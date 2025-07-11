@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridSquarePrefab: {fileID: 7780228862740512840, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
-  GridDimensions: {x: 5, y: 6}
+  GridDimensions: {x: 25, y: 25}
   selection: {fileID: 0}
   allunits: []
 --- !u!4 &2083772864

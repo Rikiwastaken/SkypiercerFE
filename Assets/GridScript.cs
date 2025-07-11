@@ -114,7 +114,7 @@ public class GridScript : MonoBehaviour
             {
                 SpreadMovements(unit.position, unit.movements, movementtiles);
             }
-            ShowAttack();
+            ShowAttack(3,false);
         }
         foreach(GridSquareScript gridSquareScript in movementtiles)
         {
@@ -123,28 +123,64 @@ public class GridScript : MonoBehaviour
 
     }
 
-    public void ShowAttack()
+    public void ShowAttack(int range, bool frapperenmelee)
     {
         attacktiles = new List<GridSquareScript>();
         foreach (GridSquareScript tile in movementtiles)
         {
-            //pour l'instant que pour un de range
-            if (tile.GridCoordinates.x > 0)
+            for(int i=1;i<=range;i++)
             {
-                attacktiles.Add(Grid[(int)(tile.GridCoordinates.x - 1)][(int)(tile.GridCoordinates.y)].GetComponent<GridSquareScript>());
+                if(i==1 && !frapperenmelee)
+                {
+                    continue;
+                }
+                if(i>1)
+                {
+                    for (int x=1; x<=i-1; x++)
+                    {
+                        for(int y =1; y<=i-1; y++)
+                        {
+                            Vector2 vectorforattack = tile.GridCoordinates+new Vector2(x,y);
+                            if(CheckIfPositionIsLegal(vectorforattack))
+                            {
+                                attacktiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
+                            }
+                            vectorforattack = tile.GridCoordinates + new Vector2(x, -y);
+                            if (CheckIfPositionIsLegal(vectorforattack))
+                            {
+                                attacktiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
+                            }
+                            vectorforattack = tile.GridCoordinates + new Vector2(-x, y);
+                            if (CheckIfPositionIsLegal(vectorforattack))
+                            {
+                                attacktiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
+                            }
+                            vectorforattack = tile.GridCoordinates + new Vector2(-x, -y);
+                            if (CheckIfPositionIsLegal(vectorforattack))
+                            {
+                                attacktiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
+                            }
+                        }
+                    }
+                }
+                if (tile.GridCoordinates.x >= i)
+                {
+                    attacktiles.Add(Grid[(int)(tile.GridCoordinates.x - i)][(int)(tile.GridCoordinates.y)].GetComponent<GridSquareScript>());
+                }
+                if (tile.GridCoordinates.x < Grid.Count - i)
+                {
+                    attacktiles.Add(Grid[(int)(tile.GridCoordinates.x + i)][(int)(tile.GridCoordinates.y)].GetComponent<GridSquareScript>());
+                }
+                if (tile.GridCoordinates.y >= i)
+                {
+                    attacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y - i)].GetComponent<GridSquareScript>());
+                }
+                if (tile.GridCoordinates.y < Grid[0].Count - i)
+                {
+                    attacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y + i)].GetComponent<GridSquareScript>());
+                }
             }
-            if (tile.GridCoordinates.x < Grid.Count - 1)
-            {
-                attacktiles.Add(Grid[(int)(tile.GridCoordinates.x + 1)][(int)(tile.GridCoordinates.y)].GetComponent<GridSquareScript>());
-            }
-            if (tile.GridCoordinates.y > 0)
-            {
-                attacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y - 1)].GetComponent<GridSquareScript>());
-            }
-            if (tile.GridCoordinates.y < Grid[0].Count - 1)
-            {
-                attacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y + 1)].GetComponent<GridSquareScript>());
-            }
+            
         }
         foreach (GridSquareScript gridSquareScript in attacktiles)
         {
@@ -208,6 +244,15 @@ public class GridScript : MonoBehaviour
             }
         }
 
+        return true;
+    }
+
+    private bool CheckIfPositionIsLegal(Vector2 position)
+    {
+        if (position.x<0 || position.x >= Grid.Count || position.y < 0 || position.y >= Grid[0].Count)
+        {
+            return false ;
+        }
         return true;
     }
 
