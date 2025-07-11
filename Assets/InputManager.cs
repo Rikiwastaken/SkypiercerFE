@@ -54,6 +54,15 @@ public class InputManager : MonoBehaviour
 
     }
 
+    void OnResetcam(InputValue value)
+    {
+        battlecameraScript battlecameraScript = FindAnyObjectByType<battlecameraScript>();
+        if (battlecameraScript != null)
+        {
+            battlecameraScript.ResetRotation();
+        }
+    }
+
     void OnMoveCam(InputValue value)
     {
         cammovementValue = value.Get<Vector2>();

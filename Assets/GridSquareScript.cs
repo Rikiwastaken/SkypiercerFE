@@ -16,11 +16,13 @@ public class GridSquareScript : MonoBehaviour
     public bool isobstacle;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
         SelectRound = transform.GetChild(1).gameObject;
-        transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round((int)transform.position.y), Mathf.Round((int)transform.position.z));
+        transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
+        GridCoordinates = new Vector2((int)transform.position.x, (int)transform.position.z);
+
     }
 
     private void FixedUpdate()
@@ -67,6 +69,12 @@ public class GridSquareScript : MonoBehaviour
     public void fillwithPurple()
     {
         filledimage.color = new Color(62.7f / 255f, 12.5f / 255f, 94.1f/255f,0.5f);
+    }
+    public void fillwithGrey()
+    {
+        Color newcolor = Color.gray;
+        newcolor.a = 0.5f;
+        filledimage.color = newcolor;
     }
 
     public void fillwithNothing()

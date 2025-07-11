@@ -50,9 +50,10 @@ public class UnitScript : MonoBehaviour
     public bool fixedgrowth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        
+        transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
+        UnitCharacteristics.position = new Vector2((int)transform.position.x, (int)transform.position.z);
     }
 
     // Update is called once per frame
@@ -194,5 +195,4 @@ public class UnitScript : MonoBehaviour
         }
         return lvlupresult;
     }
-
 }

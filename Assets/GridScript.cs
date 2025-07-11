@@ -24,25 +24,66 @@ public class GridScript : MonoBehaviour
     private List<GridSquareScript> movementtiles;
     private List<GridSquareScript> attacktiles;
 
+    public GridSquareScript lastSquare;
+
+    private int moveCD;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InstantiateGrid();
+        //InstantiateGrid();
         foreach (UnitScript character in FindObjectsByType<UnitScript>(FindObjectsSortMode.None))
         {
             allunits.Add(character.UnitCharacteristics);
         }
+        Grid = new List<List<GameObject>>();
+        GridSquareScript[] tilelist = FindObjectsByType<GridSquareScript>(FindObjectsSortMode.None);
+        for (int x = 0; x <= lastSquare.GridCoordinates.x; x++)
+        {
+            Grid.Add(new List<GameObject>());
+            for (int y = 0; y <= lastSquare.GridCoordinates.y; y++)
+            {
+                foreach(GridSquareScript tile in tilelist)
+                {
+                    if((int)tile.GridCoordinates.x == x && (int)tile.GridCoordinates.y == y)
+                    {
+                        Grid[x].Add(tile.gameObject);
+                    }
+                }
+            }
+        }
+        for (int x = 0; x < Grid.Count; x++)
+        {
+            for (int y = 0; y < Grid[x].Count; y++)
+            {
+                if (Grid[x][y].GetComponent<GridSquareScript>().isobstacle)
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithGrey();
+                }
+                else
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
+                }
+
+            }
+        }
+        selection = Grid[0][0].GetComponent<GridSquareScript>();
     }
 
     private void FixedUpdate()
     {
+        if(moveCD>0)
+        {
+            moveCD--;
+        }
         if(inputManager == null)
         {
             inputManager = FindAnyObjectByType<InputManager>();
         }
 
-        if(inputManager.movementValue!=Vector2.zero && inputManager.movementValue!= previousmovevalue)
+        if(inputManager.movementValue!=Vector2.zero && inputManager.movementValue!= previousmovevalue && moveCD<=0)
         {
+            moveCD =(int)(0.1f/Time.deltaTime);
             previousmovevalue = inputManager.movementValue;
             MoveSelection(previousmovevalue);
         }
@@ -104,7 +145,15 @@ public class GridScript : MonoBehaviour
         {
             for(int y=0; y<Grid[x].Count; y++)
             {
-                Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
+                if(Grid[x][y].GetComponent<GridSquareScript>().isobstacle)
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithGrey();
+                }
+                else
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
+                }
+                    
             }
         }
         movementtiles = new List<GridSquareScript>();
@@ -121,6 +170,23 @@ public class GridScript : MonoBehaviour
             gridSquareScript.fillwithblue();
         }
 
+    }
+
+    public Character GetSelectedUnit()
+    {
+        Character SelectedUnit = null;
+
+
+        foreach (Character unit in allunits)
+        {
+            if(unit.position ==selection.GridCoordinates)
+            {
+                SelectedUnit = unit;
+                break;
+            }
+        }
+
+        return SelectedUnit;
     }
 
     public void ShowAttack(int range, bool frapperenmelee)
