@@ -21,6 +21,9 @@ public class GridScript : MonoBehaviour
 
     public List<Character> allunits;
 
+    private List<GridSquareScript> movementtiles;
+    private List<GridSquareScript> attacktiles;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -101,22 +104,51 @@ public class GridScript : MonoBehaviour
         {
             for(int y=0; y<Grid[x].Count; y++)
             {
-                Debug.Log(x +"   "+y);
-                Debug.Log(Grid[x][y].GetComponent<GridSquareScript>());
                 Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
             }
         }
-        List<GridSquareScript> tilestolight = new List<GridSquareScript>();
+        movementtiles = new List<GridSquareScript>();
         foreach (Character unit in allunits)
         {
             if(unit.position == selection.GridCoordinates)
             {
-                SpreadMovements(unit.position, unit.movements, tilestolight);
+                SpreadMovements(unit.position, unit.movements, movementtiles);
             }
+            ShowAttack();
         }
-        foreach(GridSquareScript gridSquareScript in tilestolight)
+        foreach(GridSquareScript gridSquareScript in movementtiles)
         {
             gridSquareScript.fillwithblue();
+        }
+
+    }
+
+    public void ShowAttack()
+    {
+        attacktiles = new List<GridSquareScript>();
+        foreach (GridSquareScript tile in movementtiles)
+        {
+            //pour l'instant que pour un de range
+            if (tile.GridCoordinates.x > 0)
+            {
+                attacktiles.Add(Grid[(int)(tile.GridCoordinates.x - 1)][(int)(tile.GridCoordinates.y)].GetComponent<GridSquareScript>());
+            }
+            if (tile.GridCoordinates.x < Grid.Count - 1)
+            {
+                attacktiles.Add(Grid[(int)(tile.GridCoordinates.x + 1)][(int)(tile.GridCoordinates.y)].GetComponent<GridSquareScript>());
+            }
+            if (tile.GridCoordinates.y > 0)
+            {
+                attacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y - 1)].GetComponent<GridSquareScript>());
+            }
+            if (tile.GridCoordinates.y < Grid[0].Count - 1)
+            {
+                attacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y + 1)].GetComponent<GridSquareScript>());
+            }
+        }
+        foreach (GridSquareScript gridSquareScript in attacktiles)
+        {
+            gridSquareScript.fillwithRed();
         }
     }
 
