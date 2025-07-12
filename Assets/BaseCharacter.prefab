@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitCharacteristics:
     protagonist: 0
-    name: 
+    name: BaiscCharacter
     stats:
       HP: 50
       Strength: 30
@@ -147,5 +147,6 @@ MonoBehaviour:
       DexterityGrowth: 40
     currentHP: 25
     movements: 5
+    position: {x: 0, y: 0}
   trylvlup: 0
   fixedgrowth: 0

@@ -13,11 +13,12 @@ public class UnitScript : MonoBehaviour
         public BaseStats stats;
         public int level;
         public int experience;
-        public bool isennemy;
+        public string affiliation; // playable, enemy, other
         public StatGrowth growth;
         public int currentHP;
         public int movements;
         public Vector2 position;
+        public bool alreadyplayed;
     }
 
     [Serializable]

@@ -49,6 +49,9 @@ MonoBehaviour:
   cammovementValue: {x: 0, y: 0}
   move: {fileID: 6633391951535711003, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   movecam: {fileID: 3040192864998739745, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  activatepressed: 0
+  activatejustpressed: 0
+  activate: {fileID: -9049878976524981510, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &6066130923447186532
 MonoBehaviour:
   m_ObjectHideFlags: 0

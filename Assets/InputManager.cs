@@ -12,6 +12,21 @@ public class InputManager : MonoBehaviour
     private InputAction moveinput;
     private InputAction movecaminput;
 
+    [Header("Validate Button")]
+
+    public bool activatepressed;
+    public bool activatejustpressed;
+    public InputActionReference activate;
+    private InputAction activateinput;
+    private bool activatepressedonce;
+
+    [Header("Cancel Button")]
+
+    public bool cancelpressed;
+    public bool canceljustpressed;
+    public InputActionReference cancel;
+    private InputAction cancelinput;
+    private bool cancelpressedonce;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +36,45 @@ public class InputManager : MonoBehaviour
         movecaminput = movecam.ToInputAction();
         moveinput.canceled += context => movementValue = Vector2.zero;
         movecaminput.canceled += context => cammovementValue = Vector2.zero;
+
+        activateinput = activate.ToInputAction();
+
+        cancelinput = cancel.ToInputAction();
+    }
+
+    private void FixedUpdate()
+    {
+        activatepressed = activateinput.IsPressed();
+        if(activatepressed && ! activatejustpressed && !activatepressedonce)
+        {
+            activatejustpressed = true;
+            activatepressedonce = true;
+        }
+        else
+        {
+            activatejustpressed = false;
+        }
+
+        if(!activatepressed)
+        {
+            activatepressedonce = false;
+        }
+
+        cancelpressed = cancelinput.IsPressed();
+        if (cancelpressed && !canceljustpressed && !cancelpressedonce)
+        {
+            canceljustpressed = true;
+            cancelpressedonce = true;
+        }
+        else
+        {
+            canceljustpressed = false;
+        }
+
+        if (!cancelpressed)
+        {
+            cancelpressedonce = false;
+        }
 
     }
 

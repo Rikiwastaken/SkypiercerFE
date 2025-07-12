@@ -33,7 +33,7 @@ public class BattleInfotext : MonoBehaviour
         }
         else
         {
-            stringtoshow = "Name : "+selectedunit.name + "\n"+"Health : "+ selectedunit.currentHP+"/"+selectedunit.stats.HP+"\n" + "Equiped weapon : \n" + "Level : "+ selectedunit.level+"\n";
+            stringtoshow = selectedunit.name + "       Level : "+ selectedunit.level + "\nHealth : "+ selectedunit.currentHP+"/"+selectedunit.stats.HP+ "       Equiped weapon : \n";
         }
         TMP.text = stringtoshow;
     }

@@ -23,19 +23,26 @@ public class GridScript : MonoBehaviour
 
     private List<GridSquareScript> movementtiles;
     private List<GridSquareScript> attacktiles;
+    private List<GridSquareScript> lockedmovementtiles;
+    private List<GridSquareScript> lockedattacktiles;
 
     public GridSquareScript lastSquare;
 
     private int moveCD;
 
+    public bool lockselection;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        lockedmovementtiles = new List<GridSquareScript>();
+        lockedattacktiles = new List<GridSquareScript>();
         //InstantiateGrid();
         foreach (UnitScript character in FindObjectsByType<UnitScript>(FindObjectsSortMode.None))
         {
             allunits.Add(character.UnitCharacteristics);
         }
+        GetComponent<TurnManger>().InitializeUnitLists(allunits);
         Grid = new List<List<GameObject>>();
         GridSquareScript[] tilelist = FindObjectsByType<GridSquareScript>(FindObjectsSortMode.None);
         for (int x = 0; x <= lastSquare.GridCoordinates.x; x++)
@@ -137,6 +144,21 @@ public class GridScript : MonoBehaviour
             }
         }
         ShowMovement();
+
+    }
+
+    public void LockcurrentSelection()
+    {
+        lockedmovementtiles = new List<GridSquareScript> ();
+        foreach (GridSquareScript tile in movementtiles)
+        {
+            lockedmovementtiles.Add (tile);
+        }
+        lockedattacktiles = new List<GridSquareScript>();
+        foreach (GridSquareScript tile in attacktiles)
+        {
+            lockedattacktiles.Add(tile);
+        }
     }
 
     public void ShowMovement()
@@ -145,11 +167,11 @@ public class GridScript : MonoBehaviour
         {
             for(int y=0; y<Grid[x].Count; y++)
             {
-                if(Grid[x][y].GetComponent<GridSquareScript>().isobstacle)
+                if(Grid[x][y].GetComponent<GridSquareScript>().isobstacle && !lockedattacktiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedmovementtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()))
                 {
                     Grid[x][y].GetComponent<GridSquareScript>().fillwithGrey();
                 }
-                else
+                else if (!lockedattacktiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedmovementtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()))
                 {
                     Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
                 }
@@ -161,11 +183,19 @@ public class GridScript : MonoBehaviour
         {
             if(unit.position == selection.GridCoordinates)
             {
-                SpreadMovements(unit.position, unit.movements, movementtiles);
+                SpreadMovements(unit.position, unit.movements, movementtiles, unit);
             }
             ShowAttack(3,false);
         }
-        foreach(GridSquareScript gridSquareScript in movementtiles)
+        if (!lockselection)
+        {
+            foreach (GridSquareScript gridSquareScript in movementtiles)
+            {
+                gridSquareScript.fillwithblue();
+            }
+        }
+        
+        foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
         {
             gridSquareScript.fillwithblue();
         }
@@ -248,13 +278,67 @@ public class GridScript : MonoBehaviour
             }
             
         }
-        foreach (GridSquareScript gridSquareScript in attacktiles)
+        if(!lockselection)
+        {
+            foreach (GridSquareScript gridSquareScript in attacktiles)
+            {
+                gridSquareScript.fillwithRed();
+            }
+        }
+        
+        foreach (GridSquareScript gridSquareScript in lockedattacktiles)
         {
             gridSquareScript.fillwithRed();
         }
     }
 
-    private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight)
+    public void Recolor()
+    {
+        for (int x = 0; x < Grid.Count; x++)
+        {
+            for (int y = 0; y < Grid[x].Count; y++)
+            {
+                if (Grid[x][y].GetComponent<GridSquareScript>().isobstacle && !lockedattacktiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedmovementtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()))
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithGrey();
+                }
+                else if (!lockedattacktiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedmovementtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()))
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
+                }
+
+            }
+        }
+        if (!lockselection)
+        {
+            foreach (GridSquareScript gridSquareScript in attacktiles)
+            {
+                gridSquareScript.fillwithRed();
+            }
+        }
+
+        foreach (GridSquareScript gridSquareScript in lockedattacktiles)
+        {
+            gridSquareScript.fillwithRed();
+        }
+
+        if (!lockselection)
+        {
+            foreach (GridSquareScript gridSquareScript in movementtiles)
+            {
+                gridSquareScript.fillwithblue();
+            }
+        }
+
+        foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
+        {
+            gridSquareScript.fillwithblue();
+        }
+
+        
+    }
+
+    private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, Character selectedunit)
     {
         if (!tilestolight.Contains(Grid[(int)Coordinates.x][(int)Coordinates.y].GetComponent<GridSquareScript>()))
         {
@@ -264,37 +348,37 @@ public class GridScript : MonoBehaviour
         {
             if(Coordinates.x>0)
             {
-                if(CheckIfFree(new Vector2(Coordinates.x - 1, Coordinates.y)))
+                if(CheckIfFree(new Vector2(Coordinates.x - 1, Coordinates.y), selectedunit))
                 {
-                    SpreadMovements(new Vector2(Coordinates.x - 1, Coordinates.y), remainingMovements - 1, tilestolight);
+                    SpreadMovements(new Vector2(Coordinates.x - 1, Coordinates.y), remainingMovements - 1, tilestolight, selectedunit);
                 } 
             }
             if (Coordinates.x < Grid.Count-1)
             {
-                if (CheckIfFree(new Vector2(Coordinates.x + 1, Coordinates.y)))
+                if (CheckIfFree(new Vector2(Coordinates.x + 1, Coordinates.y), selectedunit))
                 {
-                    SpreadMovements(new Vector2(Coordinates.x + 1, Coordinates.y), remainingMovements - 1, tilestolight);
+                    SpreadMovements(new Vector2(Coordinates.x + 1, Coordinates.y), remainingMovements - 1, tilestolight, selectedunit);
                 }
             }
             if (Coordinates.y > 0)
             {
-                if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y - 1)))
+                if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y - 1), selectedunit))
                 {
-                    SpreadMovements(new Vector2(Coordinates.x, Coordinates.y - 1), remainingMovements - 1, tilestolight);
+                    SpreadMovements(new Vector2(Coordinates.x, Coordinates.y - 1), remainingMovements - 1, tilestolight, selectedunit);
                 }
             }
             if (Coordinates.y < Grid[0].Count - 1)
             {
-                if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y + 1)))
+                if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y + 1), selectedunit))
                 {
-                    SpreadMovements(new Vector2(Coordinates.x, Coordinates.y + 1), remainingMovements - 1, tilestolight);
+                    SpreadMovements(new Vector2(Coordinates.x, Coordinates.y + 1), remainingMovements - 1, tilestolight, selectedunit);
                 }
                 
             }
         }
     }
 
-    private bool CheckIfFree(Vector2 position)
+    private bool CheckIfFree(Vector2 position, Character selectedunit)
     {
 
         if (Grid[(int)position.x][(int)position.y].GetComponent<GridSquareScript>().isobstacle)
@@ -304,7 +388,7 @@ public class GridScript : MonoBehaviour
         }
         foreach (Character unit in allunits)
         {
-            if (unit.position == position && unit.isennemy)
+            if (unit.position == position && unit.affiliation != selectedunit.affiliation)
             {
                 return false;
             }
