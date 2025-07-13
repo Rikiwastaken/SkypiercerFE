@@ -172,6 +172,15 @@ public class GridScript : MonoBehaviour
         lockselection = false;
     }
 
+    public void ResetAllSelections()
+    {
+        lockedmovementtiles = new List<GridSquareScript>();
+        lockedattacktiles = new List<GridSquareScript>();
+        movementtiles = new List<GridSquareScript>();
+        attacktiles = new List<GridSquareScript>();
+        lockselection = false;
+    }
+
     public void ShowMovement()
     {
         for(int x=0; x<Grid.Count; x++)
@@ -193,12 +202,13 @@ public class GridScript : MonoBehaviour
         foreach (GameObject unitGO in allunitGOs)
         {
             Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-            if(unit.position == selection.GridCoordinates)
+            if(unit.position == selection.GridCoordinates && !unit.alreadyplayed)
             {
                 SpreadMovements(unit.position, unit.movements, movementtiles, unit);
+                (int range, bool melee) = unitGO.GetComponent<UnitScript>().GetRangeAndMele();
+                ShowAttack(range, melee);
             }
-            (int range, bool melee) = unitGO.GetComponent<UnitScript>().GetRangeAndMele();
-            ShowAttack(range,melee);
+            
         }
         if (!lockselection)
         {
@@ -230,6 +240,18 @@ public class GridScript : MonoBehaviour
         }
 
         return SelectedUnit;
+    }
+
+    public GameObject GetUnit(GridSquareScript tile)
+    {
+        foreach (GameObject unit in allunitGOs)
+        {
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.position == tile.GridCoordinates)
+            {
+                return unit;
+            }
+        }
+        return null;
     }
 
     public GameObject GetSelectedUnitGameObject()
@@ -324,7 +346,6 @@ public class GridScript : MonoBehaviour
 
     public void ShowAttackAfterMovement(int range, bool frapperenmelee, GridSquareScript tile )
     {
-        Debug.Log(range+" " +frapperenmelee);
         movementtiles.Clear();
         attacktiles = new List<GridSquareScript>();
         for (int i = 1; i <= range; i++)

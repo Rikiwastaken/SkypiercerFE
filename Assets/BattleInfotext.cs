@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnitScript;
 
 public class BattleInfotext : MonoBehaviour
@@ -29,11 +30,17 @@ public class BattleInfotext : MonoBehaviour
 
         if (selectedunit == null) {
             stringtoshow = string.Empty;
+            Color color = transform.parent.GetComponent<Image>().color;
+            color.a = 0f;
+            transform.parent.GetComponent<Image>().color = color;
         }
         else
         {
             Character selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             stringtoshow = selectedunitCharacter.name + "       Level : "+ selectedunitCharacter.level + "\nHealth : "+ selectedunitCharacter.currentHP+" / "+ selectedunitCharacter.stats.HP+ "       Equiped weapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name;
+            Color color = transform.parent.GetComponent<Image>().color;
+            color.a = 1f;
+            transform.parent.GetComponent<Image>().color = color;
         }
         TMP.text = stringtoshow;
     }

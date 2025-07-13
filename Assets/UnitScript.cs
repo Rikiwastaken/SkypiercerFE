@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.UI;
 
 public class UnitScript : MonoBehaviour
 {
@@ -99,6 +100,8 @@ public class UnitScript : MonoBehaviour
             trylvlup = false;
             LevelUp(fixedgrowth);
         }
+        transform.GetChild(0).GetChild(1).GetComponent<Image>().type = Image.Type.Filled;
+        transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.stats.HP;
     }
 
     public List<int> LevelUp(bool fixedgrowth)
@@ -244,6 +247,20 @@ public class UnitScript : MonoBehaviour
         return Fists;
     }
 
+    public void RestoreUses(int number)
+    {
+        for (int i = 0; i < UnitCharacteristics.equipments.Count; i++)
+        {
+            if (UnitCharacteristics.equipments[i].type != "item" && UnitCharacteristics.equipments[i].type != null)
+            {
+                UnitCharacteristics.equipments[i].Currentuses+= number;
+                if(UnitCharacteristics.equipments[i].Currentuses > UnitCharacteristics.equipments[i].Maxuses)
+                {
+                    UnitCharacteristics.equipments[i].Currentuses = UnitCharacteristics.equipments[i].Maxuses;
+                }
+            }
+        }
+    }
     public (int,bool) GetRangeAndMele()
     {
         equipment firstweapon = GetFirstWeapon();

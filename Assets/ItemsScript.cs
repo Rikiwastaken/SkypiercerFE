@@ -16,7 +16,6 @@ public class ItemsScript : MonoBehaviour
     public Button ItemActionsMenuCancelButton;
     private InputManager inputManager;
     public GameObject ItemActionsMenu;
-    public GameObject ItemMenu;
     public TextMeshProUGUI statstext;
     private void FixedUpdate()
     {
@@ -49,11 +48,19 @@ public class ItemsScript : MonoBehaviour
         ItemActionsMenu.transform.position = new Vector3(initialpos.x, buttons[id].transform.position.y, initialpos.z);
         ItemActionsMenu.GetComponent<ItemActionsMenuScript>().slotID = id;
         ItemActionsMenu.GetComponent<ItemActionsMenuScript>().character = target;
+        if (target.equipments[id].Name == "" || target.equipments[id].Name == null)
+        {
+            statstext.text = "Empty Slot";
+        }
+        else
+        {
+            statstext.text = "Dmg : " + target.equipments[id].BaseDamage + " Hit :" + target.equipments[id].BaseHit + "% Crit : " + target.equipments[id].BaseCrit + "% Range : " + target.equipments[id].Range + "  Uses : " + target.equipments[id].Currentuses + " / " + target.equipments[id].Maxuses;
+        }
     }
 
     public void InitializeButtons()
     {
-        target = FindAnyObjectByType<ActionsMenu>().target;
+        target = FindAnyObjectByType<ActionsMenu>().target.GetComponent<UnitScript>().UnitCharacteristics;
         if(target!= null)
         {
             for (int i = 0; i < buttons.Count; i++)
@@ -61,12 +68,10 @@ public class ItemsScript : MonoBehaviour
                 if (target.equipments[i].Name == "" || target.equipments[i].Name == null)
                 {
                     buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
-                    statstext.text = "Empty Slot";
                 }
                 else
                 {
                     buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = target.equipments[i].Name + " " + target.equipments[i].Currentuses + "/" + target.equipments[i].Maxuses;
-                    statstext.text = "Dmg : "+ target.equipments[i].BaseDamage+ " Hit :"+ target.equipments[i].BaseHit+"% Crit : "+ target.equipments[i].BaseCrit + "% Range : " + target.equipments[i].Range + "  Uses : " + target.equipments[i].Currentuses+" / " + target.equipments[i].Maxuses;
                 } 
                     
             }

@@ -26,6 +26,8 @@ public class ActionManager : MonoBehaviour
 
     public GameObject actionsMenu;
 
+    public bool preventfromlockingafteraction;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,8 +51,9 @@ public class ActionManager : MonoBehaviour
                 currentcharacter = GridScript.GetSelectedUnitGameObject();
                 if (currentcharacter != null)
                 {
-                    if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed)
+                    if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed && !preventfromlockingafteraction)
                     {
+                        Debug.Log("on active malheureusement");
                         GridScript.lockselection = true;
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
@@ -72,6 +75,7 @@ public class ActionManager : MonoBehaviour
             }
 
         }
+        preventfromlockingafteraction = false;
     }
 
     public void ResetAction()
@@ -82,6 +86,25 @@ public class ActionManager : MonoBehaviour
         currentcharacter = null;
         GridScript.UnlockSelection();
         GridScript.ResetColor();
+    }
+
+    public void Wait()
+    {
+        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true ;
+        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+        currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
+        currentcharacter = null;
+        GridScript.ResetAllSelections();
+        GridScript.ResetColor();
+        preventfromlockingafteraction = true ;
+    }
+
+    public void Attack()
+    {
+        ActionsMenu actionsMenu = FindAnyObjectByType<ActionsMenu>();
+        actionsMenu.target = currentcharacter;
+        actionsMenu.FindAttackers();
+
     }
 
     public (AttackStats,AttackStats) AttackValuesCalculator(Character attacker, Character target)
