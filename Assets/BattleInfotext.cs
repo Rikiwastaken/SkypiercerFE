@@ -25,15 +25,15 @@ public class BattleInfotext : MonoBehaviour
             GridScript = FindAnyObjectByType<GridScript>();
         }
 
-        Character selectedunit = GridScript.GetSelectedUnit();
+        GameObject selectedunit = GridScript.GetSelectedUnitGameObject();
 
-        if (selectedunit == null)
-        {
+        if (selectedunit == null) {
             stringtoshow = string.Empty;
         }
         else
         {
-            stringtoshow = selectedunit.name + "       Level : "+ selectedunit.level + "\nHealth : "+ selectedunit.currentHP+"/"+selectedunit.stats.HP+ "       Equiped weapon : \n";
+            Character selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
+            stringtoshow = selectedunitCharacter.name + "       Level : "+ selectedunitCharacter.level + "\nHealth : "+ selectedunitCharacter.currentHP+" / "+ selectedunitCharacter.stats.HP+ "       Equiped weapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name;
         }
         TMP.text = stringtoshow;
     }

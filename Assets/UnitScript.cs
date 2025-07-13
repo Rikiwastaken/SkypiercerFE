@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.RenderGraphModule;
 
 public class UnitScript : MonoBehaviour
 {
@@ -19,10 +20,26 @@ public class UnitScript : MonoBehaviour
         public int movements;
         public Vector2 position;
         public bool alreadyplayed;
+        public bool alreadymoved;
+        public bool telekinesisactivated;
+        public List<equipment> equipments;
     }
 
     [Serializable]
-    public class BaseStats 
+    public class equipment
+    {
+        public string Name;
+        public int BaseDamage;
+        public int BaseHit;
+        public int BaseCrit;
+        public int Range;
+        public string type;
+        public int Currentuses;
+        public int Maxuses;
+    }
+
+    [Serializable]
+    public class BaseStats
     {
         public int HP;
         public int Strength;
@@ -50,17 +67,34 @@ public class UnitScript : MonoBehaviour
     public bool trylvlup;
     public bool fixedgrowth;
 
+    public equipment Fists;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         UnitCharacteristics.position = new Vector2((int)transform.position.x, (int)transform.position.z);
+        if(UnitCharacteristics.equipments==null)
+        {
+            UnitCharacteristics.equipments = new List<equipment>();
+            for(int i = 0;i<6;i++)
+            {
+                UnitCharacteristics.equipments.Add(new equipment());
+            }
+        }
+        else if(UnitCharacteristics.equipments.Count<6)
+        {
+            for(int i = UnitCharacteristics.equipments.Count; i<6;i++)
+            {
+                UnitCharacteristics.equipments.Add(new equipment());
+            }
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(trylvlup)
+        if (trylvlup)
         {
             trylvlup = false;
             LevelUp(fixedgrowth);
@@ -70,11 +104,11 @@ public class UnitScript : MonoBehaviour
     public List<int> LevelUp(bool fixedgrowth)
     {
         List<int> lvlupresult = new List<int>();
-        UnitCharacteristics.experience -=100;
-        UnitCharacteristics.level +=1;
-        if(fixedgrowth)
+        UnitCharacteristics.experience -= 100;
+        UnitCharacteristics.level += 1;
+        if (fixedgrowth)
         {
-            UnitCharacteristics.stats.HP += (int)(UnitCharacteristics.growth.HPGrowth/10f);
+            UnitCharacteristics.stats.HP += (int)(UnitCharacteristics.growth.HPGrowth / 10f);
 
             UnitCharacteristics.currentHP += (int)(UnitCharacteristics.growth.HPGrowth / 10f);
             lvlupresult.Add((int)(UnitCharacteristics.growth.HPGrowth / 10f));
@@ -108,7 +142,7 @@ public class UnitScript : MonoBehaviour
         else
         {
             int rd = UnityEngine.Random.Range(0, 100);
-            if(rd <= UnitCharacteristics.growth.HPGrowth)
+            if (rd <= UnitCharacteristics.growth.HPGrowth)
             {
                 UnitCharacteristics.stats.HP += 10;
                 UnitCharacteristics.currentHP += 10;
@@ -195,5 +229,34 @@ public class UnitScript : MonoBehaviour
             }
         }
         return lvlupresult;
+    }
+
+    public equipment GetFirstWeapon()
+    {
+        for (int i = 0; i < UnitCharacteristics.equipments.Count; i++)
+        {
+            if (UnitCharacteristics.equipments[i].type !="item" && UnitCharacteristics.equipments[i].Currentuses>0)
+            {
+                return UnitCharacteristics.equipments[i];
+            }
+        }
+
+        return Fists;
+    }
+
+    public (int,bool) GetRangeAndMele()
+    {
+        equipment firstweapon = GetFirstWeapon();
+        int range = firstweapon.Range;
+        bool melee = true;
+        if(firstweapon.type =="bow")
+        {
+            melee = false;
+        }
+        if(UnitCharacteristics.telekinesisactivated)
+        {
+            range += 1;
+        }
+        return (range,melee);
     }
 }

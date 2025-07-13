@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5081702220094403406
+--- !u!1 &844069199642930664
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1940682818617995091}
-  - component: {fileID: 2425750686553171997}
-  - component: {fileID: 6822194555414918716}
-  - component: {fileID: 1594481585828386772}
-  - component: {fileID: 6360257754374888536}
+  - component: {fileID: 4505948632422018820}
+  - component: {fileID: 7332059217491176383}
+  - component: {fileID: 1587489839279831954}
+  - component: {fileID: 8275421967131772120}
+  - component: {fileID: 3771907382335103157}
   m_Layer: 0
-  m_Name: BaseCharacter
+  m_Name: Zack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1940682818617995091
+--- !u!4 &4505948632422018820
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081702220094403406}
+  m_GameObject: {fileID: 844069199642930664}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 6.13, y: 0.5, z: 2.2}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2425750686553171997
+--- !u!33 &7332059217491176383
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081702220094403406}
+  m_GameObject: {fileID: 844069199642930664}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6822194555414918716
+--- !u!23 &1587489839279831954
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081702220094403406}
+  m_GameObject: {fileID: 844069199642930664}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -88,13 +88,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1594481585828386772
+--- !u!136 &8275421967131772120
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081702220094403406}
+  m_GameObject: {fileID: 844069199642930664}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -111,13 +111,13 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6360257754374888536
+--- !u!114 &3771907382335103157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081702220094403406}
+  m_GameObject: {fileID: 844069199642930664}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19520534c7275ab4581a03228fa5dbec, type: 3}
@@ -125,39 +125,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitCharacteristics:
     protagonist: 0
-    name: BaiscCharacter
+    name: Zack
     stats:
-      HP: 50
-      Strength: 30
+      HP: 190
+      Strength: 50
       Psyche: 10
-      Defense: 45
-      Resistance: 10
-      Speed: 25
-      Dexterity: 30
+      Defense: 50
+      Resistance: 0
+      Speed: 70
+      Dexterity: 60
     level: 1
-    experience: 125
-    affiliation: 
+    experience: 0
+    affiliation: playable
     growth:
-      HPGrowth: 50
-      StrengthGrowth: 40
-      PsycheGrowth: 10
+      HPGrowth: 70
+      StrengthGrowth: 50
+      PsycheGrowth: 20
       DefenseGrowth: 40
-      ResistanceGrowth: 50
-      SpeedGrowth: 30
-      DexterityGrowth: 40
+      ResistanceGrowth: 40
+      SpeedGrowth: 60
+      DexterityGrowth: 50
     currentHP: 25
     movements: 5
-    position: {x: 0, y: 0}
+    position: {x: 8, y: 1}
     alreadyplayed: 0
-    equipments: []
+    alreadymoved: 0
+    telekinesisactivated: 0
+    equipments:
+    - Name: sword
+      BaseDamage: 50
+      BaseHit: 90
+      BaseCrit: 3
+      Range: 1
+      type: sword
+      Currentuses: 10
+      Maxuses: 10
   trylvlup: 0
   fixedgrowth: 0
   Fists:
-    Maxuses: 0
-    Currentuses: 0
     Name: Fists
     BaseDamage: 0
     BaseHit: 0
     BaseCrit: 0
     Range: 1
     type: None
+    Currentuses: 0
+    Maxuses: 0
