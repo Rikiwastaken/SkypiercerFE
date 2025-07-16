@@ -24,6 +24,8 @@ public class UnitScript : MonoBehaviour
         public bool alreadymoved;
         public bool telekinesisactivated;
         public List<equipment> equipments;
+        public bool isboss;
+        public bool attacksfriends;
     }
 
     [Serializable]
@@ -90,6 +92,7 @@ public class UnitScript : MonoBehaviour
                 UnitCharacteristics.equipments.Add(new equipment());
             }
         }
+        UnitCharacteristics.currentHP = UnitCharacteristics.stats.HP;
     }
 
     // Update is called once per frame
@@ -98,13 +101,19 @@ public class UnitScript : MonoBehaviour
         if (trylvlup)
         {
             trylvlup = false;
-            LevelUp(fixedgrowth);
+            LevelUp();
         }
         transform.GetChild(0).GetChild(1).GetComponent<Image>().type = Image.Type.Filled;
         transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.stats.HP;
+        if(UnitCharacteristics.currentHP<0)
+        {
+            FindAnyObjectByType<GridScript>().allunitGOs.Remove(gameObject);
+            FindAnyObjectByType<GridScript>().allunits.Remove(UnitCharacteristics);
+            Destroy(gameObject);
+        }
     }
 
-    public List<int> LevelUp(bool fixedgrowth)
+    public List<int> LevelUp()
     {
         List<int> lvlupresult = new List<int>();
         UnitCharacteristics.experience -= 100;

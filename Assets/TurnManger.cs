@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static UnitScript;
 
@@ -14,6 +15,8 @@ public class TurnManger : MonoBehaviour
 
     public List<Character> otherunits;
 
+    public TextMeshProUGUI turntext;
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -26,6 +29,7 @@ public class TurnManger : MonoBehaviour
             currentlyplaying = "playable";
         }
         ManageTurnRotation();
+        UpdateText();
     }
     private void ManageTurnRotation()
     {
@@ -43,7 +47,8 @@ public class TurnManger : MonoBehaviour
             {
                 foreach (Character character in enemyunit)
                 {
-                    character.alreadyplayed=false;
+                    character.alreadyplayed = false;
+                    character.alreadymoved = false;
                 }
                 currentlyplaying = "enemy";
                 return;
@@ -64,6 +69,7 @@ public class TurnManger : MonoBehaviour
                 foreach (Character character in otherunits)
                 {
                     character.alreadyplayed = false;
+                    character.alreadymoved = false;
                 }
                 currentlyplaying = "other";
                 return;
@@ -84,11 +90,52 @@ public class TurnManger : MonoBehaviour
                 foreach (Character character in playableunit)
                 {
                     character.alreadyplayed = false;
+                    character.alreadymoved = false;
                 }
                 currentlyplaying = "playable";
                 currentTurn++;
                 return;
             }
+        }
+    }
+
+    private void UpdateText()
+    {
+        if (currentlyplaying == "playable")
+        {
+            int numberremaining = 0;
+            foreach( Character character in playableunit)
+            {
+                if(!character.alreadyplayed)
+                {
+                    numberremaining++;
+                }
+            }
+            turntext.text = "Turn : Allies \nRemaining : " + numberremaining;
+        }
+        if (currentlyplaying == "enemy")
+        {
+            int numberremaining = 0;
+            foreach (Character character in enemyunit)
+            {
+                if (!character.alreadyplayed)
+                {
+                    numberremaining++;
+                }
+            }
+            turntext.text = "Turn : Enemies \nRemaining : " + numberremaining;
+        }
+        if (currentlyplaying == "other")
+        {
+            int numberremaining = 0;
+            foreach (Character character in otherunits)
+            {
+                if (!character.alreadyplayed)
+                {
+                    numberremaining++;
+                }
+            }
+            turntext.text = "Turn : Others \nRemaining : " + numberremaining;
         }
     }
 

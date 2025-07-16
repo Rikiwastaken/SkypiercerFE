@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using static UnitScript;
-using static UnityEngine.GraphicsBuffer;
+using UnityEngine.UI;
 
 public class ActionManager : MonoBehaviour
 {
@@ -105,6 +105,10 @@ public class ActionManager : MonoBehaviour
                     for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
                     {
                         GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
+                        if(i==0)
+                        {
+                            GridScript.actionsMenu.transform.GetChild(i).GetComponent<Button>().Select();
+                        }
                     }
                 }
             }

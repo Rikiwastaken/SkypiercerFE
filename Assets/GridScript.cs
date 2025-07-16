@@ -105,10 +105,10 @@ public class GridScript : MonoBehaviour
             previousmovevalue = Vector2.zero;
         }
 
-        if(inputManager.Selectjustpressed)
-        {
-            ShowDangerousTiles();
-        }
+        //if(inputManager.Selectjustpressed)
+        //{
+        //    ShowDangerousTiles();
+        //}
 
     }
 
@@ -226,6 +226,50 @@ public class GridScript : MonoBehaviour
             }
         }
         
+        foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
+        {
+            gridSquareScript.fillwithblue();
+        }
+
+    }
+
+    public void ShowMovementOfUnit(GameObject Target)
+    {
+        for (int x = 0; x < Grid.Count; x++)
+        {
+            for (int y = 0; y < Grid[x].Count; y++)
+            {
+                if (Grid[x][y].GetComponent<GridSquareScript>().isobstacle && !lockedattacktiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedmovementtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()))
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithGrey();
+                }
+                else if (!lockedattacktiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedmovementtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()))
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
+                }
+
+            }
+        }
+        movementtiles = new List<GridSquareScript>();
+        foreach (GameObject unitGO in allunitGOs)
+        {
+            Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
+            if (unit.position == Target.GetComponent<UnitScript>().UnitCharacteristics.position && !unit.alreadyplayed)
+            {
+                SpreadMovements(unit.position, unit.movements, movementtiles, unit);
+                (int range, bool melee) = unitGO.GetComponent<UnitScript>().GetRangeAndMele();
+                ShowAttack(range, melee);
+            }
+
+        }
+        if (!lockselection)
+        {
+            foreach (GridSquareScript gridSquareScript in movementtiles)
+            {
+                gridSquareScript.fillwithblue();
+            }
+        }
+
         foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
         {
             gridSquareScript.fillwithblue();
@@ -385,6 +429,65 @@ public class GridScript : MonoBehaviour
         {
             gridSquareScript.fillwithRed();
         }
+    }
+
+
+    public List<GridSquareScript> GetAttack(int range, bool frapperenmelee, GridSquareScript tile)
+    {
+        List < GridSquareScript > newattacktiles = new List<GridSquareScript >();
+        for (int i = 1; i <= range; i++)
+        {
+            if (i == 1 && !frapperenmelee)
+            {
+                continue;
+            }
+            if (i > 1)
+            {
+                for (int x = 1; x <= i - 1; x++)
+                {
+                    for (int y = 1; y <= i - 1; y++)
+                    {
+                        Vector2 vectorforattack = tile.GridCoordinates + new Vector2(x, y);
+                        if (CheckIfPositionIsLegal(vectorforattack))
+                        {
+                            newattacktiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
+                        }
+                        vectorforattack = tile.GridCoordinates + new Vector2(x, -y);
+                        if (CheckIfPositionIsLegal(vectorforattack))
+                        {
+                            newattacktiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
+                        }
+                        vectorforattack = tile.GridCoordinates + new Vector2(-x, y);
+                        if (CheckIfPositionIsLegal(vectorforattack))
+                        {
+                            newattacktiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
+                        }
+                        vectorforattack = tile.GridCoordinates + new Vector2(-x, -y);
+                        if (CheckIfPositionIsLegal(vectorforattack))
+                        {
+                            newattacktiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
+                        }
+                    }
+                }
+            }
+            if (tile.GridCoordinates.x >= i)
+            {
+                newattacktiles.Add(Grid[(int)(tile.GridCoordinates.x - i)][(int)(tile.GridCoordinates.y)].GetComponent<GridSquareScript>());
+            }
+            if (tile.GridCoordinates.x < Grid.Count - i)
+            {
+                newattacktiles.Add(Grid[(int)(tile.GridCoordinates.x + i)][(int)(tile.GridCoordinates.y)].GetComponent<GridSquareScript>());
+            }
+            if (tile.GridCoordinates.y >= i)
+            {
+                newattacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y - i)].GetComponent<GridSquareScript>());
+            }
+            if (tile.GridCoordinates.y < Grid[0].Count - i)
+            {
+                newattacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y + i)].GetComponent<GridSquareScript>());
+            }
+        }
+        return newattacktiles;
     }
 
     public void ShowAttackAfterMovement(int range, bool frapperenmelee, GridSquareScript tile )
@@ -556,7 +659,7 @@ public class GridScript : MonoBehaviour
         }
     }
 
-    private bool CheckIfFree(Vector2 position, Character selectedunit)
+    public bool CheckIfFree(Vector2 position, Character selectedunit)
     {
 
         if (Grid[(int)position.x][(int)position.y].GetComponent<GridSquareScript>().isobstacle)
