@@ -8,8 +8,14 @@ public class ItemActionsMenuScript : MonoBehaviour
     public int slotID;
 
     public Character character;
+    private GridScript GridScript;
     public void UseOrEquip()
     {
+        if(GridScript == null)
+        {
+            GridScript = FindAnyObjectByType<GridScript>();
+        }
+
         if (character.equipments[slotID].Name!="" && character.equipments[slotID].Name != null)
         {
             if (character.equipments[slotID].type != "item")
@@ -22,7 +28,13 @@ public class ItemActionsMenuScript : MonoBehaviour
                         character.equipments[i] = character.equipments[i - 1];
                     }
                     character.equipments[0] = selectedequipment;
+                    GridSquareScript tile = GridScript.GetTile(character.position);
+                    GameObject UnitGO = GridScript.GetUnit(tile);
+                    (int range, bool frapperenmelee) = UnitGO.GetComponent<UnitScript>().GetRangeAndMele();
+                    GridScript.ShowAttackAfterMovement(range, frapperenmelee, tile);
+                    GridScript.lockedattacktiles = GridScript.attacktiles;
                     FindAnyObjectByType<ItemsScript>().InitializeButtons();
+                    GridScript.Recolor();
                 }
             }
             else

@@ -3,7 +3,7 @@ using UnityEngine;
 public class battlecameraScript : MonoBehaviour
 {
 
-    private Vector2 Destination;
+    public Vector2 Destination;
 
     private GridScript GridScript;
 
@@ -18,12 +18,9 @@ public class battlecameraScript : MonoBehaviour
             GridScript = FindAnyObjectByType<GridScript>();
         }
 
-        if(GridScript.actionsMenu.activeSelf)
-        {
-            return;
-        }
+        
 
-        Destination = new Vector2(GridScript.selection.transform.position.x, GridScript.selection.transform.position.z);
+        
 
         if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), Destination)>0.1f)
         {
@@ -32,7 +29,14 @@ public class battlecameraScript : MonoBehaviour
             transform.position += new Vector3(movex, 0f, movez);
         }
 
-        if(InputManager == null)
+        if (GridScript.actionsMenu.activeSelf)
+        {
+            return;
+        }
+
+        Destination = new Vector2(GridScript.selection.transform.position.x, GridScript.selection.transform.position.z);
+
+        if (InputManager == null)
         {
             InputManager = FindAnyObjectByType<InputManager>();
         }

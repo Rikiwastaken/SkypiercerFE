@@ -247,6 +247,109 @@ public class UnitScript : MonoBehaviour
         return Fists;
     }
 
+    public List<equipment> GetAllWeapons()
+    {
+        List<equipment> weapons = new List<equipment>();
+        for (int i = 0; i < UnitCharacteristics.equipments.Count; i++)
+        {
+            if (UnitCharacteristics.equipments[i].type != "item" && UnitCharacteristics.equipments[i].Currentuses > 0)
+            {
+                weapons.Add(UnitCharacteristics.equipments[i]);
+            }
+        }
+        if(weapons.Count == 0)
+        {
+            weapons.Add(Fists);
+        }
+        return weapons;
+    }
+
+    public equipment GetNextWeapon()
+    {
+        List<equipment> listweapons = new List<equipment>();
+        List<equipment> rest = new List<equipment>();
+        for (int i = 0; i < UnitCharacteristics.equipments.Count; i++)
+        {
+            if (UnitCharacteristics.equipments[i].type != "item" && UnitCharacteristics.equipments[i].Currentuses > 0)
+            {
+                listweapons.Add(UnitCharacteristics.equipments[i]);
+            }
+            else
+            {
+                rest.Add(UnitCharacteristics.equipments[i]);
+            }
+        }
+        if(listweapons.Count > 0)
+        {
+            UnitCharacteristics.equipments = new List<equipment>();
+            for (int i = 1;i<listweapons.Count;i++)
+            {
+                UnitCharacteristics.equipments.Add(listweapons[i]);
+            }
+            UnitCharacteristics.equipments.Add(listweapons[0]);
+            for (int i = 0; i < rest.Count; i++)
+            {
+                UnitCharacteristics.equipments.Add(rest[i]);
+            }
+            return UnitCharacteristics.equipments[0];
+        }
+        else
+        {
+            return null;
+        }
+        
+    }
+
+    public void EquipWeapon(equipment weapon)
+    {
+        if(UnitCharacteristics.equipments.Contains(weapon))
+        {
+            int index = UnitCharacteristics.equipments.IndexOf(weapon);
+            int safegard = 0;
+            while(index!=0 && safegard<20)
+            {
+                GetNextWeapon();
+                index = UnitCharacteristics.equipments.IndexOf(weapon);
+            }
+        }
+    }
+
+    public equipment GetPreviousWeapon()
+    {
+        List<equipment> listweapons = new List<equipment>();
+        List<equipment> rest = new List<equipment>();
+        for (int i = 0; i < UnitCharacteristics.equipments.Count; i++)
+        {
+            if (UnitCharacteristics.equipments[i].type != "item" && UnitCharacteristics.equipments[i].Currentuses > 0)
+            {
+                listweapons.Add(UnitCharacteristics.equipments[i]);
+            }
+            else
+            {
+                rest.Add(UnitCharacteristics.equipments[i]);
+            }
+        }
+        if (listweapons.Count > 0)
+        {
+            UnitCharacteristics.equipments = new List<equipment>();
+            UnitCharacteristics.equipments.Add(listweapons[listweapons.Count - 1]);
+            for (int i = 0; i < listweapons.Count-1; i++)
+            {
+                UnitCharacteristics.equipments.Add(listweapons[i]);
+            }
+            for (int i = 0; i < rest.Count; i++)
+            {
+                UnitCharacteristics.equipments.Add(rest[i]);
+            }
+            return UnitCharacteristics.equipments[0];
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
     public void RestoreUses(int number)
     {
         for (int i = 0; i < UnitCharacteristics.equipments.Count; i++)
@@ -269,11 +372,19 @@ public class UnitScript : MonoBehaviour
         if(firstweapon.type =="bow")
         {
             melee = false;
+            if (UnitCharacteristics.telekinesisactivated)
+            {
+                range += 2;
+            }
         }
-        if(UnitCharacteristics.telekinesisactivated)
+        else
         {
-            range += 1;
+            if (UnitCharacteristics.telekinesisactivated)
+            {
+                range += 1;
+            }
         }
+        
         return (range,melee);
     }
 }

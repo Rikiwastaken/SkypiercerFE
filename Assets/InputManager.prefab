@@ -55,6 +55,24 @@ MonoBehaviour:
   cancelpressed: 0
   canceljustpressed: 0
   cancel: {fileID: -3879855657358017652, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  NextWeaponpressed: 0
+  NextWeaponjustpressed: 0
+  NextWeapon: {fileID: 8098085579089006537, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  PreviousWeaponpressed: 0
+  PreviousWeaponjustpressed: 0
+  PreviousWeapon: {fileID: -4151503835686446673, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  NextTargetpressed: 0
+  NextTargetjustpressed: 0
+  NextTarget: {fileID: 340095340307162632, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  PreviousTargetpressed: 0
+  PreviousTargetjustpressed: 0
+  PreviousTarget: {fileID: -7297141245128772127, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  Telekinesispressed: 0
+  Telekinesisjustpressed: 0
+  Telekinesis: {fileID: 5444817332331565579, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  Selectpressed: 0
+  Selectjustpressed: 0
+  Select: {fileID: 8949594279866763656, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &6066130923447186532
 MonoBehaviour:
   m_ObjectHideFlags: 0

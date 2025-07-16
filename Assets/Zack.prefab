@@ -169,12 +169,12 @@ MonoBehaviour:
       type: sword
       Currentuses: 10
       Maxuses: 10
-    - Name: sword3
+    - Name: Bow
       BaseDamage: 50
       BaseHit: 90
       BaseCrit: 3
-      Range: 1
-      type: sword
+      Range: 2
+      type: bow
       Currentuses: 10
       Maxuses: 10
   trylvlup: 0

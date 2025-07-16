@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnitScript;
 public class GridScript : MonoBehaviour
 {
@@ -22,10 +23,11 @@ public class GridScript : MonoBehaviour
     public List<Character> allunits;
     public List<GameObject> allunitGOs;
 
-    private List<GridSquareScript> movementtiles;
-    private List<GridSquareScript> attacktiles;
+    public List<GridSquareScript> movementtiles;
+    public List<GridSquareScript> attacktiles;
     public List<GridSquareScript> lockedmovementtiles;
     public List<GridSquareScript> lockedattacktiles;
+    public List<GridSquareScript> dangerousTiles;
 
     public GridSquareScript lastSquare;
 
@@ -102,6 +104,12 @@ public class GridScript : MonoBehaviour
         {
             previousmovevalue = Vector2.zero;
         }
+
+        if(inputManager.Selectjustpressed)
+        {
+            ShowDangerousTiles();
+        }
+
     }
 
     private void InstantiateGrid()
@@ -271,10 +279,45 @@ public class GridScript : MonoBehaviour
         return SelectedUnit;
     }
 
-    public void ShowAttack(int range, bool frapperenmelee)
+    public void ShowDangerousTiles()
+    {
+        dangerousTiles = new List<GridSquareScript>();
+        foreach(GameObject unit in allunitGOs)
+        {
+            Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+            if(unitchar.affiliation== "enemy")
+            {
+                SpreadMovements(unitchar.position, unitchar.movements, movementtiles, unitchar);
+                (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
+                ShowAttack(range, melee);
+                foreach(GridSquareScript tile in attacktiles)
+                {
+                    if(!dangerousTiles.Contains(tile))
+                    {
+                        dangerousTiles.Add(tile);
+                    }
+                }
+            }
+        }
+        foreach(GridSquareScript tile in dangerousTiles)
+        {
+            tile.fillwithPurple();
+        }
+    }
+
+    public void ShowAttack(int range, bool frapperenmelee, bool uselockedmovementtile=false)
     {
         attacktiles = new List<GridSquareScript>();
-        foreach (GridSquareScript tile in movementtiles)
+        List < GridSquareScript > tilestouse = new List<GridSquareScript>();
+        if(uselockedmovementtile)
+        {
+            tilestouse = lockedmovementtiles;
+        }
+        else
+        {
+            tilestouse = movementtiles;
+        }
+        foreach (GridSquareScript tile in tilestouse)
         {
             for(int i=1;i<=range;i++)
             {
@@ -439,6 +482,12 @@ public class GridScript : MonoBehaviour
 
             }
         }
+
+        foreach (GridSquareScript tile in dangerousTiles)
+        {
+            tile.fillwithPurple();
+        }
+
         if (!lockselection)
         {
             foreach (GridSquareScript gridSquareScript in attacktiles)
@@ -548,5 +597,25 @@ public class GridScript : MonoBehaviour
 
         return false;
 
+    }
+
+    public GridSquareScript GetTile(int x, int y)
+    {
+        if(x<=Grid.Count-1 && x>=0 && y <= Grid[0].Count - 1 && y >= 0)
+        {
+            return Grid[x][y].GetComponent<GridSquareScript>();
+        }
+        return null;
+    }
+
+    public GridSquareScript GetTile(Vector2 position)
+    {
+        int x = (int)position.x;
+        int y = (int)position.y;
+        if (x <= Grid.Count - 1 && x >= 0 && y <= Grid[0].Count - 1 && y >= 0)
+        {
+            return Grid[x][y].GetComponent<GridSquareScript>();
+        }
+        return null;
     }
 }

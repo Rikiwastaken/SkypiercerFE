@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using static UnitScript;
+using static UnityEngine.GraphicsBuffer;
 
 public class ActionManager : MonoBehaviour
 {
@@ -53,29 +54,72 @@ public class ActionManager : MonoBehaviour
                 {
                     if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed && !preventfromlockingafteraction)
                     {
-                        Debug.Log("on active malheureusement");
                         GridScript.lockselection = true;
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
                     }
                 }
             }
-            else if(GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+            else
             {
-                previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
-                currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = GridScript.selection.GridCoordinates;
-                currentcharacter.transform.position = new Vector3(GridScript.selection.GridCoordinates.x, currentcharacter.transform.position.y, GridScript.selection.GridCoordinates.y);
-                currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
-                GridScript.UnlockSelection();
 
-                (int weaponrange,bool melee) = currentcharacter.GetComponent<UnitScript>().GetRangeAndMele();
-                GridScript.ShowAttackAfterMovement(weaponrange, melee, GridScript.selection);
-                GridScript.LockcurrentSelection();
-                GridScript.actionsMenu.SetActive(true);
+                if(currentcharacter != null)
+                {
+                    if(InputManager.NextWeaponjustpressed)
+                    {
+                        currentcharacter.GetComponent<UnitScript>().GetNextWeapon();
+                        WeaponChange();
+                    }
+                    if (InputManager.PreviousWeaponjustpressed)
+                    {
+                        currentcharacter.GetComponent<UnitScript>().GetPreviousWeapon();
+                        WeaponChange();
+                    }
+                    if (InputManager.Telekinesisjustpressed)
+                    {
+                        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+                        WeaponChange();
+                    }
+                    if (InputManager.canceljustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                    {
+                        currentcharacter = null;
+                        GridScript.ResetAllSelections();
+                        GridScript.Recolor();
+                    }
+                }
+
+                
+
+                if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                {
+                    previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
+                    currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = GridScript.selection.GridCoordinates;
+                    currentcharacter.transform.position = new Vector3(GridScript.selection.GridCoordinates.x, currentcharacter.transform.position.y, GridScript.selection.GridCoordinates.y);
+                    currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+                    GridScript.UnlockSelection();
+
+                    (int weaponrange, bool melee) = currentcharacter.GetComponent<UnitScript>().GetRangeAndMele();
+                    GridScript.ShowAttackAfterMovement(weaponrange, melee, GridScript.selection);
+                    GridScript.LockcurrentSelection();
+                    GridScript.actionsMenu.SetActive(true);
+                    for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
+                    {
+                        GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
+                    }
+                }
             }
+            
 
         }
         preventfromlockingafteraction = false;
+    }
+
+    private void WeaponChange()
+    {
+        (int range, bool frapperenmelee) = currentcharacter.GetComponent<UnitScript>().GetRangeAndMele();
+        GridScript.ShowAttack(range, frapperenmelee, true);
+        GridScript.lockedattacktiles = GridScript.attacktiles;
+        GridScript.Recolor();
     }
 
     public void ResetAction()
@@ -103,7 +147,7 @@ public class ActionManager : MonoBehaviour
     {
         ActionsMenu actionsMenu = FindAnyObjectByType<ActionsMenu>();
         actionsMenu.target = currentcharacter;
-        actionsMenu.FindAttackers();
+        actionsMenu.AttackCommand();
 
     }
 

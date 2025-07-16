@@ -68,7 +68,9 @@ public class GridSquareScript : MonoBehaviour
 
     public void fillwithPurple()
     {
-        filledimage.color = new Color(62.7f / 255f, 12.5f / 255f, 94.1f/255f,0.5f);
+        Color newcolor = Color.magenta;
+        newcolor.a = 0.5f;
+        filledimage.color = newcolor;
     }
     public void fillwithGrey()
     {

@@ -11,6 +11,7 @@ public class BattleInfotext : MonoBehaviour
     private string stringtoshow;
 
     TextMeshProUGUI TMP;
+    private GameObject selectedunit;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,10 +26,14 @@ public class BattleInfotext : MonoBehaviour
         {
             GridScript = FindAnyObjectByType<GridScript>();
         }
+        
+        if (GridScript.GetSelectedUnitGameObject()!=null)
+        {
+            selectedunit = GridScript.GetSelectedUnitGameObject();
+        }
+        
 
-        GameObject selectedunit = GridScript.GetSelectedUnitGameObject();
-
-        if (selectedunit == null) {
+        if (GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count ==0) {
             stringtoshow = string.Empty;
             Color color = transform.parent.GetComponent<Image>().color;
             color.a = 0f;
@@ -37,7 +42,15 @@ public class BattleInfotext : MonoBehaviour
         else
         {
             Character selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
-            stringtoshow = selectedunitCharacter.name + "       Level : "+ selectedunitCharacter.level + "\nHealth : "+ selectedunitCharacter.currentHP+" / "+ selectedunitCharacter.stats.HP+ "       Equiped weapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name;
+            stringtoshow = selectedunitCharacter.name + "       Level : "+ selectedunitCharacter.level + "\nHealth : "+ selectedunitCharacter.currentHP+" / "+ selectedunitCharacter.stats.HP+ "       Weapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name;
+            if(selectedunitCharacter.telekinesisactivated)
+            {
+                stringtoshow += "\nTelekinesis : on";
+            }
+            else
+            {
+                stringtoshow += "\nTelekinesis : off";
+            }
             Color color = transform.parent.GetComponent<Image>().color;
             color.a = 1f;
             transform.parent.GetComponent<Image>().color = color;
