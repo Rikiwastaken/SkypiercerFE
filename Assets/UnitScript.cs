@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -72,22 +73,26 @@ public class UnitScript : MonoBehaviour
 
     public equipment Fists;
 
+    public float movespeed;
+
+    private battlecameraScript battlecameraScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         UnitCharacteristics.position = new Vector2((int)transform.position.x, (int)transform.position.z);
-        if(UnitCharacteristics.equipments==null)
+        if (UnitCharacteristics.equipments == null)
         {
             UnitCharacteristics.equipments = new List<equipment>();
-            for(int i = 0;i<6;i++)
+            for (int i = 0; i < 6; i++)
             {
                 UnitCharacteristics.equipments.Add(new equipment());
             }
         }
-        else if(UnitCharacteristics.equipments.Count<6)
+        else if (UnitCharacteristics.equipments.Count < 6)
         {
-            for(int i = UnitCharacteristics.equipments.Count; i<6;i++)
+            for (int i = UnitCharacteristics.equipments.Count; i < 6; i++)
             {
                 UnitCharacteristics.equipments.Add(new equipment());
             }
@@ -98,6 +103,11 @@ public class UnitScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (battlecameraScript == null)
+        {
+            battlecameraScript = FindAnyObjectByType<battlecameraScript>();
+        }
+
         if (trylvlup)
         {
             trylvlup = false;
@@ -105,12 +115,64 @@ public class UnitScript : MonoBehaviour
         }
         transform.GetChild(0).GetChild(1).GetComponent<Image>().type = Image.Type.Filled;
         transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.stats.HP;
-        if(UnitCharacteristics.currentHP<0)
+
+        if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), UnitCharacteristics.position) > 0.1f)
         {
-            FindAnyObjectByType<GridScript>().allunitGOs.Remove(gameObject);
-            FindAnyObjectByType<GridScript>().allunits.Remove(UnitCharacteristics);
-            Destroy(gameObject);
+            Vector2 direction = (UnitCharacteristics.position - new Vector2(transform.position.x, transform.position.z)).normalized;
+            transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
         }
+        else
+        {
+            transform.position = new Vector3(UnitCharacteristics.position.x, transform.position.y, UnitCharacteristics.position.y);
+        }
+
+        TemporaryColor();
+
+    }
+
+    private void TemporaryColor()
+    {
+
+        Color newcolor = Color.white;
+        if (UnitCharacteristics.affiliation == "playable")
+        {
+            newcolor = Color.blue;
+            if (UnitCharacteristics.alreadyplayed)
+            {
+                newcolor *= 0.5f;
+                newcolor.a = 1f;
+            }
+        }
+        else if (UnitCharacteristics.affiliation == "enemy")
+        {
+            newcolor = Color.red;
+            if (UnitCharacteristics.alreadyplayed)
+            {
+                newcolor *= 0.5f;
+                newcolor.a = 1f;
+            }
+        }
+        else
+        {
+            newcolor = Color.yellow;
+            if (UnitCharacteristics.alreadyplayed)
+            {
+                newcolor *= 0.5f;
+                newcolor.a = 1f;
+            }
+        }
+
+        if (battlecameraScript.incombat)
+        {
+            newcolor.a = 0f;
+            if (battlecameraScript.fighter1 == gameObject || battlecameraScript.fighter2 == gameObject)
+            {
+                newcolor.a = 1f;
+            }
+        }
+
+
+        GetComponent<MeshRenderer>().material.color = newcolor;
     }
 
     public List<int> LevelUp()
@@ -247,7 +309,7 @@ public class UnitScript : MonoBehaviour
     {
         for (int i = 0; i < UnitCharacteristics.equipments.Count; i++)
         {
-            if (UnitCharacteristics.equipments[i].type !="item" && UnitCharacteristics.equipments[i].Currentuses>0)
+            if (UnitCharacteristics.equipments[i].type != "item" && UnitCharacteristics.equipments[i].Currentuses > 0)
             {
                 return UnitCharacteristics.equipments[i];
             }
@@ -266,7 +328,7 @@ public class UnitScript : MonoBehaviour
                 weapons.Add(UnitCharacteristics.equipments[i]);
             }
         }
-        if(weapons.Count == 0)
+        if (weapons.Count == 0)
         {
             weapons.Add(Fists);
         }
@@ -288,10 +350,10 @@ public class UnitScript : MonoBehaviour
                 rest.Add(UnitCharacteristics.equipments[i]);
             }
         }
-        if(listweapons.Count > 0)
+        if (listweapons.Count > 0)
         {
             UnitCharacteristics.equipments = new List<equipment>();
-            for (int i = 1;i<listweapons.Count;i++)
+            for (int i = 1; i < listweapons.Count; i++)
             {
                 UnitCharacteristics.equipments.Add(listweapons[i]);
             }
@@ -306,16 +368,16 @@ public class UnitScript : MonoBehaviour
         {
             return null;
         }
-        
+
     }
 
     public void EquipWeapon(equipment weapon)
     {
-        if(UnitCharacteristics.equipments.Contains(weapon))
+        if (UnitCharacteristics.equipments.Contains(weapon))
         {
             int index = UnitCharacteristics.equipments.IndexOf(weapon);
             int safegard = 0;
-            while(index!=0 && safegard<20)
+            while (index != 0 && safegard < 20)
             {
                 GetNextWeapon();
                 index = UnitCharacteristics.equipments.IndexOf(weapon);
@@ -342,7 +404,7 @@ public class UnitScript : MonoBehaviour
         {
             UnitCharacteristics.equipments = new List<equipment>();
             UnitCharacteristics.equipments.Add(listweapons[listweapons.Count - 1]);
-            for (int i = 0; i < listweapons.Count-1; i++)
+            for (int i = 0; i < listweapons.Count - 1; i++)
             {
                 UnitCharacteristics.equipments.Add(listweapons[i]);
             }
@@ -365,20 +427,20 @@ public class UnitScript : MonoBehaviour
         {
             if (UnitCharacteristics.equipments[i].type != "item" && UnitCharacteristics.equipments[i].type != null)
             {
-                UnitCharacteristics.equipments[i].Currentuses+= number;
-                if(UnitCharacteristics.equipments[i].Currentuses > UnitCharacteristics.equipments[i].Maxuses)
+                UnitCharacteristics.equipments[i].Currentuses += number;
+                if (UnitCharacteristics.equipments[i].Currentuses > UnitCharacteristics.equipments[i].Maxuses)
                 {
                     UnitCharacteristics.equipments[i].Currentuses = UnitCharacteristics.equipments[i].Maxuses;
                 }
             }
         }
     }
-    public (int,bool) GetRangeAndMele()
+    public (int, bool) GetRangeAndMele()
     {
         equipment firstweapon = GetFirstWeapon();
         int range = firstweapon.Range;
         bool melee = true;
-        if(firstweapon.type =="bow")
+        if (firstweapon.type == "bow")
         {
             melee = false;
             if (UnitCharacteristics.telekinesisactivated)
@@ -393,7 +455,7 @@ public class UnitScript : MonoBehaviour
                 range += 1;
             }
         }
-        
-        return (range,melee);
+
+        return (range, melee);
     }
 }

@@ -13,6 +13,8 @@ public class BattleInfotext : MonoBehaviour
     TextMeshProUGUI TMP;
     private GameObject selectedunit;
 
+    private battlecameraScript battlecamera;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,14 +28,19 @@ public class BattleInfotext : MonoBehaviour
         {
             GridScript = FindAnyObjectByType<GridScript>();
         }
-        
+
+        if (battlecamera == null)
+        {
+            battlecamera = FindAnyObjectByType<battlecameraScript>();
+        }
+
         if (GridScript.GetSelectedUnitGameObject()!=null)
         {
             selectedunit = GridScript.GetSelectedUnitGameObject();
         }
         
 
-        if (GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count ==0) {
+        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count ==0) || battlecamera.incombat) {
             stringtoshow = string.Empty;
             Color color = transform.parent.GetComponent<Image>().color;
             color.a = 0f;
@@ -56,5 +63,7 @@ public class BattleInfotext : MonoBehaviour
             transform.parent.GetComponent<Image>().color = color;
         }
         TMP.text = stringtoshow;
+
+
     }
 }

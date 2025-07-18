@@ -33,7 +33,9 @@ public class ActionsMenu : MonoBehaviour
 
     private battlecameraScript battlecameraScript;
 
-    private int activetargetid;
+    public int activetargetid;
+
+    public bool confirmattack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,7 +48,10 @@ public class ActionsMenu : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(inputManager == null)
+
+        FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
+
+        if (inputManager == null)
         {
             inputManager = FindAnyObjectByType<InputManager>();
         }
@@ -306,19 +311,24 @@ public class ActionsMenu : MonoBehaviour
         }
     }
 
+    public void FinalizeAttack()
+    {
+        target.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
+        targetlist = new List<GameObject>();
+        target = null;
+        GridScript.Recolor();
+        confirmattack = false;
+        
+        FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
+    }
     public void ConfirmAttack()
     {
         if(targetlist.Count>0)
         {
-            ApplyDamage(target, targetlist[activetargetid]);
-            target.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
-            targetlist = new List<GameObject>();
-            target = null;           
-            GridScript.Recolor();
+            confirmattack = true;
             unitAttackText.transform.parent.parent.gameObject.SetActive(false);
             gameObject.SetActive(false);
             GridScript.ResetAllSelections();
-            FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
         }
     }
 
@@ -514,7 +524,7 @@ public class ActionsMenu : MonoBehaviour
         return true ;
     }
 
-    public void ApplyDamage(GameObject unit, GameObject target)
+    public (int, int) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
@@ -532,162 +542,65 @@ public class ActionsMenu : MonoBehaviour
         int unitcrit = CalculateCrit(unit, target);
         int targetcrit = CalculateCrit(target, unit);
 
-        if (doubleattacker == unit)
+        int numberofhits = 0;
+        int numberofcritials = 0;
+
+        if(!unitalreadyattacked)
         {
-            if (tripleattack)
-            {
-                //calculating hit for first attack
-                int randomnumber = Random.Range(0,100);
-                if(randomnumber < unithitrate)
-                {
-                    // calculating critical
-                    randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unitcrit)
-                    {
-                        chartarget.currentHP -= unitdamage * 3;
-                    }
-                    else
-                    {
-                        chartarget.currentHP -= unitdamage;
-                    }
-                }
-
-                //calculating hit for second attack
-                randomnumber = Random.Range(0, 100);
-                if (randomnumber < unithitrate)
-                {
-                    // calculating critical
-                    randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unitcrit)
-                    {
-                        chartarget.currentHP -= unitdamage * 3;
-                    }
-                    else
-                    {
-                        chartarget.currentHP -= unitdamage;
-                    }
-                }
-                //calculating hit for third attack
-                randomnumber = Random.Range(0, 100);
-                if (randomnumber < unithitrate)
-                {
-                    // calculating critical
-                    randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unitcrit)
-                    {
-                        chartarget.currentHP -= unitdamage * 3;
-                    }
-                    else
-                    {
-                        chartarget.currentHP -= unitdamage;
-                    }
-                }
-            }
-            else
-            {
-                //calculating hit for first attack
-                int randomnumber = Random.Range(0, 100);
-                if (randomnumber < unithitrate)
-                {
-                    // calculating critical
-                    randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unitcrit)
-                    {
-                        chartarget.currentHP -= unitdamage * 3;
-                    }
-                    else
-                    {
-                        chartarget.currentHP -= unitdamage;
-                    }
-                }
-
-                //calculating hit for second attack
-                randomnumber = Random.Range(0, 100);
-                if (randomnumber < unithitrate)
-                {
-                    // calculating critical
-                    randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unitcrit)
-                    {
-                        chartarget.currentHP -= unitdamage * 3;
-                    }
-                    else
-                    {
-                        chartarget.currentHP -= unitdamage;
-                    }
-                }
-            }
-
-        }
-        else
-        {
-            //calculating hit for first attack
-            int randomnumber = Random.Range(0, 100);
-            if (randomnumber < unithitrate)
-            {
-                // calculating critical
-                randomnumber = Random.Range(0, 100);
-                if (randomnumber < unitcrit)
-                {
-                    chartarget.currentHP -= unitdamage * 3;
-                }
-                else
-                {
-                    chartarget.currentHP -= unitdamage;
-                }
-            }
-        }
-
-        //enemy attack
-        if(chartarget.currentHP >0)
-        {
-            if (doubleattacker == target)
+            if (doubleattacker == unit)
             {
                 if (tripleattack)
                 {
                     //calculating hit for first attack
                     int randomnumber = Random.Range(0, 100);
-                    if (randomnumber < targethitrate)
+                    if (randomnumber < unithitrate)
                     {
+                        numberofhits++;
                         // calculating critical
                         randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targetcrit)
+                        if (randomnumber < unitcrit)
                         {
-                            charunit.currentHP -= targetdamage * 3;
+                            numberofcritials++;
+                            chartarget.currentHP -= unitdamage * 3;
                         }
                         else
                         {
-                            charunit.currentHP -= targetdamage;
+                            chartarget.currentHP -= unitdamage;
                         }
                     }
+
                     //calculating hit for second attack
                     randomnumber = Random.Range(0, 100);
-                    if (randomnumber < targethitrate)
+                    if (randomnumber < unithitrate)
                     {
+                        numberofhits++;
                         // calculating critical
                         randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targetcrit)
+                        if (randomnumber < unitcrit)
                         {
-                            charunit.currentHP -= targetdamage * 3;
+                            numberofcritials++;
+                            chartarget.currentHP -= unitdamage * 3;
                         }
                         else
                         {
-                            charunit.currentHP -= targetdamage;
+                            chartarget.currentHP -= unitdamage;
                         }
                     }
                     //calculating hit for third attack
                     randomnumber = Random.Range(0, 100);
-                    if (randomnumber < targethitrate)
+                    if (randomnumber < unithitrate)
                     {
+                        numberofhits++;
                         // calculating critical
                         randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targetcrit)
+                        if (randomnumber < unitcrit)
                         {
-                            charunit.currentHP -= targetdamage * 3;
+                            numberofcritials++;
+                            chartarget.currentHP -= unitdamage * 3;
                         }
                         else
                         {
-                            charunit.currentHP -= targetdamage;
+                            chartarget.currentHP -= unitdamage;
                         }
                     }
                 }
@@ -695,32 +608,37 @@ public class ActionsMenu : MonoBehaviour
                 {
                     //calculating hit for first attack
                     int randomnumber = Random.Range(0, 100);
-                    if (randomnumber < targethitrate)
+                    if (randomnumber < unithitrate)
                     {
+                        numberofhits++;
                         // calculating critical
                         randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targetcrit)
+                        if (randomnumber < unitcrit)
                         {
-                            charunit.currentHP -= targetdamage * 3;
+                            numberofcritials++;
+                            chartarget.currentHP -= unitdamage * 3;
                         }
                         else
                         {
-                            charunit.currentHP -= targetdamage;
+                            chartarget.currentHP -= unitdamage;
                         }
                     }
+
                     //calculating hit for second attack
                     randomnumber = Random.Range(0, 100);
-                    if (randomnumber < targethitrate)
+                    if (randomnumber < unithitrate)
                     {
+                        numberofhits++;
                         // calculating critical
                         randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targetcrit)
+                        if (randomnumber < unitcrit)
                         {
-                            charunit.currentHP -= targetdamage * 3;
+                            numberofcritials++;
+                            chartarget.currentHP -= unitdamage * 3;
                         }
                         else
                         {
-                            charunit.currentHP -= targetdamage;
+                            chartarget.currentHP -= unitdamage;
                         }
                     }
                 }
@@ -730,27 +648,155 @@ public class ActionsMenu : MonoBehaviour
             {
                 //calculating hit for first attack
                 int randomnumber = Random.Range(0, 100);
-                if (randomnumber < targethitrate)
+                if (randomnumber < unithitrate)
                 {
+                    numberofhits++;
                     // calculating critical
                     randomnumber = Random.Range(0, 100);
-                    if (randomnumber < targetcrit)
+                    if (randomnumber < unitcrit)
                     {
-                        charunit.currentHP -= targetdamage * 3;
+                        numberofcritials++;
+                        chartarget.currentHP -= unitdamage * 3;
                     }
                     else
                     {
-                        charunit.currentHP -= targetdamage;
+                        chartarget.currentHP -= unitdamage;
                     }
                 }
             }
         }
-
-        if(charunit.currentHP>0 && charunit.affiliation== "playable")
+        else
         {
-            AwardExp(unit, target);
-        }
+            //enemy attack
+            if (chartarget.currentHP > 0)
+            {
+                if (doubleattacker == target)
+                {
+                    if (tripleattack)
+                    {
+                        //calculating hit for first attack
+                        int randomnumber = Random.Range(0, 100);
+                        if (randomnumber < targethitrate)
+                        {
+                            numberofhits++;
+                            // calculating critical
+                            randomnumber = Random.Range(0, 100);
+                            if (randomnumber < targetcrit)
+                            {
+                                numberofcritials++;
+                                charunit.currentHP -= targetdamage * 3;
+                            }
+                            else
+                            {
+                                charunit.currentHP -= targetdamage;
+                            }
+                        }
+                        //calculating hit for second attack
+                        randomnumber = Random.Range(0, 100);
+                        if (randomnumber < targethitrate)
+                        {
+                            numberofhits++;
+                            // calculating critical
+                            randomnumber = Random.Range(0, 100);
+                            if (randomnumber < targetcrit)
+                            {
+                                numberofcritials++;
+                                charunit.currentHP -= targetdamage * 3;
+                            }
+                            else
+                            {
+                                charunit.currentHP -= targetdamage;
+                            }
+                        }
+                        //calculating hit for third attack
+                        randomnumber = Random.Range(0, 100);
+                        if (randomnumber < targethitrate)
+                        {
+                            numberofhits++;
+                            // calculating critical
+                            randomnumber = Random.Range(0, 100);
+                            if (randomnumber < targetcrit)
+                            {
+                                numberofcritials++;
+                                charunit.currentHP -= targetdamage * 3;
+                            }
+                            else
+                            {
+                                charunit.currentHP -= targetdamage;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //calculating hit for first attack
+                        int randomnumber = Random.Range(0, 100);
+                        if (randomnumber < targethitrate)
+                        {
+                            numberofhits++;
+                            // calculating critical
+                            randomnumber = Random.Range(0, 100);
+                            if (randomnumber < targetcrit)
+                            {
+                                numberofcritials++;
+                                charunit.currentHP -= targetdamage * 3;
+                            }
+                            else
+                            {
+                                charunit.currentHP -= targetdamage;
+                            }
+                        }
+                        //calculating hit for second attack
+                        randomnumber = Random.Range(0, 100);
+                        if (randomnumber < targethitrate)
+                        {
+                            numberofhits++;
+                            // calculating critical
+                            randomnumber = Random.Range(0, 100);
+                            if (randomnumber < targetcrit)
+                            {
+                                numberofcritials++;
+                                charunit.currentHP -= targetdamage * 3;
+                            }
+                            else
+                            {
+                                charunit.currentHP -= targetdamage;
+                            }
+                        }
+                    }
 
+                }
+                else
+                {
+                    //calculating hit for first attack
+                    int randomnumber = Random.Range(0, 100);
+                    if (randomnumber < targethitrate)
+                    {
+                        numberofhits++;
+                        // calculating critical
+                        randomnumber = Random.Range(0, 100);
+                        if (randomnumber < targetcrit)
+                        {
+                            numberofcritials++;
+                            charunit.currentHP -= targetdamage * 3;
+                        }
+                        else
+                        {
+                            charunit.currentHP -= targetdamage;
+                        }
+                    }
+                }
+            }
+
+            if (charunit.currentHP > 0 && charunit.affiliation == "playable")
+            {
+                AwardExp(unit, target);
+            }
+            if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
+            {
+                AwardExp(target, unit);
+            }
+        }
+        return (numberofhits, numberofcritials);
     }
 
     private void AwardExp(GameObject unit, GameObject target)
@@ -859,9 +905,6 @@ public class ActionsMenu : MonoBehaviour
         }
 
         int SpeedDiff = unitbasespeed - targetbasespeed;
-        Debug.Log(unitbasespeed);
-        Debug.Log(targetbasespeed);
-        Debug.Log(SpeedDiff);
 
 
         if (SpeedDiff >= 150)

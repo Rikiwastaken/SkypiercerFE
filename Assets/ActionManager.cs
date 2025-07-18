@@ -40,14 +40,14 @@ public class ActionManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(actionsMenu.activeSelf)
+        if (actionsMenu.activeSelf)
         {
             return;
         }
 
-        if(TurnManager.currentlyplaying=="playable")
+        if (TurnManager.currentlyplaying == "playable")
         {
-            if(!GridScript.lockselection)
+            if (!GridScript.lockselection)
             {
                 currentcharacter = GridScript.GetSelectedUnitGameObject();
                 if (currentcharacter != null)
@@ -63,9 +63,9 @@ public class ActionManager : MonoBehaviour
             else
             {
 
-                if(currentcharacter != null)
+                if (currentcharacter != null)
                 {
-                    if(InputManager.NextWeaponjustpressed)
+                    if (InputManager.NextWeaponjustpressed)
                     {
                         currentcharacter.GetComponent<UnitScript>().GetNextWeapon();
                         WeaponChange();
@@ -88,13 +88,12 @@ public class ActionManager : MonoBehaviour
                     }
                 }
 
-                
+
 
                 if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                 {
                     previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = GridScript.selection.GridCoordinates;
-                    currentcharacter.transform.position = new Vector3(GridScript.selection.GridCoordinates.x, currentcharacter.transform.position.y, GridScript.selection.GridCoordinates.y);
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
                     GridScript.UnlockSelection();
 
@@ -105,14 +104,14 @@ public class ActionManager : MonoBehaviour
                     for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
                     {
                         GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
-                        if(i==0)
+                        if (i == 0)
                         {
                             GridScript.actionsMenu.transform.GetChild(i).GetComponent<Button>().Select();
                         }
                     }
                 }
             }
-            
+
 
         }
         preventfromlockingafteraction = false;
@@ -129,22 +128,22 @@ public class ActionManager : MonoBehaviour
     public void ResetAction()
     {
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = previouscoordinates;
-        currentcharacter.transform.position = new Vector3(previouscoordinates.x, currentcharacter.transform.position.y, previouscoordinates.y);
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;
         currentcharacter = null;
-        GridScript.UnlockSelection();
+        GridScript.ResetAllSelections();
         GridScript.ResetColor();
+        GridScript.ShowMovement();
     }
 
     public void Wait()
     {
-        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true ;
+        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
         currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
         currentcharacter = null;
         GridScript.ResetAllSelections();
         GridScript.ResetColor();
-        preventfromlockingafteraction = true ;
+        preventfromlockingafteraction = true;
     }
 
     public void Attack()
@@ -155,8 +154,8 @@ public class ActionManager : MonoBehaviour
 
     }
 
-    public (AttackStats,AttackStats) AttackValuesCalculator(Character attacker, Character target)
+    public (AttackStats, AttackStats) AttackValuesCalculator(Character attacker, Character target)
     {
-        return (new AttackStats(),new AttackStats());
+        return (new AttackStats(), new AttackStats());
     }
 }

@@ -19,13 +19,13 @@ public class ItemsScript : MonoBehaviour
     public TextMeshProUGUI statstext;
     private void FixedUpdate()
     {
-        if (inputManager==null)
+        if (inputManager == null)
         {
             inputManager = FindAnyObjectByType<InputManager>();
         }
         if (inputManager.canceljustpressed)
         {
-            if(ItemActionsMenu.activeSelf)
+            if (ItemActionsMenu.activeSelf)
             {
                 ItemActionsMenuCancelButton.onClick.Invoke();
             }
@@ -33,7 +33,7 @@ public class ItemsScript : MonoBehaviour
             {
                 ItemMenuCancelButton.onClick.Invoke();
             }
-                
+
         }
     }
 
@@ -61,7 +61,7 @@ public class ItemsScript : MonoBehaviour
     public void InitializeButtons()
     {
         target = FindAnyObjectByType<ActionsMenu>().target.GetComponent<UnitScript>().UnitCharacteristics;
-        if(target!= null)
+        if (target != null)
         {
             for (int i = 0; i < buttons.Count; i++)
             {
@@ -72,8 +72,8 @@ public class ItemsScript : MonoBehaviour
                 else
                 {
                     buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = target.equipments[i].Name + " " + target.equipments[i].Currentuses + "/" + target.equipments[i].Maxuses;
-                } 
-                    
+                }
+
             }
         }
     }

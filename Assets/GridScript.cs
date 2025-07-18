@@ -94,7 +94,7 @@ public class GridScript : MonoBehaviour
             inputManager = FindAnyObjectByType<InputManager>();
         }
 
-        if(inputManager.movementValue!=Vector2.zero && inputManager.movementValue!= previousmovevalue && moveCD<=0 && !actionsMenu.activeSelf)
+        if(inputManager.movementValue!=Vector2.zero && inputManager.movementValue!= previousmovevalue && moveCD<=0 && !actionsMenu.activeSelf && GetComponent<TurnManger>().currentlyplaying == "playable")
         {
             moveCD =(int)(0.1f/Time.deltaTime);
             previousmovevalue = inputManager.movementValue;

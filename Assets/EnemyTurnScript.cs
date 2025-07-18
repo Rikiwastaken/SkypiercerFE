@@ -12,6 +12,7 @@ public class EnemyTurnScript : MonoBehaviour
     private TurnManger TurnManager;
 
     private GameObject CurrentEnemy;
+    private GameObject CurrentPlayable;
     private GameObject CurrentOther;
 
     private GridScript gridScript;
@@ -24,6 +25,15 @@ public class EnemyTurnScript : MonoBehaviour
     private int counterbeforemove;
     public float delaybeforeAttack;
     private int counterbeforeattack;
+    private bool waittingforcamera;
+
+    private bool unitalreadyattacked;
+
+    public float delaybetweenAttack;
+    private int counterbetweenattack;
+
+    public float delayafterAttack;
+    private int counterafterattack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,7 +46,7 @@ public class EnemyTurnScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(TurnManager.currentlyplaying != "enemy")
+        if (TurnManager.currentlyplaying != "enemy")
         {
             CurrentEnemy = null;
         }
@@ -44,17 +54,13 @@ public class EnemyTurnScript : MonoBehaviour
         {
             CurrentOther = null;
         }
-        if (TurnManager.currentlyplaying != "enemy" && TurnManager.currentlyplaying != "other")
-        {
-            return;
-        }
 
         if (CurrentEnemy == null && TurnManager.currentlyplaying == "enemy")
         {
-            foreach(GameObject unit in gridScript.allunitGOs)
+            foreach (GameObject unit in gridScript.allunitGOs)
             {
                 Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-                if(charunit.affiliation== "enemy" && !charunit.alreadyplayed)
+                if (charunit.affiliation == "enemy" && !charunit.alreadyplayed)
                 {
                     CurrentEnemy = unit;
                     counterbeforemove = (int)(delaybeforeMove / Time.fixedDeltaTime);
@@ -65,12 +71,12 @@ public class EnemyTurnScript : MonoBehaviour
         }
         else if (TurnManager.currentlyplaying == "enemy")
         {
-            
+
             Character CharCurrentEnemy = CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics;
             battlecamera.Destination = CharCurrentEnemy.position;
             if (!CharCurrentEnemy.alreadymoved)
             {
-                if(counterbeforemove > 0)
+                if (counterbeforemove > 0)
                 {
                     counterbeforemove--;
                 }
@@ -82,18 +88,16 @@ public class EnemyTurnScript : MonoBehaviour
                     {
                         DestinationVector = Destination.GridCoordinates;
                         CharCurrentEnemy.position = DestinationVector;
-                        CurrentEnemy.transform.position = new Vector3(DestinationVector.x, CurrentEnemy.transform.position.y, DestinationVector.y);
                         counterbeforeattack = (int)(delaybeforeAttack / Time.fixedDeltaTime);
                         CharCurrentEnemy.alreadymoved = true;
                     }
                     else
                     {
                         CharCurrentEnemy.position = DestinationVector;
-                        CurrentEnemy.transform.position = new Vector3(DestinationVector.x, CurrentEnemy.transform.position.y, DestinationVector.y);
                         counterbeforeattack = 0;
                         CharCurrentEnemy.alreadymoved = true;
                     }
-                    
+
                 }
             }
             else
@@ -102,19 +106,181 @@ public class EnemyTurnScript : MonoBehaviour
                 {
                     counterbeforeattack--;
                 }
+                else if (waittingforcamera)
+                {
+                    GameObject target = CalculateBestTargetForOffensiveUnits(CurrentEnemy);
+                    if (target == null)
+                    {
+                        CharCurrentEnemy.alreadyplayed = true;
+                        CurrentEnemy = null;
+                        battlecamera.incombat = false;
+                        waittingforcamera = false;
+                    }
+                    else if (CurrentEnemy == null)
+                    {
+                        battlecamera.incombat = false;
+                        waittingforcamera = false;
+                    }
+                    else
+                    {
+                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentEnemy, target);
+                        if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
+                        {
+                            if (!unitalreadyattacked)
+                            {
+                                (int hits, int crits) = ActionsMenu.ApplyDamage(CurrentEnemy, target, unitalreadyattacked);
+                                FindAnyObjectByType<CombatTextScript>().UpdateInfo(hits, crits, CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);
+                                unitalreadyattacked = true;
+                                counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
+                            }
+                            else
+                            {
+                                if (counterbetweenattack > 0)
+                                {
+                                    counterbetweenattack--;
+                                }
+                                else if (counterafterattack == 0)
+                                {
+                                    (int hits, int crits) = ActionsMenu.ApplyDamage(CurrentEnemy, target, unitalreadyattacked);
+                                    FindAnyObjectByType<CombatTextScript>().UpdateInfo(hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics);
+                                    unitalreadyattacked = true;
+                                    counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+                                }
+                                else
+                                {
+                                    counterafterattack--;
+                                    if (counterafterattack <= 0)
+                                    {
+                                        CharCurrentEnemy.alreadyplayed = true;
+                                        CurrentEnemy = null;
+                                        battlecamera.incombat = false;
+                                        waittingforcamera = false;
+                                    }
+                                }
+                            }
+
+
+
+                        }
+                    }
+
+
+                }
                 else
                 {
                     GameObject target = CalculateBestTargetForOffensiveUnits(CurrentEnemy);
-                    if(target != null)
+                    if (target != null)
                     {
-                        ActionsMenu.ApplyDamage(CurrentEnemy, target);
-                        CharCurrentEnemy.alreadyplayed = true;
-                        CurrentEnemy = null;
+                        waittingforcamera = true;
+                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentEnemy, target);
+                        unitalreadyattacked = false;
                     }
                     else
                     {
                         CharCurrentEnemy.alreadyplayed = true;
                         CurrentEnemy = null;
+                    }
+                    gridScript.ResetAllSelections();
+                }
+            }
+        }
+
+        //playerattack
+        if (TurnManager.currentlyplaying == "playable")
+        {
+            if(ActionsMenu.target==null)
+            {
+                return;
+            }
+            Debug.Log("turn is player");
+            GameObject CurrentPlayable = ActionsMenu.target;
+            Character CurrentPlayableChar = CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics;
+            if (ActionsMenu.confirmattack)
+            {
+                if (counterbeforeattack > 0)
+                {
+                    Debug.Log("Waitting before attack");
+                    counterbeforeattack--;
+                }
+                else if(waittingforcamera)
+                {
+                    Debug.Log("Camera Moving");
+                    GameObject target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
+                    if(target==null)
+                    {
+                        Debug.Log("Target null");
+                        CurrentPlayableChar.alreadyplayed = true;
+                        battlecamera.incombat = false;
+                        waittingforcamera = false;
+                    }
+                    else if(CurrentPlayable == null)
+                    {
+                        Debug.Log("Defender null");
+                        battlecamera.incombat = false;
+                        waittingforcamera = false;
+                    }
+                    else
+                    {
+                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentPlayable, target);
+                        if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
+                        {
+                            Debug.Log("Camera placed");
+                            if (!unitalreadyattacked)
+                            {
+                                Debug.Log("attacker turn");
+                                (int hits, int crits) = ActionsMenu.ApplyDamage(CurrentPlayable, target, unitalreadyattacked);
+                                FindAnyObjectByType<CombatTextScript>().UpdateInfo(hits, crits, CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);
+                                unitalreadyattacked = true;
+                                counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
+                            }
+                            else
+                            {
+                                
+                                if (counterbetweenattack > 0)
+                                {
+                                    Debug.Log("Waitting for Defender turn");
+                                    counterbetweenattack--;
+                                }
+                                else if (counterafterattack == 0)
+                                {
+                                    Debug.Log("Defender turn");
+                                    (int hits, int crits) = ActionsMenu.ApplyDamage(CurrentPlayable, target, unitalreadyattacked);
+                                    FindAnyObjectByType<CombatTextScript>().UpdateInfo(hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics);
+                                    unitalreadyattacked = true;
+                                    counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+                                }
+                                else
+                                {
+                                    counterafterattack--;
+                                    if (counterafterattack <= 0)
+                                    {
+                                        Debug.Log("End of combat");
+                                        battlecamera.incombat = false;
+                                        ActionsMenu.FinalizeAttack();
+                                    }
+                                }
+                            }
+
+
+
+                        }
+                    }
+                        
+                    
+                }
+                else
+                {
+                    Debug.Log("Seting Up Camera");
+                    GameObject target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
+                    if (target != null)
+                    {
+                        waittingforcamera = true;
+                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentPlayable, target);
+                        unitalreadyattacked = false;
+                    }
+                    else
+                    {
+                        ActionsMenu.FinalizeAttack();
                     }
                     gridScript.ResetAllSelections();
                 }
@@ -148,20 +314,18 @@ public class EnemyTurnScript : MonoBehaviour
                 }
                 else
                 {
-                    GridSquareScript Destination = CalculateDestinationForOffensiveUnits(CurrentOther,CharCurrentOther.attacksfriends);
+                    GridSquareScript Destination = CalculateDestinationForOffensiveUnits(CurrentOther, CharCurrentOther.attacksfriends);
                     Vector2 DestinationVector = CharCurrentOther.position;
                     if (Destination != null)
                     {
                         DestinationVector = Destination.GridCoordinates;
                         CharCurrentOther.position = DestinationVector;
-                        CurrentOther.transform.position = new Vector3(DestinationVector.x, CurrentOther.transform.position.y, DestinationVector.y);
                         counterbeforeattack = (int)(delaybeforeAttack / Time.fixedDeltaTime);
                         CharCurrentOther.alreadymoved = true;
                     }
                     else
                     {
                         CharCurrentOther.position = DestinationVector;
-                        CurrentOther.transform.position = new Vector3(DestinationVector.x, CurrentOther.transform.position.y, DestinationVector.y);
                         counterbeforeattack = 0;
                         CharCurrentOther.alreadymoved = true;
                     }
@@ -174,14 +338,74 @@ public class EnemyTurnScript : MonoBehaviour
                 {
                     counterbeforeattack--;
                 }
+                else if (waittingforcamera)
+                {
+                    GameObject target = CalculateBestTargetForOffensiveUnits(CurrentOther,CharCurrentOther.attacksfriends);
+                    if (target == null)
+                    {
+                        CharCurrentOther.alreadyplayed = true;
+                        CurrentOther = null;
+                        battlecamera.incombat = false;
+                        waittingforcamera = false;
+                    }
+                    else if (CurrentOther == null)
+                    {
+                        battlecamera.incombat = false;
+                        waittingforcamera = false;
+                    }
+                    else
+                    {
+                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentOther, target);
+                        if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
+                        {
+                            if (!unitalreadyattacked)
+                            {
+                                (int hits, int crits) = ActionsMenu.ApplyDamage(CurrentOther, target, unitalreadyattacked);
+                                FindAnyObjectByType<CombatTextScript>().UpdateInfo(hits, crits, CurrentOther.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);
+                                unitalreadyattacked = true;
+                                counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
+                            }
+                            else
+                            {
+                                if (counterbetweenattack > 0)
+                                {
+                                    counterbetweenattack--;
+                                }
+                                else if (counterafterattack == 0)
+                                {
+                                    (int hits, int crits) = ActionsMenu.ApplyDamage(CurrentOther, target, unitalreadyattacked);
+                                    FindAnyObjectByType<CombatTextScript>().UpdateInfo(hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, CurrentOther.GetComponent<UnitScript>().UnitCharacteristics);
+                                    unitalreadyattacked = true;
+                                    counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+                                }
+                                else
+                                {
+                                    counterafterattack--;
+                                    if (counterafterattack <= 0)
+                                    {
+                                        CharCurrentOther.alreadyplayed = true;
+                                        CurrentOther = null;
+                                        battlecamera.incombat = false;
+                                        waittingforcamera = false;
+                                    }
+                                }
+                            }
+
+
+
+                        }
+                    }
+
+
+                }
                 else
                 {
                     GameObject target = CalculateBestTargetForOffensiveUnits(CurrentOther, CharCurrentOther.attacksfriends);
                     if (target != null)
                     {
-                        ActionsMenu.ApplyDamage(CurrentOther, target);
-                        CharCurrentOther.alreadyplayed = true;
-                        CurrentOther = null;
+                        waittingforcamera = true;
+                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentOther, target);
+                        unitalreadyattacked = false;
                     }
                     else
                     {
@@ -192,10 +416,15 @@ public class EnemyTurnScript : MonoBehaviour
                 }
             }
         }
+
+        if(!battlecamera.incombat)
+        {
+            DeathCleanup();
+        }
     }
 
 
-    private GameObject CalculateBestTargetForOffensiveUnits(GameObject unit, bool attacksfriend=true)
+    public GameObject CalculateBestTargetForOffensiveUnits(GameObject unit, bool attacksfriend = true)
     {
         int maxreward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
@@ -209,7 +438,7 @@ public class EnemyTurnScript : MonoBehaviour
             {
                 Character charotherunit = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
                 string affiliationtoattack = "playable";
-                if(!attacksfriend)
+                if (!attacksfriend)
                 {
                     affiliationtoattack = "enemy";
                 }
@@ -281,7 +510,7 @@ public class EnemyTurnScript : MonoBehaviour
                     }
 
 
-                    if(reward > maxreward)
+                    if (reward > maxreward)
                     {
                         chosenUnit = otherunit;
                         maxreward = reward;
@@ -291,7 +520,7 @@ public class EnemyTurnScript : MonoBehaviour
         }
         return chosenUnit;
     }
-    
+
     private GridSquareScript CalculateDestinationForOffensiveUnits(GameObject currentCharacter, bool attacksfriend = true)
     {
         List<GridSquareScript> movementlist = gridScript.movementtiles;
@@ -302,7 +531,7 @@ public class EnemyTurnScript : MonoBehaviour
 
         foreach (GridSquareScript movement in movementlist)
         {
-            if(RewardForDestination(currentCharacter, movement, attacksfriend) > maxreward)
+            if (RewardForDestination(currentCharacter, movement, attacksfriend) > maxreward)
             {
                 bestsquare = movement;
                 maxreward = RewardForDestination(currentCharacter, movement, attacksfriend);
@@ -311,13 +540,13 @@ public class EnemyTurnScript : MonoBehaviour
         return bestsquare;
     }
 
-    private int RewardForDestination(GameObject unit,GridSquareScript position, bool attacksfriend = true)
+    private int RewardForDestination(GameObject unit, GridSquareScript position, bool attacksfriend = true)
     {
         int reward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        (int range,bool melee) =unit.GetComponent<UnitScript>().GetRangeAndMele();
+        (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
         List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position);
-        foreach(GridSquareScript tile in potentialAttackPosition)
+        foreach (GridSquareScript tile in potentialAttackPosition)
         {
             foreach (GameObject otherunit in gridScript.allunitGOs)
             {
@@ -327,13 +556,13 @@ public class EnemyTurnScript : MonoBehaviour
                 {
                     affiliationtoattack = "enemy";
                 }
-                if (charotherunit.affiliation == affiliationtoattack && charotherunit.position==tile.GridCoordinates)
+                if (charotherunit.affiliation == affiliationtoattack && charotherunit.position == tile.GridCoordinates)
                 {
                     //that means that an enemy unit is in the zone
                     int rawdamage = ActionsMenu.CalculateDamage(unit, otherunit);
                     int rawdamagetaken = ActionsMenu.CalculateDamage(otherunit, unit);
                     int hitrate = ActionsMenu.CalculateHit(unit, otherunit);
-                    int dodgerate =  100 - ActionsMenu.CalculateHit(otherunit, unit);
+                    int dodgerate = 100 - ActionsMenu.CalculateHit(otherunit, unit);
 
                     bool inrange = ActionsMenu.CheckifInRange(unit, otherunit);
                     if (!inrange)
@@ -345,7 +574,7 @@ public class EnemyTurnScript : MonoBehaviour
                     int potentialdamage = rawdamage;
                     if (doubleattacker == unit)
                     {
-                        if(tripleattack)
+                        if (tripleattack)
                         {
                             potentialdamage *= 3;
                         }
@@ -354,7 +583,7 @@ public class EnemyTurnScript : MonoBehaviour
                             potentialdamage *= 2;
                         }
                     }
-                    
+
                     if (potentialdamage > 0)
                     {
                         reward += 20;
@@ -364,11 +593,11 @@ public class EnemyTurnScript : MonoBehaviour
                         }
                         reward += (int)(hitrate / 10f);
                     }
-                    
+
 
                     int potentialdamagetaken = rawdamagetaken;
 
-                    if(doubleattacker == otherunit)
+                    if (doubleattacker == otherunit)
                     {
                         if (tripleattack)
                         {
@@ -391,20 +620,17 @@ public class EnemyTurnScript : MonoBehaviour
                         {
                             reward += 5;
                         }
-                    } 
+                    }
                 }
-                else 
+                else
                 {
-                    if (ManhattanDistance(charunit, charotherunit) <= 5)
-                    {
-                        reward += 1;
-                    }     
+                    reward += ManhattanDistance(charunit, charotherunit) - charunit.equipments[0].Range;
                 }
             }
 
-            foreach(GameObject otherunit in gridScript.allunitGOs)
+            foreach (GameObject otherunit in gridScript.allunitGOs)
             {
-                if(otherunit.GetComponent<UnitScript>().UnitCharacteristics.position==position.GridCoordinates)
+                if (otherunit.GetComponent<UnitScript>().UnitCharacteristics.position == position.GridCoordinates)
                 {
                     reward -= 9999;
                 }
@@ -416,7 +642,18 @@ public class EnemyTurnScript : MonoBehaviour
 
     private int ManhattanDistance(Character unit, Character otherunit)
     {
-        return (int) (Mathf.Abs(unit.position.x - otherunit.position.x)+ Mathf.Abs(unit.position.y - otherunit.position.y));
+        return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
+    }
+
+    private void DeathCleanup()
+    {
+        foreach(GameObject unit in gridScript.allunitGOs)
+        {
+            if(unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP<=0)
+            {
+                Destroy(unit);
+            }
+        }
     }
 
 }

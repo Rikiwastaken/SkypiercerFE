@@ -15,6 +15,8 @@ public class GridSquareScript : MonoBehaviour
 
     public bool isobstacle;
 
+    private battlecameraScript battlecameraScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -31,10 +33,14 @@ public class GridSquareScript : MonoBehaviour
         {
             GridScript = FindAnyObjectByType<GridScript>();
         }
+        if (battlecameraScript == null)
+        {
+            battlecameraScript = FindAnyObjectByType<battlecameraScript>();
+        }
 
 
 
-        if(GridScript.selection==this)
+        if (GridScript.selection==this && !battlecameraScript.incombat)
         {
             SelectRound.SetActive(true);
             SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
