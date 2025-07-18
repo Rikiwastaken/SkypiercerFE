@@ -14213,6 +14213,8 @@ MonoBehaviour:
   TargetOrangeLifeBar: {fileID: 141667971}
   TargetGreenLifebar: {fileID: 158769715}
   targetlist: []
+  activetargetid: 0
+  confirmattack: 0
 --- !u!4 &1241781129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
@@ -23776,7 +23778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActionsMenu: {fileID: 1236801789}
-  delaybeforeMove: 2
+  delaybeforeMove: 1
   delaybeforeAttack: 2
   delaybetweenAttack: 2
   delayafterAttack: 2
