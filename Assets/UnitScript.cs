@@ -77,6 +77,8 @@ public class UnitScript : MonoBehaviour
 
     private battlecameraScript battlecameraScript;
 
+    private Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -108,6 +110,11 @@ public class UnitScript : MonoBehaviour
             battlecameraScript = FindAnyObjectByType<battlecameraScript>();
         }
 
+        if(animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
+
         if (trylvlup)
         {
             trylvlup = false;
@@ -118,15 +125,44 @@ public class UnitScript : MonoBehaviour
 
         if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), UnitCharacteristics.position) > 0.1f)
         {
+            animator.SetBool("Walk", true);
             Vector2 direction = (UnitCharacteristics.position - new Vector2(transform.position.x, transform.position.z)).normalized;
             transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
+            if(!battlecameraScript.incombat)
+            {
+                transform.forward = new Vector3(direction.x, 0f, direction.y);
+            }
+            
+            
         }
         else
         {
             transform.position = new Vector3(UnitCharacteristics.position.x, transform.position.y, UnitCharacteristics.position.y);
+            if(animator.gameObject.activeSelf)
+            {
+                animator.SetBool("Walk", false);
+            }
+            
         }
 
-        TemporaryColor();
+
+        if (battlecameraScript.incombat)
+        {
+            if (battlecameraScript.fighter1 == gameObject || battlecameraScript.fighter2 == gameObject)
+            {
+                animator.gameObject.SetActive(true);
+            }
+            else
+            {
+                animator.gameObject.SetActive(false);
+            }
+        }
+        else if (!animator.gameObject.activeSelf)
+        {
+            animator.gameObject.SetActive(true);
+        }
+
+        //TemporaryColor();
 
     }
 

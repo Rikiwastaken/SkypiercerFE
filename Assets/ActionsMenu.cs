@@ -345,7 +345,7 @@ public class ActionsMenu : MonoBehaviour
         foreach(GridSquareScript tile in  GridScript.lockedattacktiles)
         {
             GameObject potentialtarget = GridScript.GetUnit(tile);
-            if(potentialtarget != null)
+            if(potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation!="playable")
             {
                 targetlist.Add(potentialtarget);
             }
@@ -524,7 +524,7 @@ public class ActionsMenu : MonoBehaviour
         return true ;
     }
 
-    public (int, int) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
+    public (int, int, int) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
@@ -544,6 +544,8 @@ public class ActionsMenu : MonoBehaviour
 
         int numberofhits = 0;
         int numberofcritials = 0;
+
+        int finaldamage = 0;
 
         if(!unitalreadyattacked)
         {
@@ -664,6 +666,7 @@ public class ActionsMenu : MonoBehaviour
                     }
                 }
             }
+            finaldamage = unitdamage;
         }
         else
         {
@@ -785,6 +788,7 @@ public class ActionsMenu : MonoBehaviour
                         }
                     }
                 }
+                finaldamage = targetdamage;
             }
 
             if (charunit.currentHP > 0 && charunit.affiliation == "playable")
@@ -796,7 +800,7 @@ public class ActionsMenu : MonoBehaviour
                 AwardExp(target, unit);
             }
         }
-        return (numberofhits, numberofcritials);
+        return (numberofhits, numberofcritials, finaldamage);
     }
 
     private void AwardExp(GameObject unit, GameObject target)

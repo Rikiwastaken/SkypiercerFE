@@ -313,11 +313,15 @@ public class GridScript : MonoBehaviour
 
         foreach (GameObject unit in allunitGOs)
         {
-            if (unit.GetComponent<UnitScript>().UnitCharacteristics.position == selection.GridCoordinates)
+            if(!unit.IsDestroyed())
             {
-                SelectedUnit = unit;
-                break;
+                if (unit.GetComponent<UnitScript>().UnitCharacteristics.position == selection.GridCoordinates)
+                {
+                    SelectedUnit = unit;
+                    break;
+                }
             }
+            
         }
 
         return SelectedUnit;

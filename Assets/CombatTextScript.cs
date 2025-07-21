@@ -84,8 +84,14 @@ public class CombatTextScript : MonoBehaviour
         defendertext.text = defender.name;
     }
 
-    public void UpdateInfo(int hits, int crits, Character newattacker, Character newdefender)
+    public void ResetInfo()
     {
+        combattext.text = "";
+    }
+
+    public void UpdateInfo(int damage, int hits, int crits, Character newattacker, Character newdefender)
+    {
+        int finaldamage = damage*hits + 2* damage*crits;
         if(hits == 0)
         {
             combattext.text = newattacker.name +" missed " + newdefender.name+".";
@@ -106,6 +112,6 @@ public class CombatTextScript : MonoBehaviour
         {
             combattext.text += "\n Critical hit "+crits+" times !";
         }
+        combattext.text += "\n"+ newdefender.name + " lost " +  finaldamage + " Health.";
     }
-
 }

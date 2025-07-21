@@ -25,6 +25,8 @@ public class battlecameraScript : MonoBehaviour
     public CombatTextScript CombatTextScript;
     private bool resettingy;
 
+    
+
     private void Start()
     {
         initialrotation = transform.GetChild(0).rotation.eulerAngles;
@@ -89,13 +91,13 @@ public class battlecameraScript : MonoBehaviour
         {
             transform.position += new Vector3(0f, InputManager.cammovementValue.y * -3f * Time.fixedDeltaTime, 0f);
         }
-        if(transform.position.y<2f)
+        if(transform.position.y<5f)
         {
-            transform.position = new Vector3(transform.position.x,2f,transform.position.z);
+            transform.position = new Vector3(transform.position.x,5f,transform.position.z);
         }
-        if (transform.position.y > 7f)
+        if (transform.position.y > 20f)
         {
-            transform.position = new Vector3(transform.position.x, 7f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, 20f, transform.position.z);
         }
         
         initialrotation = transform.GetChild(0).rotation.eulerAngles;
@@ -120,7 +122,7 @@ public class battlecameraScript : MonoBehaviour
 
         float n = Mathf.Sqrt((CoordTarget.y - CoordUnit.y) * (CoordTarget.y - CoordUnit.y) + (CoordTarget.x - CoordUnit.x) * (CoordTarget.x - CoordUnit.x));
 
-        float length = Vector2.Distance(CoordTarget,CoordUnit);
+        float length = Vector2.Distance(CoordTarget,CoordUnit)*2.5f;
 
         Vector2 CamCoordinates = new Vector2();
 
