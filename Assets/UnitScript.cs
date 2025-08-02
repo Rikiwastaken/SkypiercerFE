@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -24,6 +25,7 @@ public class UnitScript : MonoBehaviour
         public bool alreadyplayed;
         public bool alreadymoved;
         public bool telekinesisactivated;
+        public List<int> equipmentsIDs;
         public List<equipment> equipments;
         public bool isboss;
         public bool attacksfriends;
@@ -40,6 +42,8 @@ public class UnitScript : MonoBehaviour
         public string type;
         public int Currentuses;
         public int Maxuses;
+        public int ID;
+        public int Grade;
     }
 
     [Serializable]
@@ -79,9 +83,16 @@ public class UnitScript : MonoBehaviour
 
     private Animator animator;
 
+    private Transform armature;
+
+    private Vector3 initialpos;
+    private Vector3 initialrot;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    void Start()
     {
+        FindAnyObjectByType<DataScript>().GenerateEquipmentList(UnitCharacteristics);
+        Fists = FindAnyObjectByType<DataScript>().equipmentList[0];
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         UnitCharacteristics.position = new Vector2((int)transform.position.x, (int)transform.position.z);
         if (UnitCharacteristics.equipments == null)
@@ -100,6 +111,8 @@ public class UnitScript : MonoBehaviour
             }
         }
         UnitCharacteristics.currentHP = UnitCharacteristics.stats.HP;
+
+        
     }
 
     // Update is called once per frame
@@ -114,6 +127,23 @@ public class UnitScript : MonoBehaviour
         {
             animator = GetComponentInChildren<Animator>();
         }
+
+        if (armature == null)
+        {
+            armature = animator.transform;
+            initialpos = armature.localPosition;
+            initialrot = armature.rotation.eulerAngles;
+        }
+        if(!battlecameraScript.incombat)
+        {
+            if(Vector3.Distance(armature.localPosition, initialpos)>0.1f)
+            {
+                armature.localPosition += (initialpos - armature.localPosition).normalized * Time.deltaTime;
+            }
+            armature.rotation = Quaternion.Euler(armature.rotation.eulerAngles + (initialrot - armature.rotation.eulerAngles).normalized * Time.deltaTime);
+
+        }
+
 
         if (trylvlup)
         {
@@ -163,9 +193,41 @@ public class UnitScript : MonoBehaviour
         }
 
         //TemporaryColor();
+        UpdateRendererLayer();
 
     }
 
+    private void UpdateRendererLayer()
+    {
+        if(UnitCharacteristics.alreadyplayed)
+        {
+            foreach (MeshRenderer Renderer in GetComponentsInChildren<MeshRenderer>())
+            {
+                Renderer.renderingLayerMask = 0;
+            }
+            
+        }
+        else
+        {
+            foreach (MeshRenderer Renderer in GetComponentsInChildren<MeshRenderer>())
+            {
+                switch (UnitCharacteristics.affiliation)
+                {
+                    case "playable":
+                        Renderer.renderingLayerMask = 1;
+                        break;
+                    case "enemy":
+                        Renderer.renderingLayerMask = 2;
+                        break;
+                    case "other":
+                        Renderer.renderingLayerMask = 3;
+                        break;
+
+                }
+            }
+        }
+        
+    }
     private void TemporaryColor()
     {
 
@@ -398,6 +460,7 @@ public class UnitScript : MonoBehaviour
             {
                 UnitCharacteristics.equipments.Add(rest[i]);
             }
+            SynchroniseWeaponIDs();
             return UnitCharacteristics.equipments[0];
         }
         else
@@ -405,6 +468,15 @@ public class UnitScript : MonoBehaviour
             return null;
         }
 
+    }
+
+    private void SynchroniseWeaponIDs()
+    {
+        UnitCharacteristics.equipmentsIDs = new List<int>();
+        foreach ( equipment equipment in UnitCharacteristics.equipments )
+        {
+            UnitCharacteristics.equipmentsIDs.Add( equipment.ID );
+        }
     }
 
     public void EquipWeapon(equipment weapon)
@@ -419,6 +491,7 @@ public class UnitScript : MonoBehaviour
                 index = UnitCharacteristics.equipments.IndexOf(weapon);
             }
         }
+        SynchroniseWeaponIDs();
     }
 
     public equipment GetPreviousWeapon()
@@ -448,13 +521,13 @@ public class UnitScript : MonoBehaviour
             {
                 UnitCharacteristics.equipments.Add(rest[i]);
             }
+            SynchroniseWeaponIDs();
             return UnitCharacteristics.equipments[0];
         }
         else
         {
             return null;
         }
-
     }
 
     public void RestoreUses(int number)
@@ -493,5 +566,30 @@ public class UnitScript : MonoBehaviour
         }
 
         return (range, melee);
+    }
+
+    public (int, bool, string) GetRangeMeleeAndType()
+    {
+        equipment firstweapon = GetFirstWeapon();
+        int range = firstweapon.Range;
+        bool melee = true;
+        string type = firstweapon.type;
+        if (firstweapon.type == "bow")
+        {
+            melee = false;
+            if (UnitCharacteristics.telekinesisactivated)
+            {
+                range += 2;
+            }
+        }
+        else
+        {
+            if (UnitCharacteristics.telekinesisactivated)
+            {
+                range += 1;
+            }
+        }
+
+        return (range, melee, type);
     }
 }

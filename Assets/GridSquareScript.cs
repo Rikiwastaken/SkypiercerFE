@@ -15,6 +15,15 @@ public class GridSquareScript : MonoBehaviour
 
     public bool isobstacle;
 
+    /*type is for potential bonus : 
+        Forest : +30% dodge
+        Ruins : +10% Dodge, -10% Accuracy
+        Fire : -1 movement, +10% Damage taken
+        Water : -1 movement, -10% dodge
+        HighGround : +20% Accuracy, +10% Dodge
+    */
+    public string type;
+
     private battlecameraScript battlecameraScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

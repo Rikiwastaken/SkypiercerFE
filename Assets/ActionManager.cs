@@ -97,8 +97,8 @@ public class ActionManager : MonoBehaviour
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
                     GridScript.UnlockSelection();
 
-                    (int weaponrange, bool melee) = currentcharacter.GetComponent<UnitScript>().GetRangeAndMele();
-                    GridScript.ShowAttackAfterMovement(weaponrange, melee, GridScript.selection);
+                    (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                    GridScript.ShowAttackAfterMovement(weaponrange, melee, GridScript.selection,type.ToLower() == "staff");
                     GridScript.LockcurrentSelection();
                     GridScript.actionsMenu.SetActive(true);
                     for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)

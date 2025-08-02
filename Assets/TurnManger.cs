@@ -92,6 +92,11 @@ public class TurnManger : MonoBehaviour
                     character.alreadyplayed = false;
                     character.alreadymoved = false;
                 }
+                if(FindAnyObjectByType<ActionManager>())
+                {
+                    FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
+                    FindAnyObjectByType<GridScript>().ResetAllSelections();
+                }
                 currentlyplaying = "playable";
                 currentTurn++;
                 return;
@@ -139,21 +144,24 @@ public class TurnManger : MonoBehaviour
         }
     }
 
-    public void InitializeUnitLists(List<Character> allunits)
+    public void InitializeUnitLists(List<GameObject> allunits)
     {
-        foreach (Character character in allunits)
+        playableunit = new List<Character>();
+        enemyunit = new List<Character>();
+        otherunits = new List<Character>();
+        foreach (GameObject character in allunits)
         {
-            if(character.affiliation=="playable")
+            if(character.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable")
             {
-                playableunit.Add(character);
+                playableunit.Add(character.GetComponent<UnitScript>().UnitCharacteristics);
             }
-            else if(character.affiliation=="enemy")
+            else if(character.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="enemy")
             {
-                enemyunit.Add(character);
+                enemyunit.Add(character.GetComponent<UnitScript>().UnitCharacteristics);
             }
             else
             {
-                otherunits.Add(character);
+                otherunits.Add(character.GetComponent<UnitScript>().UnitCharacteristics);
             }
             
         }

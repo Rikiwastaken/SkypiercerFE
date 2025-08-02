@@ -40,10 +40,18 @@ public class ActionsMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        target = GameObject.Find("Zack");
-        battlecameraScript= FindAnyObjectByType<battlecameraScript>();
+        battlecameraScript = FindAnyObjectByType<battlecameraScript>();
 
     }
+    private void OnEnable()
+    {
+        if (GridScript == null)
+        {
+            GridScript = FindAnyObjectByType<GridScript>();
+        }
+        target = GridScript.GetSelectedUnitGameObject();
+    }
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -61,12 +69,12 @@ public class ActionsMenu : MonoBehaviour
             ActionsCancelButton.onClick.Invoke();
         }
 
-        if(inputManager.canceljustpressed && AttackButton.transform.parent.gameObject.activeSelf)
+        if (inputManager.canceljustpressed && AttackButton.transform.parent.gameObject.activeSelf)
         {
             AttackCancelButton.onClick.Invoke();
         }
-        
-        if (targetlist != null && targetlist.Count>0)
+
+        if (targetlist != null && targetlist.Count > 0)
         {
             if (inputManager.Telekinesisjustpressed)
             {
@@ -84,7 +92,7 @@ public class ActionsMenu : MonoBehaviour
 
             if (inputManager.NextTargetjustpressed)
             {
-                if(activetargetid< targetlist.Count-1)
+                if (activetargetid < targetlist.Count - 1)
                 {
                     activetargetid++;
                 }
@@ -92,7 +100,15 @@ public class ActionsMenu : MonoBehaviour
                 {
                     activetargetid = 0;
                 }
-                initializeAttackWindows(target, targetlist[activetargetid]);
+                if(target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower()=="staff")
+                {
+                    initializeHealingWindows(target, targetlist[activetargetid]);
+                }
+                else
+                {
+                    initializeAttackWindows(target, targetlist[activetargetid]);
+                }
+                
             }
             if (inputManager.PreviousTargetjustpressed)
             {
@@ -104,10 +120,17 @@ public class ActionsMenu : MonoBehaviour
                 {
                     activetargetid = targetlist.Count - 1;
                 }
-                initializeAttackWindows(target, targetlist[activetargetid]);
+                if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+                {
+                    initializeHealingWindows(target, targetlist[activetargetid]);
+                }
+                else
+                {
+                    initializeAttackWindows(target, targetlist[activetargetid]);
+                }
             }
 
-            if(activetargetid<= targetlist.Count)
+            if (activetargetid <= targetlist.Count)
             {
                 battlecameraScript.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
             }
@@ -115,7 +138,7 @@ public class ActionsMenu : MonoBehaviour
             {
                 battlecameraScript.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.position;
             }
-            
+
         }
 
     }
@@ -124,35 +147,36 @@ public class ActionsMenu : MonoBehaviour
     {
 
 
-        (int range, bool frapperenmelee) = target.GetComponent<UnitScript>().GetRangeAndMele();
-        GridScript.ShowAttackAfterMovement(range, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position));
+        (int range, bool frapperenmelee, string type) = target.GetComponent<UnitScript>().GetRangeMeleeAndType();
+        GridScript.ShowAttackAfterMovement(range, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), type.ToLower() == "staff");
         GridScript.lockedattacktiles = GridScript.attacktiles;
+        GridScript.lockedhealingtiles = GridScript.healingtiles;
         GridScript.Recolor();
-        
+
     }
 
-    private void NextWeapon(GameObject PreviousFoe,equipment initialweapon)
+    private void NextWeapon(GameObject PreviousFoe, equipment initialweapon)
     {
         target.GetComponent<UnitScript>().GetNextWeapon();
         WeaponChange();
         bool enemytargettable = false;
-        foreach(GridSquareScript tile in GridScript.lockedattacktiles)
+        foreach (GridSquareScript tile in GridScript.lockedattacktiles)
         {
-            if((int)tile.GridCoordinates.x == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.x && (int)tile.GridCoordinates.y == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.y)
+            if ((int)tile.GridCoordinates.x == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.x && (int)tile.GridCoordinates.y == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.y)
             {
                 enemytargettable = true;
                 break;
             }
         }
-        if(enemytargettable || target.GetComponent<UnitScript>().UnitCharacteristics.equipments[0]==initialweapon)
+        if (enemytargettable || target.GetComponent<UnitScript>().UnitCharacteristics.equipments[0] == initialweapon)
         {
             FindAttackers();
         }
         else
         {
-            NextWeapon(PreviousFoe,initialweapon);
+            NextWeapon(PreviousFoe, initialweapon);
         }
-        
+
     }
 
     private void PreviousWeapon(GameObject PreviousFoe, equipment initialweapon)
@@ -209,7 +233,7 @@ public class ActionsMenu : MonoBehaviour
                 break;
             }
         }
-        if(enemytargettable)
+        if (enemytargettable)
         {
             FindAttackers();
         }
@@ -225,24 +249,24 @@ public class ActionsMenu : MonoBehaviour
     {
         targetlist = null;
     }
-    
+
     public void AttackCommand()
     {
         // on essaie de trouver un combo arme/telekinesie pour pouvoir attaquer un ennemi
         Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
         FindAttackers();
-        if(targetlist.Count==0) //ici pas d'ennemi trouvé donc on essaie d'autres armes
+        if (targetlist.Count == 0) //ici pas d'ennemi trouve donc on essaie d'autres armes
         {
             List<equipment> weapons = target.GetComponent<UnitScript>().GetAllWeapons();
             Debug.Log(weapons.Count);
-            foreach(equipment weapon in weapons)
+            foreach (equipment weapon in weapons)
             {
                 Debug.Log(weapon.Name);
                 int rangebonus = 0;
                 bool frapperenmelee = true;
                 if (targetcharacter.telekinesisactivated)
                 {
-                    if(weapon.type.ToLower() == "bow")
+                    if (weapon.type.ToLower() == "bow")
                     {
                         rangebonus = 2;
                     }
@@ -256,17 +280,17 @@ public class ActionsMenu : MonoBehaviour
                     frapperenmelee = false;
                 }
 
-                GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position));
+                GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position),weapon.type=="staff");
                 GridScript.lockedattacktiles = GridScript.attacktiles;
                 GridScript.Recolor();
                 FindAttackers();
-                if(targetlist.Count>0 && weapon!=target.GetComponent<UnitScript>().Fists)
+                if (targetlist.Count > 0 && weapon != target.GetComponent<UnitScript>().Fists)
                 {
                     target.GetComponent<UnitScript>().EquipWeapon(weapon);
                     return;
                 }
             }
-            if (targetlist.Count==0) //ici toujours pas d'ennemi trouvé donc on essaie d'autres armes en chengeant le réglage de télékinésie
+            if (targetlist.Count == 0) //ici toujours pas d'ennemi trouvï¿½ donc on essaie d'autres armes en chengeant le rï¿½glage de tï¿½lï¿½kinï¿½sie
             {
                 Debug.Log("tentative avec telekinesie");
                 targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
@@ -290,7 +314,7 @@ public class ActionsMenu : MonoBehaviour
                         frapperenmelee = false;
                     }
 
-                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position));
+                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type == "staff");
                     GridScript.lockedattacktiles = GridScript.attacktiles;
                     GridScript.Recolor();
                     FindAttackers();
@@ -303,7 +327,7 @@ public class ActionsMenu : MonoBehaviour
                         return;
                     }
                 }
-                if(targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le réglage original de télékinésie
+                if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le rï¿½glage original de tï¿½lï¿½kinï¿½sie
                 {
                     targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
                 }
@@ -318,12 +342,13 @@ public class ActionsMenu : MonoBehaviour
         target = null;
         GridScript.Recolor();
         confirmattack = false;
-        
+        FindAnyObjectByType<battlecameraScript>().incombat = false;
+
         FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
     }
     public void ConfirmAttack()
     {
-        if(targetlist.Count>0)
+        if (targetlist.Count > 0)
         {
             confirmattack = true;
             unitAttackText.transform.parent.parent.gameObject.SetActive(false);
@@ -332,36 +357,67 @@ public class ActionsMenu : MonoBehaviour
         }
     }
 
+
+
     private void FindAttackers()
     {
 
         targetlist = new List<GameObject>();
 
-        if(GridScript== null)
+        if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();
         }
 
-        foreach(GridSquareScript tile in  GridScript.lockedattacktiles)
+        if(target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
-            GameObject potentialtarget = GridScript.GetUnit(tile);
-            if(potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation!="playable")
+            foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
             {
-                targetlist.Add(potentialtarget);
+                GameObject potentialtarget = GridScript.GetUnit(tile);
+                if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
+                {
+                    targetlist.Add(potentialtarget);
+                }
+            }
+            if (targetlist.Count > 0)
+            {
+                activetargetid = 0;
+                initializeHealingWindows(target, targetlist[activetargetid]);
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                }
+                AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Heal";
+                AttackButton.Select();
+            }
+        }
+        else
+        {
+            foreach (GridSquareScript tile in GridScript.lockedattacktiles)
+            {
+                GameObject potentialtarget = GridScript.GetUnit(tile);
+                if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable")
+                {
+                    targetlist.Add(potentialtarget);
+                }
+            }
+            if (targetlist.Count > 0)
+            {
+                activetargetid = 0;
+                initializeAttackWindows(target, targetlist[activetargetid]);
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                }
+                AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Attack";
+                AttackButton.Select();
             }
         }
 
-        if(targetlist.Count > 0)
-        {
-            activetargetid = 0;
-            initializeAttackWindows(target, targetlist[activetargetid]);
-            for(int i = 0; i < transform.childCount; i++)
-            {
-                transform.GetChild(i).gameObject.SetActive(false);
-            }
-            AttackButton.Select();
-        }
+            
+
         
+
 
     }
 
@@ -371,17 +427,17 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.parent.gameObject.SetActive(true);
 
-        (GameObject doubleattacker,bool tripleattack) = CalculatedoubleAttack(unit, target);
+        (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
 
-        
 
-        string UnitText= "\n"+ charunit.name+"\n";
+
+        string UnitText = "\n" + charunit.name + "\n";
         UnitText += "HP : " + charunit.currentHP + " / " + charunit.stats.HP + "\n";
         UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
-        if(doubleattacker==unit)
+        if (doubleattacker == unit)
         {
-            if(tripleattack)
+            if (tripleattack)
             {
                 UnitText += "Dmg : " + CalculateDamage(unit, target) + " x 3 \n";
             }
@@ -389,7 +445,7 @@ public class ActionsMenu : MonoBehaviour
             {
                 UnitText += "Dmg : " + CalculateDamage(unit, target) + " x 2 \n";
             }
-                
+
         }
         else
         {
@@ -407,13 +463,13 @@ public class ActionsMenu : MonoBehaviour
         }
         Debug.Log(UnitText);
 
-        
+
 
         string TargetText = "\n" + chartarget.name + "\n";
         TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.stats.HP + "\n";
         TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
-        if(CheckifInRange(unit, target))
+        if (CheckifInRange(unit, target))
         {
             if (doubleattacker == target)
             {
@@ -457,7 +513,7 @@ public class ActionsMenu : MonoBehaviour
 
         if (doubleattacker == unit)
         {
-            if(tripleattack)
+            if (tripleattack)
             {
                 TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target) * 3) / (float)chartarget.stats.HP;
                 TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
@@ -467,7 +523,7 @@ public class ActionsMenu : MonoBehaviour
                 TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target) * 2) / (float)chartarget.stats.HP;
                 TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
             }
-                
+
         }
         else
         {
@@ -501,7 +557,61 @@ public class ActionsMenu : MonoBehaviour
         {
             UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - 0) / (float)charunit.stats.HP;
             UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
-        }   
+        }
+    }
+
+    public void initializeHealingWindows(GameObject unit, GameObject target)
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+
+
+
+        string UnitText = "\n" + charunit.name + "\n";
+        UnitText += "HP : " + charunit.currentHP + " / " + charunit.stats.HP + "\n";
+        UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+        UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        UnitText += "Healing : " + CalculateHealing(unit) + " \n";
+        UnitText += "Hit : 100 %\n";
+        UnitText += "Crit : - \n";
+        if (charunit.telekinesisactivated)
+        {
+            UnitText += "Telekinesis : On\n";
+        }
+        else
+        {
+            UnitText += "Telekinesis : Off\n";
+        }
+        Debug.Log(UnitText);
+
+
+
+        string TargetText = "\n" + chartarget.name + "\n";
+        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.stats.HP + "\n";
+        TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+        TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        TargetText += "Dmg : -\n";
+        TargetText += "Hit : -\n";
+        TargetText += "Crit : -\n";
+        if (chartarget.telekinesisactivated)
+        {
+            TargetText += "Telekinesis : On\n";
+        }
+        else
+        {
+            TargetText += "Telekinesis : Off\n";
+        }
+        Debug.Log(TargetText);
+
+        unitAttackText.text = UnitText;
+        targetAttackText.text = TargetText;
+
+        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP + CalculateHealing(unit)) / (float)chartarget.stats.HP,1f);
+        TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+
+        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - 0) / (float)charunit.stats.HP;
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
     }
 
     public bool CheckifInRange(GameObject unit, GameObject target)
@@ -509,19 +619,19 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         int Distance = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
-        (int range,bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
-        if (Distance <=1)
+        (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
+        if (Distance <= 1)
         {
-            if(!melee)
+            if (!melee)
             {
                 return false;
             }
         }
-        else if (Distance>range)
+        else if (Distance > range)
         {
-            return false ;
+            return false;
         }
-        return true ;
+        return true;
     }
 
     public (int, int, int) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
@@ -529,205 +639,246 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
-        (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
-
-        bool inrange = CheckifInRange(unit,target);
-
-        int unithitrate = CalculateHit(unit, target);
-        int targethitrate = CalculateHit(target, unit);
-
-        int unitdamage = CalculateDamage(unit, target);
-        int targetdamage = CalculateDamage(target, unit);
-
-        int unitcrit = CalculateCrit(unit, target);
-        int targetcrit = CalculateCrit(target, unit);
-
-        int numberofhits = 0;
-        int numberofcritials = 0;
-
-        int finaldamage = 0;
-
-        if(!unitalreadyattacked)
+        if(unit.GetComponent<UnitScript>().GetFirstWeapon().type!="staff")
         {
-            if (doubleattacker == unit)
-            {
-                if (tripleattack)
-                {
-                    //calculating hit for first attack
-                    int randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unithitrate)
-                    {
-                        numberofhits++;
-                        // calculating critical
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unitcrit)
-                        {
-                            numberofcritials++;
-                            chartarget.currentHP -= unitdamage * 3;
-                        }
-                        else
-                        {
-                            chartarget.currentHP -= unitdamage;
-                        }
-                    }
+            (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
 
-                    //calculating hit for second attack
-                    randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unithitrate)
-                    {
-                        numberofhits++;
-                        // calculating critical
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unitcrit)
-                        {
-                            numberofcritials++;
-                            chartarget.currentHP -= unitdamage * 3;
-                        }
-                        else
-                        {
-                            chartarget.currentHP -= unitdamage;
-                        }
-                    }
-                    //calculating hit for third attack
-                    randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unithitrate)
-                    {
-                        numberofhits++;
-                        // calculating critical
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unitcrit)
-                        {
-                            numberofcritials++;
-                            chartarget.currentHP -= unitdamage * 3;
-                        }
-                        else
-                        {
-                            chartarget.currentHP -= unitdamage;
-                        }
-                    }
-                }
-                else
-                {
-                    //calculating hit for first attack
-                    int randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unithitrate)
-                    {
-                        numberofhits++;
-                        // calculating critical
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unitcrit)
-                        {
-                            numberofcritials++;
-                            chartarget.currentHP -= unitdamage * 3;
-                        }
-                        else
-                        {
-                            chartarget.currentHP -= unitdamage;
-                        }
-                    }
+            bool inrange = CheckifInRange(unit, target);
 
-                    //calculating hit for second attack
-                    randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unithitrate)
-                    {
-                        numberofhits++;
-                        // calculating critical
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unitcrit)
-                        {
-                            numberofcritials++;
-                            chartarget.currentHP -= unitdamage * 3;
-                        }
-                        else
-                        {
-                            chartarget.currentHP -= unitdamage;
-                        }
-                    }
-                }
+            int unithitrate = CalculateHit(unit, target);
+            int targethitrate = CalculateHit(target, unit);
 
-            }
-            else
+            int unitdamage = CalculateDamage(unit, target);
+            int targetdamage = CalculateDamage(target, unit);
+
+            int unitcrit = CalculateCrit(unit, target);
+            int targetcrit = CalculateCrit(target, unit);
+
+            int numberofhits = 0;
+            int numberofcritials = 0;
+
+            int finaldamage = 0;
+
+            if (!unitalreadyattacked)
             {
-                //calculating hit for first attack
-                int randomnumber = Random.Range(0, 100);
-                if (randomnumber < unithitrate)
-                {
-                    numberofhits++;
-                    // calculating critical
-                    randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unitcrit)
-                    {
-                        numberofcritials++;
-                        chartarget.currentHP -= unitdamage * 3;
-                    }
-                    else
-                    {
-                        chartarget.currentHP -= unitdamage;
-                    }
-                }
-            }
-            finaldamage = unitdamage;
-        }
-        else
-        {
-            //enemy attack
-            if (chartarget.currentHP > 0)
-            {
-                if (doubleattacker == target)
+                if (doubleattacker == unit)
                 {
                     if (tripleattack)
                     {
                         //calculating hit for first attack
                         int randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targethitrate)
+                        if (randomnumber < unithitrate)
                         {
                             numberofhits++;
                             // calculating critical
                             randomnumber = Random.Range(0, 100);
-                            if (randomnumber < targetcrit)
+                            if (randomnumber < unitcrit)
                             {
                                 numberofcritials++;
-                                charunit.currentHP -= targetdamage * 3;
+                                chartarget.currentHP -= unitdamage * 3;
                             }
                             else
                             {
-                                charunit.currentHP -= targetdamage;
+                                chartarget.currentHP -= unitdamage;
                             }
                         }
+
                         //calculating hit for second attack
                         randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targethitrate)
+                        if (randomnumber < unithitrate)
                         {
                             numberofhits++;
                             // calculating critical
                             randomnumber = Random.Range(0, 100);
-                            if (randomnumber < targetcrit)
+                            if (randomnumber < unitcrit)
                             {
                                 numberofcritials++;
-                                charunit.currentHP -= targetdamage * 3;
+                                chartarget.currentHP -= unitdamage * 3;
                             }
                             else
                             {
-                                charunit.currentHP -= targetdamage;
+                                chartarget.currentHP -= unitdamage;
                             }
                         }
                         //calculating hit for third attack
                         randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targethitrate)
+                        if (randomnumber < unithitrate)
                         {
                             numberofhits++;
                             // calculating critical
                             randomnumber = Random.Range(0, 100);
-                            if (randomnumber < targetcrit)
+                            if (randomnumber < unitcrit)
                             {
                                 numberofcritials++;
-                                charunit.currentHP -= targetdamage * 3;
+                                chartarget.currentHP -= unitdamage * 3;
                             }
                             else
                             {
-                                charunit.currentHP -= targetdamage;
+                                chartarget.currentHP -= unitdamage;
                             }
                         }
+                    }
+                    else
+                    {
+                        //calculating hit for first attack
+                        int randomnumber = Random.Range(0, 100);
+                        if (randomnumber < unithitrate)
+                        {
+                            numberofhits++;
+                            // calculating critical
+                            randomnumber = Random.Range(0, 100);
+                            if (randomnumber < unitcrit)
+                            {
+                                numberofcritials++;
+                                chartarget.currentHP -= unitdamage * 3;
+                            }
+                            else
+                            {
+                                chartarget.currentHP -= unitdamage;
+                            }
+                        }
+
+                        //calculating hit for second attack
+                        randomnumber = Random.Range(0, 100);
+                        if (randomnumber < unithitrate)
+                        {
+                            numberofhits++;
+                            // calculating critical
+                            randomnumber = Random.Range(0, 100);
+                            if (randomnumber < unitcrit)
+                            {
+                                numberofcritials++;
+                                chartarget.currentHP -= unitdamage * 3;
+                            }
+                            else
+                            {
+                                chartarget.currentHP -= unitdamage;
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+                    //calculating hit for first attack
+                    int randomnumber = Random.Range(0, 100);
+                    if (randomnumber < unithitrate)
+                    {
+                        numberofhits++;
+                        // calculating critical
+                        randomnumber = Random.Range(0, 100);
+                        if (randomnumber < unitcrit)
+                        {
+                            numberofcritials++;
+                            chartarget.currentHP -= unitdamage * 3;
+                        }
+                        else
+                        {
+                            chartarget.currentHP -= unitdamage;
+                        }
+                    }
+                }
+                finaldamage = unitdamage;
+            }
+            else
+            {
+                //enemy attack
+                if (chartarget.currentHP > 0)
+                {
+                    if (doubleattacker == target)
+                    {
+                        if (tripleattack)
+                        {
+                            //calculating hit for first attack
+                            int randomnumber = Random.Range(0, 100);
+                            if (randomnumber < targethitrate)
+                            {
+                                numberofhits++;
+                                // calculating critical
+                                randomnumber = Random.Range(0, 100);
+                                if (randomnumber < targetcrit)
+                                {
+                                    numberofcritials++;
+                                    charunit.currentHP -= targetdamage * 3;
+                                }
+                                else
+                                {
+                                    charunit.currentHP -= targetdamage;
+                                }
+                            }
+                            //calculating hit for second attack
+                            randomnumber = Random.Range(0, 100);
+                            if (randomnumber < targethitrate)
+                            {
+                                numberofhits++;
+                                // calculating critical
+                                randomnumber = Random.Range(0, 100);
+                                if (randomnumber < targetcrit)
+                                {
+                                    numberofcritials++;
+                                    charunit.currentHP -= targetdamage * 3;
+                                }
+                                else
+                                {
+                                    charunit.currentHP -= targetdamage;
+                                }
+                            }
+                            //calculating hit for third attack
+                            randomnumber = Random.Range(0, 100);
+                            if (randomnumber < targethitrate)
+                            {
+                                numberofhits++;
+                                // calculating critical
+                                randomnumber = Random.Range(0, 100);
+                                if (randomnumber < targetcrit)
+                                {
+                                    numberofcritials++;
+                                    charunit.currentHP -= targetdamage * 3;
+                                }
+                                else
+                                {
+                                    charunit.currentHP -= targetdamage;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //calculating hit for first attack
+                            int randomnumber = Random.Range(0, 100);
+                            if (randomnumber < targethitrate)
+                            {
+                                numberofhits++;
+                                // calculating critical
+                                randomnumber = Random.Range(0, 100);
+                                if (randomnumber < targetcrit)
+                                {
+                                    numberofcritials++;
+                                    charunit.currentHP -= targetdamage * 3;
+                                }
+                                else
+                                {
+                                    charunit.currentHP -= targetdamage;
+                                }
+                            }
+                            //calculating hit for second attack
+                            randomnumber = Random.Range(0, 100);
+                            if (randomnumber < targethitrate)
+                            {
+                                numberofhits++;
+                                // calculating critical
+                                randomnumber = Random.Range(0, 100);
+                                if (randomnumber < targetcrit)
+                                {
+                                    numberofcritials++;
+                                    charunit.currentHP -= targetdamage * 3;
+                                }
+                                else
+                                {
+                                    charunit.currentHP -= targetdamage;
+                                }
+                            }
+                        }
+
                     }
                     else
                     {
@@ -748,59 +899,51 @@ public class ActionsMenu : MonoBehaviour
                                 charunit.currentHP -= targetdamage;
                             }
                         }
-                        //calculating hit for second attack
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targethitrate)
-                        {
-                            numberofhits++;
-                            // calculating critical
-                            randomnumber = Random.Range(0, 100);
-                            if (randomnumber < targetcrit)
-                            {
-                                numberofcritials++;
-                                charunit.currentHP -= targetdamage * 3;
-                            }
-                            else
-                            {
-                                charunit.currentHP -= targetdamage;
-                            }
-                        }
                     }
-
+                    finaldamage = targetdamage;
                 }
-                else
+
+                if (charunit.currentHP > 0 && charunit.affiliation == "playable")
                 {
-                    //calculating hit for first attack
-                    int randomnumber = Random.Range(0, 100);
-                    if (randomnumber < targethitrate)
-                    {
-                        numberofhits++;
-                        // calculating critical
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targetcrit)
-                        {
-                            numberofcritials++;
-                            charunit.currentHP -= targetdamage * 3;
-                        }
-                        else
-                        {
-                            charunit.currentHP -= targetdamage;
-                        }
-                    }
+                    AwardExp(unit, target);
                 }
-                finaldamage = targetdamage;
+                if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
+                {
+                    AwardExp(target, unit);
+                }
             }
-
-            if (charunit.currentHP > 0 && charunit.affiliation == "playable")
-            {
-                AwardExp(unit, target);
-            }
-            if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
-            {
-                AwardExp(target, unit);
-            }
+            return (numberofhits, numberofcritials, finaldamage);
         }
-        return (numberofhits, numberofcritials, finaldamage);
+        //using a staff
+        else
+        {
+            bool inrange = CheckifInRange(unit, target);
+
+            int unitdamage = (int)Mathf.Max(CalculateHealing(unit), chartarget.stats.HP- chartarget.currentHP);
+
+            int numberofhits = 1;
+            int numberofcritials = 0;
+
+            int finaldamage = 0;
+
+            if (!unitalreadyattacked)
+            {
+                chartarget.currentHP += unitdamage;
+                if(chartarget.currentHP> chartarget.stats.HP)
+                {
+                    chartarget.currentHP = chartarget.stats.HP;
+                }
+                finaldamage = unitdamage;
+            }
+            else
+            {
+                //When healing the other does nothing
+                numberofcritials = 0;
+                numberofhits = 0;
+                finaldamage = 0;
+            }
+            return (numberofhits, numberofcritials, finaldamage);
+        }
     }
 
     private void AwardExp(GameObject unit, GameObject target)
@@ -808,18 +951,18 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         int baseexp = 15;
-        if(chartarget.isboss)
+        if (chartarget.isboss)
         {
             baseexp = 50;
         }
 
-        int adjustedexp = (int)(baseexp * (1f + (chartarget.level - charunit.level)/5f));
+        int adjustedexp = (int)(baseexp * (1f + (chartarget.level - charunit.level) / 5f));
 
-        if(chartarget.currentHP<=0)
+        if (chartarget.currentHP <= 0)
         {
             adjustedexp *= 3;
         }
-        if(adjustedexp < 0)
+        if (adjustedexp < 0)
         {
             adjustedexp = 1;
         }
@@ -828,7 +971,7 @@ public class ActionsMenu : MonoBehaviour
             adjustedexp = 100;
         }
         charunit.experience += adjustedexp;
-        if(charunit.experience>100)
+        if (charunit.experience > 100)
         {
             unit.GetComponent<UnitScript>().LevelUp();
         }
@@ -838,23 +981,21 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        GridSquareScript targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
 
         int baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
         int basestatdamage = charunit.stats.Strength;
-        if(charunit.telekinesisactivated)
+        int basestatdef = chartarget.stats.Defense;
+        if (charunit.telekinesisactivated || unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
         {
-            baseweapondamage = (int)(baseweapondamage*0.75f);
+            baseweapondamage = (int)(baseweapondamage * 0.75f);
             basestatdamage = charunit.stats.Psyche;
+            basestatdef = charunit.stats.Resistance;
         }
 
         int unitbasedamage = baseweapondamage + basestatdamage;
 
-        int basestatdef = chartarget.stats.Defense;
-        if (charunit.telekinesisactivated)
-        {
-            basestatdef = charunit.stats.Resistance;
-        }
-        if(unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower()=="greatsword")
+        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
         {
             basestatdef = (int)(basestatdef * 0.9f);
         }
@@ -865,13 +1006,17 @@ public class ActionsMenu : MonoBehaviour
 
         int finaldamage = unitbasedamage - basestatdef;
 
-        if(unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "wand")
+        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
             finaldamage = (int)(finaldamage / 2f);
         }
 
+        if (targetTile.type == "Fire")
+        {
+            finaldamage = (int)(finaldamage * 1.1f);
+        }
 
-        if(finaldamage<0)
+        if (finaldamage < 0)
         {
             finaldamage = 0;
         }
@@ -880,7 +1025,24 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
-    public (GameObject,bool) CalculatedoubleAttack(GameObject unit, GameObject target)
+    public int CalculateHealing(GameObject unit)
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+        int baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
+        int basestatdamage = charunit.stats.Psyche;
+        if (charunit.telekinesisactivated)
+        {
+            baseweapondamage = (int)(baseweapondamage * 0.75f);
+        }
+
+        int unitbasedamage = baseweapondamage + (int)(basestatdamage/2f);
+
+        return unitbasedamage;
+
+    }
+
+    public (GameObject, bool) CalculatedoubleAttack(GameObject unit, GameObject target)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
@@ -915,20 +1077,20 @@ public class ActionsMenu : MonoBehaviour
         {
             return (unit, true);
         }
-        else if (SpeedDiff >=50 )
+        else if (SpeedDiff >= 50)
         {
-            return (unit,false); 
+            return (unit, false);
         }
         if (SpeedDiff <= -150)
         {
             return (target, true);
         }
-        else if( SpeedDiff <= -50 )
+        else if (SpeedDiff <= -50)
         {
-            return (target,false);
+            return (target, false);
         }
 
-        return (null,false);
+        return (null, false);
 
     }
 
@@ -937,7 +1099,12 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
+        GridSquareScript unitTile = GridScript.GetTile((int)charunit.position.x, (int)charunit.position.y);
+        GridSquareScript targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
+
         int hitrateweapon = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseHit;
+
+        int tilebonus = GetTileBonus(unitTile, targetTile);
 
         int dexunit = charunit.stats.Dexterity;
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
@@ -950,7 +1117,7 @@ public class ActionsMenu : MonoBehaviour
         }
 
         int spdtarget = chartarget.stats.Speed;
-        if(target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower()=="sword")
+        if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
             spdtarget = (int)(spdtarget * 1.1f);
         }
@@ -959,19 +1126,55 @@ public class ActionsMenu : MonoBehaviour
             spdtarget = (int)(spdtarget * 0.9f);
         }
 
-        int finalhitrate = (int)(hitrateweapon + (dexunit - spdtarget) * 0.2f);
+        int finalhitrate = (int)(hitrateweapon + (dexunit - spdtarget) * 0.2f) + tilebonus;
 
-        if(finalhitrate<0)
+        if (finalhitrate < 0)
         {
             finalhitrate = 0;
         }
-        if(finalhitrate>100)
+        if (finalhitrate > 100)
         {
             finalhitrate = 100;
         }
 
         return finalhitrate;
 
+    }
+
+    private int GetTileBonus(GridSquareScript unitTile, GridSquareScript targetTile)
+    {
+        int tilebonus = 0;
+
+        string unittype = unitTile.type;
+        string targettype = unitTile.type;
+
+        if (unittype == "Forest")
+        {
+            tilebonus += 30;
+        }
+        else if (unittype == "Ruins")
+        {
+            tilebonus += 10;
+        }
+        else if (unittype == "HighGround")
+        {
+            tilebonus += 10;
+        }
+        else if (unittype == "Water")
+        {
+            tilebonus -= 10;
+        }
+
+        if (targettype == "Ruins")
+        {
+            tilebonus += 10;
+        }
+        else if (targettype == "HighGround")
+        {
+            tilebonus -= 10;
+        }
+
+        return tilebonus;
     }
 
     public int CalculateCrit(GameObject unit, GameObject target)
@@ -1001,7 +1204,7 @@ public class ActionsMenu : MonoBehaviour
             spdtarget = (int)(spdtarget * 0.9f);
         }
 
-        int finalcritrate = (int)(critweapon + dexunit/15f - spdtarget/20f);
+        int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f);
 
         if (finalcritrate < 0)
         {

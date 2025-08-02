@@ -89,29 +89,37 @@ public class CombatTextScript : MonoBehaviour
         combattext.text = "";
     }
 
-    public void UpdateInfo(int damage, int hits, int crits, Character newattacker, Character newdefender)
+    public void UpdateInfo(int damage, int hits, int crits, Character newattacker, Character newdefender, bool healing = false)
     {
-        int finaldamage = damage*hits + 2* damage*crits;
-        if(hits == 0)
+        if (healing)
         {
-            combattext.text = newattacker.name +" missed " + newdefender.name+".";
-        }
-        else if(hits == 1)
-        {
-            combattext.text = newattacker.name + " hit " + newdefender.name + ".";
+            combattext.text += "\n" + newdefender.name + " gained " + damage + " Health.";
         }
         else
         {
-            combattext.text = newattacker.name + " hit " + newdefender.name + " "+hits+" times.";
+            int finaldamage = damage * hits + 2 * damage * crits;
+            if (hits == 0)
+            {
+                combattext.text = newattacker.name + " missed " + newdefender.name + ".";
+            }
+            else if (hits == 1)
+            {
+                combattext.text = newattacker.name + " hit " + newdefender.name + ".";
+            }
+            else
+            {
+                combattext.text = newattacker.name + " hit " + newdefender.name + " " + hits + " times.";
+            }
+            if (crits == 1)
+            {
+                combattext.text += "\n Critical hit !";
+            }
+            else if (crits > 1)
+            {
+                combattext.text += "\n Critical hit " + crits + " times !";
+            }
+            combattext.text += "\n" + newdefender.name + " lost " + finaldamage + " Health.";
         }
-        if(crits ==1)
-        {
-            combattext.text += "\n Critical hit !";
-        }
-        else if (crits > 1)
-        {
-            combattext.text += "\n Critical hit "+crits+" times !";
-        }
-        combattext.text += "\n"+ newdefender.name + " lost " +  finaldamage + " Health.";
+            
     }
 }

@@ -60,7 +60,7 @@ public class EnemyTurnScript : MonoBehaviour
         {
             CurrentOther = null;
         }
-        if(TurnManager.currentlyplaying != "playable" && FindAnyObjectByType<ActionManager>() != null)
+        if (TurnManager.currentlyplaying != "playable" && FindAnyObjectByType<ActionManager>() != null)
         {
             FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
         }
@@ -69,7 +69,7 @@ public class EnemyTurnScript : MonoBehaviour
         {
             foreach (GameObject unit in gridScript.allunitGOs)
             {
-                if(unit.gameObject != null && unit!=null)
+                if (unit.gameObject != null && unit != null)
                 {
                     Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
                     if (charunit.affiliation == "enemy" && !charunit.alreadyplayed)
@@ -80,7 +80,7 @@ public class EnemyTurnScript : MonoBehaviour
 
                     }
                 }
-                
+
             }
         }
         else if (TurnManager.currentlyplaying == "enemy")
@@ -116,225 +116,22 @@ public class EnemyTurnScript : MonoBehaviour
             }
             else
             {
-                if (counterbeforeattack > 0)
-                {
-                    counterbeforeattack--;
-                }
-                else if (waittingforcamera)
-                {
-                    GameObject target = CalculateBestTargetForOffensiveUnits(CurrentEnemy);
-                    if (target == null)
-                    {
-                        CharCurrentEnemy.alreadyplayed = true;
-                        CurrentEnemy = null;
-                        battlecamera.incombat = false;
-                        waittingforcamera = false;
-                    }
-                    else if (CurrentEnemy == null)
-                    {
-                        battlecamera.incombat = false;
-                        waittingforcamera = false;
-                    }
-                    else
-                    {
-                        target.transform.forward = CurrentEnemy.transform.position- target.transform.position;
-                        CurrentEnemy.transform.forward = target.transform.position- CurrentEnemy.transform.position;
-                        Debug.Log(target.name);
-                        Debug.Log(CurrentEnemy.name);
-                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentEnemy, target);
-                        if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
-                        {
-                            if(counterbeforeFirstAttack>0)
-                            {
-                                counterbeforeFirstAttack--;
-                                if(attacktrigger)
-                                {
-                                    attacktrigger = false;
-                                    CurrentEnemy.GetComponentInChildren<Animator>().SetTrigger("Attack");
-                                }
-                            }
-                            else
-                            {
-                                if (!unitalreadyattacked)
-                                {
-                                    (int hits, int crits, int damage) = ActionsMenu.ApplyDamage(CurrentEnemy, target, unitalreadyattacked);
-                                    FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);
-                                    unitalreadyattacked = true;
-                                    counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
-                                    target.GetComponentInChildren<Animator>().SetTrigger("Attack");
-                                }
-                                else
-                                {
-                                    if (counterbetweenattack > 0)
-                                    {
-                                        counterbetweenattack--;
-                                    }
-                                    else if (counterafterattack == 0)
-                                    {
-                                        (int hits, int crits, int damage) = ActionsMenu.ApplyDamage(CurrentEnemy, target, unitalreadyattacked);
-                                        
-                                        FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage,hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics);
-                                        unitalreadyattacked = true;
-                                        counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
-                                    }
-                                    else
-                                    {
-                                        counterafterattack--;
-                                        if (counterafterattack <= 0)
-                                        {
-                                            CharCurrentEnemy.alreadyplayed = true;
-                                            CurrentEnemy = null;
-                                            battlecamera.incombat = false;
-                                            waittingforcamera = false;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-
-                }
-                else
-                {
-                    GameObject target = CalculateBestTargetForOffensiveUnits(CurrentEnemy);
-                    if (target != null)
-                    {
-                        waittingforcamera = true;
-                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentEnemy, target);
-                        unitalreadyattacked = false;
-                        counterbeforeFirstAttack = (int)(delaybeforeFirstAttack / Time.fixedDeltaTime);
-                        attacktrigger = true;
-                        FindAnyObjectByType<CombatTextScript>().ResetInfo();
-                    }
-                    else
-                    {
-                        CharCurrentEnemy.alreadyplayed = true;
-                        CurrentEnemy = null;
-                    }
-                    gridScript.ResetAllSelections();
-                }
+                ManageAttack(CurrentEnemy);
             }
         }
 
         //playerattack
         if (TurnManager.currentlyplaying == "playable")
         {
-            if(ActionsMenu.target==null)
+            if (ActionsMenu.target == null)
             {
                 return;
             }
-            Debug.Log("turn is player");
             GameObject CurrentPlayable = ActionsMenu.target;
             Character CurrentPlayableChar = CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics;
             if (ActionsMenu.confirmattack)
             {
-                if (counterbeforeattack > 0)
-                {
-                    Debug.Log("Waitting before attack");
-                    counterbeforeattack--;
-                }
-                else if(waittingforcamera)
-                {
-                    Debug.Log("Camera Moving");
-                    GameObject target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
-                    if(target==null)
-                    {
-                        Debug.Log("Target null");
-                        CurrentPlayableChar.alreadyplayed = true;
-                        battlecamera.incombat = false;
-                        waittingforcamera = false;
-                    }
-                    else if(CurrentPlayable == null)
-                    {
-                        Debug.Log("Defender null");
-                        battlecamera.incombat = false;
-                        waittingforcamera = false;
-                    }
-                    else
-                    {
-                        target.transform.forward = CurrentPlayable.transform.position - target.transform.position;
-                        CurrentPlayable.transform.forward = target.transform.position - CurrentPlayable.transform.position;
-                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentPlayable, target);
-                        if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
-                        {
-                            if(counterbeforeFirstAttack> 0)
-                            {
-                                counterbeforeFirstAttack--;
-                                if(attacktrigger)
-                                {
-                                    attacktrigger = false;
-                                    CurrentPlayable.GetComponentInChildren<Animator>().SetTrigger("Attack");
-                                }
-                            }
-                            else
-                            {
-                                Debug.Log("Camera placed");
-                                if (!unitalreadyattacked)
-                                {
-                                    Debug.Log("attacker turn");
-                                    (int hits, int crits, int damage) = ActionsMenu.ApplyDamage(CurrentPlayable, target, unitalreadyattacked);
-                                    target.GetComponentInChildren<Animator>().SetTrigger("Attack");
-                                    FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage,hits, crits, CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);
-                                    unitalreadyattacked = true;
-                                    counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
-                                }
-                                else
-                                {
-
-                                    if (counterbetweenattack > 0)
-                                    {
-                                        Debug.Log("Waitting for Defender turn");
-                                        counterbetweenattack--;
-                                    }
-                                    else if (counterafterattack == 0)
-                                    {
-                                        Debug.Log("Defender turn");
-                                        (int hits, int crits, int damage) = ActionsMenu.ApplyDamage(CurrentPlayable, target, unitalreadyattacked);
-                                        FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage,hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics);
-                                        unitalreadyattacked = true;
-                                        counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
-                                    }
-                                    else
-                                    {
-                                        counterafterattack--;
-                                        if (counterafterattack <= 0)
-                                        {
-                                            Debug.Log("End of combat");
-                                            battlecamera.incombat = false;
-                                            ActionsMenu.FinalizeAttack();
-                                        }
-                                    }
-                                }
-                            }
-                                
-
-
-
-                        }
-                    }
-                        
-                    
-                }
-                else
-                {
-                    Debug.Log("Seting Up Camera");
-                    GameObject target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
-                    if (target != null)
-                    {
-                        waittingforcamera = true;
-                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentPlayable, target);
-                        unitalreadyattacked = false;
-                        counterbeforeFirstAttack = (int)(delaybeforeFirstAttack/ Time.fixedDeltaTime);
-                        attacktrigger = true;
-                        FindAnyObjectByType<CombatTextScript>().ResetInfo();
-                    }
-                    else
-                    {
-                        ActionsMenu.FinalizeAttack();
-                    }
-                    gridScript.ResetAllSelections();
-                }
+                ManageAttack(CurrentPlayable);
             }
         }
 
@@ -385,117 +182,164 @@ public class EnemyTurnScript : MonoBehaviour
             }
             else
             {
-                if (counterbeforeattack > 0)
+                ManageAttack(CurrentOther);
+            }
+        }
+
+        if (!battlecamera.incombat)
+        {
+            DeathCleanup();
+
+        }
+    }
+
+
+    private void ManageAttack(GameObject Attacker)
+    {
+        Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
+        if (counterbeforeattack > 0)
+        {
+            counterbeforeattack--;
+
+        }
+        else if (waittingforcamera)
+        {
+            GameObject target = null;
+            if (CharAttacker.affiliation != "playable")
+            {
+                target = CalculateBestTargetForOffensiveUnits(Attacker, CharAttacker.attacksfriends);
+            }
+            else
+            {
+                target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
+            }
+
+            if (target == null)
+            {
+                CharAttacker.alreadyplayed = true;
+                CurrentOther = null;
+                CurrentEnemy = null;
+                CurrentPlayable = null;
+                battlecamera.incombat = false;
+                waittingforcamera = false;
+            }
+            else if (CurrentOther == null && CurrentEnemy == null && CurrentPlayable == null && CharAttacker.affiliation!="playable")
+            {
+                battlecamera.incombat = false;
+                waittingforcamera = false;
+            }
+            else
+            {
+                target.transform.forward = Attacker.transform.position - target.transform.position;
+                Attacker.transform.forward = target.transform.position - Attacker.transform.position;
+                battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
+                if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
                 {
-                    counterbeforeattack--;
-                    
-                }
-                else if (waittingforcamera)
-                {
-                    GameObject target = CalculateBestTargetForOffensiveUnits(CurrentOther,CharCurrentOther.attacksfriends);
-                    if (target == null)
+                    if (counterbeforeFirstAttack > 0)
                     {
-                        CharCurrentOther.alreadyplayed = true;
-                        CurrentOther = null;
-                        battlecamera.incombat = false;
-                        waittingforcamera = false;
-                    }
-                    else if (CurrentOther == null)
-                    {
-                        battlecamera.incombat = false;
-                        waittingforcamera = false;
-                    }
-                    else
-                    {
-                        target.transform.forward = CurrentOther.transform.position- target.transform.position;
-                        CurrentOther.transform.forward = target.transform.position- CurrentOther.transform.position;
-                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentOther, target);
-                        if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
+                        counterbeforeFirstAttack--;
+                        if (attacktrigger)
                         {
-                            if(counterbeforeFirstAttack>0)
+                            attacktrigger = false;
+                            Attacker.GetComponentInChildren<Animator>().SetTrigger("Attack");
+                        }
+                    }
+                    else if (!Attacker.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Attack") && !target.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                    {
+                        if (!unitalreadyattacked)
+                        {
+                            (int hits, int crits, int damage) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
+
+                            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
+                            FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
+                            unitalreadyattacked = true;
+                            counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
+                            target.GetComponentInChildren<Animator>().SetTrigger("Attack");
+                        }
+                        else
+                        {
+                            if (counterbetweenattack > 0)
                             {
-                                counterbeforeFirstAttack--;
-                                if (attacktrigger)
-                                {
-                                    attacktrigger = false;
-                                    CurrentOther.GetComponentInChildren<Animator>().SetTrigger("Attack");
-                                }
+                                counterbetweenattack--;
+                            }
+                            else if (counterafterattack == 0)
+                            {
+                                (int hits, int crits, int damage) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
+
+                                FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, Attacker.GetComponent<UnitScript>().UnitCharacteristics);
+                                unitalreadyattacked = true;
+                                counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
                             }
                             else
                             {
-                                if (!unitalreadyattacked)
+                                counterafterattack--;
+                                if (counterafterattack <= 0)
                                 {
-                                    (int hits, int crits, int damage) = ActionsMenu.ApplyDamage(CurrentOther, target, unitalreadyattacked);
-                                    
-                                    FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage,hits, crits, CurrentOther.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);
-                                    unitalreadyattacked = true;
-                                    counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
-                                    target.GetComponentInChildren<Animator>().SetTrigger("Attack");
-                                }
-                                else
-                                {
-                                    if (counterbetweenattack > 0)
+                                    if(CharAttacker.affiliation== "playable")
                                     {
-                                        counterbetweenattack--;
-                                    }
-                                    else if (counterafterattack == 0)
-                                    {
-                                        (int hits, int crits, int damage) = ActionsMenu.ApplyDamage(CurrentOther, target, unitalreadyattacked);
-                                        
-                                        FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage,hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, CurrentOther.GetComponent<UnitScript>().UnitCharacteristics);
-                                        unitalreadyattacked = true;
-                                        counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+
+                                        ActionsMenu.FinalizeAttack();
                                     }
                                     else
                                     {
-                                        counterafterattack--;
-                                        if (counterafterattack <= 0)
-                                        {
-                                            CharCurrentOther.alreadyplayed = true;
-                                            CurrentOther = null;
-                                            battlecamera.incombat = false;
-                                            waittingforcamera = false;
-                                        }
-                                    }
+                                        CharAttacker.alreadyplayed = true;
+                                        CurrentOther = null;
+                                        CurrentEnemy = null;
+                                        CurrentPlayable = null;
+                                        battlecamera.incombat = false;
+                                        waittingforcamera = false;
+                                    }   
                                 }
                             }
-                            
-
-
-
                         }
                     }
 
 
+
+
+                }
+            }
+
+
+        }
+        else
+        {
+            GameObject target = null;
+            if (CharAttacker.affiliation != "playable")
+            {
+                target = CalculateBestTargetForOffensiveUnits(Attacker, CharAttacker.attacksfriends);
+            }
+            else
+            {
+                target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
+            }
+            if (target != null)
+            {
+                waittingforcamera = true;
+                battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
+                unitalreadyattacked = false;
+                counterbeforeFirstAttack = (int)(delaybeforeFirstAttack / Time.fixedDeltaTime);
+                attacktrigger = true;
+                FindAnyObjectByType<CombatTextScript>().ResetInfo();
+            }
+            else
+            {
+                if(CharAttacker.affiliation=="playable")
+                {
+                    ActionsMenu.FinalizeAttack();
                 }
                 else
                 {
-                    GameObject target = CalculateBestTargetForOffensiveUnits(CurrentOther, CharCurrentOther.attacksfriends);
-                    if (target != null)
-                    {
-                        waittingforcamera = true;
-                        battlecamera.Destination = battlecamera.GoToFightCamera(CurrentOther, target);
-                        unitalreadyattacked = false;
-                        counterbeforeFirstAttack = (int)(delaybeforeFirstAttack / Time.fixedDeltaTime);
-                        attacktrigger = true;
-                        FindAnyObjectByType<CombatTextScript>().ResetInfo();
-                    }
-                    else
-                    {
-                        CharCurrentOther.alreadyplayed = true;
-                        CurrentOther = null;
-                    }
-                    gridScript.ResetAllSelections();
+                    CharAttacker.alreadyplayed = true;
+                    CurrentOther = null;
+                    CurrentEnemy = null;
+                    CurrentPlayable = null;
                 }
+                
             }
-        }
-
-        if(!battlecamera.incombat)
-        {
-            DeathCleanup();
+            gridScript.ResetAllSelections();
         }
     }
-
 
     public GameObject CalculateBestTargetForOffensiveUnits(GameObject unit, bool attacksfriend = true)
     {
@@ -511,7 +355,7 @@ public class EnemyTurnScript : MonoBehaviour
             {
                 Character charotherunit = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
                 string affiliationtoattack = "playable";
-                if (!attacksfriend)
+                if (!attacksfriend && charotherunit.affiliation == "other")
                 {
                     affiliationtoattack = "enemy";
                 }
@@ -583,7 +427,7 @@ public class EnemyTurnScript : MonoBehaviour
                     }
 
 
-                    if (reward > maxreward)
+                    if (reward > maxreward || chosenUnit == null)
                     {
                         chosenUnit = otherunit;
                         maxreward = reward;
@@ -721,19 +565,20 @@ public class EnemyTurnScript : MonoBehaviour
     private void DeathCleanup()
     {
         List<GameObject> objecttodelete = new List<GameObject>();
-        foreach(GameObject unit in gridScript.allunitGOs)
+        foreach (GameObject unit in gridScript.allunitGOs)
         {
-            if(unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP<=0)
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
             {
                 Destroy(unit);
                 objecttodelete.Add(unit);
-                
+
             }
         }
-        foreach(GameObject unittodelete in objecttodelete)
+        foreach (GameObject unittodelete in objecttodelete)
         {
             gridScript.allunitGOs.Remove(unittodelete);
         }
+        GetComponent<TurnManger>().InitializeUnitLists(GetComponent<GridScript>().allunitGOs);
     }
 
 }
