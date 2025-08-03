@@ -16,6 +16,8 @@ public class CombatTextScript : MonoBehaviour
     public Image AttackerLifebarRemaining;
     public Image DefenderLifebarRemaining;
 
+    public Image ExpBarImage;
+
     public TextMeshProUGUI combattext;
 
     private battlecameraScript battlecameraScript;

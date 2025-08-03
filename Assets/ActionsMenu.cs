@@ -634,11 +634,11 @@ public class ActionsMenu : MonoBehaviour
         return true;
     }
 
-    public (int, int, int) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
+    public (int, int, int,int) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-
+        int exp = 0;
         if(unit.GetComponent<UnitScript>().GetFirstWeapon().type!="staff")
         {
             (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
@@ -905,14 +905,14 @@ public class ActionsMenu : MonoBehaviour
 
                 if (charunit.currentHP > 0 && charunit.affiliation == "playable")
                 {
-                    AwardExp(unit, target);
+                    exp = AwardExp(unit, target);
                 }
                 if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
                 {
-                    AwardExp(target, unit);
+                    exp = AwardExp(target, unit);
                 }
             }
-            return (numberofhits, numberofcritials, finaldamage);
+            return (numberofhits, numberofcritials, finaldamage,exp);
         }
         //using a staff
         else
@@ -942,12 +942,17 @@ public class ActionsMenu : MonoBehaviour
                 numberofhits = 0;
                 finaldamage = 0;
             }
-            return (numberofhits, numberofcritials, finaldamage);
+            if (charunit.currentHP > 0 && chartarget.affiliation == "playable" && charunit.affiliation == "playable")
+            {
+                exp = AwardExp(unit, target,true);
+            }
+            return (numberofhits, numberofcritials, finaldamage,exp);
         }
     }
 
-    private void AwardExp(GameObject unit, GameObject target)
+    private int AwardExp(GameObject unit, GameObject target, bool usingstaff=false)
     {
+        
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         int baseexp = 15;
@@ -970,11 +975,16 @@ public class ActionsMenu : MonoBehaviour
         {
             adjustedexp = 100;
         }
+        if (usingstaff)
+        {
+            adjustedexp = 15;
+        }
         charunit.experience += adjustedexp;
         if (charunit.experience > 100)
         {
             unit.GetComponent<UnitScript>().LevelUp();
         }
+        return adjustedexp;
     }
 
     public int CalculateDamage(GameObject unit, GameObject target)
