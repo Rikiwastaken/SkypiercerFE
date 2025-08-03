@@ -18963,6 +18963,602 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+--- !u!1 &1666326946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1666326948}
+  - component: {fileID: 1666326947}
+  m_Layer: 0
+  m_Name: DataObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1666326947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666326946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3257f5c6a8655e4b9619b1dc242fae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentList:
+  - Name: Fists
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 1
+    type: None
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: Durandal
+    BaseDamage: 50
+    BaseHit: 90
+    BaseCrit: 3
+    Range: 1
+    type: Sword
+    Currentuses: 10
+    Maxuses: 10
+    ID: 0
+    Grade: 1
+  - Name: Tizona
+    BaseDamage: 80
+    BaseHit: 80
+    BaseCrit: 3
+    Range: 1
+    type: Sword
+    Currentuses: 8
+    Maxuses: 8
+    ID: 0
+    Grade: 2
+  - Name: Laevateinn
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 1
+    type: Sword
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 3
+  - Name: Caliburn
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 1
+    type: Sword
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 4
+  - Name: Gaebolg
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Spear
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 1
+  - Name: Rhongomiant
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Spear
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 2
+  - Name: Gugnir
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Spear
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 3
+  - Name: Longinus
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Spear
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 4
+  - Name: Wallace
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Greatsword
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 1
+  - Name: Caladbolg
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Greatsword
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 2
+  - Name: War
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Greatsword
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 3
+  - Name: Gram
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Greatsword
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 4
+  - Name: Skadi
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Bow
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 1
+  - Name: Gandiva
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Bow
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 2
+  - Name: Robin
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Bow
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 3
+  - Name: Odysseus
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Bow
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 4
+  - Name: Morana
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Scythe
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 1
+  - Name: Kronos
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Scythe
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 2
+  - Name: Yama
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Scythe
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 3
+  - Name: Death
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Scythe
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 4
+  - Name: Ancilia
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Shield
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 1
+  - Name: Svalinn
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Shield
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 2
+  - Name: Pridwen
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Shield
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 3
+  - Name: Aegis
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: Shield
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 4
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: 
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 0
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  BasicGradeList:
+  - Name: GradeE(Fists)
+    BaseDamage: 0
+    BaseHit: 0
+    BaseCrit: 0
+    Range: 1
+    type: 
+    Currentuses: 0
+    Maxuses: 0
+    ID: 0
+    Grade: 0
+  - Name: GradeD
+    BaseDamage: 50
+    BaseHit: 90
+    BaseCrit: 3
+    Range: 1
+    type: 
+    Currentuses: 10
+    Maxuses: 10
+    ID: 0
+    Grade: 1
+  - Name: GradeC
+    BaseDamage: 80
+    BaseHit: 80
+    BaseCrit: 5
+    Range: 1
+    type: 
+    Currentuses: 8
+    Maxuses: 8
+    ID: 0
+    Grade: 2
+  - Name: GradeB
+    BaseDamage: 110
+    BaseHit: 70
+    BaseCrit: 7
+    Range: 1
+    type: 
+    Currentuses: 6
+    Maxuses: 6
+    ID: 0
+    Grade: 3
+  - Name: GradeA
+    BaseDamage: 140
+    BaseHit: 60
+    BaseCrit: 8
+    Range: 1
+    type: 
+    Currentuses: 5
+    Maxuses: 5
+    ID: 0
+    Grade: 4
+--- !u!4 &1666326948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666326946}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1666544688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25353,3 +25949,4 @@ SceneRoots:
   - {fileID: 1857921354}
   - {fileID: 1731079698}
   - {fileID: 1454223631}
+  - {fileID: 1666326948}

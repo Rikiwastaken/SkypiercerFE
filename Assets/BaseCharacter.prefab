@@ -331,6 +331,7 @@ MonoBehaviour:
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
+    equipmentsIDs: 01000000
     equipments: []
     isboss: 0
     attacksfriends: 0
@@ -345,6 +346,8 @@ MonoBehaviour:
     type: None
     Currentuses: 0
     Maxuses: 0
+    ID: 0
+    Grade: 0
   movespeed: 10
 --- !u!1 &7336564532334944263
 GameObject:

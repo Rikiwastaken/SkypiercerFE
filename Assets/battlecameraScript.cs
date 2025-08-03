@@ -105,9 +105,12 @@ public class battlecameraScript : MonoBehaviour
 
     public void ResetRotation()
     {
-        transform.rotation = Quaternion.identity;
-        transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(90,0,0));
-        transform.position = new Vector3(transform.position.x, 4.5f, transform.position.z);
+        if(!incombat)
+        {
+            transform.rotation = Quaternion.identity;
+            transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(90, 0, 0));
+            transform.position = new Vector3(transform.position.x, 13f, transform.position.z);
+        }
     }
 
     public Vector2 GoToFightCamera(GameObject unit, GameObject target)
