@@ -17,10 +17,23 @@ public class TurnManger : MonoBehaviour
 
     public TextMeshProUGUI turntext;
 
+    public GameOverScript GameOverScript;
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(currentTurn == 0)
+        if(playableunit.Count ==0)
+        {
+            GameOverScript.gameObject.SetActive(true);
+            return;
+        }
+        if (enemyunit.Count == 0)
+        {
+            GameOverScript.gameObject.SetActive(true);
+            GameOverScript.victory = true;
+            return;
+        }
+        if (currentTurn == 0)
         {
             currentTurn = 1;
         }

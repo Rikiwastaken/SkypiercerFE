@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
@@ -505,7 +506,6 @@ public class ActionsMenu : MonoBehaviour
         {
             TargetText += "Telekinesis : Off\n";
         }
-        Debug.Log(TargetText);
 
         unitAttackText.text = UnitText;
         targetAttackText.text = TargetText;
@@ -670,6 +670,7 @@ public class ActionsMenu : MonoBehaviour
                         int randomnumber = Random.Range(0, 100);
                         if (randomnumber < unithitrate)
                         {
+                            
                             numberofhits++;
                             // calculating critical
                             randomnumber = Random.Range(0, 100);
@@ -681,6 +682,10 @@ public class ActionsMenu : MonoBehaviour
                             else
                             {
                                 chartarget.currentHP -= unitdamage;
+                            }
+                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                            {
+                                DealScytheDamage(unit, target);
                             }
                         }
 
@@ -700,6 +705,10 @@ public class ActionsMenu : MonoBehaviour
                             {
                                 chartarget.currentHP -= unitdamage;
                             }
+                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                            {
+                                DealScytheDamage(unit, target);
+                            }
                         }
                         //calculating hit for third attack
                         randomnumber = Random.Range(0, 100);
@@ -716,6 +725,10 @@ public class ActionsMenu : MonoBehaviour
                             else
                             {
                                 chartarget.currentHP -= unitdamage;
+                            }
+                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                            {
+                                DealScytheDamage(unit, target);
                             }
                         }
                     }
@@ -737,6 +750,10 @@ public class ActionsMenu : MonoBehaviour
                             {
                                 chartarget.currentHP -= unitdamage;
                             }
+                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                            {
+                                DealScytheDamage(unit, target);
+                            }
                         }
 
                         //calculating hit for second attack
@@ -754,6 +771,10 @@ public class ActionsMenu : MonoBehaviour
                             else
                             {
                                 chartarget.currentHP -= unitdamage;
+                            }
+                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                            {
+                                DealScytheDamage(unit, target);
                             }
                         }
                     }
@@ -776,6 +797,10 @@ public class ActionsMenu : MonoBehaviour
                         else
                         {
                             chartarget.currentHP -= unitdamage;
+                        }
+                        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                        {
+                            DealScytheDamage(unit, target);
                         }
                     }
                 }
@@ -806,6 +831,10 @@ public class ActionsMenu : MonoBehaviour
                                 {
                                     charunit.currentHP -= targetdamage;
                                 }
+                                if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                                {
+                                    DealScytheDamage(target, unit);
+                                }
                             }
                             //calculating hit for second attack
                             randomnumber = Random.Range(0, 100);
@@ -823,6 +852,10 @@ public class ActionsMenu : MonoBehaviour
                                 {
                                     charunit.currentHP -= targetdamage;
                                 }
+                                if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                                {
+                                    DealScytheDamage(target, unit);
+                                }
                             }
                             //calculating hit for third attack
                             randomnumber = Random.Range(0, 100);
@@ -839,6 +872,10 @@ public class ActionsMenu : MonoBehaviour
                                 else
                                 {
                                     charunit.currentHP -= targetdamage;
+                                }
+                                if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                                {
+                                    DealScytheDamage(target, unit);
                                 }
                             }
                         }
@@ -860,6 +897,10 @@ public class ActionsMenu : MonoBehaviour
                                 {
                                     charunit.currentHP -= targetdamage;
                                 }
+                                if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                                {
+                                    DealScytheDamage(target, unit);
+                                }
                             }
                             //calculating hit for second attack
                             randomnumber = Random.Range(0, 100);
@@ -876,6 +917,10 @@ public class ActionsMenu : MonoBehaviour
                                 else
                                 {
                                     charunit.currentHP -= targetdamage;
+                                }
+                                if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                                {
+                                    DealScytheDamage(target, unit);
                                 }
                             }
                         }
@@ -898,6 +943,10 @@ public class ActionsMenu : MonoBehaviour
                             else
                             {
                                 charunit.currentHP -= targetdamage;
+                            }
+                            if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                            {
+                                DealScytheDamage(target, unit);
                             }
                         }
                     }
@@ -951,6 +1000,44 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
+    private void DealScytheDamage(GameObject attacker, GameObject target)
+    {
+        List<GameObject> targetlist = new List<GameObject>();
+        Vector2 position = target.GetComponent<UnitScript>().UnitCharacteristics.position;
+        GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x + 1), (int)position.y));
+        if(newunit != null)
+        {
+            targetlist.Add(newunit);
+        }
+
+        newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x - 1), (int)position.y));
+        if (newunit != null)
+        {
+            targetlist.Add(newunit);
+        }
+
+        newunit = GridScript.GetUnit(GridScript.GetTile((int)position.x, (int)(position.y + 1)));
+        if (newunit != null)
+        {
+            targetlist.Add(newunit);
+        }
+
+        newunit = GridScript.GetUnit(GridScript.GetTile((int)position.x, (int)(position.y - 1)));
+        if (newunit != null)
+        {
+            targetlist.Add(newunit);
+        }
+
+        foreach(GameObject potentialtarget in targetlist)
+        {
+            Character Chartarget = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics;
+            if(Chartarget.affiliation==target.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
+            {
+                int damage = CalculateDamage(attacker, potentialtarget);
+                Chartarget.currentHP -= damage / 2;
+            }
+        }
+    }
     public (int,List<int>) AwardExp(GameObject unit, GameObject target, bool usingstaff = false)
     {
 

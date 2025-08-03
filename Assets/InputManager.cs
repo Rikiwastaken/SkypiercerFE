@@ -100,7 +100,7 @@ public class InputManager : MonoBehaviour
     private void FixedUpdate()
     {
         activatepressed = activateinput.IsPressed();
-        if(activatepressed && ! activatejustpressed && !activatepressedonce)
+        if (activatepressed && !activatejustpressed && !activatepressedonce)
         {
             activatejustpressed = true;
             activatepressedonce = true;
@@ -110,8 +110,15 @@ public class InputManager : MonoBehaviour
             activatejustpressed = false;
         }
 
-        if(!activatepressed)
+        if (!activatepressed)
         {
+            activatepressedonce = false;
+        }
+
+        if (FindAnyObjectByType<battlecameraScript>().incombat)
+        {
+            activatepressed = false;
+            activatejustpressed = false;
             activatepressedonce = false;
         }
 
