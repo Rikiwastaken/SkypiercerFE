@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static UnitScript;
+using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 public class EnemyTurnScript : MonoBehaviour
 {
@@ -49,6 +50,8 @@ public class EnemyTurnScript : MonoBehaviour
     public ExpBarScript expbar;
 
     private int expgained;
+
+    private List<int> levelupbonuses;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -260,7 +263,7 @@ public class EnemyTurnScript : MonoBehaviour
                     expbar.gameObject.SetActive(true);
                     if (!expbar.setupdone)
                     {
-                        expbar.SetupBar(CharAttacker, expgained);
+                        expbar.SetupBar(CharAttacker, expgained, levelupbonuses);
                     }
 
                 }
@@ -269,7 +272,7 @@ public class EnemyTurnScript : MonoBehaviour
                     expbar.gameObject.SetActive(true);
                     if (!expbar.setupdone)
                     {
-                        expbar.SetupBar(target.GetComponent<UnitScript>().UnitCharacteristics, expgained);
+                        expbar.SetupBar(target.GetComponent<UnitScript>().UnitCharacteristics, expgained, levelupbonuses);
                     }
 
                 }
@@ -313,8 +316,8 @@ public class EnemyTurnScript : MonoBehaviour
             }
             else
             {
-                target.transform.forward = Attacker.transform.position - target.transform.position;
-                Attacker.transform.forward = target.transform.position - Attacker.transform.position;
+                target.transform.GetChild(1).forward = Attacker.transform.GetChild(1).position - target.transform.GetChild(1).position;
+                Attacker.transform.GetChild(1).forward = target.transform.GetChild(1).position - Attacker.transform.GetChild(1).position;
                 battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
                 if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
                 {
@@ -331,15 +334,24 @@ public class EnemyTurnScript : MonoBehaviour
                     {
                         if (!unitalreadyattacked)
                         {
-                            (int hits, int crits, int damage, int exp) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
+                            (int hits, int crits, int damage, int exp, List<int> levelbonus) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                             expgained = exp;
+                            levelupbonuses = levelbonus;
 
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
                             FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
-                            unitalreadyattacked = true;
-                            counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
-                            target.GetComponentInChildren<Animator>().SetTrigger("Attack");
-
+                            if (ActionsMenu.CheckifInRange(Attacker, target))
+                            {
+                                unitalreadyattacked = true;
+                                counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
+                                target.GetComponentInChildren<Animator>().SetTrigger("Attack");
+                            }
+                            else
+                            {
+                                counterafterattack = (int)(delayafterAttack*2f / Time.fixedDeltaTime);
+                                waittingforexp = true;
+                                expdistributed = true;
+                            }
                         }
                         else
                         {
@@ -349,8 +361,9 @@ public class EnemyTurnScript : MonoBehaviour
                             }
                             else
                             {
-                                (int hits, int crits, int damage, int exp) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
+                                (int hits, int crits, int damage, int exp, List<int> levelbonus) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                                 expgained = exp;
+                                levelupbonuses = levelbonus;
                                 FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, Attacker.GetComponent<UnitScript>().UnitCharacteristics);
                                 unitalreadyattacked = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);

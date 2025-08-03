@@ -634,10 +634,11 @@ public class ActionsMenu : MonoBehaviour
         return true;
     }
 
-    public (int, int, int, int) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
+    public (int, int, int, int,List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        List<int> levelup = null;
         int exp = 0;
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type != "staff")
         {
@@ -904,14 +905,14 @@ public class ActionsMenu : MonoBehaviour
                 }
                 if (charunit.currentHP > 0 && charunit.affiliation == "playable")
                 {
-                    exp = AwardExp(unit, target);
+                    (exp,levelup) = AwardExp(unit, target);
                 }
                 if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
                 {
-                    exp = AwardExp(target, unit);
+                    (exp, levelup) = AwardExp(target, unit);
                 }
             }
-            return (numberofhits, numberofcritials, finaldamage, exp);
+            return (numberofhits, numberofcritials, finaldamage, exp, levelup);
         }
         //using a staff
         else
@@ -943,14 +944,14 @@ public class ActionsMenu : MonoBehaviour
             }
             if (charunit.currentHP > 0 && chartarget.affiliation == "playable" && charunit.affiliation == "playable")
             {
-                exp = AwardExp(unit, target, true);
+                (exp,levelup) = AwardExp(unit, target, true);
             }
-            return (numberofhits, numberofcritials, finaldamage, exp);
+            return (numberofhits, numberofcritials, finaldamage, exp,levelup);
         }
 
     }
 
-    private int AwardExp(GameObject unit, GameObject target, bool usingstaff = false)
+    public (int,List<int>) AwardExp(GameObject unit, GameObject target, bool usingstaff = false)
     {
 
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
@@ -980,12 +981,12 @@ public class ActionsMenu : MonoBehaviour
             adjustedexp = 15;
         }
         charunit.experience += adjustedexp;
+        List<int> levelup = new List<int>();
         if (charunit.experience > 100)
         {
-            unit.GetComponent<UnitScript>().LevelUp();
+            levelup = unit.GetComponent<UnitScript>().LevelUp();
         }
-        Debug.Log("expgained : " + adjustedexp);
-        return adjustedexp;
+        return (adjustedexp,levelup);
     }
 
     public int CalculateDamage(GameObject unit, GameObject target)

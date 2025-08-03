@@ -311,6 +311,20 @@ public class GridScript : MonoBehaviour
         return SelectedUnit;
     }
 
+    public List<GameObject> GetUnitFromTileList(List<GridSquareScript> listtiles)
+    {
+        List<GameObject> list = new List<GameObject>();
+        foreach(GridSquareScript tile in listtiles)
+        {
+            GameObject newobject = GetUnit(tile);
+            if (newobject != null)
+            {
+                list.Add(newobject);
+            }
+        }
+        return list;
+    }
+
     public GameObject GetUnit(GridSquareScript tile)
     {
         foreach (GameObject unit in allunitGOs)

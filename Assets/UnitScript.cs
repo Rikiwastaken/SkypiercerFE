@@ -38,6 +38,7 @@ public class UnitScript : MonoBehaviour
         public int classID;
         public int desiredlevel;
         public int itemtodropID;
+        public bool usetelekinesis;
     }
 
     [Serializable]
@@ -129,6 +130,9 @@ public class UnitScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(1).position +Vector3.Normalize(transform.GetChild(1).forward - transform.GetChild(1).position)*2f, Color.red);
+
         if (battlecameraScript == null)
         {
             battlecameraScript = FindAnyObjectByType<battlecameraScript>();
@@ -212,6 +216,9 @@ public class UnitScript : MonoBehaviour
     {
         if (UnitCharacteristics.affiliation != "playable")
         {
+
+            UnitCharacteristics.telekinesisactivated = enemyStats.usetelekinesis;
+
             ClassInfo classtoapply = FindAnyObjectByType<DataScript>().ClassList[enemyStats.classID];
             UnitCharacteristics.stats.HP = classtoapply.BaseStats.HP;
             UnitCharacteristics.stats.Strength = classtoapply.BaseStats.Strength;
@@ -239,7 +246,6 @@ public class UnitScript : MonoBehaviour
                 {
                     statsgainedstr += level.ToString() + " , ";
                 }
-                Debug.Log(UnitCharacteristics.name + " leveled up\nStats gained : " + statsgainedstr);
             }
 
         }

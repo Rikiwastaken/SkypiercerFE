@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Drawing;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnitScript;
@@ -18,6 +21,12 @@ public class ExpBarScript : MonoBehaviour
 
     public int filledupbardelaycounter;
     public float filledupbardelay;
+
+    public TextMeshProUGUI LevelUpText;
+
+    private List<int> levelupbonuses;
+
+    private Character newcharacter;
 
     private void Start()
     {
@@ -40,6 +49,7 @@ public class ExpBarScript : MonoBehaviour
                 if(currentnumber >99)
                 {
                     Expbar.fillAmount = (currentnumber-100f) / 100f;
+                    SetupLevelUpText();
 
                 }
                 else
@@ -51,6 +61,11 @@ public class ExpBarScript : MonoBehaviour
                 if (currentnumber >= targetnumber)
                 {
                     filledupbardelaycounter = (int)(filledupbardelay / Time.fixedDeltaTime);
+                    if (currentnumber>99)
+                    {
+                        filledupbardelaycounter += (int)(2f*filledupbardelay / Time.fixedDeltaTime);
+                    }
+                    
                 }
             }
             else
@@ -60,6 +75,7 @@ public class ExpBarScript : MonoBehaviour
                 {
                     EnemyTurnScript.expdistributed = true;
                     setupdone = false;
+                    LevelUpText.transform.parent.gameObject.SetActive(false);
                 }
             }
             
@@ -69,15 +85,87 @@ public class ExpBarScript : MonoBehaviour
 
     }
 
-    public void SetupBar(Character Character, int exptogain)
+    private void SetupLevelUpText()
     {
+        LevelUpText.transform.parent.gameObject.SetActive(true);
+        string leveluptext = "Level Up !\n";
+        leveluptext += newcharacter.name + "\n";
+        leveluptext += "Level " + (newcharacter.level - 1) + " > <color=blue>" + newcharacter.level + "</color>\n";
+        if (levelupbonuses[0] >= 5)
+        {
+            leveluptext += "Health " + (newcharacter.stats.HP - levelupbonuses[0]) + " > <color=blue>" + newcharacter.stats.HP + "</color>\n";
+        }
+        else
+        {
+            leveluptext += "Health " + (newcharacter.stats.HP - levelupbonuses[0]) + " >" + newcharacter.stats.HP + "\n";
+        }
+        if (levelupbonuses[1] >= 5)
+        {
+            leveluptext += "Strength " + (newcharacter.stats.Strength - levelupbonuses[1]) + " > <color=blue>" + newcharacter.stats.Strength + "</color>\n";
+        }
+        else
+        {
+            leveluptext += "Strength " + (newcharacter.stats.Strength - levelupbonuses[1]) + " > " + newcharacter.stats.Strength + "\n";
+        }
+        if (levelupbonuses[2] >= 5)
+        {
+            leveluptext += "Psyche " + (newcharacter.stats.Psyche - levelupbonuses[2]) + " > <color=blue>" + newcharacter.stats.Psyche + "</color>\n";
+        }
+        else
+        {
+            leveluptext += "Psyche " + (newcharacter.stats.Psyche - levelupbonuses[2]) + " > " + newcharacter.stats.Psyche + "\n";
+        }
+        if (levelupbonuses[3] >= 5)
+        {
+            leveluptext += "Defense " + (newcharacter.stats.Defense - levelupbonuses[3]) + " > <color=blue>" + newcharacter.stats.Defense + "</color>\n";
+        }
+        else
+        {
+            leveluptext += "Defense " + (newcharacter.stats.Defense - levelupbonuses[3]) + " > " + newcharacter.stats.Defense + "\n";
+        }
+        if (levelupbonuses[4] >= 5)
+        {
+            leveluptext += "Resistance " + (newcharacter.stats.Resistance - levelupbonuses[4]) + " > <color=blue>" + newcharacter.stats.Resistance + "</color>\n";
+        }
+        else
+        {
+            leveluptext += "Resistance " + (newcharacter.stats.Resistance - levelupbonuses[4]) + " > " + newcharacter.stats.Resistance + "\n";
+        }
+        if (levelupbonuses[5] >= 5)
+        {
+            leveluptext += "Speed " + (newcharacter.stats.Speed - levelupbonuses[5]) + " > <color=blue>" + newcharacter.stats.Speed + "</color>\n";
+        }
+        else
+        {
+            leveluptext += "Speed " + (newcharacter.stats.Speed - levelupbonuses[5]) + " > " + newcharacter.stats.Speed + "\n";
+        }
+        if (levelupbonuses[6] >= 5)
+        {
+            leveluptext += "Dexterity " + (newcharacter.stats.Dexterity - levelupbonuses[6]) + " > <color=blue>" + newcharacter.stats.Dexterity + "</color>\n";
+        }
+        else
+        {
+            leveluptext += "Dexterity " + (newcharacter.stats.Dexterity - levelupbonuses[6]) + " > " + newcharacter.stats.Dexterity + "\n";
+        }
+        
+        
+        
+        
+        
+        LevelUpText.text = leveluptext;
+    }
+
+    public void SetupBar(Character character, int exptogain, List<int> levelupstats = null)
+    {
+        newcharacter = character;
         setupdone = true;
-        currentnumber = Character.experience- exptogain;
-        targetnumber = Character.experience;
+        currentnumber = character.experience- exptogain;
+        targetnumber = character.experience;
         if (currentnumber<0)
         {
-            currentnumber = Character.experience - exptogain + 100f;
-            targetnumber = Character.experience + 100;
+            currentnumber = character.experience - exptogain + 100f;
+            targetnumber = character.experience + 100;
+            levelupbonuses = levelupstats;
         }
         
         Expbar.fillAmount = currentnumber / 100f;
