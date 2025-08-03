@@ -59,9 +59,9 @@ public class GridScript : MonoBehaviour
             Grid.Add(new List<GameObject>());
             for (int y = 0; y <= lastSquare.GridCoordinates.y; y++)
             {
-                foreach(GridSquareScript tile in tilelist)
+                foreach (GridSquareScript tile in tilelist)
                 {
-                    if((int)tile.GridCoordinates.x == x && (int)tile.GridCoordinates.y == y)
+                    if ((int)tile.GridCoordinates.x == x && (int)tile.GridCoordinates.y == y)
                     {
                         Grid[x].Add(tile.gameObject);
                     }
@@ -88,18 +88,18 @@ public class GridScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(moveCD>0)
+        if (moveCD > 0)
         {
             moveCD--;
         }
-        if(inputManager == null)
+        if (inputManager == null)
         {
             inputManager = FindAnyObjectByType<InputManager>();
         }
 
-        if(inputManager.movementValue!=Vector2.zero && inputManager.movementValue!= previousmovevalue && moveCD<=0 && !actionsMenu.activeSelf && GetComponent<TurnManger>().currentlyplaying == "playable")
+        if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue && moveCD <= 0 && !actionsMenu.activeSelf && GetComponent<TurnManger>().currentlyplaying == "playable")
         {
-            moveCD =(int)(0.1f/Time.deltaTime);
+            moveCD = (int)(0.1f / Time.deltaTime);
             previousmovevalue = inputManager.movementValue;
             MoveSelection(previousmovevalue);
         }
@@ -118,14 +118,14 @@ public class GridScript : MonoBehaviour
     private void InstantiateGrid()
     {
         Grid = new List<List<GameObject>>();
-        for(int i = 0; i < GridDimensions.x; i++)
+        for (int i = 0; i < GridDimensions.x; i++)
         {
             Grid.Add(new List<GameObject>());
-            for(int j = 0; j < GridDimensions.y; j++)
+            for (int j = 0; j < GridDimensions.y; j++)
             {
-                GameObject newtile = Instantiate(GridSquarePrefab,this.transform);
-                newtile.transform.position = new Vector3(i,0,j);
-                newtile.GetComponent<GridSquareScript>().GridCoordinates=new Vector2(i,j);
+                GameObject newtile = Instantiate(GridSquarePrefab, this.transform);
+                newtile.transform.position = new Vector3(i, 0, j);
+                newtile.GetComponent<GridSquareScript>().GridCoordinates = new Vector2(i, j);
                 Grid[i].Add(newtile);
             }
         }
@@ -134,13 +134,13 @@ public class GridScript : MonoBehaviour
 
     public void MoveSelection(Vector2 input)
     {
-        if(selection == null)
+        if (selection == null)
         {
             selection = Grid[0][0].GetComponent<GridSquareScript>();
         }
         else
         {
-            if(input.x>0 && (int)selection.GridCoordinates.x<Grid.Count-1)
+            if (input.x > 0 && (int)selection.GridCoordinates.x < Grid.Count - 1)
             {
                 selection = Grid[(int)(selection.GridCoordinates.x) + 1][(int)(selection.GridCoordinates.y)].GetComponent<GridSquareScript>();
             }
@@ -151,11 +151,11 @@ public class GridScript : MonoBehaviour
 
             if (input.y > 0 && (int)selection.GridCoordinates.y < Grid[0].Count - 1)
             {
-                selection = Grid[(int)(selection.GridCoordinates.x)][(int)(selection.GridCoordinates.y)+1].GetComponent<GridSquareScript>();
+                selection = Grid[(int)(selection.GridCoordinates.x)][(int)(selection.GridCoordinates.y) + 1].GetComponent<GridSquareScript>();
             }
             if (input.y < 0 && (int)selection.GridCoordinates.y > 0)
             {
-                selection = Grid[(int)(selection.GridCoordinates.x)][(int)(selection.GridCoordinates.y)-1].GetComponent<GridSquareScript>();
+                selection = Grid[(int)(selection.GridCoordinates.x)][(int)(selection.GridCoordinates.y) - 1].GetComponent<GridSquareScript>();
             }
         }
         ShowMovement();
@@ -164,10 +164,10 @@ public class GridScript : MonoBehaviour
 
     public void LockcurrentSelection()
     {
-        lockedmovementtiles = new List<GridSquareScript> ();
+        lockedmovementtiles = new List<GridSquareScript>();
         foreach (GridSquareScript tile in movementtiles)
         {
-            lockedmovementtiles.Add (tile);
+            lockedmovementtiles.Add(tile);
         }
         lockedattacktiles = new List<GridSquareScript>();
         foreach (GridSquareScript tile in attacktiles)
@@ -202,11 +202,11 @@ public class GridScript : MonoBehaviour
 
     public void ShowMovement()
     {
-        for(int x=0; x<Grid.Count; x++)
+        for (int x = 0; x < Grid.Count; x++)
         {
-            for(int y=0; y<Grid[x].Count; y++)
+            for (int y = 0; y < Grid[x].Count; y++)
             {
-                if(Grid[x][y].GetComponent<GridSquareScript>().isobstacle && !lockedattacktiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedmovementtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedhealingtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()))
+                if (Grid[x][y].GetComponent<GridSquareScript>().isobstacle && !lockedattacktiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedmovementtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedhealingtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()))
                 {
                     Grid[x][y].GetComponent<GridSquareScript>().fillwithGrey();
                 }
@@ -214,14 +214,14 @@ public class GridScript : MonoBehaviour
                 {
                     Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
                 }
-                    
+
             }
         }
         movementtiles = new List<GridSquareScript>();
         foreach (GameObject unitGO in allunitGOs)
         {
             Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-            if(unit.position == selection.GridCoordinates && !unit.alreadyplayed)
+            if (unit.position == selection.GridCoordinates && !unit.alreadyplayed)
             {
                 string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
                 int movements = unit.movements;
@@ -231,9 +231,9 @@ public class GridScript : MonoBehaviour
                 }
                 SpreadMovements(unit.position, movements, movementtiles, unit);
                 (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                ShowAttack(range, melee, type.ToLower()=="staff");
+                ShowAttack(range, melee, type.ToLower() == "staff");
             }
-            
+
         }
         if (!lockselection)
         {
@@ -242,7 +242,7 @@ public class GridScript : MonoBehaviour
                 gridSquareScript.fillwithblue();
             }
         }
-        
+
         foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
         {
             gridSquareScript.fillwithblue();
@@ -301,7 +301,7 @@ public class GridScript : MonoBehaviour
 
         foreach (Character unit in allunits)
         {
-            if(unit.position ==selection.GridCoordinates)
+            if (unit.position == selection.GridCoordinates)
             {
                 SelectedUnit = unit;
                 break;
@@ -314,7 +314,7 @@ public class GridScript : MonoBehaviour
     public List<GameObject> GetUnitFromTileList(List<GridSquareScript> listtiles)
     {
         List<GameObject> list = new List<GameObject>();
-        foreach(GridSquareScript tile in listtiles)
+        foreach (GridSquareScript tile in listtiles)
         {
             GameObject newobject = GetUnit(tile);
             if (newobject != null)
@@ -344,7 +344,7 @@ public class GridScript : MonoBehaviour
 
         foreach (GameObject unit in allunitGOs)
         {
-            if(!unit.IsDestroyed())
+            if (!unit.IsDestroyed())
             {
                 if (unit.GetComponent<UnitScript>().UnitCharacteristics.position == selection.GridCoordinates)
                 {
@@ -352,7 +352,7 @@ public class GridScript : MonoBehaviour
                     break;
                 }
             }
-            
+
         }
 
         return SelectedUnit;
@@ -361,35 +361,35 @@ public class GridScript : MonoBehaviour
     public void ShowDangerousTiles()
     {
         dangerousTiles = new List<GridSquareScript>();
-        foreach(GameObject unit in allunitGOs)
+        foreach (GameObject unit in allunitGOs)
         {
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-            if(unitchar.affiliation== "enemy")
+            if (unitchar.affiliation == "enemy")
             {
                 SpreadMovements(unitchar.position, unitchar.movements, movementtiles, unitchar);
                 (int range, bool melee, string type) = unit.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                ShowAttack(range, melee, type.ToLower()=="staff");
-                foreach(GridSquareScript tile in attacktiles)
+                ShowAttack(range, melee, type.ToLower() == "staff");
+                foreach (GridSquareScript tile in attacktiles)
                 {
-                    if(!dangerousTiles.Contains(tile))
+                    if (!dangerousTiles.Contains(tile))
                     {
                         dangerousTiles.Add(tile);
                     }
                 }
             }
         }
-        foreach(GridSquareScript tile in dangerousTiles)
+        foreach (GridSquareScript tile in dangerousTiles)
         {
             tile.fillwithPurple();
         }
     }
 
-    public void ShowAttack(int range, bool frapperenmelee, bool usingstaff, bool uselockedmovementtile=false)
+    public void ShowAttack(int range, bool frapperenmelee, bool usingstaff, bool uselockedmovementtile = false)
     {
         attacktiles = new List<GridSquareScript>();
         healingtiles = new List<GridSquareScript>();
-        List < GridSquareScript > tilestouse = new List<GridSquareScript>();
-        if(uselockedmovementtile)
+        List<GridSquareScript> tilestouse = new List<GridSquareScript>();
+        if (uselockedmovementtile)
         {
             tilestouse = lockedmovementtiles;
         }
@@ -399,29 +399,29 @@ public class GridScript : MonoBehaviour
         }
         foreach (GridSquareScript tile in tilestouse)
         {
-            for(int i=1;i<=range;i++)
+            for (int i = 1; i <= range; i++)
             {
-                if(i==1 && !frapperenmelee)
+                if (i == 1 && !frapperenmelee)
                 {
                     continue;
                 }
-                if(i>1)
+                if (i > 1)
                 {
-                    for (int x=1; x<=i-1; x++)
+                    for (int x = 1; x <= i - 1; x++)
                     {
-                        for(int y =1; y<=i-1; y++)
+                        for (int y = 1; y <= i - 1; y++)
                         {
-                            Vector2 vectorforattack = tile.GridCoordinates+new Vector2(x,y);
-                            if(CheckIfPositionIsLegal(vectorforattack))
+                            Vector2 vectorforattack = tile.GridCoordinates + new Vector2(x, y);
+                            if (CheckIfPositionIsLegal(vectorforattack))
                             {
-                                if(usingstaff)
+                                if (usingstaff)
                                 {
                                     healingtiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
                                 }
                                 else
                                 {
                                     attacktiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
-                                }      
+                                }
                             }
                             vectorforattack = tile.GridCoordinates + new Vector2(x, -y);
                             if (CheckIfPositionIsLegal(vectorforattack))
@@ -494,7 +494,7 @@ public class GridScript : MonoBehaviour
                     {
                         attacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y - i)].GetComponent<GridSquareScript>());
                     }
-                    
+
                 }
                 if (tile.GridCoordinates.y < Grid[0].Count - i)
                 {
@@ -509,14 +509,14 @@ public class GridScript : MonoBehaviour
                 }
             }
         }
-        if(!lockselection)
+        if (!lockselection)
         {
             foreach (GridSquareScript gridSquareScript in attacktiles)
             {
                 gridSquareScript.fillwithRed();
             }
         }
-        
+
         foreach (GridSquareScript gridSquareScript in lockedattacktiles)
         {
             gridSquareScript.fillwithRed();
@@ -539,7 +539,7 @@ public class GridScript : MonoBehaviour
 
     public List<GridSquareScript> GetAttack(int range, bool frapperenmelee, GridSquareScript tile)
     {
-        List < GridSquareScript > newattacktiles = new List<GridSquareScript >();
+        List<GridSquareScript> newattacktiles = new List<GridSquareScript>();
         for (int i = 1; i <= range; i++)
         {
             if (i == 1 && !frapperenmelee)
@@ -672,7 +672,7 @@ public class GridScript : MonoBehaviour
                 {
                     attacktiles.Add(Grid[(int)(tile.GridCoordinates.x - i)][(int)(tile.GridCoordinates.y)].GetComponent<GridSquareScript>());
                 }
-                
+
             }
             if (tile.GridCoordinates.x < Grid.Count - i)
             {
@@ -695,7 +695,7 @@ public class GridScript : MonoBehaviour
                 {
                     attacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y - i)].GetComponent<GridSquareScript>());
                 }
-                
+
             }
             if (tile.GridCoordinates.y < Grid[0].Count - i)
             {
@@ -768,7 +768,7 @@ public class GridScript : MonoBehaviour
             {
                 gridSquareScript.fillwithblue();
             }
-            
+
         }
 
         foreach (GridSquareScript gridSquareScript in lockedattacktiles)
@@ -785,7 +785,7 @@ public class GridScript : MonoBehaviour
             gridSquareScript.fillwithblue();
         }
 
-        
+
     }
     private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, Character selectedunit)
     {
@@ -798,16 +798,16 @@ public class GridScript : MonoBehaviour
         {
             tilestolight.Add(Grid[(int)Coordinates.x][(int)Coordinates.y].GetComponent<GridSquareScript>());
         }
-        if(remainingMovements > 0)
+        if (remainingMovements > 0)
         {
-            if(Coordinates.x>0)
+            if (Coordinates.x > 0)
             {
-                if(CheckIfFree(new Vector2(Coordinates.x - 1, Coordinates.y), selectedunit))
+                if (CheckIfFree(new Vector2(Coordinates.x - 1, Coordinates.y), selectedunit))
                 {
                     SpreadMovements(new Vector2(Coordinates.x - 1, Coordinates.y), remainingMovements - 1, tilestolight, selectedunit);
-                } 
+                }
             }
-            if (Coordinates.x < Grid.Count-1)
+            if (Coordinates.x < Grid.Count - 1)
             {
                 if (CheckIfFree(new Vector2(Coordinates.x + 1, Coordinates.y), selectedunit))
                 {
@@ -827,7 +827,7 @@ public class GridScript : MonoBehaviour
                 {
                     SpreadMovements(new Vector2(Coordinates.x, Coordinates.y + 1), remainingMovements - 1, tilestolight, selectedunit);
                 }
-                
+
             }
         }
     }
@@ -853,9 +853,9 @@ public class GridScript : MonoBehaviour
 
     private bool CheckIfPositionIsLegal(Vector2 position)
     {
-        if (position.x<0 || position.x >= Grid.Count || position.y < 0 || position.y >= Grid[0].Count)
+        if (position.x < 0 || position.x >= Grid.Count || position.y < 0 || position.y >= Grid[0].Count)
         {
-            return false ;
+            return false;
         }
         return true;
     }
@@ -863,9 +863,9 @@ public class GridScript : MonoBehaviour
     public bool checkifvalidpos(List<GridSquareScript> tilelist, Vector2 position)
     {
 
-        foreach(GridSquareScript tile in tilelist)
+        foreach (GridSquareScript tile in tilelist)
         {
-            if((int)tile.GridCoordinates.x==(int)position.x && (int)tile.GridCoordinates.y == (int)position.y)
+            if ((int)tile.GridCoordinates.x == (int)position.x && (int)tile.GridCoordinates.y == (int)position.y)
             {
                 return true;
             }
@@ -877,7 +877,7 @@ public class GridScript : MonoBehaviour
 
     public GridSquareScript GetTile(int x, int y)
     {
-        if(x<=Grid.Count-1 && x>=0 && y <= Grid[0].Count - 1 && y >= 0)
+        if (x <= Grid.Count - 1 && x >= 0 && y <= Grid[0].Count - 1 && y >= 0)
         {
             return Grid[x][y].GetComponent<GridSquareScript>();
         }

@@ -231,6 +231,7 @@ public class EnemyTurnScript : MonoBehaviour
                 if (CharAttacker.affiliation == "playable")
                 {
                     ActionsMenu.FinalizeAttack();
+                    unitalreadyattacked = false;
                 }
                 else
                 {
@@ -240,6 +241,7 @@ public class EnemyTurnScript : MonoBehaviour
                     CurrentPlayable = null;
                     battlecamera.incombat = false;
                     waittingforcamera = false;
+                    unitalreadyattacked = false;
 
                 }
             }
@@ -306,6 +308,7 @@ public class EnemyTurnScript : MonoBehaviour
                 waittingforcamera = false;
                 waittingforexp = true;
                 expdistributed = true;
+                unitalreadyattacked = false;
             }
             else if (CurrentOther == null && CurrentEnemy == null && CurrentPlayable == null && CharAttacker.affiliation != "playable")
             {
@@ -313,6 +316,7 @@ public class EnemyTurnScript : MonoBehaviour
                 waittingforcamera = false;
                 waittingforexp = true;
                 expdistributed = true;
+                unitalreadyattacked = false;
             }
             else
             {
@@ -340,7 +344,11 @@ public class EnemyTurnScript : MonoBehaviour
 
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
                             FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
-                            if (ActionsMenu.CheckifInRange(Attacker, target))
+                            if(ishealing)
+                            {
+                                waittingforexp = true;
+                            }
+                            else if (ActionsMenu.CheckifInRange(Attacker, target))
                             {
                                 unitalreadyattacked = true;
                                 counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);

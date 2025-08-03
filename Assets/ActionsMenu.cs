@@ -281,7 +281,7 @@ public class ActionsMenu : MonoBehaviour
                     frapperenmelee = false;
                 }
 
-                GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type == "staff");
+                GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type.ToLower() == "staff");
                 GridScript.lockedattacktiles = GridScript.attacktiles;
                 GridScript.Recolor();
                 FindAttackers();
@@ -315,7 +315,7 @@ public class ActionsMenu : MonoBehaviour
                         frapperenmelee = false;
                     }
 
-                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type == "staff");
+                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type.ToLower() == "staff");
                     GridScript.lockedattacktiles = GridScript.attacktiles;
                     GridScript.Recolor();
                     FindAttackers();
@@ -375,7 +375,7 @@ public class ActionsMenu : MonoBehaviour
             foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
             {
                 GameObject potentialtarget = GridScript.GetUnit(tile);
-                if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
+                if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && potentialtarget != target)
                 {
                     targetlist.Add(potentialtarget);
                 }
@@ -620,6 +620,7 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         int Distance = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
         (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
+        Debug.Log(Distance + "   " + range + "   " + melee);
         if (Distance <= 1)
         {
             if (!melee)
@@ -631,16 +632,17 @@ public class ActionsMenu : MonoBehaviour
         {
             return false;
         }
+        Debug.Log(true);
         return true;
     }
 
-    public (int, int, int, int,List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
+    public (int, int, int, int, List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         List<int> levelup = null;
         int exp = 0;
-        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type != "staff")
+        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() != "staff")
         {
             (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
 
@@ -670,7 +672,7 @@ public class ActionsMenu : MonoBehaviour
                         int randomnumber = Random.Range(0, 100);
                         if (randomnumber < unithitrate)
                         {
-                            
+
                             numberofhits++;
                             // calculating critical
                             randomnumber = Random.Range(0, 100);
@@ -954,7 +956,7 @@ public class ActionsMenu : MonoBehaviour
                 }
                 if (charunit.currentHP > 0 && charunit.affiliation == "playable")
                 {
-                    (exp,levelup) = AwardExp(unit, target);
+                    (exp, levelup) = AwardExp(unit, target);
                 }
                 if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
                 {
@@ -993,9 +995,9 @@ public class ActionsMenu : MonoBehaviour
             }
             if (charunit.currentHP > 0 && chartarget.affiliation == "playable" && charunit.affiliation == "playable")
             {
-                (exp,levelup) = AwardExp(unit, target, true);
+                (exp, levelup) = AwardExp(unit, target, true);
             }
-            return (numberofhits, numberofcritials, finaldamage, exp,levelup);
+            return (numberofhits, numberofcritials, finaldamage, exp, levelup);
         }
 
     }
@@ -1005,7 +1007,7 @@ public class ActionsMenu : MonoBehaviour
         List<GameObject> targetlist = new List<GameObject>();
         Vector2 position = target.GetComponent<UnitScript>().UnitCharacteristics.position;
         GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x + 1), (int)position.y));
-        if(newunit != null)
+        if (newunit != null)
         {
             targetlist.Add(newunit);
         }
@@ -1028,19 +1030,18 @@ public class ActionsMenu : MonoBehaviour
             targetlist.Add(newunit);
         }
 
-        foreach(GameObject potentialtarget in targetlist)
+        foreach (GameObject potentialtarget in targetlist)
         {
             Character Chartarget = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics;
-            if(Chartarget.affiliation==target.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
+            if (Chartarget.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
             {
                 int damage = CalculateDamage(attacker, potentialtarget);
                 Chartarget.currentHP -= damage / 2;
             }
         }
     }
-    public (int,List<int>) AwardExp(GameObject unit, GameObject target, bool usingstaff = false)
+    public (int, List<int>) AwardExp(GameObject unit, GameObject target, bool usingstaff = false)
     {
-
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         int baseexp = 15;
@@ -1073,7 +1074,7 @@ public class ActionsMenu : MonoBehaviour
         {
             levelup = unit.GetComponent<UnitScript>().LevelUp();
         }
-        return (adjustedexp,levelup);
+        return (adjustedexp, levelup);
     }
 
     public int CalculateDamage(GameObject unit, GameObject target)

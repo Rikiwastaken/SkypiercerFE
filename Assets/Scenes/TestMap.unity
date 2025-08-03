@@ -1074,8 +1074,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 261.5, y: 180.80179}
-  m_SizeDelta: {x: 270, y: 85.5223}
+  m_AnchoredPosition: {x: 261.5, y: 154.81673}
+  m_SizeDelta: {x: 270, y: 137.4924}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &51968674
 MonoBehaviour:
@@ -8110,6 +8110,10 @@ PrefabInstance:
       value: Sothe
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.level
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.stats.HP
       value: 350
       objectReference: {fileID: 0}
@@ -10104,8 +10108,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12744,7 +12748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1152793361
 RectTransform:
   m_ObjectHideFlags: 0

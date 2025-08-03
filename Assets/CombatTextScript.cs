@@ -95,7 +95,7 @@ public class CombatTextScript : MonoBehaviour
     {
         if (healing)
         {
-            combattext.text += "\n" + newdefender.name + " gained " + damage + " Health.";
+            combattext.text = "\n" + newdefender.name + " gained " + damage + " Health.";
         }
         else
         {
