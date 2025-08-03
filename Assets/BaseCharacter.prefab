@@ -335,6 +335,10 @@ MonoBehaviour:
     equipments: []
     isboss: 0
     attacksfriends: 0
+  enemyStats:
+    classID: 0
+    desiredlevel: 5
+    itemtodropID: 0
   trylvlup: 0
   fixedgrowth: 0
   Fists:

@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.UI;
+using static DataScript;
 
 public class UnitScript : MonoBehaviour
 {
@@ -29,6 +30,14 @@ public class UnitScript : MonoBehaviour
         public List<equipment> equipments;
         public bool isboss;
         public bool attacksfriends;
+    }
+
+    [Serializable]
+    public class EnemyStats
+    {
+        public int classID;
+        public int desiredlevel;
+        public int itemtodropID;
     }
 
     [Serializable]
@@ -71,6 +80,7 @@ public class UnitScript : MonoBehaviour
     }
 
     public Character UnitCharacteristics;
+    public EnemyStats enemyStats;
 
     public bool trylvlup;
     public bool fixedgrowth;
@@ -92,6 +102,7 @@ public class UnitScript : MonoBehaviour
     void Start()
     {
         FindAnyObjectByType<DataScript>().GenerateEquipmentList(UnitCharacteristics);
+        LevelSetup();
         Fists = FindAnyObjectByType<DataScript>().equipmentList[0];
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         UnitCharacteristics.position = new Vector2((int)transform.position.x, (int)transform.position.z);
@@ -112,7 +123,7 @@ public class UnitScript : MonoBehaviour
         }
         UnitCharacteristics.currentHP = UnitCharacteristics.stats.HP;
 
-        
+
     }
 
     // Update is called once per frame
@@ -123,7 +134,7 @@ public class UnitScript : MonoBehaviour
             battlecameraScript = FindAnyObjectByType<battlecameraScript>();
         }
 
-        if(animator == null)
+        if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
         }
@@ -134,9 +145,9 @@ public class UnitScript : MonoBehaviour
             initialpos = armature.localPosition;
             initialrot = armature.rotation.eulerAngles;
         }
-        if(!battlecameraScript.incombat)
+        if (!battlecameraScript.incombat)
         {
-            if(Vector3.Distance(armature.localPosition, initialpos)>0.1f)
+            if (Vector3.Distance(armature.localPosition, initialpos) > 0.1f)
             {
                 armature.localPosition += (initialpos - armature.localPosition).normalized * Time.deltaTime;
             }
@@ -158,21 +169,21 @@ public class UnitScript : MonoBehaviour
             animator.SetBool("Walk", true);
             Vector2 direction = (UnitCharacteristics.position - new Vector2(transform.position.x, transform.position.z)).normalized;
             transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
-            if(!battlecameraScript.incombat)
+            if (!battlecameraScript.incombat)
             {
                 transform.forward = new Vector3(direction.x, 0f, direction.y);
             }
-            
-            
+
+
         }
         else
         {
             transform.position = new Vector3(UnitCharacteristics.position.x, transform.position.y, UnitCharacteristics.position.y);
-            if(animator.gameObject.activeSelf)
+            if (animator.gameObject.activeSelf)
             {
                 animator.SetBool("Walk", false);
             }
-            
+
         }
 
 
@@ -197,15 +208,53 @@ public class UnitScript : MonoBehaviour
 
     }
 
+    private void LevelSetup()
+    {
+        if (UnitCharacteristics.affiliation != "playable")
+        {
+            ClassInfo classtoapply = FindAnyObjectByType<DataScript>().ClassList[enemyStats.classID];
+            UnitCharacteristics.stats.HP = classtoapply.BaseStats.HP;
+            UnitCharacteristics.stats.Strength = classtoapply.BaseStats.Strength;
+            UnitCharacteristics.stats.Psyche = classtoapply.BaseStats.Psyche;
+            UnitCharacteristics.stats.Defense = classtoapply.BaseStats.Defense;
+            UnitCharacteristics.stats.Resistance = classtoapply.BaseStats.Resistance;
+            UnitCharacteristics.stats.Speed = classtoapply.BaseStats.Speed;
+            UnitCharacteristics.stats.Dexterity = classtoapply.BaseStats.Dexterity;
+            UnitCharacteristics.growth.HPGrowth = classtoapply.StatGrowth.HPGrowth;
+            UnitCharacteristics.growth.StrengthGrowth = classtoapply.StatGrowth.StrengthGrowth;
+            UnitCharacteristics.growth.PsycheGrowth = classtoapply.StatGrowth.PsycheGrowth;
+            UnitCharacteristics.growth.DefenseGrowth = classtoapply.StatGrowth.DefenseGrowth;
+            UnitCharacteristics.growth.ResistanceGrowth = classtoapply.StatGrowth.ResistanceGrowth;
+            UnitCharacteristics.growth.SpeedGrowth = classtoapply.StatGrowth.SpeedGrowth;
+            UnitCharacteristics.growth.DexterityGrowth = classtoapply.StatGrowth.DexterityGrowth;
+            fixedgrowth = true;
+            int numberoflevelups = enemyStats.desiredlevel - UnitCharacteristics.level;
+
+            for (int i = 0; i < numberoflevelups; i++)
+            {
+
+                List<int> statsgained = LevelUp();
+                string statsgainedstr = "";
+                foreach (int level in statsgained)
+                {
+                    statsgainedstr += level.ToString() + " , ";
+                }
+                Debug.Log(UnitCharacteristics.name + " leveled up\nStats gained : " + statsgainedstr);
+            }
+
+        }
+
+    }
+
     private void UpdateRendererLayer()
     {
-        if(UnitCharacteristics.alreadyplayed)
+        if (UnitCharacteristics.alreadyplayed)
         {
             foreach (MeshRenderer Renderer in GetComponentsInChildren<MeshRenderer>())
             {
                 Renderer.renderingLayerMask = 0;
             }
-            
+
         }
         else
         {
@@ -226,7 +275,7 @@ public class UnitScript : MonoBehaviour
                 }
             }
         }
-        
+
     }
     private void TemporaryColor()
     {
@@ -473,9 +522,9 @@ public class UnitScript : MonoBehaviour
     private void SynchroniseWeaponIDs()
     {
         UnitCharacteristics.equipmentsIDs = new List<int>();
-        foreach ( equipment equipment in UnitCharacteristics.equipments )
+        foreach (equipment equipment in UnitCharacteristics.equipments)
         {
-            UnitCharacteristics.equipmentsIDs.Add( equipment.ID );
+            UnitCharacteristics.equipmentsIDs.Add(equipment.ID);
         }
     }
 

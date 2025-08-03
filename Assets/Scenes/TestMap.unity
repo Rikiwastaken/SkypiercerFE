@@ -19544,6 +19544,25 @@ MonoBehaviour:
     Maxuses: 5
     ID: 0
     Grade: 4
+  ClassList:
+  - name: Soldier
+    BaseStats:
+      HP: 200
+      Strength: 40
+      Psyche: 0
+      Defense: 40
+      Resistance: 0
+      Speed: 50
+      Dexterity: 40
+    StatGrowth:
+      HPGrowth: 80
+      StrengthGrowth: 40
+      PsycheGrowth: 10
+      DefenseGrowth: 40
+      ResistanceGrowth: 30
+      SpeedGrowth: 40
+      DexterityGrowth: 50
+    ID: 0
 --- !u!4 &1666326948
 Transform:
   m_ObjectHideFlags: 0

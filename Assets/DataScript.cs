@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnitScript;
@@ -9,16 +10,41 @@ public class DataScript : MonoBehaviour
 
     public List<equipment> BasicGradeList;
 
+    public List<ClassInfo> ClassList;
+
+    [Serializable]
+    public class ClassInfo
+    {
+        public string name;
+        public BaseStats BaseStats;
+        public StatGrowth StatGrowth;
+        public int ID;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        SetupEquipment();
+        Setup();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void Setup()
+    {
+        SetupEquipment();
+        SetupClasses();
+    }
+
+    private void SetupClasses()
+    {
+        for (int i = 0; i < ClassList.Count; i++)
+        {
+            ClassList[i].ID = i;
+        }
     }
 
     private void SetupEquipment()
