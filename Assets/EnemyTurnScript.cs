@@ -96,7 +96,10 @@ public class EnemyTurnScript : MonoBehaviour
         {
 
             Character CharCurrentEnemy = CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics;
-            battlecamera.Destination = CharCurrentEnemy.position;
+            if (!battlecamera.incombat)
+            {
+                battlecamera.Destination = CharCurrentEnemy.position;
+            }
             if (!CharCurrentEnemy.alreadymoved)
             {
                 if (counterbeforemove > 0)
@@ -211,6 +214,10 @@ public class EnemyTurnScript : MonoBehaviour
             counterbeforeattack--;
 
         }
+        else if (counterafterattack > 0)
+        {
+            counterafterattack--;
+        }
         else if (waittingforexp)
         {
             if (expdistributed)
@@ -230,7 +237,7 @@ public class EnemyTurnScript : MonoBehaviour
                     CurrentPlayable = null;
                     battlecamera.incombat = false;
                     waittingforcamera = false;
-                    
+
                 }
             }
             else
@@ -244,27 +251,27 @@ public class EnemyTurnScript : MonoBehaviour
                 {
                     target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
                 }
-                if(target==null)
+                if (target == null)
                 {
                     expdistributed = true;
                 }
-                else if(CharAttacker.affiliation == "playable" )
+                else if (CharAttacker.affiliation == "playable")
                 {
                     expbar.gameObject.SetActive(true);
-                    if(!expbar.setupdone)
+                    if (!expbar.setupdone)
                     {
                         expbar.SetupBar(CharAttacker, expgained);
                     }
-                    
+
                 }
-                else if(target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
+                else if (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
                 {
                     expbar.gameObject.SetActive(true);
                     if (!expbar.setupdone)
                     {
                         expbar.SetupBar(target.GetComponent<UnitScript>().UnitCharacteristics, expgained);
                     }
-                    
+
                 }
                 else
                 {
@@ -272,7 +279,7 @@ public class EnemyTurnScript : MonoBehaviour
                 }
 
             }
-            
+
         }
         else if (waittingforcamera)
         {
@@ -297,7 +304,7 @@ public class EnemyTurnScript : MonoBehaviour
                 waittingforexp = true;
                 expdistributed = true;
             }
-            else if (CurrentOther == null && CurrentEnemy == null && CurrentPlayable == null && CharAttacker.affiliation!="playable")
+            else if (CurrentOther == null && CurrentEnemy == null && CurrentPlayable == null && CharAttacker.affiliation != "playable")
             {
                 battlecamera.incombat = false;
                 waittingforcamera = false;
@@ -324,8 +331,7 @@ public class EnemyTurnScript : MonoBehaviour
                     {
                         if (!unitalreadyattacked)
                         {
-                            
-                            (int hits, int crits, int damage, int exp ) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
+                            (int hits, int crits, int damage, int exp) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                             expgained = exp;
 
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
@@ -333,6 +339,7 @@ public class EnemyTurnScript : MonoBehaviour
                             unitalreadyattacked = true;
                             counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
                             target.GetComponentInChildren<Animator>().SetTrigger("Attack");
+
                         }
                         else
                         {
@@ -340,16 +347,13 @@ public class EnemyTurnScript : MonoBehaviour
                             {
                                 counterbetweenattack--;
                             }
-                            else if (counterafterattack == 0)
+                            else
                             {
-                                (int hits, int crits, int damage,int exp) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
+                                (int hits, int crits, int damage, int exp) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                                 expgained = exp;
                                 FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, Attacker.GetComponent<UnitScript>().UnitCharacteristics);
                                 unitalreadyattacked = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
-                            }
-                            else
-                            {
                                 waittingforexp = true;
                             }
                         }

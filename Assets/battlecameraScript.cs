@@ -40,9 +40,8 @@ public class battlecameraScript : MonoBehaviour
             GridScript = FindAnyObjectByType<GridScript>();
         }
 
-        
 
-        
+
 
         if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), Destination)>0.01f)
         {

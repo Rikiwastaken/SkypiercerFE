@@ -19,6 +19,11 @@ public class ExpBarScript : MonoBehaviour
     public int filledupbardelaycounter;
     public float filledupbardelay;
 
+    private void Start()
+    {
+        Expbar.fillAmount = 0;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -67,9 +72,14 @@ public class ExpBarScript : MonoBehaviour
     public void SetupBar(Character Character, int exptogain)
     {
         setupdone = true;
-        currentnumber = Character.experience;
-        targetnumber = Character.experience + exptogain;
-        Debug.Log(currentnumber);
-        Debug.Log(targetnumber);
+        currentnumber = Character.experience- exptogain;
+        targetnumber = Character.experience;
+        if (currentnumber<0)
+        {
+            currentnumber = Character.experience - exptogain + 100f;
+            targetnumber = Character.experience + 100;
+        }
+        
+        Expbar.fillAmount = currentnumber / 100f;
     }
 }

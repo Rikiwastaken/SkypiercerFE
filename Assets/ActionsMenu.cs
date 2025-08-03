@@ -100,7 +100,7 @@ public class ActionsMenu : MonoBehaviour
                 {
                     activetargetid = 0;
                 }
-                if(target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower()=="staff")
+                if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
                 {
                     initializeHealingWindows(target, targetlist[activetargetid]);
                 }
@@ -108,7 +108,7 @@ public class ActionsMenu : MonoBehaviour
                 {
                     initializeAttackWindows(target, targetlist[activetargetid]);
                 }
-                
+
             }
             if (inputManager.PreviousTargetjustpressed)
             {
@@ -280,7 +280,7 @@ public class ActionsMenu : MonoBehaviour
                     frapperenmelee = false;
                 }
 
-                GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position),weapon.type=="staff");
+                GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type == "staff");
                 GridScript.lockedattacktiles = GridScript.attacktiles;
                 GridScript.Recolor();
                 FindAttackers();
@@ -369,7 +369,7 @@ public class ActionsMenu : MonoBehaviour
             GridScript = FindAnyObjectByType<GridScript>();
         }
 
-        if(target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+        if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
             foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
             {
@@ -414,9 +414,9 @@ public class ActionsMenu : MonoBehaviour
             }
         }
 
-            
 
-        
+
+
 
 
     }
@@ -607,7 +607,7 @@ public class ActionsMenu : MonoBehaviour
         unitAttackText.text = UnitText;
         targetAttackText.text = TargetText;
 
-        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP + CalculateHealing(unit)) / (float)chartarget.stats.HP,1f);
+        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP + CalculateHealing(unit)) / (float)chartarget.stats.HP, 1f);
         TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
 
         UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - 0) / (float)charunit.stats.HP;
@@ -634,12 +634,12 @@ public class ActionsMenu : MonoBehaviour
         return true;
     }
 
-    public (int, int, int,int) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
+    public (int, int, int, int) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         int exp = 0;
-        if(unit.GetComponent<UnitScript>().GetFirstWeapon().type!="staff")
+        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type != "staff")
         {
             (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
 
@@ -902,7 +902,6 @@ public class ActionsMenu : MonoBehaviour
                     }
                     finaldamage = targetdamage;
                 }
-
                 if (charunit.currentHP > 0 && charunit.affiliation == "playable")
                 {
                     exp = AwardExp(unit, target);
@@ -912,14 +911,14 @@ public class ActionsMenu : MonoBehaviour
                     exp = AwardExp(target, unit);
                 }
             }
-            return (numberofhits, numberofcritials, finaldamage,exp);
+            return (numberofhits, numberofcritials, finaldamage, exp);
         }
         //using a staff
         else
         {
             bool inrange = CheckifInRange(unit, target);
 
-            int unitdamage = (int)Mathf.Max(CalculateHealing(unit), chartarget.stats.HP- chartarget.currentHP);
+            int unitdamage = (int)Mathf.Max(CalculateHealing(unit), chartarget.stats.HP - chartarget.currentHP);
 
             int numberofhits = 1;
             int numberofcritials = 0;
@@ -929,7 +928,7 @@ public class ActionsMenu : MonoBehaviour
             if (!unitalreadyattacked)
             {
                 chartarget.currentHP += unitdamage;
-                if(chartarget.currentHP> chartarget.stats.HP)
+                if (chartarget.currentHP > chartarget.stats.HP)
                 {
                     chartarget.currentHP = chartarget.stats.HP;
                 }
@@ -944,15 +943,16 @@ public class ActionsMenu : MonoBehaviour
             }
             if (charunit.currentHP > 0 && chartarget.affiliation == "playable" && charunit.affiliation == "playable")
             {
-                exp = AwardExp(unit, target,true);
+                exp = AwardExp(unit, target, true);
             }
-            return (numberofhits, numberofcritials, finaldamage,exp);
+            return (numberofhits, numberofcritials, finaldamage, exp);
         }
+
     }
 
-    private int AwardExp(GameObject unit, GameObject target, bool usingstaff=false)
+    private int AwardExp(GameObject unit, GameObject target, bool usingstaff = false)
     {
-        
+
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         int baseexp = 15;
@@ -984,6 +984,7 @@ public class ActionsMenu : MonoBehaviour
         {
             unit.GetComponent<UnitScript>().LevelUp();
         }
+        Debug.Log("expgained : " + adjustedexp);
         return adjustedexp;
     }
 
@@ -1046,7 +1047,7 @@ public class ActionsMenu : MonoBehaviour
             baseweapondamage = (int)(baseweapondamage * 0.75f);
         }
 
-        int unitbasedamage = baseweapondamage + (int)(basestatdamage/2f);
+        int unitbasedamage = baseweapondamage + (int)(basestatdamage / 2f);
 
         return unitbasedamage;
 
