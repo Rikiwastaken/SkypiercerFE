@@ -131,6 +131,7 @@ public class EnemyTurnScript : MonoBehaviour
             }
             else
             {
+                
                 ManageAttack(CurrentEnemy);
             }
         }
@@ -320,8 +321,12 @@ public class EnemyTurnScript : MonoBehaviour
             }
             else
             {
+                
+
                 target.transform.GetChild(1).forward = Attacker.transform.GetChild(1).position - target.transform.GetChild(1).position;
                 Attacker.transform.GetChild(1).forward = target.transform.GetChild(1).position - Attacker.transform.GetChild(1).position;
+                target.GetComponent<UnitScript>().ResetForward();
+                Attacker.GetComponent<UnitScript>().ResetForward();
                 battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
                 if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
                 {

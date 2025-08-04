@@ -1,10 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.UI;
 using static UnitScript;
 public class ActionsMenu : MonoBehaviour
@@ -620,7 +616,6 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         int Distance = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
         (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
-        Debug.Log(Distance + "   " + range + "   " + melee);
         if (Distance <= 1)
         {
             if (!melee)

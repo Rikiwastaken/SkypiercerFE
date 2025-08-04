@@ -54,6 +54,16 @@ public class UnitScript : MonoBehaviour
         public int Maxuses;
         public int ID;
         public int Grade;
+        public equipmentmodel equipmentmodel;
+    }
+
+    [Serializable]
+    public class equipmentmodel
+    {
+        public GameObject Model;
+        public Vector3 localposition;
+        public Vector3 localscale;
+        public Vector3 localrotation;
     }
 
     [Serializable]
@@ -88,6 +98,8 @@ public class UnitScript : MonoBehaviour
 
     public equipment Fists;
 
+    public GameObject ModelHand;
+
     public float movespeed;
 
     private battlecameraScript battlecameraScript;
@@ -97,7 +109,13 @@ public class UnitScript : MonoBehaviour
     private Transform armature;
 
     private Vector3 initialpos;
-    private Vector3 initialrot;
+    private Vector3 initialforward;
+
+    private GameObject currentequipmentmodel;
+
+    public Material AllyMat;
+    public Material EnemyMat;
+    public GameObject Head;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -123,7 +141,16 @@ public class UnitScript : MonoBehaviour
             }
         }
         UnitCharacteristics.currentHP = UnitCharacteristics.stats.HP;
-
+        UpdateWeaponModel();
+        if(UnitCharacteristics.affiliation=="playable")
+        {
+            Head.GetComponent<SkinnedMeshRenderer>().material=AllyMat;
+        }
+        else
+        {
+            Head.GetComponent<SkinnedMeshRenderer>().material = EnemyMat;
+        }
+        
 
     }
 
@@ -147,17 +174,21 @@ public class UnitScript : MonoBehaviour
         {
             armature = animator.transform;
             initialpos = armature.localPosition;
-            initialrot = armature.rotation.eulerAngles;
+            initialforward = armature.forward;
         }
-        if (!battlecameraScript.incombat)
+        if(animator!=null)
         {
-            if (Vector3.Distance(armature.localPosition, initialpos) > 0.1f)
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {
-                armature.localPosition += (initialpos - armature.localPosition).normalized * Time.deltaTime;
-            }
-            armature.rotation = Quaternion.Euler(armature.rotation.eulerAngles + (initialrot - armature.rotation.eulerAngles).normalized * Time.deltaTime);
+                if (Vector3.Distance(armature.localPosition, initialpos) > 0.1f)
+                {
+                    armature.localPosition += (initialpos - armature.localPosition).normalized * 0.2f* Time.deltaTime;
+                }
+                armature.rotation = Quaternion.LookRotation(initialforward, Vector3.up);
 
+            }
         }
+        
 
 
         if (trylvlup)
@@ -212,6 +243,26 @@ public class UnitScript : MonoBehaviour
 
     }
 
+    public void ResetForward()
+    {
+        initialforward = armature.forward;
+    }
+    private void UpdateWeaponModel()
+    {
+        if(currentequipmentmodel !=null)
+        {
+            Destroy(currentequipmentmodel);
+        }
+        if(GetFirstWeapon().Grade!=0)
+        {
+            equipmentmodel equipmentmodel = GetFirstWeapon().equipmentmodel;
+            currentequipmentmodel = Instantiate(equipmentmodel.Model);
+            currentequipmentmodel.transform.SetParent(ModelHand.transform);
+            currentequipmentmodel.transform.localPosition = equipmentmodel.localposition;
+            currentequipmentmodel.transform.localScale = equipmentmodel.localscale;
+            currentequipmentmodel.transform.localRotation = Quaternion.Euler(equipmentmodel.localrotation);
+        }
+    }
     private void LevelSetup()
     {
         if (UnitCharacteristics.affiliation != "playable")
@@ -532,6 +583,7 @@ public class UnitScript : MonoBehaviour
         {
             UnitCharacteristics.equipmentsIDs.Add(equipment.ID);
         }
+        UpdateWeaponModel();
     }
 
     public void EquipWeapon(equipment weapon)
