@@ -28,6 +28,8 @@ public class UnitScript : MonoBehaviour
         public bool telekinesisactivated;
         public List<int> equipmentsIDs;
         public List<equipment> equipments;
+        public int UnitSkill;
+        public List<int> EquipedSkills;
         public bool isboss;
         public bool attacksfriends;
     }
@@ -117,9 +119,15 @@ public class UnitScript : MonoBehaviour
     public Material EnemyMat;
     public GameObject Head;
 
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if(UnitCharacteristics.EquipedSkills == null)
+        {
+            UnitCharacteristics.EquipedSkills = new List<int>(4);
+        }
         FindAnyObjectByType<DataScript>().GenerateEquipmentList(UnitCharacteristics);
         LevelSetup();
         Fists = FindAnyObjectByType<DataScript>().equipmentList[0];
@@ -259,6 +267,37 @@ public class UnitScript : MonoBehaviour
             currentequipmentmodel.transform.localPosition = equipmentmodel.localposition;
             currentequipmentmodel.transform.localScale = equipmentmodel.localscale;
             currentequipmentmodel.transform.localRotation = Quaternion.Euler(equipmentmodel.localrotation);
+        }
+    }
+
+    public void RetreatTrigger() // Effect of Canto/Retreat WIP
+    {
+        if(GetSkill(1))
+        {
+            Debug.Log("cantotrigger");
+            UnitCharacteristics.alreadymoved = false;
+            GridScript gridScript = FindAnyObjectByType<GridScript>();
+            gridScript.selection = gridScript.GetTile(UnitCharacteristics.position);
+            gridScript.ShowMovement();
+            
+            gridScript.lockedmovementtiles = gridScript.movementtiles;
+            gridScript.lockselection = true;
+            ActionManager actionManager = FindAnyObjectByType<ActionManager>();
+            actionManager.frameswherenotlock = 0;
+            actionManager.currentcharacter = gameObject;
+            Debug.Log(actionManager.currentcharacter);
+        }
+    }
+
+    public bool GetSkill(int SkillID)
+    {
+        if(UnitCharacteristics.EquipedSkills.Contains(SkillID) || UnitCharacteristics.UnitSkill==SkillID)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     private void LevelSetup()

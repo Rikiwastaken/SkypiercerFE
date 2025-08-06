@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
-using static UnitScript;
 using UnityEngine.UI;
+using static UnitScript;
+using static UnityEngine.GraphicsBuffer;
 
 public class ActionManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class ActionManager : MonoBehaviour
 
     private Vector2 previouscoordinates;
 
-    private GameObject currentcharacter;
+    public GameObject currentcharacter;
 
     public int frameswherenotlock;
 
@@ -49,6 +50,22 @@ public class ActionManager : MonoBehaviour
 
         if (TurnManager.currentlyplaying == "playable")
         {
+            if (currentcharacter != null)
+            {
+                if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
+                {
+                    currentcharacter = null;
+                }
+            }
+            
+
+            if(currentcharacter==null)
+            {
+                GridScript.lockselection = false;
+            }
+
+
+
             if (!GridScript.lockselection)
             {
                 currentcharacter = GridScript.GetSelectedUnitGameObject();
@@ -116,19 +133,26 @@ public class ActionManager : MonoBehaviour
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = GridScript.selection.GridCoordinates;
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
                     GridScript.UnlockSelection();
-
-                    (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    GridScript.ShowAttackAfterMovement(weaponrange, melee, GridScript.selection, type.ToLower() == "staff");
-                    GridScript.LockcurrentSelection();
-                    GridScript.actionsMenu.SetActive(true);
-                    for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
+                    if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
                     {
-                        GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
-                        if (i == 0)
+                        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+                    }
+                    else
+                    {
+                        (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                        GridScript.ShowAttackAfterMovement(weaponrange, melee, GridScript.selection, type.ToLower() == "staff");
+                        GridScript.LockcurrentSelection();
+                        GridScript.actionsMenu.SetActive(true);
+                        for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
                         {
-                            GridScript.actionsMenu.transform.GetChild(i).GetComponent<Button>().Select();
+                            GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
+                            if (i == 0)
+                            {
+                                GridScript.actionsMenu.transform.GetChild(i).GetComponent<Button>().Select();
+                            }
                         }
                     }
+
                 }
             }
 
@@ -167,12 +191,13 @@ public class ActionManager : MonoBehaviour
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
         currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
-
         GridScript.ResetAllSelections();
         GridScript.ResetColor();
-        currentcharacter = null;
-        FindAnyObjectByType<ActionManager>().frameswherenotlock = 10;
         GridScript.lockselection = false;
+        FindAnyObjectByType<ActionManager>().frameswherenotlock = 10;
+        GameObject character = currentcharacter;
+        currentcharacter = null;
+        character.GetComponent<UnitScript>().RetreatTrigger(); // Canto/Retreat (move again after action)
     }
 
     public void Attack()

@@ -131,7 +131,7 @@ public class EnemyTurnScript : MonoBehaviour
             }
             else
             {
-                
+
                 ManageAttack(CurrentEnemy);
             }
         }
@@ -321,7 +321,7 @@ public class EnemyTurnScript : MonoBehaviour
             }
             else
             {
-                
+
 
                 target.transform.GetChild(1).forward = Attacker.transform.GetChild(1).position - target.transform.GetChild(1).position;
                 Attacker.transform.GetChild(1).forward = target.transform.GetChild(1).position - Attacker.transform.GetChild(1).position;
@@ -346,16 +346,15 @@ public class EnemyTurnScript : MonoBehaviour
                             (int hits, int crits, int damage, int exp, List<int> levelbonus) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                             expgained = exp;
                             levelupbonuses = levelbonus;
-                            Debug.Log(expgained);
 
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
                             FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
-                            if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <=0)
+                            if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
                             {
                                 waittingforexp = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
                             }
-                            else if(ishealing)
+                            else if (ishealing)
                             {
                                 waittingforexp = true;
                             }
@@ -367,7 +366,7 @@ public class EnemyTurnScript : MonoBehaviour
                             }
                             else
                             {
-                                counterafterattack = (int)(delayafterAttack*2f / Time.fixedDeltaTime);
+                                counterafterattack = (int)(delayafterAttack * 2f / Time.fixedDeltaTime);
                                 waittingforexp = true;
                                 expdistributed = true;
                             }
@@ -643,7 +642,7 @@ public class EnemyTurnScript : MonoBehaviour
                     reward -= 9999;
                 }
             }
-            if(!FindIfAnyTarget(potentialAttackPosition,charunit.affiliation))
+            if (!FindIfAnyTarget(potentialAttackPosition, charunit.affiliation))
             {
                 reward -= 9999;
             }
@@ -656,12 +655,12 @@ public class EnemyTurnScript : MonoBehaviour
     {
         List<GridSquareScript> listextended = gridScript.ExpandSelection(attacklist, false);
         listextended = gridScript.ExpandSelection(listextended, false);
-        foreach(GridSquareScript tile in listextended)
+        foreach (GridSquareScript tile in listextended)
         {
             GameObject unit = gridScript.GetUnit(tile);
-            if(unit != null)
+            if (unit != null)
             {
-                if(unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation !=affiliation)
+                if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation != affiliation)
                 {
                     return true;
                 }
@@ -690,8 +689,10 @@ public class EnemyTurnScript : MonoBehaviour
         foreach (GameObject unittodelete in objecttodelete)
         {
             gridScript.allunitGOs.Remove(unittodelete);
+            gridScript.allunits.Remove(unittodelete.GetComponent<UnitScript>().UnitCharacteristics);
         }
         GetComponent<TurnManger>().InitializeUnitLists(GetComponent<GridScript>().allunitGOs);
+
     }
 
 }

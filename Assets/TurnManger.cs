@@ -62,7 +62,7 @@ public class TurnManger : MonoBehaviour
             bool alldone = true;
             foreach(Character character in playableunit)
             {
-                if(!character.alreadyplayed)
+                if(!character.alreadyplayed || !character.alreadymoved)
                 {
                     alldone = false;
                 }
@@ -84,7 +84,7 @@ public class TurnManger : MonoBehaviour
             bool alldone = true;
             foreach (Character character in enemyunit)
             {
-                if (!character.alreadyplayed)
+                if (!character.alreadyplayed || !character.alreadymoved)
                 {
                     alldone = false;
                 }
@@ -106,7 +106,7 @@ public class TurnManger : MonoBehaviour
             bool alldone = true;
             foreach (Character character in otherunits)
             {
-                if (!character.alreadyplayed)
+                if (!character.alreadyplayed || !character.alreadymoved)
                 {
                     alldone = false;
                 }
@@ -152,7 +152,7 @@ public class TurnManger : MonoBehaviour
             int numberremaining = 0;
             foreach( Character character in playableunit)
             {
-                if(!character.alreadyplayed)
+                if(!character.alreadyplayed || !character.alreadymoved)
                 {
                     numberremaining++;
                 }
@@ -164,7 +164,7 @@ public class TurnManger : MonoBehaviour
             int numberremaining = 0;
             foreach (Character character in enemyunit)
             {
-                if (!character.alreadyplayed)
+                if (!character.alreadyplayed || !character.alreadymoved)
                 {
                     numberremaining++;
                 }
@@ -176,7 +176,7 @@ public class TurnManger : MonoBehaviour
             int numberremaining = 0;
             foreach (Character character in otherunits)
             {
-                if (!character.alreadyplayed)
+                if (!character.alreadyplayed || !character.alreadymoved)
                 {
                     numberremaining++;
                 }

@@ -265,7 +265,7 @@ public class GridScript : MonoBehaviour
         foreach (GameObject unitGO in allunitGOs)
         {
             Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-            if (unit.position == selection.GridCoordinates && !unit.alreadyplayed)
+            if (unit.position == selection.GridCoordinates && !unit.alreadymoved)
             {
                 string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
                 int movements = unit.movements;

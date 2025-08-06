@@ -358,12 +358,14 @@ public class ActionsMenu : MonoBehaviour
     {
         target.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         targetlist = new List<GameObject>();
+        GameObject oldtarget = target;
         target = null;
         GridScript.Recolor();
         confirmattack = false;
+        FindAnyObjectByType<ActionManager>().currentcharacter = null;
         FindAnyObjectByType<battlecameraScript>().incombat = false;
-
         FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
+        oldtarget.GetComponent<UnitScript>().RetreatTrigger(); // Canto/Retreat (move again after action)
     }
     public void ConfirmAttack()
     {

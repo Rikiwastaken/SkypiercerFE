@@ -1496,6 +1496,10 @@ PrefabInstance:
       value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 160
       objectReference: {fileID: 0}
@@ -6838,6 +6842,8 @@ MonoBehaviour:
     telekinesisactivated: 0
     equipmentsIDs: 
     equipments: []
+    UnitSkill: 0
+    EquipedSkills: 
     isboss: 0
     attacksfriends: 0
 --- !u!1 &644847029
@@ -20032,6 +20038,179 @@ MonoBehaviour:
       SpeedGrowth: 50
       DexterityGrowth: 40
     ID: 5
+  SkillList:
+  - name: No Skill
+    Descriptions: No skil
+    Cost: 0
+    ID: 0
+  - name: Retreat
+    Descriptions: Allows the user to move again after attacking but reduces movement
+      by 1.
+    Cost: 10
+    ID: 1
+  - name: Despair
+    Descriptions: Is the unit's HP is below 33%, increase crit rate by 20% and dodge
+      rate by 40%.
+    Cost: 5
+    ID: 2
+  - name: Psychic
+    Descriptions: Increases telekinesis damage by 15% but decreases physical damage
+      by 20%.
+    Cost: 10
+    ID: 3
+  - name: Brute
+    Descriptions: Increases physical damage by 15% but decreases telekinesis damage
+      by 20%.
+    Cost: 10
+    ID: 4
+  - name: Fast Legs
+    Descriptions: Adds one movement.
+    Cost: 3
+    ID: 5
+  - name: Inspired
+    Descriptions: Increases damage dealt by 3 and decreases damage taken by 3 when
+      in movement range of the battalion commander.
+    Cost: 2
+    ID: 6
+  - name: Full of beans
+    Descriptions: Restores blade durability twice as fast.
+    Cost: 5
+    ID: 7
+  - name: Inexhaustible
+    Descriptions: Blade durability never goes down.
+    Cost: 15
+    ID: 8
+  - name: First aid
+    Descriptions: Recovers 10% of max HP at the start of the turn.
+    Cost: 5
+    ID: 9
+  - name: Genius
+    Descriptions: Increases all stat growth by 25%.
+    Cost: 20
+    ID: 10
+  - name: Fast Learner
+    Descriptions: Doubles mastery gains.
+    Cost: 10
+    ID: 11
+  - name: Medic
+    Descriptions: Heals each adjacent unit 10% of their max HP at beginning of turn.
+    Cost: 10
+    ID: 12
+  - name: Fast and Deadly
+    Descriptions: Increase critical chance by Speed/20
+    Cost: 10
+    ID: 13
+  - name: Invigorating
+    Descriptions: Heals the attacker of 10% of damage dealt
+    Cost: 10
+    ID: 14
+  - name: Sore Loser
+    Descriptions: If the unit has less health than the enemy after combat, set the
+      enemy's health points to the unit's
+    Cost: 15
+    ID: 15
+  - name: Sniper
+    Descriptions: Always 100% hit rate.
+    Cost: 0
+    ID: 16
+  - name: Tempest
+    Descriptions: Doubles Biorhythm effects.
+    Cost: 999
+    ID: 17
+  - name: Nimble
+    Descriptions: Increases dodge rate by 20% and damage taken by 30%
+    Cost: 5
+    ID: 18
+  - name: Lucky Seven
+    Descriptions: Increase strength, psyche, speed, dexterity, defense and resistance
+      by 7 when last digit of Health Points is 7
+    Cost: 0
+    ID: 19
+  - name: Patient
+    Descriptions: Restores twice the durability and restores 10% max of Health Points
+      when waiting.
+    Cost: 5
+    ID: 20
+  - name: In Great Shape
+    Descriptions: Increases hit rate and dodge rate by 10% when at max Health.
+    Cost: 2
+    ID: 21
+  - name: Competitive
+    Descriptions: Increases damage dealt by ( when facing the an enemy with the same
+      blade type.
+    Cost: 3
+    ID: 22
+  - name: Giant Crusher
+    Descriptions: Increases damage dealt to bosses by 10% and decrease damage taken
+      from bosses by 10%
+    Cost: 5
+    ID: 23
+  - name: Last Stand
+    Descriptions: If the Unit is the last one alive, increases all stats by 25%
+    Cost: 2
+    ID: 24
+  - name: Jack Of All Trades
+    Descriptions: All growths are averaged.
+    Cost: 0
+    ID: 25
+  - name: Solitary
+    Descriptions: Increases damage dealt by 5 if there is no other ally units in
+      3 tiles range
+    Cost: 5
+    ID: 26
+  - name: Cleaver
+    Descriptions: Doubles Scythe secondary damage.
+    Cost: 10
+    ID: 27
+  - name: Revenge
+    Descriptions: Missing health is added to damage.
+    Cost: 10
+    ID: 28
+  - name: Killing Spree
+    Descriptions: Increases all stats by 5 for each enemy killed.
+    Cost: 15
+    ID: 29
+  - name: Compassion
+    Descriptions: When healing an ally, recovers the same number of Health.
+    Cost: 5
+    ID: 30
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 31
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 35
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 37
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  manualgamespeed: 1
 --- !u!4 &1666326948
 Transform:
   m_ObjectHideFlags: 0
@@ -22592,6 +22771,8 @@ MonoBehaviour:
     telekinesisactivated: 0
     equipmentsIDs: 
     equipments: []
+    UnitSkill: 0
+    EquipedSkills: 
     isboss: 0
     attacksfriends: 0
   buttons:
@@ -25231,7 +25412,7 @@ MonoBehaviour:
   lastSquare: {fileID: 1677710024}
   lockselection: 0
   actionsMenu: {fileID: 1236801787}
-  movementbuffer: 0.5
+  movementbuffer: 0.33
 --- !u!4 &2083772864
 Transform:
   m_ObjectHideFlags: 0
@@ -25278,6 +25459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff7bdf6060d3c14981b7f07a70b2ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentcharacter: {fileID: 0}
   frameswherenotlock: 0
   actionsMenu: {fileID: 1236801787}
   preventfromlockingafteraction: 0

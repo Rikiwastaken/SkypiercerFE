@@ -12,12 +12,25 @@ public class DataScript : MonoBehaviour
 
     public List<ClassInfo> ClassList;
 
+    public List<Skill> SkillList;
+
+    public float manualgamespeed = 1;
+
     [Serializable]
     public class ClassInfo
     {
         public string name;
         public BaseStats BaseStats;
         public StatGrowth StatGrowth;
+        public int ID;
+    }
+
+    [Serializable]
+    public class Skill
+    {
+        public string name;
+        public string Descriptions;
+        public int Cost;
         public int ID;
     }
 
@@ -31,7 +44,7 @@ public class DataScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Time.timeScale = manualgamespeed;
     }
 
     private void Setup()
