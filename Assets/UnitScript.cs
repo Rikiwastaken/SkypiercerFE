@@ -142,15 +142,15 @@ public class UnitScript : MonoBehaviour
         }
         UnitCharacteristics.currentHP = UnitCharacteristics.stats.HP;
         UpdateWeaponModel();
-        if(UnitCharacteristics.affiliation=="playable")
+        if (UnitCharacteristics.affiliation == "playable")
         {
-            Head.GetComponent<SkinnedMeshRenderer>().material=AllyMat;
+            Head.GetComponent<SkinnedMeshRenderer>().material = AllyMat;
         }
         else
         {
             Head.GetComponent<SkinnedMeshRenderer>().material = EnemyMat;
         }
-        
+
 
     }
 
@@ -158,7 +158,7 @@ public class UnitScript : MonoBehaviour
     void FixedUpdate()
     {
 
-        Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(1).position +Vector3.Normalize(transform.GetChild(1).forward - transform.GetChild(1).position)*2f, Color.red);
+        Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(1).position + Vector3.Normalize(transform.GetChild(1).forward - transform.GetChild(1).position) * 2f, Color.red);
 
         if (battlecameraScript == null)
         {
@@ -176,20 +176,18 @@ public class UnitScript : MonoBehaviour
             initialpos = armature.localPosition;
             initialforward = armature.forward;
         }
-        if(animator!=null)
+        if (animator != null)
         {
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {
                 if (Vector3.Distance(armature.localPosition, initialpos) > 0.1f)
                 {
-                    armature.localPosition += (initialpos - armature.localPosition).normalized * 0.2f* Time.deltaTime;
+                    armature.localPosition += (initialpos - armature.localPosition).normalized * 0.2f * Time.deltaTime;
                 }
                 armature.rotation = Quaternion.LookRotation(initialforward, Vector3.up);
 
             }
         }
-        
-
 
         if (trylvlup)
         {
@@ -249,11 +247,11 @@ public class UnitScript : MonoBehaviour
     }
     private void UpdateWeaponModel()
     {
-        if(currentequipmentmodel !=null)
+        if (currentequipmentmodel != null)
         {
             Destroy(currentequipmentmodel);
         }
-        if(GetFirstWeapon().Grade!=0)
+        if (GetFirstWeapon().Grade != 0)
         {
             equipmentmodel equipmentmodel = GetFirstWeapon().equipmentmodel;
             currentequipmentmodel = Instantiate(equipmentmodel.Model);
@@ -309,7 +307,7 @@ public class UnitScript : MonoBehaviour
         {
             foreach (MeshRenderer Renderer in GetComponentsInChildren<MeshRenderer>())
             {
-                Renderer.renderingLayerMask = 0;
+                //Renderer.renderingLayerMask = 0;
             }
 
         }

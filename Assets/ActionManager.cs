@@ -16,6 +16,8 @@ public class ActionManager : MonoBehaviour
 
     private GameObject currentcharacter;
 
+    public int frameswherenotlock;
+
     [Serializable]
     public class AttackStats
     {
@@ -52,11 +54,26 @@ public class ActionManager : MonoBehaviour
                 currentcharacter = GridScript.GetSelectedUnitGameObject();
                 if (currentcharacter != null)
                 {
-                    if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed && !preventfromlockingafteraction)
+                    if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed && !preventfromlockingafteraction && frameswherenotlock == 0)
                     {
                         GridScript.lockselection = true;
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
+                    }
+                    if (InputManager.Telekinesisjustpressed)
+                    {
+                        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+                        GridScript.ShowMovement();
+                    }
+                    if (InputManager.NextWeaponjustpressed)
+                    {
+                        currentcharacter.GetComponent<UnitScript>().GetNextWeapon();
+                        GridScript.ShowMovement();
+                    }
+                    if (InputManager.PreviousWeaponjustpressed)
+                    {
+                        currentcharacter.GetComponent<UnitScript>().GetPreviousWeapon();
+                        GridScript.ShowMovement();
                     }
                 }
             }
@@ -68,17 +85,20 @@ public class ActionManager : MonoBehaviour
                     if (InputManager.NextWeaponjustpressed)
                     {
                         currentcharacter.GetComponent<UnitScript>().GetNextWeapon();
-                        WeaponChange();
+                        WeaponChange(currentcharacter);
+                        GridScript.ShowMovement();
                     }
                     if (InputManager.PreviousWeaponjustpressed)
                     {
                         currentcharacter.GetComponent<UnitScript>().GetPreviousWeapon();
-                        WeaponChange();
+                        WeaponChange(currentcharacter);
+                        GridScript.ShowMovement();
                     }
                     if (InputManager.Telekinesisjustpressed)
                     {
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
-                        WeaponChange();
+                        WeaponChange(currentcharacter);
+                        GridScript.ShowMovement();
                     }
                     if (InputManager.canceljustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                     {
@@ -90,7 +110,7 @@ public class ActionManager : MonoBehaviour
 
 
 
-                if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates, currentcharacter) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                 {
                     previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = GridScript.selection.GridCoordinates;
@@ -98,7 +118,7 @@ public class ActionManager : MonoBehaviour
                     GridScript.UnlockSelection();
 
                     (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    GridScript.ShowAttackAfterMovement(weaponrange, melee, GridScript.selection,type.ToLower() == "staff");
+                    GridScript.ShowAttackAfterMovement(weaponrange, melee, GridScript.selection, type.ToLower() == "staff");
                     GridScript.LockcurrentSelection();
                     GridScript.actionsMenu.SetActive(true);
                     for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
@@ -114,14 +134,21 @@ public class ActionManager : MonoBehaviour
 
 
         }
+        if (frameswherenotlock > 0)
+        {
+            frameswherenotlock--;
+            GridScript.UnlockSelection();
+        }
         preventfromlockingafteraction = false;
     }
 
-    private void WeaponChange()
+    private void WeaponChange(GameObject unit)
     {
-        (int range, bool frapperenmelee) = currentcharacter.GetComponent<UnitScript>().GetRangeAndMele();
-        GridScript.ShowAttack(range, frapperenmelee, true);
+        (int range, bool frapperenmelee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
+        bool usestaff = unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff";
+        GridScript.ShowAttack(range, frapperenmelee, usestaff, true);
         GridScript.lockedattacktiles = GridScript.attacktiles;
+        GridScript.lockedhealingtiles = GridScript.healingtiles;
         GridScript.Recolor();
     }
 
@@ -140,10 +167,12 @@ public class ActionManager : MonoBehaviour
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
         currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
-        currentcharacter = null;
+
         GridScript.ResetAllSelections();
         GridScript.ResetColor();
-        preventfromlockingafteraction = true;
+        currentcharacter = null;
+        FindAnyObjectByType<ActionManager>().frameswherenotlock = 10;
+        GridScript.lockselection = false;
     }
 
     public void Attack()

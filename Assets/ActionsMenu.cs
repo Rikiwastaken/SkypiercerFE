@@ -254,45 +254,15 @@ public class ActionsMenu : MonoBehaviour
         FindAttackers();
         if (targetlist.Count == 0) //ici pas d'ennemi trouve donc on essaie d'autres armes
         {
-            List<equipment> weapons = target.GetComponent<UnitScript>().GetAllWeapons();
-            Debug.Log(weapons.Count);
-            foreach (equipment weapon in weapons)
+            if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() != "staff")
             {
-                Debug.Log(weapon.Name);
-                int rangebonus = 0;
-                bool frapperenmelee = true;
-                if (targetcharacter.telekinesisactivated)
-                {
-                    if (weapon.type.ToLower() == "bow")
-                    {
-                        rangebonus = 2;
-                    }
-                    else
-                    {
-                        rangebonus = 1;
-                    }
-                }
-                if (weapon.type.ToLower() == "bow")
-                {
-                    frapperenmelee = false;
-                }
-
-                GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type.ToLower() == "staff");
-                GridScript.lockedattacktiles = GridScript.attacktiles;
-                GridScript.Recolor();
-                FindAttackers();
-                if (targetlist.Count > 0 && weapon != target.GetComponent<UnitScript>().Fists)
-                {
-                    target.GetComponent<UnitScript>().EquipWeapon(weapon);
-                    return;
-                }
-            }
-            if (targetlist.Count == 0) //ici toujours pas d'ennemi trouv� donc on essaie d'autres armes en chengeant le r�glage de t�l�kin�sie
-            {
-                Debug.Log("tentative avec telekinesie");
-                targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
+                List<equipment> weapons = target.GetComponent<UnitScript>().GetAllWeapons();
                 foreach (equipment weapon in weapons)
                 {
+                    if (weapon.type.ToLower() == "staff")
+                    {
+                        continue;
+                    }
                     int rangebonus = 0;
                     bool frapperenmelee = true;
                     if (targetcharacter.telekinesisactivated)
@@ -313,22 +283,74 @@ public class ActionsMenu : MonoBehaviour
 
                     GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type.ToLower() == "staff");
                     GridScript.lockedattacktiles = GridScript.attacktiles;
+                    GridScript.lockedhealingtiles = GridScript.healingtiles;
                     GridScript.Recolor();
                     FindAttackers();
-                    if (targetlist.Count > 0)
+                    if (targetlist.Count > 0 && weapon != target.GetComponent<UnitScript>().Fists)
                     {
-                        if (weapon != target.GetComponent<UnitScript>().Fists)
-                        {
-                            target.GetComponent<UnitScript>().EquipWeapon(weapon);
-                        }
+                        target.GetComponent<UnitScript>().EquipWeapon(weapon);
                         return;
                     }
                 }
-                if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le r�glage original de t�l�kin�sie
+                if (targetlist.Count == 0) //ici toujours pas d'ennemi trouve donc on essaie d'autres armes en chengeant le reglage de telekinesie
                 {
                     targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
+                    foreach (equipment weapon in weapons)
+                    {
+                        if (weapon.type.ToLower() == "staff")
+                        {
+                            continue;
+                        }
+                        int rangebonus = 0;
+                        bool frapperenmelee = true;
+                        if (targetcharacter.telekinesisactivated)
+                        {
+                            if (weapon.type.ToLower() == "bow")
+                            {
+                                rangebonus = 2;
+                            }
+                            else
+                            {
+                                rangebonus = 1;
+                            }
+                        }
+                        if (weapon.type.ToLower() == "bow")
+                        {
+                            frapperenmelee = false;
+                        }
+
+                        GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type.ToLower() == "staff");
+                        GridScript.lockedattacktiles = GridScript.attacktiles;
+                        GridScript.lockedhealingtiles = GridScript.healingtiles;
+                        GridScript.Recolor();
+                        FindAttackers();
+                        if (targetlist.Count > 0)
+                        {
+                            if (weapon != target.GetComponent<UnitScript>().Fists)
+                            {
+                                target.GetComponent<UnitScript>().EquipWeapon(weapon);
+                            }
+                            return;
+                        }
+                    }
+                    if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le reglage original de telekinesie
+                    {
+                        targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
+
+                    }
                 }
             }
+            else
+            {
+                targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
+                FindAttackers();
+                if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le reglage original de telekinesie
+                {
+                    targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
+
+                }
+            }
+
         }
     }
 
@@ -368,6 +390,10 @@ public class ActionsMenu : MonoBehaviour
 
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
+            GridSquareScript positiontile = GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position);
+            (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
+            GridScript.ShowAttackAfterMovement(range, melee, positiontile, true);
+            GridScript.lockedhealingtiles = GridScript.healingtiles;
             foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
             {
                 GameObject potentialtarget = GridScript.GetUnit(tile);
@@ -458,7 +484,6 @@ public class ActionsMenu : MonoBehaviour
         {
             UnitText += "Telekinesis : Off\n";
         }
-        Debug.Log(UnitText);
 
 
 
@@ -1031,7 +1056,7 @@ public class ActionsMenu : MonoBehaviour
             if (Chartarget.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
             {
                 int damage = CalculateDamage(attacker, potentialtarget);
-                Chartarget.currentHP -= damage / 2;
+                Chartarget.currentHP -= damage / 4;
             }
         }
     }

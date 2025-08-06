@@ -6,6 +6,7 @@ public class MusicManager : MonoBehaviour
     public AudioSource incombat;
     public AudioSource outcombat;
 
+    public float maxvolume;
 
 
     public battlecameraScript battlecameraScript;
@@ -13,20 +14,28 @@ public class MusicManager : MonoBehaviour
     {
         if(battlecameraScript.incombat)
         {
-            if(incombat.volume<1f)
+            if(incombat.volume< maxvolume)
             {
                 incombat.volume +=Time.fixedDeltaTime;
             }
-            if(outcombat.volume>0f)
+            else
+            {
+                incombat.volume = maxvolume;
+            }
+            if (outcombat.volume>0)
             {
                 outcombat.volume -= Time.fixedDeltaTime;
             }
         }
         else
         {
-            if (outcombat.volume < 1f)
+            if (outcombat.volume < maxvolume)
             {
                 outcombat.volume += Time.fixedDeltaTime;
+            }
+            else
+            {
+                outcombat.volume = maxvolume;
             }
             if (incombat.volume > 0f)
             {

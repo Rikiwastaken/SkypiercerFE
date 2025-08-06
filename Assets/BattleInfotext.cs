@@ -14,6 +14,8 @@ public class BattleInfotext : MonoBehaviour
     private GameObject selectedunit;
 
     private battlecameraScript battlecamera;
+    private TurnManger turnManger;
+    private EnemyTurnScript enemyTurnScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +36,16 @@ public class BattleInfotext : MonoBehaviour
             battlecamera = FindAnyObjectByType<battlecameraScript>();
         }
 
+        if (turnManger == null)
+        {
+            turnManger = FindAnyObjectByType<TurnManger>();
+        }
+
+        if(enemyTurnScript == null)
+        {
+            enemyTurnScript = FindAnyObjectByType<EnemyTurnScript>();
+        }
+
         if (GridScript.GetSelectedUnitGameObject()!=null)
         {
             selectedunit = GridScript.GetSelectedUnitGameObject();
@@ -48,19 +60,41 @@ public class BattleInfotext : MonoBehaviour
         }
         else
         {
-            Character selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
-            stringtoshow = selectedunitCharacter.name + "       Level : "+ selectedunitCharacter.level + "\nHealth : "+ selectedunitCharacter.currentHP+" / "+ selectedunitCharacter.stats.HP+ "       Weapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name;
-            if(selectedunitCharacter.telekinesisactivated)
+            Character selectedunitCharacter = null;
+            if (turnManger.currentlyplaying=="playable")
             {
-                stringtoshow += "\nTelekinesis : on";
+                selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
+            }
+            else if (turnManger.currentlyplaying == "enemy" && enemyTurnScript.CurrentEnemy!=null)
+            {
+                selectedunit = enemyTurnScript.CurrentEnemy;
+                selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
+            }
+            else if(enemyTurnScript.CurrentOther!=null)
+            {
+                selectedunit = enemyTurnScript.CurrentOther;
+                selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
+            }
+            if(selectedunit!=null && selectedunitCharacter!=null)
+            {
+                stringtoshow = selectedunitCharacter.name + "       Level : " + selectedunitCharacter.level + "    Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP + "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type + ")";
+                if (selectedunitCharacter.telekinesisactivated)
+                {
+                    stringtoshow += "\nTelekinesis : on";
+                }
+                else
+                {
+                    stringtoshow += "\nTelekinesis : off";
+                }
+                Color color = transform.parent.GetComponent<Image>().color;
+                color.a = 1f;
+                transform.parent.GetComponent<Image>().color = color;
             }
             else
             {
-                stringtoshow += "\nTelekinesis : off";
+                stringtoshow = "";
             }
-            Color color = transform.parent.GetComponent<Image>().color;
-            color.a = 1f;
-            transform.parent.GetComponent<Image>().color = color;
+            
         }
         TMP.text = stringtoshow;
 

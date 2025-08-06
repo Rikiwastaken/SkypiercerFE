@@ -14,9 +14,9 @@ public class EnemyTurnScript : MonoBehaviour
 
     private TurnManger TurnManager;
 
-    private GameObject CurrentEnemy;
-    private GameObject CurrentPlayable;
-    private GameObject CurrentOther;
+    public GameObject CurrentEnemy;
+    public GameObject CurrentPlayable;
+    public GameObject CurrentOther;
 
     private GridScript gridScript;
 
