@@ -19,9 +19,20 @@ public class TurnManger : MonoBehaviour
 
     public GameOverScript GameOverScript;
 
+    private GridScript GridScript;
+
+    private bool updatevisuals;
+
     // Update is called once per frame
     void FixedUpdate()
     {
+        
+        if(updatevisuals)
+        {
+            UpdateVisuals();
+            updatevisuals = false;
+        }
+
         if(playableunit.Count ==0)
         {
             GameOverScript.gameObject.SetActive(true);
@@ -64,6 +75,7 @@ public class TurnManger : MonoBehaviour
                     character.alreadymoved = false;
                 }
                 currentlyplaying = "enemy";
+                updatevisuals = true;
                 return;
             }
         }
@@ -85,6 +97,7 @@ public class TurnManger : MonoBehaviour
                     character.alreadymoved = false;
                 }
                 currentlyplaying = "other";
+                updatevisuals = true;
                 return;
             }
         }
@@ -112,11 +125,26 @@ public class TurnManger : MonoBehaviour
                 }
                 currentlyplaying = "playable";
                 currentTurn++;
+                updatevisuals = true;
                 return;
             }
         }
     }
 
+    private void UpdateVisuals()
+    {
+        if (GridScript == null)
+        {
+            GridScript = FindAnyObjectByType<GridScript>();
+        }
+
+        GridScript.ResetAllSelections();
+
+        if(GridScript.selection!=null)
+        {
+            GridScript.ShowMovement();
+        }
+    }
     private void UpdateText()
     {
         if (currentlyplaying == "playable")

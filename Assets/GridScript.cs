@@ -211,6 +211,28 @@ public class GridScript : MonoBehaviour
         lockselection = false;
     }
 
+    public List<GridSquareScript> ExpandSelection(List<GridSquareScript> selection, bool ignoreobstacles)
+    {
+        List<GridSquareScript> newlist = new List<GridSquareScript>();
+        foreach(GridSquareScript tile in selection)
+        {
+            List<Vector2> newpositions = new List<Vector2>
+            {
+                new Vector2(1,0), new Vector2(0,1), new Vector2(-1,0),new Vector2(0,-1)
+            };
+
+            foreach(Vector2 position in newpositions)
+            {
+                GridSquareScript newtile = GetTile(position+tile.GridCoordinates);
+                if(newtile != null && !newlist.Contains(newtile) && (!newtile.isobstacle || ignoreobstacles))
+                {
+                    newlist.Add(newtile);
+                }
+            }    
+        }
+        return newlist;
+    }
+
     public void ResetAllSelections()
     {
         lockedmovementtiles = new List<GridSquareScript>();

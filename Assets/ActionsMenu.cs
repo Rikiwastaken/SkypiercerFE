@@ -652,7 +652,6 @@ public class ActionsMenu : MonoBehaviour
         {
             return false;
         }
-        Debug.Log(true);
         return true;
     }
 
@@ -827,6 +826,13 @@ public class ActionsMenu : MonoBehaviour
                     }
                 }
                 finaldamage = unitdamage;
+                if(chartarget.currentHP <= 0)
+                {
+                    if (charunit.currentHP > 0 && charunit.affiliation == "playable")
+                    {
+                        (exp, levelup) = AwardExp(unit, target);
+                    }
+                }
             }
             else
             {

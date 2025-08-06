@@ -346,10 +346,16 @@ public class EnemyTurnScript : MonoBehaviour
                             (int hits, int crits, int damage, int exp, List<int> levelbonus) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                             expgained = exp;
                             levelupbonuses = levelbonus;
+                            Debug.Log(expgained);
 
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
                             FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
-                            if(ishealing)
+                            if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <=0)
+                            {
+                                waittingforexp = true;
+                                counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+                            }
+                            else if(ishealing)
                             {
                                 waittingforexp = true;
                             }
@@ -637,9 +643,31 @@ public class EnemyTurnScript : MonoBehaviour
                     reward -= 9999;
                 }
             }
+            if(!FindIfAnyTarget(potentialAttackPosition,charunit.affiliation))
+            {
+                reward -= 9999;
+            }
         }
         return reward;
 
+    }
+
+    private bool FindIfAnyTarget(List<GridSquareScript> attacklist, string affiliation)
+    {
+        List<GridSquareScript> listextended = gridScript.ExpandSelection(attacklist, false);
+        listextended = gridScript.ExpandSelection(listextended, false);
+        foreach(GridSquareScript tile in listextended)
+        {
+            GameObject unit = gridScript.GetUnit(tile);
+            if(unit != null)
+            {
+                if(unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation !=affiliation)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private int ManhattanDistance(Character unit, Character otherunit)
