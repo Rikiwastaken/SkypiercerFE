@@ -1497,7 +1497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.UnitSkill
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
@@ -25461,6 +25461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentcharacter: {fileID: 0}
   frameswherenotlock: 0
+  framestoskip: 0
   actionsMenu: {fileID: 1236801787}
   preventfromlockingafteraction: 0
 --- !u!114 &2083772867

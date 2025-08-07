@@ -991,6 +991,16 @@ public class ActionsMenu : MonoBehaviour
                     (exp, levelup) = AwardExp(target, unit);
                 }
             }
+
+            if(chartarget.currentHP<=0)
+            {
+                unit.GetComponent<UnitScript>().unitkilled++;
+            }
+            if (charunit.currentHP <= 0)
+            {
+                target.GetComponent<UnitScript>().unitkilled++;
+            }
+
             return (numberofhits, numberofcritials, finaldamage, exp, levelup);
         }
         //using a staff
@@ -1064,7 +1074,16 @@ public class ActionsMenu : MonoBehaviour
             if (Chartarget.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
             {
                 int damage = CalculateDamage(attacker, potentialtarget);
-                Chartarget.currentHP -= damage / 4;
+                //Cleaver
+                if(attacker.GetComponent<UnitScript>().GetSkill(27))
+                {
+                    Chartarget.currentHP -= damage / 2;
+                }
+                else
+                {
+                    Chartarget.currentHP -= damage / 4;
+                }
+                    
             }
         }
     }
@@ -1111,14 +1130,23 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         GridSquareScript targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
 
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
+        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
+
         int baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
-        int basestatdamage = charunit.stats.Strength;
-        int basestatdef = chartarget.stats.Defense;
-        if (charunit.telekinesisactivated || unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
+        int basestatdamage = charunit.stats.Strength + UnitSkillBonus.Strength;
+        int basestatdef = chartarget.stats.Defense + TargetSkillBonus.Defense;
+        if (charunit.telekinesisactivated)
         {
             baseweapondamage = (int)(baseweapondamage * 0.75f);
-            basestatdamage = charunit.stats.Psyche;
-            basestatdef = charunit.stats.Resistance;
+            basestatdamage = charunit.stats.Psyche + UnitSkillBonus.Psyche;
+            basestatdef = charunit.stats.Resistance + TargetSkillBonus.Resistance;
+        }
+
+        if(unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
+        {
+            basestatdamage = charunit.stats.Psyche + UnitSkillBonus.Psyche;
+            basestatdef = (int)Mathf.Min(chartarget.stats.Defense + TargetSkillBonus.Defense, charunit.stats.Resistance + TargetSkillBonus.Resistance);
         }
 
         int unitbasedamage = baseweapondamage + basestatdamage;
@@ -1132,8 +1160,17 @@ public class ActionsMenu : MonoBehaviour
             basestatdef += (int)(chartarget.stats.Strength * 0.2f);
         }
 
-        int finaldamage = unitbasedamage - basestatdef;
 
+        int finaldamage = unitbasedamage - basestatdef;
+        if (charunit.telekinesisactivated)
+        {
+            finaldamage = (int)(finaldamage * (1f+(float)UnitSkillBonus.TelekDamage / 100f));
+        }
+        else
+        {
+            finaldamage = (int)(finaldamage * (1f + (float)UnitSkillBonus.PhysDamage / 100f));
+        }
+        finaldamage = (int)(finaldamage / (1f + (float)TargetSkillBonus.DamageReduction / 100f));
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
             finaldamage = (int)(finaldamage / 2f);
@@ -1143,6 +1180,11 @@ public class ActionsMenu : MonoBehaviour
         {
             finaldamage = (int)(finaldamage * 1.1f);
         }
+
+        finaldamage = finaldamage + UnitSkillBonus.FixedDamageBonus - TargetSkillBonus.FixedDamageReduction;
+
+
+        
 
         if (finaldamage < 0)
         {
@@ -1158,7 +1200,10 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
         int baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
-        int basestatdamage = charunit.stats.Psyche;
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
+        int basestatdamage = charunit.stats.Psyche + UnitSkillBonus.Psyche;
+
+
         if (charunit.telekinesisactivated)
         {
             baseweapondamage = (int)(baseweapondamage * 0.75f);
@@ -1175,8 +1220,10 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
+        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
 
-        int unitbasespeed = charunit.stats.Speed;
+        int unitbasespeed = charunit.stats.Speed + UnitSkillBonus.Speed;
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
@@ -1187,7 +1234,7 @@ public class ActionsMenu : MonoBehaviour
             unitbasespeed = (int)(unitbasespeed * 0.9f);
         }
 
-        int targetbasespeed = chartarget.stats.Speed;
+        int targetbasespeed = chartarget.stats.Speed + TargetSkillBonus.Speed;
 
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
@@ -1230,11 +1277,14 @@ public class ActionsMenu : MonoBehaviour
         GridSquareScript unitTile = GridScript.GetTile((int)charunit.position.x, (int)charunit.position.y);
         GridSquareScript targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
 
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
+        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
+
         int hitrateweapon = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseHit;
 
         int tilebonus = GetTileBonus(unitTile, targetTile);
 
-        int dexunit = charunit.stats.Dexterity;
+        int dexunit = charunit.stats.Dexterity + UnitSkillBonus.Dexterity;
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
             dexunit = (int)(dexunit * 1.1f);
@@ -1244,7 +1294,7 @@ public class ActionsMenu : MonoBehaviour
             dexunit = (int)(dexunit * 0.9f);
         }
 
-        int spdtarget = chartarget.stats.Speed;
+        int spdtarget = chartarget.stats.Speed + TargetSkillBonus.Speed;
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
             spdtarget = (int)(spdtarget * 1.1f);
@@ -1254,7 +1304,7 @@ public class ActionsMenu : MonoBehaviour
             spdtarget = (int)(spdtarget * 0.9f);
         }
 
-        int finalhitrate = (int)(hitrateweapon + (dexunit - spdtarget) * 0.2f) + tilebonus;
+        int finalhitrate = (int)(hitrateweapon + (dexunit - spdtarget) * 0.2f) + tilebonus + UnitSkillBonus.Hit - TargetSkillBonus.Dodge;
 
         if (finalhitrate < 0)
         {
@@ -1310,9 +1360,12 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
+        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
+
         int critweapon = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseCrit;
 
-        int dexunit = charunit.stats.Dexterity;
+        int dexunit = charunit.stats.Dexterity + UnitSkillBonus.Dexterity;
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
             dexunit = (int)(dexunit * 1.1f);
@@ -1322,7 +1375,7 @@ public class ActionsMenu : MonoBehaviour
             dexunit = (int)(dexunit * 0.9f);
         }
 
-        int spdtarget = chartarget.stats.Speed;
+        int spdtarget = chartarget.stats.Speed + TargetSkillBonus.Speed;
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
             spdtarget = (int)(spdtarget * 1.1f);
@@ -1332,7 +1385,7 @@ public class ActionsMenu : MonoBehaviour
             spdtarget = (int)(spdtarget * 0.9f);
         }
 
-        int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f);
+        int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f + UnitSkillBonus.Crit);
 
         if (finalcritrate < 0)
         {

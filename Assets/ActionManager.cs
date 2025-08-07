@@ -19,6 +19,8 @@ public class ActionManager : MonoBehaviour
 
     public int frameswherenotlock;
 
+    public int framestoskip;
+
     [Serializable]
     public class AttackStats
     {
@@ -48,6 +50,12 @@ public class ActionManager : MonoBehaviour
             return;
         }
 
+        if (framestoskip > 0)
+        {
+            framestoskip--;
+            return;
+        }
+
         if (TurnManager.currentlyplaying == "playable")
         {
             if (currentcharacter != null)
@@ -57,9 +65,9 @@ public class ActionManager : MonoBehaviour
                     currentcharacter = null;
                 }
             }
-            
 
-            if(currentcharacter==null)
+
+            if (currentcharacter == null)
             {
                 GridScript.lockselection = false;
             }
@@ -135,7 +143,9 @@ public class ActionManager : MonoBehaviour
                     GridScript.UnlockSelection();
                     if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
                     {
+                        GridScript.ResetAllSelections();
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+                        GridScript.Recolor();
                     }
                     else
                     {
@@ -190,6 +200,18 @@ public class ActionManager : MonoBehaviour
     {
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+        //patient
+        if(currentcharacter.GetComponent<UnitScript>().GetSkill(20))
+        {
+            currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
+            Character currentcharacterchar = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics;
+            currentcharacterchar.currentHP += (int)(currentcharacterchar.stats.HP * 0.1f);
+            if (currentcharacterchar.currentHP > currentcharacterchar.stats.HP)
+            {
+                currentcharacterchar.currentHP = currentcharacterchar.stats.HP;
+            }
+        }
+
         currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
         GridScript.ResetAllSelections();
         GridScript.ResetColor();

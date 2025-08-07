@@ -10,10 +10,13 @@ public class TurnManger : MonoBehaviour
     public string currentlyplaying; // playable, enemy, other
 
     public List<Character> playableunit;
+    public List<GameObject> playableunitGO;
 
     public List<Character> enemyunit;
+    public List<GameObject> enemyunitGO;
 
     public List<Character> otherunits;
+    public List<GameObject> otherunitsGO;
 
     public TextMeshProUGUI turntext;
 
@@ -51,9 +54,44 @@ public class TurnManger : MonoBehaviour
         if(currentlyplaying == "")
         {
             currentlyplaying = "playable";
+            BeginningOfTurnsTrigger(playableunitGO);
         }
         ManageTurnRotation();
         UpdateText();
+    }
+
+    private void BeginningOfTurnsTrigger(List<GameObject> charactertoappy)
+    {
+        foreach(GameObject unit in charactertoappy)
+        {
+            Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+            //First aid
+            if (unit.GetComponent<UnitScript>().GetSkill(9))
+            {
+                unitchar.currentHP += (int)(unitchar.stats.HP * 0.1f);
+                if(unitchar.currentHP > unitchar.stats.HP )
+                {
+                    unitchar.currentHP = unitchar.stats.HP;
+                }
+            }
+            //Medic
+            if (unit.GetComponent<UnitScript>().GetSkill(12))
+            {
+                foreach( GameObject otherunit in charactertoappy)
+                {
+                    Character otherunitchar = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
+                    if(Mathf.Abs(otherunitchar.position.x-unitchar.position.x)==1 || Mathf.Abs(otherunitchar.position.y - unitchar.position.y) == 1)
+                    {
+                        otherunitchar.currentHP += (int)(otherunitchar.stats.HP * 0.1f);
+                        if (otherunitchar.currentHP > otherunitchar.stats.HP)
+                        {
+                            otherunitchar.currentHP = otherunitchar.stats.HP;
+                        }
+                    }
+                }
+            }
+        }
     }
     private void ManageTurnRotation()
     {
@@ -75,6 +113,7 @@ public class TurnManger : MonoBehaviour
                     character.alreadymoved = false;
                 }
                 currentlyplaying = "enemy";
+                BeginningOfTurnsTrigger(enemyunitGO);
                 updatevisuals = true;
                 return;
             }
@@ -96,6 +135,7 @@ public class TurnManger : MonoBehaviour
                     character.alreadyplayed = false;
                     character.alreadymoved = false;
                 }
+                BeginningOfTurnsTrigger(otherunitsGO);
                 currentlyplaying = "other";
                 updatevisuals = true;
                 return;
@@ -123,6 +163,7 @@ public class TurnManger : MonoBehaviour
                     FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
                     FindAnyObjectByType<GridScript>().ResetAllSelections();
                 }
+                BeginningOfTurnsTrigger(playableunitGO);
                 currentlyplaying = "playable";
                 currentTurn++;
                 updatevisuals = true;
@@ -190,18 +231,24 @@ public class TurnManger : MonoBehaviour
         playableunit = new List<Character>();
         enemyunit = new List<Character>();
         otherunits = new List<Character>();
+        playableunitGO = new List<GameObject>();
+        enemyunitGO = new List<GameObject>();
+        otherunitsGO = new List<GameObject>();
         foreach (GameObject character in allunits)
         {
             if(character.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable")
             {
+                playableunitGO.Add(character);
                 playableunit.Add(character.GetComponent<UnitScript>().UnitCharacteristics);
             }
             else if(character.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="enemy")
             {
+                enemyunitGO.Add(character);
                 enemyunit.Add(character.GetComponent<UnitScript>().UnitCharacteristics);
             }
             else
             {
+                otherunitsGO.Add(character);
                 otherunits.Add(character.GetComponent<UnitScript>().UnitCharacteristics);
             }
             

@@ -3,7 +3,9 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.UI;
 using static DataScript;
@@ -81,6 +83,25 @@ public class UnitScript : MonoBehaviour
     }
 
     [Serializable]
+    public class AllStatsSkillBonus
+    {
+        public int Strength;
+        public int Psyche;
+        public int Defense;
+        public int Resistance;
+        public int Speed;
+        public int Dexterity;
+        public int Dodge;
+        public int Hit;
+        public int Crit;
+        public int PhysDamage;
+        public int TelekDamage;
+        public int DamageReduction;
+        public int FixedDamageBonus;
+        public int FixedDamageReduction;
+    }
+
+    [Serializable]
     public class StatGrowth
     {
         public int HPGrowth;
@@ -118,6 +139,8 @@ public class UnitScript : MonoBehaviour
     public Material AllyMat;
     public Material EnemyMat;
     public GameObject Head;
+
+    public int unitkilled;
 
     
 
@@ -284,8 +307,10 @@ public class UnitScript : MonoBehaviour
             gridScript.lockselection = true;
             ActionManager actionManager = FindAnyObjectByType<ActionManager>();
             actionManager.frameswherenotlock = 0;
+            actionManager.framestoskip = 10;
             actionManager.currentcharacter = gameObject;
             Debug.Log(actionManager.currentcharacter);
+            Debug.Log(gridScript.lockselection);
         }
     }
 
@@ -419,45 +444,83 @@ public class UnitScript : MonoBehaviour
     public List<int> LevelUp()
     {
         List<int> lvlupresult = new List<int>();
+        StatGrowth GrowthtoApply = new StatGrowth();
+
+        GrowthtoApply.HPGrowth = UnitCharacteristics.growth.HPGrowth;
+        GrowthtoApply.PsycheGrowth = UnitCharacteristics.growth.PsycheGrowth;
+        GrowthtoApply.StrengthGrowth = UnitCharacteristics.growth.StrengthGrowth;
+        GrowthtoApply.DefenseGrowth = UnitCharacteristics.growth.DefenseGrowth;
+        GrowthtoApply.ResistanceGrowth = UnitCharacteristics.growth.ResistanceGrowth;
+        GrowthtoApply.SpeedGrowth = UnitCharacteristics.growth.SpeedGrowth;
+        GrowthtoApply.DexterityGrowth = UnitCharacteristics.growth.DexterityGrowth;
+
+        //Genius
+        if(GetSkill(10))
+        {
+            int geniusgrowthboost = 25;
+            GrowthtoApply.HPGrowth += geniusgrowthboost;
+            GrowthtoApply.PsycheGrowth += geniusgrowthboost;
+            GrowthtoApply.StrengthGrowth += geniusgrowthboost;
+            GrowthtoApply.DefenseGrowth += geniusgrowthboost;
+            GrowthtoApply.ResistanceGrowth += geniusgrowthboost;
+            GrowthtoApply.SpeedGrowth += geniusgrowthboost;
+            GrowthtoApply.DexterityGrowth += geniusgrowthboost;
+        }
+
+        //JackOfAllTrades
+        if(GetSkill(25))
+        {
+            int average = GrowthtoApply.HPGrowth + GrowthtoApply.PsycheGrowth + GrowthtoApply.StrengthGrowth + GrowthtoApply.DefenseGrowth + GrowthtoApply.ResistanceGrowth + GrowthtoApply.SpeedGrowth + GrowthtoApply.DexterityGrowth;
+            average = average / 7;
+
+            GrowthtoApply.HPGrowth = average;
+            GrowthtoApply.PsycheGrowth = average;
+            GrowthtoApply.StrengthGrowth = average;
+            GrowthtoApply.DefenseGrowth = average;
+            GrowthtoApply.ResistanceGrowth = average;
+            GrowthtoApply.SpeedGrowth = average;
+            GrowthtoApply.DexterityGrowth = average;
+        }
+
         UnitCharacteristics.experience -= 100;
         UnitCharacteristics.level += 1;
         if (fixedgrowth)
         {
-            UnitCharacteristics.stats.HP += (int)(UnitCharacteristics.growth.HPGrowth / 10f);
+            UnitCharacteristics.stats.HP += (int)(GrowthtoApply.HPGrowth / 10f);
 
-            UnitCharacteristics.currentHP += (int)(UnitCharacteristics.growth.HPGrowth / 10f);
-            lvlupresult.Add((int)(UnitCharacteristics.growth.HPGrowth / 10f));
+            UnitCharacteristics.currentHP += (int)(GrowthtoApply.HPGrowth / 10f);
+            lvlupresult.Add((int)(GrowthtoApply.HPGrowth / 10f));
 
-            UnitCharacteristics.stats.Strength += (int)(UnitCharacteristics.growth.StrengthGrowth / 10f);
+            UnitCharacteristics.stats.Strength += (int)(GrowthtoApply.StrengthGrowth / 10f);
 
-            lvlupresult.Add((int)(UnitCharacteristics.growth.StrengthGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.StrengthGrowth / 10f));
 
-            UnitCharacteristics.stats.Psyche += (int)(UnitCharacteristics.growth.PsycheGrowth / 10f);
+            UnitCharacteristics.stats.Psyche += (int)(GrowthtoApply.PsycheGrowth / 10f);
 
-            lvlupresult.Add((int)(UnitCharacteristics.growth.PsycheGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.PsycheGrowth / 10f));
 
-            UnitCharacteristics.stats.Defense += (int)(UnitCharacteristics.growth.DefenseGrowth / 10f);
+            UnitCharacteristics.stats.Defense += (int)(GrowthtoApply.DefenseGrowth / 10f);
 
-            lvlupresult.Add((int)(UnitCharacteristics.growth.DefenseGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.DefenseGrowth / 10f));
 
 
-            UnitCharacteristics.stats.Resistance += (int)(UnitCharacteristics.growth.ResistanceGrowth / 10f);
+            UnitCharacteristics.stats.Resistance += (int)(GrowthtoApply.ResistanceGrowth / 10f);
 
-            lvlupresult.Add((int)(UnitCharacteristics.growth.ResistanceGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.ResistanceGrowth / 10f));
 
-            UnitCharacteristics.stats.Speed += (int)(UnitCharacteristics.growth.SpeedGrowth / 10f);
+            UnitCharacteristics.stats.Speed += (int)(GrowthtoApply.SpeedGrowth / 10f);
 
-            lvlupresult.Add((int)(UnitCharacteristics.growth.SpeedGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.SpeedGrowth / 10f));
 
-            UnitCharacteristics.stats.Dexterity += (int)(UnitCharacteristics.growth.DexterityGrowth / 10f);
+            UnitCharacteristics.stats.Dexterity += (int)(GrowthtoApply.DexterityGrowth / 10f);
 
-            lvlupresult.Add((int)(UnitCharacteristics.growth.DexterityGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.DexterityGrowth / 10f));
 
         }
         else
         {
             int rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= UnitCharacteristics.growth.HPGrowth)
+            if (rd <= GrowthtoApply.HPGrowth)
             {
                 UnitCharacteristics.stats.HP += 10;
                 UnitCharacteristics.currentHP += 10;
@@ -471,7 +534,7 @@ public class UnitScript : MonoBehaviour
             }
 
             rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= UnitCharacteristics.growth.StrengthGrowth)
+            if (rd <= GrowthtoApply.StrengthGrowth)
             {
                 UnitCharacteristics.stats.Strength += 10;
                 lvlupresult.Add(10);
@@ -483,7 +546,7 @@ public class UnitScript : MonoBehaviour
             }
 
             rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= UnitCharacteristics.growth.PsycheGrowth)
+            if (rd <= GrowthtoApply.PsycheGrowth)
             {
                 UnitCharacteristics.stats.Psyche += 10;
                 lvlupresult.Add(10);
@@ -495,7 +558,7 @@ public class UnitScript : MonoBehaviour
             }
 
             rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= UnitCharacteristics.growth.DefenseGrowth)
+            if (rd <= GrowthtoApply.DefenseGrowth)
             {
                 UnitCharacteristics.stats.Defense += 10;
                 lvlupresult.Add(10);
@@ -508,7 +571,7 @@ public class UnitScript : MonoBehaviour
 
 
             rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= UnitCharacteristics.growth.ResistanceGrowth)
+            if (rd <= GrowthtoApply.ResistanceGrowth)
             {
                 UnitCharacteristics.stats.Resistance += 10;
                 lvlupresult.Add(10);
@@ -520,7 +583,7 @@ public class UnitScript : MonoBehaviour
             }
 
             rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= UnitCharacteristics.growth.SpeedGrowth)
+            if (rd <= GrowthtoApply.SpeedGrowth)
             {
                 UnitCharacteristics.stats.Speed += 10;
                 lvlupresult.Add(10);
@@ -532,7 +595,7 @@ public class UnitScript : MonoBehaviour
             }
 
             rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= UnitCharacteristics.growth.DexterityGrowth)
+            if (rd <= GrowthtoApply.DexterityGrowth)
             {
                 UnitCharacteristics.stats.Dexterity += 10;
                 lvlupresult.Add(10);
@@ -710,6 +773,141 @@ public class UnitScript : MonoBehaviour
         }
 
         return (range, melee);
+    }
+
+    public AllStatsSkillBonus GetStatSkillBonus(GameObject enemy)
+    {
+        AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
+
+        //Despair
+        if(GetSkill(2))
+        {
+            if(UnitCharacteristics.currentHP<=(float)UnitCharacteristics.stats.HP*0.33f)
+            {
+                statbonuses.Crit += 20;
+                statbonuses.Dodge += 40;
+            }
+        }
+        //Psychic
+        if (GetSkill(3))
+        {
+            statbonuses.TelekDamage += 15;
+            statbonuses.PhysDamage -= 20;
+        }
+        //Brute
+        if (GetSkill(4))
+        {
+            statbonuses.TelekDamage += 20;
+            statbonuses.PhysDamage -= 15;
+        }
+        //FastAndDeadly
+        if (GetSkill(13))
+        {
+            statbonuses.Crit += UnitCharacteristics.stats.Speed/20;
+        }
+        //Sniper
+        if (GetSkill(16))
+        {
+            statbonuses.Hit += 9999;
+        } 
+        //Nimble
+        if(GetSkill(18))
+        {
+            statbonuses.Dodge += 20;
+            statbonuses.DamageReduction -= 30;
+        }
+        //LuckySeven
+        if( GetSkill(19))
+        {
+            if (Math.Abs(UnitCharacteristics.currentHP % 10) == 7)
+            {
+                statbonuses.Strength += 7;
+                statbonuses.Psyche +=7;
+                statbonuses.Resistance += 7;
+                statbonuses.Defense += 7;
+                statbonuses.Speed += 7;
+                statbonuses.Dexterity += 7;
+            }
+        }
+        //In Great Shape
+        if (GetSkill(21))
+        {
+            if (UnitCharacteristics.currentHP >= UnitCharacteristics.stats.HP)
+            {
+                statbonuses.Hit += 10;
+                statbonuses.Dodge += 10;
+            }
+        }
+        // Competitive
+        if(GetSkill(22))
+        {
+            if(GetFirstWeapon().type.ToLower()==enemy.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower())
+            {
+                statbonuses.FixedDamageBonus += 5;
+            }
+        }
+        //Giant Crusher
+        if(GetSkill(23))
+        {
+            if(enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
+            {
+                statbonuses.PhysDamage += 10;
+                statbonuses.TelekDamage += 10;
+                statbonuses.DamageReduction += 10;
+            }
+        }
+        //Last Stand
+        if (GetSkill(24))
+        {
+            List<GameObject> activelist = null;
+            if(UnitCharacteristics.affiliation=="playable")
+            {
+                activelist = FindAnyObjectByType<TurnManger>().playableunitGO;
+            }
+            else if (UnitCharacteristics.affiliation == "enemy")
+            {
+                activelist = FindAnyObjectByType<TurnManger>().enemyunitGO;
+            }
+            else
+            {
+                activelist = FindAnyObjectByType<TurnManger>().otherunitsGO;
+            }
+
+            if(activelist.Count==1)
+            {
+                statbonuses.Strength += (int)(UnitCharacteristics.stats.Strength*0.25f);
+                statbonuses.Psyche += 7;
+                statbonuses.Resistance += 7;
+                statbonuses.Defense += 7;
+                statbonuses.Speed += 7;
+                statbonuses.Dexterity += 7;
+            }
+        }
+
+        //Revenge
+        if (GetSkill(28))
+        {
+            if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
+            {
+                statbonuses.FixedDamageBonus += (UnitCharacteristics.stats.HP - UnitCharacteristics.currentHP);
+            }
+        }
+        //KillingSpree
+        if (GetSkill(29))
+        {
+            if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
+            {
+                statbonuses.Strength += 5*unitkilled;
+                statbonuses.Psyche += 5 * unitkilled;
+                statbonuses.Resistance += 5 * unitkilled;
+                statbonuses.Defense += 5 * unitkilled;
+                statbonuses.Speed += 5 * unitkilled;
+                statbonuses.Dexterity += 5 * unitkilled;
+            }
+        }
+
+
+        return statbonuses;
     }
 
     public (int, bool, string) GetRangeMeleeAndType()
