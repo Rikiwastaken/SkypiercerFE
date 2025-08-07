@@ -17,7 +17,7 @@ public class ExpBarScript : MonoBehaviour
 
     public bool setupdone;
 
-    private EnemyTurnScript EnemyTurnScript;
+    private AttackTurnScript AttackTurnScript;
 
     public int filledupbardelaycounter;
     public float filledupbardelay;
@@ -36,12 +36,12 @@ public class ExpBarScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(EnemyTurnScript == null)
+        if(AttackTurnScript == null)
         {
-            EnemyTurnScript = FindAnyObjectByType<EnemyTurnScript>();
+            AttackTurnScript = FindAnyObjectByType<AttackTurnScript>();
         }
 
-        if(EnemyTurnScript.waittingforexp)
+        if(AttackTurnScript.waittingforexp)
         {
             if(filledupbardelaycounter==0)
             {
@@ -73,7 +73,7 @@ public class ExpBarScript : MonoBehaviour
                 filledupbardelaycounter--;
                 if( filledupbardelaycounter <= 0 )
                 {
-                    EnemyTurnScript.expdistributed = true;
+                    AttackTurnScript.expdistributed = true;
                     setupdone = false;
                     LevelUpText.transform.parent.gameObject.SetActive(false);
                 }

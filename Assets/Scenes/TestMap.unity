@@ -6700,6 +6700,82 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
   m_PrefabInstance: {fileID: 249897411}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &625813537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 625813538}
+  - component: {fileID: 625813540}
+  - component: {fileID: 625813539}
+  m_Layer: 5
+  m_Name: Skills
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &625813538
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625813537}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1375594052}
+  m_Father: {fileID: 1356704400}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 280.26474, y: 224.0656}
+  m_SizeDelta: {x: 218.8498, y: 323.8925}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &625813539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625813537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &625813540
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625813537}
+  m_CullTransparentMesh: 1
 --- !u!1001 &632753123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12366,6 +12442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258bdf60c0c4d2d49a0e5809735ca0d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Skilltext: {fileID: 0}
 --- !u!114 &1075626558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14074,6 +14151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258bdf60c0c4d2d49a0e5809735ca0d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Skilltext: {fileID: 1375594053}
 --- !u!114 &1235952018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15803,6 +15881,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1235952016}
+  - {fileID: 625813538}
   m_Father: {fileID: 1731079698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -16190,6 +16269,155 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+--- !u!1 &1375594051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1375594052}
+  - component: {fileID: 1375594054}
+  - component: {fileID: 1375594053}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1375594052
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375594051}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 625813538}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1375594053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375594051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Skills :
+
+    Retreat Retreat
+
+    Retreat Retreat
+
+    Retreat Retreat
+
+    Retreat
+    Retreat
+
+    Retreat Retreat
+
+'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 11.751175, y: 10.576073, z: 9.400833, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1375594054
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375594051}
+  m_CullTransparentMesh: 1
 --- !u!4 &1379833522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
@@ -20045,7 +20273,7 @@ MonoBehaviour:
     ID: 0
   - name: Retreat
     Descriptions: Allows the user to move again after attacking but reduces movement
-      by 1.
+      by 2.
     Cost: 10
     ID: 1
   - name: Despair
@@ -20111,7 +20339,7 @@ MonoBehaviour:
     ID: 15
   - name: Sniper
     Descriptions: Always 100% hit rate.
-    Cost: 0
+    Cost: 15
     ID: 16
   - name: Tempest
     Descriptions: Doubles Biorhythm effects.
@@ -20123,7 +20351,7 @@ MonoBehaviour:
     ID: 18
   - name: Lucky Seven
     Descriptions: Increase strength, psyche, speed, dexterity, defense and resistance
-      by 7 when last digit of Health Points is 7
+      by 70 when last digit of Health Points is 7
     Cost: 0
     ID: 19
   - name: Patient
@@ -20136,8 +20364,8 @@ MonoBehaviour:
     Cost: 2
     ID: 21
   - name: Competitive
-    Descriptions: Increases damage dealt by ( when facing the an enemy with the same
-      blade type.
+    Descriptions: Increases damage dealt by 50 when facing the an enemy with the
+      same blade type.
     Cost: 3
     ID: 22
   - name: Giant Crusher
@@ -20154,7 +20382,7 @@ MonoBehaviour:
     Cost: 0
     ID: 25
   - name: Solitary
-    Descriptions: Increases damage dealt by 5 if there is no other ally units in
+    Descriptions: Increases damage dealt by 50 if there is no other ally units in
       3 tiles range
     Cost: 5
     ID: 26
@@ -20167,37 +20395,38 @@ MonoBehaviour:
     Cost: 10
     ID: 28
   - name: Killing Spree
-    Descriptions: Increases all stats by 5 for each enemy killed.
+    Descriptions: Increases all stats by 10 for each enemy killed.
     Cost: 15
     ID: 29
   - name: Compassion
     Descriptions: When healing an ally, recovers the same number of Health.
     Cost: 5
     ID: 30
-  - name: 
-    Descriptions: 
-    Cost: 0
+  - name: Verso
+    Descriptions: Allows to use remaining movements after action.
+    Cost: 10
     ID: 31
-  - name: 
-    Descriptions: 
-    Cost: 0
-    ID: 0
-  - name: 
-    Descriptions: 
-    Cost: 0
-    ID: 0
-  - name: 
-    Descriptions: 
-    Cost: 0
-    ID: 0
-  - name: 
-    Descriptions: 
-    Cost: 0
+  - name: Survivor
+    Descriptions: Increases all stats by 3 when surviving a battle.
+    Cost: 20
+    ID: 32
+  - name: Focus
+    Descriptions: Increases Telekinesis range by 1.
+    Cost: 10
+    ID: 33
+  - name: Rebound
+    Descriptions: When healing, also heals other allies 25% of the amount.
+    Cost: 15
+    ID: 34
+  - name: Loyal
+    Descriptions: Doubles Commander bonus.
+    Cost: 5
     ID: 35
-  - name: 
-    Descriptions: 
-    Cost: 0
-    ID: 0
+  - name: Bravery
+    Descriptions: If enemy's level is higher, increases all stats by 7 times the
+      difference.
+    Cost: 5
+    ID: 36
   - name: 
     Descriptions: 
     Cost: 0
@@ -20441,6 +20670,10 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.level
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.isboss
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.stats.HP
@@ -21016,9 +21249,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1356704400}
   - {fileID: 1165901061}
   - {fileID: 1152793361}
-  - {fileID: 1356704400}
   - {fileID: 249043250}
   - {fileID: 2136321718}
   - {fileID: 1236801788}
@@ -25443,8 +25676,11 @@ MonoBehaviour:
   currentTurn: 0
   currentlyplaying: 
   playableunit: []
+  playableunitGO: []
   enemyunit: []
+  enemyunitGO: []
   otherunits: []
+  otherunitsGO: []
   turntext: {fileID: 2052129964}
   GameOverScript: {fileID: 197961382}
 --- !u!114 &2083772866
@@ -25483,7 +25719,7 @@ MonoBehaviour:
   delaybeforeMove: 1
   delaybeforeAttack: 1
   delaybeforeFirstAttack: 1
-  delaybetweenAttack: 2
+  delaybetweenAttack: 1
   delayafterAttack: 1
   waittingforexp: 0
   expdistributed: 0

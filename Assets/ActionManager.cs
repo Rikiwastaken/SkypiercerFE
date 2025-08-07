@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnitScript;
@@ -140,6 +141,19 @@ public class ActionManager : MonoBehaviour
                     previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = GridScript.selection.GridCoordinates;
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+                    if (currentcharacter.GetComponent<UnitScript>().GetSkill(31))
+                    {
+                        int movements = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.movements;
+                        if (currentcharacter.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using canto/Retreat
+                        {
+                            movements -= 2;
+                        }
+                        if (currentcharacter.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
+                        {
+                            movements += 1;
+                        }
+                        currentcharacter.GetComponent<UnitScript>().tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
+                    }
                     GridScript.UnlockSelection();
                     if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
                     {
@@ -204,6 +218,10 @@ public class ActionManager : MonoBehaviour
         if(currentcharacter.GetComponent<UnitScript>().GetSkill(20))
         {
             currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
+            if (currentcharacter.GetComponent<UnitScript>().GetSkill(7)) // full of beans
+            {
+                currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
+            }
             Character currentcharacterchar = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics;
             currentcharacterchar.currentHP += (int)(currentcharacterchar.stats.HP * 0.1f);
             if (currentcharacterchar.currentHP > currentcharacterchar.stats.HP)

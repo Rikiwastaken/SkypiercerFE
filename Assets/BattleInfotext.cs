@@ -15,7 +15,8 @@ public class BattleInfotext : MonoBehaviour
 
     private battlecameraScript battlecamera;
     private TurnManger turnManger;
-    private EnemyTurnScript enemyTurnScript;
+    private AttackTurnScript attackTurnScript;
+    public TextMeshProUGUI Skilltext;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,9 +42,9 @@ public class BattleInfotext : MonoBehaviour
             turnManger = FindAnyObjectByType<TurnManger>();
         }
 
-        if(enemyTurnScript == null)
+        if(attackTurnScript == null)
         {
-            enemyTurnScript = FindAnyObjectByType<EnemyTurnScript>();
+            attackTurnScript = FindAnyObjectByType<AttackTurnScript>();
         }
 
         if (GridScript.GetSelectedUnitGameObject()!=null)
@@ -57,6 +58,7 @@ public class BattleInfotext : MonoBehaviour
             Color color = transform.parent.GetComponent<Image>().color;
             color.a = 0f;
             transform.parent.GetComponent<Image>().color = color;
+            Skilltext.transform.parent.gameObject.SetActive(false);
         }
         else
         {
@@ -65,18 +67,19 @@ public class BattleInfotext : MonoBehaviour
             {
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             }
-            else if (turnManger.currentlyplaying == "enemy" && enemyTurnScript.CurrentEnemy!=null)
+            else if (turnManger.currentlyplaying == "enemy" && attackTurnScript.CurrentEnemy!=null)
             {
-                selectedunit = enemyTurnScript.CurrentEnemy;
+                selectedunit = attackTurnScript.CurrentEnemy;
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             }
-            else if(enemyTurnScript.CurrentOther!=null)
+            else if(attackTurnScript.CurrentOther!=null)
             {
-                selectedunit = enemyTurnScript.CurrentOther;
+                selectedunit = attackTurnScript.CurrentOther;
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             }
             if(selectedunit!=null && selectedunitCharacter!=null)
             {
+                ManagedSkillVisuals(selectedunitCharacter);
                 stringtoshow = selectedunitCharacter.name + "       Level : " + selectedunitCharacter.level + "    Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP + "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type + ")";
                 if (selectedunitCharacter.telekinesisactivated)
                 {
@@ -87,7 +90,7 @@ public class BattleInfotext : MonoBehaviour
                     stringtoshow += "\nTelekinesis : off";
                 }
                 Color color = transform.parent.GetComponent<Image>().color;
-                color.a = 1f;
+                color.a = 0.8f;
                 transform.parent.GetComponent<Image>().color = color;
             }
             else
@@ -99,5 +102,37 @@ public class BattleInfotext : MonoBehaviour
         TMP.text = stringtoshow;
 
 
+    }
+
+
+    private void ManagedSkillVisuals(Character unit)
+    {
+        DataScript dataScript = FindAnyObjectByType<DataScript>();
+        bool showtext = false;
+        string text = "Skills :\n";
+        if(unit.UnitSkill!=0)
+        {
+            text += "- " + dataScript.SkillList[unit.UnitSkill].name+"\n";
+            showtext = true;
+        }
+        foreach(int skillID in unit.EquipedSkills)
+        {
+            if(skillID !=0)
+            {
+                text += "- "+dataScript.SkillList[skillID].name + "\n";
+                showtext = true;
+            }
+        }
+
+        if(showtext)
+        {
+            Skilltext.text = text;
+        }
+        else
+        {
+            Skilltext.text = "";
+        }
+
+        Skilltext.transform.parent.gameObject.SetActive(showtext);
     }
 }

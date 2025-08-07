@@ -64,7 +64,26 @@ public class TurnManger : MonoBehaviour
     {
         foreach(GameObject unit in charactertoappy)
         {
+
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+            // Restoring unequiped blade durability
+
+            foreach(equipment weapon in unitchar.equipments)
+            {
+                if(weapon != unit.GetComponent<UnitScript>().GetFirstWeapon() && weapon.Maxuses!=0)
+                {
+                    weapon.Currentuses++;
+                    if(unit.GetComponent<UnitScript>().GetSkill(7)) // full of beans
+                    {
+                        weapon.Currentuses++;
+                    }
+                    if(weapon.Currentuses > weapon.Maxuses)
+                    {
+                        weapon.Currentuses = weapon.Maxuses;
+                    }
+                }
+            }
 
             //First aid
             if (unit.GetComponent<UnitScript>().GetSkill(9))
@@ -91,6 +110,8 @@ public class TurnManger : MonoBehaviour
                     }
                 }
             }
+            //Reset Verso movements
+            unit.GetComponent<UnitScript>().tilesmoved = 0;
         }
     }
     private void ManageTurnRotation()

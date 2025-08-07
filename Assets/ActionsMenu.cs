@@ -827,6 +827,7 @@ public class ActionsMenu : MonoBehaviour
                         }
                     }
                 }
+                OnDamageEffect(unit, unitdamage, false);
                 finaldamage = unitdamage;
                 if(chartarget.currentHP <= 0)
                 {
@@ -980,6 +981,7 @@ public class ActionsMenu : MonoBehaviour
                             }
                         }
                     }
+                    OnDamageEffect(target, targetdamage, false);
                     finaldamage = targetdamage;
                 }
                 if (charunit.currentHP > 0 && charunit.affiliation == "playable")
@@ -1017,11 +1019,13 @@ public class ActionsMenu : MonoBehaviour
 
             if (!unitalreadyattacked)
             {
-                chartarget.currentHP += unitdamage;
-                if (chartarget.currentHP > chartarget.stats.HP)
+                if(unitdamage + chartarget.currentHP > chartarget.stats.HP)
                 {
-                    chartarget.currentHP = chartarget.stats.HP;
+                    unitdamage = chartarget.stats.HP - chartarget.currentHP;
                 }
+                chartarget.currentHP += unitdamage;
+                
+                OnDamageEffect(unit, unitdamage, true);
                 finaldamage = unitdamage;
             }
             else
@@ -1036,6 +1040,76 @@ public class ActionsMenu : MonoBehaviour
                 (exp, levelup) = AwardExp(unit, target, true);
             }
             return (numberofhits, numberofcritials, finaldamage, exp, levelup);
+        }
+
+    }
+
+    private void OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing)
+    {
+        //Durability
+        if(Attacker.GetComponent<UnitScript>().GetSkill(8)) //inexhaustible
+        {
+            return;
+        }
+        equipment weapon = Attacker.GetComponent<UnitScript>().GetFirstWeapon();
+        if(weapon.Maxuses > 0)
+        {
+            weapon.Currentuses--;
+        }
+
+        if(healing)
+        {
+            if (Attacker.GetComponent<UnitScript>().GetSkill(30)) // Compassion
+            {
+                Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP += DamageDealt;
+                if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP > Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP)
+                {
+                    Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP = Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP;
+                }
+            }
+            if (Attacker.GetComponent<UnitScript>().GetSkill(34)) // Rebound
+            {
+                List<Character> list = new List<Character>();
+                if(Attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable")
+                {
+                    list = FindAnyObjectByType<TurnManger>().playableunit;
+                }
+                else if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "enemy")
+                {
+                    list = FindAnyObjectByType<TurnManger>().enemyunit;
+                }
+                else
+                {
+                    list = FindAnyObjectByType<TurnManger>().otherunits;
+                }
+
+                foreach (Character unitchar in list)
+                {
+                    unitchar.currentHP += (int)(DamageDealt * 0.25f);
+                    if (unitchar.currentHP > unitchar.stats.HP)
+                    {
+                        unitchar.currentHP = unitchar.stats.HP;
+                    }
+                }
+
+                Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP += DamageDealt;
+                if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP > Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP)
+                {
+                    Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP = Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP;
+                }
+            }
+        }
+        else
+        {
+            if (Attacker.GetComponent<UnitScript>().GetSkill(14)) // Invigorating
+            {
+                Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP += (DamageDealt/10);
+                if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP > Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP)
+                {
+                    Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP = Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP;
+                }
+            }
+            
         }
 
     }

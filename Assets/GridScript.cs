@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnitScript;
+using static UnityEngine.GraphicsBuffer;
 public class GridScript : MonoBehaviour
 {
 
@@ -269,15 +270,19 @@ public class GridScript : MonoBehaviour
             {
                 string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
                 int movements = unit.movements;
-                if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water" || unitGO.GetComponent<UnitScript>().GetSkill(1)) //checking if unit is using canto/Retreat or another movement reducing effect
+                if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
                 {
                     movements -= 1;
                 }
-                else if(unitGO.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
+                if (unitGO.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using canto/Retreat
+                {
+                    movements -= 2;
+                }
+                if (unitGO.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
                 {
                     movements += 1;
                 }
-                SpreadMovements(unit.position, movements, movementtiles, unit);
+                SpreadMovements(unit.position, movements, movementtiles, unitGO);
                 (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                 ShowAttack(range, melee, type.ToLower() == "staff");
             }
@@ -297,6 +302,7 @@ public class GridScript : MonoBehaviour
         }
 
     }
+
 
     public void ShowMovementOfUnit(GameObject Target)
     {
@@ -321,12 +327,67 @@ public class GridScript : MonoBehaviour
             Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
             if (unit.position == Target.GetComponent<UnitScript>().UnitCharacteristics.position && !unit.alreadyplayed)
             {
-                SpreadMovements(unit.position, unit.movements, movementtiles, unit);
+                string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
+                int movements = unit.movements;
+                if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
+                {
+                    movements -= 1;
+                }
+                if (unitGO.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using canto/Retreat
+                {
+                    movements -= 2;
+                }
+                if (unitGO.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
+                {
+                    movements += 1;
+                }
+                SpreadMovements(unit.position, movements, movementtiles, unitGO);
                 (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                 ShowAttack(range, melee, type.ToLower() == "staff");
             }
 
         }
+        if (!lockselection)
+        {
+            foreach (GridSquareScript gridSquareScript in movementtiles)
+            {
+                gridSquareScript.fillwithblue();
+            }
+        }
+
+        foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
+        {
+            gridSquareScript.fillwithblue();
+        }
+
+    }
+
+    public void ShowLimitedMovementOfUnit(GameObject unit, int remainingmovements)
+    {
+        for (int x = 0; x < Grid.Count; x++)
+        {
+            for (int y = 0; y < Grid[x].Count; y++)
+            {
+                if (Grid[x][y].GetComponent<GridSquareScript>().isobstacle && !lockedattacktiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedmovementtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedhealingtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()))
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithGrey();
+                }
+                else if (!lockedattacktiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedmovementtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()) && !lockedhealingtiles.Contains(Grid[x][y].GetComponent<GridSquareScript>()))
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
+                }
+
+            }
+        }
+        movementtiles = new List<GridSquareScript>();
+        Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        string tiletype = GetTile((int)unitchar.position.x, (int)unitchar.position.y).type;
+        int movements = remainingmovements;
+        if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
+        {
+            movements -= 1;
+        }
+        SpreadMovements(unitchar.position, movements, movementtiles, unit);
         if (!lockselection)
         {
             foreach (GridSquareScript gridSquareScript in movementtiles)
@@ -403,32 +464,6 @@ public class GridScript : MonoBehaviour
 
         }
         return SelectedUnit;
-    }
-
-    public void ShowDangerousTiles()
-    {
-        dangerousTiles = new List<GridSquareScript>();
-        foreach (GameObject unit in allunitGOs)
-        {
-            Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-            if (unitchar.affiliation == "enemy")
-            {
-                SpreadMovements(unitchar.position, unitchar.movements, movementtiles, unitchar);
-                (int range, bool melee, string type) = unit.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                ShowAttack(range, melee, type.ToLower() == "staff");
-                foreach (GridSquareScript tile in attacktiles)
-                {
-                    if (!dangerousTiles.Contains(tile))
-                    {
-                        dangerousTiles.Add(tile);
-                    }
-                }
-            }
-        }
-        foreach (GridSquareScript tile in dangerousTiles)
-        {
-            tile.fillwithPurple();
-        }
     }
 
     public void ShowAttack(int range, bool frapperenmelee, bool usingstaff, bool uselockedmovementtile = false)
@@ -891,7 +926,67 @@ public class GridScript : MonoBehaviour
 
 
     }
-    private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, Character selectedunit)
+
+    public int findshortestpath(GridSquareScript starttile, GridSquareScript targettile, int maxDeplacements)
+    {
+        int rows = Grid.Count;
+        int cols = Grid[0].Count;
+        bool[,] visited = new bool[rows, cols];
+        Queue<(int x, int y, int distance)> queue = new Queue<(int, int, int)>();
+        int[][] directions = new int[][]
+        {
+            new int[] {-1, 0}, // haut
+            new int[] {1, 0},  // bas
+            new int[] {0, -1}, // gauche
+            new int[] {0, 1}   // droite
+        };
+
+        queue.Enqueue(((int)starttile.GridCoordinates.x, (int)starttile.GridCoordinates.y, 0));
+        visited[(int)starttile.GridCoordinates.x, (int)starttile.GridCoordinates.y] = true;
+
+        while (queue.Count > 0)
+        {
+            var (x, y, distance) = queue.Dequeue();
+
+            if (distance > maxDeplacements)
+            {
+                continue; // Ignore les chemins qui d�passent la limite
+            }
+
+
+            if ((x, y) == ((int)targettile.GridCoordinates.x, (int)targettile.GridCoordinates.y))
+            {
+                return distance;
+            }
+
+            foreach (var dir in directions)
+            {
+                int nx = x + dir[0];
+                int ny = y + dir[1];
+
+                if (nx >= 0 && nx < rows && ny >= 0 && ny < cols)
+                {
+                    if (!visited[nx, ny] && !Grid[nx][ny].GetComponent<GridSquareScript>().isobstacle)
+                    {
+                        visited[nx, ny] = true;
+                        if (Grid[nx][ny].GetComponent<GridSquareScript>().type == "Fire" || Grid[nx][ny].GetComponent<GridSquareScript>().type == "Water")
+                        {
+                            queue.Enqueue((nx, ny, distance + 2));
+                        }
+                        else
+                        {
+                            queue.Enqueue((nx, ny, distance + 1));
+                        }
+
+                    }
+                }
+            }
+
+        }
+        return -1;
+    }
+
+    private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit)
     {
         string tiletype = GetTile((int)Coordinates.x, (int)Coordinates.y).type;
         if (tiletype == "Fire" || tiletype == "Water")
@@ -906,28 +1001,28 @@ public class GridScript : MonoBehaviour
         {
             if (Coordinates.x > 0)
             {
-                if (CheckIfFree(new Vector2(Coordinates.x - 1, Coordinates.y), selectedunit))
+                if (CheckIfFree(new Vector2(Coordinates.x - 1, Coordinates.y), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
                 {
                     SpreadMovements(new Vector2(Coordinates.x - 1, Coordinates.y), remainingMovements - 1, tilestolight, selectedunit);
                 }
             }
             if (Coordinates.x < Grid.Count - 1)
             {
-                if (CheckIfFree(new Vector2(Coordinates.x + 1, Coordinates.y), selectedunit))
+                if (CheckIfFree(new Vector2(Coordinates.x + 1, Coordinates.y), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
                 {
                     SpreadMovements(new Vector2(Coordinates.x + 1, Coordinates.y), remainingMovements - 1, tilestolight, selectedunit);
                 }
             }
             if (Coordinates.y > 0)
             {
-                if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y - 1), selectedunit))
+                if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y - 1), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
                 {
                     SpreadMovements(new Vector2(Coordinates.x, Coordinates.y - 1), remainingMovements - 1, tilestolight, selectedunit);
                 }
             }
             if (Coordinates.y < Grid[0].Count - 1)
             {
-                if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y + 1), selectedunit))
+                if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y + 1), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
                 {
                     SpreadMovements(new Vector2(Coordinates.x, Coordinates.y + 1), remainingMovements - 1, tilestolight, selectedunit);
                 }

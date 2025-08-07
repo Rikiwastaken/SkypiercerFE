@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 using static UnitScript;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
-public class EnemyTurnScript : MonoBehaviour
+public class AttackTurnScript : MonoBehaviour
 {
 
     private TurnManger TurnManager;
@@ -386,6 +386,14 @@ public class EnemyTurnScript : MonoBehaviour
                                 unitalreadyattacked = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
                                 waittingforexp = true;
+                                if (target != null)
+                                {
+                                    EndOfCombatTrigger(Attacker, target);
+                                }
+                                else
+                                {
+                                    EndOfCombatTrigger(Attacker);
+                                }
                             }
                         }
                     }
@@ -414,9 +422,18 @@ public class EnemyTurnScript : MonoBehaviour
             }
             else
             {
+                if (target != null)
+                {
+                    EndOfCombatTrigger(Attacker, target);
+                }
+                else
+                {
+                    EndOfCombatTrigger(Attacker);
+                }
                 if (CharAttacker.affiliation == "playable")
                 {
-                    ActionsMenu.FinalizeAttack();
+                    
+                    ActionsMenu.FinalizeAttack(); 
                 }
                 else
                 {
@@ -431,6 +448,50 @@ public class EnemyTurnScript : MonoBehaviour
         }
     }
 
+    private void EndOfCombatTrigger(GameObject unit1, GameObject unit2 = null)
+    {
+        Character charunit1 = unit1.GetComponent<UnitScript>().UnitCharacteristics;
+        if (unit1.GetComponent<UnitScript>().GetSkill(32)) // Survivor
+        {
+            unit1.GetComponent<UnitScript>().SurvivorStacks++;
+        }
+
+        if (unit2 != null)
+        {
+            Character charunit2 = unit2.GetComponent<UnitScript>().UnitCharacteristics;
+            if (unit2.GetComponent<UnitScript>().GetSkill(32)) // Survivor
+            {
+                unit2.GetComponent<UnitScript>().SurvivorStacks++;
+            }
+
+            if (unit1.GetComponent<UnitScript>().GetSkill(15)) // Sore Loser
+            {
+                if (charunit1.currentHP == 0)
+                {
+                    charunit2.currentHP = 1;
+                }
+                else if (charunit1.currentHP <  charunit2.currentHP)
+                {
+                    charunit2.currentHP = charunit1.currentHP;
+                }
+            }
+
+            if (unit2.GetComponent<UnitScript>().GetSkill(15)) // Sore Loser
+            {
+                if(charunit2.currentHP == 0)
+                {
+                    charunit1.currentHP = 1;
+                }
+                else if (charunit2.currentHP < charunit1.currentHP)
+                {
+                    charunit1.currentHP = charunit2.currentHP;
+                }
+            }
+
+        }
+        
+
+    }
     public GameObject CalculateBestTargetForOffensiveUnits(GameObject unit, bool attacksfriend = true)
     {
         int maxreward = 0;
