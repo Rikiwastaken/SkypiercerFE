@@ -43,8 +43,8 @@ public class TurnManger : MonoBehaviour
         }
         if (enemyunit.Count == 0)
         {
-            GameOverScript.gameObject.SetActive(true);
             GameOverScript.victory = true;
+            GameOverScript.gameObject.SetActive(true);
             return;
         }
         if (currentTurn == 0)
@@ -66,6 +66,22 @@ public class TurnManger : MonoBehaviour
         {
 
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+            //Kira Battalion Side Effect
+            if(unitchar.battalion=="Kira")
+            {
+                unitchar.currentHP += (int)(unitchar.stats.HP * 0.1f);
+                //Loyal
+                if (unit.GetComponent<UnitScript>().GetSkill(35))
+                {
+                    unitchar.currentHP += (int)(unitchar.stats.HP * 0.1f);
+                }
+                if (unitchar.currentHP > unitchar.stats.HP)
+                {
+                    unitchar.currentHP = unitchar.stats.HP;
+                }
+            }
+
 
             // Restoring unequiped blade durability
 

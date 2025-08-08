@@ -829,7 +829,7 @@ public class ActionsMenu : MonoBehaviour
                 }
                 OnDamageEffect(unit, unitdamage, false);
                 finaldamage = unitdamage;
-                if(chartarget.currentHP <= 0)
+                if(chartarget.currentHP <= 0 || !CheckifInRange(unit,target))
                 {
                     if (charunit.currentHP > 0 && charunit.affiliation == "playable")
                     {
@@ -1203,6 +1203,7 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         GridSquareScript targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
+
 
         AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
         AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);

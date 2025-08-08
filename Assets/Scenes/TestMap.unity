@@ -701,6 +701,10 @@ PrefabInstance:
       value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 190
       objectReference: {fileID: 0}
@@ -1373,10 +1377,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Expbar: {fileID: 1167364076}
-  Speedpersecond: 10
+  Speedpersecond: 20
   setupdone: 0
   filledupbardelaycounter: 0
-  filledupbardelay: 2
+  filledupbardelay: 1
   LevelUpText: {fileID: 197169200}
 --- !u!114 &70269724
 MonoBehaviour:
@@ -1497,7 +1501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.UnitSkill
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
@@ -1562,6 +1566,18 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.growth.ResistanceGrowth
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.EquipedSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[0]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[1]'
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: 'UnitCharacteristics.equipmentsIDs.Array.data[0]'
@@ -3064,6 +3080,10 @@ PrefabInstance:
       value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 190
       objectReference: {fileID: 0}
@@ -3215,6 +3235,10 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.stats.HP
       value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
@@ -6489,6 +6513,10 @@ PrefabInstance:
       value: 290
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 290
       objectReference: {fileID: 0}
@@ -6890,6 +6918,7 @@ MonoBehaviour:
   slotID: 0
   character:
     protagonist: 0
+    battalion: 
     name: 
     stats:
       HP: 0
@@ -8374,6 +8403,10 @@ PrefabInstance:
       value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 190
       objectReference: {fileID: 0}
@@ -8813,6 +8846,10 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.stats.HP
       value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
@@ -10960,6 +10997,10 @@ PrefabInstance:
       value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 190
       objectReference: {fileID: 0}
@@ -11273,6 +11314,10 @@ PrefabInstance:
       value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 190
       objectReference: {fileID: 0}
@@ -11347,6 +11392,18 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.growth.ResistanceGrowth
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.EquipedSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[0]'
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[1]'
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: 'UnitCharacteristics.equipmentsIDs.Array.data[0]'
@@ -12403,7 +12460,6 @@ GameObject:
   - component: {fileID: 1075626556}
   - component: {fileID: 1075626559}
   - component: {fileID: 1075626558}
-  - component: {fileID: 1075626557}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12430,19 +12486,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1075626557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075626555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 258bdf60c0c4d2d49a0e5809735ca0d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Skilltext: {fileID: 0}
 --- !u!114 &1075626558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14450,6 +14493,10 @@ PrefabInstance:
       value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 190
       objectReference: {fileID: 0}
@@ -15263,6 +15310,10 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.stats.HP
       value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
@@ -16124,6 +16175,10 @@ PrefabInstance:
       value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 170
       objectReference: {fileID: 0}
@@ -16198,6 +16253,14 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.growth.ResistanceGrowth
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.EquipedSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[0]'
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: 'UnitCharacteristics.equipmentsIDs.Array.data[0]'
@@ -18047,6 +18110,10 @@ PrefabInstance:
       value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 190
       objectReference: {fileID: 0}
@@ -18532,6 +18599,10 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.stats.HP
       value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
@@ -20427,9 +20498,9 @@ MonoBehaviour:
       difference.
     Cost: 5
     ID: 36
-  - name: 
-    Descriptions: 
-    Cost: 0
+  - name: Noble Fight
+    Descriptions: Lowers the unit and the enemy's dodge by 30%
+    Cost: 5
     ID: 37
   - name: 
     Descriptions: 
@@ -20680,6 +20751,10 @@ PrefabInstance:
       value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 190
       objectReference: {fileID: 0}
@@ -20754,6 +20829,26 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.growth.ResistanceGrowth
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.EquipedSkills.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[0]'
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[1]'
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[2]'
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[3]'
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: 'UnitCharacteristics.equipmentsIDs.Array.data[0]'
@@ -22439,6 +22534,10 @@ PrefabInstance:
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 150
       objectReference: {fileID: 0}
@@ -22513,6 +22612,14 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.growth.ResistanceGrowth
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.EquipedSkills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[0]'
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.equipments.Array.data[0].Name
@@ -22976,6 +23083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target:
     protagonist: 0
+    battalion: 
     name: 
     stats:
       HP: 0
@@ -23373,6 +23481,10 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.stats.HP
       value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
@@ -24855,6 +24967,10 @@ PrefabInstance:
       value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
       value: 190
       objectReference: {fileID: 0}
@@ -25147,6 +25263,10 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.stats.HP
       value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP
@@ -26664,6 +26784,10 @@ PrefabInstance:
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.stats.HP
       value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
+      propertyPath: UnitCharacteristics.UnitSkill
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
       propertyPath: UnitCharacteristics.currentHP

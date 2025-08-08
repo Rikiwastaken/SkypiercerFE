@@ -16,6 +16,7 @@ public class UnitScript : MonoBehaviour
     public class Character
     {
         public bool protagonist;
+        public string battalion;
         public string name;
         public BaseStats stats;
         public int level;
@@ -781,7 +782,7 @@ public class UnitScript : MonoBehaviour
         equipment firstweapon = GetFirstWeapon();
         int range = firstweapon.Range;
         bool melee = true;
-        if (firstweapon.type == "bow")
+        if (firstweapon.type.ToLower() == "bow")
         {
             melee = false;
             if (UnitCharacteristics.telekinesisactivated)
@@ -808,6 +809,90 @@ public class UnitScript : MonoBehaviour
         return (range, melee);
     }
 
+
+    public AllStatsSkillBonus GetBattalionCombatBonus()
+    {
+        AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
+
+        //Gale Side effect
+        List<GameObject> allunitsGO = FindAnyObjectByType<TurnManger>().playableunitGO;
+        List<Character> allunits = FindAnyObjectByType<TurnManger>().playableunit;
+        foreach (GameObject characterGO in allunitsGO)
+        {
+            Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
+            if (ManhattanDistance(UnitCharacteristics, character) == 1 && character.battalion == "Gale" && character.affiliation == UnitCharacteristics.affiliation)
+            {
+                statbonuses.FixedDamageReduction += character.stats.Defense / 5;
+                statbonuses.FixedDamageBonus += character.stats.Strength / 5;
+                //Loyal
+                if(characterGO.GetComponent<UnitScript>().GetSkill(35))
+                {
+                    statbonuses.FixedDamageReduction += character.stats.Defense / 5;
+                    statbonuses.FixedDamageBonus += character.stats.Strength / 5;
+                }
+            }
+        }
+
+
+        if (UnitCharacteristics.protagonist)
+        {
+            //Zack main effect
+            if (UnitCharacteristics.battalion == "Zack")
+            {
+                foreach (Character character in allunits)
+                {
+                    if (character.battalion == "Zack" && character != UnitCharacteristics)
+                    {
+                        statbonuses.Hit += 1;
+                        statbonuses.Crit += 1;
+                    }
+                }
+            }
+            //Gale main effect
+            if (UnitCharacteristics.battalion == "Gale")
+            {
+                foreach (Character character in allunits)
+                {
+                    if (character.battalion == "Gale" && character != UnitCharacteristics)
+                    {
+                        statbonuses.Defense += character.stats.Defense / 20;
+                        statbonuses.Strength += character.stats.Strength / 20;
+                    }
+                }
+            }
+            //Kira main effect
+            if (UnitCharacteristics.battalion == "Kira")
+            {
+                foreach (Character character in allunits)
+                {
+                    if (character.battalion == "Kira" && character != UnitCharacteristics)
+                    {
+                        statbonuses.Psyche += character.stats.Psyche / 20;
+
+                    }
+                }
+            }
+        }
+        else
+        {
+            //Zack Side Effect
+            if (UnitCharacteristics.battalion == "Zack")
+            {
+                statbonuses.Hit += 5;
+                statbonuses.Crit += 5;
+                //Loyal
+                if (GetSkill(35))
+                {
+                    statbonuses.Hit += 5;
+                    statbonuses.Crit += 5;
+                }
+            }
+        }
+
+
+
+        return statbonuses;
+    }
     public AllStatsSkillBonus GetStatSkillBonus(GameObject enemy)
     {
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
@@ -832,6 +917,34 @@ public class UnitScript : MonoBehaviour
         {
             statbonuses.TelekDamage += 20;
             statbonuses.PhysDamage -= 15;
+        }
+        //Inspired
+        if(GetSkill(6))
+        {
+            List<Character> activelist = null;
+            if (UnitCharacteristics.affiliation == "playable")
+            {
+                activelist = FindAnyObjectByType<TurnManger>().playableunit;
+            }
+            else if (UnitCharacteristics.affiliation == "enemy")
+            {
+                activelist = FindAnyObjectByType<TurnManger>().enemyunit;
+            }
+            else
+            {
+                activelist = FindAnyObjectByType<TurnManger>().otherunits;
+            }
+            
+            foreach (Character otherunitchar in activelist)
+            {
+                int movement = otherunitchar.movements;
+                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= movement && otherunitchar.battalion==UnitCharacteristics.battalion && otherunitchar.protagonist)
+                {
+                    statbonuses.FixedDamageBonus+=30;
+                    statbonuses.FixedDamageReduction += 30;
+                    break;
+                }
+            }
         }
         //FastAndDeadly
         if (GetSkill(13))
@@ -979,7 +1092,6 @@ public class UnitScript : MonoBehaviour
             statbonuses.Speed += 3 * SurvivorStacks;
             statbonuses.Dexterity += 3 * SurvivorStacks;
         }
-
         //Bravery
         if (GetSkill(36))
         {
@@ -997,8 +1109,30 @@ public class UnitScript : MonoBehaviour
 
 
         }
+        //Noble Fight
+        if (GetSkill(37))
+        {
+            statbonuses.Hit += 30;
+            statbonuses.Dodge -= 30;
+        }
 
 
+        AllStatsSkillBonus battalionskillbonus = GetBattalionCombatBonus();
+
+        statbonuses.FixedDamageBonus += battalionskillbonus.FixedDamageBonus;
+        statbonuses.FixedDamageReduction += battalionskillbonus.FixedDamageReduction;
+        statbonuses.PhysDamage += battalionskillbonus.PhysDamage;
+        statbonuses.TelekDamage += battalionskillbonus.TelekDamage;
+        statbonuses.Hit += battalionskillbonus.Hit;
+        statbonuses.Crit += battalionskillbonus.Crit;
+        statbonuses.Dodge += battalionskillbonus.Dodge;
+        statbonuses.DamageReduction += battalionskillbonus.DamageReduction;
+        statbonuses.Strength += battalionskillbonus.Strength;
+        statbonuses.Psyche += battalionskillbonus.Psyche;
+        statbonuses.Resistance += battalionskillbonus.Resistance;
+        statbonuses.Defense += battalionskillbonus.Defense;
+        statbonuses.Speed += battalionskillbonus.Speed;
+        statbonuses.Dexterity += battalionskillbonus.Dexterity;
 
         return statbonuses;
     }
@@ -1014,7 +1148,7 @@ public class UnitScript : MonoBehaviour
         int range = firstweapon.Range;
         bool melee = true;
         string type = firstweapon.type;
-        if (firstweapon.type == "bow")
+        if (firstweapon.type.ToLower() == "bow")
         {
             melee = false;
             if (UnitCharacteristics.telekinesisactivated)

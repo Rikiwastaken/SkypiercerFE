@@ -349,7 +349,7 @@ public class AttackTurnScript : MonoBehaviour
 
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
                             FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
-                            if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
+                            if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 || !ActionsMenu.CheckifInRange(Attacker, target))
                             {
                                 waittingforexp = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);

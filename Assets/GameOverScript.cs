@@ -19,6 +19,10 @@ public class GameOverScript : MonoBehaviour
         {
             GetComponentInChildren<TextMeshProUGUI>().text = "Winner is you !\nRestarting soon...";
         }
+        else
+        {
+            GetComponentInChildren<TextMeshProUGUI>().text = "Game Over...\nRestarting soon...";
+        }
     }
 
 

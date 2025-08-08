@@ -126,7 +126,10 @@ public class BattleInfotext : MonoBehaviour
 
         if(showtext)
         {
-            Skilltext.text = text;
+            if(Skilltext!=null)
+            {
+                Skilltext.text = text;
+            }
         }
         else
         {
