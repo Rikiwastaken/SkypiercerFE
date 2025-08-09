@@ -20502,10 +20502,10 @@ MonoBehaviour:
     Descriptions: Lowers the unit and the enemy's dodge by 30%
     Cost: 5
     ID: 37
-  - name: 
-    Descriptions: 
-    Cost: 0
-    ID: 0
+  - name: Spite
+    Descriptions: Always counterattacks.
+    Cost: 10
+    ID: 38
   - name: 
     Descriptions: 
     Cost: 0

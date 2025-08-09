@@ -349,7 +349,7 @@ public class AttackTurnScript : MonoBehaviour
 
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
                             FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
-                            if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 || !ActionsMenu.CheckifInRange(Attacker, target))
+                            if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && target && CharAttacker.currentHP>0)
                             {
                                 waittingforexp = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
@@ -358,17 +358,28 @@ public class AttackTurnScript : MonoBehaviour
                             {
                                 waittingforexp = true;
                             }
-                            else if (ActionsMenu.CheckifInRange(Attacker, target))
+                            else if (CharAttacker.affiliation == "playable" && CharAttacker.currentHP<=0)
+                            {
+                                counterafterattack = (int)(delayafterAttack * 2f / Time.fixedDeltaTime);
+                                waittingforexp = true;
+                                expdistributed = true;
+                            }
+                            else if (ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38))
                             {
                                 unitalreadyattacked = true;
                                 counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
                                 target.GetComponentInChildren<Animator>().SetTrigger("Attack");
                             }
-                            else
+                            else if(CharAttacker.affiliation !="playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation!="playable")
                             {
                                 counterafterattack = (int)(delayafterAttack * 2f / Time.fixedDeltaTime);
                                 waittingforexp = true;
                                 expdistributed = true;
+                            }
+                            else
+                            {
+                                waittingforexp = true;
+                                counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
                             }
                         }
                         else
@@ -385,7 +396,18 @@ public class AttackTurnScript : MonoBehaviour
                                 FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, Attacker.GetComponent<UnitScript>().UnitCharacteristics);
                                 unitalreadyattacked = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
-                                waittingforexp = true;
+                                if((CharAttacker.affiliation != "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable") || (CharAttacker.affiliation == "playable" && CharAttacker.currentHP <= 0))
+                                {
+                                    waittingforexp = true;
+                                    expdistributed = true;
+                                    counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+                                }
+                                else
+                                {
+                                    waittingforexp = true;
+                                    counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+                                }
+
                                 if (target != null)
                                 {
                                     EndOfCombatTrigger(Attacker, target);

@@ -493,7 +493,7 @@ public class ActionsMenu : MonoBehaviour
         TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.stats.HP + "\n";
         TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
-        if (CheckifInRange(unit, target))
+        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38)) //Spite
         {
             if (doubleattacker == target)
             {
@@ -554,7 +554,7 @@ public class ActionsMenu : MonoBehaviour
             TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
         }
 
-        if (CheckifInRange(unit, target))
+        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38)) //Spite
         {
             if (doubleattacker == target)
             {
@@ -662,12 +662,12 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         List<int> levelup = null;
-        int exp = 0;
+        int exp = 1;
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() != "staff")
         {
             (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
 
-            bool inrange = CheckifInRange(unit, target);
+            bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38);//spite
 
             int unithitrate = CalculateHit(unit, target);
             int targethitrate = CalculateHit(target, unit);
@@ -829,7 +829,7 @@ public class ActionsMenu : MonoBehaviour
                 }
                 OnDamageEffect(unit, unitdamage, false);
                 finaldamage = unitdamage;
-                if(chartarget.currentHP <= 0 || !CheckifInRange(unit,target))
+                if(chartarget.currentHP <= 0 || !(CheckifInRange(unit,target) || target.GetComponent<UnitScript>().GetSkill(38))) //Spite
                 {
                     if (charunit.currentHP > 0 && charunit.affiliation == "playable")
                     {
@@ -1008,7 +1008,7 @@ public class ActionsMenu : MonoBehaviour
         //using a staff
         else
         {
-            bool inrange = CheckifInRange(unit, target);
+            bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38); //Spite
 
             int unitdamage = (int)Mathf.Max(CalculateHealing(unit), chartarget.stats.HP - chartarget.currentHP);
 
