@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8232387876493776323
 Transform:
   m_ObjectHideFlags: 0
@@ -73,6 +73,9 @@ MonoBehaviour:
   Selectpressed: 0
   Selectjustpressed: 0
   Select: {fileID: 8949594279866763656, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  Startpressed: 0
+  Startjustpressed: 0
+  Startbtn: {fileID: -2944745837413303413, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &6066130923447186532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +157,7 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6f8e77b2-50f7-458b-aaae-444d74026288
     m_ActionName: UI/TrackedDeviceOrientation
-  m_NeverAutoSwitchControlSchemes: 1
+  m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1

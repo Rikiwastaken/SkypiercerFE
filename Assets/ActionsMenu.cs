@@ -685,6 +685,7 @@ public class ActionsMenu : MonoBehaviour
 
             if (!unitalreadyattacked)
             {
+                int totaldamage = 0;
                 if (doubleattacker == unit)
                 {
                     if (tripleattack)
@@ -700,11 +701,11 @@ public class ActionsMenu : MonoBehaviour
                             if (randomnumber < unitcrit)
                             {
                                 numberofcritials++;
-                                chartarget.currentHP -= unitdamage * 3;
+                                totaldamage += unitdamage * 3;
                             }
                             else
                             {
-                                chartarget.currentHP -= unitdamage;
+                                totaldamage += unitdamage;
                             }
                             if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                             {
@@ -722,11 +723,11 @@ public class ActionsMenu : MonoBehaviour
                             if (randomnumber < unitcrit)
                             {
                                 numberofcritials++;
-                                chartarget.currentHP -= unitdamage * 3;
+                                totaldamage += unitdamage * 3;
                             }
                             else
                             {
-                                chartarget.currentHP -= unitdamage;
+                                totaldamage += unitdamage;
                             }
                             if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                             {
@@ -743,11 +744,11 @@ public class ActionsMenu : MonoBehaviour
                             if (randomnumber < unitcrit)
                             {
                                 numberofcritials++;
-                                chartarget.currentHP -= unitdamage * 3;
+                                totaldamage += unitdamage * 3;
                             }
                             else
                             {
-                                chartarget.currentHP -= unitdamage;
+                                totaldamage += unitdamage;
                             }
                             if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                             {
@@ -767,11 +768,11 @@ public class ActionsMenu : MonoBehaviour
                             if (randomnumber < unitcrit)
                             {
                                 numberofcritials++;
-                                chartarget.currentHP -= unitdamage * 3;
+                                totaldamage += unitdamage * 3;
                             }
                             else
                             {
-                                chartarget.currentHP -= unitdamage;
+                                totaldamage += unitdamage;
                             }
                             if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                             {
@@ -789,11 +790,11 @@ public class ActionsMenu : MonoBehaviour
                             if (randomnumber < unitcrit)
                             {
                                 numberofcritials++;
-                                chartarget.currentHP -= unitdamage * 3;
+                                totaldamage += unitdamage * 3;
                             }
                             else
                             {
-                                chartarget.currentHP -= unitdamage;
+                                totaldamage += unitdamage;
                             }
                             if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                             {
@@ -815,11 +816,11 @@ public class ActionsMenu : MonoBehaviour
                         if (randomnumber < unitcrit)
                         {
                             numberofcritials++;
-                            chartarget.currentHP -= unitdamage * 3;
+                            totaldamage += unitdamage * 3;
                         }
                         else
                         {
-                            chartarget.currentHP -= unitdamage;
+                            totaldamage += unitdamage;
                         }
                         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                         {
@@ -827,6 +828,9 @@ public class ActionsMenu : MonoBehaviour
                         }
                     }
                 }
+
+                AffectDamage(unit, target, totaldamage);
+
                 OnDamageEffect(unit, unitdamage, false);
                 finaldamage = unitdamage;
                 if(chartarget.currentHP <= 0 || !(CheckifInRange(unit,target) || target.GetComponent<UnitScript>().GetSkill(38))) //Spite
@@ -840,6 +844,9 @@ public class ActionsMenu : MonoBehaviour
             else
             {
                 //enemy attack
+
+                int totaldamage = 0;
+
                 if (chartarget.currentHP > 0)
                 {
                     if (doubleattacker == target)
@@ -856,11 +863,11 @@ public class ActionsMenu : MonoBehaviour
                                 if (randomnumber < targetcrit)
                                 {
                                     numberofcritials++;
-                                    charunit.currentHP -= targetdamage * 3;
+                                    totaldamage += targetdamage * 3;
                                 }
                                 else
                                 {
-                                    charunit.currentHP -= targetdamage;
+                                    totaldamage += targetdamage;
                                 }
                                 if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                                 {
@@ -877,11 +884,11 @@ public class ActionsMenu : MonoBehaviour
                                 if (randomnumber < targetcrit)
                                 {
                                     numberofcritials++;
-                                    charunit.currentHP -= targetdamage * 3;
+                                    totaldamage += targetdamage * 3;
                                 }
                                 else
                                 {
-                                    charunit.currentHP -= targetdamage;
+                                    totaldamage += targetdamage;
                                 }
                                 if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                                 {
@@ -898,11 +905,11 @@ public class ActionsMenu : MonoBehaviour
                                 if (randomnumber < targetcrit)
                                 {
                                     numberofcritials++;
-                                    charunit.currentHP -= targetdamage * 3;
+                                    totaldamage += targetdamage * 3;
                                 }
                                 else
                                 {
-                                    charunit.currentHP -= targetdamage;
+                                    totaldamage += targetdamage;
                                 }
                                 if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                                 {
@@ -922,11 +929,11 @@ public class ActionsMenu : MonoBehaviour
                                 if (randomnumber < targetcrit)
                                 {
                                     numberofcritials++;
-                                    charunit.currentHP -= targetdamage * 3;
+                                    totaldamage += targetdamage * 3;
                                 }
                                 else
                                 {
-                                    charunit.currentHP -= targetdamage;
+                                    totaldamage += targetdamage;
                                 }
                                 if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                                 {
@@ -943,11 +950,11 @@ public class ActionsMenu : MonoBehaviour
                                 if (randomnumber < targetcrit)
                                 {
                                     numberofcritials++;
-                                    charunit.currentHP -= targetdamage * 3;
+                                    totaldamage += targetdamage * 3;
                                 }
                                 else
                                 {
-                                    charunit.currentHP -= targetdamage;
+                                    totaldamage += targetdamage;
                                 }
                                 if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                                 {
@@ -969,11 +976,11 @@ public class ActionsMenu : MonoBehaviour
                             if (randomnumber < targetcrit)
                             {
                                 numberofcritials++;
-                                charunit.currentHP -= targetdamage * 3;
+                                totaldamage += targetdamage * 3;
                             }
                             else
                             {
-                                charunit.currentHP -= targetdamage;
+                                totaldamage += targetdamage;
                             }
                             if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                             {
@@ -981,6 +988,7 @@ public class ActionsMenu : MonoBehaviour
                             }
                         }
                     }
+                    AffectDamage(target, unit, totaldamage);
                     OnDamageEffect(target, targetdamage, false);
                     finaldamage = targetdamage;
                 }
@@ -1044,6 +1052,50 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
+    private void AffectDamage(GameObject Attacker, GameObject target, int damage)
+    {
+
+        Character charTarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+
+        List<GameObject> activelist = null;
+        if (charTarget.affiliation == "playable")
+        {
+            activelist = FindAnyObjectByType<TurnManger>().playableunitGO;
+        }
+        else if (charTarget.affiliation == "enemy")
+        {
+            activelist = FindAnyObjectByType<TurnManger>().enemyunitGO;
+        }
+        else
+        {
+            activelist = FindAnyObjectByType<TurnManger>().otherunitsGO;
+        }
+
+        //All for one
+        Character allforonetransfertarget= null;
+        foreach (GameObject othertarget in activelist)
+        {
+            Character charOthertarget = othertarget.GetComponent<UnitScript>().UnitCharacteristics;
+            if (othertarget.GetComponent<UnitScript>().GetSkill(40) && ManhattanDistance(charTarget, charOthertarget) <=3)
+            {
+                allforonetransfertarget = charOthertarget;
+                break;
+            }
+        }
+
+        if(allforonetransfertarget != null)
+        {
+            target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage/2;
+            allforonetransfertarget.currentHP -= damage / 2;
+        }
+        else
+        {
+            target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage;
+        }
+
+
+            
+    }
     private void OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing)
     {
         //Durability
@@ -1323,7 +1375,7 @@ public class ActionsMenu : MonoBehaviour
         int SpeedDiff = unitbasespeed - targetbasespeed;
 
 
-        if (SpeedDiff >= 150)
+        if (SpeedDiff >= 150 || unit.GetComponent<UnitScript>().GetSkill(39))
         {
             return (unit, true);
         }
@@ -1472,6 +1524,11 @@ public class ActionsMenu : MonoBehaviour
         }
 
         return finalcritrate;
+    }
+
+    private int ManhattanDistance(Character unit, Character otherunit)
+    {
+        return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
     }
 
 }

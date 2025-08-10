@@ -77,7 +77,12 @@ public class BattleInfotext : MonoBehaviour
                 selectedunit = attackTurnScript.CurrentOther;
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             }
-            if(selectedunit!=null && selectedunitCharacter!=null)
+            else if (turnManger.currentlyplaying == "")
+            {
+                selectedunit = GridScript.GetUnit(GridScript.selection);
+                selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
+            }
+            if (selectedunit != null && selectedunitCharacter != null)
             {
                 ManagedSkillVisuals(selectedunitCharacter);
                 stringtoshow = selectedunitCharacter.name + "       Level : " + selectedunitCharacter.level + "    Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP + "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type + ")";

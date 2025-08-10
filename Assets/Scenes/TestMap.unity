@@ -20506,6 +20506,71 @@ MonoBehaviour:
     Descriptions: Always counterattacks.
     Cost: 10
     ID: 38
+  - name: Thousand Needles
+    Descriptions: Always attacks 3 times, but reduces damage by 50%.
+    Cost: 15
+    ID: 39
+  - name: All for One
+    Descriptions: 50% of damage taken by allies within 3 tiles get transferred to
+      this unit.
+    Cost: 10
+    ID: 40
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
+  - name: 
+    Descriptions: 
+    Cost: 0
+    ID: 0
   - name: 
     Descriptions: 
     Cost: 0
@@ -24660,6 +24725,7 @@ GameObject:
   - component: {fileID: 2017710287}
   - component: {fileID: 2017710290}
   - component: {fileID: 2017710289}
+  - component: {fileID: 2017710291}
   - component: {fileID: 2017710288}
   m_Layer: 0
   m_Name: Audio Source
@@ -24697,6 +24763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   incombat: {fileID: 2017710289}
   outcombat: {fileID: 2017710290}
+  BeforeCombat: {fileID: 2017710291}
   maxvolume: 0.5
   battlecameraScript: {fileID: 1857921353}
 --- !u!82 &2017710289
@@ -24711,7 +24778,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 85a31a6680f4a1349a49e259be38458a, type: 3}
   m_Resource: {fileID: 8300000, guid: 85a31a6680f4a1349a49e259be38458a, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
@@ -24808,6 +24875,103 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d8f42c9da8979744cb733913bb1f7cfd, type: 3}
   m_Resource: {fileID: 8300000, guid: d8f42c9da8979744cb733913bb1f7cfd, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &2017710291
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017710286}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0f056de0e65e909489e232b76538ccc6, type: 3}
+  m_Resource: {fileID: 8300000, guid: 0f056de0e65e909489e232b76538ccc6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -25803,6 +25967,7 @@ MonoBehaviour:
   otherunitsGO: []
   turntext: {fileID: 2052129964}
   GameOverScript: {fileID: 197961382}
+  waittingforstart: 1
 --- !u!114 &2083772866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27035,33 +27200,21 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 2136321716}
-    - target: {fileID: 6066130923447186532, guid: b616a88cbd5d5924882461cec0986aa8, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6066130923447186532, guid: b616a88cbd5d5924882461cec0986aa8, type: 3}
-      propertyPath: m_NeverAutoSwitchControlSchemes
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6413263950876600433, guid: b616a88cbd5d5924882461cec0986aa8, type: 3}
       propertyPath: m_Name
       value: InputManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6413263950876600433, guid: b616a88cbd5d5924882461cec0986aa8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8232387876493776323, guid: b616a88cbd5d5924882461cec0986aa8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.219053
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8232387876493776323, guid: b616a88cbd5d5924882461cec0986aa8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1212571
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8232387876493776323, guid: b616a88cbd5d5924882461cec0986aa8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.125053
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8232387876493776323, guid: b616a88cbd5d5924882461cec0986aa8, type: 3}
       propertyPath: m_LocalRotation.w

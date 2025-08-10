@@ -26,10 +26,23 @@ public class TurnManger : MonoBehaviour
 
     private bool updatevisuals;
 
+    public bool waittingforstart;
+
+    private InputManager InputManager;
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+        if(InputManager == null)
+        {
+            InputManager = FindAnyObjectByType<InputManager>();
+        }
+
+        if(InputManager.Startpressed && waittingforstart)
+        {
+            waittingforstart = false;
+        }
+
         if(updatevisuals)
         {
             UpdateVisuals();
@@ -47,17 +60,20 @@ public class TurnManger : MonoBehaviour
             GameOverScript.gameObject.SetActive(true);
             return;
         }
-        if (currentTurn == 0)
-        {
-            currentTurn = 1;
-        }
-        if(currentlyplaying == "")
-        {
-            currentlyplaying = "playable";
-            BeginningOfTurnsTrigger(playableunitGO);
-        }
-        ManageTurnRotation();
         UpdateText();
+        if (!waittingforstart)
+        {
+            if (currentTurn == 0)
+            {
+                currentTurn = 1;
+            }
+            if (currentlyplaying == "")
+            {
+                currentlyplaying = "playable";
+                BeginningOfTurnsTrigger(playableunitGO);
+            }
+            ManageTurnRotation();
+        }
     }
 
     private void BeginningOfTurnsTrigger(List<GameObject> charactertoappy)
@@ -228,16 +244,16 @@ public class TurnManger : MonoBehaviour
         if (currentlyplaying == "playable")
         {
             int numberremaining = 0;
-            foreach( Character character in playableunit)
+            foreach (Character character in playableunit)
             {
-                if(!character.alreadyplayed || !character.alreadymoved)
+                if (!character.alreadyplayed || !character.alreadymoved)
                 {
                     numberremaining++;
                 }
             }
             turntext.text = "Turn : Allies \nRemaining : " + numberremaining;
         }
-        if (currentlyplaying == "enemy")
+        else if (currentlyplaying == "enemy")
         {
             int numberremaining = 0;
             foreach (Character character in enemyunit)
@@ -249,7 +265,7 @@ public class TurnManger : MonoBehaviour
             }
             turntext.text = "Turn : Enemies \nRemaining : " + numberremaining;
         }
-        if (currentlyplaying == "other")
+        else if (currentlyplaying == "other")
         {
             int numberremaining = 0;
             foreach (Character character in otherunits)
@@ -260,6 +276,10 @@ public class TurnManger : MonoBehaviour
                 }
             }
             turntext.text = "Turn : Others \nRemaining : " + numberremaining;
+        }
+        else
+        {
+            turntext.text = "The battle is about to begin...";
         }
     }
 

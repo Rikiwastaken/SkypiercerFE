@@ -1115,6 +1115,12 @@ public class UnitScript : MonoBehaviour
             statbonuses.Hit += 30;
             statbonuses.Dodge -= 30;
         }
+        //Thousand Needles
+        if (GetSkill(39))
+        {
+            statbonuses.PhysDamage -= 50;
+            statbonuses.TelekDamage -= 50;
+        }
 
 
         AllStatsSkillBonus battalionskillbonus = GetBattalionCombatBonus();

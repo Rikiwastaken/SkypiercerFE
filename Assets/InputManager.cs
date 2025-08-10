@@ -76,6 +76,14 @@ public class InputManager : MonoBehaviour
     private InputAction Selectinput;
     private bool Selectpressedonce;
 
+    [Header("Start Button")]
+
+    public bool Startpressed;
+    public bool Startjustpressed;
+    public InputActionReference Startbtn;
+    private InputAction Startinput;
+    private bool Startpressedonce;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -95,6 +103,7 @@ public class InputManager : MonoBehaviour
         PreviousTargetinput = PreviousTarget.ToInputAction();
         Telekinesisinput = Telekinesis.ToInputAction();
         Selectinput = Select.ToInputAction();
+        Startinput = Startbtn.ToInputAction();
     }
 
     private void FixedUpdate()
@@ -232,6 +241,22 @@ public class InputManager : MonoBehaviour
         if (!Selectpressed)
         {
             Selectpressedonce = false;
+        }
+
+        Startpressed = Startinput.IsPressed();
+        if (Startpressed && !Startjustpressed && !Startpressedonce)
+        {
+            Startjustpressed = true;
+            Startpressedonce = true;
+        }
+        else
+        {
+            Startjustpressed = false;
+        }
+
+        if (!Startpressed)
+        {
+            Startpressedonce = false;
         }
 
     }

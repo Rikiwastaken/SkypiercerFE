@@ -116,7 +116,7 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = 0;
         }
 
-        if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue && moveCD <= 0 && !actionsMenu.activeSelf && GetComponent<TurnManger>().currentlyplaying == "playable" && movementbuffercounter <= 0)
+        if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue && moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0)
         {
             moveCD = (int)(0.1f / Time.deltaTime);
             previousmovevalue = inputManager.movementValue;
