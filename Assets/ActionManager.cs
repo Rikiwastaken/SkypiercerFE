@@ -22,6 +22,8 @@ public class ActionManager : MonoBehaviour
 
     public int framestoskip;
 
+    private battlecameraScript battlecamera;
+
     [Serializable]
     public class AttackStats
     {
@@ -41,6 +43,7 @@ public class ActionManager : MonoBehaviour
         TurnManager = GetComponent<TurnManger>();
         InputManager = FindAnyObjectByType<InputManager>();
         GridScript = GetComponent<GridScript>();
+        battlecamera = FindAnyObjectByType<battlecameraScript>();
     }
 
     // Update is called once per frame
@@ -86,7 +89,7 @@ public class ActionManager : MonoBehaviour
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
                     }
-                    if (InputManager.Telekinesisjustpressed)
+                    if (InputManager.Telekinesisjustpressed && !battlecamera.incombat)
                     {
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                         GridScript.ShowMovement();
@@ -120,7 +123,7 @@ public class ActionManager : MonoBehaviour
                         WeaponChange(currentcharacter);
                         GridScript.ShowMovement();
                     }
-                    if (InputManager.Telekinesisjustpressed)
+                    if (InputManager.Telekinesisjustpressed && !battlecamera.incombat)
                     {
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                         WeaponChange(currentcharacter);
@@ -215,7 +218,7 @@ public class ActionManager : MonoBehaviour
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
         //patient
-        if(currentcharacter.GetComponent<UnitScript>().GetSkill(20))
+        if (currentcharacter.GetComponent<UnitScript>().GetSkill(20))
         {
             currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
             if (currentcharacter.GetComponent<UnitScript>().GetSkill(7)) // full of beans

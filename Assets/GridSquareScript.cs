@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnitScript;
 
 public class GridSquareScript : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GridSquareScript : MonoBehaviour
     public float rotationperframe;
 
     private GameObject SelectRound;
+
+    private GameObject SelectRoundFilling;
 
     private GridScript GridScript;
 
@@ -31,6 +34,7 @@ public class GridSquareScript : MonoBehaviour
     {
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
         SelectRound = transform.GetChild(1).gameObject;
+        SelectRoundFilling = transform.GetChild(2).gameObject;
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         GridCoordinates = new Vector2((int)transform.position.x, (int)transform.position.z);
 
@@ -58,6 +62,37 @@ public class GridSquareScript : MonoBehaviour
         {
             SelectRound.SetActive(false);
         }
+
+        UpdateFilling();
+    }
+
+    public void UpdateFilling()
+    {
+        SpriteRenderer SR = SelectRoundFilling.GetComponent<SpriteRenderer>();
+        GameObject unit = GridScript.GetUnit(this);
+        Color newcolor = new Color();
+        if(unit == null)
+        {
+            newcolor.a = 0;
+        }
+        else
+        {
+            Character Char = unit.GetComponent<UnitScript>().UnitCharacteristics;
+            if(Char.affiliation == "playable")
+            {
+                newcolor = Color.blue;
+            }
+            else if (Char.affiliation == "enemy")
+            {
+                newcolor = Color.red;
+            }
+            else if (Char.affiliation == "other")
+            {
+                newcolor = Color.yellow;
+            }
+            newcolor.a = 0.5f;
+        }
+        SR.color = newcolor;
     }
 
     public void fillwithblue()
