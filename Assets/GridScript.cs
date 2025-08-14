@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -44,6 +45,8 @@ public class GridScript : MonoBehaviour
     public float movementbuffer;
 
     private Vector2 previousmovementvalueforbuffer;
+
+    public TextMeshProUGUI tiletext;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -135,7 +138,7 @@ public class GridScript : MonoBehaviour
         }
 
         previousmovementvalueforbuffer = inputManager.movementValue;
-
+        UpdateTileText();
     }
 
     private void InstantiateGrid()
@@ -153,6 +156,37 @@ public class GridScript : MonoBehaviour
             }
         }
         selection = Grid[0][0].GetComponent<GridSquareScript>();
+    }
+
+    private void UpdateTileText()
+    {
+        string text = "";
+
+        if(selection != null)
+        {
+            text = "Ground\nNo effect";
+            if(selection.type.ToLower()=="forest")
+            {
+                text = "Forest \n+30% Dodge";
+            }
+            if (selection.type.ToLower() == "ruins")
+            {
+                text = "Ruins \n+10% Dodge\n-10% Hit";
+            }
+            if (selection.type.ToLower() == "fire")
+            {
+                text = "Fire \n-1 mvt\n-10% Def/Res";
+            }
+            if (selection.type.ToLower() == "water")
+            {
+                text = "Water \n-1 mvt\n-10% Dodge";
+            }
+            if (selection.type.ToLower() == "highground")
+            {
+                text = "High Ground \n+20% Hit\n+10% Dodge";
+            }
+        }
+        tiletext.text = text;
     }
 
     public void MoveSelection(Vector2 input)
