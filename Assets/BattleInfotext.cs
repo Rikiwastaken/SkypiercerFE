@@ -84,8 +84,30 @@ public class BattleInfotext : MonoBehaviour
             }
             if (selectedunit != null && selectedunitCharacter != null)
             {
+
+                string gradeletter = "E";
+                int grade = selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Grade;
+                switch (grade)
+                {
+                    case 1:
+                        gradeletter = "D";
+                        break;
+                    case 2:
+                        gradeletter = "C";
+                        break;
+                    case 3:
+                        gradeletter = "B";
+                        break;
+                    case 4:
+                        gradeletter = "A";
+                        break;
+                    case 5:
+                        gradeletter = "S";
+                        break;
+                }
+
                 ManagedSkillVisuals(selectedunitCharacter);
-                stringtoshow = selectedunitCharacter.name + "       Level : " + selectedunitCharacter.level + "    Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP + "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type + ")";
+                stringtoshow = selectedunitCharacter.name + "       Level : " + selectedunitCharacter.level + "    Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP + "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type + " "+ gradeletter+ ")";
                 if (selectedunitCharacter.telekinesisactivated)
                 {
                     stringtoshow += "\nTelekinesis : on";

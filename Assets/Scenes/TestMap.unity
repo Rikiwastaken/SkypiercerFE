@@ -1277,164 +1277,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
   m_PrefabInstance: {fileID: 1991586688}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &76688892
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1454223631}
-    m_Modifications:
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081702220094403406, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_Name
-      value: Laura
-      objectReference: {fileID: 0}
-    - target: {fileID: 5602938307781546953, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 535c282d54cc42142a4a472b3eb706bc, type: 2}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.name
-      value: Laura
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.HP
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.UnitSkill
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.currentHP
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.experience
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.affiliation
-      value: playable
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Speed
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Psyche
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Defense
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Strength
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Dexterity
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Resistance
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.SpeedGrowth
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.PsycheGrowth
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DefenseGrowth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.StrengthGrowth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DexterityGrowth
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.ResistanceGrowth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.EquipedSkills.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[0]'
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[1]'
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.equipmentsIDs.Array.data[0]'
-      value: 25
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
---- !u!4 &76688893 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-  m_PrefabInstance: {fileID: 76688892}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &78809734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
@@ -5976,159 +5818,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2163203992292722363, guid: 0d939bd4973df194aad0faeabb75cf13, type: 3}
   m_PrefabInstance: {fileID: 1453938569}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &586181498
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1454223631}
-    m_Modifications:
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081702220094403406, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_Name
-      value: Nolan
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.name
-      value: Nolan
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.level
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.HP
-      value: 290
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.UnitSkill
-      value: 37
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.currentHP
-      value: 290
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.movements
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.experience
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.affiliation
-      value: playable
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Speed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Psyche
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Defense
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Strength
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.HPGrowth
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Dexterity
-      value: 110
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Resistance
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.SpeedGrowth
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.PsycheGrowth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DefenseGrowth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.StrengthGrowth
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DexterityGrowth
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.ResistanceGrowth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.equipmentsIDs.Array.data[0]'
-      value: 9
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
 --- !u!1001 &591088160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7691,172 +7380,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
---- !u!1001 &731787429
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1454223631}
-    m_Modifications:
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081702220094403406, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_Name
-      value: Sothe
-      objectReference: {fileID: 0}
-    - target: {fileID: 5602938307781546953, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 535c282d54cc42142a4a472b3eb706bc, type: 2}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.name
-      value: Sothe
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.level
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.HP
-      value: 350
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.currentHP
-      value: 350
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.movements
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.experience
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.y
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.affiliation
-      value: playable
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Speed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Psyche
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Defense
-      value: 140
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Strength
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.HPGrowth
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Dexterity
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Resistance
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.SpeedGrowth
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.PsycheGrowth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DefenseGrowth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.StrengthGrowth
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DexterityGrowth
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.ResistanceGrowth
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipmentsIDs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.equipmentsIDs.Array.data[0]'
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.equipmentsIDs.Array.data[1]'
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
---- !u!4 &731787430 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-  m_PrefabInstance: {fileID: 731787429}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &734908244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
@@ -8373,11 +7896,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
---- !u!4 &814502160 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-  m_PrefabInstance: {fileID: 971832603}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &822724788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
@@ -8757,11 +8275,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
---- !u!4 &859828231 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-  m_PrefabInstance: {fileID: 1369853076}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &861471278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10275,171 +9788,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
   m_PrefabInstance: {fileID: 429131084}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &971832603
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1454223631}
-    m_Modifications:
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081702220094403406, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_Name
-      value: Edward
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.name
-      value: Edward
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.level
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.HP
-      value: 190
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.UnitSkill
-      value: 32
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.currentHP
-      value: 190
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.movements
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.experience
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.affiliation
-      value: playable
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Speed
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Psyche
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Defense
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Strength
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.HPGrowth
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Dexterity
-      value: 110
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Resistance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.SpeedGrowth
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.PsycheGrowth
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DefenseGrowth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.StrengthGrowth
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DexterityGrowth
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.ResistanceGrowth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.EquipedSkills.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[0]'
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[1]'
-      value: 23
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.equipmentsIDs.Array.data[0]'
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
 --- !u!1 &972755504
 GameObject:
   m_ObjectHideFlags: 0
@@ -14960,167 +14308,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
---- !u!1001 &1369853076
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1454223631}
-    m_Modifications:
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081702220094403406, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_Name
-      value: Leonardo
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.name
-      value: Leonardo
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.level
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.HP
-      value: 170
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.UnitSkill
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.currentHP
-      value: 170
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.movements
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.experience
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.affiliation
-      value: playable
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Speed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Psyche
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Defense
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Strength
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.HPGrowth
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Dexterity
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Resistance
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.SpeedGrowth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.PsycheGrowth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DefenseGrowth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.StrengthGrowth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DexterityGrowth
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.ResistanceGrowth
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.EquipedSkills.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[0]'
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.equipmentsIDs.Array.data[0]'
-      value: 13
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
 --- !u!1001 &1371022903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16399,13 +15586,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 76688893}
-  - {fileID: 731787430}
-  - {fileID: 1696331211}
-  - {fileID: 1496170112}
-  - {fileID: 859828231}
-  - {fileID: 814502160}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1463797023
@@ -16681,11 +15862,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
   m_PrefabInstance: {fileID: 30225042}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1496170112 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-  m_PrefabInstance: {fileID: 586181498}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1501440110
 PrefabInstance:
@@ -19097,37 +18273,207 @@ MonoBehaviour:
     ID: 0
   PlayableCharacterList:
   - protagonist: 1
-    battalion: Zack
-    name: Zack
+    battalion: Kira
+    name: Micaiah
     stats:
-      HP: 1
-      Strength: 1
-      Psyche: 0
-      Defense: 0
-      Resistance: 0
-      Speed: 0
-      Dexterity: 0
+      HP: 150
+      Strength: 20
+      Psyche: 70
+      Defense: 20
+      Resistance: 40
+      Speed: 70
+      Dexterity: 80
     level: 1
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 0
-      StrengthGrowth: 0
-      PsycheGrowth: 0
-      DefenseGrowth: 0
-      ResistanceGrowth: 0
-      SpeedGrowth: 0
-      DexterityGrowth: 0
-    currentHP: 0
-    movements: 0
-    position: {x: 0, y: 0}
+      HPGrowth: 40
+      StrengthGrowth: 20
+      PsycheGrowth: 80
+      DefenseGrowth: 20
+      ResistanceGrowth: 90
+      SpeedGrowth: 40
+      DexterityGrowth: 40
+    currentHP: 150
+    movements: 5
+    position: {x: 4, y: 2}
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 
+    equipmentsIDs: 01000000
+    equipments: []
+    UnitSkill: 3
+    EquipedSkills: 02000000
+    isboss: 0
+    attacksfriends: 0
+  - protagonist: 0
+    battalion: Kira
+    name: Sothe
+    stats:
+      HP: 350
+      Strength: 180
+      Psyche: 40
+      Defense: 140
+      Resistance: 90
+      Speed: 200
+      Dexterity: 200
+    level: 20
+    experience: 0
+    affiliation: playable
+    growth:
+      HPGrowth: 30
+      StrengthGrowth: 60
+      PsycheGrowth: 20
+      DefenseGrowth: 20
+      ResistanceGrowth: 30
+      SpeedGrowth: 50
+      DexterityGrowth: 80
+    currentHP: 350
+    movements: 7
+    position: {x: 0, y: 11}
+    alreadyplayed: 0
+    alreadymoved: 0
+    telekinesisactivated: 0
+    equipmentsIDs: 1100000001000000
     equipments: []
     UnitSkill: 0
     EquipedSkills: 
+    isboss: 0
+    attacksfriends: 0
+  - protagonist: 0
+    battalion: Kira
+    name: Laura
+    stats:
+      HP: 160
+      Strength: 30
+      Psyche: 80
+      Defense: 20
+      Resistance: 100
+      Speed: 50
+      Dexterity: 30
+    level: 1
+    experience: 0
+    affiliation: playable
+    growth:
+      HPGrowth: 50
+      StrengthGrowth: 20
+      PsycheGrowth: 70
+      DefenseGrowth: 20
+      ResistanceGrowth: 40
+      SpeedGrowth: 70
+      DexterityGrowth: 70
+    currentHP: 160
+    movements: 5
+    position: {x: 4, y: 0}
+    alreadyplayed: 0
+    alreadymoved: 0
+    telekinesisactivated: 0
+    equipmentsIDs: 19000000
+    equipments: []
+    UnitSkill: 2
+    EquipedSkills: 030000001e000000
+    isboss: 0
+    attacksfriends: 0
+  - protagonist: 0
+    battalion: Kira
+    name: Nolan
+    stats:
+      HP: 290
+      Strength: 120
+      Psyche: 0
+      Defense: 90
+      Resistance: 30
+      Speed: 100
+      Dexterity: 110
+    level: 9
+    experience: 0
+    affiliation: playable
+    growth:
+      HPGrowth: 60
+      StrengthGrowth: 50
+      PsycheGrowth: 20
+      DefenseGrowth: 40
+      ResistanceGrowth: 40
+      SpeedGrowth: 60
+      DexterityGrowth: 70
+    currentHP: 290
+    movements: 6
+    position: {x: 6, y: 1}
+    alreadyplayed: 0
+    alreadymoved: 0
+    telekinesisactivated: 0
+    equipmentsIDs: 09000000
+    equipments: []
+    UnitSkill: 37
+    EquipedSkills: 
+    isboss: 0
+    attacksfriends: 0
+  - protagonist: 0
+    battalion: Kira
+    name: Leonardo
+    stats:
+      HP: 170
+      Strength: 80
+      Psyche: 0
+      Defense: 50
+      Resistance: 40
+      Speed: 100
+      Dexterity: 120
+    level: 4
+    experience: 0
+    affiliation: playable
+    growth:
+      HPGrowth: 60
+      StrengthGrowth: 40
+      PsycheGrowth: 20
+      DefenseGrowth: 40
+      ResistanceGrowth: 60
+      SpeedGrowth: 40
+      DexterityGrowth: 80
+    currentHP: 170
+    movements: 6
+    position: {x: 5, y: 1}
+    alreadyplayed: 0
+    alreadymoved: 0
+    telekinesisactivated: 0
+    equipmentsIDs: 0d000000
+    equipments: []
+    UnitSkill: 36
+    EquipedSkills: 1f000000
+    isboss: 0
+    attacksfriends: 0
+  - protagonist: 0
+    battalion: Kira
+    name: Edward
+    stats:
+      HP: 190
+      Strength: 70
+      Psyche: 0
+      Defense: 50
+      Resistance: 0
+      Speed: 120
+      Dexterity: 110
+    level: 4
+    experience: 0
+    affiliation: playable
+    growth:
+      HPGrowth: 90
+      StrengthGrowth: 60
+      PsycheGrowth: 10
+      DefenseGrowth: 40
+      ResistanceGrowth: 20
+      SpeedGrowth: 60
+      DexterityGrowth: 70
+    currentHP: 190
+    movements: 6
+    position: {x: 6, y: 2}
+    alreadyplayed: 0
+    alreadymoved: 0
+    telekinesisactivated: 0
+    equipmentsIDs: 01000000
+    equipments: []
+    UnitSkill: 32
+    EquipedSkills: 1c00000017000000
     isboss: 0
     attacksfriends: 0
   manualgamespeed: 1
@@ -19293,11 +18639,6 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
   m_PrefabInstance: {fileID: 2096374961}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1696331211 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-  m_PrefabInstance: {fileID: 1869729376}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1703495405
 PrefabInstance:
@@ -20981,227 +20322,6 @@ Transform:
   - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1869729376
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1454223631}
-    m_Modifications:
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940682818617995091, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819874567966335593, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5081702220094403406, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: m_Name
-      value: Micaiah
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.name
-      value: Micaiah
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.HP
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.UnitSkill
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.currentHP
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.experience
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.position.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.affiliation
-      value: playable
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Speed
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Psyche
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Defense
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Strength
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.HPGrowth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Dexterity
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.stats.Resistance
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.SpeedGrowth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.PsycheGrowth
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DefenseGrowth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.StrengthGrowth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.DexterityGrowth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.growth.ResistanceGrowth
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.EquipedSkills.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: 'UnitCharacteristics.EquipedSkills.Array.data[0]'
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[0].Name
-      value: reshine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[0].type
-      value: Sword
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[1].Name
-      value: Aaron
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[1].type
-      value: Staff
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[0].Range
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[1].Range
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[0].BaseHit
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[0].Maxuses
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[1].BaseHit
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[1].Maxuses
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[0].BaseCrit
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[1].BaseCrit
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[0].BaseDamage
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[1].BaseDamage
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[0].Currentuses
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6360257754374888536, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
-      propertyPath: UnitCharacteristics.equipments.Array.data[1].Currentuses
-      value: 10
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
 --- !u!1 &1872069743
 GameObject:
   m_ObjectHideFlags: 0
@@ -23994,7 +23114,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberofplayables: 1
   playablepos:
-  - {x: 7, y: 7}
+  - {x: 4, y: 2}
+  - {x: 0, y: 11}
+  - {x: 4, y: 0}
+  - {x: 6, y: 1}
+  - {x: 5, y: 1}
+  - {x: 6, y: 2}
   BaseCharacter: {fileID: 5081702220094403406, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
   Characters: {fileID: 1454223630}
   EnemyList:
@@ -24007,6 +23132,7 @@ MonoBehaviour:
     Skills: 09000000
     Name: Soldier
     isboss: 0
+    isother: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -24016,6 +23142,7 @@ MonoBehaviour:
     Skills: 0a000000
     Name: Soldier
     isboss: 0
+    isother: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -24025,6 +23152,7 @@ MonoBehaviour:
     Skills: 05000000
     Name: Soldier
     isboss: 0
+    isother: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -24034,6 +23162,7 @@ MonoBehaviour:
     Skills: 0d000000
     Name: Soldier
     isboss: 0
+    isother: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -24043,6 +23172,7 @@ MonoBehaviour:
     Skills: 0e000000
     Name: Soldier
     isboss: 0
+    isother: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -24052,6 +23182,7 @@ MonoBehaviour:
     Skills: 13000000
     Name: Soldier
     isboss: 0
+    isother: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -24061,6 +23192,7 @@ MonoBehaviour:
     Skills: 25000000
     Name: Soldier
     isboss: 0
+    isother: 0
   - classID: 4
     desiredlevel: 1
     itemtodropID: 0
@@ -24070,6 +23202,7 @@ MonoBehaviour:
     Skills: 2500000011000000040000000800000018000000
     Name: Zaitan
     isboss: 1
+    isother: 0
   - classID: 2
     desiredlevel: 5
     itemtodropID: 0
@@ -24079,6 +23212,7 @@ MonoBehaviour:
     Skills: 16000000
     Name: Archer
     isboss: 0
+    isother: 0
   - classID: 2
     desiredlevel: 5
     itemtodropID: 0
@@ -24088,6 +23222,7 @@ MonoBehaviour:
     Skills: 16000000
     Name: Archer
     isboss: 0
+    isother: 0
   - classID: 3
     desiredlevel: 5
     itemtodropID: 0
@@ -24097,6 +23232,7 @@ MonoBehaviour:
     Skills: 11000000
     Name: Fighter
     isboss: 0
+    isother: 0
   - classID: 3
     desiredlevel: 5
     itemtodropID: 0
@@ -24106,6 +23242,7 @@ MonoBehaviour:
     Skills: 0f000000
     Name: Fighter
     isboss: 0
+    isother: 0
   - classID: 3
     desiredlevel: 5
     itemtodropID: 0
@@ -24115,6 +23252,7 @@ MonoBehaviour:
     Skills: 17000000
     Name: Fighter
     isboss: 0
+    isother: 0
   - classID: 5
     desiredlevel: 5
     itemtodropID: 0
@@ -24124,6 +23262,7 @@ MonoBehaviour:
     Skills: 02000000
     Name: Myrmidon
     isboss: 0
+    isother: 0
   - classID: 5
     desiredlevel: 5
     itemtodropID: 0
@@ -24133,6 +23272,7 @@ MonoBehaviour:
     Skills: 12000000
     Name: Myrmidon
     isboss: 0
+    isother: 0
 --- !u!1001 &2088127821
 PrefabInstance:
   m_ObjectHideFlags: 0

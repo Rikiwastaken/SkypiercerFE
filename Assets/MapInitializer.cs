@@ -41,6 +41,7 @@ public class MapInitializer : MonoBehaviour
             playable.position = playablepos[index];
             newcharacter.transform.parent = Characters.transform;
             newcharacter.transform.position = new Vector3(playablepos[index].x,0, playablepos[index].y);
+            newcharacter.name = playable.name;
             index++;
         }
     }
