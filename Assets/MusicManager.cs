@@ -24,8 +24,10 @@ public class MusicManager : MonoBehaviour
         if(TurnManager.currentlyplaying!="" && !incombat.isPlaying)
         {
             BeforeCombat.Stop();
-            incombat.Play();
-            outcombat.Play();
+            double startTime = AudioSettings.dspTime + 0.1; // small delay to guarantee readiness
+
+            incombat.PlayScheduled(startTime);
+            outcombat.PlayScheduled(startTime);
         }
 
         if(battlecameraScript.incombat)

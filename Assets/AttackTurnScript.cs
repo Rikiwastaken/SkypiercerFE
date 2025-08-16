@@ -353,16 +353,19 @@ public class AttackTurnScript : MonoBehaviour
                             {
                                 waittingforexp = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+                                waittingforcamera = false;
                             }
                             else if (ishealing)
                             {
                                 waittingforexp = true;
+                                waittingforcamera = false;
                             }
                             else if (CharAttacker.affiliation == "playable" && CharAttacker.currentHP<=0)
                             {
                                 counterafterattack = (int)(delayafterAttack * 2f / Time.fixedDeltaTime);
                                 waittingforexp = true;
                                 expdistributed = true;
+                                waittingforcamera = false;
                             }
                             else if (ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38))
                             {
@@ -375,11 +378,13 @@ public class AttackTurnScript : MonoBehaviour
                                 counterafterattack = (int)(delayafterAttack * 2f / Time.fixedDeltaTime);
                                 waittingforexp = true;
                                 expdistributed = true;
+                                waittingforcamera = false;
                             }
                             else
                             {
                                 waittingforexp = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+                                waittingforcamera = false;
                             }
                         }
                         else
@@ -401,20 +406,24 @@ public class AttackTurnScript : MonoBehaviour
                                     waittingforexp = true;
                                     expdistributed = true;
                                     counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+                                    waittingforcamera = false;
                                 }
                                 else
                                 {
                                     waittingforexp = true;
                                     counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
+                                    waittingforcamera = false;
                                 }
 
                                 if (target != null)
                                 {
                                     EndOfCombatTrigger(Attacker, target);
+                                    waittingforcamera = false;
                                 }
                                 else
                                 {
                                     EndOfCombatTrigger(Attacker);
+                                    waittingforcamera = false;
                                 }
                             }
                         }
@@ -435,6 +444,7 @@ public class AttackTurnScript : MonoBehaviour
             }
             if (target != null)
             {
+                
                 waittingforcamera = true;
                 battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
                 unitalreadyattacked = false;
@@ -447,15 +457,18 @@ public class AttackTurnScript : MonoBehaviour
                 if (target != null)
                 {
                     EndOfCombatTrigger(Attacker, target);
+                    waittingforcamera = false;
                 }
                 else
                 {
                     EndOfCombatTrigger(Attacker);
+                    waittingforcamera = false;
                 }
                 if (CharAttacker.affiliation == "playable")
                 {
                     
-                    ActionsMenu.FinalizeAttack(); 
+                    ActionsMenu.FinalizeAttack();
+                    waittingforcamera = false;
                 }
                 else
                 {
@@ -463,6 +476,7 @@ public class AttackTurnScript : MonoBehaviour
                     CurrentOther = null;
                     CurrentEnemy = null;
                     CurrentPlayable = null;
+                    waittingforcamera = false;
                 }
 
             }

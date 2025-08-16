@@ -14,6 +14,8 @@ public class DataScript : MonoBehaviour
 
     public List<Skill> SkillList;
 
+    public List<Character> PlayableCharacterList;
+
     public float manualgamespeed = 1;
 
     [Serializable]

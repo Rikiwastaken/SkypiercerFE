@@ -20715,6 +20715,41 @@ MonoBehaviour:
     Descriptions: 
     Cost: 0
     ID: 0
+  PlayableCharacterList:
+  - protagonist: 1
+    battalion: Zack
+    name: Zack
+    stats:
+      HP: 1
+      Strength: 1
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
+    level: 1
+    experience: 0
+    affiliation: playable
+    growth:
+      HPGrowth: 0
+      StrengthGrowth: 0
+      PsycheGrowth: 0
+      DefenseGrowth: 0
+      ResistanceGrowth: 0
+      SpeedGrowth: 0
+      DexterityGrowth: 0
+    currentHP: 0
+    movements: 0
+    position: {x: 0, y: 0}
+    alreadyplayed: 0
+    alreadymoved: 0
+    telekinesisactivated: 0
+    equipmentsIDs: 
+    equipments: []
+    UnitSkill: 0
+    EquipedSkills: 
+    isboss: 0
+    attacksfriends: 0
   manualgamespeed: 1
 --- !u!4 &1666326948
 Transform:
@@ -26112,6 +26147,7 @@ GameObject:
   - component: {fileID: 2083772865}
   - component: {fileID: 2083772866}
   - component: {fileID: 2083772867}
+  - component: {fileID: 2083772868}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -26227,6 +26263,22 @@ MonoBehaviour:
   waittingforexp: 0
   expdistributed: 0
   expbar: {fileID: 70269723}
+--- !u!114 &2083772868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083772862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dbf18a66cd9f424b832c96750e84d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberofplayables: 1
+  playablepos:
+  - {x: 7, y: 7}
+  BaseCharacter: {fileID: 0}
 --- !u!1001 &2088127821
 PrefabInstance:
   m_ObjectHideFlags: 0
