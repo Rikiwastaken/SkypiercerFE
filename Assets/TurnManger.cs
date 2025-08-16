@@ -33,31 +33,31 @@ public class TurnManger : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(InputManager == null)
+        if (InputManager == null)
         {
             InputManager = FindAnyObjectByType<InputManager>();
         }
 
-        if(InputManager.Startpressed && waittingforstart)
+        if (InputManager.Startpressed && waittingforstart)
         {
             waittingforstart = false;
         }
 
-        if(updatevisuals)
+        if (updatevisuals)
         {
             UpdateVisuals();
             updatevisuals = false;
         }
 
-        if(playableunit.Count ==0)
+        if (playableunit.Count == 0)
         {
             GameOverScript.gameObject.SetActive(true);
             return;
         }
         if (enemyunit.Count == 0)
         {
-            GameOverScript.victory = true;
-            GameOverScript.gameObject.SetActive(true);
+            // GameOverScript.victory = true;
+            // GameOverScript.gameObject.SetActive(true);
             return;
         }
         UpdateText();
@@ -78,13 +78,13 @@ public class TurnManger : MonoBehaviour
 
     private void BeginningOfTurnsTrigger(List<GameObject> charactertoappy)
     {
-        foreach(GameObject unit in charactertoappy)
+        foreach (GameObject unit in charactertoappy)
         {
 
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
             //Kira Battalion Side Effect
-            if(unitchar.battalion=="Kira")
+            if (unitchar.battalion == "Kira")
             {
                 unitchar.currentHP += (int)(unitchar.stats.HP * 0.1f);
                 //Loyal
@@ -101,16 +101,16 @@ public class TurnManger : MonoBehaviour
 
             // Restoring unequiped blade durability
 
-            foreach(equipment weapon in unitchar.equipments)
+            foreach (equipment weapon in unitchar.equipments)
             {
-                if(weapon != unit.GetComponent<UnitScript>().GetFirstWeapon() && weapon.Maxuses!=0)
+                if (weapon != unit.GetComponent<UnitScript>().GetFirstWeapon() && weapon.Maxuses != 0)
                 {
                     weapon.Currentuses++;
-                    if(unit.GetComponent<UnitScript>().GetSkill(7)) // full of beans
+                    if (unit.GetComponent<UnitScript>().GetSkill(7)) // full of beans
                     {
                         weapon.Currentuses++;
                     }
-                    if(weapon.Currentuses > weapon.Maxuses)
+                    if (weapon.Currentuses > weapon.Maxuses)
                     {
                         weapon.Currentuses = weapon.Maxuses;
                     }
@@ -121,7 +121,7 @@ public class TurnManger : MonoBehaviour
             if (unit.GetComponent<UnitScript>().GetSkill(9))
             {
                 unitchar.currentHP += (int)(unitchar.stats.HP * 0.1f);
-                if(unitchar.currentHP > unitchar.stats.HP )
+                if (unitchar.currentHP > unitchar.stats.HP)
                 {
                     unitchar.currentHP = unitchar.stats.HP;
                 }
@@ -129,10 +129,10 @@ public class TurnManger : MonoBehaviour
             //Medic
             if (unit.GetComponent<UnitScript>().GetSkill(12))
             {
-                foreach( GameObject otherunit in charactertoappy)
+                foreach (GameObject otherunit in charactertoappy)
                 {
                     Character otherunitchar = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
-                    if(Mathf.Abs(otherunitchar.position.x-unitchar.position.x)==1 || Mathf.Abs(otherunitchar.position.y - unitchar.position.y) == 1)
+                    if (Mathf.Abs(otherunitchar.position.x - unitchar.position.x) == 1 || Mathf.Abs(otherunitchar.position.y - unitchar.position.y) == 1)
                     {
                         otherunitchar.currentHP += (int)(otherunitchar.stats.HP * 0.1f);
                         if (otherunitchar.currentHP > otherunitchar.stats.HP)
@@ -148,17 +148,17 @@ public class TurnManger : MonoBehaviour
     }
     private void ManageTurnRotation()
     {
-        if(currentlyplaying=="playable")
+        if (currentlyplaying == "playable")
         {
             bool alldone = true;
-            foreach(Character character in playableunit)
+            foreach (Character character in playableunit)
             {
-                if(!character.alreadyplayed || !character.alreadymoved)
+                if (!character.alreadyplayed || !character.alreadymoved)
                 {
                     alldone = false;
                 }
             }
-            if(alldone)
+            if (alldone)
             {
                 foreach (Character character in enemyunit)
                 {
@@ -211,7 +211,7 @@ public class TurnManger : MonoBehaviour
                     character.alreadyplayed = false;
                     character.alreadymoved = false;
                 }
-                if(FindAnyObjectByType<ActionManager>())
+                if (FindAnyObjectByType<ActionManager>())
                 {
                     FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
                     FindAnyObjectByType<GridScript>().ResetAllSelections();
@@ -234,7 +234,7 @@ public class TurnManger : MonoBehaviour
 
         GridScript.ResetAllSelections();
 
-        if(GridScript.selection!=null)
+        if (GridScript.selection != null)
         {
             GridScript.ShowMovement();
         }
@@ -293,12 +293,12 @@ public class TurnManger : MonoBehaviour
         otherunitsGO = new List<GameObject>();
         foreach (GameObject character in allunits)
         {
-            if(character.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable")
+            if (character.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
             {
                 playableunitGO.Add(character);
                 playableunit.Add(character.GetComponent<UnitScript>().UnitCharacteristics);
             }
-            else if(character.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="enemy")
+            else if (character.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "enemy")
             {
                 enemyunitGO.Add(character);
                 enemyunit.Add(character.GetComponent<UnitScript>().UnitCharacteristics);
@@ -308,7 +308,7 @@ public class TurnManger : MonoBehaviour
                 otherunitsGO.Add(character);
                 otherunits.Add(character.GetComponent<UnitScript>().UnitCharacteristics);
             }
-            
+
         }
     }
 }

@@ -14,8 +14,8 @@ public class GameOverScript : MonoBehaviour
     private void OnEnable()
     {
         Time.timeScale = 0f;
-        waittingforGameover= true;
-        if(victory)
+        waittingforGameover = true;
+        if (victory)
         {
             GetComponentInChildren<TextMeshProUGUI>().text = "Winner is you !\nRestarting soon...";
         }
@@ -28,10 +28,10 @@ public class GameOverScript : MonoBehaviour
 
     private void Update()
     {
-        if(waittingforGameover)
+        if (waittingforGameover)
         {
             gameovercounter++;
-            if(gameovercounter > 5f/Time.deltaTime)
+            if (gameovercounter > 5f / Time.deltaTime)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }

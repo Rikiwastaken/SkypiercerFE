@@ -44,6 +44,12 @@ public class UnitScript : MonoBehaviour
         public int desiredlevel;
         public int itemtodropID;
         public bool usetelekinesis;
+        public Vector2 startpos;
+        public List<int> equipments;
+        public List<int> Skills;
+        public String Name;
+        public bool isboss;
+        public bool isother;
     }
 
     [Serializable]

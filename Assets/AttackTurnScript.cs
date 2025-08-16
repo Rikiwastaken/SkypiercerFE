@@ -53,6 +53,8 @@ public class AttackTurnScript : MonoBehaviour
 
     private List<int> levelupbonuses;
 
+    private bool triggercleanup;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -202,7 +204,7 @@ public class AttackTurnScript : MonoBehaviour
             }
         }
 
-        if (!battlecamera.incombat)
+        if (!battlecamera.incombat && triggercleanup)
         {
             DeathCleanup();
 
@@ -212,6 +214,7 @@ public class AttackTurnScript : MonoBehaviour
 
     private void ManageAttack(GameObject Attacker)
     {
+        triggercleanup = true;
         Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
         if (counterbeforeattack > 0)
         {
@@ -773,6 +776,7 @@ public class AttackTurnScript : MonoBehaviour
 
     private void DeathCleanup()
     {
+        triggercleanup = false;
         List<GameObject> objecttodelete = new List<GameObject>();
         foreach (GameObject unit in gridScript.allunitGOs)
         {
