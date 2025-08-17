@@ -41,7 +41,7 @@ public class GridScript : MonoBehaviour
 
     public GameObject actionsMenu;
 
-    private int movementbuffercounter;
+    public int movementbuffercounter;
     public float movementbuffer;
 
     private Vector2 previousmovementvalueforbuffer;

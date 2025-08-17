@@ -76,6 +76,9 @@ MonoBehaviour:
   Startpressed: 0
   Startjustpressed: 0
   Startbtn: {fileID: -2944745837413303413, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  ShowDetailspressed: 0
+  ShowDetailsjustpressed: 0
+  ShowDetailsbtn: {fileID: 1869277360971193226, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &6066130923447186532
 MonoBehaviour:
   m_ObjectHideFlags: 0

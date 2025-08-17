@@ -96,6 +96,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ShowDetails",
+                    "type": "Button",
+                    "id": "5e37b395-a322-4ba3-8e0b-2158ff5732ee",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Select",
                     "type": "Button",
                     "id": "ca7c0ff5-0e46-4ca8-ad5b-62aaa892091f",
@@ -420,6 +429,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "TelekinesisToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67c51cdd-34f9-41b9-94b2-d5486429c9e7",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowDetails",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29eee4dd-b1b3-499d-a538-0787085518df",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowDetails",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

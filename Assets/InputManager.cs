@@ -84,6 +84,14 @@ public class InputManager : MonoBehaviour
     private InputAction Startinput;
     private bool Startpressedonce;
 
+    [Header("Show Details")]
+
+    public bool ShowDetailspressed;
+    public bool ShowDetailsjustpressed;
+    public InputActionReference ShowDetailsbtn;
+    private InputAction ShowDetailsinput;
+    private bool ShowDetailspressedonce;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -104,6 +112,7 @@ public class InputManager : MonoBehaviour
         Telekinesisinput = Telekinesis.ToInputAction();
         Selectinput = Select.ToInputAction();
         Startinput = Startbtn.ToInputAction();
+        ShowDetailsinput = ShowDetailsbtn.ToInputAction();
     }
 
     private void FixedUpdate()
@@ -257,6 +266,22 @@ public class InputManager : MonoBehaviour
         if (!Startpressed)
         {
             Startpressedonce = false;
+        }
+
+        ShowDetailspressed = ShowDetailsinput.IsPressed();
+        if (ShowDetailspressed && !ShowDetailsjustpressed && !ShowDetailspressedonce)
+        {
+            ShowDetailsjustpressed = true;
+            ShowDetailspressedonce = true;
+        }
+        else
+        {
+            ShowDetailsjustpressed = false;
+        }
+
+        if (!ShowDetailspressed)
+        {
+            ShowDetailspressedonce = false;
         }
 
     }
