@@ -136,8 +136,28 @@ public class ActionsMenu : MonoBehaviour
                 battlecameraScript.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.position;
             }
 
+            CheckCorrectInfo(target, targetlist[activetargetid]);
+
         }
 
+    }
+
+    private void CheckCorrectInfo(GameObject unit, GameObject enemy)
+    {
+        string unitweaponname = unit.GetComponent<UnitScript>().GetFirstWeapon().Name;
+        string enemyweaponname = enemy.GetComponent<UnitScript>().GetFirstWeapon().Name;
+
+        if (!unitAttackText.text.Contains(unitweaponname) || !targetAttackText.text.Contains(enemyweaponname))
+        {
+            if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+            {
+                initializeHealingWindows(target, targetlist[activetargetid]);
+            }
+            else
+            {
+                initializeAttackWindows(target, targetlist[activetargetid]);
+            }
+        }
     }
 
     private void WeaponChange()

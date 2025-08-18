@@ -56,12 +56,15 @@ public class AttackTurnScript : MonoBehaviour
 
     private bool triggercleanup;
 
+    private CombatTextScript combatTextScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         TurnManager = GetComponent<TurnManger>();
         gridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<battlecameraScript>();
+        combatTextScript = FindAnyObjectByType<CombatTextScript>();
     }
 
     // Update is called once per frame
@@ -375,7 +378,7 @@ public class AttackTurnScript : MonoBehaviour
                             levelupbonuses = levelbonus;
 
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
-                            FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
+                            combatTextScript.UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
                             if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && target && CharAttacker.currentHP>0) // distribute exp if enemy died
                             {
                                 waittingforexp = true;
@@ -442,7 +445,7 @@ public class AttackTurnScript : MonoBehaviour
                                 (int hits, int crits, int damage, int exp, List<int> levelbonus) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                                 expgained = exp;
                                 levelupbonuses = levelbonus;
-                                FindAnyObjectByType<CombatTextScript>().UpdateInfo(damage, hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, Attacker.GetComponent<UnitScript>().UnitCharacteristics);
+                                combatTextScript.UpdateInfo(damage, hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, Attacker.GetComponent<UnitScript>().UnitCharacteristics);
                                 unitalreadyattacked = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
                                 if((CharAttacker.affiliation != "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable") || (CharAttacker.affiliation == "playable" && CharAttacker.currentHP <= 0))
@@ -494,7 +497,7 @@ public class AttackTurnScript : MonoBehaviour
                 unitalreadyattacked = false;
                 counterbeforeFirstAttack = (int)(delaybeforeFirstAttack / Time.fixedDeltaTime);
                 attacktrigger = true;
-                FindAnyObjectByType<CombatTextScript>().ResetInfo();
+                combatTextScript.ResetInfo();
             }
             else
             {

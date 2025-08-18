@@ -54,7 +54,7 @@ public class ItemsScript : MonoBehaviour
         }
         else
         {
-            statstext.text = "Dmg : " + target.equipments[id].BaseDamage + " Hit :" + target.equipments[id].BaseHit + "% Crit : " + target.equipments[id].BaseCrit + "% Range : " + target.equipments[id].Range + "  Uses : " + target.equipments[id].Currentuses + " / " + target.equipments[id].Maxuses;
+            statstext.text = target.equipments[id].Name+ "\nDmg : " + target.equipments[id].BaseDamage + "\nHit : " + target.equipments[id].BaseHit + " %\nCrit : " + target.equipments[id].BaseCrit + " %\nRange : " + target.equipments[id].Range + " \nUses : " + target.equipments[id].Currentuses + " / " + target.equipments[id].Maxuses;
         }
     }
 

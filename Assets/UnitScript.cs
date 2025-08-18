@@ -993,20 +993,28 @@ public class UnitScript : MonoBehaviour
         // Competitive
         if (GetSkill(22))
         {
-            if (GetFirstWeapon().type.ToLower() == enemy.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower())
+            if(enemy!=null)
             {
-                statbonuses.FixedDamageBonus += 50;
+                if (GetFirstWeapon().type.ToLower() == enemy.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower())
+                {
+                    statbonuses.FixedDamageBonus += 50;
+                }
             }
+            
         }
         //Giant Crusher
         if (GetSkill(23))
         {
-            if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
+            if(enemy!=null)
             {
-                statbonuses.PhysDamage += 10;
-                statbonuses.TelekDamage += 10;
-                statbonuses.DamageReduction += 10;
+                if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
+                {
+                    statbonuses.PhysDamage += 10;
+                    statbonuses.TelekDamage += 10;
+                    statbonuses.DamageReduction += 10;
+                }
             }
+            
         }
         //Last Stand
         if (GetSkill(24))
@@ -1069,23 +1077,31 @@ public class UnitScript : MonoBehaviour
         //Revenge
         if (GetSkill(28))
         {
-            if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
+            if(enemy!=null)
             {
-                statbonuses.FixedDamageBonus += (UnitCharacteristics.stats.HP - UnitCharacteristics.currentHP);
+                if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
+                {
+                    statbonuses.FixedDamageBonus += (UnitCharacteristics.stats.HP - UnitCharacteristics.currentHP);
+                }
             }
+            
         }
         //KillingSpree
         if (GetSkill(29))
         {
-            if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
+            if(enemy!=null)
             {
-                statbonuses.Strength += 10 * unitkilled;
-                statbonuses.Psyche += 10 * unitkilled;
-                statbonuses.Resistance += 10 * unitkilled;
-                statbonuses.Defense += 10 * unitkilled;
-                statbonuses.Speed += 10 * unitkilled;
-                statbonuses.Dexterity += 10 * unitkilled;
+                if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
+                {
+                    statbonuses.Strength += 10 * unitkilled;
+                    statbonuses.Psyche += 10 * unitkilled;
+                    statbonuses.Resistance += 10 * unitkilled;
+                    statbonuses.Defense += 10 * unitkilled;
+                    statbonuses.Speed += 10 * unitkilled;
+                    statbonuses.Dexterity += 10 * unitkilled;
+                }
             }
+            
         }
 
         //Survivor
@@ -1101,17 +1117,21 @@ public class UnitScript : MonoBehaviour
         //Bravery
         if (GetSkill(36))
         {
-            int difference = enemy.GetComponent<UnitScript>().UnitCharacteristics.level - UnitCharacteristics.level;
-
-            if (difference > 0)
+            if(enemy!=null)
             {
-                statbonuses.Strength += 5 * difference;
-                statbonuses.Psyche += 5 * difference;
-                statbonuses.Resistance += 5 * difference;
-                statbonuses.Defense += 5 * difference;
-                statbonuses.Speed += 5 * difference;
-                statbonuses.Dexterity += 5 * difference;
+                int difference = enemy.GetComponent<UnitScript>().UnitCharacteristics.level - UnitCharacteristics.level;
+
+                if (difference > 0)
+                {
+                    statbonuses.Strength += 5 * difference;
+                    statbonuses.Psyche += 5 * difference;
+                    statbonuses.Resistance += 5 * difference;
+                    statbonuses.Defense += 5 * difference;
+                    statbonuses.Speed += 5 * difference;
+                    statbonuses.Dexterity += 5 * difference;
+                }
             }
+            
 
 
         }
