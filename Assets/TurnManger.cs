@@ -63,8 +63,8 @@ public class TurnManger : MonoBehaviour
         }
         if (enemyunit.Count == 0)
         {
-            // GameOverScript.victory = true;
-            // GameOverScript.gameObject.SetActive(true);
+            GameOverScript.victory = true;
+            GameOverScript.gameObject.SetActive(true);
             return;
         }
         UpdateText();

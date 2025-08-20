@@ -79,12 +79,20 @@ public class ActionsMenu : MonoBehaviour
             }
             if (inputManager.NextWeaponjustpressed)
             {
-                NextWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
+                if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
+                {
+                    NextWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
+                }
+                
 
             }
             if (inputManager.PreviousWeaponjustpressed)
             {
-                PreviousWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
+                if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
+                {
+                    PreviousWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
+                }
+                
             }
 
             if (inputManager.NextTargetjustpressed)
@@ -174,6 +182,7 @@ public class ActionsMenu : MonoBehaviour
 
     private void NextWeapon(GameObject PreviousFoe, equipment initialweapon)
     {
+        
         target.GetComponent<UnitScript>().GetNextWeapon();
         WeaponChange();
         bool enemytargettable = false;

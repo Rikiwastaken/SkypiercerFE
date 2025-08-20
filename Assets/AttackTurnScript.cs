@@ -375,7 +375,7 @@ public class AttackTurnScript : MonoBehaviour
 
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
                             combatTextScript.UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
-                            if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && target && CharAttacker.currentHP>0) // distribute exp if enemy died
+                            if ((target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && CharAttacker.affiliation=="playable" && CharAttacker.currentHP>0)|| (CharAttacker.currentHP <= 0 && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP > 0)) // distribute exp if a character died and a ally lived
                             {
                                 waittingforexp = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
@@ -386,7 +386,7 @@ public class AttackTurnScript : MonoBehaviour
                                 waittingforexp = true;
                                 waittingforcamera = false;
                             }
-                            else if (CharAttacker.affiliation == "playable" && CharAttacker.currentHP<=0) // end fight if attacker died and attacker was allied
+                            else if ((CharAttacker.affiliation == "playable" && CharAttacker.currentHP<=0) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)) // end fight if attacker died and attacker was allied
                             {
                                 counterafterattack = (int)(delayafterAttack * 2f / Time.fixedDeltaTime);
                                 waittingforexp = true;

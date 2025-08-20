@@ -114,10 +114,18 @@ public class BattleInfotext : MonoBehaviour
             {
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             }
-            else if (turnManger.currentlyplaying == "enemy" && attackTurnScript.CurrentEnemy != null)
+            else if (turnManger.currentlyplaying == "enemy")
             {
-                selectedunit = attackTurnScript.CurrentEnemy;
-                selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
+                if(attackTurnScript.CurrentEnemy != null)
+                {
+                    selectedunit = attackTurnScript.CurrentEnemy;
+                    selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
+                }
+                else
+                {
+                    return;
+                }
+                
             }
             else if (attackTurnScript.CurrentOther != null)
             {
