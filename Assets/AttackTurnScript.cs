@@ -1,15 +1,6 @@
-using JetBrains.Annotations;
-using NUnit.Framework;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 using static UnitScript;
-using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 public class AttackTurnScript : MonoBehaviour
 {
 
@@ -64,12 +55,17 @@ public class AttackTurnScript : MonoBehaviour
         TurnManager = GetComponent<TurnManger>();
         gridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<battlecameraScript>();
-        combatTextScript = FindAnyObjectByType<CombatTextScript>();
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(combatTextScript == null)
+        {
+            combatTextScript = FindAnyObjectByType<CombatTextScript>();
+        }
+
         if (TurnManager.currentlyplaying != "enemy")
         {
             CurrentEnemy = null;
@@ -497,6 +493,10 @@ public class AttackTurnScript : MonoBehaviour
                 unitalreadyattacked = false;
                 counterbeforeFirstAttack = (int)(delaybeforeFirstAttack / Time.fixedDeltaTime);
                 attacktrigger = true;
+                if (combatTextScript == null)
+                {
+                    combatTextScript = FindAnyObjectByType<CombatTextScript>();
+                }
                 combatTextScript.ResetInfo();
             }
             else
