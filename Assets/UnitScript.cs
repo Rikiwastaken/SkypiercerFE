@@ -332,18 +332,27 @@ public class UnitScript : MonoBehaviour
                 remainingMovements += 1;
             }
 
+            if (remainingMovements <= 0)
+            {
+                UnitCharacteristics.alreadymoved = true;
+            }
+            else
+            {
+                UnitCharacteristics.alreadymoved = false;
+                GridScript gridScript = FindAnyObjectByType<GridScript>();
+                gridScript.selection = gridScript.GetTile(UnitCharacteristics.position);
+                gridScript.ShowLimitedMovementOfUnit(gameObject, remainingMovements);
 
-            UnitCharacteristics.alreadymoved = false;
-            GridScript gridScript = FindAnyObjectByType<GridScript>();
-            gridScript.selection = gridScript.GetTile(UnitCharacteristics.position);
-            gridScript.ShowLimitedMovementOfUnit(gameObject, remainingMovements);
+                gridScript.lockedmovementtiles = gridScript.movementtiles;
+                gridScript.lockselection = true;
+                ActionManager actionManager = FindAnyObjectByType<ActionManager>();
+                actionManager.frameswherenotlock = 0;
+                actionManager.framestoskip = 10;
+                actionManager.currentcharacter = gameObject;
+            }
 
-            gridScript.lockedmovementtiles = gridScript.movementtiles;
-            gridScript.lockselection = true;
-            ActionManager actionManager = FindAnyObjectByType<ActionManager>();
-            actionManager.frameswherenotlock = 0;
-            actionManager.framestoskip = 10;
-            actionManager.currentcharacter = gameObject;
+
+
         }
     }
 
@@ -832,7 +841,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.FixedDamageReduction += character.stats.Defense / 5;
                 statbonuses.FixedDamageBonus += character.stats.Strength / 5;
                 //Loyal
-                if(characterGO.GetComponent<UnitScript>().GetSkill(35))
+                if (characterGO.GetComponent<UnitScript>().GetSkill(35))
                 {
                     statbonuses.FixedDamageReduction += character.stats.Defense / 5;
                     statbonuses.FixedDamageBonus += character.stats.Strength / 5;
@@ -926,7 +935,7 @@ public class UnitScript : MonoBehaviour
             statbonuses.PhysDamage -= 15;
         }
         //Inspired
-        if(GetSkill(6))
+        if (GetSkill(6))
         {
             List<Character> activelist = null;
             if (UnitCharacteristics.affiliation == "playable")
@@ -941,13 +950,13 @@ public class UnitScript : MonoBehaviour
             {
                 activelist = FindAnyObjectByType<TurnManger>().otherunits;
             }
-            
+
             foreach (Character otherunitchar in activelist)
             {
                 int movement = otherunitchar.movements;
-                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= movement && otherunitchar.battalion==UnitCharacteristics.battalion && otherunitchar.protagonist)
+                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= movement && otherunitchar.battalion == UnitCharacteristics.battalion && otherunitchar.protagonist)
                 {
-                    statbonuses.FixedDamageBonus+=30;
+                    statbonuses.FixedDamageBonus += 30;
                     statbonuses.FixedDamageReduction += 30;
                     break;
                 }
@@ -994,19 +1003,19 @@ public class UnitScript : MonoBehaviour
         // Competitive
         if (GetSkill(22))
         {
-            if(enemy!=null)
+            if (enemy != null)
             {
                 if (GetFirstWeapon().type.ToLower() == enemy.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower())
                 {
                     statbonuses.FixedDamageBonus += 50;
                 }
             }
-            
+
         }
         //Giant Crusher
         if (GetSkill(23))
         {
-            if(enemy!=null)
+            if (enemy != null)
             {
                 if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
                 {
@@ -1015,7 +1024,7 @@ public class UnitScript : MonoBehaviour
                     statbonuses.DamageReduction += 10;
                 }
             }
-            
+
         }
         //Last Stand
         if (GetSkill(24))
@@ -1078,19 +1087,19 @@ public class UnitScript : MonoBehaviour
         //Revenge
         if (GetSkill(28))
         {
-            if(enemy!=null)
+            if (enemy != null)
             {
                 if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
                 {
                     statbonuses.FixedDamageBonus += (UnitCharacteristics.stats.HP - UnitCharacteristics.currentHP);
                 }
             }
-            
+
         }
         //KillingSpree
         if (GetSkill(29))
         {
-            if(enemy!=null)
+            if (enemy != null)
             {
                 if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
                 {
@@ -1102,7 +1111,7 @@ public class UnitScript : MonoBehaviour
                     statbonuses.Dexterity += 10 * unitkilled;
                 }
             }
-            
+
         }
 
         //Survivor
@@ -1118,7 +1127,7 @@ public class UnitScript : MonoBehaviour
         //Bravery
         if (GetSkill(36))
         {
-            if(enemy!=null)
+            if (enemy != null)
             {
                 int difference = enemy.GetComponent<UnitScript>().UnitCharacteristics.level - UnitCharacteristics.level;
 
@@ -1132,7 +1141,7 @@ public class UnitScript : MonoBehaviour
                     statbonuses.Dexterity += 5 * difference;
                 }
             }
-            
+
 
 
         }

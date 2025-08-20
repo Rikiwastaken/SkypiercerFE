@@ -68,7 +68,7 @@ public class DataScript : MonoBehaviour
         for (int i = 0; i < equipmentList.Count; i++)
         {
 
-            if(equipmentList[i].Grade>0)
+            if (equipmentList[i].Grade > 0)
             {
                 equipment equipemnttoappy = BasicGradeList[equipmentList[i].Grade]; ;
                 equipmentList[i].BaseDamage = equipemnttoappy.BaseDamage;
@@ -76,7 +76,7 @@ public class DataScript : MonoBehaviour
                 equipmentList[i].BaseCrit = equipemnttoappy.BaseCrit;
                 equipmentList[i].Currentuses = equipemnttoappy.Maxuses;
                 equipmentList[i].Maxuses = equipemnttoappy.Maxuses;
-                if (equipmentList[i].type.ToLower()=="bow")
+                if (equipmentList[i].type.ToLower() == "bow")
                 {
                     equipmentList[i].Range = 2;
                 }
@@ -95,11 +95,24 @@ public class DataScript : MonoBehaviour
     {
         List<int> equipmentListIDs = Character.equipmentsIDs;
         List<equipment> newequipmentlist = new List<equipment>();
-        foreach(int equipmentID in equipmentListIDs)
+        foreach (int equipmentID in equipmentListIDs)
         {
-            if(equipmentID >= 0 && equipmentID<equipmentList.Count)
+            if (equipmentID >= 0 && equipmentID < equipmentList.Count)
             {
-                newequipmentlist.Add(equipmentList[equipmentID]);
+                equipment newequipment = new equipment();
+                equipment equipmenttocopy = equipmentList[equipmentID];
+                newequipment.Name = equipmenttocopy.Name;
+                newequipment.BaseDamage = equipmenttocopy.BaseDamage;
+                newequipment.BaseHit = equipmenttocopy.BaseHit;
+                newequipment.BaseCrit = equipmenttocopy.BaseCrit;
+                newequipment.Range = equipmenttocopy.Range;
+                newequipment.type = equipmenttocopy.type;
+                newequipment.Currentuses = equipmenttocopy.Currentuses;
+                newequipment.Maxuses = equipmenttocopy.Maxuses;
+                newequipment.ID = equipmenttocopy.ID;
+                newequipment.Grade = equipmenttocopy.Grade;
+                newequipment.equipmentmodel = equipmenttocopy.equipmentmodel;
+                newequipmentlist.Add(newequipment);
             }
         }
         Character.equipments = newequipmentlist;
