@@ -147,7 +147,7 @@ public class AttackTurnScript : MonoBehaviour
             }
             GameObject CurrentPlayable = ActionsMenu.target;
             Character CurrentPlayableChar = CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics;
-            if (ActionsMenu.confirmattack)
+            if (ActionsMenu.confirmattack && CurrentPlayable!=null)
             {
                 ManageAttack(CurrentPlayable);
             }

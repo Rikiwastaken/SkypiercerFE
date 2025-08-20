@@ -1199,29 +1199,45 @@ public class ActionsMenu : MonoBehaviour
     {
         List<GameObject> targetlist = new List<GameObject>();
         Vector2 position = target.GetComponent<UnitScript>().UnitCharacteristics.position;
-        GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x + 1), (int)position.y));
-        if (newunit != null)
+
+        if(position.x<GridScript.Grid.Count-1)
         {
-            targetlist.Add(newunit);
+            GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x + 1), (int)position.y));
+            if (newunit != null)
+            {
+                targetlist.Add(newunit);
+            }
+        }
+        
+
+        if(position.x>0)
+        {
+            GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x - 1), (int)position.y));
+            if (newunit != null)
+            {
+                targetlist.Add(newunit);
+            }
         }
 
-        newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x - 1), (int)position.y));
-        if (newunit != null)
+        if (position.y < GridScript.Grid[0].Count-1)
         {
-            targetlist.Add(newunit);
+            GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)position.x, (int)(position.y + 1)));
+            if (newunit != null)
+            {
+                targetlist.Add(newunit);
+            }
         }
+        
 
-        newunit = GridScript.GetUnit(GridScript.GetTile((int)position.x, (int)(position.y + 1)));
-        if (newunit != null)
+        if(position.y>0)
         {
-            targetlist.Add(newunit);
+            GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)position.x, (int)(position.y - 1)));
+            if (newunit != null)
+            {
+                targetlist.Add(newunit);
+            }
         }
-
-        newunit = GridScript.GetUnit(GridScript.GetTile((int)position.x, (int)(position.y - 1)));
-        if (newunit != null)
-        {
-            targetlist.Add(newunit);
-        }
+        
 
         foreach (GameObject potentialtarget in targetlist)
         {

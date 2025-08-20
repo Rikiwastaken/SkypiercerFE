@@ -478,7 +478,7 @@ public class GridScript : MonoBehaviour
     {
         foreach (GameObject unit in allunitGOs)
         {
-            if(unit.IsDestroyed())
+            if(unit.Equals(null) || unit==null)
             {
                 continue;
             }
@@ -497,7 +497,7 @@ public class GridScript : MonoBehaviour
 
         foreach (GameObject unit in allunitGOs)
         {
-            if (!unit.IsDestroyed())
+            if (!unit.Equals(null) || unit == null)
             {
                 if (unit.GetComponent<UnitScript>().UnitCharacteristics.position == selection.GridCoordinates)
                 {
