@@ -13,6 +13,7 @@ Music from Fire Emblem Three Houses
 - Reset Camera : press right stick / tab
 - Validate : A / escape
 - Cancel : B / escape
+- See Skill Details : X / F
 - Activate (or deactivate) telekinesis : Y / W
 - Next Target (resp previous) RT (LT) / 3 (1)
 - Next Weapon (resp previous) RB (LB) / E (A)
