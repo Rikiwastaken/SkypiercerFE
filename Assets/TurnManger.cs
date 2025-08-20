@@ -30,6 +30,8 @@ public class TurnManger : MonoBehaviour
 
     private InputManager InputManager;
 
+    private PreBattleMenuScript preBattleMenuScript;
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -38,7 +40,12 @@ public class TurnManger : MonoBehaviour
             InputManager = FindAnyObjectByType<InputManager>();
         }
 
-        if (InputManager.Startpressed && waittingforstart)
+        if (preBattleMenuScript == null)
+        {
+            preBattleMenuScript = FindAnyObjectByType<PreBattleMenuScript>();
+        }
+
+        if (InputManager.Startpressed && waittingforstart && !preBattleMenuScript.gameObject.activeSelf)
         {
             waittingforstart = false;
         }

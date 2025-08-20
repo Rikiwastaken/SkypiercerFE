@@ -55,12 +55,7 @@ public class GridScript : MonoBehaviour
         lockedattacktiles = new List<GridSquareScript>();
         lockedhealingtiles = new List<GridSquareScript>();
         //InstantiateGrid();
-        foreach (UnitScript character in FindObjectsByType<UnitScript>(FindObjectsSortMode.None))
-        {
-            allunits.Add(character.UnitCharacteristics);
-            allunitGOs.Add(character.gameObject);
-        }
-        GetComponent<TurnManger>().InitializeUnitLists(allunitGOs);
+        InitializeGOList();
         Grid = new List<List<GameObject>>();
         GridSquareScript[] tilelist = FindObjectsByType<GridSquareScript>(FindObjectsSortMode.None);
         for (int x = 0; x <= lastSquare.GridCoordinates.x; x++)
@@ -238,6 +233,17 @@ public class GridScript : MonoBehaviour
         }
     }
 
+    public void InitializeGOList()
+    {
+        allunits = new List<Character> ();
+        allunitGOs = new List<GameObject> ();
+        foreach (UnitScript character in FindObjectsByType<UnitScript>(FindObjectsSortMode.None))
+        {
+            allunits.Add(character.UnitCharacteristics);
+            allunitGOs.Add(character.gameObject);
+        }
+        GetComponent<TurnManger>().InitializeUnitLists(allunitGOs);
+    }
     public void UnlockSelection()
     {
         lockedmovementtiles = new List<GridSquareScript>();
@@ -472,6 +478,10 @@ public class GridScript : MonoBehaviour
     {
         foreach (GameObject unit in allunitGOs)
         {
+            if(unit.IsDestroyed())
+            {
+                continue;
+            }
             if (unit.GetComponent<UnitScript>().UnitCharacteristics.position == tile.GridCoordinates)
             {
                 return unit;

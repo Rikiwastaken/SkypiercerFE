@@ -1,6 +1,7 @@
 using NUnit.Framework;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Playables;
 using static UnitScript;
 
 public class MapInitializer : MonoBehaviour
@@ -18,6 +19,8 @@ public class MapInitializer : MonoBehaviour
 
     public List<EnemyStats> EnemyList;
 
+    private GridScript GridScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -25,25 +28,43 @@ public class MapInitializer : MonoBehaviour
         InitialNonPlayers();
     }
 
-    private void InitializePlayers()
+    public void InitializePlayers()
     {
+        if(GridScript == null)
+        {
+            GridScript = FindAnyObjectByType<GridScript>();
+        }
         if(DataScript == null)
         {
             DataScript = FindAnyObjectByType<DataScript>();
         }
 
+        
+
+        foreach (Transform potentialplayable in Characters.transform)
+        {
+            if(potentialplayable.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
+            {
+                Destroy(potentialplayable.gameObject);
+            }
+        }
 
         int index = 0;
         foreach(Character playable in DataScript.PlayableCharacterList)
         {
-            GameObject newcharacter = Instantiate(BaseCharacter);
-            newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable; 
-            playable.position = playablepos[index];
-            newcharacter.transform.parent = Characters.transform;
-            newcharacter.transform.position = new Vector3(playablepos[index].x,0, playablepos[index].y);
-            newcharacter.name = playable.name;
-            index++;
+            if (index < playablepos.Count && playable.deployunit)
+            {
+                GameObject newcharacter = Instantiate(BaseCharacter);
+                newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
+                playable.position = playablepos[index];
+                newcharacter.transform.parent = Characters.transform;
+                newcharacter.transform.position = new Vector3(playablepos[index].x, 0, playablepos[index].y);
+                newcharacter.name = playable.name;
+                index++;
+            }
+            
         }
+        GridScript.InitializeGOList();
     }
 
 

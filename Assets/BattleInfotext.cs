@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -33,6 +34,8 @@ public class BattleInfotext : MonoBehaviour
     public GameObject Attackwindows;
     public GameObject ItemAction;
 
+    public GameObject PreBattleMenu;
+
     public bool indescription;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,16 +50,22 @@ public class BattleInfotext : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (Attackwindows.activeSelf || ItemAction.activeSelf)
         {
             transform.parent.GetChild(1).gameObject.SetActive(false);
             transform.parent.GetChild(2).gameObject.SetActive(false);
             return;
         }
-        else
+        else if (!PreBattleMenu.activeSelf)
         {
             transform.parent.GetChild(1).gameObject.SetActive(true);
             transform.parent.GetChild(2).gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.parent.GetChild(1).gameObject.SetActive(false);
+            transform.parent.GetChild(2).gameObject.SetActive(false);
         }
 
         if (GridScript == null)
@@ -85,7 +94,7 @@ public class BattleInfotext : MonoBehaviour
         }
 
 
-        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat)
+        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
         {
             stringtoshow = string.Empty;
             Color color = transform.parent.GetComponent<Image>().color;
@@ -93,7 +102,10 @@ public class BattleInfotext : MonoBehaviour
             transform.parent.GetComponent<Image>().color = color;
             Skilltext.transform.parent.gameObject.SetActive(false);
             SkillDescription.transform.parent.gameObject.SetActive(false);
-            FindAnyObjectByType<EventSystem>().SetSelectedGameObject(null);
+            if (!(PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
+            {
+                FindAnyObjectByType<EventSystem>().SetSelectedGameObject(null);
+            }
         }
         else
         {
@@ -117,7 +129,7 @@ public class BattleInfotext : MonoBehaviour
                 selectedunit = GridScript.GetUnit(GridScript.selection);
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             }
-            if (selectedunit != null && selectedunitCharacter != null)
+            if (!selectedunit.Equals(null) && selectedunitCharacter != null)
             {
 
                 string gradeletter = "E";
@@ -148,7 +160,7 @@ public class BattleInfotext : MonoBehaviour
                 stringtoshow = selectedunitCharacter.name + "\n";
                 stringtoshow += " Level : " + selectedunitCharacter.level + "\n";
                 stringtoshow += " Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP + "\n";
-                if(selectedunitCharacter.affiliation=="playable")
+                if (selectedunitCharacter.affiliation == "playable")
                 {
                     stringtoshow += " Experience : " + selectedunitCharacter.experience + " / 100\n\n";
                 }
@@ -160,24 +172,23 @@ public class BattleInfotext : MonoBehaviour
 
                 if (statsmods.Strength > 0)
                 {
-                    stringtoshow += " Strength : <color=green>" + selectedunitCharacter.stats.Strength + statsmods.Strength + "</color>\n";
+                    stringtoshow += " Strength : <color=#017a01>" + (selectedunitCharacter.stats.Strength + statsmods.Strength) + "</color>\n";
                 }
                 else if (statsmods.Strength < 0)
                 {
-                    stringtoshow += " Strength : <color=red>" + selectedunitCharacter.stats.Strength + statsmods.Strength + "</color>\n";
+                    stringtoshow += " Strength : <color=red>" + (selectedunitCharacter.stats.Strength + statsmods.Strength) + "</color>\n";
                 }
                 else
                 {
                     stringtoshow += " Strength : " + selectedunitCharacter.stats.Strength + "\n";
                 }
-
                 if (statsmods.Psyche > 0)
                 {
-                    stringtoshow += " Psyche : <color=green>" + selectedunitCharacter.stats.Psyche + statsmods.Psyche + "</color>\n";
+                    stringtoshow += " Psyche : <color=#017a01>" + (selectedunitCharacter.stats.Psyche + statsmods.Psyche) + "</color>\n";
                 }
                 else if (statsmods.Psyche < 0)
                 {
-                    stringtoshow += " Psyche : <color=red>" + selectedunitCharacter.stats.Psyche + statsmods.Psyche + "</color>\n";
+                    stringtoshow += " Psyche : <color=red>" + (selectedunitCharacter.stats.Psyche + statsmods.Psyche) + "</color>\n";
                 }
                 else
                 {
@@ -186,11 +197,11 @@ public class BattleInfotext : MonoBehaviour
 
                 if (statsmods.Defense > 0)
                 {
-                    stringtoshow += " Defense : <color=green>" + selectedunitCharacter.stats.Defense + statsmods.Defense + "</color>\n";
+                    stringtoshow += " Defense : <color=#017a01>" + (selectedunitCharacter.stats.Defense + statsmods.Defense) + "</color>\n";
                 }
                 else if (statsmods.Defense < 0)
                 {
-                    stringtoshow += " Defense : <color=red>" + selectedunitCharacter.stats.Defense + statsmods.Defense + "</color>\n";
+                    stringtoshow += " Defense : <color=red>" + (selectedunitCharacter.stats.Defense + statsmods.Defense) + "</color>\n";
                 }
                 else
                 {
@@ -199,11 +210,11 @@ public class BattleInfotext : MonoBehaviour
 
                 if (statsmods.Resistance > 0)
                 {
-                    stringtoshow += " Resistance : <color=green>" + selectedunitCharacter.stats.Resistance + statsmods.Resistance + "</color>\n";
+                    stringtoshow += " Resistance : <color=#017a01>" + (selectedunitCharacter.stats.Resistance + statsmods.Resistance) + "</color>\n";
                 }
                 else if (statsmods.Resistance < 0)
                 {
-                    stringtoshow += " Resistance : <color=red>" + selectedunitCharacter.stats.Resistance + statsmods.Resistance + "</color>\n";
+                    stringtoshow += " Resistance : <color=red>" + (selectedunitCharacter.stats.Resistance + statsmods.Resistance) + "</color>\n";
                 }
                 else
                 {
@@ -212,11 +223,11 @@ public class BattleInfotext : MonoBehaviour
 
                 if (statsmods.Dexterity > 0)
                 {
-                    stringtoshow += " Dexterity : <color=green>" + selectedunitCharacter.stats.Dexterity + statsmods.Dexterity + "</color>\n";
+                    stringtoshow += " Dexterity : <color=#017a01>" + (selectedunitCharacter.stats.Dexterity + statsmods.Dexterity) + "</color>\n";
                 }
                 else if (statsmods.Dexterity < 0)
                 {
-                    stringtoshow += " Dexterity : <color=red>" + selectedunitCharacter.stats.Dexterity + statsmods.Dexterity + "</color>\n";
+                    stringtoshow += " Dexterity : <color=red>" + (selectedunitCharacter.stats.Dexterity + statsmods.Dexterity) + "</color>\n";
                 }
                 else
                 {
@@ -225,11 +236,11 @@ public class BattleInfotext : MonoBehaviour
 
                 if (statsmods.Speed > 0)
                 {
-                    stringtoshow += " Speed : <color=green>" + selectedunitCharacter.stats.Speed + statsmods.Speed + "</color>\n\n";
+                    stringtoshow += " Speed : <color=#017a01>" + (selectedunitCharacter.stats.Speed + statsmods.Speed) + "</color>\n\n";
                 }
                 else if (statsmods.Speed < 0)
                 {
-                    stringtoshow += " Speed : <color=red>" + selectedunitCharacter.stats.Speed + statsmods.Speed + "</color>\n\n";
+                    stringtoshow += " Speed : <color=red>" + (selectedunitCharacter.stats.Speed + statsmods.Speed) + "</color>\n\n";
                 }
                 else
                 {

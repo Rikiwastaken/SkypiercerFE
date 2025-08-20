@@ -25,23 +25,18 @@ public class battlecameraScript : MonoBehaviour
     public CombatTextScript CombatTextScript;
     private bool resettingy;
 
+    public GameObject PreBattleMenu;
     
 
     private void Start()
     {
         initialrotation = transform.GetChild(0).rotation.eulerAngles;
         previouselevation = transform.position.y;
+        GridScript = FindAnyObjectByType<GridScript>();
     }
 
     void FixedUpdate()
     {
-        if(GridScript == null)
-        {
-            GridScript = FindAnyObjectByType<GridScript>();
-        }
-
-
-
 
         if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), Destination)>0.01f)
         {
@@ -70,7 +65,7 @@ public class battlecameraScript : MonoBehaviour
             }
         }
 
-        if (GridScript.actionsMenu.activeSelf || incombat)
+        if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
         {
             return;
         }

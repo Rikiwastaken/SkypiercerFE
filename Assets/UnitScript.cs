@@ -35,6 +35,7 @@ public class UnitScript : MonoBehaviour
         public List<int> EquipedSkills;
         public bool isboss;
         public bool attacksfriends;
+        public bool deployunit;
     }
 
     [Serializable]
