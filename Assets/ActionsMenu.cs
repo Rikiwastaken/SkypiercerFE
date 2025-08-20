@@ -304,6 +304,10 @@ public class ActionsMenu : MonoBehaviour
                         {
                             rangebonus = 1;
                         }
+                        if(target.GetComponent<UnitScript>().GetSkill(33))
+                        {
+                            rangebonus += 1;
+                        }
                     }
                     if (weapon.type.ToLower() == "bow")
                     {
@@ -341,6 +345,10 @@ public class ActionsMenu : MonoBehaviour
                             else
                             {
                                 rangebonus = 1;
+                            }
+                            if (target.GetComponent<UnitScript>().GetSkill(33))
+                            {
+                                rangebonus += 1;
                             }
                         }
                         if (weapon.type.ToLower() == "bow")
