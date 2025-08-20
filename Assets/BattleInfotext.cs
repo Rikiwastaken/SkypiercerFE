@@ -137,7 +137,7 @@ public class BattleInfotext : MonoBehaviour
                 selectedunit = GridScript.GetUnit(GridScript.selection);
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             }
-            if (!selectedunit.Equals(null) && !selectedunitCharacter.Equals(null))
+            if (selectedunit!=null && selectedunitCharacter!=null)
             {
 
                 string gradeletter = "E";
