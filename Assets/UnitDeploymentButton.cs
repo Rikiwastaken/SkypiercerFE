@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnitScript;
 
@@ -14,12 +15,15 @@ public class UnitDeploymentButton : MonoBehaviour
 
     private DataScript DataScript;
 
+    private InputManager InputManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         UnitDeploymentScript = GetComponentInParent<UnitDeploymentScript>();
         DataScript = FindAnyObjectByType<DataScript>();
         MapInitializer = FindAnyObjectByType<MapInitializer>();
+        InputManager = FindAnyObjectByType<InputManager>();
     }
 
     private void FixedUpdate()
@@ -35,11 +39,28 @@ public class UnitDeploymentButton : MonoBehaviour
             {
                 GetComponent<Image>().color = Color.red;
             }
+            if (InputManager.Telekinesisjustpressed && EventSystem.current.currentSelectedGameObject==gameObject && !Character.protagonist)
+            {
+                if(Character.battalion=="Zack")
+                {
+                    Character.battalion = "Kira";
+                }
+                else if (Character.battalion == "Kira")
+                {
+                    Character.battalion = "Gale";
+                }
+                else
+                {
+                    Character.battalion = "Zack";
+                }
+            }
         }
         else
         {
             GetComponentInChildren<TextMeshProUGUI>().text = "No Unit";
         }
+
+        
     }
 
     // Update is called once per frame

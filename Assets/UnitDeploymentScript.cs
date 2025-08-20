@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,6 +20,10 @@ public class UnitDeploymentScript : MonoBehaviour
     private InputManager inputmanager;
 
     public List<GameObject> PreBattleMenuItems;
+
+    public TextMeshProUGUI BattalionText;
+
+    public TextMeshProUGUI UnitsDeployedText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -45,6 +50,7 @@ public class UnitDeploymentScript : MonoBehaviour
                     go.SetActive(true);
                 }
                 gameObject.SetActive(false);
+                gridscript.InitializeGOList();
                 return;
             }
         }
@@ -55,7 +61,7 @@ public class UnitDeploymentScript : MonoBehaviour
         bool buttonselected = false;
         if(currentselected != null )
         {
-            for( int i = 0; i < transform.childCount; i++ )
+            for( int i = 0; i < 20; i++ )
             {
                 if(transform.GetChild(i).gameObject == currentselected)
                 {
@@ -67,12 +73,28 @@ public class UnitDeploymentScript : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
         }
+        Character currentchar = EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>().Character;
+        if(currentchar.name!="")
+        {
+            string unitbattallion = currentchar.battalion;
+            BattalionText.text = "Battallion :\n" + unitbattallion + "\nChange with    /W";
+        }
+        else
+        {
+            BattalionText.text = "";
+        }
+
+
+
+        UnitsDeployedText.text ="Units deployed :\r\n"+ numberofSelectedUnits() + " / "+numberofunitstodeplay;
+
+
     }
 
     private void InitializeButtons()
     {
         OrderUnits();
-        for (int i = 0; i < Mathf.Min(DataScript.PlayableCharacterList.Count,transform.childCount); i++)
+        for (int i = 0; i < Mathf.Min(DataScript.PlayableCharacterList.Count,20); i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = DataScript.PlayableCharacterList[i];
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i;
@@ -81,7 +103,7 @@ public class UnitDeploymentScript : MonoBehaviour
                 transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.deployunit = true;
             }
         }
-        for(int i = DataScript.PlayableCharacterList.Count; i< Mathf.Min(DataScript.PlayableCharacterList.Count, transform.childCount);i++)
+        for(int i = DataScript.PlayableCharacterList.Count; i< Mathf.Min(DataScript.PlayableCharacterList.Count, 20);i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = null;
         }
