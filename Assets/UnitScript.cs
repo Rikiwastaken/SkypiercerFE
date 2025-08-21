@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -121,6 +122,15 @@ public class UnitScript : MonoBehaviour
         public int DexterityGrowth;
     }
 
+    [Serializable]
+    public class NumberToShow
+    {
+        public string EffectName;
+        public int number;
+        public bool ishealing;
+        public int framesremaining;
+    }
+
     public Character UnitCharacteristics;
     public EnemyStats enemyStats;
 
@@ -144,6 +154,8 @@ public class UnitScript : MonoBehaviour
 
     private GameObject currentequipmentmodel;
 
+    private AttackTurnScript AttackTurnScript;
+
     public Material AllyMat;
     public Material EnemyMat;
     public GameObject Head;
@@ -154,9 +166,19 @@ public class UnitScript : MonoBehaviour
 
     public int SurvivorStacks;
 
+    public TextMeshProUGUI DmgText;
+    public TextMeshProUGUI DmgEffectNameText;
+
+    private List<NumberToShow> damagestoshow = new List<NumberToShow>();
+
+    public float timeforshowingnumbers;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        AttackTurnScript = FindAnyObjectByType< AttackTurnScript >();
+
         if (UnitCharacteristics.EquipedSkills == null)
         {
             UnitCharacteristics.EquipedSkills = new List<int>(4);
@@ -279,7 +301,66 @@ public class UnitScript : MonoBehaviour
 
         //TemporaryColor();
         UpdateRendererLayer();
+        ManageDamagenumber();
 
+    }
+
+    public void AddNumber(int amount, bool ishealing, string effectname)
+    {
+        NumberToShow newnumber = new NumberToShow();
+        newnumber.number = amount;
+        newnumber.ishealing = ishealing;
+        newnumber.EffectName = effectname;
+        newnumber.framesremaining = (int)(timeforshowingnumbers/Time.fixedDeltaTime);
+        damagestoshow.Add(newnumber);
+    }
+
+    private void ManageDamagenumber()
+    {
+        if(damagestoshow.Count>0 && !battlecameraScript.incombat)
+        {
+            DmgText.enabled = true;
+            DmgEffectNameText.enabled = true;
+            if (damagestoshow[0].number==0)
+            {
+                DmgText.enabled = false;
+            }
+            else
+            {
+                DmgText.enabled = true;
+                if (damagestoshow[0].ishealing)
+                {
+                    DmgText.text = "<color=green>" + damagestoshow[0].number + "</color>";
+                }
+                else
+                {
+                    DmgText.text = "<color=red>" + damagestoshow[0].number + "</color>";
+                }
+            }
+            
+            
+            
+
+            DmgEffectNameText.text = damagestoshow[0].EffectName;
+
+            if (damagestoshow[0].framesremaining >= 0)
+            {
+                damagestoshow[0].framesremaining--;
+            }
+            if (damagestoshow[0].framesremaining <= 0)
+            {
+                damagestoshow.RemoveAt(0);
+            }
+            else
+            {
+                AttackTurnScript.delaybeforenxtunit = 3;
+            }
+        }
+        else
+        {
+            DmgText.enabled = false;
+            DmgEffectNameText.enabled = false;
+        }
     }
 
     public void ResetForward()
@@ -1073,7 +1154,7 @@ public class UnitScript : MonoBehaviour
             bool toofar = true;
             foreach (Character otherunitchar in activelist)
             {
-                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= 3)
+                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= 3 && otherunitchar!=UnitCharacteristics)
                 {
                     toofar = false; break;
                 }

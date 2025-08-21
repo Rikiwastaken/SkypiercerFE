@@ -49,6 +49,8 @@ public class AttackTurnScript : MonoBehaviour
 
     private CombatTextScript combatTextScript;
 
+    public int delaybeforenxtunit;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -61,6 +63,7 @@ public class AttackTurnScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if(combatTextScript == null)
         {
             combatTextScript = FindAnyObjectByType<CombatTextScript>();
@@ -81,6 +84,11 @@ public class AttackTurnScript : MonoBehaviour
 
         if (CurrentEnemy == null && TurnManager.currentlyplaying == "enemy")
         {
+            if (delaybeforenxtunit > 0)
+            {
+                delaybeforenxtunit--;
+                return;
+            }
             foreach (GameObject unit in gridScript.allunitGOs)
             {
                 if (unit.gameObject != null && unit != null)
@@ -169,7 +177,11 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (TurnManager.currentlyplaying == "other")
         {
-
+            if (delaybeforenxtunit > 0)
+            {
+                delaybeforenxtunit--;
+                return;
+            }
             Character CharCurrentOther = CurrentOther.GetComponent<UnitScript>().UnitCharacteristics;
             battlecamera.Destination = CharCurrentOther.position;
             if (!CharCurrentOther.alreadymoved)
@@ -550,6 +562,7 @@ public class AttackTurnScript : MonoBehaviour
         if (unit1.GetComponent<UnitScript>().GetSkill(32)) // Survivor
         {
             unit1.GetComponent<UnitScript>().SurvivorStacks++;
+            unit1.GetComponent<UnitScript>().AddNumber(unit1.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
         }
 
         if (unit2 != null)
@@ -558,16 +571,20 @@ public class AttackTurnScript : MonoBehaviour
             if (unit2.GetComponent<UnitScript>().GetSkill(32)) // Survivor
             {
                 unit2.GetComponent<UnitScript>().SurvivorStacks++;
+                unit2.GetComponent<UnitScript>().AddNumber(unit2.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
             }
 
             if (unit1.GetComponent<UnitScript>().GetSkill(15)) // Sore Loser
             {
                 if (charunit1.currentHP == 0)
                 {
+                    unit2.GetComponent<UnitScript>().AddNumber(charunit2.currentHP-1, false, "Sore Loser");
                     charunit2.currentHP = 1;
+                    
                 }
                 else if (charunit1.currentHP <  charunit2.currentHP)
                 {
+                    unit2.GetComponent<UnitScript>().AddNumber(charunit2.currentHP - charunit1.currentHP, false, "Sore Loser");
                     charunit2.currentHP = charunit1.currentHP;
                 }
             }
@@ -576,10 +593,13 @@ public class AttackTurnScript : MonoBehaviour
             {
                 if(charunit2.currentHP == 0)
                 {
+                    unit1.GetComponent<UnitScript>().AddNumber(charunit1.currentHP - 1, false, "Sore Loser");
                     charunit1.currentHP = 1;
+
                 }
                 else if (charunit2.currentHP < charunit1.currentHP)
                 {
+                    unit1.GetComponent<UnitScript>().AddNumber(charunit1.currentHP - charunit2.currentHP, false, "Sore Loser");
                     charunit1.currentHP = charunit2.currentHP;
                 }
             }
@@ -788,7 +808,10 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 else
                 {
-                    reward += ManhattanDistance(charunit, charotherunit) - charunit.equipments[0].Range;
+                    if(charunit.currentHP<charunit.stats.HP)
+                    {
+                        reward += Mathf.Min((10 - ManhattanDistance(charunit, charotherunit) - charunit.equipments[0].Range), 0);
+                    }
                 }
             }
 

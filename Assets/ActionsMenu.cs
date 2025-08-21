@@ -83,7 +83,7 @@ public class ActionsMenu : MonoBehaviour
                 {
                     NextWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
                 }
-                
+
 
             }
             if (inputManager.PreviousWeaponjustpressed)
@@ -92,7 +92,7 @@ public class ActionsMenu : MonoBehaviour
                 {
                     PreviousWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
                 }
-                
+
             }
 
             if (inputManager.NextTargetjustpressed)
@@ -182,7 +182,7 @@ public class ActionsMenu : MonoBehaviour
 
     private void NextWeapon(GameObject PreviousFoe, equipment initialweapon)
     {
-        
+
         target.GetComponent<UnitScript>().GetNextWeapon();
         WeaponChange();
         bool enemytargettable = false;
@@ -304,7 +304,7 @@ public class ActionsMenu : MonoBehaviour
                         {
                             rangebonus = 1;
                         }
-                        if(target.GetComponent<UnitScript>().GetSkill(33))
+                        if (target.GetComponent<UnitScript>().GetSkill(33))
                         {
                             rangebonus += 1;
                         }
@@ -643,7 +643,6 @@ public class ActionsMenu : MonoBehaviour
         {
             UnitText += "Telekinesis : Off\n";
         }
-        Debug.Log(UnitText);
 
 
 
@@ -870,7 +869,7 @@ public class ActionsMenu : MonoBehaviour
 
                 OnDamageEffect(unit, unitdamage, false);
                 finaldamage = unitdamage;
-                if(chartarget.currentHP <= 0 || !(CheckifInRange(unit,target) || target.GetComponent<UnitScript>().GetSkill(38))) //Spite
+                if (chartarget.currentHP <= 0 || !(CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38))) //Spite
                 {
                     if (charunit.currentHP > 0 && charunit.affiliation == "playable")
                     {
@@ -1039,7 +1038,7 @@ public class ActionsMenu : MonoBehaviour
                 }
             }
 
-            if(chartarget.currentHP<=0)
+            if (chartarget.currentHP <= 0)
             {
                 unit.GetComponent<UnitScript>().unitkilled++;
             }
@@ -1064,12 +1063,12 @@ public class ActionsMenu : MonoBehaviour
 
             if (!unitalreadyattacked)
             {
-                if(unitdamage + chartarget.currentHP > chartarget.stats.HP)
+                if (unitdamage + chartarget.currentHP > chartarget.stats.HP)
                 {
                     unitdamage = chartarget.stats.HP - chartarget.currentHP;
                 }
                 chartarget.currentHP += unitdamage;
-                
+
                 OnDamageEffect(unit, unitdamage, true);
                 finaldamage = unitdamage;
             }
@@ -1109,20 +1108,20 @@ public class ActionsMenu : MonoBehaviour
         }
 
         //All for one
-        Character allforonetransfertarget= null;
+        Character allforonetransfertarget = null;
         foreach (GameObject othertarget in activelist)
         {
             Character charOthertarget = othertarget.GetComponent<UnitScript>().UnitCharacteristics;
-            if (othertarget.GetComponent<UnitScript>().GetSkill(40) && ManhattanDistance(charTarget, charOthertarget) <=3)
+            if (othertarget.GetComponent<UnitScript>().GetSkill(40) && ManhattanDistance(charTarget, charOthertarget) <= 3)
             {
                 allforonetransfertarget = charOthertarget;
                 break;
             }
         }
 
-        if(allforonetransfertarget != null)
+        if (allforonetransfertarget != null)
         {
-            target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage/2;
+            target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage / 2;
             allforonetransfertarget.currentHP -= damage / 2;
         }
         else
@@ -1131,25 +1130,17 @@ public class ActionsMenu : MonoBehaviour
         }
 
 
-            
+
     }
     private void OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing)
     {
-        //Durability
-        if(Attacker.GetComponent<UnitScript>().GetSkill(8)) //inexhaustible
-        {
-            return;
-        }
-        equipment weapon = Attacker.GetComponent<UnitScript>().GetFirstWeapon();
-        if(weapon.Maxuses > 0)
-        {
-            weapon.Currentuses--;
-        }
 
-        if(healing)
+
+        if (healing)
         {
             if (Attacker.GetComponent<UnitScript>().GetSkill(30)) // Compassion
             {
+                Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min(DamageDealt, Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP - Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP), true, "Compassion");
                 Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP += DamageDealt;
                 if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP > Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP)
                 {
@@ -1158,33 +1149,29 @@ public class ActionsMenu : MonoBehaviour
             }
             if (Attacker.GetComponent<UnitScript>().GetSkill(34)) // Rebound
             {
-                List<Character> list = new List<Character>();
-                if(Attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable")
+                List<GameObject> list = new List<GameObject>();
+                if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
                 {
-                    list = FindAnyObjectByType<TurnManger>().playableunit;
+                    list = FindAnyObjectByType<TurnManger>().playableunitGO;
                 }
                 else if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "enemy")
                 {
-                    list = FindAnyObjectByType<TurnManger>().enemyunit;
+                    list = FindAnyObjectByType<TurnManger>().enemyunitGO;
                 }
                 else
                 {
-                    list = FindAnyObjectByType<TurnManger>().otherunits;
+                    list = FindAnyObjectByType<TurnManger>().otherunitsGO;
                 }
 
-                foreach (Character unitchar in list)
+                foreach (GameObject unit in list)
                 {
-                    unitchar.currentHP += (int)(DamageDealt * 0.25f);
+                    Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+                    unit.GetComponent<UnitScript>().AddNumber(Mathf.Min(unitchar.stats.HP - unitchar.currentHP, (int)(DamageDealt * 0.1f)), true, "Rebound");
+                    unitchar.currentHP += (int)(DamageDealt * 0.1f);
                     if (unitchar.currentHP > unitchar.stats.HP)
                     {
                         unitchar.currentHP = unitchar.stats.HP;
                     }
-                }
-
-                Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP += DamageDealt;
-                if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP > Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP)
-                {
-                    Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP = Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP;
                 }
             }
         }
@@ -1192,13 +1179,26 @@ public class ActionsMenu : MonoBehaviour
         {
             if (Attacker.GetComponent<UnitScript>().GetSkill(14)) // Invigorating
             {
-                Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP += (DamageDealt/10);
-                if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP > Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP)
+                Character AttackerChar = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
+                Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min(AttackerChar.stats.HP - AttackerChar.currentHP, (DamageDealt / 10)), true, "Invigorating");
+                AttackerChar.currentHP += (DamageDealt / 10);
+                if (AttackerChar.currentHP > AttackerChar.stats.HP)
                 {
-                    Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP = Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP;
+                    AttackerChar.currentHP = AttackerChar.stats.HP;
                 }
             }
-            
+
+        }
+
+        //Durability
+        if (Attacker.GetComponent<UnitScript>().GetSkill(8)) //inexhaustible
+        {
+            return;
+        }
+        equipment weapon = Attacker.GetComponent<UnitScript>().GetFirstWeapon();
+        if (weapon.Maxuses > 0)
+        {
+            weapon.Currentuses--;
         }
 
     }
@@ -1208,7 +1208,7 @@ public class ActionsMenu : MonoBehaviour
         List<GameObject> targetlist = new List<GameObject>();
         Vector2 position = target.GetComponent<UnitScript>().UnitCharacteristics.position;
 
-        if(position.x<GridScript.Grid.Count-1)
+        if (position.x < GridScript.Grid.Count - 1)
         {
             GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x + 1), (int)position.y));
             if (newunit != null)
@@ -1216,9 +1216,9 @@ public class ActionsMenu : MonoBehaviour
                 targetlist.Add(newunit);
             }
         }
-        
 
-        if(position.x>0)
+
+        if (position.x > 0)
         {
             GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x - 1), (int)position.y));
             if (newunit != null)
@@ -1227,7 +1227,7 @@ public class ActionsMenu : MonoBehaviour
             }
         }
 
-        if (position.y < GridScript.Grid[0].Count-1)
+        if (position.y < GridScript.Grid[0].Count - 1)
         {
             GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)position.x, (int)(position.y + 1)));
             if (newunit != null)
@@ -1235,9 +1235,9 @@ public class ActionsMenu : MonoBehaviour
                 targetlist.Add(newunit);
             }
         }
-        
 
-        if(position.y>0)
+
+        if (position.y > 0)
         {
             GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)position.x, (int)(position.y - 1)));
             if (newunit != null)
@@ -1245,7 +1245,7 @@ public class ActionsMenu : MonoBehaviour
                 targetlist.Add(newunit);
             }
         }
-        
+
 
         foreach (GameObject potentialtarget in targetlist)
         {
@@ -1253,16 +1253,18 @@ public class ActionsMenu : MonoBehaviour
             if (Chartarget.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
             {
                 int damage = CalculateDamage(attacker, potentialtarget);
+                potentialtarget.GetComponent<UnitScript>().AddNumber(damage / 4, false, "Scythe");
                 //Cleaver
-                if(attacker.GetComponent<UnitScript>().GetSkill(27))
+                if (attacker.GetComponent<UnitScript>().GetSkill(27))
                 {
+                    potentialtarget.GetComponent<UnitScript>().AddNumber(damage / 4, false, "Cleaver");
                     Chartarget.currentHP -= damage / 2;
                 }
                 else
                 {
                     Chartarget.currentHP -= damage / 4;
                 }
-                    
+
             }
         }
     }
@@ -1323,7 +1325,7 @@ public class ActionsMenu : MonoBehaviour
             basestatdef = charunit.stats.Resistance + TargetSkillBonus.Resistance;
         }
 
-        if(unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
+        if (unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
         {
             basestatdamage = charunit.stats.Psyche + UnitSkillBonus.Psyche;
             basestatdef = (int)Mathf.Min(chartarget.stats.Defense + TargetSkillBonus.Defense, charunit.stats.Resistance + TargetSkillBonus.Resistance);
@@ -1344,7 +1346,7 @@ public class ActionsMenu : MonoBehaviour
         int finaldamage = unitbasedamage - basestatdef;
         if (charunit.telekinesisactivated)
         {
-            finaldamage = (int)(finaldamage * (1f+(float)UnitSkillBonus.TelekDamage / 100f));
+            finaldamage = (int)(finaldamage * (1f + (float)UnitSkillBonus.TelekDamage / 100f));
         }
         else
         {
@@ -1364,7 +1366,7 @@ public class ActionsMenu : MonoBehaviour
         finaldamage = finaldamage + UnitSkillBonus.FixedDamageBonus - TargetSkillBonus.FixedDamageReduction;
 
 
-        
+
 
         if (finaldamage < 0)
         {
@@ -1386,10 +1388,10 @@ public class ActionsMenu : MonoBehaviour
 
         if (charunit.telekinesisactivated)
         {
-            baseweapondamage = (int)(baseweapondamage * 0.75f);
+            baseweapondamage = (int)(baseweapondamage * 0.25f);
         }
 
-        int unitbasedamage = baseweapondamage + (int)(basestatdamage / 2f);
+        int unitbasedamage = baseweapondamage + (int)(basestatdamage / 4f);
 
         return unitbasedamage;
 
