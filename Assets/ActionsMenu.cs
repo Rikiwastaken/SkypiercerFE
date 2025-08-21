@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnitScript;
 public class ActionsMenu : MonoBehaviour
@@ -53,7 +54,7 @@ public class ActionsMenu : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        SelectionSafeGuard();
         FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
 
         if (inputManager == null)
@@ -481,6 +482,22 @@ public class ActionsMenu : MonoBehaviour
 
 
 
+    }
+
+    private void SelectionSafeGuard()
+    {
+        GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
+
+        List<GameObject> listofChildren = new List<GameObject>();
+        for (int i = 0;i < transform.childCount;i++)
+        {
+            listofChildren.Add(transform.GetChild(i).gameObject);
+        }
+
+        if ((!currentSelected.activeSelf || !listofChildren.Contains(currentSelected)) && !ItemsScript.activeSelf)
+        {
+            FindAnyObjectByType<EventSystem>().SetSelectedGameObject(transform.GetChild(0).gameObject);
+        }
     }
 
     public void initializeAttackWindows(GameObject unit, GameObject target)
