@@ -12,6 +12,7 @@ public class PreBattleMenuScript : MonoBehaviour
     private InputManager InputManager;
     private GameObject selectedunit;
     private DataScript DataScript;
+    private MapInitializer MapInitializer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,6 +21,7 @@ public class PreBattleMenuScript : MonoBehaviour
         TurnManager = FindAnyObjectByType<TurnManger>();
         InputManager = FindAnyObjectByType<InputManager>();
         DataScript = FindAnyObjectByType<DataScript>();
+        MapInitializer = FindAnyObjectByType<MapInitializer>();
     }
 
     // Update is called once per frame
@@ -76,9 +78,16 @@ public class PreBattleMenuScript : MonoBehaviour
                     }
                     else
                     {
-                        SwitchUnits(selectedunit , gridselection);
+                        SwitchUnits(selectedunit, gridselection);
                         selectedunit = null;
                     }
+                }
+            }
+            else
+            {
+                if(selectedunit!=null && InputManager.activatejustpressed && MapInitializer.playablepos.Contains(GridScript.selection.GridCoordinates))
+                {
+                    selectedunit.GetComponent<UnitScript>().UnitCharacteristics.position = GridScript.selection.GridCoordinates;
                 }
             }
         }

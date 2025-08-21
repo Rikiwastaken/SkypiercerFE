@@ -22697,7 +22697,7 @@ MonoBehaviour:
     Cost: 10
     ID: 41
   - name: Readiness
-    Descriptions: Increases damage dealt by 5% every time unit waits.
+    Descriptions: Increases damage dealt by 5% each time unit waits, up to 30%.
     Cost: 10
     ID: 42
   - name: Recklessness

@@ -96,7 +96,7 @@ public class TurnManger : MonoBehaviour
     {
         foreach (GameObject unit in charactertoappy)
         {
-
+            unit.GetComponent<UnitScript>().waittedbonusturns--;
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
             //Kira Battalion Side Effect
@@ -313,6 +313,10 @@ public class TurnManger : MonoBehaviour
         otherunitsGO = new List<GameObject>();
         foreach (GameObject character in allunits)
         {
+            if(character == null)
+            {
+                continue;
+            }
             if (character.name == "")
             {
                 continue;

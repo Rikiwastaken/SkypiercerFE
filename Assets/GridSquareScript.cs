@@ -16,6 +16,9 @@ public class GridSquareScript : MonoBehaviour
 
     private GridScript GridScript;
 
+    private MapInitializer MapInitializer;
+    private TurnManger TurnManger;
+
     public bool isobstacle;
 
     /*type is for potential bonus : 
@@ -50,10 +53,27 @@ public class GridSquareScript : MonoBehaviour
         {
             battlecameraScript = FindAnyObjectByType<battlecameraScript>();
         }
+        if(TurnManger == null)
+        {
+            TurnManger = FindAnyObjectByType<TurnManger>();
+        }
+
+        if(MapInitializer == null)
+        {
+            MapInitializer = FindAnyObjectByType<MapInitializer>();
+        }
+
+        if(TurnManger.currentlyplaying=="")
+        {
+            if(MapInitializer.playablepos.Contains(GridCoordinates))
+            {
+
+                filledimage.color =new Color(0.45f,0f,0.42f,0.5f) ;
+            }
+        }
 
 
-
-        if (GridScript.selection==this && !battlecameraScript.incombat)
+        if (GridScript.selection == this && !battlecameraScript.incombat)
         {
             SelectRound.SetActive(true);
             SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
@@ -131,6 +151,18 @@ public class GridSquareScript : MonoBehaviour
 
     public void fillwithNothing()
     {
-        filledimage.color = new Color(1f, 1f, 1f, 0f);
+        if (TurnManger == null)
+        {
+            TurnManger = FindAnyObjectByType<TurnManger>();
+        }
+        if (MapInitializer == null)
+        {
+            MapInitializer = FindAnyObjectByType<MapInitializer>();
+        }
+        if (TurnManger.currentlyplaying != "" || !MapInitializer.playablepos.Contains(GridCoordinates))
+        {
+            filledimage.color = new Color(1f, 1f, 1f, 0f);
+        }
+        
     }
 }

@@ -215,6 +215,13 @@ public class ActionManager : MonoBehaviour
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
         currentcharacter.GetComponent<UnitScript>().numberoftimeswaitted++;
+        currentcharacter.GetComponent<UnitScript>().waittedbonusturns = 2;
+
+        //Readiness
+        if (currentcharacter.GetComponent<UnitScript>().GetSkill(42))
+        {
+            currentcharacter.GetComponent<UnitScript>().AddNumber(0, true, "Readiness");
+        }
         //patient
         if (currentcharacter.GetComponent<UnitScript>().GetSkill(20))
         {

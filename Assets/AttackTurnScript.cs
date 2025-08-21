@@ -693,6 +693,11 @@ public class AttackTurnScript : MonoBehaviour
                         }
                     }
 
+                    if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.stats.HP * 0.33f))
+                    {
+                        reward += Random.Range(-50, 50);
+                    }
+
 
                     if (reward > maxreward || chosenUnit == null)
                     {
@@ -813,16 +818,19 @@ public class AttackTurnScript : MonoBehaviour
                         reward += Mathf.Min((10 - ManhattanDistance(charunit, charotherunit) - charunit.equipments[0].Range), 0);
                     }
                 }
-            }
 
-            foreach (GameObject otherunit in gridScript.allunitGOs)
-            {
                 if (otherunit.GetComponent<UnitScript>().UnitCharacteristics.position == position.GridCoordinates)
                 {
                     reward -= 9999;
                 }
             }
-            if (!FindIfAnyTarget(potentialAttackPosition, charunit.affiliation))
+
+            if(unit.GetComponent<UnitScript>().enemyStats.personality.ToLower()=="deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP<=charunit.stats.HP*0.33f) )
+            {
+                reward += Random.Range(-30, 30);
+            }
+
+            if (!FindIfAnyTarget(potentialAttackPosition, charunit.affiliation) && charunit.currentHP == charunit.stats.HP)
             {
                 reward -= 9999;
             }

@@ -892,6 +892,10 @@ public class ActionsMenu : MonoBehaviour
                     {
                         (exp, levelup) = AwardExp(unit, target);
                     }
+                    else if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
+                    {
+                        (exp, levelup) = AwardExp(unit, target,false,true);
+                    }
                 }
             }
             else
@@ -1285,7 +1289,7 @@ public class ActionsMenu : MonoBehaviour
             }
         }
     }
-    public (int, List<int>) AwardExp(GameObject unit, GameObject target, bool usingstaff = false)
+    public (int, List<int>) AwardExp(GameObject unit, GameObject target, bool usingstaff = false, bool noattack=false)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
@@ -1312,6 +1316,10 @@ public class ActionsMenu : MonoBehaviour
         if (usingstaff)
         {
             adjustedexp = 15;
+        }
+        if(noattack)
+        {
+            adjustedexp = 1;
         }
         charunit.experience += adjustedexp;
         List<int> levelup = new List<int>();

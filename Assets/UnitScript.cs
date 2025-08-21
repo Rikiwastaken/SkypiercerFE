@@ -46,6 +46,7 @@ public class UnitScript : MonoBehaviour
         public int desiredlevel;
         public int itemtodropID;
         public bool usetelekinesis;
+        public string personality; // nothing : basic. Deviant : High Random. Coward : deviant if below 33% hp
         public Vector2 startpos;
         public List<int> equipments;
         public List<int> Skills;
@@ -168,6 +169,7 @@ public class UnitScript : MonoBehaviour
 
     public TextMeshProUGUI DmgText;
     public TextMeshProUGUI DmgEffectNameText;
+    public int waittedbonusturns;
 
     private List<NumberToShow> damagestoshow = new List<NumberToShow>();
 
@@ -247,8 +249,13 @@ public class UnitScript : MonoBehaviour
                 {
                     armature.localPosition += (initialpos - armature.localPosition).normalized * 0.2f * Time.deltaTime;
                 }
+                
                 armature.rotation = Quaternion.LookRotation(initialforward, Vector3.up);
 
+            }
+            if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") && Vector3.Distance(armature.localPosition, initialpos) > 0.15f)
+            {
+                armature.localPosition = initialpos;
             }
         }
 
@@ -1277,8 +1284,9 @@ public class UnitScript : MonoBehaviour
         // Readiness
         if (GetSkill(42))
         {
-            statbonuses.TelekDamage += 5 * numberoftimeswaitted;
-            statbonuses.PhysDamage += 5 * numberoftimeswaitted;
+            int dmgbonus = (int)Mathf.Min(numberoftimeswaitted*5,30);
+            statbonuses.TelekDamage += dmgbonus;
+            statbonuses.PhysDamage += dmgbonus;
         }
 
         // Recklessness
