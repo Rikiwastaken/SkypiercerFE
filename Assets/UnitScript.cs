@@ -163,7 +163,7 @@ public class UnitScript : MonoBehaviour
     public int unitkilled;
 
     public int tilesmoved;
-
+    public int numberoftimeswaitted;
     public int SurvivorStacks;
 
     public TextMeshProUGUI DmgText;
@@ -388,6 +388,7 @@ public class UnitScript : MonoBehaviour
     {
         if (GetSkill(1)) //Retreat
         {
+            AddNumber(0, true, "Retreat");
             UnitCharacteristics.alreadymoved = false;
             GridScript gridScript = FindAnyObjectByType<GridScript>();
             gridScript.selection = gridScript.GetTile(UnitCharacteristics.position);
@@ -402,7 +403,7 @@ public class UnitScript : MonoBehaviour
         }
         if (GetSkill(31)) //Verso
         {
-
+            AddNumber(0, true, "Verso");
             int remainingMovements = UnitCharacteristics.movements - tilesmoved;
             if (GetSkill(1))//checking if unit is using Retreat
             {
@@ -1237,6 +1238,55 @@ public class UnitScript : MonoBehaviour
         {
             statbonuses.PhysDamage -= 50;
             statbonuses.TelekDamage -= 50;
+        }
+
+        // Together we ride
+        if (GetSkill(41))
+        {
+            List<Character> activelist = null;
+            if (UnitCharacteristics.affiliation == "playable")
+            {
+                activelist = FindAnyObjectByType<TurnManger>().playableunit;
+            }
+            else if (UnitCharacteristics.affiliation == "enemy")
+            {
+                activelist = FindAnyObjectByType<TurnManger>().enemyunit;
+            }
+            else
+            {
+                activelist = FindAnyObjectByType<TurnManger>().otherunits;
+            }
+
+            int closepalls = 0;
+            foreach (Character otherunitchar in activelist)
+            {
+                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= 2 && otherunitchar != UnitCharacteristics)
+                {
+                    closepalls++;
+                }
+            }
+            statbonuses.Strength += 3 * closepalls;
+            statbonuses.Psyche += 3 * closepalls;
+            statbonuses.Resistance += 3 * closepalls;
+            statbonuses.Defense += 3 * closepalls;
+            statbonuses.Speed += 5 * closepalls;
+            statbonuses.Dexterity += 3 * closepalls;
+
+        }
+
+        // Readiness
+        if (GetSkill(42))
+        {
+            statbonuses.TelekDamage += 5 * numberoftimeswaitted;
+            statbonuses.PhysDamage += 5 * numberoftimeswaitted;
+        }
+
+        // Recklessness
+        if (GetSkill(43))
+        {
+            statbonuses.TelekDamage += 20;
+            statbonuses.PhysDamage += 20;
+            statbonuses.DamageReduction -= 20;
         }
 
 

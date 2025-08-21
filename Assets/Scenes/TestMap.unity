@@ -22692,18 +22692,18 @@ MonoBehaviour:
       this unit.
     Cost: 10
     ID: 40
-  - name: 
-    Descriptions: 
-    Cost: 0
-    ID: 0
-  - name: 
-    Descriptions: 
-    Cost: 0
-    ID: 0
-  - name: 
-    Descriptions: 
-    Cost: 0
-    ID: 0
+  - name: Together we ride
+    Descriptions: Increases all stats by 3 for each ally in a 3 tile radius.
+    Cost: 10
+    ID: 41
+  - name: Readiness
+    Descriptions: Increases damage dealt by 5% every time unit waits.
+    Cost: 10
+    ID: 42
+  - name: Recklessness
+    Descriptions: Increases damage dealt and taken by 20%.
+    Cost: 5
+    ID: 43
   - name: 
     Descriptions: 
     Cost: 0

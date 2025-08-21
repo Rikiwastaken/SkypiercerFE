@@ -494,7 +494,7 @@ public class ActionsMenu : MonoBehaviour
             listofChildren.Add(transform.GetChild(i).gameObject);
         }
 
-        if ((!currentSelected.activeSelf || !listofChildren.Contains(currentSelected)) && !ItemsScript.activeSelf)
+        if ((!currentSelected.activeSelf || !listofChildren.Contains(currentSelected)) && !ItemsScript.activeSelf && transform.GetChild(0).gameObject.activeSelf)
         {
             FindAnyObjectByType<EventSystem>().SetSelectedGameObject(transform.GetChild(0).gameObject);
         }

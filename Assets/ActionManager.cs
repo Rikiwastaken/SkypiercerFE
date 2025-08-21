@@ -24,15 +24,6 @@ public class ActionManager : MonoBehaviour
 
     private battlecameraScript battlecamera;
 
-    [Serializable]
-    public class AttackStats
-    {
-        public string attackername;
-        public int Damage;
-        public int hitchance;
-        public int critchange;
-    }
-
     public GameObject actionsMenu;
 
     public bool preventfromlockingafteraction;
@@ -51,6 +42,12 @@ public class ActionManager : MonoBehaviour
     {
         if (actionsMenu.activeSelf)
         {
+            if (InputManager.Telekinesisjustpressed && !battlecamera.incombat)
+            {
+                currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+                (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                GridScript.ShowAttackAfterMovement(weaponrange, melee, GridScript.selection, type.ToLower() == "staff");
+            }
             return;
         }
 
@@ -217,20 +214,25 @@ public class ActionManager : MonoBehaviour
     {
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+        currentcharacter.GetComponent<UnitScript>().numberoftimeswaitted++;
         //patient
         if (currentcharacter.GetComponent<UnitScript>().GetSkill(20))
         {
-            currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
-            if (currentcharacter.GetComponent<UnitScript>().GetSkill(7)) // full of beans
-            {
-                currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
-            }
             Character currentcharacterchar = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics;
+            currentcharacter.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(currentcharacterchar.stats.HP * 0.1f), currentcharacterchar.stats.HP - currentcharacterchar.currentHP), true, "Patient");
             currentcharacterchar.currentHP += (int)(currentcharacterchar.stats.HP * 0.1f);
             if (currentcharacterchar.currentHP > currentcharacterchar.stats.HP)
             {
                 currentcharacterchar.currentHP = currentcharacterchar.stats.HP;
             }
+
+            currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
+            if (currentcharacter.GetComponent<UnitScript>().GetSkill(7)) // full of beans
+            {
+                currentcharacter.GetComponent<UnitScript>().AddNumber(0, true, "Full of Beans");
+                currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
+            }
+
         }
 
         currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
@@ -249,10 +251,5 @@ public class ActionManager : MonoBehaviour
         actionsMenu.target = currentcharacter;
         actionsMenu.AttackCommand();
 
-    }
-
-    public (AttackStats, AttackStats) AttackValuesCalculator(Character attacker, Character target)
-    {
-        return (new AttackStats(), new AttackStats());
     }
 }

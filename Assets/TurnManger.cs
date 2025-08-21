@@ -56,7 +56,7 @@ public class TurnManger : MonoBehaviour
             waittingforstart = false;
         }
 
-        
+
 
         if (updatevisuals)
         {
@@ -102,7 +102,7 @@ public class TurnManger : MonoBehaviour
             //Kira Battalion Side Effect
             if (unitchar.battalion == "Kira")
             {
-                unit.GetComponent<UnitScript>().AddNumber(Mathf.Max((int)(unitchar.stats.HP * 0.1f),unitchar.stats.HP- unitchar.currentHP), true, "Kira Battalion");
+                unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(unitchar.stats.HP * 0.1f), unitchar.stats.HP - unitchar.currentHP), true, "Kira Battalion");
                 unitchar.currentHP += (int)(unitchar.stats.HP * 0.1f);
                 //Loyal
                 if (unit.GetComponent<UnitScript>().GetSkill(35))
@@ -138,7 +138,7 @@ public class TurnManger : MonoBehaviour
             //First aid
             if (unit.GetComponent<UnitScript>().GetSkill(9))
             {
-                unit.GetComponent<UnitScript>().AddNumber(Mathf.Max((int)(unitchar.stats.HP * 0.1f), unitchar.stats.HP - unitchar.currentHP), true, "First Aid");
+                unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(unitchar.stats.HP * 0.1f), unitchar.stats.HP - unitchar.currentHP), true, "First Aid");
                 unitchar.currentHP += (int)(unitchar.stats.HP * 0.1f);
                 if (unitchar.currentHP > unitchar.stats.HP)
                 {
@@ -153,7 +153,7 @@ public class TurnManger : MonoBehaviour
                     Character otherunitchar = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
                     if (Mathf.Abs(otherunitchar.position.x - unitchar.position.x) == 1 || Mathf.Abs(otherunitchar.position.y - unitchar.position.y) == 1)
                     {
-                        otherunit.GetComponent<UnitScript>().AddNumber(Mathf.Max((int)(otherunitchar.stats.HP * 0.1f), otherunitchar.stats.HP - otherunitchar.currentHP), true, "Medic");
+                        otherunit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(otherunitchar.stats.HP * 0.1f), otherunitchar.stats.HP - otherunitchar.currentHP), true, "Medic");
                         otherunitchar.currentHP += (int)(otherunitchar.stats.HP * 0.1f);
                         if (otherunitchar.currentHP > otherunitchar.stats.HP)
                         {
@@ -313,6 +313,10 @@ public class TurnManger : MonoBehaviour
         otherunitsGO = new List<GameObject>();
         foreach (GameObject character in allunits)
         {
+            if (character.name == "")
+            {
+                continue;
+            }
             if (character.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
             {
                 playableunitGO.Add(character);
