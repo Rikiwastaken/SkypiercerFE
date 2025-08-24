@@ -1,12 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static UnitScript;
-using static UnityEngine.GraphicsBuffer;
 public class GridScript : MonoBehaviour
 {
 
@@ -143,6 +138,56 @@ public class GridScript : MonoBehaviour
                                 break;
                             }
                         }
+                    }
+                    else
+                    {
+                        GameObject Characters = GameObject.Find("Characters");
+                        List<GameObject> listplayable = new List<GameObject>();
+                        int index = 0;
+                        int currentunitindex=-1;
+                        for(int i = 0;i<Characters.transform.childCount;i++)
+                        {
+                            GameObject unit = Characters.transform.GetChild(i).gameObject;
+                            if(unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation== "playable" && !unit.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
+                            {
+                                if (unit == GOSelected)
+                                {
+                                    currentunitindex = index;
+                                }
+                                listplayable.Add(unit);
+                                index++;
+                            }
+                            
+                        }
+                        if(inputManager.NextWeaponjustpressed)
+                        {
+                            if (currentunitindex >= listplayable.Count - 1 || currentunitindex == -1)
+                            {
+                                selection = GetTile(listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.position);
+
+                            }
+                            else
+                            {
+                                selection = GetTile(listplayable[currentunitindex + 1].GetComponent<UnitScript>().UnitCharacteristics.position);
+                            }
+                        }
+                        else
+                        {
+                            if (currentunitindex == -1)
+                            {
+                                selection = GetTile(listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.position);
+
+                            }
+                            else if(currentunitindex >0)
+                            {
+                                selection = GetTile(listplayable[currentunitindex - 1].GetComponent<UnitScript>().UnitCharacteristics.position);
+                            }
+                            else
+                            {
+                                selection = GetTile(listplayable[listplayable.Count-1].GetComponent<UnitScript>().UnitCharacteristics.position);
+                            }
+                        }
+                        
                     }
                 }
                 else
