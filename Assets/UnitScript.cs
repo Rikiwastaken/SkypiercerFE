@@ -179,7 +179,7 @@ public class UnitScript : MonoBehaviour
     void Start()
     {
 
-        AttackTurnScript = FindAnyObjectByType< AttackTurnScript >();
+        AttackTurnScript = FindAnyObjectByType<AttackTurnScript>();
 
         if (UnitCharacteristics.EquipedSkills == null)
         {
@@ -243,17 +243,17 @@ public class UnitScript : MonoBehaviour
         }
         if (animator != null)
         {
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            if (!isinattackanimation())
             {
                 if (Vector3.Distance(armature.localPosition, initialpos) > 0.1f)
                 {
                     armature.localPosition += (initialpos - armature.localPosition).normalized * 0.2f * Time.deltaTime;
                 }
-                
+
                 armature.rotation = Quaternion.LookRotation(initialforward, Vector3.up);
 
             }
-            if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") && Vector3.Distance(armature.localPosition, initialpos) > 0.15f)
+            if (!isinattackanimation() && !animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") && Vector3.Distance(armature.localPosition, initialpos) > 0.15f)
             {
                 armature.localPosition = initialpos;
             }
@@ -312,23 +312,31 @@ public class UnitScript : MonoBehaviour
 
     }
 
+    public bool isinattackanimation()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsName("DoubleAttack") || animator.GetCurrentAnimatorStateInfo(0).IsName("DoubleAttack 0") || animator.GetCurrentAnimatorStateInfo(0).IsName("TripleAttack") || animator.GetCurrentAnimatorStateInfo(0).IsName("TripleAttack 0") || animator.GetCurrentAnimatorStateInfo(0).IsName("TripleAttack 1"))
+        {
+            return true;
+        }
+        return false;
+    }
     public void AddNumber(int amount, bool ishealing, string effectname)
     {
         NumberToShow newnumber = new NumberToShow();
         newnumber.number = amount;
         newnumber.ishealing = ishealing;
         newnumber.EffectName = effectname;
-        newnumber.framesremaining = (int)(timeforshowingnumbers/Time.fixedDeltaTime);
+        newnumber.framesremaining = (int)(timeforshowingnumbers / Time.fixedDeltaTime);
         damagestoshow.Add(newnumber);
     }
 
     private void ManageDamagenumber()
     {
-        if(damagestoshow.Count>0 && !battlecameraScript.incombat)
+        if (damagestoshow.Count > 0 && !battlecameraScript.incombat)
         {
             DmgText.enabled = true;
             DmgEffectNameText.enabled = true;
-            if (damagestoshow[0].number==0)
+            if (damagestoshow[0].number == 0)
             {
                 DmgText.enabled = false;
             }
@@ -344,9 +352,9 @@ public class UnitScript : MonoBehaviour
                     DmgText.text = "<color=red>" + damagestoshow[0].number + "</color>";
                 }
             }
-            
-            
-            
+
+
+
 
             DmgEffectNameText.text = damagestoshow[0].EffectName;
 
@@ -1162,7 +1170,7 @@ public class UnitScript : MonoBehaviour
             bool toofar = true;
             foreach (Character otherunitchar in activelist)
             {
-                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= 3 && otherunitchar!=UnitCharacteristics)
+                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= 3 && otherunitchar != UnitCharacteristics)
                 {
                     toofar = false; break;
                 }
@@ -1284,7 +1292,7 @@ public class UnitScript : MonoBehaviour
         // Readiness
         if (GetSkill(42))
         {
-            int dmgbonus = (int)Mathf.Min(numberoftimeswaitted*5,30);
+            int dmgbonus = (int)Mathf.Min(numberoftimeswaitted * 5, 30);
             statbonuses.TelekDamage += dmgbonus;
             statbonuses.PhysDamage += dmgbonus;
         }
@@ -1327,15 +1335,15 @@ public class UnitScript : MonoBehaviour
     {
         DataScript datascript = FindAnyObjectByType<DataScript>();
         List<Skill> Commands = new List<Skill>();
-        if(UnitCharacteristics.UnitSkill!=0)
+        if (UnitCharacteristics.UnitSkill != 0)
         {
             if (datascript.SkillList[UnitCharacteristics.UnitSkill].IsCommand)
             {
                 Commands.Add(datascript.SkillList[UnitCharacteristics.UnitSkill]);
             }
-            foreach(int SkillID in UnitCharacteristics.EquipedSkills)
+            foreach (int SkillID in UnitCharacteristics.EquipedSkills)
             {
-                if (datascript.SkillList[SkillID].IsCommand && SkillID!=0)
+                if (datascript.SkillList[SkillID].IsCommand && SkillID != 0)
                 {
                     Commands.Add(datascript.SkillList[SkillID]);
                 }

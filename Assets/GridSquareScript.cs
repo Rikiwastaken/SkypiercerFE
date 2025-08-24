@@ -102,7 +102,16 @@ public class GridSquareScript : MonoBehaviour
             Character Char = unit.GetComponent<UnitScript>().UnitCharacteristics;
             if(Char.affiliation == "playable")
             {
-                newcolor = Color.blue;
+                if(Char.alreadyplayed)
+                {
+                    newcolor = Color.blue;
+                }
+                else
+                {
+                    newcolor = Color.cyan;
+                    
+                }
+                    
             }
             else if (Char.affiliation == "enemy")
             {

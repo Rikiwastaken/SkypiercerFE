@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -164,7 +166,7 @@ public class ActionsMenu : MonoBehaviour
                     initializeAttackWindows(target, targetlist[activetargetid]);
                 }
             }
-            if(CommandUsedID==0)
+            if (CommandUsedID == 0)
             {
                 if (activetargetid <= targetlist.Count)
                 {
@@ -176,9 +178,9 @@ public class ActionsMenu : MonoBehaviour
                 }
                 CheckCorrectInfo(target, targetlist[activetargetid]);
             }
-            
 
-            
+
+
 
         }
 
@@ -569,7 +571,7 @@ public class ActionsMenu : MonoBehaviour
                 AttackButton.Select();
             }
 
-            if(targetlist.Count == 0)
+            if (targetlist.Count == 0)
             {
                 commandmenu.SetActive(true);
                 Debug.Log("command menu activated");
@@ -632,7 +634,7 @@ public class ActionsMenu : MonoBehaviour
 
     private bool checkIfSmallWall(GridSquareScript initialtile, GridSquareScript targettile)
     {
-        
+
         Vector2 coorddiff = targettile.GridCoordinates - initialtile.GridCoordinates;
 
 
@@ -649,15 +651,15 @@ public class ActionsMenu : MonoBehaviour
         }
         Vector2 offset = new Vector2(normalizedx, normalizedy);
 
-        if(GridScript.CheckIfPositionIsLegal(targettile.GridCoordinates+offset))
+        if (GridScript.CheckIfPositionIsLegal(targettile.GridCoordinates + offset))
         {
-            if(!GridScript.GetTile(targettile.GridCoordinates + offset).isobstacle && GridScript.GetUnit(GridScript.GetTile(targettile.GridCoordinates + offset))==null)
+            if (!GridScript.GetTile(targettile.GridCoordinates + offset).isobstacle && GridScript.GetUnit(GridScript.GetTile(targettile.GridCoordinates + offset)) == null)
             {
                 return true;
             }
         }
 
-        return false ;
+        return false;
     }
 
     private void SelectionSafeGuard()
@@ -868,11 +870,11 @@ public class ActionsMenu : MonoBehaviour
 
     public void initializeSkillWindow(GameObject unit, GameObject target, Skill command)
     {
-        if(command.ID==47) //Transfuse
+        if (command.ID == 47) //Transfuse
         {
             TransferCommandWindow(unit, target);
         }
-        else if(command.ID==48) //Motivate
+        else if (command.ID == 48) //Motivate
         {
             BasicCommandWindow(unit, target);
         }
@@ -890,11 +892,15 @@ public class ActionsMenu : MonoBehaviour
         }
         else if (command.ID == 52) // Fortify
         {
-            WallTargettingWindow(unit, target, "Fortification");
+            WallTargettingWindow(unit, GridScript.GetTile(unit.GetComponent<UnitScript>().UnitCharacteristics.position).gameObject, "Fortification");
         }
         else if (command.ID == 53) // Smoke Bomb
         {
-            WallTargettingWindow(unit, target, "Fog");
+            WallTargettingWindow(unit, GridScript.GetTile(unit.GetComponent<UnitScript>().UnitCharacteristics.position).gameObject, "Fog");
+        }
+        else if (command.ID == 54) // Chakra
+        {
+            ChakraCommandWindow(unit);
         }
 
     }
@@ -952,6 +958,44 @@ public class ActionsMenu : MonoBehaviour
         UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
     }
 
+    private void ChakraCommandWindow(GameObject unit)
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+
+        int healthrestored = (int)((charunit.stats.HP - charunit.currentHP) * 0.25f);
+
+        string UnitText = "\n" + charunit.name + "\n";
+        UnitText += "HP : " + charunit.currentHP +" + <color=green>"+ healthrestored + "</color> / " + charunit.stats.HP + "\n";
+        UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+        UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        UnitText += "Dmg : - \n";
+        UnitText += "Hit : - \n";
+        UnitText += "Crit : - \n";
+        if (charunit.telekinesisactivated)
+        {
+            UnitText += "Telekinesis : On\n";
+        }
+        else
+        {
+            UnitText += "Telekinesis : Off\n";
+        }
+
+
+
+        string TargetText = "\n";
+
+        unitAttackText.text = UnitText;
+        targetAttackText.text = TargetText;
+
+        TargetGreenLifebar.fillAmount = 1f;
+        TargetOrangeLifeBar.fillAmount = 1f;
+
+        UnitGreenLifebar.fillAmount = Mathf.Min((float)(charunit.currentHP + healthrestored) / (float)charunit.stats.HP, 1f);
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+    }
+
     private void ReinvigorateWindow(GameObject unit, GameObject target)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
@@ -981,15 +1025,15 @@ public class ActionsMenu : MonoBehaviour
         string TargetText = "\n" + chartarget.name + "\n";
         TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.stats.HP + "\n";
         TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
-        if(target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses< target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses)
+        if (target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses < target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses)
         {
-            TargetText += "Uses : <color=green>" + (target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses+1) + "</color> / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+            TargetText += "Uses : <color=green>" + (target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + 1) + "</color> / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         }
         else
         {
             TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         }
-            
+
         TargetText += "Dmg : -\n";
         TargetText += "Hit : -\n";
         TargetText += "Crit : -\n";
@@ -1012,7 +1056,7 @@ public class ActionsMenu : MonoBehaviour
         UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
     }
 
-    private void WallTargettingWindow(GameObject unit, GameObject target, string change="")
+    private void WallTargettingWindow(GameObject unit, GameObject target, string change = "")
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         GridSquareScript Walltarget = target.GetComponent<GridSquareScript>();
@@ -1038,12 +1082,21 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-        string TargetText = "\n" + Walltarget.type + "\n";
-        
-        if(change!="")
+        string TargetText = "\n";
+
+        if (Walltarget.type!="")
+        {
+            TargetText += Walltarget.type + "\n";
+        }
+        else
+        {
+            TargetText += "Ground\n";
+        }
+
+        if (change != "")
         {
             TargetText += "becomes\n";
-            TargetText += "change\n";
+            TargetText += change + "\n";
         }
 
         unitAttackText.text = UnitText;
@@ -1062,10 +1115,10 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.parent.gameObject.SetActive(true);
 
-        float unithealthpercent = (float)((float)charunit.currentHP/(float)charunit.stats.HP);
+        float unithealthpercent = (float)((float)charunit.currentHP / (float)charunit.stats.HP);
         float targethealthpercent = (float)((float)chartarget.currentHP / (float)chartarget.stats.HP);
 
-        if(unithealthpercent>targethealthpercent)
+        if (unithealthpercent > targethealthpercent)
         {
 
             int unithealthlost = charunit.currentHP - (int)(targethealthpercent * charunit.stats.HP);
@@ -1077,7 +1130,7 @@ public class ActionsMenu : MonoBehaviour
             UnitText += "HP : <color=red>" + (int)(unithealthpercent * chartarget.stats.HP) + "</color> / " + charunit.stats.HP + "\n";
             UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
             UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
- 
+
 
             string TargetText = "\n" + chartarget.name + "\n";
             TargetText += "HP : <color=green>" + (unithealthpercent * chartarget.stats.HP) + "</color> / " + chartarget.stats.HP + "\n";
@@ -1121,7 +1174,7 @@ public class ActionsMenu : MonoBehaviour
 
         }
 
-        
+
     }
 
     public bool CheckifInRange(GameObject unit, GameObject target)

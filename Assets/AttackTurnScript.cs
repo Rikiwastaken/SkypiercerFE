@@ -59,14 +59,14 @@ public class AttackTurnScript : MonoBehaviour
         TurnManager = GetComponent<TurnManger>();
         gridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<battlecameraScript>();
-        
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
 
-        if(combatTextScript == null)
+        if (combatTextScript == null)
         {
             combatTextScript = FindAnyObjectByType<CombatTextScript>();
         }
@@ -157,9 +157,9 @@ public class AttackTurnScript : MonoBehaviour
             }
             GameObject CurrentPlayable = ActionsMenu.target;
             Character CurrentPlayableChar = CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics;
-            if (ActionsMenu.confirmattack && CurrentPlayable!=null)
+            if (ActionsMenu.confirmattack && CurrentPlayable != null)
             {
-                if(ActionsMenu.CommandUsedID == 0)
+                if (ActionsMenu.CommandUsedID == 0)
                 {
                     ManageAttack(CurrentPlayable);
                 }
@@ -167,7 +167,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     ManageCommand(CurrentPlayable);
                 }
-                
+
             }
         }
 
@@ -238,7 +238,7 @@ public class AttackTurnScript : MonoBehaviour
         GameObject Target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
         Character CharUser = User.GetComponent<UnitScript>().UnitCharacteristics;
         Character CharTarget = null;
-        if(Target.GetComponent<UnitScript>() != null)
+        if (Target.GetComponent<UnitScript>() != null)
         {
             CharTarget = Target.GetComponent<UnitScript>().UnitCharacteristics;
         }
@@ -253,16 +253,16 @@ public class AttackTurnScript : MonoBehaviour
             float UserPercent = (float)CharUser.currentHP / (float)CharUser.stats.HP;
             float TargetPercent = (float)CharTarget.currentHP / (float)CharTarget.stats.HP;
 
-            CharUser.currentHP = (int)(TargetPercent*(float)CharUser.stats.HP);
+            CharUser.currentHP = (int)(TargetPercent * (float)CharUser.stats.HP);
             CharTarget.currentHP = (int)(UserPercent * (float)CharTarget.stats.HP);
 
-            if(previousHPTarget> CharTarget.currentHP)
+            if (previousHPTarget > CharTarget.currentHP)
             {
-                Target.GetComponent<UnitScript>().AddNumber(previousHPTarget-CharTarget.currentHP,false,"Transfuse");
+                Target.GetComponent<UnitScript>().AddNumber(previousHPTarget - CharTarget.currentHP, false, "Transfuse");
             }
             else
             {
-                Target.GetComponent<UnitScript>().AddNumber( CharTarget.currentHP - previousHPTarget , true, "Transfuse");
+                Target.GetComponent<UnitScript>().AddNumber(CharTarget.currentHP - previousHPTarget, true, "Transfuse");
             }
 
             if (previousHPUser > CharUser.currentHP)
@@ -291,9 +291,9 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 50) //Reinvigorate
         {
-            foreach(equipment equ in CharTarget.equipments)
+            foreach (equipment equ in CharTarget.equipments)
             {
-                if(equ.Currentuses<equ.Maxuses)
+                if (equ.Currentuses < equ.Maxuses)
                 {
                     equ.Currentuses++;
                 }
@@ -331,6 +331,12 @@ public class AttackTurnScript : MonoBehaviour
         {
             FindAnyObjectByType<GridScript>().GetTile(CharUser.position).type = "Fog";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Smoke Bomb");
+        }
+        else if (commandID == 54) // Chakra
+        {
+            int healthrestored = (int)((CharUser.stats.HP - CharUser.currentHP) * 0.25f);
+            CharUser.currentHP += healthrestored;
+            User.GetComponent<UnitScript>().AddNumber(healthrestored, true, "Chakra");
         }
 
         ActionsMenu.FinalizeAttack();
@@ -469,11 +475,11 @@ public class AttackTurnScript : MonoBehaviour
                         if (attacktrigger)
                         {
                             attacktrigger = false;
-                            
+
                             (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
-                            if(doubleattacker ==Attacker)
+                            if (doubleattacker == Attacker)
                             {
-                                if(triple)
+                                if (triple)
                                 {
                                     Attacker.GetComponentInChildren<Animator>().SetTrigger("TripleAttack");
                                 }
@@ -489,7 +495,7 @@ public class AttackTurnScript : MonoBehaviour
                         }
                     }
                     //attacks
-                    else if (!checkifattackanimationisplaying(Attacker,target))
+                    else if (!checkifattackanimationisplaying(Attacker, target))
                     {
                         //first attack (attacker)
                         if (!unitalreadyattacked)
@@ -500,7 +506,7 @@ public class AttackTurnScript : MonoBehaviour
 
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
                             combatTextScript.UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
-                            if ((target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && CharAttacker.affiliation=="playable" && CharAttacker.currentHP>0)|| (CharAttacker.currentHP <= 0 && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP > 0)) // distribute exp if a character died and a ally lived
+                            if ((target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && CharAttacker.affiliation == "playable" && CharAttacker.currentHP > 0) || (CharAttacker.currentHP <= 0 && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP > 0)) // distribute exp if a character died and a ally lived
                             {
                                 waittingforexp = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
@@ -511,7 +517,7 @@ public class AttackTurnScript : MonoBehaviour
                                 waittingforexp = true;
                                 waittingforcamera = false;
                             }
-                            else if ((CharAttacker.affiliation == "playable" && CharAttacker.currentHP<=0) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)) // end fight if attacker died and attacker was allied
+                            else if ((CharAttacker.affiliation == "playable" && CharAttacker.currentHP <= 0) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)) // end fight if attacker died and attacker was allied
                             {
                                 counterafterattack = (int)(delayafterAttack * 2f / Time.fixedDeltaTime);
                                 waittingforexp = true;
@@ -538,9 +544,9 @@ public class AttackTurnScript : MonoBehaviour
                                 {
                                     target.GetComponentInChildren<Animator>().SetTrigger("Attack");
                                 }
-                                
+
                             }
-                            else if(CharAttacker.affiliation !="playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation!="playable") // end directly the fight if no one died
+                            else if (CharAttacker.affiliation != "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable") // end directly the fight if no one died
                             {
                                 counterafterattack = (int)(delayafterAttack * 2f / Time.fixedDeltaTime);
                                 waittingforexp = true;
@@ -569,7 +575,7 @@ public class AttackTurnScript : MonoBehaviour
                                 combatTextScript.UpdateInfo(damage, hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, Attacker.GetComponent<UnitScript>().UnitCharacteristics);
                                 unitalreadyattacked = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
-                                if((CharAttacker.affiliation != "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable") || (CharAttacker.affiliation == "playable" && CharAttacker.currentHP <= 0))
+                                if ((CharAttacker.affiliation != "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable") || (CharAttacker.affiliation == "playable" && CharAttacker.currentHP <= 0))
                                 {
                                     waittingforexp = true;
                                     expdistributed = true;
@@ -612,7 +618,7 @@ public class AttackTurnScript : MonoBehaviour
             }
             if (target != null)
             {
-                
+
                 waittingforcamera = true;
                 battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
                 unitalreadyattacked = false;
@@ -638,7 +644,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 if (CharAttacker.affiliation == "playable")
                 {
-                    
+
                     ActionsMenu.FinalizeAttack();
                     waittingforcamera = false;
                 }
@@ -658,16 +664,7 @@ public class AttackTurnScript : MonoBehaviour
 
     private bool checkifattackanimationisplaying(GameObject attacker, GameObject target)
     {
-        bool atkanimplaying = false;
-        if(!attacker.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle") && !attacker.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("run"))
-        {
-            atkanimplaying = true;
-        }
-        if (!target.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle") && !target.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("run"))
-        {
-            atkanimplaying = true;
-        }
-        return atkanimplaying;
+        return attacker.GetComponent<UnitScript>().isinattackanimation() || target.GetComponent<UnitScript>().isinattackanimation();
     }
     private void EndOfCombatTrigger(GameObject unit1, GameObject unit2 = null)
     {
@@ -691,11 +688,11 @@ public class AttackTurnScript : MonoBehaviour
             {
                 if (charunit1.currentHP == 0)
                 {
-                    unit2.GetComponent<UnitScript>().AddNumber(charunit2.currentHP-1, false, "Sore Loser");
+                    unit2.GetComponent<UnitScript>().AddNumber(charunit2.currentHP - 1, false, "Sore Loser");
                     charunit2.currentHP = 1;
-                    
+
                 }
-                else if (charunit1.currentHP <  charunit2.currentHP)
+                else if (charunit1.currentHP < charunit2.currentHP)
                 {
                     unit2.GetComponent<UnitScript>().AddNumber(charunit2.currentHP - charunit1.currentHP, false, "Sore Loser");
                     charunit2.currentHP = charunit1.currentHP;
@@ -704,7 +701,7 @@ public class AttackTurnScript : MonoBehaviour
 
             if (unit2.GetComponent<UnitScript>().GetSkill(15)) // Sore Loser
             {
-                if(charunit2.currentHP == 0)
+                if (charunit2.currentHP == 0)
                 {
                     unit1.GetComponent<UnitScript>().AddNumber(charunit1.currentHP - 1, false, "Sore Loser");
                     charunit1.currentHP = 1;
@@ -718,7 +715,7 @@ public class AttackTurnScript : MonoBehaviour
             }
 
         }
-        
+
 
     }
     public GameObject CalculateBestTargetForOffensiveUnits(GameObject unit, bool attacksfriend = true)
@@ -926,7 +923,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 else
                 {
-                    if(charunit.currentHP<charunit.stats.HP)
+                    if (charunit.currentHP < charunit.stats.HP)
                     {
                         reward += Mathf.Min((10 - ManhattanDistance(charunit, charotherunit) - charunit.equipments[0].Range), 0);
                     }
@@ -938,7 +935,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
             }
 
-            if(unit.GetComponent<UnitScript>().enemyStats.personality.ToLower()=="deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP<=charunit.stats.HP*0.33f) )
+            if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.stats.HP * 0.33f))
             {
                 reward += Random.Range(-30, 30);
             }

@@ -114,16 +114,63 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = 0;
         }
 
-        if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue && moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0)
+        if(moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0)
         {
-            moveCD = (int)(0.1f / Time.deltaTime);
-            previousmovevalue = inputManager.movementValue;
-            MoveSelection(previousmovevalue);
+            if(inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue)
+            {
+                moveCD = (int)(0.1f / Time.deltaTime);
+                previousmovevalue = inputManager.movementValue;
+                MoveSelection(previousmovevalue);
+            }
+            else
+            {
+                previousmovevalue = Vector2.zero;
+            }
+
+            if(inputManager.NextWeaponjustpressed || inputManager.PreviousWeaponjustpressed)
+            {
+                GameObject GOSelected = GetUnit(selection);
+                if(GOSelected != null)
+                {
+                    if(GOSelected.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed || GOSelected.GetComponent<UnitScript>().UnitCharacteristics.affiliation!="playable")
+                    {
+                        foreach(GameObject characterGO in allunitGOs)
+                        {
+                            Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
+                            if (character.affiliation=="playable" && character.alreadyplayed==false)
+                            {
+                                selection = GetTile(character.position);
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (GameObject characterGO in allunitGOs)
+                    {
+                        Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
+                        if (character.affiliation == "playable" && character.alreadyplayed == false)
+                        {
+                            selection = GetTile(character.position);
+                            break;
+                        }
+                    }
+                }
+            }
+
         }
-        else
-        {
-            previousmovevalue = Vector2.zero;
-        }
+
+        //if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue && moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0)
+        //{
+        //    moveCD = (int)(0.1f / Time.deltaTime);
+        //    previousmovevalue = inputManager.movementValue;
+        //    MoveSelection(previousmovevalue);
+        //}
+        //else
+        //{
+        //    previousmovevalue = Vector2.zero;
+        //}
 
 
 

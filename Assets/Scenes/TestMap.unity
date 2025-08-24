@@ -24216,13 +24216,13 @@ MonoBehaviour:
     targettype: 3
     range: 0
     ID: 53
-  - name: 
-    Descriptions: 
-    IsCommand: 0
-    Cost: 0
-    targettype: 0
+  - name: Chakra
+    Descriptions: Restores 25% of missing HP.
+    IsCommand: 1
+    Cost: 5
+    targettype: 3
     range: 0
-    ID: 0
+    ID: 54
   - name: 
     Descriptions: 
     IsCommand: 0
