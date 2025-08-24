@@ -1323,6 +1323,27 @@ public class UnitScript : MonoBehaviour
         return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
     }
 
+    public List<Skill> GetCommands()
+    {
+        DataScript datascript = FindAnyObjectByType<DataScript>();
+        List<Skill> Commands = new List<Skill>();
+        if(UnitCharacteristics.UnitSkill!=0)
+        {
+            if (datascript.SkillList[UnitCharacteristics.UnitSkill].IsCommand)
+            {
+                Commands.Add(datascript.SkillList[UnitCharacteristics.UnitSkill]);
+            }
+            foreach(int SkillID in UnitCharacteristics.EquipedSkills)
+            {
+                if (datascript.SkillList[SkillID].IsCommand && SkillID!=0)
+                {
+                    Commands.Add(datascript.SkillList[SkillID]);
+                }
+            }
+        }
+        return Commands;
+    }
+
     public (int, bool, string) GetRangeMeleeAndType()
     {
         equipment firstweapon = GetFirstWeapon();

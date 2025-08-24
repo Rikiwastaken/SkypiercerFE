@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static DataScript;
 using static UnitScript;
 public class ActionsMenu : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ActionsMenu : MonoBehaviour
     public Button AttackCancelButton;
 
     public GameObject ItemsScript;
+    public GameObject CommandGO;
 
     private InputManager inputManager;
 
@@ -29,11 +31,19 @@ public class ActionsMenu : MonoBehaviour
 
     public List<GameObject> targetlist;
 
+
+
     private battlecameraScript battlecameraScript;
 
     public int activetargetid;
 
     public bool confirmattack;
+    public int CommandUsedID;
+
+    private Color BaseButtonColor;
+    private Color BaseButtonPressedColor;
+
+    public GameObject commandmenu;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,11 +53,30 @@ public class ActionsMenu : MonoBehaviour
     }
     private void OnEnable()
     {
+        BaseButtonColor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
+        BaseButtonPressedColor = transform.GetChild(0).GetComponent<Button>().colors.pressedColor;
         if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();
         }
         target = GridScript.GetSelectedUnitGameObject();
+
+        if (target.GetComponent<UnitScript>().GetCommands().Count > 0)
+        {
+            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            colors.normalColor = BaseButtonColor;
+            colors.pressedColor = BaseButtonPressedColor;
+            transform.GetChild(2).GetComponent<Button>().colors = colors;
+        }
+        else
+        {
+
+            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            colors.normalColor = Color.gray;
+            colors.pressedColor = Color.gray;
+            transform.GetChild(2).GetComponent<Button>().colors = colors;
+        }
+
     }
 
 
@@ -62,7 +91,7 @@ public class ActionsMenu : MonoBehaviour
             inputManager = FindAnyObjectByType<InputManager>();
         }
 
-        if (inputManager.canceljustpressed && !ItemsScript.activeSelf)
+        if (inputManager.canceljustpressed && !ItemsScript.activeSelf && !CommandGO.activeSelf)
         {
             ActionsCancelButton.onClick.Invoke();
         }
@@ -135,17 +164,21 @@ public class ActionsMenu : MonoBehaviour
                     initializeAttackWindows(target, targetlist[activetargetid]);
                 }
             }
-
-            if (activetargetid <= targetlist.Count)
+            if(CommandUsedID==0)
             {
-                battlecameraScript.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
+                if (activetargetid <= targetlist.Count)
+                {
+                    battlecameraScript.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
+                }
+                else
+                {
+                    battlecameraScript.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.position;
+                }
+                CheckCorrectInfo(target, targetlist[activetargetid]);
             }
-            else
-            {
-                battlecameraScript.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.position;
-            }
+            
 
-            CheckCorrectInfo(target, targetlist[activetargetid]);
+            
 
         }
 
@@ -279,6 +312,7 @@ public class ActionsMenu : MonoBehaviour
 
     public void AttackCommand()
     {
+        CommandUsedID = 0;
         // on essaie de trouver un combo arme/telekinesie pour pouvoir attaquer un ennemi
         Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
         FindAttackers();
@@ -392,12 +426,19 @@ public class ActionsMenu : MonoBehaviour
         }
     }
 
+
+    public void ActivateCommand(int CommandID)
+    {
+        FindAttackers(true, CommandID);
+    }
+
     public void FinalizeAttack()
     {
         target.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         targetlist = new List<GameObject>();
         GameObject oldtarget = target;
         target = null;
+        CommandUsedID = 0;
         GridScript.Recolor();
         confirmattack = false;
         FindAnyObjectByType<ActionManager>().currentcharacter = null;
@@ -418,7 +459,7 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-    private void FindAttackers()
+    private void FindAttackers(bool usecommand = false, int commandID = 0)
     {
 
         targetlist = new List<GameObject>();
@@ -428,60 +469,195 @@ public class ActionsMenu : MonoBehaviour
             GridScript = FindAnyObjectByType<GridScript>();
         }
 
-        if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+        if (usecommand)
         {
-            GridSquareScript positiontile = GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position);
-            (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
-            GridScript.ShowAttackAfterMovement(range, melee, positiontile, true);
-            GridScript.lockedhealingtiles = GridScript.healingtiles;
-            foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
+
+            DataScript dataScript = FindAnyObjectByType<DataScript>();
+            Skill command = dataScript.SkillList[commandID]; // targetting : 0 enemies, 1 allies, 2 walls, 3 self
+            CommandUsedID = command.ID;
+            if (command.targettype == 0)
             {
-                GameObject potentialtarget = GridScript.GetUnit(tile);
-                if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && potentialtarget != target)
+                foreach (GridSquareScript tile in GridScript.lockedattacktiles)
                 {
-                    targetlist.Add(potentialtarget);
+                    GameObject potentialtarget = GridScript.GetUnit(tile);
+                    if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable")
+                    {
+                        targetlist.Add(potentialtarget);
+                    }
+                }
+                if (targetlist.Count > 0)
+                {
+                    activetargetid = 0;
+                    initializeSkillWindow(target, targetlist[activetargetid], command);
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        transform.GetChild(i).gameObject.SetActive(false);
+                    }
+                    AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
+                    AttackButton.Select();
+                }
+
+            }
+            else if (command.targettype == 1)
+            {
+                GridSquareScript positiontile = GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position);
+                GridScript.ShowAttackAfterMovement(command.range, true, positiontile, true);
+                GridScript.lockedhealingtiles = GridScript.healingtiles;
+                foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
+                {
+                    GameObject potentialtarget = GridScript.GetUnit(tile);
+                    if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && potentialtarget != target)
+                    {
+                        targetlist.Add(potentialtarget);
+                    }
+                }
+                if (targetlist.Count > 0)
+                {
+                    activetargetid = 0;
+                    initializeSkillWindow(target, targetlist[activetargetid], command);
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        transform.GetChild(i).gameObject.SetActive(false);
+                    }
+                    AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
+                    AttackButton.Select();
                 }
             }
-            if (targetlist.Count > 0)
+            else if (command.targettype == 2)
             {
+                GridSquareScript positiontile = GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position);
+                for (int i = -command.range; i <= command.range; i++)
+                {
+                    for (int j = -command.range; j <= command.range; j++)
+                    {
+                        if (Mathf.Abs(i) + Mathf.Abs(j) <= command.range)
+                        {
+                            Vector2 posoffset = new Vector2(i, j);
+                            GridSquareScript newpositiontile = GridScript.GetTile(positiontile.GridCoordinates + posoffset);
+                            if (newpositiontile != null)
+                            {
+                                if (newpositiontile.isobstacle && checkIfSmallWall(positiontile, newpositiontile))
+                                {
+                                    targetlist.Add(newpositiontile.gameObject);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (targetlist.Count > 0)
+                {
+                    activetargetid = 0;
+                    initializeSkillWindow(target, targetlist[activetargetid], command);
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        transform.GetChild(i).gameObject.SetActive(false);
+                    }
+                    AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
+                    AttackButton.Select();
+                }
+            }
+            else if (command.targettype == 3)
+            {
+                targetlist.Add(target.gameObject);
                 activetargetid = 0;
-                initializeHealingWindows(target, targetlist[activetargetid]);
+                initializeSkillWindow(target, targetlist[activetargetid], command);
                 for (int i = 0; i < transform.childCount; i++)
                 {
                     transform.GetChild(i).gameObject.SetActive(false);
                 }
-                AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Heal";
+                AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
                 AttackButton.Select();
+            }
+
+            if(targetlist.Count == 0)
+            {
+                commandmenu.SetActive(true);
+                Debug.Log("command menu activated");
             }
         }
         else
         {
-            foreach (GridSquareScript tile in GridScript.lockedattacktiles)
+            CommandUsedID = 0;
+            if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
             {
-                GameObject potentialtarget = GridScript.GetUnit(tile);
-                if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable")
+                GridSquareScript positiontile = GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position);
+                (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
+                GridScript.ShowAttackAfterMovement(range, melee, positiontile, true);
+                GridScript.lockedhealingtiles = GridScript.healingtiles;
+                foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
-                    targetlist.Add(potentialtarget);
+                    GameObject potentialtarget = GridScript.GetUnit(tile);
+                    if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && potentialtarget != target)
+                    {
+                        targetlist.Add(potentialtarget);
+                    }
+                }
+                if (targetlist.Count > 0)
+                {
+                    activetargetid = 0;
+                    initializeHealingWindows(target, targetlist[activetargetid]);
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        transform.GetChild(i).gameObject.SetActive(false);
+                    }
+                    AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Heal";
+                    AttackButton.Select();
                 }
             }
-            if (targetlist.Count > 0)
+            else
             {
-                activetargetid = 0;
-                initializeAttackWindows(target, targetlist[activetargetid]);
-                for (int i = 0; i < transform.childCount; i++)
+                foreach (GridSquareScript tile in GridScript.lockedattacktiles)
                 {
-                    transform.GetChild(i).gameObject.SetActive(false);
+                    GameObject potentialtarget = GridScript.GetUnit(tile);
+                    if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable")
+                    {
+                        targetlist.Add(potentialtarget);
+                    }
                 }
-                AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Attack";
-                AttackButton.Select();
+                if (targetlist.Count > 0)
+                {
+                    activetargetid = 0;
+                    initializeAttackWindows(target, targetlist[activetargetid]);
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        transform.GetChild(i).gameObject.SetActive(false);
+                    }
+                    AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Attack";
+                    AttackButton.Select();
+                }
             }
         }
 
+    }
+
+    private bool checkIfSmallWall(GridSquareScript initialtile, GridSquareScript targettile)
+    {
+        
+        Vector2 coorddiff = targettile.GridCoordinates - initialtile.GridCoordinates;
 
 
+        int normalizedx = 0;
+        int normalizedy = 0;
 
+        if (coorddiff.x != 0)
+        {
+            normalizedx = (int)(coorddiff.x / Mathf.Abs(coorddiff.x));
+        }
+        if (coorddiff.y != 0)
+        {
+            normalizedy = (int)(coorddiff.y / Mathf.Abs(coorddiff.y));
+        }
+        Vector2 offset = new Vector2(normalizedx, normalizedy);
 
+        if(GridScript.CheckIfPositionIsLegal(targettile.GridCoordinates+offset))
+        {
+            if(!GridScript.GetTile(targettile.GridCoordinates + offset).isobstacle && GridScript.GetUnit(GridScript.GetTile(targettile.GridCoordinates + offset))==null)
+            {
+                return true;
+            }
+        }
 
+        return false ;
     }
 
     private void SelectionSafeGuard()
@@ -489,12 +665,12 @@ public class ActionsMenu : MonoBehaviour
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
 
         List<GameObject> listofChildren = new List<GameObject>();
-        for (int i = 0;i < transform.childCount;i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
             listofChildren.Add(transform.GetChild(i).gameObject);
         }
 
-        if ((!currentSelected.activeSelf || !listofChildren.Contains(currentSelected)) && !ItemsScript.activeSelf && transform.GetChild(0).gameObject.activeSelf)
+        if ((!currentSelected.activeSelf || !listofChildren.Contains(currentSelected)) && !ItemsScript.activeSelf && !CommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
         {
             FindAnyObjectByType<EventSystem>().SetSelectedGameObject(transform.GetChild(0).gameObject);
         }
@@ -688,6 +864,264 @@ public class ActionsMenu : MonoBehaviour
 
         UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - 0) / (float)charunit.stats.HP;
         UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+    }
+
+    public void initializeSkillWindow(GameObject unit, GameObject target, Skill command)
+    {
+        if(command.ID==47) //Transfuse
+        {
+            TransferCommandWindow(unit, target);
+        }
+        else if(command.ID==48) //Motivate
+        {
+            BasicCommandWindow(unit, target);
+        }
+        else if (command.ID == 49) //Swap
+        {
+            BasicCommandWindow(unit, target);
+        }
+        else if (command.ID == 50) //Reinvigorate
+        {
+            ReinvigorateWindow(unit, target);
+        }
+        else if (command.ID == 51) // Jump
+        {
+            WallTargettingWindow(unit, target);
+        }
+        else if (command.ID == 52) // Fortify
+        {
+            WallTargettingWindow(unit, target, "Fortification");
+        }
+        else if (command.ID == 53) // Smoke Bomb
+        {
+            WallTargettingWindow(unit, target, "Fog");
+        }
+
+    }
+
+
+    private void BasicCommandWindow(GameObject unit, GameObject target)
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+
+
+
+        string UnitText = "\n" + charunit.name + "\n";
+        UnitText += "HP : " + charunit.currentHP + " / " + charunit.stats.HP + "\n";
+        UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+        UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        UnitText += "Dmg : - \n";
+        UnitText += "Hit : - \n";
+        UnitText += "Crit : - \n";
+        if (charunit.telekinesisactivated)
+        {
+            UnitText += "Telekinesis : On\n";
+        }
+        else
+        {
+            UnitText += "Telekinesis : Off\n";
+        }
+
+
+
+        string TargetText = "\n" + chartarget.name + "\n";
+        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.stats.HP + "\n";
+        TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+        TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        TargetText += "Dmg : -\n";
+        TargetText += "Hit : -\n";
+        TargetText += "Crit : -\n";
+        if (chartarget.telekinesisactivated)
+        {
+            TargetText += "Telekinesis : On\n";
+        }
+        else
+        {
+            TargetText += "Telekinesis : Off\n";
+        }
+
+        unitAttackText.text = UnitText;
+        targetAttackText.text = TargetText;
+
+        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP) / (float)chartarget.stats.HP, 1f);
+        TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+
+        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+    }
+
+    private void ReinvigorateWindow(GameObject unit, GameObject target)
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+
+
+
+        string UnitText = "\n" + charunit.name + "\n";
+        UnitText += "HP : " + charunit.currentHP + " / " + charunit.stats.HP + "\n";
+        UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+        UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        UnitText += "Dmg : - \n";
+        UnitText += "Hit : - \n";
+        UnitText += "Crit : - \n";
+        if (charunit.telekinesisactivated)
+        {
+            UnitText += "Telekinesis : On\n";
+        }
+        else
+        {
+            UnitText += "Telekinesis : Off\n";
+        }
+
+
+
+        string TargetText = "\n" + chartarget.name + "\n";
+        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.stats.HP + "\n";
+        TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+        if(target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses< target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses)
+        {
+            TargetText += "Uses : <color=green>" + (target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses+1) + "</color> / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        }
+        else
+        {
+            TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        }
+            
+        TargetText += "Dmg : -\n";
+        TargetText += "Hit : -\n";
+        TargetText += "Crit : -\n";
+        if (chartarget.telekinesisactivated)
+        {
+            TargetText += "Telekinesis : On\n";
+        }
+        else
+        {
+            TargetText += "Telekinesis : Off\n";
+        }
+
+        unitAttackText.text = UnitText;
+        targetAttackText.text = TargetText;
+
+        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP) / (float)chartarget.stats.HP, 1f);
+        TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+
+        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+    }
+
+    private void WallTargettingWindow(GameObject unit, GameObject target, string change="")
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        GridSquareScript Walltarget = target.GetComponent<GridSquareScript>();
+        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+
+
+
+        string UnitText = "\n" + charunit.name + "\n";
+        UnitText += "HP : " + charunit.currentHP + " / " + charunit.stats.HP + "\n";
+        UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+        UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        UnitText += "Dmg : - \n";
+        UnitText += "Hit : - \n";
+        UnitText += "Crit : - \n";
+        if (charunit.telekinesisactivated)
+        {
+            UnitText += "Telekinesis : On\n";
+        }
+        else
+        {
+            UnitText += "Telekinesis : Off\n";
+        }
+
+
+
+        string TargetText = "\n" + Walltarget.type + "\n";
+        
+        if(change!="")
+        {
+            TargetText += "becomes\n";
+            TargetText += "change\n";
+        }
+
+        unitAttackText.text = UnitText;
+        targetAttackText.text = TargetText;
+
+        TargetGreenLifebar.fillAmount = 1f;
+        TargetOrangeLifeBar.fillAmount = 1f;
+
+        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+    }
+
+    private void TransferCommandWindow(GameObject unit, GameObject target)
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+
+        float unithealthpercent = (float)((float)charunit.currentHP/(float)charunit.stats.HP);
+        float targethealthpercent = (float)((float)chartarget.currentHP / (float)chartarget.stats.HP);
+
+        if(unithealthpercent>targethealthpercent)
+        {
+
+            int unithealthlost = charunit.currentHP - (int)(targethealthpercent * charunit.stats.HP);
+
+            int targethealthgained = (int)(unithealthpercent * chartarget.stats.HP) - chartarget.currentHP;
+
+
+            string UnitText = "\n" + charunit.name + "\n";
+            UnitText += "HP : <color=red>" + (int)(unithealthpercent * chartarget.stats.HP) + "</color> / " + charunit.stats.HP + "\n";
+            UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+            UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+ 
+
+            string TargetText = "\n" + chartarget.name + "\n";
+            TargetText += "HP : <color=green>" + (unithealthpercent * chartarget.stats.HP) + "</color> / " + chartarget.stats.HP + "\n";
+            TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+            TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+
+            unitAttackText.text = UnitText;
+            targetAttackText.text = TargetText;
+
+            TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP + targethealthgained) / (float)chartarget.stats.HP, 1f);
+            TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+
+            UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - unithealthlost) / (float)charunit.stats.HP;
+            UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+        }
+        else
+        {
+            int unithealthgained = (int)(targethealthpercent * charunit.stats.HP) - charunit.currentHP;
+
+            int targethealthlost = chartarget.currentHP - (int)(unithealthpercent * chartarget.stats.HP);
+
+            string UnitText = "\n" + charunit.name + "\n";
+            UnitText += "HP : <color=green>" + (int)(unithealthpercent * chartarget.stats.HP) + "</color> / " + charunit.stats.HP + "\n";
+            UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+            UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+
+
+            string TargetText = "\n" + chartarget.name + "\n";
+            TargetText += "HP : <color=red>" + (int)(unithealthpercent * chartarget.stats.HP) + "</color> / " + chartarget.stats.HP + "\n";
+            TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+            TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+
+            unitAttackText.text = UnitText;
+            targetAttackText.text = TargetText;
+
+            TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP - targethealthlost) / (float)chartarget.stats.HP, 1f);
+            TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+
+            UnitGreenLifebar.fillAmount = (float)(charunit.currentHP + unithealthgained) / (float)charunit.stats.HP;
+            UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+
+        }
+
+        
     }
 
     public bool CheckifInRange(GameObject unit, GameObject target)
@@ -884,7 +1318,7 @@ public class ActionsMenu : MonoBehaviour
 
                 AffectDamage(unit, target, totaldamage);
 
-                OnDamageEffect(unit, unitdamage, false);
+                OnDamageEffect(unit, totaldamage, false);
                 finaldamage = unitdamage;
                 if (chartarget.currentHP <= 0 || !(CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38))) //Spite
                 {
@@ -894,7 +1328,7 @@ public class ActionsMenu : MonoBehaviour
                     }
                     else if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
                     {
-                        (exp, levelup) = AwardExp(unit, target,false,true);
+                        (exp, levelup) = AwardExp(unit, target, false, true);
                     }
                 }
             }
@@ -1114,6 +1548,8 @@ public class ActionsMenu : MonoBehaviour
 
         Character charTarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
+
+
         List<GameObject> activelist = null;
         if (charTarget.affiliation == "playable")
         {
@@ -1130,26 +1566,43 @@ public class ActionsMenu : MonoBehaviour
 
         //All for one
         Character allforonetransfertarget = null;
+        GameObject allforonetransfertargetGO = null;
         foreach (GameObject othertarget in activelist)
         {
             Character charOthertarget = othertarget.GetComponent<UnitScript>().UnitCharacteristics;
             if (othertarget.GetComponent<UnitScript>().GetSkill(40) && ManhattanDistance(charTarget, charOthertarget) <= 3)
             {
                 allforonetransfertarget = charOthertarget;
+                allforonetransfertargetGO = othertarget;
                 break;
             }
         }
 
+        int basehp = charTarget.currentHP;
+
         if (allforonetransfertarget != null)
         {
+            int transfertargethp = allforonetransfertarget.currentHP;
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage / 2;
             allforonetransfertarget.currentHP -= damage / 2;
+
+            if (allforonetransfertarget.currentHP <= 0 && transfertargethp >= allforonetransfertarget.stats.HP && allforonetransfertargetGO.GetComponent<UnitScript>().GetSkill(44))  //unyielding
+            {
+                allforonetransfertarget.currentHP = 1;
+                allforonetransfertargetGO.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
+            }
+
         }
         else
         {
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage;
         }
 
+        if (charTarget.currentHP <= 0 && basehp >= charTarget.stats.HP && target.GetComponent<UnitScript>().GetSkill(44))  //unyielding
+        {
+            charTarget.currentHP = 1;
+            target.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
+        }
 
 
     }
@@ -1270,7 +1723,11 @@ public class ActionsMenu : MonoBehaviour
 
         foreach (GameObject potentialtarget in targetlist)
         {
+
             Character Chartarget = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics;
+
+            int baseHP = Chartarget.currentHP;
+
             if (Chartarget.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
             {
                 int damage = CalculateDamage(attacker, potentialtarget);
@@ -1285,11 +1742,17 @@ public class ActionsMenu : MonoBehaviour
                 {
                     Chartarget.currentHP -= damage / 4;
                 }
-
             }
+
+            if (Chartarget.currentHP <= 0 && baseHP >= Chartarget.stats.HP && potentialtarget.GetComponent<UnitScript>().GetSkill(44))  //unyielding
+            {
+                Chartarget.currentHP = 1;
+                potentialtarget.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
+            }
+
         }
     }
-    public (int, List<int>) AwardExp(GameObject unit, GameObject target, bool usingstaff = false, bool noattack=false)
+    public (int, List<int>) AwardExp(GameObject unit, GameObject target, bool usingstaff = false, bool noattack = false)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
@@ -1317,7 +1780,7 @@ public class ActionsMenu : MonoBehaviour
         {
             adjustedexp = 15;
         }
-        if(noattack)
+        if (noattack)
         {
             adjustedexp = 1;
         }
@@ -1533,30 +1996,46 @@ public class ActionsMenu : MonoBehaviour
         string unittype = unitTile.type;
         string targettype = unitTile.type;
 
-        if (unittype == "Forest")
+        if (unittype.ToLower() == "forest")
         {
             tilebonus += 30;
         }
-        else if (unittype == "Ruins")
+        else if (unittype.ToLower() == "ruins")
         {
             tilebonus += 10;
         }
-        else if (unittype == "HighGround")
+        else if (unittype.ToLower() == "highground")
         {
             tilebonus += 10;
         }
-        else if (unittype == "Water")
+        else if (unittype.ToLower() == "water")
         {
             tilebonus -= 10;
+        }
+        else if (unittype.ToLower() == "fortification")
+        {
+            tilebonus += 5;
+        }
+        else if (unittype.ToLower() == "fog")
+        {
+            tilebonus += 20;
         }
 
-        if (targettype == "Ruins")
+        if (targettype.ToLower() == "ruins")
         {
             tilebonus += 10;
         }
-        else if (targettype == "HighGround")
+        else if (targettype.ToLower() == "highground")
         {
-            tilebonus -= 10;
+            tilebonus -= 20;
+        }
+        else if (targettype.ToLower() == "fortification")
+        {
+            tilebonus -= 15;
+        }
+        else if (targettype.ToLower() == "fog")
+        {
+            tilebonus -= 20;
         }
 
         return tilebonus;
@@ -1609,6 +2088,23 @@ public class ActionsMenu : MonoBehaviour
     private int ManhattanDistance(Character unit, Character otherunit)
     {
         return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
+    }
+
+
+    public void CommandButtonFunction()
+    {
+        if (target != null)
+        {
+            List<Skill> Commands = target.GetComponent<UnitScript>().GetCommands();
+            if (Commands.Count > 0)
+            {
+                CommandGO.SetActive(true);
+                CommandGO.GetComponent<CommandScript>().target = target;
+                CommandGO.GetComponent<CommandScript>().CommandList = Commands;
+                CommandGO.GetComponent<CommandScript>().InitializeButtons();
+                FindAnyObjectByType<EventSystem>().SetSelectedGameObject(CommandGO.transform.GetChild(0).gameObject);
+            }
+        }
     }
 
 }

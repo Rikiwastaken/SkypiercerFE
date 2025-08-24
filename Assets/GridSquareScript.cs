@@ -27,6 +27,8 @@ public class GridSquareScript : MonoBehaviour
         Fire : -1 movement, +10% Damage taken
         Water : -1 movement, -10% dodge
         HighGround : +20% Accuracy, +10% Dodge
+        Fortification : +5% Dodge, +15% accuracy
+        Fog : +20% Dodge, -20% accuracy
     */
     public string type;
 

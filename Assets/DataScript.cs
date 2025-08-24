@@ -32,7 +32,10 @@ public class DataScript : MonoBehaviour
     {
         public string name;
         public string Descriptions;
+        public bool IsCommand;
         public int Cost;
+        public int targettype; // 0 enemies, 1 allies, 2 walls, 3 self
+        public int range;
         public int ID;
     }
 

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 using static UnitScript;
+using static UnityEngine.GraphicsBuffer;
 public class AttackTurnScript : MonoBehaviour
 {
 
@@ -157,7 +159,15 @@ public class AttackTurnScript : MonoBehaviour
             Character CurrentPlayableChar = CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics;
             if (ActionsMenu.confirmattack && CurrentPlayable!=null)
             {
-                ManageAttack(CurrentPlayable);
+                if(ActionsMenu.CommandUsedID == 0)
+                {
+                    ManageAttack(CurrentPlayable);
+                }
+                else
+                {
+                    ManageCommand(CurrentPlayable);
+                }
+                
             }
         }
 
@@ -223,6 +233,109 @@ public class AttackTurnScript : MonoBehaviour
         }
     }
 
+    private void ManageCommand(GameObject User)
+    {
+        GameObject Target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
+        Character CharUser = User.GetComponent<UnitScript>().UnitCharacteristics;
+        Character CharTarget = null;
+        if(Target.GetComponent<UnitScript>() != null)
+        {
+            CharTarget = Target.GetComponent<UnitScript>().UnitCharacteristics;
+        }
+
+        int commandID = ActionsMenu.CommandUsedID;
+
+        if (commandID == 47) //Transfuse
+        {
+            int previousHPUser = CharUser.currentHP;
+            int previousHPTarget = CharTarget.currentHP;
+
+            float UserPercent = (float)CharUser.currentHP / (float)CharUser.stats.HP;
+            float TargetPercent = (float)CharTarget.currentHP / (float)CharTarget.stats.HP;
+
+            CharUser.currentHP = (int)(TargetPercent*(float)CharUser.stats.HP);
+            CharTarget.currentHP = (int)(UserPercent * (float)CharTarget.stats.HP);
+
+            if(previousHPTarget> CharTarget.currentHP)
+            {
+                Target.GetComponent<UnitScript>().AddNumber(previousHPTarget-CharTarget.currentHP,false,"Transfuse");
+            }
+            else
+            {
+                Target.GetComponent<UnitScript>().AddNumber( CharTarget.currentHP - previousHPTarget , true, "Transfuse");
+            }
+
+            if (previousHPUser > CharUser.currentHP)
+            {
+                User.GetComponent<UnitScript>().AddNumber(previousHPUser - CharUser.currentHP, false, "Transfuse");
+            }
+            else
+            {
+                User.GetComponent<UnitScript>().AddNumber(CharUser.currentHP - previousHPUser, true, "Transfuse");
+            }
+
+        }
+        else if (commandID == 48) //Motivate
+        {
+            CharTarget.alreadymoved = false;
+            CharTarget.alreadyplayed = false;
+            Target.GetComponent<UnitScript>().AddNumber(0, true, "Motivate");
+        }
+        else if (commandID == 49) //Swap
+        {
+            Vector2 previoususerpos = CharUser.position;
+            CharUser.position = CharTarget.position;
+            CharTarget.position = previoususerpos;
+            Target.GetComponent<UnitScript>().AddNumber(0, true, "Swap");
+            User.GetComponent<UnitScript>().AddNumber(0, true, "Swap");
+        }
+        else if (commandID == 50) //Reinvigorate
+        {
+            foreach(equipment equ in CharTarget.equipments)
+            {
+                if(equ.Currentuses<equ.Maxuses)
+                {
+                    equ.Currentuses++;
+                }
+            }
+            Target.GetComponent<UnitScript>().AddNumber(0, true, "Reinvigorate");
+        }
+        else if (commandID == 51) // Jump
+        {
+            GridSquareScript targettile = Target.GetComponent<GridSquareScript>();
+            Vector2 coorddiff = targettile.GridCoordinates - FindAnyObjectByType<GridScript>().GetTile(CharUser.position).GridCoordinates;
+
+            int normalizedx = 0;
+            int normalizedy = 0;
+
+            if (coorddiff.x != 0)
+            {
+                normalizedx = (int)(coorddiff.x / Mathf.Abs(coorddiff.x));
+            }
+            if (coorddiff.y != 0)
+            {
+                normalizedy = (int)(coorddiff.y / Mathf.Abs(coorddiff.y));
+            }
+            Vector2 offset = new Vector2(normalizedx, normalizedy);
+
+            CharUser.position = targettile.GridCoordinates + offset;
+
+            User.GetComponent<UnitScript>().AddNumber(0, true, "Jump");
+        }
+        else if (commandID == 52) // Fortify
+        {
+            FindAnyObjectByType<GridScript>().GetTile(CharUser.position).type = "Fortification";
+            User.GetComponent<UnitScript>().AddNumber(0, true, "Fortify");
+        }
+        else if (commandID == 53) // Smoke Bomb
+        {
+            FindAnyObjectByType<GridScript>().GetTile(CharUser.position).type = "Fog";
+            User.GetComponent<UnitScript>().AddNumber(0, true, "Smoke Bomb");
+        }
+
+        ActionsMenu.FinalizeAttack();
+
+    }
 
     private void ManageAttack(GameObject Attacker)
     {

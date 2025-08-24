@@ -157,10 +157,10 @@ public class GridScript : MonoBehaviour
     {
         string text = "";
 
-        if(selection != null)
+        if (selection != null)
         {
             text = "Ground\nNo effect";
-            if(selection.type.ToLower()=="forest")
+            if (selection.type.ToLower() == "forest")
             {
                 text = "Forest \n+30% Dodge";
             }
@@ -179,6 +179,14 @@ public class GridScript : MonoBehaviour
             if (selection.type.ToLower() == "highground")
             {
                 text = "High Ground \n+20% Hit\n+10% Dodge";
+            }
+            if (selection.type.ToLower() == "fortification")
+            {
+                text = "Fortification \n+5% Dodge\n+15% Hit";
+            }
+            if (selection.type.ToLower() == "fog")
+            {
+                text = "Fog \n+20% Dodge\n-20% Hit";
             }
         }
         tiletext.text = text;
@@ -235,8 +243,8 @@ public class GridScript : MonoBehaviour
 
     public void InitializeGOList()
     {
-        allunits = new List<Character> ();
-        allunitGOs = new List<GameObject> ();
+        allunits = new List<Character>();
+        allunitGOs = new List<GameObject>();
         foreach (UnitScript character in FindObjectsByType<UnitScript>(FindObjectsSortMode.None))
         {
             allunits.Add(character.UnitCharacteristics);
@@ -478,7 +486,7 @@ public class GridScript : MonoBehaviour
     {
         foreach (GameObject unit in allunitGOs)
         {
-            if(unit.Equals(null) || unit==null)
+            if (unit.Equals(null) || unit == null)
             {
                 continue;
             }
@@ -734,11 +742,11 @@ public class GridScript : MonoBehaviour
             }
             if (i > 1)
             {
-                for(int x = -i;x<=i;x++)
+                for (int x = -i; x <= i; x++)
                 {
-                    for (int y = -i;y<=i;y++)
+                    for (int y = -i; y <= i; y++)
                     {
-                        if(Mathf.Abs(x) +  Mathf.Abs(y) ==i)
+                        if (Mathf.Abs(x) + Mathf.Abs(y) == i)
                         {
                             Vector2 vectorforattack = tile.GridCoordinates + new Vector2(x, y);
                             if (CheckIfPositionIsLegal(vectorforattack))
@@ -760,7 +768,7 @@ public class GridScript : MonoBehaviour
                                 }
                             }
                         }
-                        
+
                     }
                 }
             }
@@ -960,7 +968,7 @@ public class GridScript : MonoBehaviour
                     if (!visited[nx, ny] && !Grid[nx][ny].GetComponent<GridSquareScript>().isobstacle)
                     {
                         visited[nx, ny] = true;
-                        if (Grid[nx][ny].GetComponent<GridSquareScript>().type == "Fire" || Grid[nx][ny].GetComponent<GridSquareScript>().type == "Water")
+                        if (Grid[nx][ny].GetComponent<GridSquareScript>().type.ToLower() == "fire" || Grid[nx][ny].GetComponent<GridSquareScript>().type.ToLower() == "water")
                         {
                             queue.Enqueue((nx, ny, distance + 2));
                         }
@@ -980,7 +988,7 @@ public class GridScript : MonoBehaviour
     private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit)
     {
         string tiletype = GetTile((int)Coordinates.x, (int)Coordinates.y).type;
-        if (tiletype == "Fire" || tiletype == "Water")
+        if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water")
         {
             remainingMovements -= 1;
         }
@@ -1041,7 +1049,7 @@ public class GridScript : MonoBehaviour
         return true;
     }
 
-    private bool CheckIfPositionIsLegal(Vector2 position)
+    public bool CheckIfPositionIsLegal(Vector2 position)
     {
         if (position.x < 0 || position.x >= Grid.Count || position.y < 0 || position.y >= Grid[0].Count)
         {
