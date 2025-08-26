@@ -36,9 +36,10 @@ public class PreBattleMenuScript : MonoBehaviour
         if(InputManager.canceljustpressed && ChangingUnitPlace)
         {
             ChangingUnitPlace = false;
-            transform.GetChild(1).gameObject.SetActive(true);
             transform.GetChild(2).gameObject.SetActive(true);
             transform.GetChild(3).gameObject.SetActive(true);
+            transform.GetChild(4).gameObject.SetActive(true);
+            transform.GetChild(5).gameObject.SetActive(true);
         }
 
         if(ReplaceUnitButton.activeSelf)
