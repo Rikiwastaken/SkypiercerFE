@@ -42,6 +42,7 @@ public class GridScript : MonoBehaviour
     private Vector2 previousmovementvalueforbuffer;
 
     public TextMeshProUGUI tiletext;
+    private SkillEditionScript SkillEditionScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -87,6 +88,11 @@ public class GridScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if(SkillEditionScript==null)
+        {
+            SkillEditionScript = FindAnyObjectByType<SkillEditionScript>();
+        }
 
 
         if (inputManager == null)
@@ -139,7 +145,7 @@ public class GridScript : MonoBehaviour
                             }
                         }
                     }
-                    else
+                    else if (!SkillEditionScript.gameObject.activeSelf)
                     {
                         GameObject Characters = GameObject.Find("Characters");
                         List<GameObject> listplayable = new List<GameObject>();

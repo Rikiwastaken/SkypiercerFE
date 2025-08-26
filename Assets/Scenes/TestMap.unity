@@ -5078,8 +5078,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 297, y: -19}
-  m_SizeDelta: {x: 197.2755, y: 49.4804}
+  m_AnchoredPosition: {x: 297, y: -5.9156}
+  m_SizeDelta: {x: 197.2755, y: 23.3116}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &337279751
 PrefabInstance:
@@ -19225,7 +19225,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Skill Points : \n40/60"
+  m_text: 'Skill Points : 40/60'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -22518,8 +22518,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 297, y: -131.89835}
-  m_SizeDelta: {x: 197.2755, y: 169.3585}
+  m_AnchoredPosition: {x: 297, y: -117.84474}
+  m_SizeDelta: {x: 197.2755, y: 197.4657}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1384423683
 PrefabInstance:
@@ -33742,7 +33742,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b93820fba1faa45ac47c560c6b1717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PreBattleMenuItems: []
+  PreBattleMenuItems:
+  - {fileID: 1450681536}
+  - {fileID: 923005190}
+  - {fileID: 896661813}
+  - {fileID: 1470179018}
   BattalionText: {fileID: 0}
   UnitsDeployedText: {fileID: 0}
   selectedcharacter:

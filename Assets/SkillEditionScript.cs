@@ -113,7 +113,7 @@ public class SkillEditionScript : MonoBehaviour
             }
             else
             {
-                if (characterwindowindex * 10 < DataScript.PlayableCharacterList.Count)
+                if (characterwindowindex * 10 < DataScript.PlayableCharacterList.Count - 9)
                 {
                     characterwindowindex++;
                     InitializeButtons();
@@ -205,7 +205,16 @@ public class SkillEditionScript : MonoBehaviour
             {
                 Skill skill = DataScript.SkillList[SkillID];
 
-                SkillDescriptionText.text = "Cost : " + skill.Cost + "\n" + skill.Descriptions;
+                SkillDescriptionText.text = "Cost : " + skill.Cost + "\n";
+                if(skill.IsCommand)
+                {
+                    SkillDescriptionText.text += "Type : Command\n";
+                }
+                else
+                {
+                    SkillDescriptionText.text += "Type : Skill\n";
+                }
+                SkillDescriptionText.text += skill.Descriptions;
             }
             else
             {
@@ -230,7 +239,7 @@ public class SkillEditionScript : MonoBehaviour
             }
         }
 
-        SkillPointsText.text = "Skill Points : \n"+equipedskillpoitns+"/"+unitchar.MaxSkillpoints;
+        SkillPointsText.text = "Skill Pts : "+equipedskillpoitns+"/"+unitchar.MaxSkillpoints;
     }
 
     private void InitializeInventorySkillList()
