@@ -297,42 +297,49 @@ public class SkillEditionScript : MonoBehaviour
 
     public void EquipUnequipSkill(int childID)
     {
-        int SkillID = SkillList.transform.GetChild(childID).GetComponent<UnitDeploymentButton>().Item.ID;
-        if(selectedcharacter.EquipedSkills.Contains(SkillID))
+        if(SkillList.transform.GetChild(childID).GetComponent<UnitDeploymentButton>().Item!=null)
         {
-            selectedcharacter.EquipedSkills.Remove(SkillID);
-            foreach(InventoryItem item in DataScript.PlayerInventory.inventoryItems)
+            if(SkillList.transform.GetChild(childID).GetComponent<UnitDeploymentButton>().Item.ID!=0)
             {
-                if(item.type==1 && item.ID==SkillID)
+                int SkillID = SkillList.transform.GetChild(childID).GetComponent<UnitDeploymentButton>().Item.ID;
+                if (selectedcharacter.EquipedSkills.Contains(SkillID))
                 {
-                    item.Quantity++;
-                }
-            }
-        }
-        else
-        {
-            if(selectedcharacter.UnitSkill!=SkillID && selectedcharacter.EquipedSkills.Count<4)
-            {
-                int equipedcost = 0;
-                foreach(int equskillID in selectedcharacter.EquipedSkills)
-                {
-                    equipedcost += DataScript.SkillList[equskillID].Cost;
-                }
-
-                if(equipedcost + DataScript.SkillList[SkillID].Cost<= selectedcharacter.MaxSkillpoints)
-                {
+                    selectedcharacter.EquipedSkills.Remove(SkillID);
                     foreach (InventoryItem item in DataScript.PlayerInventory.inventoryItems)
                     {
-                        if (item.type == 1 && item.ID == SkillID && item.Quantity>0)
+                        if (item.type == 1 && item.ID == SkillID)
                         {
-                            item.Quantity--;
-                            selectedcharacter.EquipedSkills.Add(SkillID);
-                            return;
+                            item.Quantity++;
+                        }
+                    }
+                }
+                else
+                {
+                    if (selectedcharacter.UnitSkill != SkillID && selectedcharacter.EquipedSkills.Count < 4)
+                    {
+                        int equipedcost = 0;
+                        foreach (int equskillID in selectedcharacter.EquipedSkills)
+                        {
+                            equipedcost += DataScript.SkillList[equskillID].Cost;
+                        }
+
+                        if (equipedcost + DataScript.SkillList[SkillID].Cost <= selectedcharacter.MaxSkillpoints)
+                        {
+                            foreach (InventoryItem item in DataScript.PlayerInventory.inventoryItems)
+                            {
+                                if (item.type == 1 && item.ID == SkillID && item.Quantity > 0)
+                                {
+                                    item.Quantity--;
+                                    selectedcharacter.EquipedSkills.Add(SkillID);
+                                    return;
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+        
     }
 
     private int numberofSelectedUnits()

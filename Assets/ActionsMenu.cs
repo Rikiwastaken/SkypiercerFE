@@ -270,6 +270,7 @@ public class ActionsMenu : MonoBehaviour
         target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
         WeaponChange();
         bool enemytargettable = false;
+        Debug.Log(GridScript.lockedattacktiles.Count);
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
         {
             if ((int)tile.GridCoordinates.x == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.x && (int)tile.GridCoordinates.y == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.y)
@@ -671,11 +672,19 @@ public class ActionsMenu : MonoBehaviour
         {
             listofChildren.Add(transform.GetChild(i).gameObject);
         }
-
-        if ((!currentSelected.activeSelf || !listofChildren.Contains(currentSelected)) && !ItemsScript.activeSelf && !CommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
+        if(currentSelected != null)
+        {
+            if ((!currentSelected.activeSelf || !listofChildren.Contains(currentSelected)) && !ItemsScript.activeSelf && !CommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
+            {
+                FindAnyObjectByType<EventSystem>().SetSelectedGameObject(transform.GetChild(0).gameObject);
+            }
+        }
+        else if(!ItemsScript.activeSelf && !CommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
         {
             FindAnyObjectByType<EventSystem>().SetSelectedGameObject(transform.GetChild(0).gameObject);
         }
+
+        
     }
 
     public void initializeAttackWindows(GameObject unit, GameObject target)

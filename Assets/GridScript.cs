@@ -831,6 +831,8 @@ public class GridScript : MonoBehaviour
     {
         movementtiles.Clear();
         attacktiles = new List<GridSquareScript>();
+        lockedattacktiles = new List<GridSquareScript>();
+        lockedhealingtiles = new List<GridSquareScript>();
         healingtiles = new List<GridSquareScript>();
         for (int i = 1; i <= range; i++)
         {

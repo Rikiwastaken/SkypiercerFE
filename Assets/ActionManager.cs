@@ -42,7 +42,7 @@ public class ActionManager : MonoBehaviour
     {
         if (actionsMenu.activeSelf)
         {
-            if (InputManager.Telekinesisjustpressed && !battlecamera.incombat)
+            if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow")==null)
             {
                 currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                 (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
