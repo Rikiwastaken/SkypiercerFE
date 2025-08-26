@@ -37,6 +37,7 @@ public class UnitScript : MonoBehaviour
         public bool isboss;
         public bool attacksfriends;
         public bool deployunit;
+        public int MaxSkillpoints = 99;
     }
 
     [Serializable]

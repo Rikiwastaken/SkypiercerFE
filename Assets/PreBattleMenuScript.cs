@@ -48,7 +48,7 @@ public class PreBattleMenuScript : MonoBehaviour
             bool buttonselected = false;
             if (currentselected != null)
             {
-                for (int i = 1; i < transform.childCount; i++)
+                for (int i = 2; i < transform.childCount; i++)
                 {
                     if (transform.GetChild(i).gameObject == currentselected)
                     {
@@ -61,7 +61,7 @@ public class PreBattleMenuScript : MonoBehaviour
             }
             if (!buttonselected || currentselected == null)
             {
-                EventSystem.current.SetSelectedGameObject(transform.GetChild(1).gameObject);
+                EventSystem.current.SetSelectedGameObject(transform.GetChild(2).gameObject);
             }
         }
 

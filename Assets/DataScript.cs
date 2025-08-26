@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static DataScript;
 using static UnitScript;
 
 public class DataScript : MonoBehaviour
@@ -18,6 +19,8 @@ public class DataScript : MonoBehaviour
 
     public float manualgamespeed = 1;
 
+    public Inventory PlayerInventory;
+
     [Serializable]
     public class ClassInfo
     {
@@ -25,6 +28,20 @@ public class DataScript : MonoBehaviour
         public BaseStats BaseStats;
         public StatGrowth StatGrowth;
         public int ID;
+    }
+
+    [Serializable]
+    public class Inventory
+    {
+        public List<InventoryItem> inventoryItems;
+    }
+
+    [Serializable]
+    public class InventoryItem
+    {
+        public int type; //0 Item, 1 Skill
+        public int ID;
+        public int Quantity;
     }
 
     [Serializable]
@@ -56,8 +73,25 @@ public class DataScript : MonoBehaviour
     {
         SetupEquipment();
         SetupClasses();
+        SetupInventory();
     }
 
+    private void SetupInventory()
+    {
+        PlayerInventory = new Inventory();
+        PlayerInventory.inventoryItems = new List<InventoryItem>();
+        foreach (Skill skill in SkillList)
+        {
+            if(skill.ID != 0)
+            {
+                InventoryItem inventoryItem = new InventoryItem();
+                inventoryItem.Quantity = 50;
+                inventoryItem.type = 1;
+                inventoryItem.ID = skill.ID;
+                PlayerInventory.inventoryItems.Add(inventoryItem);
+            }
+        }
+    }
     private void SetupClasses()
     {
         for (int i = 0; i < ClassList.Count; i++)
