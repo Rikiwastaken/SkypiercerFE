@@ -133,6 +133,7 @@ public class TurnManger : MonoBehaviour
                         weapon.Currentuses = weapon.Maxuses;
                     }
                 }
+                unit.GetComponent<UnitScript>().UpdateWeaponModel();
             }
 
             //First aid
@@ -313,7 +314,7 @@ public class TurnManger : MonoBehaviour
         otherunitsGO = new List<GameObject>();
         foreach (GameObject character in allunits)
         {
-            if(character == null)
+            if (character == null)
             {
                 continue;
             }

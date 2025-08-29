@@ -1,13 +1,7 @@
-using JetBrains.Annotations;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.UI;
 using static DataScript;
 
@@ -47,7 +41,7 @@ public class UnitScript : MonoBehaviour
         public int desiredlevel;
         public int itemtodropID;
         public bool usetelekinesis;
-        public string personality; // nothing : basic. Deviant : High Random. Coward : deviant if below 33% hp
+        public string personality; // nothing : basic. Deviant : High Random. Coward : deviant if below 33% hp. Daredevil : never takes into account their own HP
         public Vector2 startpos;
         public List<int> equipments;
         public List<int> Skills;
@@ -175,6 +169,8 @@ public class UnitScript : MonoBehaviour
     private List<NumberToShow> damagestoshow = new List<NumberToShow>();
 
     public float timeforshowingnumbers;
+
+    public bool copied;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -383,13 +379,13 @@ public class UnitScript : MonoBehaviour
     {
         initialforward = armature.forward;
     }
-    private void UpdateWeaponModel()
+    public void UpdateWeaponModel()
     {
         if (currentequipmentmodel != null)
         {
             Destroy(currentequipmentmodel);
         }
-        if (GetFirstWeapon().Grade != 0)
+        if (GetFirstWeapon().Grade != 0 && GetFirstWeapon().Currentuses != 0)
         {
             equipmentmodel equipmentmodel = GetFirstWeapon().equipmentmodel;
             currentequipmentmodel = Instantiate(equipmentmodel.Model);
@@ -402,11 +398,15 @@ public class UnitScript : MonoBehaviour
 
     public void RetreatTrigger() // Effect of Retreat or Verso
     {
+        FindAnyObjectByType<AttackTurnScript>().DeathCleanup();
+        
         if (GetSkill(1)) //Retreat
         {
             AddNumber(0, true, "Retreat");
             UnitCharacteristics.alreadymoved = false;
+
             GridScript gridScript = FindAnyObjectByType<GridScript>();
+            gridScript.InitializeGOList();
             gridScript.selection = gridScript.GetTile(UnitCharacteristics.position);
             gridScript.ShowMovement();
 
@@ -438,6 +438,7 @@ public class UnitScript : MonoBehaviour
             {
                 UnitCharacteristics.alreadymoved = false;
                 GridScript gridScript = FindAnyObjectByType<GridScript>();
+                gridScript.InitializeGOList();
                 gridScript.selection = gridScript.GetTile(UnitCharacteristics.position);
                 gridScript.ShowLimitedMovementOfUnit(gameObject, remainingMovements);
 
@@ -890,6 +891,7 @@ public class UnitScript : MonoBehaviour
                 }
             }
         }
+        UpdateWeaponModel();
     }
     public (int, bool) GetRangeAndMele()
     {
@@ -1304,6 +1306,13 @@ public class UnitScript : MonoBehaviour
             statbonuses.TelekDamage += 20;
             statbonuses.PhysDamage += 20;
             statbonuses.DamageReduction -= 20;
+        }
+
+        // Enduring
+        if (GetSkill(55))
+        {
+            statbonuses.TelekDamage += (UnitCharacteristics.stats.HP-UnitCharacteristics.currentHP)/2;
+            statbonuses.PhysDamage += (UnitCharacteristics.stats.HP - UnitCharacteristics.currentHP) / 2;
         }
 
 

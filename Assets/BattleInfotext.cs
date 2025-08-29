@@ -165,12 +165,12 @@ public class BattleInfotext : MonoBehaviour
                 ManageSkillDescription();
 
 
-                stringtoshow = selectedunitCharacter.name + "\n";
+                stringtoshow =" " +selectedunitCharacter.name + "\n";
                 stringtoshow += " Level : " + selectedunitCharacter.level + "\n";
                 stringtoshow += " Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP + "\n";
                 if (selectedunitCharacter.affiliation == "playable")
                 {
-                    stringtoshow += " Experience : " + selectedunitCharacter.experience + " / 100\n\n";
+                    stringtoshow += " Exp : " + selectedunitCharacter.experience + " / 100\n\n";
                 }
                 else
                 {
@@ -252,12 +252,12 @@ public class BattleInfotext : MonoBehaviour
                 }
                 else
                 {
-                    stringtoshow += " Speed : " + selectedunitCharacter.stats.Speed + "\n\n";
+                    stringtoshow += " Speed : " + selectedunitCharacter.stats.Speed + "\n";
                 }
 
 
 
-                stringtoshow += "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type + " " + gradeletter + ")\n";
+                stringtoshow += "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type + " " + gradeletter + ")  "+ selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / "+ selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
                 if (selectedunitCharacter.telekinesisactivated)
                 {
                     stringtoshow += "Telekinesis : on";

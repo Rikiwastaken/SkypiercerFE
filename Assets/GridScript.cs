@@ -411,27 +411,31 @@ public class GridScript : MonoBehaviour
         movementtiles = new List<GridSquareScript>();
         foreach (GameObject unitGO in allunitGOs)
         {
-            Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-            if (unit.position == selection.GridCoordinates && !unit.alreadymoved)
+            if(unitGO != null)
             {
-                string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
-                int movements = unit.movements;
-                if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
+                Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
+                if (unit.position == selection.GridCoordinates && !unit.alreadymoved)
                 {
-                    movements -= 1;
+                    string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
+                    int movements = unit.movements;
+                    if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
+                    {
+                        movements -= 1;
+                    }
+                    if (unitGO.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using canto/Retreat
+                    {
+                        movements -= 2;
+                    }
+                    if (unitGO.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
+                    {
+                        movements += 1;
+                    }
+                    SpreadMovements(unit.position, movements, movementtiles, unitGO);
+                    (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                    ShowAttack(range, melee, type.ToLower() == "staff");
                 }
-                if (unitGO.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using canto/Retreat
-                {
-                    movements -= 2;
-                }
-                if (unitGO.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
-                {
-                    movements += 1;
-                }
-                SpreadMovements(unit.position, movements, movementtiles, unitGO);
-                (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                ShowAttack(range, melee, type.ToLower() == "staff");
             }
+            
 
         }
         if (!lockselection)
@@ -1140,7 +1144,7 @@ public class GridScript : MonoBehaviour
         }
         foreach (Character unit in allunits)
         {
-            if (unit.position == position && unit.affiliation != selectedunit.affiliation)
+            if (unit.position == position && unit.affiliation != selectedunit.affiliation && unit.currentHP>0)
             {
                 return false;
             }

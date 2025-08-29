@@ -480,6 +480,10 @@ public class ActionsMenu : MonoBehaviour
             CommandUsedID = command.ID;
             if (command.targettype == 0)
             {
+                GridSquareScript positiontile = GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position);
+                GridScript.ShowAttackAfterMovement(command.range, true, positiontile, false);
+                GridScript.lockedattacktiles = GridScript.attacktiles;
+                
                 foreach (GridSquareScript tile in GridScript.lockedattacktiles)
                 {
                     GameObject potentialtarget = GridScript.GetUnit(tile);
@@ -488,6 +492,7 @@ public class ActionsMenu : MonoBehaviour
                         targetlist.Add(potentialtarget);
                     }
                 }
+                Debug.Log(targetlist[0]);
                 if (targetlist.Count > 0)
                 {
                     activetargetid = 0;
@@ -672,19 +677,19 @@ public class ActionsMenu : MonoBehaviour
         {
             listofChildren.Add(transform.GetChild(i).gameObject);
         }
-        if(currentSelected != null)
+        if (currentSelected != null)
         {
             if ((!currentSelected.activeSelf || !listofChildren.Contains(currentSelected)) && !ItemsScript.activeSelf && !CommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
             {
                 FindAnyObjectByType<EventSystem>().SetSelectedGameObject(transform.GetChild(0).gameObject);
             }
         }
-        else if(!ItemsScript.activeSelf && !CommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
+        else if (!ItemsScript.activeSelf && !CommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
         {
             FindAnyObjectByType<EventSystem>().SetSelectedGameObject(transform.GetChild(0).gameObject);
         }
 
-        
+
     }
 
     public void initializeAttackWindows(GameObject unit, GameObject target)
@@ -911,6 +916,10 @@ public class ActionsMenu : MonoBehaviour
         {
             ChakraCommandWindow(unit);
         }
+        else if (command.ID == 56) // Copy
+        {
+            BasicCommandWindow(unit, target);
+        }
 
     }
 
@@ -976,7 +985,7 @@ public class ActionsMenu : MonoBehaviour
         int healthrestored = (int)((charunit.stats.HP - charunit.currentHP) * 0.25f);
 
         string UnitText = "\n" + charunit.name + "\n";
-        UnitText += "HP : " + charunit.currentHP +" + <color=green>"+ healthrestored + "</color> / " + charunit.stats.HP + "\n";
+        UnitText += "HP : " + charunit.currentHP + " + <color=green>" + healthrestored + "</color> / " + charunit.stats.HP + "\n";
         UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         UnitText += "Dmg : - \n";
@@ -1093,7 +1102,7 @@ public class ActionsMenu : MonoBehaviour
 
         string TargetText = "\n";
 
-        if (Walltarget.type!="")
+        if (Walltarget.type != "")
         {
             TargetText += Walltarget.type + "\n";
         }
@@ -1735,6 +1744,10 @@ public class ActionsMenu : MonoBehaviour
         if (weapon.Maxuses > 0)
         {
             weapon.Currentuses--;
+        }
+        if (weapon.Currentuses <= 0)
+        {
+            Attacker.GetComponent<UnitScript>().UpdateWeaponModel();
         }
 
     }

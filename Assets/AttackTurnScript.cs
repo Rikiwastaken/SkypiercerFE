@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
 using static UnitScript;
-using static UnityEngine.GraphicsBuffer;
+using static DataScript;
 public class AttackTurnScript : MonoBehaviour
 {
 
@@ -338,6 +338,32 @@ public class AttackTurnScript : MonoBehaviour
             CharUser.currentHP += healthrestored;
             User.GetComponent<UnitScript>().AddNumber(healthrestored, true, "Chakra");
         }
+        else if (commandID == 56) // Copy
+        {
+            if(CharTarget.UnitSkill!=0 && !Target.GetComponent<UnitScript>().copied)
+            {
+                DataScript datascript = FindAnyObjectByType<DataScript>();
+                Target.GetComponent<UnitScript>().copied=true;
+                bool itemadded = false;
+                foreach(InventoryItem item in datascript.PlayerInventory.inventoryItems)
+                {
+                    if(item.type==1 && item.ID == CharTarget.UnitSkill)
+                    {
+                        item.Quantity++;
+                        itemadded = true;
+                    }
+                }
+                if(!itemadded)
+                {
+                    InventoryItem newitem = new InventoryItem();
+                    newitem.type = 1;
+                    newitem.Quantity = 1;
+                    newitem.ID = CharTarget.UnitSkill;
+                }
+                Target.GetComponent<UnitScript>().AddNumber(0, true, datascript.SkillList[CharTarget.UnitSkill].name + " copied");
+                User.GetComponent<UnitScript>().AddNumber(0, true, datascript.SkillList[CharTarget.UnitSkill].name + " copied");
+            }
+        }
 
         ActionsMenu.FinalizeAttack();
 
@@ -668,6 +694,11 @@ public class AttackTurnScript : MonoBehaviour
     }
     private void EndOfCombatTrigger(GameObject unit1, GameObject unit2 = null)
     {
+        if (unit1 != null)
+        {
+            unit1.GetComponent<UnitScript>().UpdateWeaponModel();
+        }
+
         Character charunit1 = unit1.GetComponent<UnitScript>().UnitCharacteristics;
         if (unit1.GetComponent<UnitScript>().GetSkill(32)) // Survivor
         {
@@ -714,7 +745,11 @@ public class AttackTurnScript : MonoBehaviour
                 }
             }
 
+            unit2.GetComponent<UnitScript>().UpdateWeaponModel();
+
         }
+
+
 
 
     }
@@ -790,18 +825,22 @@ public class AttackTurnScript : MonoBehaviour
                         }
                     }
 
-                    if (potentialdamagetaken == 0)
+                    if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() != "daredevil")
                     {
-                        reward += 10;
-                    }
-                    else
-                    {
-                        reward += (int)(dodgerate / 10f);
-                        if (potentialdamagetaken <= charunit.currentHP)
+                        if (potentialdamagetaken == 0)
                         {
-                            reward += 5;
+                            reward += 10;
+                        }
+                        else
+                        {
+                            reward += (int)(dodgerate / 10f);
+                            if (potentialdamagetaken <= charunit.currentHP)
+                            {
+                                reward += 5;
+                            }
                         }
                     }
+
 
                     if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.stats.HP * 0.33f))
                     {
@@ -908,16 +947,19 @@ public class AttackTurnScript : MonoBehaviour
                         }
                     }
 
-                    if (potentialdamagetaken == 0)
+                    if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() != "daredevil")
                     {
-                        reward += 10;
-                    }
-                    else
-                    {
-                        reward += (int)(dodgerate / 10f);
-                        if (potentialdamagetaken <= charunit.currentHP)
+                        if (potentialdamagetaken == 0)
                         {
-                            reward += 5;
+                            reward += 10;
+                        }
+                        else
+                        {
+                            reward += (int)(dodgerate / 10f);
+                            if (potentialdamagetaken <= charunit.currentHP)
+                            {
+                                reward += 5;
+                            }
                         }
                     }
                 }
@@ -925,7 +967,8 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     if (charunit.currentHP < charunit.stats.HP)
                     {
-                        reward += Mathf.Min((10 - ManhattanDistance(charunit, charotherunit) - charunit.equipments[0].Range), 0);
+                        (int newrange, bool newmelee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
+                        reward += Mathf.Max(ManhattanDistance(charunit, charotherunit) - newrange, 0);
                     }
                 }
 
@@ -972,7 +1015,7 @@ public class AttackTurnScript : MonoBehaviour
         return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
     }
 
-    private void DeathCleanup()
+    public void DeathCleanup()
     {
         triggercleanup = false;
         List<GameObject> objecttodelete = new List<GameObject>();

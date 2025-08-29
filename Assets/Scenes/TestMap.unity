@@ -27697,13 +27697,20 @@ MonoBehaviour:
     targettype: 3
     range: 0
     ID: 54
-  - name: 
-    Descriptions: 
+  - name: Enduring
+    Descriptions: Adds half of missing health to damage.
     IsCommand: 0
-    Cost: 0
+    Cost: 5
     targettype: 0
     range: 0
-    ID: 0
+    ID: 55
+  - name: Copy
+    Descriptions: Extracts Skill from enemy.
+    IsCommand: 1
+    Cost: 5
+    targettype: 0
+    range: 1
+    ID: 56
   PlayableCharacterList:
   - protagonist: 1
     battalion: Kira
