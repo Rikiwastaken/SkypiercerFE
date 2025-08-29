@@ -73,10 +73,10 @@ public class SkillEditionScript : MonoBehaviour
             
         }
 
-        PageNumberText.text = "A/LB < " + (characterwindowindex+1) + "/" + (DataScript.PlayableCharacterList.Count/10 +1) + " > E/RB";
+        PageNumberText.text =  (characterwindowindex+1) + "/" + (DataScript.PlayableCharacterList.Count/10 +1);
         if(SkillPageNumberText.gameObject.activeSelf)
         {
-            SkillPageNumberText.text = "A/LB < " + (skillwindowindex + 1) + "/" + (InventorySkillList.Count / 10 + 1) + " > E/RB";
+            SkillPageNumberText.text =  (skillwindowindex + 1) + "/" + (InventorySkillList.Count / 10 + 1);
         }
         
 
