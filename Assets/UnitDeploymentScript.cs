@@ -25,6 +25,9 @@ public class UnitDeploymentScript : MonoBehaviour
 
     public TextMeshProUGUI UnitsDeployedText;
 
+    public TextMeshProUGUI UnitDescription;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -41,9 +44,9 @@ public class UnitDeploymentScript : MonoBehaviour
     {
         gridscript.movementbuffercounter = 3;
 
-        if(inputmanager.canceljustpressed)
+        if (inputmanager.canceljustpressed)
         {
-            if(numberofSelectedUnits()>0)
+            if (numberofSelectedUnits() > 0)
             {
                 foreach (GameObject go in PreBattleMenuItems)
                 {
@@ -59,25 +62,63 @@ public class UnitDeploymentScript : MonoBehaviour
 
         GameObject currentselected = EventSystem.current.currentSelectedGameObject;
         bool buttonselected = false;
-        if(currentselected != null )
+        if (currentselected != null)
         {
-            for( int i = 0; i < 20; i++ )
+            for (int i = 0; i < 20; i++)
             {
-                if(transform.GetChild(i).gameObject == currentselected)
+                if (transform.GetChild(i).gameObject == currentselected)
                 {
                     buttonselected = true; break;
                 }
             }
         }
-        if ( !buttonselected || currentselected==null)
+        if (!buttonselected || currentselected == null)
         {
             EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
         }
         Character currentchar = EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>().Character;
-        if(currentchar.name!="")
+        if (currentchar.name != "")
         {
             string unitbattallion = currentchar.battalion;
-            BattalionText.text = "Battallion :\n" + unitbattallion + "\nChange with    /W";
+            BattalionText.text = "Battallion :\n" + unitbattallion + "\n Change with : ";
+            string unitdescriptiontxt = currentchar.name + "\n";
+            unitdescriptiontxt += "Level : " + currentchar.level + "\n";
+            unitdescriptiontxt += "Exp : " + currentchar.experience + " / 100\n\n";
+
+            unitdescriptiontxt += "Strength : " + currentchar.stats.Strength + "\n";
+            unitdescriptiontxt += "Psyche : " + currentchar.stats.Psyche + "\n";
+            unitdescriptiontxt += "Defense : " + currentchar.stats.Defense + "\n";
+            unitdescriptiontxt += "Resistance : " + currentchar.stats.Resistance + "\n";
+            unitdescriptiontxt += "Dexterity : " + currentchar.stats.Dexterity + "\n";
+            unitdescriptiontxt += "Speed : " + currentchar.stats.Speed + "\n\n";
+
+            string grade = "";
+            switch (DataScript.equipmentList[currentchar.equipmentsIDs[0]].Grade)
+            {
+                case 0:
+                    grade = "E";
+                    break;
+                case 1:
+                    grade = "D";
+                    break;
+                case 2:
+                    grade = "C";
+                    break;
+                case 3:
+                    grade = "B";
+                    break;
+                case 4:
+                    grade = "A";
+                    break;
+                case 5:
+                    grade = "S";
+                    break;
+
+            }
+
+
+            unitdescriptiontxt += "Weapon : " + DataScript.equipmentList[currentchar.equipmentsIDs[0]].Name + " (" + DataScript.equipmentList[currentchar.equipmentsIDs[0]].type + " " + grade + ")";
+            UnitDescription.text = unitdescriptiontxt;
         }
         else
         {
@@ -86,7 +127,7 @@ public class UnitDeploymentScript : MonoBehaviour
 
 
 
-        UnitsDeployedText.text ="Units deployed :\r\n"+ numberofSelectedUnits() + " / "+numberofunitstodeplay;
+        UnitsDeployedText.text = "Units deployed :\r\n" + numberofSelectedUnits() + " / " + numberofunitstodeplay;
 
 
     }
@@ -94,16 +135,16 @@ public class UnitDeploymentScript : MonoBehaviour
     private void InitializeButtons()
     {
         OrderUnits();
-        for (int i = 0; i < Mathf.Min(DataScript.PlayableCharacterList.Count,20); i++)
+        for (int i = 0; i < Mathf.Min(DataScript.PlayableCharacterList.Count, 20); i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = DataScript.PlayableCharacterList[i];
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i;
-            if(i<numberofunitstodeplay)
+            if (i < numberofunitstodeplay)
             {
                 transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.deployunit = true;
             }
         }
-        for(int i = DataScript.PlayableCharacterList.Count; i< Mathf.Min(DataScript.PlayableCharacterList.Count, 20);i++)
+        for (int i = DataScript.PlayableCharacterList.Count; i < Mathf.Min(DataScript.PlayableCharacterList.Count, 20); i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = null;
         }
@@ -127,9 +168,9 @@ public class UnitDeploymentScript : MonoBehaviour
     private void OrderUnits()
     {
         List<Character> newcharacterlist = new List<Character>();
-        foreach(Character character in DataScript.PlayableCharacterList)
+        foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if(character.deployunit)
+            if (character.deployunit)
             {
                 newcharacterlist.Add(character);
                 character.deployunit = false;
