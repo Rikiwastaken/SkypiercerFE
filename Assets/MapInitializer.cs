@@ -30,39 +30,40 @@ public class MapInitializer : MonoBehaviour
 
     public void InitializePlayers()
     {
-        if(GridScript == null)
+        if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();
+            GridScript.InstantiateGrid();
         }
-        if(DataScript == null)
+        if (DataScript == null)
         {
             DataScript = FindAnyObjectByType<DataScript>();
         }
 
-        
+
 
         foreach (Transform potentialplayable in Characters.transform)
         {
-            if(potentialplayable.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
+            if (potentialplayable.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
             {
                 Destroy(potentialplayable.gameObject);
             }
         }
 
         int index = 0;
-        foreach(Character playable in DataScript.PlayableCharacterList)
+        foreach (Character playable in DataScript.PlayableCharacterList)
         {
             if (index < playablepos.Count && playable.deployunit)
             {
                 GameObject newcharacter = Instantiate(BaseCharacter);
                 newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
-                playable.position = playablepos[index];
                 newcharacter.transform.parent = Characters.transform;
                 newcharacter.transform.position = new Vector3(playablepos[index].x, 0, playablepos[index].y);
+                newcharacter.GetComponent<UnitScript>().MoveTo(playablepos[index]);
                 newcharacter.name = playable.name;
                 index++;
             }
-            
+
         }
         GridScript.InitializeGOList();
     }
@@ -81,13 +82,12 @@ public class MapInitializer : MonoBehaviour
             GameObject newcharacter = Instantiate(BaseCharacter);
             newcharacter.GetComponent<UnitScript>().enemyStats = enemyStats;
             Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
-            Character.position = enemyStats.startpos;
             Character.name = enemyStats.Name;
-            if (enemyStats.Skills.Count>0)
+            if (enemyStats.Skills.Count > 0)
             {
                 Character.UnitSkill = enemyStats.Skills[0];
                 Character.EquipedSkills = new List<int>();
-                for (int i = 1; i< Mathf.Min(enemyStats.Skills.Count,5);i++)
+                for (int i = 1; i < Mathf.Min(enemyStats.Skills.Count, 5); i++)
                 {
                     Character.EquipedSkills.Add(enemyStats.Skills[i]);
                 }
@@ -95,8 +95,9 @@ public class MapInitializer : MonoBehaviour
             Character.equipmentsIDs = enemyStats.equipments;
             newcharacter.transform.parent = Characters.transform;
             newcharacter.transform.position = new Vector3(enemyStats.startpos.x, 0, enemyStats.startpos.y);
-            newcharacter.name = enemyStats.Name + " "+index;
-            if(enemyStats.isother)
+            newcharacter.GetComponent<UnitScript>().MoveTo(enemyStats.startpos);
+            newcharacter.name = enemyStats.Name + " " + index;
+            if (enemyStats.isother)
             {
                 Character.affiliation = "other";
             }
@@ -104,7 +105,7 @@ public class MapInitializer : MonoBehaviour
             {
                 Character.affiliation = "enemy";
             }
-                index++;
+            index++;
         }
     }
 

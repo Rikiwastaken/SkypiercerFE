@@ -50,40 +50,9 @@ public class GridScript : MonoBehaviour
         lockedmovementtiles = new List<GridSquareScript>();
         lockedattacktiles = new List<GridSquareScript>();
         lockedhealingtiles = new List<GridSquareScript>();
-        //InstantiateGrid();
         InitializeGOList();
-        Grid = new List<List<GameObject>>();
-        GridSquareScript[] tilelist = FindObjectsByType<GridSquareScript>(FindObjectsSortMode.None);
-        for (int x = 0; x <= lastSquare.GridCoordinates.x; x++)
-        {
-            Grid.Add(new List<GameObject>());
-            for (int y = 0; y <= lastSquare.GridCoordinates.y; y++)
-            {
-                foreach (GridSquareScript tile in tilelist)
-                {
-                    if ((int)tile.GridCoordinates.x == x && (int)tile.GridCoordinates.y == y)
-                    {
-                        Grid[x].Add(tile.gameObject);
-                    }
-                }
-            }
-        }
-        for (int x = 0; x < Grid.Count; x++)
-        {
-            for (int y = 0; y < Grid[x].Count; y++)
-            {
-                if (Grid[x][y].GetComponent<GridSquareScript>().isobstacle)
-                {
-                    Grid[x][y].GetComponent<GridSquareScript>().fillwithGrey();
-                }
-                else
-                {
-                    Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
-                }
 
-            }
-        }
-        selection = Grid[0][0].GetComponent<GridSquareScript>();
+
     }
 
     private void FixedUpdate()
@@ -234,18 +203,37 @@ public class GridScript : MonoBehaviour
         UpdateTileText();
     }
 
-    private void InstantiateGrid()
+    public void InstantiateGrid()
     {
         Grid = new List<List<GameObject>>();
-        for (int i = 0; i < GridDimensions.x; i++)
+        GridSquareScript[] tilelist = FindObjectsByType<GridSquareScript>(FindObjectsSortMode.None);
+        for (int x = 0; x <= lastSquare.GridCoordinates.x; x++)
         {
             Grid.Add(new List<GameObject>());
-            for (int j = 0; j < GridDimensions.y; j++)
+            for (int y = 0; y <= lastSquare.GridCoordinates.y; y++)
             {
-                GameObject newtile = Instantiate(GridSquarePrefab, this.transform);
-                newtile.transform.position = new Vector3(i, 0, j);
-                newtile.GetComponent<GridSquareScript>().GridCoordinates = new Vector2(i, j);
-                Grid[i].Add(newtile);
+                foreach (GridSquareScript tile in tilelist)
+                {
+                    if ((int)tile.GridCoordinates.x == x && (int)tile.GridCoordinates.y == y)
+                    {
+                        Grid[x].Add(tile.gameObject);
+                    }
+                }
+            }
+        }
+        for (int x = 0; x < Grid.Count; x++)
+        {
+            for (int y = 0; y < Grid[x].Count; y++)
+            {
+                if (Grid[x][y].GetComponent<GridSquareScript>().isobstacle)
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithGrey();
+                }
+                else
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
+                }
+
             }
         }
         selection = Grid[0][0].GetComponent<GridSquareScript>();

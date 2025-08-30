@@ -42,7 +42,7 @@ public class ActionManager : MonoBehaviour
     {
         if (actionsMenu.activeSelf)
         {
-            if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow")==null)
+            if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow") == null)
             {
                 currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                 (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
@@ -139,7 +139,7 @@ public class ActionManager : MonoBehaviour
                 if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates, currentcharacter) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                 {
                     previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
-                    currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = GridScript.selection.GridCoordinates;
+                    currentcharacter.GetComponent<UnitScript>().MoveTo(GridScript.selection.GridCoordinates);
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
                     if (currentcharacter.GetComponent<UnitScript>().GetSkill(31))
                     {

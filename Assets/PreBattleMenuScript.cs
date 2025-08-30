@@ -27,13 +27,13 @@ public class PreBattleMenuScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(TurnManager.currentlyplaying!="")
+        if (TurnManager.currentlyplaying != "")
         {
             gameObject.SetActive(false);
             return;
         }
 
-        if(InputManager.canceljustpressed && ChangingUnitPlace)
+        if (InputManager.canceljustpressed && ChangingUnitPlace)
         {
             ChangingUnitPlace = false;
             transform.GetChild(2).gameObject.SetActive(true);
@@ -42,7 +42,7 @@ public class PreBattleMenuScript : MonoBehaviour
             transform.GetChild(5).gameObject.SetActive(true);
         }
 
-        if(ReplaceUnitButton.activeSelf)
+        if (ReplaceUnitButton.activeSelf)
         {
             GridScript.movementbuffercounter = 3;
             GameObject currentselected = EventSystem.current.currentSelectedGameObject;
@@ -66,14 +66,14 @@ public class PreBattleMenuScript : MonoBehaviour
             }
         }
 
-        if(ChangingUnitPlace)
+        if (ChangingUnitPlace)
         {
-            if(GridScript.GetUnit(GridScript.selection)!=null)
+            if (GridScript.GetUnit(GridScript.selection) != null)
             {
                 GameObject gridselection = GridScript.GetUnit(GridScript.selection);
-                if(gridselection.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable" && InputManager.activatejustpressed)
+                if (gridselection.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed)
                 {
-                    if(selectedunit==null)
+                    if (selectedunit == null)
                     {
                         selectedunit = gridselection;
                     }
@@ -86,7 +86,7 @@ public class PreBattleMenuScript : MonoBehaviour
             }
             else
             {
-                if(selectedunit!=null && InputManager.activatejustpressed && MapInitializer.playablepos.Contains(GridScript.selection.GridCoordinates))
+                if (selectedunit != null && InputManager.activatejustpressed && MapInitializer.playablepos.Contains(GridScript.selection.GridCoordinates))
                 {
                     selectedunit.GetComponent<UnitScript>().UnitCharacteristics.position = GridScript.selection.GridCoordinates;
                 }
@@ -94,12 +94,12 @@ public class PreBattleMenuScript : MonoBehaviour
         }
 
     }
-    
-    private void SwitchUnits( GameObject unit1, GameObject unit2)
+
+    private void SwitchUnits(GameObject unit1, GameObject unit2)
     {
         Vector2 unit1pos = unit1.GetComponent<UnitScript>().UnitCharacteristics.position;
-        unit1.GetComponent<UnitScript>().UnitCharacteristics.position = unit2.GetComponent<UnitScript>().UnitCharacteristics.position;
-        unit2.GetComponent<UnitScript>().UnitCharacteristics.position = unit1pos;
+        unit1.GetComponent<UnitScript>().MoveTo(unit2.GetComponent<UnitScript>().UnitCharacteristics.position);
+        unit2.GetComponent<UnitScript>().MoveTo(unit1pos);
     }
 
     public void ActivatePlacement()

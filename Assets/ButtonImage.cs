@@ -27,7 +27,7 @@ public class ButtonImage : MonoBehaviour
     private Image image;
 
     private bool previousstate;
-    private void FixedUpdate()
+    private void Update()
     {
         if((Gamepad.current!=null) !=previousstate)
         {

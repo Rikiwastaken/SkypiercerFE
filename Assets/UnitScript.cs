@@ -32,6 +32,7 @@ public class UnitScript : MonoBehaviour
         public bool attacksfriends;
         public bool deployunit;
         public int MaxSkillpoints = 99;
+        public GridSquareScript currentTile;
     }
 
     [Serializable]
@@ -172,10 +173,13 @@ public class UnitScript : MonoBehaviour
 
     public bool copied;
 
+    private GridScript GridScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
+        GridScript = FindAnyObjectByType<GridScript>();
         AttackTurnScript = FindAnyObjectByType<AttackTurnScript>();
 
         if (UnitCharacteristics.EquipedSkills == null)
@@ -219,6 +223,11 @@ public class UnitScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if(UnitCharacteristics.currentTile == null)
+        {
+            MoveTo(UnitCharacteristics.position);
+        }
 
         Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(1).position + Vector3.Normalize(transform.GetChild(1).forward - transform.GetChild(1).position) * 2f, Color.red);
 
@@ -308,7 +317,22 @@ public class UnitScript : MonoBehaviour
         ManageDamagenumber();
 
     }
+    
+    public void MoveTo(Vector2 destination)
+    {
+        if(GridScript==null)
+        {
+            GridScript = FindAnyObjectByType<GridScript>();
+        }
+        GridSquareScript destTile = GridScript.GetTile(destination);
+        if (GridScript.GetUnit(destTile)== null && !destTile.isobstacle)
+        {
+            UnitCharacteristics.position = destination;
+            UnitCharacteristics.currentTile = destTile;
+        }
+        
 
+    }
     public bool isinattackanimation()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsName("DoubleAttack") || animator.GetCurrentAnimatorStateInfo(0).IsName("DoubleAttack 0") || animator.GetCurrentAnimatorStateInfo(0).IsName("TripleAttack") || animator.GetCurrentAnimatorStateInfo(0).IsName("TripleAttack 0") || animator.GetCurrentAnimatorStateInfo(0).IsName("TripleAttack 1"))

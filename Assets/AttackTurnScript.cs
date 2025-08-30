@@ -128,13 +128,13 @@ public class AttackTurnScript : MonoBehaviour
                     if (Destination != null)
                     {
                         DestinationVector = Destination.GridCoordinates;
-                        CharCurrentEnemy.position = DestinationVector;
+                        CurrentEnemy.GetComponent<UnitScript>().MoveTo(DestinationVector);
                         counterbeforeattack = (int)(delaybeforeAttack / Time.fixedDeltaTime);
                         CharCurrentEnemy.alreadymoved = true;
                     }
                     else
                     {
-                        CharCurrentEnemy.position = DestinationVector;
+                        CurrentEnemy.GetComponent<UnitScript>().MoveTo(DestinationVector);
                         counterbeforeattack = 0;
                         CharCurrentEnemy.alreadymoved = true;
                     }
@@ -207,13 +207,13 @@ public class AttackTurnScript : MonoBehaviour
                     if (Destination != null)
                     {
                         DestinationVector = Destination.GridCoordinates;
-                        CharCurrentOther.position = DestinationVector;
+                        CurrentOther.GetComponent<UnitScript>().MoveTo(DestinationVector);
                         counterbeforeattack = (int)(delaybeforeAttack / Time.fixedDeltaTime);
                         CharCurrentOther.alreadymoved = true;
                     }
                     else
                     {
-                        CharCurrentOther.position = DestinationVector;
+                        CurrentOther.GetComponent<UnitScript>().MoveTo(DestinationVector);
                         counterbeforeattack = 0;
                         CharCurrentOther.alreadymoved = true;
                     }
@@ -284,8 +284,8 @@ public class AttackTurnScript : MonoBehaviour
         else if (commandID == 49) //Swap
         {
             Vector2 previoususerpos = CharUser.position;
-            CharUser.position = CharTarget.position;
-            CharTarget.position = previoususerpos;
+            User.GetComponent<UnitScript>().MoveTo(CharTarget.position);
+            Target.GetComponent<UnitScript>().MoveTo(previoususerpos);
             Target.GetComponent<UnitScript>().AddNumber(0, true, "Swap");
             User.GetComponent<UnitScript>().AddNumber(0, true, "Swap");
         }
@@ -318,18 +318,18 @@ public class AttackTurnScript : MonoBehaviour
             }
             Vector2 offset = new Vector2(normalizedx, normalizedy);
 
-            CharUser.position = targettile.GridCoordinates + offset;
+            User.GetComponent<UnitScript>().MoveTo(targettile.GridCoordinates + offset);
 
             User.GetComponent<UnitScript>().AddNumber(0, true, "Jump");
         }
         else if (commandID == 52) // Fortify
         {
-            FindAnyObjectByType<GridScript>().GetTile(CharUser.position).type = "Fortification";
+            CharUser.currentTile.type = "Fortification";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Fortify");
         }
         else if (commandID == 53) // Smoke Bomb
         {
-            FindAnyObjectByType<GridScript>().GetTile(CharUser.position).type = "Fog";
+            CharUser.currentTile.type = "Fog";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Smoke Bomb");
         }
         else if (commandID == 54) // Chakra
@@ -340,20 +340,20 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 56) // Copy
         {
-            if(CharTarget.UnitSkill!=0 && !Target.GetComponent<UnitScript>().copied)
+            if (CharTarget.UnitSkill != 0 && !Target.GetComponent<UnitScript>().copied)
             {
                 DataScript datascript = FindAnyObjectByType<DataScript>();
-                Target.GetComponent<UnitScript>().copied=true;
+                Target.GetComponent<UnitScript>().copied = true;
                 bool itemadded = false;
-                foreach(InventoryItem item in datascript.PlayerInventory.inventoryItems)
+                foreach (InventoryItem item in datascript.PlayerInventory.inventoryItems)
                 {
-                    if(item.type==1 && item.ID == CharTarget.UnitSkill)
+                    if (item.type == 1 && item.ID == CharTarget.UnitSkill)
                     {
                         item.Quantity++;
                         itemadded = true;
                     }
                 }
-                if(!itemadded)
+                if (!itemadded)
                 {
                     InventoryItem newitem = new InventoryItem();
                     newitem.type = 1;

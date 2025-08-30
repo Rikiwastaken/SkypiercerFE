@@ -209,7 +209,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         (int range, bool frapperenmelee, string type) = target.GetComponent<UnitScript>().GetRangeMeleeAndType();
-        GridScript.ShowAttackAfterMovement(range, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), type.ToLower() == "staff");
+        GridScript.ShowAttackAfterMovement(range, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, type.ToLower() == "staff");
         GridScript.lockedattacktiles = GridScript.attacktiles;
         GridScript.lockedhealingtiles = GridScript.healingtiles;
         GridScript.Recolor();
@@ -352,7 +352,7 @@ public class ActionsMenu : MonoBehaviour
                         frapperenmelee = false;
                     }
 
-                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type.ToLower() == "staff");
+                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, weapon.type.ToLower() == "staff");
                     GridScript.lockedattacktiles = GridScript.attacktiles;
                     GridScript.lockedhealingtiles = GridScript.healingtiles;
                     GridScript.Recolor();
@@ -394,7 +394,7 @@ public class ActionsMenu : MonoBehaviour
                             frapperenmelee = false;
                         }
 
-                        GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position), weapon.type.ToLower() == "staff");
+                        GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, weapon.type.ToLower() == "staff");
                         GridScript.lockedattacktiles = GridScript.attacktiles;
                         GridScript.lockedhealingtiles = GridScript.healingtiles;
                         GridScript.Recolor();
@@ -480,10 +480,10 @@ public class ActionsMenu : MonoBehaviour
             CommandUsedID = command.ID;
             if (command.targettype == 0)
             {
-                GridSquareScript positiontile = GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position);
+                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
                 GridScript.ShowAttackAfterMovement(command.range, true, positiontile, false);
                 GridScript.lockedattacktiles = GridScript.attacktiles;
-                
+
                 foreach (GridSquareScript tile in GridScript.lockedattacktiles)
                 {
                     GameObject potentialtarget = GridScript.GetUnit(tile);
@@ -508,7 +508,7 @@ public class ActionsMenu : MonoBehaviour
             }
             else if (command.targettype == 1)
             {
-                GridSquareScript positiontile = GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position);
+                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
                 GridScript.ShowAttackAfterMovement(command.range, true, positiontile, true);
                 GridScript.lockedhealingtiles = GridScript.healingtiles;
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
@@ -533,7 +533,7 @@ public class ActionsMenu : MonoBehaviour
             }
             else if (command.targettype == 2)
             {
-                GridSquareScript positiontile = GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position);
+                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
                 for (int i = -command.range; i <= command.range; i++)
                 {
                     for (int j = -command.range; j <= command.range; j++)
@@ -588,7 +588,7 @@ public class ActionsMenu : MonoBehaviour
             CommandUsedID = 0;
             if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
             {
-                GridSquareScript positiontile = GridScript.GetTile(target.GetComponent<UnitScript>().UnitCharacteristics.position);
+                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
                 (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
                 GridScript.ShowAttackAfterMovement(range, melee, positiontile, true);
                 GridScript.lockedhealingtiles = GridScript.healingtiles;
@@ -906,11 +906,11 @@ public class ActionsMenu : MonoBehaviour
         }
         else if (command.ID == 52) // Fortify
         {
-            WallTargettingWindow(unit, GridScript.GetTile(unit.GetComponent<UnitScript>().UnitCharacteristics.position).gameObject, "Fortification");
+            WallTargettingWindow(unit, unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.gameObject, "Fortification");
         }
         else if (command.ID == 53) // Smoke Bomb
         {
-            WallTargettingWindow(unit, GridScript.GetTile(unit.GetComponent<UnitScript>().UnitCharacteristics.position).gameObject, "Fog");
+            WallTargettingWindow(unit, unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.gameObject, "Fog");
         }
         else if (command.ID == 54) // Chakra
         {
