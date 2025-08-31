@@ -331,30 +331,43 @@ public class UnitScript : MonoBehaviour
 
     private void ManageLifebars()
     {
+        Image LifebarBehind = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         Image Lifebar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
-        Lifebar.type = Image.Type.Filled;
-        Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.stats.HP;
-        if(enemyStats!=null)
+
+        if(battlecameraScript.incombat)
         {
-            switch(enemyStats.RemainingLifebars)
+            Lifebar.gameObject.SetActive(false);
+            LifebarBehind.gameObject.SetActive(false);
+        }
+        else
+        {
+            Lifebar.gameObject.SetActive(true);
+            LifebarBehind.gameObject.SetActive(true);
+            Lifebar.type = Image.Type.Filled;
+            Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.stats.HP;
+            if (enemyStats != null)
             {
-                case 0:
-                    Lifebar.color = Color.green;
-                    break;
-                case 1:
-                    Lifebar.color = Color.blue;
-                    break;
-                case 2:
-                    Lifebar.color = Color.magenta;
-                    break;
-                case 3:
-                    Lifebar.color = Color.yellow;
-                    break;
-                case 4:
-                    Lifebar.color = Color.gray;
-                    break;
+                switch (enemyStats.RemainingLifebars)
+                {
+                    case 0:
+                        Lifebar.color = Color.green;
+                        break;
+                    case 1:
+                        Lifebar.color = Color.blue;
+                        break;
+                    case 2:
+                        Lifebar.color = Color.magenta;
+                        break;
+                    case 3:
+                        Lifebar.color = Color.yellow;
+                        break;
+                    case 4:
+                        Lifebar.color = Color.gray;
+                        break;
+                }
             }
         }
+            
     }
     
     public void MoveTo(Vector2 destination)

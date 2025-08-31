@@ -82,6 +82,8 @@ public class CombatTextScript : MonoBehaviour
         defender = newdefender;
         AttackerLifebarRemaining.fillAmount = (float)(attacker.currentHP / attacker.stats.HP);
         DefenderLifebarRemaining.fillAmount = (float)(attacker.currentHP / attacker.stats.HP);
+        AttackerLifebarLost.fillAmount = (float)(attacker.currentHP / attacker.stats.HP);
+        DefenderLifebarLost.fillAmount = (float)(attacker.currentHP / attacker.stats.HP);
         attackertext.text = attacker.name;
         defendertext.text = defender.name;
     }
