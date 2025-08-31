@@ -21,6 +21,8 @@ public class GridSquareScript : MonoBehaviour
 
     public bool isobstacle;
 
+    public float elevationchange;
+
     /*type is for potential bonus : 
         Forest : +30% dodge
         Ruins : +10% Dodge, -10% Accuracy
@@ -86,6 +88,37 @@ public class GridSquareScript : MonoBehaviour
         }
 
         UpdateFilling();
+        manageElevation();
+    }
+
+    private void manageElevation()
+    {
+        if(isobstacle)
+        {
+            if (battlecameraScript.incombat)
+            {
+                if (transform.position.y > 0f)
+                {
+                    transform.position += new Vector3(0f, -elevationchange * Time.fixedDeltaTime, 0f);
+                }
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, -1f, transform.position.z);
+                }
+            }
+            else
+            {
+                if (transform.position.y < 1f)
+                {
+                    transform.position += new Vector3(0f, elevationchange * Time.fixedDeltaTime, 0f);
+                }
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+                }
+            }
+        }
+        
     }
 
     public void UpdateFilling()

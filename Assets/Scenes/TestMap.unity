@@ -2081,6 +2081,10 @@ PrefabInstance:
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevationchange
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3717739354352987645, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.a
       value: 0.44313726
@@ -10032,6 +10036,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 0
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
 --- !u!1 &644847029
 GameObject:
   m_ObjectHideFlags: 0
@@ -28467,6 +28472,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 1
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   - protagonist: 0
     battalion: Kira
     name: Sothe
@@ -28503,6 +28509,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 1
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   - protagonist: 0
     battalion: Kira
     name: Laura
@@ -28539,6 +28546,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 1
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   - protagonist: 0
     battalion: Kira
     name: Nolan
@@ -28575,6 +28583,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 1
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   - protagonist: 0
     battalion: Kira
     name: Leonardo
@@ -28611,6 +28620,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 0
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   - protagonist: 0
     battalion: Kira
     name: Edward
@@ -28647,6 +28657,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 1
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   - protagonist: 0
     battalion: Kira
     name: Lyvent
@@ -28683,6 +28694,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 1
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   - protagonist: 0
     battalion: Kira
     name: Zek
@@ -28719,6 +28731,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 1
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   - protagonist: 0
     battalion: Kira
     name: Xora
@@ -28755,6 +28768,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 1
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   manualgamespeed: 1
   PlayerInventory:
     inventoryItems: []
@@ -32528,6 +32542,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 0
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   buttons:
   - {fileID: 789561207}
   - {fileID: 1357209126}
@@ -34521,6 +34536,7 @@ MonoBehaviour:
     attacksfriends: 0
     deployunit: 0
     MaxSkillpoints: 99
+    currentTile: {fileID: 0}
   SkillList: {fileID: 850260378}
   PageNumberText: {fileID: 195208233}
   SkillPageNumberText: {fileID: 363445177}
@@ -35918,6 +35934,9 @@ MonoBehaviour:
     Name: Soldier
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -35929,6 +35948,9 @@ MonoBehaviour:
     Name: Soldier
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -35940,6 +35962,9 @@ MonoBehaviour:
     Name: Soldier
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -35951,6 +35976,9 @@ MonoBehaviour:
     Name: Soldier
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -35962,6 +35990,9 @@ MonoBehaviour:
     Name: Soldier
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -35973,6 +36004,9 @@ MonoBehaviour:
     Name: Soldier
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -35984,6 +36018,9 @@ MonoBehaviour:
     Name: Soldier
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 4
     desiredlevel: 1
     itemtodropID: 0
@@ -35995,6 +36032,9 @@ MonoBehaviour:
     Name: Zaitan
     isboss: 1
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 2
     desiredlevel: 5
     itemtodropID: 0
@@ -36006,6 +36046,9 @@ MonoBehaviour:
     Name: Archer
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 2
     desiredlevel: 5
     itemtodropID: 0
@@ -36017,6 +36060,9 @@ MonoBehaviour:
     Name: Archer
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 3
     desiredlevel: 5
     itemtodropID: 0
@@ -36028,6 +36074,9 @@ MonoBehaviour:
     Name: Fighter
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 3
     desiredlevel: 5
     itemtodropID: 0
@@ -36039,6 +36088,9 @@ MonoBehaviour:
     Name: Fighter
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 3
     desiredlevel: 5
     itemtodropID: 0
@@ -36050,6 +36102,9 @@ MonoBehaviour:
     Name: Fighter
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 5
     desiredlevel: 5
     itemtodropID: 0
@@ -36061,6 +36116,9 @@ MonoBehaviour:
     Name: Myrmidon
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 5
     desiredlevel: 5
     itemtodropID: 0
@@ -36072,6 +36130,9 @@ MonoBehaviour:
     Name: Myrmidon
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 6
     desiredlevel: 5
     itemtodropID: 0
@@ -36083,6 +36144,9 @@ MonoBehaviour:
     Name: Psychic
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   - classID: 6
     desiredlevel: 5
     itemtodropID: 0
@@ -36094,6 +36158,9 @@ MonoBehaviour:
     Name: Psychic
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
 --- !u!1 &2084363962 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2163203992292722363, guid: 0d939bd4973df194aad0faeabb75cf13, type: 3}
