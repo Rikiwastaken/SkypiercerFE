@@ -1023,8 +1023,23 @@ public class AttackTurnScript : MonoBehaviour
         {
             if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
             {
-                Destroy(unit);
-                objecttodelete.Add(unit);
+                if(unit.GetComponent<UnitScript>().enemyStats==null)
+                {
+                    Destroy(unit);
+                    objecttodelete.Add(unit);
+                }
+                else if (unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars > 0)
+                {
+                    unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars--;
+                    unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP = unit.GetComponent<UnitScript>().UnitCharacteristics.stats.HP;
+                    unit.GetComponent<UnitScript>().AddNumber(unit.GetComponent<UnitScript>().UnitCharacteristics.stats.HP, true, unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars + " Healthbars remaining.");
+                }
+                else
+                {
+                    Destroy(unit);
+                    objecttodelete.Add(unit);
+                }
+                    
 
             }
         }

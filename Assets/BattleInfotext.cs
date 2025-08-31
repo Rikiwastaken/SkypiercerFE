@@ -167,7 +167,15 @@ public class BattleInfotext : MonoBehaviour
 
                 stringtoshow =" " +selectedunitCharacter.name + "\n";
                 stringtoshow += " Level : " + selectedunitCharacter.level + "\n";
-                stringtoshow += " Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP + "\n";
+                stringtoshow += " Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP;
+                if(selectedunit.GetComponent<UnitScript>().enemyStats.RemainingLifebars>0)
+                {
+                    stringtoshow += " x " + (selectedunit.GetComponent<UnitScript>().enemyStats.RemainingLifebars+1);
+                }
+                else
+                {
+                    stringtoshow += "\n";
+                }
                 if (selectedunitCharacter.affiliation == "playable")
                 {
                     stringtoshow += " Exp : " + selectedunitCharacter.experience + " / 100\n\n";

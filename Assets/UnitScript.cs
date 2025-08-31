@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static DataScript;
+using static UnitScript;
 
 public class UnitScript : MonoBehaviour
 {
@@ -33,6 +35,13 @@ public class UnitScript : MonoBehaviour
         public bool deployunit;
         public int MaxSkillpoints = 99;
         public GridSquareScript currentTile;
+
+    }
+
+    [Serializable]
+    public class MonsterStats
+    {
+        public int size;
     }
 
     [Serializable]
@@ -49,6 +58,8 @@ public class UnitScript : MonoBehaviour
         public String Name;
         public bool isboss;
         public bool isother;
+        public MonsterStats monsterStats;
+        public int RemainingLifebars;
     }
 
     [Serializable]
@@ -270,8 +281,8 @@ public class UnitScript : MonoBehaviour
             trylvlup = false;
             LevelUp();
         }
-        transform.GetChild(0).GetChild(1).GetComponent<Image>().type = Image.Type.Filled;
-        transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.stats.HP;
+        ManageLifebars();
+        
 
         if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), UnitCharacteristics.position) > 0.1f)
         {
@@ -316,6 +327,34 @@ public class UnitScript : MonoBehaviour
         UpdateRendererLayer();
         ManageDamagenumber();
 
+    }
+
+    private void ManageLifebars()
+    {
+        Image Lifebar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
+        Lifebar.type = Image.Type.Filled;
+        Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.stats.HP;
+        if(enemyStats!=null)
+        {
+            switch(enemyStats.RemainingLifebars)
+            {
+                case 0:
+                    Lifebar.color = Color.green;
+                    break;
+                case 1:
+                    Lifebar.color = Color.blue;
+                    break;
+                case 2:
+                    Lifebar.color = Color.magenta;
+                    break;
+                case 3:
+                    Lifebar.color = Color.yellow;
+                    break;
+                case 4:
+                    Lifebar.color = Color.gray;
+                    break;
+            }
+        }
     }
     
     public void MoveTo(Vector2 destination)
