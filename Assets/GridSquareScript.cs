@@ -116,7 +116,19 @@ public class GridSquareScript : MonoBehaviour
             GridSquareScript squareFighter1 = battlecameraScript.fighter1.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
             GridSquareScript squareFighter2 = battlecameraScript.fighter2.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
 
-            if (squareFighter1 != this && squareFighter2 != this)
+
+            if(isstairs)
+            {
+                if (transform.position.y > Mathf.Min(squareFighter1.elevation, squareFighter2.elevation) - 1f)
+                {
+                    transform.position += new Vector3(0f, -elevationchange * ((float)elevation + 1f) * Time.fixedDeltaTime, 0f);
+                }
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, (float)Mathf.Min(squareFighter1.elevation, squareFighter2.elevation)-1f, transform.position.z);
+                }
+            }
+            else
             {
                 if (transform.position.y > Mathf.Min(squareFighter1.elevation, squareFighter2.elevation))
                 {
@@ -124,9 +136,11 @@ public class GridSquareScript : MonoBehaviour
                 }
                 else
                 {
-                    transform.position = new Vector3(transform.position.x, -(float)Mathf.Min(squareFighter1.elevation, squareFighter2.elevation), transform.position.z);
+                    transform.position = new Vector3(transform.position.x, (float)Mathf.Min(squareFighter1.elevation, squareFighter2.elevation), transform.position.z);
                 }
             }
+
+            
 
         }
         else

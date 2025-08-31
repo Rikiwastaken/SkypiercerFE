@@ -249,6 +249,10 @@ public class GridScript : MonoBehaviour
             {
                 text += "Wall\nNo effect";
             }
+            else if (selection.isstairs)
+            {
+                text += "Stairs\nNo elevation penalty";
+            }
             else
             {
                 text = "Ground\nNo effect";
@@ -1106,15 +1110,15 @@ public class GridScript : MonoBehaviour
                 {
                     Vector2 newpos = new Vector2(Coordinates.x - 1, Coordinates.y);
                     GridSquareScript newtile = GetTile(newpos);
-                    if(newtile.elevation > tile.elevation)
+                    if (newtile.elevation > tile.elevation)
                     {
-                        SpreadMovements(newpos, remainingMovements - 2, tilestolight, selectedunit);
+                        SpreadMovements(newpos, remainingMovements - 1 + newtile.elevation - tile.elevation, tilestolight, selectedunit);
                     }
                     else
                     {
                         SpreadMovements(newpos, remainingMovements - 1, tilestolight, selectedunit);
                     }
-                        
+
                 }
             }
             if (Coordinates.x < Grid.Count - 1)
@@ -1125,13 +1129,13 @@ public class GridScript : MonoBehaviour
                     GridSquareScript newtile = GetTile(newpos);
                     if (newtile.elevation > tile.elevation)
                     {
-                        SpreadMovements(newpos, remainingMovements - 2, tilestolight, selectedunit);
+                        SpreadMovements(newpos, remainingMovements - 1 + newtile.elevation - tile.elevation, tilestolight, selectedunit);
                     }
                     else
                     {
                         SpreadMovements(newpos, remainingMovements - 1, tilestolight, selectedunit);
                     }
-                    
+
                 }
             }
             if (Coordinates.y > 0)
@@ -1142,7 +1146,7 @@ public class GridScript : MonoBehaviour
                     GridSquareScript newtile = GetTile(newpos);
                     if (newtile.elevation > tile.elevation)
                     {
-                        SpreadMovements(newpos, remainingMovements - 2, tilestolight, selectedunit);
+                        SpreadMovements(newpos, remainingMovements - 1 + newtile.elevation - tile.elevation, tilestolight, selectedunit);
                     }
                     else
                     {
@@ -1158,7 +1162,7 @@ public class GridScript : MonoBehaviour
                     GridSquareScript newtile = GetTile(newpos);
                     if (newtile.elevation > tile.elevation)
                     {
-                        SpreadMovements(newpos, remainingMovements - 2, tilestolight, selectedunit);
+                        SpreadMovements(newpos, remainingMovements - 1 + newtile.elevation - tile.elevation, tilestolight, selectedunit);
                     }
                     else
                     {
@@ -1226,6 +1230,6 @@ public class GridScript : MonoBehaviour
     {
         int x = (int)position.x;
         int y = (int)position.y;
-        return GetTile(x,y);
+        return GetTile(x, y);
     }
 }

@@ -1106,6 +1106,10 @@ public class ActionsMenu : MonoBehaviour
         {
             TargetText += Walltarget.type + "\n";
         }
+        else if (Walltarget.isstairs)
+        {
+            TargetText += "Stairs\n";
+        }
         else if (Walltarget.isobstacle)
         {
             TargetText += "Wall\n";
@@ -2117,14 +2121,19 @@ public class ActionsMenu : MonoBehaviour
             tilebonus -= 20;
         }
 
-        if (targetTile.elevation > unitTile.elevation)
+        if (!targetTile.isstairs && !unitTile.isstairs)
         {
-            tilebonus -= 15 * (targetTile.elevation - unitTile.elevation);
+            if (targetTile.elevation > unitTile.elevation)
+            {
+                tilebonus -= 15 * (targetTile.elevation - unitTile.elevation);
+            }
+            else if (targetTile.elevation < unitTile.elevation)
+            {
+                tilebonus += 15 * (unitTile.elevation - targetTile.elevation);
+            }
         }
-        else if (targetTile.elevation < unitTile.elevation)
-        {
-            tilebonus += 15 * (unitTile.elevation - targetTile.elevation);
-        }
+
+
 
         return tilebonus;
     }

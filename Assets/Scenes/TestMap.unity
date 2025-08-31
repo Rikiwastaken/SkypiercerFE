@@ -128,6 +128,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -188,6 +192,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -254,6 +262,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -457,6 +469,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -522,6 +538,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -725,6 +745,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -847,6 +871,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -968,6 +996,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -1307,6 +1339,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -2077,6 +2113,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3717739354352987645, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.a
       value: 0.44313726
@@ -2646,6 +2686,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -2706,6 +2750,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -3671,6 +3719,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -3946,6 +3998,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -4068,6 +4124,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -4139,6 +4199,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -4199,6 +4263,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -4266,6 +4334,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -4332,6 +4404,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -4392,6 +4468,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -4954,6 +5034,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -5090,6 +5174,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -5895,6 +5983,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -6788,6 +6880,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -6848,6 +6944,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -7052,6 +7152,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -7560,6 +7664,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -7620,6 +7728,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -7767,6 +7879,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -7827,6 +7943,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -7893,6 +8013,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -7965,6 +8089,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8026,6 +8154,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8086,6 +8218,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -8453,6 +8589,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8518,6 +8658,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -8599,6 +8743,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -8727,6 +8875,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8787,6 +8939,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -8858,6 +9014,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -8995,6 +9155,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -9410,6 +9574,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -9888,6 +10056,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -10184,6 +10356,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -10431,6 +10607,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -10659,6 +10839,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -10919,6 +11103,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -11154,6 +11342,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -11276,6 +11468,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -11342,6 +11538,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -11402,6 +11602,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -11529,6 +11733,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -11680,6 +11888,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -11740,6 +11952,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -12399,6 +12615,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -12459,6 +12679,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -12688,6 +12912,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -12886,6 +13114,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -13190,6 +13422,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -13786,6 +14022,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -13851,6 +14091,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -14104,6 +14348,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -14164,6 +14412,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -15119,6 +15371,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -15179,6 +15435,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -15745,6 +16005,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -15805,6 +16069,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -16251,6 +16519,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -16373,6 +16645,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -16438,6 +16714,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -16964,6 +17244,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -17030,6 +17314,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -17095,6 +17383,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -17301,6 +17593,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -18060,6 +18356,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: isstairs
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -18120,6 +18420,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -18404,6 +18708,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -18588,6 +18896,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -18654,6 +18966,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -18714,6 +19030,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -19173,6 +19493,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -19314,6 +19638,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -19670,6 +19998,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -20000,6 +20332,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -20531,6 +20867,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -20734,6 +21074,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -20993,6 +21337,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -21173,6 +21521,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -21239,6 +21591,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -21299,6 +21655,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -21547,6 +21907,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -21669,6 +22033,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -21729,6 +22097,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -22580,6 +22952,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -22706,6 +23082,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -23262,6 +23642,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -23322,6 +23706,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -23501,6 +23889,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -23762,6 +24154,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -23894,6 +24290,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -23954,6 +24354,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -24119,6 +24523,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -24245,6 +24653,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -24766,6 +25178,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -25112,6 +25528,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -25172,6 +25592,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -25382,6 +25806,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -25524,6 +25952,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: isstairs
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -25585,6 +26021,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -25645,6 +26085,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -26071,6 +26515,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -26565,6 +27013,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -26635,6 +27087,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: isstairs
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -26843,6 +27303,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -26908,6 +27372,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -28790,6 +29258,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -28996,6 +29468,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: isstairs
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -29526,6 +30002,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -29706,6 +30186,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: isstairs
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -29766,6 +30250,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -29828,6 +30316,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -29888,6 +30380,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -29959,6 +30455,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -30136,6 +30636,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: isstairs
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -30411,6 +30915,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -30532,6 +31040,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -31012,6 +31524,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -31196,6 +31712,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -31256,6 +31776,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -31616,6 +32140,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -31687,6 +32215,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -31747,6 +32279,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -31836,6 +32372,7 @@ MonoBehaviour:
   fighter2: {fileID: 0}
   CombatTextScript: {fileID: 1152793362}
   PreBattleMenu: {fileID: 2041958287}
+  verticalautomovespeed: 1
 --- !u!4 &1857921354
 Transform:
   m_ObjectHideFlags: 0
@@ -32196,6 +32733,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -32388,6 +32929,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -32552,6 +33097,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -32777,6 +33326,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -33351,6 +33904,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -33411,6 +33968,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -33994,6 +34555,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -34064,6 +34629,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
@@ -34400,6 +34969,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -34582,6 +35155,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -34657,6 +35234,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -35556,6 +36137,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -36165,6 +36750,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -36225,6 +36814,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -36485,6 +37078,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -36551,6 +37148,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -36611,6 +37212,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
@@ -36673,6 +37278,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -36733,6 +37342,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85115597}
     m_Modifications:
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: elevation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0

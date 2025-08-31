@@ -29,6 +29,8 @@ public class battlecameraScript : MonoBehaviour
 
     public GameObject PreBattleMenu;
 
+    private float elevationtoadd;
+    public float verticalautomovespeed;
 
     private void Start()
     {
@@ -49,7 +51,7 @@ public class battlecameraScript : MonoBehaviour
             {
                 if (previousdestTile.elevation != destTile.elevation)
                 {
-                    transform.position += new Vector3(0f, destTile.elevation - previousdestTile.elevation, 0f);
+                    elevationtoadd += destTile.elevation - previousdestTile.elevation;
                     previousdestTile = destTile;
                 }
             }
@@ -60,8 +62,23 @@ public class battlecameraScript : MonoBehaviour
             
         }
         
+        if(Mathf.Abs(elevationtoadd)<=0.1f)
+        {
+            elevationtoadd = 0;
+        }
 
-        if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), Destination)>0.01f)
+        if(elevationtoadd>0)
+        {
+            transform.position += new Vector3(0f, verticalautomovespeed * Time.deltaTime, 0f);
+            elevationtoadd -= verticalautomovespeed * Time.deltaTime;
+        }
+        else if(elevationtoadd < 0)
+        {
+            transform.position += new Vector3(0f, -verticalautomovespeed * Time.deltaTime, 0f);
+            elevationtoadd += verticalautomovespeed * Time.deltaTime;
+        }
+
+        if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), Destination) > 0.01f)
         {
             float movex = (Destination.x - transform.position.x) * camspeed * Time.fixedDeltaTime;
             float movez = (Destination.y - transform.position.z) * camspeed * Time.fixedDeltaTime;
