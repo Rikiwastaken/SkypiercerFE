@@ -717,7 +717,7 @@ public class AttackTurnScript : MonoBehaviour
 
             if (unit1.GetComponent<UnitScript>().GetSkill(15)) // Sore Loser
             {
-                if (charunit1.currentHP == 0)
+                if (charunit1.currentHP <= 0)
                 {
                     unit2.GetComponent<UnitScript>().AddNumber(charunit2.currentHP - 1, false, "Sore Loser");
                     charunit2.currentHP = 1;
@@ -732,7 +732,7 @@ public class AttackTurnScript : MonoBehaviour
 
             if (unit2.GetComponent<UnitScript>().GetSkill(15)) // Sore Loser
             {
-                if (charunit2.currentHP == 0)
+                if (charunit2.currentHP <= 0)
                 {
                     unit1.GetComponent<UnitScript>().AddNumber(charunit1.currentHP - 1, false, "Sore Loser");
                     charunit1.currentHP = 1;
@@ -1023,7 +1023,7 @@ public class AttackTurnScript : MonoBehaviour
         {
             if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
             {
-                if(unit.GetComponent<UnitScript>().enemyStats==null)
+                if (unit.GetComponent<UnitScript>().enemyStats == null)
                 {
                     Destroy(unit);
                     objecttodelete.Add(unit);
@@ -1039,7 +1039,7 @@ public class AttackTurnScript : MonoBehaviour
                     Destroy(unit);
                     objecttodelete.Add(unit);
                 }
-                    
+
 
             }
         }
