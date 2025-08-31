@@ -1,3 +1,6 @@
+using NUnit.Framework;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnitScript;
 
@@ -23,6 +26,15 @@ public class GridSquareScript : MonoBehaviour
 
     public float elevationchange;
 
+    public float walloffset;
+
+    public int elevation;
+
+    public GameObject Stairs;
+
+    public GameObject Cube;
+    private List<Vector3> initialpos = new List<Vector3>();
+
     /*type is for potential bonus : 
         Forest : +30% dodge
         Ruins : +10% Dodge, -10% Accuracy
@@ -34,6 +46,8 @@ public class GridSquareScript : MonoBehaviour
     */
     public string type;
 
+    public bool isstairs;
+
     private battlecameraScript battlecameraScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,12 +58,15 @@ public class GridSquareScript : MonoBehaviour
         SelectRoundFilling = transform.GetChild(2).gameObject;
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         GridCoordinates = new Vector2((int)transform.position.x, (int)transform.position.z);
-
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            initialpos.Add(transform.GetChild(i).localPosition);
+        }
     }
 
     private void FixedUpdate()
     {
-        if(GridScript == null)
+        if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();
         }
@@ -57,22 +74,22 @@ public class GridSquareScript : MonoBehaviour
         {
             battlecameraScript = FindAnyObjectByType<battlecameraScript>();
         }
-        if(TurnManger == null)
+        if (TurnManger == null)
         {
             TurnManger = FindAnyObjectByType<TurnManger>();
         }
 
-        if(MapInitializer == null)
+        if (MapInitializer == null)
         {
             MapInitializer = FindAnyObjectByType<MapInitializer>();
         }
 
-        if(TurnManger.currentlyplaying=="")
+        if (TurnManger.currentlyplaying == "")
         {
-            if(MapInitializer.playablepos.Contains(GridCoordinates))
+            if (MapInitializer.playablepos.Contains(GridCoordinates))
             {
 
-                filledimage.color =new Color(0.45f,0f,0.42f,0.5f) ;
+                filledimage.color = new Color(0.45f, 0f, 0.42f, 0.5f);
             }
         }
 
@@ -93,32 +110,68 @@ public class GridSquareScript : MonoBehaviour
 
     private void manageElevation()
     {
-        if(isobstacle)
+
+        if (battlecameraScript.incombat)
         {
-            if (battlecameraScript.incombat)
+            GridSquareScript squareFighter1 = battlecameraScript.fighter1.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
+            GridSquareScript squareFighter2 = battlecameraScript.fighter2.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
+
+            if (squareFighter1 != this && squareFighter2 != this)
             {
-                if (transform.position.y > 0f)
+                if (transform.position.y > Mathf.Min(squareFighter1.elevation, squareFighter2.elevation))
                 {
-                    transform.position += new Vector3(0f, -elevationchange * Time.fixedDeltaTime, 0f);
+                    transform.position += new Vector3(0f, -elevationchange * ((float)elevation + 1f) * Time.fixedDeltaTime, 0f);
                 }
                 else
                 {
-                    transform.position = new Vector3(transform.position.x, -1f, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, -(float)Mathf.Min(squareFighter1.elevation, squareFighter2.elevation), transform.position.z);
+                }
+            }
+
+        }
+        else
+        {
+            if (isobstacle)
+            {
+                if (transform.position.y < elevation + walloffset - 0.05f)
+                {
+                    transform.position += new Vector3(0f, elevationchange * (1f * (float)elevation + walloffset) * Time.fixedDeltaTime, 0f);
+                }
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, elevation + walloffset, transform.position.z);
                 }
             }
             else
             {
-                if (transform.position.y < 1f)
+                if (transform.position.y < elevation - 0.05f)
                 {
-                    transform.position += new Vector3(0f, elevationchange * Time.fixedDeltaTime, 0f);
+                    transform.position += new Vector3(0f, elevationchange * (1f * (float)elevation + 1f) * Time.fixedDeltaTime, 0f);
                 }
                 else
                 {
-                    transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, elevation, transform.position.z);
                 }
             }
         }
-        
+
+        if (isstairs)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).gameObject != Cube)
+                {
+                    transform.GetChild(i).localPosition = initialpos[i] + new Vector3(0f, 0f, 1f);
+                }
+            }
+            Stairs.SetActive(true);
+        }
+        else
+        {
+            Stairs.SetActive(false);
+        }
+
+
     }
 
     public void UpdateFilling()
@@ -126,25 +179,25 @@ public class GridSquareScript : MonoBehaviour
         SpriteRenderer SR = SelectRoundFilling.GetComponent<SpriteRenderer>();
         GameObject unit = GridScript.GetUnit(this);
         Color newcolor = new Color();
-        if(unit == null)
+        if (unit == null)
         {
             newcolor.a = 0;
         }
         else
         {
             Character Char = unit.GetComponent<UnitScript>().UnitCharacteristics;
-            if(Char.affiliation == "playable")
+            if (Char.affiliation == "playable")
             {
-                if(Char.alreadyplayed)
+                if (Char.alreadyplayed)
                 {
                     newcolor = Color.blue;
                 }
                 else
                 {
                     newcolor = Color.cyan;
-                    
+
                 }
-                    
+
             }
             else if (Char.affiliation == "enemy")
             {
@@ -177,7 +230,7 @@ public class GridSquareScript : MonoBehaviour
     {
         Color newcolor = Color.green;
         newcolor.a = 0.5f;
-        filledimage.color= newcolor;
+        filledimage.color = newcolor;
     }
 
     public void fillwithPurple()
@@ -207,6 +260,6 @@ public class GridSquareScript : MonoBehaviour
         {
             filledimage.color = new Color(1f, 1f, 1f, 0f);
         }
-        
+
     }
 }

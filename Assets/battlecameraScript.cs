@@ -5,6 +5,8 @@ public class battlecameraScript : MonoBehaviour
 {
 
     public Vector2 Destination;
+    private GridSquareScript destTile;
+    private GridSquareScript previousdestTile;
 
     private GridScript GridScript;
 
@@ -26,7 +28,7 @@ public class battlecameraScript : MonoBehaviour
     private bool resettingy;
 
     public GameObject PreBattleMenu;
-    
+
 
     private void Start()
     {
@@ -37,6 +39,27 @@ public class battlecameraScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(Destination!=null)
+        {
+            destTile = GridScript.GetTile(Destination);
+        }
+        if(destTile!=null)
+        {
+            if(previousdestTile!=null)
+            {
+                if (previousdestTile.elevation != destTile.elevation)
+                {
+                    transform.position += new Vector3(0f, destTile.elevation - previousdestTile.elevation, 0f);
+                    previousdestTile = destTile;
+                }
+            }
+            else
+            {
+                previousdestTile = destTile;
+            }
+            
+        }
+        
 
         if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), Destination)>0.01f)
         {

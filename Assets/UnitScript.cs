@@ -239,6 +239,18 @@ public class UnitScript : MonoBehaviour
         {
             MoveTo(UnitCharacteristics.position);
         }
+        else
+        {
+            if(UnitCharacteristics.currentTile.isstairs)
+            {
+                transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y+0.5f, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y, transform.position.z);
+            }
+                
+        }
 
         Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(1).position + Vector3.Normalize(transform.GetChild(1).forward - transform.GetChild(1).position) * 2f, Color.red);
 

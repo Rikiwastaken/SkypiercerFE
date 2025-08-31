@@ -58,7 +58,7 @@ public class GridScript : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if(SkillEditionScript==null)
+        if (SkillEditionScript == null)
         {
             SkillEditionScript = FindAnyObjectByType<SkillEditionScript>();
         }
@@ -84,9 +84,9 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = 0;
         }
 
-        if(moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0)
+        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0)
         {
-            if(inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue)
+            if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue)
             {
                 moveCD = (int)(0.1f / Time.deltaTime);
                 previousmovevalue = inputManager.movementValue;
@@ -97,17 +97,17 @@ public class GridScript : MonoBehaviour
                 previousmovevalue = Vector2.zero;
             }
 
-            if(inputManager.NextWeaponjustpressed || inputManager.PreviousWeaponjustpressed)
+            if (inputManager.NextWeaponjustpressed || inputManager.PreviousWeaponjustpressed)
             {
                 GameObject GOSelected = GetUnit(selection);
-                if(GOSelected != null)
+                if (GOSelected != null)
                 {
-                    if(GOSelected.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed || GOSelected.GetComponent<UnitScript>().UnitCharacteristics.affiliation!="playable")
+                    if (GOSelected.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed || GOSelected.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable")
                     {
-                        foreach(GameObject characterGO in allunitGOs)
+                        foreach (GameObject characterGO in allunitGOs)
                         {
                             Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
-                            if (character.affiliation=="playable" && character.alreadyplayed==false)
+                            if (character.affiliation == "playable" && character.alreadyplayed == false)
                             {
                                 selection = GetTile(character.position);
                                 break;
@@ -119,11 +119,11 @@ public class GridScript : MonoBehaviour
                         GameObject Characters = GameObject.Find("Characters");
                         List<GameObject> listplayable = new List<GameObject>();
                         int index = 0;
-                        int currentunitindex=-1;
-                        for(int i = 0;i<Characters.transform.childCount;i++)
+                        int currentunitindex = -1;
+                        for (int i = 0; i < Characters.transform.childCount; i++)
                         {
                             GameObject unit = Characters.transform.GetChild(i).gameObject;
-                            if(unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation== "playable" && !unit.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
+                            if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !unit.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
                             {
                                 if (unit == GOSelected)
                                 {
@@ -132,9 +132,9 @@ public class GridScript : MonoBehaviour
                                 listplayable.Add(unit);
                                 index++;
                             }
-                            
+
                         }
-                        if(inputManager.NextWeaponjustpressed)
+                        if (inputManager.NextWeaponjustpressed)
                         {
                             if (currentunitindex >= listplayable.Count - 1 || currentunitindex == -1)
                             {
@@ -153,16 +153,16 @@ public class GridScript : MonoBehaviour
                                 selection = GetTile(listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.position);
 
                             }
-                            else if(currentunitindex >0)
+                            else if (currentunitindex > 0)
                             {
                                 selection = GetTile(listplayable[currentunitindex - 1].GetComponent<UnitScript>().UnitCharacteristics.position);
                             }
                             else
                             {
-                                selection = GetTile(listplayable[listplayable.Count-1].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                selection = GetTile(listplayable[listplayable.Count - 1].GetComponent<UnitScript>().UnitCharacteristics.position);
                             }
                         }
-                        
+
                     }
                 }
                 else
@@ -245,7 +245,15 @@ public class GridScript : MonoBehaviour
 
         if (selection != null)
         {
-            text = "Ground\nNo effect";
+            if (selection.isobstacle)
+            {
+                text += "Wall\nNo effect";
+            }
+            else
+            {
+                text = "Ground\nNo effect";
+            }
+
             if (selection.type.ToLower() == "forest")
             {
                 text = "Forest \n+30% Dodge";
@@ -274,6 +282,7 @@ public class GridScript : MonoBehaviour
             {
                 text = "Fog \n+20% Dodge\n-20% Hit";
             }
+            text += "\n Elevation : " + selection.elevation;
         }
         tiletext.text = text;
     }
@@ -399,7 +408,7 @@ public class GridScript : MonoBehaviour
         movementtiles = new List<GridSquareScript>();
         foreach (GameObject unitGO in allunitGOs)
         {
-            if(unitGO != null)
+            if (unitGO != null)
             {
                 Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
                 if (unit.position == selection.GridCoordinates && !unit.alreadymoved)
@@ -423,7 +432,7 @@ public class GridScript : MonoBehaviour
                     ShowAttack(range, melee, type.ToLower() == "staff");
                 }
             }
-            
+
 
         }
         if (!lockselection)
@@ -1079,7 +1088,8 @@ public class GridScript : MonoBehaviour
 
     private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit)
     {
-        string tiletype = GetTile((int)Coordinates.x, (int)Coordinates.y).type;
+        GridSquareScript tile = GetTile((int)Coordinates.x, (int)Coordinates.y);
+        string tiletype = tile.type;
         if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water")
         {
             remainingMovements -= 1;
@@ -1094,28 +1104,66 @@ public class GridScript : MonoBehaviour
             {
                 if (CheckIfFree(new Vector2(Coordinates.x - 1, Coordinates.y), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
                 {
-                    SpreadMovements(new Vector2(Coordinates.x - 1, Coordinates.y), remainingMovements - 1, tilestolight, selectedunit);
+                    Vector2 newpos = new Vector2(Coordinates.x - 1, Coordinates.y);
+                    GridSquareScript newtile = GetTile(newpos);
+                    if(newtile.elevation > tile.elevation)
+                    {
+                        SpreadMovements(newpos, remainingMovements - 2, tilestolight, selectedunit);
+                    }
+                    else
+                    {
+                        SpreadMovements(newpos, remainingMovements - 1, tilestolight, selectedunit);
+                    }
+                        
                 }
             }
             if (Coordinates.x < Grid.Count - 1)
             {
                 if (CheckIfFree(new Vector2(Coordinates.x + 1, Coordinates.y), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
                 {
-                    SpreadMovements(new Vector2(Coordinates.x + 1, Coordinates.y), remainingMovements - 1, tilestolight, selectedunit);
+                    Vector2 newpos = new Vector2(Coordinates.x + 1, Coordinates.y);
+                    GridSquareScript newtile = GetTile(newpos);
+                    if (newtile.elevation > tile.elevation)
+                    {
+                        SpreadMovements(newpos, remainingMovements - 2, tilestolight, selectedunit);
+                    }
+                    else
+                    {
+                        SpreadMovements(newpos, remainingMovements - 1, tilestolight, selectedunit);
+                    }
+                    
                 }
             }
             if (Coordinates.y > 0)
             {
                 if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y - 1), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
                 {
-                    SpreadMovements(new Vector2(Coordinates.x, Coordinates.y - 1), remainingMovements - 1, tilestolight, selectedunit);
+                    Vector2 newpos = new Vector2(Coordinates.x, Coordinates.y - 1);
+                    GridSquareScript newtile = GetTile(newpos);
+                    if (newtile.elevation > tile.elevation)
+                    {
+                        SpreadMovements(newpos, remainingMovements - 2, tilestolight, selectedunit);
+                    }
+                    else
+                    {
+                        SpreadMovements(newpos, remainingMovements - 1, tilestolight, selectedunit);
+                    }
                 }
             }
             if (Coordinates.y < Grid[0].Count - 1)
             {
                 if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y + 1), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
                 {
-                    SpreadMovements(new Vector2(Coordinates.x, Coordinates.y + 1), remainingMovements - 1, tilestolight, selectedunit);
+                    Vector2 newpos = new Vector2(Coordinates.x, Coordinates.y + 1);
+                    GridSquareScript newtile = GetTile(newpos);
+                    if (newtile.elevation > tile.elevation)
+                    {
+                        SpreadMovements(newpos, remainingMovements - 2, tilestolight, selectedunit);
+                    }
+                    else
+                    {
+                        SpreadMovements(newpos, remainingMovements - 1, tilestolight, selectedunit);
+                    }
                 }
 
             }
@@ -1132,7 +1180,7 @@ public class GridScript : MonoBehaviour
         }
         foreach (Character unit in allunits)
         {
-            if (unit.position == position && unit.affiliation != selectedunit.affiliation && unit.currentHP>0)
+            if (unit.position == position && unit.affiliation != selectedunit.affiliation && unit.currentHP > 0)
             {
                 return false;
             }
@@ -1178,10 +1226,6 @@ public class GridScript : MonoBehaviour
     {
         int x = (int)position.x;
         int y = (int)position.y;
-        if (x <= Grid.Count - 1 && x >= 0 && y <= Grid[0].Count - 1 && y >= 0)
-        {
-            return Grid[x][y].GetComponent<GridSquareScript>();
-        }
-        return null;
+        return GetTile(x,y);
     }
 }

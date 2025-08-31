@@ -1106,6 +1106,10 @@ public class ActionsMenu : MonoBehaviour
         {
             TargetText += Walltarget.type + "\n";
         }
+        else if (Walltarget.isobstacle)
+        {
+            TargetText += "Wall\n";
+        }
         else
         {
             TargetText += "Ground\n";
@@ -2111,6 +2115,15 @@ public class ActionsMenu : MonoBehaviour
         else if (targettype.ToLower() == "fog")
         {
             tilebonus -= 20;
+        }
+
+        if (targetTile.elevation > unitTile.elevation)
+        {
+            tilebonus -= 15 * (targetTile.elevation - unitTile.elevation);
+        }
+        else if (targetTile.elevation < unitTile.elevation)
+        {
+            tilebonus += 15 * (unitTile.elevation - targetTile.elevation);
         }
 
         return tilebonus;
