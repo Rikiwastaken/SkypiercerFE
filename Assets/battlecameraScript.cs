@@ -88,8 +88,12 @@ public class battlecameraScript : MonoBehaviour
         if(incombat)
         {
             transform.GetChild(0).LookAt(pointtolookat);
-            float movey = (0.5f - transform.position.y) * camspeed * Time.fixedDeltaTime;
-            transform.position += new Vector3(0f, movey, 0f);
+            float movey = (1.5f - transform.position.y) * camspeed * Time.fixedDeltaTime;
+            if(transform.position.y>1.5f)
+            {
+                transform.position += new Vector3(0f, movey, 0f);
+            }
+            
             resettingy = true;
         }
         else if(resettingy)
@@ -168,7 +172,7 @@ public class battlecameraScript : MonoBehaviour
         CamCoordinates.x = Middle.x + side * length * ((float)CoordUnit.y- (float)CoordTarget.y)/n;
         CamCoordinates.y = Middle.y + side * length * ((float)CoordTarget.x - (float)CoordUnit.x) / n;
 
-        pointtolookat = new Vector3(Middle.x,0.5f,Middle.y);
+        pointtolookat = new Vector3(Middle.x,1.5f,Middle.y);
         CombatTextScript.SetupCombat(unit.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);
         return CamCoordinates;
 

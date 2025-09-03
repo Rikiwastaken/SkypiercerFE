@@ -3268,8 +3268,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 4.5479, y: 0}
+  m_SizeDelta: {x: -9.0959, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &197169200
 MonoBehaviour:
@@ -3347,7 +3347,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -29045,13 +29045,13 @@ MonoBehaviour:
     battalion: Kira
     name: Nolan
     stats:
-      HP: 290
-      Strength: 120
+      HP: 29
+      Strength: 12
       Psyche: 0
-      Defense: 90
-      Resistance: 30
-      Speed: 100
-      Dexterity: 110
+      Defense: 9
+      Resistance: 3
+      Speed: 10
+      Dexterity: 11
     AjustedStats:
       HP: 0
       Strength: 0
@@ -29090,13 +29090,13 @@ MonoBehaviour:
     battalion: Kira
     name: Leonardo
     stats:
-      HP: 170
-      Strength: 80
+      HP: 17
+      Strength: 8
       Psyche: 0
-      Defense: 50
-      Resistance: 40
-      Speed: 100
-      Dexterity: 120
+      Defense: 5
+      Resistance: 4
+      Speed: 10
+      Dexterity: 12
     AjustedStats:
       HP: 0
       Strength: 0
@@ -29135,13 +29135,13 @@ MonoBehaviour:
     battalion: Kira
     name: Edward
     stats:
-      HP: 190
-      Strength: 70
+      HP: 19
+      Strength: 7
       Psyche: 0
-      Defense: 50
+      Defense: 5
       Resistance: 0
-      Speed: 120
-      Dexterity: 110
+      Speed: 12
+      Dexterity: 11
     AjustedStats:
       HP: 0
       Strength: 0

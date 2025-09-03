@@ -91,61 +91,61 @@ public class ExpBarScript : MonoBehaviour
         string leveluptext = "Level Up !\n";
         leveluptext += newcharacter.name + "\n";
         leveluptext += "Level " + (newcharacter.level - 1) + " > <color=blue>" + newcharacter.level + "</color>\n";
-        if (levelupbonuses[0] >= 5)
+        if (levelupbonuses[0] >= 1)
         {
             leveluptext += "Health " + (newcharacter.stats.HP - levelupbonuses[0]) + " > <color=blue>" + newcharacter.stats.HP + "</color>\n";
         }
         else
         {
-            leveluptext += "Health " + (newcharacter.stats.HP - levelupbonuses[0]) + " >" + newcharacter.stats.HP + "\n";
+            leveluptext += "Health " + (newcharacter.stats.HP)  + "\n";
         }
-        if (levelupbonuses[1] >= 5)
+        if (levelupbonuses[1] >= 1)
         {
             leveluptext += "Strength " + (newcharacter.stats.Strength - levelupbonuses[1]) + " > <color=blue>" + newcharacter.stats.Strength + "</color>\n";
         }
         else
         {
-            leveluptext += "Strength " + (newcharacter.stats.Strength - levelupbonuses[1]) + " > " + newcharacter.stats.Strength + "\n";
+            leveluptext += "Strength " + (newcharacter.stats.Strength ) + "\n";
         }
-        if (levelupbonuses[2] >= 5)
+        if (levelupbonuses[2] >= 1)
         {
             leveluptext += "Psyche " + (newcharacter.stats.Psyche - levelupbonuses[2]) + " > <color=blue>" + newcharacter.stats.Psyche + "</color>\n";
         }
         else
         {
-            leveluptext += "Psyche " + (newcharacter.stats.Psyche - levelupbonuses[2]) + " > " + newcharacter.stats.Psyche + "\n";
+            leveluptext += "Psyche " + (newcharacter.stats.Psyche ) + "\n";
         }
-        if (levelupbonuses[3] >= 5)
+        if (levelupbonuses[3] >= 1)
         {
             leveluptext += "Defense " + (newcharacter.stats.Defense - levelupbonuses[3]) + " > <color=blue>" + newcharacter.stats.Defense + "</color>\n";
         }
         else
         {
-            leveluptext += "Defense " + (newcharacter.stats.Defense - levelupbonuses[3]) + " > " + newcharacter.stats.Defense + "\n";
+            leveluptext += "Defense " + (newcharacter.stats.Defense) + "\n";
         }
-        if (levelupbonuses[4] >= 5)
+        if (levelupbonuses[4] >= 1)
         {
             leveluptext += "Resistance " + (newcharacter.stats.Resistance - levelupbonuses[4]) + " > <color=blue>" + newcharacter.stats.Resistance + "</color>\n";
         }
         else
         {
-            leveluptext += "Resistance " + (newcharacter.stats.Resistance - levelupbonuses[4]) + " > " + newcharacter.stats.Resistance + "\n";
+            leveluptext += "Resistance " + (newcharacter.stats.Resistance) + "\n";
         }
-        if (levelupbonuses[5] >= 5)
+        if (levelupbonuses[5] >= 1)
         {
             leveluptext += "Speed " + (newcharacter.stats.Speed - levelupbonuses[5]) + " > <color=blue>" + newcharacter.stats.Speed + "</color>\n";
         }
         else
         {
-            leveluptext += "Speed " + (newcharacter.stats.Speed - levelupbonuses[5]) + " > " + newcharacter.stats.Speed + "\n";
+            leveluptext += "Speed " + (newcharacter.stats.Speed) + "\n";
         }
-        if (levelupbonuses[6] >= 5)
+        if (levelupbonuses[6] >= 1)
         {
             leveluptext += "Dexterity " + (newcharacter.stats.Dexterity - levelupbonuses[6]) + " > <color=blue>" + newcharacter.stats.Dexterity + "</color>\n";
         }
         else
         {
-            leveluptext += "Dexterity " + (newcharacter.stats.Dexterity - levelupbonuses[6]) + " > " + newcharacter.stats.Dexterity + "\n";
+            leveluptext += "Dexterity " + (newcharacter.stats.Dexterity) + "\n";
         }
         
         
