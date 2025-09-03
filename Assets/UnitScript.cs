@@ -1357,12 +1357,12 @@ public class UnitScript : MonoBehaviour
             {
                 if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
                 {
-                    statbonuses.Strength += 10 * unitkilled;
-                    statbonuses.Psyche += 10 * unitkilled;
-                    statbonuses.Resistance += 10 * unitkilled;
-                    statbonuses.Defense += 10 * unitkilled;
-                    statbonuses.Speed += 10 * unitkilled;
-                    statbonuses.Dexterity += 10 * unitkilled;
+                    statbonuses.Strength += 1 * unitkilled;
+                    statbonuses.Psyche += 1 * unitkilled;
+                    statbonuses.Resistance += 1 * unitkilled;
+                    statbonuses.Defense += 1 * unitkilled;
+                    statbonuses.Speed += 1 * unitkilled;
+                    statbonuses.Dexterity += 1 * unitkilled;
                 }
             }
 
@@ -1371,12 +1371,12 @@ public class UnitScript : MonoBehaviour
         //Survivor
         if (GetSkill(32))
         {
-            statbonuses.Strength += 3 * SurvivorStacks;
-            statbonuses.Psyche += 3 * SurvivorStacks;
-            statbonuses.Resistance += 3 * SurvivorStacks;
-            statbonuses.Defense += 3 * SurvivorStacks;
-            statbonuses.Speed += 3 * SurvivorStacks;
-            statbonuses.Dexterity += 3 * SurvivorStacks;
+            statbonuses.Strength += (SurvivorStacks / 3);
+            statbonuses.Psyche += (SurvivorStacks / 3);
+            statbonuses.Resistance += (SurvivorStacks / 3);
+            statbonuses.Defense += (SurvivorStacks / 3);
+            statbonuses.Speed += (SurvivorStacks / 3);
+            statbonuses.Dexterity += (SurvivorStacks / 3);
         }
         //Bravery
         if (GetSkill(36))
@@ -1387,12 +1387,12 @@ public class UnitScript : MonoBehaviour
 
                 if (difference > 0)
                 {
-                    statbonuses.Strength += 5 * difference;
-                    statbonuses.Psyche += 5 * difference;
-                    statbonuses.Resistance += 5 * difference;
-                    statbonuses.Defense += 5 * difference;
-                    statbonuses.Speed += 5 * difference;
-                    statbonuses.Dexterity += 5 * difference;
+                    statbonuses.Strength += difference / 2;
+                    statbonuses.Psyche += difference / 2;
+                    statbonuses.Resistance += difference / 2;
+                    statbonuses.Defense += difference / 2;
+                    statbonuses.Speed += difference / 2;
+                    statbonuses.Dexterity += difference / 2;
                 }
             }
 
@@ -1437,12 +1437,12 @@ public class UnitScript : MonoBehaviour
                     closepalls++;
                 }
             }
-            statbonuses.Strength += 3 * closepalls;
-            statbonuses.Psyche += 3 * closepalls;
-            statbonuses.Resistance += 3 * closepalls;
-            statbonuses.Defense += 3 * closepalls;
-            statbonuses.Speed += 5 * closepalls;
-            statbonuses.Dexterity += 3 * closepalls;
+            statbonuses.Strength += closepalls / 2;
+            statbonuses.Psyche += closepalls / 2;
+            statbonuses.Resistance += closepalls / 2;
+            statbonuses.Defense += closepalls / 2;
+            statbonuses.Speed += 5 * closepalls / 2;
+            statbonuses.Dexterity += closepalls / 2;
 
         }
 

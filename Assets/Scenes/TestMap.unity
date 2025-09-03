@@ -28589,7 +28589,7 @@ MonoBehaviour:
     range: 0
     ID: 12
   - name: Fast and Deadly
-    Descriptions: Increase critical chance by Speed/20
+    Descriptions: Increase critical chance by Speed/2
     IsCommand: 0
     Cost: 10
     targettype: 0
@@ -28633,7 +28633,7 @@ MonoBehaviour:
     ID: 18
   - name: Lucky Seven
     Descriptions: Increase strength, psyche, speed, dexterity, defense and resistance
-      by 70 when last digit of Health Points is 7
+      by 7 when last digit of Health Points is 7
     IsCommand: 0
     Cost: 0
     targettype: 0
