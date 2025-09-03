@@ -210,7 +210,7 @@ public class ActionManager : MonoBehaviour
         GridScript.ShowMovement();
     }
 
-    public void Wait()
+    public void Wait() // permet d'attendre
     {
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
@@ -226,11 +226,11 @@ public class ActionManager : MonoBehaviour
         if (currentcharacter.GetComponent<UnitScript>().GetSkill(20))
         {
             Character currentcharacterchar = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics;
-            currentcharacter.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(currentcharacterchar.stats.HP * 0.1f), currentcharacterchar.stats.HP - currentcharacterchar.currentHP), true, "Patient");
-            currentcharacterchar.currentHP += (int)(currentcharacterchar.stats.HP * 0.1f);
-            if (currentcharacterchar.currentHP > currentcharacterchar.stats.HP)
+            currentcharacter.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(currentcharacterchar.AjustedStats.HP * 0.1f), (int)currentcharacterchar.AjustedStats.HP - currentcharacterchar.currentHP), true, "Patient");
+            currentcharacterchar.currentHP += (int)(currentcharacterchar.AjustedStats.HP * 0.1f);
+            if (currentcharacterchar.currentHP > currentcharacterchar.AjustedStats.HP)
             {
-                currentcharacterchar.currentHP = currentcharacterchar.stats.HP;
+                currentcharacterchar.currentHP = (int)currentcharacterchar.AjustedStats.HP;
             }
 
             currentcharacter.GetComponent<UnitScript>().RestoreUses(1);

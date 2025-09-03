@@ -57,6 +57,7 @@ public class MapInitializer : MonoBehaviour
             {
                 GameObject newcharacter = Instantiate(BaseCharacter);
                 newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
+                newcharacter.GetComponent<UnitScript>().calculateStats();
                 newcharacter.transform.parent = Characters.transform;
                 newcharacter.transform.position = new Vector3(playablepos[index].x, 0, playablepos[index].y);
                 newcharacter.GetComponent<UnitScript>().MoveTo(playablepos[index]);

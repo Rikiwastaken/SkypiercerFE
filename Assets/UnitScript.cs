@@ -16,6 +16,7 @@ public class UnitScript : MonoBehaviour
         public string battalion;
         public string name;
         public BaseStats stats;
+        public BaseStats AjustedStats;
         public int level;
         public int experience;
         public string affiliation; // playable, enemy, other
@@ -90,14 +91,15 @@ public class UnitScript : MonoBehaviour
     [Serializable]
     public class BaseStats
     {
-        public int HP;
-        public int Strength;
-        public int Psyche;
-        public int Defense;
-        public int Resistance;
-        public int Speed;
-        public int Dexterity;
+        public float HP;
+        public float Strength;
+        public float Psyche;
+        public float Defense;
+        public float Resistance;
+        public float Speed;
+        public float Dexterity;
     }
+
 
     [Serializable]
     public class AllStatsSkillBonus
@@ -217,7 +219,7 @@ public class UnitScript : MonoBehaviour
                 UnitCharacteristics.equipments.Add(new equipment());
             }
         }
-        UnitCharacteristics.currentHP = UnitCharacteristics.stats.HP;
+        UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
         UpdateWeaponModel();
         if (UnitCharacteristics.affiliation == "playable")
         {
@@ -235,21 +237,21 @@ public class UnitScript : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(UnitCharacteristics.currentTile == null)
+        if (UnitCharacteristics.currentTile == null)
         {
             MoveTo(UnitCharacteristics.position);
         }
         else
         {
-            if(UnitCharacteristics.currentTile.isstairs)
+            if (UnitCharacteristics.currentTile.isstairs)
             {
-                transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y+0.5f, transform.position.z);
+                transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y + 0.5f, transform.position.z);
             }
             else
             {
                 transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y, transform.position.z);
             }
-                
+
         }
 
         Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(1).position + Vector3.Normalize(transform.GetChild(1).forward - transform.GetChild(1).position) * 2f, Color.red);
@@ -294,7 +296,7 @@ public class UnitScript : MonoBehaviour
             LevelUp();
         }
         ManageLifebars();
-        
+
 
         if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), UnitCharacteristics.position) > 0.1f)
         {
@@ -346,7 +348,7 @@ public class UnitScript : MonoBehaviour
         Image LifebarBehind = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         Image Lifebar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
 
-        if(battlecameraScript.incombat)
+        if (battlecameraScript.incombat)
         {
             Lifebar.gameObject.SetActive(false);
             LifebarBehind.gameObject.SetActive(false);
@@ -356,7 +358,7 @@ public class UnitScript : MonoBehaviour
             Lifebar.gameObject.SetActive(true);
             LifebarBehind.gameObject.SetActive(true);
             Lifebar.type = Image.Type.Filled;
-            Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.stats.HP;
+            Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.AjustedStats.HP;
             if (enemyStats != null)
             {
                 switch (enemyStats.RemainingLifebars)
@@ -379,22 +381,32 @@ public class UnitScript : MonoBehaviour
                 }
             }
         }
-            
+
     }
-    
+
+    public void calculateStats()
+    {
+        UnitCharacteristics.AjustedStats.HP = (int)UnitCharacteristics.stats.HP;
+        UnitCharacteristics.AjustedStats.Strength = (int)UnitCharacteristics.stats.Strength;
+        UnitCharacteristics.AjustedStats.Psyche = (int)UnitCharacteristics.stats.Psyche;
+        UnitCharacteristics.AjustedStats.Defense = (int)UnitCharacteristics.stats.Defense;
+        UnitCharacteristics.AjustedStats.Resistance = (int)UnitCharacteristics.stats.Resistance;
+        UnitCharacteristics.AjustedStats.Speed = (int)UnitCharacteristics.stats.Speed;
+        UnitCharacteristics.AjustedStats.Dexterity = (int)UnitCharacteristics.stats.Dexterity;
+    }
     public void MoveTo(Vector2 destination)
     {
-        if(GridScript==null)
+        if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();
         }
         GridSquareScript destTile = GridScript.GetTile(destination);
-        if (GridScript.GetUnit(destTile)== null && !destTile.isobstacle)
+        if (GridScript.GetUnit(destTile) == null && !destTile.isobstacle)
         {
             UnitCharacteristics.position = destination;
             UnitCharacteristics.currentTile = destTile;
         }
-        
+
 
     }
     public bool isinattackanimation()
@@ -487,7 +499,7 @@ public class UnitScript : MonoBehaviour
     public void RetreatTrigger() // Effect of Retreat or Verso
     {
         FindAnyObjectByType<AttackTurnScript>().DeathCleanup();
-        
+
         if (GetSkill(1)) //Retreat
         {
             AddNumber(0, true, "Retreat");
@@ -591,6 +603,7 @@ public class UnitScript : MonoBehaviour
             }
 
         }
+        calculateStats();
 
     }
 
@@ -715,35 +728,34 @@ public class UnitScript : MonoBehaviour
         UnitCharacteristics.level += 1;
         if (fixedgrowth)
         {
-            UnitCharacteristics.stats.HP += (int)(GrowthtoApply.HPGrowth / 10f);
+            UnitCharacteristics.stats.HP += (int)(GrowthtoApply.HPGrowth / 100f);
 
-            UnitCharacteristics.currentHP += (int)(GrowthtoApply.HPGrowth / 10f);
-            lvlupresult.Add((int)(GrowthtoApply.HPGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.HPGrowth / 100f));
 
-            UnitCharacteristics.stats.Strength += (int)(GrowthtoApply.StrengthGrowth / 10f);
+            UnitCharacteristics.stats.Strength += (int)(GrowthtoApply.StrengthGrowth / 100f);
 
-            lvlupresult.Add((int)(GrowthtoApply.StrengthGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.StrengthGrowth / 100f));
 
-            UnitCharacteristics.stats.Psyche += (int)(GrowthtoApply.PsycheGrowth / 10f);
+            UnitCharacteristics.stats.Psyche += (int)(GrowthtoApply.PsycheGrowth / 100f);
 
-            lvlupresult.Add((int)(GrowthtoApply.PsycheGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.PsycheGrowth / 100f));
 
-            UnitCharacteristics.stats.Defense += (int)(GrowthtoApply.DefenseGrowth / 10f);
+            UnitCharacteristics.stats.Defense += (int)(GrowthtoApply.DefenseGrowth / 100f);
 
-            lvlupresult.Add((int)(GrowthtoApply.DefenseGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.DefenseGrowth / 100f));
 
 
-            UnitCharacteristics.stats.Resistance += (int)(GrowthtoApply.ResistanceGrowth / 10f);
+            UnitCharacteristics.stats.Resistance += (int)(GrowthtoApply.ResistanceGrowth / 100f);
 
-            lvlupresult.Add((int)(GrowthtoApply.ResistanceGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.ResistanceGrowth / 100f));
 
-            UnitCharacteristics.stats.Speed += (int)(GrowthtoApply.SpeedGrowth / 10f);
+            UnitCharacteristics.stats.Speed += (int)(GrowthtoApply.SpeedGrowth / 100f);
 
-            lvlupresult.Add((int)(GrowthtoApply.SpeedGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.SpeedGrowth / 100f));
 
-            UnitCharacteristics.stats.Dexterity += (int)(GrowthtoApply.DexterityGrowth / 10f);
+            UnitCharacteristics.stats.Dexterity += (int)(GrowthtoApply.DexterityGrowth / 100f);
 
-            lvlupresult.Add((int)(GrowthtoApply.DexterityGrowth / 10f));
+            lvlupresult.Add((int)(GrowthtoApply.DexterityGrowth / 100f));
 
         }
         else
@@ -751,24 +763,12 @@ public class UnitScript : MonoBehaviour
             int rd = UnityEngine.Random.Range(0, 100);
             if (rd <= GrowthtoApply.HPGrowth)
             {
-                UnitCharacteristics.stats.HP += 10;
-                UnitCharacteristics.currentHP += 10;
-                lvlupresult.Add(10);
-            }
-            else
-            {
                 UnitCharacteristics.stats.HP += 1;
-                UnitCharacteristics.currentHP += 1;
                 lvlupresult.Add(1);
             }
 
             rd = UnityEngine.Random.Range(0, 100);
             if (rd <= GrowthtoApply.StrengthGrowth)
-            {
-                UnitCharacteristics.stats.Strength += 10;
-                lvlupresult.Add(10);
-            }
-            else
             {
                 UnitCharacteristics.stats.Strength += 1;
                 lvlupresult.Add(1);
@@ -777,22 +777,12 @@ public class UnitScript : MonoBehaviour
             rd = UnityEngine.Random.Range(0, 100);
             if (rd <= GrowthtoApply.PsycheGrowth)
             {
-                UnitCharacteristics.stats.Psyche += 10;
-                lvlupresult.Add(10);
-            }
-            else
-            {
                 UnitCharacteristics.stats.Psyche += 1;
                 lvlupresult.Add(1);
             }
 
             rd = UnityEngine.Random.Range(0, 100);
             if (rd <= GrowthtoApply.DefenseGrowth)
-            {
-                UnitCharacteristics.stats.Defense += 10;
-                lvlupresult.Add(10);
-            }
-            else
             {
                 UnitCharacteristics.stats.Defense += 1;
                 lvlupresult.Add(1);
@@ -802,22 +792,12 @@ public class UnitScript : MonoBehaviour
             rd = UnityEngine.Random.Range(0, 100);
             if (rd <= GrowthtoApply.ResistanceGrowth)
             {
-                UnitCharacteristics.stats.Resistance += 10;
-                lvlupresult.Add(10);
-            }
-            else
-            {
                 UnitCharacteristics.stats.Resistance += 1;
                 lvlupresult.Add(1);
             }
 
             rd = UnityEngine.Random.Range(0, 100);
             if (rd <= GrowthtoApply.SpeedGrowth)
-            {
-                UnitCharacteristics.stats.Speed += 10;
-                lvlupresult.Add(10);
-            }
-            else
             {
                 UnitCharacteristics.stats.Speed += 1;
                 lvlupresult.Add(1);
@@ -826,15 +806,11 @@ public class UnitScript : MonoBehaviour
             rd = UnityEngine.Random.Range(0, 100);
             if (rd <= GrowthtoApply.DexterityGrowth)
             {
-                UnitCharacteristics.stats.Dexterity += 10;
-                lvlupresult.Add(10);
-            }
-            else
-            {
                 UnitCharacteristics.stats.Dexterity += 1;
                 lvlupresult.Add(1);
             }
         }
+        calculateStats();
         return lvlupresult;
     }
 
@@ -1026,13 +1002,13 @@ public class UnitScript : MonoBehaviour
             Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
             if (ManhattanDistance(UnitCharacteristics, character) == 1 && character.battalion == "Gale" && character.affiliation == UnitCharacteristics.affiliation)
             {
-                statbonuses.FixedDamageReduction += character.stats.Defense / 5;
-                statbonuses.FixedDamageBonus += character.stats.Strength / 5;
+                statbonuses.FixedDamageReduction += (int)character.AjustedStats.Defense / 5;
+                statbonuses.FixedDamageBonus += (int)character.AjustedStats.Strength / 5;
                 //Loyal
                 if (characterGO.GetComponent<UnitScript>().GetSkill(35))
                 {
-                    statbonuses.FixedDamageReduction += character.stats.Defense / 5;
-                    statbonuses.FixedDamageBonus += character.stats.Strength / 5;
+                    statbonuses.FixedDamageReduction += (int)character.AjustedStats.Defense / 5;
+                    statbonuses.FixedDamageBonus += (int)character.AjustedStats.Strength / 5;
                 }
             }
         }
@@ -1059,8 +1035,8 @@ public class UnitScript : MonoBehaviour
                 {
                     if (character.battalion == "Gale" && character != UnitCharacteristics)
                     {
-                        statbonuses.Defense += character.stats.Defense / 20;
-                        statbonuses.Strength += character.stats.Strength / 20;
+                        statbonuses.Defense += (int)character.AjustedStats.Defense / 20;
+                        statbonuses.Strength += (int)character.AjustedStats.Strength / 20;
                     }
                 }
             }
@@ -1071,7 +1047,7 @@ public class UnitScript : MonoBehaviour
                 {
                     if (character.battalion == "Kira" && character != UnitCharacteristics)
                     {
-                        statbonuses.Psyche += character.stats.Psyche / 20;
+                        statbonuses.Psyche += (int)character.AjustedStats.Psyche / 20;
 
                     }
                 }
@@ -1104,7 +1080,7 @@ public class UnitScript : MonoBehaviour
         //Despair
         if (GetSkill(2))
         {
-            if (UnitCharacteristics.currentHP <= (float)UnitCharacteristics.stats.HP * 0.33f)
+            if (UnitCharacteristics.currentHP <= (float)UnitCharacteristics.AjustedStats.HP * 0.33f)
             {
                 statbonuses.Crit += 20;
                 statbonuses.Dodge += 40;
@@ -1144,8 +1120,8 @@ public class UnitScript : MonoBehaviour
                 int movement = otherunitchar.movements;
                 if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= movement && otherunitchar.battalion == UnitCharacteristics.battalion && otherunitchar.protagonist)
                 {
-                    statbonuses.FixedDamageBonus += 30;
-                    statbonuses.FixedDamageReduction += 30;
+                    statbonuses.FixedDamageBonus += 3;
+                    statbonuses.FixedDamageReduction += 3;
                     break;
                 }
             }
@@ -1153,7 +1129,7 @@ public class UnitScript : MonoBehaviour
         //FastAndDeadly
         if (GetSkill(13))
         {
-            statbonuses.Crit += UnitCharacteristics.stats.Speed / 20;
+            statbonuses.Crit += (int)UnitCharacteristics.AjustedStats.Speed / 2;
         }
         //Sniper
         if (GetSkill(16))
@@ -1171,18 +1147,18 @@ public class UnitScript : MonoBehaviour
         {
             if (Math.Abs(UnitCharacteristics.currentHP % 10) == 7)
             {
-                statbonuses.Strength += 70;
-                statbonuses.Psyche += 70;
-                statbonuses.Resistance += 70;
-                statbonuses.Defense += 70;
-                statbonuses.Speed += 70;
-                statbonuses.Dexterity += 70;
+                statbonuses.Strength += 7;
+                statbonuses.Psyche += 7;
+                statbonuses.Resistance += 7;
+                statbonuses.Defense += 7;
+                statbonuses.Speed += 7;
+                statbonuses.Dexterity += 7;
             }
         }
         //In Great Shape
         if (GetSkill(21))
         {
-            if (UnitCharacteristics.currentHP >= UnitCharacteristics.stats.HP)
+            if (UnitCharacteristics.currentHP >= UnitCharacteristics.AjustedStats.HP)
             {
                 statbonuses.Hit += 10;
                 statbonuses.Dodge += 10;
@@ -1195,7 +1171,7 @@ public class UnitScript : MonoBehaviour
             {
                 if (GetFirstWeapon().type.ToLower() == enemy.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower())
                 {
-                    statbonuses.FixedDamageBonus += 50;
+                    statbonuses.FixedDamageBonus += 5;
                 }
             }
 
@@ -1207,7 +1183,7 @@ public class UnitScript : MonoBehaviour
             {
                 if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
                 {
-                    statbonuses.PhysDamage += 10;
+                    statbonuses.PhysDamage += 1;
                     statbonuses.TelekDamage += 10;
                     statbonuses.DamageReduction += 10;
                 }
@@ -1233,12 +1209,12 @@ public class UnitScript : MonoBehaviour
 
             if (activelist.Count == 1)
             {
-                statbonuses.Strength += (int)(UnitCharacteristics.stats.Strength * 0.25f);
-                statbonuses.Psyche += (int)(UnitCharacteristics.stats.Psyche * 0.25f);
-                statbonuses.Resistance += (int)(UnitCharacteristics.stats.Resistance * 0.25f);
-                statbonuses.Defense += (int)(UnitCharacteristics.stats.Defense * 0.25f);
-                statbonuses.Speed += (int)(UnitCharacteristics.stats.Speed * 0.25f);
-                statbonuses.Dexterity += (int)(UnitCharacteristics.stats.Dexterity * 0.25f);
+                statbonuses.Strength += (int)(UnitCharacteristics.AjustedStats.Strength * 0.25f);
+                statbonuses.Psyche += (int)(UnitCharacteristics.AjustedStats.Psyche * 0.25f);
+                statbonuses.Resistance += (int)(UnitCharacteristics.AjustedStats.Resistance * 0.25f);
+                statbonuses.Defense += (int)(UnitCharacteristics.AjustedStats.Defense * 0.25f);
+                statbonuses.Speed += (int)(UnitCharacteristics.AjustedStats.Speed * 0.25f);
+                statbonuses.Dexterity += (int)(UnitCharacteristics.AjustedStats.Dexterity * 0.25f);
             }
         }
         // Solitary
@@ -1268,7 +1244,7 @@ public class UnitScript : MonoBehaviour
             }
             if (toofar)
             {
-                statbonuses.FixedDamageBonus += 50;
+                statbonuses.FixedDamageBonus += 5;
             }
         }
 
@@ -1279,7 +1255,7 @@ public class UnitScript : MonoBehaviour
             {
                 if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
                 {
-                    statbonuses.FixedDamageBonus += (UnitCharacteristics.stats.HP - UnitCharacteristics.currentHP);
+                    statbonuses.FixedDamageBonus += ((int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP);
                 }
             }
 
@@ -1399,8 +1375,8 @@ public class UnitScript : MonoBehaviour
         // Enduring
         if (GetSkill(55))
         {
-            statbonuses.TelekDamage += (UnitCharacteristics.stats.HP-UnitCharacteristics.currentHP)/2;
-            statbonuses.PhysDamage += (UnitCharacteristics.stats.HP - UnitCharacteristics.currentHP) / 2;
+            statbonuses.TelekDamage += ((int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP) / 2;
+            statbonuses.PhysDamage += ((int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP) / 2;
         }
 
 

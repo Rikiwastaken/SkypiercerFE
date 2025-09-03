@@ -119,13 +119,13 @@ public class GridSquareScript : MonoBehaviour
 
             if(isstairs)
             {
-                if (transform.position.y > Mathf.Min(squareFighter1.elevation, squareFighter2.elevation) - 1f)
+                if (transform.position.y > Mathf.Min(squareFighter1.elevation, squareFighter2.elevation) - 1.1f)
                 {
                     transform.position += new Vector3(0f, -elevationchange * ((float)elevation + 1f) * Time.fixedDeltaTime, 0f);
                 }
                 else
                 {
-                    transform.position = new Vector3(transform.position.x, (float)Mathf.Min(squareFighter1.elevation, squareFighter2.elevation)-1f, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, (float)Mathf.Min(squareFighter1.elevation, squareFighter2.elevation)-1.1f, transform.position.z);
                 }
             }
             else

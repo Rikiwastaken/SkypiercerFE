@@ -250,11 +250,11 @@ public class AttackTurnScript : MonoBehaviour
             int previousHPUser = CharUser.currentHP;
             int previousHPTarget = CharTarget.currentHP;
 
-            float UserPercent = (float)CharUser.currentHP / (float)CharUser.stats.HP;
-            float TargetPercent = (float)CharTarget.currentHP / (float)CharTarget.stats.HP;
+            float UserPercent = (float)CharUser.currentHP / (float)CharUser.AjustedStats.HP;
+            float TargetPercent = (float)CharTarget.currentHP / (float)CharTarget.AjustedStats.HP;
 
-            CharUser.currentHP = (int)(TargetPercent * (float)CharUser.stats.HP);
-            CharTarget.currentHP = (int)(UserPercent * (float)CharTarget.stats.HP);
+            CharUser.currentHP = (int)(TargetPercent * (float)CharUser.AjustedStats.HP);
+            CharTarget.currentHP = (int)(UserPercent * (float)CharTarget.AjustedStats.HP);
 
             if (previousHPTarget > CharTarget.currentHP)
             {
@@ -334,7 +334,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 54) // Chakra
         {
-            int healthrestored = (int)((CharUser.stats.HP - CharUser.currentHP) * 0.25f);
+            int healthrestored = (int)((CharUser.AjustedStats.HP - CharUser.currentHP) * 0.25f);
             CharUser.currentHP += healthrestored;
             User.GetComponent<UnitScript>().AddNumber(healthrestored, true, "Chakra");
         }
@@ -842,7 +842,7 @@ public class AttackTurnScript : MonoBehaviour
                     }
 
 
-                    if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.stats.HP * 0.33f))
+                    if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.33f))
                     {
                         reward += Random.Range(-50, 50);
                     }
@@ -965,7 +965,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 else
                 {
-                    if (charunit.currentHP < charunit.stats.HP)
+                    if (charunit.currentHP < charunit.AjustedStats.HP)
                     {
                         (int newrange, bool newmelee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
                         reward += Mathf.Max(ManhattanDistance(charunit, charotherunit) - newrange, 0);
@@ -978,12 +978,12 @@ public class AttackTurnScript : MonoBehaviour
                 }
             }
 
-            if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.stats.HP * 0.33f))
+            if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.33f))
             {
                 reward += Random.Range(-30, 30);
             }
 
-            if (!FindIfAnyTarget(potentialAttackPosition, charunit.affiliation) && charunit.currentHP == charunit.stats.HP)
+            if (!FindIfAnyTarget(potentialAttackPosition, charunit.affiliation) && charunit.currentHP == charunit.AjustedStats.HP)
             {
                 reward -= 9999;
             }
@@ -1031,8 +1031,8 @@ public class AttackTurnScript : MonoBehaviour
                 else if (unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars > 0)
                 {
                     unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars--;
-                    unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP = unit.GetComponent<UnitScript>().UnitCharacteristics.stats.HP;
-                    unit.GetComponent<UnitScript>().AddNumber(unit.GetComponent<UnitScript>().UnitCharacteristics.stats.HP, true, unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars + " Healthbars remaining.");
+                    unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP = (int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP;
+                    unit.GetComponent<UnitScript>().AddNumber((int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP, true, unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars + " Healthbars remaining.");
                 }
                 else
                 {

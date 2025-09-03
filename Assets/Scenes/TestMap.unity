@@ -10175,6 +10175,14 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 0
     experience: 0
     affiliation: 
@@ -27546,7 +27554,7 @@ MonoBehaviour:
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Durandal
-    BaseDamage: 50
+    BaseDamage: 5
     BaseHit: 90
     BaseCrit: 3
     Range: 1
@@ -27561,7 +27569,7 @@ MonoBehaviour:
       localscale: {x: 0.000052, y: 0.000156, z: 0.000052}
       localrotation: {x: 100, y: 10, z: 0}
   - Name: Tizona
-    BaseDamage: 80
+    BaseDamage: 8
     BaseHit: 80
     BaseCrit: 3
     Range: 1
@@ -28297,7 +28305,7 @@ MonoBehaviour:
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: GradeD
-    BaseDamage: 50
+    BaseDamage: 5
     BaseHit: 90
     BaseCrit: 3
     Range: 1
@@ -28312,7 +28320,7 @@ MonoBehaviour:
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: GradeC
-    BaseDamage: 80
+    BaseDamage: 8
     BaseHit: 80
     BaseCrit: 5
     Range: 1
@@ -28327,7 +28335,7 @@ MonoBehaviour:
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: GradeB
-    BaseDamage: 110
+    BaseDamage: 11
     BaseHit: 70
     BaseCrit: 7
     Range: 1
@@ -28342,7 +28350,7 @@ MonoBehaviour:
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: GradeA
-    BaseDamage: 140
+    BaseDamage: 14
     BaseHit: 60
     BaseCrit: 8
     Range: 1
@@ -28359,13 +28367,13 @@ MonoBehaviour:
   ClassList:
   - name: Soldier
     BaseStats:
-      HP: 200
-      Strength: 40
+      HP: 20
+      Strength: 4
       Psyche: 0
-      Defense: 40
+      Defense: 4
       Resistance: 0
-      Speed: 50
-      Dexterity: 40
+      Speed: 5
+      Dexterity: 4
     StatGrowth:
       HPGrowth: 80
       StrengthGrowth: 40
@@ -28377,13 +28385,13 @@ MonoBehaviour:
     ID: 0
   - name: Priest
     BaseStats:
-      HP: 160
-      Strength: 30
-      Psyche: 80
-      Defense: 20
-      Resistance: 100
-      Speed: 50
-      Dexterity: 30
+      HP: 16
+      Strength: 3
+      Psyche: 8
+      Defense: 2
+      Resistance: 10
+      Speed: 5
+      Dexterity: 3
     StatGrowth:
       HPGrowth: 50
       StrengthGrowth: 20
@@ -28395,13 +28403,13 @@ MonoBehaviour:
     ID: 1
   - name: Archer
     BaseStats:
-      HP: 190
-      Strength: 90
+      HP: 19
+      Strength: 9
       Psyche: 0
-      Defense: 50
-      Resistance: 10
-      Speed: 80
-      Dexterity: 100
+      Defense: 5
+      Resistance: 1
+      Speed: 8
+      Dexterity: 10
     StatGrowth:
       HPGrowth: 60
       StrengthGrowth: 50
@@ -28413,13 +28421,13 @@ MonoBehaviour:
     ID: 2
   - name: Fighter
     BaseStats:
-      HP: 220
-      Strength: 100
+      HP: 22
+      Strength: 10
       Psyche: 0
-      Defense: 50
+      Defense: 5
       Resistance: 0
-      Speed: 80
-      Dexterity: 60
+      Speed: 8
+      Dexterity: 6
     StatGrowth:
       HPGrowth: 80
       StrengthGrowth: 50
@@ -28431,13 +28439,13 @@ MonoBehaviour:
     ID: 3
   - name: Zaitan
     BaseStats:
-      HP: 300
+      HP: 30
       Strength: 11
       Psyche: 0
-      Defense: 120
-      Resistance: 50
-      Speed: 90
-      Dexterity: 110
+      Defense: 12
+      Resistance: 5
+      Speed: 9
+      Dexterity: 11
     StatGrowth:
       HPGrowth: 40
       StrengthGrowth: 20
@@ -28449,13 +28457,13 @@ MonoBehaviour:
     ID: 4
   - name: Myrmidon
     BaseStats:
-      HP: 180
-      Strength: 60
+      HP: 18
+      Strength: 6
       Psyche: 0
-      Defense: 40
+      Defense: 4
       Resistance: 0
-      Speed: 110
-      Dexterity: 100
+      Speed: 11
+      Dexterity: 10
     StatGrowth:
       HPGrowth: 60
       StrengthGrowth: 40
@@ -28467,13 +28475,13 @@ MonoBehaviour:
     ID: 5
   - name: Psychic
     BaseStats:
-      HP: 170
-      Strength: 40
-      Psyche: 40
-      Defense: 30
-      Resistance: 50
-      Speed: 70
-      Dexterity: 60
+      HP: 17
+      Strength: 4
+      Psyche: 4
+      Defense: 3
+      Resistance: 5
+      Speed: 7
+      Dexterity: 6
     StatGrowth:
       HPGrowth: 50
       StrengthGrowth: 20
@@ -28902,13 +28910,21 @@ MonoBehaviour:
     battalion: Kira
     name: Micaiah
     stats:
-      HP: 150
-      Strength: 20
-      Psyche: 70
-      Defense: 20
-      Resistance: 40
-      Speed: 70
-      Dexterity: 80
+      HP: 15
+      Strength: 2
+      Psyche: 7
+      Defense: 2
+      Resistance: 4
+      Speed: 7
+      Dexterity: 8
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 1
     experience: 0
     affiliation: playable
@@ -28939,13 +28955,21 @@ MonoBehaviour:
     battalion: Kira
     name: Sothe
     stats:
-      HP: 350
-      Strength: 180
-      Psyche: 40
-      Defense: 140
-      Resistance: 90
-      Speed: 200
-      Dexterity: 200
+      HP: 35
+      Strength: 18
+      Psyche: 4
+      Defense: 14
+      Resistance: 9
+      Speed: 20
+      Dexterity: 20
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 20
     experience: 0
     affiliation: playable
@@ -28976,13 +29000,21 @@ MonoBehaviour:
     battalion: Kira
     name: Laura
     stats:
-      HP: 160
-      Strength: 30
-      Psyche: 80
-      Defense: 20
-      Resistance: 100
-      Speed: 50
-      Dexterity: 30
+      HP: 16
+      Strength: 3
+      Psyche: 8
+      Defense: 2
+      Resistance: 10
+      Speed: 5
+      Dexterity: 3
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 1
     experience: 0
     affiliation: playable
@@ -29020,6 +29052,14 @@ MonoBehaviour:
       Resistance: 30
       Speed: 100
       Dexterity: 110
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 9
     experience: 0
     affiliation: playable
@@ -29057,6 +29097,14 @@ MonoBehaviour:
       Resistance: 40
       Speed: 100
       Dexterity: 120
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 4
     experience: 0
     affiliation: playable
@@ -29094,6 +29142,14 @@ MonoBehaviour:
       Resistance: 0
       Speed: 120
       Dexterity: 110
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 4
     experience: 0
     affiliation: playable
@@ -29124,13 +29180,21 @@ MonoBehaviour:
     battalion: Kira
     name: Lyvent
     stats:
-      HP: 171
-      Strength: 36
-      Psyche: 58
-      Defense: 73
-      Resistance: 39
-      Speed: 78
-      Dexterity: 50
+      HP: 17
+      Strength: 3
+      Psyche: 6
+      Defense: 7
+      Resistance: 4
+      Speed: 8
+      Dexterity: 5
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 4
     experience: 0
     affiliation: playable
@@ -29161,13 +29225,21 @@ MonoBehaviour:
     battalion: Kira
     name: Zek
     stats:
-      HP: 165
-      Strength: 31
-      Psyche: 91
-      Defense: 52
-      Resistance: 44
-      Speed: 91
-      Dexterity: 78
+      HP: 16
+      Strength: 3
+      Psyche: 9
+      Defense: 5
+      Resistance: 4
+      Speed: 9
+      Dexterity: 8
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 4
     experience: 0
     affiliation: playable
@@ -29198,13 +29270,21 @@ MonoBehaviour:
     battalion: Kira
     name: Xora
     stats:
-      HP: 201
-      Strength: 88
-      Psyche: 13
-      Defense: 108
-      Resistance: 85
-      Speed: 29
-      Dexterity: 52
+      HP: 20
+      Strength: 9
+      Psyche: 1
+      Defense: 11
+      Resistance: 8
+      Speed: 3
+      Dexterity: 5
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 4
     experience: 0
     affiliation: playable
@@ -33052,6 +33132,14 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 0
     experience: 0
     affiliation: 
@@ -35067,6 +35155,14 @@ MonoBehaviour:
     battalion: 
     name: 
     stats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
+    AjustedStats:
       HP: 0
       Strength: 0
       Psyche: 0

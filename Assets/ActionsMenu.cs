@@ -703,7 +703,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         string UnitText = "\n" + charunit.name + "\n";
-        UnitText += "HP : " + charunit.currentHP + " / " + charunit.stats.HP + "\n";
+        UnitText += "HP : " + charunit.currentHP + " / " + charunit.AjustedStats.HP + "\n";
         UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         if (doubleattacker == unit)
@@ -736,7 +736,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         string TargetText = "\n" + chartarget.name + "\n";
-        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.stats.HP + "\n";
+        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.AjustedStats.HP + "\n";
         TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38)) //Spite
@@ -784,20 +784,20 @@ public class ActionsMenu : MonoBehaviour
         {
             if (tripleattack)
             {
-                TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target) * 3) / (float)chartarget.stats.HP;
-                TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+                TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target) * 3) / (float)chartarget.AjustedStats.HP;
+                TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
             }
             else
             {
-                TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target) * 2) / (float)chartarget.stats.HP;
-                TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+                TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target) * 2) / (float)chartarget.AjustedStats.HP;
+                TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
             }
 
         }
         else
         {
-            TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target)) / (float)chartarget.stats.HP;
-            TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+            TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target)) / (float)chartarget.AjustedStats.HP;
+            TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
         }
 
         if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38)) //Spite
@@ -806,26 +806,26 @@ public class ActionsMenu : MonoBehaviour
             {
                 if (tripleattack)
                 {
-                    UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, unit) * 3) / (float)charunit.stats.HP;
-                    UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+                    UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, unit) * 3) / (float)charunit.AjustedStats.HP;
+                    UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
                 }
                 else
                 {
-                    UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, unit) * 2) / (float)charunit.stats.HP;
-                    UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+                    UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, unit) * 2) / (float)charunit.AjustedStats.HP;
+                    UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
                 }
             }
 
             else
             {
-                UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, unit)) / (float)charunit.stats.HP;
-                UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+                UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, unit)) / (float)charunit.AjustedStats.HP;
+                UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
             }
         }
         else
         {
-            UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - 0) / (float)charunit.stats.HP;
-            UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+            UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - 0) / (float)charunit.AjustedStats.HP;
+            UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
         }
     }
 
@@ -838,7 +838,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         string UnitText = "\n" + charunit.name + "\n";
-        UnitText += "HP : " + charunit.currentHP + " / " + charunit.stats.HP + "\n";
+        UnitText += "HP : " + charunit.currentHP + " / " + charunit.AjustedStats.HP + "\n";
         UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         UnitText += "Healing : " + CalculateHealing(unit) + " \n";
@@ -856,7 +856,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         string TargetText = "\n" + chartarget.name + "\n";
-        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.stats.HP + "\n";
+        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.AjustedStats.HP + "\n";
         TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         TargetText += "Dmg : -\n";
@@ -875,11 +875,11 @@ public class ActionsMenu : MonoBehaviour
         unitAttackText.text = UnitText;
         targetAttackText.text = TargetText;
 
-        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP + CalculateHealing(unit)) / (float)chartarget.stats.HP, 1f);
-        TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP + CalculateHealing(unit)) / (float)chartarget.AjustedStats.HP, 1f);
+        TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
 
-        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - 0) / (float)charunit.stats.HP;
-        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - 0) / (float)charunit.AjustedStats.HP;
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
     }
 
     public void initializeSkillWindow(GameObject unit, GameObject target, Skill command)
@@ -933,7 +933,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         string UnitText = "\n" + charunit.name + "\n";
-        UnitText += "HP : " + charunit.currentHP + " / " + charunit.stats.HP + "\n";
+        UnitText += "HP : " + charunit.currentHP + " / " + charunit.AjustedStats.HP + "\n";
         UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         UnitText += "Dmg : - \n";
@@ -951,7 +951,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         string TargetText = "\n" + chartarget.name + "\n";
-        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.stats.HP + "\n";
+        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.AjustedStats.HP + "\n";
         TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         TargetText += "Dmg : -\n";
@@ -969,11 +969,11 @@ public class ActionsMenu : MonoBehaviour
         unitAttackText.text = UnitText;
         targetAttackText.text = TargetText;
 
-        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP) / (float)chartarget.stats.HP, 1f);
-        TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP, 1f);
+        TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
 
-        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
-        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
     }
 
     private void ChakraCommandWindow(GameObject unit)
@@ -982,10 +982,10 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.parent.gameObject.SetActive(true);
 
-        int healthrestored = (int)((charunit.stats.HP - charunit.currentHP) * 0.25f);
+        int healthrestored = (int)((charunit.AjustedStats.HP - charunit.currentHP) * 0.25f);
 
         string UnitText = "\n" + charunit.name + "\n";
-        UnitText += "HP : " + charunit.currentHP + " + <color=green>" + healthrestored + "</color> / " + charunit.stats.HP + "\n";
+        UnitText += "HP : " + charunit.currentHP + " + <color=green>" + healthrestored + "</color> / " + charunit.AjustedStats.HP + "\n";
         UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         UnitText += "Dmg : - \n";
@@ -1010,8 +1010,8 @@ public class ActionsMenu : MonoBehaviour
         TargetGreenLifebar.fillAmount = 1f;
         TargetOrangeLifeBar.fillAmount = 1f;
 
-        UnitGreenLifebar.fillAmount = Mathf.Min((float)(charunit.currentHP + healthrestored) / (float)charunit.stats.HP, 1f);
-        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+        UnitGreenLifebar.fillAmount = Mathf.Min((float)(charunit.currentHP + healthrestored) / (float)charunit.AjustedStats.HP, 1f);
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
     }
 
     private void ReinvigorateWindow(GameObject unit, GameObject target)
@@ -1023,7 +1023,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         string UnitText = "\n" + charunit.name + "\n";
-        UnitText += "HP : " + charunit.currentHP + " / " + charunit.stats.HP + "\n";
+        UnitText += "HP : " + charunit.currentHP + " / " + charunit.AjustedStats.HP + "\n";
         UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         UnitText += "Dmg : - \n";
@@ -1041,7 +1041,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         string TargetText = "\n" + chartarget.name + "\n";
-        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.stats.HP + "\n";
+        TargetText += "HP : " + chartarget.currentHP + " / " + chartarget.AjustedStats.HP + "\n";
         TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         if (target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses < target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses)
         {
@@ -1067,11 +1067,11 @@ public class ActionsMenu : MonoBehaviour
         unitAttackText.text = UnitText;
         targetAttackText.text = TargetText;
 
-        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP) / (float)chartarget.stats.HP, 1f);
-        TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP, 1f);
+        TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
 
-        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
-        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
     }
 
     private void WallTargettingWindow(GameObject unit, GameObject target, string change = "")
@@ -1083,7 +1083,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         string UnitText = "\n" + charunit.name + "\n";
-        UnitText += "HP : " + charunit.currentHP + " / " + charunit.stats.HP + "\n";
+        UnitText += "HP : " + charunit.currentHP + " / " + charunit.AjustedStats.HP + "\n";
         UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
         UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
         UnitText += "Dmg : - \n";
@@ -1131,8 +1131,8 @@ public class ActionsMenu : MonoBehaviour
         TargetGreenLifebar.fillAmount = 1f;
         TargetOrangeLifeBar.fillAmount = 1f;
 
-        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
-        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
     }
 
     private void TransferCommandWindow(GameObject unit, GameObject target)
@@ -1141,62 +1141,62 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.parent.gameObject.SetActive(true);
 
-        float unithealthpercent = (float)((float)charunit.currentHP / (float)charunit.stats.HP);
-        float targethealthpercent = (float)((float)chartarget.currentHP / (float)chartarget.stats.HP);
+        float unithealthpercent = (float)((float)charunit.currentHP / (float)charunit.AjustedStats.HP);
+        float targethealthpercent = (float)((float)chartarget.currentHP / (float)chartarget.AjustedStats.HP);
 
         if (unithealthpercent > targethealthpercent)
         {
 
-            int unithealthlost = charunit.currentHP - (int)(targethealthpercent * charunit.stats.HP);
+            int unithealthlost = charunit.currentHP - (int)(targethealthpercent * charunit.AjustedStats.HP);
 
-            int targethealthgained = (int)(unithealthpercent * chartarget.stats.HP) - chartarget.currentHP;
+            int targethealthgained = (int)(unithealthpercent * chartarget.AjustedStats.HP) - chartarget.currentHP;
 
 
             string UnitText = "\n" + charunit.name + "\n";
-            UnitText += "HP : <color=red>" + (int)(unithealthpercent * chartarget.stats.HP) + "</color> / " + charunit.stats.HP + "\n";
+            UnitText += "HP : <color=red>" + (int)(unithealthpercent * chartarget.AjustedStats.HP) + "</color> / " + charunit.AjustedStats.HP + "\n";
             UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
             UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
 
 
             string TargetText = "\n" + chartarget.name + "\n";
-            TargetText += "HP : <color=green>" + (unithealthpercent * chartarget.stats.HP) + "</color> / " + chartarget.stats.HP + "\n";
+            TargetText += "HP : <color=green>" + (unithealthpercent * chartarget.AjustedStats.HP) + "</color> / " + chartarget.AjustedStats.HP + "\n";
             TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
             TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
 
             unitAttackText.text = UnitText;
             targetAttackText.text = TargetText;
 
-            TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP + targethealthgained) / (float)chartarget.stats.HP, 1f);
-            TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+            TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP + targethealthgained) / (float)chartarget.AjustedStats.HP, 1f);
+            TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
 
-            UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - unithealthlost) / (float)charunit.stats.HP;
-            UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+            UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - unithealthlost) / (float)charunit.AjustedStats.HP;
+            UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
         }
         else
         {
-            int unithealthgained = (int)(targethealthpercent * charunit.stats.HP) - charunit.currentHP;
+            int unithealthgained = (int)(targethealthpercent * charunit.AjustedStats.HP) - charunit.currentHP;
 
-            int targethealthlost = chartarget.currentHP - (int)(unithealthpercent * chartarget.stats.HP);
+            int targethealthlost = chartarget.currentHP - (int)(unithealthpercent * chartarget.AjustedStats.HP);
 
             string UnitText = "\n" + charunit.name + "\n";
-            UnitText += "HP : <color=green>" + (int)(unithealthpercent * chartarget.stats.HP) + "</color> / " + charunit.stats.HP + "\n";
+            UnitText += "HP : <color=green>" + (int)(unithealthpercent * chartarget.AjustedStats.HP) + "</color> / " + charunit.AjustedStats.HP + "\n";
             UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
             UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
 
 
             string TargetText = "\n" + chartarget.name + "\n";
-            TargetText += "HP : <color=red>" + (int)(unithealthpercent * chartarget.stats.HP) + "</color> / " + chartarget.stats.HP + "\n";
+            TargetText += "HP : <color=red>" + (int)(unithealthpercent * chartarget.AjustedStats.HP) + "</color> / " + chartarget.AjustedStats.HP + "\n";
             TargetText += "Wpn : " + target.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
             TargetText += "Uses : " + target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + target.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
 
             unitAttackText.text = UnitText;
             targetAttackText.text = TargetText;
 
-            TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP - targethealthlost) / (float)chartarget.stats.HP, 1f);
-            TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.stats.HP;
+            TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP - targethealthlost) / (float)chartarget.AjustedStats.HP, 1f);
+            TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
 
-            UnitGreenLifebar.fillAmount = (float)(charunit.currentHP + unithealthgained) / (float)charunit.stats.HP;
-            UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.stats.HP;
+            UnitGreenLifebar.fillAmount = (float)(charunit.currentHP + unithealthgained) / (float)charunit.AjustedStats.HP;
+            UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
 
         }
 
@@ -1588,7 +1588,7 @@ public class ActionsMenu : MonoBehaviour
         {
             bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38); //Spite
 
-            int unitdamage = (int)Mathf.Max(CalculateHealing(unit), chartarget.stats.HP - chartarget.currentHP);
+            int unitdamage = (int)Mathf.Max(CalculateHealing(unit), chartarget.AjustedStats.HP - chartarget.currentHP);
 
             int numberofhits = 1;
             int numberofcritials = 0;
@@ -1597,9 +1597,9 @@ public class ActionsMenu : MonoBehaviour
 
             if (!unitalreadyattacked)
             {
-                if (unitdamage + chartarget.currentHP > chartarget.stats.HP)
+                if (unitdamage + chartarget.currentHP > chartarget.AjustedStats.HP)
                 {
-                    unitdamage = chartarget.stats.HP - chartarget.currentHP;
+                    unitdamage = (int)chartarget.AjustedStats.HP - chartarget.currentHP;
                 }
                 chartarget.currentHP += unitdamage;
 
@@ -1665,7 +1665,7 @@ public class ActionsMenu : MonoBehaviour
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage / 2;
             allforonetransfertarget.currentHP -= damage / 2;
 
-            if (allforonetransfertarget.currentHP <= 0 && transfertargethp >= allforonetransfertarget.stats.HP && allforonetransfertargetGO.GetComponent<UnitScript>().GetSkill(44))  //unyielding
+            if (allforonetransfertarget.currentHP <= 0 && transfertargethp >= allforonetransfertarget.AjustedStats.HP && allforonetransfertargetGO.GetComponent<UnitScript>().GetSkill(44))  //unyielding
             {
                 allforonetransfertarget.currentHP = 1;
                 allforonetransfertargetGO.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
@@ -1677,7 +1677,7 @@ public class ActionsMenu : MonoBehaviour
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage;
         }
 
-        if (charTarget.currentHP <= 0 && basehp >= charTarget.stats.HP && target.GetComponent<UnitScript>().GetSkill(44))  //unyielding
+        if (charTarget.currentHP <= 0 && basehp >= charTarget.AjustedStats.HP && target.GetComponent<UnitScript>().GetSkill(44))  //unyielding
         {
             charTarget.currentHP = 1;
             target.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
@@ -1693,11 +1693,11 @@ public class ActionsMenu : MonoBehaviour
         {
             if (Attacker.GetComponent<UnitScript>().GetSkill(30)) // Compassion
             {
-                Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min(DamageDealt, Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP - Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP), true, "Compassion");
+                Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min(DamageDealt, (int)Attacker.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP - Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP), true, "Compassion");
                 Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP += DamageDealt;
-                if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP > Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP)
+                if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP > Attacker.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP)
                 {
-                    Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP = Attacker.GetComponent<UnitScript>().UnitCharacteristics.stats.HP;
+                    Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP = (int)Attacker.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP;
                 }
             }
             if (Attacker.GetComponent<UnitScript>().GetSkill(34)) // Rebound
@@ -1719,11 +1719,11 @@ public class ActionsMenu : MonoBehaviour
                 foreach (GameObject unit in list)
                 {
                     Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-                    unit.GetComponent<UnitScript>().AddNumber(Mathf.Min(unitchar.stats.HP - unitchar.currentHP, (int)(DamageDealt * 0.1f)), true, "Rebound");
+                    unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)unitchar.AjustedStats.HP - unitchar.currentHP, (int)(DamageDealt * 0.1f)), true, "Rebound");
                     unitchar.currentHP += (int)(DamageDealt * 0.1f);
-                    if (unitchar.currentHP > unitchar.stats.HP)
+                    if (unitchar.currentHP > unitchar.AjustedStats.HP)
                     {
-                        unitchar.currentHP = unitchar.stats.HP;
+                        unitchar.currentHP = (int)unitchar.AjustedStats.HP;
                     }
                 }
             }
@@ -1733,11 +1733,11 @@ public class ActionsMenu : MonoBehaviour
             if (Attacker.GetComponent<UnitScript>().GetSkill(14)) // Invigorating
             {
                 Character AttackerChar = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
-                Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min(AttackerChar.stats.HP - AttackerChar.currentHP, (DamageDealt / 10)), true, "Invigorating");
+                Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)AttackerChar.AjustedStats.HP - AttackerChar.currentHP, (DamageDealt / 10)), true, "Invigorating");
                 AttackerChar.currentHP += (DamageDealt / 10);
-                if (AttackerChar.currentHP > AttackerChar.stats.HP)
+                if (AttackerChar.currentHP > AttackerChar.AjustedStats.HP)
                 {
-                    AttackerChar.currentHP = AttackerChar.stats.HP;
+                    AttackerChar.currentHP = (int)AttackerChar.AjustedStats.HP;
                 }
             }
 
@@ -1827,7 +1827,7 @@ public class ActionsMenu : MonoBehaviour
                 }
             }
 
-            if (Chartarget.currentHP <= 0 && baseHP >= Chartarget.stats.HP && potentialtarget.GetComponent<UnitScript>().GetSkill(44))  //unyielding
+            if (Chartarget.currentHP <= 0 && baseHP >= Chartarget.AjustedStats.HP && potentialtarget.GetComponent<UnitScript>().GetSkill(44))  //unyielding
             {
                 Chartarget.currentHP = 1;
                 potentialtarget.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
@@ -1887,19 +1887,19 @@ public class ActionsMenu : MonoBehaviour
         AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
 
         int baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
-        int basestatdamage = charunit.stats.Strength + UnitSkillBonus.Strength;
-        int basestatdef = chartarget.stats.Defense + TargetSkillBonus.Defense;
+        int basestatdamage = (int)charunit.AjustedStats.Strength + UnitSkillBonus.Strength;
+        int basestatdef = (int)chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
         if (charunit.telekinesisactivated)
         {
             baseweapondamage = (int)(baseweapondamage * 0.75f);
-            basestatdamage = charunit.stats.Psyche + UnitSkillBonus.Psyche;
-            basestatdef = charunit.stats.Resistance + TargetSkillBonus.Resistance;
+            basestatdamage = (int)charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
+            basestatdef = (int)charunit.AjustedStats.Resistance + TargetSkillBonus.Resistance;
         }
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
         {
-            basestatdamage = charunit.stats.Psyche + UnitSkillBonus.Psyche;
-            basestatdef = (int)Mathf.Min(chartarget.stats.Defense + TargetSkillBonus.Defense, charunit.stats.Resistance + TargetSkillBonus.Resistance);
+            basestatdamage = (int)charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
+            basestatdef = (int)Mathf.Min(chartarget.AjustedStats.Defense + TargetSkillBonus.Defense, charunit.AjustedStats.Resistance + TargetSkillBonus.Resistance);
         }
 
         int unitbasedamage = baseweapondamage + basestatdamage;
@@ -1910,7 +1910,7 @@ public class ActionsMenu : MonoBehaviour
         }
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield")
         {
-            basestatdef += (int)(chartarget.stats.Strength * 0.2f);
+            basestatdef += (int)(chartarget.AjustedStats.Strength * 0.2f);
         }
 
 
@@ -1954,7 +1954,7 @@ public class ActionsMenu : MonoBehaviour
 
         int baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
         AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
-        int basestatdamage = charunit.stats.Psyche + UnitSkillBonus.Psyche;
+        int basestatdamage = (int)charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
 
 
         if (charunit.telekinesisactivated)
@@ -1976,7 +1976,7 @@ public class ActionsMenu : MonoBehaviour
         AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
         AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
 
-        int unitbasespeed = charunit.stats.Speed + UnitSkillBonus.Speed;
+        int unitbasespeed = (int)charunit.AjustedStats.Speed + UnitSkillBonus.Speed;
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
@@ -1987,7 +1987,7 @@ public class ActionsMenu : MonoBehaviour
             unitbasespeed = (int)(unitbasespeed * 0.9f);
         }
 
-        int targetbasespeed = chartarget.stats.Speed + TargetSkillBonus.Speed;
+        int targetbasespeed = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed;
 
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
@@ -2037,7 +2037,7 @@ public class ActionsMenu : MonoBehaviour
 
         int tilebonus = GetTileBonus(unitTile, targetTile);
 
-        int dexunit = charunit.stats.Dexterity + UnitSkillBonus.Dexterity;
+        int dexunit = (int)charunit.AjustedStats.Dexterity + UnitSkillBonus.Dexterity;
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
             dexunit = (int)(dexunit * 1.1f);
@@ -2047,7 +2047,7 @@ public class ActionsMenu : MonoBehaviour
             dexunit = (int)(dexunit * 0.9f);
         }
 
-        int spdtarget = chartarget.stats.Speed + TargetSkillBonus.Speed;
+        int spdtarget = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed;
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
             spdtarget = (int)(spdtarget * 1.1f);
@@ -2148,7 +2148,7 @@ public class ActionsMenu : MonoBehaviour
 
         int critweapon = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseCrit;
 
-        int dexunit = charunit.stats.Dexterity + UnitSkillBonus.Dexterity;
+        int dexunit = (int)charunit.AjustedStats.Dexterity + UnitSkillBonus.Dexterity;
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
             dexunit = (int)(dexunit * 1.1f);
@@ -2158,7 +2158,7 @@ public class ActionsMenu : MonoBehaviour
             dexunit = (int)(dexunit * 0.9f);
         }
 
-        int spdtarget = chartarget.stats.Speed + TargetSkillBonus.Speed;
+        int spdtarget = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed;
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
             spdtarget = (int)(spdtarget * 1.1f);
