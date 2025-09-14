@@ -33,6 +33,13 @@ public class TurnManger : MonoBehaviour
 
     private PreBattleMenuScript preBattleMenuScript;
 
+    private WeatherManager weatherManager;
+
+    private void Start()
+    {
+        weatherManager = GetComponent<WeatherManager>();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -86,6 +93,7 @@ public class TurnManger : MonoBehaviour
             {
                 currentlyplaying = "playable";
                 BeginningOfTurnsTrigger(playableunitGO);
+                weatherManager.UpdateRain();
             }
             ManageTurnRotation();
         }
@@ -318,7 +326,7 @@ public class TurnManger : MonoBehaviour
             {
                 continue;
             }
-            if (character.name == "")
+            if (character.name == "" || !character.GetComponent<UnitScript>().UnitCharacteristics.currentTile.activated)
             {
                 continue;
             }

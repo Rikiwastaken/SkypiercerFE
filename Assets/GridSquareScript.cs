@@ -50,18 +50,32 @@ public class GridSquareScript : MonoBehaviour
 
     private battlecameraScript battlecameraScript;
 
+    public bool activated;
+
+    public int RemainingRainTurns;
+
+    public int RemainingSunTurns;
+
+    public bool justbecamerain;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
         SelectRound = transform.GetChild(1).gameObject;
         SelectRoundFilling = transform.GetChild(2).gameObject;
+        InitializePosition();
+    }
+
+    public void InitializePosition()
+    {
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         GridCoordinates = new Vector2((int)transform.position.x, (int)transform.position.z);
         for (int i = 0; i < transform.childCount; i++)
         {
             initialpos.Add(transform.GetChild(i).localPosition);
         }
+        ManageActivation();
     }
 
     private void FixedUpdate()
@@ -82,6 +96,17 @@ public class GridSquareScript : MonoBehaviour
         if (MapInitializer == null)
         {
             MapInitializer = FindAnyObjectByType<MapInitializer>();
+        }
+
+        ManageActivation();
+        if(!activated)
+        {
+            return;
+        }
+
+        if(RemainingRainTurns < 3)
+        {
+            justbecamerain = false;
         }
 
         if (TurnManger.currentlyplaying == "")
@@ -188,6 +213,26 @@ public class GridSquareScript : MonoBehaviour
 
     }
 
+    private void ManageActivation()
+    {
+        if(activated && !GetComponent<SpriteRenderer>().enabled)
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+            for(int i = 0; i < transform.childCount;i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        if(!activated && GetComponent<SpriteRenderer>().enabled)
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+
     public void UpdateFilling()
     {
         SpriteRenderer SR = SelectRoundFilling.GetComponent<SpriteRenderer>();
@@ -255,9 +300,13 @@ public class GridSquareScript : MonoBehaviour
     }
     public void fillwithGrey()
     {
-        Color newcolor = Color.gray;
-        newcolor.a = 0.5f;
-        filledimage.color = newcolor;
+        if(filledimage!=null)
+        {
+            Color newcolor = Color.gray;
+            newcolor.a = 0.5f;
+            filledimage.color = newcolor;
+        }
+        
     }
 
     public void fillwithNothing()
@@ -270,7 +319,7 @@ public class GridSquareScript : MonoBehaviour
         {
             MapInitializer = FindAnyObjectByType<MapInitializer>();
         }
-        if (TurnManger.currentlyplaying != "" || !MapInitializer.playablepos.Contains(GridCoordinates))
+        if (TurnManger.currentlyplaying != "" || !MapInitializer.playablepos.Contains(GridCoordinates) && filledimage!=null)
         {
             filledimage.color = new Color(1f, 1f, 1f, 0f);
         }

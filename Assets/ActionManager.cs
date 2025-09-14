@@ -202,8 +202,12 @@ public class ActionManager : MonoBehaviour
 
     public void ResetAction()
     {
-        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = previouscoordinates;
-        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;
+        if(currentcharacter != null)
+        {
+            currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = previouscoordinates;
+            currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;
+        }
+        
         currentcharacter = null;
         GridScript.ResetAllSelections();
         GridScript.ResetColor();

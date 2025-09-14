@@ -53,13 +53,15 @@ public class AttackTurnScript : MonoBehaviour
 
     public int delaybeforenxtunit;
 
+    public MapEventManager mapEventManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         TurnManager = GetComponent<TurnManger>();
         gridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<battlecameraScript>();
-
+        mapEventManager = FindAnyObjectByType<MapEventManager>();
     }
 
     // Update is called once per frame
@@ -750,7 +752,7 @@ public class AttackTurnScript : MonoBehaviour
         }
 
 
-
+        mapEventManager.TriggerEventCheck();
 
     }
     public GameObject CalculateBestTargetForOffensiveUnits(GameObject unit, bool attacksfriend = true)
@@ -1021,27 +1023,31 @@ public class AttackTurnScript : MonoBehaviour
         List<GameObject> objecttodelete = new List<GameObject>();
         foreach (GameObject unit in gridScript.allunitGOs)
         {
-            if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
+            if (unit != null)
             {
-                if (unit.GetComponent<UnitScript>().enemyStats == null)
+                if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
                 {
-                    Destroy(unit);
-                    objecttodelete.Add(unit);
-                }
-                else if (unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars > 0)
-                {
-                    unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars--;
-                    unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP = (int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP;
-                    unit.GetComponent<UnitScript>().AddNumber((int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP, true, unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars + " Healthbars remaining.");
-                }
-                else
-                {
-                    Destroy(unit);
-                    objecttodelete.Add(unit);
-                }
+                    if (unit.GetComponent<UnitScript>().enemyStats == null)
+                    {
+                        Destroy(unit);
+                        objecttodelete.Add(unit);
+                    }
+                    else if (unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars > 0)
+                    {
+                        unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars--;
+                        unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP = (int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP;
+                        unit.GetComponent<UnitScript>().AddNumber((int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP, true, unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars + " Healthbars remaining.");
+                    }
+                    else
+                    {
+                        Destroy(unit);
+                        objecttodelete.Add(unit);
+                    }
 
 
+                }
             }
+            
         }
         foreach (GameObject unittodelete in objecttodelete)
         {

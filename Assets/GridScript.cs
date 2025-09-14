@@ -207,6 +207,7 @@ public class GridScript : MonoBehaviour
     {
         Grid = new List<List<GameObject>>();
         GridSquareScript[] tilelist = FindObjectsByType<GridSquareScript>(FindObjectsSortMode.None);
+        lastSquare.InitializePosition();
         for (int x = 0; x <= lastSquare.GridCoordinates.x; x++)
         {
             Grid.Add(new List<GameObject>());
@@ -301,20 +302,35 @@ public class GridScript : MonoBehaviour
         {
             if (input.x > 0 && (int)selection.GridCoordinates.x < Grid.Count - 1)
             {
-                selection = Grid[(int)(selection.GridCoordinates.x) + 1][(int)(selection.GridCoordinates.y)].GetComponent<GridSquareScript>();
+                GridSquareScript newtile = Grid[(int)(selection.GridCoordinates.x) + 1][(int)(selection.GridCoordinates.y)].GetComponent<GridSquareScript>();
+                if(newtile.activated)
+                {
+                    selection = newtile;
+                }
             }
             if (input.x < 0 && (int)selection.GridCoordinates.x > 0)
             {
-                selection = Grid[(int)(selection.GridCoordinates.x) - 1][(int)(selection.GridCoordinates.y)].GetComponent<GridSquareScript>();
+                GridSquareScript newtile = Grid[(int)(selection.GridCoordinates.x) - 1][(int)(selection.GridCoordinates.y)].GetComponent<GridSquareScript>();
+                if (newtile.activated)
+                {
+                    selection = newtile;
+                }
             }
-
             if (input.y > 0 && (int)selection.GridCoordinates.y < Grid[0].Count - 1)
             {
-                selection = Grid[(int)(selection.GridCoordinates.x)][(int)(selection.GridCoordinates.y) + 1].GetComponent<GridSquareScript>();
+                GridSquareScript newtile = Grid[(int)(selection.GridCoordinates.x)][(int)(selection.GridCoordinates.y) + 1].GetComponent<GridSquareScript>();
+                if (newtile.activated)
+                {
+                    selection = newtile;
+                }
             }
             if (input.y < 0 && (int)selection.GridCoordinates.y > 0)
             {
-                selection = Grid[(int)(selection.GridCoordinates.x)][(int)(selection.GridCoordinates.y) - 1].GetComponent<GridSquareScript>();
+                GridSquareScript newtile = Grid[(int)(selection.GridCoordinates.x)][(int)(selection.GridCoordinates.y) - 1].GetComponent<GridSquareScript>();
+                if (newtile.activated)
+                {
+                    selection = newtile;
+                }
             }
         }
         ShowMovement();
@@ -1198,6 +1214,10 @@ public class GridScript : MonoBehaviour
         if (position.x < 0 || position.x >= Grid.Count || position.y < 0 || position.y >= Grid[0].Count)
         {
             return false;
+        }
+        else if (!GetTile(position).activated)
+        {
+            return false ;
         }
         return true;
     }
