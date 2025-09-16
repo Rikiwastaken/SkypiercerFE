@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -285,7 +286,7 @@ public class UnitScript : MonoBehaviour
                 armature.rotation = Quaternion.LookRotation(initialforward, Vector3.up);
 
             }
-            if (!isinattackanimation() && !animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") && Vector3.Distance(armature.localPosition, initialpos) > 0.15f)
+            if (!isinattackanimation() && !animator.GetCurrentAnimatorStateInfo(0).IsName("run") && Vector3.Distance(armature.localPosition, initialpos) > 0.15f)
             {
                 armature.localPosition = initialpos;
             }
@@ -412,12 +413,82 @@ public class UnitScript : MonoBehaviour
     }
     public bool isinattackanimation()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsName("DoubleAttack") || animator.GetCurrentAnimatorStateInfo(0).IsName("DoubleAttack 0") || animator.GetCurrentAnimatorStateInfo(0).IsName("TripleAttack") || animator.GetCurrentAnimatorStateInfo(0).IsName("TripleAttack 0") || animator.GetCurrentAnimatorStateInfo(0).IsName("TripleAttack 1"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("run") )
         {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
+
+    public void PlayAttackAnimation(bool doubleattack =false, bool tripleattack = false, bool healing=false)
+    {
+        if(tripleattack)
+        {
+            animator.SetBool("Double", false);
+            animator.SetBool("Triple", true);
+        }
+        else if(doubleattack)
+        {
+            animator.SetBool("Double", true);
+            animator.SetBool("Triple", false);
+        }
+        else
+        {
+            animator.SetBool("Double", false);
+            animator.SetBool("Triple", false);
+        }
+        animator.SetTrigger("Attack");
+
+        equipment weapon = GetFirstWeapon();
+
+        animator.SetBool("Slash", false);
+        animator.SetBool("Stab", false);
+        animator.SetBool("Punch", false);
+        animator.SetBool("GreatSword", false);
+        animator.SetBool("Heal", false);
+
+        switch (weapon.type.ToLower())
+        {
+            case "sword":
+                animator.SetBool("Slash", true);
+                break;
+            case "spear":
+                animator.SetBool("Stab", true);
+                break;
+            case "greatsword":
+                animator.SetBool("GreatSword", true);
+                break;
+            case "scythe":
+                animator.SetBool("GreatSword", true);
+                break;
+            case "shield":
+                animator.SetBool("Punch", true);
+                break;
+            case "staff":
+                if(healing)
+                {
+                    animator.SetBool("Heal", true);
+                }
+                else
+                {
+                    animator.SetBool("Stab", true);
+                }
+                break;
+            case "none":
+                animator.SetBool("Punch", true);
+                break;
+            default:
+                animator.SetBool("Slash", true);
+                break;
+        }
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("run"))
+        {
+            return;
+        }
+        return ;
+    }
+
     public void AddNumber(int amount, bool ishealing, string effectname)
     {
         NumberToShow newnumber = new NumberToShow();

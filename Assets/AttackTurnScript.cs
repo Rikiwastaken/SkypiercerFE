@@ -505,20 +505,21 @@ public class AttackTurnScript : MonoBehaviour
                             attacktrigger = false;
 
                             (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
+                            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
                             if (doubleattacker == Attacker)
                             {
                                 if (triple)
                                 {
-                                    Attacker.GetComponentInChildren<Animator>().SetTrigger("TripleAttack");
+                                    Attacker.GetComponent<UnitScript>().PlayAttackAnimation(true, true, ishealing);
                                 }
                                 else
                                 {
-                                    Attacker.GetComponentInChildren<Animator>().SetTrigger("DoubleAttack");
+                                    Attacker.GetComponent<UnitScript>().PlayAttackAnimation(true, false, ishealing);
                                 }
                             }
                             else
                             {
-                                Attacker.GetComponentInChildren<Animator>().SetTrigger("Attack");
+                                Attacker.GetComponent<UnitScript>().PlayAttackAnimation(false, false, ishealing);
                             }
                         }
                     }
@@ -561,16 +562,16 @@ public class AttackTurnScript : MonoBehaviour
                                 {
                                     if (triple)
                                     {
-                                        target.GetComponentInChildren<Animator>().SetTrigger("TripleAttack");
+                                        target.GetComponent<UnitScript>().PlayAttackAnimation(true, true);
                                     }
                                     else
                                     {
-                                        target.GetComponentInChildren<Animator>().SetTrigger("DoubleAttack");
+                                        target.GetComponent<UnitScript>().PlayAttackAnimation(true);
                                     }
                                 }
                                 else
                                 {
-                                    target.GetComponentInChildren<Animator>().SetTrigger("Attack");
+                                    target.GetComponent<UnitScript>().PlayAttackAnimation();
                                 }
 
                             }
