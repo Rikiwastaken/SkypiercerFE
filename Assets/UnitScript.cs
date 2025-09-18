@@ -781,6 +781,19 @@ public class UnitScript : MonoBehaviour
             GrowthtoApply.DexterityGrowth += geniusgrowthboost;
         }
 
+        //Crystal Heart
+        if (GetSkill(57))
+        {
+            int cystalheartgrowthboost = 10;
+            GrowthtoApply.HPGrowth += cystalheartgrowthboost;
+            GrowthtoApply.PsycheGrowth += cystalheartgrowthboost;
+            GrowthtoApply.StrengthGrowth += cystalheartgrowthboost;
+            GrowthtoApply.DefenseGrowth += cystalheartgrowthboost;
+            GrowthtoApply.ResistanceGrowth += cystalheartgrowthboost;
+            GrowthtoApply.SpeedGrowth += cystalheartgrowthboost;
+            GrowthtoApply.DexterityGrowth += cystalheartgrowthboost;
+        }
+
         //JackOfAllTrades
         if (GetSkill(25))
         {

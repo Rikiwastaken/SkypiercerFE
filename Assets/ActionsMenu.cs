@@ -1851,14 +1851,7 @@ public class ActionsMenu : MonoBehaviour
         {
             adjustedexp *= 3;
         }
-        if (adjustedexp < 0)
-        {
-            adjustedexp = 1;
-        }
-        if (adjustedexp > 100)
-        {
-            adjustedexp = 100;
-        }
+        
         if (usingstaff)
         {
             adjustedexp = 15;
@@ -1866,6 +1859,20 @@ public class ActionsMenu : MonoBehaviour
         if (noattack)
         {
             adjustedexp = 1;
+        }
+
+        if(unit.GetComponent<UnitScript>().GetSkill(57)) // Crystal Heart
+        {
+            adjustedexp = (int)(adjustedexp * 1.1f);
+        }
+
+        if (adjustedexp < 0)
+        {
+            adjustedexp = 1;
+        }
+        if (adjustedexp > 100)
+        {
+            adjustedexp = 100;
         }
         charunit.experience += adjustedexp;
         List<int> levelup = new List<int>();
