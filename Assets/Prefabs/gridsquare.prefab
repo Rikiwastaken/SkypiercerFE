@@ -397,6 +397,15 @@ MonoBehaviour:
   Cube: {fileID: 3481345409924445766}
   type: 
   isstairs: 0
+  activated: 0
+  RemainingRainTurns: 0
+  RemainingSunTurns: 0
+  justbecamerain: 0
+  VisualType: Cave
+  MaterialsList:
+  - name: Cave
+    groundmaterial: {fileID: 2100000, guid: 2cd2a7435494f914f888b66f850aa6a9, type: 2}
+    wallmaterial: {fileID: 2100000, guid: 47d234b6593cc064dbfdbf19b8edfa87, type: 2}
 --- !u!1 &9114880376293435180
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -57,6 +58,18 @@ public class GridSquareScript : MonoBehaviour
     public int RemainingSunTurns;
 
     public bool justbecamerain;
+
+    public string VisualType;
+
+    [Serializable]
+    public class MaterialsClass
+    {
+        public string name;
+        public Material groundmaterial;
+        public Material wallmaterial;
+    }
+
+    public List<MaterialsClass> MaterialsList;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -131,8 +144,27 @@ public class GridSquareScript : MonoBehaviour
 
         UpdateFilling();
         manageElevation();
+        manageVisuals();
     }
 
+
+    private void manageVisuals()
+    {
+        foreach(MaterialsClass mat in MaterialsList)
+        {
+            if(mat.name.ToLower() == VisualType.ToLower())
+            {
+                if(isobstacle && mat.wallmaterial!=null)
+                {
+                    Cube.GetComponent<Renderer>().material = mat.wallmaterial;
+                }
+                else
+                {
+                    Cube.GetComponent<Renderer>().material = mat.groundmaterial;
+                }
+            }
+        }
+    }
     private void manageElevation()
     {
 
