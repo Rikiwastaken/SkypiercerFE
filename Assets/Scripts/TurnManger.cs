@@ -108,7 +108,7 @@ public class TurnManger : MonoBehaviour
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
             //Kira Battalion Side Effect
-            if (unitchar.battalion == "Kira")
+            if (unitchar.playableStats.battalion == "Kira")
             {
                 unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(unitchar.AjustedStats.HP * 0.1f), (int)unitchar.AjustedStats.HP - unitchar.currentHP), true, "Kira Battalion");
                 unitchar.currentHP += (int)(unitchar.AjustedStats.HP * 0.1f);

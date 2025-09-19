@@ -64155,38 +64155,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 592762161491615691, guid: da99cd39cd49c7241b59d69980e7e1bd, type: 3}
-      propertyPath: PlayableCharacterList.Array.data[0].deployunit
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 592762161491615691, guid: da99cd39cd49c7241b59d69980e7e1bd, type: 3}
-      propertyPath: PlayableCharacterList.Array.data[1].deployunit
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 592762161491615691, guid: da99cd39cd49c7241b59d69980e7e1bd, type: 3}
-      propertyPath: PlayableCharacterList.Array.data[2].deployunit
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 592762161491615691, guid: da99cd39cd49c7241b59d69980e7e1bd, type: 3}
-      propertyPath: PlayableCharacterList.Array.data[3].deployunit
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 592762161491615691, guid: da99cd39cd49c7241b59d69980e7e1bd, type: 3}
-      propertyPath: PlayableCharacterList.Array.data[5].deployunit
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 592762161491615691, guid: da99cd39cd49c7241b59d69980e7e1bd, type: 3}
-      propertyPath: PlayableCharacterList.Array.data[6].deployunit
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 592762161491615691, guid: da99cd39cd49c7241b59d69980e7e1bd, type: 3}
-      propertyPath: PlayableCharacterList.Array.data[7].deployunit
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 592762161491615691, guid: da99cd39cd49c7241b59d69980e7e1bd, type: 3}
-      propertyPath: PlayableCharacterList.Array.data[8].deployunit
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2087937790783622554, guid: da99cd39cd49c7241b59d69980e7e1bd, type: 3}
       propertyPath: m_Name
       value: DataObject

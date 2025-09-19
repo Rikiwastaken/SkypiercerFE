@@ -1,9 +1,10 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnitScript;
 using static DataScript;
+using static UnitScript;
 
 public class UnitDeploymentButton : MonoBehaviour
 {
@@ -47,10 +48,14 @@ public class UnitDeploymentButton : MonoBehaviour
         {
             if (Character.name != "")
             {
+                if(Character.playableStats.battalion!= "Zack" && Character.playableStats.battalion != "Kira" && Character.playableStats.battalion != "Gale")
+                {
+                    Character.playableStats.battalion = "Zack";
+                }
                 GetComponentInChildren<TextMeshProUGUI>().text = Character.name + " Lvl " + Character.level;
                 if(!isskillbutton)
                 {
-                    if (Character.deployunit)
+                    if (Character.playableStats.deployunit)
                     {
                         GetComponent<Image>().color = Color.green;
                     }
@@ -59,20 +64,10 @@ public class UnitDeploymentButton : MonoBehaviour
                         GetComponent<Image>().color = Color.red;
                     }
                 }
-                if (InputManager.Telekinesisjustpressed && EventSystem.current.currentSelectedGameObject == gameObject && !Character.protagonist)
+                if (InputManager.Telekinesisjustpressed && EventSystem.current.currentSelectedGameObject == gameObject && !Character.playableStats.protagonist)
                 {
-                    if (Character.battalion == "Zack")
-                    {
-                        Character.battalion = "Kira";
-                    }
-                    else if (Character.battalion == "Kira")
-                    {
-                        Character.battalion = "Gale";
-                    }
-                    else
-                    {
-                        Character.battalion = "Zack";
-                    }
+                    ChangeBattallion();
+                    
                 }
                 return;
             }
@@ -108,27 +103,79 @@ public class UnitDeploymentButton : MonoBehaviour
         }
     }
 
+    private void ChangeBattallion()
+    {
+
+        bool KiraUnlocked = false;
+        bool GaleUnlocked = false;
+
+        foreach (Character character in DataScript.PlayableCharacterList)
+        {
+            if (character.name.ToLower()== "kira" && character.playableStats.unlocked)
+            {
+                KiraUnlocked = true;
+            }
+            if (character.name.ToLower() == "gale" && character.playableStats.unlocked)
+            {
+                GaleUnlocked = true;
+            }
+        }
+        //exception for test map
+        if (SceneManager.GetActiveScene().name == "TestMap")
+        {
+            KiraUnlocked = true;
+            GaleUnlocked = true;
+        }
+
+        if (Character.playableStats.battalion == "Zack")
+        {
+            if(KiraUnlocked)
+            {
+                Character.playableStats.battalion = "Kira";
+            }
+            else if(GaleUnlocked)
+            {
+                Character.playableStats.battalion = "Gale";
+            }
+        }
+        else if (Character.playableStats.battalion == "Kira")
+        {
+            if (GaleUnlocked)
+            {
+                Character.playableStats.battalion = "Gale";
+            }
+            else
+            {
+                Character.playableStats.battalion = "Zack";
+            }
+        }
+        else
+        {
+            Character.playableStats.battalion = "Zack";
+        }
+    }
+
     // Update is called once per frame
     public void LockorUnlock()
     {
         int numberofcharacterdeployed = 0;
         foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if (character.deployunit)
+            if (character.playableStats.deployunit)
             {
                 numberofcharacterdeployed++;
             }
 
         }
 
-        if (Character.deployunit)
+        if (Character.playableStats.deployunit)
         {
-            Character.deployunit = false;
+            Character.playableStats.deployunit = false;
             MapInitializer.InitializePlayers();
         }
-        else if (!Character.deployunit && numberofcharacterdeployed <MapInitializer.playablepos.Count)
+        else if (!Character.playableStats.deployunit && numberofcharacterdeployed <MapInitializer.playablepos.Count)
         {
-            Character.deployunit = true;
+            Character.playableStats.deployunit = true;
             MapInitializer.InitializePlayers();
         }
     }

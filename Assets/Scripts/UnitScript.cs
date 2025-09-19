@@ -15,8 +15,6 @@ public class UnitScript : MonoBehaviour
     [Serializable]
     public class Character
     {
-        public bool protagonist;
-        public string battalion;
         public string name;
         public BaseStats stats;
         public BaseStats AjustedStats;
@@ -36,8 +34,9 @@ public class UnitScript : MonoBehaviour
         public List<int> EquipedSkills;
         public bool isboss;
         public bool attacksfriends;
-        public bool deployunit;
-        public int MaxSkillpoints = 99;
+        
+        public PlayableStats playableStats;
+
         public GridSquareScript currentTile;
 
     }
@@ -46,6 +45,16 @@ public class UnitScript : MonoBehaviour
     public class MonsterStats
     {
         public int size;
+    }
+
+    [Serializable]
+    public class PlayableStats
+    {
+        public int MaxSkillpoints = 99;
+        public bool deployunit;
+        public bool unlocked;
+        public bool protagonist;
+        public string battalion;
     }
 
     [Serializable]
@@ -152,8 +161,6 @@ public class UnitScript : MonoBehaviour
 
     public equipment Fists;
 
-    public GameObject ModelHand;
-
     public float movespeed;
 
     private battlecameraScript battlecameraScript;
@@ -190,6 +197,8 @@ public class UnitScript : MonoBehaviour
     public bool copied;
 
     private GridScript GridScript;
+
+    public Transform handbone;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -561,10 +570,11 @@ public class UnitScript : MonoBehaviour
         {
             equipmentmodel equipmentmodel = GetFirstWeapon().equipmentmodel;
             currentequipmentmodel = Instantiate(equipmentmodel.Model);
-            currentequipmentmodel.transform.SetParent(ModelHand.transform);
-            currentequipmentmodel.transform.localPosition = equipmentmodel.localposition;
-            currentequipmentmodel.transform.localScale = equipmentmodel.localscale;
-            currentequipmentmodel.transform.localRotation = Quaternion.Euler(equipmentmodel.localrotation);
+            
+            currentequipmentmodel.transform.SetParent(handbone);
+            currentequipmentmodel.transform.localScale = Vector3.one*0.5f;
+            currentequipmentmodel.transform.localPosition = Vector3.zero;
+            currentequipmentmodel.transform.localRotation = Quaternion.identity;
         }
     }
 
@@ -1174,7 +1184,7 @@ public class UnitScript : MonoBehaviour
         foreach (GameObject characterGO in allunitsGO)
         {
             Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
-            if (ManhattanDistance(UnitCharacteristics, character) == 1 && character.battalion == "Gale" && character.affiliation == UnitCharacteristics.affiliation)
+            if (ManhattanDistance(UnitCharacteristics, character) == 1 && character.playableStats.battalion == "Gale" && character.affiliation == UnitCharacteristics.affiliation)
             {
                 statbonuses.FixedDamageReduction += (int)character.AjustedStats.Defense / 5;
                 statbonuses.FixedDamageBonus += (int)character.AjustedStats.Strength / 5;
@@ -1188,14 +1198,14 @@ public class UnitScript : MonoBehaviour
         }
 
 
-        if (UnitCharacteristics.protagonist)
+        if (UnitCharacteristics.playableStats.protagonist)
         {
             //Zack main effect
-            if (UnitCharacteristics.battalion == "Zack")
+            if (UnitCharacteristics.playableStats.battalion == "Zack")
             {
                 foreach (Character character in allunits)
                 {
-                    if (character.battalion == "Zack" && character != UnitCharacteristics)
+                    if (character.playableStats.battalion == "Zack" && character != UnitCharacteristics)
                     {
                         statbonuses.Hit += 1;
                         statbonuses.Crit += 1;
@@ -1203,11 +1213,11 @@ public class UnitScript : MonoBehaviour
                 }
             }
             //Gale main effect
-            if (UnitCharacteristics.battalion == "Gale")
+            if (UnitCharacteristics.playableStats.battalion == "Gale")
             {
                 foreach (Character character in allunits)
                 {
-                    if (character.battalion == "Gale" && character != UnitCharacteristics)
+                    if (character.playableStats.battalion == "Gale" && character != UnitCharacteristics)
                     {
                         statbonuses.Defense += (int)character.AjustedStats.Defense / 20;
                         statbonuses.Strength += (int)character.AjustedStats.Strength / 20;
@@ -1215,11 +1225,11 @@ public class UnitScript : MonoBehaviour
                 }
             }
             //Kira main effect
-            if (UnitCharacteristics.battalion == "Kira")
+            if (UnitCharacteristics.playableStats.battalion == "Kira")
             {
                 foreach (Character character in allunits)
                 {
-                    if (character.battalion == "Kira" && character != UnitCharacteristics)
+                    if (character.playableStats.battalion == "Kira" && character != UnitCharacteristics)
                     {
                         statbonuses.Psyche += (int)character.AjustedStats.Psyche / 20;
 
@@ -1230,7 +1240,7 @@ public class UnitScript : MonoBehaviour
         else
         {
             //Zack Side Effect
-            if (UnitCharacteristics.battalion == "Zack")
+            if (UnitCharacteristics.playableStats.battalion == "Zack")
             {
                 statbonuses.Hit += 5;
                 statbonuses.Crit += 5;
@@ -1292,7 +1302,7 @@ public class UnitScript : MonoBehaviour
             foreach (Character otherunitchar in activelist)
             {
                 int movement = otherunitchar.movements;
-                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= movement && otherunitchar.battalion == UnitCharacteristics.battalion && otherunitchar.protagonist)
+                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= movement && otherunitchar.playableStats.battalion == UnitCharacteristics.playableStats.battalion && otherunitchar.playableStats.protagonist)
                 {
                     statbonuses.FixedDamageBonus += 3;
                     statbonuses.FixedDamageReduction += 3;

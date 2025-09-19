@@ -37,11 +37,11 @@ public class MapInitializer : MonoBehaviour
         }
         for (int i = 0; i < DataScript.PlayableCharacterList.Count; i++)
         {
-            DataScript.PlayableCharacterList[i].deployunit = false;
+            DataScript.PlayableCharacterList[i].playableStats.deployunit = false;
         }
         for (int i = 0; i < Mathf.Min(playablepos.Count, DataScript.PlayableCharacterList.Count); i++)
         {
-            DataScript.PlayableCharacterList[i].deployunit = true;
+            DataScript.PlayableCharacterList[i].playableStats.deployunit = true;
         }
     }
 
@@ -70,12 +70,11 @@ public class MapInitializer : MonoBehaviour
                 Destroy(potentialplayable.gameObject);
             }
         }
-        Debug.Log(Characters.transform.childCount);
 
         int index = 0;
         foreach (Character playable in DataScript.PlayableCharacterList)
         {
-            if (index < playablepos.Count && playable.deployunit)
+            if (index < playablepos.Count && playable.playableStats.deployunit)
             {
                 GameObject newcharacter = Instantiate(BaseCharacter);
                 newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;

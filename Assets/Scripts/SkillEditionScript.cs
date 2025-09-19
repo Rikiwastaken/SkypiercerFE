@@ -239,7 +239,7 @@ public class SkillEditionScript : MonoBehaviour
             }
         }
 
-        SkillPointsText.text = "Skill Pts : "+equipedskillpoitns+"/"+unitchar.MaxSkillpoints;
+        SkillPointsText.text = "Skill Pts : "+equipedskillpoitns+"/"+unitchar.playableStats.MaxSkillpoints;
     }
 
     private void InitializeInventorySkillList()
@@ -323,7 +323,7 @@ public class SkillEditionScript : MonoBehaviour
                             equipedcost += DataScript.SkillList[equskillID].Cost;
                         }
 
-                        if (equipedcost + DataScript.SkillList[SkillID].Cost <= selectedcharacter.MaxSkillpoints)
+                        if (equipedcost + DataScript.SkillList[SkillID].Cost <= selectedcharacter.playableStats.MaxSkillpoints)
                         {
                             foreach (InventoryItem item in DataScript.PlayerInventory.inventoryItems)
                             {
@@ -347,7 +347,7 @@ public class SkillEditionScript : MonoBehaviour
         int numberofunits = 0;
         foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if (character.deployunit)
+            if (character.playableStats.deployunit)
             {
                 numberofunits++;
             }

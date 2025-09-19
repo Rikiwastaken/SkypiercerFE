@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnitScript;
 
@@ -79,7 +80,7 @@ public class UnitDeploymentScript : MonoBehaviour
         Character currentchar = EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>().Character;
         if (currentchar.name != "")
         {
-            string unitbattallion = currentchar.battalion;
+            string unitbattallion = currentchar.playableStats.battalion;
             BattalionText.text = "Battallion :\n" + unitbattallion + "\n Change with : ";
             string unitdescriptiontxt = currentchar.name + "\n";
             unitdescriptiontxt += "Level : " + currentchar.level + "\n";
@@ -123,6 +124,7 @@ public class UnitDeploymentScript : MonoBehaviour
         else
         {
             BattalionText.text = "";
+            UnitDescription.text = "";
         }
 
 
@@ -132,19 +134,45 @@ public class UnitDeploymentScript : MonoBehaviour
 
     }
 
+    private List<Character> InitializeCharactersToShow()
+    {
+        List<Character> characterstoshow = new List<Character>();
+        if(SceneManager.GetActiveScene().name== "TestMap")
+        {
+            foreach (Character character in DataScript.PlayableCharacterList)
+            {
+                characterstoshow.Add(character);
+            }
+        }
+        else
+        {
+            foreach (Character character in DataScript.PlayableCharacterList)
+            {
+                if (character.playableStats.unlocked)
+                {
+                    characterstoshow.Add(character);
+                }
+            }
+        }
+        
+        return characterstoshow;
+    }
+
     private void InitializeButtons()
     {
         OrderUnits();
-        for (int i = 0; i < Mathf.Min(DataScript.PlayableCharacterList.Count, 20); i++)
+        List<Character> characterstoshow = InitializeCharactersToShow();
+        
+        for (int i = 0; i < Mathf.Min(characterstoshow.Count, 20); i++)
         {
-            transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = DataScript.PlayableCharacterList[i];
+            transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = characterstoshow[i];
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i;
             if (i < numberofunitstodeplay)
             {
-                transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.deployunit = true;
+                transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit = true;
             }
         }
-        for (int i = DataScript.PlayableCharacterList.Count; i < Mathf.Min(DataScript.PlayableCharacterList.Count, 20); i++)
+        for (int i = characterstoshow.Count; i < Mathf.Min(characterstoshow.Count, 20); i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = null;
         }
@@ -156,7 +184,7 @@ public class UnitDeploymentScript : MonoBehaviour
         int numberofunits = 0;
         foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if (character.deployunit)
+            if (character.playableStats.deployunit)
             {
                 numberofunits++;
             }
@@ -170,10 +198,10 @@ public class UnitDeploymentScript : MonoBehaviour
         List<Character> newcharacterlist = new List<Character>();
         foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if (character.deployunit)
+            if (character.playableStats.deployunit)
             {
                 newcharacterlist.Add(character);
-                character.deployunit = false;
+                character.playableStats.deployunit = false;
             }
 
         }

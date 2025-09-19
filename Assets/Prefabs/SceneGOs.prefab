@@ -4803,8 +4803,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target:
-    protagonist: 0
-    battalion: 
     name: 
     stats:
       HP: 0
@@ -4845,8 +4843,12 @@ MonoBehaviour:
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
-    deployunit: 0
-    MaxSkillpoints: 99
+    playableStats:
+      MaxSkillpoints: 99
+      deployunit: 0
+      unlocked: 0
+      protagonist: 0
+      battalion: 
     currentTile: {fileID: 0}
   buttons:
   - {fileID: 3240861738529935134}
@@ -9734,8 +9736,6 @@ MonoBehaviour:
   BattalionText: {fileID: 0}
   UnitsDeployedText: {fileID: 0}
   selectedcharacter:
-    protagonist: 0
-    battalion: 
     name: 
     stats:
       HP: 0
@@ -9776,8 +9776,12 @@ MonoBehaviour:
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
-    deployunit: 0
-    MaxSkillpoints: 99
+    playableStats:
+      MaxSkillpoints: 99
+      deployunit: 0
+      unlocked: 0
+      protagonist: 0
+      battalion: 
     currentTile: {fileID: 0}
   SkillList: {fileID: 4898234980993599380}
   PageNumberText: {fileID: 8048071046576614320}
@@ -12428,8 +12432,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotID: 0
   character:
-    protagonist: 0
-    battalion: 
     name: 
     stats:
       HP: 0
@@ -12470,8 +12472,12 @@ MonoBehaviour:
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
-    deployunit: 0
-    MaxSkillpoints: 99
+    playableStats:
+      MaxSkillpoints: 99
+      deployunit: 0
+      unlocked: 0
+      protagonist: 0
+      battalion: 
     currentTile: {fileID: 0}
 --- !u!1 &7512953878376125901
 GameObject:
@@ -16631,7 +16637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4501723932556671548, guid: c1da08657d7d5104b9b42e51cd0ece94, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 69.4
+      value: 74
       objectReference: {fileID: 0}
     - target: {fileID: 4501723932556671548, guid: c1da08657d7d5104b9b42e51cd0ece94, type: 3}
       propertyPath: m_AnchoredPosition.y

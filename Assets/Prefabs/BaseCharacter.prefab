@@ -578,8 +578,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitCharacteristics:
-    protagonist: 0
-    battalion: 
     name: BaiscCharacter
     stats:
       HP: 50
@@ -589,6 +587,14 @@ MonoBehaviour:
       Resistance: 10
       Speed: 25
       Dexterity: 30
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
     level: 1
     experience: 125
     affiliation: 
@@ -612,18 +618,28 @@ MonoBehaviour:
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
-    deployunit: 0
+    playableStats:
+      MaxSkillpoints: 99
+      deployunit: 0
+      unlocked: 0
+      protagonist: 0
+      battalion: 
+    currentTile: {fileID: 0}
   enemyStats:
     classID: 0
     desiredlevel: 5
     itemtodropID: 0
     usetelekinesis: 0
+    personality: 
     startpos: {x: 0, y: 0}
     equipments: 
     Skills: 
     Name: 
     isboss: 0
     isother: 0
+    monsterStats:
+      size: 0
+    RemainingLifebars: 0
   trylvlup: 0
   fixedgrowth: 0
   Fists:
@@ -642,17 +658,20 @@ MonoBehaviour:
       localposition: {x: 0, y: 0, z: 0}
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
-  ModelHand: {fileID: 2297698540290326592}
   movespeed: 10
   AllyMat: {fileID: 2100000, guid: 535c282d54cc42142a4a472b3eb706bc, type: 2}
   EnemyMat: {fileID: 2100000, guid: e186c7cfc5adc494bbaae3584b2feeb3, type: 2}
   Head: {fileID: 8757377855559164649}
   unitkilled: 0
   tilesmoved: 0
+  numberoftimeswaitted: 0
   SurvivorStacks: 0
   DmgText: {fileID: 556772734091618764}
   DmgEffectNameText: {fileID: 8121606913267278229}
+  waittedbonusturns: 0
   timeforshowingnumbers: 2
+  copied: 0
+  handbone: {fileID: 8030716896983152631}
 --- !u!1 &7336564532334944263
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,14 +828,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b49d129f02e79d545a5b5c0866ef6158, type: 3}
---- !u!1 &2297698540290326592 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -2376002950853918251, guid: b49d129f02e79d545a5b5c0866ef6158, type: 3}
-  m_PrefabInstance: {fileID: 4676334285729481109}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5147355150551066238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b49d129f02e79d545a5b5c0866ef6158, type: 3}
+  m_PrefabInstance: {fileID: 4676334285729481109}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8030716896983152631 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5794026908437268894, guid: b49d129f02e79d545a5b5c0866ef6158, type: 3}
   m_PrefabInstance: {fileID: 4676334285729481109}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8757377855559164649 stripped
