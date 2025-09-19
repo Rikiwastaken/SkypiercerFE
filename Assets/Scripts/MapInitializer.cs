@@ -22,10 +22,27 @@ public class MapInitializer : MonoBehaviour
     private GridScript GridScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    void Start()
     {
+        EmptyPlayables();
         InitializePlayers();
         InitialNonPlayers();
+    }
+
+    private void EmptyPlayables()
+    {
+        if (DataScript == null)
+        {
+            DataScript = FindAnyObjectByType<DataScript>();
+        }
+        for (int i = 0; i < DataScript.PlayableCharacterList.Count; i++)
+        {
+            DataScript.PlayableCharacterList[i].deployunit = false;
+        }
+        for (int i = 0; i < Mathf.Min(playablepos.Count, DataScript.PlayableCharacterList.Count); i++)
+        {
+            DataScript.PlayableCharacterList[i].deployunit = true;
+        }
     }
 
     public void InitializePlayers()
@@ -39,16 +56,21 @@ public class MapInitializer : MonoBehaviour
         {
             DataScript = FindAnyObjectByType<DataScript>();
         }
+        if(Characters == null)
+        {
+            Characters = GameObject.Find("Characters");
+        }
 
-
-
+        numberofplayables = playablepos.Count;
         foreach (Transform potentialplayable in Characters.transform)
         {
             if (potentialplayable.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
             {
+                string name = potentialplayable.name;
                 Destroy(potentialplayable.gameObject);
             }
         }
+        Debug.Log(Characters.transform.childCount);
 
         int index = 0;
         foreach (Character playable in DataScript.PlayableCharacterList)
@@ -66,6 +88,7 @@ public class MapInitializer : MonoBehaviour
             }
 
         }
+        
         GridScript.InitializeGOList();
     }
 

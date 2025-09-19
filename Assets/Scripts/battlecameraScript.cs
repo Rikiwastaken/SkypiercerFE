@@ -37,6 +37,7 @@ public class battlecameraScript : MonoBehaviour
         initialrotation = transform.GetChild(0).rotation.eulerAngles;
         previouselevation = transform.position.y;
         GridScript = FindAnyObjectByType<GridScript>();
+        Destination = GridScript.selection.GridCoordinates;
     }
 
     void FixedUpdate()

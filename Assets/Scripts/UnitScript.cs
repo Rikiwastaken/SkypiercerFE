@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 using static DataScript;
@@ -241,6 +242,7 @@ public class UnitScript : MonoBehaviour
 
         if (UnitCharacteristics.currentTile == null)
         {
+            Debug.Log(UnitCharacteristics.position);
             MoveTo(UnitCharacteristics.position);
         }
         else
@@ -403,13 +405,11 @@ public class UnitScript : MonoBehaviour
             GridScript = FindAnyObjectByType<GridScript>();
         }
         GridSquareScript destTile = GridScript.GetTile(destination);
-        if (GridScript.GetUnit(destTile) == null && !destTile.isobstacle)
+        if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile)==gameObject) && !destTile.isobstacle)
         {
             UnitCharacteristics.position = destination;
             UnitCharacteristics.currentTile = destTile;
         }
-
-
     }
     public bool isinattackanimation()
     {

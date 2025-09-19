@@ -207,6 +207,10 @@ public class GridScript : MonoBehaviour
     {
         Grid = new List<List<GameObject>>();
         GridSquareScript[] tilelist = FindObjectsByType<GridSquareScript>(FindObjectsSortMode.None);
+        if(lastSquare == null)
+        {
+            lastSquare = GameObject.Find("Grid").transform.GetChild(GameObject.Find("Grid").transform.childCount - 1).GetComponent<GridSquareScript>();
+        }
         lastSquare.InitializePosition();
         for (int x = 0; x <= lastSquare.GridCoordinates.x; x++)
         {
@@ -215,6 +219,7 @@ public class GridScript : MonoBehaviour
             {
                 foreach (GridSquareScript tile in tilelist)
                 {
+                    tile.InitializePosition();
                     if ((int)tile.GridCoordinates.x == x && (int)tile.GridCoordinates.y == y)
                     {
                         Grid[x].Add(tile.gameObject);
@@ -237,7 +242,8 @@ public class GridScript : MonoBehaviour
 
             }
         }
-        selection = Grid[0][0].GetComponent<GridSquareScript>();
+        GridDimensions = new Vector2(Grid.Count, Grid[0].Count);
+        selection = GetTile(GetComponent<MapInitializer>().playablepos[0]);
     }
 
     private void UpdateTileText()

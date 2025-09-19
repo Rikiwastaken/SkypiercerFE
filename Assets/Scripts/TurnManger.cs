@@ -71,17 +71,17 @@ public class TurnManger : MonoBehaviour
             updatevisuals = false;
         }
 
-        if (playableunit.Count == 0)
-        {
-            GameOverScript.gameObject.SetActive(true);
-            return;
-        }
-        if (enemyunit.Count == 0)
-        {
-            GameOverScript.victory = true;
-            GameOverScript.gameObject.SetActive(true);
-            return;
-        }
+        //if (playableunit.Count == 0)
+        //{
+        //    GameOverScript.gameObject.SetActive(true);
+        //    return;
+        //}
+        //if (enemyunit.Count == 0)
+        //{
+        //    GameOverScript.victory = true;
+        //    GameOverScript.gameObject.SetActive(true);
+        //    return;
+        //}
         UpdateText();
         if (!waittingforstart)
         {
@@ -323,6 +323,10 @@ public class TurnManger : MonoBehaviour
         foreach (GameObject character in allunits)
         {
             if (character == null)
+            {
+                continue;
+            }
+            if(character.GetComponent<UnitScript>().UnitCharacteristics.currentTile==null)
             {
                 continue;
             }
