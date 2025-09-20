@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using static UnitScript;
+using static TextBubbleScript;
+
 
 public class MapEventManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class MapEventManager : MonoBehaviour
          * 4 : one of the units died
          * 5 : all of the units died
          * 6 : small conditions are verified
+         * 7 : Battle Starts
          */
         public int initializationtype;
         /* 1 : Get Units From Names
@@ -36,15 +38,16 @@ public class MapEventManager : MonoBehaviour
         /* 1 : Win the game
          * 2 : Lose the game
          * 3 : ModifyTiles
-         * 4 : 
+         * 4 : ShowDialogue
          * 5 : 
          * 6 : 
          */
+        public List<TextBubbleInfo> dialoguetoShow;
 
         public TileModification tileModification;
         public void TriggerEvent(GameOverScript GameOverScript)
         {
-            switch(triggerEffectType)
+            switch (triggerEffectType)
             {
                 case 1:
                     GameOverScript.gameObject.SetActive(true);
@@ -58,6 +61,9 @@ public class MapEventManager : MonoBehaviour
                     {
                         tileModification.ApplyModification();
                     }
+                    break;
+                case 4:
+                    FindAnyObjectByType<TextBubbleScript>().InitializeDialogue(dialoguetoShow);
                     break;
             }
         }
@@ -164,11 +170,10 @@ public class MapEventManager : MonoBehaviour
         {
             eventinitialized = true;
             EventInitialization();
-            Debug.Log("eventinitialization");
         }
     }
 
-    private void EventInitialization()
+    public void EventInitialization()
     {
         if (EventsToMonitor != null)
         {

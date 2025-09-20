@@ -35,10 +35,11 @@ public class TurnManger : MonoBehaviour
 
     private WeatherManager weatherManager;
     private ActionManager actionManager;
-
+    private MapEventManager mapEventManager;
     private void Start()
     {
         weatherManager = GetComponent<WeatherManager>();
+        mapEventManager = GetComponent<MapEventManager>();
     }
 
     // Update is called once per frame
@@ -101,6 +102,8 @@ public class TurnManger : MonoBehaviour
                 currentlyplaying = "playable";
                 BeginningOfTurnsTrigger(playableunitGO);
                 weatherManager.UpdateRain();
+                mapEventManager.EventInitialization();
+                mapEventManager.TriggerEventCheck();
             }
             ManageTurnRotation();
         }
