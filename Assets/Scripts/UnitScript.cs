@@ -233,14 +233,14 @@ public class UnitScript : MonoBehaviour
         }
         UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
         UpdateWeaponModel();
-        if (UnitCharacteristics.affiliation == "playable")
-        {
-            Head.GetComponent<SkinnedMeshRenderer>().material = AllyMat;
-        }
-        else
-        {
-            Head.GetComponent<SkinnedMeshRenderer>().material = EnemyMat;
-        }
+        //if (UnitCharacteristics.affiliation == "playable")
+        //{
+        //    Head.GetComponent<SkinnedMeshRenderer>().material = AllyMat;
+        //}
+        //else
+        //{
+        //    Head.GetComponent<SkinnedMeshRenderer>().material = EnemyMat;
+        //}
 
 
     }
@@ -570,9 +570,9 @@ public class UnitScript : MonoBehaviour
         {
             equipmentmodel equipmentmodel = GetFirstWeapon().equipmentmodel;
             currentequipmentmodel = Instantiate(equipmentmodel.Model);
-            
+            currentequipmentmodel.transform.localScale = Vector3.one * 0.5f;
             currentequipmentmodel.transform.SetParent(handbone);
-            currentequipmentmodel.transform.localScale = Vector3.one*0.5f;
+            
             currentequipmentmodel.transform.localPosition = Vector3.zero;
             currentequipmentmodel.transform.localRotation = Quaternion.identity;
         }

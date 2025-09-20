@@ -149,12 +149,23 @@ public class MapEventManager : MonoBehaviour
 
     public GameOverScript GameOverScript;
 
+    private bool eventinitialized;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         GridScript = GetComponent<GridScript>();
         turnManger = GetComponent<TurnManger>();
-        EventInitialization();
+    }
+
+    private void FixedUpdate()
+    {
+        if((GetComponent<TurnManger>().currentlyplaying=="playable" || GetComponent<TurnManger>().currentlyplaying == "other" || GetComponent<TurnManger>().currentlyplaying == "enemy") && !eventinitialized)
+        {
+            eventinitialized = true;
+            EventInitialization();
+            Debug.Log("eventinitialization");
+        }
     }
 
     private void EventInitialization()
