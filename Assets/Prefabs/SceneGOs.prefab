@@ -10048,6 +10048,7 @@ MonoBehaviour:
     initializationtype: 2
     triggered: 0
     triggerEffectType: 2
+    dialoguetoShow: []
     tileModification:
       TilesIdCouples: []
       newtype: 
@@ -10062,6 +10063,7 @@ MonoBehaviour:
     initializationtype: 1
     triggered: 0
     triggerEffectType: 3
+    dialoguetoShow: []
     tileModification:
       TilesIdCouples:
       - {x: 208, y: 305}
@@ -14101,8 +14103,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

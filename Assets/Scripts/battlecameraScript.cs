@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class battlecameraScript : MonoBehaviour
 {
@@ -88,9 +89,12 @@ public class battlecameraScript : MonoBehaviour
 
         if(incombat)
         {
+            Vector2 CoordUnit = fighter1.GetComponent<UnitScript>().UnitCharacteristics.position;
+            Vector2 CoordTarget = fighter2.GetComponent<UnitScript>().UnitCharacteristics.position;
             transform.GetChild(0).LookAt(pointtolookat);
-            float movey = (1.5f - transform.position.y) * camspeed * Time.fixedDeltaTime;
-            if(transform.position.y>1.5f)
+            float targetelevation = Mathf.Min(1.5f, Mathf.Max(0,2.5f- Vector2.Distance(CoordTarget, CoordUnit)));
+            float movey = (targetelevation - transform.position.y) * camspeed * Time.fixedDeltaTime;
+            if(transform.position.y> targetelevation)
             {
                 transform.position += new Vector3(0f, movey, 0f);
             }
@@ -164,7 +168,7 @@ public class battlecameraScript : MonoBehaviour
 
         float n = Mathf.Sqrt((CoordTarget.y - CoordUnit.y) * (CoordTarget.y - CoordUnit.y) + (CoordTarget.x - CoordUnit.x) * (CoordTarget.x - CoordUnit.x));
 
-        float length = Vector2.Distance(CoordTarget,CoordUnit)*2.5f;
+        float length = Mathf.Max(Vector2.Distance(CoordTarget,CoordUnit)*2f,2.5f);
 
         Vector2 CamCoordinates = new Vector2();
 
@@ -173,7 +177,9 @@ public class battlecameraScript : MonoBehaviour
         CamCoordinates.x = Middle.x + side * length * ((float)CoordUnit.y- (float)CoordTarget.y)/n;
         CamCoordinates.y = Middle.y + side * length * ((float)CoordTarget.x - (float)CoordUnit.x) / n;
 
-        pointtolookat = new Vector3(Middle.x,1.5f,Middle.y);
+        float targetelevation = Mathf.Min(1.5f, Mathf.Max(0, 2.5f - Vector2.Distance(CoordTarget, CoordUnit)));
+
+        pointtolookat = new Vector3(Middle.x, targetelevation, Middle.y);
         CombatTextScript.SetupCombat(unit.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);
         return CamCoordinates;
 
