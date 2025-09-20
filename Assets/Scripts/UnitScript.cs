@@ -287,7 +287,7 @@ public class UnitScript : MonoBehaviour
         }
         if (animator != null)
         {
-            if (!isinattackanimation())
+            if (!isinattackanimation() && !battlecameraScript.incombat)
             {
                 if (Vector3.Distance(armature.localPosition, initialpos) > 0.1f)
                 {

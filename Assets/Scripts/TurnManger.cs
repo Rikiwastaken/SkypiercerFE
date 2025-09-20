@@ -34,6 +34,7 @@ public class TurnManger : MonoBehaviour
     private PreBattleMenuScript preBattleMenuScript;
 
     private WeatherManager weatherManager;
+    private ActionManager actionManager;
 
     private void Start()
     {
@@ -58,12 +59,17 @@ public class TurnManger : MonoBehaviour
             GridScript = FindAnyObjectByType<GridScript>();
         }
 
+        if (actionManager == null)
+        {
+            actionManager = FindAnyObjectByType<ActionManager>();
+        }
+
         if (InputManager.Startpressed && waittingforstart && !preBattleMenuScript.gameObject.activeSelf)
         {
             waittingforstart = false;
         }
 
-
+        
 
         if (updatevisuals)
         {
@@ -91,6 +97,7 @@ public class TurnManger : MonoBehaviour
             }
             if (currentlyplaying == "")
             {
+                actionManager.frameswherenotlock = 5;
                 currentlyplaying = "playable";
                 BeginningOfTurnsTrigger(playableunitGO);
                 weatherManager.UpdateRain();
