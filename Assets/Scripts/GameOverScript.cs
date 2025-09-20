@@ -17,12 +17,13 @@ public class GameOverScript : MonoBehaviour
         waittingforGameover = true;
         if (victory)
         {
-            GetComponentInChildren<TextMeshProUGUI>().text = "Winner is you !\nRestarting soon...";
+            GetComponentInChildren<TextMeshProUGUI>().text = "Winner is you !\nReturning to main Menu";
         }
         else
         {
-            GetComponentInChildren<TextMeshProUGUI>().text = "Game Over...\nRestarting soon...";
+            GetComponentInChildren<TextMeshProUGUI>().text = "Game Over...\nReturning to main Menu";
         }
+        
     }
 
 
@@ -33,7 +34,8 @@ public class GameOverScript : MonoBehaviour
             gameovercounter++;
             if (gameovercounter > 5f / Time.deltaTime)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                FindAnyObjectByType<SaveManager>().SaveCurrentSlot();
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }

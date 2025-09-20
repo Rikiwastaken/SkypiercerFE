@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static DataScript;
 using static UnitScript;
 
@@ -20,6 +21,8 @@ public class DataScript : MonoBehaviour
     public float manualgamespeed = 1;
 
     public Inventory PlayerInventory;
+
+    private List<Character> DefaultPlayableCharacterList;
 
     [Serializable]
     public class ClassInfo
@@ -61,6 +64,11 @@ public class DataScript : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         Setup();
+        DontDestroyOnLoad(gameObject);
+        if(SceneManager.GetActiveScene().name== "FirstScene")
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     // Update is called once per frame
@@ -74,6 +82,7 @@ public class DataScript : MonoBehaviour
         SetupEquipment();
         SetupClasses();
         SetupInventory();
+        SetupDefaultCharacterList();
     }
 
     private void SetupInventory()
@@ -92,12 +101,47 @@ public class DataScript : MonoBehaviour
             }
         }
     }
+
+    
     private void SetupClasses()
     {
         for (int i = 0; i < ClassList.Count; i++)
         {
             ClassList[i].ID = i;
         }
+    }
+    private void SetupDefaultCharacterList()
+    {
+        DefaultPlayableCharacterList = new List<Character>();
+        foreach(Character character in PlayableCharacterList)
+        {
+            DefaultPlayableCharacterList.Add(CopyChararacter(character));
+        }
+    }
+
+    public void RestoreBaseCharacterValues()
+    {
+        PlayableCharacterList = new List<Character>();
+        foreach (Character character in DefaultPlayableCharacterList)
+        {
+            PlayableCharacterList.Add(CopyChararacter(character));
+        }
+    }
+
+    private Character CopyChararacter(Character charactertoCopy)
+    {
+        Character copy = new Character();
+        copy.name = charactertoCopy.name;
+        copy.stats = charactertoCopy.stats;
+        copy.movements = charactertoCopy.movements;
+        copy.growth = charactertoCopy.growth;
+        copy.equipmentsIDs = charactertoCopy.equipmentsIDs;
+        copy.UnitSkill = charactertoCopy.UnitSkill;
+        copy.EquipedSkills = charactertoCopy.EquipedSkills;
+        copy.playableStats = charactertoCopy.playableStats;
+        copy.level = charactertoCopy.level;
+        copy.experience = charactertoCopy.experience;
+        return copy;
     }
 
     private void SetupEquipment()

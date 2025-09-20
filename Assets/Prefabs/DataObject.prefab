@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2887273360177285642}
   - component: {fileID: 592762161491615691}
+  - component: {fileID: 6877748070760658668}
   m_Layer: 0
   m_Name: DataObject
   m_TagString: Untagged
@@ -1987,3 +1988,17 @@ MonoBehaviour:
   manualgamespeed: 1
   PlayerInventory:
     inventoryItems: []
+--- !u!114 &6877748070760658668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087937790783622554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96044cd774742f64cbd6546a776f0941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  versionID: 040
+  activeSlot: 0
