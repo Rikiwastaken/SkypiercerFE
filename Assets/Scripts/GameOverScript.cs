@@ -11,6 +11,8 @@ public class GameOverScript : MonoBehaviour
 
     public bool victory;
 
+    private SceneLoader sceneLoader;
+
     private void OnEnable()
     {
         Time.timeScale = 0f;
@@ -29,13 +31,18 @@ public class GameOverScript : MonoBehaviour
 
     private void Update()
     {
+        if(sceneLoader ==  null)
+        {
+            sceneLoader = FindAnyObjectByType<SceneLoader>();
+        }
+
         if (waittingforGameover)
         {
             gameovercounter++;
             if (gameovercounter > 5f / Time.deltaTime)
             {
                 FindAnyObjectByType<SaveManager>().SaveCurrentSlot();
-                SceneManager.LoadScene("MainMenu");
+                sceneLoader.LoadScene("MainMenu");
             }
         }
     }
