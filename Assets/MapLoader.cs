@@ -1,4 +1,4 @@
-using System.Runtime.CompilerServices;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -155,3 +155,4 @@ public class MapLoader : MonoBehaviour
         return (grey,Elevation0,Elevation1,Elevation2,Elevation3);
     }
 }
+#endif

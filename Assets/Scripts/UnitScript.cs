@@ -2,13 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 using static DataScript;
-using static UnitScript;
 
 public class UnitScript : MonoBehaviour
 {

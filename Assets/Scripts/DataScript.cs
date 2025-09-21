@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static DataScript;
@@ -220,7 +219,7 @@ public class DataScript : MonoBehaviour
         }
         Character.equipments = newequipmentlist;
     }
-
+    #if UNITY_EDITOR
     [ContextMenu("Calculate IDs and fillout out classes")]
     void CalculateIDs()
     {
@@ -233,4 +232,5 @@ public class DataScript : MonoBehaviour
         Setup();
         EditorUtility.SetDirty(this);
     }
+    #endif
 }

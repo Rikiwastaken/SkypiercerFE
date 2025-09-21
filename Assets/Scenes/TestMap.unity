@@ -20917,6 +20917,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneGOs
       objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].name
+      value: Victory
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].triggertype
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].triggerEffectType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].initializationtype
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].NameUnitList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EventsToMonitor.Array.data[2].NameUnitList.Array.data[0]'
+      value: Zaitan
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].tileModification.modiftype
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].tileModification.TilesIdCouples.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].tileModification.TilesIdCouples.Array.data[0].x
+      value: 208
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].tileModification.TilesIdCouples.Array.data[0].y
+      value: 305
+      objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: Characters
       value: 
