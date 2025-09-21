@@ -23,6 +23,7 @@ public class DataScript : MonoBehaviour
     public Inventory PlayerInventory;
 
     private List<Character> DefaultPlayableCharacterList;
+    private Inventory DefaultInventory;
 
     [Serializable]
     public class ClassInfo
@@ -113,18 +114,28 @@ public class DataScript : MonoBehaviour
     private void SetupDefaultCharacterList()
     {
         DefaultPlayableCharacterList = new List<Character>();
+        DefaultInventory =new Inventory();
         foreach(Character character in PlayableCharacterList)
         {
             DefaultPlayableCharacterList.Add(CopyChararacter(character));
+        }
+        foreach (InventoryItem item in PlayerInventory.inventoryItems)
+        {
+            DefaultInventory.inventoryItems.Add(CopyInventoryItem(item));
         }
     }
 
     public void RestoreBaseCharacterValues()
     {
         PlayableCharacterList = new List<Character>();
+        PlayerInventory = new Inventory();
         foreach (Character character in DefaultPlayableCharacterList)
         {
             PlayableCharacterList.Add(CopyChararacter(character));
+        }
+        foreach (InventoryItem item in DefaultInventory.inventoryItems)
+        {
+            PlayerInventory.inventoryItems.Add(CopyInventoryItem(item));
         }
     }
 
@@ -141,6 +152,15 @@ public class DataScript : MonoBehaviour
         copy.playableStats = charactertoCopy.playableStats;
         copy.level = charactertoCopy.level;
         copy.experience = charactertoCopy.experience;
+        return copy;
+    }
+
+    private InventoryItem CopyInventoryItem(InventoryItem itemtocopy)
+    {
+        InventoryItem copy = new InventoryItem();
+        copy.Quantity = itemtocopy.Quantity;
+        copy.type = itemtocopy.type;
+        copy.ID = itemtocopy.ID;
         return copy;
     }
 

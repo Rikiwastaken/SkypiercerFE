@@ -19,6 +19,7 @@ public class SaveManager : MonoBehaviour
         public int slot;
         public int chapter;
         public List<Character> PlayableCharacterList;
+        public Inventory PlayerInventory;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private List<SaveClass> GetAllSaves()
@@ -69,6 +70,7 @@ public class SaveManager : MonoBehaviour
             if(save.slot==activeSlot && save.versionID==versionID)
             {
                 GetComponent<DataScript>().PlayableCharacterList = save.PlayableCharacterList;
+                GetComponent<DataScript>().PlayerInventory = save.PlayerInventory;
                 return;
             }
         }
@@ -81,7 +83,8 @@ public class SaveManager : MonoBehaviour
             versionID = versionID,
             slot = activeSlot,
             chapter = 0,
-            PlayableCharacterList = GetComponent<DataScript>().PlayableCharacterList
+            PlayableCharacterList = GetComponent<DataScript>().PlayableCharacterList,
+            PlayerInventory = GetComponent<DataScript>().PlayerInventory
         };
 
         string json = JsonUtility.ToJson(save, true);
