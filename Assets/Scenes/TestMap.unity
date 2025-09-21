@@ -20921,6 +20921,110 @@ PrefabInstance:
       propertyPath: Characters
       value: 
       objectReference: {fileID: 1454223630}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[17].Name
+      value: Psychic
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].Name
+      value: Better Zaitan
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].isboss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[17].classID
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].classID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[17].startpos.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].startpos.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].startpos.y
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[17].desiredlevel
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].desiredlevel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[17].usetelekinesis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].usetelekinesis
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[17].Skills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].RemainingLifebars
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].Skills.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EnemyList.Array.data[17].Skills.Array.data[0]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EnemyList.Array.data[18].Skills.Array.data[0]'
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EnemyList.Array.data[18].Skills.Array.data[1]'
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EnemyList.Array.data[18].Skills.Array.data[2]'
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EnemyList.Array.data[18].Skills.Array.data[3]'
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EnemyList.Array.data[18].Skills.Array.data[4]'
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[17].equipments.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].equipments.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EnemyList.Array.data[17].equipments.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EnemyList.Array.data[18].equipments.Array.data[0]'
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 6735075567054094981, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: lastSquare
       value: 

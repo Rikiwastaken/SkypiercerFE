@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static DataScript;
@@ -64,7 +66,6 @@ public class DataScript : MonoBehaviour
     void Awake()
     {
         Application.targetFrameRate = 60;
-        Setup();
         DontDestroyOnLoad(gameObject);
         if(SceneManager.GetActiveScene().name== "FirstScene")
         {
@@ -114,7 +115,8 @@ public class DataScript : MonoBehaviour
     private void SetupDefaultCharacterList()
     {
         DefaultPlayableCharacterList = new List<Character>();
-        DefaultInventory =new Inventory();
+        DefaultInventory =new Inventory() { inventoryItems =new List<InventoryItem>() };
+
         foreach(Character character in PlayableCharacterList)
         {
             DefaultPlayableCharacterList.Add(CopyChararacter(character));
@@ -128,7 +130,7 @@ public class DataScript : MonoBehaviour
     public void RestoreBaseCharacterValues()
     {
         PlayableCharacterList = new List<Character>();
-        PlayerInventory = new Inventory();
+        PlayerInventory = new Inventory() { inventoryItems = new List<InventoryItem>() };
         foreach (Character character in DefaultPlayableCharacterList)
         {
             PlayableCharacterList.Add(CopyChararacter(character));
@@ -217,5 +219,18 @@ public class DataScript : MonoBehaviour
             }
         }
         Character.equipments = newequipmentlist;
+    }
+
+    [ContextMenu("Calculate IDs and fillout out classes")]
+    void CalculateIDs()
+    {
+        if (Application.isPlaying)
+        {
+            Debug.LogWarning("Cannot generate persistent map in Play Mode. Exit Play Mode first.");
+            return;
+        }
+
+        Setup();
+        EditorUtility.SetDirty(this);
     }
 }

@@ -172,28 +172,28 @@ public class GridSquareScript : MonoBehaviour
         {
             GridSquareScript squareFighter1 = battlecameraScript.fighter1.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
             GridSquareScript squareFighter2 = battlecameraScript.fighter2.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
-
-
-            if(isstairs)
+            //float targetelevation = Mathf.Min(squareFighter1.elevation, squareFighter2.elevation);
+            float targetelevation = 0;
+            if (isstairs)
             {
-                if (transform.position.y > Mathf.Min(squareFighter1.elevation, squareFighter2.elevation) - 1.1f)
+                if (transform.position.y > targetelevation - 1.1f)
                 {
                     transform.position += new Vector3(0f, -elevationchange * ((float)elevation + 1f) * Time.fixedDeltaTime, 0f);
                 }
                 else
                 {
-                    transform.position = new Vector3(transform.position.x, (float)Mathf.Min(squareFighter1.elevation, squareFighter2.elevation)-1.1f, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, targetelevation - 1.1f, transform.position.z);
                 }
             }
             else
             {
-                if (transform.position.y > Mathf.Min(squareFighter1.elevation, squareFighter2.elevation))
+                if (transform.position.y > targetelevation)
                 {
                     transform.position += new Vector3(0f, -elevationchange * ((float)elevation + 1f) * Time.fixedDeltaTime, 0f);
                 }
                 else
                 {
-                    transform.position = new Vector3(transform.position.x, (float)Mathf.Min(squareFighter1.elevation, squareFighter2.elevation), transform.position.z);
+                    transform.position = new Vector3(transform.position.x, targetelevation, transform.position.z);
                 }
             }
 

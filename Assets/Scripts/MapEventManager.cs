@@ -66,6 +66,7 @@ public class MapEventManager : MonoBehaviour
                     FindAnyObjectByType<TextBubbleScript>().InitializeDialogue(dialoguetoShow);
                     break;
             }
+            FindAnyObjectByType<MapEventManager>().EventInitialization();
         }
 
     }

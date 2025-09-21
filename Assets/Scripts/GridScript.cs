@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using static UnitScript;
 public class GridScript : MonoBehaviour
@@ -44,6 +45,8 @@ public class GridScript : MonoBehaviour
     public TextMeshProUGUI tiletext;
     private SkillEditionScript SkillEditionScript;
 
+    private TextBubbleScript textBubble;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -51,7 +54,7 @@ public class GridScript : MonoBehaviour
         lockedattacktiles = new List<GridSquareScript>();
         lockedhealingtiles = new List<GridSquareScript>();
         InitializeGOList();
-
+        textBubble = FindAnyObjectByType<TextBubbleScript>();
 
     }
 
@@ -84,7 +87,7 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = 0;
         }
 
-        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0)
+        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue)
         {
             if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue)
             {
