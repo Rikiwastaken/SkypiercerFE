@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTextBubble: 0
-  indialogue: 0
+  indialogue: 1
   characterportrait: {fileID: 4102054814459368746}
   charactername: {fileID: 2234400838559224320}
   sentence: {fileID: 5132090153720932011}

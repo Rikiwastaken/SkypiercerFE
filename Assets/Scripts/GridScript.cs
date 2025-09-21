@@ -87,8 +87,15 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = 0;
         }
 
-        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue)
+        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0)
         {
+            if(textBubble.indialogue)
+            {
+                ShowMovement();
+                return;
+            }
+            
+
             if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue)
             {
                 moveCD = (int)(0.1f / Time.deltaTime);

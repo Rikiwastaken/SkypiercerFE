@@ -113,10 +113,7 @@ public class AttackTurnScript : MonoBehaviour
         {
 
             Character CharCurrentEnemy = CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics;
-            if (!battlecamera.incombat)
-            {
-                battlecamera.Destination = CharCurrentEnemy.position;
-            }
+            
             if (!CharCurrentEnemy.alreadymoved)
             {
                 if (counterbeforemove > 0)
@@ -145,9 +142,9 @@ public class AttackTurnScript : MonoBehaviour
             }
             else
             {
-
                 ManageAttack(CurrentEnemy);
             }
+            
         }
 
         //playerattack

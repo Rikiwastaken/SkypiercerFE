@@ -75,8 +75,14 @@ public class TextBubbleScript : MonoBehaviour
             {
                 ActionManager.frameswherenotlock = 5;
             }
-            
+            else
+            {
+                ActionManager = FindAnyObjectByType<ActionManager>();
+            }
+
             indialogue = true;
+
+            FindAnyObjectByType<GridScript>().lockselection = false;
 
             if (isPrinting && charIndex < texttodisplay.Length)
             {

@@ -18,7 +18,7 @@ public class ActionManager : MonoBehaviour
 
     public GameObject currentcharacter;
 
-    public int frameswherenotlock;
+    public int frameswherenotlock = 5;
 
     public int framestoskip;
 
@@ -28,6 +28,8 @@ public class ActionManager : MonoBehaviour
 
     public bool preventfromlockingafteraction;
 
+    private TextBubbleScript TextBubbleScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +37,7 @@ public class ActionManager : MonoBehaviour
         InputManager = FindAnyObjectByType<InputManager>();
         GridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<battlecameraScript>();
+        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>();
     }
 
     // Update is called once per frame
@@ -80,7 +83,7 @@ public class ActionManager : MonoBehaviour
                 currentcharacter = GridScript.GetSelectedUnitGameObject();
                 if (currentcharacter != null)
                 {
-                    if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed && !preventfromlockingafteraction && frameswherenotlock == 0)
+                    if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed && !preventfromlockingafteraction && frameswherenotlock == 0 && !TextBubbleScript.indialogue)
                     {
                         GridScript.lockselection = true;
                         GridScript.LockcurrentSelection();
@@ -202,12 +205,12 @@ public class ActionManager : MonoBehaviour
 
     public void ResetAction()
     {
-        if(currentcharacter != null)
+        if (currentcharacter != null)
         {
             currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = previouscoordinates;
             currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;
         }
-        
+
         currentcharacter = null;
         GridScript.ResetAllSelections();
         GridScript.ResetColor();
