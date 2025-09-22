@@ -21,7 +21,7 @@ public class battlecameraScript : MonoBehaviour
 
     private Vector3 initialrotation;
 
-    private float previouselevation;
+    public float previouselevation;
 
     public GameObject fighter1;
     public GameObject fighter2;
@@ -116,6 +116,10 @@ public class battlecameraScript : MonoBehaviour
                 resettingy = false;
             }
         }
+        else
+        {
+            previouselevation = transform.position.y;
+        }
 
         if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || TextBubbleScript.indialogue)
         {
@@ -161,7 +165,7 @@ public class battlecameraScript : MonoBehaviour
 
     public Vector2 GoToFightCamera(GameObject unit, GameObject target)
     {
-        previouselevation = transform.position.y;
+        
         fighter1 = unit;
         fighter2 = target;
         incombat = true;

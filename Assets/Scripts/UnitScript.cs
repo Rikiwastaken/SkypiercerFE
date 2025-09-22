@@ -408,7 +408,7 @@ public class UnitScript : MonoBehaviour
     {
         if(GetSkill(58)) //weakness
         {
-            UnitCharacteristics.AjustedStats.HP = (int)UnitCharacteristics.stats.HP / 2;
+            UnitCharacteristics.AjustedStats.HP = (int)UnitCharacteristics.stats.HP;
             UnitCharacteristics.AjustedStats.Strength = (int)UnitCharacteristics.stats.Strength / 2;
             UnitCharacteristics.AjustedStats.Psyche = (int)UnitCharacteristics.stats.Psyche / 2;
             UnitCharacteristics.AjustedStats.Defense = (int)UnitCharacteristics.stats.Defense / 2;
