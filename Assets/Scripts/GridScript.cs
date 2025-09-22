@@ -43,6 +43,7 @@ public class GridScript : MonoBehaviour
     private Vector2 previousmovementvalueforbuffer;
 
     public TextMeshProUGUI tiletext;
+    public GameObject TileImageContainer;
     private SkillEditionScript SkillEditionScript;
 
     private TextBubbleScript textBubble;
@@ -310,8 +311,29 @@ public class GridScript : MonoBehaviour
                 text = "Fog \n+20% Dodge\n-20% Hit";
             }
             text += "\n Elevation : " + selection.elevation;
+            UpdateWeatherImage(selection);
         }
         tiletext.text = text;
+    }
+
+    private void UpdateWeatherImage(GridSquareScript tile)
+    {
+        TileImageContainer.transform.GetChild(0).gameObject.SetActive(false);
+        TileImageContainer.transform.GetChild(1).gameObject.SetActive(false);
+        TileImageContainer.transform.GetChild(2).gameObject.SetActive(false);
+        Debug.Log("Rain turns : " + tile.RemainingRainTurns + " Sun turns : " + tile.RemainingSunTurns);
+        if (tile.RemainingRainTurns > 0)
+        {
+            TileImageContainer.transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else if(tile.RemainingSunTurns > 0)
+        {
+            TileImageContainer.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            TileImageContainer.transform.GetChild(2).gameObject.SetActive(true);
+        }
     }
 
     public void MoveSelection(Vector2 input)

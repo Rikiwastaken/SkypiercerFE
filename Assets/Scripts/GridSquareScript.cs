@@ -61,6 +61,8 @@ public class GridSquareScript : MonoBehaviour
 
     public string VisualType;
 
+    private ParticleSystem rainparticle;
+
     [Serializable]
     public class MaterialsClass
     {
@@ -77,6 +79,7 @@ public class GridSquareScript : MonoBehaviour
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
         SelectRound = transform.GetChild(1).gameObject;
         SelectRoundFilling = transform.GetChild(2).gameObject;
+        rainparticle = GetComponentInChildren<ParticleSystem>();
         InitializePosition();
     }
 
@@ -121,6 +124,18 @@ public class GridSquareScript : MonoBehaviour
         {
             justbecamerain = false;
         }
+
+        if(RemainingRainTurns > 0)
+        {
+            rainparticle.gameObject.SetActive(true);
+        }
+        else
+        {
+            rainparticle.gameObject.SetActive(false);
+        }
+
+
+        
 
         if (TurnManger.currentlyplaying == "")
         {
