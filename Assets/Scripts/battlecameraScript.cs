@@ -33,11 +33,14 @@ public class battlecameraScript : MonoBehaviour
     private float elevationtoadd;
     public float verticalautomovespeed;
 
+    private TextBubbleScript TextBubbleScript;
+
     private void Start()
     {
         initialrotation = transform.GetChild(0).rotation.eulerAngles;
         previouselevation = transform.position.y;
         GridScript = FindAnyObjectByType<GridScript>();
+        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>();
         Destination = GridScript.selection.GridCoordinates;
     }
 
@@ -114,7 +117,7 @@ public class battlecameraScript : MonoBehaviour
             }
         }
 
-        if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
+        if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || TextBubbleScript.indialogue)
         {
             return;
         }

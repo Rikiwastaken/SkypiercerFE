@@ -899,6 +899,22 @@ public class AttackTurnScript : MonoBehaviour
                         reward += Random.Range(-50, 50);
                     }
 
+                    if (charunit.enemyStats.personality.ToLower() != "passive")
+                    {
+                        if (potentialdamagetaken == 0)
+                        {
+                            reward += 50;
+                        }
+                        else
+                        {
+                            reward += (int)(dodgerate / 10f);
+                            if (potentialdamagetaken <= charunit.currentHP)
+                            {
+                                reward += 5;
+                            }
+                        }
+                    }
+
 
                     if (reward > maxreward || chosenUnit == null)
                     {
@@ -1014,6 +1030,21 @@ public class AttackTurnScript : MonoBehaviour
                             }
                         }
                     }
+                    if (charunit.enemyStats.personality.ToLower() != "passive")
+                    {
+                        if (potentialdamagetaken == 0)
+                        {
+                            reward += 50;
+                        }
+                        else
+                        {
+                            reward += (int)(dodgerate / 10f);
+                            if (potentialdamagetaken <= charunit.currentHP)
+                            {
+                                reward += 5;
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -1022,6 +1053,12 @@ public class AttackTurnScript : MonoBehaviour
                         (int newrange, bool newmelee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
                         reward += Mathf.Max(ManhattanDistance(charunit, charotherunit) - newrange, 0);
                     }
+
+                    if (charunit.enemyStats.personality.ToLower() != "passive" && (!charunit.attacksfriends && charotherunit.affiliation=="enemy"))
+                    {
+                        reward += ManhattanDistance(charunit, charotherunit);
+                    }
+
                 }
 
                 if (otherunit.GetComponent<UnitScript>().UnitCharacteristics.position == position.GridCoordinates)
