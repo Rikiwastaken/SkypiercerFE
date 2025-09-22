@@ -92,7 +92,7 @@ public class battlecameraScript : MonoBehaviour
             Vector2 CoordUnit = fighter1.GetComponent<UnitScript>().UnitCharacteristics.position;
             Vector2 CoordTarget = fighter2.GetComponent<UnitScript>().UnitCharacteristics.position;
             transform.GetChild(0).LookAt(pointtolookat);
-            float targetelevation = Mathf.Min(0.5f, Mathf.Max(0,1.5f- Vector2.Distance(CoordTarget, CoordUnit)));
+            float targetelevation = Mathf.Min(0.5f, Mathf.Max(0.5f,1.5f- Vector2.Distance(CoordTarget, CoordUnit)));
             float movey = (targetelevation - transform.position.y) * camspeed * Time.fixedDeltaTime;
             if(transform.position.y> targetelevation)
             {
@@ -177,7 +177,7 @@ public class battlecameraScript : MonoBehaviour
         CamCoordinates.x = Middle.x + side * length * ((float)CoordUnit.y- (float)CoordTarget.y)/n;
         CamCoordinates.y = Middle.y + side * length * ((float)CoordTarget.x - (float)CoordUnit.x) / n;
 
-        float targetelevation = Mathf.Min(0.5f, Mathf.Max(0, 1.5f - Vector2.Distance(CoordTarget, CoordUnit)));
+        float targetelevation = Mathf.Min(0.5f, Mathf.Max(0.5f, 1.5f - Vector2.Distance(CoordTarget, CoordUnit)));
 
         pointtolookat = new Vector3(Middle.x, targetelevation, Middle.y);
         CombatTextScript.SetupCombat(unit.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);

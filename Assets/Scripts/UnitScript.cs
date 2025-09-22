@@ -254,7 +254,15 @@ public class UnitScript : MonoBehaviour
         {
             if (UnitCharacteristics.currentTile.isstairs)
             {
-                transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y + 0.5f, transform.position.z);
+                
+                if(battlecameraScript.incombat)
+                {
+                    transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y + 1f, transform.position.z);
+                }
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y + 0.5f, transform.position.z);
+                }
             }
             else
             {

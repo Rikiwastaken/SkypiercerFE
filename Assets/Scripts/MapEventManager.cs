@@ -12,7 +12,7 @@ public class MapEventManager : MonoBehaviour
     public class EventCondition
     {
         public string name;
-        public List<GameObject> UnitList;
+        public List<Character> UnitList;
         public List<string> NameUnitList;
         public List<GridSquareScript> TilesList;
         public List<SmallerCondition> SmallerConditions;
@@ -183,12 +183,12 @@ public class MapEventManager : MonoBehaviour
                 switch (e.initializationtype)
                 {
                     case (1):
-                        e.UnitList = new List<GameObject>();
+                        e.UnitList = new List<Character>();
                         foreach(string name in e.NameUnitList )
                         {
-                            foreach(GameObject unit in GridScript.allunitGOs)
+                            foreach(Character unit in GridScript.allunits)
                             {
-                                if(unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower()==name.ToLower())
+                                if(unit.name.ToLower()==name.ToLower())
                                 {
                                     e.UnitList.Add(unit);
                                 }
@@ -196,13 +196,13 @@ public class MapEventManager : MonoBehaviour
                         }
                         break;
                     case (2):
-                        e.UnitList = turnManger.playableunitGO;
+                        e.UnitList = turnManger.playableunit;
                         break;
                     case (3):
-                        e.UnitList = turnManger.enemyunitGO;
+                        e.UnitList = turnManger.enemyunit;
                         break;
                     case (4):
-                        e.UnitList = turnManger.otherunitsGO;
+                        e.UnitList = turnManger.otherunits;
                         break;
                     case (5):
 
@@ -251,14 +251,14 @@ public class MapEventManager : MonoBehaviour
                                 }
                                 break;
                             case (4):
-                                if (checkIfAllDead(e.UnitList))
+                                if (checkIfOneDead(e.UnitList))
                                 {
                                     e.TriggerEvent(GameOverScript);
                                     e.triggered = true;
                                 }
                                 break;
                             case (5):
-                                if (checkIfOneDead(e.UnitList))
+                                if (checkIfAllDead(e.UnitList))
                                 {
                                     e.TriggerEvent(GameOverScript);
                                     e.triggered = true;
@@ -375,7 +375,7 @@ public class MapEventManager : MonoBehaviour
         return false;
     }
 
-    private bool checkIfAllDead(List<GameObject> units)
+    private bool checkIfAllDead(List<Character> units)
     {
         if(units.Count==0)
         {
@@ -383,19 +383,21 @@ public class MapEventManager : MonoBehaviour
         }
         else
         {
-            foreach (GameObject unit in units)
+            foreach (Character unit in units)
             {
                 if(unit != null)
                 {
-                    return false;
+                    if(unit.currentHP > 0)
+                    {
+                        return false;
+                    }
                 }
             }
         }
-        Debug.Log("here");
         return true;
     }
 
-    private bool checkIfOneDead(List<GameObject> units)
+    private bool checkIfOneDead(List<Character> units)
     {
         if (units.Count == 0)
         {
@@ -403,9 +405,13 @@ public class MapEventManager : MonoBehaviour
         }
         else
         {
-            foreach (GameObject unit in units)
+            foreach (Character unit in units)
             {
                 if (unit == null)
+                {
+                    return true;
+                }
+                else if (unit.currentHP <= 0)
                 {
                     return true;
                 }

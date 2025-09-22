@@ -107,7 +107,7 @@ public class GridScript : MonoBehaviour
                 previousmovevalue = Vector2.zero;
             }
 
-            if (inputManager.NextWeaponjustpressed || inputManager.PreviousWeaponjustpressed)
+            if ((inputManager.NextWeaponjustpressed || inputManager.PreviousWeaponjustpressed) && GetComponent<TurnManger>().currentlyplaying == "playable")
             {
                 GameObject GOSelected = GetUnit(selection);
                 if (GOSelected != null)
@@ -124,56 +124,60 @@ public class GridScript : MonoBehaviour
                             }
                         }
                     }
-                    else if (!SkillEditionScript.gameObject.activeSelf)
+                    else if(SkillEditionScript!=null)
                     {
-                        GameObject Characters = GameObject.Find("Characters");
-                        List<GameObject> listplayable = new List<GameObject>();
-                        int index = 0;
-                        int currentunitindex = -1;
-                        for (int i = 0; i < Characters.transform.childCount; i++)
+                        if (!SkillEditionScript.gameObject.activeSelf)
                         {
-                            GameObject unit = Characters.transform.GetChild(i).gameObject;
-                            if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !unit.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
+                            GameObject Characters = GameObject.Find("Characters");
+                            List<GameObject> listplayable = new List<GameObject>();
+                            int index = 0;
+                            int currentunitindex = -1;
+                            for (int i = 0; i < Characters.transform.childCount; i++)
                             {
-                                if (unit == GOSelected)
+                                GameObject unit = Characters.transform.GetChild(i).gameObject;
+                                if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !unit.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
                                 {
-                                    currentunitindex = index;
+                                    if (unit == GOSelected)
+                                    {
+                                        currentunitindex = index;
+                                    }
+                                    listplayable.Add(unit);
+                                    index++;
                                 }
-                                listplayable.Add(unit);
-                                index++;
+
                             }
-
-                        }
-                        if (inputManager.NextWeaponjustpressed)
-                        {
-                            if (currentunitindex >= listplayable.Count - 1 || currentunitindex == -1)
+                            if (inputManager.NextWeaponjustpressed)
                             {
-                                selection = GetTile(listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                if (currentunitindex >= listplayable.Count - 1 || currentunitindex == -1)
+                                {
+                                    selection = GetTile(listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.position);
 
+                                }
+                                else
+                                {
+                                    selection = GetTile(listplayable[currentunitindex + 1].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                }
                             }
                             else
                             {
-                                selection = GetTile(listplayable[currentunitindex + 1].GetComponent<UnitScript>().UnitCharacteristics.position);
-                            }
-                        }
-                        else
-                        {
-                            if (currentunitindex == -1)
-                            {
-                                selection = GetTile(listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                if (currentunitindex == -1)
+                                {
+                                    selection = GetTile(listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.position);
 
+                                }
+                                else if (currentunitindex > 0)
+                                {
+                                    selection = GetTile(listplayable[currentunitindex - 1].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                }
+                                else
+                                {
+                                    selection = GetTile(listplayable[listplayable.Count - 1].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                }
                             }
-                            else if (currentunitindex > 0)
-                            {
-                                selection = GetTile(listplayable[currentunitindex - 1].GetComponent<UnitScript>().UnitCharacteristics.position);
-                            }
-                            else
-                            {
-                                selection = GetTile(listplayable[listplayable.Count - 1].GetComponent<UnitScript>().UnitCharacteristics.position);
-                            }
-                        }
 
+                        }
                     }
+                    
                 }
                 else
                 {
@@ -187,6 +191,8 @@ public class GridScript : MonoBehaviour
                         }
                     }
                 }
+                ShowMovement();
+                GetComponent<ActionManager>().frameswherenotlock = 5;
             }
 
         }

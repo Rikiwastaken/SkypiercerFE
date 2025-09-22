@@ -113,7 +113,8 @@ public class AttackTurnScript : MonoBehaviour
         {
 
             Character CharCurrentEnemy = CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics;
-            
+            battlecamera.Destination = CharCurrentEnemy.position;
+
             if (!CharCurrentEnemy.alreadymoved)
             {
                 if (counterbeforemove > 0)
@@ -485,13 +486,12 @@ public class AttackTurnScript : MonoBehaviour
             {
 
 
-                
-                target.transform.forward = Attacker.transform.position - target.transform.position;
-                target.transform.GetChild(1).forward = Attacker.transform.GetChild(1).position - target.transform.GetChild(1).position;
-                Attacker.transform.forward = target.transform.position - Attacker.transform.position;
-                Attacker.transform.GetChild(1).forward = target.transform.GetChild(1).position - Attacker.transform.GetChild(1).position;
-                //target.GetComponent<UnitScript>().ResetForward();
-                //Attacker.GetComponent<UnitScript>().ResetForward();
+
+                target.transform.LookAt(Attacker.transform);
+                Attacker.transform.LookAt(target.transform);
+                target.transform.GetChild(1).LookAt(Attacker.transform.GetChild(1));
+                Attacker.transform.GetChild(1).LookAt(target.transform.GetChild(1));
+
                 battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
                 //waitting for camera to be fully placed
                 if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
