@@ -10,7 +10,7 @@ public class PreBattleMenuScript : MonoBehaviour
     private TurnManger TurnManager;
     public bool ChangingUnitPlace;
     private InputManager InputManager;
-    private GameObject selectedunit;
+    public GameObject selectedunit;
     private DataScript DataScript;
     private MapInitializer MapInitializer;
 
@@ -88,7 +88,7 @@ public class PreBattleMenuScript : MonoBehaviour
             {
                 if (selectedunit != null && InputManager.activatejustpressed && MapInitializer.playablepos.Contains(GridScript.selection.GridCoordinates))
                 {
-                    selectedunit.GetComponent<UnitScript>().UnitCharacteristics.position = GridScript.selection.GridCoordinates;
+                    selectedunit.GetComponent<UnitScript>().MoveTo(GridScript.selection.GridCoordinates);
                 }
             }
         }
@@ -97,9 +97,14 @@ public class PreBattleMenuScript : MonoBehaviour
 
     private void SwitchUnits(GameObject unit1, GameObject unit2)
     {
-        Vector2 unit1pos = unit1.GetComponent<UnitScript>().UnitCharacteristics.position;
-        unit1.GetComponent<UnitScript>().MoveTo(unit2.GetComponent<UnitScript>().UnitCharacteristics.position);
+        Debug.Log("Switching " + unit1.name + " with " + unit2.name);
+
+        Vector2 unit1pos = new Vector2(unit1.GetComponent<UnitScript>().UnitCharacteristics.position.x, unit1.GetComponent<UnitScript>().UnitCharacteristics.position.y);
+        Vector2 unit2pos = new Vector2(unit2.GetComponent<UnitScript>().UnitCharacteristics.position.x, unit2.GetComponent<UnitScript>().UnitCharacteristics.position.y);
+        GridSquareScript temp = GridScript.GetFirstFreeTile();
+        unit1.GetComponent<UnitScript>().MoveTo(temp.GridCoordinates);
         unit2.GetComponent<UnitScript>().MoveTo(unit1pos);
+        unit1.GetComponent<UnitScript>().MoveTo(unit2pos);
     }
 
     public void ActivatePlacement()

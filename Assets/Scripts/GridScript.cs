@@ -1274,4 +1274,20 @@ public class GridScript : MonoBehaviour
         int y = (int)position.y;
         return GetTile(x, y);
     }
+
+    public GridSquareScript GetFirstFreeTile()
+    {
+        for(int x=0; x<Grid.Count; x++)
+        {
+            for(int y=0; y<Grid[x].Count; y++)
+            {
+                GridSquareScript Tile = Grid[x][y].GetComponent<GridSquareScript>();
+                if (!Tile.isobstacle && GetUnit(Tile)==null)
+                {
+                    return Grid[x][y].GetComponent<GridSquareScript>();
+                }
+            }
+        }
+        return null;
+    }
 }

@@ -247,7 +247,6 @@ public class UnitScript : MonoBehaviour
 
         if (UnitCharacteristics.currentTile == null)
         {
-            Debug.Log(UnitCharacteristics.position);
             MoveTo(UnitCharacteristics.position);
         }
         else
@@ -298,7 +297,7 @@ public class UnitScript : MonoBehaviour
                     armature.localPosition += (initialpos - armature.localPosition).normalized * 0.2f * Time.deltaTime;
                 }
 
-                armature.rotation = Quaternion.LookRotation(initialforward, Vector3.up);
+                //armature.rotation = Quaternion.LookRotation(initialforward, Vector3.up);
 
             }
             if (!isinattackanimation() && !animator.GetCurrentAnimatorStateInfo(0).IsName("run") && Vector3.Distance(armature.localPosition, initialpos) > 0.15f)
@@ -322,7 +321,8 @@ public class UnitScript : MonoBehaviour
             transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
             if (!battlecameraScript.incombat)
             {
-                transform.forward = new Vector3(direction.x, 0f, direction.y);
+                transform.forward =new Vector3(direction.x, 0f, direction.y).normalized;
+                transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
             }
 
 
@@ -362,6 +362,7 @@ public class UnitScript : MonoBehaviour
 
     private void ManageLifebars()
     {
+        transform.GetChild(0).rotation = Quaternion.Euler(90f, 0f, 0f);
         Image LifebarBehind = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         Image Lifebar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
 
@@ -422,6 +423,11 @@ public class UnitScript : MonoBehaviour
         {
             UnitCharacteristics.position = destination;
             UnitCharacteristics.currentTile = destTile;
+            Debug.Log("Moved " + UnitCharacteristics.name + " to " + destination);
+        }
+        else
+        {
+            Debug.Log("Cannot move " + UnitCharacteristics.name + " to " + destination);
         }
     }
     public bool isinattackanimation()

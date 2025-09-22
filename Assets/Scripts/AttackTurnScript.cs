@@ -100,9 +100,18 @@ public class AttackTurnScript : MonoBehaviour
                     Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
                     if (charunit.affiliation == "enemy" && !charunit.alreadyplayed)
                     {
+
+                        if(!determineifActionifTaken(unit))
+                        {
+                            charunit.alreadyplayed = true;
+                            charunit.alreadymoved = true;
+                            continue;
+                        }
+
                         CurrentEnemy = unit;
                         counterbeforemove = (int)(delaybeforeMove / Time.fixedDeltaTime);
                         gridScript.ShowMovementOfUnit(unit);
+                        break;
 
                     }
                 }
@@ -113,7 +122,11 @@ public class AttackTurnScript : MonoBehaviour
         {
 
             Character CharCurrentEnemy = CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics;
-            battlecamera.Destination = CharCurrentEnemy.position;
+            if (!battlecamera.incombat)
+            {
+                battlecamera.Destination = CharCurrentEnemy.position;
+            }
+            
 
             if (!CharCurrentEnemy.alreadymoved)
             {
@@ -233,6 +246,42 @@ public class AttackTurnScript : MonoBehaviour
         }
     }
 
+    private bool determineifActionifTaken(GameObject unit)
+    {
+        
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Vector2 originalpos = charunit.position;
+        gridScript.ShowMovementOfUnit(unit);
+        GridSquareScript Destination = CalculateDestinationForOffensiveUnits(unit, charunit.attacksfriends);
+        if(Destination == null)
+        {
+            
+            GameObject target = CalculateBestTargetForOffensiveUnits(unit, charunit.attacksfriends);
+            if (target == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            unit.GetComponent<UnitScript>().MoveTo(Destination.GridCoordinates);
+            GameObject target = CalculateBestTargetForOffensiveUnits(unit, charunit.attacksfriends);
+            unit.GetComponent<UnitScript>().MoveTo(originalpos);
+            if (target == null && Destination.GridCoordinates == originalpos)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        
+    }
     private void ManageCommand(GameObject User)
     {
         GameObject Target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
