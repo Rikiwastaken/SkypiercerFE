@@ -98,7 +98,7 @@ public class AttackTurnScript : MonoBehaviour
                 if (unit.gameObject != null && unit != null)
                 {
                     Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-                    if (charunit.affiliation == "enemy" && !charunit.alreadyplayed)
+                    if (charunit.affiliation == "enemy" && !charunit.alreadyplayed && charunit.currentTile.activated)
                     {
 
                         if(!determineifActionifTaken(unit))

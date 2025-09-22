@@ -357,7 +357,7 @@ public class UnitScript : MonoBehaviour
         //TemporaryColor();
         UpdateRendererLayer();
         ManageDamagenumber();
-
+        Hidedeactivated();
     }
 
     private void ManageLifebars()
@@ -696,6 +696,21 @@ public class UnitScript : MonoBehaviour
 
         }
         calculateStats();
+
+    }
+
+    private void Hidedeactivated()
+    {
+        if(UnitCharacteristics.currentTile.activated)
+        {
+            transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
 
     }
 
