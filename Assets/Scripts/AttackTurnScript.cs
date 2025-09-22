@@ -877,7 +877,7 @@ public class AttackTurnScript : MonoBehaviour
                         }
                     }
 
-                    if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() != "daredevil")
+                    if (charunit.enemyStats.personality.ToLower() != "daredevil")
                     {
                         if (potentialdamagetaken == 0)
                         {
@@ -894,7 +894,7 @@ public class AttackTurnScript : MonoBehaviour
                     }
 
 
-                    if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.33f))
+                    if (charunit.enemyStats.personality.ToLower() == "deviant" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.33f))
                     {
                         reward += Random.Range(-50, 50);
                     }
@@ -999,7 +999,7 @@ public class AttackTurnScript : MonoBehaviour
                         }
                     }
 
-                    if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() != "daredevil")
+                    if (charunit.enemyStats.personality.ToLower() != "daredevil")
                     {
                         if (potentialdamagetaken == 0)
                         {
@@ -1030,7 +1030,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
             }
 
-            if (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "deviant" || (unit.GetComponent<UnitScript>().enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.33f))
+            if (charunit.enemyStats.personality.ToLower() == "deviant" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.33f))
             {
                 reward += Random.Range(-30, 30);
             }
@@ -1075,18 +1075,19 @@ public class AttackTurnScript : MonoBehaviour
         {
             if (unit != null)
             {
-                if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
+                Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+                if (charunit.currentHP <= 0)
                 {
-                    if (unit.GetComponent<UnitScript>().enemyStats == null)
+                    if (charunit.enemyStats == null)
                     {
                         Destroy(unit);
                         objecttodelete.Add(unit);
                     }
-                    else if (unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars > 0)
+                    else if (charunit.enemyStats.RemainingLifebars > 0)
                     {
-                        unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars--;
-                        unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP = (int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP;
-                        unit.GetComponent<UnitScript>().AddNumber((int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP, true, unit.GetComponent<UnitScript>().enemyStats.RemainingLifebars + " Healthbars remaining.");
+                        charunit.enemyStats.RemainingLifebars--;
+                        charunit.currentHP = (int)charunit.AjustedStats.HP;
+                        unit.GetComponent<UnitScript>().AddNumber((int)charunit.AjustedStats.HP, true, charunit.enemyStats.RemainingLifebars + " Healthbars remaining.");
                     }
                     else
                     {

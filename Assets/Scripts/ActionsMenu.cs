@@ -1893,55 +1893,56 @@ public class ActionsMenu : MonoBehaviour
         AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
         AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
 
-        int baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
-        int basestatdamage = (int)charunit.AjustedStats.Strength + UnitSkillBonus.Strength;
-        int basestatdef = (int)chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
+        float baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
+        float basestatdamage = charunit.AjustedStats.Strength + UnitSkillBonus.Strength;
+        float basestatdef = chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
         if (charunit.telekinesisactivated)
         {
-            baseweapondamage = (int)(baseweapondamage * 0.75f);
-            basestatdamage = (int)charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
-            basestatdef = (int)charunit.AjustedStats.Resistance + TargetSkillBonus.Resistance;
+            baseweapondamage = baseweapondamage * 0.75f;
+            basestatdamage = charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
+            basestatdef = charunit.AjustedStats.Resistance + TargetSkillBonus.Resistance;
         }
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
         {
-            basestatdamage = (int)charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
-            basestatdef = (int)Mathf.Min(chartarget.AjustedStats.Defense + TargetSkillBonus.Defense, charunit.AjustedStats.Resistance + TargetSkillBonus.Resistance);
+            basestatdamage = charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
+            basestatdef = Mathf.Min(chartarget.AjustedStats.Defense + TargetSkillBonus.Defense, charunit.AjustedStats.Resistance + TargetSkillBonus.Resistance);
         }
 
-        int unitbasedamage = baseweapondamage + basestatdamage;
+        float unitbasedamage = baseweapondamage + basestatdamage;
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
         {
-            basestatdef = (int)(basestatdef * 0.9f);
+            basestatdef = basestatdef * 0.9f;
         }
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield")
         {
-            basestatdef += (int)(chartarget.AjustedStats.Strength * 0.2f);
+            basestatdef += chartarget.AjustedStats.Strength * 0.2f;
         }
 
-
-        int finaldamage = unitbasedamage - basestatdef;
+        float finaldamagefloat = unitbasedamage - basestatdef;
         if (charunit.telekinesisactivated)
         {
-            finaldamage = (int)(finaldamage * (1f + (float)UnitSkillBonus.TelekDamage / 100f));
+            finaldamagefloat = finaldamagefloat * (1f + (float)UnitSkillBonus.TelekDamage / 100f);
         }
         else
         {
-            finaldamage = (int)(finaldamage * (1f + (float)UnitSkillBonus.PhysDamage / 100f));
+            finaldamagefloat = finaldamagefloat * (1f + (float)UnitSkillBonus.PhysDamage / 100f);
         }
-        finaldamage = (int)(finaldamage / (1f + (float)TargetSkillBonus.DamageReduction / 100f));
+        finaldamagefloat = finaldamagefloat / (1f + (float)TargetSkillBonus.DamageReduction / 100f);
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
-            finaldamage = (int)(finaldamage / 2f);
+            finaldamagefloat = finaldamagefloat / 2f;
         }
 
         if (targetTile.type == "Fire")
         {
-            finaldamage = (int)(finaldamage * 1.1f);
+            finaldamagefloat = finaldamagefloat * 1.1f;
         }
 
-        finaldamage = finaldamage + UnitSkillBonus.FixedDamageBonus - TargetSkillBonus.FixedDamageReduction;
+        finaldamagefloat = finaldamagefloat * CalculateRainDamageBonus(charunit, chartarget);
+
+        int finaldamage = (int)finaldamagefloat + UnitSkillBonus.FixedDamageBonus - TargetSkillBonus.FixedDamageReduction;
 
 
 
@@ -1973,6 +1974,40 @@ public class ActionsMenu : MonoBehaviour
 
         return unitbasedamage;
 
+    }
+
+    private float CalculateRainDamageBonus(Character unit, Character target)
+    {
+        float damagebonus = 1f;
+        if (unit.enemyStats!=null)
+        {
+            if(unit.enemyStats.monsterStats!=null)
+            {
+                if(unit.enemyStats.monsterStats.ispluvial && unit.currentTile.RemainingRainTurns>0)
+                {
+                    damagebonus += 0.1f;
+                }
+                if(unit.enemyStats.monsterStats.ispluvial && unit.currentTile.RemainingSunTurns > 0)
+                {
+                    damagebonus -= 0.1f;
+                }
+            }
+        }
+        if (target.enemyStats != null)
+        {
+            if (target.enemyStats.monsterStats != null)
+            {
+                if (target.enemyStats.monsterStats.ispluvial && target.currentTile.RemainingRainTurns > 0)
+                {
+                    damagebonus -= 0.1f;
+                }
+                if (target.enemyStats.monsterStats.ispluvial && target.currentTile.RemainingSunTurns > 0)
+                {
+                    damagebonus += 0.1f;
+                }
+            }
+        }
+        return damagebonus;
     }
 
     public (GameObject, bool) CalculatedoubleAttack(GameObject unit, GameObject target)

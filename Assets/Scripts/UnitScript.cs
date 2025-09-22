@@ -32,6 +32,7 @@ public class UnitScript : MonoBehaviour
         public bool attacksfriends;
         
         public PlayableStats playableStats;
+        public EnemyStats enemyStats;
 
         public GridSquareScript currentTile;
 
@@ -41,6 +42,7 @@ public class UnitScript : MonoBehaviour
     public class MonsterStats
     {
         public int size;
+        public bool ispluvial;
     }
 
     [Serializable]
@@ -150,7 +152,7 @@ public class UnitScript : MonoBehaviour
     }
 
     public Character UnitCharacteristics;
-    public EnemyStats enemyStats;
+    
 
     public bool trylvlup;
     public bool fixedgrowth;
@@ -377,9 +379,9 @@ public class UnitScript : MonoBehaviour
             LifebarBehind.gameObject.SetActive(true);
             Lifebar.type = Image.Type.Filled;
             Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.AjustedStats.HP;
-            if (enemyStats != null)
+            if (UnitCharacteristics.enemyStats != null)
             {
-                switch (enemyStats.RemainingLifebars)
+                switch (UnitCharacteristics.enemyStats.RemainingLifebars)
                 {
                     case 0:
                         Lifebar.color = Color.green;
@@ -663,9 +665,9 @@ public class UnitScript : MonoBehaviour
         if (UnitCharacteristics.affiliation != "playable")
         {
 
-            UnitCharacteristics.telekinesisactivated = enemyStats.usetelekinesis;
+            UnitCharacteristics.telekinesisactivated = UnitCharacteristics.enemyStats.usetelekinesis;
 
-            ClassInfo classtoapply = FindAnyObjectByType<DataScript>().ClassList[enemyStats.classID];
+            ClassInfo classtoapply = FindAnyObjectByType<DataScript>().ClassList[UnitCharacteristics.enemyStats.classID];
             UnitCharacteristics.stats.HP = classtoapply.BaseStats.HP;
             UnitCharacteristics.stats.Strength = classtoapply.BaseStats.Strength;
             UnitCharacteristics.stats.Psyche = classtoapply.BaseStats.Psyche;
@@ -681,7 +683,7 @@ public class UnitScript : MonoBehaviour
             UnitCharacteristics.growth.SpeedGrowth = classtoapply.StatGrowth.SpeedGrowth;
             UnitCharacteristics.growth.DexterityGrowth = classtoapply.StatGrowth.DexterityGrowth;
             fixedgrowth = true;
-            int numberoflevelups = enemyStats.desiredlevel - UnitCharacteristics.level;
+            int numberoflevelups = UnitCharacteristics.enemyStats.desiredlevel - UnitCharacteristics.level;
 
             for (int i = 0; i < numberoflevelups; i++)
             {

@@ -103,8 +103,8 @@ public class MapInitializer : MonoBehaviour
         foreach (EnemyStats enemyStats in EnemyList)
         {
             GameObject newcharacter = Instantiate(BaseCharacter);
-            newcharacter.GetComponent<UnitScript>().enemyStats = enemyStats;
             Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
+            Character.enemyStats = enemyStats;
             Character.name = enemyStats.Name;
             if (enemyStats.Skills.Count > 0)
             {

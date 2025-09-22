@@ -168,9 +168,9 @@ public class BattleInfotext : MonoBehaviour
                 stringtoshow =" " +selectedunitCharacter.name + "\n";
                 stringtoshow += " Level : " + selectedunitCharacter.level + "\n";
                 stringtoshow += " Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP;
-                if(selectedunit.GetComponent<UnitScript>().enemyStats.RemainingLifebars>0)
+                if(selectedunitCharacter.enemyStats.RemainingLifebars>0)
                 {
-                    stringtoshow += " x " + (selectedunit.GetComponent<UnitScript>().enemyStats.RemainingLifebars+1);
+                    stringtoshow += " x " + (selectedunitCharacter.enemyStats.RemainingLifebars+1);
                 }
                 else
                 {
@@ -263,9 +263,13 @@ public class BattleInfotext : MonoBehaviour
                     stringtoshow += " Speed : " + selectedunitCharacter.stats.Speed + "\n";
                 }
 
+                string weapontype = selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type;
+                if(selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower()=="greatsword")
+                {
+                    weapontype = "Gr.Sword";
+                }
 
-
-                stringtoshow += "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type + " " + gradeletter + ")  "+ selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / "+ selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+                stringtoshow += "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + weapontype + " " + gradeletter + ")  "+ selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / "+ selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
                 if (selectedunitCharacter.telekinesisactivated)
                 {
                     stringtoshow += "Telekinesis : on";
