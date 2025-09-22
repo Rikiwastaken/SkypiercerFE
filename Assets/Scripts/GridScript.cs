@@ -88,13 +88,8 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = 0;
         }
 
-        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0)
+        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue)
         {
-            if(textBubble.indialogue)
-            {
-                ShowMovement();
-                return;
-            }
             
 
             if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue)
@@ -534,27 +529,31 @@ public class GridScript : MonoBehaviour
         movementtiles = new List<GridSquareScript>();
         foreach (GameObject unitGO in allunitGOs)
         {
-            Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-            if (unit.position == Target.GetComponent<UnitScript>().UnitCharacteristics.position && !unit.alreadyplayed)
+            if(unitGO != null)
             {
-                string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
-                int movements = unit.movements;
-                if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
+                Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
+                if (unit.position == Target.GetComponent<UnitScript>().UnitCharacteristics.position && !unit.alreadyplayed)
                 {
-                    movements -= 1;
+                    string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
+                    int movements = unit.movements;
+                    if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
+                    {
+                        movements -= 1;
+                    }
+                    if (unitGO.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using canto/Retreat
+                    {
+                        movements -= 2;
+                    }
+                    if (unitGO.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
+                    {
+                        movements += 1;
+                    }
+                    SpreadMovements(unit.position, movements, movementtiles, unitGO);
+                    (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                    ShowAttack(range, melee, type.ToLower() == "staff");
                 }
-                if (unitGO.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using canto/Retreat
-                {
-                    movements -= 2;
-                }
-                if (unitGO.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
-                {
-                    movements += 1;
-                }
-                SpreadMovements(unit.position, movements, movementtiles, unitGO);
-                (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                ShowAttack(range, melee, type.ToLower() == "staff");
             }
+            
 
         }
         if (!lockselection)

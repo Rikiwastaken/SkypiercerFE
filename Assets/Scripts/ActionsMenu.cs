@@ -1900,7 +1900,7 @@ public class ActionsMenu : MonoBehaviour
         {
             baseweapondamage = baseweapondamage * 0.75f;
             basestatdamage = charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
-            basestatdef = charunit.AjustedStats.Resistance + TargetSkillBonus.Resistance;
+            basestatdef = chartarget.AjustedStats.Resistance + TargetSkillBonus.Resistance;
         }
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")

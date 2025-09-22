@@ -809,7 +809,7 @@ public class AttackTurnScript : MonoBehaviour
         }
 
 
-        mapEventManager.TriggerEventCheck();
+        
 
     }
     public GameObject CalculateBestTargetForOffensiveUnits(GameObject unit, bool attacksfriend = true)
@@ -1150,7 +1150,7 @@ public class AttackTurnScript : MonoBehaviour
             gridScript.allunits.Remove(unittodelete.GetComponent<UnitScript>().UnitCharacteristics);
         }
         GetComponent<TurnManger>().InitializeUnitLists(GetComponent<GridScript>().allunitGOs);
-
+        mapEventManager.TriggerEventCheck();
     }
 
 }

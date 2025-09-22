@@ -29,6 +29,7 @@ public class ItemActionsMenuScript : MonoBehaviour
                     character.equipments[0] = selectedequipment;
                     GridSquareScript tile = character.currentTile;
                     GameObject UnitGO = GridScript.GetUnit(tile);
+                    UnitGO.GetComponent<UnitScript>().UpdateWeaponModel();
                     (int range, bool frapperenmelee, string type) = UnitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                     GridScript.ShowAttackAfterMovement(range, frapperenmelee, tile, type.ToLower() == "staff");
                     GridScript.lockedattacktiles = GridScript.attacktiles;

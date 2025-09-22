@@ -76,6 +76,8 @@ public class GridSquareScript : MonoBehaviour
     public Sprite gridsquareinsideWithoutUnit;
     public Sprite gridsquareinsideWithUnit;
 
+    private TextBubbleScript textBubbleScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -84,6 +86,7 @@ public class GridSquareScript : MonoBehaviour
         SelectRoundFilling = transform.GetChild(2).gameObject;
         rainparticle = GetComponentInChildren<ParticleSystem>();
         InitializePosition();
+        textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
     }
 
     public void InitializePosition()
@@ -99,6 +102,10 @@ public class GridSquareScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(textBubbleScript.indialogue)
+        {
+            return;
+        }
         if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();

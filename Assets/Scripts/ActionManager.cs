@@ -207,7 +207,7 @@ public class ActionManager : MonoBehaviour
     {
         if (currentcharacter != null)
         {
-            currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position = previouscoordinates;
+            currentcharacter.GetComponent<UnitScript>().MoveTo( previouscoordinates);
             currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;
         }
 

@@ -39,11 +39,14 @@ public class TextBubbleScript : MonoBehaviour
 
     public float charDelay;
 
+    private GridScript gridScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         InputManager = FindAnyObjectByType<InputManager>();
         ActionManager = FindAnyObjectByType<ActionManager>();
+        gridScript = FindAnyObjectByType<GridScript>();
         //DialogueExample();
     }
 
@@ -145,6 +148,7 @@ public class TextBubbleScript : MonoBehaviour
         Dialogue = dialogue;
         GoToNextPage();
         indialogue = true;
+        gridScript.ShowMovement();
     }
 
     private void ActivateBubble()

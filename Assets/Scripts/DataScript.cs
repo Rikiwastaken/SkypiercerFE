@@ -23,8 +23,8 @@ public class DataScript : MonoBehaviour
 
     public Inventory PlayerInventory;
 
-    private List<Character> DefaultPlayableCharacterList;
-    private Inventory DefaultInventory;
+    public List<Character> DefaultPlayableCharacterList;
+    public Inventory DefaultInventory;
 
     [Serializable]
     public class ClassInfo

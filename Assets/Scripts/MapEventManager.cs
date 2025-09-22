@@ -50,8 +50,8 @@ public class MapEventManager : MonoBehaviour
             switch (triggerEffectType)
             {
                 case 1:
-                    GameOverScript.gameObject.SetActive(true);
                     GameOverScript.victory = true;
+                    GameOverScript.gameObject.SetActive(true);
                     break;
                 case 2:
                     GameOverScript.gameObject.SetActive(true);
