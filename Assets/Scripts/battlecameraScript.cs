@@ -161,6 +161,7 @@ public class battlecameraScript : MonoBehaviour
 
     public Vector2 GoToFightCamera(GameObject unit, GameObject target)
     {
+        previouselevation = transform.position.y;
         fighter1 = unit;
         fighter2 = target;
         incombat = true;

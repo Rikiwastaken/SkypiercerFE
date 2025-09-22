@@ -19,7 +19,7 @@ public class WeatherManager : MonoBehaviour
 
     public void UpdateRain()
     {
-        if(rainymap)
+        if(!rainymap)
         {
             return;
         }

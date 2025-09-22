@@ -321,7 +321,6 @@ public class GridScript : MonoBehaviour
         TileImageContainer.transform.GetChild(0).gameObject.SetActive(false);
         TileImageContainer.transform.GetChild(1).gameObject.SetActive(false);
         TileImageContainer.transform.GetChild(2).gameObject.SetActive(false);
-        Debug.Log("Rain turns : " + tile.RemainingRainTurns + " Sun turns : " + tile.RemainingSunTurns);
         if (tile.RemainingRainTurns > 0)
         {
             TileImageContainer.transform.GetChild(0).gameObject.SetActive(true);

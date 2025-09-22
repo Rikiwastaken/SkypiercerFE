@@ -1524,6 +1524,13 @@ MonoBehaviour:
     targettype: 0
     range: 0
     ID: 57
+  - name: Crystal Heart
+    Descriptions: Increases all stat growth and exp gained by 10% (exclusive to Zack)
+    IsCommand: 0
+    Cost: 0
+    targettype: 0
+    range: 0
+    ID: 57
   PlayableCharacterList:
   - name: Zack
     stats:
@@ -1559,7 +1566,7 @@ MonoBehaviour:
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 01000000
+    equipmentsIDs: 0100000005000000090000000d000000110000001500000019000000
     equipments: []
     UnitSkill: 57
     EquipedSkills: 05000000
@@ -1571,6 +1578,22 @@ MonoBehaviour:
       unlocked: 1
       protagonist: 1
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Lea
     stats:
@@ -1618,6 +1641,22 @@ MonoBehaviour:
       unlocked: 1
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Elwyn
     stats:
@@ -1665,6 +1704,22 @@ MonoBehaviour:
       unlocked: 1
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Micaiah
     stats:
@@ -1712,6 +1767,22 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Sothe
     stats:
@@ -1759,6 +1830,22 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Laura
     stats:
@@ -1806,6 +1893,22 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Nolan
     stats:
@@ -1853,6 +1956,22 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Leonardo
     stats:
@@ -1900,6 +2019,22 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Edward
     stats:
@@ -1947,6 +2082,22 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Lyvent
     stats:
@@ -1994,6 +2145,22 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Zek
     stats:
@@ -2041,6 +2208,22 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   - name: Xora
     stats:
@@ -2088,6 +2271,22 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
     currentTile: {fileID: 0}
   manualgamespeed: 1
   PlayerInventory:

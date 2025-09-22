@@ -217,14 +217,14 @@ public class UnitScript : MonoBehaviour
         if (UnitCharacteristics.equipments == null)
         {
             UnitCharacteristics.equipments = new List<equipment>();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 8; i++)
             {
                 UnitCharacteristics.equipments.Add(new equipment());
             }
         }
-        else if (UnitCharacteristics.equipments.Count < 6)
+        else if (UnitCharacteristics.equipments.Count < 8)
         {
-            for (int i = UnitCharacteristics.equipments.Count; i < 6; i++)
+            for (int i = UnitCharacteristics.equipments.Count; i < 8; i++)
             {
                 UnitCharacteristics.equipments.Add(new equipment());
             }
@@ -406,13 +406,27 @@ public class UnitScript : MonoBehaviour
 
     public void calculateStats()
     {
-        UnitCharacteristics.AjustedStats.HP = (int)UnitCharacteristics.stats.HP;
-        UnitCharacteristics.AjustedStats.Strength = (int)UnitCharacteristics.stats.Strength;
-        UnitCharacteristics.AjustedStats.Psyche = (int)UnitCharacteristics.stats.Psyche;
-        UnitCharacteristics.AjustedStats.Defense = (int)UnitCharacteristics.stats.Defense;
-        UnitCharacteristics.AjustedStats.Resistance = (int)UnitCharacteristics.stats.Resistance;
-        UnitCharacteristics.AjustedStats.Speed = (int)UnitCharacteristics.stats.Speed;
-        UnitCharacteristics.AjustedStats.Dexterity = (int)UnitCharacteristics.stats.Dexterity;
+        if(GetSkill(58)) //weakness
+        {
+            UnitCharacteristics.AjustedStats.HP = (int)UnitCharacteristics.stats.HP / 2;
+            UnitCharacteristics.AjustedStats.Strength = (int)UnitCharacteristics.stats.Strength / 2;
+            UnitCharacteristics.AjustedStats.Psyche = (int)UnitCharacteristics.stats.Psyche / 2;
+            UnitCharacteristics.AjustedStats.Defense = (int)UnitCharacteristics.stats.Defense / 2;
+            UnitCharacteristics.AjustedStats.Resistance = (int)UnitCharacteristics.stats.Resistance / 2;
+            UnitCharacteristics.AjustedStats.Speed = (int)UnitCharacteristics.stats.Speed / 2;
+            UnitCharacteristics.AjustedStats.Dexterity = (int)UnitCharacteristics.stats.Dexterity / 2;
+        }
+        else
+        {
+            UnitCharacteristics.AjustedStats.HP = (int)UnitCharacteristics.stats.HP;
+            UnitCharacteristics.AjustedStats.Strength = (int)UnitCharacteristics.stats.Strength;
+            UnitCharacteristics.AjustedStats.Psyche = (int)UnitCharacteristics.stats.Psyche;
+            UnitCharacteristics.AjustedStats.Defense = (int)UnitCharacteristics.stats.Defense;
+            UnitCharacteristics.AjustedStats.Resistance = (int)UnitCharacteristics.stats.Resistance;
+            UnitCharacteristics.AjustedStats.Speed = (int)UnitCharacteristics.stats.Speed;
+            UnitCharacteristics.AjustedStats.Dexterity = (int)UnitCharacteristics.stats.Dexterity;
+        }
+            
     }
     public void MoveTo(Vector2 destination)
     {
@@ -425,12 +439,8 @@ public class UnitScript : MonoBehaviour
         {
             UnitCharacteristics.position = destination;
             UnitCharacteristics.currentTile = destTile;
-            Debug.Log("Moved " + UnitCharacteristics.name + " to " + destination);
         }
-        else
-        {
-            Debug.Log("Cannot move " + UnitCharacteristics.name + " to " + destination);
-        }
+
     }
     public bool isinattackanimation()
     {
