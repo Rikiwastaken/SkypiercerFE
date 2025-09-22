@@ -53,7 +53,9 @@ public class AttackTurnScript : MonoBehaviour
 
     public int delaybeforenxtunit;
 
-    public MapEventManager mapEventManager;
+    private MapEventManager mapEventManager;
+
+    public PhaseTextScript phaseTextScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -61,12 +63,17 @@ public class AttackTurnScript : MonoBehaviour
         TurnManager = GetComponent<TurnManger>();
         gridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<battlecameraScript>();
-        mapEventManager = FindAnyObjectByType<MapEventManager>();
+        mapEventManager = GetComponent<MapEventManager>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if(phaseTextScript.moveText)
+        {
+            return;
+        }
 
         if (combatTextScript == null)
         {

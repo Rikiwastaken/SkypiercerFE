@@ -36,6 +36,8 @@ public class TurnManger : MonoBehaviour
     private WeatherManager weatherManager;
     private ActionManager actionManager;
     private MapEventManager mapEventManager;
+
+    public PhaseTextScript phaseTextScript;
     private void Start()
     {
         weatherManager = GetComponent<WeatherManager>();
@@ -187,6 +189,10 @@ public class TurnManger : MonoBehaviour
     }
     private void ManageTurnRotation()
     {
+        if(phaseTextScript.moveText)
+        {
+            return;
+        }
         if (currentlyplaying == "playable")
         {
             bool alldone = true;
@@ -205,6 +211,10 @@ public class TurnManger : MonoBehaviour
                     character.alreadymoved = false;
                 }
                 currentlyplaying = "enemy";
+                if (enemyunit.Count > 0)
+                {
+                    phaseTextScript.SetupText(currentlyplaying);
+                }
                 BeginningOfTurnsTrigger(enemyunitGO);
                 updatevisuals = true;
                 return;
@@ -229,6 +239,10 @@ public class TurnManger : MonoBehaviour
                 }
                 BeginningOfTurnsTrigger(otherunitsGO);
                 currentlyplaying = "other";
+                if (otherunits.Count > 0)
+                {
+                    phaseTextScript.SetupText(currentlyplaying);
+                }
                 updatevisuals = true;
                 return;
             }
@@ -257,6 +271,7 @@ public class TurnManger : MonoBehaviour
                 }
                 BeginningOfTurnsTrigger(playableunitGO);
                 currentlyplaying = "playable";
+                phaseTextScript.SetupText(currentlyplaying);
                 currentTurn++;
                 updatevisuals = true;
                 return;

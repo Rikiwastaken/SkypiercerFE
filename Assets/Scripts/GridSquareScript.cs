@@ -73,6 +73,9 @@ public class GridSquareScript : MonoBehaviour
 
     public List<MaterialsClass> MaterialsList;
 
+    public Sprite gridsquareinsideWithoutUnit;
+    public Sprite gridsquareinsideWithUnit;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -162,6 +165,17 @@ public class GridSquareScript : MonoBehaviour
         manageVisuals();
     }
 
+    public void UpdateInsideSprite(bool unitenter)
+    {
+        if(unitenter)
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
+        }
+        else
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithoutUnit;
+        }
+    }
 
     private void manageVisuals()
     {

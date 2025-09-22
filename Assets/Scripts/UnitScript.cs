@@ -437,8 +437,13 @@ public class UnitScript : MonoBehaviour
         GridSquareScript destTile = GridScript.GetTile(destination);
         if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile)==gameObject) && !destTile.isobstacle)
         {
+            if(UnitCharacteristics.currentTile!=null)
+            {
+                UnitCharacteristics.currentTile.UpdateInsideSprite(false);
+            }
             UnitCharacteristics.position = destination;
             UnitCharacteristics.currentTile = destTile;
+            destTile.UpdateInsideSprite(true);
         }
 
     }
