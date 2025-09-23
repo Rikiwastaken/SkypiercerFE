@@ -485,7 +485,7 @@ public class GridScript : MonoBehaviour
                     {
                         movements += 1;
                     }
-                    SpreadMovements(unit.position, movements, movementtiles, unitGO);
+                    SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                     ShowAttack(range, melee, type.ToLower() == "staff");
                 }
@@ -548,7 +548,7 @@ public class GridScript : MonoBehaviour
                     {
                         movements += 1;
                     }
-                    SpreadMovements(unit.position, movements, movementtiles, unitGO);
+                    SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                     ShowAttack(range, melee, type.ToLower() == "staff");
                 }
@@ -596,7 +596,7 @@ public class GridScript : MonoBehaviour
         {
             movements -= 1;
         }
-        SpreadMovements(unitchar.position, movements, movementtiles, unit);
+        SpreadMovements(unitchar.position, movements, movementtiles, unit, new Dictionary<GridSquareScript, int>());
         if (!lockselection)
         {
             foreach (GridSquareScript gridSquareScript in movementtiles)
@@ -1148,93 +1148,62 @@ public class GridScript : MonoBehaviour
         return -1;
     }
 
-    private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit)
+    private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit,Dictionary<GridSquareScript, int> visited)
     {
         GridSquareScript tile = GetTile((int)Coordinates.x, (int)Coordinates.y);
-        string tiletype = tile.type;
-        if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water")
-        {
+        if (tile == null) return;
+
+        // already visited with equal or more moves left -> no need to continue
+        if (visited.ContainsKey(tile) && visited[tile] >= remainingMovements)
+            return;
+
+        // record the best remaining moves we've seen for this tile
+        visited[tile] = remainingMovements;
+
+        // adjust cost for terrain
+        string tiletype = tile.type.ToLower();
+        if (tiletype == "fire" || tiletype == "water")
             remainingMovements -= 1;
-        }
-        if (!tilestolight.Contains(Grid[(int)Coordinates.x][(int)Coordinates.y].GetComponent<GridSquareScript>()))
+
+        if (!tilestolight.Contains(tile))
+            tilestolight.Add(tile);
+
+        if (remainingMovements <= 0) return;
+
+        // neighbor directions
+        Vector2[] dirs = {
+        new Vector2(-1, 0), new Vector2(1, 0),
+        new Vector2(0, -1), new Vector2(0, 1)
+    };
+
+        foreach (var dir in dirs)
         {
-            tilestolight.Add(Grid[(int)Coordinates.x][(int)Coordinates.y].GetComponent<GridSquareScript>());
-        }
-        if (remainingMovements > 0)
-        {
-            if (Coordinates.x > 0)
-            {
-                if (CheckIfFree(new Vector2(Coordinates.x - 1, Coordinates.y), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
-                {
-                    Vector2 newpos = new Vector2(Coordinates.x - 1, Coordinates.y);
-                    GridSquareScript newtile = GetTile(newpos);
-                    if (newtile.elevation > tile.elevation)
-                    {
-                        SpreadMovements(newpos, remainingMovements - 1 + newtile.elevation - tile.elevation, tilestolight, selectedunit);
-                    }
-                    else
-                    {
-                        SpreadMovements(newpos, remainingMovements - 1, tilestolight, selectedunit);
-                    }
+            Vector2 newpos = Coordinates + dir;
 
-                }
-            }
-            if (Coordinates.x < Grid.Count - 1)
-            {
-                if (CheckIfFree(new Vector2(Coordinates.x + 1, Coordinates.y), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
-                {
-                    Vector2 newpos = new Vector2(Coordinates.x + 1, Coordinates.y);
-                    GridSquareScript newtile = GetTile(newpos);
-                    if (newtile.elevation > tile.elevation)
-                    {
-                        SpreadMovements(newpos, remainingMovements - 1 + newtile.elevation - tile.elevation, tilestolight, selectedunit);
-                    }
-                    else
-                    {
-                        SpreadMovements(newpos, remainingMovements - 1, tilestolight, selectedunit);
-                    }
+            if (newpos.x < 0 || newpos.x >= Grid.Count || newpos.y < 0 || newpos.y >= Grid[0].Count)
+                continue;
 
-                }
-            }
-            if (Coordinates.y > 0)
+            if (CheckIfFree(newpos, selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
             {
-                if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y - 1), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
-                {
-                    Vector2 newpos = new Vector2(Coordinates.x, Coordinates.y - 1);
-                    GridSquareScript newtile = GetTile(newpos);
-                    if (newtile.elevation > tile.elevation)
-                    {
-                        SpreadMovements(newpos, remainingMovements - 1 + newtile.elevation - tile.elevation, tilestolight, selectedunit);
-                    }
-                    else
-                    {
-                        SpreadMovements(newpos, remainingMovements - 1, tilestolight, selectedunit);
-                    }
-                }
-            }
-            if (Coordinates.y < Grid[0].Count - 1)
-            {
-                if (CheckIfFree(new Vector2(Coordinates.x, Coordinates.y + 1), selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
-                {
-                    Vector2 newpos = new Vector2(Coordinates.x, Coordinates.y + 1);
-                    GridSquareScript newtile = GetTile(newpos);
-                    if (newtile.elevation > tile.elevation)
-                    {
-                        SpreadMovements(newpos, remainingMovements - 1 + newtile.elevation - tile.elevation, tilestolight, selectedunit);
-                    }
-                    else
-                    {
-                        SpreadMovements(newpos, remainingMovements - 1, tilestolight, selectedunit);
-                    }
-                }
+                GridSquareScript newtile = GetTile(newpos);
 
+                int cost = 1;
+                if (newtile.elevation > tile.elevation)
+                    cost += newtile.elevation - tile.elevation;
+
+                SpreadMovements(newpos, remainingMovements - cost, tilestolight, selectedunit, visited);
             }
         }
     }
 
+
     public bool CheckIfFree(Vector2 position, Character selectedunit)
     {
 
+        if(!CheckIfPositionIsLegal(position))
+        {
+            return false;
+        }
         if (Grid[(int)position.x][(int)position.y].GetComponent<GridSquareScript>().isobstacle)
         {
             return false;

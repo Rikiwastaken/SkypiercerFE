@@ -20,7 +20,7 @@ public class MainMenuScript : MonoBehaviour
     private void FixedUpdate()
     {
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
-        if(currentSelected!= transform.GetChild(0).gameObject && currentSelected != transform.GetChild(1).gameObject && currentSelected != transform.GetChild(2).gameObject)
+        if(currentSelected!= transform.GetChild(0).gameObject && currentSelected != transform.GetChild(1).gameObject)
         {
             EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
         }

@@ -212,24 +212,32 @@ public class GridSquareScript : MonoBehaviour
             float targetelevation = 0;
             if (isstairs)
             {
-                if (transform.position.y > targetelevation - 1.1f)
+                if(Mathf.Abs(transform.position.y - targetelevation) <= 1.1)
+                {
+                    transform.position = new Vector3(transform.position.x, targetelevation - 1.1f, transform.position.z);
+                }
+                else if (transform.position.y > targetelevation - 1.1f)
                 {
                     transform.position += new Vector3(0f, -elevationchange * ((float)elevation + 1f) * Time.fixedDeltaTime, 0f);
                 }
-                else
+                else if (transform.position.y < targetelevation - 1.1f)
                 {
-                    transform.position = new Vector3(transform.position.x, targetelevation - 1.1f, transform.position.z);
+                    transform.position += new Vector3(0f, elevationchange * ((float)elevation + 1f) * Time.fixedDeltaTime, 0f);
                 }
             }
             else
             {
-                if (transform.position.y > targetelevation)
-                {
-                    transform.position += new Vector3(0f, -elevationchange * ((float)elevation + 1f) * Time.fixedDeltaTime, 0f);
-                }
-                else
+                if(Mathf.Abs(transform.position.y - targetelevation) <= 0.05f)
                 {
                     transform.position = new Vector3(transform.position.x, targetelevation, transform.position.z);
+                }
+                else if (transform.position.y < targetelevation)
+                {
+                    transform.position += new Vector3(0f, elevationchange * ((float)elevation + 1f) * Time.fixedDeltaTime, 0f);
+                }
+                else if (transform.position.y > targetelevation)
+                {
+                    transform.position += new Vector3(0f, -elevationchange * ((float)elevation + 1f) * Time.fixedDeltaTime, 0f);
                 }
             }
 
@@ -240,24 +248,32 @@ public class GridSquareScript : MonoBehaviour
         {
             if (isobstacle)
             {
-                if (transform.position.y < elevation + walloffset - 0.05f)
-                {
-                    transform.position += new Vector3(0f, elevationchange * (1f * (float)elevation + walloffset) * Time.fixedDeltaTime, 0f);
-                }
-                else
+                if(Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f)
                 {
                     transform.position = new Vector3(transform.position.x, elevation + walloffset, transform.position.z);
+                }
+                else if (transform.position.y < elevation + walloffset - 0.05f)
+                {
+                    transform.position += new Vector3(0f, elevationchange * (1f * (float)Mathf.Abs(elevation) + walloffset) * Time.fixedDeltaTime, 0f);
+                }
+                else if (transform.position.y > elevation + walloffset + 0.05f)
+                {
+                    transform.position += new Vector3(0f, -elevationchange * (1f * (float)Mathf.Abs(elevation) + walloffset) * Time.fixedDeltaTime, 0f);
                 }
             }
             else
             {
-                if (transform.position.y < elevation - 0.05f)
-                {
-                    transform.position += new Vector3(0f, elevationchange * (1f * (float)elevation + 1f) * Time.fixedDeltaTime, 0f);
-                }
-                else
+                if(Mathf.Abs(transform.position.y - elevation) <= 0.05f)
                 {
                     transform.position = new Vector3(transform.position.x, elevation, transform.position.z);
+                }
+                else if (transform.position.y < elevation - 0.05f)
+                {
+                    transform.position += new Vector3(0f, elevationchange * (1f * (float)Mathf.Abs(elevation) + 1f) * Time.fixedDeltaTime, 0f);
+                }
+                else if (transform.position.y > elevation + 0.05f)
+                {
+                    transform.position += new Vector3(0f, -elevationchange * (1f * (float)Mathf.Abs(elevation) + 1f) * Time.fixedDeltaTime, 0f);
                 }
             }
         }
