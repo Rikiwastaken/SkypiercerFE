@@ -95,59 +95,59 @@ public class ExpBarScript : MonoBehaviour
             leveluptext += "Level " + (newcharacter.level - 1) + " > <color=blue>" + newcharacter.level + "</color>\n";
             if (levelupbonuses[0] >= 1)
             {
-                leveluptext += "Health " + (newcharacter.stats.HP - levelupbonuses[0]) + " > <color=blue>" + newcharacter.stats.HP + "</color>\n";
+                leveluptext += "Health " + (newcharacter.AjustedStats.HP - levelupbonuses[0]) + " > <color=blue>" + newcharacter.AjustedStats.HP + "</color>\n";
             }
             else
             {
-                leveluptext += "Health " + (newcharacter.stats.HP) + "\n";
+                leveluptext += "Health " + (newcharacter.AjustedStats.HP) + "\n";
             }
             if (levelupbonuses[1] >= 1)
             {
-                leveluptext += "Strength " + (newcharacter.stats.Strength - levelupbonuses[1]) + " > <color=blue>" + newcharacter.stats.Strength + "</color>\n";
+                leveluptext += "Strength " + (newcharacter.AjustedStats.Strength - levelupbonuses[1]) + " > <color=blue>" + newcharacter.AjustedStats.Strength + "</color>\n";
             }
             else
             {
-                leveluptext += "Strength " + (newcharacter.stats.Strength) + "\n";
+                leveluptext += "Strength " + (newcharacter.AjustedStats.Strength) + "\n";
             }
             if (levelupbonuses[2] >= 1)
             {
-                leveluptext += "Psyche " + (newcharacter.stats.Psyche - levelupbonuses[2]) + " > <color=blue>" + newcharacter.stats.Psyche + "</color>\n";
+                leveluptext += "Psyche " + (newcharacter.AjustedStats.Psyche - levelupbonuses[2]) + " > <color=blue>" + newcharacter.AjustedStats.Psyche + "</color>\n";
             }
             else
             {
-                leveluptext += "Psyche " + (newcharacter.stats.Psyche) + "\n";
+                leveluptext += "Psyche " + (newcharacter.AjustedStats.Psyche) + "\n";
             }
             if (levelupbonuses[3] >= 1)
             {
-                leveluptext += "Defense " + (newcharacter.stats.Defense - levelupbonuses[3]) + " > <color=blue>" + newcharacter.stats.Defense + "</color>\n";
+                leveluptext += "Defense " + (newcharacter.AjustedStats.Defense - levelupbonuses[3]) + " > <color=blue>" + newcharacter.AjustedStats.Defense + "</color>\n";
             }
             else
             {
-                leveluptext += "Defense " + (newcharacter.stats.Defense) + "\n";
+                leveluptext += "Defense " + (newcharacter.AjustedStats.Defense) + "\n";
             }
             if (levelupbonuses[4] >= 1)
             {
-                leveluptext += "Resistance " + (newcharacter.stats.Resistance - levelupbonuses[4]) + " > <color=blue>" + newcharacter.stats.Resistance + "</color>\n";
+                leveluptext += "Resistance " + (newcharacter.AjustedStats.Resistance - levelupbonuses[4]) + " > <color=blue>" + newcharacter.AjustedStats.Resistance + "</color>\n";
             }
             else
             {
-                leveluptext += "Resistance " + (newcharacter.stats.Resistance) + "\n";
+                leveluptext += "Resistance " + (newcharacter.AjustedStats.Resistance) + "\n";
             }
             if (levelupbonuses[5] >= 1)
             {
-                leveluptext += "Speed " + (newcharacter.stats.Speed - levelupbonuses[5]) + " > <color=blue>" + newcharacter.stats.Speed + "</color>\n";
+                leveluptext += "Speed " + (newcharacter.AjustedStats.Speed - levelupbonuses[5]) + " > <color=blue>" + newcharacter.AjustedStats.Speed + "</color>\n";
             }
             else
             {
-                leveluptext += "Speed " + (newcharacter.stats.Speed) + "\n";
+                leveluptext += "Speed " + (newcharacter.AjustedStats.Speed) + "\n";
             }
             if (levelupbonuses[6] >= 1)
             {
-                leveluptext += "Dexterity " + (newcharacter.stats.Dexterity - levelupbonuses[6]) + " > <color=blue>" + newcharacter.stats.Dexterity + "</color>\n";
+                leveluptext += "Dexterity " + (newcharacter.AjustedStats.Dexterity - levelupbonuses[6]) + " > <color=blue>" + newcharacter.AjustedStats.Dexterity + "</color>\n";
             }
             else
             {
-                leveluptext += "Dexterity " + (newcharacter.stats.Dexterity) + "\n";
+                leveluptext += "Dexterity " + (newcharacter.AjustedStats.Dexterity) + "\n";
             }
 
 

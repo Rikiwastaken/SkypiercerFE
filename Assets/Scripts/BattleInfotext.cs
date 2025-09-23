@@ -167,7 +167,7 @@ public class BattleInfotext : MonoBehaviour
 
                 stringtoshow =" " +selectedunitCharacter.name + "\n";
                 stringtoshow += " Level : " + selectedunitCharacter.level + "\n";
-                stringtoshow += " Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.stats.HP;
+                stringtoshow += " Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.AjustedStats.HP;
                 if(selectedunitCharacter.enemyStats.RemainingLifebars>0)
                 {
                     stringtoshow += " x " + (selectedunitCharacter.enemyStats.RemainingLifebars+1);
@@ -188,79 +188,79 @@ public class BattleInfotext : MonoBehaviour
 
                 if (statsmods.Strength > 0)
                 {
-                    stringtoshow += " Strength : <color=#017a01>" + (selectedunitCharacter.stats.Strength + statsmods.Strength) + "</color>\n";
+                    stringtoshow += " Strength : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength) + "</color>\n";
                 }
                 else if (statsmods.Strength < 0)
                 {
-                    stringtoshow += " Strength : <color=red>" + (selectedunitCharacter.stats.Strength + statsmods.Strength) + "</color>\n";
+                    stringtoshow += " Strength : <color=red>" + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength) + "</color>\n";
                 }
                 else
                 {
-                    stringtoshow += " Strength : " + selectedunitCharacter.stats.Strength + "\n";
+                    stringtoshow += " Strength : " + selectedunitCharacter.AjustedStats.Strength + "\n";
                 }
                 if (statsmods.Psyche > 0)
                 {
-                    stringtoshow += " Psyche : <color=#017a01>" + (selectedunitCharacter.stats.Psyche + statsmods.Psyche) + "</color>\n";
+                    stringtoshow += " Psyche : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche) + "</color>\n";
                 }
                 else if (statsmods.Psyche < 0)
                 {
-                    stringtoshow += " Psyche : <color=red>" + (selectedunitCharacter.stats.Psyche + statsmods.Psyche) + "</color>\n";
+                    stringtoshow += " Psyche : <color=red>" + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche) + "</color>\n";
                 }
                 else
                 {
-                    stringtoshow += " Psyche : " + selectedunitCharacter.stats.Psyche + "\n";
+                    stringtoshow += " Psyche : " + selectedunitCharacter.AjustedStats.Psyche + "\n";
                 }
 
                 if (statsmods.Defense > 0)
                 {
-                    stringtoshow += " Defense : <color=#017a01>" + (selectedunitCharacter.stats.Defense + statsmods.Defense) + "</color>\n";
+                    stringtoshow += " Defense : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense) + "</color>\n";
                 }
                 else if (statsmods.Defense < 0)
                 {
-                    stringtoshow += " Defense : <color=red>" + (selectedunitCharacter.stats.Defense + statsmods.Defense) + "</color>\n";
+                    stringtoshow += " Defense : <color=red>" + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense) + "</color>\n";
                 }
                 else
                 {
-                    stringtoshow += " Defense : " + selectedunitCharacter.stats.Defense + "\n";
+                    stringtoshow += " Defense : " + selectedunitCharacter.AjustedStats.Defense + "\n";
                 }
 
                 if (statsmods.Resistance > 0)
                 {
-                    stringtoshow += " Resistance : <color=#017a01>" + (selectedunitCharacter.stats.Resistance + statsmods.Resistance) + "</color>\n";
+                    stringtoshow += " Resistance : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance) + "</color>\n";
                 }
                 else if (statsmods.Resistance < 0)
                 {
-                    stringtoshow += " Resistance : <color=red>" + (selectedunitCharacter.stats.Resistance + statsmods.Resistance) + "</color>\n";
+                    stringtoshow += " Resistance : <color=red>" + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance) + "</color>\n";
                 }
                 else
                 {
-                    stringtoshow += " Resistance : " + selectedunitCharacter.stats.Resistance + "\n";
+                    stringtoshow += " Resistance : " + selectedunitCharacter.AjustedStats.Resistance + "\n";
                 }
 
                 if (statsmods.Dexterity > 0)
                 {
-                    stringtoshow += " Dexterity : <color=#017a01>" + (selectedunitCharacter.stats.Dexterity + statsmods.Dexterity) + "</color>\n";
+                    stringtoshow += " Dexterity : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity) + "</color>\n";
                 }
                 else if (statsmods.Dexterity < 0)
                 {
-                    stringtoshow += " Dexterity : <color=red>" + (selectedunitCharacter.stats.Dexterity + statsmods.Dexterity) + "</color>\n";
+                    stringtoshow += " Dexterity : <color=red>" + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity) + "</color>\n";
                 }
                 else
                 {
-                    stringtoshow += " Dexterity : " + selectedunitCharacter.stats.Dexterity + "\n";
+                    stringtoshow += " Dexterity : " + selectedunitCharacter.AjustedStats.Dexterity + "\n";
                 }
 
                 if (statsmods.Speed > 0)
                 {
-                    stringtoshow += " Speed : <color=#017a01>" + (selectedunitCharacter.stats.Speed + statsmods.Speed) + "</color>\n\n";
+                    stringtoshow += " Speed : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed) + "</color>\n\n";
                 }
                 else if (statsmods.Speed < 0)
                 {
-                    stringtoshow += " Speed : <color=red>" + (selectedunitCharacter.stats.Speed + statsmods.Speed) + "</color>\n\n";
+                    stringtoshow += " Speed : <color=red>" + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed) + "</color>\n\n";
                 }
                 else
                 {
-                    stringtoshow += " Speed : " + selectedunitCharacter.stats.Speed + "\n";
+                    stringtoshow += " Speed : " + selectedunitCharacter.AjustedStats.Speed + "\n";
                 }
 
                 string weapontype = selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type;

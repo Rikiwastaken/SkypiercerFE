@@ -35,8 +35,8 @@ public class CombatTextScript : MonoBehaviour
         if(battlecameraScript.incombat && attacker!=null)
         {
             
-            AttackerLifebarRemaining.fillAmount = (float)attacker.currentHP / (float)attacker.stats.HP;
-            DefenderLifebarRemaining.fillAmount = (float)defender.currentHP / (float)defender.stats.HP;
+            AttackerLifebarRemaining.fillAmount = (float)attacker.currentHP / (float)attacker.AjustedStats.HP;
+            DefenderLifebarRemaining.fillAmount = (float)defender.currentHP / (float)defender.AjustedStats.HP;
 
 
             float newlost = AttackerLifebarLost.fillAmount;
@@ -80,10 +80,10 @@ public class CombatTextScript : MonoBehaviour
         gameObject.SetActive(true);
         attacker = newattacker;
         defender = newdefender;
-        AttackerLifebarRemaining.fillAmount = (float)(attacker.currentHP / attacker.stats.HP);
-        DefenderLifebarRemaining.fillAmount = (float)(attacker.currentHP / attacker.stats.HP);
-        AttackerLifebarLost.fillAmount = (float)(attacker.currentHP / attacker.stats.HP);
-        DefenderLifebarLost.fillAmount = (float)(attacker.currentHP / attacker.stats.HP);
+        AttackerLifebarRemaining.fillAmount = (float)(attacker.currentHP / attacker.AjustedStats.HP);
+        DefenderLifebarRemaining.fillAmount = (float)(attacker.currentHP / attacker.AjustedStats.HP);
+        AttackerLifebarLost.fillAmount = (float)(attacker.currentHP / attacker.AjustedStats.HP);
+        DefenderLifebarLost.fillAmount = (float)(attacker.currentHP / attacker.AjustedStats.HP);
         attackertext.text = attacker.name;
         defendertext.text = defender.name;
     }
