@@ -3425,6 +3425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingCanvas: {fileID: 2025362491766159402}
+  loadingtext: {fileID: 6546950897785189506}
 --- !u!1 &3274449038388439652
 GameObject:
   m_ObjectHideFlags: 0

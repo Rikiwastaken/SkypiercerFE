@@ -1122,8 +1122,13 @@ public class AttackTurnScript : MonoBehaviour
                 Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
                 if (charunit.currentHP <= 0)
                 {
+                    
                     if (charunit.enemyStats == null)
                     {
+                        if (charunit.currentTile != null)
+                        {
+                            charunit.currentTile.UpdateInsideSprite(false);
+                        }
                         Destroy(unit);
                         objecttodelete.Add(unit);
                     }
@@ -1135,6 +1140,10 @@ public class AttackTurnScript : MonoBehaviour
                     }
                     else
                     {
+                        if (charunit.currentTile != null)
+                        {
+                            charunit.currentTile.UpdateInsideSprite(false);
+                        }
                         Destroy(unit);
                         objecttodelete.Add(unit);
                     }
