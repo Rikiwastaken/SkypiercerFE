@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -47,6 +48,23 @@ public class GridScript : MonoBehaviour
     private SkillEditionScript SkillEditionScript;
 
     private TextBubbleScript textBubble;
+
+    public class Node
+    {
+        public Vector2 Position;
+        public Node Parent;
+        public float G; // cost from start
+        public float H; // heuristic (distance to goal)
+        public float F => G + H; // total score
+
+        public Node(Vector2 pos, Node parent, float g, float h)
+        {
+            Position = pos;
+            Parent = parent;
+            G = g;
+            H = h;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -1279,4 +1297,105 @@ public class GridScript : MonoBehaviour
         }
         return null;
     }
+
+    public List<Vector2> FindPath(Vector2 start, Vector2 goal, Character unit)
+    {
+        List<Node> open = new List<Node>();
+        HashSet<Vector2> closed = new HashSet<Vector2>();
+
+        Node startNode = new Node(start, null, 0, Manhattandistance(start, goal));
+        open.Add(startNode);
+
+        while (open.Count > 0)
+        {
+            // 1. Get node with lowest F cost
+            Node current = open.OrderBy(n => n.F).First();
+
+            // 2. If goal reached, reconstruct path
+            if (current.Position == goal)
+                return ReconstructPath(current);
+
+            // 3. Move from open → closed
+            open.Remove(current);
+            closed.Add(current.Position);
+
+            // 4. Check neighbors
+            foreach (Vector2 neighborPos in GetNeighbors(current.Position))
+            {
+                if (closed.Contains(neighborPos))
+                    continue;
+
+                GridSquareScript neighborTile = GetTile((int)neighborPos.x, (int)neighborPos.y);
+                if (neighborTile == null)
+                    continue;
+
+                if (!CheckIfFree(neighborPos, unit))
+                    continue;
+
+                GridSquareScript currentTile = GetTile((int)current.Position.x, (int)current.Position.y);
+
+                int cost = 1;
+                if (neighborTile.elevation > currentTile.elevation)
+                    cost += neighborTile.elevation - currentTile.elevation;
+
+                float tentativeG = current.G + cost;
+
+                Node existing = open.FirstOrDefault(n => n.Position == neighborPos);
+                if (existing == null)
+                {
+                    Node neighborNode = new Node(
+                        neighborPos,
+                        current,
+                        tentativeG,
+                        Manhattandistance(neighborPos, goal)
+                    );
+                    open.Add(neighborNode);
+                }
+                else if (tentativeG < existing.G)
+                {
+                    existing.G = tentativeG;
+                    existing.Parent = current;
+                }
+            }
+        }
+
+        // no path found
+        return new List<Vector2>();
+    }
+
+    private float Manhattandistance(Vector2 a, Vector2 b)
+    {
+        // Manhattan distance (good for 4-directional grids)
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
+
+    private IEnumerable<Vector2> GetNeighbors(Vector2 pos)
+    {
+        Vector2[] dirs = {
+        new Vector2(-1, 0),
+        new Vector2(1, 0),
+        new Vector2(0, -1),
+        new Vector2(0, 1)
+    };
+
+        foreach (var dir in dirs)
+        {
+            Vector2 np = pos + dir;
+            if (np.x >= 0 && np.x < Grid.Count && np.y >= 0 && np.y < Grid[0].Count)
+                yield return np;
+        }
+    }
+
+    private List<Vector2> ReconstructPath(Node node)
+    {
+        List<Vector2> path = new List<Vector2>();
+        while (node != null)
+        {
+            path.Add(node.Position);
+            node = node.Parent;
+        }
+        path.Reverse();
+        return path;
+    }
+
 }

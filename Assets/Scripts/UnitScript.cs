@@ -198,6 +198,8 @@ public class UnitScript : MonoBehaviour
 
     public Transform handbone;
 
+    private List<Vector2> pathtotake =  new List<Vector2>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -316,28 +318,7 @@ public class UnitScript : MonoBehaviour
         ManageLifebars();
 
 
-        if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), UnitCharacteristics.position) > 0.1f)
-        {
-            animator.SetBool("Walk", true);
-            Vector2 direction = (UnitCharacteristics.position - new Vector2(transform.position.x, transform.position.z)).normalized;
-            transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
-            if (!battlecameraScript.incombat)
-            {
-                transform.forward =new Vector3(direction.x, 0f, direction.y).normalized;
-                transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
-            }
-
-
-        }
-        else
-        {
-            transform.position = new Vector3(UnitCharacteristics.position.x, transform.position.y, UnitCharacteristics.position.y);
-            if (animator.gameObject.activeSelf)
-            {
-                animator.SetBool("Walk", false);
-            }
-
-        }
+        ManageMovement();
 
 
         if (battlecameraScript.incombat)
@@ -362,6 +343,53 @@ public class UnitScript : MonoBehaviour
         Hidedeactivated();
     }
 
+    private void ManageMovement()
+    {
+        if(pathtotake.Count >0)
+        {
+            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), pathtotake[0]) > 0.1f)
+            {
+                animator.SetBool("Walk", true);
+                Vector2 direction = (pathtotake[0] - new Vector2(transform.position.x, transform.position.z)).normalized;
+                transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
+                if (!battlecameraScript.incombat)
+                {
+                    transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                    transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                }
+            }
+            else
+            {
+                pathtotake.RemoveAt(0);
+            }
+        }
+        else
+        {
+            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), UnitCharacteristics.position) > 0.1f)
+            {
+                animator.SetBool("Walk", true);
+                Vector2 direction = (UnitCharacteristics.position - new Vector2(transform.position.x, transform.position.z)).normalized;
+                transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
+                if (!battlecameraScript.incombat)
+                {
+                    transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                    transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                }
+
+
+            }
+            else
+            {
+                transform.position = new Vector3(UnitCharacteristics.position.x, transform.position.y, UnitCharacteristics.position.y);
+                if (animator.gameObject.activeSelf)
+                {
+                    animator.SetBool("Walk", false);
+                }
+
+            }
+        }
+        
+    }
     private void ManageLifebars()
     {
         transform.GetChild(0).rotation = Quaternion.Euler(90f, 0f, 0f);
@@ -440,10 +468,16 @@ public class UnitScript : MonoBehaviour
             if(UnitCharacteristics.currentTile!=null)
             {
                 UnitCharacteristics.currentTile.UpdateInsideSprite(false);
+                pathtotake = GridScript.FindPath(UnitCharacteristics.currentTile.GridCoordinates, destination,UnitCharacteristics);
+            }
+            else
+            {
+                transform.position = new Vector3(destination.x, transform.position.y, destination.y);
             }
             UnitCharacteristics.position = destination;
             UnitCharacteristics.currentTile = destTile;
             destTile.UpdateInsideSprite(true);
+            
         }
 
     }

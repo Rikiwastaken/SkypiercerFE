@@ -87,7 +87,7 @@ public class MapLoader : MonoBehaviour
     private void ManageObstable(GameObject Tile, int x, int y)
     {
         Color pixelColor = ObstacleMap.GetPixel(x, y);
-        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3) = InitializeColors();
+        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4) = InitializeColors();
         if (pixelColor.Equals(wall))
         {
             Tile.GetComponent<GridSquareScript>().isobstacle = true;
@@ -101,7 +101,7 @@ public class MapLoader : MonoBehaviour
     private void ManageActivation(GameObject Tile, int x, int y)
     {
         Color pixelColor = ActivationMap.GetPixel(x, y);
-        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3) = InitializeColors();
+        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4) = InitializeColors();
         if (pixelColor.Equals(wall))
         {
             Tile.GetComponent<GridSquareScript>().activated = false;
@@ -115,7 +115,7 @@ public class MapLoader : MonoBehaviour
     private void ManageElevation(GameObject Tile, int x, int y)
     {
         Color pixelColor = new Color();
-        if (x==0 && y<=4)
+        if (x==0 && y<=8)
         {
             pixelColor = ElevationMap.GetPixel(x+1, y);
         }
@@ -125,7 +125,7 @@ public class MapLoader : MonoBehaviour
         }
 
 
-        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3) = InitializeColors();
+        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4) = InitializeColors();
         if (pixelColor.Equals(Elevation0))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 0;
@@ -142,17 +142,46 @@ public class MapLoader : MonoBehaviour
         {
             Tile.GetComponent<GridSquareScript>().elevation = 3;
         }
+        else if (pixelColor.Equals(Elevation4))
+        {
+            Tile.GetComponent<GridSquareScript>().elevation = 4;
+        }
+        else if (pixelColor.Equals(ElevationNeg1))
+        {
+            Tile.GetComponent<GridSquareScript>().elevation = -1;
+        }
+        else if (pixelColor.Equals(ElevationNeg2))
+        {
+            Tile.GetComponent<GridSquareScript>().elevation = -2;
+        }
+        else if (pixelColor.Equals(ElevationNeg3))
+        {
+            Tile.GetComponent<GridSquareScript>().elevation = -3;
+        }
+        else if (pixelColor.Equals(ElevationNeg4))
+        {
+            Tile.GetComponent<GridSquareScript>().elevation = -4;
+        }
+        else
+        {
+            Debug.LogError("Unrecognized color in Elevation Map at (" + x + "," + y + "): " + pixelColor);
+        }
         
     }
 
-    private (Color,Color,Color,Color,Color) InitializeColors()
+    private (Color,Color,Color,Color,Color, Color, Color, Color, Color, Color) InitializeColors()
     {
         Color grey = ObstacleMap.GetPixel(0, 0);
-        Color Elevation3 = ElevationMap.GetPixel(0, 1);
-        Color Elevation2 = ElevationMap.GetPixel(0, 2);
-        Color Elevation1 = ElevationMap.GetPixel(0, 3);
+        Color Elevation4 = ElevationMap.GetPixel(0, 8);
+        Color Elevation3 = ElevationMap.GetPixel(0, 7);
+        Color Elevation2 = ElevationMap.GetPixel(0, 6);
+        Color Elevation1 = ElevationMap.GetPixel(0, 5);
         Color Elevation0 = ElevationMap.GetPixel(0, 4);
-        return (grey,Elevation0,Elevation1,Elevation2,Elevation3);
+        Color ElevationNeg1 = ElevationMap.GetPixel(0, 3);
+        Color ElevationNeg2 = ElevationMap.GetPixel(0, 2);
+        Color ElevationNeg3= ElevationMap.GetPixel(0, 1);
+        Color ElevationNeg4 = ElevationMap.GetPixel(0, 0);
+        return (grey,Elevation0,Elevation1,Elevation2,Elevation3, Elevation4, ElevationNeg1, ElevationNeg2, ElevationNeg3, ElevationNeg4);
     }
 }
 #endif
