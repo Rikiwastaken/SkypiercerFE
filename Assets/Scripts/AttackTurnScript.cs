@@ -374,7 +374,7 @@ public class AttackTurnScript : MonoBehaviour
             }
             Vector2 offset = new Vector2(normalizedx, normalizedy);
 
-            User.GetComponent<UnitScript>().MoveTo(targettile.GridCoordinates + offset);
+            User.GetComponent<UnitScript>().MoveTo(targettile.GridCoordinates + offset, true);
 
             User.GetComponent<UnitScript>().AddNumber(0, true, "Jump");
         }

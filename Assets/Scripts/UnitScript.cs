@@ -456,7 +456,7 @@ public class UnitScript : MonoBehaviour
         }
             
     }
-    public void MoveTo(Vector2 destination)
+    public void MoveTo(Vector2 destination, bool jump=false)
     {
         if (GridScript == null)
         {
@@ -468,9 +468,17 @@ public class UnitScript : MonoBehaviour
             if(UnitCharacteristics.currentTile!=null)
             {
                 UnitCharacteristics.currentTile.UpdateInsideSprite(false);
-                pathtotake = GridScript.FindPath(UnitCharacteristics.currentTile.GridCoordinates, destination,UnitCharacteristics);
+                if(jump)
+                {
+                    pathtotake = new List<Vector2>{ destination };
+                }
+                else
+                {
+                    pathtotake = GridScript.FindPath(UnitCharacteristics.currentTile.GridCoordinates, destination, UnitCharacteristics);
+                }
+                    
             }
-            else
+            else 
             {
                 transform.position = new Vector3(destination.x, transform.position.y, destination.y);
             }
