@@ -7,6 +7,8 @@ public class InputManager : MonoBehaviour
     [Header("Sticks")]
     public Vector2 movementValue;
     public Vector2 cammovementValue;
+    public bool movementjustpressed;
+    private bool movementpressedonce;
     public InputActionReference move;
     public InputActionReference movecam;
     private InputAction moveinput;
@@ -284,6 +286,21 @@ public class InputManager : MonoBehaviour
             ShowDetailspressedonce = false;
         }
 
+        if(movementValue != Vector2.zero & !movementpressedonce)
+        {
+            movementpressedonce = true;
+            movementjustpressed = true;
+        }
+        else
+        {
+            movementjustpressed = false;
+        }
+
+        if(movementValue == Vector2.zero)
+        {
+            movementpressedonce = false;
+            movementjustpressed = false;
+        }
     }
 
     void OnMovement(InputValue value)

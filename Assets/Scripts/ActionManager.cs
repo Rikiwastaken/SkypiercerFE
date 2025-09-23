@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using static UnitScript;
 using static UnityEngine.GraphicsBuffer;
@@ -29,6 +31,9 @@ public class ActionManager : MonoBehaviour
     public bool preventfromlockingafteraction;
 
     private TextBubbleScript TextBubbleScript;
+
+    public List<GridSquareScript> currentpath;
+    private bool recalculatingpath;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -134,13 +139,19 @@ public class ActionManager : MonoBehaviour
                         currentcharacter = null;
                         GridScript.ResetAllSelections();
                         GridScript.Recolor();
+                        currentpath = null;
                     }
                 }
+                else
+                {
+                    currentpath = null;
+                }
 
-
+                ManagePath();
 
                 if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates, currentcharacter) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                 {
+                    currentpath = null;
                     previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
                     currentcharacter.GetComponent<UnitScript>().MoveTo(GridScript.selection.GridCoordinates);
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
@@ -191,6 +202,58 @@ public class ActionManager : MonoBehaviour
             GridScript.UnlockSelection();
         }
         preventfromlockingafteraction = false;
+    }
+
+    private void ManagePath()
+    {
+        if(recalculatingpath)
+        {
+            recalculatingpath = false;
+            bool legalposition = true;
+            GridSquareScript tile = GridScript.selection;
+            if (tile.isobstacle || !tile.activated)
+            {
+                legalposition = false;
+            }
+            bool checkifinmovements = false;
+            foreach (GridSquareScript movementtile in GridScript.lockedmovementtiles)
+            {
+                if (GridScript.selection == movementtile)
+                {
+                    Debug.Log("found in movements");
+                    checkifinmovements = true;
+                    break;
+                }
+            }
+            if (!checkifinmovements)
+            {
+                legalposition = false;
+            }
+            GameObject unit = GridScript.GetUnit(tile);
+            if (unit != null)
+            {
+                Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+                if (unitchar != currentcharacter.GetComponent<UnitScript>().UnitCharacteristics && unitchar.affiliation != currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
+                {
+                    legalposition = false;
+                }
+            }
+            Debug.Log("legal position " + legalposition);
+            if (legalposition)
+            {
+                List<Vector2> path = new List<Vector2>();
+                path = GridScript.FindPath(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position, GridScript.selection.GridCoordinates, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+                currentpath = new List<GridSquareScript>();
+                foreach (Vector2 coord in path)
+                {
+                    currentpath.Add(GridScript.GetTile(coord));
+                }
+            }
+        }
+        if (InputManager.movementjustpressed)
+        {
+            recalculatingpath = true;
+        }
     }
 
     private void WeaponChange(GameObject unit)

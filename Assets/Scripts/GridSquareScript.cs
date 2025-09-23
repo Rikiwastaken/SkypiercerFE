@@ -78,6 +78,10 @@ public class GridSquareScript : MonoBehaviour
 
     private TextBubbleScript textBubbleScript;
 
+    public Transform PathPiecePrevious;
+    public Transform PathPieceNext;
+    public Transform PathPieceEnd;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -130,7 +134,9 @@ public class GridSquareScript : MonoBehaviour
             return;
         }
 
-        if(RemainingRainTurns < 3)
+        ManagePath();
+
+        if (RemainingRainTurns < 3)
         {
             justbecamerain = false;
         }
@@ -170,6 +176,64 @@ public class GridSquareScript : MonoBehaviour
         UpdateFilling();
         manageElevation();
         manageVisuals();
+    }
+
+    private void ManagePath()
+    {
+        List<GridSquareScript> path = GridScript.GetComponent<ActionManager>().currentpath;
+        if (path != null)
+        {
+            if (path.Contains(this))
+            {
+                int index = path.IndexOf(this);
+                if (index > 0)
+                {
+                    PathPiecePrevious.gameObject.SetActive(true);
+                    Vector3 direction = path[index - 1].transform.position - transform.position;
+                    float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+                    PathPiecePrevious.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
+                    if(index == path.Count - 1)
+                    {
+                        PathPieceEnd.gameObject.SetActive(true);
+                        PathPieceEnd.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
+                    }
+                    else
+                    {                         
+                        PathPieceEnd.gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    PathPiecePrevious.gameObject.SetActive(false);
+                    PathPieceEnd.gameObject.SetActive(false);
+                }
+                if (index < path.Count - 1)
+                {
+                    PathPieceNext.gameObject.SetActive(true);
+                    Vector3 direction = path[index + 1].transform.position - transform.position;
+                    float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+                    PathPieceNext.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
+                    
+                }
+                else
+                {
+                    PathPieceNext.gameObject.SetActive(false);
+                    
+                }
+            }
+            else
+            {
+                PathPiecePrevious.gameObject.SetActive(false);
+                PathPieceNext.gameObject.SetActive(false);
+                PathPieceEnd.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            PathPiecePrevious.gameObject.SetActive(false);
+            PathPieceNext.gameObject.SetActive(false);
+            PathPieceEnd.gameObject.SetActive(false);
+        }
     }
 
     public void UpdateInsideSprite(bool unitenter)

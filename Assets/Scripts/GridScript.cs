@@ -1265,7 +1265,6 @@ public class GridScript : MonoBehaviour
         return false;
 
     }
-
     public GridSquareScript GetTile(int x, int y)
     {
         if (x <= Grid.Count - 1 && x >= 0 && y <= Grid[0].Count - 1 && y >= 0)
