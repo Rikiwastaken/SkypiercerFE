@@ -33,7 +33,7 @@ public class ActionManager : MonoBehaviour
     private TextBubbleScript TextBubbleScript;
 
     public List<GridSquareScript> currentpath;
-    private bool recalculatingpath;
+    private GridSquareScript previoustile;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -204,28 +204,14 @@ public class ActionManager : MonoBehaviour
         preventfromlockingafteraction = false;
     }
 
-    private void ManagePath()
+    public void ManagePath()
     {
-        if(recalculatingpath)
+        if(GridScript.selection!=currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile && GridScript.selection!= previoustile && GridScript.lockedmovementtiles.Contains(GridScript.selection))
         {
-            recalculatingpath = false;
+            previoustile = GridScript.selection;
             bool legalposition = true;
             GridSquareScript tile = GridScript.selection;
             if (tile.isobstacle || !tile.activated)
-            {
-                legalposition = false;
-            }
-            bool checkifinmovements = false;
-            foreach (GridSquareScript movementtile in GridScript.lockedmovementtiles)
-            {
-                if (GridScript.selection == movementtile)
-                {
-                    Debug.Log("found in movements");
-                    checkifinmovements = true;
-                    break;
-                }
-            }
-            if (!checkifinmovements)
             {
                 legalposition = false;
             }
@@ -238,7 +224,6 @@ public class ActionManager : MonoBehaviour
                     legalposition = false;
                 }
             }
-            Debug.Log("legal position " + legalposition);
             if (legalposition)
             {
                 List<Vector2> path = new List<Vector2>();
@@ -250,9 +235,9 @@ public class ActionManager : MonoBehaviour
                 }
             }
         }
-        if (InputManager.movementjustpressed)
+        else if(GridScript.selection != currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
         {
-            recalculatingpath = true;
+            currentpath = null;
         }
     }
 

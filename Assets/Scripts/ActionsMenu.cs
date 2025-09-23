@@ -178,12 +178,7 @@ public class ActionsMenu : MonoBehaviour
                 }
                 CheckCorrectInfo(target, targetlist[activetargetid]);
             }
-
-
-
-
         }
-
     }
 
     private void CheckCorrectInfo(GameObject unit, GameObject enemy)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using static DataScript;
 using static UnitScript;
 
@@ -20,7 +21,21 @@ public class SaveManager : MonoBehaviour
         public int chapter;
         public List<Character> PlayableCharacterList;
         public Inventory PlayerInventory;
+        public float secondselapsed;
     }
+
+    public int numberofslots;
+
+    public List<SaveClass> SaveClasses;
+
+    private void FixedUpdate()
+    {
+        if (SaveClasses.Count > activeSlot)
+        {
+            SaveClasses[activeSlot].secondselapsed += Time.fixedDeltaTime;
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private List<SaveClass> GetAllSaves()
     {
@@ -62,16 +77,15 @@ public class SaveManager : MonoBehaviour
         return loadedSaves;
     }
 
-    public void LoadCurrentSave()
+    public void LoadSaves()
     {
         List<SaveClass> loadedSaves = GetAllSaves();
+        SaveClasses = new List<SaveClass>(numberofslots);
         foreach(SaveClass save in loadedSaves)
         {
-            if(save.slot==activeSlot && save.versionID==versionID)
+            if(save.slot>=0 && save.slot<numberofslots && save.versionID==versionID)
             {
-                GetComponent<DataScript>().PlayableCharacterList = save.PlayableCharacterList;
-                GetComponent<DataScript>().PlayerInventory = save.PlayerInventory;
-                return;
+                SaveClasses[save.slot] = save;
             }
         }
     }
