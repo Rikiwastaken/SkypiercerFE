@@ -1281,17 +1281,31 @@ public class GridScript : MonoBehaviour
         return GetTile(x, y);
     }
 
-    public GridSquareScript GetFirstFreeTile()
+    public GridSquareScript GetFirstClosestTile(Vector2 pos)
     {
         for(int x=0; x<Grid.Count; x++)
         {
             for(int y=0; y<Grid[x].Count; y++)
             {
-                GridSquareScript Tile = Grid[x][y].GetComponent<GridSquareScript>();
-                if (!Tile.isobstacle && GetUnit(Tile)==null)
+                if(x==0 && y==0)
                 {
-                    return Grid[x][y].GetComponent<GridSquareScript>();
+                    continue;
                 }
+                List<Vector2> list = new List<Vector2>() { new Vector2((int)(x + pos.x), (int)(y + pos.y)) , new Vector2((int)(x + pos.x), (int)(pos.y - y)), new Vector2((int)(pos.x + x), (int)(y + pos.y)), new Vector2((int)(pos.x - x), (int)(pos.y - y)) };
+                foreach(Vector2 newpos in list)
+                {
+                    
+                    if (CheckIfPositionIsLegal(newpos))
+                    {
+                        GridSquareScript Tile = Grid[(int)newpos.x][(int)newpos.y].GetComponent<GridSquareScript>();
+                        if (!Tile.isobstacle && GetUnit(Tile) == null && newpos!=pos)
+                        {
+                            return Grid[(int)newpos.x][(int)newpos.y].GetComponent<GridSquareScript>();
+                        }
+                    }
+                }
+               
+
             }
         }
         return null;

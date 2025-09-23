@@ -213,6 +213,8 @@ public class UnitScript : MonoBehaviour
         }
         FindAnyObjectByType<DataScript>().GenerateEquipmentList(UnitCharacteristics);
         LevelSetup();
+        UnitCharacteristics.alreadymoved = false;
+        UnitCharacteristics.alreadyplayed = false;
         Fists = FindAnyObjectByType<DataScript>().equipmentList[0];
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         UnitCharacteristics.position = new Vector2((int)transform.position.x, (int)transform.position.z);
