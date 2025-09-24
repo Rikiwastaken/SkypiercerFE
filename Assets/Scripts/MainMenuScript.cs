@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -50,24 +51,12 @@ public class MainMenuScript : MonoBehaviour
 
     public void InitializeSaveButtons()
     {
-        for(int i = 0; i < ContinueMenu.childCount-1; i++)
+        List<Button> buttons = new List<Button>();
+        for (int i = 0; i < ContinueMenu.childCount-1; i++)
         {
-            if (saveManager.SaveClasses[i] != null)
-            {
-                SaveClass save = saveManager.SaveClasses[i];
-                int numberofseconds = (int)save.secondselapsed;
-                int numberofminutes = (int)save.secondselapsed / 60;
-                int numberofhours = numberofminutes / 60;
-                numberofminutes = numberofminutes % 60;
-                string text = "Slot : " + (i + 1) + "  Time played : " + numberofhours+"h" + numberofminutes + "min\nChapter : " +save.chapter;
-                ContinueMenu.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = text;
-            }
-            else
-            {
-                string text = "Slot : " + (i + 1) + "  Empty";
-                ContinueMenu.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = text;
-            } 
+            buttons.Add(ContinueMenu.GetChild(i).GetComponent<Button>());
         }
+        saveManager.InitializeSaveButtons(buttons);
     }
 
     public void LoadTestMap()

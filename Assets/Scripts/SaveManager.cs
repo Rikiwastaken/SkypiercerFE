@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using static DataScript;
 using static UnitScript;
@@ -94,6 +95,27 @@ public class SaveManager : MonoBehaviour
         return loadedSaves;
     }
 
+    public void InitializeSaveButtons(List<Button> buttons)
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (SaveClasses[i] != null)
+            {
+                SaveClass save = SaveClasses[i];
+                int numberofseconds = (int)save.secondselapsed;
+                int numberofminutes = (int)save.secondselapsed / 60;
+                int numberofhours = numberofminutes / 60;
+                numberofminutes = numberofminutes % 60;
+                string text = "Slot : " + (i + 1) + "  Time played : " + numberofhours + "h" + numberofminutes + "min\nChapter : " + save.chapter;
+                buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = text;
+            }
+            else
+            {
+                string text = "Slot : " + (i + 1) + "  Empty";
+                buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = text;
+            }
+        }
+    }
     public void LoadSaves()
     {
         List<SaveClass> loadedSaves = GetAllSaves();
