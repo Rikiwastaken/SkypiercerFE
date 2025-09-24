@@ -1,7 +1,8 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static SaveManager;
 using UnityEngine.UI;
+using static SaveManager;
 
 public class MainMenuScript : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class MainMenuScript : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
             }
-            else if(currentSelected.transform.parent!= BaseMenu.gameObject)
+            else if(currentSelected.transform.parent!= BaseMenu)
             {
                 EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
             }
@@ -39,7 +40,7 @@ public class MainMenuScript : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(ContinueMenu.GetChild(0).gameObject);
             }
-            else if (currentSelected.transform.parent != ContinueMenu.gameObject)
+            else if (currentSelected.transform.parent != ContinueMenu)
             {
                 EventSystem.current.SetSelectedGameObject(ContinueMenu.GetChild(0).gameObject);
             }
@@ -49,24 +50,67 @@ public class MainMenuScript : MonoBehaviour
 
     public void InitializeSaveButtons()
     {
-        for(int i = 0; i < BaseMenu.childCount-1; i++)
+        for(int i = 0; i < ContinueMenu.childCount-1; i++)
         {
             if (saveManager.SaveClasses[i] != null)
             {
                 SaveClass save = saveManager.SaveClasses[i];
                 int numberofseconds = (int)save.secondselapsed;
-                int numberofminutes = save.secondselapsed / 60;
+                int numberofminutes = (int)save.secondselapsed / 60;
+                int numberofhours = numberofminutes / 60;
+                numberofminutes = numberofminutes % 60;
+                string text = "Slot : " + (i + 1) + "  Time played : " + numberofhours+"h" + numberofminutes + "min\nChapter : " +save.chapter;
+                ContinueMenu.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = text;
             }
+            else
+            {
+                string text = "Slot : " + (i + 1) + "  Empty";
+                ContinueMenu.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = text;
+            } 
         }
     }
 
     public void LoadTestMap()
     {
+        saveManager.ApplySave(-1);
         sceneLoader.LoadScene("TestMap");
+    }
+
+    public void QuitApp()
+    {
+        Application.Quit();
+    }
+
+    private string GetChapterScene(int chapter)
+    {
+        switch (chapter)
+        {
+            case 0:
+                return "Prologue";
+        }
+        return "Prologue";
+    }
+
+    public void LoadSave(int slot)
+    {
+        
+        if (saveManager.SaveClasses[slot] != null)
+        {
+            saveManager.activeSlot = slot;
+            saveManager.ApplySave(slot);
+            sceneLoader.LoadScene(GetChapterScene(saveManager.SaveClasses[slot].chapter));
+        }
+        else
+        {
+            saveManager.ApplySave(-1);
+            saveManager.activeSlot = slot;
+            sceneLoader.LoadScene("Prologue");
+        }
     }
 
     public void LoadPrologue()
     {
+        saveManager.ApplySave(-1);
         sceneLoader.LoadScene("Prologue");
     }
 

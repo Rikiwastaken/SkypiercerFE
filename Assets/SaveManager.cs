@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using static DataScript;
 using static UnitScript;
 
@@ -28,12 +29,28 @@ public class SaveManager : MonoBehaviour
 
     public List<SaveClass> SaveClasses;
 
+    public float secondselapsed;
+
+    public SaveClass DefaultSave;
+
+    private void Start()
+    {
+        DefaultSave.slot = -1;
+        DefaultSave.versionID = versionID;
+        DefaultSave.chapter = 0;
+        DefaultSave.PlayableCharacterList = GetComponent<DataScript>().PlayableCharacterList;
+        DefaultSave.PlayerInventory = GetComponent<DataScript>().PlayerInventory;
+        DefaultSave.secondselapsed = 0;
+    }
+
     private void FixedUpdate()
     {
-        if (SaveClasses.Count > activeSlot)
+        string activescenename = SceneManager.GetActiveScene().name;
+        if (activescenename != "MainMenu" && activescenename != "FirstScene" && activescenename != "LoadingScene")
         {
-            SaveClasses[activeSlot].secondselapsed += Time.fixedDeltaTime;
+            secondselapsed += Time.fixedDeltaTime;
         }
+            
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -80,14 +97,35 @@ public class SaveManager : MonoBehaviour
     public void LoadSaves()
     {
         List<SaveClass> loadedSaves = GetAllSaves();
-        SaveClasses = new List<SaveClass>(numberofslots);
-        foreach(SaveClass save in loadedSaves)
+        SaveClasses = new List<SaveClass>();
+        for(int i = 0; i < numberofslots; i++)
+        {
+            SaveClasses.Add(null);
+        }
+        foreach (SaveClass save in loadedSaves)
         {
             if(save.slot>=0 && save.slot<numberofslots && save.versionID==versionID)
             {
                 SaveClasses[save.slot] = save;
             }
         }
+    }
+
+    public void ApplySave(int slot)
+    {
+        if(slot>=0 && slot< SaveClasses.Count)
+        {
+            GetComponent<DataScript>().PlayableCharacterList = SaveClasses[slot].PlayableCharacterList;
+            GetComponent<DataScript>().PlayerInventory = SaveClasses[slot].PlayerInventory;
+            secondselapsed = SaveClasses[slot].secondselapsed;
+        }
+        else if(slot==-1)
+        {
+            GetComponent<DataScript>().PlayableCharacterList = DefaultSave.PlayableCharacterList;
+            GetComponent<DataScript>().PlayerInventory = DefaultSave.PlayerInventory;
+            secondselapsed = 0;
+        }
+
     }
 
     public void SaveCurrentSlot()
@@ -98,7 +136,9 @@ public class SaveManager : MonoBehaviour
             slot = activeSlot,
             chapter = 0,
             PlayableCharacterList = GetComponent<DataScript>().PlayableCharacterList,
-            PlayerInventory = GetComponent<DataScript>().PlayerInventory
+            PlayerInventory = GetComponent<DataScript>().PlayerInventory,
+            secondselapsed = secondselapsed
+
         };
 
         string json = JsonUtility.ToJson(save, true);

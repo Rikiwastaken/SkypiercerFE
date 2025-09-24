@@ -3475,6 +3475,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   versionID: 041
   activeSlot: 0
+  numberofslots: 6
+  SaveClasses: []
 --- !u!114 &8454189363692229850
 MonoBehaviour:
   m_ObjectHideFlags: 0
