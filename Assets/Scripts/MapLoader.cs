@@ -38,9 +38,7 @@ public class MapLoader : MonoBehaviour
 
                 Color pixelColor = ObstacleMap.GetPixel(x, y);
 
-                // Skip transparent pixels
-                if (pixelColor.a == 0)
-                    continue;
+             
 
                 Vector3 position = new Vector3(x, 0, y);
 
