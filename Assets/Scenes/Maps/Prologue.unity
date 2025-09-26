@@ -30225,11 +30225,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[7].name
-      value: Elder Farron
+      value: Elwyn
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[7].text
-      value: Oh, don't you worry. With Mir here with me I was never in any danger.
+      value: Zack, look at his medal.
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[8].name
@@ -30237,15 +30237,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[8].text
-      value: What ? You're a master hunter ? how come !
+      value: What ? You're a master hunter ? how come ?
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[9].name
-      value: Zack
+      value: Mir
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[9].text
-      value: What ? You're a master hunter ? how come !
+      value: Why don't we return to Landfall village ? I want to talk with you, Zack.
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[4].dialoguetoShow.Array.data[0].name
@@ -30407,7 +30407,7 @@ PrefabInstance:
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[7].Portrait
       value: 
-      objectReference: {fileID: 21300000, guid: f9f0b7b0584129949998471b8702086b, type: 3}
+      objectReference: {fileID: 21300000, guid: c6a1704e47f6dcf4cafcb92a6be35997, type: 3}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[8].Portrait
       value: 
@@ -30415,7 +30415,7 @@ PrefabInstance:
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[9].Portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
+      objectReference: {fileID: 21300000, guid: a6917331ada75f148afaf32f0ca6664e, type: 3}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[4].dialoguetoShow.Array.data[0].Portrait
       value: 
