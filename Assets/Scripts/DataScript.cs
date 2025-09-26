@@ -80,12 +80,20 @@ public class DataScript : MonoBehaviour
 
     private void Setup()
     {
+        SetupCharacterIDs();
         SetupEquipment();
         SetupClasses();
         SetupInventory();
         SetupDefaultCharacterList();
     }
 
+    private void SetupCharacterIDs()
+    {
+        for (int i = 0; i < PlayableCharacterList.Count; i++)
+        {
+            PlayableCharacterList[i].playableStats.ID = i;
+        }
+    }
     private void SetupInventory()
     {
         PlayerInventory = new Inventory();

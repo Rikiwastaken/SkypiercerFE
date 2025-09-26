@@ -53,6 +53,7 @@ public class UnitScript : MonoBehaviour
         public bool unlocked;
         public bool protagonist;
         public string battalion;
+        public int ID;
     }
 
     [Serializable]

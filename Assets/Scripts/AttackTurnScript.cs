@@ -1083,6 +1083,14 @@ public class AttackTurnScript : MonoBehaviour
             {
                 reward -= 9999;
             }
+
+            if(charunit.enemyStats.personality.ToLower() == "survivor" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.1f))
+            {
+                if(FindIfAnyTarget(potentialAttackPosition, charunit.affiliation))
+                {
+                    reward -= 99;
+                }
+            }
         }
         return reward;
 
@@ -1097,7 +1105,7 @@ public class AttackTurnScript : MonoBehaviour
             GameObject unit = gridScript.GetUnit(tile);
             if (unit != null)
             {
-                if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation != affiliation)
+                if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation != affiliation || (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation!="playable" && affiliation=="other"))
                 {
                     return true;
                 }
