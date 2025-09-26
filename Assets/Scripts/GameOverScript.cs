@@ -108,7 +108,10 @@ public class GameOverScript : MonoBehaviour
 
     public void Continue()
     {
-        //todo
+        int nextsceneindex = FindAnyObjectByType<MapInitializer>().ChapterID;
+        string scenetoload = "Chapter" + nextsceneindex+1;
+
+        sceneLoader.LoadScene(scenetoload);
     }
 
     public void ReturnToMainMenu()

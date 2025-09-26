@@ -11,6 +11,8 @@ public class MapInitializer : MonoBehaviour
 
     public List<Vector2> playablepos;
 
+    public int ChapterID;
+
     private DataScript DataScript;
 
     public GameObject BaseCharacter;

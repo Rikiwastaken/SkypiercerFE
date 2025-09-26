@@ -12,8 +12,10 @@ public class MapEventManager : MonoBehaviour
     public class EventCondition
     {
         public string name;
+        public int ID;
         public List<Character> UnitList;
         public List<string> NameUnitList;
+        public List<int> EventsToWatch;
         public List<GridSquareScript> TilesList;
         public List<SmallerCondition> SmallerConditions;
         public int triggertype;
@@ -24,6 +26,7 @@ public class MapEventManager : MonoBehaviour
          * 5 : all of the units died
          * 6 : small conditions are verified
          * 7 : Battle Starts
+         * 8 : EventID Given are all triggered
          */
         public int initializationtype;
         /* 1 : Get Units From Names
@@ -268,6 +271,17 @@ public class MapEventManager : MonoBehaviour
                                 e.TriggerEvent(GameOverScript);
                                 e.triggered = true;
                                 break;
+                            case (7):
+                                e.TriggerEvent(GameOverScript);
+                                e.triggered = true;
+                                break;
+                            case (8):
+                                if(CheckIfEventsAreTriggered(e.EventsToWatch))
+                                {
+                                    e.TriggerEvent(GameOverScript);
+                                    e.triggered = true;
+                                }
+                                break;
 
                         }
                     }
@@ -277,6 +291,29 @@ public class MapEventManager : MonoBehaviour
     }
 
     
+    private bool CheckIfEventsAreTriggered(List<int> eventIDs)
+    {
+        foreach(int id in eventIDs)
+        {
+            bool found = false;
+            foreach(EventCondition e in EventsToMonitor)
+            {
+                if(e.ID==id)
+                {
+                    found = true;
+                    if(!e.triggered)
+                    {
+                        return false;
+                    }
+                }
+            }
+            if(!found)
+            {
+                return false; //if one of the event was not found, we consider the condition as not verified
+            }
+        }
+        return true;
+    }
 
     private bool CheckSmallerConditionsAreChecked(List<SmallerCondition> smallerConditions)
     {

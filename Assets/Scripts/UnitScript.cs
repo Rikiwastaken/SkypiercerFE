@@ -63,7 +63,7 @@ public class UnitScript : MonoBehaviour
         public int desiredlevel;
         public int itemtodropID;
         public bool usetelekinesis;
-        public string personality; // nothing : basic. Deviant : High Random. Coward : deviant if below 33% hp. Daredevil : never takes into account their own HP
+        public string personality; // nothing : basic. Deviant : High Random. Coward : deviant if below 33% hp, survivor if below 10%. Daredevil : never takes into account their own HP. Survivor : Always avoid enemies and attacks.
         public Vector2 startpos;
         public List<int> equipments;
         public List<int> Skills;
