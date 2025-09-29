@@ -105,7 +105,7 @@ public class AttackTurnScript : MonoBehaviour
                 if (unit.gameObject != null && unit != null)
                 {
                     Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-                    if (charunit.affiliation == "enemy" && !charunit.alreadyplayed && charunit.currentTile.activated)
+                    if (charunit.affiliation == "enemy" && !charunit.alreadyplayed && unit.GetComponent<UnitScript>().CheckIfOnActivated())
                     {
 
                         if(!determineifActionifTaken(unit))
@@ -380,12 +380,12 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 52) // Fortify
         {
-            CharUser.currentTile.type = "Fortification";
+            CharUser.currentTile[0].type = "Fortification";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Fortify");
         }
         else if (commandID == 53) // Smoke Bomb
         {
-            CharUser.currentTile.type = "Fog";
+            CharUser.currentTile[0].type = "Fog";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Smoke Bomb");
         }
         else if (commandID == 54) // Chakra
@@ -817,7 +817,7 @@ public class AttackTurnScript : MonoBehaviour
         int maxreward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
-        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, gridScript.GetTile(charunit.position));
+        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, gridScript.GetTile(charunit.position), charunit.enemyStats.monsterStats.size);
         GameObject chosenUnit = null;
 
         foreach (GridSquareScript tile in potentialAttackPosition)
@@ -958,7 +958,7 @@ public class AttackTurnScript : MonoBehaviour
         int reward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
-        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position);
+        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position, charunit.enemyStats.monsterStats.size);
         foreach (GridSquareScript tile in potentialAttackPosition)
         {
             foreach (GameObject otherunit in gridScript.allunitGOs)
@@ -1135,7 +1135,10 @@ public class AttackTurnScript : MonoBehaviour
                     {
                         if (charunit.currentTile != null)
                         {
-                            charunit.currentTile.UpdateInsideSprite(false);
+                            foreach (GridSquareScript tile in charunit.currentTile)
+                            {
+                                tile.UpdateInsideSprite(false);
+                            }
                         }
                         Destroy(unit);
                         objecttodelete.Add(unit);
@@ -1150,7 +1153,10 @@ public class AttackTurnScript : MonoBehaviour
                     {
                         if (charunit.currentTile != null)
                         {
-                            charunit.currentTile.UpdateInsideSprite(false);
+                            foreach (GridSquareScript tile in charunit.currentTile)
+                            {
+                                tile.UpdateInsideSprite(false);
+                            }
                         }
                         Destroy(unit);
                         objecttodelete.Add(unit);

@@ -34,7 +34,7 @@ public class UnitScript : MonoBehaviour
         public PlayableStats playableStats;
         public EnemyStats enemyStats;
 
-        public GridSquareScript currentTile;
+        public List<GridSquareScript> currentTile;
 
     }
 
@@ -252,30 +252,7 @@ public class UnitScript : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (UnitCharacteristics.currentTile == null)
-        {
-            MoveTo(UnitCharacteristics.position);
-        }
-        else
-        {
-            if (UnitCharacteristics.currentTile.isstairs)
-            {
-                
-                if(battlecameraScript.incombat)
-                {
-                    transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y + 1f, transform.position.z);
-                }
-                else
-                {
-                    transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y + 0.5f, transform.position.z);
-                }
-            }
-            else
-            {
-                transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y, transform.position.z);
-            }
-
-        }
+        ManagePosition();
 
         Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(1).position + Vector3.Normalize(transform.GetChild(1).forward - transform.GetChild(1).position) * 2f, Color.red);
 
@@ -346,6 +323,36 @@ public class UnitScript : MonoBehaviour
         Hidedeactivated();
     }
 
+    //Manage Vertical Position
+    private void ManagePosition()
+    {
+        if (UnitCharacteristics.currentTile == null)
+        {
+            MoveTo(UnitCharacteristics.position);
+        }
+        else
+        {
+            if (UnitCharacteristics.currentTile[0].isstairs)
+            {
+
+                if (battlecameraScript.incombat)
+                {
+                    transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile[0].transform.position.y + 1f, transform.position.z);
+                }
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile[0].transform.position.y + 0.5f, transform.position.z);
+                }
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile[0].transform.position.y, transform.position.z);
+            }
+
+        }
+    }
+
+    //Manage horizontal movements
     private void ManageMovement()
     {
         if(pathtotake.Count >0)
@@ -368,10 +375,19 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), UnitCharacteristics.position) > 0.1f)
+            Vector2 destination = new Vector2();
+            if(UnitCharacteristics.enemyStats.monsterStats.size > 1)
+            {
+                destination = UnitCharacteristics.position + new Vector2(-0.5f, 0.5f);
+            }
+            else
+            {
+                destination = UnitCharacteristics.position;
+            }
+            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) > 0.1f)
             {
                 animator.SetBool("Walk", true);
-                Vector2 direction = (UnitCharacteristics.position - new Vector2(transform.position.x, transform.position.z)).normalized;
+                Vector2 direction = (destination - new Vector2(transform.position.x, transform.position.z)).normalized;
                 transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
                 if (!battlecameraScript.incombat)
                 {
@@ -383,7 +399,7 @@ public class UnitScript : MonoBehaviour
             }
             else
             {
-                transform.position = new Vector3(UnitCharacteristics.position.x, transform.position.y, UnitCharacteristics.position.y);
+                transform.position = new Vector3(destination.x, transform.position.y, destination.y);
                 if (animator.gameObject.activeSelf)
                 {
                     animator.SetBool("Walk", false);
@@ -468,16 +484,25 @@ public class UnitScript : MonoBehaviour
         GridSquareScript destTile = GridScript.GetTile(destination);
         if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile)==gameObject) && !destTile.isobstacle)
         {
-            if(UnitCharacteristics.currentTile!=null)
+            if(UnitCharacteristics.currentTile!=null && UnitCharacteristics.currentTile.Count>0)
             {
-                UnitCharacteristics.currentTile.UpdateInsideSprite(false);
+                foreach(GridSquareScript tile in UnitCharacteristics.currentTile)
+                {
+                    if(tile!=null)
+                    {
+                        tile.UpdateInsideSprite(false);
+                    }
+                    
+                }
+                
+                
                 if(jump)
                 {
                     pathtotake = new List<Vector2>{ destination };
                 }
-                else
+                else if (UnitCharacteristics.currentTile[0]!=null)
                 {
-                    pathtotake = GridScript.FindPath(UnitCharacteristics.currentTile.GridCoordinates, destination, UnitCharacteristics);
+                    pathtotake = GridScript.FindPath(UnitCharacteristics.currentTile[0].GridCoordinates, destination, UnitCharacteristics);
                 }
                     
             }
@@ -486,12 +511,25 @@ public class UnitScript : MonoBehaviour
                 transform.position = new Vector3(destination.x, transform.position.y, destination.y);
             }
             UnitCharacteristics.position = destination;
-            UnitCharacteristics.currentTile = destTile;
-            destTile.UpdateInsideSprite(true);
-            
+            UpdateTiles(destTile);
+            foreach(GridSquareScript tile in UnitCharacteristics.currentTile )
+            {
+                tile.UpdateInsideSprite(true, UnitCharacteristics);
+            }
         }
-
     }
+
+    private void UpdateTiles(GridSquareScript destination)
+    {
+        UnitCharacteristics.currentTile = new List<GridSquareScript> { destination };
+        if(UnitCharacteristics.enemyStats.monsterStats.size > 1)
+        {
+            UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(-1, 0)));
+            UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(0, 1)));
+            UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(-1, 1)));
+        }
+    }
+
     public bool isinattackanimation()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("run") )
@@ -763,17 +801,31 @@ public class UnitScript : MonoBehaviour
 
     private void Hidedeactivated()
     {
-        if(UnitCharacteristics.currentTile.activated)
+        transform.GetChild(1).gameObject.SetActive(CheckIfOnActivated());
+        transform.GetChild(0).gameObject.SetActive(CheckIfOnActivated());
+
+    }
+
+
+    public bool CheckIfOnActivated()
+    {
+        bool isdeactivated = false;
+        foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
         {
-            transform.GetChild(1).gameObject.SetActive(true);
-            transform.GetChild(0).gameObject.SetActive(true);
+            if (!tile.activated)
+            {
+                isdeactivated = true;
+                break;
+            }
+        }
+        if (isdeactivated)
+        {
+            return false;
         }
         else
         {
-            transform.GetChild(1).gameObject.SetActive(false);
-            transform.GetChild(0).gameObject.SetActive(false);
+            return true;
         }
-
     }
 
     private void UpdateRendererLayer()
@@ -1175,6 +1227,35 @@ public class UnitScript : MonoBehaviour
             }
         }
         SynchroniseWeaponIDs();
+    }
+
+    public string GetWeatherType()
+    {
+        int numberofraintiles = 0;
+        int numberofsuntiles = 0;
+        foreach(GridSquareScript tile in UnitCharacteristics.currentTile)
+        {
+            if(tile.RemainingRainTurns > 0)
+            {
+                numberofraintiles++;
+            }
+            if(tile.RemainingSunTurns > 0)
+            {
+                numberofsuntiles++;
+            }
+        }
+        if(numberofraintiles > numberofsuntiles)
+        {
+            return "rain";
+        }
+        else if (numberofraintiles < numberofsuntiles)
+        {
+            return "sun";
+        }
+        else
+        {
+            return "";
+        }
     }
 
     public equipment GetPreviousWeapon()

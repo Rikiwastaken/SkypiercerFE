@@ -204,7 +204,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         (int range, bool frapperenmelee, string type) = target.GetComponent<UnitScript>().GetRangeMeleeAndType();
-        GridScript.ShowAttackAfterMovement(range, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, type.ToLower() == "staff");
+        GridScript.ShowAttackAfterMovement(range, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size);
         GridScript.lockedattacktiles = GridScript.attacktiles;
         GridScript.lockedhealingtiles = GridScript.healingtiles;
         GridScript.Recolor();
@@ -347,7 +347,7 @@ public class ActionsMenu : MonoBehaviour
                         frapperenmelee = false;
                     }
 
-                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, weapon.type.ToLower() == "staff");
+                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, weapon.type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size);
                     GridScript.lockedattacktiles = GridScript.attacktiles;
                     GridScript.lockedhealingtiles = GridScript.healingtiles;
                     GridScript.Recolor();
@@ -388,8 +388,8 @@ public class ActionsMenu : MonoBehaviour
                         {
                             frapperenmelee = false;
                         }
-
-                        GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, weapon.type.ToLower() == "staff");
+                        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+                        GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, chartarget.currentTile, weapon.type.ToLower() == "staff", chartarget.enemyStats.monsterStats.size);
                         GridScript.lockedattacktiles = GridScript.attacktiles;
                         GridScript.lockedhealingtiles = GridScript.healingtiles;
                         GridScript.Recolor();
@@ -475,8 +475,8 @@ public class ActionsMenu : MonoBehaviour
             CommandUsedID = command.ID;
             if (command.targettype == 0)
             {
-                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
-                GridScript.ShowAttackAfterMovement(command.range, true, positiontile, false);
+                Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, false, chartarget.enemyStats.monsterStats.size);
                 GridScript.lockedattacktiles = GridScript.attacktiles;
 
                 foreach (GridSquareScript tile in GridScript.lockedattacktiles)
@@ -503,8 +503,8 @@ public class ActionsMenu : MonoBehaviour
             }
             else if (command.targettype == 1)
             {
-                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
-                GridScript.ShowAttackAfterMovement(command.range, true, positiontile, true);
+                Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, true, chartarget.enemyStats.monsterStats.size);
                 GridScript.lockedhealingtiles = GridScript.healingtiles;
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
@@ -528,7 +528,7 @@ public class ActionsMenu : MonoBehaviour
             }
             else if (command.targettype == 2)
             {
-                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
+                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
                 for (int i = -command.range; i <= command.range; i++)
                 {
                     for (int j = -command.range; j <= command.range; j++)
@@ -583,9 +583,9 @@ public class ActionsMenu : MonoBehaviour
             CommandUsedID = 0;
             if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
             {
-                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
                 (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
-                GridScript.ShowAttackAfterMovement(range, melee, positiontile, true);
+                Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+                GridScript.ShowAttackAfterMovement(range, melee, chartarget.currentTile, true, chartarget.enemyStats.monsterStats.size);
                 GridScript.lockedhealingtiles = GridScript.healingtiles;
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
@@ -901,11 +901,11 @@ public class ActionsMenu : MonoBehaviour
         }
         else if (command.ID == 52) // Fortify
         {
-            WallTargettingWindow(unit, unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.gameObject, "Fortification");
+            WallTargettingWindow(unit, unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].gameObject, "Fortification");
         }
         else if (command.ID == 53) // Smoke Bomb
         {
-            WallTargettingWindow(unit, unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.gameObject, "Fog");
+            WallTargettingWindow(unit, unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].gameObject, "Fog");
         }
         else if (command.ID == 54) // Chakra
         {
@@ -1935,7 +1935,7 @@ public class ActionsMenu : MonoBehaviour
             finaldamagefloat = finaldamagefloat * 1.1f;
         }
 
-        finaldamagefloat = finaldamagefloat * CalculateRainDamageBonus(charunit, chartarget);
+        finaldamagefloat = finaldamagefloat * CalculateRainDamageBonus(unit, target);
 
         int finaldamage = (int)finaldamagefloat + UnitSkillBonus.FixedDamageBonus - TargetSkillBonus.FixedDamageReduction;
 
@@ -1971,32 +1971,35 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
-    private float CalculateRainDamageBonus(Character unit, Character target)
+    private float CalculateRainDamageBonus(GameObject unit, GameObject target)
     {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        
         float damagebonus = 1f;
-        if (unit.enemyStats!=null)
+        if (charunit.enemyStats!=null)
         {
-            if(unit.enemyStats.monsterStats!=null)
+            if(charunit.enemyStats.monsterStats!=null)
             {
-                if(unit.enemyStats.monsterStats.ispluvial && unit.currentTile.RemainingRainTurns>0)
+                if(charunit.enemyStats.monsterStats.ispluvial && unit.GetComponent<UnitScript>().GetWeatherType()=="rain")
                 {
                     damagebonus += 0.1f;
                 }
-                if(unit.enemyStats.monsterStats.ispluvial && unit.currentTile.RemainingSunTurns > 0)
+                if(charunit.enemyStats.monsterStats.ispluvial && unit.GetComponent<UnitScript>().GetWeatherType() == "sun")
                 {
                     damagebonus -= 0.1f;
                 }
             }
         }
-        if (target.enemyStats != null)
+        if (chartarget.enemyStats != null)
         {
-            if (target.enemyStats.monsterStats != null)
+            if (chartarget.enemyStats.monsterStats != null)
             {
-                if (target.enemyStats.monsterStats.ispluvial && target.currentTile.RemainingRainTurns > 0)
+                if (chartarget.enemyStats.monsterStats.ispluvial && target.GetComponent<UnitScript>().GetWeatherType() == "rain")
                 {
                     damagebonus -= 0.1f;
                 }
-                if (target.enemyStats.monsterStats.ispluvial && target.currentTile.RemainingSunTurns > 0)
+                if (chartarget.enemyStats.monsterStats.ispluvial && target.GetComponent<UnitScript>().GetWeatherType() == "sun")
                 {
                     damagebonus += 0.1f;
                 }

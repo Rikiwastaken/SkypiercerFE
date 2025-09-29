@@ -75,12 +75,16 @@ public class GridSquareScript : MonoBehaviour
 
     public Sprite gridsquareinsideWithoutUnit;
     public Sprite gridsquareinsideWithUnit;
+    public Sprite gridsquareinsideWithUnitBigEnemies;
 
     private TextBubbleScript textBubbleScript;
 
     public Transform PathPiecePrevious;
     public Transform PathPieceNext;
     public Transform PathPieceEnd;
+
+    public Sprite gridsquareFilling;
+    public Sprite gridsquareFillingBigEnemies;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -236,11 +240,38 @@ public class GridSquareScript : MonoBehaviour
         }
     }
 
-    public void UpdateInsideSprite(bool unitenter)
+    public void UpdateInsideSprite(bool unitenter, Character unitchar = null)
     {
         if(unitenter)
         {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
+            if(unitchar != null)
+            {
+                if(unitchar.enemyStats.monsterStats.size>1)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnitBigEnemies;
+                    int index = unitchar.currentTile.IndexOf(this);
+                    switch(index)
+                    {
+                        case 0:
+                            transform.GetChild(0).localRotation = Quaternion.Euler(0f, 0f, 90f);
+                            break;
+                        case 1:
+                            transform.GetChild(0).localRotation = Quaternion.Euler(0f, 0f, 180f);
+                            break;
+                        case 2:
+                            transform.GetChild(0).localRotation = Quaternion.Euler(0f, 0f, 0f);
+                            break;
+                        case 3:
+                            transform.GetChild(0).localRotation = Quaternion.Euler(0f, 0f, -90f);
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
+            }
+                
         }
         else
         {
@@ -270,9 +301,6 @@ public class GridSquareScript : MonoBehaviour
 
         if (battlecameraScript.incombat)
         {
-            GridSquareScript squareFighter1 = battlecameraScript.fighter1.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
-            GridSquareScript squareFighter2 = battlecameraScript.fighter2.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
-            //float targetelevation = Mathf.Min(squareFighter1.elevation, squareFighter2.elevation);
             float targetelevation = 0;
             if (isstairs)
             {
@@ -393,6 +421,33 @@ public class GridSquareScript : MonoBehaviour
         else
         {
             Character Char = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+            if(Char.enemyStats.monsterStats.size >1 )
+            {
+                SR.sprite = gridsquareFillingBigEnemies;
+                int index = Char.currentTile.IndexOf(this);
+                switch (index)
+                {
+                    case 0:
+                        SelectRoundFilling.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
+                        break;
+                    case 1:
+                        SelectRoundFilling.transform.localRotation = Quaternion.Euler(0f, 0f, 180f);
+                        break;
+                    case 2:
+                        SelectRoundFilling.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                        break;
+                    case 3:
+                        SelectRoundFilling.transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
+                        break;
+                }
+            }
+            else
+            {
+                SR.sprite = gridsquareFilling;
+            }
+
+
             if (Char.affiliation == "playable")
             {
                 if (Char.alreadyplayed)

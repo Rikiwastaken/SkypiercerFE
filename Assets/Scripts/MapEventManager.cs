@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static UnitScript;
 using static TextBubbleScript;
+using static UnitScript;
 
 
 public class MapEventManager : MonoBehaviour
@@ -53,19 +54,23 @@ public class MapEventManager : MonoBehaviour
             switch (triggerEffectType)
             {
                 case 1:
+                    Debug.Log("victory trigger");
                     GameOverScript.victory = true;
                     GameOverScript.gameObject.SetActive(true);
                     break;
                 case 2:
+                    Debug.Log("gameover trigger");
                     GameOverScript.gameObject.SetActive(true);
                     break;
                 case 3:
-                    if(tileModification != null)
+                    Debug.Log("tilechange trigger");
+                    if (tileModification != null)
                     {
                         tileModification.ApplyModification();
                     }
                     break;
                 case 4:
+                    Debug.Log("dialoguetrigger trigger");
                     FindAnyObjectByType<TextBubbleScript>().InitializeDialogue(dialoguetoShow);
                     break;
             }
@@ -403,10 +408,14 @@ public class MapEventManager : MonoBehaviour
 
         foreach(Character c in list)
         {
-            if(tiles.Contains(c.currentTile))
+            foreach(GridSquareScript tile in c.currentTile)
             {
-                return true;
+                if (tiles.Contains(tile))
+                {
+                    return true;
+                }
             }
+            
         }
 
         return false;

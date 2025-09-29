@@ -4969,6 +4969,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 0
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -4985,7 +4986,8 @@ MonoBehaviour:
         size: 0
         ispluvial: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+    currentTile:
+    - {fileID: 0}
   buttons:
   - {fileID: 3240861738529935134}
   - {fileID: 4872761711283878001}
@@ -9933,6 +9935,7 @@ MonoBehaviour:
   - {x: 6, y: 1}
   - {x: 5, y: 1}
   - {x: 6, y: 2}
+  ChapterID: 0
   BaseCharacter: {fileID: 5081702220094403406, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
   Characters: {fileID: 0}
   EnemyList:
@@ -10205,8 +10208,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EventsToMonitor:
   - name: Defeat
+    ID: 0
     UnitList: []
     NameUnitList: []
+    EventsToWatch: 
     TilesList: []
     SmallerConditions: []
     triggertype: 5
@@ -10219,9 +10224,11 @@ MonoBehaviour:
       newtype: 
       modiftype: 0
   - name: UnlockRestOfTheMap
+    ID: 0
     UnitList: []
     NameUnitList:
     - Zaitan
+    EventsToWatch: 
     TilesList: []
     SmallerConditions: []
     triggertype: 4
@@ -10367,6 +10374,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 0
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -10383,7 +10391,8 @@ MonoBehaviour:
         size: 0
         ispluvial: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+    currentTile:
+    - {fileID: 0}
   SkillList: {fileID: 4898234980993599380}
   PageNumberText: {fileID: 8048071046576614320}
   SkillPageNumberText: {fileID: 2346139528945135520}
@@ -13093,6 +13102,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 0
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -13109,7 +13119,8 @@ MonoBehaviour:
         size: 0
         ispluvial: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+    currentTile:
+    - {fileID: 0}
 --- !u!1 &7512953878376125901
 GameObject:
   m_ObjectHideFlags: 0
@@ -17131,6 +17142,10 @@ PrefabInstance:
     - target: {fileID: 1829886880485280528, guid: 1595378c529f33e4badbdd18c78229ab, type: 3}
       propertyPath: m_Name
       value: GameEnd
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829886880485280528, guid: 1595378c529f33e4badbdd18c78229ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2568072095873730917, guid: 1595378c529f33e4badbdd18c78229ab, type: 3}
       propertyPath: m_Pivot.x

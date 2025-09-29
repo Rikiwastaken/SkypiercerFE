@@ -10,10 +10,6 @@ public class MapLoader : MonoBehaviour
     public Texture2D ElevationMap;
     public Texture2D ActivationMap;
     public Transform GridObject;
-    void Awake()
-    {
-        
-    }
 
     [ContextMenu("Generate Map From Image (Edit Mode)")]
     void LoadMap()

@@ -355,7 +355,7 @@ public class TurnManger : MonoBehaviour
             {
                 continue;
             }
-            if (character.name == "" || !character.GetComponent<UnitScript>().UnitCharacteristics.currentTile.activated)
+            if (character.name == "" || !character.GetComponent<UnitScript>().CheckIfOnActivated())
             {
                 continue;
             }
