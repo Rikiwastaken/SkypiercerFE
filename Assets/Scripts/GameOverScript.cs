@@ -33,7 +33,7 @@ public class GameOverScript : MonoBehaviour
             VictoryMenu.gameObject.SetActive(false);
             GameOverMenu.gameObject.SetActive(true);
         }
-        
+        sceneLoader = FindAnyObjectByType<SceneLoader>();
     }
 
     public void InitializeSaveButtons()

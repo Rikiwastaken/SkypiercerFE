@@ -56,10 +56,12 @@ public class AttackTurnScript : MonoBehaviour
     private MapEventManager mapEventManager;
 
     public PhaseTextScript phaseTextScript;
+    private MinimapScript minimapScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        minimapScript = FindAnyObjectByType<MinimapScript>();
         TurnManager = GetComponent<TurnManger>();
         gridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<battlecameraScript>();
@@ -278,6 +280,7 @@ public class AttackTurnScript : MonoBehaviour
             unit.GetComponent<UnitScript>().MoveTo(Destination.GridCoordinates);
             GameObject target = CalculateBestTargetForOffensiveUnits(unit, charunit.attacksfriends);
             unit.GetComponent<UnitScript>().MoveTo(originalpos);
+            unit.GetComponent<UnitScript>().ResetPath();
             if (target == null && Destination.GridCoordinates == originalpos)
             {
                 return false;
@@ -1174,6 +1177,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         GetComponent<TurnManger>().InitializeUnitLists(GetComponent<GridScript>().allunitGOs);
         mapEventManager.TriggerEventCheck();
+        minimapScript.UpdateMinimap();
     }
 
 }

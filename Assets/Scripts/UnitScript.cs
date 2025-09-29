@@ -201,10 +201,14 @@ public class UnitScript : MonoBehaviour
 
     private List<Vector2> pathtotake =  new List<Vector2>();
 
+    private float canvaselevation;
+    private MinimapScript MinimapScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        MinimapScript = FindAnyObjectByType<MinimapScript>();
+        canvaselevation = transform.GetChild(0).localPosition.y;
         GridScript = FindAnyObjectByType<GridScript>();
         AttackTurnScript = FindAnyObjectByType<AttackTurnScript>();
 
@@ -321,12 +325,13 @@ public class UnitScript : MonoBehaviour
         UpdateRendererLayer();
         ManageDamagenumber();
         Hidedeactivated();
+        ManageSize();
     }
 
     //Manage Vertical Position
     private void ManagePosition()
     {
-        if (UnitCharacteristics.currentTile == null)
+        if (UnitCharacteristics.currentTile.Count<=0)
         {
             MoveTo(UnitCharacteristics.position);
         }
@@ -409,6 +414,11 @@ public class UnitScript : MonoBehaviour
         }
         
     }
+
+    public void ResetPath()
+    {
+        pathtotake = new List<Vector2>();
+    }
     private void ManageLifebars()
     {
         transform.GetChild(0).rotation = Quaternion.Euler(90f, 0f, 0f);
@@ -477,6 +487,7 @@ public class UnitScript : MonoBehaviour
     }
     public void MoveTo(Vector2 destination, bool jump=false)
     {
+        Debug.Log(transform.name + " moving to : " + destination);
         if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();
@@ -517,6 +528,11 @@ public class UnitScript : MonoBehaviour
                 tile.UpdateInsideSprite(true, UnitCharacteristics);
             }
         }
+        if(MinimapScript==null)
+        {
+            MinimapScript = FindAnyObjectByType<MinimapScript>();
+        }
+        MinimapScript.UpdateMinimap();
     }
 
     private void UpdateTiles(GridSquareScript destination)
@@ -793,9 +809,27 @@ public class UnitScript : MonoBehaviour
                     statsgainedstr += level.ToString() + " , ";
                 }
             }
-
         }
         calculateStats();
+
+    }
+
+    private void ManageSize()
+    {
+        if(UnitCharacteristics.enemyStats.monsterStats.size > 0)
+        {
+            for (int i = 1; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                if (child.localScale.x != UnitCharacteristics.enemyStats.monsterStats.size)
+                {
+                    child.localScale = Vector3.one * UnitCharacteristics.enemyStats.monsterStats.size;
+                }
+            }
+            transform.GetChild(0).position = new Vector3(transform.GetChild(0).position.x, canvaselevation + UnitCharacteristics.enemyStats.monsterStats.size, transform.GetChild(0).position.z);
+        }
+        
+        
 
     }
 

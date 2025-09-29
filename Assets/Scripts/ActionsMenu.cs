@@ -1202,20 +1202,51 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        int Distance = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
-        (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
-        if (Distance <= 1)
+
+
+        if(chartarget.enemyStats.monsterStats.size > 0)
         {
-            if (!melee)
+            int DistanceSE = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
+            int DistanceSW = (int)(Mathf.Abs(chartarget.position.x-1 - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
+            int DistanceNE = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y+1 - charunit.position.y));
+            int DistanceNW = (int)(Mathf.Abs(chartarget.position.x-1 - charunit.position.x) + Mathf.Abs(chartarget.position.y+1 - charunit.position.y));
+
+
+
+
+            (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
+            if (DistanceSE <= 1 && DistanceSW <= 1 && DistanceNE <= 1 && DistanceNW <= 1)
+            {
+                if (!melee)
+                {
+                    return false;
+                }
+            }
+            else if (DistanceSE > range && DistanceSW > range && DistanceNE > range && DistanceNW > range )
             {
                 return false;
             }
+            return true;
         }
-        else if (Distance > range)
+        else
         {
-            return false;
+            int Distance = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
+            (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
+            if (Distance <= 1)
+            {
+                if (!melee)
+                {
+                    return false;
+                }
+            }
+            else if (Distance > range)
+            {
+                return false;
+            }
+            return true;
         }
-        return true;
+
+            
     }
 
     public (int, int, int, int, List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
@@ -1268,7 +1299,7 @@ public class ActionsMenu : MonoBehaviour
                             {
                                 totaldamage += unitdamage;
                             }
-                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe" || charunit.enemyStats.monsterStats.size>0)
                             {
                                 DealScytheDamage(unit, target);
                             }

@@ -206,7 +206,11 @@ public class ActionManager : MonoBehaviour
 
     public void ManagePath()
     {
-        if(!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(GridScript.selection) && GridScript.selection!= previoustile && GridScript.lockedmovementtiles.Contains(GridScript.selection))
+        if(currentcharacter == null)
+        {
+            currentpath = null;
+        }
+        else if(!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(GridScript.selection) && GridScript.selection!= previoustile && GridScript.lockedmovementtiles.Contains(GridScript.selection))
         {
             previoustile = GridScript.selection;
             bool legalposition = true;
@@ -235,7 +239,7 @@ public class ActionManager : MonoBehaviour
                 }
             }
         }
-        else if( ! currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(GridScript.selection))
+        else if(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(GridScript.selection))
         {
             currentpath = null;
         }

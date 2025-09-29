@@ -38,10 +38,13 @@ public class TurnManger : MonoBehaviour
     private MapEventManager mapEventManager;
 
     public PhaseTextScript phaseTextScript;
+
+    private MinimapScript minimapScript;
     private void Start()
     {
         weatherManager = GetComponent<WeatherManager>();
         mapEventManager = GetComponent<MapEventManager>();
+        minimapScript = FindAnyObjectByType<MinimapScript>();
     }
 
     // Update is called once per frame
@@ -102,6 +105,7 @@ public class TurnManger : MonoBehaviour
             {
                 actionManager.frameswherenotlock = 5;
                 currentlyplaying = "playable";
+                phaseTextScript.SetupText(currentlyplaying);
                 BeginningOfTurnsTrigger(playableunitGO);
                 weatherManager.UpdateRain();
                 mapEventManager.EventInitialization();
@@ -186,6 +190,7 @@ public class TurnManger : MonoBehaviour
             //Reset Verso movements
             unit.GetComponent<UnitScript>().tilesmoved = 0;
         }
+        minimapScript.UpdateMinimap();
     }
     private void ManageTurnRotation()
     {

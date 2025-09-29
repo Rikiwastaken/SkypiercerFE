@@ -136,6 +136,7 @@ public class TextBubbleScript : MonoBehaviour
         else
         {
             DeactivateBubble();
+            FindAnyObjectByType<MapEventManager>().TriggerEventCheck();
         }
             
 
@@ -168,5 +169,6 @@ public class TextBubbleScript : MonoBehaviour
         }
         currentTextBubble = 0;
         Dialogue = null;
+        
     }
 }

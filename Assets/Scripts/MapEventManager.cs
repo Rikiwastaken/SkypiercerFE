@@ -68,13 +68,14 @@ public class MapEventManager : MonoBehaviour
                     {
                         tileModification.ApplyModification();
                     }
+                    FindAnyObjectByType<MapEventManager>().EventInitialization();
                     break;
                 case 4:
                     Debug.Log("dialoguetrigger trigger");
                     FindAnyObjectByType<TextBubbleScript>().InitializeDialogue(dialoguetoShow);
                     break;
             }
-            FindAnyObjectByType<MapEventManager>().EventInitialization();
+
         }
 
     }

@@ -1019,6 +1019,10 @@ public class GridScript : MonoBehaviour
 
             }
         }
+        else
+        {
+            newtileslist = tiles;
+        }
         for (int i = 1; i <= range; i++)
         {
             if (i == 1 && !frapperenmelee)
