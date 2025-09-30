@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnitScript;
@@ -87,6 +88,14 @@ public class MinimapScript : MonoBehaviour
 
             float zoom = 7f;
             minimapImage.rectTransform.sizeDelta = new Vector2(gridWidth * zoom, gridHeight * zoom);
+            GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
+            GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
+
+            // Pivot also bottom-left
+            GetComponent<RectTransform>().pivot = new Vector2(1, 0);
+
+            // Position with offset (e.g., 10px from edges)
+            GetComponent<RectTransform>().anchoredPosition = new Vector2(-5, 5);
         }
        
         UpdateMinimap();
@@ -107,6 +116,7 @@ public class MinimapScript : MonoBehaviour
             {
                 for (int j = 0; j < gridScript.Grid[i].Count; j++)
                 {
+                    GridSquareScript tile = gridScript.GetTile(i, j);
                     if (gridScript.GetTile(i, j).isobstacle)
                     {
                         SetTileColor(i, j, Color.grey);
@@ -114,6 +124,18 @@ public class MinimapScript : MonoBehaviour
                     else
                     {
                         SetTileColor(i, j, Color.white);
+                    }
+                    if (gridScript.attacktiles.Contains(tile) || gridScript.lockedattacktiles.Contains(tile))
+                    {
+                        SetTileColor(i, j, new Color(245f/255f, 176f / 255f, 66f / 255f)); //orange
+                    }
+                    if (gridScript.healingtiles.Contains(tile) || gridScript.lockedhealingtiles.Contains(tile))
+                    {
+                        SetTileColor(i, j, new Color(66f / 255f, 245f / 255f, 170f / 255f));
+                    }
+                    if (gridScript.movementtiles.Contains(tile) || gridScript.lockedmovementtiles.Contains(tile))
+                    {
+                        SetTileColor(i, j, Color.blue);
                     }
                 }
             }
@@ -123,7 +145,7 @@ public class MinimapScript : MonoBehaviour
                 {
                     if (character.affiliation == "playable")
                     {
-                        SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.blue);
+                        SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.cyan);
                     }
                     else if (character.affiliation == "enemy")
                     {
@@ -135,6 +157,10 @@ public class MinimapScript : MonoBehaviour
                     }
                 }
             }
+
+            
+
+
             if(gridScript.selection!=null && showposition<=4)
             {
                 SetTileColor((int)gridScript.selection.GridCoordinates.x, (int)gridScript.selection.GridCoordinates.y, Color.green);

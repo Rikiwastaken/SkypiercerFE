@@ -240,6 +240,10 @@ public class GridScript : MonoBehaviour
 
         previousmovementvalueforbuffer = inputManager.movementValue;
         UpdateTileText();
+        if(lockselection && movementtiles.Count==0 && lockedmovementtiles.Count==0 && attacktiles.Count == 0 && lockedattacktiles.Count == 0 && healingtiles.Count == 0 && lockedhealingtiles.Count == 0)
+        {
+            lockselection = false;
+        }
     }
 
     public void InstantiateGrid()
@@ -283,6 +287,7 @@ public class GridScript : MonoBehaviour
         }
         GridDimensions = new Vector2(Grid.Count, Grid[0].Count);
         selection = GetTile(GetComponent<MapInitializer>().playablepos[0]);
+        
     }
 
     private void UpdateTileText()
@@ -361,7 +366,8 @@ public class GridScript : MonoBehaviour
     {
         if (selection == null)
         {
-            selection = Grid[0][0].GetComponent<GridSquareScript>();
+            selection = GetTile(GetComponent<MapInitializer>().playablepos[0]);
+            FindAnyObjectByType<battlecameraScript>().transform.position = new Vector3(selection.GridCoordinates.x, FindAnyObjectByType<battlecameraScript>().transform.position.y,selection.GridCoordinates.y);
         }
         else
         {
@@ -491,6 +497,7 @@ public class GridScript : MonoBehaviour
             }
         }
         movementtiles = new List<GridSquareScript>();
+        attacktiles = new List<GridSquareScript>();
         foreach (GameObject unitGO in allunitGOs)
         {
             if (unitGO != null)
@@ -513,12 +520,12 @@ public class GridScript : MonoBehaviour
                         movements += 1;
                     }
                     SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
-                    if(unit.enemyStats.monsterStats.size > 1)
+                    if (unit.enemyStats.monsterStats.size > 1)
                     {
                         CheckMovementsForBigUnits(unit);
                     }
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    ShowAttack(range, melee, type.ToLower() == "staff", false,unit.enemyStats.monsterStats.size);
+                    ShowAttack(range, melee, type.ToLower() == "staff", false, unit.enemyStats.monsterStats.size);
                 }
             }
 
@@ -589,9 +596,10 @@ public class GridScript : MonoBehaviour
             }
         }
         movementtiles = new List<GridSquareScript>();
+        attacktiles = new List<GridSquareScript>();
         foreach (GameObject unitGO in allunitGOs)
         {
-            if(unitGO != null)
+            if (unitGO != null)
             {
                 Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
                 if (unit.position == Target.GetComponent<UnitScript>().UnitCharacteristics.position && !unit.alreadyplayed)
@@ -615,7 +623,7 @@ public class GridScript : MonoBehaviour
                     ShowAttack(range, melee, type.ToLower() == "staff", false, unit.enemyStats.monsterStats.size);
                 }
             }
-            
+
 
         }
         if (!lockselection)
@@ -651,6 +659,7 @@ public class GridScript : MonoBehaviour
             }
         }
         movementtiles = new List<GridSquareScript>();
+        attacktiles = new List<GridSquareScript>();
         Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
         string tiletype = GetTile((int)unitchar.position.x, (int)unitchar.position.y).type;
         int movements = remainingmovements;

@@ -41,7 +41,8 @@ public class battlecameraScript : MonoBehaviour
         previouselevation = transform.position.y;
         GridScript = FindAnyObjectByType<GridScript>();
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>();
-        Destination = GridScript.selection.GridCoordinates;
+        Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
+        transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
     }
 
     void FixedUpdate()
