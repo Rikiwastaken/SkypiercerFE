@@ -1094,6 +1094,22 @@ public class AttackTurnScript : MonoBehaviour
                     reward -= 99;
                 }
             }
+
+            if(charunit.enemyStats.monsterStats.size>1)
+            {
+                GridSquareScript tile1 = gridScript.GetTile(position.GridCoordinates + new Vector2(-1, 0));
+                GridSquareScript tile2 = gridScript.GetTile(position.GridCoordinates + new Vector2(-1, 1));
+                GridSquareScript tile3 = gridScript.GetTile(position.GridCoordinates + new Vector2(0, 1));
+                if(tile1.isobstacle || tile2.isobstacle || tile3.isobstacle)
+                {
+                    return reward - 9999;
+                }
+                if(gridScript.GetUnit(tile1)!=unit || gridScript.GetUnit(tile2) != unit ||  gridScript.GetUnit(tile3) != unit)
+                {
+                    return reward - 9999;
+                }
+            }
+
         }
         return reward;
 

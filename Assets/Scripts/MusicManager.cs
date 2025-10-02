@@ -13,6 +13,22 @@ public class MusicManager : MonoBehaviour
     public battlecameraScript battlecameraScript;
 
     private TurnManger TurnManager;
+    
+    private SaveManager SaveManager;
+
+    private float beforecombatmusicvol;
+
+    private void Start()
+    {
+        beforecombatmusicvol = BeforeCombat.volume;
+        SaveManager = FindAnyObjectByType<SaveManager>();
+        float volumemult = (float)SaveManager.Options.musicvolume / 100f;
+
+        if (BeforeCombat.isPlaying)
+        {
+            BeforeCombat.volume = beforecombatmusicvol * volumemult;
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -21,7 +37,16 @@ public class MusicManager : MonoBehaviour
             TurnManager=FindAnyObjectByType<TurnManger>();
         }
 
-        if(TurnManager.currentlyplaying!="" && !incombat.isPlaying)
+        float volumemult = (float)SaveManager.Options.musicvolume / 100f;
+
+        if(BeforeCombat.isPlaying)
+        {
+            BeforeCombat.volume = beforecombatmusicvol * volumemult;
+        }
+
+
+
+        if (TurnManager.currentlyplaying!="" && !incombat.isPlaying)
         {
             BeforeCombat.Stop();
             double startTime = AudioSettings.dspTime + 0.1; // small delay to guarantee readiness
@@ -32,13 +57,13 @@ public class MusicManager : MonoBehaviour
 
         if(battlecameraScript.incombat)
         {
-            if(incombat.volume< maxvolume)
+            if(incombat.volume< maxvolume* volumemult)
             {
                 incombat.volume +=Time.fixedDeltaTime;
             }
             else
             {
-                incombat.volume = maxvolume;
+                incombat.volume = maxvolume* volumemult;
             }
             if (outcombat.volume>0)
             {
@@ -47,13 +72,13 @@ public class MusicManager : MonoBehaviour
         }
         else
         {
-            if (outcombat.volume < maxvolume)
+            if (outcombat.volume < maxvolume* volumemult)
             {
                 outcombat.volume += Time.fixedDeltaTime;
             }
             else
             {
-                outcombat.volume = maxvolume;
+                outcombat.volume = maxvolume * volumemult;
             }
             if (incombat.volume > 0f)
             {

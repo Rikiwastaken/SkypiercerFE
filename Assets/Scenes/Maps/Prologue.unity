@@ -29954,7 +29954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].name
-      value: DialogueTest
+      value: BattleStartDialogue
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].name
@@ -30046,7 +30046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.size
@@ -30118,7 +30118,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[4].text
-      value: Right. Zack's team, move out ! Do you remember how to fight ?
+      value: Right. Let's deal with them quickly. I haven't been this excited to
+        fight in a while !
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[5].name
@@ -30126,8 +30127,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[5].text
-      value: Yeah. I mean we're not the ones ditching class... I'm ready to roll
-        !
+      value: If you weren't ditching training that much, maybe you wouldn't get like
+        this over some weak pluvial...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[6].name
+      value: Zack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[6].text
+      value: Team Zack, move out !
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[0].name
@@ -30200,7 +30209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[8].text
-      value: What ? You're a master hunter ? how come ?
+      value: What ? You're a master hunter ? No way...
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[9].name
@@ -30396,6 +30405,10 @@ PrefabInstance:
       propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[5].Portrait
       value: 
       objectReference: {fileID: 21300000, guid: 95a4432c0a5facf4b96a82497eae6937, type: 3}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[6].Portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[0].Portrait
       value: 

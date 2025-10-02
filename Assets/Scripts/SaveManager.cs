@@ -26,6 +26,14 @@ public class SaveManager : MonoBehaviour
         public float secondselapsed;
     }
 
+    public class OptionsClass
+    {
+        public string versionID;
+        public int musicvolume;
+        public int SEVolume;
+        public bool Fullscreen;
+    }
+
     public int numberofslots;
 
     public List<SaveClass> SaveClasses;
@@ -34,8 +42,11 @@ public class SaveManager : MonoBehaviour
 
     public SaveClass DefaultSave;
 
+    public OptionsClass Options;
+
     private void Start()
     {
+        LoadOptions();
         DefaultSave.slot = -1;
         DefaultSave.versionID = versionID;
         DefaultSave.chapter = 0;
@@ -73,6 +84,10 @@ public class SaveManager : MonoBehaviour
         {
             try
             {
+                if(file.Contains("options"))
+                {
+                    continue;
+                }
                 string json = File.ReadAllText(file);
                 SaveClass save = JsonUtility.FromJson<SaveClass>(json);
                 if (save != null)
@@ -93,6 +108,62 @@ public class SaveManager : MonoBehaviour
 
         Debug.Log($"Chargement terminé. {loadedSaves.Count} sauvegarde(s) trouvée(s).");
         return loadedSaves;
+    }
+
+    private void LoadOptions()
+    {
+        string path = Application.persistentDataPath;
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        string fileName = "options.json";
+        string fullPath = Path.Combine(path, fileName);
+
+        try
+        {
+            string json = File.ReadAllText(fullPath);
+            if (json != null)
+            {
+                Options = JsonUtility.FromJson<OptionsClass>(json);
+                Screen.fullScreen = Options.Fullscreen;
+            }
+        }
+        catch 
+        {
+            Debug.Log("creating new options data");
+            Options = new OptionsClass();
+            Options.musicvolume = 100;
+            Options.SEVolume = 100;
+            Options.Fullscreen = Screen.fullScreen;
+        }
+    }
+
+    public void SaveOptions()
+    {
+        if( Options == null )
+        {
+            Options = new OptionsClass();
+        }
+        string path = Application.persistentDataPath;
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        string fileName = "options.json";
+        string fullPath = Path.Combine(path, fileName);
+        string json = JsonUtility.ToJson(Options, true);
+
+        try
+        {
+            File.WriteAllText(fullPath, json);
+            Debug.Log($"Sauvegarde d'options effectuée : {fullPath}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Erreur lors de la sauvegarde d'options : {e.Message}");
+        }
+
     }
 
     public void InitializeSaveButtons(List<Button> buttons)
