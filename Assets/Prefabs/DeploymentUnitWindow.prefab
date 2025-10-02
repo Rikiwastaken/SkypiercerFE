@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: d1ae3fc8ff19b904282150a3042c514c, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -147,10 +147,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Character:
-    protagonist: 0
-    battalion: 
     name: 
     stats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
+    AjustedStats:
       HP: 0
       Strength: 0
       Psyche: 0
@@ -181,8 +187,36 @@ MonoBehaviour:
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
-    deployunit: 0
+    playableStats:
+      MaxSkillpoints: 99
+      deployunit: 0
+      unlocked: 0
+      protagonist: 0
+      battalion: 
+      ID: 0
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
+    currentTile: []
+  Item:
+    type: 0
+    ID: 0
+    Quantity: 0
   CharacterID: 0
+  isskillbutton: 0
 --- !u!1 &4756475583996408417
 GameObject:
   m_ObjectHideFlags: 0

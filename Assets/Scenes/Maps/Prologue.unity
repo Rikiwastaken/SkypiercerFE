@@ -29934,7 +29934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].ID
@@ -29946,11 +29946,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].ID
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[4].ID
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].name
@@ -29962,11 +29962,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].name
-      value: Victory
+      value: GoToNextChapter
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[4].name
-      value: GoToNextChapter
+      value: Victory
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].triggertype
@@ -29978,7 +29978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].triggertype
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[4].triggertype
@@ -29990,15 +29990,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].triggerEffectType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
-      propertyPath: EventsToMonitor.Array.data[3].triggerEffectType
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
-      propertyPath: EventsToMonitor.Array.data[4].triggerEffectType
+      propertyPath: EventsToMonitor.Array.data[3].triggerEffectType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[4].triggerEffectType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[0].initializationtype
@@ -30014,7 +30014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].initializationtype
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[4].initializationtype
@@ -30033,12 +30033,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].EventsToWatch.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].EventsToWatch.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[4].EventsToWatch.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.size
@@ -30046,11 +30050,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.size
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.size
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[4].dialoguetoShow.Array.size
@@ -30065,8 +30069,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
-      propertyPath: 'EventsToMonitor.Array.data[3].EventsToWatch.Array.data[0]'
+      propertyPath: 'EventsToMonitor.Array.data[2].EventsToWatch.Array.data[0]'
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EventsToMonitor.Array.data[3].EventsToWatch.Array.data[0]'
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EventsToMonitor.Array.data[4].EventsToWatch.Array.data[0]'
@@ -30127,48 +30135,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[0].text
-      value: So, is this the place ?
+      value: We finally got them all...
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[1].name
-      value: Elwyn
+      value: Lea
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[1].text
-      value: Yeah, the entrance of this cave is where the Elder was seen last.
+      value: Look. Someone is coming.
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[2].name
-      value: Zack
+      value: ???
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[2].text
-      value: Granpa, why did you come here ? It's crawling with pluvials.
+      value: You really dealt with that monster. Well done.
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[3].name
-      value: Lea
-      objectReference: {fileID: 0}
-    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
-      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[3].text
-      value: Do you guys think we have time to chat ?
-      objectReference: {fileID: 0}
-    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
-      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[4].name
       value: Zack
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[3].text
+      value: Who are you ? What did you do to granpa ?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[4].name
+      value: Elder Farron
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[4].text
-      value: Right. Zack's team, move out ! Do you remember how to fight ?
+      value: Calm down, Zack. He is an old friend of mine.
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[5].name
-      value: Lea
+      value: Zack
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[5].text
-      value: Yeah. I mean we're not the ones ditching class... I'm ready to roll
-        !
+      value: Granpa ! Are you alright ? Why did you come here without taking anyone
+        with you ?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[6].name
+      value: Elder Farron
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[6].text
+      value: Oh, don't you worry. With Mir here with me I was never in any danger.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[7].name
+      value: Elwyn
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[7].text
+      value: Zack, look at his medal.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[8].name
+      value: Zack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[8].text
+      value: What ? You're a master hunter ? how come ?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[9].name
+      value: Mir
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[9].text
+      value: Why don't we return to Landfall village ? I want to talk with you, Zack.
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[0].name
@@ -30363,23 +30403,39 @@ PrefabInstance:
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[1].Portrait
       value: 
-      objectReference: {fileID: 21300000, guid: c6a1704e47f6dcf4cafcb92a6be35997, type: 3}
+      objectReference: {fileID: 21300000, guid: 95a4432c0a5facf4b96a82497eae6937, type: 3}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[2].Portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
+      objectReference: {fileID: 21300000, guid: a6917331ada75f148afaf32f0ca6664e, type: 3}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[3].Portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 95a4432c0a5facf4b96a82497eae6937, type: 3}
+      objectReference: {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[4].Portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
+      objectReference: {fileID: 21300000, guid: f9f0b7b0584129949998471b8702086b, type: 3}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[5].Portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 95a4432c0a5facf4b96a82497eae6937, type: 3}
+      objectReference: {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[6].Portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: f9f0b7b0584129949998471b8702086b, type: 3}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[7].Portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: c6a1704e47f6dcf4cafcb92a6be35997, type: 3}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[8].Portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[9].Portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: a6917331ada75f148afaf32f0ca6664e, type: 3}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[0].Portrait
       value: 
