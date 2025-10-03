@@ -35,7 +35,18 @@ public class UnitScript : MonoBehaviour
         public EnemyStats enemyStats;
 
         public List<GridSquareScript> currentTile;
+        public int modelID;
 
+    }
+
+    [Serializable]
+    public class ModelInfo
+    {
+        public int ID;
+        public GameObject wholeModel;
+        public Transform handbone;
+        public Transform Lefthandbone;
+        public bool active;
     }
 
     [Serializable]
@@ -43,6 +54,7 @@ public class UnitScript : MonoBehaviour
     {
         public int size;
         public bool ispluvial;
+        public bool ismachine;
     }
 
     [Serializable]
@@ -72,6 +84,7 @@ public class UnitScript : MonoBehaviour
         public bool isother;
         public MonsterStats monsterStats;
         public int RemainingLifebars;
+        public int modelID;
     }
 
     [Serializable]
@@ -197,13 +210,12 @@ public class UnitScript : MonoBehaviour
 
     private GridScript GridScript;
 
-    public Transform handbone;
-    public Transform Lefthandbone;
-
     private List<Vector2> pathtotake =  new List<Vector2>();
 
     private float canvaselevation;
     private MinimapScript MinimapScript;
+
+    public List<ModelInfo> ModelList;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -250,7 +262,15 @@ public class UnitScript : MonoBehaviour
         //    Head.GetComponent<SkinnedMeshRenderer>().material = EnemyMat;
         //}
 
+        foreach(ModelInfo modelInfo in ModelList)
+        {
+            if(modelInfo.active)
+            {
+                modelInfo.wholeModel.SetActive(true); ;
+            }
+        }
 
+        
     }
 
     // Update is called once per frame
@@ -268,7 +288,14 @@ public class UnitScript : MonoBehaviour
 
         if (animator == null)
         {
-            animator = GetComponentInChildren<Animator>();
+            foreach(ModelInfo modelInfo in ModelList)
+            {
+                if(modelInfo.active)
+                {
+                    animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
+                }
+            }
+            animator.SetBool("Ismachine",UnitCharacteristics.enemyStats.monsterStats.ismachine);
         }
 
         if (armature == null)
@@ -702,14 +729,21 @@ public class UnitScript : MonoBehaviour
             equipmentmodel equipmentmodel = GetFirstWeapon().equipmentmodel;
             currentequipmentmodel = Instantiate(equipmentmodel.Model);
             currentequipmentmodel.transform.localScale = Vector3.one * 0.5f;
-            if(GetFirstWeapon().type.ToLower()=="bow")
+            foreach (ModelInfo modelInfo in ModelList)
             {
-                currentequipmentmodel.transform.SetParent(Lefthandbone);
+                if (modelInfo.active)
+                {
+                    if (GetFirstWeapon().type.ToLower() == "bow")
+                    {
+                        currentequipmentmodel.transform.SetParent(modelInfo.Lefthandbone);
+                    }
+                    else if(GetFirstWeapon().type.ToLower() != "machine")
+                    {
+                        currentequipmentmodel.transform.SetParent(modelInfo.handbone);
+                    }
+                }
             }
-            else
-            {
-                currentequipmentmodel.transform.SetParent(handbone);
-            }
+            
             
             
             currentequipmentmodel.transform.localPosition = Vector3.zero;

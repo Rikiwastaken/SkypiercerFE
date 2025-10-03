@@ -80,6 +80,7 @@ public class MapInitializer : MonoBehaviour
             {
                 GameObject newcharacter = Instantiate(BaseCharacter);
                 newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
+                ManageModel(newcharacter);
                 newcharacter.GetComponent<UnitScript>().calculateStats();
                 newcharacter.transform.parent = Characters.transform;
                 newcharacter.transform.position = new Vector3(playablepos[index].x, 0, playablepos[index].y);
@@ -107,6 +108,8 @@ public class MapInitializer : MonoBehaviour
             GameObject newcharacter = Instantiate(BaseCharacter);
             Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
             Character.enemyStats = enemyStats;
+            Character.modelID = enemyStats.modelID;
+            ManageModel(newcharacter);
             Character.name = enemyStats.Name;
             if (enemyStats.Skills.Count > 0)
             {
@@ -133,5 +136,21 @@ public class MapInitializer : MonoBehaviour
             index++;
         }
     }
-
+    private void ManageModel(GameObject character)
+    {
+        foreach (ModelInfo modelinf in character.GetComponent<UnitScript>().ModelList)
+        {
+            if(modelinf.ID == character.GetComponent<UnitScript>().UnitCharacteristics.modelID)
+            {
+                modelinf.active = true;
+                modelinf.wholeModel.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("destroying");
+                modelinf.active = false;
+                DestroyImmediate(modelinf.wholeModel);
+            }
+        }
+    }
 }
