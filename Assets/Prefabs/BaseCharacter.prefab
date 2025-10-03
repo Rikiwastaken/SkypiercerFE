@@ -624,22 +624,25 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
-    currentTile: {fileID: 0}
-  enemyStats:
-    classID: 0
-    desiredlevel: 5
-    itemtodropID: 0
-    usetelekinesis: 0
-    personality: 
-    startpos: {x: 0, y: 0}
-    equipments: 
-    Skills: 
-    Name: 
-    isboss: 0
-    isother: 0
-    monsterStats:
-      size: 0
-    RemainingLifebars: 0
+      ID: 0
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+      RemainingLifebars: 0
+    currentTile:
+    - {fileID: 0}
   trylvlup: 0
   fixedgrowth: 0
   Fists:
@@ -672,6 +675,7 @@ MonoBehaviour:
   timeforshowingnumbers: 2
   copied: 0
   handbone: {fileID: 4823662156962520033}
+  Lefthandbone: {fileID: 5906616131762545722}
 --- !u!1 &7336564532334944263
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,5 +824,10 @@ Transform:
 --- !u!4 &4823662156962520033 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2868419398323936185, guid: 64b182395c0b6744a920c74bce3ece13, type: 3}
+  m_PrefabInstance: {fileID: 7295755607377625176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5906616131762545722 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3803077687212418146, guid: 64b182395c0b6744a920c74bce3ece13, type: 3}
   m_PrefabInstance: {fileID: 7295755607377625176}
   m_PrefabAsset: {fileID: 0}

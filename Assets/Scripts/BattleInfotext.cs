@@ -1,7 +1,6 @@
 
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -38,6 +37,8 @@ public class BattleInfotext : MonoBehaviour
 
     public bool indescription;
 
+    private TextBubbleScript textBubbleScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,13 +46,23 @@ public class BattleInfotext : MonoBehaviour
         dataScript = FindAnyObjectByType<DataScript>();
         inputManager = FindAnyObjectByType<InputManager>();
         gridScript = FindAnyObjectByType<GridScript>();
+        textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        if (Attackwindows.activeSelf || ItemAction.activeSelf)
+        if(textBubbleScript.indialogue)
+        {
+            transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
+            transform.parent.GetComponent<Image>().enabled = false;
+        }
+        else
+        {
+            transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = true;
+            transform.parent.GetComponent<Image>().enabled = true;
+        }
+        if (Attackwindows.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue)
         {
             transform.parent.GetChild(1).gameObject.SetActive(false);
             transform.parent.GetChild(2).gameObject.SetActive(false);

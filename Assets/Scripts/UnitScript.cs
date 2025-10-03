@@ -198,6 +198,7 @@ public class UnitScript : MonoBehaviour
     private GridScript GridScript;
 
     public Transform handbone;
+    public Transform Lefthandbone;
 
     private List<Vector2> pathtotake =  new List<Vector2>();
 
@@ -581,6 +582,7 @@ public class UnitScript : MonoBehaviour
         animator.SetBool("Punch", false);
         animator.SetBool("GreatSword", false);
         animator.SetBool("Heal", false);
+        animator.SetBool("Bow", false);
 
         switch (weapon.type.ToLower())
         {
@@ -598,6 +600,9 @@ public class UnitScript : MonoBehaviour
                 break;
             case "shield":
                 animator.SetBool("Punch", true);
+                break;
+            case "bow":
+                animator.SetBool("Bow", true);
                 break;
             case "staff":
                 if(healing)
@@ -697,7 +702,15 @@ public class UnitScript : MonoBehaviour
             equipmentmodel equipmentmodel = GetFirstWeapon().equipmentmodel;
             currentequipmentmodel = Instantiate(equipmentmodel.Model);
             currentequipmentmodel.transform.localScale = Vector3.one * 0.5f;
-            currentequipmentmodel.transform.SetParent(handbone);
+            if(GetFirstWeapon().type.ToLower()=="bow")
+            {
+                currentequipmentmodel.transform.SetParent(Lefthandbone);
+            }
+            else
+            {
+                currentequipmentmodel.transform.SetParent(handbone);
+            }
+            
             
             currentequipmentmodel.transform.localPosition = Vector3.zero;
             currentequipmentmodel.transform.localRotation = Quaternion.identity;
