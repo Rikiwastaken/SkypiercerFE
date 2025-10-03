@@ -27,11 +27,13 @@ public class GameOverScript : MonoBehaviour
         {
             VictoryMenu.gameObject.SetActive(true);
             GameOverMenu.gameObject.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(VictoryMenu.GetChild(1).gameObject);
         }
         else
         {
             VictoryMenu.gameObject.SetActive(false);
             GameOverMenu.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(GameOverMenu.GetChild(1).gameObject);
         }
         sceneLoader = FindAnyObjectByType<SceneLoader>();
     }
@@ -52,6 +54,7 @@ public class GameOverScript : MonoBehaviour
 
     private void Update()
     {
+        Time.timeScale = 0f;
         ManageSelection();
     }
 
@@ -71,13 +74,14 @@ public class GameOverScript : MonoBehaviour
     private void ManageSelection()
     {
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
+        
         if (GameOverMenu.gameObject.activeSelf)
         {
             if (currentSelected == null)
             {
                 EventSystem.current.SetSelectedGameObject(GameOverMenu.GetChild(1).gameObject);
             }
-            else if (currentSelected.transform.parent != GameOverMenu)
+            else if (!currentSelected.transform.IsChildOf(GameOverMenu.transform) )
             {
                 EventSystem.current.SetSelectedGameObject(GameOverMenu.GetChild(1).gameObject);
             }
@@ -88,7 +92,7 @@ public class GameOverScript : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(VictoryMenu.GetChild(1).gameObject);
             }
-            else if (currentSelected.transform.parent != VictoryMenu)
+            else if (!currentSelected.transform.IsChildOf(VictoryMenu.transform))
             {
                 EventSystem.current.SetSelectedGameObject(VictoryMenu.GetChild(1).gameObject);
             }
@@ -99,7 +103,7 @@ public class GameOverScript : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(SaveMenu.GetChild(0).gameObject);
             }
-            else if (currentSelected.transform.parent != SaveMenu)
+            else if (!currentSelected.transform.IsChildOf(SaveMenu.transform))
             {
                 EventSystem.current.SetSelectedGameObject(SaveMenu.GetChild(0).gameObject);
             }
@@ -109,7 +113,7 @@ public class GameOverScript : MonoBehaviour
     public void Continue()
     {
         int nextsceneindex = FindAnyObjectByType<MapInitializer>().ChapterID;
-        string scenetoload = "Chapter" + nextsceneindex+1;
+        string scenetoload = "Chapter" + (nextsceneindex+1);
 
         sceneLoader.LoadScene(scenetoload);
     }

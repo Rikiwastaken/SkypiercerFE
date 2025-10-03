@@ -853,7 +853,10 @@ public class UnitScript : MonoBehaviour
 
     }
 
-
+    public string GetName()
+    {
+        return UnitCharacteristics.name;
+    }
     public bool CheckIfOnActivated()
     {
         bool isdeactivated = false;

@@ -11,7 +11,7 @@ public class TextBubbleScript : MonoBehaviour
     [Serializable]
     public class TextBubbleInfo
     {
-        public string name;
+        public string Charactername;
         public string text;
         public Sprite Portrait;
     }
@@ -41,6 +41,16 @@ public class TextBubbleScript : MonoBehaviour
 
     private GridScript gridScript;
 
+    void Awake()
+    {
+        if (charactername != null)
+            charactername.ForceMeshUpdate();
+
+        if (sentence != null)
+            sentence.ForceMeshUpdate();
+    }
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -54,10 +64,10 @@ public class TextBubbleScript : MonoBehaviour
     {
         TextBubbleInfo ex1 = new TextBubbleInfo();
         ex1.text = "I'm ready to roll !";
-        ex1.name = "Genny";
+        ex1.Charactername = "Genny";
         TextBubbleInfo ex2 = new TextBubbleInfo();
         ex2.text = "I'M READY TO ROLL";
-        ex2.name = "Genny";
+        ex2.Charactername = "Genny";
         InitializeDialogue(new List<TextBubbleInfo> { ex1, ex2 });
     }
 
@@ -129,7 +139,7 @@ public class TextBubbleScript : MonoBehaviour
                 characterportrait.sprite = Dialogue[currentTextBubble].Portrait;
             }
             texttodisplay = Dialogue[currentTextBubble].text;
-            charactername.text = Dialogue[currentTextBubble].name;
+            charactername.text = Dialogue[currentTextBubble].Charactername;
             charIndex = 0;
             isPrinting = true;
         }

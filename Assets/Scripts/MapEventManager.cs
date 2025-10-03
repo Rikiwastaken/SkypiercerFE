@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using static TextBubbleScript;
 using static UnitScript;
+
 
 
 public class MapEventManager : MonoBehaviour
@@ -12,7 +12,7 @@ public class MapEventManager : MonoBehaviour
     [Serializable]
     public class EventCondition
     {
-        public string name;
+        public string eventname;
         public int ID;
         public List<Character> UnitList;
         public List<string> NameUnitList;
@@ -49,34 +49,7 @@ public class MapEventManager : MonoBehaviour
         public List<TextBubbleInfo> dialoguetoShow;
 
         public TileModification tileModification;
-        public void TriggerEvent(GameOverScript GameOverScript)
-        {
-            switch (triggerEffectType)
-            {
-                case 1:
-                    Debug.Log("victory trigger");
-                    GameOverScript.victory = true;
-                    GameOverScript.gameObject.SetActive(true);
-                    break;
-                case 2:
-                    Debug.Log("gameover trigger");
-                    GameOverScript.gameObject.SetActive(true);
-                    break;
-                case 3:
-                    Debug.Log("tilechange trigger");
-                    if (tileModification != null)
-                    {
-                        tileModification.ApplyModification();
-                    }
-                    FindAnyObjectByType<MapEventManager>().EventInitialization();
-                    break;
-                case 4:
-                    Debug.Log("dialoguetrigger trigger");
-                    FindAnyObjectByType<TextBubbleScript>().InitializeDialogue(dialoguetoShow);
-                    break;
-            }
-
-        }
+        
 
     }
 
@@ -99,7 +72,7 @@ public class MapEventManager : MonoBehaviour
     public class TileModification
     {
         public List<Vector2Int> TilesIdCouples;
-        private List<GridSquareScript> tilestomodify;
+        public List<GridSquareScript> tilestomodify;
         public string newtype;
         public int modiftype;
         /* 1 : activate
@@ -110,52 +83,8 @@ public class MapEventManager : MonoBehaviour
          * 6 : 
          */
 
-        public void initializelists()
-        {
-            GameObject grid = GameObject.Find("Grid");
-            tilestomodify = new List<GridSquareScript>();
-            foreach(Vector2Int IDCouple in TilesIdCouples)
-            {
-                if (IDCouple.y >= IDCouple.x && IDCouple.y < grid.transform.childCount)
-                {
-                    for (int i = IDCouple.x; i <= IDCouple.y; i++)
-                    {
-                        tilestomodify.Add(grid.transform.GetChild(i).GetComponent<GridSquareScript>());
-                    }
-                }
-            }
-        }
-        public void ApplyModification()
-        {
-            initializelists();
-            switch (modiftype)
-            {
-                case 1:
-                    foreach(GridSquareScript tile in tilestomodify)
-                    {
-                        tile.activated = true ;
-                    }
-                    break;
-                case 2:
-                    foreach (GridSquareScript tile in tilestomodify)
-                    {
-                        tile.isobstacle = false;
-                    }
-                    break;
-                case 3:
-                    foreach (GridSquareScript tile in tilestomodify)
-                    {
-                        tile.isobstacle = true;
-                    }
-                    break;
-                case 4:
-                    foreach (GridSquareScript tile in tilestomodify)
-                    {
-                        tile.type = newtype;
-                    }
-                    break;
-            }
-        }
+        
+        
     }
 
     public List<EventCondition> EventsToMonitor;
@@ -164,14 +93,21 @@ public class MapEventManager : MonoBehaviour
     private TurnManger turnManger;
 
     public GameOverScript GameOverScript;
+    private TextBubbleScript TextBubbleScript;
 
     private bool eventinitialized;
+
+    public int ManualEventTrigger = -1;
+
+    private GameObject grid;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         GridScript = GetComponent<GridScript>();
+        grid = GameObject.Find("Grid");
         turnManger = GetComponent<TurnManger>();
+        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>();
     }
 
     private void FixedUpdate()
@@ -181,6 +117,91 @@ public class MapEventManager : MonoBehaviour
             eventinitialized = true;
             EventInitialization();
         }
+        if(ManualEventTrigger >=0 && EventsToMonitor.Count>ManualEventTrigger)
+        {
+            if(!EventsToMonitor[ManualEventTrigger].triggered)
+            {
+                Debug.Log("triggering : " +  EventsToMonitor[ManualEventTrigger].eventname);
+                TriggerEvent(EventsToMonitor[ManualEventTrigger]);
+                EventsToMonitor[ManualEventTrigger].triggered = true;
+            }
+        }
+    }
+
+    public void initializeEventList(TileModification TileMod)
+    {
+        TileMod.tilestomodify = new List<GridSquareScript>();
+        foreach (Vector2Int IDCouple in TileMod.TilesIdCouples)
+        {
+            if (IDCouple.y >= IDCouple.x && IDCouple.y < grid.transform.childCount)
+            {
+                for (int i = IDCouple.x; i <= IDCouple.y; i++)
+                {
+                    TileMod.tilestomodify.Add(grid.transform.GetChild(i).GetComponent<GridSquareScript>());
+                }
+            }
+        }
+    }
+
+
+    public void ApplyTilesModification(TileModification TileMod)
+    {
+        initializeEventList(TileMod);
+        switch (TileMod.modiftype)
+        {
+            case 1:
+                foreach (GridSquareScript tile in TileMod.tilestomodify)
+                {
+                    tile.activated = true;
+                }
+                break;
+            case 2:
+                foreach (GridSquareScript tile in TileMod.tilestomodify)
+                {
+                    tile.isobstacle = false;
+                }
+                break;
+            case 3:
+                foreach (GridSquareScript tile in TileMod.tilestomodify)
+                {
+                    tile.isobstacle = true;
+                }
+                break;
+            case 4:
+                foreach (GridSquareScript tile in TileMod.tilestomodify)
+                {
+                    tile.type = TileMod.newtype;
+                }
+                break;
+        }
+    }
+
+    public void TriggerEvent(EventCondition Event)
+    {
+        switch (Event.triggerEffectType)
+        {
+            case 1:
+                Debug.Log("victory trigger");
+                GameOverScript.victory = true;
+                GameOverScript.gameObject.SetActive(true);
+                break;
+            case 2:
+                Debug.Log("gameover trigger");
+                GameOverScript.gameObject.SetActive(true);
+                break;
+            case 3:
+                Debug.Log("tilechange trigger");
+                if (Event.tileModification != null)
+                {
+                    ApplyTilesModification(Event.tileModification);
+                }
+                break;
+            case 4:
+                Debug.Log("dialoguetrigger trigger");
+                TextBubbleScript.InitializeDialogue(Event.dialoguetoShow);
+                break;
+        }
+
     }
 
     public void EventInitialization()
@@ -195,11 +216,11 @@ public class MapEventManager : MonoBehaviour
                         e.UnitList = new List<Character>();
                         foreach(string name in e.NameUnitList )
                         {
-                            foreach(Character unit in GridScript.allunits)
+                            foreach(GameObject unit in GridScript.allunitGOs)
                             {
-                                if(unit.name.ToLower()==name.ToLower())
+                                if(unit.GetComponent<UnitScript>().GetName().ToLower()==name.ToLower())
                                 {
-                                    e.UnitList.Add(unit);
+                                    e.UnitList.Add(unit.GetComponent<UnitScript>().UnitCharacteristics);
                                 }
                             }
                         }
@@ -241,51 +262,66 @@ public class MapEventManager : MonoBehaviour
                             case (1):
                                 if (reachedTiles("playable", e.TilesList))
                                 {
-                                    e.TriggerEvent(GameOverScript);
+                                    TriggerEvent(e);
+                                    
                                     e.triggered = true;
+                                    EventInitialization();
+                                    return;
                                 }
                                 break;
                             case (2):
                                 if (reachedTiles("enemy", e.TilesList))
                                 {
-                                    e.TriggerEvent(GameOverScript);
+                                    TriggerEvent(e);
                                     e.triggered = true;
+                                    EventInitialization();
+                                    return;
                                 }
                                 break;
                             case (3):
                                 if (reachedTiles("other", e.TilesList))
                                 {
-                                    e.TriggerEvent(GameOverScript);
+                                    TriggerEvent(e);
                                     e.triggered = true;
+                                    EventInitialization();
+                                    return;
                                 }
                                 break;
                             case (4):
                                 if (checkIfOneDead(e.UnitList))
                                 {
-                                    e.TriggerEvent(GameOverScript);
+                                    TriggerEvent(e);
                                     e.triggered = true;
+                                    EventInitialization();
+                                    return;
                                 }
                                 break;
                             case (5):
                                 if (checkIfAllDead(e.UnitList))
                                 {
-                                    e.TriggerEvent(GameOverScript);
+                                    TriggerEvent(e);
                                     e.triggered = true;
+                                    EventInitialization();
+                                    return;
                                 }
                                 break;
                             case (6):
-                                e.TriggerEvent(GameOverScript);
+                                TriggerEvent(e);
                                 e.triggered = true;
-                                break;
+                                EventInitialization();
+                                return;
                             case (7):
-                                e.TriggerEvent(GameOverScript);
+                                TriggerEvent(e);
                                 e.triggered = true;
-                                break;
+                                EventInitialization();
+                                return;
                             case (8):
                                 if(CheckIfEventsAreTriggered(e.EventsToWatch))
                                 {
-                                    e.TriggerEvent(GameOverScript);
+                                    TriggerEvent(e);
                                     e.triggered = true;
+                                    EventInitialization();
+                                    return;
                                 }
                                 break;
 
@@ -331,12 +367,11 @@ public class MapEventManager : MonoBehaviour
             {
                 if(unit != null)
                 {
-                    Character unitcharacter = unit.GetComponent<UnitScript>().UnitCharacteristics;
-                    if (unitcharacter.name.ToLower() == condition.Unit1.ToLower())
+                    if (unit.GetComponent<UnitScript>().GetName().ToLower() == condition.Unit1.ToLower())
                     {
                         unit1 = unit;
                     }
-                    if (unitcharacter.name.ToLower() == condition.Unit2.ToLower())
+                    if (unit.GetComponent<UnitScript>().GetName().ToLower() == condition.Unit2.ToLower())
                     {
                         unit2 = unit;
                     }

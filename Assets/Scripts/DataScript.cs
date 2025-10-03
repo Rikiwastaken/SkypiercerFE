@@ -19,7 +19,7 @@ public class DataScript : MonoBehaviour
 
     public List<Character> PlayableCharacterList;
 
-    public float manualgamespeed = 1;
+    public float manualgamespeed = -1;
 
     public Inventory PlayerInventory;
 
@@ -66,7 +66,7 @@ public class DataScript : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         DontDestroyOnLoad(gameObject);
-        if(SceneManager.GetActiveScene().name== "FirstScene")
+        if (SceneManager.GetActiveScene().name == "FirstScene")
         {
             SceneManager.LoadScene("MainMenu");
         }
@@ -75,7 +75,11 @@ public class DataScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Time.timeScale = manualgamespeed;
+        if (manualgamespeed > 0)
+        {
+            Time.timeScale = manualgamespeed;
+        }
+
     }
 
     private void Setup()
@@ -100,7 +104,7 @@ public class DataScript : MonoBehaviour
         PlayerInventory.inventoryItems = new List<InventoryItem>();
         foreach (Skill skill in SkillList)
         {
-            if(skill.ID != 0)
+            if (skill.ID != 0)
             {
                 InventoryItem inventoryItem = new InventoryItem();
                 inventoryItem.Quantity = 50;
@@ -111,7 +115,7 @@ public class DataScript : MonoBehaviour
         }
     }
 
-    
+
     private void SetupClasses()
     {
         for (int i = 0; i < ClassList.Count; i++)
@@ -122,9 +126,9 @@ public class DataScript : MonoBehaviour
     private void SetupDefaultCharacterList()
     {
         DefaultPlayableCharacterList = new List<Character>();
-        DefaultInventory =new Inventory() { inventoryItems =new List<InventoryItem>() };
+        DefaultInventory = new Inventory() { inventoryItems = new List<InventoryItem>() };
 
-        foreach(Character character in PlayableCharacterList)
+        foreach (Character character in PlayableCharacterList)
         {
             DefaultPlayableCharacterList.Add(CopyChararacter(character));
         }
@@ -227,7 +231,7 @@ public class DataScript : MonoBehaviour
         }
         Character.equipments = newequipmentlist;
     }
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     [ContextMenu("Calculate IDs and fillout out classes")]
     void CalculateIDs()
     {
@@ -240,5 +244,5 @@ public class DataScript : MonoBehaviour
         Setup();
         EditorUtility.SetDirty(this);
     }
-    #endif
+#endif
 }

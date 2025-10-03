@@ -29946,7 +29946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].ID
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[4].ID
@@ -29967,6 +29967,22 @@ PrefabInstance:
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[4].name
       value: Victory
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[0].eventname
+      value: Defeat
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].eventname
+      value: Startdialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].eventname
+      value: VictoryDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[3].eventname
+      value: NextChapter
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].triggertype
@@ -30034,7 +30050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].EventsToWatch.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].EventsToWatch.Array.size
@@ -30074,7 +30090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EventsToMonitor.Array.data[3].EventsToWatch.Array.data[0]'
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EventsToMonitor.Array.data[4].EventsToWatch.Array.data[0]'
@@ -30530,8 +30546,136 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[0].Charactername
+      value: Zack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[1].Charactername
+      value: Elwyn
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[2].Charactername
+      value: Zack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[3].Charactername
+      value: Lea
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[4].Charactername
+      value: Zack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[5].Charactername
+      value: Lea
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[6].Charactername
+      value: Zack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].tileModification.TilesIdCouples.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[0].Charactername
+      value: Zack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[1].Charactername
+      value: Lea
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[2].Charactername
+      value: ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[3].Charactername
+      value: Zack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[4].Charactername
+      value: Elder Farron
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[5].Charactername
+      value: Zack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[6].Charactername
+      value: Elder Farron
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[7].Charactername
+      value: Elwyn
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[8].Charactername
+      value: Zack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[9].Charactername
+      value: Mir
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[1].dialoguepartID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[2].dialoguepartID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[3].dialoguepartID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[4].dialoguepartID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[5].dialoguepartID
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[1].dialoguetoShow.Array.data[6].dialoguepartID
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[1].dialoguepartID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[2].dialoguepartID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[3].dialoguepartID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[4].dialoguepartID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[5].dialoguepartID
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[6].dialoguepartID
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[7].dialoguepartID
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[8].dialoguepartID
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[9].dialoguepartID
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.size
