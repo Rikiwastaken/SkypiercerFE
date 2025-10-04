@@ -585,121 +585,121 @@ MonoBehaviour:
       localposition: {x: -0.00035, y: 0.0001, z: -0.0023}
       localscale: {x: 0.00006, y: 0.0002, z: 0.00006}
       localrotation: {x: 0, y: 100, z: 90}
-  - Name: 
-    BaseDamage: 0
-    BaseHit: 0
-    BaseCrit: 0
-    Range: 0
-    type: 
-    Currentuses: 0
-    Maxuses: 0
+  - Name: Machine Limb
+    BaseDamage: 5
+    BaseHit: 90
+    BaseCrit: 3
+    Range: 1
+    type: Machine
+    Currentuses: 99
+    Maxuses: 99
     ID: 29
-    Grade: 0
+    Grade: 1
     equipmentmodel:
       Model: {fileID: 0}
       localposition: {x: 0, y: 0, z: 0}
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
-  - Name: 
-    BaseDamage: 0
-    BaseHit: 0
-    BaseCrit: 0
-    Range: 0
-    type: 
-    Currentuses: 0
-    Maxuses: 0
+  - Name: Machine Claw
+    BaseDamage: 8
+    BaseHit: 80
+    BaseCrit: 5
+    Range: 1
+    type: Machine
+    Currentuses: 99
+    Maxuses: 99
     ID: 30
-    Grade: 0
+    Grade: 2
     equipmentmodel:
       Model: {fileID: 0}
       localposition: {x: 0, y: 0, z: 0}
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
-  - Name: 
-    BaseDamage: 0
-    BaseHit: 0
-    BaseCrit: 0
-    Range: 0
-    type: 
-    Currentuses: 0
-    Maxuses: 0
+  - Name: Machine Saw
+    BaseDamage: 11
+    BaseHit: 70
+    BaseCrit: 7
+    Range: 1
+    type: Machine
+    Currentuses: 99
+    Maxuses: 99
     ID: 31
-    Grade: 0
+    Grade: 3
     equipmentmodel:
       Model: {fileID: 0}
       localposition: {x: 0, y: 0, z: 0}
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
-  - Name: 
-    BaseDamage: 0
-    BaseHit: 0
-    BaseCrit: 0
-    Range: 0
-    type: 
-    Currentuses: 0
-    Maxuses: 0
+  - Name: Machine Cleaver
+    BaseDamage: 14
+    BaseHit: 60
+    BaseCrit: 8
+    Range: 1
+    type: Machine
+    Currentuses: 99
+    Maxuses: 99
     ID: 32
-    Grade: 0
+    Grade: 4
     equipmentmodel:
       Model: {fileID: 0}
       localposition: {x: 0, y: 0, z: 0}
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
-  - Name: 
-    BaseDamage: 0
-    BaseHit: 0
-    BaseCrit: 0
-    Range: 0
-    type: 
-    Currentuses: 0
-    Maxuses: 0
+  - Name: Machine Spring
+    BaseDamage: 5
+    BaseHit: 90
+    BaseCrit: 3
+    Range: 2
+    type: Bow
+    Currentuses: 99
+    Maxuses: 99
     ID: 33
-    Grade: 0
+    Grade: 1
     equipmentmodel:
       Model: {fileID: 0}
       localposition: {x: 0, y: 0, z: 0}
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
-  - Name: 
-    BaseDamage: 0
-    BaseHit: 0
-    BaseCrit: 0
-    Range: 0
-    type: 
-    Currentuses: 0
-    Maxuses: 0
+  - Name: Machine Nailgun
+    BaseDamage: 8
+    BaseHit: 80
+    BaseCrit: 5
+    Range: 2
+    type: Bow
+    Currentuses: 99
+    Maxuses: 99
     ID: 34
-    Grade: 0
+    Grade: 2
     equipmentmodel:
       Model: {fileID: 0}
       localposition: {x: 0, y: 0, z: 0}
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
-  - Name: 
-    BaseDamage: 0
-    BaseHit: 0
-    BaseCrit: 0
-    Range: 0
-    type: 
-    Currentuses: 0
-    Maxuses: 0
+  - Name: Machine Crossbow
+    BaseDamage: 11
+    BaseHit: 70
+    BaseCrit: 7
+    Range: 2
+    type: Bow
+    Currentuses: 99
+    Maxuses: 99
     ID: 35
-    Grade: 0
+    Grade: 3
     equipmentmodel:
       Model: {fileID: 0}
       localposition: {x: 0, y: 0, z: 0}
       localscale: {x: 0, y: 0, z: 0}
       localrotation: {x: 0, y: 0, z: 0}
-  - Name: 
-    BaseDamage: 0
-    BaseHit: 0
-    BaseCrit: 0
-    Range: 0
-    type: 
-    Currentuses: 0
-    Maxuses: 0
+  - Name: Machine Laser
+    BaseDamage: 14
+    BaseHit: 60
+    BaseCrit: 8
+    Range: 2
+    type: Bow
+    Currentuses: 99
+    Maxuses: 99
     ID: 36
-    Grade: 0
+    Grade: 4
     equipmentmodel:
       Model: {fileID: 0}
       localposition: {x: 0, y: 0, z: 0}
@@ -1578,6 +1578,7 @@ MonoBehaviour:
       unlocked: 1
       protagonist: 1
       battalion: 
+      ID: 0
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -1593,8 +1594,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Lea
     stats:
       HP: 23
@@ -1641,6 +1646,7 @@ MonoBehaviour:
       unlocked: 1
       protagonist: 0
       battalion: 
+      ID: 1
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -1656,8 +1662,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Elwyn
     stats:
       HP: 14
@@ -1704,6 +1714,7 @@ MonoBehaviour:
       unlocked: 1
       protagonist: 0
       battalion: 
+      ID: 2
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -1719,8 +1730,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Sorak
     stats:
       HP: 20
@@ -1767,6 +1782,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 3
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -1782,8 +1798,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Lyv
     stats:
       HP: 17
@@ -1830,6 +1850,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 4
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -1845,8 +1866,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Sieg
     stats:
       HP: 16
@@ -1893,6 +1918,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 5
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -1908,8 +1934,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Micaiah
     stats:
       HP: 15
@@ -1956,6 +1986,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 6
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -1971,8 +2002,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Sothe
     stats:
       HP: 35
@@ -2019,6 +2054,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 7
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2034,8 +2070,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Laura
     stats:
       HP: 16
@@ -2082,6 +2122,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 8
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2097,8 +2138,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Nolan
     stats:
       HP: 29
@@ -2145,6 +2190,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 9
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2160,8 +2206,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Leonardo
     stats:
       HP: 17
@@ -2208,6 +2258,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 10
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2223,8 +2274,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Edward
     stats:
       HP: 19
@@ -2271,6 +2326,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 11
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2286,8 +2342,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   - name: Xora
     stats:
       HP: 20
@@ -2334,6 +2394,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 12
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2349,8 +2410,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile:
+    - {fileID: 0}
+    modelID: 0
   manualgamespeed: 1
   PlayerInventory:
     inventoryItems:
@@ -2575,6 +2640,7 @@ MonoBehaviour:
       unlocked: 1
       protagonist: 1
       battalion: 
+      ID: 0
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2590,14 +2656,17 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile: []
+    modelID: 0
   - name: Lea
     stats:
       HP: 23
       Strength: 6
       Psyche: 0
-      Defense: 8
+      Defense: 7
       Resistance: 4
       Speed: 6
       Dexterity: 6
@@ -2638,6 +2707,7 @@ MonoBehaviour:
       unlocked: 1
       protagonist: 0
       battalion: 
+      ID: 1
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2653,8 +2723,11 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile: []
+    modelID: 0
   - name: Elwyn
     stats:
       HP: 14
@@ -2701,6 +2774,7 @@ MonoBehaviour:
       unlocked: 1
       protagonist: 0
       battalion: 
+      ID: 2
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2716,8 +2790,212 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile: []
+    modelID: 0
+  - name: Sorak
+    stats:
+      HP: 20
+      Strength: 9
+      Psyche: 1
+      Defense: 11
+      Resistance: 8
+      Speed: 3
+      Dexterity: 5
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
+    level: 4
+    experience: 0
+    affiliation: 
+    growth:
+      HPGrowth: 70
+      StrengthGrowth: 60
+      PsycheGrowth: 10
+      DefenseGrowth: 60
+      ResistanceGrowth: 50
+      SpeedGrowth: 30
+      DexterityGrowth: 40
+    currentHP: 0
+    movements: 5
+    position: {x: 0, y: 0}
+    alreadyplayed: 0
+    alreadymoved: 0
+    telekinesisactivated: 0
+    equipmentsIDs: 1100000001000000
+    equipments: []
+    UnitSkill: 2
+    EquipedSkills: 
+    isboss: 0
+    attacksfriends: 0
+    playableStats:
+      MaxSkillpoints: 99
+      deployunit: 0
+      unlocked: 0
+      protagonist: 0
+      battalion: 
+      ID: 3
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+        ismachine: 0
+      RemainingLifebars: 0
+      modelID: 0
+    currentTile: []
+    modelID: 0
+  - name: Lyv
+    stats:
+      HP: 17
+      Strength: 3
+      Psyche: 6
+      Defense: 7
+      Resistance: 4
+      Speed: 8
+      Dexterity: 5
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
+    level: 3
+    experience: 0
+    affiliation: 
+    growth:
+      HPGrowth: 70
+      StrengthGrowth: 20
+      PsycheGrowth: 60
+      DefenseGrowth: 60
+      ResistanceGrowth: 30
+      SpeedGrowth: 60
+      DexterityGrowth: 50
+    currentHP: 0
+    movements: 6
+    position: {x: 0, y: 0}
+    alreadyplayed: 0
+    alreadymoved: 0
+    telekinesisactivated: 0
+    equipmentsIDs: 0500000019000000
+    equipments: []
+    UnitSkill: 31
+    EquipedSkills: 
+    isboss: 0
+    attacksfriends: 0
+    playableStats:
+      MaxSkillpoints: 99
+      deployunit: 0
+      unlocked: 0
+      protagonist: 0
+      battalion: 
+      ID: 4
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+        ismachine: 0
+      RemainingLifebars: 0
+      modelID: 0
+    currentTile: []
+    modelID: 0
+  - name: Sieg
+    stats:
+      HP: 16
+      Strength: 3
+      Psyche: 9
+      Defense: 5
+      Resistance: 4
+      Speed: 9
+      Dexterity: 8
+    AjustedStats:
+      HP: 0
+      Strength: 0
+      Psyche: 0
+      Defense: 0
+      Resistance: 0
+      Speed: 0
+      Dexterity: 0
+    level: 4
+    experience: 0
+    affiliation: 
+    growth:
+      HPGrowth: 50
+      StrengthGrowth: 20
+      PsycheGrowth: 70
+      DefenseGrowth: 40
+      ResistanceGrowth: 30
+      SpeedGrowth: 70
+      DexterityGrowth: 60
+    currentHP: 0
+    movements: 6
+    position: {x: 0, y: 0}
+    alreadyplayed: 0
+    alreadymoved: 0
+    telekinesisactivated: 0
+    equipmentsIDs: 0d000000
+    equipments: []
+    UnitSkill: 38
+    EquipedSkills: 
+    isboss: 0
+    attacksfriends: 0
+    playableStats:
+      MaxSkillpoints: 99
+      deployunit: 0
+      unlocked: 0
+      protagonist: 0
+      battalion: 
+      ID: 5
+    enemyStats:
+      classID: 0
+      desiredlevel: 0
+      itemtodropID: 0
+      usetelekinesis: 0
+      personality: 
+      startpos: {x: 0, y: 0}
+      equipments: 
+      Skills: 
+      Name: 
+      isboss: 0
+      isother: 0
+      monsterStats:
+        size: 0
+        ispluvial: 0
+        ismachine: 0
+      RemainingLifebars: 0
+      modelID: 0
+    currentTile: []
+    modelID: 0
   - name: Micaiah
     stats:
       HP: 15
@@ -2764,6 +3042,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 6
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2779,8 +3058,11 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile: []
+    modelID: 0
   - name: Sothe
     stats:
       HP: 35
@@ -2827,6 +3109,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 7
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2842,8 +3125,11 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile: []
+    modelID: 0
   - name: Laura
     stats:
       HP: 16
@@ -2890,6 +3176,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 8
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2905,8 +3192,11 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile: []
+    modelID: 0
   - name: Nolan
     stats:
       HP: 29
@@ -2953,6 +3243,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 9
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -2968,8 +3259,11 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile: []
+    modelID: 0
   - name: Leonardo
     stats:
       HP: 17
@@ -3016,6 +3310,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 10
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -3031,8 +3326,11 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile: []
+    modelID: 0
   - name: Edward
     stats:
       HP: 19
@@ -3079,6 +3377,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 11
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -3094,134 +3393,11 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
-  - name: Lyvent
-    stats:
-      HP: 17
-      Strength: 3
-      Psyche: 6
-      Defense: 7
-      Resistance: 4
-      Speed: 8
-      Dexterity: 5
-    AjustedStats:
-      HP: 0
-      Strength: 0
-      Psyche: 0
-      Defense: 0
-      Resistance: 0
-      Speed: 0
-      Dexterity: 0
-    level: 4
-    experience: 0
-    affiliation: 
-    growth:
-      HPGrowth: 70
-      StrengthGrowth: 20
-      PsycheGrowth: 60
-      DefenseGrowth: 60
-      ResistanceGrowth: 30
-      SpeedGrowth: 60
-      DexterityGrowth: 50
-    currentHP: 0
-    movements: 6
-    position: {x: 0, y: 0}
-    alreadyplayed: 0
-    alreadymoved: 0
-    telekinesisactivated: 0
-    equipmentsIDs: 0500000019000000
-    equipments: []
-    UnitSkill: 31
-    EquipedSkills: 220000002800000021000000
-    isboss: 0
-    attacksfriends: 0
-    playableStats:
-      MaxSkillpoints: 99
-      deployunit: 0
-      unlocked: 0
-      protagonist: 0
-      battalion: 
-    enemyStats:
-      classID: 0
-      desiredlevel: 0
-      itemtodropID: 0
-      usetelekinesis: 0
-      personality: 
-      startpos: {x: 0, y: 0}
-      equipments: 
-      Skills: 
-      Name: 
-      isboss: 0
-      isother: 0
-      monsterStats:
-        size: 0
-        ispluvial: 0
-      RemainingLifebars: 0
-    currentTile: {fileID: 0}
-  - name: Zek
-    stats:
-      HP: 16
-      Strength: 3
-      Psyche: 9
-      Defense: 5
-      Resistance: 4
-      Speed: 9
-      Dexterity: 8
-    AjustedStats:
-      HP: 0
-      Strength: 0
-      Psyche: 0
-      Defense: 0
-      Resistance: 0
-      Speed: 0
-      Dexterity: 0
-    level: 4
-    experience: 0
-    affiliation: 
-    growth:
-      HPGrowth: 50
-      StrengthGrowth: 20
-      PsycheGrowth: 70
-      DefenseGrowth: 40
-      ResistanceGrowth: 30
-      SpeedGrowth: 70
-      DexterityGrowth: 60
-    currentHP: 0
-    movements: 6
-    position: {x: 0, y: 0}
-    alreadyplayed: 0
-    alreadymoved: 0
-    telekinesisactivated: 0
-    equipmentsIDs: 0d000000
-    equipments: []
-    UnitSkill: 26
-    EquipedSkills: 260000001f0000001000000007000000
-    isboss: 0
-    attacksfriends: 0
-    playableStats:
-      MaxSkillpoints: 99
-      deployunit: 0
-      unlocked: 0
-      protagonist: 0
-      battalion: 
-    enemyStats:
-      classID: 0
-      desiredlevel: 0
-      itemtodropID: 0
-      usetelekinesis: 0
-      personality: 
-      startpos: {x: 0, y: 0}
-      equipments: 
-      Skills: 
-      Name: 
-      isboss: 0
-      isother: 0
-      monsterStats:
-        size: 0
-        ispluvial: 0
-      RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile: []
+    modelID: 0
   - name: Xora
     stats:
       HP: 20
@@ -3268,6 +3444,7 @@ MonoBehaviour:
       unlocked: 0
       protagonist: 0
       battalion: 
+      ID: 12
     enemyStats:
       classID: 0
       desiredlevel: 0
@@ -3283,8 +3460,11 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
-    currentTile: {fileID: 0}
+      modelID: 0
+    currentTile: []
+    modelID: 0
   DefaultInventory:
     inventoryItems:
     - type: 1

@@ -105,7 +105,7 @@ public class BattleInfotext : MonoBehaviour
         }
 
 
-        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace)|| gridScript.GetComponent<TurnManger>().currentlyplaying!="playable")
+        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || gridScript.GetComponent<TurnManger>().currentlyplaying!="playable")
         {
             stringtoshow = string.Empty;
             Color color = transform.parent.GetComponent<Image>().color;

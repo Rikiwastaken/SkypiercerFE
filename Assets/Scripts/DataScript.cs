@@ -188,8 +188,17 @@ public class DataScript : MonoBehaviour
                 equipmentList[i].BaseDamage = equipemnttoappy.BaseDamage;
                 equipmentList[i].BaseHit = equipemnttoappy.BaseHit;
                 equipmentList[i].BaseCrit = equipemnttoappy.BaseCrit;
-                equipmentList[i].Currentuses = equipemnttoappy.Maxuses;
-                equipmentList[i].Maxuses = equipemnttoappy.Maxuses;
+                if (equipmentList[i].Name.Contains("Machine"))
+                {
+                    equipmentList[i].Currentuses = 99;
+                    equipmentList[i].Maxuses = 99;
+                }
+                else
+                {
+                    equipmentList[i].Currentuses = equipemnttoappy.Maxuses;
+                    equipmentList[i].Maxuses = equipemnttoappy.Maxuses;
+                }
+                    
                 if (equipmentList[i].type.ToLower() == "bow")
                 {
                     equipmentList[i].Range = 2;
@@ -227,6 +236,35 @@ public class DataScript : MonoBehaviour
                 newequipment.Grade = equipmenttocopy.Grade;
                 newequipment.equipmentmodel = equipmenttocopy.equipmentmodel;
                 newequipmentlist.Add(newequipment);
+
+                if(Character.name == "Zack")
+                {
+                    switch(newequipment.type.ToLower())
+                    {
+                        case "sword":
+                            newequipment.Name = "Swino";
+                            break;
+                        case "spear":
+                            newequipment.Name = "Spino";
+                            break;
+                        case "greatsword":
+                            newequipment.Name = "Grino";
+                            break;
+                        case "bow":
+                            newequipment.Name = "Bino";
+                            break;
+                        case "scythe":
+                            newequipment.Name = "Scino";
+                            break;
+                        case "shield":
+                            newequipment.Name = "Shino";
+                            break;
+                        case "staff":
+                            newequipment.Name = "Stino";
+                            break;
+
+                    }
+                }
             }
         }
         Character.equipments = newequipmentlist;

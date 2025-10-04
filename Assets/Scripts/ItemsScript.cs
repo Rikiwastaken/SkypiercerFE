@@ -29,12 +29,13 @@ public class ItemsScript : MonoBehaviour
             if (ItemActionsMenu.activeSelf)
             {
                 ItemActionsMenuCancelButton.onClick.Invoke();
+                
             }
             else
             {
                 ItemMenuCancelButton.onClick.Invoke();
             }
-
+            statstext.transform.parent.gameObject.SetActive(false);
         }
 
         GameObject currentselected = EventSystem.current.currentSelectedGameObject;
