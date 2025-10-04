@@ -513,7 +513,7 @@ public class UnitScript : MonoBehaviour
         }
             
     }
-    public void MoveTo(Vector2 destination, bool jump=false)
+    public void MoveTo(Vector2 destination, bool jump=false, bool instantaneousmovement = false)
     {
         Debug.Log(transform.name + " moving to : " + destination);
         if (GridScript == null)
@@ -539,7 +539,8 @@ public class UnitScript : MonoBehaviour
                 {
                     pathtotake = new List<Vector2>{ destination };
                 }
-                else if (UnitCharacteristics.currentTile[0]!=null)
+               
+                else if (UnitCharacteristics.currentTile[0] != null)
                 {
                     pathtotake = GridScript.FindPath(UnitCharacteristics.currentTile[0].GridCoordinates, destination, UnitCharacteristics);
                 }
@@ -547,6 +548,11 @@ public class UnitScript : MonoBehaviour
             }
             else 
             {
+                transform.position = new Vector3(destination.x, transform.position.y, destination.y);
+            }
+            if(instantaneousmovement)
+            {
+                pathtotake = new List<Vector2>();
                 transform.position = new Vector3(destination.x, transform.position.y, destination.y);
             }
             UnitCharacteristics.position = destination;

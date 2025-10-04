@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static MapEventManager;
 using static TextBubbleScript;
 using static UnitScript;
 
@@ -49,7 +51,7 @@ public class MapEventManager : MonoBehaviour
         public List<TextBubbleInfo> dialoguetoShow;
 
         public TileModification tileModification;
-        
+        public UnitPlacement UnitPlacement;
 
     }
 
@@ -66,6 +68,15 @@ public class MapEventManager : MonoBehaviour
          * 5 : 
          * 6 : 
          */
+    }
+
+    [Serializable]
+    public class UnitPlacement
+    {
+        public List<string> UnitToPlaceManually;
+        public List<Vector2> WhereToManuallyPlaceUnits;
+        public List<Vector2> RemainingSpots;
+        public Vector2 CameraPosition;
     }
 
     [Serializable]
@@ -176,8 +187,48 @@ public class MapEventManager : MonoBehaviour
         }
     }
 
+    public void ManageUnitPlacement(UnitPlacement unitPlacement)
+    {
+        List<GameObject> movedunits = new List<GameObject>();
+        foreach(string unitname in unitPlacement.UnitToPlaceManually)
+        {
+            
+            int rankinList = unitPlacement.UnitToPlaceManually.IndexOf(unitname);
+            foreach (GameObject unit in GridScript.allunitGOs)
+            {
+                if (unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == unitname.ToLower())
+                {
+                    if (unitPlacement.WhereToManuallyPlaceUnits.Count > rankinList)
+                    {
+                        unit.GetComponent<UnitScript>().MoveTo(unitPlacement.WhereToManuallyPlaceUnits[rankinList],false,true);
+                        movedunits.Add(unit);
+                    }
+                }
+            }
+        }
+        int otherpositionsrank = 0;
+        foreach (GameObject unit in GridScript.allunitGOs)
+        {
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable" && !movedunits.Contains(unit) )
+            {
+                if (unitPlacement.RemainingSpots.Count > otherpositionsrank)
+                {
+                    unit.GetComponent<UnitScript>().MoveTo(unitPlacement.RemainingSpots[otherpositionsrank], false, true);
+                    otherpositionsrank++;
+                    movedunits.Add(unit);
+                }
+            }
+        }
+        if(unitPlacement.CameraPosition!=Vector2.zero)
+        {
+            FindAnyObjectByType<battlecameraScript>().Destination = unitPlacement.CameraPosition;
+        }
+        
+    }
+
     public void TriggerEvent(EventCondition Event)
     {
+        ManageUnitPlacement(Event.UnitPlacement);
         switch (Event.triggerEffectType)
         {
             case 1:
@@ -218,7 +269,7 @@ public class MapEventManager : MonoBehaviour
                         {
                             foreach(GameObject unit in GridScript.allunitGOs)
                             {
-                                if(unit.GetComponent<UnitScript>().GetName().ToLower()==name.ToLower())
+                                if(unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower()==name.ToLower())
                                 {
                                     e.UnitList.Add(unit.GetComponent<UnitScript>().UnitCharacteristics);
                                 }
@@ -367,11 +418,11 @@ public class MapEventManager : MonoBehaviour
             {
                 if(unit != null)
                 {
-                    if (unit.GetComponent<UnitScript>().GetName().ToLower() == condition.Unit1.ToLower())
+                    if (unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == condition.Unit1.ToLower())
                     {
                         unit1 = unit;
                     }
-                    if (unit.GetComponent<UnitScript>().GetName().ToLower() == condition.Unit2.ToLower())
+                    if (unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == condition.Unit2.ToLower())
                     {
                         unit2 = unit;
                     }
