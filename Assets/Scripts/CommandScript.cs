@@ -18,15 +18,8 @@ public class CommandScript : MonoBehaviour
     private InputManager inputManager;
     public GameObject ItemActionsMenu;
     public TextMeshProUGUI statstext;
-    private Color BaseButtonColor;
-    private Color BaseButtonPressedColor;
     private ActionsMenu ActionsMenu;
 
-    private void Start()
-    {
-        BaseButtonColor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
-        BaseButtonPressedColor = transform.GetChild(0).GetComponent<Button>().colors.pressedColor;
-    }
     private void FixedUpdate()
     {
         if (inputManager == null)

@@ -770,7 +770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5268765326841187349
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4986,9 +4986,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
+      modelID: 0
     currentTile:
     - {fileID: 0}
+    modelID: 0
   buttons:
   - {fileID: 3240861738529935134}
   - {fileID: 4872761711283878001}
@@ -5516,7 +5519,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d8f42c9da8979744cb733913bb1f7cfd, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: d8f42c9da8979744cb733913bb1f7cfd, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.25
@@ -5613,7 +5616,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 85a31a6680f4a1349a49e259be38458a, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 85a31a6680f4a1349a49e259be38458a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.25
@@ -5710,7 +5713,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0f056de0e65e909489e232b76538ccc6, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 0f056de0e65e909489e232b76538ccc6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
@@ -10043,7 +10046,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -10058,7 +10063,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -10073,7 +10080,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -10088,7 +10097,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -10103,7 +10114,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -10118,7 +10131,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 0
     desiredlevel: 5
     itemtodropID: 0
@@ -10133,7 +10148,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 4
     desiredlevel: 1
     itemtodropID: 0
@@ -10148,7 +10165,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 2
     desiredlevel: 5
     itemtodropID: 0
@@ -10163,7 +10182,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 2
     desiredlevel: 5
     itemtodropID: 0
@@ -10178,7 +10199,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 3
     desiredlevel: 5
     itemtodropID: 0
@@ -10193,7 +10216,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 3
     desiredlevel: 5
     itemtodropID: 0
@@ -10208,7 +10233,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 3
     desiredlevel: 5
     itemtodropID: 0
@@ -10223,7 +10250,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 5
     desiredlevel: 5
     itemtodropID: 0
@@ -10238,7 +10267,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 5
     desiredlevel: 5
     itemtodropID: 0
@@ -10253,7 +10284,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 6
     desiredlevel: 5
     itemtodropID: 0
@@ -10268,7 +10301,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
   - classID: 6
     desiredlevel: 5
     itemtodropID: 0
@@ -10283,7 +10318,9 @@ MonoBehaviour:
     monsterStats:
       size: 0
       ispluvial: 0
+      ismachine: 0
     RemainingLifebars: 0
+    modelID: 0
 --- !u!114 &3706195574740214509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10297,7 +10334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventsToMonitor:
-  - name: Defeat
+  - eventname: 
     ID: 0
     UnitList: []
     NameUnitList: []
@@ -10311,9 +10348,15 @@ MonoBehaviour:
     dialoguetoShow: []
     tileModification:
       TilesIdCouples: []
+      tilestomodify: []
       newtype: 
       modiftype: 0
-  - name: UnlockRestOfTheMap
+    UnitPlacement:
+      UnitToPlaceManually: []
+      WhereToManuallyPlaceUnits: []
+      RemainingSpots: []
+      CameraPosition: {x: 0, y: 0}
+  - eventname: 
     ID: 0
     UnitList: []
     NameUnitList:
@@ -10329,9 +10372,16 @@ MonoBehaviour:
     tileModification:
       TilesIdCouples:
       - {x: 208, y: 305}
+      tilestomodify: []
       newtype: 
       modiftype: 1
+    UnitPlacement:
+      UnitToPlaceManually: []
+      WhereToManuallyPlaceUnits: []
+      RemainingSpots: []
+      CameraPosition: {x: 0, y: 0}
   GameOverScript: {fileID: 3232693506058724292}
+  ManualEventTrigger: -1
 --- !u!114 &2180441029300987015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10480,9 +10530,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
+      modelID: 0
     currentTile:
     - {fileID: 0}
+    modelID: 0
   SkillList: {fileID: 4898234980993599380}
   PageNumberText: {fileID: 8048071046576614320}
   SkillPageNumberText: {fileID: 2346139528945135520}
@@ -13208,9 +13261,12 @@ MonoBehaviour:
       monsterStats:
         size: 0
         ispluvial: 0
+        ismachine: 0
       RemainingLifebars: 0
+      modelID: 0
     currentTile:
     - {fileID: 0}
+    modelID: 0
 --- !u!1 &7512953878376125901
 GameObject:
   m_ObjectHideFlags: 0
