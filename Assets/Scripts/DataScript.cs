@@ -198,7 +198,7 @@ public class DataScript : MonoBehaviour
                     equipmentList[i].Currentuses = equipemnttoappy.Maxuses;
                     equipmentList[i].Maxuses = equipemnttoappy.Maxuses;
                 }
-                    
+
                 if (equipmentList[i].type.ToLower() == "bow")
                 {
                     equipmentList[i].Range = 2;
@@ -214,8 +214,73 @@ public class DataScript : MonoBehaviour
         }
     }
 
+    private void UpdateEquipmentID(Character character)
+    {
+        List<WeaponMastery> Masteries = character.Masteries;
+        foreach (WeaponMastery weaponMastery in Masteries)
+        {
+            if (weaponMastery.Level > 0)
+            {
+                bool weaponfound = false;
+                int equipmentIDLen = character.equipmentsIDs.Count;
+                for (int i = 0; i < equipmentIDLen; i++)
+                {
+                    equipment currentequipment = equipmentList[character.equipmentsIDs[i]];
+                    string currentequipmenttype = currentequipment.type;
+                    int currentequipmentgrade = currentequipment.Grade;
+                    if (weaponMastery.weapontype.ToLower() == currentequipmenttype.ToLower())
+                    {
+                        weaponfound = true;
+                        if (currentequipmentgrade < weaponMastery.Level)
+                        {
+                            character.equipmentsIDs[i] += weaponMastery.Level - currentequipmentgrade;
+                        }
+                        break;
+                    }
+                }
+                if (!weaponfound)
+                {
+                    character.equipmentsIDs.Add(GetWeaponID(weaponMastery.weapontype, weaponMastery.Level));
+                }
+            }
+        }
+    }
+
+    private int GetWeaponID(string type, int grade)
+    {
+        int weaponID = 0;
+
+        switch (type.ToLower())
+        {
+            case "sword":
+                weaponID = 1;
+                break;
+            case "spear":
+                weaponID = 5;
+                break;
+            case "greatsword":
+                weaponID = 9;
+                break;
+            case "bow":
+                weaponID = 13;
+                break;
+            case "scythe":
+                weaponID = 17;
+                break;
+            case "shield":
+                weaponID = 21;
+                break;
+            case "staff":
+                weaponID = 25;
+                break;
+        }
+
+        return weaponID + grade - 1;
+    }
+
     public void GenerateEquipmentList(Character Character)
     {
+        UpdateEquipmentID(Character);
         List<int> equipmentListIDs = Character.equipmentsIDs;
         List<equipment> newequipmentlist = new List<equipment>();
         foreach (int equipmentID in equipmentListIDs)
@@ -237,9 +302,9 @@ public class DataScript : MonoBehaviour
                 newequipment.equipmentmodel = equipmenttocopy.equipmentmodel;
                 newequipmentlist.Add(newequipment);
 
-                if(Character.name == "Zack")
+                if (Character.name == "Zack")
                 {
-                    switch(newequipment.type.ToLower())
+                    switch (newequipment.type.ToLower())
                     {
                         case "sword":
                             newequipment.Name = "Swino";
@@ -282,5 +347,40 @@ public class DataScript : MonoBehaviour
         Setup();
         EditorUtility.SetDirty(this);
     }
+
+    [ContextMenu("Initialize Unfilled Masteries")]
+    void InitializeMasteries()
+    {
+        if (Application.isPlaying)
+        {
+            Debug.LogWarning("Cannot generate persistent map in Play Mode. Exit Play Mode first.");
+            return;
+        }
+
+        foreach(Character character in PlayableCharacterList)
+        {
+            if(character.Masteries.Count <7)
+            {
+                List<WeaponMastery> masteries = new List<WeaponMastery>();
+                WeaponMastery swordmastery = new WeaponMastery() {weapontype= "sword",Level=-1,Exp=0 };
+                WeaponMastery spearmastery = new WeaponMastery() { weapontype = "spear", Level = -1, Exp = 0 };
+                WeaponMastery greatswordmastery = new WeaponMastery() { weapontype = "greatsword", Level = -1, Exp = 0 };
+                WeaponMastery bowmastery = new WeaponMastery() { weapontype = "bow", Level = -1, Exp = 0 };
+                WeaponMastery scythemastery = new WeaponMastery() { weapontype = "scythe", Level = -1, Exp = 0 };
+                WeaponMastery shieldmastery = new WeaponMastery() { weapontype = "shield", Level = -1, Exp = 0 };
+                WeaponMastery staffmastery = new WeaponMastery() { weapontype = "staff", Level = -1, Exp = 0 };
+                masteries.Add(swordmastery);
+                masteries.Add(spearmastery);
+                masteries.Add(greatswordmastery);
+                masteries.Add(bowmastery);
+                masteries.Add(scythemastery);
+                masteries.Add(shieldmastery);
+                masteries.Add(staffmastery);
+                character.Masteries = masteries;
+            }
+        }
+        EditorUtility.SetDirty(this);
+    }
+
 #endif
 }

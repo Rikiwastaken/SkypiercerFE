@@ -1600,6 +1600,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: 1
+    - weapontype: spear
+      Exp: 0
+      Level: 1
+    - weapontype: greatsword
+      Exp: 0
+      Level: 1
+    - weapontype: bow
+      Exp: 0
+      Level: 1
+    - weapontype: scythe
+      Exp: 0
+      Level: 1
+    - weapontype: shield
+      Exp: 0
+      Level: 1
+    - weapontype: staff
+      Exp: 0
+      Level: 1
   - name: Lea
     stats:
       HP: 23
@@ -1668,6 +1690,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: 0
+    - weapontype: greatsword
+      Exp: 0
+      Level: 0
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: 1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Elwyn
     stats:
       HP: 14
@@ -1736,6 +1780,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Sorak
     stats:
       HP: 20
@@ -1804,6 +1870,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: 1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: 0
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: 0
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Lyv
     stats:
       HP: 17
@@ -1872,6 +1960,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: 1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: 0
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: 0
   - name: Sieg
     stats:
       HP: 16
@@ -1940,6 +2050,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: 0
+    - weapontype: spear
+      Exp: 0
+      Level: 0
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: 1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Micaiah
     stats:
       HP: 15
@@ -2008,6 +2140,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Sothe
     stats:
       HP: 35
@@ -2076,6 +2230,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Laura
     stats:
       HP: 16
@@ -2144,6 +2320,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Nolan
     stats:
       HP: 29
@@ -2212,6 +2410,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Leonardo
     stats:
       HP: 17
@@ -2280,6 +2500,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Edward
     stats:
       HP: 19
@@ -2348,6 +2590,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Xora
     stats:
       HP: 20
@@ -2416,6 +2680,28 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   manualgamespeed: 1
   PlayerInventory:
     inventoryItems:
@@ -2661,6 +2947,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Lea
     stats:
       HP: 23
@@ -2728,6 +3015,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Elwyn
     stats:
       HP: 14
@@ -2795,6 +3083,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Sorak
     stats:
       HP: 20
@@ -2862,6 +3151,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Lyv
     stats:
       HP: 17
@@ -2929,6 +3219,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Sieg
     stats:
       HP: 16
@@ -2996,6 +3287,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Micaiah
     stats:
       HP: 15
@@ -3063,6 +3355,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Sothe
     stats:
       HP: 35
@@ -3130,6 +3423,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Laura
     stats:
       HP: 16
@@ -3197,6 +3491,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Nolan
     stats:
       HP: 29
@@ -3264,6 +3559,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Leonardo
     stats:
       HP: 17
@@ -3331,6 +3627,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Edward
     stats:
       HP: 19
@@ -3398,6 +3695,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   - name: Xora
     stats:
       HP: 20
@@ -3465,6 +3763,7 @@ MonoBehaviour:
       modelID: 0
     currentTile: []
     modelID: 0
+    Masteries: []
   DefaultInventory:
     inventoryItems:
     - type: 1

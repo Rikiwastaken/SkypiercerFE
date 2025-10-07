@@ -30,13 +30,21 @@ public class UnitScript : MonoBehaviour
         public List<int> EquipedSkills;
         public bool isboss;
         public bool attacksfriends;
-        
+
         public PlayableStats playableStats;
         public EnemyStats enemyStats;
 
         public List<GridSquareScript> currentTile;
         public int modelID;
+        public List<WeaponMastery> Masteries;
+    }
 
+    [Serializable]
+    public class WeaponMastery
+    {
+        public string weapontype;
+        public int Exp;
+        public int Level;
     }
 
     [Serializable]
@@ -166,7 +174,7 @@ public class UnitScript : MonoBehaviour
     }
 
     public Character UnitCharacteristics;
-    
+
 
     public bool trylvlup;
     public bool fixedgrowth;
@@ -210,7 +218,7 @@ public class UnitScript : MonoBehaviour
 
     private GridScript GridScript;
 
-    private List<Vector2> pathtotake =  new List<Vector2>();
+    private List<Vector2> pathtotake = new List<Vector2>();
 
     private float canvaselevation;
     private MinimapScript MinimapScript;
@@ -262,15 +270,15 @@ public class UnitScript : MonoBehaviour
         //    Head.GetComponent<SkinnedMeshRenderer>().material = EnemyMat;
         //}
 
-        foreach(ModelInfo modelInfo in ModelList)
+        foreach (ModelInfo modelInfo in ModelList)
         {
-            if(modelInfo.active)
+            if (modelInfo.active)
             {
                 modelInfo.wholeModel.SetActive(true); ;
             }
         }
 
-        
+
     }
 
     // Update is called once per frame
@@ -288,14 +296,14 @@ public class UnitScript : MonoBehaviour
 
         if (animator == null)
         {
-            foreach(ModelInfo modelInfo in ModelList)
+            foreach (ModelInfo modelInfo in ModelList)
             {
-                if(modelInfo.active)
+                if (modelInfo.active)
                 {
                     animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
                 }
             }
-            animator.SetBool("Ismachine",UnitCharacteristics.enemyStats.monsterStats.ismachine);
+            animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
         }
 
         if (armature == null)
@@ -359,7 +367,7 @@ public class UnitScript : MonoBehaviour
     //Manage Vertical Position
     private void ManagePosition()
     {
-        if (UnitCharacteristics.currentTile.Count<=0)
+        if (UnitCharacteristics.currentTile.Count <= 0)
         {
             MoveTo(UnitCharacteristics.position);
         }
@@ -388,7 +396,7 @@ public class UnitScript : MonoBehaviour
     //Manage horizontal movements
     private void ManageMovement()
     {
-        if(pathtotake.Count >0)
+        if (pathtotake.Count > 0)
         {
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), pathtotake[0]) > 0.1f)
             {
@@ -409,7 +417,7 @@ public class UnitScript : MonoBehaviour
         else
         {
             Vector2 destination = new Vector2();
-            if(UnitCharacteristics.enemyStats.monsterStats.size > 1)
+            if (UnitCharacteristics.enemyStats.monsterStats.size > 1)
             {
                 destination = UnitCharacteristics.position + new Vector2(-0.5f, 0.5f);
             }
@@ -440,7 +448,7 @@ public class UnitScript : MonoBehaviour
 
             }
         }
-        
+
     }
 
     public void ResetPath()
@@ -491,7 +499,7 @@ public class UnitScript : MonoBehaviour
 
     public void calculateStats()
     {
-        if(GetSkill(58)) //weakness
+        if (GetSkill(58)) //weakness
         {
             UnitCharacteristics.AjustedStats.HP = (int)UnitCharacteristics.stats.HP;
             UnitCharacteristics.AjustedStats.Strength = (int)UnitCharacteristics.stats.Strength / 2;
@@ -511,9 +519,88 @@ public class UnitScript : MonoBehaviour
             UnitCharacteristics.AjustedStats.Speed = (int)UnitCharacteristics.stats.Speed;
             UnitCharacteristics.AjustedStats.Dexterity = (int)UnitCharacteristics.stats.Dexterity;
         }
-            
+
     }
-    public void MoveTo(Vector2 destination, bool jump=false, bool instantaneousmovement = false)
+
+    private void GainMastery(Character character, string weapontounlock = "", bool secundary = false)
+    {
+        int maxlevel = 4;
+        List<WeaponMastery> masteries = character.Masteries;
+        if (weapontounlock == "")
+        {
+            weapontounlock = GetFirstWeapon().type.ToLower();
+        }
+
+        foreach(WeaponMastery mastery in masteries)
+        {
+            if(mastery.weapontype.ToLower()==weapontounlock)
+            {
+                if(mastery.Level > 0 && mastery.Level <= maxlevel ||(mastery.Level==0 && secundary))
+                {
+                    if (GetSkill(11))
+                    {
+                        mastery.Exp += 1;
+                    }
+                    mastery.Exp += 1;
+                }
+            }
+            LevelupMasteryCheck(mastery);
+        }
+    }
+
+    private void LevelupMasteryCheck(WeaponMastery mastery)
+    {
+        bool levelup = false;
+        switch (mastery.Level)
+        {
+            case 0:
+                if (mastery.Exp >= 30)
+                {
+                    levelup = true;
+                }
+                break;
+            case 1:
+                if (mastery.Exp >= 30)
+                {
+                    levelup = true;
+                }
+                break;
+            case 2:
+                if (mastery.Exp >= 50)
+                {
+                    levelup = true;
+                }
+                break;
+            case 3:
+                if (mastery.Exp >= 100)
+                {
+                    levelup = true;
+                }
+                break;
+        }
+
+        if(levelup)
+        {
+            mastery.Level++;
+        }
+    }
+
+    public void GainCombatMastery()
+    {
+
+        foreach (Character ally in GridScript.allunits)
+        {
+            if (ally.affiliation == "playable" && ManhattanDistance(UnitCharacteristics, ally) <= 2 && ally!=UnitCharacteristics)
+            {
+                GainMastery(ally,"",true);
+            }
+        }
+
+        GainMastery(UnitCharacteristics, GetFirstWeapon().type.ToLower());
+
+
+    }
+    public void MoveTo(Vector2 destination, bool jump = false, bool instantaneousmovement = false)
     {
         Debug.Log(transform.name + " moving to : " + destination);
         if (GridScript == null)
@@ -521,48 +608,48 @@ public class UnitScript : MonoBehaviour
             GridScript = FindAnyObjectByType<GridScript>();
         }
         GridSquareScript destTile = GridScript.GetTile(destination);
-        if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile)==gameObject) && !destTile.isobstacle)
+        if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile) == gameObject) && !destTile.isobstacle)
         {
-            if(UnitCharacteristics.currentTile!=null && UnitCharacteristics.currentTile.Count>0)
+            if (UnitCharacteristics.currentTile != null && UnitCharacteristics.currentTile.Count > 0)
             {
-                foreach(GridSquareScript tile in UnitCharacteristics.currentTile)
+                foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
                 {
-                    if(tile!=null)
+                    if (tile != null)
                     {
                         tile.UpdateInsideSprite(false);
                     }
-                    
+
                 }
-                
-                
-                if(jump)
+
+
+                if (jump)
                 {
-                    pathtotake = new List<Vector2>{ destination };
+                    pathtotake = new List<Vector2> { destination };
                 }
-               
+
                 else if (UnitCharacteristics.currentTile[0] != null)
                 {
                     pathtotake = GridScript.FindPath(UnitCharacteristics.currentTile[0].GridCoordinates, destination, UnitCharacteristics);
                 }
-                    
+
             }
-            else 
+            else
             {
                 transform.position = new Vector3(destination.x, transform.position.y, destination.y);
             }
-            if(instantaneousmovement)
+            if (instantaneousmovement)
             {
                 pathtotake = new List<Vector2>();
                 transform.position = new Vector3(destination.x, transform.position.y, destination.y);
             }
             UnitCharacteristics.position = destination;
             UpdateTiles(destTile);
-            foreach(GridSquareScript tile in UnitCharacteristics.currentTile )
+            foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
             {
                 tile.UpdateInsideSprite(true, UnitCharacteristics);
             }
         }
-        if(MinimapScript==null)
+        if (MinimapScript == null)
         {
             MinimapScript = FindAnyObjectByType<MinimapScript>();
         }
@@ -572,7 +659,7 @@ public class UnitScript : MonoBehaviour
     private void UpdateTiles(GridSquareScript destination)
     {
         UnitCharacteristics.currentTile = new List<GridSquareScript> { destination };
-        if(UnitCharacteristics.enemyStats.monsterStats.size > 1)
+        if (UnitCharacteristics.enemyStats.monsterStats.size > 1)
         {
             UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(-1, 0)));
             UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(0, 1)));
@@ -582,21 +669,21 @@ public class UnitScript : MonoBehaviour
 
     public bool isinattackanimation()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("run") )
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("run"))
         {
             return false;
         }
         return true;
     }
 
-    public void PlayAttackAnimation(bool doubleattack =false, bool tripleattack = false, bool healing=false)
+    public void PlayAttackAnimation(bool doubleattack = false, bool tripleattack = false, bool healing = false)
     {
-        if(tripleattack)
+        if (tripleattack)
         {
             animator.SetBool("Double", false);
             animator.SetBool("Triple", true);
         }
-        else if(doubleattack)
+        else if (doubleattack)
         {
             animator.SetBool("Double", true);
             animator.SetBool("Triple", false);
@@ -638,7 +725,7 @@ public class UnitScript : MonoBehaviour
                 animator.SetBool("Bow", true);
                 break;
             case "staff":
-                if(healing)
+                if (healing)
                 {
                     animator.SetBool("Heal", true);
                 }
@@ -659,7 +746,7 @@ public class UnitScript : MonoBehaviour
         {
             return;
         }
-        return ;
+        return;
     }
 
     public void AddNumber(int amount, bool ishealing, string effectname)
@@ -743,15 +830,15 @@ public class UnitScript : MonoBehaviour
                     {
                         currentequipmentmodel.transform.SetParent(modelInfo.Lefthandbone);
                     }
-                    else if(GetFirstWeapon().type.ToLower() != "machine")
+                    else if (GetFirstWeapon().type.ToLower() != "machine")
                     {
                         currentequipmentmodel.transform.SetParent(modelInfo.handbone);
                     }
                 }
             }
-            
-            
-            
+
+
+
             currentequipmentmodel.transform.localPosition = Vector3.zero;
             currentequipmentmodel.transform.localRotation = Quaternion.identity;
         }
@@ -869,7 +956,7 @@ public class UnitScript : MonoBehaviour
 
     private void ManageSize()
     {
-        if(UnitCharacteristics.enemyStats.monsterStats.size > 0)
+        if (UnitCharacteristics.enemyStats.monsterStats.size > 0)
         {
             for (int i = 1; i < transform.childCount; i++)
             {
@@ -881,8 +968,8 @@ public class UnitScript : MonoBehaviour
             }
             transform.GetChild(0).position = new Vector3(transform.GetChild(0).position.x, canvaselevation + UnitCharacteristics.enemyStats.monsterStats.size, transform.GetChild(0).position.z);
         }
-        
-        
+
+
 
     }
 
@@ -1323,18 +1410,18 @@ public class UnitScript : MonoBehaviour
     {
         int numberofraintiles = 0;
         int numberofsuntiles = 0;
-        foreach(GridSquareScript tile in UnitCharacteristics.currentTile)
+        foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
         {
-            if(tile.RemainingRainTurns > 0)
+            if (tile.RemainingRainTurns > 0)
             {
                 numberofraintiles++;
             }
-            if(tile.RemainingSunTurns > 0)
+            if (tile.RemainingSunTurns > 0)
             {
                 numberofsuntiles++;
             }
         }
-        if(numberofraintiles > numberofsuntiles)
+        if (numberofraintiles > numberofsuntiles)
         {
             return "rain";
         }

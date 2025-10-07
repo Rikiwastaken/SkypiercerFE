@@ -1906,6 +1906,9 @@ public class ActionsMenu : MonoBehaviour
         {
             levelup = unit.GetComponent<UnitScript>().LevelUp();
         }
+
+        unit.GetComponent<UnitScript>().GainCombatMastery();
+
         return (adjustedexp, levelup);
     }
 
