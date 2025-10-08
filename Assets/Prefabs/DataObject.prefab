@@ -1786,7 +1786,7 @@ MonoBehaviour:
       Level: -1
     - weapontype: spear
       Exp: 0
-      Level: -1
+      Level: 1
     - weapontype: greatsword
       Exp: 0
       Level: -1
@@ -1795,13 +1795,13 @@ MonoBehaviour:
       Level: -1
     - weapontype: scythe
       Exp: 0
-      Level: -1
+      Level: 0
     - weapontype: shield
       Exp: 0
       Level: -1
     - weapontype: staff
       Exp: 0
-      Level: -1
+      Level: 0
   - name: Sorak
     stats:
       HP: 20

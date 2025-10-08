@@ -23,6 +23,8 @@ public class BattleInfotext : MonoBehaviour
     public List<Button> SkillButtonList;
     private List<int> SkillButtonIDList = new List<int>();
     public TextMeshProUGUI SkillDescription;
+    public TextMeshProUGUI MasteryText;
+    public List<Transform> MasteryExpBars;
 
     private DataScript dataScript;
 
@@ -113,6 +115,7 @@ public class BattleInfotext : MonoBehaviour
             transform.parent.GetComponent<Image>().color = color;
             Skilltext.transform.parent.gameObject.SetActive(false);
             SkillDescription.transform.parent.gameObject.SetActive(false);
+            MasteryText.transform.parent.gameObject.SetActive(false);
             if (!(PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
             {
                 FindAnyObjectByType<EventSystem>().SetSelectedGameObject(null);
@@ -174,6 +177,7 @@ public class BattleInfotext : MonoBehaviour
 
                 ManagedSkillVisuals(selectedunitCharacter);
                 ManageSkillDescription();
+                ManageMasteryVisuals(selectedunitCharacter);
 
 
                 stringtoshow =" " +selectedunitCharacter.name + "\n";
@@ -326,6 +330,61 @@ public class BattleInfotext : MonoBehaviour
             }
         }
         SkillDescription.transform.parent.gameObject.SetActive(false);
+    }
+
+    private void ManageMasteryVisuals(Character unit)
+    {
+        if(unit.affiliation=="playable")
+        {
+            MasteryText.transform.parent.gameObject.SetActive(true);
+        }
+        else
+        {
+            MasteryText.transform.parent.gameObject.SetActive(false);
+            return;
+        }
+
+        MasteryText.text = "";
+
+        List<WeaponMastery> masteries = unit.Masteries;
+        int barID = 0;
+        for(int i=0; i<masteries.Count; i++)
+        {
+            MasteryExpBars[i].gameObject.SetActive(true);
+            string masterylevel="";
+            switch(masteries[i].Level)
+            {
+                case (-1):
+                    continue;
+                case (0):
+                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / 30f;
+                    masterylevel = "X";
+                    break;
+                case (1):
+                    masterylevel = "D";
+                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / 30f;
+                    break;
+                case (2):
+                    masterylevel = "C";
+                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / 50f;
+                    break;
+                case (3):
+                    masterylevel = "B";
+                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / 100f;
+                    break;
+                case (4):
+                    masterylevel = "A";
+                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = 1f;
+                    break;
+            }
+            barID++;
+            MasteryText.text += masteries[i].weapontype[0] + (masteries[i].weapontype[1] + " : "+masterylevel+"\n");
+        }
+        for(int i = barID; i<MasteryExpBars.Count;i++)
+        {
+            MasteryExpBars[i].gameObject.SetActive(false);
+        }
+
     }
     private void ManagedSkillVisuals(Character unit)
     {
