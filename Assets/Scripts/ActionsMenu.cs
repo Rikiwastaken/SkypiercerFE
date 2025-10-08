@@ -1204,12 +1204,12 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
 
-        if(chartarget.enemyStats.monsterStats.size > 0)
+        if (chartarget.enemyStats.monsterStats.size > 0)
         {
             int DistanceSE = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
-            int DistanceSW = (int)(Mathf.Abs(chartarget.position.x-1 - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
-            int DistanceNE = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y+1 - charunit.position.y));
-            int DistanceNW = (int)(Mathf.Abs(chartarget.position.x-1 - charunit.position.x) + Mathf.Abs(chartarget.position.y+1 - charunit.position.y));
+            int DistanceSW = (int)(Mathf.Abs(chartarget.position.x - 1 - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
+            int DistanceNE = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y + 1 - charunit.position.y));
+            int DistanceNW = (int)(Mathf.Abs(chartarget.position.x - 1 - charunit.position.x) + Mathf.Abs(chartarget.position.y + 1 - charunit.position.y));
 
 
 
@@ -1222,7 +1222,7 @@ public class ActionsMenu : MonoBehaviour
                     return false;
                 }
             }
-            else if (DistanceSE > range && DistanceSW > range && DistanceNE > range && DistanceNW > range )
+            else if (DistanceSE > range && DistanceSW > range && DistanceNE > range && DistanceNW > range)
             {
                 return false;
             }
@@ -1246,7 +1246,7 @@ public class ActionsMenu : MonoBehaviour
             return true;
         }
 
-            
+
     }
 
     public (int, int, int, int, List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
@@ -1299,7 +1299,7 @@ public class ActionsMenu : MonoBehaviour
                             {
                                 totaldamage += unitdamage;
                             }
-                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe" || charunit.enemyStats.monsterStats.size>0)
+                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe" || charunit.enemyStats.monsterStats.size > 0)
                             {
                                 DealScytheDamage(unit, target);
                             }
@@ -1877,7 +1877,7 @@ public class ActionsMenu : MonoBehaviour
         {
             adjustedexp *= 3;
         }
-        
+
         if (usingstaff)
         {
             adjustedexp = 15;
@@ -1887,7 +1887,7 @@ public class ActionsMenu : MonoBehaviour
             adjustedexp = 1;
         }
 
-        if(unit.GetComponent<UnitScript>().GetSkill(57)) // Crystal Heart
+        if (unit.GetComponent<UnitScript>().GetSkill(57)) // Crystal Heart
         {
             adjustedexp = (int)(adjustedexp * 1.1f);
         }
@@ -2009,19 +2009,22 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        
+
         float damagebonus = 1f;
-        if (charunit.enemyStats!=null)
+        if (charunit.enemyStats != null)
         {
-            if(charunit.enemyStats.monsterStats!=null)
+            if (charunit.enemyStats.monsterStats != null)
             {
-                if(charunit.enemyStats.monsterStats.ispluvial && unit.GetComponent<UnitScript>().GetWeatherType()=="rain")
+                //If the attacker is pluvial and the weather is rain, increase damage by 10%
+                if (charunit.enemyStats.monsterStats.ispluvial && unit.GetComponent<UnitScript>().GetWeatherType() == "rain")
                 {
-                    damagebonus += 0.1f;
+                    damagebonus += 0.15f;
                 }
-                if(charunit.enemyStats.monsterStats.ispluvial && unit.GetComponent<UnitScript>().GetWeatherType() == "sun")
+
+                //If the attacker is pluvial and the weather is sun, decrease damage by 10%
+                if (charunit.enemyStats.monsterStats.ispluvial && unit.GetComponent<UnitScript>().GetWeatherType() == "sun")
                 {
-                    damagebonus -= 0.1f;
+                    damagebonus -= 0.15f;
                 }
             }
         }
@@ -2029,13 +2032,20 @@ public class ActionsMenu : MonoBehaviour
         {
             if (chartarget.enemyStats.monsterStats != null)
             {
+                //If the defender is pluvial and the weather is rain, decrease damage by 10%
                 if (chartarget.enemyStats.monsterStats.ispluvial && target.GetComponent<UnitScript>().GetWeatherType() == "rain")
                 {
-                    damagebonus -= 0.1f;
+                    damagebonus -= 0.15f;
                 }
+                //If the defender is pluvial and the weather is sun, increase damage by 10%
                 if (chartarget.enemyStats.monsterStats.ispluvial && target.GetComponent<UnitScript>().GetWeatherType() == "sun")
                 {
-                    damagebonus += 0.1f;
+                    damagebonus += 0.15f;
+                }
+                //If the defender is a machine and the weather is rain, increase damage by 20%
+                if (chartarget.enemyStats.monsterStats.ismachine && target.GetComponent<UnitScript>().GetWeatherType() == "rain")
+                {
+                    damagebonus += 0.2f;
                 }
             }
         }

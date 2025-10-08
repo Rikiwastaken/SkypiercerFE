@@ -72,12 +72,14 @@ public class MainMenuScript : MonoBehaviour
 
     private string GetChapterScene(int chapter)
     {
-        switch (chapter)
+        if(chapter == 0)
         {
-            case 0:
-                return "Prologue";
+            return "Prologue";
         }
-        return "Prologue";
+        else
+        {
+            return "Chapter"+chapter;
+        }
     }
 
     public void LoadSave(int slot)

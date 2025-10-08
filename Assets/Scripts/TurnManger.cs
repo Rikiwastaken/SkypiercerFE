@@ -75,7 +75,7 @@ public class TurnManger : MonoBehaviour
             waittingforstart = false;
         }
 
-        
+
 
         if (updatevisuals)
         {
@@ -187,6 +187,18 @@ public class TurnManger : MonoBehaviour
                     }
                 }
             }
+
+            // Machine Sun HP Regen
+            if (unitchar.enemyStats.monsterStats.ismachine && unit.GetComponent<UnitScript>().GetWeatherType() == "sun")
+            {
+                unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(unitchar.AjustedStats.HP * 0.1f), (int)unitchar.AjustedStats.HP - unitchar.currentHP), true, "Solar Power");
+                unitchar.currentHP += (int)(unitchar.AjustedStats.HP * 0.1f);
+                if (unitchar.currentHP > unitchar.AjustedStats.HP)
+                {
+                    unitchar.currentHP = (int)unitchar.AjustedStats.HP;
+                }
+            }
+
             //Reset Verso movements
             unit.GetComponent<UnitScript>().tilesmoved = 0;
         }
@@ -194,7 +206,7 @@ public class TurnManger : MonoBehaviour
     }
     private void ManageTurnRotation()
     {
-        if(phaseTextScript.moveText)
+        if (phaseTextScript.moveText)
         {
             return;
         }
@@ -356,7 +368,7 @@ public class TurnManger : MonoBehaviour
             {
                 continue;
             }
-            if(character.GetComponent<UnitScript>().UnitCharacteristics.currentTile==null)
+            if (character.GetComponent<UnitScript>().UnitCharacteristics.currentTile == null)
             {
                 continue;
             }
