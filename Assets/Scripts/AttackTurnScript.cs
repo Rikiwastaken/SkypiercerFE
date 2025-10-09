@@ -937,6 +937,12 @@ public class AttackTurnScript : MonoBehaviour
         return chosenUnit;
     }
 
+    /// <summary>
+    /// Calculate movement Destination for AI Characters 
+    /// </summary>
+    /// <param name="currentCharacter"></param>
+    /// <param name="attacksfriend"></param>
+    /// <returns></returns>
     private GridSquareScript CalculateDestinationForOffensiveUnits(GameObject currentCharacter, bool attacksfriend = true)
     {
         List<GridSquareScript> movementlist = gridScript.movementtiles;
@@ -956,10 +962,22 @@ public class AttackTurnScript : MonoBehaviour
         return bestsquare;
     }
 
+    /// <summary>
+    /// Calculate Reward for target position for AI Unit
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="position"></param>
+    /// <param name="attacksfriend"></param>
+    /// <returns></returns>
     private int RewardForDestination(GameObject unit, GridSquareScript position, bool attacksfriend = true)
     {
+        
         int reward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        if (charunit.enemyStats.personality.ToLower() == "guard" && position.GridCoordinates != charunit.position)
+        {
+            return reward - 9999;
+        }
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
         List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position, charunit.enemyStats.monsterStats.size);
         foreach (GridSquareScript tile in potentialAttackPosition)
@@ -1109,6 +1127,8 @@ public class AttackTurnScript : MonoBehaviour
                     return reward - 9999;
                 }
             }
+
+            
 
         }
         return reward;

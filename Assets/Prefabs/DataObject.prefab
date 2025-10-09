@@ -1103,6 +1103,42 @@ MonoBehaviour:
       SpeedGrowth: 40
       DexterityGrowth: 40
     ID: 6
+  - name: Melee Machine
+    BaseStats:
+      HP: 16
+      Strength: 4
+      Psyche: 0
+      Defense: 2
+      Resistance: 2
+      Speed: 3
+      Dexterity: 4
+    StatGrowth:
+      HPGrowth: 80
+      StrengthGrowth: 45
+      PsycheGrowth: 0
+      DefenseGrowth: 40
+      ResistanceGrowth: 40
+      SpeedGrowth: 35
+      DexterityGrowth: 45
+    ID: 7
+  - name: Ranged Machine
+    BaseStats:
+      HP: 15
+      Strength: 4
+      Psyche: 0
+      Defense: 2
+      Resistance: 2
+      Speed: 3
+      Dexterity: 5
+    StatGrowth:
+      HPGrowth: 70
+      StrengthGrowth: 40
+      PsycheGrowth: 0
+      DefenseGrowth: 35
+      ResistanceGrowth: 35
+      SpeedGrowth: 40
+      DexterityGrowth: 55
+    ID: 8
   SkillList:
   - name: No Skill
     Descriptions: No skil

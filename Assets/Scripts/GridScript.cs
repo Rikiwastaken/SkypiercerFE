@@ -905,7 +905,14 @@ public class GridScript : MonoBehaviour
         Recolor();
     }
 
-
+    /// <summary>
+    /// Shows attack of an Unit from their current position
+    /// </summary>
+    /// <param name="range"></param>
+    /// <param name="frapperenmelee"></param>
+    /// <param name="tile"></param>
+    /// <param name="size"></param>
+    /// <returns></returns>
     public List<GridSquareScript> GetAttack(int range, bool frapperenmelee, GridSquareScript tile, int size = 0)
     {
         List<GridSquareScript> newattacktiles = new List<GridSquareScript>();

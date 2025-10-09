@@ -83,17 +83,6 @@ public class TurnManger : MonoBehaviour
             updatevisuals = false;
         }
 
-        //if (playableunit.Count == 0)
-        //{
-        //    GameOverScript.gameObject.SetActive(true);
-        //    return;
-        //}
-        //if (enemyunit.Count == 0)
-        //{
-        //    GameOverScript.victory = true;
-        //    GameOverScript.gameObject.SetActive(true);
-        //    return;
-        //}
         UpdateText();
         if (!waittingforstart)
         {
@@ -116,6 +105,10 @@ public class TurnManger : MonoBehaviour
         InitializeUnitLists(GridScript.allunitGOs);
     }
 
+    /// <summary>
+    /// Skills, blade durability recovery and Protagonist effects to trigger when a new turn starts
+    /// </summary>
+    /// <param name="charactertoappy"></param>
     private void BeginningOfTurnsTrigger(List<GameObject> charactertoappy)
     {
         foreach (GameObject unit in charactertoappy)
@@ -204,6 +197,10 @@ public class TurnManger : MonoBehaviour
         }
         minimapScript.UpdateMinimap();
     }
+
+    /// <summary>
+    /// Manage players, enemy and other turn rotation
+    /// </summary>
     private void ManageTurnRotation()
     {
         if (phaseTextScript.moveText)

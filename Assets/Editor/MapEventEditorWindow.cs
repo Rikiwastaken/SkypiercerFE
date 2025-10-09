@@ -70,7 +70,7 @@ public class MapEventEditorWindow : EditorWindow
     {
         if (targetManager == null)
         {
-            targetManager = FindObjectOfType<MapEventManager>();
+            targetManager = FindAnyObjectByType<MapEventManager>();
         }
 
         if (targetManager != null)
