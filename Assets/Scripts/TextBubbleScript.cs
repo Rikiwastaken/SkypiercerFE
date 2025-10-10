@@ -13,6 +13,7 @@ public class TextBubbleScript : MonoBehaviour
     {
         public string Charactername;
         public string text;
+        public Vector3 CameraDestination;
         public Sprite Portrait;
     }
 
@@ -41,6 +42,8 @@ public class TextBubbleScript : MonoBehaviour
 
     private GridScript gridScript;
 
+    private battlecameraScript battlecameraScript;
+
     void Awake()
     {
         if (charactername != null)
@@ -57,6 +60,7 @@ public class TextBubbleScript : MonoBehaviour
         InputManager = FindAnyObjectByType<InputManager>();
         ActionManager = FindAnyObjectByType<ActionManager>();
         gridScript = FindAnyObjectByType<GridScript>();
+        battlecameraScript = FindAnyObjectByType<battlecameraScript>();
         //DialogueExample();
     }
 
@@ -96,6 +100,11 @@ public class TextBubbleScript : MonoBehaviour
             indialogue = true;
 
             FindAnyObjectByType<GridScript>().lockselection = false;
+
+            if(Dialogue[currentTextBubble].CameraDestination != Vector3.zero)
+            {
+                battlecameraScript.Destination = new Vector2(Dialogue[currentTextBubble].CameraDestination.x, Dialogue[currentTextBubble].CameraDestination.z);
+            }
 
             if (isPrinting && charIndex < texttodisplay.Length)
             {

@@ -45,11 +45,11 @@ public class MapEventManager : MonoBehaviour
          * 2 : Lose the game
          * 3 : ModifyTiles
          * 4 : ShowDialogue
-         * 5 : 
-         * 6 : 
+         * 5 : UnlockUnit
+         * 6 : LoseUnit
          */
         public List<TextBubbleInfo> dialoguetoShow;
-
+        public List<int> UnitsToUnlockID;
         public TileModification tileModification;
         public UnitPlacement UnitPlacement;
 
@@ -99,6 +99,8 @@ public class MapEventManager : MonoBehaviour
     }
 
     public List<EventCondition> EventsToMonitor;
+
+    
 
     private GridScript GridScript;
     private TurnManger turnManger;
@@ -228,6 +230,7 @@ public class MapEventManager : MonoBehaviour
 
     public void TriggerEvent(EventCondition Event)
     {
+        Debug.Log("event trigger : "+Event.ID);
         ManageUnitPlacement(Event.UnitPlacement);
         switch (Event.triggerEffectType)
         {
@@ -246,10 +249,21 @@ public class MapEventManager : MonoBehaviour
                 {
                     ApplyTilesModification(Event.tileModification);
                 }
+                TriggerEventCheck();
                 break;
             case 4:
-                Debug.Log("dialoguetrigger trigger");
+                Debug.Log("dialogue trigger");
                 TextBubbleScript.InitializeDialogue(Event.dialoguetoShow);
+                break;
+            case 5:
+                Debug.Log("UnitAdd trigger");
+                UnitAddTrigger(Event.UnitsToUnlockID, true);
+                TriggerEventCheck();
+                break;
+            case 6:
+                Debug.Log("UnitToRemove trigger");
+                UnitAddTrigger(Event.UnitsToUnlockID, false);
+                TriggerEventCheck();
                 break;
         }
 
@@ -554,6 +568,17 @@ public class MapEventManager : MonoBehaviour
         return false;
     }
 
+    private void UnitAddTrigger(List<int> UnitsToUnlockID, bool unlock)
+    {
+        List<Character> units = FindAnyObjectByType<DataScript>().PlayableCharacterList;
+        foreach (Character unit in units)
+        {
+            if(UnitsToUnlockID.Contains(unit.ID))
+            {
+                unit.playableStats.unlocked = unlock;
+            }
+        }
+    }
     private int ManhattanDistance(Character unit, Character otherunit)
     {
         return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));

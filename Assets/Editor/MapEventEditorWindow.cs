@@ -12,6 +12,11 @@ public class MapEventEditorWindow : EditorWindow
     private SerializedObject so;
     private SerializedProperty eventsProp;
     private Vector2 scrollPos;
+    private DataScript dataScriptPrefab;
+
+    // Equipment dropdown
+    private List<string> characternames = new List<string>();
+    private List<int> characterIDs = new List<int>();
 
     private static readonly string[] TriggerTypeLabels = new string[]
     {
@@ -44,8 +49,8 @@ public class MapEventEditorWindow : EditorWindow
         "2 : Lose the game",
         "3 : Modify Tiles",
         "4 : Show Dialogue",
-        "5 : (unused)",
-        "6 : (unused)"
+        "5 : Unlock Unit",
+        "6 : Lock Unit"
     };
 
     [MenuItem("Tools/Map Event Editor")]
@@ -83,6 +88,27 @@ public class MapEventEditorWindow : EditorWindow
             so = null;
             eventsProp = null;
         }
+
+        if (dataScriptPrefab == null)
+        {
+            // Load prefab from project if not in scene
+            string[] guids = AssetDatabase.FindAssets("DataObject");
+            if (guids.Length > 0)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+                dataScriptPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(path).GetComponent<DataScript>();
+            }
+        }
+
+        if (dataScriptPrefab.PlayableCharacterList != null)
+        {
+            foreach (var e in dataScriptPrefab.PlayableCharacterList)
+            {
+                characternames.Add(e.name);
+                characterIDs.Add(e.ID);
+            }
+        }
+
     }
 
     private void OnGUI()
@@ -171,6 +197,7 @@ public class MapEventEditorWindow : EditorWindow
         eProp.FindPropertyRelative("triggered").boolValue = false;
         eProp.FindPropertyRelative("triggerEffectType").intValue = 4;
         eProp.FindPropertyRelative("dialoguetoShow").ClearArray();
+        eProp.FindPropertyRelative("UnitsToUnlockID").ClearArray();
 
         SerializedProperty tileMod = eProp.FindPropertyRelative("tileModification");
         if (tileMod != null)
@@ -260,6 +287,11 @@ public class MapEventEditorWindow : EditorWindow
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("dialoguetoShow"), true);
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("tileModification"), true);
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("UnitPlacement"), true);
+
+        // --- Equipments ---
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("Units To Unlock/Lock");
+        DrawIDListDropdown(eProp.FindPropertyRelative("UnitsToUnlockID"), characternames, characterIDs);
 
         EditorGUILayout.EndVertical();
         EditorGUI.indentLevel--;
@@ -372,5 +404,40 @@ public class MapEventEditorWindow : EditorWindow
         {
             listProp.DeleteArrayElementAtIndex(toRemove);
         }
+    }
+
+    private void DrawIDListDropdown(SerializedProperty listProp, List<string> displayNames, List<int> IDs)
+    {
+        if (listProp == null || IDs.Count == 0) return;
+
+        int toRemove = -1;
+
+        for (int i = 0; i < listProp.arraySize; i++)
+        {
+            EditorGUILayout.BeginHorizontal();
+            SerializedProperty element = listProp.GetArrayElementAtIndex(i);
+
+            int currentIndex = Mathf.Max(0, IDs.IndexOf(element.intValue));
+            // Scrollable popup
+            int selectedIndex = EditorGUILayout.Popup(currentIndex, displayNames.ToArray());
+            if (selectedIndex >= 0 && selectedIndex < IDs.Count)
+                element.intValue = IDs[selectedIndex];
+
+            if (GUILayout.Button("x", GUILayout.MaxWidth(20)))
+                toRemove = i;
+
+            EditorGUILayout.EndHorizontal();
+        }
+
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Add"))
+        {
+            listProp.arraySize++;
+            listProp.GetArrayElementAtIndex(listProp.arraySize - 1).intValue = IDs[0];
+        }
+        EditorGUILayout.EndHorizontal();
+
+        if (toRemove >= 0)
+            listProp.DeleteArrayElementAtIndex(toRemove);
     }
 }

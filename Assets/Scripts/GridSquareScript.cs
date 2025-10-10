@@ -95,6 +95,7 @@ public class GridSquareScript : MonoBehaviour
         rainparticle = GetComponentInChildren<ParticleSystem>();
         InitializePosition();
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
+        rainparticle.gameObject.SetActive(false);
     }
 
     public void InitializePosition()
@@ -112,7 +113,7 @@ public class GridSquareScript : MonoBehaviour
     {
         if(textBubbleScript.indialogue)
         {
-            return;
+            //return;
         }
         if (GridScript == null)
         {

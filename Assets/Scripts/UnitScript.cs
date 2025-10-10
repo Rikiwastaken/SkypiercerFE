@@ -11,7 +11,9 @@ public class UnitScript : MonoBehaviour
     [Serializable]
     public class Character
     {
+        
         public string name;
+        public int ID;
         public BaseStats stats;
         public BaseStats AjustedStats;
         public int level;

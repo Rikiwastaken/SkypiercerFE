@@ -1623,6 +1623,7 @@ MonoBehaviour:
     ID: 57
   PlayableCharacterList:
   - name: Zack
+    ID: 0
     stats:
       HP: 20
       Strength: 5
@@ -1713,6 +1714,7 @@ MonoBehaviour:
       Exp: 0
       Level: 1
   - name: Lea
+    ID: 1
     stats:
       HP: 23
       Strength: 6
@@ -1803,6 +1805,7 @@ MonoBehaviour:
       Exp: 0
       Level: -1
   - name: Elwyn
+    ID: 2
     stats:
       HP: 14
       Strength: 1
@@ -1893,6 +1896,7 @@ MonoBehaviour:
       Exp: 0
       Level: 0
   - name: Sorak
+    ID: 3
     stats:
       HP: 20
       Strength: 9
@@ -1983,6 +1987,7 @@ MonoBehaviour:
       Exp: 0
       Level: -1
   - name: Lyv
+    ID: 4
     stats:
       HP: 17
       Strength: 3
@@ -2073,6 +2078,7 @@ MonoBehaviour:
       Exp: 0
       Level: 0
   - name: Sieg
+    ID: 5
     stats:
       HP: 16
       Strength: 3
@@ -2163,6 +2169,7 @@ MonoBehaviour:
       Exp: 0
       Level: -1
   - name: Micaiah
+    ID: 6
     stats:
       HP: 15
       Strength: 2
@@ -2253,6 +2260,7 @@ MonoBehaviour:
       Exp: 0
       Level: -1
   - name: Sothe
+    ID: 7
     stats:
       HP: 35
       Strength: 18
@@ -2343,6 +2351,7 @@ MonoBehaviour:
       Exp: 0
       Level: -1
   - name: Laura
+    ID: 8
     stats:
       HP: 16
       Strength: 3
@@ -2433,6 +2442,7 @@ MonoBehaviour:
       Exp: 0
       Level: -1
   - name: Nolan
+    ID: 9
     stats:
       HP: 29
       Strength: 12
@@ -2523,6 +2533,7 @@ MonoBehaviour:
       Exp: 0
       Level: -1
   - name: Leonardo
+    ID: 10
     stats:
       HP: 17
       Strength: 8
@@ -2613,6 +2624,7 @@ MonoBehaviour:
       Exp: 0
       Level: -1
   - name: Edward
+    ID: 11
     stats:
       HP: 19
       Strength: 7
@@ -2703,6 +2715,7 @@ MonoBehaviour:
       Exp: 0
       Level: -1
   - name: Xora
+    ID: 12
     stats:
       HP: 20
       Strength: 9
@@ -2971,6 +2984,7 @@ MonoBehaviour:
       Quantity: 50
   DefaultPlayableCharacterList:
   - name: Zack
+    ID: 0
     stats:
       HP: 20
       Strength: 5
@@ -3039,6 +3053,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Lea
+    ID: 0
     stats:
       HP: 23
       Strength: 6
@@ -3107,6 +3122,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Elwyn
+    ID: 0
     stats:
       HP: 14
       Strength: 1
@@ -3175,6 +3191,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Sorak
+    ID: 0
     stats:
       HP: 20
       Strength: 9
@@ -3243,6 +3260,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Lyv
+    ID: 0
     stats:
       HP: 17
       Strength: 3
@@ -3311,6 +3329,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Sieg
+    ID: 0
     stats:
       HP: 16
       Strength: 3
@@ -3379,6 +3398,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Micaiah
+    ID: 0
     stats:
       HP: 15
       Strength: 2
@@ -3447,6 +3467,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Sothe
+    ID: 0
     stats:
       HP: 35
       Strength: 18
@@ -3515,6 +3536,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Laura
+    ID: 0
     stats:
       HP: 16
       Strength: 3
@@ -3583,6 +3605,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Nolan
+    ID: 0
     stats:
       HP: 29
       Strength: 12
@@ -3651,6 +3674,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Leonardo
+    ID: 0
     stats:
       HP: 17
       Strength: 8
@@ -3719,6 +3743,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Edward
+    ID: 0
     stats:
       HP: 19
       Strength: 7
@@ -3787,6 +3812,7 @@ MonoBehaviour:
     modelID: 0
     Masteries: []
   - name: Xora
+    ID: 0
     stats:
       HP: 20
       Strength: 9
