@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5774791661217524108
 Transform:
   m_ObjectHideFlags: 0
@@ -9976,7 +9976,9 @@ MonoBehaviour:
   turntext: {fileID: 5231594651729968502}
   GameOverScript: {fileID: 3232693506058724292}
   waittingforstart: 1
+  preBattleMenuScript: {fileID: 1790609790847505973}
   phaseTextScript: {fileID: 3028186298790515499}
+  textBubbleScript: {fileID: 7773822336030157861}
 --- !u!114 &1394583299071352539
 MonoBehaviour:
   m_ObjectHideFlags: 0

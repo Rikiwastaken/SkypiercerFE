@@ -1139,6 +1139,60 @@ MonoBehaviour:
       SpeedGrowth: 40
       DexterityGrowth: 55
     ID: 8
+  - name: LyvNPC
+    BaseStats:
+      HP: 17
+      Strength: 3
+      Psyche: 6
+      Defense: 7
+      Resistance: 4
+      Speed: 8
+      Dexterity: 5
+    StatGrowth:
+      HPGrowth: 70
+      StrengthGrowth: 20
+      PsycheGrowth: 60
+      DefenseGrowth: 60
+      ResistanceGrowth: 30
+      SpeedGrowth: 60
+      DexterityGrowth: 50
+    ID: 9
+  - name: SorakNPC
+    BaseStats:
+      HP: 20
+      Strength: 9
+      Psyche: 1
+      Defense: 11
+      Resistance: 8
+      Speed: 3
+      Dexterity: 5
+    StatGrowth:
+      HPGrowth: 70
+      StrengthGrowth: 60
+      PsycheGrowth: 10
+      DefenseGrowth: 60
+      ResistanceGrowth: 50
+      SpeedGrowth: 30
+      DexterityGrowth: 40
+    ID: 10
+  - name: Villager
+    BaseStats:
+      HP: 10
+      Strength: 1
+      Psyche: 1
+      Defense: 1
+      Resistance: 1
+      Speed: 1
+      Dexterity: 1
+    StatGrowth:
+      HPGrowth: 40
+      StrengthGrowth: 40
+      PsycheGrowth: 40
+      DefenseGrowth: 40
+      ResistanceGrowth: 40
+      SpeedGrowth: 40
+      DexterityGrowth: 40
+    ID: 11
   SkillList:
   - name: No Skill
     Descriptions: No skil

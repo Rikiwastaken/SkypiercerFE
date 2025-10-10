@@ -8,7 +8,7 @@ public class TurnManger : MonoBehaviour
 {
     public int currentTurn;
 
-    public string currentlyplaying; // playable, enemy, other
+    public string currentlyplaying =""; // playable, enemy, other
 
     public List<Character> playableunit;
     public List<GameObject> playableunitGO;
@@ -31,7 +31,7 @@ public class TurnManger : MonoBehaviour
 
     private InputManager InputManager;
 
-    private PreBattleMenuScript preBattleMenuScript;
+    public PreBattleMenuScript preBattleMenuScript;
 
     private WeatherManager weatherManager;
     private ActionManager actionManager;
@@ -40,6 +40,9 @@ public class TurnManger : MonoBehaviour
     public PhaseTextScript phaseTextScript;
 
     private MinimapScript minimapScript;
+
+    public TextBubbleScript textBubbleScript;
+
     private void Start()
     {
         weatherManager = GetComponent<WeatherManager>();
@@ -53,11 +56,6 @@ public class TurnManger : MonoBehaviour
         if (InputManager == null)
         {
             InputManager = FindAnyObjectByType<InputManager>();
-        }
-
-        if (preBattleMenuScript == null)
-        {
-            preBattleMenuScript = FindAnyObjectByType<PreBattleMenuScript>();
         }
 
         if (GridScript == null)
@@ -76,6 +74,10 @@ public class TurnManger : MonoBehaviour
         }
 
 
+        if(!textBubbleScript.indialogue && !preBattleMenuScript.gameObject.activeSelf && currentlyplaying == "")
+        {
+            preBattleMenuScript.gameObject.SetActive(true);
+        }
 
         if (updatevisuals)
         {

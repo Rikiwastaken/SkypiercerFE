@@ -48,7 +48,7 @@ public class MapEventEditorWindow : EditorWindow
         "6 : (unused)"
     };
 
-    [MenuItem("Tools/Map Setup/Map Event Editor")]
+    [MenuItem("Tools/Map Event Editor")]
     public static void ShowWindow()
     {
         var w = GetWindow<MapEventEditorWindow>("Map Event Editor");

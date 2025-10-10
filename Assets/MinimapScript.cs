@@ -101,9 +101,9 @@ public class MinimapScript : MonoBehaviour
         UpdateMinimap();
     }
 
-    private void SetTileColor(int x, int y, Color color)
+    private void SetTileColor(int x, int y, Color color, float alpha = 0.75f)
     {
-        color.a = 0.75f;
+        color.a = alpha;
         minimapTexture.SetPixel(x, y, color);
         minimapTexture.Apply();
     }
@@ -137,6 +137,10 @@ public class MinimapScript : MonoBehaviour
                     {
                         SetTileColor(i, j, Color.blue);
                     }
+                    if (!tile.activated)
+                    {
+                        SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
+                    }
                 }
             }
             foreach (Character character in gridScript.allunits)
@@ -154,6 +158,10 @@ public class MinimapScript : MonoBehaviour
                     else if (character.affiliation == "other")
                     {
                         SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
+                    }
+                    if(!tile.activated)
+                    {
+                        SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
                     }
                 }
             }

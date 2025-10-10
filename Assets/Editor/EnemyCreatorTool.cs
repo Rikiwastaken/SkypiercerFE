@@ -34,7 +34,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         "Guard : Does not move"
     };
 
-    [MenuItem("Tools/Map Setup/Enemy Stats Editor")]
+    [MenuItem("Tools/Enemy Stats Editor")]
     public static void ShowWindow()
     {
         var w = GetWindow<EnemyStatsEditorWindow>("Enemy Stats Editor");
@@ -108,7 +108,7 @@ public class EnemyStatsEditorWindow : EditorWindow
             {
                 foreach (var s in dataScriptPrefab.SkillList)
                 {
-                    string label = s.name + (s.IsCommand ? " (command)" : " (passive)");
+                    string label = s.ID +" : "+s.name + (s.IsCommand ? " (command)" : " (passive)");
                     skillNames.Add(label);
                     skillIDs.Add(s.ID);
                 }
@@ -119,7 +119,7 @@ public class EnemyStatsEditorWindow : EditorWindow
             {
                 foreach (var e in dataScriptPrefab.equipmentList)
                 {
-                    string label = $"{e.type} {e.Grade}";
+                    string label = e.ID +$" : {e.type} {e.Grade}";
                     equipmentNames.Add(label);
                     equipmentIDs.Add(e.ID);
                 }
@@ -207,7 +207,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         eProp.FindPropertyRelative("startpos").vector2Value = Vector2.zero;
         eProp.FindPropertyRelative("isboss").boolValue = false;
         eProp.FindPropertyRelative("isother").boolValue = false;
-        eProp.FindPropertyRelative("RemainingLifebars").intValue = 1;
+        eProp.FindPropertyRelative("RemainingLifebars").intValue = 0;
         eProp.FindPropertyRelative("modelID").intValue = 0;
 
         eProp.FindPropertyRelative("equipments").ClearArray();
@@ -216,7 +216,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         SerializedProperty monsterStats = eProp.FindPropertyRelative("monsterStats");
         if (monsterStats != null)
         {
-            monsterStats.FindPropertyRelative("size").intValue = 1;
+            monsterStats.FindPropertyRelative("size").intValue = 0;
             monsterStats.FindPropertyRelative("ispluvial").boolValue = false;
             monsterStats.FindPropertyRelative("ismachine").boolValue = false;
         }

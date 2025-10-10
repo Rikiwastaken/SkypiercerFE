@@ -705,7 +705,6 @@ public class CustomPolygonTool : EditorWindow
         for (int i = 0; i < n; i++) V.Add(i);
 
         int count = 2 * n; // maximum iterations
-        int m = 0;
         int v = n - 1;
 
         while (n > 2)

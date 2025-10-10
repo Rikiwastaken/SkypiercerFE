@@ -815,12 +815,32 @@ public class AttackTurnScript : MonoBehaviour
         
 
     }
+
+    private List<string> Whotoattack(string affiliation, bool attackfriend)
+    {
+        List<string> affiliationtoattack = new List<string>() { "playable", "other" };
+        if (affiliation=="other")
+        {
+            if(attackfriend)
+            {
+                affiliationtoattack = new List<string>() { "playable", "enemy" };
+            }
+            else
+            {
+                affiliationtoattack = new List<string>() { "enemy"};
+            }
+        }
+        return affiliationtoattack;
+    }
+
+
     public GameObject CalculateBestTargetForOffensiveUnits(GameObject unit, bool attacksfriend = true)
     {
         int maxreward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
         List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, gridScript.GetTile(charunit.position), charunit.enemyStats.monsterStats.size);
+        List<string> affiliationtoattack = Whotoattack(charunit.affiliation, attacksfriend);
         GameObject chosenUnit = null;
 
         foreach (GridSquareScript tile in potentialAttackPosition)
@@ -828,12 +848,7 @@ public class AttackTurnScript : MonoBehaviour
             foreach (GameObject otherunit in gridScript.allunitGOs)
             {
                 Character charotherunit = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
-                string affiliationtoattack = "playable";
-                if (!attacksfriend && charotherunit.affiliation == "other")
-                {
-                    affiliationtoattack = "enemy";
-                }
-                if (charotherunit.affiliation == affiliationtoattack && charotherunit.position == tile.GridCoordinates)
+                if (affiliationtoattack.Contains(charotherunit.affiliation.ToLower()) && charotherunit.position == tile.GridCoordinates)
                 {
                     int reward = 0;
                     //that means that an enemy unit is in the zone
@@ -980,17 +995,13 @@ public class AttackTurnScript : MonoBehaviour
         }
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
         List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position, charunit.enemyStats.monsterStats.size);
+        List<string> affiliationtoattack = Whotoattack(charunit.affiliation, attacksfriend);
         foreach (GridSquareScript tile in potentialAttackPosition)
         {
             foreach (GameObject otherunit in gridScript.allunitGOs)
             {
                 Character charotherunit = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
-                string affiliationtoattack = "playable";
-                if (!attacksfriend)
-                {
-                    affiliationtoattack = "enemy";
-                }
-                if (charotherunit.affiliation == affiliationtoattack && charotherunit.position == tile.GridCoordinates)
+                if (affiliationtoattack.Contains(charotherunit.affiliation.ToLower()) && charotherunit.position == tile.GridCoordinates)
                 {
                     //that means that an enemy unit is in the zone
                     int rawdamage = ActionsMenu.CalculateDamage(unit, otherunit);

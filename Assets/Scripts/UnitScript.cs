@@ -676,7 +676,7 @@ public class UnitScript : MonoBehaviour
 
     public bool isinattackanimation()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("run"))
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow")|| animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animator.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
         {
             return false;
         }
@@ -827,7 +827,9 @@ public class UnitScript : MonoBehaviour
         if (GetFirstWeapon().Grade != 0 && GetFirstWeapon().Currentuses != 0)
         {
             equipmentmodel equipmentmodel = GetFirstWeapon().equipmentmodel;
-            currentequipmentmodel = Instantiate(equipmentmodel.Model);
+            if (equipmentmodel.Model != null)
+            {
+                currentequipmentmodel = Instantiate(equipmentmodel.Model);
             currentequipmentmodel.transform.localScale = Vector3.one * 0.5f;
             foreach (ModelInfo modelInfo in ModelList)
             {
@@ -848,6 +850,8 @@ public class UnitScript : MonoBehaviour
 
             currentequipmentmodel.transform.localPosition = Vector3.zero;
             currentequipmentmodel.transform.localRotation = Quaternion.identity;
+            }
+            
         }
     }
 
