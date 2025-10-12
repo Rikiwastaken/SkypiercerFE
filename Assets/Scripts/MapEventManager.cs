@@ -577,6 +577,7 @@ public class MapEventManager : MonoBehaviour
             if(UnitsToUnlockID.Contains(unit.ID))
             {
                 unit.playableStats.unlocked = unlock;
+                unit.playableStats.deployunit = unlock;
             }
         }
     }

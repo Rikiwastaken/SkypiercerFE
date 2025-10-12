@@ -147,22 +147,26 @@ public class MinimapScript : MonoBehaviour
             {
                 foreach (GridSquareScript tile in character.currentTile)
                 {
-                    if (character.affiliation == "playable")
+                    if(character.currentTile.Count>0)
                     {
-                        SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.cyan);
+                        if (character.affiliation == "playable")
+                        {
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.cyan);
+                        }
+                        else if (character.affiliation == "enemy")
+                        {
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
+                        }
+                        else if (character.affiliation == "other")
+                        {
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
+                        }
+                        if (!tile.activated)
+                        {
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
+                        }
                     }
-                    else if (character.affiliation == "enemy")
-                    {
-                        SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
-                    }
-                    else if (character.affiliation == "other")
-                    {
-                        SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
-                    }
-                    if(!tile.activated)
-                    {
-                        SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
-                    }
+                    
                 }
             }
 

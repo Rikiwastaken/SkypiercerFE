@@ -86,6 +86,8 @@ public class GridSquareScript : MonoBehaviour
     public Sprite gridsquareFilling;
     public Sprite gridsquareFillingBigEnemies;
 
+    private bool previouslyincombat;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -99,7 +101,7 @@ public class GridSquareScript : MonoBehaviour
         {
             rainparticle.gameObject.SetActive(false);
         }
-        
+        manageVisuals();
     }
 
     public void InitializePosition()
@@ -115,6 +117,7 @@ public class GridSquareScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();
@@ -133,54 +136,64 @@ public class GridSquareScript : MonoBehaviour
             MapInitializer = FindAnyObjectByType<MapInitializer>();
         }
 
-        ManageActivation();
-        if(!activated)
+        if(battlecameraScript.incombat)
         {
-            return;
-        }
-
-        ManagePath();
-
-        if (RemainingRainTurns < 3)
-        {
-            justbecamerain = false;
-        }
-
-        if(RemainingRainTurns > 0)
-        {
-            rainparticle.gameObject.SetActive(true);
+            SelectRoundFilling.GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f,0f);
         }
         else
         {
-            rainparticle.gameObject.SetActive(false);
-        }
-
-
-        
-
-        if (TurnManger.currentlyplaying == "")
-        {
-            if (MapInitializer.playablepos.Contains(GridCoordinates))
+            ManageActivation();
+            if (!activated)
             {
-
-                filledimage.color = new Color(0.45f, 0f, 0.42f, 0.5f);
+                return;
             }
-        }
+
+            ManagePath();
+
+            if (RemainingRainTurns < 3)
+            {
+                justbecamerain = false;
+            }
+
+            if (RemainingRainTurns > 0)
+            {
+                rainparticle.gameObject.SetActive(true);
+            }
+            else
+            {
+                rainparticle.gameObject.SetActive(false);
+            }
 
 
-        if (GridScript.selection == this && !battlecameraScript.incombat)
-        {
-            SelectRound.SetActive(true);
-            SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
-        }
-        else
-        {
-            SelectRound.SetActive(false);
+
+
+            if (TurnManger.currentlyplaying == "")
+            {
+                if (MapInitializer.playablepos.Contains(GridCoordinates))
+                {
+
+                    filledimage.color = new Color(0.45f, 0f, 0.42f, 0.5f);
+                }
+            }
+
+
+            if (GridScript.selection == this && !battlecameraScript.incombat)
+            {
+                SelectRound.SetActive(true);
+                SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
+            }
+            else
+            {
+                SelectRound.SetActive(false);
+            }
+
+            UpdateFilling();
+            
+            
         }
 
-        UpdateFilling();
         manageElevation();
-        manageVisuals();
+        previouslyincombat = battlecameraScript.incombat;
     }
 
     private void ManagePath()
@@ -339,6 +352,18 @@ public class GridSquareScript : MonoBehaviour
         }
         else
         {
+            if(previouslyincombat)
+            {
+                if (isstairs)
+                {
+                    transform.position = new Vector3(transform.position.x, 0 - 1.1f, transform.position.z);
+                }
+                else
+                {
+                    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                }
+            }
+
             if (isobstacle)
             {
                 if(Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f)

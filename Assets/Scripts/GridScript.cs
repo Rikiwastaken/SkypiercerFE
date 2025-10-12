@@ -501,6 +501,7 @@ public class GridScript : MonoBehaviour
         }
         movementtiles = new List<GridSquareScript>();
         attacktiles = new List<GridSquareScript>();
+        healingtiles = new List<GridSquareScript>();
         foreach (GameObject unitGO in allunitGOs)
         {
             if (unitGO != null)

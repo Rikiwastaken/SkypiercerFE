@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5774791661217524108
 Transform:
   m_ObjectHideFlags: 0
@@ -363,6 +363,8 @@ MonoBehaviour:
   CombatTextScript: {fileID: 1855832936173055007}
   PreBattleMenu: {fileID: 7512953878376125901}
   verticalautomovespeed: 1
+  rotationSmoothTime: 0.3
+  rotationSpeed: 45
 --- !u!1 &830969901523141309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2382,8 +2384,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34.358868, y: 0}
-  m_SizeDelta: {x: 91.2823, y: 30}
+  m_AnchoredPosition: {x: -20.017, y: 0}
+  m_SizeDelta: {x: 119.966, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3930431052909199623
 CanvasRenderer:
@@ -3385,8 +3387,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34.358868, y: -66}
-  m_SizeDelta: {x: 91.2823, y: 30}
+  m_AnchoredPosition: {x: -20.017, y: -66}
+  m_SizeDelta: {x: 119.966, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5039041157461273551
 CanvasRenderer:
@@ -3930,8 +3932,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34.358868, y: -99}
-  m_SizeDelta: {x: 91.2823, y: 30}
+  m_AnchoredPosition: {x: -20.017, y: -99}
+  m_SizeDelta: {x: 119.966, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7310789235949688811
 CanvasRenderer:
@@ -4909,7 +4911,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: 6}
+  m_AnchoredPosition: {x: -33, y: 6}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4325700373763566634
@@ -4926,6 +4928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target:
     name: 
+    ID: 0
     stats:
       HP: 0
       Strength: 0
@@ -8266,8 +8269,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34.358868, y: -33}
-  m_SizeDelta: {x: 91.2823, y: 30}
+  m_AnchoredPosition: {x: -20.017, y: -33}
+  m_SizeDelta: {x: 119.966, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2742959485232325745
 CanvasRenderer:
@@ -10361,6 +10364,7 @@ MonoBehaviour:
     triggered: 0
     triggerEffectType: 2
     dialoguetoShow: []
+    UnitsToUnlockID: 
     tileModification:
       TilesIdCouples: []
       tilestomodify: []
@@ -10384,6 +10388,7 @@ MonoBehaviour:
     triggered: 0
     triggerEffectType: 3
     dialoguetoShow: []
+    UnitsToUnlockID: 
     tileModification:
       TilesIdCouples:
       - {x: 208, y: 305}
@@ -10484,6 +10489,7 @@ MonoBehaviour:
   UnitsDeployedText: {fileID: 0}
   selectedcharacter:
     name: 
+    ID: 0
     stats:
       HP: 0
       Strength: 0
@@ -11324,7 +11330,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: 6}
+  m_AnchoredPosition: {x: -34, y: 6}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4787921598771061559
@@ -11467,7 +11473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -157, y: 56}
+  m_AnchoredPosition: {x: -157, y: 70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4915612603892297116
@@ -12978,8 +12984,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34.358868, y: -132}
-  m_SizeDelta: {x: 91.2823, y: 30}
+  m_AnchoredPosition: {x: -20.017, y: -132}
+  m_SizeDelta: {x: 119.966, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6393421622969027003
 CanvasRenderer:
@@ -13216,6 +13222,7 @@ MonoBehaviour:
   slotID: 0
   character:
     name: 
+    ID: 0
     stats:
       HP: 0
       Strength: 0

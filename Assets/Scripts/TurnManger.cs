@@ -68,7 +68,7 @@ public class TurnManger : MonoBehaviour
             actionManager = FindAnyObjectByType<ActionManager>();
         }
 
-        if (InputManager.Startpressed && waittingforstart && !preBattleMenuScript.gameObject.activeSelf)
+        if (InputManager.Startpressed && waittingforstart && !preBattleMenuScript.gameObject.activeSelf && !textBubbleScript.indialogue)
         {
             waittingforstart = false;
         }

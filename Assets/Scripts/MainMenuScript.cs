@@ -10,8 +10,12 @@ public class MainMenuScript : MonoBehaviour
 
     private SaveManager saveManager;
     private SceneLoader sceneLoader;
+
+    public Transform OptionsMenu;
+    public Button OptionsMenuButton;
     public Transform BaseMenu;
     public Transform ContinueMenu;
+    public Button ContinueMenuButton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -63,6 +67,18 @@ public class MainMenuScript : MonoBehaviour
     {
         saveManager.ApplySave(-1);
         sceneLoader.LoadScene("TestMap");
+    }
+
+    public void OnCancel()
+    {
+        if(OptionsMenu.gameObject.activeSelf)
+        {
+            OptionsMenuButton.onClick.Invoke();
+        }
+        else if(ContinueMenu.gameObject.activeSelf)
+        {
+            ContinueMenuButton.onClick.Invoke();
+        }
     }
 
     public void QuitApp()

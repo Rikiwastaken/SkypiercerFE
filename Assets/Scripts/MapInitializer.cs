@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 using static UnitScript;
 
 public class MapInitializer : MonoBehaviour
@@ -43,7 +44,11 @@ public class MapInitializer : MonoBehaviour
         }
         for (int i = 0; i < Mathf.Min(playablepos.Count, DataScript.PlayableCharacterList.Count); i++)
         {
-            DataScript.PlayableCharacterList[i].playableStats.deployunit = true;
+            if(DataScript.PlayableCharacterList[i].playableStats.unlocked || SceneManager.GetActiveScene().name=="TestMap")
+            {
+                DataScript.PlayableCharacterList[i].playableStats.deployunit = true;
+            }
+            
         }
     }
 
@@ -74,9 +79,11 @@ public class MapInitializer : MonoBehaviour
         }
 
         int index = 0;
+        bool intestmap = SceneManager.GetActiveScene().name == "TestMap";
         foreach (Character playable in DataScript.PlayableCharacterList)
         {
-            if (index < playablepos.Count && playable.playableStats.deployunit)
+
+            if (index < playablepos.Count && (playable.playableStats.deployunit || (intestmap || playable.playableStats.unlocked)))
             {
                 GameObject newcharacter = Instantiate(BaseCharacter);
                 newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;

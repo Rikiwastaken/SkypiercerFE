@@ -97,31 +97,37 @@ public class UnitDeploymentScript : MonoBehaviour
             unitdescriptiontxt += "Speed : " + currentchar.stats.Speed + "\n\n";
 
             string grade = "";
-            switch (DataScript.equipmentList[currentchar.equipmentsIDs[0]].Grade)
+            if(currentchar.equipmentsIDs.Count > 0)
             {
-                case 0:
-                    grade = "E";
-                    break;
-                case 1:
-                    grade = "D";
-                    break;
-                case 2:
-                    grade = "C";
-                    break;
-                case 3:
-                    grade = "B";
-                    break;
-                case 4:
-                    grade = "A";
-                    break;
-                case 5:
-                    grade = "S";
-                    break;
+                switch (DataScript.equipmentList[currentchar.equipmentsIDs[0]].Grade)
+                {
+                    case 0:
+                        grade = "E";
+                        break;
+                    case 1:
+                        grade = "D";
+                        break;
+                    case 2:
+                        grade = "C";
+                        break;
+                    case 3:
+                        grade = "B";
+                        break;
+                    case 4:
+                        grade = "A";
+                        break;
+                    case 5:
+                        grade = "S";
+                        break;
 
+                }
+                unitdescriptiontxt += "Weapon : " + DataScript.equipmentList[currentchar.equipmentsIDs[0]].Name + " (" + DataScript.equipmentList[currentchar.equipmentsIDs[0]].type + " " + grade + ")";
             }
-
-
-            unitdescriptiontxt += "Weapon : " + DataScript.equipmentList[currentchar.equipmentsIDs[0]].Name + " (" + DataScript.equipmentList[currentchar.equipmentsIDs[0]].type + " " + grade + ")";
+            else
+            {
+                grade = "E";
+                unitdescriptiontxt += "Weapon : " + DataScript.equipmentList[0].Name + " (" + DataScript.equipmentList[0].type + " " + grade + ")";
+            }
             UnitDescription.text = unitdescriptiontxt;
         }
         else
@@ -247,10 +253,16 @@ public class UnitDeploymentScript : MonoBehaviour
 
     private int numberofSelectedUnits()
     {
+        bool intestmap = SceneManager.GetActiveScene().name == "TestMap";
         int numberofunits = 0;
         foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if (character.playableStats.deployunit)
+            if(intestmap)
+            {
+                numberofunits++;
+                continue;
+            }
+            if (character.playableStats.deployunit && character.playableStats.unlocked)
             {
                 numberofunits++;
             }
@@ -261,10 +273,11 @@ public class UnitDeploymentScript : MonoBehaviour
 
     private void OrderUnits()
     {
+        bool intestmap = SceneManager.GetActiveScene().name == "TestMap";
         List<Character> newcharacterlist = new List<Character>();
         foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if (character.playableStats.deployunit)
+            if (character.playableStats.deployunit && (character.playableStats.unlocked || intestmap))
             {
                 newcharacterlist.Add(character);
                 character.playableStats.deployunit = false;
@@ -273,7 +286,7 @@ public class UnitDeploymentScript : MonoBehaviour
         }
         foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if (!newcharacterlist.Contains(character))
+            if (!newcharacterlist.Contains(character) && (character.playableStats.unlocked || intestmap))
             {
                 newcharacterlist.Add(character);
             }

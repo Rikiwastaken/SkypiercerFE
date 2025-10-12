@@ -355,20 +355,11 @@ public class UnitScript : MonoBehaviour
         ManageMovement();
 
 
-        if (battlecameraScript.incombat)
+        bool shouldBeActive = battlecameraScript.fighter1 == gameObject || battlecameraScript.fighter2 == gameObject || !battlecameraScript.incombat;
+
+        if (animator.gameObject.activeSelf != shouldBeActive)
         {
-            if (battlecameraScript.fighter1 == gameObject || battlecameraScript.fighter2 == gameObject)
-            {
-                animator.gameObject.SetActive(true);
-            }
-            else
-            {
-                animator.gameObject.SetActive(false);
-            }
-        }
-        else if (!animator.gameObject.activeSelf)
-        {
-            animator.gameObject.SetActive(true);
+            animator.gameObject.SetActive(shouldBeActive);
         }
 
         //TemporaryColor();
@@ -385,7 +376,7 @@ public class UnitScript : MonoBehaviour
         {
             MoveTo(UnitCharacteristics.position);
         }
-        else
+        else if (UnitCharacteristics.currentTile.Count > 0)
         {
             if (UnitCharacteristics.currentTile[0].isstairs)
             {
@@ -477,15 +468,18 @@ public class UnitScript : MonoBehaviour
         Image LifebarBehind = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         Image Lifebar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
 
-        if (battlecameraScript.incombat)
+        if (battlecameraScript.incombat && Lifebar.gameObject.activeSelf)
         {
             Lifebar.gameObject.SetActive(false);
             LifebarBehind.gameObject.SetActive(false);
         }
         else
         {
-            Lifebar.gameObject.SetActive(true);
-            LifebarBehind.gameObject.SetActive(true);
+            if(!Lifebar.gameObject.activeSelf)
+            {
+                Lifebar.gameObject.SetActive(true);
+                LifebarBehind.gameObject.SetActive(true);
+            }
             Lifebar.type = Image.Type.Filled;
             Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.AjustedStats.HP;
             if (UnitCharacteristics.enemyStats != null)
@@ -1004,8 +998,13 @@ public class UnitScript : MonoBehaviour
 
     private void Hidedeactivated()
     {
-        transform.GetChild(1).gameObject.SetActive(CheckIfOnActivated());
-        transform.GetChild(0).gameObject.SetActive(CheckIfOnActivated());
+        bool checkifonactivated = CheckIfOnActivated();
+        if(transform.GetChild(0).gameObject.activeSelf != checkifonactivated)
+        {
+            transform.GetChild(1).gameObject.SetActive(CheckIfOnActivated());
+            transform.GetChild(0).gameObject.SetActive(CheckIfOnActivated());
+        }
+        
 
     }
 

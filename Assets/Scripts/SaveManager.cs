@@ -223,6 +223,16 @@ public class SaveManager : MonoBehaviour
 
     public void SaveCurrentSlot()
     {
+
+        int currentchapter = 0;
+        string scenename = SceneManager.GetActiveScene().name;
+
+        if(scenename.Contains("Chapter"))
+        {
+            scenename.Replace("Chapter1", "");
+            currentchapter = int.Parse(scenename)+1;
+        }
+
         SaveClass save = new SaveClass
         {
             versionID = versionID,
