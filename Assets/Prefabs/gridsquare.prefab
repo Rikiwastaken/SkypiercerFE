@@ -5510,6 +5510,9 @@ MonoBehaviour:
   - name: Darkness
     groundmaterial: {fileID: 2100000, guid: c33dc14a09201ea4cb788f05e6c381a5, type: 2}
     wallmaterial: {fileID: 2100000, guid: c33dc14a09201ea4cb788f05e6c381a5, type: 2}
+  - name: Dungeon
+    groundmaterial: {fileID: 2100000, guid: 2cd2a7435494f914f888b66f850aa6a9, type: 2}
+    wallmaterial: {fileID: 2100000, guid: 2cd2a7435494f914f888b66f850aa6a9, type: 2}
   gridsquareinsideWithoutUnit: {fileID: 21300000, guid: 922cc7db09ed86b42a1f3d4be7636464, type: 3}
   gridsquareinsideWithUnit: {fileID: 21300000, guid: de4e57d48242d4241839652f6aad954c, type: 3}
   gridsquareinsideWithUnitBigEnemies: {fileID: 21300000, guid: 64d9436f97a5d9242a71a5a5c641d419, type: 3}

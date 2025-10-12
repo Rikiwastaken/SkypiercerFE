@@ -136,6 +136,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -203,6 +207,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -285,6 +293,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -354,6 +366,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -421,6 +437,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -497,6 +517,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -565,6 +589,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -641,6 +669,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -704,6 +736,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -775,6 +811,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -840,6 +880,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -903,6 +947,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -972,6 +1020,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -1049,6 +1101,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -1112,6 +1168,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -1181,6 +1241,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -1592,6 +1656,10 @@ PrefabInstance:
       propertyPath: elevation
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
     - target: {fileID: 3717739354352987645, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.a
       value: 0.44313726
@@ -1660,6 +1728,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -1737,6 +1809,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -1802,6 +1878,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -1865,6 +1945,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -1956,6 +2040,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -2023,6 +2111,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -2095,6 +2187,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -2158,6 +2254,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -2228,6 +2328,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -2310,6 +2414,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -2373,6 +2481,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -2448,6 +2560,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -2529,6 +2645,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -2608,6 +2728,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -2671,6 +2795,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -2742,6 +2870,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -2810,6 +2942,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -2891,6 +3027,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -2958,6 +3098,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -3030,6 +3174,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -3097,6 +3245,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -3173,6 +3325,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -3247,6 +3403,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -3315,6 +3475,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -3391,6 +3555,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -3458,6 +3626,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -3535,6 +3707,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -3598,6 +3774,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -3690,6 +3870,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -3764,6 +3948,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -3827,6 +4015,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -3912,6 +4104,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -4139,6 +4335,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -4206,6 +4406,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -4297,6 +4501,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -4365,6 +4573,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -4456,6 +4668,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -4523,6 +4739,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -4593,6 +4813,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -4670,6 +4894,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -4733,6 +4961,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -4804,6 +5036,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -4871,6 +5107,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -4945,6 +5185,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -5026,6 +5270,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -5095,6 +5343,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -5162,6 +5414,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -5248,6 +5504,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -5322,6 +5582,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -5390,6 +5654,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -5471,6 +5739,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -5546,6 +5818,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -5613,6 +5889,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -5687,6 +5967,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -5768,6 +6052,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -5838,6 +6126,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -5905,6 +6197,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -5981,6 +6277,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -6046,6 +6346,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -6109,6 +6413,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -6180,6 +6488,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -6243,6 +6555,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -6313,6 +6629,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -6387,6 +6707,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -6471,6 +6795,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -6577,6 +6905,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -6644,6 +6976,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -6720,6 +7056,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -6783,6 +7123,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -6852,6 +7196,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -6933,6 +7281,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -7000,6 +7352,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -7070,6 +7426,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -7144,6 +7504,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -7221,6 +7585,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -7288,6 +7656,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -7362,6 +7734,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -7444,6 +7820,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -7517,6 +7897,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -7599,6 +7983,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -7662,6 +8050,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -7733,6 +8125,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -7800,6 +8196,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -7925,6 +8325,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -7999,6 +8403,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8062,6 +8470,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -8139,6 +8551,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8202,6 +8618,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -8274,6 +8694,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8337,6 +8761,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -8406,6 +8834,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -8478,6 +8910,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8545,6 +8981,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -8621,6 +9061,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8689,6 +9133,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -8765,6 +9213,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8832,6 +9284,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -8904,6 +9360,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -8972,6 +9432,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -9049,6 +9513,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -9117,6 +9585,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -9188,6 +9660,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -9251,6 +9727,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -9320,6 +9800,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -9392,6 +9876,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -9460,6 +9948,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -9536,6 +10028,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -9603,6 +10099,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -9694,6 +10194,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -9759,6 +10263,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -9822,6 +10330,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -9891,6 +10403,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -9963,6 +10479,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -10026,6 +10546,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -10095,6 +10619,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -10182,6 +10710,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -10250,6 +10782,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -10322,6 +10858,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -10389,6 +10929,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -10465,6 +11009,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -10537,6 +11085,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -10616,6 +11168,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -10702,6 +11258,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -10769,6 +11329,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -10851,6 +11415,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -10920,6 +11488,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -10983,6 +11555,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -11050,6 +11626,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -11113,6 +11693,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -11182,6 +11766,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -11258,6 +11846,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -11325,6 +11917,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -11397,6 +11993,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -11464,6 +12064,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -11538,6 +12142,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -11639,6 +12247,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -11714,6 +12326,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -11784,6 +12400,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -11847,6 +12467,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -11916,6 +12540,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -11988,6 +12616,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -12051,6 +12683,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -12122,6 +12758,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -12185,6 +12825,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -12257,6 +12901,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -12322,6 +12970,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -12385,6 +13037,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -12454,6 +13110,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -12530,6 +13190,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -12600,6 +13264,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -12667,6 +13335,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -12743,6 +13415,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -12810,6 +13486,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -12886,6 +13566,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -12949,6 +13633,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -13020,6 +13708,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -13089,6 +13781,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -13154,6 +13850,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -13217,6 +13917,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -13298,6 +14002,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -13368,6 +14076,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -13436,6 +14148,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -13512,6 +14228,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -13586,6 +14306,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -13653,6 +14377,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -13729,6 +14457,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -13792,6 +14524,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -13868,6 +14604,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -13931,6 +14671,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -14003,6 +14747,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -14070,6 +14818,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -14141,6 +14893,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -14204,6 +14960,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -14296,6 +15056,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -14370,6 +15134,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -14440,6 +15208,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -14507,6 +15279,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -14605,6 +15381,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -14677,6 +15457,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -14754,6 +15538,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -14819,6 +15607,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -14882,6 +15674,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -14964,6 +15760,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -15031,6 +15831,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -15102,6 +15906,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -15165,6 +15973,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -15234,6 +16046,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -15316,6 +16132,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -15394,6 +16214,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -15468,6 +16292,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -15537,6 +16365,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -15600,6 +16432,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -15674,6 +16510,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -15751,6 +16591,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -15814,6 +16658,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -15883,6 +16731,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -15960,6 +16812,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -16031,6 +16887,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -16113,6 +16973,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -16187,6 +17051,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -16254,6 +17122,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -16336,6 +17208,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -16403,6 +17279,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -16484,6 +17364,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -16556,6 +17440,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -16647,6 +17535,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -16714,6 +17606,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -16790,6 +17686,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -16857,6 +17757,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -16938,6 +17842,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -17005,6 +17913,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -17086,6 +17998,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -17149,6 +18065,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -17223,6 +18143,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -17304,6 +18228,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -17378,6 +18306,10 @@ PrefabInstance:
       propertyPath: activated
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
     - target: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.96
@@ -17438,6 +18370,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -17509,6 +18445,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -17578,6 +18518,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -17641,6 +18585,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -17753,6 +18701,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -17820,6 +18772,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -17896,6 +18852,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -17965,6 +18925,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -18028,6 +18992,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -18095,6 +19063,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -18158,6 +19130,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -18230,6 +19206,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -18297,6 +19277,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -18383,6 +19367,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -18452,6 +19440,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -18517,6 +19509,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -18580,6 +19576,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -18652,6 +19652,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -18719,6 +19723,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -18791,6 +19799,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -18859,6 +19871,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -18936,6 +19952,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -19005,6 +20025,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -19072,6 +20096,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -19163,6 +20191,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -19247,6 +20279,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -19321,6 +20357,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -19384,6 +20424,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -19458,6 +20502,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -19559,6 +20607,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -19622,6 +20674,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -19704,6 +20760,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -19772,6 +20832,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -19844,6 +20908,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -19911,6 +20979,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -19993,6 +21065,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -20072,6 +21148,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -20139,6 +21219,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -20209,6 +21293,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -20292,6 +21380,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -20355,6 +21447,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: activated
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -20431,6 +21527,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 1
       objectReference: {fileID: 0}
@@ -20503,6 +21603,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -20579,6 +21683,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -20646,6 +21754,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -20722,6 +21834,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
       value: 0
       objectReference: {fileID: 0}
@@ -20785,6 +21901,10 @@ PrefabInstance:
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: VisualType
+      value: Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: isobstacle
@@ -20912,6 +22032,10 @@ PrefabInstance:
     - target: {fileID: 38206123502173926, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 246758830866421855, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1889352924782871818, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: m_Name

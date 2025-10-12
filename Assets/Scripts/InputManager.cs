@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
     public Vector2 cammovementValue;
     public bool movementjustpressed;
     private bool movementpressedonce;
+    public bool movecamjustpressed;
+    private bool movecampressedonce;
     public InputActionReference move;
     public InputActionReference movecam;
     private InputAction moveinput;
@@ -300,6 +302,22 @@ public class InputManager : MonoBehaviour
         {
             movementpressedonce = false;
             movementjustpressed = false;
+        }
+
+        if (cammovementValue != Vector2.zero & !movecampressedonce)
+        {
+            movecampressedonce = true;
+            movecamjustpressed = true;
+        }
+        else
+        {
+            movecamjustpressed = false;
+        }
+
+        if (cammovementValue == Vector2.zero)
+        {
+            movecampressedonce = false;
+            movecamjustpressed = false;
         }
     }
 

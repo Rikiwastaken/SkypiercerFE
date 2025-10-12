@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -34,6 +35,12 @@ public class battlecameraScript : MonoBehaviour
     public float verticalautomovespeed;
 
     private TextBubbleScript TextBubbleScript;
+
+    private float targetangle;
+
+    private float currentVelocity = 0f;
+    public float rotationSmoothTime = 0.3f;
+    public float rotationSpeed = 45f;
 
     private void Start()
     {
@@ -133,10 +140,24 @@ public class battlecameraScript : MonoBehaviour
             InputManager = FindAnyObjectByType<InputManager>();
         }
 
-        if(InputManager.cammovementValue.x != 0f)
+        if (InputManager.movecamjustpressed)
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, InputManager.cammovementValue.x* -30f * Time.fixedDeltaTime, 0f));
+            if (InputManager.cammovementValue.x > 0)
+                targetangle -= rotationSpeed;
+            else if (InputManager.cammovementValue.x < 0)
+                targetangle += rotationSpeed;
+
+            // Keep target angle in [-180, 180)
+            targetangle = Mathf.Repeat(targetangle + 180f, 360f) - 180f;
+
+            Debug.Log($"Input: {InputManager.cammovementValue}, Target: {targetangle}");
         }
+
+        // Smooth rotation toward target
+        float currentY = transform.eulerAngles.y;
+        float newY = Mathf.SmoothDampAngle(currentY, targetangle, ref currentVelocity, rotationSmoothTime);
+
+        transform.rotation = Quaternion.Euler(0f, newY, 0f);
 
         if (InputManager.cammovementValue.y != 0f)
         {
@@ -191,7 +212,52 @@ public class battlecameraScript : MonoBehaviour
         pointtolookat = new Vector3(Middle.x, targetelevation, Middle.y);
         CombatTextScript.SetupCombat(unit.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);
         return CamCoordinates;
-
     }
+
+
+    public Vector2 DetermineDirection(Vector2 input)
+    {
+        if (input == Vector2.zero)
+            return Vector2.zero;
+
+        // Camera rotation in multiples of 45°
+        float camY = Camera.main.transform.eulerAngles.y;
+        int steps = Mathf.RoundToInt(camY / 45f); // number of 45° steps clockwise
+
+        // Map discrete input (-1,0,1) to one of 8 directions
+        int inputX = Mathf.RoundToInt(input.x);
+        int inputY = Mathf.RoundToInt(input.y);
+
+        // Encode input direction as a step index (0 = up, 1 = up-right, 2 = right, ..., 7 = up-left)
+        int inputIndex = -1;
+        if (inputX == 0 && inputY == 1) inputIndex = 0;
+        else if (inputX == 1 && inputY == 1) inputIndex = 1;
+        else if (inputX == 1 && inputY == 0) inputIndex = 2;
+        else if (inputX == 1 && inputY == -1) inputIndex = 3;
+        else if (inputX == 0 && inputY == -1) inputIndex = 4;
+        else if (inputX == -1 && inputY == -1) inputIndex = 5;
+        else if (inputX == -1 && inputY == 0) inputIndex = 6;
+        else if (inputX == -1 && inputY == 1) inputIndex = 7;
+
+        if (inputIndex == -1) return Vector2.zero; // invalid input
+
+        // Rotate input by camera steps (modulo 8)
+        int outputIndex = (inputIndex + steps) % 8;
+
+        // Map index back to discrete Vector2
+        Vector2[] directions = new Vector2[8] {
+        new Vector2(0, 1),    // up
+        new Vector2(1, 1),    // up-right
+        new Vector2(1, 0),    // right
+        new Vector2(1, -1),   // down-right
+        new Vector2(0, -1),   // down
+        new Vector2(-1, -1),  // down-left
+        new Vector2(-1, 0),   // left
+        new Vector2(-1, 1)    // up-left
+    };
+
+        return directions[outputIndex];
+    }
+
 
 }

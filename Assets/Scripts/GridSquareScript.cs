@@ -115,10 +115,6 @@ public class GridSquareScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(textBubbleScript.indialogue)
-        {
-            //return;
-        }
         if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();

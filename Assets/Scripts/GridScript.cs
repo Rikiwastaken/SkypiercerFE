@@ -50,6 +50,8 @@ public class GridScript : MonoBehaviour
 
     private TextBubbleScript textBubble;
 
+    private battlecameraScript battlecamera;
+
     public class Node
     {
         public Vector2 Position;
@@ -83,6 +85,7 @@ public class GridScript : MonoBehaviour
         lockedhealingtiles = new List<GridSquareScript>();
         InitializeGOList();
         textBubble = FindAnyObjectByType<TextBubbleScript>();
+        battlecamera = FindAnyObjectByType<battlecameraScript>();
 
     }
 
@@ -122,7 +125,7 @@ public class GridScript : MonoBehaviour
             if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue)
             {
                 moveCD = (int)(0.1f / Time.deltaTime);
-                previousmovevalue = inputManager.movementValue;
+                previousmovevalue = battlecamera.DetermineDirection(inputManager.movementValue);
                 MoveSelection(previousmovevalue);
             }
             else
@@ -238,7 +241,7 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = (int)(movementbuffer / Time.fixedDeltaTime);
         }
 
-        previousmovementvalueforbuffer = inputManager.movementValue;
+        previousmovementvalueforbuffer = battlecamera.DetermineDirection(inputManager.movementValue);
         UpdateTileText();
         if(lockselection && movementtiles.Count==0 && lockedmovementtiles.Count==0 && attacktiles.Count == 0 && lockedattacktiles.Count == 0 && healingtiles.Count == 0 && lockedhealingtiles.Count == 0)
         {
