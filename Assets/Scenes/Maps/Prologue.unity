@@ -30846,6 +30846,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 246758830866421855, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 318267942057167068, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -30908,7 +30912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[1].triggertype
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].triggertype

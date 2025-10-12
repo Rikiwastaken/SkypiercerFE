@@ -95,7 +95,11 @@ public class GridSquareScript : MonoBehaviour
         rainparticle = GetComponentInChildren<ParticleSystem>();
         InitializePosition();
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
-        rainparticle.gameObject.SetActive(false);
+        if(rainparticle != null)
+        {
+            rainparticle.gameObject.SetActive(false);
+        }
+        
     }
 
     public void InitializePosition()
@@ -507,7 +511,7 @@ public class GridSquareScript : MonoBehaviour
         if(filledimage!=null)
         {
             Color newcolor = Color.gray;
-            newcolor.a = 0.5f;
+            newcolor.a = 0f;
             filledimage.color = newcolor;
         }
         
