@@ -56,6 +56,7 @@ public class UnitScript : MonoBehaviour
         public GameObject wholeModel;
         public Transform handbone;
         public Transform Lefthandbone;
+        public Vector3 rotationadjust;
         public bool active;
     }
 
@@ -234,6 +235,8 @@ public class UnitScript : MonoBehaviour
 
     public List<ModelInfo> ModelList;
 
+    public Vector3 rotationadjust;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -310,9 +313,11 @@ public class UnitScript : MonoBehaviour
                 if (modelInfo.active)
                 {
                     animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
+                    rotationadjust = modelInfo.rotationadjust;
                 }
             }
             animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
+
         }
 
         if (armature == null)
@@ -333,7 +338,7 @@ public class UnitScript : MonoBehaviour
                 //armature.rotation = Quaternion.LookRotation(initialforward, Vector3.up);
 
             }
-            if (!isinattackanimation() && !animator.GetCurrentAnimatorStateInfo(0).IsName("run") && Vector3.Distance(armature.localPosition, initialpos) > 0.15f)
+            if (!isinattackanimation() && !isinrunanimation() && Vector3.Distance(armature.localPosition, initialpos) > 0.15f)
             {
                 armature.localPosition = initialpos;
             }
@@ -346,7 +351,7 @@ public class UnitScript : MonoBehaviour
         }
         ManageLifebars();
 
-
+        
         ManageMovement();
 
 
@@ -416,6 +421,7 @@ public class UnitScript : MonoBehaviour
                 {
                     transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
                     transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                    transform.rotation = Quaternion.Euler(transform.rotation .eulerAngles+ rotationadjust);
                 }
             }
             else
@@ -443,6 +449,7 @@ public class UnitScript : MonoBehaviour
                 {
                     transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
                     transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + rotationadjust);
                 }
 
 
@@ -679,6 +686,15 @@ public class UnitScript : MonoBehaviour
     public bool isinattackanimation()
     {
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow")|| animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animator.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public bool isinrunanimation()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animator.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
         {
             return false;
         }

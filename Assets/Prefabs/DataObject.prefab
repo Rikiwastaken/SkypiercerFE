@@ -2168,16 +2168,16 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-  - name: Micaiah
+  - name: Mir
     ID: 6
     stats:
-      HP: 15
-      Strength: 2
-      Psyche: 7
-      Defense: 2
-      Resistance: 4
-      Speed: 7
-      Dexterity: 8
+      HP: 20
+      Strength: 10
+      Psyche: 10
+      Defense: 20
+      Resistance: 20
+      Speed: 10
+      Dexterity: 10
     AjustedStats:
       HP: 0
       Strength: 0
@@ -2186,7 +2186,7 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
-    level: 1
+    level: 99
     experience: 0
     affiliation: playable
     growth:
@@ -2197,13 +2197,13 @@ MonoBehaviour:
       ResistanceGrowth: 90
       SpeedGrowth: 40
       DexterityGrowth: 40
-    currentHP: 150
-    movements: 5
+    currentHP: 20
+    movements: 6
     position: {x: 4, y: 2}
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 01000000
+    equipmentsIDs: 
     equipments: []
     UnitSkill: 3
     EquipedSkills: 02000000

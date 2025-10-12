@@ -551,6 +551,14 @@ public class AttackTurnScript : MonoBehaviour
                 target.transform.GetChild(1).LookAt(Attacker.transform.GetChild(1));
                 Attacker.transform.GetChild(1).LookAt(target.transform.GetChild(1));
 
+                foreach (ModelInfo modelinfo in Attacker.GetComponent<UnitScript>().ModelList)
+                {
+                    if (modelinfo.ID==1 && modelinfo.active)
+                    {
+                        Attacker.transform.GetChild(1).localRotation = Quaternion.Euler(0,90,0);
+                    }
+                }
+
                 battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
                 //waitting for camera to be fully placed
                 if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)

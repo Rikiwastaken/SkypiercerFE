@@ -316,6 +316,7 @@ public class MapEventManager : MonoBehaviour
     {
         if (EventsToMonitor != null)
         {
+            EventInitialization();
             foreach (EventCondition e in EventsToMonitor)
             {
                 if (!e.triggered)

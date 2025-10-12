@@ -501,6 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitCharacteristics:
     name: BaiscCharacter
+    ID: 0
     stats:
       HP: 50
       Strength: 30
@@ -568,6 +569,7 @@ MonoBehaviour:
     currentTile:
     - {fileID: 0}
     modelID: 0
+    Masteries: []
   trylvlup: 0
   fixedgrowth: 0
   Fists:
@@ -604,12 +606,15 @@ MonoBehaviour:
     wholeModel: {fileID: 6658386783633810941}
     handbone: {fileID: 4823662156962520033}
     Lefthandbone: {fileID: 7570963822083588045}
+    rotationadjust: {x: 0, y: 0, z: 0}
     active: 1
   - ID: 1
     wholeModel: {fileID: 3372608056074292518}
     handbone: {fileID: 4823662156962520033}
     Lefthandbone: {fileID: 7570963822083588045}
+    rotationadjust: {x: 0, y: 90, z: 0}
     active: 1
+  rotationadjust: {x: 0, y: 0, z: 0}
 --- !u!1 &7336564532334944263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,7 +1447,11 @@ PrefabInstance:
       value: 0.004111278
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -3773859586774165327, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+    - {fileID: 4579539296995022581, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+    - {fileID: -26989698506131194, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+    - {fileID: 1129460535054188979, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
