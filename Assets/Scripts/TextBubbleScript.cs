@@ -51,6 +51,7 @@ public class TextBubbleScript : MonoBehaviour
 
         if (sentence != null)
             sentence.ForceMeshUpdate();
+
     }
 
 
@@ -113,7 +114,7 @@ public class TextBubbleScript : MonoBehaviour
                 {
                     charTimer = 0f;
                     charIndex++;
-                    sentence.text = texttodisplay.Substring(0, charIndex);
+                    sentence.maxVisibleCharacters = charIndex;
                 }
             }
             else if(isPrinting)
@@ -147,10 +148,15 @@ public class TextBubbleScript : MonoBehaviour
             {
                 characterportrait.sprite = Dialogue[currentTextBubble].Portrait;
             }
+
             texttodisplay = Dialogue[currentTextBubble].text;
             charactername.text = Dialogue[currentTextBubble].Charactername;
             charIndex = 0;
             isPrinting = true;
+            sentence.textWrappingMode = TextWrappingModes.NoWrap; // Temporarily disable word wrapping
+            sentence.text = texttodisplay;       // Set full text to calculate layout
+            sentence.ForceMeshUpdate();
+            sentence.textWrappingMode = TextWrappingModes.Normal;
         }
         else
         {

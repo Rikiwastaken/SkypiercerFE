@@ -870,8 +870,12 @@ public class AttackTurnScript : MonoBehaviour
                     {
                         rawdamagetaken = 0;
                     }
+                    else if(charunit.enemyStats.personality.ToLower() != "passive")
+                    {
+                        reward = -999;
+                    }
 
-                    (GameObject doubleattacker, bool tripleattack) = ActionsMenu.CalculatedoubleAttack(unit, otherunit);
+                        (GameObject doubleattacker, bool tripleattack) = ActionsMenu.CalculatedoubleAttack(unit, otherunit);
                     int potentialdamage = rawdamage;
                     if (doubleattacker == unit)
                     {
@@ -946,6 +950,10 @@ public class AttackTurnScript : MonoBehaviour
                                 reward += 5;
                             }
                         }
+                    }
+                    else
+                    {
+                        reward -= 999;
                     }
 
 
@@ -1103,7 +1111,7 @@ public class AttackTurnScript : MonoBehaviour
 
                     if (charunit.enemyStats.personality.ToLower() != "passive" && (!charunit.attacksfriends && charotherunit.affiliation=="enemy"))
                     {
-                        reward += ManhattanDistance(charunit, charotherunit);
+                        reward += ManhattanDistance(charunit, charotherunit)*5;
                     }
 
                 }
@@ -1124,7 +1132,7 @@ public class AttackTurnScript : MonoBehaviour
                 reward -= 9999;
             }
 
-            if(charunit.enemyStats.personality.ToLower() == "survivor" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.1f))
+            if(charunit.enemyStats.personality.ToLower() == "survivor" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.1f) || charunit.enemyStats.personality.ToLower() == "survivor")
             {
                 if(FindIfAnyTarget(potentialAttackPosition, charunit.affiliation))
                 {
