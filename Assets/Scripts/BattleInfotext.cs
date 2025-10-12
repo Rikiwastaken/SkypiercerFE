@@ -54,7 +54,7 @@ public class BattleInfotext : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(textBubbleScript.indialogue)
+        if (textBubbleScript.indialogue)
         {
             transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
             transform.parent.GetComponent<Image>().enabled = false;
@@ -72,8 +72,12 @@ public class BattleInfotext : MonoBehaviour
         }
         else if (!PreBattleMenu.activeSelf)
         {
-            transform.parent.GetChild(1).gameObject.SetActive(true);
-            transform.parent.GetChild(2).gameObject.SetActive(true);
+            if (!transform.parent.GetChild(1).gameObject.activeSelf)
+            {
+                transform.parent.GetChild(1).gameObject.SetActive(true);
+                transform.parent.GetChild(2).gameObject.SetActive(true);
+            }
+
         }
         else
         {
@@ -107,7 +111,7 @@ public class BattleInfotext : MonoBehaviour
         }
 
 
-        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || gridScript.GetComponent<TurnManger>().currentlyplaying!="playable")
+        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || gridScript.GetComponent<TurnManger>().currentlyplaying != "playable")
         {
             stringtoshow = string.Empty;
             Color color = transform.parent.GetComponent<Image>().color;
@@ -130,7 +134,7 @@ public class BattleInfotext : MonoBehaviour
             }
             else if (turnManger.currentlyplaying == "enemy")
             {
-                if(attackTurnScript.CurrentEnemy != null)
+                if (attackTurnScript.CurrentEnemy != null)
                 {
                     selectedunit = attackTurnScript.CurrentEnemy;
                     selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
@@ -139,7 +143,7 @@ public class BattleInfotext : MonoBehaviour
                 {
                     return;
                 }
-                
+
             }
             else if (attackTurnScript.CurrentOther != null)
             {
@@ -151,7 +155,7 @@ public class BattleInfotext : MonoBehaviour
                 selectedunit = GridScript.GetUnit(GridScript.selection);
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             }
-            if (selectedunit!=null && selectedunitCharacter!=null)
+            if (selectedunit != null && selectedunitCharacter != null)
             {
 
                 string gradeletter = "E";
@@ -180,12 +184,12 @@ public class BattleInfotext : MonoBehaviour
                 ManageMasteryVisuals(selectedunitCharacter);
 
 
-                stringtoshow =" " +selectedunitCharacter.name + "\n";
+                stringtoshow = " " + selectedunitCharacter.name + "\n";
                 stringtoshow += " Level : " + selectedunitCharacter.level + "\n";
                 stringtoshow += " Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.AjustedStats.HP;
-                if(selectedunitCharacter.enemyStats.RemainingLifebars>0)
+                if (selectedunitCharacter.enemyStats.RemainingLifebars > 0)
                 {
-                    stringtoshow += " x " + (selectedunitCharacter.enemyStats.RemainingLifebars+1);
+                    stringtoshow += " x " + (selectedunitCharacter.enemyStats.RemainingLifebars + 1);
                 }
                 else
                 {
@@ -279,12 +283,12 @@ public class BattleInfotext : MonoBehaviour
                 }
 
                 string weapontype = selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type;
-                if(selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower()=="greatsword")
+                if (selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
                 {
                     weapontype = "Gr.Sword";
                 }
 
-                stringtoshow += "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + weapontype + " " + gradeletter + ")  "+ selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / "+ selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+                stringtoshow += "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + weapontype + " " + gradeletter + ")  " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
                 if (selectedunitCharacter.telekinesisactivated)
                 {
                     stringtoshow += "Telekinesis : on";
@@ -334,9 +338,13 @@ public class BattleInfotext : MonoBehaviour
 
     private void ManageMasteryVisuals(Character unit)
     {
-        if(unit.affiliation=="playable")
+        if (unit.affiliation == "playable")
         {
-            MasteryText.transform.parent.gameObject.SetActive(true);
+            if (MasteryText.transform.parent.gameObject.activeSelf == false)
+            {
+                MasteryText.transform.parent.gameObject.SetActive(true);
+            }
+
         }
         else
         {
@@ -348,11 +356,15 @@ public class BattleInfotext : MonoBehaviour
 
         List<WeaponMastery> masteries = unit.Masteries;
         int barID = 0;
-        for(int i=0; i<masteries.Count; i++)
+        for (int i = 0; i < masteries.Count; i++)
         {
-            MasteryExpBars[i].gameObject.SetActive(true);
-            string masterylevel="";
-            switch(masteries[i].Level)
+            if (MasteryExpBars[i].gameObject.activeSelf == false)
+            {
+                MasteryExpBars[i].gameObject.SetActive(true);
+            }
+
+            string masterylevel = "";
+            switch (masteries[i].Level)
             {
                 case (-1):
                     continue;
@@ -378,9 +390,9 @@ public class BattleInfotext : MonoBehaviour
                     break;
             }
             barID++;
-            MasteryText.text += masteries[i].weapontype[0] + (masteries[i].weapontype[1] + " : "+masterylevel+"\n");
+            MasteryText.text += masteries[i].weapontype[0] + (masteries[i].weapontype[1] + " : " + masterylevel + "\n");
         }
-        for(int i = barID; i<MasteryExpBars.Count;i++)
+        for (int i = barID; i < MasteryExpBars.Count; i++)
         {
             MasteryExpBars[i].gameObject.SetActive(false);
         }
@@ -391,12 +403,18 @@ public class BattleInfotext : MonoBehaviour
         SkillButtonIDList = new List<int>();
         if (unit.UnitSkill != 0)
         {
-            SkillButtonList[0].gameObject.SetActive(true);
+            if (!SkillButtonList[0].gameObject.activeSelf)
+            {
+                SkillButtonList[0].gameObject.SetActive(true);
+            }
             SkillButtonList[0].GetComponentInChildren<TextMeshProUGUI>().text = dataScript.SkillList[unit.UnitSkill].name;
             SkillButtonIDList.Add(dataScript.SkillList[unit.UnitSkill].ID);
             for (int i = 0; i < Mathf.Min(unit.EquipedSkills.Count, 4); i++)
             {
-                SkillButtonList[i + 1].gameObject.SetActive(true);
+                if (!SkillButtonList[i + 1].gameObject.activeSelf)
+                {
+                    SkillButtonList[i + 1].gameObject.SetActive(true);
+                }
                 SkillButtonList[i + 1].GetComponentInChildren<TextMeshProUGUI>().text = dataScript.SkillList[unit.EquipedSkills[i]].name;
                 SkillButtonIDList.Add(dataScript.SkillList[unit.EquipedSkills[i]].ID);
             }
@@ -409,7 +427,10 @@ public class BattleInfotext : MonoBehaviour
         {
             for (int i = 0; i < Mathf.Min(unit.EquipedSkills.Count, 4); i++)
             {
-                SkillButtonList[i].gameObject.SetActive(true);
+                if (!SkillButtonList[i].gameObject.activeSelf)
+                {
+                    SkillButtonList[i].gameObject.SetActive(true);
+                }
                 SkillButtonList[i].GetComponentInChildren<TextMeshProUGUI>().text = dataScript.SkillList[unit.EquipedSkills[i]].name;
                 SkillButtonIDList.Add(dataScript.SkillList[unit.EquipedSkills[unit.EquipedSkills[i]]].ID);
             }
@@ -421,7 +442,10 @@ public class BattleInfotext : MonoBehaviour
 
         if (unit.UnitSkill != 0 || unit.EquipedSkills.Count > 0)
         {
-            Skilltext.transform.parent.gameObject.SetActive(true);
+            if (!Skilltext.transform.parent.gameObject.activeSelf)
+            {
+                Skilltext.transform.parent.gameObject.SetActive(true);
+            }
         }
         else
         {

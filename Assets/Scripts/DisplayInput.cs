@@ -43,7 +43,10 @@ public class DisplayInput : MonoBehaviour
 
         if (InputManager.PreviousTargetpressed)
         {
-            LT.SetActive(true);
+            if (!LT.activeSelf)
+            {
+                LT.SetActive(true);
+            }
         }
         else
         {
@@ -52,7 +55,10 @@ public class DisplayInput : MonoBehaviour
 
         if (InputManager.NextTargetpressed)
         {
-            RT.SetActive(true);
+            if (!RT.activeSelf)
+            {
+                RT.SetActive(true);
+            }
         }
         else
         {
@@ -61,7 +67,10 @@ public class DisplayInput : MonoBehaviour
 
         if (InputManager.PreviousWeaponpressed)
         {
-            LB.SetActive(true);
+            if (!LB.activeSelf)
+            {
+                LB.SetActive(true);
+            }
         }
         else
         {
@@ -70,7 +79,11 @@ public class DisplayInput : MonoBehaviour
 
         if (InputManager.NextWeaponpressed)
         {
-            RB.SetActive(true);
+            if (!RB.activeSelf)
+            {
+                RB.SetActive(true);
+            }
+
         }
         else
         {
@@ -79,7 +92,10 @@ public class DisplayInput : MonoBehaviour
 
         if (InputManager.activatepressed)
         {
-            SouthButton.SetActive(true);
+            if (SouthButton.activeSelf == false)
+            {
+                SouthButton.SetActive(true);
+            }
         }
         else
         {
@@ -88,7 +104,10 @@ public class DisplayInput : MonoBehaviour
 
         if (InputManager.cancelpressed)
         {
-            EastButton.SetActive(true);
+            if (!EastButton.activeSelf)
+            {
+                EastButton.SetActive(true);
+            }
         }
         else
         {
@@ -97,34 +116,46 @@ public class DisplayInput : MonoBehaviour
 
         if (InputManager.ShowDetailspressed)
         {
-            WestButton.SetActive(true);
+            if (!WestButton.activeSelf)
+            {
+                WestButton.SetActive(true);
+            }
         }
         else
         {
             WestButton.SetActive(false);
         }
 
-        if(InputManager.Telekinesispressed)
+        if (InputManager.Telekinesispressed)
         {
-            NorthButton.SetActive(true);
+            if (!NorthButton.activeSelf)
+            {
+                NorthButton.SetActive(true);
+            }
         }
         else
         {
             NorthButton.SetActive(false);
         }
 
-        if(InputManager.Startpressed)
+        if (InputManager.Startpressed)
         {
-            StartButton.SetActive(true);
+            if (!StartButton.activeSelf)
+            {
+                StartButton.SetActive(true);
+            }
         }
         else
         {
             StartButton.SetActive(false);
         }
 
-        if(InputManager.Selectpressed)
+        if (InputManager.Selectpressed)
         {
-            SelectButton.SetActive(true);
+            if (!SelectButton.activeSelf)
+            {
+                SelectButton.SetActive(true);
+            }
         }
         else
         {

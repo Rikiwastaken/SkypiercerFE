@@ -50,11 +50,11 @@ public class ActionManager : MonoBehaviour
     {
         if (actionsMenu.activeSelf)
         {
-            if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow") == null && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable")
+            if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow") == null && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
             {
                 currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                 (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>(){GridScript.selection}, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size);
+                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size);
             }
             return;
         }
@@ -180,10 +180,18 @@ public class ActionManager : MonoBehaviour
                         (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
                         GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size);
                         GridScript.LockcurrentSelection();
-                        GridScript.actionsMenu.SetActive(true);
+                        if (!GridScript.actionsMenu.activeSelf)
+                        {
+                            GridScript.actionsMenu.SetActive(true);
+                        }
+
                         for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
                         {
-                            GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
+                            if (!GridScript.actionsMenu.transform.GetChild(i).gameObject.activeSelf)
+                            {
+                                GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
+                            }
+
                             if (i == 0)
                             {
                                 GridScript.actionsMenu.transform.GetChild(i).GetComponent<Button>().Select();
@@ -206,11 +214,11 @@ public class ActionManager : MonoBehaviour
 
     public void ManagePath()
     {
-        if(currentcharacter == null)
+        if (currentcharacter == null)
         {
             currentpath = null;
         }
-        else if(!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(GridScript.selection) && GridScript.selection!= previoustile && GridScript.lockedmovementtiles.Contains(GridScript.selection))
+        else if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(GridScript.selection) && GridScript.selection != previoustile && GridScript.lockedmovementtiles.Contains(GridScript.selection))
         {
             previoustile = GridScript.selection;
             bool legalposition = true;
@@ -239,7 +247,7 @@ public class ActionManager : MonoBehaviour
                 }
             }
         }
-        else if(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(GridScript.selection))
+        else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(GridScript.selection))
         {
             currentpath = null;
         }
@@ -260,7 +268,7 @@ public class ActionManager : MonoBehaviour
     {
         if (currentcharacter != null)
         {
-            currentcharacter.GetComponent<UnitScript>().MoveTo( previouscoordinates);
+            currentcharacter.GetComponent<UnitScript>().MoveTo(previouscoordinates);
             currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;
         }
 
