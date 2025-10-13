@@ -196,28 +196,46 @@ public class AttackTurnScript : MonoBehaviour
 
         if (CurrentOther == null && TurnManager.currentlyplaying == "other")
         {
-            foreach (GameObject unit in gridScript.allunitGOs)
-            {
-                Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-                if (charunit.affiliation == "other" && !charunit.alreadyplayed)
-                {
-                    CurrentOther = unit;
-                    counterbeforemove = (int)(delaybeforeMove / Time.fixedDeltaTime);
-                    gridScript.ShowMovementOfUnit(unit);
-
-                }
-            }
-        }
-        else if (TurnManager.currentlyplaying == "other")
-        {
             if (delaybeforenxtunit > 0)
             {
                 delaybeforenxtunit--;
                 return;
             }
-            Character CharCurrentOther = CurrentOther.GetComponent<UnitScript>().UnitCharacteristics;
-            battlecamera.Destination = CharCurrentOther.position;
-            if (!CharCurrentOther.alreadymoved)
+            foreach (GameObject unit in gridScript.allunitGOs)
+            {
+                if (unit.gameObject != null && unit != null)
+                {
+                    Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+                    if (charunit.affiliation == "other" && !charunit.alreadyplayed && unit.GetComponent<UnitScript>().CheckIfOnActivated())
+                    {
+
+                        if (!determineifActionifTaken(unit))
+                        {
+                            charunit.alreadyplayed = true;
+                            charunit.alreadymoved = true;
+                            continue;
+                        }
+
+                        CurrentOther = unit;
+                        counterbeforemove = (int)(delaybeforeMove / Time.fixedDeltaTime);
+                        gridScript.ShowMovementOfUnit(unit);
+                        break;
+
+                    }
+                }
+
+            }
+        }
+        else if (TurnManager.currentlyplaying == "other")
+        {
+            Character Charcurrentother = CurrentOther.GetComponent<UnitScript>().UnitCharacteristics;
+            if (!battlecamera.incombat)
+            {
+                battlecamera.Destination = Charcurrentother.position;
+            }
+
+
+            if (!Charcurrentother.alreadymoved)
             {
                 if (counterbeforemove > 0)
                 {
@@ -225,20 +243,20 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 else
                 {
-                    GridSquareScript Destination = CalculateDestinationForOffensiveUnits(CurrentOther, CharCurrentOther.attacksfriends);
-                    Vector2 DestinationVector = CharCurrentOther.position;
+                    GridSquareScript Destination = CalculateDestinationForOffensiveUnits(CurrentOther);
+                    Vector2 DestinationVector = Charcurrentother.position;
                     if (Destination != null)
                     {
                         DestinationVector = Destination.GridCoordinates;
                         CurrentOther.GetComponent<UnitScript>().MoveTo(DestinationVector);
                         counterbeforeattack = (int)(delaybeforeAttack / Time.fixedDeltaTime);
-                        CharCurrentOther.alreadymoved = true;
+                        Charcurrentother.alreadymoved = true;
                     }
                     else
                     {
                         CurrentOther.GetComponent<UnitScript>().MoveTo(DestinationVector);
                         counterbeforeattack = 0;
-                        CharCurrentOther.alreadymoved = true;
+                        Charcurrentother.alreadymoved = true;
                     }
 
                 }

@@ -49,8 +49,8 @@ public class MapEventEditorWindow : EditorWindow
         "2 : Lose the game",
         "3 : Modify Tiles",
         "4 : Show Dialogue",
-        "5 : Unlock Unit",
-        "6 : Lock Unit"
+        "5 : Unused",
+        "6 : Unused"
     };
 
     [MenuItem("Tools/Map Event Editor")]
@@ -198,6 +198,7 @@ public class MapEventEditorWindow : EditorWindow
         eProp.FindPropertyRelative("triggerEffectType").intValue = 4;
         eProp.FindPropertyRelative("dialoguetoShow").ClearArray();
         eProp.FindPropertyRelative("UnitsToUnlockID").ClearArray();
+        eProp.FindPropertyRelative("UnitsToLockID").ClearArray();
 
         SerializedProperty tileMod = eProp.FindPropertyRelative("tileModification");
         if (tileMod != null)
@@ -290,8 +291,10 @@ public class MapEventEditorWindow : EditorWindow
 
         // --- Equipments ---
         EditorGUILayout.Space();
-        EditorGUILayout.LabelField("Units To Unlock/Lock");
+        EditorGUILayout.LabelField("Units To Unlock:");
         DrawIDListDropdown(eProp.FindPropertyRelative("UnitsToUnlockID"), characternames, characterIDs);
+        EditorGUILayout.LabelField("Units To Lock:");
+        DrawIDListDropdown(eProp.FindPropertyRelative("UnitsToLockID"), characternames, characterIDs);
 
         EditorGUILayout.EndVertical();
         EditorGUI.indentLevel--;

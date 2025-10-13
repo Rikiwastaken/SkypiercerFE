@@ -15,7 +15,11 @@ public class ItemActionsMenuScript : MonoBehaviour
             GridScript = FindAnyObjectByType<GridScript>();
         }
 
-        if (character.equipments[slotID].Name.ToLower() != "fist" && character.equipments[slotID].Name.ToLower() != "fists" && character.equipments[slotID].Name != "" && character.equipments[slotID].Name != null)
+        if(character.equipments[slotID].Name == null)
+        {
+            return;
+        }
+        if (character.equipments[slotID].Name.ToLower() != "fist" && character.equipments[slotID].Name.ToLower() != "fists" && character.equipments[slotID].Name != "")
         {
             if (character.equipments[slotID].type != "item")
             {

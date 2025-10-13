@@ -36,6 +36,7 @@ public class BattleInfotext : MonoBehaviour
     public GameObject ItemAction;
 
     public GameObject PreBattleMenu;
+    public GameObject AttackMenu;
 
     public bool indescription;
 
@@ -54,7 +55,7 @@ public class BattleInfotext : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (textBubbleScript.indialogue)
+        if (textBubbleScript.indialogue || AttackMenu.activeSelf)
         {
             transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
             transform.parent.GetComponent<Image>().enabled = false;
@@ -110,8 +111,8 @@ public class BattleInfotext : MonoBehaviour
             selectedunit = GridScript.GetSelectedUnitGameObject();
         }
 
-
-        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || gridScript.GetComponent<TurnManger>().currentlyplaying != "playable")
+        
+        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && gridScript.GetComponent<TurnManger>().currentlyplaying != "playable"))
         {
             stringtoshow = string.Empty;
             Color color = transform.parent.GetComponent<Image>().color;
@@ -157,7 +158,6 @@ public class BattleInfotext : MonoBehaviour
             }
             if (selectedunit != null && selectedunitCharacter != null)
             {
-
                 string gradeletter = "E";
                 int grade = selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Grade;
                 switch (grade)

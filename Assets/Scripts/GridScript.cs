@@ -1364,9 +1364,12 @@ public class GridScript : MonoBehaviour
         }
         foreach (Character unit in allunits)
         {
-            if (unit.position == position && unit.affiliation != selectedunit.affiliation && unit.currentHP > 0)
+            foreach(GridSquareScript tile in unit.currentTile)
             {
-                return false;
+                if(tile.GridCoordinates==position && unit.affiliation != selectedunit.affiliation && unit.currentHP > 0)
+                {
+                    return false;
+                }
             }
         }
         if(selectedunit.enemyStats.monsterStats.size > 1)

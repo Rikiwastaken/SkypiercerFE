@@ -45,11 +45,12 @@ public class MapEventManager : MonoBehaviour
          * 2 : Lose the game
          * 3 : ModifyTiles
          * 4 : ShowDialogue
-         * 5 : UnlockUnit
-         * 6 : LoseUnit
+         * 5 : 
+         * 6 : 
          */
         public List<TextBubbleInfo> dialoguetoShow;
         public List<int> UnitsToUnlockID;
+        public List<int> UnitsToLockID;
         public TileModification tileModification;
         public UnitPlacement UnitPlacement;
 
@@ -232,6 +233,8 @@ public class MapEventManager : MonoBehaviour
     {
         Debug.Log("event trigger : "+Event.ID);
         ManageUnitPlacement(Event.UnitPlacement);
+        UnitAddTrigger(Event.UnitsToUnlockID, true);
+        UnitAddTrigger(Event.UnitsToLockID, false);
         switch (Event.triggerEffectType)
         {
             case 1:
@@ -256,14 +259,10 @@ public class MapEventManager : MonoBehaviour
                 TextBubbleScript.InitializeDialogue(Event.dialoguetoShow);
                 break;
             case 5:
-                Debug.Log("UnitAdd trigger");
-                UnitAddTrigger(Event.UnitsToUnlockID, true);
-                TriggerEventCheck();
+                
                 break;
             case 6:
-                Debug.Log("UnitToRemove trigger");
-                UnitAddTrigger(Event.UnitsToUnlockID, false);
-                TriggerEventCheck();
+                
                 break;
         }
 

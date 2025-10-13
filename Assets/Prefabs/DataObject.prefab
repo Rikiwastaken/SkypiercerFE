@@ -1788,7 +1788,7 @@ MonoBehaviour:
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 15000000
+    equipmentsIDs: 
     equipments: []
     UnitSkill: 35
     EquipedSkills: 
@@ -1879,7 +1879,7 @@ MonoBehaviour:
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 0500000019000000
+    equipmentsIDs: 
     equipments: []
     UnitSkill: 12
     EquipedSkills: 
@@ -2217,7 +2217,7 @@ MonoBehaviour:
       Defense: 20
       Resistance: 20
       Speed: 10
-      Dexterity: 10
+      Dexterity: 20
     AjustedStats:
       HP: 0
       Strength: 0
@@ -2226,7 +2226,7 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
-    level: 99
+    level: 20
     experience: 0
     affiliation: playable
     growth:
@@ -4108,7 +4108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96044cd774742f64cbd6546a776f0941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  versionID: 050
+  versionID: 051
   activeSlot: 0
   numberofslots: 6
   SaveClasses: []

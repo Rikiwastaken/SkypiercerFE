@@ -194,6 +194,13 @@ public class EnemyStatsEditorWindow : EditorWindow
         EditorGUILayout.EndScrollView();
 
         so.ApplyModifiedProperties();
+        HideCharacter();
+        ShowCharacter();
+    }
+
+    private void OnDisable()
+    {
+        HideCharacter();
     }
 
     private void InitializeNewEnemy(SerializedProperty eProp)
@@ -330,5 +337,69 @@ public class EnemyStatsEditorWindow : EditorWindow
 
         if (toRemove >= 0)
             listProp.DeleteArrayElementAtIndex(toRemove);
+    }
+
+
+    [MenuItem("Tools/Show Positions")]
+    public static void ShowCharacter()
+    {
+        Transform gridGO = GameObject.Find("Grid").transform;
+        MapInitializer mapInitializer = FindAnyObjectByType<MapInitializer>();
+        List<Vector2> enemypositions = new List<Vector2>();
+        List<Vector2> otherpositions = new List<Vector2>();
+        List<Vector2> playablepositions = new List<Vector2>();
+        foreach (var character in mapInitializer.EnemyList)
+        {
+            if(character.isother)
+            {
+                otherpositions.Add(character.startpos);
+            }
+            else
+            {
+                enemypositions.Add(character.startpos);
+            }
+                
+        }
+        foreach (Vector2 playablepos in mapInitializer.playablepos)
+        {
+            playablepositions.Add(playablepos);
+        }
+
+        for (int i = 0; i < gridGO.childCount; i++)
+        {
+            Vector2 position = new Vector2(gridGO.GetChild(i).position.x, gridGO.GetChild(i).position.z);
+            if(enemypositions.Contains(position))
+            {
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+                enemypositions.Remove(position);
+            }
+            if(playablepositions.Contains(position))
+            {
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.blue;
+                enemypositions.Remove(position);
+            }
+            if (otherpositions.Contains(position))
+            {
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+                enemypositions.Remove(position);
+            }
+            if(gridGO.GetChild(i).GetComponent<GridSquareScript>().isobstacle)
+            {
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.black;
+            }
+        }
+
+    }
+
+    [MenuItem("Tools/Hide Characters Positions")]
+    public static void HideCharacter()
+    {
+        Transform gridGO = GameObject.Find("Grid").transform;
+        for (int i = 0; i < gridGO.childCount; i++)
+        {
+            Color newcolor = Color.white;
+            newcolor.a = 0f;
+            gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = newcolor;
+        }
     }
 }

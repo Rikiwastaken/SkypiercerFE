@@ -590,7 +590,7 @@ public class ActionsMenu : MonoBehaviour
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
                     GameObject potentialtarget = GridScript.GetUnit(tile);
-                    if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && potentialtarget != target)
+                    if (potentialtarget != null && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)) && potentialtarget != target)
                     {
                         targetlist.Add(potentialtarget);
                     }
@@ -612,7 +612,7 @@ public class ActionsMenu : MonoBehaviour
                 foreach (GridSquareScript tile in GridScript.lockedattacktiles)
                 {
                     GameObject potentialtarget = GridScript.GetUnit(tile);
-                    if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable")
+                    if (potentialtarget != null && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "enemy" || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)))
                     {
                         targetlist.Add(potentialtarget);
                     }

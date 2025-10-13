@@ -109,7 +109,10 @@ public class battlecameraScript : MonoBehaviour
             {
                 transform.position += new Vector3(0f, movey, 0f);
             }
-            
+            else
+            {
+                transform.position = new Vector3(transform.position.x, targetelevation, transform.position.z);
+            }
             resettingy = true;
         }
         else if(resettingy)
