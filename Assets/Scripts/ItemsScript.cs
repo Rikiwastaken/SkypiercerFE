@@ -47,7 +47,7 @@ public class ItemsScript : MonoBehaviour
                 if(target != null)
                 {
                     equipment equ = target.equipments[buttons.IndexOf(currentselected)];
-                    if(equ.Name!="" && equ.Name!=null)
+                    if(equ.Name.ToLower() != "fists" && equ.Name.ToLower() != "fist" && equ.Name!="" && equ.Name!=null)
                     {
                         string grade = "";
                         switch (equ.Grade)
@@ -101,7 +101,7 @@ public class ItemsScript : MonoBehaviour
         ItemActionsMenu.transform.position = new Vector3(initialpos.x, buttons[id].transform.position.y, initialpos.z);
         ItemActionsMenu.GetComponent<ItemActionsMenuScript>().slotID = id;
         ItemActionsMenu.GetComponent<ItemActionsMenuScript>().character = target;
-        if (target.equipments[id].Name == "" || target.equipments[id].Name == null)
+        if (target.equipments[id].Name.ToLower() == "fists" || target.equipments[id].Name.ToLower() == "fist" || target.equipments[id].Name == "" || target.equipments[id].Name == null)
         {
             statstext.text = "Empty Slot";
         }
@@ -142,14 +142,22 @@ public class ItemsScript : MonoBehaviour
         {
             for (int i = 0; i < buttons.Count; i++)
             {
-                if (target.equipments[i].Name == "" || target.equipments[i].Name == null)
+                if(target.equipments.Count>i)
                 {
-                    buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
+                    if (target.equipments[i].Name.ToLower() == "fists" || target.equipments[i].Name.ToLower() == "fist" || target.equipments[i].Name == "" || target.equipments[i].Name == null)
+                    {
+                        buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
+                    }
+                    else
+                    {
+                        buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = target.equipments[i].Name + " " + target.equipments[i].Currentuses + "/" + target.equipments[i].Maxuses;
+                    }
                 }
                 else
                 {
-                    buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = target.equipments[i].Name + " " + target.equipments[i].Currentuses + "/" + target.equipments[i].Maxuses;
+                    buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
                 }
+
 
             }
         }

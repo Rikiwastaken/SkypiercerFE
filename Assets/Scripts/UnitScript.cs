@@ -11,7 +11,7 @@ public class UnitScript : MonoBehaviour
     [Serializable]
     public class Character
     {
-        
+
         public string name;
         public int ID;
         public BaseStats stats;
@@ -316,10 +316,10 @@ public class UnitScript : MonoBehaviour
                     rotationadjust = modelInfo.rotationadjust;
                 }
             }
-            animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
+
 
         }
-
+        animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
         if (armature == null)
         {
             armature = animator.transform;
@@ -351,7 +351,7 @@ public class UnitScript : MonoBehaviour
         }
         ManageLifebars();
 
-        
+
         ManageMovement();
 
 
@@ -412,7 +412,7 @@ public class UnitScript : MonoBehaviour
                 {
                     transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
                     transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                    transform.rotation = Quaternion.Euler(transform.rotation .eulerAngles+ rotationadjust);
+                    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + rotationadjust);
                 }
             }
             else
@@ -468,14 +468,17 @@ public class UnitScript : MonoBehaviour
         Image LifebarBehind = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         Image Lifebar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
 
-        if (battlecameraScript.incombat && Lifebar.gameObject.activeSelf)
+        if (battlecameraScript.incombat)
         {
-            Lifebar.gameObject.SetActive(false);
-            LifebarBehind.gameObject.SetActive(false);
+            if (Lifebar.gameObject.activeSelf)
+            {
+                Lifebar.gameObject.SetActive(false);
+                LifebarBehind.gameObject.SetActive(false);
+            }
         }
         else
         {
-            if(!Lifebar.gameObject.activeSelf)
+            if (!Lifebar.gameObject.activeSelf)
             {
                 Lifebar.gameObject.SetActive(true);
                 LifebarBehind.gameObject.SetActive(true);
@@ -541,11 +544,11 @@ public class UnitScript : MonoBehaviour
             weapontounlock = GetFirstWeapon().type.ToLower();
         }
 
-        foreach(WeaponMastery mastery in masteries)
+        foreach (WeaponMastery mastery in masteries)
         {
-            if(mastery.weapontype.ToLower()==weapontounlock)
+            if (mastery.weapontype.ToLower() == weapontounlock)
             {
-                if(mastery.Level > 0 && mastery.Level <= maxlevel ||(mastery.Level==0 && secundary))
+                if (mastery.Level > 0 && mastery.Level <= maxlevel || (mastery.Level == 0 && secundary))
                 {
                     if (GetSkill(11))
                     {
@@ -589,7 +592,7 @@ public class UnitScript : MonoBehaviour
                 break;
         }
 
-        if(levelup)
+        if (levelup)
         {
             mastery.Level++;
         }
@@ -600,9 +603,9 @@ public class UnitScript : MonoBehaviour
 
         foreach (Character ally in GridScript.allunits)
         {
-            if (ally.affiliation == "playable" && ManhattanDistance(UnitCharacteristics, ally) <= 2 && ally!=UnitCharacteristics)
+            if (ally.affiliation == "playable" && ManhattanDistance(UnitCharacteristics, ally) <= 2 && ally != UnitCharacteristics)
             {
-                GainMastery(ally,"",true);
+                GainMastery(ally, "", true);
             }
         }
 
@@ -612,7 +615,6 @@ public class UnitScript : MonoBehaviour
     }
     public void MoveTo(Vector2 destination, bool jump = false, bool instantaneousmovement = false)
     {
-        Debug.Log(transform.name + " moving to : " + destination);
         if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();
@@ -679,7 +681,7 @@ public class UnitScript : MonoBehaviour
 
     public bool isinattackanimation()
     {
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow")|| animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animator.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animator.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
         {
             return false;
         }
@@ -842,28 +844,28 @@ public class UnitScript : MonoBehaviour
             if (equipmentmodel.Model != null)
             {
                 currentequipmentmodel = Instantiate(equipmentmodel.Model);
-            currentequipmentmodel.transform.localScale = Vector3.one * 0.5f;
-            foreach (ModelInfo modelInfo in ModelList)
-            {
-                if (modelInfo.active)
+                currentequipmentmodel.transform.localScale = Vector3.one * 0.5f;
+                foreach (ModelInfo modelInfo in ModelList)
                 {
-                    if (GetFirstWeapon().type.ToLower() == "bow")
+                    if (modelInfo.active)
                     {
-                        currentequipmentmodel.transform.SetParent(modelInfo.Lefthandbone);
-                    }
-                    else if (GetFirstWeapon().type.ToLower() != "machine")
-                    {
-                        currentequipmentmodel.transform.SetParent(modelInfo.handbone);
+                        if (GetFirstWeapon().type.ToLower() == "bow")
+                        {
+                            currentequipmentmodel.transform.SetParent(modelInfo.Lefthandbone);
+                        }
+                        else if (GetFirstWeapon().type.ToLower() != "machine")
+                        {
+                            currentequipmentmodel.transform.SetParent(modelInfo.handbone);
+                        }
                     }
                 }
+
+
+
+                currentequipmentmodel.transform.localPosition = Vector3.zero;
+                currentequipmentmodel.transform.localRotation = Quaternion.identity;
             }
 
-
-
-            currentequipmentmodel.transform.localPosition = Vector3.zero;
-            currentequipmentmodel.transform.localRotation = Quaternion.identity;
-            }
-            
         }
     }
 
@@ -999,12 +1001,12 @@ public class UnitScript : MonoBehaviour
     private void Hidedeactivated()
     {
         bool checkifonactivated = CheckIfOnActivated();
-        if(transform.GetChild(0).gameObject.activeSelf != checkifonactivated)
+        if (transform.GetChild(0).gameObject.activeSelf != checkifonactivated)
         {
             transform.GetChild(1).gameObject.SetActive(CheckIfOnActivated());
             transform.GetChild(0).gameObject.SetActive(CheckIfOnActivated());
         }
-        
+
 
     }
 
@@ -1980,11 +1982,11 @@ public class UnitScript : MonoBehaviour
         }
 
         //Master Hunter
-        if(GetSkill(63))
+        if (GetSkill(63))
         {
-            if(GetFirstWeapon()== Fists)
+            if (GetFirstWeapon() == Fists)
             {
-                statbonuses.Hit += 50;
+                statbonuses.Hit += 80;
                 statbonuses.TelekDamage += 3;
                 statbonuses.PhysDamage += 3;
             }

@@ -916,6 +916,16 @@ public class ActionsMenu : MonoBehaviour
             BasicCommandWindow(unit, target);
         }
 
+        else if (command.ID == 59) // RainDance
+        {
+            BasicCommandWindow(unit, target);
+        }
+
+        else if (command.ID == 60) // SunDance
+        {
+            BasicCommandWindow(unit, target);
+        }
+
     }
 
 
@@ -1946,7 +1956,7 @@ public class ActionsMenu : MonoBehaviour
         }
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield")
         {
-            basestatdef += chartarget.AjustedStats.Strength * 0.2f;
+            basestatdef += chartarget.AjustedStats.Strength * 0.1f;
         }
 
         float finaldamagefloat = unitbasedamage - basestatdef;
@@ -2209,11 +2219,11 @@ public class ActionsMenu : MonoBehaviour
         {
             if (targetTile.elevation > unitTile.elevation)
             {
-                tilebonus -= 15 * (targetTile.elevation - unitTile.elevation);
+                tilebonus -= 40 * (targetTile.elevation - unitTile.elevation);
             }
             else if (targetTile.elevation < unitTile.elevation)
             {
-                tilebonus += 15 * (unitTile.elevation - targetTile.elevation);
+                tilebonus += 40 * (unitTile.elevation - targetTile.elevation);
             }
         }
 

@@ -1162,7 +1162,7 @@ MonoBehaviour:
       HP: 20
       Strength: 9
       Psyche: 1
-      Defense: 11
+      Defense: 8
       Resistance: 8
       Speed: 3
       Dexterity: 5
@@ -1654,7 +1654,7 @@ MonoBehaviour:
     range: 0
     ID: 62
   - name: Master Hunter
-    Descriptions: Increase hit rate by 50% and damage by 3 if not wielding any blade
+    Descriptions: Increase hit rate by 80% and damage by 3 if not wielding any blade
       (exclusive to Mir)
     IsCommand: 0
     Cost: 5
@@ -4108,7 +4108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96044cd774742f64cbd6546a776f0941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  versionID: 041
+  versionID: 050
   activeSlot: 0
   numberofslots: 6
   SaveClasses: []

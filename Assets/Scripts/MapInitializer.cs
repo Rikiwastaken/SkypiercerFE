@@ -154,7 +154,6 @@ public class MapInitializer : MonoBehaviour
             }
             else
             {
-                Debug.Log("destroying");
                 modelinf.active = false;
                 DestroyImmediate(modelinf.wholeModel);
             }

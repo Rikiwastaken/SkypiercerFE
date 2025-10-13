@@ -141,31 +141,35 @@ public class TextBubbleScript : MonoBehaviour
     private void GoToNextPage()
     {
         currentTextBubble++;
-        if(currentTextBubble < Dialogue.Count)
+
+        if (currentTextBubble < Dialogue.Count)
         {
             ActivateBubble();
-            if(Dialogue[currentTextBubble].Portrait!=null)
-            {
-                characterportrait.sprite = Dialogue[currentTextBubble].Portrait;
-            }
 
-            texttodisplay = Dialogue[currentTextBubble].text;
-            charactername.text = Dialogue[currentTextBubble].Charactername;
-            charIndex = 0;
-            isPrinting = true;
-            sentence.textWrappingMode = TextWrappingModes.NoWrap; // Temporarily disable word wrapping
-            sentence.text = texttodisplay;       // Set full text to calculate layout
-            sentence.ForceMeshUpdate();
+            var info = Dialogue[currentTextBubble];
+
+            if (info.Portrait != null)
+                characterportrait.sprite = info.Portrait;
+
+            texttodisplay = info.text;
+            charactername.text = info.Charactername;
+
+            sentence.textWrappingMode = TextWrappingModes.NoWrap; // Temporarily disable wrapping
+            sentence.text = texttodisplay;
+            sentence.ForceMeshUpdate(); // Let TMP calculate layout
             sentence.textWrappingMode = TextWrappingModes.Normal;
+
+            sentence.maxVisibleCharacters = 0;
+
+            charIndex = 0;
+            charTimer = 0f;
+            isPrinting = true;
         }
         else
         {
             DeactivateBubble();
-            FindAnyObjectByType<MapEventManager>().TriggerEventCheck();
+            FindAnyObjectByType<MapEventManager>()?.TriggerEventCheck();
         }
-            
-
-
     }
 
     public void InitializeDialogue(List<TextBubbleInfo> dialogue)

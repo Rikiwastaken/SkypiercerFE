@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
-using static UnitScript;
 using static DataScript;
+using static UnitScript;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 public class AttackTurnScript : MonoBehaviour
 {
 
@@ -72,7 +73,7 @@ public class AttackTurnScript : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(phaseTextScript.moveText)
+        if (phaseTextScript.moveText)
         {
             return;
         }
@@ -110,7 +111,7 @@ public class AttackTurnScript : MonoBehaviour
                     if (charunit.affiliation == "enemy" && !charunit.alreadyplayed && unit.GetComponent<UnitScript>().CheckIfOnActivated())
                     {
 
-                        if(!determineifActionifTaken(unit))
+                        if (!determineifActionifTaken(unit))
                         {
                             charunit.alreadyplayed = true;
                             charunit.alreadymoved = true;
@@ -135,7 +136,7 @@ public class AttackTurnScript : MonoBehaviour
             {
                 battlecamera.Destination = CharCurrentEnemy.position;
             }
-            
+
 
             if (!CharCurrentEnemy.alreadymoved)
             {
@@ -167,7 +168,7 @@ public class AttackTurnScript : MonoBehaviour
             {
                 ManageAttack(CurrentEnemy);
             }
-            
+
         }
 
         //playerattack
@@ -257,14 +258,14 @@ public class AttackTurnScript : MonoBehaviour
 
     private bool determineifActionifTaken(GameObject unit)
     {
-        
+
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Vector2 originalpos = charunit.position;
         gridScript.ShowMovementOfUnit(unit);
         GridSquareScript Destination = CalculateDestinationForOffensiveUnits(unit, charunit.attacksfriends);
-        if(Destination == null)
+        if (Destination == null)
         {
-            
+
             GameObject target = CalculateBestTargetForOffensiveUnits(unit, charunit.attacksfriends);
             if (target == null)
             {
@@ -290,7 +291,7 @@ public class AttackTurnScript : MonoBehaviour
                 return true;
             }
         }
-        
+
     }
     private void ManageCommand(GameObject User)
     {
@@ -423,21 +424,21 @@ public class AttackTurnScript : MonoBehaviour
                 User.GetComponent<UnitScript>().AddNumber(0, true, datascript.SkillList[CharTarget.UnitSkill].name + " copied");
             }
         }
-        else if(commandID == 59) // Sundance
+        else if (commandID == 59) // Sundance
         {
 
             WeatherManager weathermanager = FindAnyObjectByType<WeatherManager>();
-            if(weathermanager.rainymap)
+            if (weathermanager.rainymap)
             {
-                List<GridSquareScript> tilestochange= new List<GridSquareScript>();
-                foreach(GridSquareScript tile in User.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
+                List<GridSquareScript> tilestochange = new List<GridSquareScript>();
+                foreach (GridSquareScript tile in User.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
                 {
-                    if(!tilestochange.Contains(tile))
+                    if (!tilestochange.Contains(tile))
                     {
                         tilestochange.Add(tile);
                     }
-                    List<GridSquareScript> othertiles = new List<GridSquareScript>() { gridScript.GetTile(tile.GridCoordinates+ new Vector2(0,1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(0, -1)) , gridScript.GetTile(tile.GridCoordinates + new Vector2(1, 0)) , gridScript.GetTile(tile.GridCoordinates + new Vector2(-1, 0)) };
-                    foreach(GridSquareScript addedtile in othertiles)
+                    List<GridSquareScript> othertiles = new List<GridSquareScript>() { gridScript.GetTile(tile.GridCoordinates + new Vector2(0, 1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(0, -1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(1, 0)), gridScript.GetTile(tile.GridCoordinates + new Vector2(-1, 0)) };
+                    foreach (GridSquareScript addedtile in othertiles)
                     {
                         if (!tilestochange.Contains(addedtile))
                         {
@@ -446,12 +447,12 @@ public class AttackTurnScript : MonoBehaviour
                     }
 
                 }
-                foreach(GridSquareScript tile in tilestochange)
+                foreach (GridSquareScript tile in tilestochange)
                 {
                     tile.RemainingRainTurns = 0;
                     tile.RemainingSunTurns = 3;
                 }
-            } 
+            }
         }
         else if (commandID == 60) // RainDance
         {
@@ -613,9 +614,9 @@ public class AttackTurnScript : MonoBehaviour
 
                 foreach (ModelInfo modelinfo in Attacker.GetComponent<UnitScript>().ModelList)
                 {
-                    if (modelinfo.ID==1 && modelinfo.active)
+                    if (modelinfo.ID == 1 && modelinfo.active)
                     {
-                        Attacker.transform.GetChild(1).localRotation = Quaternion.Euler(0,90,0);
+                        Attacker.transform.GetChild(1).localRotation = Quaternion.Euler(0, 90, 0);
                     }
                 }
 
@@ -880,22 +881,22 @@ public class AttackTurnScript : MonoBehaviour
         }
 
 
-        
+
 
     }
 
     private List<string> Whotoattack(string affiliation, bool attackfriend)
     {
         List<string> affiliationtoattack = new List<string>() { "playable", "other" };
-        if (affiliation=="other")
+        if (affiliation == "other")
         {
-            if(attackfriend)
+            if (attackfriend)
             {
                 affiliationtoattack = new List<string>() { "playable", "enemy" };
             }
             else
             {
-                affiliationtoattack = new List<string>() { "enemy"};
+                affiliationtoattack = new List<string>() { "enemy" };
             }
         }
         return affiliationtoattack;
@@ -930,12 +931,12 @@ public class AttackTurnScript : MonoBehaviour
                     {
                         rawdamagetaken = 0;
                     }
-                    else if(charunit.enemyStats.personality.ToLower() != "passive")
+                    else if (charunit.enemyStats.personality.ToLower() != "survivor")
                     {
                         reward = -999;
                     }
 
-                        (GameObject doubleattacker, bool tripleattack) = ActionsMenu.CalculatedoubleAttack(unit, otherunit);
+                    (GameObject doubleattacker, bool tripleattack) = ActionsMenu.CalculatedoubleAttack(unit, otherunit);
                     int potentialdamage = rawdamage;
                     if (doubleattacker == unit)
                     {
@@ -996,7 +997,7 @@ public class AttackTurnScript : MonoBehaviour
                         reward += Random.Range(-50, 50);
                     }
 
-                    if (charunit.enemyStats.personality.ToLower() != "passive")
+                    if (charunit.enemyStats.personality.ToLower() != "survivor")
                     {
                         if (potentialdamagetaken == 0)
                         {
@@ -1024,6 +1025,10 @@ public class AttackTurnScript : MonoBehaviour
                     }
                 }
             }
+        }
+        if (charunit.enemyStats.personality.ToLower() == "survivor")
+        {
+            chosenUnit = null;
         }
         return chosenUnit;
     }
@@ -1062,7 +1067,7 @@ public class AttackTurnScript : MonoBehaviour
     /// <returns></returns>
     private int RewardForDestination(GameObject unit, GridSquareScript position, bool attacksfriend = true)
     {
-        
+
         int reward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         if (charunit.enemyStats.personality.ToLower() == "guard" && position.GridCoordinates != charunit.position)
@@ -1145,7 +1150,7 @@ public class AttackTurnScript : MonoBehaviour
                             }
                         }
                     }
-                    if (charunit.enemyStats.personality.ToLower() != "passive")
+                    if (charunit.enemyStats.personality.ToLower() != "survivor")
                     {
                         if (potentialdamagetaken == 0)
                         {
@@ -1169,9 +1174,9 @@ public class AttackTurnScript : MonoBehaviour
                         reward += Mathf.Max(ManhattanDistance(charunit, charotherunit) - newrange, 0);
                     }
 
-                    if (charunit.enemyStats.personality.ToLower() != "passive" && (!charunit.attacksfriends && charotherunit.affiliation=="enemy"))
+                    if (charunit.enemyStats.personality.ToLower() != "survivor" && (!charunit.attacksfriends && charotherunit.affiliation == "enemy"))
                     {
-                        reward += ManhattanDistance(charunit, charotherunit)*5;
+                        reward += ManhattanDistance(charunit, charotherunit) * 5;
                     }
 
                 }
@@ -1192,30 +1197,30 @@ public class AttackTurnScript : MonoBehaviour
                 reward -= 9999;
             }
 
-            if(charunit.enemyStats.personality.ToLower() == "survivor" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.1f) || charunit.enemyStats.personality.ToLower() == "survivor")
+            if (charunit.enemyStats.personality.ToLower() == "survivor" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.1f) || charunit.enemyStats.personality.ToLower() == "survivor")
             {
-                if(FindIfAnyTarget(potentialAttackPosition, charunit.affiliation))
+                if (FindIfAnyTarget(potentialAttackPosition, charunit.affiliation))
                 {
                     reward -= 99;
                 }
             }
 
-            if(charunit.enemyStats.monsterStats.size>1)
+            if (charunit.enemyStats.monsterStats.size > 1)
             {
                 GridSquareScript tile1 = gridScript.GetTile(position.GridCoordinates + new Vector2(-1, 0));
                 GridSquareScript tile2 = gridScript.GetTile(position.GridCoordinates + new Vector2(-1, 1));
                 GridSquareScript tile3 = gridScript.GetTile(position.GridCoordinates + new Vector2(0, 1));
-                if(tile1.isobstacle || tile2.isobstacle || tile3.isobstacle)
+                if (tile1.isobstacle || tile2.isobstacle || tile3.isobstacle)
                 {
                     return reward - 9999;
                 }
-                if(gridScript.GetUnit(tile1)!=unit || gridScript.GetUnit(tile2) != unit ||  gridScript.GetUnit(tile3) != unit)
+                if (gridScript.GetUnit(tile1) != unit || gridScript.GetUnit(tile2) != unit || gridScript.GetUnit(tile3) != unit)
                 {
                     return reward - 9999;
                 }
             }
 
-            
+
 
         }
         return reward;
@@ -1231,7 +1236,7 @@ public class AttackTurnScript : MonoBehaviour
             GameObject unit = gridScript.GetUnit(tile);
             if (unit != null)
             {
-                if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation != affiliation || (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation!="playable" && affiliation=="other"))
+                if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation != affiliation || (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && affiliation == "other"))
                 {
                     return true;
                 }
@@ -1256,7 +1261,7 @@ public class AttackTurnScript : MonoBehaviour
                 Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
                 if (charunit.currentHP <= 0)
                 {
-                    
+
                     if (charunit.enemyStats == null)
                     {
                         if (charunit.currentTile != null)
@@ -1291,7 +1296,7 @@ public class AttackTurnScript : MonoBehaviour
 
                 }
             }
-            
+
         }
         foreach (GameObject unittodelete in objecttodelete)
         {
