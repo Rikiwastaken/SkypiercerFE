@@ -423,6 +423,66 @@ public class AttackTurnScript : MonoBehaviour
                 User.GetComponent<UnitScript>().AddNumber(0, true, datascript.SkillList[CharTarget.UnitSkill].name + " copied");
             }
         }
+        else if(commandID == 59) // Sundance
+        {
+
+            WeatherManager weathermanager = FindAnyObjectByType<WeatherManager>();
+            if(weathermanager.rainymap)
+            {
+                List<GridSquareScript> tilestochange= new List<GridSquareScript>();
+                foreach(GridSquareScript tile in User.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
+                {
+                    if(!tilestochange.Contains(tile))
+                    {
+                        tilestochange.Add(tile);
+                    }
+                    List<GridSquareScript> othertiles = new List<GridSquareScript>() { gridScript.GetTile(tile.GridCoordinates+ new Vector2(0,1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(0, -1)) , gridScript.GetTile(tile.GridCoordinates + new Vector2(1, 0)) , gridScript.GetTile(tile.GridCoordinates + new Vector2(-1, 0)) };
+                    foreach(GridSquareScript addedtile in othertiles)
+                    {
+                        if (!tilestochange.Contains(addedtile))
+                        {
+                            tilestochange.Add(addedtile);
+                        }
+                    }
+
+                }
+                foreach(GridSquareScript tile in tilestochange)
+                {
+                    tile.RemainingRainTurns = 0;
+                    tile.RemainingSunTurns = 3;
+                }
+            } 
+        }
+        else if (commandID == 60) // RainDance
+        {
+
+            WeatherManager weathermanager = FindAnyObjectByType<WeatherManager>();
+            if (weathermanager.rainymap)
+            {
+                List<GridSquareScript> tilestochange = new List<GridSquareScript>();
+                foreach (GridSquareScript tile in User.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
+                {
+                    if (!tilestochange.Contains(tile))
+                    {
+                        tilestochange.Add(tile);
+                    }
+                    List<GridSquareScript> othertiles = new List<GridSquareScript>() { gridScript.GetTile(tile.GridCoordinates + new Vector2(0, 1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(0, -1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(1, 0)), gridScript.GetTile(tile.GridCoordinates + new Vector2(-1, 0)) };
+                    foreach (GridSquareScript addedtile in othertiles)
+                    {
+                        if (!tilestochange.Contains(addedtile))
+                        {
+                            tilestochange.Add(addedtile);
+                        }
+                    }
+
+                }
+                foreach (GridSquareScript tile in tilestochange)
+                {
+                    tile.RemainingRainTurns = 3;
+                    tile.RemainingSunTurns = 0;
+                }
+            }
+        }
 
         ActionsMenu.FinalizeAttack();
 

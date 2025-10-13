@@ -1936,6 +1936,60 @@ public class UnitScript : MonoBehaviour
             statbonuses.PhysDamage += ((int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP) / 2;
         }
 
+        //Amphibian
+        if (GetSkill(61))
+        {
+            bool onwatertile = false;
+            foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
+            {
+                if (tile.RemainingRainTurns > 0 || tile.type.ToLower() == "water")
+                {
+                    onwatertile = true;
+                    break;
+                }
+            }
+            if (onwatertile)
+            {
+                statbonuses.Dodge += 15;
+                statbonuses.Hit += 15;
+            }
+        }
+
+        //Shut-In
+        if (GetSkill(62))
+        {
+            bool onsunnytile = false;
+            foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
+            {
+                if (tile.RemainingSunTurns > 0)
+                {
+                    onsunnytile = true;
+                    break;
+                }
+            }
+            if (onsunnytile)
+            {
+                statbonuses.TelekDamage -= 6;
+                statbonuses.PhysDamage -= 6;
+            }
+            else
+            {
+                statbonuses.TelekDamage += 3;
+                statbonuses.PhysDamage += 3;
+            }
+        }
+
+        //Master Hunter
+        if(GetSkill(63))
+        {
+            if(GetFirstWeapon()== Fists)
+            {
+                statbonuses.Hit += 50;
+                statbonuses.TelekDamage += 3;
+                statbonuses.PhysDamage += 3;
+            }
+        }
+
 
         AllStatsSkillBonus battalionskillbonus = GetBattalionCombatBonus();
 

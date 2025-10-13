@@ -1614,13 +1614,53 @@ MonoBehaviour:
     targettype: 0
     range: 0
     ID: 57
-  - name: Crystal Heart
-    Descriptions: Increases all stat growth and exp gained by 10% (exclusive to Zack)
+  - name: Weakness
+    Descriptions: Lowers all stats by 50%.
     IsCommand: 0
     Cost: 0
     targettype: 0
     range: 0
-    ID: 57
+    ID: 58
+  - name: Sundance
+    Descriptions: Turn the weather of the tiles at 1 distance to Sunny (only available
+      outside).
+    IsCommand: 1
+    Cost: 5
+    targettype: 3
+    range: 1
+    ID: 59
+  - name: Raindance
+    Descriptions: urn the weather of the tiles at 1 distance to Rainy (only available
+      outside).
+    IsCommand: 1
+    Cost: 5
+    targettype: 3
+    range: 1
+    ID: 60
+  - name: Amphibian
+    Descriptions: Increase Dodge rate and hit rate by 15% when on a Water or Rainy
+      Tile.
+    IsCommand: 0
+    Cost: 5
+    targettype: 0
+    range: 0
+    ID: 61
+  - name: Shut-in
+    Descriptions: Increase damage by 3 when not on a Sunny Tile but reduces it by
+      6 otherwise.
+    IsCommand: 0
+    Cost: 5
+    targettype: 0
+    range: 0
+    ID: 62
+  - name: Master Hunter
+    Descriptions: Increase hit rate by 50% and damage by 3 if not wielding any blade
+      (exclusive to Mir)
+    IsCommand: 0
+    Cost: 5
+    targettype: 0
+    range: 0
+    ID: 63
   PlayableCharacterList:
   - name: Zack
     ID: 0
@@ -2205,8 +2245,8 @@ MonoBehaviour:
     telekinesisactivated: 0
     equipmentsIDs: 
     equipments: []
-    UnitSkill: 3
-    EquipedSkills: 02000000
+    UnitSkill: 63
+    EquipedSkills: 
     isboss: 0
     attacksfriends: 0
     playableStats:
