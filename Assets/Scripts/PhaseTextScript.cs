@@ -15,32 +15,39 @@ public class PhaseTextScript : MonoBehaviour
     private TextMeshProUGUI TMP;
     private TextMeshProUGUI BackTMP;
 
+    private TextBubbleScript textbubblescript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         transform.localPosition = new Vector2(-restingXpos, 0);
         TMP = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         BackTMP = GetComponent<TextMeshProUGUI>();
+        textbubblescript = FindAnyObjectByType<TextBubbleScript>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(moveText)
+        if (textbubblescript.indialogue)
         {
-            if(transform.localPosition.x<=-100)
+            return;
+        }
+        if (moveText)
+        {
+            if (transform.localPosition.x <= -100)
             {
                 transform.localPosition += new Vector3(speed * Time.fixedDeltaTime, 0f, 0f);
-                timeinthemiddlecounter = (int)(timeinthemiddle/Time.fixedDeltaTime);
+                timeinthemiddlecounter = (int)(timeinthemiddle / Time.fixedDeltaTime);
             }
             else
             {
-                if(timeinthemiddlecounter>0)
+                if (timeinthemiddlecounter > 0)
                 {
                     timeinthemiddlecounter--;
-                    transform.localPosition += new Vector3(speed * Time.fixedDeltaTime/20f, 0f, 0f);
+                    transform.localPosition += new Vector3(speed * Time.fixedDeltaTime / 20f, 0f, 0f);
                 }
-                else if(transform.localPosition.x < restingXpos)
+                else if (transform.localPosition.x < restingXpos)
                 {
                     transform.localPosition += new Vector3(speed * Time.fixedDeltaTime, 0f, 0f);
                 }
@@ -58,14 +65,14 @@ public class PhaseTextScript : MonoBehaviour
 
     public void SetupText(string currentlyplaying)
     {
-        if(currentlyplaying=="playable")
+        if (currentlyplaying == "playable")
         {
             moveText = true;
             TMP.text = "Ally Phase";
             BackTMP.text = "Ally Phase";
             TMP.color = Color.blue;
         }
-        else if(currentlyplaying=="enemy")
+        else if (currentlyplaying == "enemy")
         {
             moveText = true;
             TMP.text = "Enemy Phase";

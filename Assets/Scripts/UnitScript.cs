@@ -93,6 +93,7 @@ public class UnitScript : MonoBehaviour
          * Daredevil : never takes into account their own HP.
          * Survivor : Always avoid enemies and attacks.
          * Guard : Does not move 
+         * Hunter : Can get to enemies no matter the distance
          */
         public Vector2 startpos;
         public List<int> equipments;

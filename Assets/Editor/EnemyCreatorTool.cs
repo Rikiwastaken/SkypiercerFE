@@ -31,7 +31,8 @@ public class EnemyStatsEditorWindow : EditorWindow
         "Coward : deviant if below 33% hp, survivor if below 10%",
         "Daredevil : never takes into account their own HP",
         "Survivor : Always avoid enemies and attacks",
-        "Guard : Does not move"
+        "Guard : Does not move",
+        "Hunter : Looks for enemies regardless of HP and distance"
     };
 
     [MenuItem("Tools/Enemy Stats Editor")]

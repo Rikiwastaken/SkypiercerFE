@@ -1095,11 +1095,21 @@ public class AttackTurnScript : MonoBehaviour
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
         List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position, charunit.enemyStats.monsterStats.size);
         List<string> affiliationtoattack = Whotoattack(charunit.affiliation, attacksfriend);
+
         foreach (GridSquareScript tile in potentialAttackPosition)
         {
             foreach (GameObject otherunit in gridScript.allunitGOs)
             {
+
+                
+
                 Character charotherunit = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
+
+                if(affiliationtoattack.Contains(charotherunit.affiliation.ToLower()) && charunit.enemyStats.personality.ToLower() == "hunter")
+                {
+                    reward += Mathf.Max(100 - ManhattanDistance(charunit, charotherunit),0);
+                }
+
                 if (affiliationtoattack.Contains(charotherunit.affiliation.ToLower()) && charotherunit.position == tile.GridCoordinates)
                 {
                     //that means that an enemy unit is in the zone
@@ -1192,6 +1202,7 @@ public class AttackTurnScript : MonoBehaviour
                         reward += Mathf.Max(ManhattanDistance(charunit, charotherunit) - newrange, 0);
                     }
 
+
                     if (charunit.enemyStats.personality.ToLower() != "survivor" && (!charunit.attacksfriends && charotherunit.affiliation == "enemy"))
                     {
                         reward += ManhattanDistance(charunit, charotherunit) * 5;
@@ -1210,7 +1221,7 @@ public class AttackTurnScript : MonoBehaviour
                 reward += Random.Range(-30, 30);
             }
 
-            if (!FindIfAnyTarget(potentialAttackPosition, charunit.affiliation) && charunit.currentHP == charunit.AjustedStats.HP)
+            if (!FindIfAnyTarget(potentialAttackPosition, charunit.affiliation) && charunit.currentHP == charunit.AjustedStats.HP && charunit.enemyStats.personality.ToLower() != "hunter")
             {
                 reward -= 9999;
             }
@@ -1241,6 +1252,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
         }
+
         return reward;
 
     }
@@ -1266,6 +1278,11 @@ public class AttackTurnScript : MonoBehaviour
     private int ManhattanDistance(Character unit, Character otherunit)
     {
         return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
+    }
+
+    private int ManhattanDistance(Vector2 unit, Vector2 otherunit)
+    {
+        return (int)(Mathf.Abs(unit.x - otherunit.x) + Mathf.Abs(unit.y - otherunit.y));
     }
 
     public void DeathCleanup()
