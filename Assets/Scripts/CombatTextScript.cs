@@ -22,6 +22,8 @@ public class CombatTextScript : MonoBehaviour
 
     private battlecameraScript battlecameraScript;
 
+    public ActionsMenu ActionsMenu;
+
     public float fillspeed;
 
     // Update is called once per frame
@@ -32,7 +34,9 @@ public class CombatTextScript : MonoBehaviour
             battlecameraScript = FindAnyObjectByType<battlecameraScript>();
         }
 
-        if(battlecameraScript.incombat && attacker!=null)
+        
+
+        if (battlecameraScript.incombat && attacker!=null)
         {
             
             AttackerLifebarRemaining.fillAmount = (float)attacker.currentHP / (float)attacker.AjustedStats.HP;
@@ -75,17 +79,74 @@ public class CombatTextScript : MonoBehaviour
 
     }
 
-    public void SetupCombat(Character newattacker,Character newdefender)
+    public void SetupCombat(GameObject newattacker, GameObject newdefender)
     {
         gameObject.SetActive(true);
-        attacker = newattacker;
-        defender = newdefender;
+        attacker = newattacker.GetComponent<UnitScript>().UnitCharacteristics;
+        defender = newdefender.GetComponent<UnitScript>().UnitCharacteristics;
         AttackerLifebarRemaining.fillAmount = (float)(attacker.currentHP / attacker.AjustedStats.HP);
         DefenderLifebarRemaining.fillAmount = (float)(defender.currentHP / defender.AjustedStats.HP);
         AttackerLifebarLost.fillAmount = (float)(attacker.currentHP / attacker.AjustedStats.HP);
         DefenderLifebarLost.fillAmount = (float)(defender.currentHP / defender.AjustedStats.HP);
-        attackertext.text = attacker.name;
-        defendertext.text = defender.name;
+
+        string attackerText = attacker.name+"\n";
+        string defenderText = defender.name + "\n";
+        if (newattacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower()=="staff")
+        {
+            int healing = ActionsMenu.CalculateHealing(newattacker);
+            attackerText += "healing: " + healing+"  hit: 100%  crit: NA";
+            defenderText += "dmg: NA  hit: NA  crit: NA";
+        }
+        else
+        {
+            (GameObject doubler, bool istriple) = ActionsMenu.CalculatedoubleAttack(newattacker, newdefender);
+
+
+            int damagedealtattacker = ActionsMenu.CalculateDamage(newattacker, newdefender);
+            int hitrateattacker = ActionsMenu.CalculateHit(newattacker, newdefender);
+            int critrateattacker = ActionsMenu.CalculateCrit(newattacker, newdefender);
+
+            attackerText += "dmg: " + damagedealtattacker;
+            if(doubler==newattacker)
+            {
+                if(istriple)
+                {
+                    attackerText += "x3";
+                }
+                else
+                {
+                    attackerText += "x2";
+                }
+                    
+            }
+            attackerText += "  hit: " + hitrateattacker + "%  crit: " + critrateattacker+"%";
+
+
+            int damagedealtDefender = ActionsMenu.CalculateDamage(newdefender, newattacker);
+            int hitrateDefender = ActionsMenu.CalculateHit(newdefender, newattacker);
+            int critrateDefender = ActionsMenu.CalculateCrit(newdefender, newattacker);
+
+            defenderText += "dmg: " + damagedealtDefender;
+            if (doubler == newdefender)
+            {
+                if (istriple)
+                {
+                    defenderText += "x3";
+                }
+                else
+                {
+                    defenderText += "x2";
+                }
+
+            }
+            defenderText += "  hit: " + hitrateDefender + "%  crit: " + critrateDefender + "%";
+
+        }
+        
+
+
+        attackertext.text = attackerText;
+        defendertext.text = defenderText;
     }
 
     public void ResetInfo()

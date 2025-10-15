@@ -62,7 +62,7 @@ public class SaveManager : MonoBehaviour
         {
             secondselapsed += Time.fixedDeltaTime;
         }
-            
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -84,7 +84,7 @@ public class SaveManager : MonoBehaviour
         {
             try
             {
-                if(file.Contains("options"))
+                if (file.Contains("options"))
                 {
                     continue;
                 }
@@ -93,7 +93,7 @@ public class SaveManager : MonoBehaviour
                 if (save != null)
                 {
                     loadedSaves.Add(save);
-                    Debug.Log($"Fichier chargé : {Path.GetFileName(file)}");
+                    Debug.Log($"Fichier chargï¿½ : {Path.GetFileName(file)}");
                 }
                 else
                 {
@@ -106,7 +106,7 @@ public class SaveManager : MonoBehaviour
             }
         }
 
-        Debug.Log($"Chargement terminé. {loadedSaves.Count} sauvegarde(s) trouvée(s).");
+        Debug.Log($"Chargement terminï¿½. {loadedSaves.Count} sauvegarde(s) trouvï¿½e(s).");
         return loadedSaves;
     }
 
@@ -129,7 +129,7 @@ public class SaveManager : MonoBehaviour
                 Screen.fullScreen = Options.Fullscreen;
             }
         }
-        catch 
+        catch
         {
             Debug.Log("creating new options data");
             Options = new OptionsClass();
@@ -141,7 +141,7 @@ public class SaveManager : MonoBehaviour
 
     public void SaveOptions()
     {
-        if( Options == null )
+        if (Options == null)
         {
             Options = new OptionsClass();
         }
@@ -157,7 +157,7 @@ public class SaveManager : MonoBehaviour
         try
         {
             File.WriteAllText(fullPath, json);
-            Debug.Log($"Sauvegarde d'options effectuée : {fullPath}");
+            Debug.Log($"Sauvegarde d'options effectuï¿½e : {fullPath}");
         }
         catch (System.Exception e)
         {
@@ -191,13 +191,13 @@ public class SaveManager : MonoBehaviour
     {
         List<SaveClass> loadedSaves = GetAllSaves();
         SaveClasses = new List<SaveClass>();
-        for(int i = 0; i < numberofslots; i++)
+        for (int i = 0; i < numberofslots; i++)
         {
             SaveClasses.Add(null);
         }
         foreach (SaveClass save in loadedSaves)
         {
-            if(save.slot>=0 && save.slot<numberofslots && save.versionID==versionID)
+            if (save.slot >= 0 && save.slot < numberofslots && save.versionID == versionID)
             {
                 SaveClasses[save.slot] = save;
             }
@@ -206,13 +206,13 @@ public class SaveManager : MonoBehaviour
 
     public void ApplySave(int slot)
     {
-        if(slot>=0 && slot< SaveClasses.Count)
+        if (slot >= 0 && slot < SaveClasses.Count)
         {
             GetComponent<DataScript>().PlayableCharacterList = SaveClasses[slot].PlayableCharacterList;
             GetComponent<DataScript>().PlayerInventory = SaveClasses[slot].PlayerInventory;
             secondselapsed = SaveClasses[slot].secondselapsed;
         }
-        else if(slot==-1)
+        else if (slot == -1)
         {
             GetComponent<DataScript>().PlayableCharacterList = DefaultSave.PlayableCharacterList;
             GetComponent<DataScript>().PlayerInventory = DefaultSave.PlayerInventory;
@@ -227,10 +227,10 @@ public class SaveManager : MonoBehaviour
         int currentchapter = 0;
         string scenename = SceneManager.GetActiveScene().name;
 
-        if(scenename.Contains("Chapter"))
+        if (scenename.Contains("Chapter"))
         {
-            scenename.Replace("Chapter1", "");
-            currentchapter = int.Parse(scenename)+1;
+            scenename.Replace("Chapter", "");
+            currentchapter = int.Parse(scenename) + 1;
         }
 
         SaveClass save = new SaveClass
@@ -259,7 +259,7 @@ public class SaveManager : MonoBehaviour
         try
         {
             File.WriteAllText(fullPath, json);
-            Debug.Log($"Sauvegarde effectuée : {fullPath}");
+            Debug.Log($"Sauvegarde effectuï¿½e : {fullPath}");
         }
         catch (System.Exception e)
         {

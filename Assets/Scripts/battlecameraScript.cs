@@ -213,7 +213,7 @@ public class battlecameraScript : MonoBehaviour
         float targetelevation = Mathf.Min(0.5f, Mathf.Max(0.5f, 1.5f - Vector2.Distance(CoordTarget, CoordUnit)));
 
         pointtolookat = new Vector3(Middle.x, targetelevation, Middle.y);
-        CombatTextScript.SetupCombat(unit.GetComponent<UnitScript>().UnitCharacteristics, target.GetComponent<UnitScript>().UnitCharacteristics);
+        CombatTextScript.SetupCombat(unit, target);
         return CamCoordinates;
     }
 
