@@ -32,11 +32,12 @@ public class BattleInfotext : MonoBehaviour
 
     private GridScript gridScript;
 
-    public GameObject Attackwindows;
     public GameObject ItemAction;
 
     public GameObject PreBattleMenu;
     public GameObject AttackMenu;
+
+    public ActionsMenu ActionsMenu;
 
     public bool indescription;
 
@@ -65,7 +66,7 @@ public class BattleInfotext : MonoBehaviour
             transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = true;
             transform.parent.GetComponent<Image>().enabled = true;
         }
-        if (Attackwindows.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue)
+        if (AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue)
         {
             transform.parent.GetChild(1).gameObject.SetActive(false);
             transform.parent.GetChild(2).gameObject.SetActive(false);
@@ -288,7 +289,15 @@ public class BattleInfotext : MonoBehaviour
                     weapontype = "Gr.Sword";
                 }
 
+                
+
                 stringtoshow += "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + weapontype + " " + gradeletter + ")  " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+
+                int BaseDamage = ActionsMenu.CalculateDamage(selectedunit);
+
+                stringtoshow += "\nBaseDmg: " + BaseDamage + "\nMvt: " + selectedunitCharacter.movements+"\n\n";
+
+
                 if (selectedunitCharacter.telekinesisactivated)
                 {
                     stringtoshow += "Telekinesis : on";

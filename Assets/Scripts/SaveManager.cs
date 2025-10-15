@@ -93,20 +93,20 @@ public class SaveManager : MonoBehaviour
                 if (save != null)
                 {
                     loadedSaves.Add(save);
-                    Debug.Log($"Fichier charg� : {Path.GetFileName(file)}");
+                    Debug.Log($"File Loaded : {Path.GetFileName(file)}");
                 }
                 else
                 {
-                    Debug.LogWarning($"Impossible de parser : {Path.GetFileName(file)}");
+                    Debug.LogWarning($"Impossible to parse : {Path.GetFileName(file)}");
                 }
             }
             catch (System.Exception e)
             {
-                Debug.LogError($"Erreur en lisant {file} : {e.Message}");
+                Debug.LogError($"Error reading {file} : {e.Message}");
             }
         }
 
-        Debug.Log($"Chargement termin�. {loadedSaves.Count} sauvegarde(s) trouv�e(s).");
+        Debug.Log($"Loading successful. {loadedSaves.Count} save(s) found.");
         return loadedSaves;
     }
 
@@ -157,11 +157,11 @@ public class SaveManager : MonoBehaviour
         try
         {
             File.WriteAllText(fullPath, json);
-            Debug.Log($"Sauvegarde d'options effectu�e : {fullPath}");
+            Debug.Log($"Options Saved : {fullPath}");
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"Erreur lors de la sauvegarde d'options : {e.Message}");
+            Debug.LogError($"Error when saving options : {e.Message}");
         }
 
     }

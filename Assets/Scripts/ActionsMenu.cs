@@ -1981,30 +1981,50 @@ public class ActionsMenu : MonoBehaviour
         return (adjustedexp, levelup);
     }
 
-    public int CalculateDamage(GameObject unit, GameObject target)
+    public int CalculateDamage(GameObject unit, GameObject target = null)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        GridSquareScript targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
+        Character chartarget = null;
+        GridSquareScript targetTile = null;
+        
+        
 
 
         AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
-        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
+        AllStatsSkillBonus TargetSkillBonus = null;
 
         float baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
         float basestatdamage = charunit.AjustedStats.Strength + UnitSkillBonus.Strength;
-        float basestatdef = chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
+        float basestatdef = 0;
+
+
+        if (target != null)
+        {
+            chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+            targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
+            TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
+            basestatdef = chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
+        }
+
+        
         if (charunit.telekinesisactivated)
         {
             baseweapondamage = baseweapondamage * 0.75f;
             basestatdamage = charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
-            basestatdef = chartarget.AjustedStats.Resistance + TargetSkillBonus.Resistance;
+            if(target != null)
+            {
+                basestatdef = chartarget.AjustedStats.Resistance + TargetSkillBonus.Resistance;
+            }
+            
         }
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
         {
             basestatdamage = charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
-            basestatdef = Mathf.Min(chartarget.AjustedStats.Defense + TargetSkillBonus.Defense, charunit.AjustedStats.Resistance + TargetSkillBonus.Resistance);
+            if (target != null)
+            {
+                basestatdef = Mathf.Min(chartarget.AjustedStats.Defense + TargetSkillBonus.Defense, charunit.AjustedStats.Resistance + TargetSkillBonus.Resistance);
+            }
         }
 
         float unitbasedamage = baseweapondamage + basestatdamage;
@@ -2013,7 +2033,7 @@ public class ActionsMenu : MonoBehaviour
         {
             basestatdef = basestatdef * 0.9f;
         }
-        if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield")
+        if (target!=null && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield")
         {
             basestatdef += chartarget.AjustedStats.Strength * 0.1f;
         }
@@ -2027,22 +2047,29 @@ public class ActionsMenu : MonoBehaviour
         {
             finaldamagefloat = finaldamagefloat * (1f + (float)UnitSkillBonus.PhysDamage / 100f);
         }
-        finaldamagefloat = finaldamagefloat / (1f + (float)TargetSkillBonus.DamageReduction / 100f);
+        if(target!=null)
+        {
+            finaldamagefloat = finaldamagefloat / (1f + (float)TargetSkillBonus.DamageReduction / 100f);
+        }
+        
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
             finaldamagefloat = finaldamagefloat / 2f;
         }
 
-        if (targetTile.type == "Fire")
+        if (target != null && targetTile.type == "Fire")
         {
             finaldamagefloat = finaldamagefloat * 1.1f;
         }
 
-        finaldamagefloat = finaldamagefloat * CalculateRainDamageBonus(unit, target);
+        finaldamagefloat = finaldamagefloat * CalculateRainDamageBonus(unit);
 
-        int finaldamage = (int)finaldamagefloat + UnitSkillBonus.FixedDamageBonus - TargetSkillBonus.FixedDamageReduction;
+        int finaldamage = (int)finaldamagefloat + UnitSkillBonus.FixedDamageBonus;
 
-
+        if(target!=null)
+        {
+            finaldamage = finaldamage - TargetSkillBonus.FixedDamageReduction;
+        }
 
 
         if (finaldamage < 0)
@@ -2074,12 +2101,14 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
-    private float CalculateRainDamageBonus(GameObject unit, GameObject target)
+    private float CalculateRainDamageBonus(GameObject unit, GameObject target = null)
     {
-        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-
         float damagebonus = 1f;
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        
+        
+
+        
         if (charunit.enemyStats != null)
         {
             if (charunit.enemyStats.monsterStats != null)
@@ -2097,27 +2126,32 @@ public class ActionsMenu : MonoBehaviour
                 }
             }
         }
-        if (chartarget.enemyStats != null)
+        if (target != null)
         {
-            if (chartarget.enemyStats.monsterStats != null)
+            Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+            if (chartarget.enemyStats != null)
             {
-                //If the defender is pluvial and the weather is rain, decrease damage by 10%
-                if (chartarget.enemyStats.monsterStats.ispluvial && target.GetComponent<UnitScript>().GetWeatherType() == "rain")
+                if (chartarget.enemyStats.monsterStats != null)
                 {
-                    damagebonus -= 0.15f;
-                }
-                //If the defender is pluvial and the weather is sun, increase damage by 10%
-                if (chartarget.enemyStats.monsterStats.ispluvial && target.GetComponent<UnitScript>().GetWeatherType() == "sun")
-                {
-                    damagebonus += 0.15f;
-                }
-                //If the defender is a machine and the weather is rain, increase damage by 20%
-                if (chartarget.enemyStats.monsterStats.ismachine && target.GetComponent<UnitScript>().GetWeatherType() == "rain")
-                {
-                    damagebonus += 0.2f;
+                    //If the defender is pluvial and the weather is rain, decrease damage by 10%
+                    if (chartarget.enemyStats.monsterStats.ispluvial && target.GetComponent<UnitScript>().GetWeatherType() == "rain")
+                    {
+                        damagebonus -= 0.15f;
+                    }
+                    //If the defender is pluvial and the weather is sun, increase damage by 10%
+                    if (chartarget.enemyStats.monsterStats.ispluvial && target.GetComponent<UnitScript>().GetWeatherType() == "sun")
+                    {
+                        damagebonus += 0.15f;
+                    }
+                    //If the defender is a machine and the weather is rain, increase damage by 20%
+                    if (chartarget.enemyStats.monsterStats.ismachine && target.GetComponent<UnitScript>().GetWeatherType() == "rain")
+                    {
+                        damagebonus += 0.2f;
+                    }
                 }
             }
         }
+
         return damagebonus;
     }
 
