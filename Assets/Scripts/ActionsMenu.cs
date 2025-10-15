@@ -308,12 +308,41 @@ public class ActionsMenu : MonoBehaviour
         targetlist = null;
     }
 
+    private (List<equipment>,List<int>, bool) previouscharacterstate(Character character)
+    {
+        List<equipment> previousequipmentstate = new List<equipment>();
+        List<int> previousequipmentIDstate = new List<int>();
+        for(int i = 0;i<Mathf.Max(character.equipments.Count,character.equipmentsIDs.Count);i++)
+        {
+            if(i< character.equipments.Count)
+            {
+                previousequipmentstate.Add(character.equipments[i]);
+            }
+            if (i < character.equipmentsIDs.Count)
+            {
+                previousequipmentIDstate.Add(character.equipmentsIDs[i]);
+            }
+        }
+        return(previousequipmentstate,previousequipmentIDstate, character.telekinesisactivated);
+    }
+
+    private void ResetCharacterEquipment(Character character, List<equipment> previousequipmentstate, List<int> previousequipmentIDstate, bool previoustelekinesis)
+    {
+        character.equipments = previousequipmentstate;
+        character.equipmentsIDs = previousequipmentIDstate;
+        character.telekinesisactivated = previoustelekinesis;
+    }
+
     public void AttackCommand()
     {
         CommandUsedID = 0;
         // on essaie de trouver un combo arme/telekinesie pour pouvoir attaquer un ennemi
         Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
         FindAttackers();
+        List<equipment> previousequipmentstate = new List<equipment>();
+        List<int> previousequipmentIDstate = new List<int>();
+        bool previoustelekinesis = false;
+        (previousequipmentstate, previousequipmentIDstate, previoustelekinesis) = previouscharacterstate(targetcharacter);
         if (targetlist.Count == 0) //ici pas d'ennemi trouve donc on essaie d'autres armes
         {
             if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() != "staff")
@@ -405,7 +434,7 @@ public class ActionsMenu : MonoBehaviour
                     }
                     if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le reglage original de telekinesie
                     {
-                        targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
+                        ResetCharacterEquipment(targetcharacter, previousequipmentstate, previousequipmentIDstate, previoustelekinesis);
 
                     }
                 }
@@ -416,12 +445,42 @@ public class ActionsMenu : MonoBehaviour
                 FindAttackers();
                 if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le reglage original de telekinesie
                 {
-                    targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
+                    ResetCharacterEquipment(targetcharacter, previousequipmentstate, previousequipmentIDstate, previoustelekinesis);
 
                 }
             }
 
         }
+        if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le reglage original de telekinesie
+        {
+            ResetCharacterEquipment(targetcharacter, previousequipmentstate, previousequipmentIDstate, previoustelekinesis);
+
+        }
+        equipment newweapon = target.GetComponent<UnitScript>().GetFirstWeapon();
+
+        int newrangebonus = 0;
+        bool newfrapperenmelee = true;
+        if (targetcharacter.telekinesisactivated)
+        {
+            if (newweapon.type.ToLower() == "bow")
+            {
+                newrangebonus = 2;
+            }
+            else
+            {
+                newrangebonus = 1;
+            }
+            if (target.GetComponent<UnitScript>().GetSkill(33))
+            {
+                newrangebonus += 1;
+            }
+        }
+        if (newweapon.type.ToLower() == "bow")
+        {
+            newfrapperenmelee = false;
+        }
+        Character newchartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        GridScript.ShowAttackAfterMovement(newweapon.Range + newrangebonus, newfrapperenmelee, newchartarget.currentTile, newweapon.type.ToLower() == "staff", newchartarget.enemyStats.monsterStats.size);
     }
 
 
@@ -590,7 +649,7 @@ public class ActionsMenu : MonoBehaviour
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
                     GameObject potentialtarget = GridScript.GetUnit(tile);
-                    if (potentialtarget != null && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)) && potentialtarget != target)
+                    if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.currentHP< potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)) && potentialtarget != target)
                     {
                         targetlist.Add(potentialtarget);
                     }
