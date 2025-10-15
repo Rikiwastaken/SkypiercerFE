@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "InputSystem_Actions",
     "maps": [
         {
@@ -214,6 +215,17 @@
                 },
                 {
                     "name": "",
+                    "id": "71cb4213-cb60-4239-bc4b-a0b6c67080ea",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Validate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4ae7a326-0492-4cc1-9e80-774e638f3d17",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -227,6 +239,17 @@
                     "name": "",
                     "id": "e678eef4-e3e5-400e-84e2-88dd80fb871c",
                     "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3166bcf1-e1e6-40d7-914a-4975c5a14713",
+                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -336,7 +359,7 @@
                 {
                     "name": "",
                     "id": "f07283d5-b30d-4024-b4cc-25feb7715525",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -358,7 +381,7 @@
                 {
                     "name": "",
                     "id": "26340588-05f2-4465-b118-ccb9d525001c",
-                    "path": "<Keyboard>/3",
+                    "path": "<Keyboard>/0",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -424,7 +447,7 @@
                 {
                     "name": "",
                     "id": "d0156c9e-5121-41ea-9928-230b7c0ac16f",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/o",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -446,7 +469,7 @@
                 {
                     "name": "",
                     "id": "29eee4dd-b1b3-499d-a538-0787085518df",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

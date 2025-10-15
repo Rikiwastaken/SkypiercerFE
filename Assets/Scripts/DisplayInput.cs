@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DisplayInput : MonoBehaviour
 {
@@ -43,124 +45,136 @@ public class DisplayInput : MonoBehaviour
 
         if (InputManager.PreviousTargetpressed)
         {
-            if (!LT.activeSelf)
-            {
-                LT.SetActive(true);
-            }
+            ActivateButton(LT);
         }
         else
         {
-            LT.SetActive(false);
+            DeactivateButton(LT);
         }
 
         if (InputManager.NextTargetpressed)
         {
-            if (!RT.activeSelf)
-            {
-                RT.SetActive(true);
-            }
+            ActivateButton(RT);
         }
         else
         {
-            RT.SetActive(false);
+            DeactivateButton(RT);
         }
 
         if (InputManager.PreviousWeaponpressed)
         {
-            if (!LB.activeSelf)
-            {
-                LB.SetActive(true);
-            }
+            ActivateButton(LB);
         }
         else
         {
-            LB.SetActive(false);
+            DeactivateButton(LB);
         }
 
         if (InputManager.NextWeaponpressed)
         {
-            if (!RB.activeSelf)
-            {
-                RB.SetActive(true);
-            }
+            ActivateButton(RB);
 
         }
         else
         {
-            RB.SetActive(false);
+            DeactivateButton(RB);
         }
 
         if (InputManager.activatepressed)
         {
-            if (SouthButton.activeSelf == false)
-            {
-                SouthButton.SetActive(true);
-            }
+            ActivateButton(SouthButton);
         }
         else
         {
-            SouthButton.SetActive(false);
+            DeactivateButton(SouthButton);
         }
 
         if (InputManager.cancelpressed)
         {
-            if (!EastButton.activeSelf)
-            {
-                EastButton.SetActive(true);
-            }
+            ActivateButton(EastButton);
         }
         else
         {
-            EastButton.SetActive(false);
+            DeactivateButton(EastButton);
         }
 
         if (InputManager.ShowDetailspressed)
         {
-            if (!WestButton.activeSelf)
-            {
-                WestButton.SetActive(true);
-            }
+            ActivateButton(WestButton);
         }
         else
         {
-            WestButton.SetActive(false);
+            DeactivateButton(WestButton);
         }
 
         if (InputManager.Telekinesispressed)
         {
-            if (!NorthButton.activeSelf)
-            {
-                NorthButton.SetActive(true);
-            }
+            ActivateButton(NorthButton);
         }
         else
         {
-            NorthButton.SetActive(false);
+            DeactivateButton(NorthButton);
         }
 
         if (InputManager.Startpressed)
         {
-            if (!StartButton.activeSelf)
-            {
-                StartButton.SetActive(true);
-            }
+            ActivateButton(StartButton);
         }
         else
         {
-            StartButton.SetActive(false);
+            DeactivateButton(StartButton);
         }
 
         if (InputManager.Selectpressed)
         {
-            if (!SelectButton.activeSelf)
+            ActivateButton(SelectButton);
+        }
+        else
+        {
+            DeactivateButton(SelectButton);
+        }
+
+    }
+
+    private void ActivateButton(GameObject button)
+    {
+        if(!button.GetComponent<Image>().enabled)
+        {
+            button.GetComponent<Image>().enabled = true;
+        }
+        
+        if(button.transform.childCount > 1)
+        {
+            if(!button.transform.GetChild(0).GetComponent<Image>().enabled)
             {
-                SelectButton.SetActive(true);
+                button.transform.GetChild(0).GetComponent<Image>().enabled = true;
+                button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = Color.white;
             }
         }
         else
         {
-            SelectButton.SetActive(false);
+            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.white;
+        }
+    }
+    private void DeactivateButton(GameObject button)
+    {
+        if (button.GetComponent<Image>().enabled)
+        {
+            button.GetComponent<Image>().enabled = false;
         }
 
+        if (button.transform.childCount > 1)
+        {
+            if (button.transform.GetChild(0).GetComponent<Image>().enabled)
+            {
+                button.transform.GetChild(0).GetComponent<Image>().enabled = false;
+                button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = Color.red;
+            }
+        }
+        else
+        {
+            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.red;
+        }
     }
+
 }

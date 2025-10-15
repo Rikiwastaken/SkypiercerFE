@@ -1855,8 +1855,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -314.55, y: -40.72097}
-  m_SizeDelta: {x: 152.38, y: 350.5838}
+  m_AnchoredPosition: {x: -314.55, y: -71.615295}
+  m_SizeDelta: {x: 152.38, y: 288.7953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5885411233386079591
 CanvasRenderer:
@@ -6013,10 +6013,10 @@ MonoBehaviour:
   - {fileID: 4390559051729473401}
   - {fileID: 4592190752908531929}
   - {fileID: 8286996537376651759}
+  Attackwindows: {fileID: 8497216942260371860}
   ItemAction: {fileID: 7511860956042788997}
   PreBattleMenu: {fileID: 7512953878376125901}
   AttackMenu: {fileID: 8497216942260371860}
-  ActionsMenu: {fileID: 4915612603892297116}
   indescription: 0
 --- !u!1 &3563736158338644525
 GameObject:
