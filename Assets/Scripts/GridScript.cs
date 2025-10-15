@@ -1366,7 +1366,7 @@ public class GridScript : MonoBehaviour
         {
             foreach(GridSquareScript tile in unit.currentTile)
             {
-                bool compatibleaffiliation = (unit.affiliation != selectedunit.affiliation) || (selectedunit.affiliation == "playable" && unit.affiliation == "other" && !unit.attacksfriends) || (selectedunit.affiliation == "other" && unit.affiliation == "playable" && !selectedunit.attacksfriends);
+                bool compatibleaffiliation = (selectedunit.affiliation == "playable" && unit.affiliation == "other" && unit.attacksfriends) || (selectedunit.affiliation == "other" && unit.affiliation == "playable" && selectedunit.attacksfriends) || selectedunit.affiliation == "enemy" || unit.affiliation == "enemy";
                 if (tile.GridCoordinates==position && compatibleaffiliation && unit.currentHP > 0)
                 {
                     return false;

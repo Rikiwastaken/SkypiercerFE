@@ -171,7 +171,7 @@ public class TurnManger : MonoBehaviour
                 foreach (GameObject otherunit in charactertoappy)
                 {
                     Character otherunitchar = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
-                    if (Mathf.Abs(otherunitchar.position.x - unitchar.position.x) == 1 || Mathf.Abs(otherunitchar.position.y - unitchar.position.y) == 1)
+                    if (Mathf.Abs(otherunitchar.position.x - unitchar.position.x) <= 1 && Mathf.Abs(otherunitchar.position.y - unitchar.position.y) <= 1)
                     {
                         otherunit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(otherunitchar.AjustedStats.HP * 0.1f), (int)otherunitchar.AjustedStats.HP - otherunitchar.currentHP), true, "Medic");
                         otherunitchar.currentHP += (int)(otherunitchar.AjustedStats.HP * 0.1f);
