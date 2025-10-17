@@ -35,6 +35,8 @@ public class ActionManager : MonoBehaviour
     public List<GridSquareScript> currentpath;
     private GridSquareScript previoustile;
 
+    public GameObject NeutralMenu;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -94,6 +96,10 @@ public class ActionManager : MonoBehaviour
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
                     }
+                    else if(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed)
+                    {
+                        NeutralMenu.SetActive(true);
+                    }
                     if (InputManager.Telekinesisjustpressed && !battlecamera.incombat)
                     {
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
@@ -108,6 +114,13 @@ public class ActionManager : MonoBehaviour
                     {
                         currentcharacter.GetComponent<UnitScript>().GetPreviousWeapon();
                         GridScript.ShowMovement();
+                    }
+                }
+                else
+                {
+                    if(InputManager.activatejustpressed)
+                    {
+                        NeutralMenu.SetActive(true);
                     }
                 }
             }

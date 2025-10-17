@@ -51,7 +51,7 @@ public class GridScript : MonoBehaviour
     private TextBubbleScript textBubble;
 
     private battlecameraScript battlecamera;
-
+    public GameObject NeutralMenu;
     public class Node
     {
         public Vector2 Position;
@@ -118,7 +118,7 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = 0;
         }
 
-        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue)
+        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !NeutralMenu.activeSelf)
         {
             
 

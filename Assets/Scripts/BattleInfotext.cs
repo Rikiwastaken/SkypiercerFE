@@ -43,6 +43,8 @@ public class BattleInfotext : MonoBehaviour
 
     private TextBubbleScript textBubbleScript;
 
+    public GameObject NeutralMenu;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -56,7 +58,7 @@ public class BattleInfotext : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (textBubbleScript.indialogue || AttackMenu.activeSelf)
+        if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf)
         {
             transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
             transform.parent.GetComponent<Image>().enabled = false;
@@ -66,7 +68,7 @@ public class BattleInfotext : MonoBehaviour
             transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = true;
             transform.parent.GetComponent<Image>().enabled = true;
         }
-        if (AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue)
+        if (AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf)
         {
             transform.parent.GetChild(1).gameObject.SetActive(false);
             transform.parent.GetChild(2).gameObject.SetActive(false);
