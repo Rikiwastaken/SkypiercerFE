@@ -29,7 +29,7 @@ public class MapInitializer : MonoBehaviour
     {
         EmptyPlayables();
         InitializePlayers();
-        InitialNonPlayers();
+        InitializeNonPlayers();
     }
 
     private void EmptyPlayables()
@@ -103,7 +103,7 @@ public class MapInitializer : MonoBehaviour
 
 
     // creating all gameobjects for nonplayer 
-    private void InitialNonPlayers()
+    private void InitializeNonPlayers()
     {
         if (DataScript == null)
         {
@@ -140,6 +140,7 @@ public class MapInitializer : MonoBehaviour
             {
                 Character.affiliation = "enemy";
             }
+            newcharacter.GetComponent<RandomScript>().InitializeRandomValues();
             index++;
         }
     }

@@ -1171,7 +1171,7 @@ public class UnitScript : MonoBehaviour
         if (fixedgrowth)
         {
             float oldHP = UnitCharacteristics.stats.HP;
-            UnitCharacteristics.stats.HP += (int)(GrowthtoApply.HPGrowth / 100f);
+            UnitCharacteristics.stats.HP += (GrowthtoApply.HPGrowth / 100f);
 
             if ((int)oldHP < (int)(UnitCharacteristics.stats.HP))
             {
@@ -1184,7 +1184,7 @@ public class UnitScript : MonoBehaviour
 
             float oldStrength = UnitCharacteristics.stats.Strength;
 
-            UnitCharacteristics.stats.Strength += (int)(GrowthtoApply.StrengthGrowth / 100f);
+            UnitCharacteristics.stats.Strength += (GrowthtoApply.StrengthGrowth / 100f);
 
             if ((int)oldStrength < (int)(UnitCharacteristics.stats.Strength))
             {
@@ -1197,7 +1197,7 @@ public class UnitScript : MonoBehaviour
 
             float oldPsyche = UnitCharacteristics.stats.Psyche;
 
-            UnitCharacteristics.stats.Psyche += (int)(GrowthtoApply.PsycheGrowth / 100f);
+            UnitCharacteristics.stats.Psyche += (GrowthtoApply.PsycheGrowth / 100f);
 
             if ((int)oldPsyche < (int)(UnitCharacteristics.stats.Psyche))
             {
@@ -1210,7 +1210,7 @@ public class UnitScript : MonoBehaviour
 
             float oldDefense = UnitCharacteristics.stats.Defense;
 
-            UnitCharacteristics.stats.Defense += (int)(GrowthtoApply.DefenseGrowth / 100f);
+            UnitCharacteristics.stats.Defense += (GrowthtoApply.DefenseGrowth / 100f);
 
             if ((int)oldDefense < (int)(UnitCharacteristics.stats.Defense))
             {
@@ -1223,7 +1223,7 @@ public class UnitScript : MonoBehaviour
 
             float oldResistance = UnitCharacteristics.stats.Resistance;
 
-            UnitCharacteristics.stats.Resistance += (int)(GrowthtoApply.ResistanceGrowth / 100f);
+            UnitCharacteristics.stats.Resistance += (GrowthtoApply.ResistanceGrowth / 100f);
 
             if ((int)oldResistance < (int)(UnitCharacteristics.stats.Resistance))
             {
@@ -1236,7 +1236,7 @@ public class UnitScript : MonoBehaviour
 
             float oldSpeed = UnitCharacteristics.stats.Speed;
 
-            UnitCharacteristics.stats.Speed += (int)(GrowthtoApply.SpeedGrowth / 100f);
+            UnitCharacteristics.stats.Speed += (GrowthtoApply.SpeedGrowth / 100f);
 
             if ((int)oldSpeed < (int)(UnitCharacteristics.stats.Speed))
             {
@@ -1249,7 +1249,7 @@ public class UnitScript : MonoBehaviour
 
             float oldDexterity = UnitCharacteristics.stats.Dexterity;
 
-            UnitCharacteristics.stats.Dexterity += (int)(GrowthtoApply.DexterityGrowth / 100f);
+            UnitCharacteristics.stats.Dexterity += (GrowthtoApply.DexterityGrowth / 100f);
 
             if ((int)oldDexterity < (int)(UnitCharacteristics.stats.Dexterity))
             {
@@ -1263,8 +1263,10 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            int rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= GrowthtoApply.HPGrowth)
+
+            RandomScript.RandomLevelValues levelValues = GetComponent<RandomScript>().GetLevelUpRandomValues();
+
+            if (levelValues.HPRandomValue <= GrowthtoApply.HPGrowth)
             {
                 UnitCharacteristics.stats.HP += 1;
                 lvlupresult.Add(1);
@@ -1274,8 +1276,7 @@ public class UnitScript : MonoBehaviour
                 lvlupresult.Add(0);
             }
 
-            rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= GrowthtoApply.StrengthGrowth)
+            if (levelValues.StrengthRandomValue <= GrowthtoApply.StrengthGrowth)
             {
                 UnitCharacteristics.stats.Strength += 1;
                 lvlupresult.Add(1);
@@ -1285,8 +1286,7 @@ public class UnitScript : MonoBehaviour
                 lvlupresult.Add(0);
             }
 
-            rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= GrowthtoApply.PsycheGrowth)
+            if (levelValues.PsycheRandomValue <= GrowthtoApply.PsycheGrowth)
             {
                 UnitCharacteristics.stats.Psyche += 1;
                 lvlupresult.Add(1);
@@ -1296,8 +1296,7 @@ public class UnitScript : MonoBehaviour
                 lvlupresult.Add(0);
             }
 
-            rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= GrowthtoApply.DefenseGrowth)
+            if (levelValues.DefenseRandomValue <= GrowthtoApply.DefenseGrowth)
             {
                 UnitCharacteristics.stats.Defense += 1;
                 lvlupresult.Add(1);
@@ -1308,8 +1307,7 @@ public class UnitScript : MonoBehaviour
             }
 
 
-            rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= GrowthtoApply.ResistanceGrowth)
+            if (levelValues.ResistanceRandomValue <= GrowthtoApply.ResistanceGrowth)
             {
                 UnitCharacteristics.stats.Resistance += 1;
                 lvlupresult.Add(1);
@@ -1319,8 +1317,7 @@ public class UnitScript : MonoBehaviour
                 lvlupresult.Add(0);
             }
 
-            rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= GrowthtoApply.SpeedGrowth)
+            if (levelValues.SpeedRandomValue <= GrowthtoApply.SpeedGrowth)
             {
                 UnitCharacteristics.stats.Speed += 1;
                 lvlupresult.Add(1);
@@ -1330,8 +1327,8 @@ public class UnitScript : MonoBehaviour
                 lvlupresult.Add(0);
             }
 
-            rd = UnityEngine.Random.Range(0, 100);
-            if (rd <= GrowthtoApply.DexterityGrowth)
+
+            if (levelValues.DexterityRandomValue <= GrowthtoApply.DexterityGrowth)
             {
                 UnitCharacteristics.stats.Dexterity += 1;
                 lvlupresult.Add(1);
@@ -1341,6 +1338,15 @@ public class UnitScript : MonoBehaviour
                 lvlupresult.Add(0);
             }
         }
+
+        string levelupstring = UnitCharacteristics.name+"  levelup : ";
+        foreach( int  level in lvlupresult )
+        {
+            levelupstring += level+" ";
+        }
+
+        Debug.Log(levelupstring);
+
         calculateStats();
         return lvlupresult;
     }

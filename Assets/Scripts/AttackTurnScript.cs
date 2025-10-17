@@ -679,7 +679,7 @@ public class AttackTurnScript : MonoBehaviour
                             expgained = exp;
                             levelupbonuses = levelbonus;
 
-                            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation ||(target.GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower()=="other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends));
+                            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower() == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends));
                             combatTextScript.UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
                             if ((target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && CharAttacker.affiliation == "playable" && CharAttacker.currentHP > 0) || (CharAttacker.currentHP <= 0 && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP > 0)) // distribute exp if a character died and a ally lived
                             {
@@ -1012,7 +1012,7 @@ public class AttackTurnScript : MonoBehaviour
 
                     if (charunit.enemyStats.personality.ToLower() == "deviant" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.33f))
                     {
-                        reward += Random.Range(-50, 50);
+                        reward += unit.GetComponent<RandomScript>().GetPersonalityValue() - 50;
                     }
 
                     if (charunit.enemyStats.personality.ToLower() != "survivor")
@@ -1101,13 +1101,13 @@ public class AttackTurnScript : MonoBehaviour
             foreach (GameObject otherunit in gridScript.allunitGOs)
             {
 
-                
+
 
                 Character charotherunit = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
 
-                if(affiliationtoattack.Contains(charotherunit.affiliation.ToLower()) && charunit.enemyStats.personality.ToLower() == "hunter")
+                if (affiliationtoattack.Contains(charotherunit.affiliation.ToLower()) && charunit.enemyStats.personality.ToLower() == "hunter")
                 {
-                    reward += Mathf.Max(100 - ManhattanDistance(charunit, charotherunit),0);
+                    reward += Mathf.Max(100 - ManhattanDistance(charunit, charotherunit), 0);
                 }
 
                 if (affiliationtoattack.Contains(charotherunit.affiliation.ToLower()) && charotherunit.position == tile.GridCoordinates)
@@ -1218,7 +1218,8 @@ public class AttackTurnScript : MonoBehaviour
 
             if (charunit.enemyStats.personality.ToLower() == "deviant" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.33f))
             {
-                reward += Random.Range(-30, 30);
+                int value = (int)(((float)unit.GetComponent<RandomScript>().GetPersonalityValue() / 100f) * 60f) - 30;
+                reward += value;
             }
 
             if (!FindIfAnyTarget(potentialAttackPosition, charunit.affiliation) && charunit.currentHP == charunit.AjustedStats.HP && charunit.enemyStats.personality.ToLower() != "hunter")

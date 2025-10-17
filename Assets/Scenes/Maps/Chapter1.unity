@@ -34480,10 +34480,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 246758830866421855, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1889352924782871818, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: m_Name
       value: SceneGOs
@@ -36572,14 +36568,6 @@ PrefabInstance:
       propertyPath: lastSquare
       value: 
       objectReference: {fileID: 1252980003}
-    - target: {fileID: 7512953878376125901, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7773822336030157861, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
-      propertyPath: indialogue
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

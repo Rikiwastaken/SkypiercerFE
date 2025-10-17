@@ -462,6 +462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1940682818617995091}
   - component: {fileID: 6360257754374888536}
+  - component: {fileID: 5380667576583153213}
   m_Layer: 0
   m_Name: BaseCharacter
   m_TagString: Untagged
@@ -615,6 +616,25 @@ MonoBehaviour:
     rotationadjust: {x: 0, y: 90, z: 0}
     active: 1
   rotationadjust: {x: 0, y: 0, z: 0}
+--- !u!114 &5380667576583153213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081702220094403406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a554c5f46be7ce47bddc76806a99f86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitValues: 
+  CritValues: 
+  personalityValues: 
+  levelValues: []
+  LevelValues: []
+  numberofRandomValues: 100
+  numberofLevelValues: 20
 --- !u!1 &7336564532334944263
 GameObject:
   m_ObjectHideFlags: 0

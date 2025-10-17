@@ -1352,14 +1352,12 @@ public class ActionsMenu : MonoBehaviour
                     if (tripleattack)
                     {
                         //calculating hit for first attack
-                        int randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unithitrate)
+                        if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
                         {
 
                             numberofhits++;
                             // calculating critical
-                            randomnumber = Random.Range(0, 100);
-                            if (randomnumber < unitcrit)
+                            if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
                             {
                                 numberofcritials++;
                                 totaldamage += unitdamage * 3;
@@ -1375,13 +1373,11 @@ public class ActionsMenu : MonoBehaviour
                         }
 
                         //calculating hit for second attack
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unithitrate)
+                        if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
                         {
                             numberofhits++;
                             // calculating critical
-                            randomnumber = Random.Range(0, 100);
-                            if (randomnumber < unitcrit)
+                            if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
                             {
                                 numberofcritials++;
                                 totaldamage += unitdamage * 3;
@@ -1396,13 +1392,11 @@ public class ActionsMenu : MonoBehaviour
                             }
                         }
                         //calculating hit for third attack
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unithitrate)
+                        if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
                         {
                             numberofhits++;
                             // calculating critical
-                            randomnumber = Random.Range(0, 100);
-                            if (randomnumber < unitcrit)
+                            if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
                             {
                                 numberofcritials++;
                                 totaldamage += unitdamage * 3;
@@ -1420,13 +1414,11 @@ public class ActionsMenu : MonoBehaviour
                     else
                     {
                         //calculating hit for first attack
-                        int randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unithitrate)
+                        if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
                         {
                             numberofhits++;
                             // calculating critical
-                            randomnumber = Random.Range(0, 100);
-                            if (randomnumber < unitcrit)
+                            if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
                             {
                                 numberofcritials++;
                                 totaldamage += unitdamage * 3;
@@ -1442,13 +1434,11 @@ public class ActionsMenu : MonoBehaviour
                         }
 
                         //calculating hit for second attack
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unithitrate)
+                        if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
                         {
                             numberofhits++;
                             // calculating critical
-                            randomnumber = Random.Range(0, 100);
-                            if (randomnumber < unitcrit)
+                            if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
                             {
                                 numberofcritials++;
                                 totaldamage += unitdamage * 3;
@@ -1468,13 +1458,11 @@ public class ActionsMenu : MonoBehaviour
                 else
                 {
                     //calculating hit for first attack
-                    int randomnumber = Random.Range(0, 100);
-                    if (randomnumber < unithitrate)
+                    if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
                     {
                         numberofhits++;
                         // calculating critical
-                        randomnumber = Random.Range(0, 100);
-                        if (randomnumber < unitcrit)
+                        if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
                         {
                             numberofcritials++;
                             totaldamage += unitdamage * 3;
@@ -1519,13 +1507,11 @@ public class ActionsMenu : MonoBehaviour
                         if (tripleattack)
                         {
                             //calculating hit for first attack
-                            int randomnumber = Random.Range(0, 100);
-                            if (randomnumber < targethitrate)
+                            if (target.GetComponent<RandomScript>().GetHitValue() < targethitrate)
                             {
                                 numberofhits++;
                                 // calculating critical
-                                randomnumber = Random.Range(0, 100);
-                                if (randomnumber < targetcrit)
+                                if (target.GetComponent<RandomScript>().GetCritValue() < targetcrit)
                                 {
                                     numberofcritials++;
                                     totaldamage += targetdamage * 3;
@@ -1540,13 +1526,11 @@ public class ActionsMenu : MonoBehaviour
                                 }
                             }
                             //calculating hit for second attack
-                            randomnumber = Random.Range(0, 100);
-                            if (randomnumber < targethitrate)
+                            if (target.GetComponent<RandomScript>().GetHitValue() < targethitrate)
                             {
                                 numberofhits++;
                                 // calculating critical
-                                randomnumber = Random.Range(0, 100);
-                                if (randomnumber < targetcrit)
+                                if (target.GetComponent<RandomScript>().GetCritValue() < targetcrit)
                                 {
                                     numberofcritials++;
                                     totaldamage += targetdamage * 3;
@@ -1561,13 +1545,11 @@ public class ActionsMenu : MonoBehaviour
                                 }
                             }
                             //calculating hit for third attack
-                            randomnumber = Random.Range(0, 100);
-                            if (randomnumber < targethitrate)
+                            if (target.GetComponent<RandomScript>().GetHitValue() < targethitrate)
                             {
                                 numberofhits++;
                                 // calculating critical
-                                randomnumber = Random.Range(0, 100);
-                                if (randomnumber < targetcrit)
+                                if (target.GetComponent<RandomScript>().GetCritValue() < targetcrit)
                                 {
                                     numberofcritials++;
                                     totaldamage += targetdamage * 3;
@@ -1585,13 +1567,11 @@ public class ActionsMenu : MonoBehaviour
                         else
                         {
                             //calculating hit for first attack
-                            int randomnumber = Random.Range(0, 100);
-                            if (randomnumber < targethitrate)
+                            if (target.GetComponent<RandomScript>().GetHitValue() < targethitrate)
                             {
                                 numberofhits++;
                                 // calculating critical
-                                randomnumber = Random.Range(0, 100);
-                                if (randomnumber < targetcrit)
+                                if (target.GetComponent<RandomScript>().GetCritValue() < targetcrit)
                                 {
                                     numberofcritials++;
                                     totaldamage += targetdamage * 3;
@@ -1606,13 +1586,11 @@ public class ActionsMenu : MonoBehaviour
                                 }
                             }
                             //calculating hit for second attack
-                            randomnumber = Random.Range(0, 100);
-                            if (randomnumber < targethitrate)
+                            if (target.GetComponent<RandomScript>().GetHitValue() < targethitrate)
                             {
                                 numberofhits++;
                                 // calculating critical
-                                randomnumber = Random.Range(0, 100);
-                                if (randomnumber < targetcrit)
+                                if (target.GetComponent<RandomScript>().GetCritValue() < targetcrit)
                                 {
                                     numberofcritials++;
                                     totaldamage += targetdamage * 3;
@@ -1632,13 +1610,11 @@ public class ActionsMenu : MonoBehaviour
                     else
                     {
                         //calculating hit for first attack
-                        int randomnumber = Random.Range(0, 100);
-                        if (randomnumber < targethitrate)
+                        if (target.GetComponent<RandomScript>().GetHitValue() < targethitrate)
                         {
                             numberofhits++;
                             // calculating critical
-                            randomnumber = Random.Range(0, 100);
-                            if (randomnumber < targetcrit)
+                            if (target.GetComponent<RandomScript>().GetCritValue() < targetcrit)
                             {
                                 numberofcritials++;
                                 totaldamage += targetdamage * 3;
