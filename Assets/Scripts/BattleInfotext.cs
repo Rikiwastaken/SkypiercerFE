@@ -45,6 +45,8 @@ public class BattleInfotext : MonoBehaviour
 
     public GameObject NeutralMenu;
 
+    public GameObject ForeSightMenu;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -58,7 +60,7 @@ public class BattleInfotext : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf)
+        if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf || ForeSightMenu.activeSelf)
         {
             transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
             transform.parent.GetComponent<Image>().enabled = false;
@@ -68,7 +70,7 @@ public class BattleInfotext : MonoBehaviour
             transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = true;
             transform.parent.GetComponent<Image>().enabled = true;
         }
-        if (AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf)
+        if (AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf || ForeSightMenu.activeSelf)
         {
             transform.parent.GetChild(1).gameObject.SetActive(false);
             transform.parent.GetChild(2).gameObject.SetActive(false);
@@ -114,7 +116,7 @@ public class BattleInfotext : MonoBehaviour
             selectedunit = GridScript.GetSelectedUnitGameObject();
         }
 
-        
+
         if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && gridScript.GetComponent<TurnManger>().currentlyplaying != "playable"))
         {
             stringtoshow = string.Empty;
@@ -291,13 +293,13 @@ public class BattleInfotext : MonoBehaviour
                     weapontype = "Gr.Sword";
                 }
 
-                
+
 
                 stringtoshow += "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + weapontype + " " + gradeletter + ")  " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
 
                 int BaseDamage = ActionsMenu.CalculateDamage(selectedunit);
 
-                stringtoshow += "\nBaseDmg: " + BaseDamage + "\nMvt: " + selectedunitCharacter.movements+"\n\n";
+                stringtoshow += "\nBaseDmg: " + BaseDamage + "\nMvt: " + selectedunitCharacter.movements + "\n\n";
 
 
                 if (selectedunitCharacter.telekinesisactivated)

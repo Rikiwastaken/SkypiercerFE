@@ -16,9 +16,13 @@ public class NeutralMenuScript : MonoBehaviour
 
     private SaveManager SaveManager;
 
+    public ActionManager ActionManager;
+
     private int chapter;
 
     public int chapterforUnlockingForesight;
+
+    private InputManager InputManager;
 
     // Update is called once per frame
 
@@ -28,6 +32,8 @@ public class NeutralMenuScript : MonoBehaviour
         {
             SaveManager = FindAnyObjectByType<SaveManager>();
         }
+
+        InputManager = FindAnyObjectByType<InputManager>();
 
         if(SceneManager.GetActiveScene().name.Contains("Chapter"))
         {
@@ -46,8 +52,23 @@ public class NeutralMenuScript : MonoBehaviour
 
     void FixedUpdate()
     {
+
         ManageSelection();
         
+        if(InputManager.canceljustpressed)
+        {
+            if(OptionsMenuTransfrom.gameObject.activeSelf)
+            {
+                OptionsMenuTransfrom.gameObject.SetActive(false);
+            }
+            else
+            {
+                CloseMenu();
+            }
+                
+            
+        }
+
     }
 
     public void CloseMenu()
@@ -57,10 +78,10 @@ public class NeutralMenuScript : MonoBehaviour
 
     public void EndTurn()
     {
-        foreach(Character character in TurnManager.playableunit)
+        foreach(GameObject character in TurnManager.playableunitGO)
         {
-            character.alreadymoved = true;
-            character.alreadyplayed = true;
+            if(!character.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && !character.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+            ActionManager.Wait(character);
         }
         CloseMenu();
     }
@@ -75,6 +96,7 @@ public class NeutralMenuScript : MonoBehaviour
         {
             RedoMenuTransfrom.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(RedoMenuTransfrom.GetChild(0).gameObject);
+            gameObject.SetActive(false);
         }
     }
 

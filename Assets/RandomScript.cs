@@ -8,19 +8,19 @@ public class RandomScript : MonoBehaviour
 
     public List<int> HitValues;
 
-    private int hitvaluesindex;
+    public int hitvaluesindex;
 
     public List<int> CritValues;
 
-    private int CritValuesindex;
+    public int CritValuesindex;
 
     public List<int> personalityValues;
 
-    private int personalityvaluesindex;
+    public int personalityvaluesindex;
 
     public List<RandomLevelValues> levelValues;
 
-    private int levelvaluesindex;
+    public int levelvaluesindex;
 
     [Serializable]
     public class RandomLevelValues

@@ -132,7 +132,7 @@ public class battlecameraScript : MonoBehaviour
             previouselevation = transform.position.y;
         }
 
-        if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || TextBubbleScript.indialogue)
+        if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || TextBubbleScript.indialogue ||GridScript.NeutralMenu.activeSelf || GridScript.ForesightMenu.activeSelf)
         {
             return;
         }

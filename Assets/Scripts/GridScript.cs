@@ -52,6 +52,8 @@ public class GridScript : MonoBehaviour
 
     private battlecameraScript battlecamera;
     public GameObject NeutralMenu;
+
+    public GameObject ForesightMenu;
     public class Node
     {
         public Vector2 Position;
@@ -118,9 +120,9 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = 0;
         }
 
-        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !NeutralMenu.activeSelf)
+        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !NeutralMenu.activeSelf && !ForesightMenu.activeSelf)
         {
-            
+
 
             if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue)
             {
@@ -150,7 +152,7 @@ public class GridScript : MonoBehaviour
                             }
                         }
                     }
-                    else if(SkillEditionScript!=null)
+                    else if (SkillEditionScript != null)
                     {
                         if (!SkillEditionScript.gameObject.activeSelf)
                         {
@@ -203,7 +205,7 @@ public class GridScript : MonoBehaviour
 
                         }
                     }
-                    
+
                 }
                 else
                 {
@@ -243,7 +245,7 @@ public class GridScript : MonoBehaviour
 
         previousmovementvalueforbuffer = battlecamera.DetermineDirection(inputManager.movementValue);
         UpdateTileText();
-        if(lockselection && movementtiles.Count==0 && lockedmovementtiles.Count==0 && attacktiles.Count == 0 && lockedattacktiles.Count == 0 && healingtiles.Count == 0 && lockedhealingtiles.Count == 0)
+        if (lockselection && movementtiles.Count == 0 && lockedmovementtiles.Count == 0 && attacktiles.Count == 0 && lockedattacktiles.Count == 0 && healingtiles.Count == 0 && lockedhealingtiles.Count == 0)
         {
             lockselection = false;
         }
@@ -253,7 +255,7 @@ public class GridScript : MonoBehaviour
     {
         Grid = new List<List<GameObject>>();
         GridSquareScript[] tilelist = FindObjectsByType<GridSquareScript>(FindObjectsSortMode.None);
-        if(lastSquare == null)
+        if (lastSquare == null)
         {
             lastSquare = GameObject.Find("Grid").transform.GetChild(GameObject.Find("Grid").transform.childCount - 1).GetComponent<GridSquareScript>();
         }
@@ -290,7 +292,7 @@ public class GridScript : MonoBehaviour
         }
         GridDimensions = new Vector2(Grid.Count, Grid[0].Count);
         selection = GetTile(GetComponent<MapInitializer>().playablepos[0]);
-        
+
     }
 
     private void UpdateTileText()
@@ -355,7 +357,7 @@ public class GridScript : MonoBehaviour
         {
             TileImageContainer.transform.GetChild(0).gameObject.SetActive(true);
         }
-        else if(tile.RemainingSunTurns > 0)
+        else if (tile.RemainingSunTurns > 0)
         {
             TileImageContainer.transform.GetChild(1).gameObject.SetActive(true);
         }
@@ -370,14 +372,14 @@ public class GridScript : MonoBehaviour
         if (selection == null)
         {
             selection = GetTile(GetComponent<MapInitializer>().playablepos[0]);
-            FindAnyObjectByType<battlecameraScript>().transform.position = new Vector3(selection.GridCoordinates.x, FindAnyObjectByType<battlecameraScript>().transform.position.y,selection.GridCoordinates.y);
+            FindAnyObjectByType<battlecameraScript>().transform.position = new Vector3(selection.GridCoordinates.x, FindAnyObjectByType<battlecameraScript>().transform.position.y, selection.GridCoordinates.y);
         }
         else
         {
             if (input.x > 0 && (int)selection.GridCoordinates.x < Grid.Count - 1)
             {
                 GridSquareScript newtile = Grid[(int)(selection.GridCoordinates.x) + 1][(int)(selection.GridCoordinates.y)].GetComponent<GridSquareScript>();
-                if(newtile.activated)
+                if (newtile.activated)
                 {
                     selection = newtile;
                 }
@@ -552,23 +554,23 @@ public class GridScript : MonoBehaviour
 
     private void CheckMovementsForBigUnits(Character unit)
     {
-        List<Vector2> Otherpositions  = new List<Vector2>() { new Vector2(0, 0),new Vector2(0,1),new Vector2(-1,0), new Vector2(-1,1) };
+        List<Vector2> Otherpositions = new List<Vector2>() { new Vector2(0, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(-1, 1) };
         List<GridSquareScript> tilestoremove = new List<GridSquareScript>();
-        foreach(GridSquareScript tile in movementtiles)
+        foreach (GridSquareScript tile in movementtiles)
         {
             foreach (Vector2 newpos in Otherpositions)
             {
-                GridSquareScript newtile = GetTile(tile.GridCoordinates+newpos);
-                if(newtile.isobstacle || !newtile.activated || tile.elevation != newtile.elevation)
+                GridSquareScript newtile = GetTile(tile.GridCoordinates + newpos);
+                if (newtile.isobstacle || !newtile.activated || tile.elevation != newtile.elevation)
                 {
                     tilestoremove.Add(tile);
                     continue;
                 }
                 GameObject newunit = GetUnit(newtile);
-                if (newunit!=null)
+                if (newunit != null)
                 {
                     Character character = newunit.GetComponent<UnitScript>().UnitCharacteristics;
-                    if(character != unit && character !=null)
+                    if (character != unit && character != null)
                     {
                         tilestoremove.Add(tile);
                         continue;
@@ -576,7 +578,7 @@ public class GridScript : MonoBehaviour
                 }
             }
         }
-        foreach(GridSquareScript tile in tilestoremove)
+        foreach (GridSquareScript tile in tilestoremove)
         {
             movementtiles.Remove(tile);
         }
@@ -726,9 +728,9 @@ public class GridScript : MonoBehaviour
             {
                 continue;
             }
-            if(unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Count>0)
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Count > 0)
             {
-                if(unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(tile))
+                if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(tile))
                 {
                     return unit;
                 }
@@ -775,13 +777,13 @@ public class GridScript : MonoBehaviour
         {
             tilestousetemp = movementtiles;
         }
-        
-        if(size >1)
+
+        if (size > 1)
         {
             List<Vector2> addedvectors = new List<Vector2>() { new Vector2(0, 0), new Vector2(0, 1), new Vector2(-1, 1), new Vector2(-1, 0) };
             foreach (GridSquareScript tile in tilestousetemp)
             {
-                foreach(Vector2 vector in addedvectors)
+                foreach (Vector2 vector in addedvectors)
                 {
                     if (!tilestouse.Contains(GetTile(tile.GridCoordinates + vector)))
                     {
@@ -976,11 +978,11 @@ public class GridScript : MonoBehaviour
                 if (newtile.GridCoordinates.x >= i)
                 {
                     GridSquareScript othertile = GetTile((int)(newtile.GridCoordinates.x - i), (int)(newtile.GridCoordinates.y));
-                    if(!newattacktiles.Contains(othertile))
+                    if (!newattacktiles.Contains(othertile))
                     {
                         newattacktiles.Add(othertile);
                     }
-                    
+
                 }
                 if (newtile.GridCoordinates.x < Grid.Count - i)
                 {
@@ -1057,7 +1059,7 @@ public class GridScript : MonoBehaviour
                     {
                         if (Mathf.Abs(x) + Mathf.Abs(y) == i)
                         {
-                            foreach(GridSquareScript tile in newtileslist)
+                            foreach (GridSquareScript tile in newtileslist)
                             {
                                 Vector2 vectorforattack = tile.GridCoordinates + new Vector2(x, y);
                                 if (CheckIfPositionIsLegal(vectorforattack))
@@ -1079,7 +1081,7 @@ public class GridScript : MonoBehaviour
                                     }
                                 }
                             }
-                            
+
                         }
 
                     }
@@ -1301,7 +1303,7 @@ public class GridScript : MonoBehaviour
         return -1;
     }
 
-    private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit,Dictionary<GridSquareScript, int> visited)
+    private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit, Dictionary<GridSquareScript, int> visited)
     {
         GridSquareScript tile = GetTile((int)Coordinates.x, (int)Coordinates.y);
         if (tile == null) return;
@@ -1353,7 +1355,7 @@ public class GridScript : MonoBehaviour
     public bool CheckIfFree(Vector2 position, Character selectedunit)
     {
 
-        if(!CheckIfPositionIsLegal(position))
+        if (!CheckIfPositionIsLegal(position))
         {
             return false;
         }
@@ -1364,28 +1366,28 @@ public class GridScript : MonoBehaviour
         }
         foreach (Character unit in allunits)
         {
-            foreach(GridSquareScript tile in unit.currentTile)
+            foreach (GridSquareScript tile in unit.currentTile)
             {
                 bool compatibleaffiliation = (selectedunit.affiliation == "playable" && unit.affiliation == "other" && unit.attacksfriends) || (selectedunit.affiliation == "other" && unit.affiliation == "playable" && selectedunit.attacksfriends) || selectedunit.affiliation == "enemy" || unit.affiliation == "enemy";
-                if (tile.GridCoordinates==position && compatibleaffiliation && unit.currentHP > 0)
+                if (tile.GridCoordinates == position && compatibleaffiliation && unit.currentHP > 0)
                 {
                     return false;
                 }
             }
         }
-        if(selectedunit.enemyStats.monsterStats.size > 1)
+        if (selectedunit.enemyStats.monsterStats.size > 1)
         {
             List<Vector2> otherpositions = new List<Vector2>() { position + new Vector2(-1, 0), position + new Vector2(-1, 1), position + new Vector2(0, 1) };
             foreach (Character unit in allunits)
             {
-                foreach(Vector2 newposition in otherpositions)
+                foreach (Vector2 newposition in otherpositions)
                 {
                     GridSquareScript newtile = GetTile(newposition);
-                    if(!CheckIfPositionIsLegal(newposition, selectedunit.enemyStats.monsterStats.size))
+                    if (!CheckIfPositionIsLegal(newposition, selectedunit.enemyStats.monsterStats.size))
                     {
                         return false;
                     }
-                    if(unit.currentTile.Contains(newtile) && unit!=selectedunit && unit.affiliation!=selectedunit.affiliation)
+                    if (unit.currentTile.Contains(newtile) && unit != selectedunit && unit.affiliation != selectedunit.affiliation)
                     {
                         return false;
                     }
@@ -1404,11 +1406,11 @@ public class GridScript : MonoBehaviour
         }
         else if (!GetTile(position).activated)
         {
-            return false ;
+            return false;
         }
-        if(size > 0)
+        if (size > 0)
         {
-            if(!(CheckIfPositionIsLegal(position + new Vector2(-1,0)) && CheckIfPositionIsLegal(position + new Vector2(0, 1)) && CheckIfPositionIsLegal(position + new Vector2(-1, 1)) ))
+            if (!(CheckIfPositionIsLegal(position + new Vector2(-1, 0)) && CheckIfPositionIsLegal(position + new Vector2(0, 1)) && CheckIfPositionIsLegal(position + new Vector2(-1, 1))))
             {
                 return false;
             }
@@ -1448,28 +1450,28 @@ public class GridScript : MonoBehaviour
 
     public GridSquareScript GetFirstClosestTile(Vector2 pos)
     {
-        for(int x=0; x<Grid.Count; x++)
+        for (int x = 0; x < Grid.Count; x++)
         {
-            for(int y=0; y<Grid[x].Count; y++)
+            for (int y = 0; y < Grid[x].Count; y++)
             {
-                if(x==0 && y==0)
+                if (x == 0 && y == 0)
                 {
                     continue;
                 }
-                List<Vector2> list = new List<Vector2>() { new Vector2((int)(x + pos.x), (int)(y + pos.y)) , new Vector2((int)(x + pos.x), (int)(pos.y - y)), new Vector2((int)(pos.x + x), (int)(y + pos.y)), new Vector2((int)(pos.x - x), (int)(pos.y - y)) };
-                foreach(Vector2 newpos in list)
+                List<Vector2> list = new List<Vector2>() { new Vector2((int)(x + pos.x), (int)(y + pos.y)), new Vector2((int)(x + pos.x), (int)(pos.y - y)), new Vector2((int)(pos.x + x), (int)(y + pos.y)), new Vector2((int)(pos.x - x), (int)(pos.y - y)) };
+                foreach (Vector2 newpos in list)
                 {
-                    
+
                     if (CheckIfPositionIsLegal(newpos))
                     {
                         GridSquareScript Tile = Grid[(int)newpos.x][(int)newpos.y].GetComponent<GridSquareScript>();
-                        if (!Tile.isobstacle && GetUnit(Tile) == null && newpos!=pos)
+                        if (!Tile.isobstacle && GetUnit(Tile) == null && newpos != pos)
                         {
                             return Grid[(int)newpos.x][(int)newpos.y].GetComponent<GridSquareScript>();
                         }
                     }
                 }
-               
+
 
             }
         }

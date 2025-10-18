@@ -24,6 +24,8 @@ public class MapInitializer : MonoBehaviour
 
     private GridScript GridScript;
 
+    private int previousid;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -128,12 +130,15 @@ public class MapInitializer : MonoBehaviour
                 }
             }
             Character.equipmentsIDs = enemyStats.equipments;
+            Character.ID = findfirstfreeid();
             newcharacter.transform.parent = Characters.transform;
             newcharacter.transform.position = new Vector3(enemyStats.startpos.x, 0, enemyStats.startpos.y);
+            newcharacter.GetComponent<UnitScript>().previousposition = enemyStats.startpos;
             newcharacter.GetComponent<UnitScript>().MoveTo(enemyStats.startpos);
             newcharacter.name = enemyStats.Name + " " + index;
             if (enemyStats.isother)
             {
+                Character.affiliation = "other";
                 Character.affiliation = "other";
             }
             else
@@ -144,6 +149,26 @@ public class MapInitializer : MonoBehaviour
             index++;
         }
     }
+
+    private int findfirstfreeid()
+    {
+        int maxid = 50;
+        for (int i = 0;i< Characters.transform.childCount;i++)
+        {
+            Character character = Characters.transform.GetChild(i).GetComponent<UnitScript>().UnitCharacteristics;
+            if (character.ID > maxid)
+            {
+                maxid = character.ID + 1;
+            }
+        }
+        if( previousid >= maxid )
+        {
+            maxid = previousid + 1;
+        }
+        previousid = maxid;
+        return maxid;
+    }
+
     private void ManageModel(GameObject character)
     {
         foreach (ModelInfo modelinf in character.GetComponent<UnitScript>().ModelList)

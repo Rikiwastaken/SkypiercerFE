@@ -8,7 +8,7 @@ public class TurnManger : MonoBehaviour
 {
     public int currentTurn;
 
-    public string currentlyplaying =""; // playable, enemy, other
+    public string currentlyplaying = ""; // playable, enemy, other
 
     public List<Character> playableunit;
     public List<GameObject> playableunitGO;
@@ -43,6 +43,7 @@ public class TurnManger : MonoBehaviour
 
     public TextBubbleScript textBubbleScript;
 
+
     private void Start()
     {
         weatherManager = GetComponent<WeatherManager>();
@@ -74,7 +75,7 @@ public class TurnManger : MonoBehaviour
         }
 
 
-        if(!textBubbleScript.indialogue && !preBattleMenuScript.gameObject.activeSelf && currentlyplaying == "")
+        if (!textBubbleScript.indialogue && !preBattleMenuScript.gameObject.activeSelf && currentlyplaying == "")
         {
             preBattleMenuScript.gameObject.SetActive(true);
         }
@@ -113,14 +114,33 @@ public class TurnManger : MonoBehaviour
     /// <param name="charactertoappy"></param>
     private void BeginningOfTurnsTrigger(List<GameObject> charactertoappy)
     {
+        ForesightScript.Action action = new ForesightScript.Action();
+        action.actiontype = 4;
+
+        if (charactertoappy == playableunitGO)
+        {
+            action.beginningofturn = 0;
+        }
+        else if (charactertoappy == enemyunitGO)
+        {
+            action.beginningofturn = 1;
+        }
+        else if (charactertoappy == otherunitsGO)
+        {
+            action.beginningofturn = 2;
+        }
+
+        action.ModifiedCharacters = new List<Character>();
+
         foreach (GameObject unit in charactertoappy)
         {
             unit.GetComponent<UnitScript>().waittedbonusturns--;
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-
+            action.ModifiedCharacters.Add(unit.GetComponent<UnitScript>().CreateCopy());
             //Kira Battalion Side Effect
             if (unitchar.playableStats.battalion == "Kira")
             {
+
                 unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(unitchar.AjustedStats.HP * 0.1f), (int)unitchar.AjustedStats.HP - unitchar.currentHP), true, "Kira Battalion");
                 unitchar.currentHP += (int)(unitchar.AjustedStats.HP * 0.1f);
                 //Loyal
@@ -196,6 +216,10 @@ public class TurnManger : MonoBehaviour
 
             //Reset Verso movements
             unit.GetComponent<UnitScript>().tilesmoved = 0;
+        }
+        if(charactertoappy.Count > 0)
+        {
+            GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>().actions.Add(action);
         }
         minimapScript.UpdateMinimap();
     }

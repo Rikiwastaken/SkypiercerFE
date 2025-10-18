@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using static DataScript;
 using static UnitScript;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 public class AttackTurnScript : MonoBehaviour
 {
 
@@ -59,6 +59,10 @@ public class AttackTurnScript : MonoBehaviour
     public PhaseTextScript phaseTextScript;
     private MinimapScript minimapScript;
 
+    public ForesightScript.Action CurrentAction;
+
+    public ForesightScript foresightScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -113,8 +117,7 @@ public class AttackTurnScript : MonoBehaviour
 
                         if (!determineifActionifTaken(unit))
                         {
-                            charunit.alreadyplayed = true;
-                            charunit.alreadymoved = true;
+                            GetComponent<ActionManager>().Wait(unit);
                             continue;
                         }
 
@@ -323,8 +326,17 @@ public class AttackTurnScript : MonoBehaviour
 
         int commandID = ActionsMenu.CommandUsedID;
 
+        CurrentAction = new ForesightScript.Action();
+
+        CurrentAction.actiontype = 3;
+        CurrentAction.commandID = commandID;
+        CurrentAction.Unit = User.GetComponent<UnitScript>();
+        CurrentAction.previousPosition = User.GetComponent<UnitScript>().previousposition;
+        CurrentAction.ModifiedCharacters = new List<Character>() { User.GetComponent<UnitScript>().CreateCopy() };
+
         if (commandID == 47) //Transfuse
         {
+            CurrentAction.ModifiedCharacters.Add(Target.GetComponent<UnitScript>().CreateCopy());
             int previousHPUser = CharUser.currentHP;
             int previousHPTarget = CharTarget.currentHP;
 
@@ -355,12 +367,14 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 48) //Motivate
         {
+            CurrentAction.ModifiedCharacters.Add(Target.GetComponent<UnitScript>().CreateCopy());
             CharTarget.alreadymoved = false;
             CharTarget.alreadyplayed = false;
             Target.GetComponent<UnitScript>().AddNumber(0, true, "Motivate");
         }
         else if (commandID == 49) //Swap
         {
+            CurrentAction.ModifiedCharacters.Add(Target.GetComponent<UnitScript>().CreateCopy());
             Vector2 previoususerpos = CharUser.position;
             User.GetComponent<UnitScript>().MoveTo(CharTarget.position);
             Target.GetComponent<UnitScript>().MoveTo(previoususerpos);
@@ -369,6 +383,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 50) //Reinvigorate
         {
+            CurrentAction.ModifiedCharacters.Add(Target.GetComponent<UnitScript>().CreateCopy());
             foreach (equipment equ in CharTarget.equipments)
             {
                 if (equ.Currentuses < equ.Maxuses)
@@ -402,12 +417,17 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 52) // Fortify
         {
-            CharUser.currentTile[0].type = "Fortification";
+            GridSquareScript tile = CharUser.currentTile[0];
+            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() { new ForesightScript.TileModification() {tile= tile, type= tile.type, previousremainingrain= tile.RemainingRainTurns,previousremainingsun = tile.RemainingSunTurns } };
+
+            tile.type = "Fortification";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Fortify");
         }
         else if (commandID == 53) // Smoke Bomb
         {
-            CharUser.currentTile[0].type = "Fog";
+            GridSquareScript tile = CharUser.currentTile[0];
+            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() { new ForesightScript.TileModification() { tile = tile, type = tile.type, previousremainingrain = tile.RemainingRainTurns, previousremainingsun = tile.RemainingSunTurns } };
+            tile.type = "Fog";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Smoke Bomb");
         }
         else if (commandID == 54) // Chakra
@@ -418,6 +438,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 56) // Copy
         {
+            CurrentAction.skilltoremovefrominventory = CharTarget.UnitSkill;
             if (CharTarget.UnitSkill != 0 && !Target.GetComponent<UnitScript>().copied)
             {
                 DataScript datascript = FindAnyObjectByType<DataScript>();
@@ -438,13 +459,14 @@ public class AttackTurnScript : MonoBehaviour
                     newitem.Quantity = 1;
                     newitem.ID = CharTarget.UnitSkill;
                 }
+
                 Target.GetComponent<UnitScript>().AddNumber(0, true, datascript.SkillList[CharTarget.UnitSkill].name + " copied");
                 User.GetComponent<UnitScript>().AddNumber(0, true, datascript.SkillList[CharTarget.UnitSkill].name + " copied");
             }
         }
         else if (commandID == 59) // Sundance
-        {
-
+        {   
+            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() {  };
             WeatherManager weathermanager = FindAnyObjectByType<WeatherManager>();
             if (weathermanager.rainymap)
             {
@@ -467,6 +489,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 foreach (GridSquareScript tile in tilestochange)
                 {
+                    CurrentAction.ModifiedTiles.Add(new ForesightScript.TileModification() { tile = tile, type = tile.type, previousremainingrain = tile.RemainingRainTurns, previousremainingsun = tile.RemainingSunTurns });
                     tile.RemainingRainTurns = 0;
                     tile.RemainingSunTurns = 3;
                 }
@@ -474,7 +497,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 60) // RainDance
         {
-
+            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() { };
             WeatherManager weathermanager = FindAnyObjectByType<WeatherManager>();
             if (weathermanager.rainymap)
             {
@@ -497,12 +520,13 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 foreach (GridSquareScript tile in tilestochange)
                 {
+                    CurrentAction.ModifiedTiles.Add(new ForesightScript.TileModification() { tile = tile, type = tile.type, previousremainingrain = tile.RemainingRainTurns, previousremainingsun = tile.RemainingSunTurns });
                     tile.RemainingRainTurns = 3;
                     tile.RemainingSunTurns = 0;
                 }
             }
         }
-
+        foresightScript.actions.Add(CurrentAction);
         ActionsMenu.FinalizeAttack();
 
     }
@@ -611,6 +635,7 @@ public class AttackTurnScript : MonoBehaviour
                 waittingforexp = true;
                 expdistributed = true;
                 unitalreadyattacked = false;
+                foresightScript.actions.Add(CurrentAction);
             }
             else if (CurrentOther == null && CurrentEnemy == null && CurrentPlayable == null && CharAttacker.affiliation != "playable") //end fight if no attacker
             {
@@ -619,11 +644,12 @@ public class AttackTurnScript : MonoBehaviour
                 waittingforexp = true;
                 expdistributed = true;
                 unitalreadyattacked = false;
+                foresightScript.actions.Add(CurrentAction);
             }
             else // begin fight
             {
 
-
+                
 
                 target.transform.LookAt(Attacker.transform);
                 Attacker.transform.LookAt(target.transform);
@@ -651,7 +677,11 @@ public class AttackTurnScript : MonoBehaviour
                             attacktrigger = false;
 
                             (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
-                            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation;
+                            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation=="playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));
+                            if(ishealing)
+                            {
+                                CurrentAction.actiontype = 1;
+                            }
                             if (doubleattacker == Attacker)
                             {
                                 if (triple)
@@ -727,6 +757,9 @@ public class AttackTurnScript : MonoBehaviour
                                 waittingforexp = true;
                                 expdistributed = true;
                                 waittingforcamera = false;
+
+                                
+
                             }
                             else // distribute exp if no one died and one of the characters is playable
                             {
@@ -795,6 +828,26 @@ public class AttackTurnScript : MonoBehaviour
             {
 
                 waittingforcamera = true;
+
+
+                CurrentAction = new ForesightScript.Action();
+                foresightScript.actions.Add(CurrentAction);
+                CurrentAction.actiontype = 0;
+                CurrentAction.Unit = Attacker.GetComponent<UnitScript>();
+                CurrentAction.previousPosition = Attacker.GetComponent<UnitScript>().previousposition;
+                CurrentAction.ModifiedCharacters = new List<Character>() { Attacker.GetComponent<UnitScript>().CreateCopy() };
+                CurrentAction.AttackData = new ForesightScript.AttackData();
+                CurrentAction.AttackData.previousattackerhitindex = Attacker.GetComponent<RandomScript>().hitvaluesindex;
+                CurrentAction.AttackData.previousattackercritindex = Attacker.GetComponent<RandomScript>().CritValuesindex;
+                CurrentAction.AttackData.previousattackerlvlupindex = Attacker.GetComponent<RandomScript>().levelvaluesindex;
+
+                CurrentAction.AttackData.defender = target.GetComponent<UnitScript>();
+                CurrentAction.ModifiedCharacters.Add(target.GetComponent<UnitScript>().CreateCopy());
+                CurrentAction.AttackData.previousdefenderhitindex = target.GetComponent<RandomScript>().hitvaluesindex;
+                CurrentAction.AttackData.previousdefendercritindex = target.GetComponent<RandomScript>().CritValuesindex;
+                CurrentAction.AttackData.previousdefenderlvlupindex = target.GetComponent<RandomScript>().levelvaluesindex;
+
+
                 battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
                 unitalreadyattacked = false;
                 counterbeforeFirstAttack = (int)(delaybeforeFirstAttack / Time.fixedDeltaTime);
@@ -819,7 +872,6 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 if (CharAttacker.affiliation == "playable")
                 {
-
                     ActionsMenu.FinalizeAttack();
                     waittingforcamera = false;
                 }
@@ -851,6 +903,7 @@ public class AttackTurnScript : MonoBehaviour
         Character charunit1 = unit1.GetComponent<UnitScript>().UnitCharacteristics;
         if (unit1.GetComponent<UnitScript>().GetSkill(32)) // Survivor
         {
+            CurrentAction.AttackData.attackersurvivorstats = unit1.GetComponent<UnitScript>().SurvivorStacks;
             unit1.GetComponent<UnitScript>().SurvivorStacks++;
             unit1.GetComponent<UnitScript>().AddNumber(unit1.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
         }
@@ -860,6 +913,7 @@ public class AttackTurnScript : MonoBehaviour
             Character charunit2 = unit2.GetComponent<UnitScript>().UnitCharacteristics;
             if (unit2.GetComponent<UnitScript>().GetSkill(32)) // Survivor
             {
+                CurrentAction.AttackData.attackersurvivorstats = unit2.GetComponent<UnitScript>().SurvivorStacks;
                 unit2.GetComponent<UnitScript>().SurvivorStacks++;
                 unit2.GetComponent<UnitScript>().AddNumber(unit2.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
             }
@@ -895,12 +949,12 @@ public class AttackTurnScript : MonoBehaviour
             }
 
             unit2.GetComponent<UnitScript>().UpdateWeaponModel();
-
+           
         }
 
 
 
-
+        
     }
 
     private List<string> Whotoattack(string affiliation, bool attackfriend)
@@ -1307,7 +1361,7 @@ public class AttackTurnScript : MonoBehaviour
                                 tile.UpdateInsideSprite(false);
                             }
                         }
-                        Destroy(unit);
+                        unit.SetActive(false);
                         objecttodelete.Add(unit);
                     }
                     else if (charunit.enemyStats.RemainingLifebars > 0)
@@ -1325,7 +1379,7 @@ public class AttackTurnScript : MonoBehaviour
                                 tile.UpdateInsideSprite(false);
                             }
                         }
-                        Destroy(unit);
+                        unit.SetActive(false);
                         objecttodelete.Add(unit);
                     }
 

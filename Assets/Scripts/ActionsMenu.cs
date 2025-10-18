@@ -29,7 +29,7 @@ public class ActionsMenu : MonoBehaviour
     public Image TargetOrangeLifeBar;
     public Image TargetGreenLifebar;
 
-    private GridScript GridScript;
+    public GridScript GridScript;
 
     public List<GameObject> targetlist;
 
@@ -47,20 +47,18 @@ public class ActionsMenu : MonoBehaviour
 
     public GameObject commandmenu;
 
+    private AttackTurnScript attackTurnScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         battlecameraScript = FindAnyObjectByType<battlecameraScript>();
-
+        attackTurnScript = FindAnyObjectByType<AttackTurnScript>();
     }
     private void OnEnable()
     {
         BaseButtonColor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
         BaseButtonPressedColor = transform.GetChild(0).GetComponent<Button>().colors.pressedColor;
-        if (GridScript == null)
-        {
-            GridScript = FindAnyObjectByType<GridScript>();
-        }
         target = GridScript.GetSelectedUnitGameObject();
 
         if (target.GetComponent<UnitScript>().GetCommands().Count > 0)
@@ -1720,8 +1718,10 @@ public class ActionsMenu : MonoBehaviour
         foreach (GameObject othertarget in activelist)
         {
             Character charOthertarget = othertarget.GetComponent<UnitScript>().UnitCharacteristics;
+            
             if (othertarget.GetComponent<UnitScript>().GetSkill(40) && ManhattanDistance(charTarget, charOthertarget) <= 3)
             {
+                attackTurnScript.CurrentAction.ModifiedCharacters.Add(charOthertarget);
                 allforonetransfertarget = charOthertarget;
                 allforonetransfertargetGO = othertarget;
                 break;
@@ -1790,6 +1790,11 @@ public class ActionsMenu : MonoBehaviour
                 foreach (GameObject unit in list)
                 {
                     Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+                    if(!attackTurnScript.CurrentAction.ModifiedCharacters.Contains(unitchar))
+                    {
+                        attackTurnScript.CurrentAction.ModifiedCharacters.Add(unitchar);
+                    }
+                    
                     unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)unitchar.AjustedStats.HP - unitchar.currentHP, (int)(DamageDealt * 0.1f)), true, "Rebound");
                     unitchar.currentHP += (int)(DamageDealt * 0.1f);
                     if (unitchar.currentHP > unitchar.AjustedStats.HP)
@@ -1877,8 +1882,9 @@ public class ActionsMenu : MonoBehaviour
 
         foreach (GameObject potentialtarget in targetlist)
         {
-
+            
             Character Chartarget = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics;
+            attackTurnScript.CurrentAction.ModifiedCharacters.Add(Chartarget);
 
             int baseHP = Chartarget.currentHP;
 
@@ -1974,7 +1980,7 @@ public class ActionsMenu : MonoBehaviour
         float basestatdef = 0;
 
 
-        if (target != null)
+        if (target != null && target.activeSelf)
         {
             chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
             targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);

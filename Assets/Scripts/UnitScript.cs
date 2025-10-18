@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
@@ -238,6 +239,9 @@ public class UnitScript : MonoBehaviour
 
     public Vector3 rotationadjust;
 
+    public Vector2 previousposition;
+    public BaseStats previousStats;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -290,7 +294,6 @@ public class UnitScript : MonoBehaviour
                 modelInfo.wholeModel.SetActive(true); ;
             }
         }
-
 
     }
 
@@ -398,6 +401,107 @@ public class UnitScript : MonoBehaviour
 
         }
     }
+
+    public Character CreateCopy(Character CharacterToCopy=null)
+    {
+        if (CharacterToCopy == null)
+        {
+            CharacterToCopy = UnitCharacteristics;
+        }
+
+        Character copy = new Character
+        {
+            name = CharacterToCopy.name,
+            ID = CharacterToCopy.ID,
+            stats = new BaseStats
+            {
+                HP = CharacterToCopy.stats.HP,
+                Strength = CharacterToCopy.stats.Strength,
+                Psyche = CharacterToCopy.stats.Psyche,
+                Defense = CharacterToCopy.stats.Defense,
+                Resistance = CharacterToCopy.stats.Resistance,
+                Speed = CharacterToCopy.stats.Speed,
+                Dexterity = CharacterToCopy.stats.Dexterity
+            },
+            AjustedStats = new BaseStats
+            {
+                HP = CharacterToCopy.AjustedStats.HP,
+                Strength = CharacterToCopy.AjustedStats.Strength,
+                Psyche = CharacterToCopy.AjustedStats.Psyche,
+                Defense = CharacterToCopy.AjustedStats.Defense,
+                Resistance = CharacterToCopy.AjustedStats.Resistance,
+                Speed = CharacterToCopy.AjustedStats.Speed,
+                Dexterity = CharacterToCopy.AjustedStats.Dexterity
+            },
+            level = CharacterToCopy.level,
+            experience = CharacterToCopy.experience,
+            affiliation = CharacterToCopy.affiliation,
+            growth = new StatGrowth
+            {
+                HPGrowth = CharacterToCopy.growth.HPGrowth,
+                StrengthGrowth = CharacterToCopy.growth.StrengthGrowth,
+                PsycheGrowth = CharacterToCopy.growth.PsycheGrowth,
+                DefenseGrowth = CharacterToCopy.growth.DefenseGrowth,
+                ResistanceGrowth = CharacterToCopy.growth.ResistanceGrowth,
+                SpeedGrowth = CharacterToCopy.growth.SpeedGrowth,
+                DexterityGrowth = CharacterToCopy.growth.DexterityGrowth
+            },
+            currentHP = CharacterToCopy.currentHP,
+            movements = CharacterToCopy.movements,
+            position = CharacterToCopy.position,
+            alreadyplayed = CharacterToCopy.alreadyplayed,
+            alreadymoved = CharacterToCopy.alreadymoved,
+            telekinesisactivated = CharacterToCopy.telekinesisactivated,
+            equipmentsIDs = new List<int>(CharacterToCopy.equipmentsIDs),
+            equipments = CharacterToCopy.equipments,
+            UnitSkill = CharacterToCopy.UnitSkill,
+            EquipedSkills = new List<int>(CharacterToCopy.EquipedSkills),
+            isboss = CharacterToCopy.isboss,
+            attacksfriends = CharacterToCopy.attacksfriends,
+            playableStats = new PlayableStats
+            {
+                MaxSkillpoints = CharacterToCopy.playableStats.MaxSkillpoints,
+                deployunit = CharacterToCopy.playableStats.deployunit,
+                unlocked = CharacterToCopy.playableStats.unlocked,
+                protagonist = CharacterToCopy.playableStats.protagonist,
+                battalion = CharacterToCopy.playableStats.battalion,
+                ID = CharacterToCopy.playableStats.ID
+            },
+            enemyStats = new EnemyStats
+            {
+                classID = CharacterToCopy.enemyStats.classID,
+                desiredlevel = CharacterToCopy.enemyStats.desiredlevel,
+                itemtodropID = CharacterToCopy.enemyStats.itemtodropID,
+                usetelekinesis = CharacterToCopy.enemyStats.usetelekinesis,
+                personality = CharacterToCopy.enemyStats.personality,
+                startpos = CharacterToCopy.enemyStats.startpos,
+                equipments = new List<int>(CharacterToCopy.enemyStats.equipments),
+                Skills = new List<int>(CharacterToCopy.enemyStats.Skills),
+                Name = CharacterToCopy.enemyStats.Name,
+                isboss = CharacterToCopy.enemyStats.isboss,
+                isother = CharacterToCopy.enemyStats.isother,
+                monsterStats = new MonsterStats
+                {
+                    size = CharacterToCopy.enemyStats.monsterStats.size,
+                    ispluvial = CharacterToCopy.enemyStats.monsterStats.ispluvial,
+                    ismachine = CharacterToCopy.enemyStats.monsterStats.ismachine
+                },
+                RemainingLifebars = CharacterToCopy.enemyStats.RemainingLifebars,
+                modelID = CharacterToCopy.enemyStats.modelID
+            },
+            currentTile = new List<GridSquareScript>(CharacterToCopy.currentTile),
+            modelID = CharacterToCopy.modelID,
+            Masteries = CharacterToCopy.Masteries.Select(m => new WeaponMastery
+            {
+                weapontype = m.weapontype,
+                Exp = m.Exp,
+                Level = m.Level
+            }).ToList()
+        };
+
+        return copy;
+    }
+
 
     //Manage horizontal movements
     private void ManageMovement()
@@ -616,6 +720,10 @@ public class UnitScript : MonoBehaviour
     }
     public void MoveTo(Vector2 destination, bool jump = false, bool instantaneousmovement = false)
     {
+        if(UnitCharacteristics.position!=null)
+        {
+            previousposition = UnitCharacteristics.position;
+        }
         if (GridScript == null)
         {
             GridScript = FindAnyObjectByType<GridScript>();
@@ -669,7 +777,7 @@ public class UnitScript : MonoBehaviour
         MinimapScript.UpdateMinimap();
     }
 
-    private void UpdateTiles(GridSquareScript destination)
+    public void UpdateTiles(GridSquareScript destination)
     {
         UnitCharacteristics.currentTile = new List<GridSquareScript> { destination };
         if (UnitCharacteristics.enemyStats.monsterStats.size > 1)
@@ -1114,6 +1222,10 @@ public class UnitScript : MonoBehaviour
 
     public List<int> LevelUp()
     {
+
+        BaseStats statsbeforelevelup = new BaseStats() {HP=UnitCharacteristics.stats.HP,Strength = UnitCharacteristics.stats.Strength,Psyche= UnitCharacteristics.stats.Psyche,Defense= UnitCharacteristics.stats.Defense,Resistance= UnitCharacteristics.stats.Resistance,Speed = UnitCharacteristics.stats.Speed, Dexterity= UnitCharacteristics.stats.Dexterity };
+        previousStats = statsbeforelevelup;
+
         List<int> lvlupresult = new List<int>();
         StatGrowth GrowthtoApply = new StatGrowth();
 
@@ -1344,8 +1456,6 @@ public class UnitScript : MonoBehaviour
         {
             levelupstring += level+" ";
         }
-
-        Debug.Log(levelupstring);
 
         calculateStats();
         return lvlupresult;

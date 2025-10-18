@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using static UnitScript;
-using static UnityEngine.GraphicsBuffer;
 
 public class ActionManager : MonoBehaviour
 {
@@ -37,6 +33,10 @@ public class ActionManager : MonoBehaviour
 
     public GameObject NeutralMenu;
 
+    public ForesightScript Foresight;
+
+    private int NeutralMenuCD;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -50,6 +50,16 @@ public class ActionManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (NeutralMenu.activeSelf)
+        {
+            NeutralMenuCD = 5;
+        }
+        else if (NeutralMenuCD > 0)
+        {
+            NeutralMenuCD--;
+        }
+
         if (actionsMenu.activeSelf)
         {
             if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow") == null && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
@@ -96,7 +106,7 @@ public class ActionManager : MonoBehaviour
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
                     }
-                    else if(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed)
+                    else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed && TurnManager.currentlyplaying == "playable" && NeutralMenuCD == 0)
                     {
                         NeutralMenu.SetActive(true);
                     }
@@ -118,7 +128,7 @@ public class ActionManager : MonoBehaviour
                 }
                 else
                 {
-                    if(InputManager.activatejustpressed)
+                    if (InputManager.activatejustpressed && TurnManager.currentlyplaying == "playable" && NeutralMenuCD == 0)
                     {
                         NeutralMenu.SetActive(true);
                     }
@@ -291,46 +301,65 @@ public class ActionManager : MonoBehaviour
         GridScript.ShowMovement();
     }
 
-    public void Wait() // permet d'attendre
+    public void WaitButton()
     {
-        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
-        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
-        currentcharacter.GetComponent<UnitScript>().numberoftimeswaitted++;
-        currentcharacter.GetComponent<UnitScript>().waittedbonusturns = 2;
+        Wait();
+    }
+
+    public void Wait(GameObject Unit = null) // permet d'attendre
+    {
+        GameObject Unittouse = currentcharacter;
+        if (Unit != null)
+        {
+            Unittouse = Unit;
+        }
+        ForesightScript.Action waittedaction = new ForesightScript.Action();
+
+        waittedaction.Unit = Unittouse.GetComponent<UnitScript>();
+
+        waittedaction.actiontype = 2;
+        waittedaction.previousPosition = Unittouse.GetComponent<UnitScript>().previousposition;
+
+        waittedaction.ModifiedCharacters = new List<Character>() { Unittouse.GetComponent<UnitScript>().CreateCopy() };
+
+        Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
+        Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+        Unittouse.GetComponent<UnitScript>().numberoftimeswaitted++;
+        Unittouse.GetComponent<UnitScript>().waittedbonusturns = 2;
 
         //Readiness
-        if (currentcharacter.GetComponent<UnitScript>().GetSkill(42))
+        if (Unittouse.GetComponent<UnitScript>().GetSkill(42))
         {
-            currentcharacter.GetComponent<UnitScript>().AddNumber(0, true, "Readiness");
+            Unittouse.GetComponent<UnitScript>().AddNumber(0, true, "Readiness");
         }
         //patient
-        if (currentcharacter.GetComponent<UnitScript>().GetSkill(20))
+        if (Unittouse.GetComponent<UnitScript>().GetSkill(20))
         {
-            Character currentcharacterchar = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics;
-            currentcharacter.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(currentcharacterchar.AjustedStats.HP * 0.1f), (int)currentcharacterchar.AjustedStats.HP - currentcharacterchar.currentHP), true, "Patient");
+            Character currentcharacterchar = Unittouse.GetComponent<UnitScript>().UnitCharacteristics;
+            Unittouse.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(currentcharacterchar.AjustedStats.HP * 0.1f), (int)currentcharacterchar.AjustedStats.HP - currentcharacterchar.currentHP), true, "Patient");
             currentcharacterchar.currentHP += (int)(currentcharacterchar.AjustedStats.HP * 0.1f);
             if (currentcharacterchar.currentHP > currentcharacterchar.AjustedStats.HP)
             {
                 currentcharacterchar.currentHP = (int)currentcharacterchar.AjustedStats.HP;
             }
 
-            currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
-            if (currentcharacter.GetComponent<UnitScript>().GetSkill(7)) // full of beans
+            Unittouse.GetComponent<UnitScript>().RestoreUses(1);
+            if (Unittouse.GetComponent<UnitScript>().GetSkill(7)) // full of beans
             {
-                currentcharacter.GetComponent<UnitScript>().AddNumber(0, true, "Full of Beans");
-                currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
+                Unittouse.GetComponent<UnitScript>().AddNumber(0, true, "Full of Beans");
+                Unittouse.GetComponent<UnitScript>().RestoreUses(1);
             }
 
         }
 
-        currentcharacter.GetComponent<UnitScript>().RestoreUses(1);
+        Unittouse.GetComponent<UnitScript>().RestoreUses(1);
         GridScript.ResetAllSelections();
         GridScript.ResetColor();
         GridScript.lockselection = false;
         FindAnyObjectByType<ActionManager>().frameswherenotlock = 10;
-        GameObject character = currentcharacter;
         currentcharacter = null;
-        character.GetComponent<UnitScript>().RetreatTrigger(); // Canto/Retreat (move again after action)
+        Foresight.actions.Add(waittedaction);
+
     }
 
     public void Attack()
