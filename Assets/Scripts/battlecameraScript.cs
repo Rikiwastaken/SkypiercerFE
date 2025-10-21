@@ -35,6 +35,7 @@ public class battlecameraScript : MonoBehaviour
     public float verticalautomovespeed;
 
     private TextBubbleScript TextBubbleScript;
+    public TutorialWindowScript TutorialWindowScript;
 
     private float targetangle;
 
@@ -132,7 +133,7 @@ public class battlecameraScript : MonoBehaviour
             previouselevation = transform.position.y;
         }
 
-        if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || TextBubbleScript.indialogue ||GridScript.NeutralMenu.activeSelf || GridScript.ForesightMenu.activeSelf)
+        if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || TutorialWindowScript.gameObject.activeSelf || TextBubbleScript.indialogue ||GridScript.NeutralMenu.activeSelf || GridScript.ForesightMenu.activeSelf)
         {
             return;
         }

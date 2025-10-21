@@ -45,7 +45,7 @@ public class MapEventManager : MonoBehaviour
          * 2 : Lose the game
          * 3 : ModifyTiles
          * 4 : ShowDialogue
-         * 5 : 
+         * 5 : Show Tutorial Window
          * 6 : 
          */
         public List<TextBubbleInfo> dialoguetoShow;
@@ -53,6 +53,7 @@ public class MapEventManager : MonoBehaviour
         public List<int> UnitsToLockID;
         public TileModification tileModification;
         public UnitPlacement UnitPlacement;
+        public TutorialWindow TutorialWindow;
 
     }
 
@@ -99,6 +100,13 @@ public class MapEventManager : MonoBehaviour
         
     }
 
+    [Serializable]
+    public class TutorialWindow
+    {
+        public Vector2Int WindowDimensions;
+        public List<string> lines;
+    }
+
     public List<EventCondition> EventsToMonitor;
 
     
@@ -114,6 +122,8 @@ public class MapEventManager : MonoBehaviour
     public int ManualEventTrigger = -1;
 
     private GameObject grid;
+
+    public TutorialWindowScript TutorialwindowScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -232,6 +242,7 @@ public class MapEventManager : MonoBehaviour
     public void TriggerEvent(EventCondition Event)
     {
         Debug.Log("event trigger : "+Event.ID);
+        Debug.Log("is event triggered ? : " + Event.triggered);
         ManageUnitPlacement(Event.UnitPlacement);
         UnitAddTrigger(Event.UnitsToUnlockID, true);
         UnitAddTrigger(Event.UnitsToLockID, false);
@@ -259,7 +270,14 @@ public class MapEventManager : MonoBehaviour
                 TextBubbleScript.InitializeDialogue(Event.dialoguetoShow);
                 break;
             case 5:
-                
+                Debug.Log("Tutorial Window trigger");
+
+                string fullstring = "";
+                foreach(string line in Event.TutorialWindow.lines)
+                {
+                    fullstring += line+"\n";
+                }
+                TutorialwindowScript.InitializeWindow(Event.TutorialWindow.WindowDimensions, fullstring);
                 break;
             case 6:
                 
@@ -327,9 +345,8 @@ public class MapEventManager : MonoBehaviour
                             case (1):
                                 if (reachedTiles("playable", e.TilesList))
                                 {
-                                    TriggerEvent(e);
-                                    
                                     e.triggered = true;
+                                    TriggerEvent(e);
                                     EventInitialization();
                                     return;
                                 }
@@ -337,8 +354,8 @@ public class MapEventManager : MonoBehaviour
                             case (2):
                                 if (reachedTiles("enemy", e.TilesList))
                                 {
-                                    TriggerEvent(e);
                                     e.triggered = true;
+                                    TriggerEvent(e);
                                     EventInitialization();
                                     return;
                                 }
@@ -346,8 +363,8 @@ public class MapEventManager : MonoBehaviour
                             case (3):
                                 if (reachedTiles("other", e.TilesList))
                                 {
-                                    TriggerEvent(e);
                                     e.triggered = true;
+                                    TriggerEvent(e);
                                     EventInitialization();
                                     return;
                                 }
@@ -355,8 +372,8 @@ public class MapEventManager : MonoBehaviour
                             case (4):
                                 if (checkIfOneDead(e.UnitList))
                                 {
-                                    TriggerEvent(e);
                                     e.triggered = true;
+                                    TriggerEvent(e);
                                     EventInitialization();
                                     return;
                                 }
@@ -364,27 +381,27 @@ public class MapEventManager : MonoBehaviour
                             case (5):
                                 if (checkIfAllDead(e.UnitList))
                                 {
-                                    TriggerEvent(e);
                                     e.triggered = true;
+                                    TriggerEvent(e);
                                     EventInitialization();
                                     return;
                                 }
                                 break;
                             case (6):
-                                TriggerEvent(e);
                                 e.triggered = true;
+                                TriggerEvent(e);
                                 EventInitialization();
                                 return;
                             case (7):
-                                TriggerEvent(e);
                                 e.triggered = true;
+                                TriggerEvent(e);
                                 EventInitialization();
                                 return;
                             case (8):
                                 if(CheckIfEventsAreTriggered(e.EventsToWatch))
                                 {
-                                    TriggerEvent(e);
                                     e.triggered = true;
+                                    TriggerEvent(e);
                                     EventInitialization();
                                     return;
                                 }
@@ -405,7 +422,7 @@ public class MapEventManager : MonoBehaviour
             bool found = false;
             foreach(EventCondition e in EventsToMonitor)
             {
-                if(e.ID==id)
+                if (e.ID==id)
                 {
                     found = true;
                     if(!e.triggered)
@@ -524,6 +541,10 @@ public class MapEventManager : MonoBehaviour
 
     private bool checkIfAllDead(List<Character> units)
     {
+        if(FindAnyObjectByType<TurnManger>().currentlyplaying == "")
+        {
+            return false ;
+        }
         if(units.Count==0)
         {
             return true;
@@ -546,6 +567,10 @@ public class MapEventManager : MonoBehaviour
 
     private bool checkIfOneDead(List<Character> units)
     {
+        if (FindAnyObjectByType<TurnManger>().currentlyplaying == "")
+        {
+            return false;
+        }
         if (units.Count == 0)
         {
             return true;

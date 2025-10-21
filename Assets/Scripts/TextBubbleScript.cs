@@ -44,6 +44,8 @@ public class TextBubbleScript : MonoBehaviour
 
     private battlecameraScript battlecameraScript;
 
+    public MapEventManager mapEventManager;
+
     void Awake()
     {
         if (charactername != null)
@@ -82,10 +84,13 @@ public class TextBubbleScript : MonoBehaviour
         if(Dialogue==null)
         {
             DeactivateBubble();
+            mapEventManager.TriggerEventCheck();
         }
         else if (Dialogue.Count <= currentTextBubble)
         {
+
             DeactivateBubble();
+            mapEventManager.TriggerEventCheck();
         }
         else
         {
@@ -168,7 +173,7 @@ public class TextBubbleScript : MonoBehaviour
         else
         {
             DeactivateBubble();
-            FindAnyObjectByType<MapEventManager>()?.TriggerEventCheck();
+            mapEventManager.TriggerEventCheck();
         }
     }
 

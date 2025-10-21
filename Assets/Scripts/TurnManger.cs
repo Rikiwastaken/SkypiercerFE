@@ -42,7 +42,7 @@ public class TurnManger : MonoBehaviour
     private MinimapScript minimapScript;
 
     public TextBubbleScript textBubbleScript;
-
+    public GameObject TutorialWindows;
 
     private void Start()
     {
@@ -69,13 +69,13 @@ public class TurnManger : MonoBehaviour
             actionManager = FindAnyObjectByType<ActionManager>();
         }
 
-        if (InputManager.Startpressed && waittingforstart && !preBattleMenuScript.gameObject.activeSelf && !textBubbleScript.indialogue)
+        if (InputManager.Startpressed && waittingforstart && !preBattleMenuScript.gameObject.activeSelf && !textBubbleScript.indialogue && !TutorialWindows.activeSelf)
         {
             waittingforstart = false;
         }
 
 
-        if (!textBubbleScript.indialogue && !preBattleMenuScript.gameObject.activeSelf && currentlyplaying == "")
+        if (!textBubbleScript.indialogue && !preBattleMenuScript.gameObject.activeSelf && currentlyplaying == "" && !TutorialWindows.activeSelf)
         {
             preBattleMenuScript.gameObject.SetActive(true);
         }

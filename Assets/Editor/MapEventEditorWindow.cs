@@ -49,7 +49,7 @@ public class MapEventEditorWindow : EditorWindow
         "2 : Lose the game",
         "3 : Modify Tiles",
         "4 : Show Dialogue",
-        "5 : Unused",
+        "5 : Show Tutorial Window",
         "6 : Unused"
     };
 
@@ -289,12 +289,19 @@ public class MapEventEditorWindow : EditorWindow
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("tileModification"), true);
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("UnitPlacement"), true);
 
+        //--- Tutorial Window ---
+
+        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("TutorialWindow"), true);
+
         // --- Equipments ---
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Units To Unlock:");
         DrawIDListDropdown(eProp.FindPropertyRelative("UnitsToUnlockID"), characternames, characterIDs);
         EditorGUILayout.LabelField("Units To Lock:");
         DrawIDListDropdown(eProp.FindPropertyRelative("UnitsToLockID"), characternames, characterIDs);
+
+        
+
 
         EditorGUILayout.EndVertical();
         EditorGUI.indentLevel--;
