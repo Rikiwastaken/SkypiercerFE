@@ -202,7 +202,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         (int range, bool frapperenmelee, string type) = target.GetComponent<UnitScript>().GetRangeMeleeAndType();
-        GridScript.ShowAttackAfterMovement(range, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size);
+        GridScript.ShowAttackAfterMovement(range, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, target.GetComponent<UnitScript>().UnitCharacteristics);
         GridScript.lockedattacktiles = GridScript.attacktiles;
         GridScript.lockedhealingtiles = GridScript.healingtiles;
         GridScript.Recolor();
@@ -374,7 +374,7 @@ public class ActionsMenu : MonoBehaviour
                         frapperenmelee = false;
                     }
 
-                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, weapon.type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size);
+                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, weapon.type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, target.GetComponent<UnitScript>().UnitCharacteristics);
                     GridScript.lockedattacktiles = GridScript.attacktiles;
                     GridScript.lockedhealingtiles = GridScript.healingtiles;
                     GridScript.Recolor();
@@ -416,7 +416,7 @@ public class ActionsMenu : MonoBehaviour
                             frapperenmelee = false;
                         }
                         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                        GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, chartarget.currentTile, weapon.type.ToLower() == "staff", chartarget.enemyStats.monsterStats.size);
+                        GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, chartarget.currentTile, weapon.type.ToLower() == "staff", chartarget.enemyStats.monsterStats.size, target.GetComponent<UnitScript>().UnitCharacteristics);
                         GridScript.lockedattacktiles = GridScript.attacktiles;
                         GridScript.lockedhealingtiles = GridScript.healingtiles;
                         GridScript.Recolor();
@@ -478,7 +478,7 @@ public class ActionsMenu : MonoBehaviour
             newfrapperenmelee = false;
         }
         Character newchartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        GridScript.ShowAttackAfterMovement(newweapon.Range + newrangebonus, newfrapperenmelee, newchartarget.currentTile, newweapon.type.ToLower() == "staff", newchartarget.enemyStats.monsterStats.size);
+        GridScript.ShowAttackAfterMovement(newweapon.Range + newrangebonus, newfrapperenmelee, newchartarget.currentTile, newweapon.type.ToLower() == "staff", newchartarget.enemyStats.monsterStats.size, newchartarget);
     }
 
 
@@ -533,7 +533,7 @@ public class ActionsMenu : MonoBehaviour
             if (command.targettype == 0)
             {
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, false, chartarget.enemyStats.monsterStats.size);
+                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, false, chartarget.enemyStats.monsterStats.size, chartarget);
                 GridScript.lockedattacktiles = GridScript.attacktiles;
 
                 foreach (GridSquareScript tile in GridScript.lockedattacktiles)
@@ -561,7 +561,7 @@ public class ActionsMenu : MonoBehaviour
             else if (command.targettype == 1)
             {
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, true, chartarget.enemyStats.monsterStats.size);
+                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, true, chartarget.enemyStats.monsterStats.size, chartarget);
                 GridScript.lockedhealingtiles = GridScript.healingtiles;
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
@@ -642,7 +642,7 @@ public class ActionsMenu : MonoBehaviour
             {
                 (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(range, melee, chartarget.currentTile, true, chartarget.enemyStats.monsterStats.size);
+                GridScript.ShowAttackAfterMovement(range, melee, chartarget.currentTile, true, chartarget.enemyStats.monsterStats.size, chartarget);
                 GridScript.lockedhealingtiles = GridScript.healingtiles;
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {

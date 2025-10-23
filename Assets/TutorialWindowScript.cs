@@ -28,9 +28,10 @@ public class TutorialWindowScript : MonoBehaviour
         TextGO.transform.localPosition = Vector2.zero;
         timecounter = 0;
         TextGO.GetComponent<TextMeshProUGUI>().text = text;
+        Time.timeScale = 0f;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if(timecounter < delay / Time.fixedDeltaTime)
         {
@@ -55,6 +56,7 @@ public class TutorialWindowScript : MonoBehaviour
     {
         if(abletocontinue)
         {
+            Time.timeScale = 1f;
             gameObject.SetActive(false);
         }
     }

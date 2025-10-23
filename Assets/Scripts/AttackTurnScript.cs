@@ -980,7 +980,7 @@ public class AttackTurnScript : MonoBehaviour
         int maxreward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
-        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, gridScript.GetTile(charunit.position), charunit.enemyStats.monsterStats.size);
+        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, gridScript.GetTile(charunit.position), charunit.enemyStats.monsterStats.size,charunit);
         List<string> affiliationtoattack = Whotoattack(charunit.affiliation, attacksfriend);
         GameObject chosenUnit = null;
 
@@ -1147,7 +1147,7 @@ public class AttackTurnScript : MonoBehaviour
             return reward - 9999;
         }
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
-        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position, charunit.enemyStats.monsterStats.size);
+        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position, charunit.enemyStats.monsterStats.size,charunit);
         List<string> affiliationtoattack = Whotoattack(charunit.affiliation, attacksfriend);
 
         foreach (GridSquareScript tile in potentialAttackPosition)

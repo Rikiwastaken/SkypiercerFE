@@ -66,7 +66,7 @@ public class ActionManager : MonoBehaviour
             {
                 currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                 (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size);
+                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
             }
             return;
         }
@@ -201,7 +201,7 @@ public class ActionManager : MonoBehaviour
                     else
                     {
                         (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                        GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size);
+                        GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
                         GridScript.LockcurrentSelection();
                         if (!GridScript.actionsMenu.activeSelf)
                         {
@@ -281,7 +281,7 @@ public class ActionManager : MonoBehaviour
         (int range, bool frapperenmelee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
         bool usestaff = unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff";
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        GridScript.ShowAttack(range, frapperenmelee, usestaff, true, charunit.enemyStats.monsterStats.size);
+        GridScript.ShowAttack(range, frapperenmelee, usestaff, true, charunit.enemyStats.monsterStats.size, charunit);
         GridScript.lockedattacktiles = GridScript.attacktiles;
         GridScript.lockedhealingtiles = GridScript.healingtiles;
         GridScript.Recolor();

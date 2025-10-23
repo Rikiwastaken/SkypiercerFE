@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnitScript;
@@ -532,7 +533,7 @@ public class GridScript : MonoBehaviour
                         CheckMovementsForBigUnits(unit);
                     }
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    ShowAttack(range, melee, type.ToLower() == "staff", false, unit.enemyStats.monsterStats.size);
+                    ShowAttack(range, melee, type.ToLower() == "staff", false, unit.enemyStats.monsterStats.size, unit);
                 }
             }
 
@@ -627,7 +628,8 @@ public class GridScript : MonoBehaviour
                     }
                     SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    ShowAttack(range, melee, type.ToLower() == "staff", false, unit.enemyStats.monsterStats.size);
+                    ShowAttack(range, melee, type.ToLower() == "staff", false, unit.enemyStats.monsterStats.size, unit);
+
                 }
             }
 
@@ -764,7 +766,7 @@ public class GridScript : MonoBehaviour
         return SelectedUnit;
     }
 
-    public void ShowAttack(int range, bool frapperenmelee, bool usingstaff, bool uselockedmovementtile = false, int size = 0)
+    public void ShowAttack(int range, bool frapperenmelee, bool usingstaff, bool uselockedmovementtile = false, int size = 0, Character attacker = null)
     {
         attacktiles = new List<GridSquareScript>();
         healingtiles = new List<GridSquareScript>();
@@ -909,6 +911,22 @@ public class GridScript : MonoBehaviour
                 }
             }
         }
+
+        if(attacker!=null)
+        {
+            foreach(GridSquareScript tile in attacker.currentTile)
+            {
+                if(attacktiles.Contains(tile))
+                {
+                    attacktiles.Remove(tile);
+                }
+                if(healingtiles.Contains(tile))
+                {
+                    healingtiles.Remove(tile);
+                }
+            }
+        }
+
         Recolor();
     }
 
@@ -919,8 +937,9 @@ public class GridScript : MonoBehaviour
     /// <param name="frapperenmelee"></param>
     /// <param name="tile"></param>
     /// <param name="size"></param>
+    /// <param name="unit"></param>
     /// <returns></returns>
-    public List<GridSquareScript> GetAttack(int range, bool frapperenmelee, GridSquareScript tile, int size = 0)
+    public List<GridSquareScript> GetAttack(int range, bool frapperenmelee, GridSquareScript tile, int size = 0, Character unit=null)
     {
         List<GridSquareScript> newattacktiles = new List<GridSquareScript>();
         List<GridSquareScript> tilestouse = new List<GridSquareScript>() { tile };
@@ -1011,10 +1030,20 @@ public class GridScript : MonoBehaviour
                 }
             }
         }
+        if (unit != null)
+        {
+            foreach (GridSquareScript unittile in unit.currentTile)
+            {
+                if (newattacktiles.Contains(unittile))
+                {
+                    newattacktiles.Remove(unittile);
+                }
+            }
+        }
         return newattacktiles;
     }
 
-    public void ShowAttackAfterMovement(int range, bool frapperenmelee, List<GridSquareScript> tiles, bool usingstaff, int size)
+    public void ShowAttackAfterMovement(int range, bool frapperenmelee, List<GridSquareScript> tiles, bool usingstaff, int size, Character unit)
     {
         movementtiles.Clear();
         attacktiles = new List<GridSquareScript>();
@@ -1163,6 +1192,20 @@ public class GridScript : MonoBehaviour
                             attacktiles.Add(Grid[(int)(tile.GridCoordinates.x)][(int)(tile.GridCoordinates.y + i)].GetComponent<GridSquareScript>());
                         }
                     }
+                }
+            }
+        }
+        if (unit != null)
+        {
+            foreach (GridSquareScript tile in unit.currentTile)
+            {
+                if (attacktiles.Contains(tile))
+                {
+                    attacktiles.Remove(tile);
+                }
+                if (healingtiles.Contains(tile))
+                {
+                    healingtiles.Remove(tile);
                 }
             }
         }
