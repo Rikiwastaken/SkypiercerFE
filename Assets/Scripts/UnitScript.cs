@@ -1220,15 +1220,10 @@ public class UnitScript : MonoBehaviour
         GetComponent<MeshRenderer>().material.color = newcolor;
     }
 
-    public List<int> LevelUp()
+
+    public StatGrowth GetGrowthModifications()
     {
-
-        BaseStats statsbeforelevelup = new BaseStats() {HP=UnitCharacteristics.stats.HP,Strength = UnitCharacteristics.stats.Strength,Psyche= UnitCharacteristics.stats.Psyche,Defense= UnitCharacteristics.stats.Defense,Resistance= UnitCharacteristics.stats.Resistance,Speed = UnitCharacteristics.stats.Speed, Dexterity= UnitCharacteristics.stats.Dexterity };
-        previousStats = statsbeforelevelup;
-
-        List<int> lvlupresult = new List<int>();
         StatGrowth GrowthtoApply = new StatGrowth();
-
         GrowthtoApply.HPGrowth = UnitCharacteristics.growth.HPGrowth;
         GrowthtoApply.PsycheGrowth = UnitCharacteristics.growth.PsycheGrowth;
         GrowthtoApply.StrengthGrowth = UnitCharacteristics.growth.StrengthGrowth;
@@ -1278,7 +1273,65 @@ public class UnitScript : MonoBehaviour
             GrowthtoApply.DexterityGrowth = average;
         }
 
+        int bonussize = 10;
+
+        switch(GetFirstWeapon().type.ToLower())
+        {
+            case "sword":
+                GrowthtoApply.SpeedGrowth += bonussize;
+                GrowthtoApply.DexterityGrowth += bonussize;
+                GrowthtoApply.HPGrowth -= bonussize;
+                break;
+            case "spear":
+                GrowthtoApply.StrengthGrowth += bonussize;
+                GrowthtoApply.PsycheGrowth += bonussize;
+                GrowthtoApply.ResistanceGrowth -= bonussize;
+                break;
+            case "greatsword":
+                GrowthtoApply.StrengthGrowth += bonussize;
+                GrowthtoApply.DefenseGrowth += bonussize;
+                GrowthtoApply.SpeedGrowth -= bonussize;
+                break;
+            case "bow":
+                GrowthtoApply.StrengthGrowth += bonussize;
+                GrowthtoApply.DexterityGrowth += bonussize;
+                GrowthtoApply.DefenseGrowth -= bonussize;
+                break;
+            case "scythe":
+                GrowthtoApply.PsycheGrowth += bonussize;
+                GrowthtoApply.DexterityGrowth += bonussize;
+                GrowthtoApply.SpeedGrowth -= bonussize;
+                break;
+            case "shield":
+                GrowthtoApply.HPGrowth += bonussize;
+                GrowthtoApply.DefenseGrowth += bonussize;
+                GrowthtoApply.PsycheGrowth -= bonussize;
+                break;
+            case "staff":
+                GrowthtoApply.PsycheGrowth += bonussize;
+                GrowthtoApply.ResistanceGrowth += bonussize;
+                GrowthtoApply.StrengthGrowth -= bonussize;
+                break;
+        }
+
+        return GrowthtoApply;
+    }
+    public List<int> LevelUp()
+    {
+
+        BaseStats statsbeforelevelup = new BaseStats() {HP=UnitCharacteristics.stats.HP,Strength = UnitCharacteristics.stats.Strength,Psyche= UnitCharacteristics.stats.Psyche,Defense= UnitCharacteristics.stats.Defense,Resistance= UnitCharacteristics.stats.Resistance,Speed = UnitCharacteristics.stats.Speed, Dexterity= UnitCharacteristics.stats.Dexterity };
+        previousStats = statsbeforelevelup;
+
+        List<int> lvlupresult = new List<int>();
+        StatGrowth GrowthtoApply = GetGrowthModifications();
+
+        
+
         UnitCharacteristics.experience -= 100;
+        if(UnitCharacteristics.experience<0)
+        {
+            UnitCharacteristics.experience = 0;
+        }
         UnitCharacteristics.level += 1;
         if (fixedgrowth)
         {
