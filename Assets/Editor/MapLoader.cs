@@ -3,15 +3,107 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class MapLoader : MonoBehaviour
+public class MapLoader : EditorWindow
 {
-    public GameObject Tileprefab;
-    public Texture2D ObstacleMap;
-    public Texture2D ElevationMap;
-    public Texture2D ActivationMap;
-    public Transform GridObject;
+    private GameObject Tileprefab;
+    private Texture2D ObstacleMap;
+    private Texture2D ElevationMap;
+    private Texture2D ActivationMap;
+    private Transform GridObject;
 
-    [ContextMenu("Generate Map From Image (Edit Mode)")]
+
+    [MenuItem("Tools/Map Creator")]
+    public static void ShowWindow()
+    {
+        var w = GetWindow<MapLoader>("Map Editor");
+        w.minSize = new Vector2(650, 500);
+    }
+
+    private void OnEnable()
+    {
+        RefreshTarget();
+    }
+
+    private void OnHierarchyChange()
+    {
+        RefreshTarget();
+        Repaint();
+    }
+
+    private void OnGUI()
+    {
+
+        EditorGUILayout.Space();
+
+        // Allow manual prefab assignment
+        GridObject = (Transform)EditorGUILayout.ObjectField("Grid Transform", GridObject, typeof(Transform), true);
+
+        EditorGUILayout.Space();
+
+        // Allow manual prefab assignment
+        Tileprefab = (GameObject)EditorGUILayout.ObjectField("Tile Prefab", Tileprefab, typeof(GameObject), false);
+
+        EditorGUILayout.Space();
+
+        // Allow manual prefab assignment
+        ObstacleMap = (Texture2D)EditorGUILayout.ObjectField("Obstacle Map Image", ObstacleMap, typeof(Texture2D), false);
+
+        EditorGUILayout.Space();
+
+        // Allow manual prefab assignment
+        ElevationMap = (Texture2D)EditorGUILayout.ObjectField("Elevation Map Image", ElevationMap, typeof(Texture2D), false);
+
+        EditorGUILayout.Space();
+
+        // Allow manual prefab assignment
+        ActivationMap = (Texture2D)EditorGUILayout.ObjectField("Activation Map Image", ActivationMap, typeof(Texture2D), false);
+
+
+        if (GUILayout.Button("Create Map"))
+        {
+            if (ObstacleMap == null)
+            {
+                EditorGUILayout.HelpBox("Please add an obstacle map.", MessageType.Warning);
+            }
+            else if (ElevationMap == null)
+            {
+                EditorGUILayout.HelpBox("Please add an elevation map.", MessageType.Warning);
+            }
+            else if (ActivationMap == null)
+            {
+                EditorGUILayout.HelpBox("Please add an activation map.", MessageType.Warning);
+            }
+            else
+            {
+                LoadMap();
+            } 
+        }
+            
+
+        if (GUILayout.Button("Delete Map"))
+            DeletePreviousMap();
+
+        EditorGUILayout.Space();
+
+      
+    }
+
+    private void RefreshTarget()
+    {
+        if (GridObject == null)
+            GridObject = GameObject.Find("Grid").transform;
+
+        if (Tileprefab == null)
+        {
+            // Load prefab from project if not in scene
+            string[] guids = AssetDatabase.FindAssets("gridsquare");
+            if (guids.Length > 0)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+                Tileprefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            }
+        }
+    }
     void LoadMap()
     {
         if (Application.isPlaying)
@@ -59,8 +151,6 @@ public class MapLoader : MonoBehaviour
         FindAnyObjectByType<GridScript>().lastSquare = lasttile;
         EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
     }
-
-    [ContextMenu("Delete Map (Edit Mode)")]
     void DeletePreviousMap()
     {
         if (Application.isPlaying)
