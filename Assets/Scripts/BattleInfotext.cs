@@ -16,7 +16,7 @@ public class BattleInfotext : MonoBehaviour
     TextMeshProUGUI TMP;
     private GameObject selectedunit;
 
-    private battlecameraScript battlecamera;
+    private cameraScript battlecamera;
     private TurnManger turnManger;
     private AttackTurnScript attackTurnScript;
     public TextMeshProUGUI Skilltext;
@@ -98,7 +98,7 @@ public class BattleInfotext : MonoBehaviour
 
         if (battlecamera == null)
         {
-            battlecamera = FindAnyObjectByType<battlecameraScript>();
+            battlecamera = FindAnyObjectByType<cameraScript>();
         }
 
         if (turnManger == null)

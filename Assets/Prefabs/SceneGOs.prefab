@@ -753,6 +753,7 @@ MonoBehaviour:
   validatebutton: {fileID: 7367934050878403132}
   TextGO: {fileID: 2117697800256249527}
   delay: 3
+  InputManager: {fileID: 0}
 --- !u!1 &495905010165923905
 GameObject:
   m_ObjectHideFlags: 0
@@ -8398,7 +8399,7 @@ MonoBehaviour:
   outcombat: {fileID: 2103798853662452955}
   BeforeCombat: {fileID: 1442887712299173525}
   maxvolume: 0.5
-  battlecameraScript: {fileID: 6766556140434444581}
+  cameraScript: {fileID: 6766556140434444581}
 --- !u!1 &3357795807470446806
 GameObject:
   m_ObjectHideFlags: 0
@@ -13626,9 +13627,9 @@ MonoBehaviour:
   ActionsMenu: {fileID: 4915612603892297116}
   delaybeforeMove: 1
   delaybeforeAttack: 1
-  delaybeforeFirstAttack: 1
-  delaybetweenAttack: 1
-  delayafterAttack: 1
+  delaybeforeFirstAttack: 0.1
+  delaybetweenAttack: 0.1
+  delayafterAttack: 0.5
   waittingforexp: 0
   expdistributed: 0
   expbar: {fileID: 4384917138213913139}

@@ -15,7 +15,7 @@ public class AttackTurnScript : MonoBehaviour
 
     private GridScript gridScript;
 
-    private battlecameraScript battlecamera;
+    private cameraScript battlecamera;
 
     public ActionsMenu ActionsMenu;
 
@@ -69,7 +69,7 @@ public class AttackTurnScript : MonoBehaviour
         minimapScript = FindAnyObjectByType<MinimapScript>();
         TurnManager = GetComponent<TurnManger>();
         gridScript = GetComponent<GridScript>();
-        battlecamera = FindAnyObjectByType<battlecameraScript>();
+        battlecamera = FindAnyObjectByType<cameraScript>();
         mapEventManager = GetComponent<MapEventManager>();
     }
 

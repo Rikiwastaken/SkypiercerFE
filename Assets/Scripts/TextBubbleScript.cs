@@ -42,7 +42,7 @@ public class TextBubbleScript : MonoBehaviour
 
     private GridScript gridScript;
 
-    private battlecameraScript battlecameraScript;
+    private cameraScript cameraScript;
 
     public MapEventManager mapEventManager;
 
@@ -63,7 +63,7 @@ public class TextBubbleScript : MonoBehaviour
         InputManager = FindAnyObjectByType<InputManager>();
         ActionManager = FindAnyObjectByType<ActionManager>();
         gridScript = FindAnyObjectByType<GridScript>();
-        battlecameraScript = FindAnyObjectByType<battlecameraScript>();
+        cameraScript = FindAnyObjectByType<cameraScript>();
         //DialogueExample();
     }
 
@@ -109,7 +109,7 @@ public class TextBubbleScript : MonoBehaviour
 
             if(Dialogue[currentTextBubble].CameraDestination != Vector3.zero)
             {
-                battlecameraScript.Destination = new Vector2(Dialogue[currentTextBubble].CameraDestination.x, Dialogue[currentTextBubble].CameraDestination.z);
+                cameraScript.Destination = new Vector2(Dialogue[currentTextBubble].CameraDestination.x, Dialogue[currentTextBubble].CameraDestination.z);
             }
 
             if (isPrinting && charIndex < texttodisplay.Length)

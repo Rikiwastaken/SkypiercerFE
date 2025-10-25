@@ -234,7 +234,7 @@ public class MapEventManager : MonoBehaviour
         }
         if(unitPlacement.CameraPosition!=Vector2.zero)
         {
-            FindAnyObjectByType<battlecameraScript>().Destination = unitPlacement.CameraPosition;
+            FindAnyObjectByType<cameraScript>().Destination = unitPlacement.CameraPosition;
         }
         
     }

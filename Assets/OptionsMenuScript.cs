@@ -16,6 +16,8 @@ public class OptionsMenuScript : MonoBehaviour
 
     public TextMeshProUGUI fullscreentext;
 
+    public TextMeshProUGUI BattleAnimations;
+
     private SaveManager SaveManager;
 
     private void Start()
@@ -28,6 +30,14 @@ public class OptionsMenuScript : MonoBehaviour
         else
         {
             fullscreentext.text = "Fullscreen : Off";
+        }
+        if (SaveManager.Options.BattleAnimations)
+        {
+            BattleAnimations.text = "Battle Animations : On";
+        }
+        else
+        {
+            BattleAnimations.text = "Battle Animations : Off";
         }
     }
 
@@ -94,5 +104,27 @@ public class OptionsMenuScript : MonoBehaviour
     {
         SaveManager.Options.Fullscreen = !Screen.fullScreen;
         SaveManager.SaveOptions();
+        if (SaveManager.Options.Fullscreen)
+        {
+            fullscreentext.text = "Fullscreen : On";
+        }
+        else
+        {
+            fullscreentext.text = "Fullscreen : Off";
+        }
+    }
+
+    public void TogglebattleAnimations()
+    {
+        SaveManager.Options.BattleAnimations = !SaveManager.Options.BattleAnimations;
+        SaveManager.SaveOptions();
+        if (SaveManager.Options.BattleAnimations)
+        {
+            BattleAnimations.text = "Battle Animations : On";
+        }
+        else
+        {
+            BattleAnimations.text = "Battle Animations : Off";
+        }
     }
 }

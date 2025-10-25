@@ -26,12 +26,14 @@ public class SaveManager : MonoBehaviour
         public float secondselapsed;
     }
 
+    [Serializable]
     public class OptionsClass
     {
         public string versionID;
         public int musicvolume;
         public int SEVolume;
         public bool Fullscreen;
+        public bool BattleAnimations;
     }
 
     public int numberofslots;

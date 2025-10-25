@@ -17,6 +17,7 @@ public class SceneLoader : MonoBehaviour
         {
             framestoloading = 5;
             SceneManager.LoadScene(SceneToToad);
+            GetComponent<CombatSceneManager>().currentSceneName = SceneToToad;
             SceneToToad = "";
             loadingCanvas.SetActive(true);
             Color newcolor = loadingCanvas.transform.GetChild(0).GetComponent<Image>().color;

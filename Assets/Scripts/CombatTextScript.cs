@@ -20,7 +20,7 @@ public class CombatTextScript : MonoBehaviour
 
     public TextMeshProUGUI combattext;
 
-    private battlecameraScript battlecameraScript;
+    private cameraScript cameraScript;
 
     public ActionsMenu ActionsMenu;
 
@@ -29,14 +29,14 @@ public class CombatTextScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(battlecameraScript == null)
+        if(cameraScript == null)
         {
-            battlecameraScript = FindAnyObjectByType<battlecameraScript>();
+            cameraScript = FindAnyObjectByType<cameraScript>();
         }
 
         
 
-        if (battlecameraScript.incombat && attacker!=null)
+        if (cameraScript.incombat && attacker!=null)
         {
             
             AttackerLifebarRemaining.fillAmount = (float)attacker.currentHP / (float)attacker.AjustedStats.HP;

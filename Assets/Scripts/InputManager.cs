@@ -137,7 +137,7 @@ public class InputManager : MonoBehaviour
             activatepressedonce = false;
         }
 
-        if (FindAnyObjectByType<battlecameraScript>().incombat)
+        if (FindAnyObjectByType<cameraScript>().incombat)
         {
             activatepressed = false;
             activatejustpressed = false;
@@ -353,10 +353,10 @@ public class InputManager : MonoBehaviour
 
     void OnResetcam(InputValue value)
     {
-        battlecameraScript battlecameraScript = FindAnyObjectByType<battlecameraScript>();
-        if (battlecameraScript != null)
+        cameraScript cameraScript = FindAnyObjectByType<cameraScript>();
+        if (cameraScript != null)
         {
-            battlecameraScript.ResetRotation();
+            cameraScript.ResetRotation();
         }
     }
 

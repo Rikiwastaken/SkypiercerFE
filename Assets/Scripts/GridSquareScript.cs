@@ -49,7 +49,7 @@ public class GridSquareScript : MonoBehaviour
 
     public bool isstairs;
 
-    private battlecameraScript battlecameraScript;
+    private cameraScript cameraScript;
 
     public bool activated;
 
@@ -122,9 +122,9 @@ public class GridSquareScript : MonoBehaviour
         {
             GridScript = FindAnyObjectByType<GridScript>();
         }
-        if (battlecameraScript == null)
+        if (cameraScript == null)
         {
-            battlecameraScript = FindAnyObjectByType<battlecameraScript>();
+            cameraScript = FindAnyObjectByType<cameraScript>();
         }
         if (TurnManger == null)
         {
@@ -136,9 +136,9 @@ public class GridSquareScript : MonoBehaviour
             MapInitializer = FindAnyObjectByType<MapInitializer>();
         }
 
-        if(battlecameraScript.incombat)
+        if(cameraScript.incombat)
         {
-            SelectRoundFilling.GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f,0f);
+            //SelectRoundFilling.GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f,0f);
         }
         else
         {
@@ -177,7 +177,7 @@ public class GridSquareScript : MonoBehaviour
             }
 
 
-            if (GridScript.selection == this && !battlecameraScript.incombat)
+            if (GridScript.selection == this && !cameraScript.incombat)
             {
                 SelectRound.SetActive(true);
                 SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
@@ -193,7 +193,7 @@ public class GridSquareScript : MonoBehaviour
         }
 
         manageElevation();
-        previouslyincombat = battlecameraScript.incombat;
+        previouslyincombat = cameraScript.incombat;
     }
 
     private void ManagePath()
@@ -312,8 +312,8 @@ public class GridSquareScript : MonoBehaviour
     }
     private void manageElevation()
     {
-
-        if (battlecameraScript.incombat)
+        //made on purpose so that it's never active
+        if (cameraScript.incombat && !cameraScript.incombat)
         {
             float targetelevation = 0;
             if (isstairs)
@@ -352,17 +352,18 @@ public class GridSquareScript : MonoBehaviour
         }
         else
         {
-            if(previouslyincombat)
-            {
-                if (isstairs)
-                {
-                    transform.position = new Vector3(transform.position.x, 0 - 1.1f, transform.position.z);
-                }
-                else
-                {
-                    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-                }
-            }
+
+            //if(previouslyincombat)
+            //{
+            //    if (isstairs)
+            //    {
+            //        transform.position = new Vector3(transform.position.x, 0 - 1.1f, transform.position.z);
+            //    }
+            //    else
+            //    {
+            //        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            //    }
+            //}
 
             if (isobstacle)
             {

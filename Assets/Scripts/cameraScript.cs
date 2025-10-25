@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class battlecameraScript : MonoBehaviour
+public class cameraScript : MonoBehaviour
 {
 
     public Vector2 Destination;
@@ -98,7 +98,7 @@ public class battlecameraScript : MonoBehaviour
             float movez = (Destination.y - transform.position.z) * camspeed * Time.fixedDeltaTime;
             transform.position += new Vector3(movex, 0f, movez);
         }
-
+        /*
         if(incombat)
         {
             Vector2 CoordUnit = fighter1.GetComponent<UnitScript>().UnitCharacteristics.position;
@@ -132,7 +132,7 @@ public class battlecameraScript : MonoBehaviour
         {
             previouselevation = transform.position.y;
         }
-
+        */
         if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || TutorialWindowScript.gameObject.activeSelf || TextBubbleScript.indialogue ||GridScript.NeutralMenu.activeSelf || GridScript.ForesightMenu.activeSelf)
         {
             return;
@@ -194,7 +194,10 @@ public class battlecameraScript : MonoBehaviour
         
         fighter1 = unit;
         fighter2 = target;
+        CombatTextScript.SetupCombat(unit, target);
         incombat = true;
+        /*
+         
         Vector2 CoordUnit = unit.GetComponent<UnitScript>().UnitCharacteristics.position;
         Vector2 CoordTarget = target.GetComponent<UnitScript>().UnitCharacteristics.position;
 
@@ -214,8 +217,11 @@ public class battlecameraScript : MonoBehaviour
         float targetelevation = Mathf.Min(0.5f, Mathf.Max(0.5f, 1.5f - Vector2.Distance(CoordTarget, CoordUnit)));
 
         pointtolookat = new Vector3(Middle.x, targetelevation, Middle.y);
-        CombatTextScript.SetupCombat(unit, target);
+        
+        
         return CamCoordinates;
+        */
+        return Destination;
     }
 
 

@@ -51,7 +51,7 @@ public class GridScript : MonoBehaviour
 
     private TextBubbleScript textBubble;
 
-    private battlecameraScript battlecamera;
+    private cameraScript battlecamera;
     public GameObject NeutralMenu;
 
     public GameObject ForesightMenu;
@@ -89,7 +89,7 @@ public class GridScript : MonoBehaviour
         lockedhealingtiles = new List<GridSquareScript>();
         InitializeGOList();
         textBubble = FindAnyObjectByType<TextBubbleScript>();
-        battlecamera = FindAnyObjectByType<battlecameraScript>();
+        battlecamera = FindAnyObjectByType<cameraScript>();
 
     }
 
@@ -374,7 +374,7 @@ public class GridScript : MonoBehaviour
         if (selection == null)
         {
             selection = GetTile(GetComponent<MapInitializer>().playablepos[0]);
-            FindAnyObjectByType<battlecameraScript>().transform.position = new Vector3(selection.GridCoordinates.x, FindAnyObjectByType<battlecameraScript>().transform.position.y, selection.GridCoordinates.y);
+            FindAnyObjectByType<cameraScript>().transform.position = new Vector3(selection.GridCoordinates.x, FindAnyObjectByType<cameraScript>().transform.position.y, selection.GridCoordinates.y);
         }
         else
         {

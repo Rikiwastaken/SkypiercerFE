@@ -35,7 +35,7 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-    private battlecameraScript battlecameraScript;
+    private cameraScript cameraScript;
 
     public int activetargetid;
 
@@ -52,7 +52,7 @@ public class ActionsMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        battlecameraScript = FindAnyObjectByType<battlecameraScript>();
+        cameraScript = FindAnyObjectByType<cameraScript>();
         attackTurnScript = FindAnyObjectByType<AttackTurnScript>();
     }
     private void OnEnable()
@@ -168,11 +168,11 @@ public class ActionsMenu : MonoBehaviour
             {
                 if (activetargetid <= targetlist.Count)
                 {
-                    battlecameraScript.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
+                    cameraScript.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
                 }
                 else
                 {
-                    battlecameraScript.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.position;
+                    cameraScript.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.position;
                 }
                 CheckCorrectInfo(target, targetlist[activetargetid]);
             }
@@ -497,7 +497,7 @@ public class ActionsMenu : MonoBehaviour
         GridScript.Recolor();
         confirmattack = false;
         FindAnyObjectByType<ActionManager>().currentcharacter = null;
-        FindAnyObjectByType<battlecameraScript>().incombat = false;
+        FindAnyObjectByType<cameraScript>().incombat = false;
         FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
         oldtarget.GetComponent<UnitScript>().RetreatTrigger(); // Canto/Retreat (move again after action)
     }

@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
     public float maxvolume;
 
 
-    public battlecameraScript battlecameraScript;
+    public cameraScript cameraScript;
 
     private TurnManger TurnManager;
     
@@ -55,7 +55,7 @@ public class MusicManager : MonoBehaviour
             outcombat.PlayScheduled(startTime);
         }
 
-        if(battlecameraScript.incombat)
+        if(cameraScript.incombat)
         {
             if(incombat.volume< maxvolume* volumemult)
             {

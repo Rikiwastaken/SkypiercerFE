@@ -17,6 +17,8 @@ public class TutorialWindowScript : MonoBehaviour
 
     private bool abletocontinue;
 
+    public InputManager InputManager;
+
     public void InitializeWindow(Vector2 Dimensions, string text)
     {
         gameObject.SetActive(true);
@@ -33,10 +35,14 @@ public class TutorialWindowScript : MonoBehaviour
 
     private void Update()
     {
-        if(timecounter < delay / Time.fixedDeltaTime)
+        if(InputManager==null)
+        {
+            InputManager = FindAnyObjectByType<InputManager>();
+        }
+        if(timecounter < delay / Time.deltaTime)
         {
             timecounter++;
-            validatebutton.GetComponentInChildren<TextMeshProUGUI>().text = " ( "+(int)(delay - (timecounter * Time.fixedDeltaTime))+ " ) ";
+            validatebutton.GetComponentInChildren<TextMeshProUGUI>().text = " ( "+(int)(delay - (timecounter * Time.deltaTime))+ " ) ";
             abletocontinue = false;
         }
         else
@@ -50,6 +56,12 @@ public class TutorialWindowScript : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(validatebutton.gameObject);
             }
         }
+
+        if(InputManager.activatejustpressed)
+        {
+            ContinueButton();
+        }
+
     }
 
     public void ContinueButton()

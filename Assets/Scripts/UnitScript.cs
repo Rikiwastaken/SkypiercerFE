@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static DataScript;
 
@@ -195,7 +196,7 @@ public class UnitScript : MonoBehaviour
 
     public float movespeed;
 
-    private battlecameraScript battlecameraScript;
+    private cameraScript cameraScript;
 
     private Animator animator;
 
@@ -245,6 +246,14 @@ public class UnitScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if(SceneManager.GetActiveScene().name=="BattleScene")
+        {
+            this.enabled = false;
+            transform.GetChild(0).gameObject.SetActive(false);
+            GetComponent<BattleCharacterScript>().enabled = true;
+        }
+
+
         MinimapScript = FindAnyObjectByType<MinimapScript>();
         canvaselevation = transform.GetChild(0).localPosition.y;
         GridScript = FindAnyObjectByType<GridScript>();
@@ -305,9 +314,9 @@ public class UnitScript : MonoBehaviour
 
         Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(1).position + Vector3.Normalize(transform.GetChild(1).forward - transform.GetChild(1).position) * 2f, Color.red);
 
-        if (battlecameraScript == null)
+        if (cameraScript == null)
         {
-            battlecameraScript = FindAnyObjectByType<battlecameraScript>();
+            cameraScript = FindAnyObjectByType<cameraScript>();
         }
 
         if (animator == null)
@@ -332,7 +341,7 @@ public class UnitScript : MonoBehaviour
         }
         if (animator != null)
         {
-            if (!isinattackanimation() && !battlecameraScript.incombat)
+            if (!isinattackanimation() && !cameraScript.incombat)
             {
                 if (Vector3.Distance(armature.localPosition, initialpos) > 0.1f)
                 {
@@ -359,12 +368,12 @@ public class UnitScript : MonoBehaviour
         ManageMovement();
 
 
-        bool shouldBeActive = battlecameraScript.fighter1 == gameObject || battlecameraScript.fighter2 == gameObject || !battlecameraScript.incombat;
+        //bool shouldBeActive = cameraScript.fighter1 == gameObject || cameraScript.fighter2 == gameObject || !cameraScript.incombat;
 
-        if (animator.gameObject.activeSelf != shouldBeActive)
-        {
-            animator.gameObject.SetActive(shouldBeActive);
-        }
+        //if (animator.gameObject.activeSelf != shouldBeActive)
+        //{
+        //    animator.gameObject.SetActive(shouldBeActive);
+        //}
 
         //TemporaryColor();
         UpdateRendererLayer();
@@ -385,7 +394,7 @@ public class UnitScript : MonoBehaviour
             if (UnitCharacteristics.currentTile[0].isstairs)
             {
 
-                if (battlecameraScript.incombat)
+                if (cameraScript.incombat)
                 {
                     transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile[0].transform.position.y + 1f, transform.position.z);
                 }
@@ -513,7 +522,7 @@ public class UnitScript : MonoBehaviour
                 animator.SetBool("Walk", true);
                 Vector2 direction = (pathtotake[0] - new Vector2(transform.position.x, transform.position.z)).normalized;
                 transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
-                if (!battlecameraScript.incombat)
+                if (!cameraScript.incombat)
                 {
                     transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
                     transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
@@ -541,7 +550,7 @@ public class UnitScript : MonoBehaviour
                 animator.SetBool("Walk", true);
                 Vector2 direction = (destination - new Vector2(transform.position.x, transform.position.z)).normalized;
                 transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
-                if (!battlecameraScript.incombat)
+                if (!cameraScript.incombat)
                 {
                     transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
                     transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
@@ -573,7 +582,7 @@ public class UnitScript : MonoBehaviour
         Image LifebarBehind = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         Image Lifebar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
 
-        if (battlecameraScript.incombat)
+        if (cameraScript.incombat)
         {
             if (Lifebar.gameObject.activeSelf)
             {
@@ -891,7 +900,7 @@ public class UnitScript : MonoBehaviour
 
     private void ManageDamagenumber()
     {
-        if (damagestoshow.Count > 0 && !battlecameraScript.incombat)
+        if (damagestoshow.Count > 0 && !cameraScript.incombat)
         {
             DmgText.enabled = true;
             DmgEffectNameText.enabled = true;
@@ -1207,10 +1216,10 @@ public class UnitScript : MonoBehaviour
             }
         }
 
-        if (battlecameraScript.incombat)
+        if (cameraScript.incombat)
         {
             newcolor.a = 0f;
-            if (battlecameraScript.fighter1 == gameObject || battlecameraScript.fighter2 == gameObject)
+            if (cameraScript.fighter1 == gameObject || cameraScript.fighter2 == gameObject)
             {
                 newcolor.a = 1f;
             }

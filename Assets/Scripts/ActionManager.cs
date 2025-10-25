@@ -20,7 +20,7 @@ public class ActionManager : MonoBehaviour
 
     public int framestoskip;
 
-    private battlecameraScript battlecamera;
+    private cameraScript battlecamera;
 
     public GameObject actionsMenu;
 
@@ -43,7 +43,7 @@ public class ActionManager : MonoBehaviour
         TurnManager = GetComponent<TurnManger>();
         InputManager = FindAnyObjectByType<InputManager>();
         GridScript = GetComponent<GridScript>();
-        battlecamera = FindAnyObjectByType<battlecameraScript>();
+        battlecamera = FindAnyObjectByType<cameraScript>();
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>();
     }
 
