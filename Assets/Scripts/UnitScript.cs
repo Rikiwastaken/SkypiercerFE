@@ -1282,7 +1282,7 @@ public class UnitScript : MonoBehaviour
             GrowthtoApply.DexterityGrowth = average;
         }
 
-        int bonussize = 10;
+        int bonussize = 20;
 
         switch(GetFirstWeapon().type.ToLower())
         {
@@ -1351,6 +1351,10 @@ public class UnitScript : MonoBehaviour
             {
                 lvlupresult.Add(1);
             }
+            else if((int)oldHP > (int)(UnitCharacteristics.stats.HP))
+            {
+                lvlupresult.Add(-1);
+            }
             else
             {
                 lvlupresult.Add(0);
@@ -1363,6 +1367,10 @@ public class UnitScript : MonoBehaviour
             if ((int)oldStrength < (int)(UnitCharacteristics.stats.Strength))
             {
                 lvlupresult.Add(1);
+            }
+            else if ((int)oldStrength > (int)(UnitCharacteristics.stats.Strength))
+            {
+                lvlupresult.Add(-1);
             }
             else
             {
@@ -1377,6 +1385,10 @@ public class UnitScript : MonoBehaviour
             {
                 lvlupresult.Add(1);
             }
+            else if ((int)oldPsyche > (int)(UnitCharacteristics.stats.Psyche))
+            {
+                lvlupresult.Add(-1);
+            }
             else
             {
                 lvlupresult.Add(0);
@@ -1389,6 +1401,10 @@ public class UnitScript : MonoBehaviour
             if ((int)oldDefense < (int)(UnitCharacteristics.stats.Defense))
             {
                 lvlupresult.Add(1);
+            }
+            else if ((int)oldDefense > (int)(UnitCharacteristics.stats.Defense))
+            {
+                lvlupresult.Add(-1);
             }
             else
             {
@@ -1403,6 +1419,10 @@ public class UnitScript : MonoBehaviour
             {
                 lvlupresult.Add(1);
             }
+            else if ((int)oldResistance > (int)(UnitCharacteristics.stats.Resistance))
+            {
+                lvlupresult.Add(-1);
+            }
             else
             {
                 lvlupresult.Add(0);
@@ -1415,6 +1435,10 @@ public class UnitScript : MonoBehaviour
             if ((int)oldSpeed < (int)(UnitCharacteristics.stats.Speed))
             {
                 lvlupresult.Add(1);
+            }
+            else if ((int)oldSpeed > (int)(UnitCharacteristics.stats.Speed))
+            {
+                lvlupresult.Add(-1);
             }
             else
             {
@@ -1429,6 +1453,10 @@ public class UnitScript : MonoBehaviour
             {
                 lvlupresult.Add(1);
             }
+            else if ((int)oldDexterity > (int)(UnitCharacteristics.stats.Dexterity))
+            {
+                lvlupresult.Add(-1);
+            }
             else
             {
                 lvlupresult.Add(0);
@@ -1440,77 +1468,35 @@ public class UnitScript : MonoBehaviour
 
             RandomScript.RandomLevelValues levelValues = GetComponent<RandomScript>().GetLevelUpRandomValues();
 
-            if (levelValues.HPRandomValue <= GrowthtoApply.HPGrowth)
-            {
-                UnitCharacteristics.stats.HP += 1;
-                lvlupresult.Add(1);
-            }
-            else
-            {
-                lvlupresult.Add(0);
-            }
 
-            if (levelValues.StrengthRandomValue <= GrowthtoApply.StrengthGrowth)
-            {
-                UnitCharacteristics.stats.Strength += 1;
-                lvlupresult.Add(1);
-            }
-            else
-            {
-                lvlupresult.Add(0);
-            }
+            float HPgain = GetLevelUpStatsChange(GrowthtoApply.HPGrowth, levelValues.HPRandomValue);
+            UnitCharacteristics.stats.HP += HPgain;
+            lvlupresult.Add((int)HPgain);
 
-            if (levelValues.PsycheRandomValue <= GrowthtoApply.PsycheGrowth)
-            {
-                UnitCharacteristics.stats.Psyche += 1;
-                lvlupresult.Add(1);
-            }
-            else
-            {
-                lvlupresult.Add(0);
-            }
+            float Strengthgain = GetLevelUpStatsChange(GrowthtoApply.StrengthGrowth, levelValues.StrengthRandomValue);
+            UnitCharacteristics.stats.Strength += Strengthgain;
+            lvlupresult.Add((int)Strengthgain);
 
-            if (levelValues.DefenseRandomValue <= GrowthtoApply.DefenseGrowth)
-            {
-                UnitCharacteristics.stats.Defense += 1;
-                lvlupresult.Add(1);
-            }
-            else
-            {
-                lvlupresult.Add(0);
-            }
+            float Psychegain = GetLevelUpStatsChange(GrowthtoApply.PsycheGrowth, levelValues.PsycheRandomValue);
+            UnitCharacteristics.stats.Psyche += Psychegain;
+            lvlupresult.Add((int)Psychegain);
+
+            float Defensegain = GetLevelUpStatsChange(GrowthtoApply.DefenseGrowth, levelValues.DefenseRandomValue);
+            UnitCharacteristics.stats.Defense += Defensegain;
+            lvlupresult.Add((int)Defensegain);
+
+            float Resistancegain = GetLevelUpStatsChange(GrowthtoApply.ResistanceGrowth, levelValues.ResistanceRandomValue);
+            UnitCharacteristics.stats.Resistance += Resistancegain;
+            lvlupresult.Add((int)Resistancegain);
+
+            float Speedgain = GetLevelUpStatsChange(GrowthtoApply.SpeedGrowth, levelValues.SpeedRandomValue);
+            UnitCharacteristics.stats.Speed += Speedgain;
+            lvlupresult.Add((int)Speedgain);
 
 
-            if (levelValues.ResistanceRandomValue <= GrowthtoApply.ResistanceGrowth)
-            {
-                UnitCharacteristics.stats.Resistance += 1;
-                lvlupresult.Add(1);
-            }
-            else
-            {
-                lvlupresult.Add(0);
-            }
-
-            if (levelValues.SpeedRandomValue <= GrowthtoApply.SpeedGrowth)
-            {
-                UnitCharacteristics.stats.Speed += 1;
-                lvlupresult.Add(1);
-            }
-            else
-            {
-                lvlupresult.Add(0);
-            }
-
-
-            if (levelValues.DexterityRandomValue <= GrowthtoApply.DexterityGrowth)
-            {
-                UnitCharacteristics.stats.Dexterity += 1;
-                lvlupresult.Add(1);
-            }
-            else
-            {
-                lvlupresult.Add(0);
-            }
+            float Dexteritygain = GetLevelUpStatsChange(GrowthtoApply.DexterityGrowth, levelValues.DexterityRandomValue);
+            UnitCharacteristics.stats.Speed += Dexteritygain;
+            lvlupresult.Add((int)Dexteritygain);
         }
 
         string levelupstring = UnitCharacteristics.name+"  levelup : ";
@@ -1519,8 +1505,39 @@ public class UnitScript : MonoBehaviour
             levelupstring += level+" ";
         }
 
+        Debug.Log(levelupstring);
+
         calculateStats();
         return lvlupresult;
+    }
+
+    public float GetLevelUpStatsChange(float growth, int randomvalue)
+    {
+        float gain = 0f;
+        if(growth > 100)
+        {
+            gain ++;
+
+            if(randomvalue <= growth -100f)
+            {
+                gain ++;
+            }
+        }
+        else if(growth <0)
+        {
+            if(randomvalue <= Mathf.Abs( growth))
+            {
+                gain--;
+            }
+        }
+        else
+        {
+            if (randomvalue <= growth)
+            {
+                gain++;
+            }
+        }
+        return gain;
     }
 
     public equipment GetFirstWeapon()
