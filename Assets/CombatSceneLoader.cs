@@ -68,7 +68,11 @@ public class CombatSceneLoader : MonoBehaviour
         int expgained,
         List<int> levelupbonuses,
         Character attackerbeforecombat,
-        Character defenderbeforecombat)
+        Character defenderbeforecombat,
+        int attackerdamage,
+        int defenderdamage,
+        int attackercrits,
+        int defendercrits)
     {
         if (!combatLoaded)
         {
@@ -88,7 +92,7 @@ public class CombatSceneLoader : MonoBehaviour
                 {
                     combatManager.SetupScene(attacker, defender, attackerWeapon, defenderWeapon,
                         doubleAttacker, tripleHit, healing, attackerDodged, defenderAttacks,
-                        defenderDodged, attackerDied, defenderDied, expgained, levelupbonuses, attackerbeforecombat, defenderbeforecombat);
+                        defenderDodged, attackerDied, defenderDied, expgained, levelupbonuses, attackerbeforecombat, defenderbeforecombat, attackerdamage, defenderdamage, attackercrits, defendercrits);
                 }
             }));
     }

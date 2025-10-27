@@ -1083,7 +1083,7 @@ public class AttackTurnScript : MonoBehaviour
                 Debug.Log("attacker damage : "+attackerdamage);
                 Debug.Log("defender damage : " + defenderdamage);
 
-                FindAnyObjectByType<CombatSceneLoader>().ActivateCombatScene(CharAttacker, Chartarget, Attacker.GetComponent<UnitScript>().GetFirstWeapon(), target.GetComponent<UnitScript>().GetFirstWeapon(), Chardoubleattacker, triple, ishealing, attackerdodged, defenderattacks, defenderdodged, attackerdied, defenderdied, expearned, levelbonus, Attackercopy,Targetcopy);
+                FindAnyObjectByType<CombatSceneLoader>().ActivateCombatScene(CharAttacker, Chartarget, Attacker.GetComponent<UnitScript>().GetFirstWeapon(), target.GetComponent<UnitScript>().GetFirstWeapon(), Chardoubleattacker, triple, ishealing, attackerdodged, defenderattacks, defenderdodged, attackerdied, defenderdied, expearned, levelbonus, Attackercopy,Targetcopy,attackerdamage, defenderdamage, attackercrits, defendercrits);
 
             }
         }

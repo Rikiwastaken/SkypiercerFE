@@ -4,12 +4,15 @@ using static UnitScript;
 using System.Collections.Generic;
 using UnityEngineInternal;
 using UnityEngine.SceneManagement;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class CombaSceneManager : MonoBehaviour
 {
 
     public GameObject attackerSceneGO;
     public GameObject defenderSceneGO;
+    public ExpBarScript ExpBarScript;
+    public AnimationCombatTextScript AnimText;
 
     [Serializable]
     public class CombatData
@@ -23,6 +26,10 @@ public class CombaSceneManager : MonoBehaviour
         public Character doubleAttacker;
         public bool triplehit;
         public bool healing;
+        public int attackerdamage;
+        public int defenderdamage;
+        public int attackercrits;
+        public int defendercrits;
         public bool attackerdodged;
         public bool defenderdodged;
         public bool attackerdied;
@@ -74,6 +81,14 @@ public class CombaSceneManager : MonoBehaviour
 
     public float attackbufferduration;
 
+    public bool waittingforexp;
+
+    public bool expdistributed;
+
+    private bool firsttextcreated;
+
+    private bool secondtextcreated;
+
     [Header("Camera Positions")]
 
     public Camera cam;
@@ -92,16 +107,13 @@ public class CombaSceneManager : MonoBehaviour
 
     public Transform MiddleTransform;
 
-
-    private bool attackerranged;
-
     private Character onetoreceiveexp;
 
-    public ExpBarScript ExpBarScript;
+    [Header("Combat Text")]
 
-    public bool waittingforexp;
 
-    public bool expdistributed;
+    public Transform TextCanvas;
+
 
     private void Start()
     {
@@ -113,7 +125,10 @@ public class CombaSceneManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(ActiveCombatData != null)
+
+        TextCanvas.LookAt(cam.transform.position);
+
+        if (ActiveCombatData != null)
         {
             if(timebeforestartcounter>0)
             {
@@ -134,7 +149,6 @@ public class CombaSceneManager : MonoBehaviour
         {
             if(ActiveCombatData.attacker.telekinesisactivated || ActiveCombatData.attackerWeapon.type.ToLower()=="staff" || ActiveCombatData.attackerWeapon.type.ToLower() == "bow")
             {
-                attackerranged = true;
                 Attackermoveintoposition = false;
                 attackerLaunchAttack = true;
 
@@ -189,14 +203,7 @@ public class CombaSceneManager : MonoBehaviour
         }
         else if(attackerLaunchAttack)
         {
-            if(!attackerranged)
-            {
-                //cam.transform.parent = null;
-                //float newx = (ActiveCombatData.attackerAnimator.transform.position.x + ActiveCombatData.defenderAnimator.transform.position.x) / 2f - 1.2f;
-                //cameraMidCombatPos = new Vector3(newx, cameraMidCombatPos.y, cameraMidCombatPos.z);
-                //cam.transform.position = Vector3.Lerp(cam.transform.position, cameraMidCombatPos, Time.fixedDeltaTime * CamMoveSpeed);
-                //cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, Quaternion.Euler(cameraMidCombatRot), Time.fixedDeltaTime * CamRotSpeed);
-            }
+
 
             MiddleTransform.position = (ActiveCombatData.attackerAnimator.transform.position + ActiveCombatData.defenderAnimator.transform.position) / 2f;
 
@@ -222,7 +229,13 @@ public class CombaSceneManager : MonoBehaviour
         }
         else if(DefenderResponse)
         {
-            if(!defenderSceneGO.GetComponent<UnitScript>().isinattackresponseanimation(ActiveCombatData.defenderAnimator))
+            if(!firsttextcreated)
+            {
+                CreateText(true);
+                firsttextcreated = true;
+            }
+            
+            if (!defenderSceneGO.GetComponent<UnitScript>().isinattackresponseanimation(ActiveCombatData.defenderAnimator))
             {
                 DefenderResponse = false;
                 if (ActiveCombatData.defenderattacks)
@@ -350,6 +363,12 @@ public class CombaSceneManager : MonoBehaviour
         }
         else if(AttackerResponse)
         {
+            if(!secondtextcreated)
+            {
+                CreateText(false);
+                secondtextcreated = true;
+            }
+            
             if (!attackerSceneGO.GetComponent<UnitScript>().isinattackresponseanimation(ActiveCombatData.attackerAnimator))
             {
                 AttackerResponse = false;
@@ -417,7 +436,90 @@ public class CombaSceneManager : MonoBehaviour
         return onetoreceiveexp;
     }
 
-    public void SetupScene(Character attacker, Character defender, equipment attackerweapon, equipment defenderweapon, Character doubleattacker, bool triplehit, bool healing, bool attackerdodged, bool defenderattacks, bool defenderdodged, bool attackerdied, bool defenderdied, int expgained, List<int> levelupbonuses, Character attackerbeforecombat, Character defenderbeforecombat)
+    private void CreateText(bool attackerturn)
+    {
+        if(attackerturn)
+        {
+            if(ActiveCombatData.healing)
+            {
+                AnimText.InitializeText("1 hit\n" + ActiveCombatData.attackerdamage, Color.green);
+            }
+            else
+            {
+                string attacktext = "";
+
+                Color colortouse = Color.white;
+
+                if(ActiveCombatData.defenderdodged)
+                {
+                    attacktext = "Miss";
+                }
+                else
+                {
+                    if (ActiveCombatData.doubleAttacker == ActiveCombatData.attacker)
+                    {
+                        if (ActiveCombatData.triplehit)
+                        {
+                            attacktext = "3 hits\n";
+                        }
+                        else
+                        {
+                            attacktext = "2 hits\n";
+                        }
+                    }
+                    else
+                    {
+                        attacktext = "1 hit\n";
+                    }
+                    if(ActiveCombatData.attackercrits>0)
+                    {
+                        attacktext += ActiveCombatData.attackercrits + " crits !\n";
+                        colortouse = Color.yellow;
+                    }
+                    attacktext += ActiveCombatData.attackerdamage;
+                }
+                AnimText.InitializeText(attacktext, colortouse);
+            }
+        }
+        else
+        {
+            string attacktext = "";
+
+            Color colortouse = Color.white;
+
+            if (ActiveCombatData.attackerdodged)
+            {
+                attacktext = "Miss";
+            }
+            else
+            {
+                if (ActiveCombatData.doubleAttacker == ActiveCombatData.defender)
+                {
+                    if (ActiveCombatData.triplehit)
+                    {
+                        attacktext = "3 hits\n";
+                    }
+                    else
+                    {
+                        attacktext = "2 hits\n";
+                    }
+                }
+                else
+                {
+                    attacktext = "1 hit\n";
+                }
+                if (ActiveCombatData.defendercrits > 0)
+                {
+                    attacktext += ActiveCombatData.defendercrits + " crits !\n";
+                    colortouse = Color.yellow;
+                }
+                attacktext += ActiveCombatData.defenderdamage;
+            }
+            AnimText.InitializeText(attacktext, colortouse);
+        }
+    }
+
+    public void SetupScene(Character attacker, Character defender, equipment attackerweapon, equipment defenderweapon, Character doubleattacker, bool triplehit, bool healing, bool attackerdodged, bool defenderattacks, bool defenderdodged, bool attackerdied, bool defenderdied, int expgained, List<int> levelupbonuses, Character attackerbeforecombat, Character defenderbeforecombat, int attackerdamage, int defenderdamage, int attackercrits, int defendercrits)
     {
         attackerSceneGO.GetComponent<UnitScript>().UnitCharacteristics = attacker;
         attackerSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(attacker.modelID);
@@ -441,6 +543,10 @@ public class CombaSceneManager : MonoBehaviour
         newdata.triplehit = triplehit;
         newdata.healing = healing;
         newdata.defenderattacks = defenderattacks;
+        newdata.attackerdamage = attackerdamage;
+        newdata.defenderdamage = defenderdamage;
+        newdata.attackercrits = attackercrits;
+        newdata.defendercrits = defendercrits;
 
 
 
@@ -465,13 +571,14 @@ public class CombaSceneManager : MonoBehaviour
 
         MiddleTransform.position = new Vector3((ActiveCombatData.attackerAnimator.transform.position.x + ActiveCombatData.defenderAnimator.transform.position.x) / 2f, 0f, 0f);
 
-        attackerranged = false;
         ExpBarScript.gameObject.SetActive(false);
     }
 
 
     private void ReturnToMain()
     {
+        waittingforexp = false;
+        expdistributed = false;
         FindAnyObjectByType<CombatSceneLoader>().ActivateMainScene();
     }
 
@@ -491,6 +598,8 @@ public class CombaSceneManager : MonoBehaviour
         timebetweenattackscounter = (int)(timebetweenattacks / Time.fixedDeltaTime);
 
         waittingforexp = false;
+        firsttextcreated = false;
+        secondtextcreated= false;
     }
 
 
