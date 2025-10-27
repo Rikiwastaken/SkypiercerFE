@@ -2029,7 +2029,7 @@ public class ActionsMenu : MonoBehaviour
         {
             finaldamagefloat = finaldamagefloat * (1f + (float)UnitSkillBonus.PhysDamage / 100f);
         }
-        if(target!=null)
+        if(target!=null && TargetSkillBonus!=null)
         {
             finaldamagefloat = finaldamagefloat / (1f + (float)TargetSkillBonus.DamageReduction / 100f);
         }
@@ -2048,7 +2048,7 @@ public class ActionsMenu : MonoBehaviour
 
         int finaldamage = (int)finaldamagefloat + UnitSkillBonus.FixedDamageBonus;
 
-        if(target!=null)
+        if(target!=null && TargetSkillBonus != null)
         {
             finaldamage = finaldamage - TargetSkillBonus.FixedDamageReduction;
         }

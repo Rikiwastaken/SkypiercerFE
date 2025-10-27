@@ -13655,6 +13655,7 @@ MonoBehaviour:
     skilltoremovefrominventory: -1
     beginningofturn: -1
   foresightScript: {fileID: 4945345412159395524}
+  attackanimationhappening: 0
 --- !u!114 &5264566689360548286
 MonoBehaviour:
   m_ObjectHideFlags: 0

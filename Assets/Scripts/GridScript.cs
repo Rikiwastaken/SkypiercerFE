@@ -438,8 +438,13 @@ public class GridScript : MonoBehaviour
     {
         allunits = new List<Character>();
         allunitGOs = new List<GameObject>();
-        foreach (UnitScript character in FindObjectsByType<UnitScript>(FindObjectsSortMode.None))
+
+        Transform unitholder = GameObject.Find("Characters").transform;
+
+
+        for(int i = 0; i < unitholder.childCount; i++)
         {
+            UnitScript character = unitholder.GetChild(i).GetComponent<UnitScript>();
             allunits.Add(character.UnitCharacteristics);
             allunitGOs.Add(character.gameObject);
         }

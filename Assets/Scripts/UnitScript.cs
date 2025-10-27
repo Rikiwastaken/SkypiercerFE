@@ -251,6 +251,7 @@ public class UnitScript : MonoBehaviour
             this.enabled = false;
             transform.GetChild(0).gameObject.SetActive(false);
             GetComponent<BattleCharacterScript>().enabled = true;
+            return;
         }
 
 
@@ -333,6 +334,7 @@ public class UnitScript : MonoBehaviour
 
         }
         animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
+        animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
         if (armature == null)
         {
             armature = animator.transform;
@@ -797,91 +799,236 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    public bool isinattackanimation()
+    public bool isinattackanimation(Animator otheranimator = null)
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animator.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
+        Animator animatortouse = otheranimator;
+        if(otheranimator != null)
         {
-            return false;
-        }
-        return true;
-    }
-
-    public bool isinrunanimation()
-    {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animator.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public void PlayAttackAnimation(bool doubleattack = false, bool tripleattack = false, bool healing = false)
-    {
-        if (tripleattack)
-        {
-            animator.SetBool("Double", false);
-            animator.SetBool("Triple", true);
-        }
-        else if (doubleattack)
-        {
-            animator.SetBool("Double", true);
-            animator.SetBool("Triple", false);
+            animatortouse = otheranimator;
         }
         else
         {
-            animator.SetBool("Double", false);
-            animator.SetBool("Triple", false);
+            if (animator == null)
+            {
+                foreach (ModelInfo modelInfo in ModelList)
+                {
+                    if (modelInfo.active)
+                    {
+                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
+                        rotationadjust = modelInfo.rotationadjust;
+                    }
+                }
+            }
+            animatortouse = animator;
         }
-        animator.SetTrigger("Attack");
+
+        
+        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("PluvialIdle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public bool AttackAnimationAlmostdone(Animator otheranimator = null, float percentage=1)
+    {
+        Animator animatortouse = otheranimator;
+        if (otheranimator != null)
+        {
+            animatortouse = otheranimator;
+        }
+        else
+        {
+            if (animator == null)
+            {
+                foreach (ModelInfo modelInfo in ModelList)
+                {
+                    if (modelInfo.active)
+                    {
+                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
+                        rotationadjust = modelInfo.rotationadjust;
+                    }
+                }
+            }
+            animatortouse = animator;
+        }
+
+
+        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("PluvialIdle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
+        {
+            return false;
+        }
+        else
+        {
+            AnimatorStateInfo stateInfo = animatortouse.GetCurrentAnimatorStateInfo(0);
+            float progress = stateInfo.normalizedTime % 1;
+
+            if (progress >= percentage)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }     
+    }
+
+    public bool isinrunanimation(Animator otheranimator = null)
+    {
+        Animator animatortouse = otheranimator;
+        if (otheranimator != null)
+        {
+            animatortouse = otheranimator;
+        }
+        else
+        {
+            if (animator == null)
+            {
+                foreach (ModelInfo modelInfo in ModelList)
+                {
+                    if (modelInfo.active)
+                    {
+                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
+                        rotationadjust = modelInfo.rotationadjust;
+                    }
+                }
+            }
+            animatortouse = animator;
+        }
+        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool isinattackresponseanimation(Animator otheranimator = null)
+    {
+        Animator animatortouse = otheranimator;
+        if (otheranimator != null)
+        {
+            animatortouse = otheranimator;
+        }
+        else
+        {
+            if (animator == null)
+            {
+                foreach (ModelInfo modelInfo in ModelList)
+                {
+                    if (modelInfo.active)
+                    {
+                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
+                        rotationadjust = modelInfo.rotationadjust;
+                    }
+                }
+            }
+            animatortouse = animator;
+        }
+        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("TakeDamage") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Dodge"))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void PlayAttackAnimation(bool doubleattack = false, bool tripleattack = false, bool healing = false, Animator otheranimator = null)
+    {
+
+        Animator animatortouse = otheranimator;
+        if (otheranimator != null)
+        {
+            animatortouse = otheranimator;
+        }
+        else
+        {
+            if (animator == null)
+            {
+                foreach (ModelInfo modelInfo in ModelList)
+                {
+                    if (modelInfo.active)
+                    {
+                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
+                        rotationadjust = modelInfo.rotationadjust;
+                    }
+                }
+            }
+            animatortouse = animator;
+        }
+        if (tripleattack)
+        {
+            animatortouse.SetBool("Double", false);
+            animatortouse.SetBool("Triple", true);
+        }
+        else if (doubleattack)
+        {
+            animatortouse.SetBool("Double", true);
+            animatortouse.SetBool("Triple", false);
+        }
+        else
+        {
+            animatortouse.SetBool("Double", false);
+            animatortouse.SetBool("Triple", false);
+        }
+        animatortouse.SetTrigger("Attack");
 
         equipment weapon = GetFirstWeapon();
 
-        animator.SetBool("Slash", false);
-        animator.SetBool("Stab", false);
-        animator.SetBool("Punch", false);
-        animator.SetBool("GreatSword", false);
-        animator.SetBool("Heal", false);
-        animator.SetBool("Bow", false);
+        animatortouse.SetBool("Slash", false);
+        animatortouse.SetBool("Stab", false);
+        animatortouse.SetBool("Punch", false);
+        animatortouse.SetBool("GreatSword", false);
+        animatortouse.SetBool("Heal", false);
+        animatortouse.SetBool("Bow", false);
 
-        switch (weapon.type.ToLower())
+        if(UnitCharacteristics.telekinesisactivated)
         {
-            case "sword":
-                animator.SetBool("Slash", true);
-                break;
-            case "spear":
-                animator.SetBool("Stab", true);
-                break;
-            case "greatsword":
-                animator.SetBool("GreatSword", true);
-                break;
-            case "scythe":
-                animator.SetBool("GreatSword", true);
-                break;
-            case "shield":
-                animator.SetBool("Punch", true);
-                break;
-            case "bow":
-                animator.SetBool("Bow", true);
-                break;
-            case "staff":
-                if (healing)
-                {
-                    animator.SetBool("Heal", true);
-                }
-                else
-                {
-                    animator.SetBool("Stab", true);
-                }
-                break;
-            case "none":
-                animator.SetBool("Punch", true);
-                break;
-            default:
-                animator.SetBool("Slash", true);
-                break;
+            animatortouse.SetBool("Heal", true);
+        }
+        else
+        {
+            switch (weapon.type.ToLower())
+            {
+                case "sword":
+                    animatortouse.SetBool("Slash", true);
+                    break;
+                case "spear":
+                    animatortouse.SetBool("Stab", true);
+                    break;
+                case "greatsword":
+                    animatortouse.SetBool("GreatSword", true);
+                    break;
+                case "scythe":
+                    animatortouse.SetBool("GreatSword", true);
+                    break;
+                case "shield":
+                    animatortouse.SetBool("Punch", true);
+                    break;
+                case "bow":
+                    animatortouse.SetBool("Bow", true);
+                    break;
+                case "staff":
+                    if (healing)
+                    {
+                        animatortouse.SetBool("Heal", true);
+                    }
+                    else
+                    {
+                        animatortouse.SetBool("Stab", true);
+                    }
+                    break;
+                case "none":
+                    animatortouse.SetBool("Punch", true);
+                    break;
+                default:
+                    animatortouse.SetBool("Slash", true);
+                    break;
+            }
         }
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("run"))
+            
+
+        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("run"))
         {
             return;
         }
@@ -1505,7 +1652,7 @@ public class UnitScript : MonoBehaviour
             levelupstring += level+" ";
         }
 
-        Debug.Log(levelupstring);
+        //Debug.Log(levelupstring);
 
         calculateStats();
         return lvlupresult;

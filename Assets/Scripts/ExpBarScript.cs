@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnitScript;
 
@@ -18,6 +19,8 @@ public class ExpBarScript : MonoBehaviour
     public bool setupdone;
 
     private AttackTurnScript AttackTurnScript;
+
+    private CombaSceneManager CombatSceneManager;
 
     public int filledupbardelaycounter;
     public float filledupbardelay;
@@ -36,52 +39,105 @@ public class ExpBarScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(AttackTurnScript == null)
-        {
-            AttackTurnScript = FindAnyObjectByType<AttackTurnScript>();
-        }
 
-        if(AttackTurnScript.waittingforexp)
+        if(SceneManager.GetActiveScene().name == "BattleScene")
         {
-            if(filledupbardelaycounter==0)
+            if (CombatSceneManager == null)
             {
-                currentnumber += Speedpersecond * Time.fixedDeltaTime;
-                if(currentnumber >99)
-                {
-                    Expbar.fillAmount = (currentnumber-100f) / 100f;
-                    SetupLevelUpText();
+                CombatSceneManager = FindAnyObjectByType<CombaSceneManager>();
+            }
 
+            if (CombatSceneManager.waittingforexp)
+            {
+                if (filledupbardelaycounter == 0)
+                {
+                    currentnumber += Speedpersecond * Time.fixedDeltaTime;
+                    if (currentnumber > 99)
+                    {
+                        Expbar.fillAmount = (currentnumber - 100f) / 100f;
+                        SetupLevelUpText();
+
+                    }
+                    else
+                    {
+                        Expbar.fillAmount = currentnumber / 100f;
+
+                    }
+
+                    if (currentnumber >= targetnumber)
+                    {
+                        filledupbardelaycounter = (int)(filledupbardelay / Time.fixedDeltaTime);
+                        if (currentnumber > 99)
+                        {
+                            filledupbardelaycounter += (int)(2f * filledupbardelay / Time.fixedDeltaTime);
+                        }
+
+                    }
                 }
                 else
                 {
-                    Expbar.fillAmount = currentnumber / 100f;
-
-                }
-
-                if (currentnumber >= targetnumber)
-                {
-                    filledupbardelaycounter = (int)(filledupbardelay / Time.fixedDeltaTime);
-                    if (currentnumber>99)
+                    filledupbardelaycounter--;
+                    if (filledupbardelaycounter <= 0)
                     {
-                        filledupbardelaycounter += (int)(2f*filledupbardelay / Time.fixedDeltaTime);
+                        CombatSceneManager.expdistributed = true;
+                        setupdone = false;
+                        LevelUpText.transform.parent.gameObject.SetActive(false);
                     }
-                    
                 }
+
             }
-            else
+        }
+        else
+        {
+            if (AttackTurnScript == null)
             {
-                filledupbardelaycounter--;
-                if( filledupbardelaycounter <= 0 )
-                {
-                    AttackTurnScript.expdistributed = true;
-                    setupdone = false;
-                    LevelUpText.transform.parent.gameObject.SetActive(false);
-                }
+                AttackTurnScript = FindAnyObjectByType<AttackTurnScript>();
             }
-            
+
+            if (AttackTurnScript.waittingforexp)
+            {
+                if (filledupbardelaycounter == 0)
+                {
+                    currentnumber += Speedpersecond * Time.fixedDeltaTime;
+                    if (currentnumber > 99)
+                    {
+                        Expbar.fillAmount = (currentnumber - 100f) / 100f;
+                        SetupLevelUpText();
+
+                    }
+                    else
+                    {
+                        Expbar.fillAmount = currentnumber / 100f;
+
+                    }
+
+                    if (currentnumber >= targetnumber)
+                    {
+                        filledupbardelaycounter = (int)(filledupbardelay / Time.fixedDeltaTime);
+                        if (currentnumber > 99)
+                        {
+                            filledupbardelaycounter += (int)(2f * filledupbardelay / Time.fixedDeltaTime);
+                        }
+
+                    }
+                }
+                else
+                {
+                    filledupbardelaycounter--;
+                    if (filledupbardelaycounter <= 0)
+                    {
+                        AttackTurnScript.expdistributed = true;
+                        setupdone = false;
+                        LevelUpText.transform.parent.gameObject.SetActive(false);
+                    }
+                }
+
+            }
+
+
         }
 
-        
+
 
     }
 

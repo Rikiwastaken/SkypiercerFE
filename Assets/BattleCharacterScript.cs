@@ -1,16 +1,39 @@
 using UnityEngine;
+using static UnitScript;
 
 public class BattleCharacterScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void OnEnable()
     {
-        
+        foreach(ModelInfo modelinfo in GetComponent<UnitScript>().ModelList)
+        {
+            modelinfo.wholeModel.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ActivateModel(int ID)
     {
-        
+        foreach (ModelInfo modelinfo in GetComponent<UnitScript>().ModelList)
+        {
+            if(modelinfo.ID == ID)
+            {
+                if(!modelinfo.wholeModel.activeSelf)
+                {
+                    modelinfo.wholeModel.SetActive(true);
+                }
+                
+            }
+            else
+            {
+                if (modelinfo.wholeModel.activeSelf)
+                {
+                    modelinfo.wholeModel.SetActive(false);
+                }
+            }
+
+                
+        }
     }
+
 }

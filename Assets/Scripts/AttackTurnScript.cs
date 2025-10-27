@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static DataScript;
 using static UnitScript;
+using static UnityEngine.GraphicsBuffer;
 public class AttackTurnScript : MonoBehaviour
 {
 
@@ -63,6 +66,13 @@ public class AttackTurnScript : MonoBehaviour
 
     public ForesightScript foresightScript;
 
+    private SaveManager saveManager;
+
+    public bool attackanimationhappening;
+
+    private GameObject previousattacker;
+    private GameObject previoustarget;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -71,11 +81,19 @@ public class AttackTurnScript : MonoBehaviour
         gridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<cameraScript>();
         mapEventManager = GetComponent<MapEventManager>();
+        saveManager = FindAnyObjectByType<SaveManager>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if(previousattacker != null)
+        {
+            AttackWithAnimationEndOfFight(previousattacker,previoustarget);
+            previousattacker = null;
+            previoustarget = null;
+        }
 
         if (phaseTextScript.moveText)
         {
@@ -169,7 +187,15 @@ public class AttackTurnScript : MonoBehaviour
             }
             else
             {
-                ManageAttack(CurrentEnemy);
+                if(saveManager.Options.BattleAnimations)
+                {
+                    ManageAttackWithAnimation(CurrentEnemy);
+                }
+                else
+                {
+                    ManageAttackWithoutAnimation(CurrentEnemy);
+                }
+                    
             }
 
         }
@@ -187,7 +213,14 @@ public class AttackTurnScript : MonoBehaviour
             {
                 if (ActionsMenu.CommandUsedID == 0)
                 {
-                    ManageAttack(CurrentPlayable);
+                    if (saveManager.Options.BattleAnimations)
+                    {
+                        ManageAttackWithAnimation(CurrentPlayable);
+                    }
+                    else
+                    {
+                        ManageAttackWithoutAnimation(CurrentPlayable);
+                    }
                 }
                 else
                 {
@@ -266,7 +299,14 @@ public class AttackTurnScript : MonoBehaviour
             }
             else
             {
-                ManageAttack(CurrentOther);
+                if (saveManager.Options.BattleAnimations)
+                {
+                    ManageAttackWithAnimation(CurrentOther);
+                }
+                else
+                {
+                    ManageAttackWithoutAnimation(CurrentOther);
+                }
             }
         }
 
@@ -531,7 +571,7 @@ public class AttackTurnScript : MonoBehaviour
 
     }
 
-    private void ManageAttack(GameObject Attacker)
+    private void ManageAttackWithoutAnimation(GameObject Attacker)
     {
         triggercleanup = true;
         Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
@@ -886,6 +926,166 @@ public class AttackTurnScript : MonoBehaviour
 
             }
             gridScript.ResetAllSelections();
+        }
+    }
+
+    public void AttackWithAnimationEndOfFight(GameObject Attacker, GameObject Target)
+    {
+
+        if (Target != null)
+        {
+            EndOfCombatTrigger(Attacker, Target);
+        }
+        else
+        {
+            EndOfCombatTrigger(Attacker);
+        }
+
+        if(Attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable")
+        {
+            ActionsMenu.FinalizeAttack();
+        }
+
+    }
+
+
+    public void ManageAttackWithAnimation(GameObject Attacker)
+    {
+        if(!attackanimationhappening)
+        {
+            attackanimationhappening = true;
+            Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
+
+            Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
+
+            triggercleanup = true;
+
+            GameObject target = null;
+            if (CharAttacker.affiliation != "playable")
+            {
+                target = CalculateBestTargetForOffensiveUnits(Attacker, CharAttacker.attacksfriends);
+            }
+            else
+            {
+                target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
+            }
+
+            if (target != null)
+            {
+
+                previousattacker = Attacker;
+                previoustarget = target;
+
+                Character Chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+
+                Character Targetcopy = target.GetComponent<UnitScript>().CreateCopy();
+
+                CurrentAction = new ForesightScript.Action();
+                foresightScript.actions.Add(CurrentAction);
+                CurrentAction.actiontype = 0;
+                CurrentAction.Unit = Attacker.GetComponent<UnitScript>();
+                CurrentAction.previousPosition = Attacker.GetComponent<UnitScript>().previousposition;
+                CurrentAction.ModifiedCharacters = new List<Character>() { Attacker.GetComponent<UnitScript>().CreateCopy() };
+                CurrentAction.AttackData = new ForesightScript.AttackData();
+                CurrentAction.AttackData.previousattackerhitindex = Attacker.GetComponent<RandomScript>().hitvaluesindex;
+                CurrentAction.AttackData.previousattackercritindex = Attacker.GetComponent<RandomScript>().CritValuesindex;
+                CurrentAction.AttackData.previousattackerlvlupindex = Attacker.GetComponent<RandomScript>().levelvaluesindex;
+
+                CurrentAction.AttackData.defender = target.GetComponent<UnitScript>();
+                CurrentAction.ModifiedCharacters.Add(target.GetComponent<UnitScript>().CreateCopy());
+                CurrentAction.AttackData.previousdefenderhitindex = target.GetComponent<RandomScript>().hitvaluesindex;
+                CurrentAction.AttackData.previousdefendercritindex = target.GetComponent<RandomScript>().CritValuesindex;
+                CurrentAction.AttackData.previousdefenderlvlupindex = target.GetComponent<RandomScript>().levelvaluesindex;
+                foresightScript.actions.Add(CurrentAction);
+
+                (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
+                bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));
+                if (ishealing)
+                {
+                    CurrentAction.actiontype = 1;
+                }
+
+                (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus) = ActionsMenu.ApplyDamage(Attacker, target, false);
+
+                bool defenderdodged = false;
+                if (attackerhits == 0)
+                {
+                    defenderdodged = true;
+                }
+
+                bool defenderattacks = true;
+
+
+                if ((target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && CharAttacker.affiliation == "playable" && CharAttacker.currentHP > 0) || (CharAttacker.currentHP <= 0 && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP > 0))
+                {
+                    defenderattacks = false;
+                }
+                if ((CharAttacker.affiliation == "playable" && CharAttacker.currentHP <= 0) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0))
+                {
+                    defenderattacks = false;
+                }
+                if (ishealing)
+                {
+                    defenderattacks = false;
+                }
+                if (!ActionsMenu.CheckifInRange(Attacker, target) && !target.GetComponent<UnitScript>().GetSkill(38)) // counterattack
+                {
+                    defenderattacks = false;
+                }
+
+                bool defenderdied = false;
+                if (Chartarget.currentHP <= 0)
+                {
+                    defenderdied = true;
+                }
+                bool attackerdodged = false;
+                int defenderhits = 0;
+                int defenderdamage = 0;
+                int defendercrits = 0;
+                int defenderexp = 0;
+                List<int> defenderlevelbonus = new List<int>();
+                if (defenderattacks)
+                {
+                    (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus) = ActionsMenu.ApplyDamage(Attacker, target, true);
+                    if (defenderhits == 0)
+                    {
+                        attackerdodged = true;
+                    }
+                }
+
+                bool attackerdied = false;
+                if (CharAttacker.currentHP <= 0)
+                {
+                    attackerdied = true;
+                }
+                Character Chardoubleattacker = null;
+                if (doubleattacker != null)
+                {
+                    Chardoubleattacker = doubleattacker.GetComponent<UnitScript>().UnitCharacteristics;
+                }
+
+                int expearned = 0;
+
+                List<int> levelbonus = new List<int>();
+
+                if (attackerexp!=0)
+                {
+                    expearned = attackerexp;
+                    levelbonus = attackerlevelbonus;
+                }
+                else if (defenderexp!=0)
+                {
+                    expearned = defenderexp;
+                    levelbonus = defenderlevelbonus;
+                }
+
+
+                Debug.Log("attacker damage : "+attackerdamage);
+                Debug.Log("defender damage : " + defenderdamage);
+
+                FindAnyObjectByType<CombatSceneLoader>().ActivateCombatScene(CharAttacker, Chartarget, Attacker.GetComponent<UnitScript>().GetFirstWeapon(), target.GetComponent<UnitScript>().GetFirstWeapon(), Chardoubleattacker, triple, ishealing, attackerdodged, defenderattacks, defenderdodged, attackerdied, defenderdied, expearned, levelbonus, Attackercopy,Targetcopy);
+
+            }
         }
     }
 
