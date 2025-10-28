@@ -25,12 +25,14 @@ public class SceneLoader : MonoBehaviour
                 SceneManager.LoadScene(SceneToToad);
                 GetComponent<CombatSceneLoader>().MainSceneName = SceneToToad;
                 GetComponent<CombatSceneLoader>().LoadCombatScene();
+                MusicManager.instance.InitializeMusics(SceneToToad);
                 SceneToToad = "";
                 LoadingImage.gameObject.SetActive(true);
                 Color newcolor = LoadingImage.color;
                 newcolor.a = 1;
                 LoadingImage.color = newcolor;
                 loadingtext.gameObject.SetActive(true);
+                
             }
            
         }

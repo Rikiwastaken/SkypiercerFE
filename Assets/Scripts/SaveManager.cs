@@ -30,8 +30,8 @@ public class SaveManager : MonoBehaviour
     public class OptionsClass
     {
         public string versionID;
-        public int musicvolume;
-        public int SEVolume;
+        public float musicvolume;
+        public float SEVolume;
         public bool Fullscreen;
         public bool BattleAnimations;
     }
@@ -135,9 +135,10 @@ public class SaveManager : MonoBehaviour
         {
             Debug.Log("creating new options data");
             Options = new OptionsClass();
-            Options.musicvolume = 100;
-            Options.SEVolume = 100;
+            Options.musicvolume = 1.000001f;
+            Options.SEVolume = 1.000001f;
             Options.Fullscreen = Screen.fullScreen;
+            Options.BattleAnimations = true;
         }
     }
 
@@ -164,6 +165,12 @@ public class SaveManager : MonoBehaviour
         catch (System.Exception e)
         {
             Debug.LogError($"Error when saving options : {e.Message}");
+        }
+
+        if(MusicManager.instance != null)
+        {
+            MusicManager.instance.ChangeVolume();
+
         }
 
     }

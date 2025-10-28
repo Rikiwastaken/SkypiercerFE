@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 
 public class MusicManager : MonoBehaviour
@@ -9,8 +13,9 @@ public class MusicManager : MonoBehaviour
 
     public float maxvolume;
 
+    public AudioMixer mixer;
 
-    public cameraScript cameraScript;
+    private cameraScript cameraScript;
 
     private TurnManger TurnManager;
     
@@ -18,35 +23,114 @@ public class MusicManager : MonoBehaviour
 
     private float beforecombatmusicvol;
 
+    public static MusicManager instance;
+
+    [Serializable]
+    public class MapBattleMusic
+    {
+        public AudioClip BattleMusic;
+        public AudioClip MapMusic;
+        public AudioClip PrepMusic;
+        public List<int> Chapters;
+    }
+
+    public List<MapBattleMusic> MusicList;
+
+    private bool PlayPrepMusic;
+
+    private bool PrepFinished;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+
     private void Start()
     {
         beforecombatmusicvol = BeforeCombat.volume;
         SaveManager = FindAnyObjectByType<SaveManager>();
-        float volumemult = (float)SaveManager.Options.musicvolume / 100f;
+        ChangeVolume();
 
         if (BeforeCombat.isPlaying)
         {
-            BeforeCombat.volume = beforecombatmusicvol * volumemult;
+            BeforeCombat.volume = beforecombatmusicvol;
+        }
+    }
+
+    public void ChangeVolume()
+    {
+        mixer.SetFloat("MusicVol",Mathf.Log10(SaveManager.Options.musicvolume)*20f);
+    }
+
+    public void InitializeMusics(string ChapterToLoad)
+    {
+        Debug.Log(ChapterToLoad);
+        int Chapter = -1;
+        if(ChapterToLoad.Contains("Chapter"))
+        {
+            ChapterToLoad = ChapterToLoad.Replace("Chapter", "");
+            Chapter = int.Parse(ChapterToLoad);
+        }
+        if(ChapterToLoad.Contains("Prologue") || ChapterToLoad.Contains("TestMap"))
+        {
+            Chapter = 0;
+        }
+        Debug.Log(Chapter);
+        incombat.Stop();
+        outcombat.Stop();
+        BeforeCombat.Stop();
+
+        if (Chapter!=-1)
+        {
+            
+            foreach (MapBattleMusic MusicClass in MusicList)
+            {
+                if (MusicClass.Chapters.Contains(Chapter))
+                {
+                    incombat.clip = MusicClass.BattleMusic;
+                    outcombat.clip = MusicClass.MapMusic;
+                    BeforeCombat.clip = MusicClass.PrepMusic;
+                    break;
+                }
+            }
+            PlayPrepMusic = true;
         }
     }
 
     private void FixedUpdate()
     {
-        if(TurnManager == null)
+        cameraScript = FindAnyObjectByType<cameraScript>();
+
+        TurnManager=FindAnyObjectByType<TurnManger>();
+
+        if(PlayPrepMusic)
         {
-            TurnManager=FindAnyObjectByType<TurnManger>();
+            PlayPrepMusic = false;
+            BeforeCombat.Play();
         }
 
-        float volumemult = (float)SaveManager.Options.musicvolume / 100f;
 
-        if(BeforeCombat.isPlaying)
+        if (BeforeCombat.isPlaying)
         {
-            BeforeCombat.volume = beforecombatmusicvol * volumemult;
+            BeforeCombat.volume = beforecombatmusicvol;
         }
 
+        if (TurnManager != null)
+        {
+            if (TurnManager.currentlyplaying != "" && !incombat.isPlaying)
+            {
+                PrepFinished = true;
+            }
+            else
+            {
+                PrepFinished = false;
+            }
+        }
 
-
-        if (TurnManager.currentlyplaying!="" && !incombat.isPlaying)
+        if (PrepFinished && !incombat.isPlaying)
         {
             BeforeCombat.Stop();
             double startTime = AudioSettings.dspTime + 0.1; // small delay to guarantee readiness
@@ -55,36 +139,41 @@ public class MusicManager : MonoBehaviour
             outcombat.PlayScheduled(startTime);
         }
 
-        if(cameraScript.incombat)
+        if(incombat.isPlaying)
         {
-            if(incombat.volume< maxvolume* volumemult)
+            if ((cameraScript!=null && cameraScript.incombat) || SceneManager.GetActiveScene().name == "BattleScene")
             {
-                incombat.volume +=Time.fixedDeltaTime;
+                if (incombat.volume < maxvolume)
+                {
+                    incombat.volume += Time.fixedDeltaTime;
+                }
+                else
+                {
+                    incombat.volume = maxvolume;
+                }
+                if (outcombat.volume > 0)
+                {
+                    outcombat.volume -= Time.fixedDeltaTime;
+                }
             }
             else
             {
-                incombat.volume = maxvolume* volumemult;
-            }
-            if (outcombat.volume>0)
-            {
-                outcombat.volume -= Time.fixedDeltaTime;
-            }
-        }
-        else
-        {
-            if (outcombat.volume < maxvolume* volumemult)
-            {
-                outcombat.volume += Time.fixedDeltaTime;
-            }
-            else
-            {
-                outcombat.volume = maxvolume * volumemult;
-            }
-            if (incombat.volume > 0f)
-            {
-                incombat.volume -= Time.fixedDeltaTime;
+                if (outcombat.volume < maxvolume)
+                {
+                    outcombat.volume += Time.fixedDeltaTime;
+                }
+                else
+                {
+                    outcombat.volume = maxvolume;
+                }
+                if (incombat.volume > 0f)
+                {
+                    incombat.volume -= Time.fixedDeltaTime;
+                }
             }
         }
+
+          
     }
 
 }

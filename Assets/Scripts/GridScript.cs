@@ -75,7 +75,7 @@ public class GridScript : MonoBehaviour
         }
     }
 
-    private void Awake()
+    void Awake()
     {
         if (instance == null)
         {

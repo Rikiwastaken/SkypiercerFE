@@ -58,6 +58,10 @@ public class ActionsMenu : MonoBehaviour
     }
     private void OnEnable()
     {
+        if (GridScript == null)
+        {
+            GridScript = GridScript.instance;
+        }
         BaseButtonColor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
         BaseButtonPressedColor = transform.GetChild(0).GetComponent<Button>().colors.pressedColor;
         target = GridScript.GetSelectedUnitGameObject();
@@ -84,6 +88,10 @@ public class ActionsMenu : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(GridScript==null)
+        {
+            GridScript = GridScript.instance;
+        }
         SelectionSafeGuard();
         FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
 

@@ -768,7 +768,11 @@ public class CombaSceneManager : MonoBehaviour
         waittingforexp = false;
         expdistributed = false;
         ExpBarScript.gameObject.SetActive(false);
-        FindAnyObjectByType<CombatSceneLoader>().ActivateMainScene();
+        if(FindAnyObjectByType<CombatSceneLoader>()!=null)
+        {
+            FindAnyObjectByType<CombatSceneLoader>().ActivateMainScene();
+        }
+        
     }
 
     private void ResetScene(Transform AttackerTransform, Transform DefenderTransform)
