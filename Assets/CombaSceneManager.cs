@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 using static UnitScript;
 using System.Collections.Generic;
-using UnityEngineInternal;
 using UnityEngine.SceneManagement;
-using UnityEngine.ProBuilder.MeshOperations;
+using UnityEngine.UI;
+using TMPro;
 
 public class CombaSceneManager : MonoBehaviour
 {
@@ -18,9 +18,11 @@ public class CombaSceneManager : MonoBehaviour
     public class CombatData
     {
         public Character attacker;
+        public Character attackerBeforeCombat;
         public equipment attackerWeapon;
         public Animator attackerAnimator;
         public Character defender;
+        public Character defenderBeforeCombat;
         public equipment defenderWeapon;
         public Animator defenderAnimator;
         public Character doubleAttacker;
@@ -113,11 +115,25 @@ public class CombaSceneManager : MonoBehaviour
 
     private Character onetoreceiveexp;
 
-    [Header("Combat Text")]
+    [Header("Combat Text & Lifebars")]
 
 
     public Transform TextCanvas;
 
+    public Image AttackerHPRemaining;
+    public Image AttackerHPLost;
+    public Image DefenderHPRemaining;
+    public Image DefenderHPLost;
+    public TextMeshProUGUI AttackerNameTMP;
+    public TextMeshProUGUI DefenderNameTMP;
+    public TextMeshProUGUI AttackerHPTMP;
+    public TextMeshProUGUI DefenderHPTMP;
+
+    public float LowerHPBarTime;
+    private int LowerAttackerHPBarTimeCounter;
+    private bool ChangeAttackerLifebar;
+    private int LowerDefenderHPBarTimeCounter;
+    private bool ChangeDefenderLifebar;
 
     private void Start()
     {
@@ -156,10 +172,40 @@ public class CombaSceneManager : MonoBehaviour
             else
             {
                 ManageAnimationFlow();
+                ManageLifeBars();
             }
         }
     }
 
+    private void ManageLifeBars()
+    {
+        if(ChangeAttackerLifebar && LowerAttackerHPBarTimeCounter< LowerHPBarTime / Time.fixedDeltaTime)
+        {
+
+            LowerAttackerHPBarTimeCounter++;
+            float IntialrationofHPAttackerLost = (float)(ActiveCombatData.attackerBeforeCombat.currentHP - ActiveCombatData.defenderdamage)/(float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP;
+
+            float ratiotToAdd = ((LowerHPBarTime / Time.fixedDeltaTime - (float)LowerAttackerHPBarTimeCounter) / (LowerHPBarTime / Time.fixedDeltaTime)) * ((float)ActiveCombatData.defenderdamage / (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP);
+
+            AttackerHPTMP.text = "" + (int)((IntialrationofHPAttackerLost + ratiotToAdd) * ActiveCombatData.attackerBeforeCombat.AjustedStats.HP);
+
+            AttackerHPLost.fillAmount = IntialrationofHPAttackerLost + ratiotToAdd;
+            AttackerHPRemaining.fillAmount = IntialrationofHPAttackerLost;
+        }
+        if (ChangeDefenderLifebar && LowerDefenderHPBarTimeCounter < LowerHPBarTime / Time.fixedDeltaTime)
+        {
+
+            LowerDefenderHPBarTimeCounter++;
+            float IntialrationofHPAttackerLost = (float)(ActiveCombatData.defenderBeforeCombat.currentHP - ActiveCombatData.attackerdamage) / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP;
+
+            float ratiotToAdd = ((LowerHPBarTime / Time.fixedDeltaTime - (float)LowerDefenderHPBarTimeCounter) / (LowerHPBarTime / Time.fixedDeltaTime)) * ((float)ActiveCombatData.attackerdamage / (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP);
+
+            DefenderHPTMP.text = "" + (int)((IntialrationofHPAttackerLost + ratiotToAdd) * ActiveCombatData.attackerBeforeCombat.AjustedStats.HP);
+
+            DefenderHPLost.fillAmount = IntialrationofHPAttackerLost + ratiotToAdd;
+            DefenderHPRemaining.fillAmount = IntialrationofHPAttackerLost;
+        }
+    }
     private void ManageWeaponPositionResting(GameObject go)
     {
         if (go.GetComponent<UnitScript>().FlyingWeapon != null)
@@ -235,7 +281,7 @@ public class CombaSceneManager : MonoBehaviour
                 }
             }
         }
-        else if (attackerLaunchAttack)
+        else if (attackerLaunchAttack) // Attacker starts their attack or heal
         {
 
 
@@ -275,7 +321,7 @@ public class CombaSceneManager : MonoBehaviour
 
 
         }
-        else if (waitForAttackerProjectile)
+        else if (waitForAttackerProjectile) // If attacker uses a projectile, we wait while the projectile moves
         {
 
             if (ActiveCombatData.attackerWeapon.type.ToLower() == "bow")
@@ -305,11 +351,12 @@ public class CombaSceneManager : MonoBehaviour
 
 
         }
-        else if (DefenderResponse)
+        else if (DefenderResponse) // Defender does the response animation to the attack
         {
             if (!firsttextcreated)
             {
                 CreateText(true);
+                ChangeDefenderLifebar = true;
                 firsttextcreated = true;
             }
 
@@ -337,7 +384,7 @@ public class CombaSceneManager : MonoBehaviour
             }
             cam.transform.parent = MiddleTransform;
         }
-        else if (Defendermoveintoposition)
+        else if (Defendermoveintoposition) // moving defender to range(if healing or telekinesis or bow, no need to move)
         {
             if ((ActiveCombatData.defender.telekinesisactivated || ActiveCombatData.defenderWeapon.type.ToLower() == "staff" || ActiveCombatData.defenderWeapon.type.ToLower() == "bow") || !(ActiveCombatData.attacker.telekinesisactivated || ActiveCombatData.attackerWeapon.type.ToLower() == "staff" || ActiveCombatData.attackerWeapon.type.ToLower() == "bow"))
             {
@@ -416,7 +463,7 @@ public class CombaSceneManager : MonoBehaviour
 
 
         }
-        else if (DefenderLaunchAttack)
+        else if (DefenderLaunchAttack) // Defender attacks
         {
             MiddleTransform.rotation = Quaternion.Lerp(MiddleTransform.rotation, Quaternion.Euler(new Vector3(0, 180, 0)), Time.fixedDeltaTime * CamRotSpeed);
 
@@ -454,7 +501,7 @@ public class CombaSceneManager : MonoBehaviour
 
 
         }
-        else if (waitForDefenderProjectile)
+        else if (waitForDefenderProjectile) // Wait for defender projectile if any
         {
 
             if (ActiveCombatData.defenderWeapon.type.ToLower() == "bow")
@@ -484,11 +531,12 @@ public class CombaSceneManager : MonoBehaviour
 
 
         }
-        else if (AttackerResponse)
+        else if (AttackerResponse) // Attacker animation answer for damage
         {
             if (!secondtextcreated)
             {
                 CreateText(false);
+                ChangeAttackerLifebar = true;
                 secondtextcreated = true;
             }
 
@@ -507,7 +555,7 @@ public class CombaSceneManager : MonoBehaviour
                 }
             }
         }
-        else if (AwaitExp)
+        else if (AwaitExp) // Distribute exp
         {
             if (!waittingforexp)
             {
@@ -532,7 +580,7 @@ public class CombaSceneManager : MonoBehaviour
             }
 
         }
-        else
+        else // Return to Map Scene
         {
             if (timebeforeendcounter > 0)
             {
@@ -732,6 +780,8 @@ public class CombaSceneManager : MonoBehaviour
         newdata.defenderdamage = defenderdamage;
         newdata.attackercrits = attackercrits;
         newdata.defendercrits = defendercrits;
+        newdata.attackerBeforeCombat = attackerbeforecombat;
+        newdata.defenderBeforeCombat = defenderbeforecombat;
 
         attackerSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.attackerAnimator);
         defenderSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.defenderAnimator);
@@ -758,6 +808,23 @@ public class CombaSceneManager : MonoBehaviour
         cam.transform.parent = newdata.attackerAnimator.transform;
 
         MiddleTransform.position = new Vector3((ActiveCombatData.attackerAnimator.transform.position.x + ActiveCombatData.defenderAnimator.transform.position.x) / 2f, 0f, 0f);
+
+
+        float attackerHPRatio = (float)ActiveCombatData.attackerBeforeCombat.currentHP/ (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP;
+        float defenderHPRatio = (float)ActiveCombatData.defenderBeforeCombat.currentHP / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP;
+
+        AttackerHPTMP.text = "" + (int)(ActiveCombatData.attackerBeforeCombat.currentHP);
+        DefenderHPTMP.text = "" + (int)(ActiveCombatData.defenderBeforeCombat.currentHP);
+
+
+        AttackerHPRemaining.fillAmount = attackerHPRatio;
+        AttackerHPLost.fillAmount = attackerHPRatio;
+
+        DefenderHPLost.fillAmount = attackerHPRatio;
+        DefenderHPRemaining.fillAmount = attackerHPRatio;
+
+        AttackerNameTMP.text = attacker.name;
+        DefenderNameTMP.text = defender.name;
 
         ExpBarScript.gameObject.SetActive(false);
     }
@@ -793,6 +860,10 @@ public class CombaSceneManager : MonoBehaviour
         waittingforexp = false;
         firsttextcreated = false;
         secondtextcreated = false;
+        LowerAttackerHPBarTimeCounter = 0;
+        LowerDefenderHPBarTimeCounter = 0;
+        ChangeAttackerLifebar = false;
+        ChangeDefenderLifebar = false;
     }
 
 

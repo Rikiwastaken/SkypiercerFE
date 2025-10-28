@@ -13281,9 +13281,9 @@ MonoBehaviour:
   CurrentOther: {fileID: 0}
   ActionsMenu: {fileID: 4915612603892297116}
   delaybeforeMove: 1
-  delaybeforeAttack: 1
-  delaybeforeFirstAttack: 0.1
-  delaybetweenAttack: 0.1
+  delaybeforeAttack: 0.5
+  delaybeforeFirstAttack: 0.4
+  delaybetweenAttack: 0.2
   delayafterAttack: 0.5
   waittingforexp: 0
   expdistributed: 0
