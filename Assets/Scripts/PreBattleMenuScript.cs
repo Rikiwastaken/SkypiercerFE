@@ -11,16 +11,14 @@ public class PreBattleMenuScript : MonoBehaviour
     public bool ChangingUnitPlace;
     private InputManager InputManager;
     public GameObject selectedunit;
-    private DataScript DataScript;
     private MapInitializer MapInitializer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GridScript = FindAnyObjectByType<GridScript>();
+        GridScript = GridScript.instance;
         TurnManager = FindAnyObjectByType<TurnManger>();
-        InputManager = FindAnyObjectByType<InputManager>();
-        DataScript = FindAnyObjectByType<DataScript>();
+        InputManager = InputManager.instance;
         MapInitializer = FindAnyObjectByType<MapInitializer>();
     }
 

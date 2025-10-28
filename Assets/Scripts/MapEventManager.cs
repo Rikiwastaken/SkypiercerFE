@@ -96,8 +96,8 @@ public class MapEventManager : MonoBehaviour
          * 6 : 
          */
 
-        
-        
+
+
     }
 
     [Serializable]
@@ -109,7 +109,7 @@ public class MapEventManager : MonoBehaviour
 
     public List<EventCondition> EventsToMonitor;
 
-    
+
 
     private GridScript GridScript;
     private TurnManger turnManger;
@@ -136,16 +136,16 @@ public class MapEventManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if((GetComponent<TurnManger>().currentlyplaying=="playable" || GetComponent<TurnManger>().currentlyplaying == "other" || GetComponent<TurnManger>().currentlyplaying == "enemy") && !eventinitialized)
+        if ((GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "other" || GetComponent<TurnManger>().currentlyplaying == "enemy") && !eventinitialized)
         {
             eventinitialized = true;
             EventInitialization();
         }
-        if(ManualEventTrigger >=0 && EventsToMonitor.Count>ManualEventTrigger)
+        if (ManualEventTrigger >= 0 && EventsToMonitor.Count > ManualEventTrigger)
         {
-            if(!EventsToMonitor[ManualEventTrigger].triggered)
+            if (!EventsToMonitor[ManualEventTrigger].triggered)
             {
-                Debug.Log("triggering : " +  EventsToMonitor[ManualEventTrigger].eventname);
+                Debug.Log("triggering : " + EventsToMonitor[ManualEventTrigger].eventname);
                 TriggerEvent(EventsToMonitor[ManualEventTrigger]);
                 EventsToMonitor[ManualEventTrigger].triggered = true;
             }
@@ -203,9 +203,9 @@ public class MapEventManager : MonoBehaviour
     public void ManageUnitPlacement(UnitPlacement unitPlacement)
     {
         List<GameObject> movedunits = new List<GameObject>();
-        foreach(string unitname in unitPlacement.UnitToPlaceManually)
+        foreach (string unitname in unitPlacement.UnitToPlaceManually)
         {
-            
+
             int rankinList = unitPlacement.UnitToPlaceManually.IndexOf(unitname);
             foreach (GameObject unit in GridScript.allunitGOs)
             {
@@ -213,7 +213,7 @@ public class MapEventManager : MonoBehaviour
                 {
                     if (unitPlacement.WhereToManuallyPlaceUnits.Count > rankinList)
                     {
-                        unit.GetComponent<UnitScript>().MoveTo(unitPlacement.WhereToManuallyPlaceUnits[rankinList],false,true);
+                        unit.GetComponent<UnitScript>().MoveTo(unitPlacement.WhereToManuallyPlaceUnits[rankinList], false, true);
                         movedunits.Add(unit);
                     }
                 }
@@ -222,7 +222,7 @@ public class MapEventManager : MonoBehaviour
         int otherpositionsrank = 0;
         foreach (GameObject unit in GridScript.allunitGOs)
         {
-            if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable" && !movedunits.Contains(unit) )
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !movedunits.Contains(unit))
             {
                 if (unitPlacement.RemainingSpots.Count > otherpositionsrank)
                 {
@@ -232,16 +232,16 @@ public class MapEventManager : MonoBehaviour
                 }
             }
         }
-        if(unitPlacement.CameraPosition!=Vector2.zero)
+        if (unitPlacement.CameraPosition != Vector2.zero)
         {
             FindAnyObjectByType<cameraScript>().Destination = unitPlacement.CameraPosition;
         }
-        
+
     }
 
     public void TriggerEvent(EventCondition Event)
     {
-        Debug.Log("event trigger : "+Event.ID);
+        Debug.Log("event trigger : " + Event.ID);
         Debug.Log("is event triggered ? : " + Event.triggered);
         ManageUnitPlacement(Event.UnitPlacement);
         UnitAddTrigger(Event.UnitsToUnlockID, true);
@@ -273,14 +273,14 @@ public class MapEventManager : MonoBehaviour
                 Debug.Log("Tutorial Window trigger");
 
                 string fullstring = "";
-                foreach(string line in Event.TutorialWindow.lines)
+                foreach (string line in Event.TutorialWindow.lines)
                 {
-                    fullstring += line+"\n";
+                    fullstring += line + "\n";
                 }
                 TutorialwindowScript.InitializeWindow(Event.TutorialWindow.WindowDimensions, fullstring);
                 break;
             case 6:
-                
+
                 break;
         }
 
@@ -296,11 +296,11 @@ public class MapEventManager : MonoBehaviour
                 {
                     case (1):
                         e.UnitList = new List<Character>();
-                        foreach(string name in e.NameUnitList )
+                        foreach (string name in e.NameUnitList)
                         {
-                            foreach(GameObject unit in GridScript.allunitGOs)
+                            foreach (GameObject unit in GridScript.allunitGOs)
                             {
-                                if(unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower()==name.ToLower())
+                                if (unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == name.ToLower())
                                 {
                                     e.UnitList.Add(unit.GetComponent<UnitScript>().UnitCharacteristics);
                                 }
@@ -338,7 +338,7 @@ public class MapEventManager : MonoBehaviour
             {
                 if (!e.triggered)
                 {
-                    if(CheckSmallerConditionsAreChecked(e.SmallerConditions))
+                    if (CheckSmallerConditionsAreChecked(e.SmallerConditions))
                     {
                         switch (e.triggertype)
                         {
@@ -398,7 +398,7 @@ public class MapEventManager : MonoBehaviour
                                 EventInitialization();
                                 return;
                             case (8):
-                                if(CheckIfEventsAreTriggered(e.EventsToWatch))
+                                if (CheckIfEventsAreTriggered(e.EventsToWatch))
                                 {
                                     e.triggered = true;
                                     TriggerEvent(e);
@@ -414,24 +414,24 @@ public class MapEventManager : MonoBehaviour
         }
     }
 
-    
+
     private bool CheckIfEventsAreTriggered(List<int> eventIDs)
     {
-        foreach(int id in eventIDs)
+        foreach (int id in eventIDs)
         {
             bool found = false;
-            foreach(EventCondition e in EventsToMonitor)
+            foreach (EventCondition e in EventsToMonitor)
             {
-                if (e.ID==id)
+                if (e.ID == id)
                 {
                     found = true;
-                    if(!e.triggered)
+                    if (!e.triggered)
                     {
                         return false;
                     }
                 }
             }
-            if(!found)
+            if (!found)
             {
                 return false; //if one of the event was not found, we consider the condition as not verified
             }
@@ -441,13 +441,13 @@ public class MapEventManager : MonoBehaviour
 
     private bool CheckSmallerConditionsAreChecked(List<SmallerCondition> smallerConditions)
     {
-        foreach(SmallerCondition condition in smallerConditions)
+        foreach (SmallerCondition condition in smallerConditions)
         {
             GameObject unit1 = null;
             GameObject unit2 = null;
             foreach (GameObject unit in GridScript.allunitGOs)
             {
-                if(unit != null)
+                if (unit != null)
                 {
                     if (unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == condition.Unit1.ToLower())
                     {
@@ -462,13 +462,13 @@ public class MapEventManager : MonoBehaviour
             switch (condition.triggertype)
             {
                 case (1):
-                    if(unit1==null)
+                    if (unit1 == null)
                     {
                         return false; //if unit1 was not found, then she was not deployed or is dead
                     }
                     break;
                 case (2):
-                    if(unit1== null || unit2== null)
+                    if (unit1 == null || unit2 == null)
                     {
                         return false;
                     }
@@ -476,14 +476,14 @@ public class MapEventManager : MonoBehaviour
                     {
                         Character charunit1 = unit1.GetComponent<UnitScript>().UnitCharacteristics;
                         Character charunit2 = unit2.GetComponent<UnitScript>().UnitCharacteristics;
-                        if(ManhattanDistance(charunit1, charunit2)>1)
+                        if (ManhattanDistance(charunit1, charunit2) > 1)
                         {
                             return false;
                         }
                     }
                     break;
                 case (3):
-                    if(unit1==null)
+                    if (unit1 == null)
                     {
                         return false;
                     }
@@ -495,7 +495,7 @@ public class MapEventManager : MonoBehaviour
                     }
                     break;
                 case (5):
-                    
+
                     break;
                 case (6):
 
@@ -509,13 +509,13 @@ public class MapEventManager : MonoBehaviour
     }
     private bool reachedTiles(string affiliation, List<GridSquareScript> tiles)
     {
-        
+
         List<Character> list = null;
-        if(affiliation=="enemy")
+        if (affiliation == "enemy")
         {
             list = turnManger.enemyunit;
         }
-        else if(affiliation=="playable")
+        else if (affiliation == "playable")
         {
             list = turnManger.playableunit;
         }
@@ -524,16 +524,16 @@ public class MapEventManager : MonoBehaviour
             list = turnManger.otherunits;
         }
 
-        foreach(Character c in list)
+        foreach (Character c in list)
         {
-            foreach(GridSquareScript tile in c.currentTile)
+            foreach (GridSquareScript tile in c.currentTile)
             {
                 if (tiles.Contains(tile))
                 {
                     return true;
                 }
             }
-            
+
         }
 
         return false;
@@ -541,11 +541,11 @@ public class MapEventManager : MonoBehaviour
 
     private bool checkIfAllDead(List<Character> units)
     {
-        if(FindAnyObjectByType<TurnManger>().currentlyplaying == "")
+        if (FindAnyObjectByType<TurnManger>().currentlyplaying == "")
         {
-            return false ;
+            return false;
         }
-        if(units.Count==0)
+        if (units.Count == 0)
         {
             return true;
         }
@@ -553,9 +553,9 @@ public class MapEventManager : MonoBehaviour
         {
             foreach (Character unit in units)
             {
-                if(unit != null)
+                if (unit != null)
                 {
-                    if(unit.currentHP > 0)
+                    if (unit.currentHP > 0)
                     {
                         return false;
                     }
@@ -595,10 +595,10 @@ public class MapEventManager : MonoBehaviour
 
     private void UnitAddTrigger(List<int> UnitsToUnlockID, bool unlock)
     {
-        List<Character> units = FindAnyObjectByType<DataScript>().PlayableCharacterList;
+        List<Character> units = DataScript.instance.PlayableCharacterList;
         foreach (Character unit in units)
         {
-            if(UnitsToUnlockID.Contains(unit.ID))
+            if (UnitsToUnlockID.Contains(unit.ID))
             {
                 unit.playableStats.unlocked = unlock;
                 unit.playableStats.deployunit = unlock;

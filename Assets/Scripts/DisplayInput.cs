@@ -32,7 +32,7 @@ public class DisplayInput : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InputManager = FindAnyObjectByType<InputManager>();
+        InputManager = InputManager.instance;
         LeftStickBasepos = LeftStick.transform.localPosition;
         RightStickBasepos = RightStick.transform.localPosition;
     }
@@ -138,14 +138,14 @@ public class DisplayInput : MonoBehaviour
 
     private void ActivateButton(GameObject button)
     {
-        if(!button.GetComponent<Image>().enabled)
+        if (!button.GetComponent<Image>().enabled)
         {
             button.GetComponent<Image>().enabled = true;
         }
-        
-        if(button.transform.childCount > 1)
+
+        if (button.transform.childCount > 1)
         {
-            if(!button.transform.GetChild(0).GetComponent<Image>().enabled)
+            if (!button.transform.GetChild(0).GetComponent<Image>().enabled)
             {
                 button.transform.GetChild(0).GetComponent<Image>().enabled = true;
                 button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = Color.white;

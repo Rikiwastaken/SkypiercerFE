@@ -10,13 +10,13 @@ using static UnitScript;
 public class UnitDeploymentScript : MonoBehaviour
 {
 
-    private DataScript DataScript;
-
     private MapInitializer MapInitializer;
 
     private int numberofunitstodeplay;
 
     private GridScript gridscript;
+
+    private DataScript DataScript;
 
     private InputManager inputmanager;
 
@@ -36,8 +36,8 @@ public class UnitDeploymentScript : MonoBehaviour
     {
         DataScript = FindAnyObjectByType<DataScript>();
         MapInitializer = FindAnyObjectByType<MapInitializer>();
-        gridscript = FindAnyObjectByType<GridScript>();
-        inputmanager = FindAnyObjectByType<InputManager>();
+        gridscript = GridScript.instance;
+        inputmanager = InputManager.instance;
         numberofunitstodeplay = MapInitializer.playablepos.Count;
         InitializeButtons();
     }
@@ -97,7 +97,7 @@ public class UnitDeploymentScript : MonoBehaviour
             unitdescriptiontxt += "Speed : " + currentchar.stats.Speed + "\n\n";
 
             string grade = "";
-            if(currentchar.equipmentsIDs.Count > 0)
+            if (currentchar.equipmentsIDs.Count > 0)
             {
                 switch (DataScript.equipmentList[currentchar.equipmentsIDs[0]].Grade)
                 {
@@ -148,7 +148,7 @@ public class UnitDeploymentScript : MonoBehaviour
     private List<Character> InitializeCharactersToShow()
     {
         List<Character> characterstoshow = new List<Character>();
-        if(SceneManager.GetActiveScene().name== "TestMap")
+        if (SceneManager.GetActiveScene().name == "TestMap")
         {
             foreach (Character character in DataScript.PlayableCharacterList)
             {
@@ -165,7 +165,7 @@ public class UnitDeploymentScript : MonoBehaviour
                 }
             }
         }
-        
+
         return characterstoshow;
     }
 
@@ -183,7 +183,7 @@ public class UnitDeploymentScript : MonoBehaviour
         }
 
         List<Transform> MasteryExpBars = new List<Transform>();
-        for(int i = 1; i< Mastery.childCount;i++)
+        for (int i = 1; i < Mastery.childCount; i++)
         {
             MasteryExpBars.Add(Mastery.GetChild(i).transform);
         }
@@ -234,7 +234,7 @@ public class UnitDeploymentScript : MonoBehaviour
     {
         OrderUnits();
         List<Character> characterstoshow = InitializeCharactersToShow();
-        
+
         for (int i = 0; i < Mathf.Min(characterstoshow.Count, 20); i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = characterstoshow[i];
@@ -257,7 +257,7 @@ public class UnitDeploymentScript : MonoBehaviour
         int numberofunits = 0;
         foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if(intestmap)
+            if (intestmap)
             {
                 numberofunits++;
                 continue;

@@ -22,17 +22,16 @@ public class CommandScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (inputManager == null)
-        {
-            inputManager = FindAnyObjectByType<InputManager>();
-        }
+
+        inputManager = InputManager.instance;
+
         if (inputManager.canceljustpressed)
         {
             ItemMenuCancelButton.onClick.Invoke();
 
         }
 
-        if(ActionsMenu ==null)
+        if (ActionsMenu == null)
         {
             ActionsMenu = FindAnyObjectByType<ActionsMenu>();
         }
@@ -51,7 +50,7 @@ public class CommandScript : MonoBehaviour
                 colors.pressedColor = Color.white;
                 buttons[i].GetComponent<Button>().colors = colors;
             }
-            for(int i = CommandList.Count;i<5;i++)
+            for (int i = CommandList.Count; i < 5; i++)
             {
                 buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "None";
                 var colors = buttons[i].GetComponent<Button>().colors;
@@ -64,12 +63,12 @@ public class CommandScript : MonoBehaviour
 
     public void ActivateButton(int i)
     {
-        if (i<CommandList.Count)
+        if (i < CommandList.Count)
         {
             gameObject.SetActive(false);
             ActionsMenu.ActivateCommand(CommandList[i].ID);
-            ActionsMenu.target = FindAnyObjectByType<GridScript>().GetSelectedUnitGameObject();
-            
+            ActionsMenu.target = GridScript.instance.GetSelectedUnitGameObject();
+
         }
     }
 

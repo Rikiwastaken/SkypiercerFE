@@ -121,7 +121,7 @@ public class CombaSceneManager : MonoBehaviour
 
     private void Start()
     {
-        if(FindAnyObjectByType<DataScript>()==null)
+        if (DataScript.instance == null)
         {
             SceneManager.LoadScene("FirstScene");
         }
@@ -136,7 +136,7 @@ public class CombaSceneManager : MonoBehaviour
         if (ActiveCombatData != null)
         {
 
-            if(!waitForAttackerProjectile)
+            if (!waitForAttackerProjectile)
             {
 
                 ManageWeaponPositionResting(attackerSceneGO);
@@ -149,7 +149,7 @@ public class CombaSceneManager : MonoBehaviour
             }
 
 
-            if (timebeforestartcounter>0)
+            if (timebeforestartcounter > 0)
             {
                 timebeforestartcounter--;
             }
@@ -162,7 +162,7 @@ public class CombaSceneManager : MonoBehaviour
 
     private void ManageWeaponPositionResting(GameObject go)
     {
-        if(go.GetComponent<UnitScript>().FlyingWeapon!=null)
+        if (go.GetComponent<UnitScript>().FlyingWeapon != null)
         {
             if (Vector3.Distance(go.GetComponent<UnitScript>().FlyingWeapon.transform.localPosition, go.GetComponent<UnitScript>().telekinesisWeaponPos) > go.GetComponent<UnitScript>().maxmovementrangevertical * 2f)
             {
@@ -181,7 +181,7 @@ public class CombaSceneManager : MonoBehaviour
         attackbuffer--;
         if (Attackermoveintoposition) // moving attacker to range (if healing or telekinesis or bow, no need to move
         {
-            if(ActiveCombatData.attacker.telekinesisactivated || ActiveCombatData.attackerWeapon.type.ToLower()=="staff" || ActiveCombatData.attackerWeapon.type.ToLower() == "bow")
+            if (ActiveCombatData.attacker.telekinesisactivated || ActiveCombatData.attackerWeapon.type.ToLower() == "staff" || ActiveCombatData.attackerWeapon.type.ToLower() == "bow")
             {
                 Attackermoveintoposition = false;
                 attackerLaunchAttack = true;
@@ -189,9 +189,9 @@ public class CombaSceneManager : MonoBehaviour
                 bool doubleattack = false;
                 bool tripleattack = false;
 
-                if (ActiveCombatData.doubleAttacker==ActiveCombatData.attacker)
+                if (ActiveCombatData.doubleAttacker == ActiveCombatData.attacker)
                 {
-                    if(ActiveCombatData.triplehit)
+                    if (ActiveCombatData.triplehit)
                     {
                         tripleattack = true;
                     }
@@ -206,9 +206,9 @@ public class CombaSceneManager : MonoBehaviour
             }
             else
             {
-                ActiveCombatData.attackerAnimator.SetBool("Walk",true);
-                ActiveCombatData.attackerAnimator.transform.position += (AttackerDestination - ActiveCombatData.attackerAnimator.transform.position).normalized * movespeed*Time.fixedDeltaTime;
-                if(Vector3.Distance(AttackerDestination, ActiveCombatData.attackerAnimator.transform.position)<0.1f)
+                ActiveCombatData.attackerAnimator.SetBool("Walk", true);
+                ActiveCombatData.attackerAnimator.transform.position += (AttackerDestination - ActiveCombatData.attackerAnimator.transform.position).normalized * movespeed * Time.fixedDeltaTime;
+                if (Vector3.Distance(AttackerDestination, ActiveCombatData.attackerAnimator.transform.position) < 0.1f)
                 {
                     ActiveCombatData.attackerAnimator.transform.position = AttackerDestination;
                     ActiveCombatData.attackerAnimator.SetBool("Walk", false);
@@ -235,14 +235,14 @@ public class CombaSceneManager : MonoBehaviour
                 }
             }
         }
-        else if(attackerLaunchAttack)
+        else if (attackerLaunchAttack)
         {
 
 
             MiddleTransform.position = (ActiveCombatData.attackerAnimator.transform.position + ActiveCombatData.defenderAnimator.transform.position) / 2f;
 
 
-            if(ActiveCombatData.attacker.telekinesisactivated || ActiveCombatData.attackerWeapon.type.ToLower()=="bow")
+            if (ActiveCombatData.attacker.telekinesisactivated || ActiveCombatData.attackerWeapon.type.ToLower() == "bow")
             {
                 waitForAttackerProjectile = true;
                 attackerLaunchAttack = false;
@@ -273,12 +273,12 @@ public class CombaSceneManager : MonoBehaviour
             }
 
 
-            
+
         }
         else if (waitForAttackerProjectile)
         {
 
-            if(ActiveCombatData.attackerWeapon.type.ToLower() == "bow")
+            if (ActiveCombatData.attackerWeapon.type.ToLower() == "bow")
             {
                 waitForAttackerProjectile = false;
                 if (ActiveCombatData.defenderdodged)
@@ -302,8 +302,8 @@ public class CombaSceneManager : MonoBehaviour
                 ManageTelekinesisProjectileMovement(true);
             }
 
-                
-            
+
+
         }
         else if (DefenderResponse)
         {
@@ -452,7 +452,7 @@ public class CombaSceneManager : MonoBehaviour
             }
 
 
-            
+
         }
         else if (waitForDefenderProjectile)
         {
@@ -548,10 +548,10 @@ public class CombaSceneManager : MonoBehaviour
     private void ManageTelekinesisProjectileMovement(bool Attackerturn)
     {
 
-        if(Attackerturn)
+        if (Attackerturn)
         {
             attackerSceneGO.GetComponent<UnitScript>().FlyingWeapon.transform.position = Vector3.Lerp(attackerSceneGO.GetComponent<UnitScript>().FlyingWeapon.transform.position, ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
-            if (Mathf.Abs(attackerSceneGO.GetComponent<UnitScript>().FlyingWeapon.transform.position.x - ActiveCombatData.defenderAnimator.transform.position.x) <0.1f)
+            if (Mathf.Abs(attackerSceneGO.GetComponent<UnitScript>().FlyingWeapon.transform.position.x - ActiveCombatData.defenderAnimator.transform.position.x) < 0.1f)
             {
                 waitForAttackerProjectile = false;
                 if (ActiveCombatData.defenderdodged)
@@ -597,7 +597,7 @@ public class CombaSceneManager : MonoBehaviour
 
 
 
-        
+
     }
 
 
@@ -605,7 +605,7 @@ public class CombaSceneManager : MonoBehaviour
     private Character DetermineWhoGainedExp()
     {
         Character onetoreceiveexp = null;
-        if(!ActiveCombatData.attackerdied && ActiveCombatData.attacker.affiliation=="playable")
+        if (!ActiveCombatData.attackerdied && ActiveCombatData.attacker.affiliation == "playable")
         {
             onetoreceiveexp = ActiveCombatData.attacker;
         }
@@ -618,9 +618,9 @@ public class CombaSceneManager : MonoBehaviour
 
     private void CreateText(bool attackerturn)
     {
-        if(attackerturn)
+        if (attackerturn)
         {
-            if(ActiveCombatData.healing)
+            if (ActiveCombatData.healing)
             {
                 AnimText.InitializeText("1 hit\n" + ActiveCombatData.attackerdamage, Color.green);
             }
@@ -630,7 +630,7 @@ public class CombaSceneManager : MonoBehaviour
 
                 Color colortouse = Color.white;
 
-                if(ActiveCombatData.defenderdodged)
+                if (ActiveCombatData.defenderdodged)
                 {
                     attacktext = "Miss";
                 }
@@ -651,14 +651,14 @@ public class CombaSceneManager : MonoBehaviour
                     {
                         attacktext = "1 hit\n";
                     }
-                    if(ActiveCombatData.attackercrits==1)
+                    if (ActiveCombatData.attackercrits == 1)
                     {
-                        attacktext +=" Critical !\n";
+                        attacktext += " Critical !\n";
                         colortouse = Color.yellow;
                     }
-                    else if(ActiveCombatData.attackercrits>1)
+                    else if (ActiveCombatData.attackercrits > 1)
                     {
-                        attacktext += " Critical x"+ ActiveCombatData.attackercrits+" !\n";
+                        attacktext += " Critical x" + ActiveCombatData.attackercrits + " !\n";
                         colortouse = Color.yellow;
                     }
                     attacktext += ActiveCombatData.attackerdamage;
@@ -708,14 +708,14 @@ public class CombaSceneManager : MonoBehaviour
     {
         attackerSceneGO.GetComponent<UnitScript>().UnitCharacteristics = attacker;
         attackerSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(attacker.modelID);
-        
+
         defenderSceneGO.GetComponent<UnitScript>().UnitCharacteristics = defender;
         defenderSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(defender.modelID);
-        
+
 
 
         CombatData newdata = new CombatData();
-       
+
         newdata.attacker = attacker;
         newdata.attackerWeapon = attackerweapon;
         newdata.attackerAnimator = attackerSceneGO.GetComponent<UnitScript>().ModelList[attacker.modelID].wholeModel.GetComponentInChildren<Animator>();
@@ -788,7 +788,7 @@ public class CombaSceneManager : MonoBehaviour
 
         waittingforexp = false;
         firsttextcreated = false;
-        secondtextcreated= false;
+        secondtextcreated = false;
     }
 
 
@@ -797,7 +797,7 @@ public class CombaSceneManager : MonoBehaviour
 
         Animator animator = null;
         UnitScript CharacterUnitscript = null;
-        if(charactertoAnimate == ActiveCombatData.attacker)
+        if (charactertoAnimate == ActiveCombatData.attacker)
         {
             animator = ActiveCombatData.attackerAnimator;
             CharacterUnitscript = attackerSceneGO.GetComponent<UnitScript>();
@@ -812,7 +812,7 @@ public class CombaSceneManager : MonoBehaviour
         switch (animationtype) // 0 : atk, 1 : walk, 2 : Take Damage, 3 : Dodge, 4 : Die
         {
             case 0:
-                CharacterUnitscript.PlayAttackAnimation(doubleattack,tripleattack,healing,animator);
+                CharacterUnitscript.PlayAttackAnimation(doubleattack, tripleattack, healing, animator);
                 break;
             case 1:
                 animator.SetBool("Walk", true);
@@ -827,7 +827,7 @@ public class CombaSceneManager : MonoBehaviour
                 animator.SetTrigger("Death");
                 break;
         }
-        
+
     }
 
 }

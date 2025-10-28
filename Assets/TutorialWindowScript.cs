@@ -35,14 +35,13 @@ public class TutorialWindowScript : MonoBehaviour
 
     private void Update()
     {
-        if(InputManager==null)
-        {
-            InputManager = FindAnyObjectByType<InputManager>();
-        }
-        if(timecounter < delay / Time.deltaTime)
+
+        InputManager = InputManager.instance;
+
+        if (timecounter < delay / Time.deltaTime)
         {
             timecounter++;
-            validatebutton.GetComponentInChildren<TextMeshProUGUI>().text = " ( "+(int)(delay - (timecounter * Time.deltaTime))+ " ) ";
+            validatebutton.GetComponentInChildren<TextMeshProUGUI>().text = " ( " + (int)(delay - (timecounter * Time.deltaTime)) + " ) ";
             abletocontinue = false;
         }
         else
@@ -57,7 +56,7 @@ public class TutorialWindowScript : MonoBehaviour
             }
         }
 
-        if(InputManager.activatejustpressed)
+        if (InputManager.activatejustpressed)
         {
             ContinueButton();
         }
@@ -66,7 +65,7 @@ public class TutorialWindowScript : MonoBehaviour
 
     public void ContinueButton()
     {
-        if(abletocontinue)
+        if (abletocontinue)
         {
             Time.timeScale = 1f;
             gameObject.SetActive(false);

@@ -14,8 +14,6 @@ public class MapInitializer : MonoBehaviour
 
     public int ChapterID;
 
-    private DataScript DataScript;
-
     public GameObject BaseCharacter;
 
     public GameObject Characters;
@@ -36,21 +34,17 @@ public class MapInitializer : MonoBehaviour
 
     private void EmptyPlayables()
     {
-        if (DataScript == null)
+        for (int i = 0; i < DataScript.instance.PlayableCharacterList.Count; i++)
         {
-            DataScript = FindAnyObjectByType<DataScript>();
+            DataScript.instance.PlayableCharacterList[i].playableStats.deployunit = false;
         }
-        for (int i = 0; i < DataScript.PlayableCharacterList.Count; i++)
+        for (int i = 0; i < Mathf.Min(playablepos.Count, DataScript.instance.PlayableCharacterList.Count); i++)
         {
-            DataScript.PlayableCharacterList[i].playableStats.deployunit = false;
-        }
-        for (int i = 0; i < Mathf.Min(playablepos.Count, DataScript.PlayableCharacterList.Count); i++)
-        {
-            if(DataScript.PlayableCharacterList[i].playableStats.unlocked || SceneManager.GetActiveScene().name=="TestMap")
+            if (DataScript.instance.PlayableCharacterList[i].playableStats.unlocked || SceneManager.GetActiveScene().name == "TestMap")
             {
-                DataScript.PlayableCharacterList[i].playableStats.deployunit = true;
+                DataScript.instance.PlayableCharacterList[i].playableStats.deployunit = true;
             }
-            
+
         }
     }
 
@@ -58,14 +52,10 @@ public class MapInitializer : MonoBehaviour
     {
         if (GridScript == null)
         {
-            GridScript = FindAnyObjectByType<GridScript>();
+            GridScript = GridScript.instance;
             GridScript.InstantiateGrid();
         }
-        if (DataScript == null)
-        {
-            DataScript = FindAnyObjectByType<DataScript>();
-        }
-        if(Characters == null)
+        if (Characters == null)
         {
             Characters = GameObject.Find("Characters");
         }
@@ -82,7 +72,7 @@ public class MapInitializer : MonoBehaviour
 
         int index = 0;
         bool intestmap = SceneManager.GetActiveScene().name == "TestMap";
-        foreach (Character playable in DataScript.PlayableCharacterList)
+        foreach (Character playable in DataScript.instance.PlayableCharacterList)
         {
 
             if (index < playablepos.Count && (playable.playableStats.deployunit || (intestmap || playable.playableStats.unlocked)))
@@ -99,7 +89,7 @@ public class MapInitializer : MonoBehaviour
             }
 
         }
-        
+
         GridScript.InitializeGOList();
     }
 
@@ -107,10 +97,7 @@ public class MapInitializer : MonoBehaviour
     // creating all gameobjects for nonplayer 
     private void InitializeNonPlayers()
     {
-        if (DataScript == null)
-        {
-            DataScript = FindAnyObjectByType<DataScript>();
-        }
+
         int index = 0;
         foreach (EnemyStats enemyStats in EnemyList)
         {
@@ -153,7 +140,7 @@ public class MapInitializer : MonoBehaviour
     private int findfirstfreeid()
     {
         int maxid = 50;
-        for (int i = 0;i< Characters.transform.childCount;i++)
+        for (int i = 0; i < Characters.transform.childCount; i++)
         {
             Character character = Characters.transform.GetChild(i).GetComponent<UnitScript>().UnitCharacteristics;
             if (character.ID > maxid)
@@ -161,7 +148,7 @@ public class MapInitializer : MonoBehaviour
                 maxid = character.ID + 1;
             }
         }
-        if( previousid >= maxid )
+        if (previousid >= maxid)
         {
             maxid = previousid + 1;
         }
@@ -173,7 +160,7 @@ public class MapInitializer : MonoBehaviour
     {
         foreach (ModelInfo modelinf in character.GetComponent<UnitScript>().ModelList)
         {
-            if(modelinf.ID == character.GetComponent<UnitScript>().UnitCharacteristics.modelID)
+            if (modelinf.ID == character.GetComponent<UnitScript>().UnitCharacteristics.modelID)
             {
                 modelinf.active = true;
                 modelinf.wholeModel.SetActive(true);

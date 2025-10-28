@@ -259,7 +259,7 @@ public class UnitScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(SceneManager.GetActiveScene().name=="BattleScene")
+        if (SceneManager.GetActiveScene().name == "BattleScene")
         {
             this.enabled = false;
             transform.GetChild(0).gameObject.SetActive(false);
@@ -270,18 +270,18 @@ public class UnitScript : MonoBehaviour
 
         MinimapScript = FindAnyObjectByType<MinimapScript>();
         canvaselevation = transform.GetChild(0).localPosition.y;
-        GridScript = FindAnyObjectByType<GridScript>();
+        GridScript = GridScript.instance;
         AttackTurnScript = FindAnyObjectByType<AttackTurnScript>();
 
         if (UnitCharacteristics.EquipedSkills == null)
         {
             UnitCharacteristics.EquipedSkills = new List<int>(4);
         }
-        FindAnyObjectByType<DataScript>().GenerateEquipmentList(UnitCharacteristics);
+        DataScript.instance.GenerateEquipmentList(UnitCharacteristics);
         LevelSetup();
         UnitCharacteristics.alreadymoved = false;
         UnitCharacteristics.alreadyplayed = false;
-        Fists = FindAnyObjectByType<DataScript>().equipmentList[0];
+        Fists = DataScript.instance.equipmentList[0];
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         UnitCharacteristics.position = new Vector2((int)transform.position.x, (int)transform.position.z);
         if (UnitCharacteristics.equipments == null)
@@ -348,7 +348,7 @@ public class UnitScript : MonoBehaviour
         }
         animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
         animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
-        animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower()!="bow");
+        animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow");
         if (armature == null)
         {
             armature = animator.transform;
@@ -420,7 +420,7 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    public Character CreateCopy(Character CharacterToCopy=null)
+    public Character CreateCopy(Character CharacterToCopy = null)
     {
         if (CharacterToCopy == null)
         {
@@ -589,28 +589,28 @@ public class UnitScript : MonoBehaviour
 
     public void ManageFlyingWeaponPosition()
     {
-        if(FlyingWeapon!=null)
+        if (FlyingWeapon != null)
         {
- 
+
 
             float RandomY = (float)UnityEngine.Random.Range(0.9f, 1.1f);
 
             if (flyingweaponmovingup)
             {
-                FlyingWeapon.transform.localPosition += new Vector3(0f, flyingmovingspeed* RandomY * Time.fixedDeltaTime, 0f);
+                FlyingWeapon.transform.localPosition += new Vector3(0f, flyingmovingspeed * RandomY * Time.fixedDeltaTime, 0f);
 
                 if (FlyingWeapon.transform.localPosition.y >= telekinesisWeaponPos.y + maxmovementrangevertical)
                 {
-                    
+
                     flyingweaponmovingup = false;
                 }
             }
             else
             {
-                FlyingWeapon.transform.localPosition -= new Vector3(0f, flyingmovingspeed* RandomY * Time.fixedDeltaTime, 0f);
+                FlyingWeapon.transform.localPosition -= new Vector3(0f, flyingmovingspeed * RandomY * Time.fixedDeltaTime, 0f);
                 if (FlyingWeapon.transform.localPosition.y <= telekinesisWeaponPos.y - maxmovementrangevertical)
                 {
-                    
+
                     flyingweaponmovingup = true;
                 }
             }
@@ -772,13 +772,13 @@ public class UnitScript : MonoBehaviour
     }
     public void MoveTo(Vector2 destination, bool jump = false, bool instantaneousmovement = false)
     {
-        if(UnitCharacteristics.position!=null)
+        if (UnitCharacteristics.position != null)
         {
             previousposition = UnitCharacteristics.position;
         }
         if (GridScript == null)
         {
-            GridScript = FindAnyObjectByType<GridScript>();
+            GridScript = GridScript.instance;
         }
         GridSquareScript destTile = GridScript.GetTile(destination);
         if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile) == gameObject) && !destTile.isobstacle)
@@ -843,7 +843,7 @@ public class UnitScript : MonoBehaviour
     public bool isinattackanimation(Animator otheranimator = null)
     {
         Animator animatortouse = otheranimator;
-        if(otheranimator != null)
+        if (otheranimator != null)
         {
             animatortouse = otheranimator;
         }
@@ -863,7 +863,7 @@ public class UnitScript : MonoBehaviour
             animatortouse = animator;
         }
 
-        
+
         if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Telekinesis Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("PluvialIdle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
         {
             return false;
@@ -871,7 +871,7 @@ public class UnitScript : MonoBehaviour
         return true;
     }
 
-    public bool AttackAnimationAlmostdone(Animator otheranimator = null, float percentage=1)
+    public bool AttackAnimationAlmostdone(Animator otheranimator = null, float percentage = 1)
     {
         Animator animatortouse = otheranimator;
         if (otheranimator != null)
@@ -912,7 +912,7 @@ public class UnitScript : MonoBehaviour
             {
                 return false;
             }
-        }     
+        }
     }
 
     public bool isinrunanimation(Animator otheranimator = null)
@@ -1022,7 +1022,7 @@ public class UnitScript : MonoBehaviour
         animatortouse.SetBool("Heal", false);
         animatortouse.SetBool("Bow", false);
 
-        if(UnitCharacteristics.telekinesisactivated)
+        if (UnitCharacteristics.telekinesisactivated)
         {
             animatortouse.SetBool("Heal", true);
         }
@@ -1067,7 +1067,7 @@ public class UnitScript : MonoBehaviour
             }
         }
 
-            
+
 
         if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("run"))
         {
@@ -1182,7 +1182,7 @@ public class UnitScript : MonoBehaviour
                         {
                             currentequipmentmodel.transform.SetParent(modelInfo.Lefthandbone);
                         }
-                        else if(UnitCharacteristics.telekinesisactivated)
+                        else if (UnitCharacteristics.telekinesisactivated)
                         {
                             FlyingWeapon = currentequipmentmodel;
                             currentequipmentmodel.transform.SetParent(animatortouse.transform);
@@ -1195,7 +1195,7 @@ public class UnitScript : MonoBehaviour
                 }
 
 
-                if(UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow")
+                if (UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow")
                 {
                     currentequipmentmodel.transform.localPosition = telekinesisWeaponPos;
                     currentequipmentmodel.transform.localRotation = Quaternion.Euler(telekinesisWeaponRot);
@@ -1205,7 +1205,7 @@ public class UnitScript : MonoBehaviour
                     currentequipmentmodel.transform.localPosition = Vector3.zero;
                     currentequipmentmodel.transform.localRotation = Quaternion.identity;
                 }
-                    
+
             }
 
         }
@@ -1220,7 +1220,7 @@ public class UnitScript : MonoBehaviour
             AddNumber(0, true, "Retreat");
             UnitCharacteristics.alreadymoved = false;
 
-            GridScript gridScript = FindAnyObjectByType<GridScript>();
+            GridScript gridScript = GridScript.instance;
             gridScript.InitializeGOList();
             gridScript.selection = gridScript.GetTile(UnitCharacteristics.position);
             gridScript.ShowMovement();
@@ -1252,7 +1252,7 @@ public class UnitScript : MonoBehaviour
             else
             {
                 UnitCharacteristics.alreadymoved = false;
-                GridScript gridScript = FindAnyObjectByType<GridScript>();
+                GridScript gridScript = GridScript.instance;
                 gridScript.InitializeGOList();
                 gridScript.selection = gridScript.GetTile(UnitCharacteristics.position);
                 gridScript.ShowLimitedMovementOfUnit(gameObject, remainingMovements);
@@ -1288,7 +1288,7 @@ public class UnitScript : MonoBehaviour
 
             UnitCharacteristics.telekinesisactivated = UnitCharacteristics.enemyStats.usetelekinesis;
 
-            ClassInfo classtoapply = FindAnyObjectByType<DataScript>().ClassList[UnitCharacteristics.enemyStats.classID];
+            ClassInfo classtoapply = DataScript.instance.ClassList[UnitCharacteristics.enemyStats.classID];
             UnitCharacteristics.stats.HP = classtoapply.BaseStats.HP;
             UnitCharacteristics.stats.Strength = classtoapply.BaseStats.Strength;
             UnitCharacteristics.stats.Psyche = classtoapply.BaseStats.Psyche;
@@ -1508,7 +1508,7 @@ public class UnitScript : MonoBehaviour
 
         int bonussize = 20;
 
-        switch(GetFirstWeapon().type.ToLower())
+        switch (GetFirstWeapon().type.ToLower())
         {
             case "sword":
                 GrowthtoApply.SpeedGrowth += bonussize;
@@ -1552,16 +1552,16 @@ public class UnitScript : MonoBehaviour
     public List<int> LevelUp()
     {
 
-        BaseStats statsbeforelevelup = new BaseStats() {HP=UnitCharacteristics.stats.HP,Strength = UnitCharacteristics.stats.Strength,Psyche= UnitCharacteristics.stats.Psyche,Defense= UnitCharacteristics.stats.Defense,Resistance= UnitCharacteristics.stats.Resistance,Speed = UnitCharacteristics.stats.Speed, Dexterity= UnitCharacteristics.stats.Dexterity };
+        BaseStats statsbeforelevelup = new BaseStats() { HP = UnitCharacteristics.stats.HP, Strength = UnitCharacteristics.stats.Strength, Psyche = UnitCharacteristics.stats.Psyche, Defense = UnitCharacteristics.stats.Defense, Resistance = UnitCharacteristics.stats.Resistance, Speed = UnitCharacteristics.stats.Speed, Dexterity = UnitCharacteristics.stats.Dexterity };
         previousStats = statsbeforelevelup;
 
         List<int> lvlupresult = new List<int>();
         StatGrowth GrowthtoApply = GetGrowthModifications();
 
-        
+
 
         UnitCharacteristics.experience -= 100;
-        if(UnitCharacteristics.experience<0)
+        if (UnitCharacteristics.experience < 0)
         {
             UnitCharacteristics.experience = 0;
         }
@@ -1575,7 +1575,7 @@ public class UnitScript : MonoBehaviour
             {
                 lvlupresult.Add(1);
             }
-            else if((int)oldHP > (int)(UnitCharacteristics.stats.HP))
+            else if ((int)oldHP > (int)(UnitCharacteristics.stats.HP))
             {
                 lvlupresult.Add(-1);
             }
@@ -1723,10 +1723,10 @@ public class UnitScript : MonoBehaviour
             lvlupresult.Add((int)Dexteritygain);
         }
 
-        string levelupstring = UnitCharacteristics.name+"  levelup : ";
-        foreach( int  level in lvlupresult )
+        string levelupstring = UnitCharacteristics.name + "  levelup : ";
+        foreach (int level in lvlupresult)
         {
-            levelupstring += level+" ";
+            levelupstring += level + " ";
         }
 
         //Debug.Log(levelupstring);
@@ -1738,18 +1738,18 @@ public class UnitScript : MonoBehaviour
     public float GetLevelUpStatsChange(float growth, int randomvalue)
     {
         float gain = 0f;
-        if(growth > 100)
+        if (growth > 100)
         {
-            gain ++;
+            gain++;
 
-            if(randomvalue <= growth -100f)
+            if (randomvalue <= growth - 100f)
             {
-                gain ++;
+                gain++;
             }
         }
-        else if(growth <0)
+        else if (growth < 0)
         {
-            if(randomvalue <= Mathf.Abs( growth))
+            if (randomvalue <= Mathf.Abs(growth))
             {
                 gain--;
             }
@@ -2440,19 +2440,18 @@ public class UnitScript : MonoBehaviour
 
     public List<Skill> GetCommands()
     {
-        DataScript datascript = FindAnyObjectByType<DataScript>();
         List<Skill> Commands = new List<Skill>();
         if (UnitCharacteristics.UnitSkill != 0)
         {
-            if (datascript.SkillList[UnitCharacteristics.UnitSkill].IsCommand)
+            if (DataScript.instance.SkillList[UnitCharacteristics.UnitSkill].IsCommand)
             {
-                Commands.Add(datascript.SkillList[UnitCharacteristics.UnitSkill]);
+                Commands.Add(DataScript.instance.SkillList[UnitCharacteristics.UnitSkill]);
             }
             foreach (int SkillID in UnitCharacteristics.EquipedSkills)
             {
-                if (datascript.SkillList[SkillID].IsCommand && SkillID != 0)
+                if (DataScript.instance.SkillList[SkillID].IsCommand && SkillID != 0)
                 {
-                    Commands.Add(datascript.SkillList[SkillID]);
+                    Commands.Add(DataScript.instance.SkillList[SkillID]);
                 }
             }
         }

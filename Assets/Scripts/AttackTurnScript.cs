@@ -84,9 +84,9 @@ public class AttackTurnScript : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(previousattacker != null)
+        if (previousattacker != null)
         {
-            AttackWithAnimationEndOfFight(previousattacker,previoustarget);
+            AttackWithAnimationEndOfFight(previousattacker, previoustarget);
             previousattacker = null;
             previoustarget = null;
             gridScript.ResetAllSelections();
@@ -186,7 +186,7 @@ public class AttackTurnScript : MonoBehaviour
             }
             else
             {
-                if(saveManager.Options.BattleAnimations)
+                if (saveManager.Options.BattleAnimations)
                 {
                     ManageAttackWithAnimation(CurrentEnemy);
                 }
@@ -194,7 +194,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     ManageAttackWithoutAnimation(CurrentEnemy);
                 }
-                    
+
             }
 
         }
@@ -457,7 +457,7 @@ public class AttackTurnScript : MonoBehaviour
         else if (commandID == 52) // Fortify
         {
             GridSquareScript tile = CharUser.currentTile[0];
-            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() { new ForesightScript.TileModification() {tile= tile, type= tile.type, previousremainingrain= tile.RemainingRainTurns,previousremainingsun = tile.RemainingSunTurns } };
+            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() { new ForesightScript.TileModification() { tile = tile, type = tile.type, previousremainingrain = tile.RemainingRainTurns, previousremainingsun = tile.RemainingSunTurns } };
 
             tile.type = "Fortification";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Fortify");
@@ -480,10 +480,9 @@ public class AttackTurnScript : MonoBehaviour
             CurrentAction.skilltoremovefrominventory = CharTarget.UnitSkill;
             if (CharTarget.UnitSkill != 0 && !Target.GetComponent<UnitScript>().copied)
             {
-                DataScript datascript = FindAnyObjectByType<DataScript>();
                 Target.GetComponent<UnitScript>().copied = true;
                 bool itemadded = false;
-                foreach (InventoryItem item in datascript.PlayerInventory.inventoryItems)
+                foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                 {
                     if (item.type == 1 && item.ID == CharTarget.UnitSkill)
                     {
@@ -499,13 +498,13 @@ public class AttackTurnScript : MonoBehaviour
                     newitem.ID = CharTarget.UnitSkill;
                 }
 
-                Target.GetComponent<UnitScript>().AddNumber(0, true, datascript.SkillList[CharTarget.UnitSkill].name + " copied");
-                User.GetComponent<UnitScript>().AddNumber(0, true, datascript.SkillList[CharTarget.UnitSkill].name + " copied");
+                Target.GetComponent<UnitScript>().AddNumber(0, true, DataScript.instance.SkillList[CharTarget.UnitSkill].name + " copied");
+                User.GetComponent<UnitScript>().AddNumber(0, true, DataScript.instance.SkillList[CharTarget.UnitSkill].name + " copied");
             }
         }
         else if (commandID == 59) // Sundance
-        {   
-            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() {  };
+        {
+            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() { };
             WeatherManager weathermanager = FindAnyObjectByType<WeatherManager>();
             if (weathermanager.rainymap)
             {
@@ -572,7 +571,7 @@ public class AttackTurnScript : MonoBehaviour
 
     private void ManageAttackWithoutAnimation(GameObject Attacker)
     {
-        
+
         Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
         if (counterbeforeattack > 0)
         {
@@ -688,7 +687,7 @@ public class AttackTurnScript : MonoBehaviour
             else // begin fight
             {
 
-                
+
 
                 target.transform.LookAt(Attacker.transform);
                 Attacker.transform.LookAt(target.transform);
@@ -716,8 +715,8 @@ public class AttackTurnScript : MonoBehaviour
                             attacktrigger = false;
 
                             (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
-                            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation=="playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));
-                            if(ishealing)
+                            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));
+                            if (ishealing)
                             {
                                 CurrentAction.actiontype = 1;
                             }
@@ -797,7 +796,7 @@ public class AttackTurnScript : MonoBehaviour
                                 expdistributed = true;
                                 waittingforcamera = false;
 
-                                
+
 
                             }
                             else // distribute exp if no one died and one of the characters is playable
@@ -933,7 +932,7 @@ public class AttackTurnScript : MonoBehaviour
         Attacker.GetComponent<UnitScript>().disableLifebar = false;
         if (Target != null)
         {
-            
+
             Target.GetComponent<UnitScript>().disableLifebar = false;
             EndOfCombatTrigger(Attacker, Target);
         }
@@ -942,7 +941,7 @@ public class AttackTurnScript : MonoBehaviour
             EndOfCombatTrigger(Attacker);
         }
 
-        if(Attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable")
+        if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
         {
             ActionsMenu.FinalizeAttack();
         }
@@ -952,7 +951,7 @@ public class AttackTurnScript : MonoBehaviour
 
     public void ManageAttackWithAnimation(GameObject Attacker)
     {
-        if(!attackanimationhappening)
+        if (!attackanimationhappening)
         {
             attackanimationhappening = true;
             Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
@@ -1072,22 +1071,22 @@ public class AttackTurnScript : MonoBehaviour
 
                 List<int> levelbonus = new List<int>();
 
-                if (attackerexp!=0)
+                if (attackerexp != 0)
                 {
                     expearned = attackerexp;
                     levelbonus = attackerlevelbonus;
                 }
-                else if (defenderexp!=0)
+                else if (defenderexp != 0)
                 {
                     expearned = defenderexp;
                     levelbonus = defenderlevelbonus;
                 }
 
 
-                Debug.Log("attacker damage : "+attackerdamage);
+                Debug.Log("attacker damage : " + attackerdamage);
                 Debug.Log("defender damage : " + defenderdamage);
 
-                FindAnyObjectByType<CombatSceneLoader>().ActivateCombatScene(CharAttacker, Chartarget, Attacker.GetComponent<UnitScript>().GetFirstWeapon(), target.GetComponent<UnitScript>().GetFirstWeapon(), Chardoubleattacker, triple, ishealing, attackerdodged, defenderattacks, defenderdodged, attackerdied, defenderdied, expearned, levelbonus, Attackercopy,Targetcopy,attackerdamage, defenderdamage, attackercrits, defendercrits);
+                FindAnyObjectByType<CombatSceneLoader>().ActivateCombatScene(CharAttacker, Chartarget, Attacker.GetComponent<UnitScript>().GetFirstWeapon(), target.GetComponent<UnitScript>().GetFirstWeapon(), Chardoubleattacker, triple, ishealing, attackerdodged, defenderattacks, defenderdodged, attackerdied, defenderdied, expearned, levelbonus, Attackercopy, Targetcopy, attackerdamage, defenderdamage, attackercrits, defendercrits);
 
             }
         }
@@ -1153,12 +1152,12 @@ public class AttackTurnScript : MonoBehaviour
             }
 
             unit2.GetComponent<UnitScript>().UpdateWeaponModel();
-           
+
         }
 
 
 
-        
+
     }
 
     private List<string> Whotoattack(string affiliation, bool attackfriend)
@@ -1184,7 +1183,7 @@ public class AttackTurnScript : MonoBehaviour
         int maxreward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
-        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, gridScript.GetTile(charunit.position), charunit.enemyStats.monsterStats.size,charunit);
+        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, gridScript.GetTile(charunit.position), charunit.enemyStats.monsterStats.size, charunit);
         List<string> affiliationtoattack = Whotoattack(charunit.affiliation, attacksfriend);
         GameObject chosenUnit = null;
 
@@ -1351,7 +1350,7 @@ public class AttackTurnScript : MonoBehaviour
             return reward - 9999;
         }
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
-        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position, charunit.enemyStats.monsterStats.size,charunit);
+        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position, charunit.enemyStats.monsterStats.size, charunit);
         List<string> affiliationtoattack = Whotoattack(charunit.affiliation, attacksfriend);
 
         foreach (GridSquareScript tile in potentialAttackPosition)

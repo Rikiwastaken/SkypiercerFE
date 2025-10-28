@@ -21,30 +21,30 @@ public class MinimapScript : MonoBehaviour
 
     private void Start()
     {
-        gridScript = FindAnyObjectByType<GridScript>();
+        gridScript = GridScript.instance;
         cameraScript = FindAnyObjectByType<cameraScript>();
     }
 
     private void FixedUpdate()
     {
-        if(waitforinitialization > 0)
+        if (waitforinitialization > 0)
         {
             waitforinitialization--;
-            if(waitforinitialization == 0 )
+            if (waitforinitialization == 0)
             {
                 CreateMinimap();
             }
         }
 
-        if(updatedelay > 0)
+        if (updatedelay > 0)
         {
             updatedelay--;
         }
-        if(updatedelay <= 0)
+        if (updatedelay <= 0)
         {
-            updatedelay = (int)(0.1f/Time.deltaTime);
+            updatedelay = (int)(0.1f / Time.deltaTime);
             showposition += 1;
-            if(showposition >8)
+            if (showposition > 8)
             {
                 showposition = 0;
             }
@@ -52,7 +52,7 @@ public class MinimapScript : MonoBehaviour
         }
 
 
-        if(cameraScript.incombat)
+        if (cameraScript.incombat)
         {
             minimapImage.enabled = false;
         }
@@ -64,7 +64,7 @@ public class MinimapScript : MonoBehaviour
     }
     public void CreateMinimap()
     {
-        if(minimapTexture == null)
+        if (minimapTexture == null)
         {
             int gridHeight = gridScript.Grid[0].Count;
             int gridWidth = gridScript.Grid.Count;
@@ -97,7 +97,7 @@ public class MinimapScript : MonoBehaviour
             // Position with offset (e.g., 10px from edges)
             GetComponent<RectTransform>().anchoredPosition = new Vector2(-5, 5);
         }
-       
+
         UpdateMinimap();
     }
 
@@ -110,7 +110,7 @@ public class MinimapScript : MonoBehaviour
 
     public void UpdateMinimap()
     {
-        if(waitforinitialization<=0)
+        if (waitforinitialization <= 0)
         {
             for (int i = 0; i < gridScript.Grid.Count; i++)
             {
@@ -127,7 +127,7 @@ public class MinimapScript : MonoBehaviour
                     }
                     if (gridScript.attacktiles.Contains(tile) || gridScript.lockedattacktiles.Contains(tile))
                     {
-                        SetTileColor(i, j, new Color(245f/255f, 176f / 255f, 66f / 255f)); //orange
+                        SetTileColor(i, j, new Color(245f / 255f, 176f / 255f, 66f / 255f)); //orange
                     }
                     if (gridScript.healingtiles.Contains(tile) || gridScript.lockedhealingtiles.Contains(tile))
                     {
@@ -147,7 +147,7 @@ public class MinimapScript : MonoBehaviour
             {
                 foreach (GridSquareScript tile in character.currentTile)
                 {
-                    if(character.currentTile.Count>0)
+                    if (character.currentTile.Count > 0)
                     {
                         if (character.affiliation == "playable")
                         {
@@ -166,19 +166,19 @@ public class MinimapScript : MonoBehaviour
                             SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
                         }
                     }
-                    
+
                 }
             }
 
-            
 
 
-            if(gridScript.selection!=null && showposition<=4)
+
+            if (gridScript.selection != null && showposition <= 4)
             {
                 SetTileColor((int)gridScript.selection.GridCoordinates.x, (int)gridScript.selection.GridCoordinates.y, Color.green);
             }
         }
-        
+
     }
 
 }

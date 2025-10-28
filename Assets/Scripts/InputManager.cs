@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+
+    public static InputManager instance;
+
+
     [Header("Sticks")]
     public Vector2 movementValue;
     public Vector2 cammovementValue;
@@ -96,7 +100,14 @@ public class InputManager : MonoBehaviour
     private InputAction ShowDetailsinput;
     private bool ShowDetailspressedonce;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
     void Start()
     {
         //setup of the inputs

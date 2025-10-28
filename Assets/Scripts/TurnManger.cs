@@ -54,14 +54,13 @@ public class TurnManger : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (InputManager == null)
-        {
-            InputManager = FindAnyObjectByType<InputManager>();
-        }
+
+        InputManager = InputManager.instance;
+
 
         if (GridScript == null)
         {
-            GridScript = FindAnyObjectByType<GridScript>();
+            GridScript = GridScript.instance;
         }
 
         if (actionManager == null)
@@ -217,7 +216,7 @@ public class TurnManger : MonoBehaviour
             //Reset Verso movements
             unit.GetComponent<UnitScript>().tilesmoved = 0;
         }
-        if(charactertoappy.Count > 0)
+        if (charactertoappy.Count > 0)
         {
             GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>().actions.Add(action);
         }
@@ -323,7 +322,7 @@ public class TurnManger : MonoBehaviour
     {
         if (GridScript == null)
         {
-            GridScript = FindAnyObjectByType<GridScript>();
+            GridScript = GridScript.instance;
         }
 
         GridScript.ResetAllSelections();

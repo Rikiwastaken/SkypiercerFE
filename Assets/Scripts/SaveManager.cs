@@ -52,8 +52,8 @@ public class SaveManager : MonoBehaviour
         DefaultSave.slot = -1;
         DefaultSave.versionID = versionID;
         DefaultSave.chapter = 0;
-        DefaultSave.PlayableCharacterList = GetComponent<DataScript>().PlayableCharacterList;
-        DefaultSave.PlayerInventory = GetComponent<DataScript>().PlayerInventory;
+        DefaultSave.PlayableCharacterList = DataScript.instance.PlayableCharacterList;
+        DefaultSave.PlayerInventory = DataScript.instance.PlayerInventory;
         DefaultSave.secondselapsed = 0;
     }
 
@@ -210,14 +210,14 @@ public class SaveManager : MonoBehaviour
     {
         if (slot >= 0 && slot < SaveClasses.Count)
         {
-            GetComponent<DataScript>().PlayableCharacterList = SaveClasses[slot].PlayableCharacterList;
-            GetComponent<DataScript>().PlayerInventory = SaveClasses[slot].PlayerInventory;
+            DataScript.instance.PlayableCharacterList = SaveClasses[slot].PlayableCharacterList;
+            DataScript.instance.PlayerInventory = SaveClasses[slot].PlayerInventory;
             secondselapsed = SaveClasses[slot].secondselapsed;
         }
         else if (slot == -1)
         {
-            GetComponent<DataScript>().PlayableCharacterList = DefaultSave.PlayableCharacterList;
-            GetComponent<DataScript>().PlayerInventory = DefaultSave.PlayerInventory;
+            DataScript.instance.PlayableCharacterList = DefaultSave.PlayableCharacterList;
+            DataScript.instance.PlayerInventory = DefaultSave.PlayerInventory;
             secondselapsed = 0;
         }
 
@@ -240,8 +240,8 @@ public class SaveManager : MonoBehaviour
             versionID = versionID,
             slot = activeSlot,
             chapter = 0,
-            PlayableCharacterList = GetComponent<DataScript>().PlayableCharacterList,
-            PlayerInventory = GetComponent<DataScript>().PlayerInventory,
+            PlayableCharacterList = DataScript.instance.PlayableCharacterList,
+            PlayerInventory = DataScript.instance.PlayerInventory,
             secondselapsed = secondselapsed
 
         };

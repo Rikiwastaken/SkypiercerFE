@@ -12,10 +12,10 @@ public class ItemActionsMenuScript : MonoBehaviour
     {
         if (GridScript == null)
         {
-            GridScript = FindAnyObjectByType<GridScript>();
+            GridScript = GridScript.instance;
         }
 
-        if(character.equipments[slotID].Name == null)
+        if (character.equipments[slotID].Name == null)
         {
             return;
         }
@@ -34,7 +34,7 @@ public class ItemActionsMenuScript : MonoBehaviour
                     GameObject UnitGO = GridScript.GetUnit(character.currentTile[0]);
                     UnitGO.GetComponent<UnitScript>().UpdateWeaponModel();
                     (int range, bool frapperenmelee, string type) = UnitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    GridScript.ShowAttackAfterMovement(range, frapperenmelee, character.currentTile, type.ToLower() == "staff", character.enemyStats.monsterStats.size,character);
+                    GridScript.ShowAttackAfterMovement(range, frapperenmelee, character.currentTile, type.ToLower() == "staff", character.enemyStats.monsterStats.size, character);
                     GridScript.lockedattacktiles = GridScript.attacktiles;
                     FindAnyObjectByType<ItemsScript>().InitializeButtons();
                     GridScript.Recolor();

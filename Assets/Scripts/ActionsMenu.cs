@@ -29,7 +29,7 @@ public class ActionsMenu : MonoBehaviour
     public Image TargetOrangeLifeBar;
     public Image TargetGreenLifebar;
 
-    public GridScript GridScript;
+    private GridScript GridScript;
 
     public List<GameObject> targetlist;
 
@@ -52,6 +52,7 @@ public class ActionsMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GridScript = GridScript.instance;
         cameraScript = FindAnyObjectByType<cameraScript>();
         attackTurnScript = FindAnyObjectByType<AttackTurnScript>();
     }
@@ -86,10 +87,9 @@ public class ActionsMenu : MonoBehaviour
         SelectionSafeGuard();
         FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
 
-        if (inputManager == null)
-        {
-            inputManager = FindAnyObjectByType<InputManager>();
-        }
+
+        inputManager = InputManager.instance;
+
 
         if (inputManager.canceljustpressed && !ItemsScript.activeSelf && !CommandGO.activeSelf)
         {
@@ -262,6 +262,7 @@ public class ActionsMenu : MonoBehaviour
     {
         target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
         WeaponChange();
+        target.GetComponent<UnitScript>().UpdateWeaponModel();
         bool enemytargettable = false;
         Debug.Log(GridScript.lockedattacktiles.Count);
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
@@ -306,13 +307,13 @@ public class ActionsMenu : MonoBehaviour
         targetlist = null;
     }
 
-    private (List<equipment>,List<int>, bool) previouscharacterstate(Character character)
+    private (List<equipment>, List<int>, bool) previouscharacterstate(Character character)
     {
         List<equipment> previousequipmentstate = new List<equipment>();
         List<int> previousequipmentIDstate = new List<int>();
-        for(int i = 0;i<Mathf.Max(character.equipments.Count,character.equipmentsIDs.Count);i++)
+        for (int i = 0; i < Mathf.Max(character.equipments.Count, character.equipmentsIDs.Count); i++)
         {
-            if(i< character.equipments.Count)
+            if (i < character.equipments.Count)
             {
                 previousequipmentstate.Add(character.equipments[i]);
             }
@@ -321,7 +322,7 @@ public class ActionsMenu : MonoBehaviour
                 previousequipmentIDstate.Add(character.equipmentsIDs[i]);
             }
         }
-        return(previousequipmentstate,previousequipmentIDstate, character.telekinesisactivated);
+        return (previousequipmentstate, previousequipmentIDstate, character.telekinesisactivated);
     }
 
     private void ResetCharacterEquipment(Character character, List<equipment> previousequipmentstate, List<int> previousequipmentIDstate, bool previoustelekinesis)
@@ -521,14 +522,13 @@ public class ActionsMenu : MonoBehaviour
 
         if (GridScript == null)
         {
-            GridScript = FindAnyObjectByType<GridScript>();
+            GridScript = GridScript.instance;
         }
 
         if (usecommand)
         {
 
-            DataScript dataScript = FindAnyObjectByType<DataScript>();
-            Skill command = dataScript.SkillList[commandID]; // targetting : 0 enemies, 1 allies, 2 walls, 3 self
+            Skill command = DataScript.instance.SkillList[commandID]; // targetting : 0 enemies, 1 allies, 2 walls, 3 self
             CommandUsedID = command.ID;
             if (command.targettype == 0)
             {
@@ -647,7 +647,7 @@ public class ActionsMenu : MonoBehaviour
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
                     GameObject potentialtarget = GridScript.GetUnit(tile);
-                    if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.currentHP< potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)) && potentialtarget != target)
+                    if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.currentHP < potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)) && potentialtarget != target)
                     {
                         targetlist.Add(potentialtarget);
                     }
@@ -1718,7 +1718,7 @@ public class ActionsMenu : MonoBehaviour
         foreach (GameObject othertarget in activelist)
         {
             Character charOthertarget = othertarget.GetComponent<UnitScript>().UnitCharacteristics;
-            
+
             if (othertarget.GetComponent<UnitScript>().GetSkill(40) && ManhattanDistance(charTarget, charOthertarget) <= 3)
             {
                 attackTurnScript.CurrentAction.ModifiedCharacters.Add(charOthertarget);
@@ -1790,11 +1790,11 @@ public class ActionsMenu : MonoBehaviour
                 foreach (GameObject unit in list)
                 {
                     Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-                    if(!attackTurnScript.CurrentAction.ModifiedCharacters.Contains(unitchar))
+                    if (!attackTurnScript.CurrentAction.ModifiedCharacters.Contains(unitchar))
                     {
                         attackTurnScript.CurrentAction.ModifiedCharacters.Add(unitchar);
                     }
-                    
+
                     unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)unitchar.AjustedStats.HP - unitchar.currentHP, (int)(DamageDealt * 0.1f)), true, "Rebound");
                     unitchar.currentHP += (int)(DamageDealt * 0.1f);
                     if (unitchar.currentHP > unitchar.AjustedStats.HP)
@@ -1882,7 +1882,7 @@ public class ActionsMenu : MonoBehaviour
 
         foreach (GameObject potentialtarget in targetlist)
         {
-            
+
             Character Chartarget = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics;
             attackTurnScript.CurrentAction.ModifiedCharacters.Add(Chartarget);
 
@@ -1968,8 +1968,8 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = null;
         GridSquareScript targetTile = null;
-        
-        
+
+
 
 
         AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
@@ -1988,16 +1988,16 @@ public class ActionsMenu : MonoBehaviour
             basestatdef = chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
         }
 
-        
+
         if (charunit.telekinesisactivated)
         {
             baseweapondamage = baseweapondamage * 0.75f;
             basestatdamage = charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
-            if(target != null)
+            if (target != null)
             {
                 basestatdef = chartarget.AjustedStats.Resistance + TargetSkillBonus.Resistance;
             }
-            
+
         }
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
@@ -2015,7 +2015,7 @@ public class ActionsMenu : MonoBehaviour
         {
             basestatdef = basestatdef * 0.9f;
         }
-        if (target!=null && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield")
+        if (target != null && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield")
         {
             basestatdef += chartarget.AjustedStats.Strength * 0.1f;
         }
@@ -2029,11 +2029,11 @@ public class ActionsMenu : MonoBehaviour
         {
             finaldamagefloat = finaldamagefloat * (1f + (float)UnitSkillBonus.PhysDamage / 100f);
         }
-        if(target!=null && TargetSkillBonus!=null)
+        if (target != null && TargetSkillBonus != null)
         {
             finaldamagefloat = finaldamagefloat / (1f + (float)TargetSkillBonus.DamageReduction / 100f);
         }
-        
+
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
             finaldamagefloat = finaldamagefloat / 2f;
@@ -2048,7 +2048,7 @@ public class ActionsMenu : MonoBehaviour
 
         int finaldamage = (int)finaldamagefloat + UnitSkillBonus.FixedDamageBonus;
 
-        if(target!=null && TargetSkillBonus != null)
+        if (target != null && TargetSkillBonus != null)
         {
             finaldamage = finaldamage - TargetSkillBonus.FixedDamageReduction;
         }
@@ -2087,10 +2087,10 @@ public class ActionsMenu : MonoBehaviour
     {
         float damagebonus = 1f;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        
-        
 
-        
+
+
+
         if (charunit.enemyStats != null)
         {
             if (charunit.enemyStats.monsterStats != null)

@@ -8,8 +8,6 @@ using static DataScript;
 public class SkillEditionScript : MonoBehaviour
 {
 
-    private DataScript DataScript;
-
     private GridScript gridscript;
 
     private InputManager inputmanager;
@@ -21,7 +19,7 @@ public class SkillEditionScript : MonoBehaviour
     public TextMeshProUGUI UnitsDeployedText;
 
     public Character selectedcharacter;
-    
+
     private int characterwindowindex = 0;
     private int skillwindowindex = 0;
     public GameObject SkillList;
@@ -38,9 +36,8 @@ public class SkillEditionScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        DataScript = FindAnyObjectByType<DataScript>();
-        gridscript = FindAnyObjectByType<GridScript>();
-        inputmanager = FindAnyObjectByType<InputManager>();
+        gridscript = GridScript.instance;
+        inputmanager = InputManager.instance;
         InitializeButtons();
     }
 
@@ -53,7 +50,7 @@ public class SkillEditionScript : MonoBehaviour
 
         if (inputmanager.canceljustpressed)
         {
-            if(SkillList.activeSelf)
+            if (SkillList.activeSelf)
             {
                 SkillList.SetActive(false);
             }
@@ -70,19 +67,19 @@ public class SkillEditionScript : MonoBehaviour
                     return;
                 }
             }
-            
+
         }
 
-        PageNumberText.text =  (characterwindowindex+1) + "/" + (DataScript.PlayableCharacterList.Count/10 +1);
-        if(SkillPageNumberText.gameObject.activeSelf)
+        PageNumberText.text = (characterwindowindex + 1) + "/" + (DataScript.instance.PlayableCharacterList.Count / 10 + 1);
+        if (SkillPageNumberText.gameObject.activeSelf)
         {
-            SkillPageNumberText.text =  (skillwindowindex + 1) + "/" + (InventorySkillList.Count / 10 + 1);
+            SkillPageNumberText.text = (skillwindowindex + 1) + "/" + (InventorySkillList.Count / 10 + 1);
         }
-        
+
 
         if (inputmanager.PreviousWeaponjustpressed)
         {
-            if(SkillList.activeSelf)
+            if (SkillList.activeSelf)
             {
                 if (skillwindowindex > 0)
                 {
@@ -98,7 +95,7 @@ public class SkillEditionScript : MonoBehaviour
                     InitializeButtons();
                 }
             }
-            
+
         }
 
         if (inputmanager.NextWeaponjustpressed)
@@ -113,16 +110,16 @@ public class SkillEditionScript : MonoBehaviour
             }
             else
             {
-                if (characterwindowindex * 10 < DataScript.PlayableCharacterList.Count - 9)
+                if (characterwindowindex * 10 < DataScript.instance.PlayableCharacterList.Count - 9)
                 {
                     characterwindowindex++;
                     InitializeButtons();
                 }
             }
-            
+
         }
 
-        
+
 
         GameObject currentselected = EventSystem.current.currentSelectedGameObject;
         bool buttonselected = false;
@@ -141,9 +138,9 @@ public class SkillEditionScript : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
         }
-        if(EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>())
+        if (EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>())
         {
-            if(SkillList.activeSelf)
+            if (SkillList.activeSelf)
             {
                 UpdateEquipedSkillText();
                 UpdateSkillPointText();
@@ -153,7 +150,7 @@ public class SkillEditionScript : MonoBehaviour
             {
                 Character currentchar = EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>().Character;
             }
-                
+
         }
 
 
@@ -167,20 +164,20 @@ public class SkillEditionScript : MonoBehaviour
 
         if (unitchar.UnitSkill != 0)
         {
-            equipedskills = "Unit Skill :\n" + DataScript.SkillList[unitchar.UnitSkill].name + "\n";
+            equipedskills = "Unit Skill :\n" + DataScript.instance.SkillList[unitchar.UnitSkill].name + "\n";
         }
         else
         {
             equipedskills = "Unit Skill :\nNone\n";
         }
 
-            int nbrofequipedskills = 0;
+        int nbrofequipedskills = 0;
 
         for (int i = 0; i < Mathf.Min(unitchar.EquipedSkills.Count, 4); i++)
         {
             if (unitchar.EquipedSkills[i] != 0)
             {
-                nbrofequipedskills ++;
+                nbrofequipedskills++;
             }
         }
 
@@ -190,7 +187,7 @@ public class SkillEditionScript : MonoBehaviour
         {
             if (unitchar.EquipedSkills[i] != 0)
             {
-                equipedskills += DataScript.SkillList[unitchar.EquipedSkills[i]].name + "\n";
+                equipedskills += DataScript.instance.SkillList[unitchar.EquipedSkills[i]].name + "\n";
             }
         }
 
@@ -198,15 +195,15 @@ public class SkillEditionScript : MonoBehaviour
     }
     private void UpdateSkillDescriptionText(UnitDeploymentButton SkillButton)
     {
-        if (SkillButton.Item!=null)
+        if (SkillButton.Item != null)
         {
             int SkillID = SkillButton.Item.ID;
-            if(SkillID > 0)
+            if (SkillID > 0)
             {
-                Skill skill = DataScript.SkillList[SkillID];
+                Skill skill = DataScript.instance.SkillList[SkillID];
 
                 SkillDescriptionText.text = "Cost : " + skill.Cost + "\n";
-                if(skill.IsCommand)
+                if (skill.IsCommand)
                 {
                     SkillDescriptionText.text += "Type : Command\n";
                 }
@@ -218,9 +215,9 @@ public class SkillEditionScript : MonoBehaviour
             }
             else
             {
-                SkillDescriptionText.text = "None" ;
+                SkillDescriptionText.text = "None";
             }
-            
+
         }
     }
 
@@ -235,19 +232,19 @@ public class SkillEditionScript : MonoBehaviour
         {
             if (unitchar.EquipedSkills[i] != 0)
             {
-                equipedskillpoitns += DataScript.SkillList[unitchar.EquipedSkills[i]].Cost;
+                equipedskillpoitns += DataScript.instance.SkillList[unitchar.EquipedSkills[i]].Cost;
             }
         }
 
-        SkillPointsText.text = "Skill Pts : "+equipedskillpoitns+"/"+unitchar.playableStats.MaxSkillpoints;
+        SkillPointsText.text = "Skill Pts : " + equipedskillpoitns + "/" + unitchar.playableStats.MaxSkillpoints;
     }
 
     private void InitializeInventorySkillList()
     {
         InventorySkillList = new List<InventoryItem>();
-        foreach(InventoryItem item in DataScript.PlayerInventory.inventoryItems)
+        foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
         {
-            if(item.type==1 && item.Quantity>0)
+            if (item.type == 1 && item.Quantity > 0)
             {
                 InventorySkillList.Add(item);
             }
@@ -256,12 +253,12 @@ public class SkillEditionScript : MonoBehaviour
 
     private void InitializeButtons()
     {
-        for (int i = 0; i < Mathf.Min(DataScript.PlayableCharacterList.Count- 10 * (characterwindowindex), 10); i++)
+        for (int i = 0; i < Mathf.Min(DataScript.instance.PlayableCharacterList.Count - 10 * (characterwindowindex), 10); i++)
         {
-            transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = DataScript.PlayableCharacterList[i+ 10 * (characterwindowindex)];
-            transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i+ 10 * (characterwindowindex);
+            transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = DataScript.instance.PlayableCharacterList[i + 10 * (characterwindowindex)];
+            transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i + 10 * (characterwindowindex);
         }
-        for (int i = Mathf.Min(DataScript.PlayableCharacterList.Count - 10 * (characterwindowindex), 10); i < 10; i++)
+        for (int i = Mathf.Min(DataScript.instance.PlayableCharacterList.Count - 10 * (characterwindowindex), 10); i < 10; i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = null;
         }
@@ -272,7 +269,7 @@ public class SkillEditionScript : MonoBehaviour
     {
         for (int i = 0; i < Mathf.Min(InventorySkillList.Count - 10 * (skillwindowindex), 10); i++)
         {
-            SkillList.transform.GetChild(i).GetComponent<UnitDeploymentButton>().Item = InventorySkillList[i+ 10 * (skillwindowindex)];
+            SkillList.transform.GetChild(i).GetComponent<UnitDeploymentButton>().Item = InventorySkillList[i + 10 * (skillwindowindex)];
         }
         for (int i = Mathf.Min(InventorySkillList.Count - 10 * (skillwindowindex), 10); i < 10; i++)
         {
@@ -283,29 +280,29 @@ public class SkillEditionScript : MonoBehaviour
 
     public void SelectUnit(int ButtonID)
     {
-        if(transform.GetChild(ButtonID).GetComponent<UnitDeploymentButton>().Character!=null)
+        if (transform.GetChild(ButtonID).GetComponent<UnitDeploymentButton>().Character != null)
         {
             if (transform.GetChild(ButtonID).GetComponent<UnitDeploymentButton>().Character.name != "")
             {
-                selectedcharacter = DataScript.PlayableCharacterList[ButtonID + characterwindowindex * 10];
+                selectedcharacter = DataScript.instance.PlayableCharacterList[ButtonID + characterwindowindex * 10];
                 SkillList.SetActive(true);
                 InitializeSkillButtons();
-                skillwindowindex= 0;
+                skillwindowindex = 0;
             }
         }
     }
 
     public void EquipUnequipSkill(int childID)
     {
-        if(SkillList.transform.GetChild(childID).GetComponent<UnitDeploymentButton>().Item!=null)
+        if (SkillList.transform.GetChild(childID).GetComponent<UnitDeploymentButton>().Item != null)
         {
-            if(SkillList.transform.GetChild(childID).GetComponent<UnitDeploymentButton>().Item.ID!=0)
+            if (SkillList.transform.GetChild(childID).GetComponent<UnitDeploymentButton>().Item.ID != 0)
             {
                 int SkillID = SkillList.transform.GetChild(childID).GetComponent<UnitDeploymentButton>().Item.ID;
                 if (selectedcharacter.EquipedSkills.Contains(SkillID))
                 {
                     selectedcharacter.EquipedSkills.Remove(SkillID);
-                    foreach (InventoryItem item in DataScript.PlayerInventory.inventoryItems)
+                    foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                     {
                         if (item.type == 1 && item.ID == SkillID)
                         {
@@ -320,12 +317,12 @@ public class SkillEditionScript : MonoBehaviour
                         int equipedcost = 0;
                         foreach (int equskillID in selectedcharacter.EquipedSkills)
                         {
-                            equipedcost += DataScript.SkillList[equskillID].Cost;
+                            equipedcost += DataScript.instance.SkillList[equskillID].Cost;
                         }
 
-                        if (equipedcost + DataScript.SkillList[SkillID].Cost <= selectedcharacter.playableStats.MaxSkillpoints)
+                        if (equipedcost + DataScript.instance.SkillList[SkillID].Cost <= selectedcharacter.playableStats.MaxSkillpoints)
                         {
-                            foreach (InventoryItem item in DataScript.PlayerInventory.inventoryItems)
+                            foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                             {
                                 if (item.type == 1 && item.ID == SkillID && item.Quantity > 0)
                                 {
@@ -339,13 +336,13 @@ public class SkillEditionScript : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     private int numberofSelectedUnits()
     {
         int numberofunits = 0;
-        foreach (Character character in DataScript.PlayableCharacterList)
+        foreach (Character character in DataScript.instance.PlayableCharacterList)
         {
             if (character.playableStats.deployunit)
             {

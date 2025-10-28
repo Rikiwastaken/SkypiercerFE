@@ -20,8 +20,6 @@ public class UnitDeploymentButton : MonoBehaviour
 
     private MapInitializer MapInitializer;
 
-    private DataScript DataScript;
-
     private InputManager InputManager;
 
     private SkillEditionScript SkillEditionScript;
@@ -30,9 +28,8 @@ public class UnitDeploymentButton : MonoBehaviour
     void Start()
     {
         UnitDeploymentScript = GetComponentInParent<UnitDeploymentScript>();
-        DataScript = FindAnyObjectByType<DataScript>();
         MapInitializer = FindAnyObjectByType<MapInitializer>();
-        InputManager = FindAnyObjectByType<InputManager>();
+        InputManager = InputManager.instance;
     }
 
     private void FixedUpdate()
@@ -80,7 +77,7 @@ public class UnitDeploymentButton : MonoBehaviour
         {
             if (Item.ID != 0)
             {
-                Skill skill = DataScript.SkillList[Item.ID];
+                Skill skill = DataScript.instance.SkillList[Item.ID];
                 GetComponentInChildren<TextMeshProUGUI>().text = skill.name + " : " + Item.Quantity;
                 if (SkillEditionScript.selectedcharacter.UnitSkill == Item.ID)
                 {
@@ -109,7 +106,7 @@ public class UnitDeploymentButton : MonoBehaviour
         bool KiraUnlocked = false;
         bool GaleUnlocked = false;
 
-        foreach (Character character in DataScript.PlayableCharacterList)
+        foreach (Character character in DataScript.instance.PlayableCharacterList)
         {
             if (character.name.ToLower() == "kira" && character.playableStats.unlocked)
             {
@@ -159,7 +156,7 @@ public class UnitDeploymentButton : MonoBehaviour
     public void LockorUnlock()
     {
         int numberofcharacterdeployed = 0;
-        foreach (Character character in DataScript.PlayableCharacterList)
+        foreach (Character character in DataScript.instance.PlayableCharacterList)
         {
             if (character.playableStats.deployunit)
             {

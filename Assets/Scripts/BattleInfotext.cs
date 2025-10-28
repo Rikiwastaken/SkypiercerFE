@@ -26,11 +26,7 @@ public class BattleInfotext : MonoBehaviour
     public TextMeshProUGUI MasteryText;
     public List<Transform> MasteryExpBars;
 
-    private DataScript dataScript;
-
     private InputManager inputManager;
-
-    private GridScript gridScript;
 
     public GameObject ItemAction;
 
@@ -51,9 +47,8 @@ public class BattleInfotext : MonoBehaviour
     void Start()
     {
         TMP = GetComponent<TextMeshProUGUI>();
-        dataScript = FindAnyObjectByType<DataScript>();
-        inputManager = FindAnyObjectByType<InputManager>();
-        gridScript = FindAnyObjectByType<GridScript>();
+        inputManager = InputManager.instance;
+        GridScript = GridScript.instance;
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
     }
 
@@ -91,11 +86,6 @@ public class BattleInfotext : MonoBehaviour
             transform.parent.GetChild(2).gameObject.SetActive(false);
         }
 
-        if (GridScript == null)
-        {
-            GridScript = FindAnyObjectByType<GridScript>();
-        }
-
         if (battlecamera == null)
         {
             battlecamera = FindAnyObjectByType<cameraScript>();
@@ -117,7 +107,7 @@ public class BattleInfotext : MonoBehaviour
         }
 
 
-        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && gridScript.GetComponent<TurnManger>().currentlyplaying != "playable"))
+        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && GridScript.GetComponent<TurnManger>().currentlyplaying != "playable"))
         {
             stringtoshow = string.Empty;
             Color color = transform.parent.GetComponent<Image>().color;
@@ -340,9 +330,9 @@ public class BattleInfotext : MonoBehaviour
         {
             if (SkillButtonList[i].gameObject == currentSelected)
             {
-                SkillDescription.text = dataScript.SkillList[SkillButtonIDList[i]].Descriptions;
+                SkillDescription.text = DataScript.instance.SkillList[SkillButtonIDList[i]].Descriptions;
                 SkillDescription.transform.parent.gameObject.SetActive(true);
-                gridScript.movementbuffercounter = 5;
+                GridScript.movementbuffercounter = 5;
                 return;
             }
         }
@@ -420,16 +410,16 @@ public class BattleInfotext : MonoBehaviour
             {
                 SkillButtonList[0].gameObject.SetActive(true);
             }
-            SkillButtonList[0].GetComponentInChildren<TextMeshProUGUI>().text = dataScript.SkillList[unit.UnitSkill].name;
-            SkillButtonIDList.Add(dataScript.SkillList[unit.UnitSkill].ID);
+            SkillButtonList[0].GetComponentInChildren<TextMeshProUGUI>().text = DataScript.instance.SkillList[unit.UnitSkill].name;
+            SkillButtonIDList.Add(DataScript.instance.SkillList[unit.UnitSkill].ID);
             for (int i = 0; i < Mathf.Min(unit.EquipedSkills.Count, 4); i++)
             {
                 if (!SkillButtonList[i + 1].gameObject.activeSelf)
                 {
                     SkillButtonList[i + 1].gameObject.SetActive(true);
                 }
-                SkillButtonList[i + 1].GetComponentInChildren<TextMeshProUGUI>().text = dataScript.SkillList[unit.EquipedSkills[i]].name;
-                SkillButtonIDList.Add(dataScript.SkillList[unit.EquipedSkills[i]].ID);
+                SkillButtonList[i + 1].GetComponentInChildren<TextMeshProUGUI>().text = DataScript.instance.SkillList[unit.EquipedSkills[i]].name;
+                SkillButtonIDList.Add(DataScript.instance.SkillList[unit.EquipedSkills[i]].ID);
             }
             for (int i = Mathf.Min(unit.EquipedSkills.Count, 4); i < 4; i++)
             {
@@ -444,8 +434,8 @@ public class BattleInfotext : MonoBehaviour
                 {
                     SkillButtonList[i].gameObject.SetActive(true);
                 }
-                SkillButtonList[i].GetComponentInChildren<TextMeshProUGUI>().text = dataScript.SkillList[unit.EquipedSkills[i]].name;
-                SkillButtonIDList.Add(dataScript.SkillList[unit.EquipedSkills[unit.EquipedSkills[i]]].ID);
+                SkillButtonList[i].GetComponentInChildren<TextMeshProUGUI>().text = DataScript.instance.SkillList[unit.EquipedSkills[i]].name;
+                SkillButtonIDList.Add(DataScript.instance.SkillList[unit.EquipedSkills[unit.EquipedSkills[i]]].ID);
             }
             for (int i = Mathf.Min(unit.EquipedSkills.Count, 4); i < 4; i++)
             {

@@ -20,16 +20,15 @@ public class ItemsScript : MonoBehaviour
     public TextMeshProUGUI statstext;
     private void FixedUpdate()
     {
-        if (inputManager == null)
-        {
-            inputManager = FindAnyObjectByType<InputManager>();
-        }
+
+        inputManager = InputManager.instance;
+
         if (inputManager.canceljustpressed)
         {
             if (ItemActionsMenu.activeSelf)
             {
                 ItemActionsMenuCancelButton.onClick.Invoke();
-                
+
             }
             else
             {
@@ -42,16 +41,16 @@ public class ItemsScript : MonoBehaviour
 
         if (currentselected != null)
         {
-            if(buttons.Contains(currentselected))
+            if (buttons.Contains(currentselected))
             {
-                if(target != null)
+                if (target != null)
                 {
                     equipment equ = target.equipments[buttons.IndexOf(currentselected)];
-                    if(equ==null)
+                    if (equ == null)
                     {
                         statstext.transform.parent.gameObject.SetActive(false);
                     }
-                    else if(equ.Name == null)
+                    else if (equ.Name == null)
                     {
                         statstext.transform.parent.gameObject.SetActive(false);
                     }
@@ -87,12 +86,12 @@ public class ItemsScript : MonoBehaviour
                     {
                         statstext.transform.parent.gameObject.SetActive(false);
                     }
-                    
+
                 }
-                
+
             }
         }
-        else if(currentselected.transform.parent==transform)
+        else if (currentselected.transform.parent == transform)
         {
             statstext.transform.parent.gameObject.SetActive(false);
         }
@@ -109,11 +108,11 @@ public class ItemsScript : MonoBehaviour
         ItemActionsMenu.transform.position = new Vector3(initialpos.x, buttons[id].transform.position.y, initialpos.z);
         ItemActionsMenu.GetComponent<ItemActionsMenuScript>().slotID = id;
         ItemActionsMenu.GetComponent<ItemActionsMenuScript>().character = target;
-        if(target.equipments[id].Name == null)
+        if (target.equipments[id].Name == null)
         {
             statstext.text = "Empty Slot";
             ItemActionsMenu.gameObject.SetActive(false);
-            statstext.transform.parent.gameObject.SetActive(false) ;
+            statstext.transform.parent.gameObject.SetActive(false);
             buttons[id].GetComponent<Button>().Select();
         }
         else if (target.equipments[id].Name.ToLower() == "fists" || target.equipments[id].Name.ToLower() == "fist" || target.equipments[id].Name == "")
@@ -128,7 +127,7 @@ public class ItemsScript : MonoBehaviour
         {
 
             string grade = "";
-            switch(target.equipments[id].Grade)
+            switch (target.equipments[id].Grade)
             {
                 case (0):
                     grade = "E";
@@ -150,7 +149,7 @@ public class ItemsScript : MonoBehaviour
                     break;
             }
 
-            statstext.text = target.equipments[id].Name+ "\nDmg : " + target.equipments[id].BaseDamage + "\nHit : " + target.equipments[id].BaseHit + " %\nCrit : " + target.equipments[id].BaseCrit + " %\nRange : " + target.equipments[id].Range + "\nType: " + target.equipments[id].type + "\nGrade: " + grade + " \nUses : " + target.equipments[id].Currentuses + " / " + target.equipments[id].Maxuses;
+            statstext.text = target.equipments[id].Name + "\nDmg : " + target.equipments[id].BaseDamage + "\nHit : " + target.equipments[id].BaseHit + " %\nCrit : " + target.equipments[id].BaseCrit + " %\nRange : " + target.equipments[id].Range + "\nType: " + target.equipments[id].type + "\nGrade: " + grade + " \nUses : " + target.equipments[id].Currentuses + " / " + target.equipments[id].Maxuses;
             statstext.transform.parent.gameObject.SetActive(true);
         }
     }
@@ -162,13 +161,13 @@ public class ItemsScript : MonoBehaviour
         {
             for (int i = 0; i < buttons.Count; i++)
             {
-                if(target.equipments.Count>i)
+                if (target.equipments.Count > i)
                 {
-                    if(target.equipments[i]==null)
+                    if (target.equipments[i] == null)
                     {
                         buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
                     }
-                    else if(target.equipments[i].Name == null)
+                    else if (target.equipments[i].Name == null)
                     {
                         buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
                     }

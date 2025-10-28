@@ -60,9 +60,9 @@ public class TextBubbleScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InputManager = FindAnyObjectByType<InputManager>();
+        InputManager = InputManager.instance;
         ActionManager = FindAnyObjectByType<ActionManager>();
-        gridScript = FindAnyObjectByType<GridScript>();
+        gridScript = GridScript.instance;
         cameraScript = FindAnyObjectByType<cameraScript>();
         //DialogueExample();
     }
@@ -81,7 +81,7 @@ public class TextBubbleScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Dialogue==null)
+        if (Dialogue == null)
         {
             DeactivateBubble();
             mapEventManager.TriggerEventCheck();
@@ -94,7 +94,7 @@ public class TextBubbleScript : MonoBehaviour
         }
         else
         {
-            if(ActionManager!=null)
+            if (ActionManager != null)
             {
                 ActionManager.frameswherenotlock = 5;
             }
@@ -107,7 +107,7 @@ public class TextBubbleScript : MonoBehaviour
 
             FindAnyObjectByType<GridScript>().lockselection = false;
 
-            if(Dialogue[currentTextBubble].CameraDestination != Vector3.zero)
+            if (Dialogue[currentTextBubble].CameraDestination != Vector3.zero)
             {
                 cameraScript.Destination = new Vector2(Dialogue[currentTextBubble].CameraDestination.x, Dialogue[currentTextBubble].CameraDestination.z);
             }
@@ -122,7 +122,7 @@ public class TextBubbleScript : MonoBehaviour
                     sentence.maxVisibleCharacters = charIndex;
                 }
             }
-            else if(isPrinting)
+            else if (isPrinting)
             {
                 isPrinting = false;
             }
@@ -203,6 +203,6 @@ public class TextBubbleScript : MonoBehaviour
         }
         currentTextBubble = 0;
         Dialogue = null;
-        
+
     }
 }

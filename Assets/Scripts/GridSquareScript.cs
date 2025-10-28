@@ -97,7 +97,7 @@ public class GridSquareScript : MonoBehaviour
         rainparticle = GetComponentInChildren<ParticleSystem>();
         InitializePosition();
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
-        if(rainparticle != null)
+        if (rainparticle != null)
         {
             rainparticle.gameObject.SetActive(false);
         }
@@ -120,7 +120,7 @@ public class GridSquareScript : MonoBehaviour
 
         if (GridScript == null)
         {
-            GridScript = FindAnyObjectByType<GridScript>();
+            GridScript = GridScript.instance;
         }
         if (cameraScript == null)
         {
@@ -136,7 +136,7 @@ public class GridSquareScript : MonoBehaviour
             MapInitializer = FindAnyObjectByType<MapInitializer>();
         }
 
-        if(cameraScript.incombat)
+        if (cameraScript.incombat)
         {
             //SelectRoundFilling.GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f,0f);
         }
@@ -188,8 +188,8 @@ public class GridSquareScript : MonoBehaviour
             }
 
             UpdateFilling();
-            
-            
+
+
         }
 
         manageElevation();
@@ -210,13 +210,13 @@ public class GridSquareScript : MonoBehaviour
                     Vector3 direction = path[index - 1].transform.position - transform.position;
                     float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
                     PathPiecePrevious.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
-                    if(index == path.Count - 1)
+                    if (index == path.Count - 1)
                     {
                         PathPieceEnd.gameObject.SetActive(true);
                         PathPieceEnd.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
                     }
                     else
-                    {                         
+                    {
                         PathPieceEnd.gameObject.SetActive(false);
                     }
                 }
@@ -231,12 +231,12 @@ public class GridSquareScript : MonoBehaviour
                     Vector3 direction = path[index + 1].transform.position - transform.position;
                     float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
                     PathPieceNext.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
-                    
+
                 }
                 else
                 {
                     PathPieceNext.gameObject.SetActive(false);
-                    
+
                 }
             }
             else
@@ -256,15 +256,15 @@ public class GridSquareScript : MonoBehaviour
 
     public void UpdateInsideSprite(bool unitenter, Character unitchar = null)
     {
-        if(unitenter)
+        if (unitenter)
         {
-            if(unitchar != null)
+            if (unitchar != null)
             {
-                if(unitchar.enemyStats.monsterStats.size>1)
+                if (unitchar.enemyStats.monsterStats.size > 1)
                 {
                     transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnitBigEnemies;
                     int index = unitchar.currentTile.IndexOf(this);
-                    switch(index)
+                    switch (index)
                     {
                         case 0:
                             transform.GetChild(0).localRotation = Quaternion.Euler(0f, 0f, 90f);
@@ -285,7 +285,7 @@ public class GridSquareScript : MonoBehaviour
             {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
             }
-                
+
         }
         else
         {
@@ -295,11 +295,11 @@ public class GridSquareScript : MonoBehaviour
 
     private void manageVisuals()
     {
-        foreach(MaterialsClass mat in MaterialsList)
+        foreach (MaterialsClass mat in MaterialsList)
         {
-            if(mat.name.ToLower() == VisualType.ToLower())
+            if (mat.name.ToLower() == VisualType.ToLower())
             {
-                if(isobstacle && mat.wallmaterial!=null)
+                if (isobstacle && mat.wallmaterial != null)
                 {
                     Cube.GetComponent<Renderer>().material = mat.wallmaterial;
                 }
@@ -318,7 +318,7 @@ public class GridSquareScript : MonoBehaviour
             float targetelevation = 0;
             if (isstairs)
             {
-                if(Mathf.Abs(transform.position.y - targetelevation) <= 1.1)
+                if (Mathf.Abs(transform.position.y - targetelevation) <= 1.1)
                 {
                     transform.position = new Vector3(transform.position.x, targetelevation - 1.1f, transform.position.z);
                 }
@@ -333,7 +333,7 @@ public class GridSquareScript : MonoBehaviour
             }
             else
             {
-                if(Mathf.Abs(transform.position.y - targetelevation) <= 0.05f)
+                if (Mathf.Abs(transform.position.y - targetelevation) <= 0.05f)
                 {
                     transform.position = new Vector3(transform.position.x, targetelevation, transform.position.z);
                 }
@@ -347,7 +347,7 @@ public class GridSquareScript : MonoBehaviour
                 }
             }
 
-            
+
 
         }
         else
@@ -367,7 +367,7 @@ public class GridSquareScript : MonoBehaviour
 
             if (isobstacle)
             {
-                if(Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f)
+                if (Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f)
                 {
                     transform.position = new Vector3(transform.position.x, elevation + walloffset, transform.position.z);
                 }
@@ -382,7 +382,7 @@ public class GridSquareScript : MonoBehaviour
             }
             else
             {
-                if(Mathf.Abs(transform.position.y - elevation) <= 0.05f)
+                if (Mathf.Abs(transform.position.y - elevation) <= 0.05f)
                 {
                     transform.position = new Vector3(transform.position.x, elevation, transform.position.z);
                 }
@@ -418,15 +418,15 @@ public class GridSquareScript : MonoBehaviour
 
     private void ManageActivation()
     {
-        if(activated && !GetComponent<SpriteRenderer>().enabled)
+        if (activated && !GetComponent<SpriteRenderer>().enabled)
         {
             GetComponent<SpriteRenderer>().enabled = true;
-            for(int i = 0; i < transform.childCount;i++)
+            for (int i = 0; i < transform.childCount; i++)
             {
                 transform.GetChild(i).gameObject.SetActive(true);
             }
         }
-        if(!activated && GetComponent<SpriteRenderer>().enabled)
+        if (!activated && GetComponent<SpriteRenderer>().enabled)
         {
             GetComponent<SpriteRenderer>().enabled = false;
             for (int i = 0; i < transform.childCount; i++)
@@ -449,7 +449,7 @@ public class GridSquareScript : MonoBehaviour
         {
             Character Char = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
-            if(Char.enemyStats.monsterStats.size >1 )
+            if (Char.enemyStats.monsterStats.size > 1)
             {
                 SR.sprite = gridsquareFillingBigEnemies;
                 int index = Char.currentTile.IndexOf(this);
@@ -530,13 +530,13 @@ public class GridSquareScript : MonoBehaviour
     }
     public void fillwithGrey()
     {
-        if(filledimage!=null)
+        if (filledimage != null)
         {
             Color newcolor = Color.gray;
             newcolor.a = 0f;
             filledimage.color = newcolor;
         }
-        
+
     }
 
     public void fillwithNothing()
@@ -549,7 +549,7 @@ public class GridSquareScript : MonoBehaviour
         {
             MapInitializer = FindAnyObjectByType<MapInitializer>();
         }
-        if (TurnManger.currentlyplaying != "" || !MapInitializer.playablepos.Contains(GridCoordinates) && filledimage!=null)
+        if (TurnManger.currentlyplaying != "" || !MapInitializer.playablepos.Contains(GridCoordinates) && filledimage != null)
         {
             filledimage.color = new Color(1f, 1f, 1f, 0f);
         }

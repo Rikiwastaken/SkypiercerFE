@@ -9,6 +9,8 @@ using static UnitScript;
 public class DataScript : MonoBehaviour
 {
 
+    public static DataScript instance;
+
     public List<equipment> equipmentList;
 
     public List<equipment> BasicGradeList;
@@ -64,6 +66,10 @@ public class DataScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
         Application.targetFrameRate = 60;
         DontDestroyOnLoad(gameObject);
         if (SceneManager.GetActiveScene().name == "FirstScene")

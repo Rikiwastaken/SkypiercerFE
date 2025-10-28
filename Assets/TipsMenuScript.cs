@@ -35,10 +35,9 @@ public class TipsMenuScript : MonoBehaviour
     private void OnEnable()
     {
         ButtonInitialization();
-        if (InputManager == null)
-        {
-            InputManager = FindAnyObjectByType<InputManager>();
-        }
+
+        InputManager = InputManager.instance;
+
     }
 
     // Update is called once per frame
@@ -63,9 +62,9 @@ public class TipsMenuScript : MonoBehaviour
             }
 
 
-            if(ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())]!=-1)
+            if (ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())] != -1)
             {
-                if(!descriptionText.transform.parent.gameObject.activeSelf)
+                if (!descriptionText.transform.parent.gameObject.activeSelf)
                 {
                     descriptionText.transform.parent.gameObject.SetActive(true);
                 }

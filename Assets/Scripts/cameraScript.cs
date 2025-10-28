@@ -47,7 +47,7 @@ public class cameraScript : MonoBehaviour
     {
         initialrotation = transform.GetChild(0).rotation.eulerAngles;
         previouselevation = transform.position.y;
-        GridScript = FindAnyObjectByType<GridScript>();
+        GridScript = GridScript.instance;
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>();
         Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
         transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
@@ -55,13 +55,13 @@ public class cameraScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Destination!=null)
+        if (Destination != null)
         {
             destTile = GridScript.GetTile(Destination);
         }
-        if(destTile!=null)
+        if (destTile != null)
         {
-            if(previousdestTile!=null)
+            if (previousdestTile != null)
             {
                 if (previousdestTile.elevation != destTile.elevation)
                 {
@@ -73,20 +73,20 @@ public class cameraScript : MonoBehaviour
             {
                 previousdestTile = destTile;
             }
-            
+
         }
-        
-        if(Mathf.Abs(elevationtoadd)<=0.1f)
+
+        if (Mathf.Abs(elevationtoadd) <= 0.1f)
         {
             elevationtoadd = 0;
         }
 
-        if(elevationtoadd>0)
+        if (elevationtoadd > 0)
         {
             transform.position += new Vector3(0f, verticalautomovespeed * Time.deltaTime, 0f);
             elevationtoadd -= verticalautomovespeed * Time.deltaTime;
         }
-        else if(elevationtoadd < 0)
+        else if (elevationtoadd < 0)
         {
             transform.position += new Vector3(0f, -verticalautomovespeed * Time.deltaTime, 0f);
             elevationtoadd += verticalautomovespeed * Time.deltaTime;
@@ -133,16 +133,15 @@ public class cameraScript : MonoBehaviour
             previouselevation = transform.position.y;
         }
         */
-        if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || TutorialWindowScript.gameObject.activeSelf || TextBubbleScript.indialogue ||GridScript.NeutralMenu.activeSelf || GridScript.ForesightMenu.activeSelf)
+        if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || TutorialWindowScript.gameObject.activeSelf || TextBubbleScript.indialogue || GridScript.NeutralMenu.activeSelf || GridScript.ForesightMenu.activeSelf)
         {
             return;
         }
         Destination = new Vector2(GridScript.selection.transform.position.x, GridScript.selection.transform.position.z);
 
-        if (InputManager == null)
-        {
-            InputManager = FindAnyObjectByType<InputManager>();
-        }
+
+        InputManager = InputManager.instance;
+
 
         if (InputManager.movecamjustpressed)
         {
@@ -167,21 +166,21 @@ public class cameraScript : MonoBehaviour
         {
             transform.position += new Vector3(0f, InputManager.cammovementValue.y * -3f * Time.fixedDeltaTime, 0f);
         }
-        if(transform.position.y<5f)
+        if (transform.position.y < 5f)
         {
-            transform.position = new Vector3(transform.position.x,5f,transform.position.z);
+            transform.position = new Vector3(transform.position.x, 5f, transform.position.z);
         }
         if (transform.position.y > 20f)
         {
             transform.position = new Vector3(transform.position.x, 20f, transform.position.z);
         }
-        
+
         initialrotation = transform.GetChild(0).rotation.eulerAngles;
     }
 
     public void ResetRotation()
     {
-        if(!incombat)
+        if (!incombat)
         {
             transform.rotation = Quaternion.identity;
             transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(90, 0, 0));
@@ -191,7 +190,7 @@ public class cameraScript : MonoBehaviour
 
     public Vector2 GoToFightCamera(GameObject unit, GameObject target)
     {
-        
+
         fighter1 = unit;
         fighter2 = target;
         CombatTextScript.SetupCombat(unit, target);
@@ -230,9 +229,9 @@ public class cameraScript : MonoBehaviour
         if (input == Vector2.zero)
             return Vector2.zero;
 
-        // Camera rotation in multiples of 45°
+        // Camera rotation in multiples of 45ï¿½
         float camY = Camera.main.transform.eulerAngles.y;
-        int steps = Mathf.RoundToInt(camY / 45f); // number of 45° steps clockwise
+        int steps = Mathf.RoundToInt(camY / 45f); // number of 45ï¿½ steps clockwise
 
         // Map discrete input (-1,0,1) to one of 8 directions
         int inputX = Mathf.RoundToInt(input.x);

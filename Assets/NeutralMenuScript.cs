@@ -33,9 +33,9 @@ public class NeutralMenuScript : MonoBehaviour
             SaveManager = FindAnyObjectByType<SaveManager>();
         }
 
-        InputManager = FindAnyObjectByType<InputManager>();
+        InputManager = InputManager.instance;
 
-        if(SceneManager.GetActiveScene().name.Contains("Chapter"))
+        if (SceneManager.GetActiveScene().name.Contains("Chapter"))
         {
             chapter = int.Parse(SceneManager.GetActiveScene().name.Replace("Chapter", ""));
         }
@@ -54,10 +54,10 @@ public class NeutralMenuScript : MonoBehaviour
     {
 
         ManageSelection();
-        
-        if(InputManager.canceljustpressed)
+
+        if (InputManager.canceljustpressed)
         {
-            if(OptionsMenuTransfrom.gameObject.activeSelf)
+            if (OptionsMenuTransfrom.gameObject.activeSelf)
             {
                 OptionsMenuTransfrom.gameObject.SetActive(false);
             }
@@ -65,8 +65,8 @@ public class NeutralMenuScript : MonoBehaviour
             {
                 CloseMenu();
             }
-                
-            
+
+
         }
 
     }
@@ -78,10 +78,10 @@ public class NeutralMenuScript : MonoBehaviour
 
     public void EndTurn()
     {
-        foreach(GameObject character in TurnManager.playableunitGO)
+        foreach (GameObject character in TurnManager.playableunitGO)
         {
-            if(!character.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && !character.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
-            ActionManager.Wait(character);
+            if (!character.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && !character.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                ActionManager.Wait(character);
         }
         CloseMenu();
     }

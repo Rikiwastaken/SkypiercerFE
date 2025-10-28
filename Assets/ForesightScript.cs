@@ -56,7 +56,6 @@ public class ForesightScript : MonoBehaviour
     }
 
     public List<Action> actions = new List<Action>();
-    public GridScript gridscript;
 
     private GameObject CharacterHolder;
 
@@ -64,7 +63,6 @@ public class ForesightScript : MonoBehaviour
 
     public List<int> ButtonIDs;
 
-    private DataScript DataScript;
 
     private InputManager InputManager;
 
@@ -78,10 +76,8 @@ public class ForesightScript : MonoBehaviour
     private void OnEnable()
     {
         ButtonInitialization();
-        if(InputManager ==  null)
-        {
-            InputManager = FindAnyObjectByType<InputManager>();
-        }
+        InputManager = InputManager.instance;
+
     }
 
 
@@ -89,19 +85,19 @@ public class ForesightScript : MonoBehaviour
     {
 
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
-        if(currentSelected != null )
+        if (currentSelected != null)
         {
             if (currentSelected.transform.parent != transform)
             {
                 EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
             }
 
-            if (currentSelected == transform.GetChild(0).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y > 0)|| (InputManager.movecamjustpressed && InputManager.cammovementValue.y > 0)))
+            if (currentSelected == transform.GetChild(0).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y > 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y > 0)))
             {
                 ChangeButtonID(-1);
             }
 
-            if (currentSelected == transform.GetChild(Buttons.Count-1).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y < 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y < 0)))
+            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y < 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y < 0)))
             {
                 ChangeButtonID(1);
             }
@@ -137,9 +133,9 @@ public class ForesightScript : MonoBehaviour
             }
 
         }
-        
 
-        if(InputManager.canceljustpressed)
+
+        if (InputManager.canceljustpressed)
         {
             gameObject.SetActive(false);
             neutralmenu.SetActive(true);
@@ -150,9 +146,9 @@ public class ForesightScript : MonoBehaviour
 
     private void ChangeButtonID(int direction)
     {
-        if (direction ==1)
+        if (direction == 1)
         {
-            if (ButtonIDs[Buttons.Count-1] < actions.Count-1)
+            if (ButtonIDs[Buttons.Count - 1] < actions.Count - 1)
             {
                 for (int i = 0; i < Buttons.Count; i++)
                 {
@@ -161,11 +157,11 @@ public class ForesightScript : MonoBehaviour
             }
             UpdateButtonVisuals();
         }
-        else if(direction ==-1)
+        else if (direction == -1)
         {
-            if (ButtonIDs[0]>0)
+            if (ButtonIDs[0] > 0)
             {
-                for(int i = 0;i<Buttons.Count;i++)
+                for (int i = 0; i < Buttons.Count; i++)
                 {
                     ButtonIDs[i]--;
                 }
@@ -177,7 +173,7 @@ public class ForesightScript : MonoBehaviour
     private void ButtonInitialization()
     {
         ButtonIDs = new List<int>();
-        for(int i = 0;i < Buttons.Count;i++)
+        for (int i = 0; i < Buttons.Count; i++)
         {
             ButtonIDs.Add(-1);
         }
@@ -185,11 +181,11 @@ public class ForesightScript : MonoBehaviour
         for (int i = Buttons.Count - 1; i >= 0; i--)
         {
             int newindex = actions.Count - 1 - indexmod;
-            if(newindex >= 0)
+            if (newindex >= 0)
             {
                 ButtonIDs[i] = newindex;
             }
-            
+
             indexmod++;
         }
 
@@ -212,7 +208,7 @@ public class ForesightScript : MonoBehaviour
                 Buttons[i].transform.GetChild(0).gameObject.SetActive(true);
                 Action currentaction = actions[ButtonIDs[i]];
                 UnitScript unitwhoattacks = currentaction.Unit;
-                if(unitwhoattacks != null)
+                if (unitwhoattacks != null)
                 {
                     if (unitwhoattacks.UnitCharacteristics.affiliation == "playable")
                     {
@@ -242,19 +238,15 @@ public class ForesightScript : MonoBehaviour
                             text += " waited.";
                             break;
                         case 3:
-                            if (DataScript == null)
-                            {
-                                DataScript = FindAnyObjectByType<DataScript>();
-                            }
-                            text += " used " + DataScript.SkillList[currentaction.commandID].name + ".";
+                            text += " used " + DataScript.instance.SkillList[currentaction.commandID].name + ".";
                             break;
                     }
                 }
-                
 
-                
 
-                if(currentaction.beginningofturn==0)
+
+
+                if (currentaction.beginningofturn == 0)
                 {
                     text = "Beginning of Player Phase.";
                     Buttons[i].GetComponent<Image>().color = Color.blue;
@@ -282,28 +274,28 @@ public class ForesightScript : MonoBehaviour
 
     public void RevertButton(int ButtonID)
     {
-        if(ButtonID !=-1)
+        if (ButtonID != -1)
         {
             RevertTo(ButtonIDs[ButtonID]);
             gameObject.SetActive(false);
             neutralmenu.SetActive(true);
             EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
         }
-        
+
     }
     private void RevertTo(int ID)
-    { 
+    {
         int actionLength = actions.Count;
-        for (int i= actionLength - 1; i>ID; i--)
+        for (int i = actionLength - 1; i > ID; i--)
         {
             Action ActionToRevert = actions[i];
 
-            if(CharacterHolder==null)
+            if (CharacterHolder == null)
             {
                 CharacterHolder = GameObject.Find("Characters");
             }
 
-            for(int j=0; j<CharacterHolder.transform.childCount; j++)
+            for (int j = 0; j < CharacterHolder.transform.childCount; j++)
             {
                 GameObject GO = CharacterHolder.transform.GetChild(j).gameObject;
                 foreach (Character Character in ActionToRevert.ModifiedCharacters)
@@ -318,12 +310,12 @@ public class ForesightScript : MonoBehaviour
             UpdateCharacterLists();
             if (ActionToRevert.Unit != null)
             {
-                foreach (GameObject GO in gridscript.allunitGOs)
+                foreach (GameObject GO in GridScript.instance.allunitGOs)
                 {
 
                     if (GO.GetComponent<UnitScript>().UnitCharacteristics.ID == ActionToRevert.Unit.UnitCharacteristics.ID)
                     {
-                       
+
                         foreach (GridSquareScript tile in GO.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
                         {
                             tile.UpdateInsideSprite(true, GO.GetComponent<UnitScript>().UnitCharacteristics);
@@ -331,11 +323,11 @@ public class ForesightScript : MonoBehaviour
                     }
                 }
             }
-            
+
             switch (ActionToRevert.actiontype)
             {
                 case 0:
-                    if(ActionToRevert.AttackData.attackersurvivorstats!=-1)
+                    if (ActionToRevert.AttackData.attackersurvivorstats != -1)
                     {
                         ActionToRevert.Unit.SurvivorStacks = ActionToRevert.AttackData.attackersurvivorstats;
                     }
@@ -351,24 +343,24 @@ public class ForesightScript : MonoBehaviour
 
                     break;
                 case 3:
-                    foreach(TileModification tileModification in ActionToRevert.ModifiedTiles)
+                    foreach (TileModification tileModification in ActionToRevert.ModifiedTiles)
                     {
                         tileModification.tile.type = tileModification.type;
                         tileModification.tile.RemainingRainTurns = tileModification.previousremainingrain;
                         tileModification.tile.RemainingSunTurns = tileModification.previousremainingsun;
                     }
-                    if(ActionToRevert.skilltoremovefrominventory!=-1)
+                    if (ActionToRevert.skilltoremovefrominventory != -1)
                     {
-                        foreach (InventoryItem item in DataScript.PlayerInventory.inventoryItems)
+                        foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                         {
                             if (item.type == 1 && item.ID == ActionToRevert.skilltoremovefrominventory)
                             {
                                 item.Quantity--;
                             }
                         }
-                        foreach (GameObject GO in gridscript.allunitGOs)
+                        foreach (GameObject GO in GridScript.instance.allunitGOs)
                         {
-                            if (GO.GetComponent<UnitScript>().UnitCharacteristics.affiliation!="playable" && GO.GetComponent<UnitScript>().UnitCharacteristics.UnitSkill== ActionToRevert.skilltoremovefrominventory)
+                            if (GO.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && GO.GetComponent<UnitScript>().UnitCharacteristics.UnitSkill == ActionToRevert.skilltoremovefrominventory)
                             {
                                 GO.GetComponent<UnitScript>().copied = false;
                             }
@@ -376,7 +368,7 @@ public class ForesightScript : MonoBehaviour
                     }
                     break;
             }
-            gridscript.InitializeGOList();
+            GridScript.instance.InitializeGOList();
             RevertRolls(ActionToRevert);
             actions.Remove(ActionToRevert);
         }
@@ -389,7 +381,7 @@ public class ForesightScript : MonoBehaviour
         switch (action.actiontype)
         {
             case 0:
-                action.Unit.GetComponent<RandomScript>().hitvaluesindex= action.AttackData.previousattackerhitindex;
+                action.Unit.GetComponent<RandomScript>().hitvaluesindex = action.AttackData.previousattackerhitindex;
                 action.Unit.GetComponent<RandomScript>().CritValuesindex = action.AttackData.previousattackercritindex;
                 action.Unit.GetComponent<RandomScript>().levelvaluesindex = action.AttackData.previousattackerlvlupindex;
                 action.AttackData.defender.GetComponent<RandomScript>().hitvaluesindex = action.AttackData.previousdefenderhitindex;
@@ -406,7 +398,7 @@ public class ForesightScript : MonoBehaviour
                 action.Unit.GetComponent<RandomScript>().hitvaluesindex = action.AttackData.previousattackerhitindex;
                 action.Unit.GetComponent<RandomScript>().CritValuesindex = action.AttackData.previousattackercritindex;
                 action.Unit.GetComponent<RandomScript>().levelvaluesindex = action.AttackData.previousattackerlvlupindex;
-                if (action.AttackData.defender!=null)
+                if (action.AttackData.defender != null)
                 {
                     action.AttackData.defender.GetComponent<RandomScript>().hitvaluesindex = action.AttackData.previousdefenderhitindex;
                     action.AttackData.defender.GetComponent<RandomScript>().CritValuesindex = action.AttackData.previousdefendercritindex;
@@ -422,24 +414,24 @@ public class ForesightScript : MonoBehaviour
         {
             CharacterHolder = GameObject.Find("Characters");
         }
-        for(int i=0; i<CharacterHolder.transform.childCount; i++)
+        for (int i = 0; i < CharacterHolder.transform.childCount; i++)
         {
             GameObject currentGO = CharacterHolder.transform.GetChild(i).gameObject;
-            if (currentGO.activeSelf && !gridscript.allunitGOs.Contains(currentGO))
+            if (currentGO.activeSelf && !GridScript.instance.allunitGOs.Contains(currentGO))
             {
-                gridscript.allunitGOs.Add(currentGO);
+                GridScript.instance.allunitGOs.Add(currentGO);
                 currentGO.SetActive(true);
             }
-            else if(!currentGO.activeSelf && currentGO.GetComponent<UnitScript>().UnitCharacteristics.currentHP>0)
+            else if (!currentGO.activeSelf && currentGO.GetComponent<UnitScript>().UnitCharacteristics.currentHP > 0)
             {
-                if (!gridscript.allunitGOs.Contains(currentGO))
+                if (!GridScript.instance.allunitGOs.Contains(currentGO))
                 {
-                    gridscript.allunitGOs.Add(currentGO);
+                    GridScript.instance.allunitGOs.Add(currentGO);
                     currentGO.SetActive(true);
                 }
             }
         }
-        gridscript.GetComponent<TurnManger>().InitializeUnitLists(gridscript.allunitGOs);
+        GridScript.instance.GetComponent<TurnManger>().InitializeUnitLists(GridScript.instance.allunitGOs);
 
     }
 

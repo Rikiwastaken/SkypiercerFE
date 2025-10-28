@@ -41,7 +41,7 @@ public class ActionManager : MonoBehaviour
     void Start()
     {
         TurnManager = GetComponent<TurnManger>();
-        InputManager = FindAnyObjectByType<InputManager>();
+        InputManager = InputManager.instance;
         GridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<cameraScript>();
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>();

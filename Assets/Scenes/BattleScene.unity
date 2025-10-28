@@ -237,7 +237,7 @@ MonoBehaviour:
   ForegoundTMP: {fileID: 380509489}
   BackGroundTMP: {fileID: 249156839}
   timebeforevanish: 1
-  timetotargetscale: 0.1
+  timetotargetscale: 0.3
   movespeed: 10
   targetscale: 1
 --- !u!1 &133627132
@@ -1806,9 +1806,11 @@ MonoBehaviour:
   timebeforeending: 1
   Attackermoveintoposition: 0
   attackerLaunchAttack: 0
+  waitForAttackerProjectile: 0
   DefenderResponse: 0
   Defendermoveintoposition: 0
   DefenderLaunchAttack: 0
+  waitForDefenderProjectile: 0
   AttackerResponse: 0
   AwaitExp: 0
   movespeed: 5

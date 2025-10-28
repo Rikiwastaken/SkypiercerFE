@@ -34,7 +34,7 @@ public class MainMenuScript : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
             }
-            else if(currentSelected.transform.parent!= BaseMenu)
+            else if (currentSelected.transform.parent != BaseMenu)
             {
                 EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
             }
@@ -56,7 +56,7 @@ public class MainMenuScript : MonoBehaviour
     public void InitializeSaveButtons()
     {
         List<Button> buttons = new List<Button>();
-        for (int i = 0; i < ContinueMenu.childCount-1; i++)
+        for (int i = 0; i < ContinueMenu.childCount - 1; i++)
         {
             buttons.Add(ContinueMenu.GetChild(i).GetComponent<Button>());
         }
@@ -71,11 +71,11 @@ public class MainMenuScript : MonoBehaviour
 
     public void OnCancel()
     {
-        if(OptionsMenu.gameObject.activeSelf)
+        if (OptionsMenu.gameObject.activeSelf)
         {
             OptionsMenuButton.onClick.Invoke();
         }
-        else if(ContinueMenu.gameObject.activeSelf)
+        else if (ContinueMenu.gameObject.activeSelf)
         {
             ContinueMenuButton.onClick.Invoke();
         }
@@ -88,19 +88,19 @@ public class MainMenuScript : MonoBehaviour
 
     private string GetChapterScene(int chapter)
     {
-        if(chapter == 0)
+        if (chapter == 0)
         {
             return "Prologue";
         }
         else
         {
-            return "Chapter"+chapter;
+            return "Chapter" + chapter;
         }
     }
 
     public void LoadSave(int slot)
     {
-        
+
         if (saveManager.SaveClasses[slot] != null)
         {
             saveManager.activeSlot = slot;
@@ -123,7 +123,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void ResetSave()
     {
-        FindAnyObjectByType<DataScript>().RestoreBaseCharacterValues();
+        DataScript.instance.RestoreBaseCharacterValues();
     }
 
 }

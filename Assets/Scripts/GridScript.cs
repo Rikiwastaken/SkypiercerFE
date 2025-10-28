@@ -9,6 +9,8 @@ using static UnitScript;
 public class GridScript : MonoBehaviour
 {
 
+    public static GridScript instance;
+
     public GameObject GridSquarePrefab;
 
     public List<List<GameObject>> Grid;
@@ -75,10 +77,16 @@ public class GridScript : MonoBehaviour
 
     private void Awake()
     {
-        if (FindAnyObjectByType<DataScript>() == null)
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        if (DataScript.instance == null)
         {
             SceneManager.LoadScene("FirstScene");
         }
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -102,10 +110,9 @@ public class GridScript : MonoBehaviour
         }
 
 
-        if (inputManager == null)
-        {
-            inputManager = FindAnyObjectByType<InputManager>();
-        }
+
+        inputManager = InputManager.instance;
+
 
         if (moveCD > 0)
         {
@@ -442,7 +449,7 @@ public class GridScript : MonoBehaviour
         Transform unitholder = GameObject.Find("Characters").transform;
 
 
-        for(int i = 0; i < unitholder.childCount; i++)
+        for (int i = 0; i < unitholder.childCount; i++)
         {
             UnitScript character = unitholder.GetChild(i).GetComponent<UnitScript>();
             allunits.Add(character.UnitCharacteristics);
@@ -917,15 +924,15 @@ public class GridScript : MonoBehaviour
             }
         }
 
-        if(attacker!=null)
+        if (attacker != null)
         {
-            foreach(GridSquareScript tile in attacker.currentTile)
+            foreach (GridSquareScript tile in attacker.currentTile)
             {
-                if(attacktiles.Contains(tile))
+                if (attacktiles.Contains(tile))
                 {
                     attacktiles.Remove(tile);
                 }
-                if(healingtiles.Contains(tile))
+                if (healingtiles.Contains(tile))
                 {
                     healingtiles.Remove(tile);
                 }
@@ -944,7 +951,7 @@ public class GridScript : MonoBehaviour
     /// <param name="size"></param>
     /// <param name="unit"></param>
     /// <returns></returns>
-    public List<GridSquareScript> GetAttack(int range, bool frapperenmelee, GridSquareScript tile, int size = 0, Character unit=null)
+    public List<GridSquareScript> GetAttack(int range, bool frapperenmelee, GridSquareScript tile, int size = 0, Character unit = null)
     {
         List<GridSquareScript> newattacktiles = new List<GridSquareScript>();
         List<GridSquareScript> tilestouse = new List<GridSquareScript>() { tile };

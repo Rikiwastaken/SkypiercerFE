@@ -148,7 +148,7 @@ public class MapLoader : EditorWindow
                 lasttile = newtile.GetComponent<GridSquareScript>();
             }
         }
-        FindAnyObjectByType<GridScript>().lastSquare = lasttile;
+        GridScript.instance.lastSquare = lasttile;
         EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
     }
     void DeletePreviousMap()
