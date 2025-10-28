@@ -57,11 +57,15 @@ public class CombaSceneManager : MonoBehaviour
 
     public bool attackerLaunchAttack;
 
+    public bool waitForAttackerProjectile;
+
     public bool DefenderResponse;
 
     public bool Defendermoveintoposition;
 
     public bool DefenderLaunchAttack;
+
+    public bool waitForDefenderProjectile;
 
     public bool AttackerResponse;
 
@@ -126,11 +130,26 @@ public class CombaSceneManager : MonoBehaviour
     private void FixedUpdate()
     {
 
+
         TextCanvas.LookAt(cam.transform.position);
 
         if (ActiveCombatData != null)
         {
-            if(timebeforestartcounter>0)
+
+            if(!waitForAttackerProjectile)
+            {
+
+                ManageWeaponPositionResting(attackerSceneGO);
+            }
+
+            if (!waitForDefenderProjectile)
+            {
+
+                ManageWeaponPositionResting(defenderSceneGO);
+            }
+
+
+            if (timebeforestartcounter>0)
             {
                 timebeforestartcounter--;
             }
@@ -141,6 +160,21 @@ public class CombaSceneManager : MonoBehaviour
         }
     }
 
+    private void ManageWeaponPositionResting(GameObject go)
+    {
+        if(go.GetComponent<UnitScript>().FlyingWeapon!=null)
+        {
+            if (Vector3.Distance(go.GetComponent<UnitScript>().FlyingWeapon.transform.localPosition, go.GetComponent<UnitScript>().telekinesisWeaponPos) > go.GetComponent<UnitScript>().maxmovementrangevertical * 2f)
+            {
+                go.GetComponent<UnitScript>().FlyingWeapon.transform.localPosition = Vector3.Lerp(go.GetComponent<UnitScript>().FlyingWeapon.transform.localPosition, go.GetComponent<UnitScript>().telekinesisWeaponPos, Time.fixedDeltaTime * 5f);
+                go.GetComponent<UnitScript>().FlyingWeapon.transform.localRotation = Quaternion.Lerp(go.GetComponent<UnitScript>().FlyingWeapon.transform.localRotation, Quaternion.Euler(go.GetComponent<UnitScript>().telekinesisWeaponRot), Time.fixedDeltaTime * 5f);
+            }
+            else
+            {
+                go.GetComponent<UnitScript>().ManageFlyingWeaponPosition();
+            }
+        }
+    }
 
     private void ManageAnimationFlow()
     {
@@ -207,10 +241,47 @@ public class CombaSceneManager : MonoBehaviour
 
             MiddleTransform.position = (ActiveCombatData.attackerAnimator.transform.position + ActiveCombatData.defenderAnimator.transform.position) / 2f;
 
-            if (attackerSceneGO.GetComponent<UnitScript>().AttackAnimationAlmostdone(ActiveCombatData.attackerAnimator,0.8f) && attackbuffer <= 0)
+
+            if(ActiveCombatData.attacker.telekinesisactivated || ActiveCombatData.attackerWeapon.type.ToLower()=="bow")
             {
+                waitForAttackerProjectile = true;
                 attackerLaunchAttack = false;
-                if(ActiveCombatData.defenderdodged)
+
+
+            }
+            else
+            {
+                if (attackerSceneGO.GetComponent<UnitScript>().AttackAnimationAlmostdone(ActiveCombatData.attackerAnimator, 0.8f) && attackbuffer <= 0)
+                {
+                    attackerLaunchAttack = false;
+                    if (ActiveCombatData.defenderdodged)
+                    {
+                        ActiveCombatData.defenderAnimator.SetTrigger("Dodge");
+                    }
+                    else if (ActiveCombatData.defenderdied)
+                    {
+                        ActiveCombatData.defenderAnimator.SetTrigger("Death");
+                        deathcharactercounter = (int)(deathtimeoutduration / Time.fixedDeltaTime);
+                    }
+                    else
+                    {
+                        ActiveCombatData.defenderAnimator.SetTrigger("Damage");
+                    }
+
+                    DefenderResponse = true;
+                }
+            }
+
+
+            
+        }
+        else if (waitForAttackerProjectile)
+        {
+
+            if(ActiveCombatData.attackerWeapon.type.ToLower() == "bow")
+            {
+                waitForAttackerProjectile = false;
+                if (ActiveCombatData.defenderdodged)
                 {
                     ActiveCombatData.defenderAnimator.SetTrigger("Dodge");
                 }
@@ -223,31 +294,38 @@ public class CombaSceneManager : MonoBehaviour
                 {
                     ActiveCombatData.defenderAnimator.SetTrigger("Damage");
                 }
-                
+
                 DefenderResponse = true;
             }
+            else
+            {
+                ManageTelekinesisProjectileMovement(true);
+            }
+
+                
+            
         }
-        else if(DefenderResponse)
+        else if (DefenderResponse)
         {
-            if(!firsttextcreated)
+            if (!firsttextcreated)
             {
                 CreateText(true);
                 firsttextcreated = true;
             }
-            
+
             if (!defenderSceneGO.GetComponent<UnitScript>().isinattackresponseanimation(ActiveCombatData.defenderAnimator))
             {
                 DefenderResponse = false;
                 if (ActiveCombatData.defenderattacks)
                 {
-                    
+
                     Defendermoveintoposition = true;
                 }
             }
-            if(deathcharactercounter>0)
+            if (deathcharactercounter > 0)
             {
                 deathcharactercounter--;
-                if(deathcharactercounter <= 0)
+                if (deathcharactercounter <= 0)
                 {
                     DefenderResponse = false;
                     if (ActiveCombatData.defenderattacks)
@@ -259,7 +337,7 @@ public class CombaSceneManager : MonoBehaviour
             }
             cam.transform.parent = MiddleTransform;
         }
-        else if(Defendermoveintoposition)
+        else if (Defendermoveintoposition)
         {
             if ((ActiveCombatData.defender.telekinesisactivated || ActiveCombatData.defenderWeapon.type.ToLower() == "staff" || ActiveCombatData.defenderWeapon.type.ToLower() == "bow") || !(ActiveCombatData.attacker.telekinesisactivated || ActiveCombatData.attackerWeapon.type.ToLower() == "staff" || ActiveCombatData.attackerWeapon.type.ToLower() == "bow"))
             {
@@ -290,7 +368,7 @@ public class CombaSceneManager : MonoBehaviour
                     PlayAnimation(ActiveCombatData.defender, 0, doubleattack, tripleattack, ActiveCombatData.healing);
                     attackbuffer = (int)(attackbufferduration / Time.fixedDeltaTime);
                 }
-                
+
 
             }
             else
@@ -332,19 +410,56 @@ public class CombaSceneManager : MonoBehaviour
                         attackbuffer = (int)(attackbufferduration / Time.fixedDeltaTime);
                     }
                 }
-                
-            }
-            
 
-            
+            }
+
+
+
         }
         else if (DefenderLaunchAttack)
         {
             MiddleTransform.rotation = Quaternion.Lerp(MiddleTransform.rotation, Quaternion.Euler(new Vector3(0, 180, 0)), Time.fixedDeltaTime * CamRotSpeed);
-            if (defenderSceneGO.GetComponent<UnitScript>().AttackAnimationAlmostdone(ActiveCombatData.defenderAnimator, 0.8f) && attackbuffer<=0)
+
+
+            if (ActiveCombatData.defender.telekinesisactivated || ActiveCombatData.defenderWeapon.type.ToLower() == "bow")
             {
+                waitForDefenderProjectile = true;
                 DefenderLaunchAttack = false;
-                AttackerResponse = true;
+
+
+            }
+            else
+            {
+                if (defenderSceneGO.GetComponent<UnitScript>().AttackAnimationAlmostdone(ActiveCombatData.defenderAnimator, 0.8f) && attackbuffer <= 0)
+                {
+                    DefenderLaunchAttack = false;
+                    AttackerResponse = true;
+                    if (ActiveCombatData.attackerdodged)
+                    {
+                        ActiveCombatData.attackerAnimator.SetTrigger("Dodge");
+                    }
+                    else if (ActiveCombatData.attackerdied)
+                    {
+                        ActiveCombatData.attackerAnimator.SetTrigger("Death");
+                        deathcharactercounter = (int)(deathtimeoutduration / Time.fixedDeltaTime);
+                    }
+                    else
+                    {
+                        ActiveCombatData.attackerAnimator.SetTrigger("Damage");
+                    }
+
+                }
+            }
+
+
+            
+        }
+        else if (waitForDefenderProjectile)
+        {
+
+            if (ActiveCombatData.defenderWeapon.type.ToLower() == "bow")
+            {
+                waitForDefenderProjectile = false;
                 if (ActiveCombatData.attackerdodged)
                 {
                     ActiveCombatData.attackerAnimator.SetTrigger("Dodge");
@@ -358,22 +473,30 @@ public class CombaSceneManager : MonoBehaviour
                 {
                     ActiveCombatData.attackerAnimator.SetTrigger("Damage");
                 }
-                
+
+                AttackerResponse = true;
             }
+            else
+            {
+                ManageTelekinesisProjectileMovement(false);
+            }
+
+
+
         }
-        else if(AttackerResponse)
+        else if (AttackerResponse)
         {
-            if(!secondtextcreated)
+            if (!secondtextcreated)
             {
                 CreateText(false);
                 secondtextcreated = true;
             }
-            
+
             if (!attackerSceneGO.GetComponent<UnitScript>().isinattackresponseanimation(ActiveCombatData.attackerAnimator))
             {
                 AttackerResponse = false;
                 onetoreceiveexp = DetermineWhoGainedExp();
-                AwaitExp = onetoreceiveexp!=null;
+                AwaitExp = onetoreceiveexp != null;
             }
             if (deathcharactercounter > 0)
             {
@@ -386,7 +509,7 @@ public class CombaSceneManager : MonoBehaviour
         }
         else if (AwaitExp)
         {
-            if(!waittingforexp)
+            if (!waittingforexp)
             {
                 waittingforexp = true;
                 ExpBarScript.SetupBar(onetoreceiveexp, ActiveCombatData.expGained, ActiveCombatData.levelupbonuses);
@@ -403,7 +526,7 @@ public class CombaSceneManager : MonoBehaviour
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, cameraExpGainPos, Time.fixedDeltaTime * CamMoveSpeed);
             cam.transform.localRotation = Quaternion.Lerp(cam.transform.localRotation, Quaternion.Euler(cameraExpGainRot), Time.fixedDeltaTime * CamRotSpeed);
 
-            if(expdistributed)
+            if (expdistributed)
             {
                 AwaitExp = false;
             }
@@ -411,7 +534,7 @@ public class CombaSceneManager : MonoBehaviour
         }
         else
         {
-            if(timebeforeendcounter > 0)
+            if (timebeforeendcounter > 0)
             {
                 timebeforeendcounter--;
             }
@@ -421,6 +544,63 @@ public class CombaSceneManager : MonoBehaviour
             }
         }
     }
+
+    private void ManageTelekinesisProjectileMovement(bool Attackerturn)
+    {
+
+        if(Attackerturn)
+        {
+            attackerSceneGO.GetComponent<UnitScript>().FlyingWeapon.transform.position = Vector3.Lerp(attackerSceneGO.GetComponent<UnitScript>().FlyingWeapon.transform.position, ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
+            if (Mathf.Abs(attackerSceneGO.GetComponent<UnitScript>().FlyingWeapon.transform.position.x - ActiveCombatData.defenderAnimator.transform.position.x) <0.1f)
+            {
+                waitForAttackerProjectile = false;
+                if (ActiveCombatData.defenderdodged)
+                {
+                    ActiveCombatData.defenderAnimator.SetTrigger("Dodge");
+                }
+                else if (ActiveCombatData.defenderdied)
+                {
+                    ActiveCombatData.defenderAnimator.SetTrigger("Death");
+                    deathcharactercounter = (int)(deathtimeoutduration / Time.fixedDeltaTime);
+                }
+                else
+                {
+                    ActiveCombatData.defenderAnimator.SetTrigger("Damage");
+                }
+
+                DefenderResponse = true;
+            }
+        }
+        else
+        {
+            defenderSceneGO.GetComponent<UnitScript>().FlyingWeapon.transform.position = Vector3.Lerp(defenderSceneGO.GetComponent<UnitScript>().FlyingWeapon.transform.position, ActiveCombatData.attackerAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
+            if (Mathf.Abs(defenderSceneGO.GetComponent<UnitScript>().FlyingWeapon.transform.position.x - ActiveCombatData.attackerAnimator.transform.position.x) < 0.1f)
+            {
+                waitForDefenderProjectile = false;
+                if (ActiveCombatData.attackerdodged)
+                {
+                    ActiveCombatData.attackerAnimator.SetTrigger("Dodge");
+                }
+                else if (ActiveCombatData.attackerdied)
+                {
+                    ActiveCombatData.attackerAnimator.SetTrigger("Death");
+                    deathcharactercounter = (int)(deathtimeoutduration / Time.fixedDeltaTime);
+                }
+                else
+                {
+                    ActiveCombatData.attackerAnimator.SetTrigger("Damage");
+                }
+
+                AttackerResponse = true;
+            }
+        }
+
+
+
+        
+    }
+
+
 
     private Character DetermineWhoGainedExp()
     {
@@ -471,9 +651,14 @@ public class CombaSceneManager : MonoBehaviour
                     {
                         attacktext = "1 hit\n";
                     }
-                    if(ActiveCombatData.attackercrits>0)
+                    if(ActiveCombatData.attackercrits==1)
                     {
-                        attacktext += ActiveCombatData.attackercrits + " crits !\n";
+                        attacktext +=" Critical !\n";
+                        colortouse = Color.yellow;
+                    }
+                    else if(ActiveCombatData.attackercrits>1)
+                    {
+                        attacktext += " Critical x"+ ActiveCombatData.attackercrits+" !\n";
                         colortouse = Color.yellow;
                     }
                     attacktext += ActiveCombatData.attackerdamage;
@@ -523,10 +708,10 @@ public class CombaSceneManager : MonoBehaviour
     {
         attackerSceneGO.GetComponent<UnitScript>().UnitCharacteristics = attacker;
         attackerSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(attacker.modelID);
-        attackerSceneGO.GetComponent<UnitScript>().UpdateWeaponModel();
+        
         defenderSceneGO.GetComponent<UnitScript>().UnitCharacteristics = defender;
         defenderSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(defender.modelID);
-        defenderSceneGO.GetComponent<UnitScript>().UpdateWeaponModel();
+        
 
 
         CombatData newdata = new CombatData();
@@ -548,12 +733,15 @@ public class CombaSceneManager : MonoBehaviour
         newdata.attackercrits = attackercrits;
         newdata.defendercrits = defendercrits;
 
-
+        attackerSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.attackerAnimator);
+        defenderSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.defenderAnimator);
 
         newdata.attackerAnimator.SetBool("Ismachine", attacker.enemyStats.monsterStats.ismachine);
-        newdata.defenderAnimator.SetBool("Ismachine", attacker.enemyStats.monsterStats.ismachine);
+        newdata.defenderAnimator.SetBool("Ismachine", defender.enemyStats.monsterStats.ismachine);
         newdata.attackerAnimator.SetBool("Ispluvial", attacker.enemyStats.monsterStats.ispluvial);
-        newdata.defenderAnimator.SetBool("Ispluvial", attacker.enemyStats.monsterStats.ispluvial);
+        newdata.defenderAnimator.SetBool("Ispluvial", defender.enemyStats.monsterStats.ispluvial);
+        newdata.defenderAnimator.SetBool("UsingTelekinesis", defender.telekinesisactivated);
+        newdata.attackerAnimator.SetBool("UsingTelekinesis", attacker.telekinesisactivated);
 
 
         ResetScene(newdata.attackerAnimator.transform, newdata.defenderAnimator.transform);
@@ -579,6 +767,7 @@ public class CombaSceneManager : MonoBehaviour
     {
         waittingforexp = false;
         expdistributed = false;
+        ExpBarScript.gameObject.SetActive(false);
         FindAnyObjectByType<CombatSceneLoader>().ActivateMainScene();
     }
 

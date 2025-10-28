@@ -37,23 +37,23 @@ public class UnitDeploymentButton : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(SkillEditionScript==null)
+        if (SkillEditionScript == null)
         {
             SkillEditionScript = FindAnyObjectByType<SkillEditionScript>();
         }
-        
+
 
         GetComponentInChildren<TextMeshProUGUI>().text = "None";
-        if (Character!=null)
+        if (Character != null)
         {
             if (Character.name != "")
             {
-                if(Character.playableStats.battalion!= "Zack" && Character.playableStats.battalion != "Kira" && Character.playableStats.battalion != "Gale")
+                if (Character.playableStats.battalion != "Zack" && Character.playableStats.battalion != "Kira" && Character.playableStats.battalion != "Gale")
                 {
                     Character.playableStats.battalion = "Zack";
                 }
                 GetComponentInChildren<TextMeshProUGUI>().text = Character.name + " Lvl " + Character.level;
-                if(!isskillbutton)
+                if (!isskillbutton)
                 {
                     if (Character.playableStats.deployunit)
                     {
@@ -67,7 +67,7 @@ public class UnitDeploymentButton : MonoBehaviour
                 if (InputManager.Telekinesisjustpressed && EventSystem.current.currentSelectedGameObject == gameObject && !Character.playableStats.protagonist)
                 {
                     ChangeBattallion();
-                    
+
                 }
                 return;
             }
@@ -76,17 +76,17 @@ public class UnitDeploymentButton : MonoBehaviour
                 GetComponentInChildren<TextMeshProUGUI>().text = "None";
             }
         }
-        if(Item!=null)
+        if (Item != null)
         {
-            if(Item.ID!=0)
+            if (Item.ID != 0)
             {
                 Skill skill = DataScript.SkillList[Item.ID];
                 GetComponentInChildren<TextMeshProUGUI>().text = skill.name + " : " + Item.Quantity;
-                if(SkillEditionScript.selectedcharacter.UnitSkill == Item.ID)
+                if (SkillEditionScript.selectedcharacter.UnitSkill == Item.ID)
                 {
                     GetComponent<Image>().color = Color.green;
                 }
-                else if(SkillEditionScript.selectedcharacter.EquipedSkills.Contains(Item.ID))
+                else if (SkillEditionScript.selectedcharacter.EquipedSkills.Contains(Item.ID))
                 {
                     GetComponent<Image>().color = Color.cyan;
                 }
@@ -111,7 +111,7 @@ public class UnitDeploymentButton : MonoBehaviour
 
         foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if (character.name.ToLower()== "kira" && character.playableStats.unlocked)
+            if (character.name.ToLower() == "kira" && character.playableStats.unlocked)
             {
                 KiraUnlocked = true;
             }
@@ -129,11 +129,11 @@ public class UnitDeploymentButton : MonoBehaviour
 
         if (Character.playableStats.battalion == "Zack")
         {
-            if(KiraUnlocked)
+            if (KiraUnlocked)
             {
                 Character.playableStats.battalion = "Kira";
             }
-            else if(GaleUnlocked)
+            else if (GaleUnlocked)
             {
                 Character.playableStats.battalion = "Gale";
             }
@@ -173,7 +173,7 @@ public class UnitDeploymentButton : MonoBehaviour
             Character.playableStats.deployunit = false;
             MapInitializer.InitializePlayers();
         }
-        else if (!Character.playableStats.deployunit && numberofcharacterdeployed <MapInitializer.playablepos.Count)
+        else if (!Character.playableStats.deployunit && numberofcharacterdeployed < MapInitializer.playablepos.Count)
         {
             Character.playableStats.deployunit = true;
             MapInitializer.InitializePlayers();

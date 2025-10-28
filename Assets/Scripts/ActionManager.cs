@@ -65,6 +65,7 @@ public class ActionManager : MonoBehaviour
             if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow") == null && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
             {
                 currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+                currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                 (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
                 GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
             }
@@ -113,6 +114,7 @@ public class ActionManager : MonoBehaviour
                     if (InputManager.Telekinesisjustpressed && !battlecamera.incombat)
                     {
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+                        currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                         GridScript.ShowMovement();
                     }
                     if (InputManager.NextWeaponjustpressed)
@@ -155,6 +157,7 @@ public class ActionManager : MonoBehaviour
                     {
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                         WeaponChange(currentcharacter);
+                        currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                         GridScript.ShowMovement();
                     }
                     if (InputManager.canceljustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)

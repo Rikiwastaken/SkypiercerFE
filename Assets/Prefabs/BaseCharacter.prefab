@@ -626,6 +626,12 @@ MonoBehaviour:
     Resistance: 0
     Speed: 0
     Dexterity: 0
+  FlyingWeapon: {fileID: 0}
+  telekinesisWeaponPos: {x: 0.3, y: 1.7, z: -0.35}
+  telekinesisWeaponRot: {x: -90, y: -90, z: 0}
+  flyingmovingspeed: 0.1
+  maxmovementrangevertical: 0.2
+  maxmovementrangehorizontal: 0.1
 --- !u!114 &5380667576583153213
 MonoBehaviour:
   m_ObjectHideFlags: 0

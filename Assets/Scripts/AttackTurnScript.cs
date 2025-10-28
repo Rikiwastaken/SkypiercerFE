@@ -1,8 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static DataScript;
 using static UnitScript;
@@ -93,6 +89,9 @@ public class AttackTurnScript : MonoBehaviour
             AttackWithAnimationEndOfFight(previousattacker,previoustarget);
             previousattacker = null;
             previoustarget = null;
+            gridScript.ResetAllSelections();
+            waittingforcamera = false;
+            triggercleanup = true;
         }
 
         if (phaseTextScript.moveText)
@@ -573,7 +572,7 @@ public class AttackTurnScript : MonoBehaviour
 
     private void ManageAttackWithoutAnimation(GameObject Attacker)
     {
-        triggercleanup = true;
+        
         Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
         if (counterbeforeattack > 0)
         {
@@ -931,9 +930,11 @@ public class AttackTurnScript : MonoBehaviour
 
     public void AttackWithAnimationEndOfFight(GameObject Attacker, GameObject Target)
     {
-
+        Attacker.GetComponent<UnitScript>().disableLifebar = false;
         if (Target != null)
         {
+            
+            Target.GetComponent<UnitScript>().disableLifebar = false;
             EndOfCombatTrigger(Attacker, Target);
         }
         else
@@ -945,7 +946,7 @@ public class AttackTurnScript : MonoBehaviour
         {
             ActionsMenu.FinalizeAttack();
         }
-
+        attackanimationhappening = false;
     }
 
 
@@ -972,6 +973,9 @@ public class AttackTurnScript : MonoBehaviour
 
             if (target != null)
             {
+
+                Attacker.GetComponent<UnitScript>().disableLifebar = true;
+                target.GetComponent<UnitScript>().disableLifebar = true;
 
                 previousattacker = Attacker;
                 previoustarget = target;

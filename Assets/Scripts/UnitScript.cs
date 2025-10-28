@@ -243,6 +243,19 @@ public class UnitScript : MonoBehaviour
     public Vector2 previousposition;
     public BaseStats previousStats;
 
+
+    public bool disableLifebar;
+
+
+    [Header("Flying Weapon")]
+    public GameObject FlyingWeapon;
+
+    public Vector3 telekinesisWeaponPos;
+    public Vector3 telekinesisWeaponRot;
+    private bool flyingweaponmovingup;
+    public float flyingmovingspeed;
+    public float maxmovementrangevertical;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -335,6 +348,7 @@ public class UnitScript : MonoBehaviour
         }
         animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
         animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
+        animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower()!="bow");
         if (armature == null)
         {
             armature = animator.transform;
@@ -369,19 +383,12 @@ public class UnitScript : MonoBehaviour
 
         ManageMovement();
 
-
-        //bool shouldBeActive = cameraScript.fighter1 == gameObject || cameraScript.fighter2 == gameObject || !cameraScript.incombat;
-
-        //if (animator.gameObject.activeSelf != shouldBeActive)
-        //{
-        //    animator.gameObject.SetActive(shouldBeActive);
-        //}
-
         //TemporaryColor();
         UpdateRendererLayer();
         ManageDamagenumber();
         Hidedeactivated();
         ManageSize();
+        ManageFlyingWeaponPosition();
     }
 
     //Manage Vertical Position
@@ -578,13 +585,47 @@ public class UnitScript : MonoBehaviour
     {
         pathtotake = new List<Vector2>();
     }
+
+
+    public void ManageFlyingWeaponPosition()
+    {
+        if(FlyingWeapon!=null)
+        {
+ 
+
+            float RandomY = (float)UnityEngine.Random.Range(0.9f, 1.1f);
+
+            if (flyingweaponmovingup)
+            {
+                FlyingWeapon.transform.localPosition += new Vector3(0f, flyingmovingspeed* RandomY * Time.fixedDeltaTime, 0f);
+
+                if (FlyingWeapon.transform.localPosition.y >= telekinesisWeaponPos.y + maxmovementrangevertical)
+                {
+                    
+                    flyingweaponmovingup = false;
+                }
+            }
+            else
+            {
+                FlyingWeapon.transform.localPosition -= new Vector3(0f, flyingmovingspeed* RandomY * Time.fixedDeltaTime, 0f);
+                if (FlyingWeapon.transform.localPosition.y <= telekinesisWeaponPos.y - maxmovementrangevertical)
+                {
+                    
+                    flyingweaponmovingup = true;
+                }
+            }
+
+        }
+    }
+
     private void ManageLifebars()
     {
+
         transform.GetChild(0).rotation = Quaternion.Euler(90f, 0f, 0f);
         Image LifebarBehind = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         Image Lifebar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
 
-        if (cameraScript.incombat)
+        if (cameraScript.incombat || disableLifebar)
         {
             if (Lifebar.gameObject.activeSelf)
             {
@@ -823,7 +864,7 @@ public class UnitScript : MonoBehaviour
         }
 
         
-        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("PluvialIdle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
+        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Telekinesis Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("PluvialIdle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
         {
             return false;
         }
@@ -854,7 +895,7 @@ public class UnitScript : MonoBehaviour
         }
 
 
-        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("PluvialIdle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
+        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Telekinesis Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("PluvialIdle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
         {
             return false;
         }
@@ -1097,11 +1138,34 @@ public class UnitScript : MonoBehaviour
     {
         initialforward = armature.forward;
     }
-    public void UpdateWeaponModel()
+    public void UpdateWeaponModel(Animator otheranimator = null)
     {
+
+        Animator animatortouse = otheranimator;
+        if (otheranimator != null)
+        {
+            animatortouse = otheranimator;
+        }
+        else
+        {
+            if (animator == null)
+            {
+                foreach (ModelInfo modelInfo in ModelList)
+                {
+                    if (modelInfo.active)
+                    {
+                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
+                        rotationadjust = modelInfo.rotationadjust;
+                    }
+                }
+            }
+            animatortouse = animator;
+        }
+
         if (currentequipmentmodel != null)
         {
             Destroy(currentequipmentmodel);
+            FlyingWeapon = null;
         }
         if (GetFirstWeapon().Grade != 0 && GetFirstWeapon().Currentuses != 0)
         {
@@ -1118,6 +1182,11 @@ public class UnitScript : MonoBehaviour
                         {
                             currentequipmentmodel.transform.SetParent(modelInfo.Lefthandbone);
                         }
+                        else if(UnitCharacteristics.telekinesisactivated)
+                        {
+                            FlyingWeapon = currentequipmentmodel;
+                            currentequipmentmodel.transform.SetParent(animatortouse.transform);
+                        }
                         else if (GetFirstWeapon().type.ToLower() != "machine")
                         {
                             currentequipmentmodel.transform.SetParent(modelInfo.handbone);
@@ -1126,9 +1195,17 @@ public class UnitScript : MonoBehaviour
                 }
 
 
-
-                currentequipmentmodel.transform.localPosition = Vector3.zero;
-                currentequipmentmodel.transform.localRotation = Quaternion.identity;
+                if(UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow")
+                {
+                    currentequipmentmodel.transform.localPosition = telekinesisWeaponPos;
+                    currentequipmentmodel.transform.localRotation = Quaternion.Euler(telekinesisWeaponRot);
+                }
+                else
+                {
+                    currentequipmentmodel.transform.localPosition = Vector3.zero;
+                    currentequipmentmodel.transform.localRotation = Quaternion.identity;
+                }
+                    
             }
 
         }
