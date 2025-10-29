@@ -1,10 +1,12 @@
 using System;
-using UnityEngine;
-using static UnitScript;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
+using static UnitScript;
 
 public class CombaSceneManager : MonoBehaviour
 {
@@ -40,6 +42,15 @@ public class CombaSceneManager : MonoBehaviour
         public GameObject CharacterToLevelUp;
         public int expGained;
         public List<int> levelupbonuses;
+    }
+
+    [Serializable]
+    public class CombatEnvirnoment
+    {
+        public GameObject Model;
+        public Vector3 position;
+        public Vector3 rotation;
+        public List<int> ChapterInWhichToUse;
     }
 
     public CombatData ActiveCombatData;
@@ -138,6 +149,10 @@ public class CombaSceneManager : MonoBehaviour
     private bool ChangeAttackerLifebar;
     private int LowerDefenderHPBarTimeCounter;
     private bool ChangeDefenderLifebar;
+
+    public List<CombatEnvirnoment> EnvirnomentList;
+
+    GameObject currentenv;
 
     private void Start()
     {
@@ -926,4 +941,48 @@ public class CombaSceneManager : MonoBehaviour
 
     }
 
+    public void LoadEnvironment(string ChapterToLoad, Scene SceneToLoadin)
+    {
+        StartCoroutine(LoadEnvironmentAsync(ChapterToLoad, SceneToLoadin));
+    }
+
+    private IEnumerator LoadEnvironmentAsync(string ChapterToLoad, Scene SceneToLoadin)
+    {
+        Debug.Log(ChapterToLoad);
+        int Chapter = -1;
+        if (ChapterToLoad.Contains("Chapter"))
+        {
+            ChapterToLoad = ChapterToLoad.Replace("Chapter", "");
+            Chapter = int.Parse(ChapterToLoad);
+        }
+        if (ChapterToLoad.Contains("Prologue") || ChapterToLoad.Contains("TestMap"))
+        {
+            Chapter = 0;
+        }
+        Debug.Log(Chapter);
+
+        foreach(CombatEnvirnoment env in EnvirnomentList)
+        {
+            if(env.ChapterInWhichToUse.Contains(Chapter))
+            {
+                if(currentenv==null)
+                {
+                    UnityEngine.Object newobject = Instantiate(env.Model, SceneToLoadin);
+                    currentenv = newobject.GameObject();
+                    currentenv.transform.position = env.position;
+                    currentenv.transform.rotation = Quaternion.Euler(env.rotation);
+                }
+                else if(env!=null)
+                {
+                    Destroy(currentenv);
+                    UnityEngine.Object newobject = Instantiate(env.Model, SceneToLoadin);
+                    currentenv = newobject.GameObject();
+                    currentenv.transform.position = env.position;
+                    currentenv.transform.rotation = Quaternion.Euler(env.rotation);
+                }
+                yield return null;
+            }
+        }
+        yield return null;
+    }
 }

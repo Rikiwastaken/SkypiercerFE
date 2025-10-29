@@ -43,7 +43,7 @@ public class CombatSceneLoader : MonoBehaviour
         yield return new WaitUntil(() => asyncLoad.isDone);
 
         combatScene = SceneManager.GetSceneByName(CombatSceneName);
-
+        FindAnyObjectByType<CombaSceneManager>().LoadEnvironment(MainSceneName, combatScene);
         // Hide combat scene root objects
         SetSceneVisible(combatScene, false);
 
