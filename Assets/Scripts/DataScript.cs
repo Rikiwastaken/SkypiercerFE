@@ -208,11 +208,15 @@ public class DataScript : MonoBehaviour
                 if (equipmentList[i].type.ToLower() == "bow")
                 {
                     equipmentList[i].Range = 2;
+                    equipmentList[i].equipmentmodel.localposition = new Vector3(-0.04f, 0.065f, 0);
                 }
                 else
                 {
                     equipmentList[i].Range = 1;
+                    equipmentList[i].equipmentmodel.localposition = Vector3.zero;
                 }
+                equipmentList[i].equipmentmodel.localrotation = Vector3.zero;
+                equipmentList[i].equipmentmodel.localscale = Vector3.one;
 
             }
 

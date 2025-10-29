@@ -1138,7 +1138,7 @@ public class UnitScript : MonoBehaviour
     {
         initialforward = armature.forward;
     }
-    public void UpdateWeaponModel(Animator otheranimator = null)
+    public void UpdateWeaponModel(Animator otheranimator = null, float scalemultiplier = 0.5f)
     {
 
         Animator animatortouse = otheranimator;
@@ -1173,7 +1173,7 @@ public class UnitScript : MonoBehaviour
             if (equipmentmodel.Model != null)
             {
                 currentequipmentmodel = Instantiate(equipmentmodel.Model);
-                currentequipmentmodel.transform.localScale = Vector3.one * 0.5f;
+                currentequipmentmodel.transform.localScale = Vector3.one * scalemultiplier;
                 foreach (ModelInfo modelInfo in ModelList)
                 {
                     if (modelInfo.active)
@@ -1202,8 +1202,8 @@ public class UnitScript : MonoBehaviour
                 }
                 else
                 {
-                    currentequipmentmodel.transform.localPosition = Vector3.zero;
-                    currentequipmentmodel.transform.localRotation = Quaternion.identity;
+                    currentequipmentmodel.transform.localPosition = equipmentmodel.localposition;
+                    currentequipmentmodel.transform.localRotation = Quaternion.Euler(equipmentmodel.localrotation);
                 }
 
             }
