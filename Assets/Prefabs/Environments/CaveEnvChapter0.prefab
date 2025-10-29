@@ -498,7 +498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5868442818135856547}
   m_Layer: 0
-  m_Name: CaveEnvironment
+  m_Name: CaveEnvChapter0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
