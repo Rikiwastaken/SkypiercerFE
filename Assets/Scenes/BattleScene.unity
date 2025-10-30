@@ -2623,6 +2623,10 @@ MonoBehaviour:
     position: {x: -16.5, y: 0.3, z: 16.5}
     rotation: {x: 0, y: 0, z: 0}
     ChapterInWhichToUse: 00000000
+  - Model: {fileID: 6640663240667536817, guid: 4accdb4417fe4af4e8abdb377619baf5, type: 3}
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    ChapterInWhichToUse: 01000000
 --- !u!4 &1449378730
 Transform:
   m_ObjectHideFlags: 0

@@ -955,10 +955,16 @@ public class CombaSceneManager : MonoBehaviour
             ChapterToLoad = ChapterToLoad.Replace("Chapter", "");
             Chapter = int.Parse(ChapterToLoad);
         }
-        if (ChapterToLoad.Contains("Prologue") || ChapterToLoad.Contains("TestMap"))
+        if (ChapterToLoad.Contains("Prologue"))
         {
             Chapter = 0;
         }
+
+        if(ChapterToLoad.Contains("TestMap"))
+        {
+            Chapter = UnityEngine.Random.Range(0, 1);
+        }
+
         Debug.Log(Chapter);
 
         foreach(CombatEnvirnoment env in EnvirnomentList)
