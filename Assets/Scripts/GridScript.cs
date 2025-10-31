@@ -229,7 +229,7 @@ public class GridScript : MonoBehaviour
                     }
                 }
                 ShowMovement();
-                GetComponent<ActionManager>().frameswherenotlock = 5;
+                ActionManager.instance.frameswherenotlock = 5;
             }
 
         }
@@ -1502,6 +1502,22 @@ public class GridScript : MonoBehaviour
         int x = (int)position.x;
         int y = (int)position.y;
         return GetTile(x, y);
+    }
+
+    public GameObject GetTileGO(int x, int y)
+    {
+        if (x <= Grid.Count - 1 && x >= 0 && y <= Grid[0].Count - 1 && y >= 0)
+        {
+            return Grid[x][y];
+        }
+        return null;
+    }
+
+    public GameObject GetTileGO(Vector2 position)
+    {
+        int x = (int)position.x;
+        int y = (int)position.y;
+        return GetTileGO(x, y);
     }
 
     public GridSquareScript GetFirstClosestTile(Vector2 pos)

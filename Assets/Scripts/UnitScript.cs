@@ -106,6 +106,8 @@ public class UnitScript : MonoBehaviour
         public MonsterStats monsterStats;
         public int RemainingLifebars;
         public int modelID;
+        public bool talkable;
+        public bool talkedto;
     }
 
     [Serializable]
@@ -1227,10 +1229,9 @@ public class UnitScript : MonoBehaviour
 
             gridScript.lockedmovementtiles = gridScript.movementtiles;
             gridScript.lockselection = true;
-            ActionManager actionManager = FindAnyObjectByType<ActionManager>();
-            actionManager.frameswherenotlock = 0;
-            actionManager.framestoskip = 10;
-            actionManager.currentcharacter = gameObject;
+            ActionManager.instance.frameswherenotlock = 0;
+            ActionManager.instance.framestoskip = 10;
+            ActionManager.instance.currentcharacter = gameObject;
         }
         if (GetSkill(31)) //Verso
         {
@@ -1259,10 +1260,9 @@ public class UnitScript : MonoBehaviour
 
                 gridScript.lockedmovementtiles = gridScript.movementtiles;
                 gridScript.lockselection = true;
-                ActionManager actionManager = FindAnyObjectByType<ActionManager>();
-                actionManager.frameswherenotlock = 0;
-                actionManager.framestoskip = 10;
-                actionManager.currentcharacter = gameObject;
+                ActionManager.instance.frameswherenotlock = 0;
+                ActionManager.instance.framestoskip = 10;
+                ActionManager.instance.currentcharacter = gameObject;
             }
 
 
@@ -2456,6 +2456,81 @@ public class UnitScript : MonoBehaviour
             }
         }
         return Commands;
+    }
+
+    public List<GameObject> GetSpectialInteraction()
+    {
+        List<GameObject> interactables = new List<GameObject>();
+        GameObject newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(1, 0));
+        if(newtile != null)
+        {
+            GameObject newunit = GridScript.GetUnit(newtile.GetComponent<GridSquareScript>());
+            if (newunit != null)
+            {
+                if (newunit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkable && !newunit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkedto)
+                {
+                    interactables.Add(newunit);
+                }
+            }
+            if (newtile.GetComponent<GridSquareScript>().Mechanism != null && !newtile.GetComponent<GridSquareScript>().Mechanism.isactivated && newtile.GetComponent<GridSquareScript>().Mechanism.type == 2)
+            {
+                interactables.Add(newtile);
+            }
+        }
+
+        newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(-1, 0));
+        if (newtile != null)
+        {
+            GameObject newunit = GridScript.GetUnit(newtile.GetComponent<GridSquareScript>());
+            if (newunit != null)
+            {
+                if (newunit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkable && !newunit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkedto)
+                {
+                    interactables.Add(newunit);
+                }
+            }
+            if (newtile.GetComponent<GridSquareScript>().Mechanism != null && !newtile.GetComponent<GridSquareScript>().Mechanism.isactivated && newtile.GetComponent<GridSquareScript>().Mechanism.type == 2)
+            {
+                interactables.Add(newtile);
+            }
+        }
+
+        newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(0, 1));
+        if (newtile != null)
+        {
+            GameObject newunit = GridScript.GetUnit(newtile.GetComponent<GridSquareScript>());
+            if (newunit != null)
+            {
+                if (newunit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkable && !newunit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkedto)
+                {
+                    interactables.Add(newunit);
+                }
+            }
+            if (newtile.GetComponent<GridSquareScript>().Mechanism != null && !newtile.GetComponent<GridSquareScript>().Mechanism.isactivated && newtile.GetComponent<GridSquareScript>().Mechanism.type == 2)
+            {
+                interactables.Add(newtile);
+            }
+        }
+
+        newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(0, -1));
+        if (newtile != null)
+        {
+            GameObject newunit = GridScript.GetUnit(newtile.GetComponent<GridSquareScript>());
+            if (newunit != null)
+            {
+                if (newunit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkable && !newunit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkedto)
+                {
+                    interactables.Add(newunit);
+                }
+            }
+            if (newtile.GetComponent<GridSquareScript>().Mechanism != null && !newtile.GetComponent<GridSquareScript>().Mechanism.isactivated && newtile.GetComponent<GridSquareScript>().Mechanism.type == 2)
+            {
+                interactables.Add(newtile);
+            }
+        }
+
+        return interactables;
+
     }
 
     public (int, bool, string) GetRangeMeleeAndType()

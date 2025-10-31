@@ -16,8 +16,6 @@ public class NeutralMenuScript : MonoBehaviour
 
     private SaveManager SaveManager;
 
-    public ActionManager ActionManager;
-
     private int chapter;
 
     public int chapterforUnlockingForesight;
@@ -81,7 +79,7 @@ public class NeutralMenuScript : MonoBehaviour
         foreach (GameObject character in TurnManager.playableunitGO)
         {
             if (!character.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && !character.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
-                ActionManager.Wait(character);
+                ActionManager.instance.Wait(character);
         }
         CloseMenu();
     }

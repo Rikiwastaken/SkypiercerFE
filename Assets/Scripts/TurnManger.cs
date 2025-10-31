@@ -34,8 +34,6 @@ public class TurnManger : MonoBehaviour
     public PreBattleMenuScript preBattleMenuScript;
 
     private WeatherManager weatherManager;
-    private ActionManager actionManager;
-    private MapEventManager mapEventManager;
 
     public PhaseTextScript phaseTextScript;
 
@@ -47,7 +45,6 @@ public class TurnManger : MonoBehaviour
     private void Start()
     {
         weatherManager = GetComponent<WeatherManager>();
-        mapEventManager = GetComponent<MapEventManager>();
         minimapScript = FindAnyObjectByType<MinimapScript>();
     }
 
@@ -61,11 +58,6 @@ public class TurnManger : MonoBehaviour
         if (GridScript == null)
         {
             GridScript = GridScript.instance;
-        }
-
-        if (actionManager == null)
-        {
-            actionManager = FindAnyObjectByType<ActionManager>();
         }
 
         if (InputManager.Startpressed && waittingforstart && !preBattleMenuScript.gameObject.activeSelf && !textBubbleScript.indialogue && !TutorialWindows.activeSelf)
@@ -94,13 +86,13 @@ public class TurnManger : MonoBehaviour
             }
             if (currentlyplaying == "")
             {
-                actionManager.frameswherenotlock = 5;
+                ActionManager.instance.frameswherenotlock = 5;
                 currentlyplaying = "playable";
                 phaseTextScript.SetupText(currentlyplaying);
                 BeginningOfTurnsTrigger(playableunitGO);
                 weatherManager.UpdateRain();
-                mapEventManager.EventInitialization();
-                mapEventManager.TriggerEventCheck();
+                MapEventManager.instance.EventInitialization();
+                MapEventManager.instance.TriggerEventCheck();
             }
             ManageTurnRotation();
         }
@@ -218,7 +210,7 @@ public class TurnManger : MonoBehaviour
         }
         if (charactertoappy.Count > 0)
         {
-            GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>().actions.Add(action);
+            GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>().AddAction(action);
         }
         minimapScript.UpdateMinimap();
     }
@@ -303,11 +295,8 @@ public class TurnManger : MonoBehaviour
                     character.alreadyplayed = false;
                     character.alreadymoved = false;
                 }
-                if (FindAnyObjectByType<ActionManager>())
-                {
-                    FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
-                    FindAnyObjectByType<GridScript>().ResetAllSelections();
-                }
+                ActionManager.instance.preventfromlockingafteraction = true;
+                GridScript.instance.ResetAllSelections();
                 BeginningOfTurnsTrigger(playableunitGO);
                 currentlyplaying = "playable";
                 phaseTextScript.SetupText(currentlyplaying);

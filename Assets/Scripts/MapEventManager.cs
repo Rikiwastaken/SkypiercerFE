@@ -11,6 +11,15 @@ using static UnitScript;
 public class MapEventManager : MonoBehaviour
 {
 
+    public static MapEventManager instance;
+
+    [System.Serializable]
+    private class Wrapper<T>
+    {
+        public T Data;
+        public Wrapper(T data) => Data = data;
+    }
+
     [Serializable]
     public class EventCondition
     {
@@ -30,6 +39,7 @@ public class MapEventManager : MonoBehaviour
          * 6 : small conditions are verified
          * 7 : Battle Starts
          * 8 : EventID Given are all triggered
+         * 9 : TileList Mechanisms are all activated
          */
         public int initializationtype;
         /* 1 : Get Units From Names
@@ -125,6 +135,15 @@ public class MapEventManager : MonoBehaviour
 
     public TutorialWindowScript TutorialwindowScript;
 
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -150,6 +169,16 @@ public class MapEventManager : MonoBehaviour
                 EventsToMonitor[ManualEventTrigger].triggered = true;
             }
         }
+    }
+
+    public List<EventCondition> CloneEvents()
+    {
+        if (EventsToMonitor == null)
+            return null;
+
+        string json = JsonUtility.ToJson(new Wrapper<List<EventCondition>>(EventsToMonitor));
+        Wrapper<List<EventCondition>> cloneWrapper = JsonUtility.FromJson<Wrapper<List<EventCondition>>>(json);
+        return cloneWrapper.Data;
     }
 
     public void initializeEventList(TileModification TileMod)
@@ -406,6 +435,15 @@ public class MapEventManager : MonoBehaviour
                                     return;
                                 }
                                 break;
+                            case (9):
+                                if (CheckIfMechanismsActivated(e))
+                                {
+                                    e.triggered = true;
+                                    TriggerEvent(e);
+                                    EventInitialization();
+                                    return;
+                                }
+                                break;
 
                         }
                     }
@@ -439,6 +477,7 @@ public class MapEventManager : MonoBehaviour
         return true;
     }
 
+    
     private bool CheckSmallerConditionsAreChecked(List<SmallerCondition> smallerConditions)
     {
         foreach (SmallerCondition condition in smallerConditions)
@@ -507,6 +546,25 @@ public class MapEventManager : MonoBehaviour
 
         return true;
     }
+
+    private bool CheckIfMechanismsActivated(EventCondition eventtocheck)
+    {
+        bool mechanismallactivated = true;
+        foreach(GridSquareScript tile in eventtocheck.TilesList)
+        {
+            if(tile.Mechanism!=null)
+            {
+                if(!tile.Mechanism.isactivated)
+                {
+                    mechanismallactivated = false;
+                    break;
+                }
+            }
+        }
+
+        return mechanismallactivated;
+    }
+
     private bool reachedTiles(string affiliation, List<GridSquareScript> tiles)
     {
 

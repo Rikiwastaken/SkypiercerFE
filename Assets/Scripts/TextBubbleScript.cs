@@ -23,7 +23,6 @@ public class TextBubbleScript : MonoBehaviour
 
     private InputManager InputManager;
 
-    private ActionManager ActionManager;
 
     public bool indialogue;
 
@@ -44,8 +43,6 @@ public class TextBubbleScript : MonoBehaviour
 
     private cameraScript cameraScript;
 
-    public MapEventManager mapEventManager;
-
     void Awake()
     {
         if (charactername != null)
@@ -61,7 +58,6 @@ public class TextBubbleScript : MonoBehaviour
     void Start()
     {
         InputManager = InputManager.instance;
-        ActionManager = FindAnyObjectByType<ActionManager>();
         gridScript = GridScript.instance;
         cameraScript = FindAnyObjectByType<cameraScript>();
         //DialogueExample();
@@ -84,24 +80,17 @@ public class TextBubbleScript : MonoBehaviour
         if (Dialogue == null)
         {
             DeactivateBubble();
-            mapEventManager.TriggerEventCheck();
+            MapEventManager.instance.TriggerEventCheck();
         }
         else if (Dialogue.Count <= currentTextBubble)
         {
 
             DeactivateBubble();
-            mapEventManager.TriggerEventCheck();
+            MapEventManager.instance.TriggerEventCheck();
         }
         else
         {
-            if (ActionManager != null)
-            {
-                ActionManager.frameswherenotlock = 5;
-            }
-            else
-            {
-                ActionManager = FindAnyObjectByType<ActionManager>();
-            }
+            ActionManager.instance.frameswherenotlock = 5;
 
             indialogue = true;
 
@@ -173,7 +162,7 @@ public class TextBubbleScript : MonoBehaviour
         else
         {
             DeactivateBubble();
-            mapEventManager.TriggerEventCheck();
+            MapEventManager.instance.TriggerEventCheck();
         }
     }
 

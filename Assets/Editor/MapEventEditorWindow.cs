@@ -28,7 +28,8 @@ public class MapEventEditorWindow : EditorWindow
         "5 : All units died",
         "6 : Smaller conditions met",
         "7 : Battle starts",
-        "8 : Watched events triggered"
+        "8 : Watched events triggered",
+        "9 : TileList Mechanisms are all activated"
     };
 
     private static readonly string[] InitializationTypeLabels = new string[]

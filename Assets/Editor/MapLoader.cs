@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using static GridSquareScript;
 
 public class MapLoader : EditorWindow
 {
@@ -9,6 +10,7 @@ public class MapLoader : EditorWindow
     private Texture2D ObstacleMap;
     private Texture2D ElevationMap;
     private Texture2D ActivationMap;
+    private Texture2D MechanismMap;
     private Transform GridObject;
 
 
@@ -57,6 +59,9 @@ public class MapLoader : EditorWindow
 
         // Allow manual prefab assignment
         ActivationMap = (Texture2D)EditorGUILayout.ObjectField("Activation Map Image", ActivationMap, typeof(Texture2D), false);
+
+        // Allow manual prefab assignment
+        MechanismMap = (Texture2D)EditorGUILayout.ObjectField("Mechanism Map Image", MechanismMap, typeof(Texture2D), false);
 
 
         if (GUILayout.Button("Create Map"))
@@ -138,6 +143,7 @@ public class MapLoader : EditorWindow
                 ManageActivation(newtile, x, y);
                 ManageObstable(newtile, x, y);
                 ManageElevation(newtile, x, y);
+                ManageMechanism(newtile, x, y);
 
                 newtile.GetComponent<GridSquareScript>().activated = true;
                 newtile.transform.parent = GridObject;
@@ -148,7 +154,7 @@ public class MapLoader : EditorWindow
                 lasttile = newtile.GetComponent<GridSquareScript>();
             }
         }
-        GridScript.instance.lastSquare = lasttile;
+        GameObject.FindAnyObjectByType<GridScript>().lastSquare = lasttile;
         EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
     }
     void DeletePreviousMap()
@@ -171,7 +177,7 @@ public class MapLoader : EditorWindow
     private void ManageObstable(GameObject Tile, int x, int y)
     {
         Color pixelColor = ObstacleMap.GetPixel(x, y);
-        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4) = InitializeColors();
+        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4, Color LeverColor, Color DoorColor) = InitializeColors();
         if (pixelColor.Equals(wall))
         {
             Tile.GetComponent<GridSquareScript>().isobstacle = true;
@@ -185,7 +191,7 @@ public class MapLoader : EditorWindow
     private void ManageActivation(GameObject Tile, int x, int y)
     {
         Color pixelColor = ActivationMap.GetPixel(x, y);
-        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4) = InitializeColors();
+        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4, Color LeverColor, Color DoorColor) = InitializeColors();
         if (pixelColor.Equals(wall))
         {
             Tile.GetComponent<GridSquareScript>().activated = false;
@@ -193,6 +199,30 @@ public class MapLoader : EditorWindow
         else
         {
             Tile.GetComponent<GridSquareScript>().activated = true;
+        }
+    }
+
+    private void ManageMechanism(GameObject Tile, int x, int y)
+    {
+        if(MechanismMap!=null)
+        {
+            if(x!=0)
+            {
+                Color pixelColor = MechanismMap.GetPixel(x, y);
+                (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4, Color LeverColor, Color DoorColor) = InitializeColors();
+                if (pixelColor.Equals(LeverColor))
+                {
+                    MechanismClass Mechanism = new MechanismClass();
+                    Mechanism.type = 2;
+                    Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
+                }
+                else if (pixelColor.Equals(DoorColor))
+                {
+                    MechanismClass Mechanism = new MechanismClass();
+                    Mechanism.type = 1;
+                    Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
+                }
+            }
         }
     }
 
@@ -209,7 +239,7 @@ public class MapLoader : EditorWindow
         }
 
 
-        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4) = InitializeColors();
+        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4, Color LeverColor, Color DoorColor) = InitializeColors();
         if (pixelColor.Equals(Elevation0))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 0;
@@ -253,7 +283,7 @@ public class MapLoader : EditorWindow
         
     }
 
-    private (Color,Color,Color,Color,Color, Color, Color, Color, Color, Color) InitializeColors()
+    private (Color,Color,Color,Color,Color, Color, Color, Color, Color, Color, Color, Color) InitializeColors()
     {
         Color grey = ObstacleMap.GetPixel(0, 0);
         Color Elevation4 = ElevationMap.GetPixel(0, 8);
@@ -265,7 +295,14 @@ public class MapLoader : EditorWindow
         Color ElevationNeg2 = ElevationMap.GetPixel(0, 2);
         Color ElevationNeg3= ElevationMap.GetPixel(0, 1);
         Color ElevationNeg4 = ElevationMap.GetPixel(0, 0);
-        return (grey,Elevation0,Elevation1,Elevation2,Elevation3, Elevation4, ElevationNeg1, ElevationNeg2, ElevationNeg3, ElevationNeg4);
+        Color Trigger = Color.white;
+        Color Door = Color.white;
+        if(MechanismMap!=null)
+        {
+            Trigger = MechanismMap.GetPixel(0, 1);
+            Door = MechanismMap.GetPixel(0, 2);
+        }
+        return (grey,Elevation0,Elevation1,Elevation2,Elevation3, Elevation4, ElevationNeg1, ElevationNeg2, ElevationNeg3, ElevationNeg4, Trigger, Door);
     }
 }
 #endif

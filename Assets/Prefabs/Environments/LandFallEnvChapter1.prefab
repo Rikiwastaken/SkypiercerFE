@@ -341,7 +341,8 @@ PrefabInstance:
       value: LandFall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -5117700066308340382, guid: 76544e555f7857048b8f456a9c7cee96, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76544e555f7857048b8f456a9c7cee96, type: 3}

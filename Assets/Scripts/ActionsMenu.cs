@@ -18,6 +18,7 @@ public class ActionsMenu : MonoBehaviour
 
     public GameObject ItemsScript;
     public GameObject CommandGO;
+    public GameObject SpecialCommandGO;
 
     private InputManager inputManager;
 
@@ -82,18 +83,34 @@ public class ActionsMenu : MonoBehaviour
             transform.GetChild(2).GetComponent<Button>().colors = colors;
         }
 
+        if (target.GetComponent<UnitScript>().GetSpectialInteraction().Count > 0)
+        {
+            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            colors.normalColor = BaseButtonColor;
+            colors.pressedColor = BaseButtonPressedColor;
+            transform.GetChild(2).GetComponent<Button>().colors = colors;
+        }
+        else
+        {
+
+            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            colors.normalColor = Color.yellow;
+            colors.pressedColor = Color.gray;
+            transform.GetChild(2).GetComponent<Button>().colors = colors;
+        }
+
     }
 
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(GridScript==null)
+        if (GridScript == null)
         {
             GridScript = GridScript.instance;
         }
         SelectionSafeGuard();
-        FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
+        ActionManager.instance.preventfromlockingafteraction = true;
 
 
         inputManager = InputManager.instance;
@@ -505,9 +522,9 @@ public class ActionsMenu : MonoBehaviour
         CommandUsedID = 0;
         GridScript.Recolor();
         confirmattack = false;
-        FindAnyObjectByType<ActionManager>().currentcharacter = null;
+        ActionManager.instance.currentcharacter = null;
         FindAnyObjectByType<cameraScript>().incombat = false;
-        FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
+        ActionManager.instance.preventfromlockingafteraction = true;
         oldtarget.GetComponent<UnitScript>().RetreatTrigger(); // Canto/Retreat (move again after action)
     }
     public void ConfirmAttack()
@@ -2381,4 +2398,21 @@ public class ActionsMenu : MonoBehaviour
         }
     }
 
+    public void SpecialButtonFunction()
+    {
+        if (target != null)
+        {
+            List<GameObject> SpecialInteractors = target.GetComponent<UnitScript>().GetSpectialInteraction();
+            if (SpecialInteractors.Count > 0)
+            {
+                SpecialCommandGO.SetActive(true);
+                SpecialCommandGO.GetComponent<SpecialCommandsScript>().target = target;
+                SpecialCommandGO.GetComponent<SpecialCommandsScript>().SpecialInteractos = SpecialInteractors;
+                SpecialCommandGO.GetComponent<SpecialCommandsScript>().InitializeButtons();
+                FindAnyObjectByType<EventSystem>().SetSelectedGameObject(SpecialCommandGO.transform.GetChild(0).gameObject);
+            }
+        }
+    }
+
 }
+

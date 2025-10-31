@@ -64,6 +64,16 @@ public class GridSquareScript : MonoBehaviour
     private ParticleSystem rainparticle;
 
     [Serializable]
+    public class MechanismClass
+    {
+        public int type; // 1 : door, 2 : lever;
+        public bool isactivated;
+        public List<GridSquareScript> Triggers;
+    }
+
+    public MechanismClass Mechanism;
+
+    [Serializable]
     public class MaterialsClass
     {
         public string name;
@@ -117,6 +127,39 @@ public class GridSquareScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (Mechanism != null)
+        {
+            if (Mechanism.type == 1)
+            {
+                if (!Mechanism.isactivated)
+                {
+                    isobstacle = true;
+                    bool alltriggersactive = true;
+                    foreach (GridSquareScript triggertile in Mechanism.Triggers)
+                    {
+                        if (triggertile.Mechanism != null)
+                        {
+                            if (triggertile.Mechanism.type == 2 && !triggertile.Mechanism.isactivated)
+                            {
+                                alltriggersactive = false;
+                                break;
+                            }
+                        }
+
+                    }
+                    if (alltriggersactive)
+                    {
+                        Mechanism.isactivated = true;
+                    }
+                }
+
+                if (Mechanism.isactivated)
+                {
+                    isobstacle = false;
+                }
+            }
+        }
 
         if (GridScript == null)
         {
@@ -198,7 +241,7 @@ public class GridSquareScript : MonoBehaviour
 
     private void ManagePath()
     {
-        List<GridSquareScript> path = GridScript.GetComponent<ActionManager>().currentpath;
+        List<GridSquareScript> path = ActionManager.instance.currentpath;
         if (path != null)
         {
             if (path.Contains(this))

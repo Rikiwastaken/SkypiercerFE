@@ -53,8 +53,6 @@ public class AttackTurnScript : MonoBehaviour
 
     public int delaybeforenxtunit;
 
-    private MapEventManager mapEventManager;
-
     public PhaseTextScript phaseTextScript;
     private MinimapScript minimapScript;
 
@@ -76,7 +74,6 @@ public class AttackTurnScript : MonoBehaviour
         TurnManager = GetComponent<TurnManger>();
         gridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<cameraScript>();
-        mapEventManager = GetComponent<MapEventManager>();
         saveManager = FindAnyObjectByType<SaveManager>();
     }
 
@@ -112,9 +109,9 @@ public class AttackTurnScript : MonoBehaviour
         {
             CurrentOther = null;
         }
-        if (TurnManager.currentlyplaying != "playable" && FindAnyObjectByType<ActionManager>() != null)
+        if (TurnManager.currentlyplaying != "playable" && ActionManager.instance != null)
         {
-            FindAnyObjectByType<ActionManager>().preventfromlockingafteraction = true;
+            ActionManager.instance.preventfromlockingafteraction = true;
         }
 
         if (CurrentEnemy == null && TurnManager.currentlyplaying == "enemy")
@@ -134,7 +131,7 @@ public class AttackTurnScript : MonoBehaviour
 
                         if (!determineifActionifTaken(unit))
                         {
-                            GetComponent<ActionManager>().Wait(unit);
+                            ActionManager.instance.Wait(unit);
                             continue;
                         }
 
@@ -564,7 +561,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
             }
         }
-        foresightScript.actions.Add(CurrentAction);
+        foresightScript.AddAction(CurrentAction);
         ActionsMenu.FinalizeAttack();
 
     }
@@ -673,7 +670,7 @@ public class AttackTurnScript : MonoBehaviour
                 waittingforexp = true;
                 expdistributed = true;
                 unitalreadyattacked = false;
-                foresightScript.actions.Add(CurrentAction);
+                foresightScript.AddAction(CurrentAction);
             }
             else if (CurrentOther == null && CurrentEnemy == null && CurrentPlayable == null && CharAttacker.affiliation != "playable") //end fight if no attacker
             {
@@ -682,7 +679,7 @@ public class AttackTurnScript : MonoBehaviour
                 waittingforexp = true;
                 expdistributed = true;
                 unitalreadyattacked = false;
-                foresightScript.actions.Add(CurrentAction);
+                foresightScript.AddAction(CurrentAction);
             }
             else // begin fight
             {
@@ -869,7 +866,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
                 CurrentAction = new ForesightScript.Action();
-                foresightScript.actions.Add(CurrentAction);
+                foresightScript.AddAction(CurrentAction);
                 CurrentAction.actiontype = 0;
                 CurrentAction.Unit = Attacker.GetComponent<UnitScript>();
                 CurrentAction.previousPosition = Attacker.GetComponent<UnitScript>().previousposition;
@@ -984,7 +981,7 @@ public class AttackTurnScript : MonoBehaviour
                 Character Targetcopy = target.GetComponent<UnitScript>().CreateCopy();
 
                 CurrentAction = new ForesightScript.Action();
-                foresightScript.actions.Add(CurrentAction);
+                foresightScript.AddAction(CurrentAction);
                 CurrentAction.actiontype = 0;
                 CurrentAction.Unit = Attacker.GetComponent<UnitScript>();
                 CurrentAction.previousPosition = Attacker.GetComponent<UnitScript>().previousposition;
@@ -999,7 +996,7 @@ public class AttackTurnScript : MonoBehaviour
                 CurrentAction.AttackData.previousdefenderhitindex = target.GetComponent<RandomScript>().hitvaluesindex;
                 CurrentAction.AttackData.previousdefendercritindex = target.GetComponent<RandomScript>().CritValuesindex;
                 CurrentAction.AttackData.previousdefenderlvlupindex = target.GetComponent<RandomScript>().levelvaluesindex;
-                foresightScript.actions.Add(CurrentAction);
+                foresightScript.AddAction(CurrentAction);
 
                 (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
                 bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));
@@ -1597,7 +1594,7 @@ public class AttackTurnScript : MonoBehaviour
             gridScript.allunits.Remove(unittodelete.GetComponent<UnitScript>().UnitCharacteristics);
         }
         GetComponent<TurnManger>().InitializeUnitLists(GetComponent<GridScript>().allunitGOs);
-        mapEventManager.TriggerEventCheck();
+        MapEventManager.instance.TriggerEventCheck();
         minimapScript.UpdateMinimap();
     }
 

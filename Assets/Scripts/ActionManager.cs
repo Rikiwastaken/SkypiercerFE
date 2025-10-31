@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static ForesightScript;
+using static GridSquareScript;
 using static UnitScript;
 
 public class ActionManager : MonoBehaviour
 {
+
+    public static ActionManager instance;
 
     private TurnManger TurnManager;
 
@@ -37,9 +41,18 @@ public class ActionManager : MonoBehaviour
 
     private int NeutralMenuCD;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         TurnManager = GetComponent<TurnManger>();
         InputManager = InputManager.instance;
         GridScript = GetComponent<GridScript>();
@@ -359,10 +372,59 @@ public class ActionManager : MonoBehaviour
         GridScript.ResetAllSelections();
         GridScript.ResetColor();
         GridScript.lockselection = false;
-        FindAnyObjectByType<ActionManager>().frameswherenotlock = 10;
+        frameswherenotlock = 10;
         currentcharacter = null;
-        Foresight.actions.Add(waittedaction);
+        Foresight.AddAction(waittedaction);
 
+    }
+
+    public void Interract(GameObject Unit = null, GridSquareScript tilechanged = null, UnitScript OneTalkedTo = null) // Appel� quand l'unit� parle � une autre unit� ou qu'elle interragit avec un objet
+    {
+        GameObject Unittouse = currentcharacter;
+        if (Unit != null)
+        {
+            Unittouse = Unit;
+        }
+        ForesightScript.Action Interractaction = new ForesightScript.Action();
+
+        Interractaction.Unit = Unittouse.GetComponent<UnitScript>();
+        Interractaction.previousPosition = Unittouse.GetComponent<UnitScript>().previousposition;
+        Interractaction.ModifiedCharacters = new List<Character>() { Unittouse.GetComponent<UnitScript>().CreateCopy() };
+
+        Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
+        Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+
+        if (tilechanged != null)
+        {
+            TileModification newtilemodif = new TileModification();
+            newtilemodif.tile = tilechanged;
+            MechanismClass mechanismClass = new MechanismClass();
+            mechanismClass.isactivated = tilechanged.Mechanism.isactivated;
+            mechanismClass.type = tilechanged.Mechanism.type;
+            mechanismClass.Triggers = tilechanged.Mechanism.Triggers;
+            newtilemodif.MechanismClass = mechanismClass;
+            newtilemodif.tile.type = tilechanged.type;
+            newtilemodif.tile.RemainingRainTurns = tilechanged.RemainingRainTurns;
+            newtilemodif.tile.RemainingSunTurns = tilechanged.RemainingSunTurns;
+            Interractaction.ModifiedTiles.Add(newtilemodif);
+            Interractaction.actiontype = 6;
+        }
+        if (OneTalkedTo != null)
+        {
+            Interractaction.actiontype = 5;
+            Character copy = OneTalkedTo.CreateCopy();
+            Interractaction.ModifiedCharacters.Add(copy);
+            Interractaction.AttackData = new AttackData();
+            Interractaction.AttackData.defender = OneTalkedTo;
+        }
+
+        Unittouse.GetComponent<UnitScript>().RestoreUses(1);
+        GridScript.ResetAllSelections();
+        GridScript.ResetColor();
+        GridScript.lockselection = false;
+        frameswherenotlock = 10;
+        currentcharacter = null;
+        Foresight.AddAction(Interractaction);
     }
 
     public void Attack()
