@@ -88,15 +88,15 @@ public class ActionsMenu : MonoBehaviour
             var colors = transform.GetChild(2).GetComponent<Button>().colors;
             colors.normalColor = BaseButtonColor;
             colors.pressedColor = BaseButtonPressedColor;
-            transform.GetChild(2).GetComponent<Button>().colors = colors;
+            transform.GetChild(3).GetComponent<Button>().colors = colors;
         }
         else
         {
 
             var colors = transform.GetChild(2).GetComponent<Button>().colors;
-            colors.normalColor = Color.yellow;
+            colors.normalColor = Color.gray;
             colors.pressedColor = Color.gray;
-            transform.GetChild(2).GetComponent<Button>().colors = colors;
+            transform.GetChild(3).GetComponent<Button>().colors = colors;
         }
 
     }
@@ -756,12 +756,12 @@ public class ActionsMenu : MonoBehaviour
         }
         if (currentSelected != null)
         {
-            if ((!currentSelected.activeSelf || !listofChildren.Contains(currentSelected)) && !ItemsScript.activeSelf && !CommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
+            if ((!currentSelected.activeSelf || !listofChildren.Contains(currentSelected)) && !ItemsScript.activeSelf && !CommandGO.activeSelf && !SpecialCommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
             {
                 FindAnyObjectByType<EventSystem>().SetSelectedGameObject(transform.GetChild(0).gameObject);
             }
         }
-        else if (!ItemsScript.activeSelf && !CommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
+        else if (!ItemsScript.activeSelf && !CommandGO.activeSelf && !SpecialCommandGO.activeSelf && transform.GetChild(0).gameObject.activeSelf)
         {
             FindAnyObjectByType<EventSystem>().SetSelectedGameObject(transform.GetChild(0).gameObject);
         }

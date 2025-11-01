@@ -76,13 +76,18 @@ public class SpecialCommandsScript : MonoBehaviour
             ActionManager.instance.Interract(target, null, SpecialInteractos[i].GetComponent<UnitScript>());
             SpecialInteractos[i].GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkedto = true;
             MapEventManager.instance.TriggerEventCheck();
-            
+            gameObject.SetActive(false);
+            ActionsMenu.gameObject.SetActive(false);
+
+
         }
         else if(SpecialInteractos[i].GetComponent<GridSquareScript>() != null)
         {
             ActionManager.instance.Interract(target, SpecialInteractos[i].GetComponent<GridSquareScript>());
             SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.isactivated = true;
             MapEventManager.instance.TriggerEventCheck();
+            gameObject.SetActive(false);
+            ActionsMenu.gameObject.SetActive(false);
         }
     }
 

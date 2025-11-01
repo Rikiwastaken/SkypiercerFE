@@ -148,7 +148,36 @@ public class MapLoader : EditorWindow
                 newtile.GetComponent<GridSquareScript>().activated = true;
                 newtile.transform.parent = GridObject;
                 newtile.transform.localRotation = Quaternion.Euler(-90,0,0);
-                newtile.name = "Tile_" + number;
+
+                string tilename = "";
+
+                if(newtile.GetComponent<GridSquareScript>().isobstacle)
+                {
+                    tilename = "wall";
+                }
+                else if(newtile.GetComponent<GridSquareScript>().type!="")
+                {
+                    tilename = newtile.GetComponent<GridSquareScript>().type;
+                }
+                else
+                {
+                    tilename = "tile";
+                }
+
+                if (newtile.GetComponent<GridSquareScript>().Mechanism != null)
+                {
+                    if (newtile.GetComponent<GridSquareScript>().Mechanism.type == 1)
+                    {
+                        tilename = "door";
+                    }
+                    if (newtile.GetComponent<GridSquareScript>().Mechanism.type == 2)
+                    {
+                        tilename = "lever";
+                    }
+                }
+
+                tilename += "_" + number;
+                newtile.name = tilename;
                 
                 number++;
                 lasttile = newtile.GetComponent<GridSquareScript>();

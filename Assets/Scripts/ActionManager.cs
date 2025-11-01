@@ -406,7 +406,7 @@ public class ActionManager : MonoBehaviour
             newtilemodif.tile.type = tilechanged.type;
             newtilemodif.tile.RemainingRainTurns = tilechanged.RemainingRainTurns;
             newtilemodif.tile.RemainingSunTurns = tilechanged.RemainingSunTurns;
-            Interractaction.ModifiedTiles.Add(newtilemodif);
+            Interractaction.ModifiedTiles = new List<TileModification> { newtilemodif };
             Interractaction.actiontype = 6;
         }
         if (OneTalkedTo != null)
