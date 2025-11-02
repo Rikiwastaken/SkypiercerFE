@@ -107,7 +107,7 @@ public class GridSquareScript : MonoBehaviour
         rainparticle = GetComponentInChildren<ParticleSystem>();
         InitializePosition();
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
-        if (rainparticle != null)
+        if (rainparticle != null && rainparticle.gameObject.activeSelf)
         {
             rainparticle.gameObject.SetActive(false);
         }
@@ -200,11 +200,19 @@ public class GridSquareScript : MonoBehaviour
 
             if (RemainingRainTurns > 0)
             {
-                rainparticle.gameObject.SetActive(true);
+                if(!rainparticle.gameObject.activeSelf)
+                {
+                    rainparticle.gameObject.SetActive(true);
+                }
+                
             }
             else
             {
-                rainparticle.gameObject.SetActive(false);
+                if(rainparticle.gameObject.activeSelf)
+                {
+                    rainparticle.gameObject.SetActive(false);
+                }
+                
             }
 
 
@@ -212,7 +220,7 @@ public class GridSquareScript : MonoBehaviour
 
             if (TurnManger.currentlyplaying == "")
             {
-                if (MapInitializer.playablepos.Contains(GridCoordinates))
+                if (MapInitializer.playablepos.Contains(GridCoordinates) && filledimage.color!= new Color(0.45f, 0f, 0.42f, 0.5f))
                 {
 
                     filledimage.color = new Color(0.45f, 0f, 0.42f, 0.5f);
@@ -222,15 +230,27 @@ public class GridSquareScript : MonoBehaviour
 
             if (GridScript.selection == this && !cameraScript.incombat)
             {
-                SelectRound.SetActive(true);
+                if(!SelectRound.activeSelf)
+                {
+                    SelectRound.SetActive(true);
+                }
+                
                 SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
             }
             else
             {
-                SelectRound.SetActive(false);
+                if (SelectRound.activeSelf)
+                {
+                    SelectRound.SetActive(false);
+                }
+                
             }
-
-            UpdateFilling();
+            
+            if(InputManager.instance.movementjustpressed)
+            {
+                UpdateFilling();
+            }
+            
 
 
         }
@@ -249,28 +269,49 @@ public class GridSquareScript : MonoBehaviour
                 int index = path.IndexOf(this);
                 if (index > 0)
                 {
-                    PathPiecePrevious.gameObject.SetActive(true);
+                    if(!PathPiecePrevious.gameObject.activeSelf)
+                    {
+                        PathPiecePrevious.gameObject.SetActive(true);
+                    }
+                    
                     Vector3 direction = path[index - 1].transform.position - transform.position;
                     float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
                     PathPiecePrevious.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
                     if (index == path.Count - 1)
                     {
-                        PathPieceEnd.gameObject.SetActive(true);
+                        if (!PathPieceEnd.gameObject.activeSelf)
+                        {
+                            PathPieceEnd.gameObject.SetActive(true);
+                        }
+                        
                         PathPieceEnd.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
                     }
                     else
                     {
-                        PathPieceEnd.gameObject.SetActive(false);
+                        if (!PathPieceEnd.gameObject.activeSelf)
+                        {
+                            PathPieceEnd.gameObject.SetActive(true);
+                        }
+                        
                     }
                 }
                 else
                 {
-                    PathPiecePrevious.gameObject.SetActive(false);
-                    PathPieceEnd.gameObject.SetActive(false);
+                    if (PathPiecePrevious.gameObject.activeSelf)
+                    {
+                        PathPiecePrevious.gameObject.SetActive(false);
+                    }
+                    if (PathPieceEnd.gameObject.activeSelf)
+                    {
+                        PathPieceEnd.gameObject.SetActive(false);
+                    }
                 }
                 if (index < path.Count - 1)
                 {
-                    PathPieceNext.gameObject.SetActive(true);
+                    if (!PathPieceNext.gameObject.activeSelf)
+                    {
+                        PathPieceNext.gameObject.SetActive(true);
+                    }
                     Vector3 direction = path[index + 1].transform.position - transform.position;
                     float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
                     PathPieceNext.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
@@ -278,22 +319,43 @@ public class GridSquareScript : MonoBehaviour
                 }
                 else
                 {
-                    PathPieceNext.gameObject.SetActive(false);
+                    if (PathPieceNext.gameObject.activeSelf)
+                    {
+                        PathPieceNext.gameObject.SetActive(false);
+                    }
 
                 }
             }
             else
             {
-                PathPiecePrevious.gameObject.SetActive(false);
-                PathPieceNext.gameObject.SetActive(false);
-                PathPieceEnd.gameObject.SetActive(false);
+                if (PathPiecePrevious.gameObject.activeSelf)
+                {
+                    PathPiecePrevious.gameObject.SetActive(false);
+                }
+                if (PathPieceEnd.gameObject.activeSelf)
+                {
+                    PathPieceEnd.gameObject.SetActive(false);
+                }
+                if (PathPieceNext.gameObject.activeSelf)
+                {
+                    PathPieceNext.gameObject.SetActive(false);
+                }
             }
         }
         else
         {
-            PathPiecePrevious.gameObject.SetActive(false);
-            PathPieceNext.gameObject.SetActive(false);
-            PathPieceEnd.gameObject.SetActive(false);
+            if (PathPiecePrevious.gameObject.activeSelf)
+            {
+                PathPiecePrevious.gameObject.SetActive(false);
+            }
+            if (PathPieceEnd.gameObject.activeSelf)
+            {
+                PathPieceEnd.gameObject.SetActive(false);
+            }
+            if (PathPieceNext.gameObject.activeSelf)
+            {
+                PathPieceNext.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -363,6 +425,7 @@ public class GridSquareScript : MonoBehaviour
                 Cube.GetComponent<MeshRenderer>().enabled = false;
                 Stairs.GetComponent<MeshRenderer>().enabled = false;
             }
+            return;
         }
         else
         {
@@ -467,11 +530,19 @@ public class GridSquareScript : MonoBehaviour
                     transform.GetChild(i).localPosition = initialpos[i] + new Vector3(0f, 0f, 1f);
                 }
             }
-            Stairs.SetActive(true);
+            if(!Stairs.activeSelf)
+            {
+                Stairs.SetActive(true);
+            }
+            
         }
         else
         {
-            Stairs.SetActive(false);
+            if (Stairs.activeSelf)
+            {
+                Stairs.SetActive(false);
+            }
+            
         }
 
 
@@ -484,7 +555,11 @@ public class GridSquareScript : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = true;
             for (int i = 0; i < transform.childCount; i++)
             {
-                transform.GetChild(i).gameObject.SetActive(true);
+                if(!transform.GetChild(i).gameObject.activeSelf)
+                {
+                    transform.GetChild(i).gameObject.SetActive(true);
+                }
+                
             }
         }
         if (!activated && GetComponent<SpriteRenderer>().enabled)
@@ -492,7 +567,11 @@ public class GridSquareScript : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = false;
             for (int i = 0; i < transform.childCount; i++)
             {
-                transform.GetChild(i).gameObject.SetActive(false);
+                if (transform.GetChild(i).gameObject.activeSelf)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                }
+                
             }
         }
     }
