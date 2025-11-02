@@ -355,6 +355,24 @@ public class GridSquareScript : MonoBehaviour
     }
     private void manageElevation()
     {
+
+        if(GridScript.instance.MapModel!=null)
+        {
+            if(Cube.GetComponent<MeshRenderer>().enabled)
+            {
+                Cube.GetComponent<MeshRenderer>().enabled = false;
+                Stairs.GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
+        else
+        {
+            if (!Cube.GetComponent<MeshRenderer>().enabled)
+            {
+                Cube.GetComponent<MeshRenderer>().enabled = true;
+                Stairs.GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
+
         //made on purpose so that it's never active
         if (cameraScript.incombat && !cameraScript.incombat)
         {

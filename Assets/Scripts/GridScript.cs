@@ -58,6 +58,9 @@ public class GridScript : MonoBehaviour
 
     public GameObject ForesightMenu;
     public GameObject TutorialWindowMenu;
+
+    public GameObject MapModel;
+
     public class Node
     {
         public Vector2 Position;
