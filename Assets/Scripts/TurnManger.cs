@@ -6,6 +6,9 @@ using static UnitScript;
 
 public class TurnManger : MonoBehaviour
 {
+
+    public static TurnManger instance;
+
     public int currentTurn;
 
     public string currentlyplaying = ""; // playable, enemy, other
@@ -42,6 +45,13 @@ public class TurnManger : MonoBehaviour
     public TextBubbleScript textBubbleScript;
     public GameObject TutorialWindows;
 
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
     private void Start()
     {
         weatherManager = GetComponent<WeatherManager>();

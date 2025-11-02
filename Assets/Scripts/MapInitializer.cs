@@ -171,5 +171,6 @@ public class MapInitializer : MonoBehaviour
                 DestroyImmediate(modelinf.wholeModel);
             }
         }
+        character.GetComponent<UnitScript>().ResetChildRenderers();
     }
 }

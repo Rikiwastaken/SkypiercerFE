@@ -5,6 +5,9 @@ using static UnitScript;
 
 public class MinimapScript : MonoBehaviour
 {
+
+    public static MinimapScript instance;
+
     public Image minimapImage;
 
     private Texture2D minimapTexture;
@@ -18,6 +21,14 @@ public class MinimapScript : MonoBehaviour
     private int updatedelay;
 
     private int showposition;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this; 
+        }
+    }
 
     private void Start()
     {

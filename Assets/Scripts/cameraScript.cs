@@ -6,6 +6,8 @@ using static UnityEngine.GraphicsBuffer;
 public class cameraScript : MonoBehaviour
 {
 
+    public static cameraScript instance;
+
     public Vector2 Destination;
     private GridSquareScript destTile;
     private GridSquareScript previousdestTile;
@@ -43,6 +45,13 @@ public class cameraScript : MonoBehaviour
     public float rotationSmoothTime = 0.3f;
     public float rotationSpeed = 45f;
 
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
     private void Start()
     {
         initialrotation = transform.GetChild(0).rotation.eulerAngles;

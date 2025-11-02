@@ -125,7 +125,7 @@ public class GridSquareScript : MonoBehaviour
         ManageActivation();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         if (Mechanism != null)
@@ -367,34 +367,34 @@ public class GridSquareScript : MonoBehaviour
             {
                 if (unitchar.enemyStats.monsterStats.size > 1)
                 {
-                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnitBigEnemies;
+                    filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnitBigEnemies;
                     int index = unitchar.currentTile.IndexOf(this);
                     switch (index)
                     {
                         case 0:
-                            transform.GetChild(0).localRotation = Quaternion.Euler(0f, 0f, 90f);
+                            filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
                             break;
                         case 1:
-                            transform.GetChild(0).localRotation = Quaternion.Euler(0f, 0f, 180f);
+                            filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 180f);
                             break;
                         case 2:
-                            transform.GetChild(0).localRotation = Quaternion.Euler(0f, 0f, 0f);
+                            filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
                             break;
                         case 3:
-                            transform.GetChild(0).localRotation = Quaternion.Euler(0f, 0f, -90f);
+                            filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
                             break;
                     }
                 }
             }
             else
             {
-                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
+                filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
             }
 
         }
         else
         {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithoutUnit;
+            filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithoutUnit;
         }
     }
 

@@ -258,6 +258,11 @@ public class UnitScript : MonoBehaviour
     public float flyingmovingspeed;
     public float maxmovementrangevertical;
 
+    private List<float> Randomnumbers;
+    private int Randomnumbersindex;
+
+    private MeshRenderer[] childrenmeshrender;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -270,7 +275,7 @@ public class UnitScript : MonoBehaviour
         }
 
 
-        MinimapScript = FindAnyObjectByType<MinimapScript>();
+        MinimapScript = MinimapScript.instance;
         canvaselevation = transform.GetChild(0).localPosition.y;
         GridScript = GridScript.instance;
         AttackTurnScript = FindAnyObjectByType<AttackTurnScript>();
@@ -320,10 +325,28 @@ public class UnitScript : MonoBehaviour
             }
         }
 
+
+        Randomnumbers = new List<float>();
+        {
+            for (int i = 0;i < 100;i++)
+            {
+                Randomnumbers.Add((float)UnityEngine.Random.Range(0.9f, 1.1f));
+            }
+        }
+
+
+        ResetChildRenderers();
+
+    }
+
+
+    public void ResetChildRenderers()
+    {
+        childrenmeshrender = GetComponentsInChildren<MeshRenderer>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
         ManagePosition();
@@ -332,7 +355,7 @@ public class UnitScript : MonoBehaviour
 
         if (cameraScript == null)
         {
-            cameraScript = FindAnyObjectByType<cameraScript>();
+            cameraScript = cameraScript.instance;
         }
 
         if (animator == null)
@@ -348,9 +371,18 @@ public class UnitScript : MonoBehaviour
 
 
         }
-        animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
-        animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
-        animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow");
+        if (animator.GetBool("Ismachine") != UnitCharacteristics.enemyStats.monsterStats.ismachine)
+        {
+            animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
+        }
+        if (animator.GetBool("Ispluvial") != UnitCharacteristics.enemyStats.monsterStats.ispluvial)
+        {
+            animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
+        }
+        if (animator.GetBool("UsingTelekinesis") != UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow")
+        {
+            animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow");
+        }
         if (armature == null)
         {
             armature = animator.transform;
@@ -532,7 +564,7 @@ public class UnitScript : MonoBehaviour
             {
                 animator.SetBool("Walk", true);
                 Vector2 direction = (pathtotake[0] - new Vector2(transform.position.x, transform.position.z)).normalized;
-                transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
+                transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.deltaTime;
                 if (!cameraScript.incombat)
                 {
                     transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
@@ -560,7 +592,7 @@ public class UnitScript : MonoBehaviour
             {
                 animator.SetBool("Walk", true);
                 Vector2 direction = (destination - new Vector2(transform.position.x, transform.position.z)).normalized;
-                transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.fixedDeltaTime;
+                transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.deltaTime;
                 if (!cameraScript.incombat)
                 {
                     transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
@@ -595,11 +627,16 @@ public class UnitScript : MonoBehaviour
         {
 
 
-            float RandomY = (float)UnityEngine.Random.Range(0.9f, 1.1f);
+            float RandomY = Randomnumbers[Randomnumbersindex];
+            Randomnumbersindex++;
+            if(Randomnumbersindex >= Randomnumbers.Count)
+            {
+                Randomnumbersindex = 0;
+            }
 
             if (flyingweaponmovingup)
             {
-                FlyingWeapon.transform.localPosition += new Vector3(0f, flyingmovingspeed * RandomY * Time.fixedDeltaTime, 0f);
+                FlyingWeapon.transform.localPosition += new Vector3(0f, flyingmovingspeed * RandomY * Time.deltaTime, 0f);
 
                 if (FlyingWeapon.transform.localPosition.y >= telekinesisWeaponPos.y + maxmovementrangevertical)
                 {
@@ -609,7 +646,7 @@ public class UnitScript : MonoBehaviour
             }
             else
             {
-                FlyingWeapon.transform.localPosition -= new Vector3(0f, flyingmovingspeed * RandomY * Time.fixedDeltaTime, 0f);
+                FlyingWeapon.transform.localPosition -= new Vector3(0f, flyingmovingspeed * RandomY * Time.deltaTime, 0f);
                 if (FlyingWeapon.transform.localPosition.y <= telekinesisWeaponPos.y - maxmovementrangevertical)
                 {
 
@@ -826,7 +863,7 @@ public class UnitScript : MonoBehaviour
         }
         if (MinimapScript == null)
         {
-            MinimapScript = FindAnyObjectByType<MinimapScript>();
+            MinimapScript = MinimapScript.instance;
         }
         MinimapScript.UpdateMinimap();
     }
@@ -1084,7 +1121,7 @@ public class UnitScript : MonoBehaviour
         newnumber.number = amount;
         newnumber.ishealing = ishealing;
         newnumber.EffectName = effectname;
-        newnumber.framesremaining = (int)(timeforshowingnumbers / Time.fixedDeltaTime);
+        newnumber.framesremaining = (int)(timeforshowingnumbers / Time.deltaTime);
         damagestoshow.Add(newnumber);
     }
 
@@ -1215,7 +1252,7 @@ public class UnitScript : MonoBehaviour
 
     public void RetreatTrigger() // Effect of Retreat or Verso
     {
-        FindAnyObjectByType<AttackTurnScript>().DeathCleanup();
+        AttackTurnScript.DeathCleanup();
 
         if (GetSkill(1)) //Retreat
         {
@@ -1381,7 +1418,7 @@ public class UnitScript : MonoBehaviour
     {
         if (UnitCharacteristics.alreadyplayed)
         {
-            foreach (MeshRenderer Renderer in GetComponentsInChildren<MeshRenderer>())
+            foreach (MeshRenderer Renderer in childrenmeshrender)
             {
                 //Renderer.renderingLayerMask = 0;
             }
@@ -1389,21 +1426,25 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            foreach (MeshRenderer Renderer in GetComponentsInChildren<MeshRenderer>())
+            foreach (MeshRenderer Renderer in childrenmeshrender)
             {
-                switch (UnitCharacteristics.affiliation)
+                if(Renderer!=null)
                 {
-                    case "playable":
-                        Renderer.renderingLayerMask = 1;
-                        break;
-                    case "enemy":
-                        Renderer.renderingLayerMask = 2;
-                        break;
-                    case "other":
-                        Renderer.renderingLayerMask = 3;
-                        break;
+                    switch (UnitCharacteristics.affiliation)
+                    {
+                        case "playable":
+                            Renderer.renderingLayerMask = 1;
+                            break;
+                        case "enemy":
+                            Renderer.renderingLayerMask = 2;
+                            break;
+                        case "other":
+                            Renderer.renderingLayerMask = 3;
+                            break;
 
+                    }
                 }
+                
             }
         }
 
@@ -1974,8 +2015,8 @@ public class UnitScript : MonoBehaviour
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
 
         //Gale Side effect
-        List<GameObject> allunitsGO = FindAnyObjectByType<TurnManger>().playableunitGO;
-        List<Character> allunits = FindAnyObjectByType<TurnManger>().playableunit;
+        List<GameObject> allunitsGO = TurnManger.instance.playableunitGO;
+        List<Character> allunits = TurnManger.instance.playableunit;
         foreach (GameObject characterGO in allunitsGO)
         {
             Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
@@ -2083,15 +2124,15 @@ public class UnitScript : MonoBehaviour
             List<Character> activelist = null;
             if (UnitCharacteristics.affiliation == "playable")
             {
-                activelist = FindAnyObjectByType<TurnManger>().playableunit;
+                activelist = TurnManger.instance.playableunit;
             }
             else if (UnitCharacteristics.affiliation == "enemy")
             {
-                activelist = FindAnyObjectByType<TurnManger>().enemyunit;
+                activelist = TurnManger.instance.enemyunit;
             }
             else
             {
-                activelist = FindAnyObjectByType<TurnManger>().otherunits;
+                activelist = TurnManger.instance.otherunits;
             }
 
             foreach (Character otherunitchar in activelist)
@@ -2175,15 +2216,15 @@ public class UnitScript : MonoBehaviour
             List<GameObject> activelist = null;
             if (UnitCharacteristics.affiliation == "playable")
             {
-                activelist = FindAnyObjectByType<TurnManger>().playableunitGO;
+                activelist = TurnManger.instance.playableunitGO;
             }
             else if (UnitCharacteristics.affiliation == "enemy")
             {
-                activelist = FindAnyObjectByType<TurnManger>().enemyunitGO;
+                activelist = TurnManger.instance.enemyunitGO;
             }
             else
             {
-                activelist = FindAnyObjectByType<TurnManger>().otherunitsGO;
+                activelist = TurnManger.instance.otherunitsGO;
             }
 
             if (activelist.Count == 1)
@@ -2202,15 +2243,15 @@ public class UnitScript : MonoBehaviour
             List<Character> activelist = null;
             if (UnitCharacteristics.affiliation == "playable")
             {
-                activelist = FindAnyObjectByType<TurnManger>().playableunit;
+                activelist = TurnManger.instance.playableunit;
             }
             else if (UnitCharacteristics.affiliation == "enemy")
             {
-                activelist = FindAnyObjectByType<TurnManger>().enemyunit;
+                activelist = TurnManger.instance.enemyunit;
             }
             else
             {
-                activelist = FindAnyObjectByType<TurnManger>().otherunits;
+                activelist = TurnManger.instance.otherunits;
             }
 
             bool toofar = true;
@@ -2307,15 +2348,15 @@ public class UnitScript : MonoBehaviour
             List<Character> activelist = null;
             if (UnitCharacteristics.affiliation == "playable")
             {
-                activelist = FindAnyObjectByType<TurnManger>().playableunit;
+                activelist = TurnManger.instance.playableunit;
             }
             else if (UnitCharacteristics.affiliation == "enemy")
             {
-                activelist = FindAnyObjectByType<TurnManger>().enemyunit;
+                activelist = TurnManger.instance.enemyunit;
             }
             else
             {
-                activelist = FindAnyObjectByType<TurnManger>().otherunits;
+                activelist = TurnManger.instance.otherunits;
             }
 
             int closepalls = 0;
