@@ -61,8 +61,8 @@ public class TipsMenuScript : MonoBehaviour
                 ChangeButtonID(1);
             }
 
-
-            if (ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())] != -1)
+            Debug.Log(Buttons.IndexOf(currentSelected.GetComponent<Button>()));
+            if (Buttons.IndexOf(currentSelected.GetComponent<Button>()) < ButtonIDs.Count && Buttons.IndexOf(currentSelected.GetComponent<Button>()) !=-1 && ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())] != -1)
             {
                 if (!descriptionText.transform.parent.gameObject.activeSelf)
                 {
@@ -174,7 +174,7 @@ public class TipsMenuScript : MonoBehaviour
         int indexmod = 0;
         for (int i = Buttons.Count - 1; i >= 0; i--)
         {
-            int newindex = Tips.Count - 1 - indexmod;
+            int newindex = (int)Math.Min(Tips.Count, Buttons.Count) - 1 - indexmod;
             if (newindex >= 0)
             {
                 ButtonIDs[i] = newindex;

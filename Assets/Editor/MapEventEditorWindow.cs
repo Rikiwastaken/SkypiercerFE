@@ -292,7 +292,22 @@ public class MapEventEditorWindow : EditorWindow
 
         //--- Tutorial Window ---
 
-        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("TutorialWindow"), true);
+        SerializedProperty tutorialWindowProp = eProp.FindPropertyRelative("TutorialWindow");
+        if (tutorialWindowProp != null)
+        {
+            EditorGUILayout.LabelField("Tutorial Window", EditorStyles.boldLabel);
+
+            // Draw the WindowDimensions normally
+            EditorGUILayout.PropertyField(tutorialWindowProp.FindPropertyRelative("WindowDimensions"));
+
+            // Draw a large multiline text area for the 'text' field
+            SerializedProperty textProp = tutorialWindowProp.FindPropertyRelative("text");
+            if (textProp != null)
+            {
+                // Set a minimum height for the text area
+                textProp.stringValue = EditorGUILayout.TextArea(textProp.stringValue, GUILayout.Height(150));
+            }
+        }
 
         // --- Equipments ---
         EditorGUILayout.Space();

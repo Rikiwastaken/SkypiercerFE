@@ -114,7 +114,7 @@ public class MapEventManager : MonoBehaviour
     public class TutorialWindow
     {
         public Vector2Int WindowDimensions;
-        public List<string> lines;
+        public string text;
     }
 
     public List<EventCondition> EventsToMonitor;
@@ -301,12 +301,7 @@ public class MapEventManager : MonoBehaviour
             case 5:
                 Debug.Log("Tutorial Window trigger");
 
-                string fullstring = "";
-                foreach (string line in Event.TutorialWindow.lines)
-                {
-                    fullstring += line + "\n";
-                }
-                TutorialwindowScript.InitializeWindow(Event.TutorialWindow.WindowDimensions, fullstring);
+                TutorialwindowScript.InitializeWindow(Event.TutorialWindow.WindowDimensions, Event.TutorialWindow.text);
                 break;
             case 6:
 
