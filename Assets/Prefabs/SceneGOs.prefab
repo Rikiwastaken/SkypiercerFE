@@ -13692,6 +13692,7 @@ MonoBehaviour:
   NeutralMenu: {fileID: 7632028078773960243}
   ForesightMenu: {fileID: 427256297507341953}
   TutorialWindowMenu: {fileID: 428145789603806661}
+  MapModel: {fileID: 0}
 --- !u!114 &2903731464767154197
 MonoBehaviour:
   m_ObjectHideFlags: 0

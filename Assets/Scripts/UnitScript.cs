@@ -263,20 +263,39 @@ public class UnitScript : MonoBehaviour
 
     private MeshRenderer[] childrenmeshrender;
 
+    private Transform CanvasTransform;
+    
+    private event Action<int> OnHealthChanged;
+    private int previousHPForEvent;
+    private int HPForEvent
+    {
+        get => previousHPForEvent;
+        set
+        {
+            if (previousHPForEvent != value) // Only trigger if the value actually changes
+            {
+                previousHPForEvent = value;
+                OnHealthChanged?.Invoke(previousHPForEvent); // Fire the event
+            }
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        CanvasTransform = transform.GetChild(0);
         if (SceneManager.GetActiveScene().name == "BattleScene")
         {
             this.enabled = false;
-            transform.GetChild(0).gameObject.SetActive(false);
+            CanvasTransform.gameObject.SetActive(false);
             GetComponent<BattleCharacterScript>().enabled = true;
             return;
         }
 
+        
 
         MinimapScript = MinimapScript.instance;
-        canvaselevation = transform.GetChild(0).localPosition.y;
+        canvaselevation = CanvasTransform.localPosition.y;
         GridScript = GridScript.instance;
         AttackTurnScript = FindAnyObjectByType<AttackTurnScript>();
 
@@ -336,7 +355,7 @@ public class UnitScript : MonoBehaviour
 
 
         ResetChildRenderers();
-
+        OnHealthChanged += HealthChangedHandler;
     }
 
 
@@ -350,8 +369,6 @@ public class UnitScript : MonoBehaviour
     {
 
         ManagePosition();
-
-        Debug.DrawLine(transform.GetChild(1).position, transform.GetChild(1).position + Vector3.Normalize(transform.GetChild(1).forward - transform.GetChild(1).position) * 2f, Color.red);
 
         if (cameraScript == null)
         {
@@ -412,7 +429,7 @@ public class UnitScript : MonoBehaviour
             trylvlup = false;
             LevelUp();
         }
-        ManageLifebars();
+        HPForEvent = UnitCharacteristics.currentHP;
 
 
         ManageMovement();
@@ -568,7 +585,7 @@ public class UnitScript : MonoBehaviour
                 if (!cameraScript.incombat)
                 {
                     transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                    transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                    animator.transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
                     transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + rotationadjust);
                 }
             }
@@ -590,13 +607,17 @@ public class UnitScript : MonoBehaviour
             }
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) > 0.1f)
             {
-                animator.SetBool("Walk", true);
+                if(animator.GetBool("Walk")!=true)
+                {
+                    animator.SetBool("Walk", true);
+                }
+                
                 Vector2 direction = (destination - new Vector2(transform.position.x, transform.position.z)).normalized;
                 transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.deltaTime;
                 if (!cameraScript.incombat)
                 {
                     transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                    transform.GetChild(1).forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                    animator.transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
                     transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + rotationadjust);
                 }
 
@@ -660,47 +681,48 @@ public class UnitScript : MonoBehaviour
     private void ManageLifebars()
     {
 
-        transform.GetChild(0).rotation = Quaternion.Euler(90f, 0f, 0f);
-        Image LifebarBehind = transform.GetChild(0).GetChild(0).GetComponent<Image>();
-        Image Lifebar = transform.GetChild(0).GetChild(1).GetComponent<Image>();
+        CanvasTransform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        Image LifebarBehind = CanvasTransform.GetChild(0).GetComponent<Image>();
+        Image Lifebar = CanvasTransform.GetChild(1).GetComponent<Image>();
 
-        if (cameraScript.incombat || disableLifebar)
+        //if (cameraScript.incombat || disableLifebar)
+        //{
+        //    if (Lifebar.gameObject.activeSelf)
+        //    {
+        //        Lifebar.gameObject.SetActive(false);
+        //        LifebarBehind.gameObject.SetActive(false);
+        //    }
+        //}
+        //else
+        //{
+
+        //}
+        if (!Lifebar.gameObject.activeSelf)
         {
-            if (Lifebar.gameObject.activeSelf)
-            {
-                Lifebar.gameObject.SetActive(false);
-                LifebarBehind.gameObject.SetActive(false);
-            }
+            Lifebar.gameObject.SetActive(true);
+            LifebarBehind.gameObject.SetActive(true);
         }
-        else
+        Lifebar.type = Image.Type.Filled;
+        Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.AjustedStats.HP;
+        if (UnitCharacteristics.enemyStats != null)
         {
-            if (!Lifebar.gameObject.activeSelf)
+            switch (UnitCharacteristics.enemyStats.RemainingLifebars)
             {
-                Lifebar.gameObject.SetActive(true);
-                LifebarBehind.gameObject.SetActive(true);
-            }
-            Lifebar.type = Image.Type.Filled;
-            Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.AjustedStats.HP;
-            if (UnitCharacteristics.enemyStats != null)
-            {
-                switch (UnitCharacteristics.enemyStats.RemainingLifebars)
-                {
-                    case 0:
-                        Lifebar.color = Color.green;
-                        break;
-                    case 1:
-                        Lifebar.color = Color.blue;
-                        break;
-                    case 2:
-                        Lifebar.color = Color.magenta;
-                        break;
-                    case 3:
-                        Lifebar.color = Color.yellow;
-                        break;
-                    case 4:
-                        Lifebar.color = Color.gray;
-                        break;
-                }
+                case 0:
+                    Lifebar.color = Color.green;
+                    break;
+                case 1:
+                    Lifebar.color = Color.blue;
+                    break;
+                case 2:
+                    Lifebar.color = Color.magenta;
+                    break;
+                case 3:
+                    Lifebar.color = Color.yellow;
+                    break;
+                case 4:
+                    Lifebar.color = Color.gray;
+                    break;
             }
         }
 
@@ -1250,6 +1272,11 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+    void HealthChangedHandler(int newHealth)
+    {
+        Debug.Log("Health changed to: " + newHealth);
+        ManageLifebars();
+    }
     public void RetreatTrigger() // Effect of Retreat or Verso
     {
         AttackTurnScript.DeathCleanup();
@@ -1370,20 +1397,20 @@ public class UnitScript : MonoBehaviour
                     child.localScale = Vector3.one * UnitCharacteristics.enemyStats.monsterStats.size;
                 }
             }
-            transform.GetChild(0).position = new Vector3(transform.GetChild(0).position.x, canvaselevation + UnitCharacteristics.enemyStats.monsterStats.size, transform.GetChild(0).position.z);
+            if(CanvasTransform.position != new Vector3(CanvasTransform.position.x, canvaselevation + UnitCharacteristics.enemyStats.monsterStats.size, CanvasTransform.position.z))
+            {
+                CanvasTransform.position = new Vector3(CanvasTransform.position.x, canvaselevation + UnitCharacteristics.enemyStats.monsterStats.size, CanvasTransform.position.z);
+            }
         }
-
-
-
     }
 
     private void Hidedeactivated()
     {
         bool checkifonactivated = CheckIfOnActivated();
-        if (transform.GetChild(0).gameObject.activeSelf != checkifonactivated)
+        if (CanvasTransform.gameObject.activeSelf != checkifonactivated)
         {
-            transform.GetChild(1).gameObject.SetActive(CheckIfOnActivated());
-            transform.GetChild(0).gameObject.SetActive(CheckIfOnActivated());
+            animator.transform.gameObject.SetActive(CheckIfOnActivated());
+            CanvasTransform.gameObject.SetActive(CheckIfOnActivated());
         }
 
 
