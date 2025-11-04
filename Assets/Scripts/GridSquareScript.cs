@@ -69,6 +69,7 @@ public class GridSquareScript : MonoBehaviour
         public int type; // 1 : door, 2 : lever;
         public bool isactivated;
         public List<GridSquareScript> Triggers;
+        public List<GridSquareScript> PairedTiles;
     }
 
     public MechanismClass Mechanism;
@@ -97,6 +98,8 @@ public class GridSquareScript : MonoBehaviour
     public Sprite gridsquareFillingBigEnemies;
 
     private bool previouslyincombat;
+
+    public GameObject LeverGO;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -257,6 +260,43 @@ public class GridSquareScript : MonoBehaviour
 
         manageElevation();
         previouslyincombat = cameraScript.incombat;
+    }
+
+    public void ReinitializeMechanismIfPairednotactive()
+    {
+        if(Mechanism!=null && Mechanism.type==2 && Mechanism.PairedTiles!=null && Mechanism.PairedTiles.Count>0)
+        {
+            bool pairedallactive = true;
+            foreach(GridSquareScript pairedtile in Mechanism.PairedTiles)
+            {
+                if (pairedtile.Mechanism != null && !pairedtile.Mechanism.isactivated)
+                {
+                    pairedallactive = false;
+                    break;
+                }
+            }
+            if(!pairedallactive)
+            {
+                Mechanism.isactivated = false;
+            }
+        }
+    }
+
+    public void ManageLeverOrientation()
+    {
+        if(LeverGO.activeSelf && Mechanism != null)
+        {
+            Vector3 previousrot = LeverGO.transform.GetChild(0).localRotation.eulerAngles;
+            if(previousrot.y<100)
+            {
+                previousrot = new Vector3(previousrot.x, 135, previousrot.z);
+            }
+            else
+            {
+                previousrot = new Vector3(previousrot.x, 45, previousrot.z);
+            }
+            LeverGO.transform.GetChild(0).localRotation = Quaternion.Euler(previousrot);
+        }
     }
 
     private void ManagePath()
@@ -425,7 +465,11 @@ public class GridSquareScript : MonoBehaviour
                 Cube.GetComponent<MeshRenderer>().enabled = false;
                 Stairs.GetComponent<MeshRenderer>().enabled = false;
             }
-            return;
+            if(Mechanism!=null && Mechanism.type==2 && LeverGO.GetComponent<MeshRenderer>().enabled != false)
+            {
+                LeverGO.GetComponent<MeshRenderer>().enabled = false;
+            }
+            
         }
         else
         {

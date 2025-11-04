@@ -115,6 +115,18 @@ public class TurnManger : MonoBehaviour
     /// <param name="charactertoappy"></param>
     private void BeginningOfTurnsTrigger(List<GameObject> charactertoappy)
     {
+
+
+        //reset mechanisms
+        foreach(List<GameObject> list in GridScript.instance.Grid)
+        {
+            foreach(GameObject tile in list)
+            {
+                tile.GetComponent<GridSquareScript>().ReinitializeMechanismIfPairednotactive();
+            }
+        }
+
+
         ForesightScript.Action action = new ForesightScript.Action();
         action.actiontype = 4;
 
