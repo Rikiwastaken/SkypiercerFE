@@ -1,7 +1,5 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using static UnitScript;
 
@@ -136,9 +134,40 @@ public class MapInitializer : MonoBehaviour
         Character.equipmentsIDs = enemyStats.equipments;
         Character.ID = findfirstfreeid();
         newcharacter.transform.parent = Characters.transform;
-        newcharacter.transform.position = new Vector3(enemyStats.startpos.x, 0, enemyStats.startpos.y);
-        newcharacter.GetComponent<UnitScript>().previousposition = enemyStats.startpos;
-        newcharacter.GetComponent<UnitScript>().MoveTo(enemyStats.startpos);
+        if(GridScript.instance.checkifvalidpos(enemyStats.startpos, newcharacter,0))
+        {
+            newcharacter.transform.position = new Vector3(enemyStats.startpos.x, 0, enemyStats.startpos.y);
+            newcharacter.GetComponent<UnitScript>().previousposition = enemyStats.startpos;
+            newcharacter.GetComponent<UnitScript>().MoveTo(enemyStats.startpos);
+        }
+        else
+        {
+            for (int i = 0;i<3;i++)
+            {
+
+                bool posfound = false;
+
+                List<Vector2> newposlist = new List<Vector2>() { new Vector2(0, i), new Vector2(0, -i), new Vector2(i, 0), new Vector2(-i, 0), new Vector2(-i, i), new Vector2(i, i), new Vector2(-i, -i), new Vector2(i, -i) };
+
+                foreach(Vector2 pos in newposlist)
+                {
+                    if (GridScript.instance.checkifvalidpos(pos, newcharacter, 0))
+                    {
+                        newcharacter.transform.position = new Vector3(pos.x, 0, pos.y);
+                        newcharacter.GetComponent<UnitScript>().previousposition = pos;
+                        newcharacter.GetComponent<UnitScript>().MoveTo(pos);
+                        posfound = true;
+                        break;
+                    }
+                }
+
+                if(posfound)
+                {
+                    break;
+                }
+            }
+        }
+        
         if(index!=-1)
         {
             newcharacter.name = enemyStats.Name + " " + index;

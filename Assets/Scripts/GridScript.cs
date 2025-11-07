@@ -1491,6 +1491,53 @@ public class GridScript : MonoBehaviour
         return false;
 
     }
+
+    public bool checkifvalidpos(Vector2 position, GameObject currentunit, int range)
+    {
+
+        List< GridSquareScript > tiles = new List<GridSquareScript>() { GetTile(position) };
+
+        for(int i = 0; i<range;i++)
+        {
+            List<GridSquareScript> tilestoadd = new List<GridSquareScript>();
+
+            foreach(GridSquareScript tile in tiles)
+            {
+                GridSquareScript newtile = GetTile(tile.GridCoordinates + new Vector2(0, 1));
+                if(!tilestoadd.Contains(newtile) && !tiles.Contains(newtile))
+                {
+                    tilestoadd.Add(newtile);
+                }
+
+                newtile = GetTile(tile.GridCoordinates + new Vector2(0, -1));
+                if (!tilestoadd.Contains(newtile) && !tiles.Contains(newtile))
+                {
+                    tilestoadd.Add(newtile);
+                }
+
+                newtile = GetTile(tile.GridCoordinates + new Vector2(1,0));
+                if (!tilestoadd.Contains(newtile) && !tiles.Contains(newtile))
+                {
+                    tilestoadd.Add(newtile);
+                }
+
+                newtile = GetTile(tile.GridCoordinates + new Vector2(-1,0));
+                if (!tilestoadd.Contains(newtile) && !tiles.Contains(newtile))
+                {
+                    tilestoadd.Add(newtile);
+                }
+            }
+
+            foreach(GridSquareScript tile in tilestoadd)
+            {
+                tiles.Add(tile);
+            }
+
+        }
+
+        return checkifvalidpos(tiles,position,currentunit);
+
+    }
     public GridSquareScript GetTile(int x, int y)
     {
         if (x <= Grid.Count - 1 && x >= 0 && y <= Grid[0].Count - 1 && y >= 0)

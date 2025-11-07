@@ -535,7 +535,7 @@ public class GridSquareScript : MonoBehaviour
 
             if (isobstacle)
             {
-                if (Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f)
+                if (Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f || GridScript.instance.MapModel!=null)
                 {
                     transform.position = new Vector3(transform.position.x, elevation + walloffset, transform.position.z);
                 }
@@ -550,7 +550,7 @@ public class GridSquareScript : MonoBehaviour
             }
             else
             {
-                if (Mathf.Abs(transform.position.y - elevation) <= 0.05f)
+                if (Mathf.Abs(transform.position.y - elevation) <= 0.05f || GridScript.instance.MapModel != null)
                 {
                     transform.position = new Vector3(transform.position.x, elevation, transform.position.z);
                 }

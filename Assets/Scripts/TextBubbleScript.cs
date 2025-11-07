@@ -15,6 +15,7 @@ public class TextBubbleScript : MonoBehaviour
         public string text;
         public Vector3 CameraDestination;
         public Sprite Portrait;
+        public int characterindex = -1;
     }
 
     private List<TextBubbleInfo> Dialogue;
@@ -142,11 +143,30 @@ public class TextBubbleScript : MonoBehaviour
 
             var info = Dialogue[currentTextBubble];
 
-            if (info.Portrait != null)
-                characterportrait.sprite = info.Portrait;
+
+            if(info.characterindex>=0)
+            {
+                foreach(Character character in DataScript.instance.PlayableCharacterList)
+                {
+                    if(character.ID == info.characterindex)
+                    {
+                        charactername.text = character.name;
+                        characterportrait.sprite = character.DialogueSprite;
+                    }
+                }
+            }
+            else
+            {
+                if (info.Portrait != null)
+                {
+                    characterportrait.sprite = info.Portrait;
+                }
+                charactername.text = info.Charactername;
+            }
+                
 
             texttodisplay = info.text;
-            charactername.text = info.Charactername;
+            
 
             sentence.textWrappingMode = TextWrappingModes.NoWrap; // Temporarily disable wrapping
             sentence.text = texttodisplay;

@@ -41,6 +41,8 @@ public class UnitScript : MonoBehaviour
         public List<GridSquareScript> currentTile;
         public int modelID;
         public List<WeaponMastery> Masteries;
+
+        public Sprite DialogueSprite;
     }
 
     [Serializable]
