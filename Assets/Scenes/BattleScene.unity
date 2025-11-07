@@ -2249,9 +2249,12 @@ MonoBehaviour:
           ismachine: 0
         RemainingLifebars: 0
         modelID: 0
+        talkable: 0
+        talkedto: 0
       currentTile: []
       modelID: 0
       Masteries: []
+      DialogueSprite: {fileID: 0}
     attackerBeforeCombat:
       name: 
       ID: 0
@@ -2319,9 +2322,12 @@ MonoBehaviour:
           ismachine: 0
         RemainingLifebars: 0
         modelID: 0
+        talkable: 0
+        talkedto: 0
       currentTile: []
       modelID: 0
       Masteries: []
+      DialogueSprite: {fileID: 0}
     attackerWeapon:
       Name: 
       BaseDamage: 0
@@ -2406,9 +2412,12 @@ MonoBehaviour:
           ismachine: 0
         RemainingLifebars: 0
         modelID: 0
+        talkable: 0
+        talkedto: 0
       currentTile: []
       modelID: 0
       Masteries: []
+      DialogueSprite: {fileID: 0}
     defenderBeforeCombat:
       name: 
       ID: 0
@@ -2476,9 +2485,12 @@ MonoBehaviour:
           ismachine: 0
         RemainingLifebars: 0
         modelID: 0
+        talkable: 0
+        talkedto: 0
       currentTile: []
       modelID: 0
       Masteries: []
+      DialogueSprite: {fileID: 0}
     defenderWeapon:
       Name: 
       BaseDamage: 0
@@ -2563,9 +2575,12 @@ MonoBehaviour:
           ismachine: 0
         RemainingLifebars: 0
         modelID: 0
+        talkable: 0
+        talkedto: 0
       currentTile: []
       modelID: 0
       Masteries: []
+      DialogueSprite: {fileID: 0}
     triplehit: 0
     healing: 0
     attackerdamage: 0
@@ -2627,6 +2642,10 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     ChapterInWhichToUse: 01000000
+  - Model: {fileID: 2976861412954192007, guid: 1b8df90c7d8b28248aef046d26c29119, type: 3}
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    ChapterInWhichToUse: 02000000
 --- !u!4 &1449378730
 Transform:
   m_ObjectHideFlags: 0
