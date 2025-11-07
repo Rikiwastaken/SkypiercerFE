@@ -578,7 +578,7 @@ MonoBehaviour:
     BaseHit: 60
     BaseCrit: 8
     Range: 1
-    type: 
+    type: Staff
     Currentuses: 5
     Maxuses: 5
     ID: 28
@@ -1196,6 +1196,24 @@ MonoBehaviour:
       SpeedGrowth: 40
       DexterityGrowth: 40
     ID: 11
+  - name: SiegNPC
+    BaseStats:
+      HP: 16
+      Strength: 3
+      Psyche: 9
+      Defense: 5
+      Resistance: 4
+      Speed: 9
+      Dexterity: 8
+    StatGrowth:
+      HPGrowth: 0
+      StrengthGrowth: 0
+      PsycheGrowth: 0
+      DefenseGrowth: 0
+      ResistanceGrowth: 0
+      SpeedGrowth: 0
+      DexterityGrowth: 0
+    ID: 12
   SkillList:
   - name: No Skill
     Descriptions: No skil
@@ -2157,22 +2175,22 @@ MonoBehaviour:
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 50
-      StrengthGrowth: 20
+      HPGrowth: 40
+      StrengthGrowth: 30
       PsycheGrowth: 70
-      DefenseGrowth: 40
-      ResistanceGrowth: 30
+      DefenseGrowth: 30
+      ResistanceGrowth: 20
       SpeedGrowth: 70
       DexterityGrowth: 60
-    currentHP: 150
-    movements: 6
+    currentHP: 16
+    movements: 5
     position: {x: 6, y: 2}
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
     equipmentsIDs: 0d000000
     equipments: []
-    UnitSkill: 38
+    UnitSkill: 2
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0

@@ -2195,7 +2195,7 @@ public class ActionsMenu : MonoBehaviour
         int SpeedDiff = unitbasespeed - targetbasespeed;
 
 
-        if (SpeedDiff >= 150 || unit.GetComponent<UnitScript>().GetSkill(39))
+        if (SpeedDiff >= 150 || unit.GetComponent<UnitScript>().GetSkill(39)) // Thousand Needles
         {
             return (unit, true);
         }
