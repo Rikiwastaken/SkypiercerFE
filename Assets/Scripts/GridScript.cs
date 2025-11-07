@@ -1282,6 +1282,7 @@ public class GridScript : MonoBehaviour
             foreach (GridSquareScript gridSquareScript in movementtiles)
             {
                 gridSquareScript.fillwithblue();
+                gridSquareScript.CorrectColor();
             }
 
         }
@@ -1298,6 +1299,7 @@ public class GridScript : MonoBehaviour
         foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
         {
             gridSquareScript.fillwithblue();
+            gridSquareScript.CorrectColor();
         }
 
 

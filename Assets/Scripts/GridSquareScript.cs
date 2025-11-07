@@ -401,41 +401,41 @@ public class GridSquareScript : MonoBehaviour
 
     public void UpdateInsideSprite(bool unitenter, Character unitchar = null)
     {
-        if (unitenter)
+        if (unitchar != null)
         {
-            if (unitchar != null)
+            if (unitchar.enemyStats.monsterStats.size > 1)
             {
-                if (unitchar.enemyStats.monsterStats.size > 1)
+                filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnitBigEnemies;
+                int index = unitchar.currentTile.IndexOf(this);
+                Debug.Log(index);
+                switch (index)
                 {
-                    filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnitBigEnemies;
-                    int index = unitchar.currentTile.IndexOf(this);
-                    switch (index)
-                    {
-                        case 0:
-                            filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
-                            break;
-                        case 1:
-                            filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 180f);
-                            break;
-                        case 2:
-                            filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-                            break;
-                        case 3:
-                            filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
-                            break;
-                    }
+                    case 0:
+
+                        filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
+                        break;
+                    case 1:
+                        filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 180f);
+                        break;
+                    case 2:
+                        filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                        break;
+                    case 3:
+                        filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
+                        break;
                 }
             }
-            else
-            {
-                filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
-            }
-
+        }
+        else if(unitenter)
+        {
+            filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
         }
         else
         {
             filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithoutUnit;
         }
+
+        
     }
 
     private void manageVisuals()
@@ -694,9 +694,34 @@ public class GridSquareScript : MonoBehaviour
 
     public void fillwithRed()
     {
+
+        GameObject GO = GridScript.instance.GetUnit(this);
+
+        if(GO != null)
+        {
+            UpdateInsideSprite(true,GO.GetComponent<UnitScript>().UnitCharacteristics);
+        }
+
         Color newcolor = Color.red;
         newcolor.a = 0.5f;
         filledimage.color = newcolor;
+    }
+
+    public void CorrectColor()
+    {
+        Color newcolor = Color.blue;
+        newcolor.a = 0.5f;
+        if(filledimage.color == newcolor)
+        {
+            GameObject GO = GridScript.instance.GetUnit(this);
+            if (GO != null && GO.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size>0)
+            {
+                foreach(GridSquareScript tile in GO.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
+                {
+                    tile.filledimage.color = newcolor ;
+                }
+            }
+        }
     }
 
     public void fillwithGreen()

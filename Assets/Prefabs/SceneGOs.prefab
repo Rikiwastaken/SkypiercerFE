@@ -1908,28 +1908,97 @@ MonoBehaviour:
       allows the unit to switch blades, COMMAND and SPECIAL are actions that will
       be detailed in another tip, and WAIT ends the turn of the unit.'
     chapterWhereUnlocks: 0
-  - name: Test2
-    description: Test2
+  - name: Telekinesis
+    description: 'You can toggle telekinesis by pressing Y on Controller or O on
+      Keyboard.
+
+
+      When telekinesis is activated, the attack range is increased
+      by 1 but damage is reduced by 25%.
+
+
+      When it is activated, damage depends
+      on Psyche and Resistance instead of Attack and Defense.
+
+'
     chapterWhereUnlocks: 0
-  - name: Test3
-    description: Test3
+  - name: Blades (1/2)
+    description: "Blades are the summoned weapons Hunters use to fight pluvials.
+      The blade are sorted into 7 types. Each type gives different bonus in combat
+      and when leveling up.\n\nSwords increase the speed and dexterity of their wielder
+      by 10%.\n  Growth modification : +10% spd, +10% dex, -10% HP\n\nSpears decrease
+      the enemy's dexterity by 10%.\n  Growth modification : +10% str, +10% psy,
+      -10% res\n\nGreatswords decrease the enemy's defense and resistance by 10%
+      while decreasing the wielder's speed by 10%.\n  Growth modification : +10%
+      str, +10% def, -10% spd"
     chapterWhereUnlocks: 0
-  - name: Test4
-    description: Test4
+  - name: Blades (2/2)
+    description: "Bows are the only physical blade by the same maximum range as a
+      telekinesis attack (2 tiles). When used with telekinesis, they can hit a target
+      up to 4 tiles away. However, it cannot attack in melee range (1 tile).\n  Growth
+      modification : +10% str, +10% dex, -10% def\n  \nScythes deal bonus damage
+      to each enemy adjacent to the initial target equal to 25% of the damage they
+      would have taken had they been attacked directly.\n  Growth modification :
+      +10% psy, +10% dex, -10% spd\n\nShields increase the wielder's defense by 10%
+      of their strength.\n  Growth modification : +10% hp, +10% def, -10% psy\n\nStaffs
+      can heal allies (using always psyche) but their damage is reduced by 50% and
+      they cannot initiate combat.\n  Growth modification : +10% psy, +10% res, -10%
+      str"
     chapterWhereUnlocks: 0
-  - name: Test5
-    description: Test5
+  - name: Leveling up
+    description: 'When an ally unit reaches 100 experience points, their level increase
+      and their experience goes back to 0.
+
+
+      When an unit levels up, their
+      stats can increase.
+
+
+      The increase is determined by their growth in each
+      stats. A random value is picked for each stat. If this value is lower than
+      the growth for said stat, the stat will increase by one point.
+
+
+      Growths
+      can be modified by weapons and skills.'
     chapterWhereUnlocks: 0
-  - name: Test6
-    description: Test6
+  - name: Fixed Growth mode
+    description: 'Picking fixed growth mode in the options changes the way ally units
+      level up.
+
+
+      Instead of picking a random value for deciding if a stat
+      is increased, the stat is directly increased by the value (i.e. 40% growth
+      will increase the stat by 0.4).
+
+
+      The true stat of the characters is
+      the stat rounded down (1.4 will be considered as 1).
+
+
+      With 40% growth,
+      the stat will increase truly after 3 levels.
+
+
+      Enemies and other units
+      use Fixed Growth by default.'
     chapterWhereUnlocks: 0
-  - name: Test7
-    description: Test7
-    chapterWhereUnlocks: 0
-  - name: Test8
-    description: Test8
-    chapterWhereUnlocks: 0
-  - name: Test9
+  - name: Other Units
+    description: 'Some units are displayed in Yellow. These units are neither allies
+      nor enemies.
+
+
+      They will sometimes be friendly units who need to be protected,
+      but they can also be a third faction enemy to both allies and enemies.'
+    chapterWhereUnlocks: 1
+  - name: Foresight
+    description: "Zack's Foresight can sometimes make him aware of the near future.
+      \n\nThis feature allows you to turn back time to a specific part of the current
+      battle.\n\nThe number of time this feature can be used increases with Zack's
+      level and some story events.\n\nForesight can be accessed through the neutral
+      menu."
+    chapterWhereUnlocks: 1
+  - name: 
     description: Test9
     chapterWhereUnlocks: 0
   - name: Test10
@@ -7602,6 +7671,7 @@ MonoBehaviour:
     - {fileID: 0}
     modelID: 0
     Masteries: []
+    DialogueSprite: {fileID: 0}
   buttons:
   - {fileID: 3240861738529935134}
   - {fileID: 4872761711283878001}
@@ -14184,6 +14254,7 @@ MonoBehaviour:
     dialoguetoShow: []
     UnitsToUnlockID: 
     UnitsToLockID: 
+    turnswheretotrigger: 
     tileModification:
       TilesIdCouples: []
       tilestomodify: []
@@ -14197,6 +14268,7 @@ MonoBehaviour:
     TutorialWindow:
       WindowDimensions: {x: 0, y: 0}
       text: 
+    CharactersToSpawn: []
   - eventname: 
     ID: 0
     UnitList: []
@@ -14212,6 +14284,7 @@ MonoBehaviour:
     dialoguetoShow: []
     UnitsToUnlockID: 
     UnitsToLockID: 
+    turnswheretotrigger: 
     tileModification:
       TilesIdCouples:
       - {x: 208, y: 305}
@@ -14226,6 +14299,7 @@ MonoBehaviour:
     TutorialWindow:
       WindowDimensions: {x: 0, y: 0}
       text: 
+    CharactersToSpawn: []
   GameOverScript: {fileID: 3232693506058724292}
   ManualEventTrigger: -1
   TutorialwindowScript: {fileID: 1663968727731626961}
@@ -14792,6 +14866,7 @@ MonoBehaviour:
     - {fileID: 0}
     modelID: 0
     Masteries: []
+    DialogueSprite: {fileID: 0}
   SkillList: {fileID: 4898234980993599380}
   PageNumberText: {fileID: 8048071046576614320}
   SkillPageNumberText: {fileID: 2346139528945135520}
@@ -18607,6 +18682,7 @@ MonoBehaviour:
     - {fileID: 0}
     modelID: 0
     Masteries: []
+    DialogueSprite: {fileID: 0}
 --- !u!1 &7512953878376125901
 GameObject:
   m_ObjectHideFlags: 0
