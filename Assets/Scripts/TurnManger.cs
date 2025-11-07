@@ -117,14 +117,7 @@ public class TurnManger : MonoBehaviour
     {
 
 
-        //reset mechanisms
-        foreach(List<GameObject> list in GridScript.instance.Grid)
-        {
-            foreach(GameObject tile in list)
-            {
-                tile.GetComponent<GridSquareScript>().ReinitializeMechanismIfPairednotactive();
-            }
-        }
+        
 
 
         ForesightScript.Action action = new ForesightScript.Action();
@@ -235,6 +228,21 @@ public class TurnManger : MonoBehaviour
             GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>().AddAction(action);
         }
         minimapScript.UpdateMinimap();
+
+        if(charactertoappy==playableunitGO) // true change of turns;
+        {
+            MapEventManager.instance.TriggerEventCheck(currentTurn);
+            //reset mechanisms
+            foreach (List<GameObject> list in GridScript.instance.Grid)
+            {
+                foreach (GameObject tile in list)
+                {
+                    tile.GetComponent<GridSquareScript>().ReinitializeMechanismIfPairednotactive();
+                }
+            }
+        }
+
+        
     }
 
     /// <summary>
@@ -319,10 +327,10 @@ public class TurnManger : MonoBehaviour
                 }
                 ActionManager.instance.preventfromlockingafteraction = true;
                 GridScript.instance.ResetAllSelections();
-                BeginningOfTurnsTrigger(playableunitGO);
                 currentlyplaying = "playable";
                 phaseTextScript.SetupText(currentlyplaying);
                 currentTurn++;
+                BeginningOfTurnsTrigger(playableunitGO);
                 updatevisuals = true;
                 return;
             }

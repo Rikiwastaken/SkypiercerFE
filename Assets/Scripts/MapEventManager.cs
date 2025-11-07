@@ -40,6 +40,7 @@ public class MapEventManager : MonoBehaviour
          * 7 : Battle Starts
          * 8 : EventID Given are all triggered
          * 9 : TileList Mechanisms are all activated
+         * 10 : Beginning of turns listed
          */
         public int initializationtype;
         /* 1 : Get Units From Names
@@ -56,15 +57,16 @@ public class MapEventManager : MonoBehaviour
          * 3 : ModifyTiles
          * 4 : ShowDialogue
          * 5 : Show Tutorial Window
-         * 6 : 
+         * 6 : Spawn Units
          */
         public List<TextBubbleInfo> dialoguetoShow;
         public List<int> UnitsToUnlockID;
         public List<int> UnitsToLockID;
+        public List<int> turnswheretotrigger;
         public TileModification tileModification;
         public UnitPlacement UnitPlacement;
         public TutorialWindow TutorialWindow;
-
+        public List<EnemyStats> CharactersToSpawn;
     }
 
     [Serializable]
@@ -165,7 +167,7 @@ public class MapEventManager : MonoBehaviour
             if (!EventsToMonitor[ManualEventTrigger].triggered)
             {
                 Debug.Log("triggering : " + EventsToMonitor[ManualEventTrigger].eventname);
-                TriggerEvent(EventsToMonitor[ManualEventTrigger]);
+                TriggerEvent(EventsToMonitor[ManualEventTrigger], -1);
                 EventsToMonitor[ManualEventTrigger].triggered = true;
             }
         }
@@ -268,7 +270,7 @@ public class MapEventManager : MonoBehaviour
 
     }
 
-    public void TriggerEvent(EventCondition Event)
+    public void TriggerEvent(EventCondition Event, int currentturn)
     {
         Debug.Log("event trigger : " + Event.ID);
         Debug.Log("is event triggered ? : " + Event.triggered);
@@ -292,7 +294,7 @@ public class MapEventManager : MonoBehaviour
                 {
                     ApplyTilesModification(Event.tileModification);
                 }
-                TriggerEventCheck();
+                TriggerEventCheck(currentturn);
                 break;
             case 4:
                 Debug.Log("dialogue trigger");
@@ -353,7 +355,7 @@ public class MapEventManager : MonoBehaviour
     }
 
 
-    public void TriggerEventCheck()
+    public void TriggerEventCheck(int beginningofTurn=-1)
     {
         if (EventsToMonitor != null)
         {
@@ -370,7 +372,7 @@ public class MapEventManager : MonoBehaviour
                                 if (reachedTiles("playable", e.TilesList))
                                 {
                                     e.triggered = true;
-                                    TriggerEvent(e);
+                                    TriggerEvent(e, beginningofTurn);
                                     EventInitialization();
                                     return;
                                 }
@@ -379,7 +381,7 @@ public class MapEventManager : MonoBehaviour
                                 if (reachedTiles("enemy", e.TilesList))
                                 {
                                     e.triggered = true;
-                                    TriggerEvent(e);
+                                    TriggerEvent(e, beginningofTurn);
                                     EventInitialization();
                                     return;
                                 }
@@ -388,7 +390,7 @@ public class MapEventManager : MonoBehaviour
                                 if (reachedTiles("other", e.TilesList))
                                 {
                                     e.triggered = true;
-                                    TriggerEvent(e);
+                                    TriggerEvent(e, beginningofTurn);
                                     EventInitialization();
                                     return;
                                 }
@@ -397,7 +399,7 @@ public class MapEventManager : MonoBehaviour
                                 if (checkIfOneDead(e.UnitList))
                                 {
                                     e.triggered = true;
-                                    TriggerEvent(e);
+                                    TriggerEvent(e, beginningofTurn);
                                     EventInitialization();
                                     return;
                                 }
@@ -406,26 +408,26 @@ public class MapEventManager : MonoBehaviour
                                 if (checkIfAllDead(e.UnitList))
                                 {
                                     e.triggered = true;
-                                    TriggerEvent(e);
+                                    TriggerEvent(e, beginningofTurn);
                                     EventInitialization();
                                     return;
                                 }
                                 break;
                             case (6):
                                 e.triggered = true;
-                                TriggerEvent(e);
+                                TriggerEvent(e, beginningofTurn);
                                 EventInitialization();
                                 return;
                             case (7):
                                 e.triggered = true;
-                                TriggerEvent(e);
+                                TriggerEvent(e, beginningofTurn);
                                 EventInitialization();
                                 return;
                             case (8):
                                 if (CheckIfEventsAreTriggered(e.EventsToWatch))
                                 {
                                     e.triggered = true;
-                                    TriggerEvent(e);
+                                    TriggerEvent(e, beginningofTurn);
                                     EventInitialization();
                                     return;
                                 }
@@ -434,7 +436,16 @@ public class MapEventManager : MonoBehaviour
                                 if (CheckIfMechanismsActivated(e))
                                 {
                                     e.triggered = true;
-                                    TriggerEvent(e);
+                                    TriggerEvent(e, beginningofTurn);
+                                    EventInitialization();
+                                    return;
+                                }
+                                break;
+                            case (10):
+                                if (e.turnswheretotrigger!=null && e.turnswheretotrigger.Contains(beginningofTurn))
+                                {
+                                    e.triggered = true;
+                                    TriggerEvent(e, beginningofTurn);
                                     EventInitialization();
                                     return;
                                 }
@@ -663,4 +674,16 @@ public class MapEventManager : MonoBehaviour
         return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
     }
 
+    private void SpawnnewEnemies(EventCondition e)
+    {
+        if(e.CharactersToSpawn!=null && e.CharactersToSpawn.Count>0)
+        {
+            foreach(EnemyStats enemyStats in e.CharactersToSpawn)
+            {
+                MapInitializer.instance.InitializeNonPlayable(enemyStats);
+            }
+            GridScript.InitializeGOList();
+            
+        }
+    }
 }

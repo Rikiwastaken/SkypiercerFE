@@ -8,6 +8,8 @@ using static UnitScript;
 public class MapInitializer : MonoBehaviour
 {
 
+    public static MapInitializer instance;
+
     public int numberofplayables;
 
     public List<Vector2> playablepos;
@@ -23,6 +25,14 @@ public class MapInitializer : MonoBehaviour
     private GridScript GridScript;
 
     private int previousid;
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            instance = this;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -101,40 +111,53 @@ public class MapInitializer : MonoBehaviour
         int index = 0;
         foreach (EnemyStats enemyStats in EnemyList)
         {
-            GameObject newcharacter = Instantiate(BaseCharacter);
-            Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
-            Character.enemyStats = enemyStats;
-            Character.modelID = enemyStats.modelID;
-            ManageModel(newcharacter);
-            Character.name = enemyStats.Name;
-            if (enemyStats.Skills.Count > 0)
-            {
-                Character.UnitSkill = enemyStats.Skills[0];
-                Character.EquipedSkills = new List<int>();
-                for (int i = 1; i < Mathf.Min(enemyStats.Skills.Count, 5); i++)
-                {
-                    Character.EquipedSkills.Add(enemyStats.Skills[i]);
-                }
-            }
-            Character.equipmentsIDs = enemyStats.equipments;
-            Character.ID = findfirstfreeid();
-            newcharacter.transform.parent = Characters.transform;
-            newcharacter.transform.position = new Vector3(enemyStats.startpos.x, 0, enemyStats.startpos.y);
-            newcharacter.GetComponent<UnitScript>().previousposition = enemyStats.startpos;
-            newcharacter.GetComponent<UnitScript>().MoveTo(enemyStats.startpos);
-            newcharacter.name = enemyStats.Name + " " + index;
-            if (enemyStats.isother)
-            {
-                Character.affiliation = "other";
-                Character.affiliation = "other";
-            }
-            else
-            {
-                Character.affiliation = "enemy";
-            }
-            newcharacter.GetComponent<RandomScript>().InitializeRandomValues();
+            InitializeNonPlayable(enemyStats, index);
             index++;
         }
+    }
+
+    public void InitializeNonPlayable(EnemyStats enemyStats, int index = -1)
+    {
+        GameObject newcharacter = Instantiate(BaseCharacter);
+        Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
+        Character.enemyStats = enemyStats;
+        Character.modelID = enemyStats.modelID;
+        ManageModel(newcharacter);
+        Character.name = enemyStats.Name;
+        if (enemyStats.Skills.Count > 0)
+        {
+            Character.UnitSkill = enemyStats.Skills[0];
+            Character.EquipedSkills = new List<int>();
+            for (int i = 1; i < Mathf.Min(enemyStats.Skills.Count, 5); i++)
+            {
+                Character.EquipedSkills.Add(enemyStats.Skills[i]);
+            }
+        }
+        Character.equipmentsIDs = enemyStats.equipments;
+        Character.ID = findfirstfreeid();
+        newcharacter.transform.parent = Characters.transform;
+        newcharacter.transform.position = new Vector3(enemyStats.startpos.x, 0, enemyStats.startpos.y);
+        newcharacter.GetComponent<UnitScript>().previousposition = enemyStats.startpos;
+        newcharacter.GetComponent<UnitScript>().MoveTo(enemyStats.startpos);
+        if(index!=-1)
+        {
+            newcharacter.name = enemyStats.Name + " " + index;
+        }
+        else
+        {
+            newcharacter.name = enemyStats.Name + " spawned";
+        }
+
+        if (enemyStats.isother)
+        {
+            Character.affiliation = "other";
+            Character.affiliation = "other";
+        }
+        else
+        {
+            Character.affiliation = "enemy";
+        }
+        newcharacter.GetComponent<RandomScript>().InitializeRandomValues();
     }
 
     private int findfirstfreeid()
