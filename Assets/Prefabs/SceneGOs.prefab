@@ -750,7 +750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   validatebutton: {fileID: 7367934050878403132}
   TextGO: {fileID: 2117697800256249527}
-  delay: 3
+  delay: 1
 --- !u!1 &495905010165923905
 GameObject:
   m_ObjectHideFlags: 0

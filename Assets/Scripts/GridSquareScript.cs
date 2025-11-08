@@ -328,9 +328,9 @@ public class GridSquareScript : MonoBehaviour
                     }
                     else
                     {
-                        if (!PathPieceEnd.gameObject.activeSelf)
+                        if (PathPieceEnd.gameObject.activeSelf)
                         {
-                            PathPieceEnd.gameObject.SetActive(true);
+                            PathPieceEnd.gameObject.SetActive(false);
                         }
                         
                     }
@@ -424,6 +424,10 @@ public class GridSquareScript : MonoBehaviour
                         filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
                         break;
                 }
+            }
+            else
+            {
+                filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
             }
         }
         else if(unitenter)

@@ -2064,7 +2064,7 @@ public class ActionsMenu : MonoBehaviour
             finaldamagefloat = finaldamagefloat / 2f;
         }
 
-        if (target != null && targetTile.type == "Fire")
+        if (target != null && targetTile!=null && targetTile.type == "Fire")
         {
             finaldamagefloat = finaldamagefloat * 1.1f;
         }

@@ -266,7 +266,7 @@ public class UnitScript : MonoBehaviour
     private MeshRenderer[] childrenmeshrender;
 
     private Transform CanvasTransform;
-    
+
     private event Action<int> OnHealthChanged;
     private int previousHPForEvent;
     private int HPForEvent
@@ -282,6 +282,16 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+
+    public Sprite SwordSprite;
+    public Sprite SpearSprite;
+    public Sprite GreatSwordSprite;
+    public Sprite BowSprite;
+    public Sprite ScytheSprite;
+    public Sprite ShieldSprite;
+    public Sprite StaffSprite;
+    public Image WeaponImage;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -294,7 +304,7 @@ public class UnitScript : MonoBehaviour
             return;
         }
 
-        
+
 
         MinimapScript = MinimapScript.instance;
         canvaselevation = CanvasTransform.localPosition.y;
@@ -349,7 +359,7 @@ public class UnitScript : MonoBehaviour
 
         Randomnumbers = new List<float>();
         {
-            for (int i = 0;i < 100;i++)
+            for (int i = 0; i < 100; i++)
             {
                 Randomnumbers.Add((float)UnityEngine.Random.Range(0.9f, 1.1f));
             }
@@ -472,6 +482,8 @@ public class UnitScript : MonoBehaviour
 
         }
     }
+
+    
 
     public Character CreateCopy(Character CharacterToCopy = null)
     {
@@ -609,11 +621,11 @@ public class UnitScript : MonoBehaviour
             }
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) > 0.1f)
             {
-                if(animator.GetBool("Walk")!=true)
+                if (animator.GetBool("Walk") != true)
                 {
                     animator.SetBool("Walk", true);
                 }
-                
+
                 Vector2 direction = (destination - new Vector2(transform.position.x, transform.position.z)).normalized;
                 transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.deltaTime;
                 if (!cameraScript.incombat)
@@ -635,7 +647,7 @@ public class UnitScript : MonoBehaviour
 
             }
         }
-
+        ManageLifeBarRotation();
     }
 
     public void ResetPath()
@@ -652,7 +664,7 @@ public class UnitScript : MonoBehaviour
 
             float RandomY = Randomnumbers[Randomnumbersindex];
             Randomnumbersindex++;
-            if(Randomnumbersindex >= Randomnumbers.Count)
+            if (Randomnumbersindex >= Randomnumbers.Count)
             {
                 Randomnumbersindex = 0;
             }
@@ -680,10 +692,14 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+    private void ManageLifeBarRotation()
+    {
+        CanvasTransform.rotation = Quaternion.Euler(90f, 0f, 0f);
+    }
     private void ManageLifebars()
     {
 
-        CanvasTransform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        ManageLifeBarRotation();
         Image LifebarBehind = CanvasTransform.GetChild(0).GetComponent<Image>();
         Image Lifebar = CanvasTransform.GetChild(1).GetComponent<Image>();
 
@@ -890,6 +906,7 @@ public class UnitScript : MonoBehaviour
             MinimapScript = MinimapScript.instance;
         }
         MinimapScript.UpdateMinimap();
+
     }
 
     public void UpdateTiles(GridSquareScript destination)
@@ -1272,6 +1289,40 @@ public class UnitScript : MonoBehaviour
             }
 
         }
+
+        UpdateWeaponIcon(GetFirstWeapon());
+
+    }
+
+    private void UpdateWeaponIcon(equipment weapon)
+    {
+        switch (weapon.type.ToLower())
+        {
+            case ("sword"):
+                WeaponImage.sprite = SwordSprite;
+                break;
+            case ("spear"):
+                WeaponImage.sprite = SpearSprite;
+                break;
+            case ("greatsword"):
+                WeaponImage.sprite = GreatSwordSprite;
+                break;
+            case ("bow"):
+                WeaponImage.sprite = BowSprite;
+                break;
+            case ("scythe"):
+                WeaponImage.sprite = ScytheSprite;
+                break;
+            case ("shield"):
+                WeaponImage.sprite = ShieldSprite;
+                break;
+            case ("staff"):
+                WeaponImage.sprite = StaffSprite;
+                break;
+            default:
+                WeaponImage.sprite = null;
+                break;
+        }
     }
 
     void HealthChangedHandler(int newHealth)
@@ -1399,7 +1450,7 @@ public class UnitScript : MonoBehaviour
                     child.localScale = Vector3.one * UnitCharacteristics.enemyStats.monsterStats.size;
                 }
             }
-            if(CanvasTransform.position != new Vector3(CanvasTransform.position.x, canvaselevation + UnitCharacteristics.enemyStats.monsterStats.size, CanvasTransform.position.z))
+            if (CanvasTransform.position != new Vector3(CanvasTransform.position.x, canvaselevation + UnitCharacteristics.enemyStats.monsterStats.size, CanvasTransform.position.z))
             {
                 CanvasTransform.position = new Vector3(CanvasTransform.position.x, canvaselevation + UnitCharacteristics.enemyStats.monsterStats.size, CanvasTransform.position.z);
             }
@@ -1457,7 +1508,7 @@ public class UnitScript : MonoBehaviour
         {
             foreach (MeshRenderer Renderer in childrenmeshrender)
             {
-                if(Renderer!=null)
+                if (Renderer != null)
                 {
                     switch (UnitCharacteristics.affiliation)
                     {
@@ -1473,7 +1524,7 @@ public class UnitScript : MonoBehaviour
 
                     }
                 }
-                
+
             }
         }
 
@@ -2532,7 +2583,7 @@ public class UnitScript : MonoBehaviour
     {
         List<GameObject> interactables = new List<GameObject>();
         GameObject newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(1, 0));
-        if(newtile != null)
+        if (newtile != null)
         {
             GameObject newunit = GridScript.GetUnit(newtile.GetComponent<GridSquareScript>());
             if (newunit != null)

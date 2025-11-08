@@ -5758,6 +5758,7 @@ MonoBehaviour:
     type: 0
     isactivated: 0
     Triggers: []
+    PairedTiles: []
   MaterialsList:
   - name: Cave
     groundmaterial: {fileID: 2100000, guid: 2cd2a7435494f914f888b66f850aa6a9, type: 2}

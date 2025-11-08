@@ -181,10 +181,11 @@ public class AttackTurnScript : MonoBehaviour
 
                 }
             }
-            else
+            else if(CurrentEnemy!=null && !CharCurrentEnemy.alreadyplayed)
             {
                 if (saveManager.Options.BattleAnimations)
                 {
+                    
                     ManageAttackWithAnimation(CurrentEnemy);
                 }
                 else
@@ -192,6 +193,10 @@ public class AttackTurnScript : MonoBehaviour
                     ManageAttackWithoutAnimation(CurrentEnemy);
                 }
 
+            }
+            else
+            {
+                CurrentEnemy = null;
             }
 
         }
@@ -293,7 +298,7 @@ public class AttackTurnScript : MonoBehaviour
 
                 }
             }
-            else
+            else if (CurrentOther != null && !Charcurrentother.alreadyplayed)
             {
                 if (saveManager.Options.BattleAnimations)
                 {
@@ -303,6 +308,10 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     ManageAttackWithoutAnimation(CurrentOther);
                 }
+            }
+            else
+            {
+                CurrentOther = null;
             }
         }
 
@@ -1082,7 +1091,7 @@ public class AttackTurnScript : MonoBehaviour
 
                 Debug.Log("attacker damage : " + attackerdamage);
                 Debug.Log("defender damage : " + defenderdamage);
-
+                CharAttacker.alreadyplayed = true;
                 FindAnyObjectByType<CombatSceneLoader>().ActivateCombatScene(CharAttacker, Chartarget, Attacker.GetComponent<UnitScript>().GetFirstWeapon(), target.GetComponent<UnitScript>().GetFirstWeapon(), Chardoubleattacker, triple, ishealing, attackerdodged, defenderattacks, defenderdodged, attackerdied, defenderdied, expearned, levelbonus, Attackercopy, Targetcopy, attackerdamage, defenderdamage, attackercrits, defendercrits);
 
             }

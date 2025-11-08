@@ -154,6 +154,8 @@ public class CombaSceneManager : MonoBehaviour
 
     GameObject currentenv;
 
+    private bool CombatStarted;
+
     private void Start()
     {
         if (DataScript.instance == null)
@@ -206,7 +208,7 @@ public class CombaSceneManager : MonoBehaviour
 
             float ratiotToAdd = ((LowerHPBarTime / Time.fixedDeltaTime - (float)LowerAttackerHPBarTimeCounter) / (LowerHPBarTime / Time.fixedDeltaTime)) * ((float)ActiveCombatData.defenderdamage / (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP);
 
-            AttackerHPTMP.text = "" + (int)((IntialrationofHPAttackerLost + ratiotToAdd) * ActiveCombatData.attackerBeforeCombat.AjustedStats.HP);
+            AttackerHPTMP.text = "" + (int)Mathf.Max(((IntialrationofHPAttackerLost + ratiotToAdd) * ActiveCombatData.attackerBeforeCombat.AjustedStats.HP),0);
 
             AttackerHPLost.fillAmount = IntialrationofHPAttackerLost + ratiotToAdd;
             AttackerHPRemaining.fillAmount = IntialrationofHPAttackerLost;
@@ -219,7 +221,7 @@ public class CombaSceneManager : MonoBehaviour
 
             float ratiotToAdd = ((LowerHPBarTime / Time.fixedDeltaTime - (float)LowerDefenderHPBarTimeCounter) / (LowerHPBarTime / Time.fixedDeltaTime)) * ((float)ActiveCombatData.attackerdamage / (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP);
 
-            DefenderHPTMP.text = "" + (int)((IntialrationofHPAttackerLost + ratiotToAdd) * ActiveCombatData.attackerBeforeCombat.AjustedStats.HP);
+            DefenderHPTMP.text = "" + (int)Mathf.Max(((IntialrationofHPAttackerLost + ratiotToAdd) * ActiveCombatData.attackerBeforeCombat.AjustedStats.HP),0);
 
             DefenderHPLost.fillAmount = IntialrationofHPAttackerLost + ratiotToAdd;
             DefenderHPRemaining.fillAmount = IntialrationofHPAttackerLost;
@@ -790,79 +792,88 @@ public class CombaSceneManager : MonoBehaviour
 
     public void SetupScene(Character attacker, Character defender, equipment attackerweapon, equipment defenderweapon, Character doubleattacker, bool triplehit, bool healing, bool attackerdodged, bool defenderattacks, bool defenderdodged, bool attackerdied, bool defenderdied, int expgained, List<int> levelupbonuses, Character attackerbeforecombat, Character defenderbeforecombat, int attackerdamage, int defenderdamage, int attackercrits, int defendercrits)
     {
-        attackerSceneGO.GetComponent<UnitScript>().UnitCharacteristics = attacker;
-        attackerSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(attacker.modelID);
 
-        defenderSceneGO.GetComponent<UnitScript>().UnitCharacteristics = defender;
-        defenderSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(defender.modelID);
+        if(!CombatStarted)
+        {
+            CombatStarted = true;
+            attackerSceneGO.GetComponent<UnitScript>().UnitCharacteristics = attacker;
+            attackerSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(attacker.modelID);
 
-
-
-        CombatData newdata = new CombatData();
-
-        newdata.attacker = attacker;
-        newdata.attackerWeapon = attackerweapon;
-        newdata.attackerAnimator = attackerSceneGO.GetComponent<UnitScript>().ModelList[attacker.modelID].wholeModel.GetComponentInChildren<Animator>();
-        newdata.attackerdied = attackerdied;
-        newdata.defender = defender;
-        newdata.defenderWeapon = defenderweapon;
-        newdata.defenderAnimator = defenderSceneGO.GetComponent<UnitScript>().ModelList[defender.modelID].wholeModel.GetComponentInChildren<Animator>();
-        newdata.defenderdied = defenderdied;
-        newdata.doubleAttacker = doubleattacker;
-        newdata.triplehit = triplehit;
-        newdata.healing = healing;
-        newdata.defenderattacks = defenderattacks;
-        newdata.attackerdamage = attackerdamage;
-        newdata.defenderdamage = defenderdamage;
-        newdata.attackercrits = attackercrits;
-        newdata.defendercrits = defendercrits;
-        newdata.attackerBeforeCombat = attackerbeforecombat;
-        newdata.defenderBeforeCombat = defenderbeforecombat;
-
-        attackerSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.attackerAnimator, 1f);
-        defenderSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.defenderAnimator, 1f);
-
-        newdata.attackerAnimator.SetBool("Ismachine", attacker.enemyStats.monsterStats.ismachine);
-        newdata.defenderAnimator.SetBool("Ismachine", defender.enemyStats.monsterStats.ismachine);
-        newdata.attackerAnimator.SetBool("Ispluvial", attacker.enemyStats.monsterStats.ispluvial);
-        newdata.defenderAnimator.SetBool("Ispluvial", defender.enemyStats.monsterStats.ispluvial);
-        newdata.defenderAnimator.SetBool("UsingTelekinesis", defender.telekinesisactivated);
-        newdata.attackerAnimator.SetBool("UsingTelekinesis", attacker.telekinesisactivated);
+            defenderSceneGO.GetComponent<UnitScript>().UnitCharacteristics = defender;
+            defenderSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(defender.modelID);
 
 
-        ResetScene(newdata.attackerAnimator.transform, newdata.defenderAnimator.transform);
 
-        AttackerDestination = (newdata.defenderAnimator.transform.position - newdata.attackerAnimator.transform.position) * 0.9f + newdata.attackerAnimator.transform.position;
+            CombatData newdata = new CombatData();
 
-        DefenderDestination = (newdata.attackerAnimator.transform.position - newdata.defenderAnimator.transform.position) * 0.9f + newdata.defenderAnimator.transform.position;
+            newdata.attacker = attacker;
+            newdata.attackerWeapon = attackerweapon;
+            newdata.attackerAnimator = attackerSceneGO.GetComponent<UnitScript>().ModelList[attacker.modelID].wholeModel.GetComponentInChildren<Animator>();
+            newdata.attackerdied = attackerdied;
+            newdata.defender = defender;
+            newdata.defenderWeapon = defenderweapon;
+            newdata.defenderAnimator = defenderSceneGO.GetComponent<UnitScript>().ModelList[defender.modelID].wholeModel.GetComponentInChildren<Animator>();
+            newdata.defenderdied = defenderdied;
+            newdata.doubleAttacker = doubleattacker;
+            newdata.triplehit = triplehit;
+            newdata.healing = healing;
+            newdata.defenderattacks = defenderattacks;
+            newdata.attackerdamage = attackerdamage;
+            newdata.defenderdamage = defenderdamage;
+            newdata.attackercrits = attackercrits;
+            newdata.defendercrits = defendercrits;
+            newdata.attackerBeforeCombat = attackerbeforecombat;
+            newdata.defenderBeforeCombat = defenderbeforecombat;
 
-        ActiveCombatData = newdata;
-        Attackermoveintoposition = true;
+            attackerSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.attackerAnimator, 1f);
+            defenderSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.defenderAnimator, 1f);
 
-        cam.transform.position = cameraStartPos;
-        cam.transform.rotation = Quaternion.Euler(cameraStartRotation);
-        cam.transform.parent = newdata.attackerAnimator.transform;
-
-        MiddleTransform.position = new Vector3((ActiveCombatData.attackerAnimator.transform.position.x + ActiveCombatData.defenderAnimator.transform.position.x) / 2f, 0f, 0f);
-
-
-        float attackerHPRatio = (float)ActiveCombatData.attackerBeforeCombat.currentHP/ (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP;
-        float defenderHPRatio = (float)ActiveCombatData.defenderBeforeCombat.currentHP / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP;
-
-        AttackerHPTMP.text = "" + (int)(ActiveCombatData.attackerBeforeCombat.currentHP);
-        DefenderHPTMP.text = "" + (int)(ActiveCombatData.defenderBeforeCombat.currentHP);
+            newdata.attackerAnimator.SetBool("Ismachine", attacker.enemyStats.monsterStats.ismachine);
+            newdata.defenderAnimator.SetBool("Ismachine", defender.enemyStats.monsterStats.ismachine);
+            newdata.attackerAnimator.SetBool("Ispluvial", attacker.enemyStats.monsterStats.ispluvial);
+            newdata.defenderAnimator.SetBool("Ispluvial", defender.enemyStats.monsterStats.ispluvial);
+            newdata.defenderAnimator.SetBool("UsingTelekinesis", defender.telekinesisactivated);
+            newdata.attackerAnimator.SetBool("UsingTelekinesis", attacker.telekinesisactivated);
 
 
-        AttackerHPRemaining.fillAmount = attackerHPRatio;
-        AttackerHPLost.fillAmount = attackerHPRatio;
+            ResetScene(newdata.attackerAnimator.transform, newdata.defenderAnimator.transform);
 
-        DefenderHPLost.fillAmount = attackerHPRatio;
-        DefenderHPRemaining.fillAmount = attackerHPRatio;
+            AttackerDestination = (newdata.defenderAnimator.transform.position - newdata.attackerAnimator.transform.position) * 0.9f + newdata.attackerAnimator.transform.position;
 
-        AttackerNameTMP.text = attacker.name;
-        DefenderNameTMP.text = defender.name;
+            DefenderDestination = (newdata.attackerAnimator.transform.position - newdata.defenderAnimator.transform.position) * 0.9f + newdata.defenderAnimator.transform.position;
 
-        ExpBarScript.gameObject.SetActive(false);
+            ActiveCombatData = newdata;
+            Attackermoveintoposition = true;
+
+            cam.transform.position = cameraStartPos;
+            cam.transform.rotation = Quaternion.Euler(cameraStartRotation);
+            cam.transform.parent = newdata.attackerAnimator.transform;
+
+            MiddleTransform.position = new Vector3((ActiveCombatData.attackerAnimator.transform.position.x + ActiveCombatData.defenderAnimator.transform.position.x) / 2f, 0f, 0f);
+
+
+            float attackerHPRatio = (float)ActiveCombatData.attackerBeforeCombat.currentHP / (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP;
+            float defenderHPRatio = (float)ActiveCombatData.defenderBeforeCombat.currentHP / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP;
+
+            AttackerHPTMP.text = "" + (int)(ActiveCombatData.attackerBeforeCombat.currentHP);
+            DefenderHPTMP.text = "" + (int)(ActiveCombatData.defenderBeforeCombat.currentHP);
+
+            Debug.Log("attacker ratio : " + attackerHPRatio);
+            Debug.Log("defender ratio : " + defenderHPRatio);
+
+            AttackerHPRemaining.fillAmount = attackerHPRatio;
+            AttackerHPLost.fillAmount = attackerHPRatio;
+
+            DefenderHPLost.fillAmount = attackerHPRatio;
+            DefenderHPRemaining.fillAmount = attackerHPRatio;
+
+            AttackerNameTMP.text = attacker.name;
+            DefenderNameTMP.text = defender.name;
+
+            ExpBarScript.gameObject.SetActive(false);
+        }
+
+        
     }
 
 
@@ -870,6 +881,7 @@ public class CombaSceneManager : MonoBehaviour
     {
         waittingforexp = false;
         expdistributed = false;
+        CombatStarted = false;
         ExpBarScript.gameObject.SetActive(false);
         if(FindAnyObjectByType<CombatSceneLoader>()!=null)
         {
