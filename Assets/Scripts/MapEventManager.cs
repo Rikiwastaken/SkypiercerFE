@@ -41,6 +41,7 @@ public class MapEventManager : MonoBehaviour
          * 8 : EventID Given are all triggered
          * 9 : TileList Mechanisms are all activated
          * 10 : Beginning of turns listed
+         * 11 : Characters Talked To
          */
         public int initializationtype;
         /* 1 : Get Units From Names
@@ -450,6 +451,15 @@ public class MapEventManager : MonoBehaviour
                                     return;
                                 }
                                 break;
+                            case (11):
+                                if (CheckIfAllCharactersTalkedTo(e))
+                                {
+                                    e.triggered = true;
+                                    TriggerEvent(e, beginningofTurn);
+                                    EventInitialization();
+                                    return;
+                                }
+                                break;
 
                         }
                     }
@@ -458,6 +468,22 @@ public class MapEventManager : MonoBehaviour
         }
     }
 
+
+    private bool CheckIfAllCharactersTalkedTo(EventCondition ev)
+    {
+        bool allcharacterstalkedto = true;
+
+        foreach(Character chararacter in ev.UnitList )
+        {
+            if(!chararacter.enemyStats.talkable || !!chararacter.enemyStats.talkedto)
+            {
+                allcharacterstalkedto = false;
+                break;
+            }
+        }
+
+        return allcharacterstalkedto;
+    }
 
     private bool CheckIfEventsAreTriggered(List<int> eventIDs)
     {
