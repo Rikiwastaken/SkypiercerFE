@@ -62,7 +62,7 @@ public class AttackTurnScript : MonoBehaviour
 
     private SaveManager saveManager;
 
-    public bool attackanimationhappening;
+    public int attackanimationhappeningcnt;
 
     private GameObject previousattacker;
     private GameObject previoustarget;
@@ -78,8 +78,14 @@ public class AttackTurnScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
+
+        if (attackanimationhappeningcnt > 0)
+        {
+            attackanimationhappeningcnt--;
+            return;
+        }
 
         if (previousattacker != null)
         {
@@ -89,6 +95,7 @@ public class AttackTurnScript : MonoBehaviour
             gridScript.ResetAllSelections();
             waittingforcamera = false;
             triggercleanup = true;
+            MapEventManager.instance.TriggerEventCheck();
         }
 
         if (phaseTextScript.moveText)
@@ -181,12 +188,15 @@ public class AttackTurnScript : MonoBehaviour
 
                 }
             }
-            else if(CurrentEnemy!=null && !CharCurrentEnemy.alreadyplayed)
+            else if (CurrentEnemy != null && !CharCurrentEnemy.alreadyplayed)
             {
                 if (saveManager.Options.BattleAnimations)
                 {
-                    
-                    ManageAttackWithAnimation(CurrentEnemy);
+                    if (Vector2.Distance(CharCurrentEnemy.currentTile[0].GridCoordinates, new Vector2(CurrentEnemy.transform.position.x, CurrentEnemy.transform.position.z)) <= 1f)
+                    {
+                        ManageAttackWithAnimation(CurrentEnemy);
+                    }
+
                 }
                 else
                 {
@@ -216,7 +226,10 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     if (saveManager.Options.BattleAnimations)
                     {
-                        ManageAttackWithAnimation(CurrentPlayable);
+                        if (Vector2.Distance(CurrentPlayableChar.currentTile[0].GridCoordinates, new Vector2(CurrentPlayable.transform.position.x, CurrentPlayable.transform.position.z)) <= 1f)
+                        {
+                            ManageAttackWithAnimation(CurrentPlayable);
+                        }
                     }
                     else
                     {
@@ -302,7 +315,11 @@ public class AttackTurnScript : MonoBehaviour
             {
                 if (saveManager.Options.BattleAnimations)
                 {
-                    ManageAttackWithAnimation(CurrentOther);
+                    if (Vector2.Distance(Charcurrentother.currentTile[0].GridCoordinates, new Vector2(CurrentOther.transform.position.x, CurrentOther.transform.position.z)) <= 1f)
+                    {
+                        ManageAttackWithAnimation(CurrentOther);
+                    }
+
                 }
                 else
                 {
@@ -707,7 +724,6 @@ public class AttackTurnScript : MonoBehaviour
                         Attacker.transform.GetChild(1).localRotation = Quaternion.Euler(0, 90, 0);
                     }
                 }
-
                 battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
                 //waitting for camera to be fully placed
                 if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
@@ -891,7 +907,6 @@ public class AttackTurnScript : MonoBehaviour
                 CurrentAction.AttackData.previousdefendercritindex = target.GetComponent<RandomScript>().CritValuesindex;
                 CurrentAction.AttackData.previousdefenderlvlupindex = target.GetComponent<RandomScript>().levelvaluesindex;
 
-
                 battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
                 unitalreadyattacked = false;
                 counterbeforeFirstAttack = (int)(delaybeforeFirstAttack / Time.fixedDeltaTime);
@@ -951,15 +966,14 @@ public class AttackTurnScript : MonoBehaviour
         {
             ActionsMenu.FinalizeAttack();
         }
-        attackanimationhappening = false;
     }
 
 
     public void ManageAttackWithAnimation(GameObject Attacker)
     {
-        if (!attackanimationhappening)
+        if (attackanimationhappeningcnt == 0)
         {
-            attackanimationhappening = true;
+            attackanimationhappeningcnt = (int)(2f / Time.deltaTime);
             Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
 
             Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
@@ -1073,27 +1087,38 @@ public class AttackTurnScript : MonoBehaviour
                     Chardoubleattacker = doubleattacker.GetComponent<UnitScript>().UnitCharacteristics;
                 }
 
-                int expearned = 0;
+                int expearned = 1;
 
                 List<int> levelbonus = new List<int>();
 
-                if (attackerexp != 0)
+                if (attackerexp != 1)
                 {
                     expearned = attackerexp;
                     levelbonus = attackerlevelbonus;
                 }
-                else if (defenderexp != 0)
+                else if (defenderexp != 1)
                 {
                     expearned = defenderexp;
                     levelbonus = defenderlevelbonus;
                 }
 
+                if (attackerlevelbonus != null && attackerlevelbonus.Count > 0)
+                {
+                    levelbonus = attackerlevelbonus;
+                }
+                else if (defenderlevelbonus != null && defenderlevelbonus.Count > 0)
+                {
+                    levelbonus = defenderlevelbonus;
+                }
 
-                Debug.Log("attacker damage : " + attackerdamage);
-                Debug.Log("defender damage : " + defenderdamage);
+
                 CharAttacker.alreadyplayed = true;
                 FindAnyObjectByType<CombatSceneLoader>().ActivateCombatScene(CharAttacker, Chartarget, Attacker.GetComponent<UnitScript>().GetFirstWeapon(), target.GetComponent<UnitScript>().GetFirstWeapon(), Chardoubleattacker, triple, ishealing, attackerdodged, defenderattacks, defenderdodged, attackerdied, defenderdied, expearned, levelbonus, Attackercopy, Targetcopy, attackerdamage, defenderdamage, attackercrits, defendercrits);
 
+            }
+            else
+            {
+                ActionManager.instance.Wait(Attacker);
             }
         }
     }
@@ -1603,7 +1628,11 @@ public class AttackTurnScript : MonoBehaviour
             gridScript.allunits.Remove(unittodelete.GetComponent<UnitScript>().UnitCharacteristics);
         }
         GetComponent<TurnManger>().InitializeUnitLists(GetComponent<GridScript>().allunitGOs);
-        MapEventManager.instance.TriggerEventCheck();
+        if (!SaveManager.instance.Options.BattleAnimations)
+        {
+            MapEventManager.instance.TriggerEventCheck();
+        }
+
         minimapScript.UpdateMinimap();
     }
 

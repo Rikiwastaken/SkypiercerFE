@@ -215,6 +215,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         eProp.FindPropertyRelative("startpos").vector2Value = Vector2.zero;
         eProp.FindPropertyRelative("isboss").boolValue = false;
         eProp.FindPropertyRelative("isother").boolValue = false;
+        eProp.FindPropertyRelative("talkable").boolValue = false;
         eProp.FindPropertyRelative("RemainingLifebars").intValue = 0;
         eProp.FindPropertyRelative("modelID").intValue = 0;
 
@@ -286,6 +287,7 @@ public class EnemyStatsEditorWindow : EditorWindow
 
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("isboss"));
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("isother"));
+        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("talkable"));
 
         EditorGUILayout.LabelField("Monster Stats", EditorStyles.boldLabel);
         SerializedProperty monsterStats = eProp.FindPropertyRelative("monsterStats");

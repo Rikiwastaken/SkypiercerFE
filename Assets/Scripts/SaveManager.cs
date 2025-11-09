@@ -11,6 +11,8 @@ using static UnitScript;
 public class SaveManager : MonoBehaviour
 {
 
+    public static SaveManager instance;
+
     public string versionID;
 
     public int activeSlot;
@@ -34,6 +36,7 @@ public class SaveManager : MonoBehaviour
         public float SEVolume;
         public bool Fullscreen;
         public bool BattleAnimations;
+        public bool FixedGrowth;
     }
 
     public int numberofslots;
@@ -45,6 +48,14 @@ public class SaveManager : MonoBehaviour
     public SaveClass DefaultSave;
 
     public OptionsClass Options;
+
+    private void Awake()
+    {
+        if(instance== null)
+        {
+            instance = this;
+        }
+    }
 
     private void Start()
     {
@@ -139,6 +150,7 @@ public class SaveManager : MonoBehaviour
             Options.SEVolume = 1.000001f;
             Options.Fullscreen = Screen.fullScreen;
             Options.BattleAnimations = true;
+            Options.FixedGrowth = false;
         }
     }
 
@@ -177,6 +189,7 @@ public class SaveManager : MonoBehaviour
 
     public void InitializeSaveButtons(List<Button> buttons)
     {
+        LoadSaves();
         for (int i = 0; i < buttons.Count; i++)
         {
             if (SaveClasses[i] != null)
@@ -215,16 +228,18 @@ public class SaveManager : MonoBehaviour
 
     public void ApplySave(int slot)
     {
+        DataScript DS = DataScript.instance;
+
         if (slot >= 0 && slot < SaveClasses.Count)
         {
-            DataScript.instance.PlayableCharacterList = SaveClasses[slot].PlayableCharacterList;
-            DataScript.instance.PlayerInventory = SaveClasses[slot].PlayerInventory;
+            DS.PlayableCharacterList = SaveClasses[slot].PlayableCharacterList;
+            DS.PlayerInventory = SaveClasses[slot].PlayerInventory;
             secondselapsed = SaveClasses[slot].secondselapsed;
         }
         else if (slot == -1)
         {
-            DataScript.instance.PlayableCharacterList = DefaultSave.PlayableCharacterList;
-            DataScript.instance.PlayerInventory = DefaultSave.PlayerInventory;
+            DS.PlayableCharacterList = DefaultSave.PlayableCharacterList;
+            DS.PlayerInventory = DefaultSave.PlayerInventory;
             secondselapsed = 0;
         }
 
@@ -236,17 +251,32 @@ public class SaveManager : MonoBehaviour
         int currentchapter = 0;
         string scenename = SceneManager.GetActiveScene().name;
 
+        for(int i = 0; i < SceneManager.sceneCount;i++)
+        {
+            if(SceneManager.GetSceneAt(i).name== "Prologue" || SceneManager.GetSceneAt(i).name.Contains("Chapter"))
+            {
+                scenename = SceneManager.GetSceneAt(i).name;
+                break;
+            }
+        }
+
         if (scenename.Contains("Chapter"))
         {
-            scenename.Replace("Chapter", "");
+            scenename =scenename.Replace("Chapter", "");
             currentchapter = int.Parse(scenename) + 1;
+            DataScript.instance.UpdatePlayableUnits();
+        }
+        if(scenename.Contains("Prologue"))
+        {
+            currentchapter = 1;
+            DataScript.instance.UpdatePlayableUnits();
         }
 
         SaveClass save = new SaveClass
         {
             versionID = versionID,
             slot = activeSlot,
-            chapter = 0,
+            chapter = currentchapter,
             PlayableCharacterList = DataScript.instance.PlayableCharacterList,
             PlayerInventory = DataScript.instance.PlayerInventory,
             secondselapsed = secondselapsed

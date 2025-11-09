@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,8 @@ public class DataScript : MonoBehaviour
 
     public List<Character> DefaultPlayableCharacterList;
     public Inventory DefaultInventory;
+
+    public List<Sprite> DialogueSpriteList;
 
     [Serializable]
     public class ClassInfo
@@ -224,6 +227,33 @@ public class DataScript : MonoBehaviour
         }
     }
 
+    public void UpdatePlayableUnits()
+    {
+        UnitScript[] unitscripts = GameObject.FindObjectsByType<UnitScript>(FindObjectsSortMode.None);
+
+        List< Character > playablecopy = new List< Character >();
+
+        foreach( Character c in PlayableCharacterList)
+        {
+            UnitScript uS = new UnitScript();
+            playablecopy.Add(uS.CreateCopy(c));
+        }
+
+        foreach (UnitScript unitscript in unitscripts)
+        {
+            foreach (Character character in PlayableCharacterList)
+            {
+                Character currentchar = unitscript.UnitCharacteristics;
+                if(currentchar.affiliation=="playable" && character.ID==currentchar.ID)
+                {
+                    playablecopy[PlayableCharacterList.IndexOf(character)] = currentchar;
+                }
+            }
+        }
+
+        PlayableCharacterList = playablecopy;
+
+    }
     private void UpdateEquipmentID(Character character)
     {
         List<WeaponMastery> Masteries = character.Masteries;

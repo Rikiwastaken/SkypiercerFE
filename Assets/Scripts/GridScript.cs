@@ -462,6 +462,7 @@ public class GridScript : MonoBehaviour
     }
     public void UnlockSelection()
     {
+
         lockedmovementtiles = new List<GridSquareScript>();
         lockedattacktiles = new List<GridSquareScript>();
         lockedhealingtiles = new List<GridSquareScript>();
@@ -526,7 +527,7 @@ public class GridScript : MonoBehaviour
             if (unitGO != null)
             {
                 Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-                if (unit.currentTile.Contains(selection) && !unit.alreadymoved)
+                if (unit.currentTile.Contains(selection))
                 {
                     string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
                     int movements = unit.movements;
@@ -554,19 +555,8 @@ public class GridScript : MonoBehaviour
 
 
         }
-        if (!lockselection)
-        {
-            foreach (GridSquareScript gridSquareScript in movementtiles)
-            {
-                gridSquareScript.fillwithblue();
-            }
-        }
-
-        foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
-        {
-            gridSquareScript.fillwithblue();
-        }
-
+        
+        Recolor();
     }
 
     private void CheckMovementsForBigUnits(Character unit)
@@ -1497,16 +1487,16 @@ public class GridScript : MonoBehaviour
     public bool checkifvalidpos(Vector2 position, GameObject currentunit, int range)
     {
 
-        List< GridSquareScript > tiles = new List<GridSquareScript>() { GetTile(position) };
+        List<GridSquareScript> tiles = new List<GridSquareScript>() { GetTile(position) };
 
-        for(int i = 0; i<range;i++)
+        for (int i = 0; i < range; i++)
         {
             List<GridSquareScript> tilestoadd = new List<GridSquareScript>();
 
-            foreach(GridSquareScript tile in tiles)
+            foreach (GridSquareScript tile in tiles)
             {
                 GridSquareScript newtile = GetTile(tile.GridCoordinates + new Vector2(0, 1));
-                if(!tilestoadd.Contains(newtile) && !tiles.Contains(newtile))
+                if (!tilestoadd.Contains(newtile) && !tiles.Contains(newtile))
                 {
                     tilestoadd.Add(newtile);
                 }
@@ -1517,27 +1507,27 @@ public class GridScript : MonoBehaviour
                     tilestoadd.Add(newtile);
                 }
 
-                newtile = GetTile(tile.GridCoordinates + new Vector2(1,0));
+                newtile = GetTile(tile.GridCoordinates + new Vector2(1, 0));
                 if (!tilestoadd.Contains(newtile) && !tiles.Contains(newtile))
                 {
                     tilestoadd.Add(newtile);
                 }
 
-                newtile = GetTile(tile.GridCoordinates + new Vector2(-1,0));
+                newtile = GetTile(tile.GridCoordinates + new Vector2(-1, 0));
                 if (!tilestoadd.Contains(newtile) && !tiles.Contains(newtile))
                 {
                     tilestoadd.Add(newtile);
                 }
             }
 
-            foreach(GridSquareScript tile in tilestoadd)
+            foreach (GridSquareScript tile in tilestoadd)
             {
                 tiles.Add(tile);
             }
 
         }
 
-        return checkifvalidpos(tiles,position,currentunit);
+        return checkifvalidpos(tiles, position, currentunit);
 
     }
     public GridSquareScript GetTile(int x, int y)

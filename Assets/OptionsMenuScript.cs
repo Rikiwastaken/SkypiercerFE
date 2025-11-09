@@ -18,11 +18,13 @@ public class OptionsMenuScript : MonoBehaviour
 
     public TextMeshProUGUI BattleAnimations;
 
+    public TextMeshProUGUI FixedGrowth;
+
     private SaveManager SaveManager;
 
     private void Start()
     {
-        SaveManager = FindAnyObjectByType<SaveManager>();
+        SaveManager = SaveManager.instance;
         if(SaveManager.Options.Fullscreen)
         {
             fullscreentext.text = "Fullscreen : On";
@@ -38,6 +40,14 @@ public class OptionsMenuScript : MonoBehaviour
         else
         {
             BattleAnimations.text = "Battle Animations : Off";
+        }
+        if (SaveManager.Options.FixedGrowth)
+        {
+            FixedGrowth.text = "Fixed Growth : On";
+        }
+        else
+        {
+            FixedGrowth.text = "Fixed Growth : Off";
         }
     }
 
@@ -125,6 +135,20 @@ public class OptionsMenuScript : MonoBehaviour
         else
         {
             BattleAnimations.text = "Battle Animations : Off";
+        }
+    }
+
+    public void ToggleFixedGrowth()
+    {
+        SaveManager.Options.FixedGrowth = !SaveManager.Options.FixedGrowth;
+        SaveManager.SaveOptions();
+        if (SaveManager.Options.FixedGrowth)
+        {
+            FixedGrowth.text = "Fixed Growth : On";
+        }
+        else
+        {
+            FixedGrowth.text = "Fixed Growth : Off";
         }
     }
 }

@@ -78,7 +78,11 @@ public class TextBubbleScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Dialogue == null)
+        if(Dialogue == null && !indialogue)
+        {
+            return;
+        }
+        if (Dialogue == null && indialogue)
         {
             DeactivateBubble();
             MapEventManager.instance.TriggerEventCheck();
@@ -151,7 +155,7 @@ public class TextBubbleScript : MonoBehaviour
                     if(character.ID == info.characterindex)
                     {
                         charactername.text = character.name;
-                        characterportrait.sprite = character.DialogueSprite;
+                        characterportrait.sprite = DataScript.instance.DialogueSpriteList[character.ID];
                     }
                 }
             }

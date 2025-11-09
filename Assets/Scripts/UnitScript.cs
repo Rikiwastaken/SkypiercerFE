@@ -41,8 +41,6 @@ public class UnitScript : MonoBehaviour
         public List<GridSquareScript> currentTile;
         public int modelID;
         public List<WeaponMastery> Masteries;
-
-        public Sprite DialogueSprite;
     }
 
     [Serializable]
@@ -380,7 +378,7 @@ public class UnitScript : MonoBehaviour
     void Update()
     {
 
-        ManagePosition();
+
 
         if (cameraScript == null)
         {
@@ -444,13 +442,20 @@ public class UnitScript : MonoBehaviour
         HPForEvent = UnitCharacteristics.currentHP;
 
 
-        ManageMovement();
+
 
         //TemporaryColor();
         UpdateRendererLayer();
         ManageDamagenumber();
         Hidedeactivated();
         ManageSize();
+
+    }
+
+    private void FixedUpdate()
+    {
+        ManagePosition();
+        ManageMovement();
         ManageFlyingWeaponPosition();
     }
 
@@ -483,7 +488,7 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    
+
 
     public Character CreateCopy(Character CharacterToCopy = null)
     {
@@ -596,12 +601,12 @@ public class UnitScript : MonoBehaviour
                 animator.SetBool("Walk", true);
                 Vector2 direction = (pathtotake[0] - new Vector2(transform.position.x, transform.position.z)).normalized;
                 transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.deltaTime;
-                if (!cameraScript.incombat)
-                {
-                    transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                    animator.transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + rotationadjust);
-                }
+                //if (!cameraScript.incombat)
+                //{
+                //    transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                //    animator.transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                //    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + rotationadjust);
+                //}
             }
             else
             {
@@ -628,12 +633,12 @@ public class UnitScript : MonoBehaviour
 
                 Vector2 direction = (destination - new Vector2(transform.position.x, transform.position.z)).normalized;
                 transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.deltaTime;
-                if (!cameraScript.incombat)
-                {
-                    transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                    animator.transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + rotationadjust);
-                }
+                //if (!cameraScript.incombat)
+                //{
+                //    transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                //    animator.transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
+                //    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + rotationadjust);
+                //}
 
 
             }
@@ -660,14 +665,23 @@ public class UnitScript : MonoBehaviour
     {
         if (FlyingWeapon != null)
         {
-
-
-            float RandomY = Randomnumbers[Randomnumbersindex];
-            Randomnumbersindex++;
+            if (Randomnumbers == null || Randomnumbers.Count == 0)
+            {
+                Randomnumbers = new List<float>();
+                {
+                    for (int i = 0; i < 100; i++)
+                    {
+                        Randomnumbers.Add((float)UnityEngine.Random.Range(0.9f, 1.1f));
+                    }
+                }
+            }
             if (Randomnumbersindex >= Randomnumbers.Count)
             {
                 Randomnumbersindex = 0;
             }
+            float RandomY = Randomnumbers[Randomnumbersindex];
+            Randomnumbersindex++;
+
 
             if (flyingweaponmovingup)
             {
@@ -700,8 +714,8 @@ public class UnitScript : MonoBehaviour
     {
 
         ManageLifeBarRotation();
-        Image LifebarBehind = CanvasTransform.GetChild(0).GetComponent<Image>();
-        Image Lifebar = CanvasTransform.GetChild(1).GetComponent<Image>();
+        Image LifebarBehind = CanvasTransform.GetChild(1).GetComponent<Image>();
+        Image Lifebar = CanvasTransform.GetChild(2).GetComponent<Image>();
 
         //if (cameraScript.incombat || disableLifebar)
         //{
@@ -859,6 +873,7 @@ public class UnitScript : MonoBehaviour
         {
             GridScript = GridScript.instance;
         }
+        List<GridSquareScript> oldtiles = new List<GridSquareScript>();
         GridSquareScript destTile = GridScript.GetTile(destination);
         if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile) == gameObject) && !destTile.isobstacle)
         {
@@ -868,7 +883,7 @@ public class UnitScript : MonoBehaviour
                 {
                     if (tile != null)
                     {
-                        tile.UpdateInsideSprite(false);
+                        oldtiles.Add(tile);
                     }
 
                 }
@@ -899,6 +914,10 @@ public class UnitScript : MonoBehaviour
             foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
             {
                 tile.UpdateInsideSprite(true, UnitCharacteristics);
+            }
+            foreach (GridSquareScript tile in oldtiles)
+            {
+                tile.UpdateInsideSprite(false);
             }
         }
         if (MinimapScript == null)
@@ -1102,7 +1121,7 @@ public class UnitScript : MonoBehaviour
         animatortouse.SetBool("Heal", false);
         animatortouse.SetBool("Bow", false);
 
-        if (UnitCharacteristics.telekinesisactivated)
+        if (UnitCharacteristics.telekinesisactivated && weapon.type.ToLower() != "bow")
         {
             animatortouse.SetBool("Heal", true);
         }
@@ -1296,6 +1315,7 @@ public class UnitScript : MonoBehaviour
 
     private void UpdateWeaponIcon(equipment weapon)
     {
+        WeaponImage.color = Color.white;
         switch (weapon.type.ToLower())
         {
             case ("sword"):
@@ -1320,6 +1340,9 @@ public class UnitScript : MonoBehaviour
                 WeaponImage.sprite = StaffSprite;
                 break;
             default:
+                Color color = Color.white;
+                color.a = 0f;
+                WeaponImage.color = color;
                 WeaponImage.sprite = null;
                 break;
         }
@@ -1327,7 +1350,6 @@ public class UnitScript : MonoBehaviour
 
     void HealthChangedHandler(int newHealth)
     {
-        Debug.Log("Health changed to: " + newHealth);
         ManageLifebars();
     }
     public void RetreatTrigger() // Effect of Retreat or Verso
@@ -1673,6 +1695,11 @@ public class UnitScript : MonoBehaviour
     public List<int> LevelUp()
     {
 
+        if (UnitCharacteristics.affiliation == "playable")
+        {
+            fixedgrowth = SaveManager.instance.Options.FixedGrowth;
+        }
+
         BaseStats statsbeforelevelup = new BaseStats() { HP = UnitCharacteristics.stats.HP, Strength = UnitCharacteristics.stats.Strength, Psyche = UnitCharacteristics.stats.Psyche, Defense = UnitCharacteristics.stats.Defense, Resistance = UnitCharacteristics.stats.Resistance, Speed = UnitCharacteristics.stats.Speed, Dexterity = UnitCharacteristics.stats.Dexterity };
         previousStats = statsbeforelevelup;
 
@@ -1849,8 +1876,6 @@ public class UnitScript : MonoBehaviour
         {
             levelupstring += level + " ";
         }
-
-        //Debug.Log(levelupstring);
 
         calculateStats();
         return lvlupresult;

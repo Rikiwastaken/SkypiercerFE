@@ -64,6 +64,10 @@ public class TurnManger : MonoBehaviour
 
         InputManager = InputManager.instance;
 
+        if(GetComponent<AttackTurnScript>().attackanimationhappeningcnt > 0)
+        {
+            return;
+        }
 
         if (GridScript == null)
         {

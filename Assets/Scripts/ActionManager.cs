@@ -120,7 +120,7 @@ public class ActionManager : MonoBehaviour
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
                     }
-                    else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed && TurnManager.currentlyplaying == "playable" && NeutralMenuCD == 0)
+                    else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed && TurnManager.currentlyplaying == "playable" && NeutralMenuCD == 0 && !TextBubbleScript.indialogue) 
                     {
                         NeutralMenu.SetActive(true);
                     }

@@ -227,7 +227,6 @@ public class ExpBarScript : MonoBehaviour
             targetnumber = character.experience + 100;
             levelupbonuses = levelupstats;
         }
-        
         Expbar.fillAmount = currentnumber / 100f;
     }
 }

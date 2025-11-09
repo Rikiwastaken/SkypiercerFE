@@ -62,7 +62,7 @@ public class cameraScript : MonoBehaviour
         transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (Destination != null)
         {
@@ -103,8 +103,8 @@ public class cameraScript : MonoBehaviour
 
         if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), Destination) > 0.01f)
         {
-            float movex = (Destination.x - transform.position.x) * camspeed * Time.fixedDeltaTime;
-            float movez = (Destination.y - transform.position.z) * camspeed * Time.fixedDeltaTime;
+            float movex = (Destination.x - transform.position.x) * camspeed * Time.deltaTime;
+            float movez = (Destination.y - transform.position.z) * camspeed * Time.deltaTime;
             transform.position += new Vector3(movex, 0f, movez);
         }
         /*
@@ -146,7 +146,11 @@ public class cameraScript : MonoBehaviour
         {
             return;
         }
-        Destination = new Vector2(GridScript.selection.transform.position.x, GridScript.selection.transform.position.z);
+        if(TurnManger.instance.currentlyplaying=="playable")
+        {
+            Destination = new Vector2(GridScript.selection.transform.position.x, GridScript.selection.transform.position.z);
+        }
+        
 
 
         InputManager = InputManager.instance;
@@ -162,7 +166,6 @@ public class cameraScript : MonoBehaviour
             // Keep target angle in [-180, 180)
             targetangle = Mathf.Repeat(targetangle + 180f, 360f) - 180f;
 
-            Debug.Log($"Input: {InputManager.cammovementValue}, Target: {targetangle}");
         }
 
         // Smooth rotation toward target
@@ -173,7 +176,7 @@ public class cameraScript : MonoBehaviour
 
         if (InputManager.cammovementValue.y != 0f)
         {
-            transform.position += new Vector3(0f, InputManager.cammovementValue.y * -3f * Time.fixedDeltaTime, 0f);
+            transform.position += new Vector3(0f, InputManager.cammovementValue.y * -3f * Time.deltaTime, 0f);
         }
         if (transform.position.y < 5f)
         {

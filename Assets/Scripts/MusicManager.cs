@@ -67,7 +67,6 @@ public class MusicManager : MonoBehaviour
 
     public void InitializeMusics(string ChapterToLoad)
     {
-        Debug.Log(ChapterToLoad);
         int Chapter = -1;
         if(ChapterToLoad.Contains("Chapter"))
         {
@@ -78,7 +77,6 @@ public class MusicManager : MonoBehaviour
         {
             Chapter = 0;
         }
-        Debug.Log(Chapter);
         incombat.Stop();
         outcombat.Stop();
         BeforeCombat.Stop();

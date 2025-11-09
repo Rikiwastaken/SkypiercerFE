@@ -47,7 +47,7 @@ public class RandomScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(!initialized && GetComponent<UnitScript>().UnitCharacteristics != null)
+        if (!initialized && GetComponent<UnitScript>().UnitCharacteristics != null)
         {
             InitializeRandomValues();
         }
@@ -62,13 +62,13 @@ public class RandomScript : MonoBehaviour
         CritValues = new List<int>();
         personalityValues = new List<int>();
         levelValues = new List<RandomLevelValues> { };
-        for(int i = 0; i < numberofRandomValues; i++)
+        for (int i = 0; i < numberofRandomValues; i++)
         {
             HitValues.Add((int)UnityEngine.Random.Range(0, 100));
             CritValues.Add((int)UnityEngine.Random.Range(0, 100));
-            if(UnitCharacter.affiliation=="playable")
+            if (UnitCharacter.affiliation == "playable")
             {
-                if(i< numberofLevelValues)
+                if (i < numberofLevelValues)
                 {
                     RandomLevelValues newlevelvalues = new RandomLevelValues();
                     newlevelvalues.HPRandomValue = (int)UnityEngine.Random.Range(0, 100);
@@ -85,7 +85,7 @@ public class RandomScript : MonoBehaviour
             {
                 personalityValues.Add((int)UnityEngine.Random.Range(0, 100));
             }
-                
+
         }
     }
 
@@ -113,8 +113,7 @@ public class RandomScript : MonoBehaviour
     public RandomLevelValues GetLevelUpRandomValues()
     {
         RandomLevelValues randomLevelValues = levelValues[levelvaluesindex];
-        //levelvaluesindex++;
-        Debug.Log("random values : " + randomLevelValues.HPRandomValue + ", " + randomLevelValues.StrengthRandomValue + ", " + randomLevelValues.PsycheRandomValue + ", " + randomLevelValues.DefenseRandomValue + ", " + randomLevelValues.ResistanceRandomValue + ", " + randomLevelValues.DexterityRandomValue + ", " + randomLevelValues.SpeedRandomValue);
+        levelvaluesindex++;
         return randomLevelValues;
     }
 

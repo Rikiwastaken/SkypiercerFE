@@ -935,7 +935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9800539, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1983,6 +1983,21 @@ MonoBehaviour:
       Enemies and other units
       use Fixed Growth by default.'
     chapterWhereUnlocks: 0
+  - name: Pluvials
+    description: 'Pluvials are monsters created by the Beast''s power.
+
+
+      These
+      reanimated corpses can use blades and skills.
+
+
+      They get stronger under
+      Rainy Weather and weaker under Sunny weather.
+
+
+      They are usually found
+      in caves where yellow crystals appear, and outside when it starts to rain.'
+    chapterWhereUnlocks: 0
   - name: Other Units
     description: 'Some units are displayed in Yellow. These units are neither allies
       nor enemies.
@@ -1998,12 +2013,19 @@ MonoBehaviour:
       level and some story events.\n\nForesight can be accessed through the neutral
       menu."
     chapterWhereUnlocks: 1
-  - name: 
-    description: Test9
-    chapterWhereUnlocks: 0
-  - name: Test10
-    description: Test10
-    chapterWhereUnlocks: 0
+  - name: Machines
+    description: 'Machines are an enemy type which can usually be found in old world
+      ruins.
+
+
+      These contraptions cannot use blades nor telekinesis, but the
+      strong materials used to make them also give their weapon unlimited durability.
+
+
+      When
+      they are under Sunny weather, the solar energy repairs them a bit every turn.
+      This effect only triggers outside and never during Cloudy or Rainy weather.'
+    chapterWhereUnlocks: 1
   - name: Test11
     description: Test11
     chapterWhereUnlocks: 0
@@ -7671,7 +7693,6 @@ MonoBehaviour:
     - {fileID: 0}
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   buttons:
   - {fileID: 3240861738529935134}
   - {fileID: 4872761711283878001}
@@ -13879,7 +13900,7 @@ MonoBehaviour:
     beginningofturn: -1
     PreviousEvents: []
   foresightScript: {fileID: 4945345412159395524}
-  attackanimationhappening: 0
+  attackanimationhappeningcnt: 0
 --- !u!114 &5264566689360548286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13900,6 +13921,7 @@ MonoBehaviour:
   - {x: 6, y: 1}
   - {x: 5, y: 1}
   - {x: 6, y: 2}
+  ForcedCharacters: 
   ChapterID: 0
   BaseCharacter: {fileID: 5081702220094403406, guid: 8457eaa0d5794534a99c5154d7349036, type: 3}
   Characters: {fileID: 0}
@@ -14866,7 +14888,6 @@ MonoBehaviour:
     - {fileID: 0}
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   SkillList: {fileID: 4898234980993599380}
   PageNumberText: {fileID: 8048071046576614320}
   SkillPageNumberText: {fileID: 2346139528945135520}
@@ -18682,7 +18703,6 @@ MonoBehaviour:
     - {fileID: 0}
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
 --- !u!1 &7512953878376125901
 GameObject:
   m_ObjectHideFlags: 0

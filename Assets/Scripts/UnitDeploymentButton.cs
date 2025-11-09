@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,6 +25,9 @@ public class UnitDeploymentButton : MonoBehaviour
 
     private SkillEditionScript SkillEditionScript;
 
+    public GameObject lockimage;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,8 +47,19 @@ public class UnitDeploymentButton : MonoBehaviour
         GetComponentInChildren<TextMeshProUGUI>().text = "None";
         if (Character != null)
         {
+            
             if (Character.name != "")
             {
+                if (!lockimage.activeSelf && MapInitializer.ForcedCharacters.Contains(Character.ID))
+                {
+                    lockimage.SetActive(true);
+                }
+
+                if (lockimage.activeSelf && !MapInitializer.ForcedCharacters.Contains(Character.ID))
+                {
+                    lockimage.SetActive(false);
+                }
+
                 if (Character.playableStats.battalion != "Zack" && Character.playableStats.battalion != "Kira" && Character.playableStats.battalion != "Gale")
                 {
                     Character.playableStats.battalion = "Zack";
@@ -70,6 +85,10 @@ public class UnitDeploymentButton : MonoBehaviour
             }
             else
             {
+                if (lockimage.activeSelf)
+                {
+                    lockimage.SetActive(false);
+                }
                 GetComponentInChildren<TextMeshProUGUI>().text = "None";
             }
         }
@@ -165,7 +184,7 @@ public class UnitDeploymentButton : MonoBehaviour
 
         }
 
-        if (Character.playableStats.deployunit)
+        if (Character.playableStats.deployunit && !MapInitializer.ForcedCharacters.Contains(Character.ID))
         {
             Character.playableStats.deployunit = false;
             MapInitializer.InitializePlayers();

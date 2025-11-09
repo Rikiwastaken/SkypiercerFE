@@ -14,6 +14,8 @@ public class UnitDeploymentScript : MonoBehaviour
 
     private int numberofunitstodeplay;
 
+    private List<int> forcedunits;
+
     private GridScript gridscript;
 
     private DataScript DataScript;
@@ -34,11 +36,12 @@ public class UnitDeploymentScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        DataScript = FindAnyObjectByType<DataScript>();
+        DataScript = DataScript.instance;
         MapInitializer = FindAnyObjectByType<MapInitializer>();
         gridscript = GridScript.instance;
         inputmanager = InputManager.instance;
         numberofunitstodeplay = MapInitializer.playablepos.Count;
+        forcedunits = MapInitializer.ForcedCharacters;
         InitializeButtons();
     }
 

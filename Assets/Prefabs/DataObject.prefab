@@ -1198,12 +1198,12 @@ MonoBehaviour:
     ID: 11
   - name: SiegNPC
     BaseStats:
-      HP: 16
+      HP: 18
       Strength: 3
       Psyche: 9
-      Defense: 5
+      Defense: 6
       Resistance: 4
-      Speed: 9
+      Speed: 10
       Dexterity: 8
     StatGrowth:
       HPGrowth: 0
@@ -1776,7 +1776,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: 1
-    DialogueSprite: {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
   - name: Lea
     ID: 1
     stats:
@@ -1870,7 +1869,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-    DialogueSprite: {fileID: 21300000, guid: 95a4432c0a5facf4b96a82497eae6937, type: 3}
   - name: Elwyn
     ID: 2
     stats:
@@ -1964,7 +1962,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: 0
-    DialogueSprite: {fileID: 21300000, guid: c6a1704e47f6dcf4cafcb92a6be35997, type: 3}
   - name: Sorak
     ID: 3
     stats:
@@ -2000,7 +1997,7 @@ MonoBehaviour:
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 1100000001000000
+    equipmentsIDs: 
     equipments: []
     UnitSkill: 2
     EquipedSkills: 
@@ -2058,17 +2055,16 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-    DialogueSprite: {fileID: 21300000, guid: 52d0746f276b0cf4492fd439934f187a, type: 3}
   - name: Lyv
     ID: 4
     stats:
-      HP: 17
+      HP: 19
       Strength: 3
-      Psyche: 6
-      Defense: 7
+      Psyche: 7
+      Defense: 8
       Resistance: 4
-      Speed: 8
-      Dexterity: 5
+      Speed: 9
+      Dexterity: 6
     AjustedStats:
       HP: 0
       Strength: 0
@@ -2077,7 +2073,7 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
-    level: 3
+    level: 5
     experience: 0
     affiliation: playable
     growth:
@@ -2152,7 +2148,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: 0
-    DialogueSprite: {fileID: 21300000, guid: 1ae4ac2249c552842a7555d345088b75, type: 3}
   - name: Sieg
     ID: 5
     stats:
@@ -2246,7 +2241,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-    DialogueSprite: {fileID: 21300000, guid: 42e125a7c5eb2b9439638a8d5a4dc6cc, type: 3}
   - name: Mir
     ID: 6
     stats:
@@ -2340,7 +2334,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-    DialogueSprite: {fileID: 21300000, guid: a6917331ada75f148afaf32f0ca6664e, type: 3}
   - name: Sothe
     ID: 7
     stats:
@@ -2434,7 +2427,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-    DialogueSprite: {fileID: 0}
   - name: Laura
     ID: 8
     stats:
@@ -2528,7 +2520,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-    DialogueSprite: {fileID: 0}
   - name: Nolan
     ID: 9
     stats:
@@ -2622,7 +2613,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-    DialogueSprite: {fileID: 0}
   - name: Leonardo
     ID: 10
     stats:
@@ -2716,7 +2706,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-    DialogueSprite: {fileID: 0}
   - name: Edward
     ID: 11
     stats:
@@ -2810,7 +2799,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-    DialogueSprite: {fileID: 0}
   - name: Xora
     ID: 12
     stats:
@@ -2904,7 +2892,6 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-    DialogueSprite: {fileID: 0}
   manualgamespeed: 1
   PlayerInventory:
     inventoryItems:
@@ -3169,7 +3156,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Lea
     ID: 0
     stats:
@@ -3241,7 +3227,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Elwyn
     ID: 0
     stats:
@@ -3313,7 +3298,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Sorak
     ID: 0
     stats:
@@ -3385,7 +3369,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Lyv
     ID: 0
     stats:
@@ -3457,7 +3440,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Sieg
     ID: 0
     stats:
@@ -3529,7 +3511,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Mir
     ID: 0
     stats:
@@ -3601,7 +3582,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Sothe
     ID: 0
     stats:
@@ -3673,7 +3653,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Laura
     ID: 0
     stats:
@@ -3745,7 +3724,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Nolan
     ID: 0
     stats:
@@ -3817,7 +3795,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Leonardo
     ID: 0
     stats:
@@ -3889,7 +3866,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Edward
     ID: 0
     stats:
@@ -3961,7 +3937,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   - name: Xora
     ID: 0
     stats:
@@ -4033,7 +4008,6 @@ MonoBehaviour:
     currentTile: []
     modelID: 0
     Masteries: []
-    DialogueSprite: {fileID: 0}
   DefaultInventory:
     inventoryItems:
     - type: 1
@@ -4225,6 +4199,14 @@ MonoBehaviour:
     - type: 1
       ID: 63
       Quantity: 50
+  DialogueSpriteList:
+  - {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
+  - {fileID: 21300000, guid: 95a4432c0a5facf4b96a82497eae6937, type: 3}
+  - {fileID: 21300000, guid: c6a1704e47f6dcf4cafcb92a6be35997, type: 3}
+  - {fileID: 21300000, guid: 52d0746f276b0cf4492fd439934f187a, type: 3}
+  - {fileID: 21300000, guid: 1ae4ac2249c552842a7555d345088b75, type: 3}
+  - {fileID: 21300000, guid: 42e125a7c5eb2b9439638a8d5a4dc6cc, type: 3}
+  - {fileID: 21300000, guid: a6917331ada75f148afaf32f0ca6664e, type: 3}
 --- !u!114 &6877748070760658668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4237,7 +4219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96044cd774742f64cbd6546a776f0941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  versionID: 051
+  versionID: 060
   activeSlot: 0
   numberofslots: 6
   SaveClasses: []
@@ -4256,6 +4238,7 @@ MonoBehaviour:
     SEVolume: 0
     Fullscreen: 0
     BattleAnimations: 0
+    FixedGrowth: 0
 --- !u!114 &8454189363692229850
 MonoBehaviour:
   m_ObjectHideFlags: 0

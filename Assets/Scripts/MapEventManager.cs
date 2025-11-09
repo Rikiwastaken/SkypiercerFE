@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static MapEventManager;
 using static TextBubbleScript;
 using static UnitScript;
@@ -141,7 +142,7 @@ public class MapEventManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -266,6 +267,7 @@ public class MapEventManager : MonoBehaviour
         }
         if (unitPlacement.CameraPosition != Vector2.zero)
         {
+            Debug.Log("moving camera to : " + unitPlacement.CameraPosition);
             FindAnyObjectByType<cameraScript>().Destination = unitPlacement.CameraPosition;
         }
 
@@ -274,7 +276,6 @@ public class MapEventManager : MonoBehaviour
     public void TriggerEvent(EventCondition Event, int currentturn)
     {
         Debug.Log("event trigger : " + Event.ID);
-        Debug.Log("is event triggered ? : " + Event.triggered);
         ManageUnitPlacement(Event.UnitPlacement);
         UnitAddTrigger(Event.UnitsToUnlockID, true);
         UnitAddTrigger(Event.UnitsToLockID, false);
@@ -307,7 +308,9 @@ public class MapEventManager : MonoBehaviour
                 TutorialwindowScript.InitializeWindow(Event.TutorialWindow.WindowDimensions, Event.TutorialWindow.text);
                 break;
             case 6:
-
+                Debug.Log("spawn enemy dtrigger");
+                SpawnnewEnemies(Event);
+                TriggerEventCheck(currentturn);
                 break;
         }
 
@@ -356,8 +359,12 @@ public class MapEventManager : MonoBehaviour
     }
 
 
-    public void TriggerEventCheck(int beginningofTurn=-1)
+    public void TriggerEventCheck(int beginningofTurn = -1)
     {
+        if(SceneManager.GetActiveScene().name=="BattleScene")
+        {
+            return;
+        }
         if (EventsToMonitor != null)
         {
             EventInitialization();
@@ -443,7 +450,7 @@ public class MapEventManager : MonoBehaviour
                                 }
                                 break;
                             case (10):
-                                if (e.turnswheretotrigger!=null && e.turnswheretotrigger.Contains(beginningofTurn))
+                                if (e.turnswheretotrigger != null && e.turnswheretotrigger.Contains(beginningofTurn))
                                 {
                                     e.triggered = true;
                                     TriggerEvent(e, beginningofTurn);
@@ -473,9 +480,9 @@ public class MapEventManager : MonoBehaviour
     {
         bool allcharacterstalkedto = true;
 
-        foreach(Character chararacter in ev.UnitList )
+        foreach (Character chararacter in ev.UnitList)
         {
-            if(!chararacter.enemyStats.talkable || !!chararacter.enemyStats.talkedto)
+            if (!chararacter.enemyStats.talkable || !chararacter.enemyStats.talkedto)
             {
                 allcharacterstalkedto = false;
                 break;
@@ -509,7 +516,7 @@ public class MapEventManager : MonoBehaviour
         return true;
     }
 
-    
+
     private bool CheckSmallerConditionsAreChecked(List<SmallerCondition> smallerConditions)
     {
         foreach (SmallerCondition condition in smallerConditions)
@@ -582,11 +589,11 @@ public class MapEventManager : MonoBehaviour
     private bool CheckIfMechanismsActivated(EventCondition eventtocheck)
     {
         bool mechanismallactivated = true;
-        foreach(GridSquareScript tile in eventtocheck.TilesList)
+        foreach (GridSquareScript tile in eventtocheck.TilesList)
         {
-            if(tile.Mechanism!=null)
+            if (tile.Mechanism != null)
             {
-                if(!tile.Mechanism.isactivated)
+                if (!tile.Mechanism.isactivated)
                 {
                     mechanismallactivated = false;
                     break;
@@ -702,14 +709,14 @@ public class MapEventManager : MonoBehaviour
 
     private void SpawnnewEnemies(EventCondition e)
     {
-        if(e.CharactersToSpawn!=null && e.CharactersToSpawn.Count>0)
+        if (e.CharactersToSpawn != null && e.CharactersToSpawn.Count > 0)
         {
-            foreach(EnemyStats enemyStats in e.CharactersToSpawn)
+            foreach (EnemyStats enemyStats in e.CharactersToSpawn)
             {
-                MapInitializer.instance.InitializeNonPlayable(enemyStats);
+                FindAnyObjectByType<MapInitializer>().InitializeNonPlayable(enemyStats);
             }
             GridScript.InitializeGOList();
-            
+
         }
     }
 }

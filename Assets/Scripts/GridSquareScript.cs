@@ -101,6 +101,8 @@ public class GridSquareScript : MonoBehaviour
 
     public GameObject LeverGO;
 
+    private int autoupdatefillingcnt;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -259,6 +261,7 @@ public class GridSquareScript : MonoBehaviour
         }
 
         manageElevation();
+        AutoUpdateFilling();
         previouslyincombat = cameraScript.incombat;
     }
 
@@ -438,6 +441,22 @@ public class GridSquareScript : MonoBehaviour
         {
             filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithoutUnit;
         }
+        UpdateFilling();
+        
+    }
+
+    private void AutoUpdateFilling()
+    {
+
+        if(autoupdatefillingcnt == 0)
+        {
+            UpdateFilling();
+            autoupdatefillingcnt = (int)(0.25f/Time.deltaTime);
+        }
+        else
+        {
+            autoupdatefillingcnt--;
+        }
 
         
     }
@@ -469,9 +488,9 @@ public class GridSquareScript : MonoBehaviour
                 Cube.GetComponent<MeshRenderer>().enabled = false;
                 Stairs.GetComponent<MeshRenderer>().enabled = false;
             }
-            if(Mechanism!=null && Mechanism.type==2 && LeverGO.GetComponent<MeshRenderer>().enabled != false)
+            if(Mechanism!=null && Mechanism.type==2 && LeverGO.activeSelf)
             {
-                LeverGO.GetComponent<MeshRenderer>().enabled = false;
+                LeverGO.SetActive(false);
             }
             
         }
@@ -481,6 +500,10 @@ public class GridSquareScript : MonoBehaviour
             {
                 Cube.GetComponent<MeshRenderer>().enabled = true;
                 Stairs.GetComponent<MeshRenderer>().enabled = true;
+            }
+            if (Mechanism != null && Mechanism.type == 2 && !LeverGO.activeSelf)
+            {
+                LeverGO.SetActive(true);
             }
         }
 
@@ -537,7 +560,7 @@ public class GridSquareScript : MonoBehaviour
             //    }
             //}
 
-            if (isobstacle)
+            if (isobstacle && !(Mechanism != null && Mechanism.type == 2))
             {
                 if (Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f || GridScript.instance.MapModel!=null)
                 {
@@ -627,6 +650,10 @@ public class GridSquareScript : MonoBehaviour
     public void UpdateFilling()
     {
         SpriteRenderer SR = SelectRoundFilling.GetComponent<SpriteRenderer>();
+        if(GridScript==null)
+        {
+            return;
+        }
         GameObject unit = GridScript.GetUnit(this);
         Color newcolor = new Color();
         if (unit == null)

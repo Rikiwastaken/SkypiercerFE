@@ -59,6 +59,11 @@ public class BattleInfotext : MonoBehaviour
         {
             transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
             transform.parent.GetComponent<Image>().enabled = false;
+            if(MasteryText.transform.parent.gameObject.activeSelf)
+            {
+                MasteryText.transform.parent.gameObject.SetActive(false);
+            }
+            
         }
         else
         {

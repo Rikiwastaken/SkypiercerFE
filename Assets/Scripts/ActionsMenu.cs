@@ -89,6 +89,7 @@ public class ActionsMenu : MonoBehaviour
             colors.normalColor = BaseButtonColor;
             colors.pressedColor = BaseButtonPressedColor;
             transform.GetChild(3).GetComponent<Button>().colors = colors;
+            transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 0f);
         }
         else
         {
@@ -97,6 +98,7 @@ public class ActionsMenu : MonoBehaviour
             colors.normalColor = Color.gray;
             colors.pressedColor = Color.gray;
             transform.GetChild(3).GetComponent<Button>().colors = colors;
+            transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 1f);
         }
 
     }
@@ -289,7 +291,6 @@ public class ActionsMenu : MonoBehaviour
         WeaponChange();
         target.GetComponent<UnitScript>().UpdateWeaponModel();
         bool enemytargettable = false;
-        Debug.Log(GridScript.lockedattacktiles.Count);
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
         {
             if ((int)tile.GridCoordinates.x == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.x && (int)tile.GridCoordinates.y == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.y)
@@ -569,7 +570,6 @@ public class ActionsMenu : MonoBehaviour
                         targetlist.Add(potentialtarget);
                     }
                 }
-                Debug.Log(targetlist[0]);
                 if (targetlist.Count > 0)
                 {
                     activetargetid = 0;
@@ -657,7 +657,6 @@ public class ActionsMenu : MonoBehaviour
             if (targetlist.Count == 0)
             {
                 commandmenu.SetActive(true);
-                Debug.Log("command menu activated");
             }
         }
         else
@@ -947,7 +946,6 @@ public class ActionsMenu : MonoBehaviour
         {
             TargetText += "Telekinesis : Off\n";
         }
-        Debug.Log(TargetText);
 
         unitAttackText.text = UnitText;
         targetAttackText.text = TargetText;
@@ -2064,7 +2062,7 @@ public class ActionsMenu : MonoBehaviour
             finaldamagefloat = finaldamagefloat / 2f;
         }
 
-        if (target != null && targetTile!=null && targetTile.type == "Fire")
+        if (target != null && targetTile != null && targetTile.type == "Fire")
         {
             finaldamagefloat = finaldamagefloat * 1.1f;
         }

@@ -11,6 +11,7 @@ public class MapInitializer : MonoBehaviour
     public int numberofplayables;
 
     public List<Vector2> playablepos;
+    public List<int> ForcedCharacters;
 
     public int ChapterID;
 
@@ -26,7 +27,7 @@ public class MapInitializer : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             instance = this;
         }
@@ -36,7 +37,7 @@ public class MapInitializer : MonoBehaviour
     void Start()
     {
         EmptyPlayables();
-        InitializePlayers();
+        InitializePlayers(true);
         InitializeNonPlayers();
     }
 
@@ -56,7 +57,7 @@ public class MapInitializer : MonoBehaviour
         }
     }
 
-    public void InitializePlayers()
+    public void InitializePlayers(bool firstinit = false)
     {
         if (GridScript == null)
         {
@@ -78,12 +79,32 @@ public class MapInitializer : MonoBehaviour
             }
         }
 
+
+
         int index = 0;
         bool intestmap = SceneManager.GetActiveScene().name == "TestMap";
+
+        foreach (Character playable in DataScript.instance.PlayableCharacterList)
+        {
+            if (ForcedCharacters.Contains(playable.ID))
+            {
+                playable.playableStats.deployunit = true;
+                GameObject newcharacter = Instantiate(BaseCharacter);
+                newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
+                ManageModel(newcharacter);
+                newcharacter.GetComponent<UnitScript>().calculateStats();
+                newcharacter.transform.parent = Characters.transform;
+                newcharacter.transform.position = new Vector3(playablepos[index].x, 0, playablepos[index].y);
+                newcharacter.GetComponent<UnitScript>().MoveTo(playablepos[index]);
+                newcharacter.name = playable.name;
+                index++;
+            }
+        }
+
         foreach (Character playable in DataScript.instance.PlayableCharacterList)
         {
 
-            if (index < playablepos.Count && (playable.playableStats.deployunit || (intestmap || playable.playableStats.unlocked)))
+            if (index < playablepos.Count && (playable.playableStats.deployunit || intestmap || (playable.playableStats.unlocked && firstinit)) && !ForcedCharacters.Contains(playable.ID))
             {
                 GameObject newcharacter = Instantiate(BaseCharacter);
                 newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
@@ -134,7 +155,7 @@ public class MapInitializer : MonoBehaviour
         Character.equipmentsIDs = enemyStats.equipments;
         Character.ID = findfirstfreeid();
         newcharacter.transform.parent = Characters.transform;
-        if(GridScript.instance.checkifvalidpos(enemyStats.startpos, newcharacter,0))
+        if (GridScript.instance.checkifvalidpos(enemyStats.startpos, newcharacter, 0))
         {
             newcharacter.transform.position = new Vector3(enemyStats.startpos.x, 0, enemyStats.startpos.y);
             newcharacter.GetComponent<UnitScript>().previousposition = enemyStats.startpos;
@@ -142,14 +163,14 @@ public class MapInitializer : MonoBehaviour
         }
         else
         {
-            for (int i = 0;i<3;i++)
+            for (int i = 0; i < 3; i++)
             {
 
                 bool posfound = false;
 
                 List<Vector2> newposlist = new List<Vector2>() { new Vector2(0, i), new Vector2(0, -i), new Vector2(i, 0), new Vector2(-i, 0), new Vector2(-i, i), new Vector2(i, i), new Vector2(-i, -i), new Vector2(i, -i) };
 
-                foreach(Vector2 pos in newposlist)
+                foreach (Vector2 pos in newposlist)
                 {
                     if (GridScript.instance.checkifvalidpos(pos, newcharacter, 0))
                     {
@@ -161,14 +182,14 @@ public class MapInitializer : MonoBehaviour
                     }
                 }
 
-                if(posfound)
+                if (posfound)
                 {
                     break;
                 }
             }
         }
-        
-        if(index!=-1)
+
+        if (index != -1)
         {
             newcharacter.name = enemyStats.Name + " " + index;
         }
