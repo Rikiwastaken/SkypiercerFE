@@ -361,7 +361,7 @@ public class MapEventManager : MonoBehaviour
 
     public void TriggerEventCheck(int beginningofTurn = -1)
     {
-        if(SceneManager.GetActiveScene().name=="BattleScene")
+        if(SceneManager.GetActiveScene().name=="BattleScene" || TextBubbleScript.indialogue)
         {
             return;
         }

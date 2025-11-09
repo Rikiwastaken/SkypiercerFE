@@ -2027,10 +2027,10 @@ MonoBehaviour:
       This effect only triggers outside and never during Cloudy or Rainy weather.'
     chapterWhereUnlocks: 1
   - name: Test11
-    description: Test11
+    description: Test11Test11Test11Test11Test11Test11Test11Test11Test11Test11Test11Test11
     chapterWhereUnlocks: 0
   - name: Test12
-    description: Test12
+    description: Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12
     chapterWhereUnlocks: 0
 --- !u!1 &1117708666303132778
 GameObject:
@@ -13833,6 +13833,7 @@ MonoBehaviour:
   phaseTextScript: {fileID: 3028186298790515499}
   textBubbleScript: {fileID: 7773822336030157861}
   TutorialWindows: {fileID: 428145789603806661}
+  skipothersTurn: 0
 --- !u!114 &1394583299071352539
 MonoBehaviour:
   m_ObjectHideFlags: 0

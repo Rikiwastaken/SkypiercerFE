@@ -146,7 +146,7 @@ public class GridScript : MonoBehaviour
                 previousmovevalue = Vector2.zero;
             }
 
-            if ((inputManager.NextWeaponjustpressed || inputManager.PreviousWeaponjustpressed) && GetComponent<TurnManger>().currentlyplaying == "playable")
+            if ((inputManager.NextWeaponjustpressed || inputManager.PreviousWeaponjustpressed) && GetComponent<TurnManger>().currentlyplaying == "playable" && !lockselection)
             {
                 GameObject GOSelected = GetUnit(selection);
                 if (GOSelected != null)
@@ -453,9 +453,12 @@ public class GridScript : MonoBehaviour
 
         for (int i = 0; i < unitholder.childCount; i++)
         {
-            UnitScript character = unitholder.GetChild(i).GetComponent<UnitScript>();
-            allunits.Add(character.UnitCharacteristics);
-            allunitGOs.Add(character.gameObject);
+            if(unitholder.GetChild(i).gameObject.activeSelf)
+            {
+                UnitScript character = unitholder.GetChild(i).GetComponent<UnitScript>();
+                allunits.Add(character.UnitCharacteristics);
+                allunitGOs.Add(character.gameObject);
+            }
         }
         GetComponent<TurnManger>().InitializeUnitLists(allunitGOs);
     }

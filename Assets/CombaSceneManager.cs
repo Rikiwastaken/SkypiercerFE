@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -199,45 +200,72 @@ public class CombaSceneManager : MonoBehaviour
 
     private void ManageLifeBars()
     {
-        if (ChangeAttackerLifebar && LowerAttackerHPBarTimeCounter < LowerHPBarTime / Time.fixedDeltaTime)
-        {
+        float totalSteps = LowerHPBarTime / Time.fixedDeltaTime;
 
+        // ----- ATTACKER -----
+        if (ChangeAttackerLifebar && LowerAttackerHPBarTimeCounter < totalSteps)
+        {
             LowerAttackerHPBarTimeCounter++;
-            float IntialrationofHPAttackerLost = (float)(ActiveCombatData.attackerBeforeCombat.currentHP - ActiveCombatData.defenderdamage) / (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP;
 
-            float ratiotToAdd = ((LowerHPBarTime / Time.fixedDeltaTime - (float)LowerAttackerHPBarTimeCounter) / (LowerHPBarTime / Time.fixedDeltaTime)) * ((float)ActiveCombatData.defenderdamage / (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP);
+            float maxHP = ActiveCombatData.attackerBeforeCombat.AjustedStats.HP;
+            float currentHPBefore = ActiveCombatData.attackerBeforeCombat.currentHP;
+            float damage = ActiveCombatData.defenderdamage;
 
-            
+            // Ratio at start of the animation
+            float startRatio = Mathf.Clamp01((currentHPBefore - damage) / maxHP);
 
-            AttackerHPTMP.text = "" + (int)Mathf.Max(((IntialrationofHPAttackerLost + ratiotToAdd) * ActiveCombatData.attackerBeforeCombat.AjustedStats.HP), 0);
+            // Ratio we animate from
+            float endRatio = Mathf.Clamp01(currentHPBefore / maxHP);
 
-            AttackerHPLost.fillAmount = IntialrationofHPAttackerLost + ratiotToAdd;
-            AttackerHPRemaining.fillAmount = IntialrationofHPAttackerLost;
+            // How far through the animation are we?
+            float t = LowerAttackerHPBarTimeCounter / totalSteps;
+
+            // Smoothly interpolate
+            float displayedRatio = Mathf.Lerp(endRatio, startRatio, t);
+
+            // Apply
+            AttackerHPLost.fillAmount = displayedRatio;
+            AttackerHPRemaining.fillAmount = displayedRatio;
+
+            int displayedHP = Mathf.RoundToInt(displayedRatio * maxHP);
+            AttackerHPTMP.text = displayedHP.ToString();
         }
-        if (ChangeDefenderLifebar && LowerDefenderHPBarTimeCounter < LowerHPBarTime / Time.fixedDeltaTime)
+
+
+        // ----- DEFENDER -----
+        if (ChangeDefenderLifebar && LowerDefenderHPBarTimeCounter < totalSteps)
         {
-
             LowerDefenderHPBarTimeCounter++;
-            float IntialrationofHPDefenderLost = (float)(ActiveCombatData.defenderBeforeCombat.currentHP + ActiveCombatData.attackerdamage) / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP;
 
-            float ratiotToAdd = ((LowerHPBarTime / Time.fixedDeltaTime - (float)LowerDefenderHPBarTimeCounter) / (LowerHPBarTime / Time.fixedDeltaTime)) * ((float)ActiveCombatData.attackerdamage / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP);
+            float maxHP = ActiveCombatData.defenderBeforeCombat.AjustedStats.HP;
+            float currentHPBefore = ActiveCombatData.defenderBeforeCombat.currentHP;
+            float delta = ActiveCombatData.attackerdamage;
 
-            if (ActiveCombatData.healing)
-            {
-                ratiotToAdd = ((LowerHPBarTime / Time.fixedDeltaTime - (float)LowerDefenderHPBarTimeCounter) / (LowerHPBarTime / Time.fixedDeltaTime)) * ((float)ActiveCombatData.attackerdamage / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP);
-                DefenderHPTMP.text = "" + (int)Mathf.Max(((IntialrationofHPDefenderLost - ratiotToAdd) * ActiveCombatData.defenderBeforeCombat.AjustedStats.HP), 0);
-            }
-            else
-            {
-                DefenderHPTMP.text = "" + (int)Mathf.Max(((IntialrationofHPDefenderLost + ratiotToAdd) * ActiveCombatData.defenderBeforeCombat.AjustedStats.HP), 0);
-            }
+            bool healing = ActiveCombatData.healing;
 
-                
+            // Damage decreases HP; healing increases HP
+            float startHP = healing ? currentHPBefore + delta : currentHPBefore - delta;
+            float endHP = currentHPBefore;
 
-            DefenderHPLost.fillAmount = IntialrationofHPDefenderLost + ratiotToAdd;
-            DefenderHPRemaining.fillAmount = IntialrationofHPDefenderLost;
+            // Clamp both sides
+            float startRatio = Mathf.Clamp01(startHP / maxHP);
+            float endRatio = Mathf.Clamp01(endHP / maxHP);
+
+            // Animation step
+            float t = LowerDefenderHPBarTimeCounter / totalSteps;
+
+            // Lerp from pre-change HP to actual HP
+            float displayedRatio = Mathf.Lerp( endRatio, startRatio, t);
+
+            // Apply
+            DefenderHPLost.fillAmount = displayedRatio;
+            DefenderHPRemaining.fillAmount = displayedRatio;
+
+            int displayedHP = Mathf.RoundToInt(displayedRatio * maxHP);
+            DefenderHPTMP.text = displayedHP.ToString();
         }
     }
+
     private void ManageWeaponPositionResting(GameObject go)
     {
         if (go.GetComponent<UnitScript>().FlyingWeapon != null)
@@ -649,7 +677,34 @@ public class CombaSceneManager : MonoBehaviour
             if (Modeltomove == null)
             {
                 Modeltomove = attackerSceneGO.GetComponent<UnitScript>().FlyingWeapon;
-                Modeltomove.transform.position = Vector3.Lerp(Modeltomove.transform.position, ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
+                if(Modeltomove == null)
+                {
+                    waitForAttackerProjectile = false;
+                    if (ActiveCombatData.defenderdodged)
+                    {
+                        ActiveCombatData.defenderAnimator.SetTrigger("Dodge");
+                    }
+                    else if (ActiveCombatData.defenderdied)
+                    {
+                        ActiveCombatData.defenderAnimator.SetTrigger("Death");
+                        deathcharactercounter = (int)(deathtimeoutduration / Time.fixedDeltaTime);
+                    }
+                    else
+                    {
+                        ActiveCombatData.defenderAnimator.SetTrigger("Damage");
+                    }
+                    if (Modeltomove == NewArrow)
+                    {
+                        Destroy(NewArrow);
+                    }
+                    DefenderResponse = true;
+                    return;
+                }
+                else
+                {
+                    Modeltomove.transform.position = Vector3.Lerp(Modeltomove.transform.position, ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
+                }
+                    
             }
             else
             {
@@ -686,7 +741,35 @@ public class CombaSceneManager : MonoBehaviour
             if (Modeltomove == null)
             {
                 Modeltomove = defenderSceneGO.GetComponent<UnitScript>().FlyingWeapon;
-                Modeltomove.transform.position = Vector3.Lerp(Modeltomove.transform.position, ActiveCombatData.attackerAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
+                if (Modeltomove == null)
+                {
+                    waitForDefenderProjectile = false;
+                    if (ActiveCombatData.attackerdodged)
+                    {
+                        ActiveCombatData.attackerAnimator.SetTrigger("Dodge");
+                    }
+                    else if (ActiveCombatData.attackerdied)
+                    {
+                        ActiveCombatData.attackerAnimator.SetTrigger("Death");
+                        deathcharactercounter = (int)(deathtimeoutduration / Time.fixedDeltaTime);
+                    }
+                    else
+                    {
+                        ActiveCombatData.attackerAnimator.SetTrigger("Damage");
+                    }
+                    if (Modeltomove == NewArrow)
+                    {
+                        Destroy(NewArrow);
+                    }
+                    AttackerResponse = true;
+                    return;
+                }
+                else
+                {
+                    Modeltomove.transform.position = Vector3.Lerp(Modeltomove.transform.position, ActiveCombatData.attackerAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
+                }
+
+                    
             }
             else
             {
@@ -985,8 +1068,11 @@ public class CombaSceneManager : MonoBehaviour
             float attackerHPRatio = (float)ActiveCombatData.attackerBeforeCombat.currentHP / (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP;
             float defenderHPRatio = (float)ActiveCombatData.defenderBeforeCombat.currentHP / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP;
 
+            
             AttackerHPTMP.text = "" + (int)(ActiveCombatData.attackerBeforeCombat.currentHP);
             DefenderHPTMP.text = "" + (int)(ActiveCombatData.defenderBeforeCombat.currentHP);
+            Debug.Log(AttackerHPTMP.text);
+            Debug.Log(DefenderHPTMP.text);
 
             Debug.Log("attacker ratio : " + attackerHPRatio);
             Debug.Log("defender ratio : " + defenderHPRatio);

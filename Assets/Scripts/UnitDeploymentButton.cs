@@ -50,12 +50,12 @@ public class UnitDeploymentButton : MonoBehaviour
             
             if (Character.name != "")
             {
-                if (!lockimage.activeSelf && MapInitializer.ForcedCharacters.Contains(Character.ID))
+                if (lockimage != null &&  !lockimage.activeSelf && MapInitializer.ForcedCharacters.Contains(Character.ID))
                 {
                     lockimage.SetActive(true);
                 }
 
-                if (lockimage.activeSelf && !MapInitializer.ForcedCharacters.Contains(Character.ID))
+                if (lockimage != null && lockimage.activeSelf && !MapInitializer.ForcedCharacters.Contains(Character.ID))
                 {
                     lockimage.SetActive(false);
                 }
@@ -85,7 +85,7 @@ public class UnitDeploymentButton : MonoBehaviour
             }
             else
             {
-                if (lockimage.activeSelf)
+                if (lockimage!=null && lockimage.activeSelf)
                 {
                     lockimage.SetActive(false);
                 }

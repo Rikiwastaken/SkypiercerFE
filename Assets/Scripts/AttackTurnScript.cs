@@ -89,7 +89,15 @@ public class AttackTurnScript : MonoBehaviour
 
         if (previousattacker != null)
         {
+            Debug.Log(previousattacker+"   "+ previoustarget);
+            previousattacker.GetComponent<UnitScript>().disableLifebar = false;
+            previousattacker.GetComponent<UnitScript>().ManageLifebars();
             AttackWithAnimationEndOfFight(previousattacker, previoustarget);
+            if(previoustarget!=null)
+            {
+                previoustarget.GetComponent<UnitScript>().disableLifebar = false;
+                previoustarget.GetComponent<UnitScript>().ManageLifebars();
+            }
             previousattacker = null;
             previoustarget = null;
             gridScript.ResetAllSelections();
@@ -978,6 +986,8 @@ public class AttackTurnScript : MonoBehaviour
 
             Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
 
+            
+
             triggercleanup = true;
 
             GameObject target = null;
@@ -1019,7 +1029,6 @@ public class AttackTurnScript : MonoBehaviour
                 CurrentAction.AttackData.previousdefenderhitindex = target.GetComponent<RandomScript>().hitvaluesindex;
                 CurrentAction.AttackData.previousdefendercritindex = target.GetComponent<RandomScript>().CritValuesindex;
                 CurrentAction.AttackData.previousdefenderlvlupindex = target.GetComponent<RandomScript>().levelvaluesindex;
-                foresightScript.AddAction(CurrentAction);
 
                 (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
                 bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));

@@ -49,6 +49,8 @@ public class OptionsMenuScript : MonoBehaviour
         {
             FixedGrowth.text = "Fixed Growth : Off";
         }
+        MusicMain.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Music : " + (int)(SaveManager.Options.musicvolume * 100);
+        SEMain.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Sound : " + (int)(SaveManager.Options.SEVolume * 100);
     }
 
     // Update is called once per frame

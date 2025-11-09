@@ -75,7 +75,7 @@ public class ActionManager : MonoBehaviour
 
         if (actionsMenu.activeSelf)
         {
-            if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow") == null && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
+            if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow") == null && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
             {
                 currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                 currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
@@ -124,7 +124,7 @@ public class ActionManager : MonoBehaviour
                     {
                         NeutralMenu.SetActive(true);
                     }
-                    if (InputManager.Telekinesisjustpressed && !battlecamera.incombat)
+                    if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
                     {
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                         currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
@@ -166,7 +166,7 @@ public class ActionManager : MonoBehaviour
                         WeaponChange(currentcharacter);
                         GridScript.ShowMovement();
                     }
-                    if (InputManager.Telekinesisjustpressed && !battlecamera.incombat)
+                    if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable")
                     {
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                         WeaponChange(currentcharacter);

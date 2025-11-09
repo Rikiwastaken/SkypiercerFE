@@ -710,7 +710,7 @@ public class UnitScript : MonoBehaviour
     {
         CanvasTransform.rotation = Quaternion.Euler(90f, 0f, 0f);
     }
-    private void ManageLifebars()
+    public void ManageLifebars()
     {
 
         ManageLifeBarRotation();
@@ -729,7 +729,15 @@ public class UnitScript : MonoBehaviour
         //{
 
         //}
-        if (!Lifebar.gameObject.activeSelf)
+        if (disableLifebar)
+        {
+            if (Lifebar.gameObject.activeSelf)
+            {
+                Lifebar.gameObject.SetActive(false);
+                LifebarBehind.gameObject.SetActive(false);
+            }
+        }
+        else if (!Lifebar.gameObject.activeSelf)
         {
             Lifebar.gameObject.SetActive(true);
             LifebarBehind.gameObject.SetActive(true);

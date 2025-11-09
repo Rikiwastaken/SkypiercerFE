@@ -32,6 +32,8 @@ public class TipsMenuScript : MonoBehaviour
 
     public List<Tip> Tips;
 
+    private GameObject previousselection;
+
     private void OnEnable()
     {
         ButtonInitialization();
@@ -51,24 +53,23 @@ public class TipsMenuScript : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
             }
 
-            if (currentSelected == transform.GetChild(0).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y > 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y > 0)))
+            if (currentSelected == transform.GetChild(0).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y > 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y > 0)) && previousselection == currentSelected)
             {
                 ChangeButtonID(-1);
             }
 
-            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y < 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y < 0)))
+            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y < 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y < 0)) && previousselection == currentSelected)
             {
                 ChangeButtonID(1);
             }
 
-            Debug.Log(Buttons.IndexOf(currentSelected.GetComponent<Button>()));
             if (Buttons.IndexOf(currentSelected.GetComponent<Button>()) < ButtonIDs.Count && Buttons.IndexOf(currentSelected.GetComponent<Button>()) !=-1 && ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())] != -1)
             {
                 if (!descriptionText.transform.parent.gameObject.activeSelf)
                 {
                     descriptionText.transform.parent.gameObject.SetActive(true);
                 }
-                descriptionText.text = Tips[Buttons.IndexOf(currentSelected.GetComponent<Button>())].description;
+                descriptionText.text = Tips[ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())]].description;
             }
             else
             {
@@ -117,6 +118,8 @@ public class TipsMenuScript : MonoBehaviour
             neutralmenu.SetActive(true);
             EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
         }
+
+        previousselection = currentSelected;
     }
 
     private void ChangeButtonID(int direction)

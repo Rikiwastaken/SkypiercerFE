@@ -99,29 +99,29 @@ public class ButtonImage : MonoBehaviour
             switch (WhattoShow)
             {
                 case ("A"):
-                    keyboardtext.text = "Spc";
+                    keyboardtext.text = "K";
                     
                     break;
                 case ("B"):
-                    keyboardtext.text = "Esc";
+                    keyboardtext.text = "L";
                     break;
                 case ("X"):
-                    keyboardtext.text = "F";
+                    keyboardtext.text = "I";
                     break;
                 case ("Y"):
-                    keyboardtext.text = "W";
+                    keyboardtext.text = "O";
                     break;
                 case ("LB"):
                     keyboardtext.text = "A";
                     break;
                 case ("RB"):
-                    keyboardtext.text = "E";
+                    keyboardtext.text = "P";
                     break;
                 case ("LT"):
                     keyboardtext.text = "&";
                     break;
                 case ("RT"):
-                    keyboardtext.text = "\"";
+                    keyboardtext.text = "à";
                     break;
                 case ("DPadUp"):
                     keyboardtext.text = "";
