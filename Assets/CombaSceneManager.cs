@@ -207,6 +207,8 @@ public class CombaSceneManager : MonoBehaviour
 
             float ratiotToAdd = ((LowerHPBarTime / Time.fixedDeltaTime - (float)LowerAttackerHPBarTimeCounter) / (LowerHPBarTime / Time.fixedDeltaTime)) * ((float)ActiveCombatData.defenderdamage / (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP);
 
+            
+
             AttackerHPTMP.text = "" + (int)Mathf.Max(((IntialrationofHPAttackerLost + ratiotToAdd) * ActiveCombatData.attackerBeforeCombat.AjustedStats.HP), 0);
 
             AttackerHPLost.fillAmount = IntialrationofHPAttackerLost + ratiotToAdd;
@@ -216,11 +218,21 @@ public class CombaSceneManager : MonoBehaviour
         {
 
             LowerDefenderHPBarTimeCounter++;
-            float IntialrationofHPDefenderLost = (float)(ActiveCombatData.defenderBeforeCombat.currentHP - ActiveCombatData.attackerdamage) / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP;
+            float IntialrationofHPDefenderLost = (float)(ActiveCombatData.defenderBeforeCombat.currentHP + ActiveCombatData.attackerdamage) / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP;
 
             float ratiotToAdd = ((LowerHPBarTime / Time.fixedDeltaTime - (float)LowerDefenderHPBarTimeCounter) / (LowerHPBarTime / Time.fixedDeltaTime)) * ((float)ActiveCombatData.attackerdamage / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP);
 
-            DefenderHPTMP.text = "" + (int)Mathf.Max(((IntialrationofHPDefenderLost + ratiotToAdd) * ActiveCombatData.defenderBeforeCombat.AjustedStats.HP), 0);
+            if (ActiveCombatData.healing)
+            {
+                ratiotToAdd = ((LowerHPBarTime / Time.fixedDeltaTime - (float)LowerDefenderHPBarTimeCounter) / (LowerHPBarTime / Time.fixedDeltaTime)) * ((float)ActiveCombatData.attackerdamage / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP);
+                DefenderHPTMP.text = "" + (int)Mathf.Max(((IntialrationofHPDefenderLost - ratiotToAdd) * ActiveCombatData.defenderBeforeCombat.AjustedStats.HP), 0);
+            }
+            else
+            {
+                DefenderHPTMP.text = "" + (int)Mathf.Max(((IntialrationofHPDefenderLost + ratiotToAdd) * ActiveCombatData.defenderBeforeCombat.AjustedStats.HP), 0);
+            }
+
+                
 
             DefenderHPLost.fillAmount = IntialrationofHPDefenderLost + ratiotToAdd;
             DefenderHPRemaining.fillAmount = IntialrationofHPDefenderLost;
@@ -342,7 +354,7 @@ public class CombaSceneManager : MonoBehaviour
                         ActiveCombatData.defenderAnimator.SetTrigger("Death");
                         deathcharactercounter = (int)(deathtimeoutduration / Time.fixedDeltaTime);
                     }
-                    else
+                    else if(!ActiveCombatData.healing)
                     {
                         ActiveCombatData.defenderAnimator.SetTrigger("Damage");
                     }
