@@ -386,7 +386,7 @@ public class TurnManger : MonoBehaviour
                     numberremaining++;
                 }
             }
-            turntext.text = "Turn : Allies \nRemaining : " + numberremaining;
+            turntext.text = "Turn "+currentTurn+" : Allies \nRemaining : " + numberremaining;
         }
         else if (currentlyplaying == "enemy")
         {
@@ -398,7 +398,7 @@ public class TurnManger : MonoBehaviour
                     numberremaining++;
                 }
             }
-            turntext.text = "Turn : Enemies \nRemaining : " + numberremaining;
+            turntext.text = "Turn "+currentTurn+" : Enemies \nRemaining : " + numberremaining;
         }
         else if (currentlyplaying == "other")
         {
@@ -410,7 +410,7 @@ public class TurnManger : MonoBehaviour
                     numberremaining++;
                 }
             }
-            turntext.text = "Turn : Others \nRemaining : " + numberremaining;
+            turntext.text = "Turn "+currentTurn+" : Others \nRemaining : " + numberremaining;
         }
         else
         {
