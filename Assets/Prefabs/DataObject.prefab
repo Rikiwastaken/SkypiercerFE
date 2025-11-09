@@ -2090,9 +2090,9 @@ MonoBehaviour:
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 0500000019000000
+    equipmentsIDs: 
     equipments: []
-    UnitSkill: 31
+    UnitSkill: 30
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
@@ -2147,7 +2147,7 @@ MonoBehaviour:
       Level: -1
     - weapontype: staff
       Exp: 0
-      Level: 0
+      Level: 1
   - name: Sieg
     ID: 5
     stats:

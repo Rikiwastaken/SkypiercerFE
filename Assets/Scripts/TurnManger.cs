@@ -45,6 +45,7 @@ public class TurnManger : MonoBehaviour
     public TextBubbleScript textBubbleScript;
     public GameObject TutorialWindows;
 
+    public bool skipothersTurn;
     private void Awake()
     {
         if(instance == null)
@@ -297,17 +298,35 @@ public class TurnManger : MonoBehaviour
             }
             if (alldone)
             {
-                foreach (Character character in otherunits)
+                if(skipothersTurn)
                 {
-                    character.alreadyplayed = false;
-                    character.alreadymoved = false;
-                }
-                BeginningOfTurnsTrigger(otherunitsGO);
-                currentlyplaying = "other";
-                if (otherunits.Count > 0)
-                {
+                    foreach (Character character in playableunit)
+                    {
+                        character.alreadyplayed = false;
+                        character.alreadymoved = false;
+                    }
+                    ActionManager.instance.preventfromlockingafteraction = true;
+                    GridScript.instance.ResetAllSelections();
+                    currentlyplaying = "playable";
                     phaseTextScript.SetupText(currentlyplaying);
+                    currentTurn++;
+                    BeginningOfTurnsTrigger(playableunitGO);
                 }
+                else
+                {
+                    foreach (Character character in otherunits)
+                    {
+                        character.alreadyplayed = false;
+                        character.alreadymoved = false;
+                    }
+                    BeginningOfTurnsTrigger(otherunitsGO);
+                    currentlyplaying = "other";
+                    if (otherunits.Count > 0)
+                    {
+                        phaseTextScript.SetupText(currentlyplaying);
+                    }
+                }
+                    
                 updatevisuals = true;
                 return;
             }
