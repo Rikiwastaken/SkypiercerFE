@@ -158,7 +158,7 @@ public class MapInitializer : MonoBehaviour
         if (GridScript.instance.checkifvalidpos(enemyStats.startpos, newcharacter, 0))
         {
             newcharacter.transform.position = new Vector3(enemyStats.startpos.x, 0, enemyStats.startpos.y);
-            newcharacter.GetComponent<UnitScript>().previousposition = enemyStats.startpos;
+            newcharacter.GetComponent<UnitScript>().previouspos = new List<GridSquareScript>(){ GridScript.GetTile(enemyStats.startpos)};
             newcharacter.GetComponent<UnitScript>().MoveTo(enemyStats.startpos);
         }
         else
@@ -175,7 +175,7 @@ public class MapInitializer : MonoBehaviour
                     if (GridScript.instance.checkifvalidpos(pos, newcharacter, 0))
                     {
                         newcharacter.transform.position = new Vector3(pos.x, 0, pos.y);
-                        newcharacter.GetComponent<UnitScript>().previousposition = pos;
+                        newcharacter.GetComponent<UnitScript>().previouspos = new List<GridSquareScript>() { GridScript.GetTile(pos) };
                         newcharacter.GetComponent<UnitScript>().MoveTo(pos);
                         posfound = true;
                         break;

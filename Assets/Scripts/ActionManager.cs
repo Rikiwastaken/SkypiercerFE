@@ -334,7 +334,7 @@ public class ActionManager : MonoBehaviour
         waittedaction.Unit = Unittouse.GetComponent<UnitScript>();
 
         waittedaction.actiontype = 2;
-        waittedaction.previousPosition = Unittouse.GetComponent<UnitScript>().previousposition;
+        waittedaction.previousPosition = Unittouse.GetComponent<UnitScript>().previouspos;
 
         waittedaction.ModifiedCharacters = new List<Character>() { Unittouse.GetComponent<UnitScript>().CreateCopy() };
 
@@ -376,6 +376,8 @@ public class ActionManager : MonoBehaviour
         currentcharacter = null;
         Foresight.AddAction(waittedaction);
 
+        MapEventManager.instance.TriggerEventCheck();
+
     }
 
     public void Interract(GameObject Unit = null, GridSquareScript tilechanged = null, UnitScript OneTalkedTo = null) // Appel� quand l'unit� parle � une autre unit� ou qu'elle interragit avec un objet
@@ -388,7 +390,7 @@ public class ActionManager : MonoBehaviour
         ForesightScript.Action Interractaction = new ForesightScript.Action();
 
         Interractaction.Unit = Unittouse.GetComponent<UnitScript>();
-        Interractaction.previousPosition = Unittouse.GetComponent<UnitScript>().previousposition;
+        Interractaction.previousPosition = Unittouse.GetComponent<UnitScript>().previouspos;
         Interractaction.ModifiedCharacters = new List<Character>() { Unittouse.GetComponent<UnitScript>().CreateCopy() };
 
         Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;

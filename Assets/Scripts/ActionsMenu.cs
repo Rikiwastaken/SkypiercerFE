@@ -193,7 +193,7 @@ public class ActionsMenu : MonoBehaviour
             }
             if (CommandUsedID == 0)
             {
-                if (activetargetid <= targetlist.Count)
+                if (activetargetid < targetlist.Count)
                 {
                     cameraScript.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
                 }
@@ -362,6 +362,10 @@ public class ActionsMenu : MonoBehaviour
     {
         CommandUsedID = 0;
         // on essaie de trouver un combo arme/telekinesie pour pouvoir attaquer un ennemi
+        if(target==null)
+        {
+            return;
+        }
         Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
         FindAttackers();
         List<equipment> previousequipmentstate = new List<equipment>();
@@ -2006,7 +2010,11 @@ public class ActionsMenu : MonoBehaviour
         if (target != null && target.activeSelf)
         {
             chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-            targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
+            if(chartarget.position!=null && GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y)!=null)
+            {
+                targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
+            }
+            
             TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
             basestatdef = chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
         }

@@ -186,6 +186,15 @@ public class DataScript : MonoBehaviour
         return copy;
     }
 
+    public void CreateEmptyInventory()
+    {
+        //InventoryItem copy = new InventoryItem();
+        //copy.Quantity = itemtocopy.Quantity;
+        //copy.type = itemtocopy.type;
+        //copy.ID = itemtocopy.ID;
+        //return copy;
+    }
+
     private void SetupEquipment()
     {
         for (int i = 0; i < equipmentList.Count; i++)

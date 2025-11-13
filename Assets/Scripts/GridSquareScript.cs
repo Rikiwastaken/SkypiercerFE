@@ -151,14 +151,12 @@ public class GridSquareScript : MonoBehaviour
                                 break;
                             }
                         }
-
                     }
                     if (alltriggersactive)
                     {
                         Mechanism.isactivated = true;
                     }
                 }
-
                 if (Mechanism.isactivated)
                 {
                     isobstacle = false;

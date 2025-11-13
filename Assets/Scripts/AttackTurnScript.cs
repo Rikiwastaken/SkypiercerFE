@@ -401,7 +401,7 @@ public class AttackTurnScript : MonoBehaviour
         CurrentAction.actiontype = 3;
         CurrentAction.commandID = commandID;
         CurrentAction.Unit = User.GetComponent<UnitScript>();
-        CurrentAction.previousPosition = User.GetComponent<UnitScript>().previousposition;
+        CurrentAction.previousPosition = User.GetComponent<UnitScript>().previouspos;
         CurrentAction.ModifiedCharacters = new List<Character>() { User.GetComponent<UnitScript>().CreateCopy() };
 
         if (commandID == 47) //Transfuse
@@ -675,7 +675,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     expdistributed = true;
                 }
-
+                
             }
 
         }
@@ -749,6 +749,8 @@ public class AttackTurnScript : MonoBehaviour
                             if (ishealing)
                             {
                                 CurrentAction.actiontype = 1;
+                                doubleattacker = null;
+                                triple = false;
                             }
                             if (doubleattacker == Attacker)
                             {
@@ -857,9 +859,11 @@ public class AttackTurnScript : MonoBehaviour
                                     expdistributed = true;
                                     counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
                                     waittingforcamera = false;
+                                    EndOfCombatTrigger(Attacker, target);
                                 }
                                 else
                                 {
+                                    EndOfCombatTrigger(Attacker, target);
                                     waittingforexp = true;
                                     counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
                                     waittingforcamera = false;
@@ -872,7 +876,7 @@ public class AttackTurnScript : MonoBehaviour
                                 }
                                 else
                                 {
-                                    EndOfCombatTrigger(Attacker);
+                                    EndOfCombatTrigger(Attacker, target);
                                     waittingforcamera = false;
                                 }
                             }
@@ -902,7 +906,7 @@ public class AttackTurnScript : MonoBehaviour
                 foresightScript.AddAction(CurrentAction);
                 CurrentAction.actiontype = 0;
                 CurrentAction.Unit = Attacker.GetComponent<UnitScript>();
-                CurrentAction.previousPosition = Attacker.GetComponent<UnitScript>().previousposition;
+                CurrentAction.previousPosition = Attacker.GetComponent<UnitScript>().previouspos;
                 CurrentAction.ModifiedCharacters = new List<Character>() { Attacker.GetComponent<UnitScript>().CreateCopy() };
                 CurrentAction.AttackData = new ForesightScript.AttackData();
                 CurrentAction.AttackData.previousattackerhitindex = Attacker.GetComponent<RandomScript>().hitvaluesindex;
@@ -1017,7 +1021,7 @@ public class AttackTurnScript : MonoBehaviour
                 foresightScript.AddAction(CurrentAction);
                 CurrentAction.actiontype = 0;
                 CurrentAction.Unit = Attacker.GetComponent<UnitScript>();
-                CurrentAction.previousPosition = Attacker.GetComponent<UnitScript>().previousposition;
+                CurrentAction.previousPosition = Attacker.GetComponent<UnitScript>().previouspos;
                 CurrentAction.ModifiedCharacters = new List<Character>() { Attacker.GetComponent<UnitScript>().CreateCopy() };
                 CurrentAction.AttackData = new ForesightScript.AttackData();
                 CurrentAction.AttackData.previousattackerhitindex = Attacker.GetComponent<RandomScript>().hitvaluesindex;

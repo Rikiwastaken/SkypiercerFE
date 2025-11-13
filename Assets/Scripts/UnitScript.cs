@@ -242,9 +242,10 @@ public class UnitScript : MonoBehaviour
 
     public Vector3 rotationadjust;
 
-    public Vector2 previousposition;
     public BaseStats previousStats;
 
+
+    public List<GridSquareScript> previouspos;
 
     public bool disableLifebar;
 
@@ -873,9 +874,9 @@ public class UnitScript : MonoBehaviour
     }
     public void MoveTo(Vector2 destination, bool jump = false, bool instantaneousmovement = false)
     {
-        if (UnitCharacteristics.position != null)
+        if (UnitCharacteristics.currentTile != null)
         {
-            previousposition = UnitCharacteristics.position;
+            previouspos = UnitCharacteristics.currentTile;
         }
         if (GridScript == null)
         {

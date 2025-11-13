@@ -25,7 +25,7 @@ public class ForesightScript : MonoBehaviour
         5 Talk
         6 Examined
          */
-        public Vector2 previousPosition;
+        public List<GridSquareScript> previousPosition;
         public List<Character> ModifiedCharacters;
         public AttackData AttackData;
         public int commandID;
@@ -315,6 +315,7 @@ public class ForesightScript : MonoBehaviour
                 {
                     if (GO.GetComponent<UnitScript>().UnitCharacteristics.ID == Character.ID)
                     {
+                        Debug.Log("reverting : " + Character.name);
                         GO.GetComponent<UnitScript>().UnitCharacteristics = Character;
                     }
 
@@ -328,7 +329,8 @@ public class ForesightScript : MonoBehaviour
 
                     if (GO.GetComponent<UnitScript>().UnitCharacteristics.ID == ActionToRevert.Unit.UnitCharacteristics.ID)
                     {
-
+                        GO.GetComponent<UnitScript>().MoveTo(ActionToRevert.previousPosition[0].GridCoordinates);
+                        GO.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;
                         foreach (GridSquareScript tile in GO.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
                         {
                             tile.UpdateInsideSprite(true, GO.GetComponent<UnitScript>().UnitCharacteristics);
