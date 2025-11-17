@@ -24,9 +24,9 @@ public class MinimapScript : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
-            instance = this; 
+            instance = this;
         }
     }
 
@@ -36,7 +36,7 @@ public class MinimapScript : MonoBehaviour
         cameraScript = FindAnyObjectByType<cameraScript>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (waitforinitialization > 0)
         {

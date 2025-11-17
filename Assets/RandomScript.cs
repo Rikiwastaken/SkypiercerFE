@@ -45,7 +45,7 @@ public class RandomScript : MonoBehaviour
     public int numberofLevelValues;
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (!initialized && GetComponent<UnitScript>().UnitCharacteristics != null)
         {

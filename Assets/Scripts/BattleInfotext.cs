@@ -53,27 +53,31 @@ public class BattleInfotext : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf || ForeSightMenu.activeSelf)
         {
             transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
             transform.parent.GetComponent<Image>().enabled = false;
-            if(MasteryText.transform.parent.gameObject.activeSelf)
+            if (MasteryText.transform.parent.gameObject.activeSelf)
             {
                 MasteryText.transform.parent.gameObject.SetActive(false);
             }
-            
+
         }
-        else
+        else if(!transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled)
         {
             transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = true;
             transform.parent.GetComponent<Image>().enabled = true;
         }
-        if (AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf || ForeSightMenu.activeSelf)
+        if ((AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf || ForeSightMenu.activeSelf))
         {
-            transform.parent.GetChild(1).gameObject.SetActive(false);
-            transform.parent.GetChild(2).gameObject.SetActive(false);
+            if(transform.parent.GetChild(1).gameObject.activeSelf)
+            {
+                transform.parent.GetChild(1).gameObject.SetActive(false);
+                transform.parent.GetChild(2).gameObject.SetActive(false);
+            }
+            
             return;
         }
         else if (!PreBattleMenu.activeSelf)
@@ -87,8 +91,11 @@ public class BattleInfotext : MonoBehaviour
         }
         else
         {
-            transform.parent.GetChild(1).gameObject.SetActive(false);
-            transform.parent.GetChild(2).gameObject.SetActive(false);
+            if (transform.parent.GetChild(1).gameObject.activeSelf)
+            {
+                transform.parent.GetChild(1).gameObject.SetActive(false);
+                transform.parent.GetChild(2).gameObject.SetActive(false);
+            }
         }
 
         if (battlecamera == null)
@@ -114,13 +121,18 @@ public class BattleInfotext : MonoBehaviour
 
         if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && GridScript.GetComponent<TurnManger>().currentlyplaying != "playable"))
         {
-            stringtoshow = string.Empty;
-            Color color = transform.parent.GetComponent<Image>().color;
-            color.a = 0f;
-            transform.parent.GetComponent<Image>().color = color;
-            Skilltext.transform.parent.gameObject.SetActive(false);
-            SkillDescription.transform.parent.gameObject.SetActive(false);
-            MasteryText.transform.parent.gameObject.SetActive(false);
+
+            //if(!Skilltext.transform.parent.gameObject.activeSelf)
+            //{
+            //    stringtoshow = string.Empty;
+            //    Color color = transform.parent.GetComponent<Image>().color;
+            //    color.a = 0f;
+            //    transform.parent.GetComponent<Image>().color = color;
+            //    Skilltext.transform.parent.gameObject.SetActive(false);
+            //    SkillDescription.transform.parent.gameObject.SetActive(false);
+            //    MasteryText.transform.parent.gameObject.SetActive(false);
+            //}
+            
             if (!(PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
             {
                 FindAnyObjectByType<EventSystem>().SetSelectedGameObject(null);
@@ -311,6 +323,16 @@ public class BattleInfotext : MonoBehaviour
             }
             else
             {
+                if (!Skilltext.transform.parent.gameObject.activeSelf)
+                {
+                    stringtoshow = string.Empty;
+                    Color color = transform.parent.GetComponent<Image>().color;
+                    color.a = 0f;
+                    transform.parent.GetComponent<Image>().color = color;
+                    Skilltext.transform.parent.gameObject.SetActive(false);
+                    SkillDescription.transform.parent.gameObject.SetActive(false);
+                    MasteryText.transform.parent.gameObject.SetActive(false);
+                }
                 stringtoshow = "";
             }
 
@@ -336,12 +358,20 @@ public class BattleInfotext : MonoBehaviour
             if (SkillButtonList[i].gameObject == currentSelected)
             {
                 SkillDescription.text = DataScript.instance.SkillList[SkillButtonIDList[i]].Descriptions;
-                SkillDescription.transform.parent.gameObject.SetActive(true);
+                if(!SkillDescription.transform.parent.gameObject.activeSelf)
+                {
+                    Debug.Log("there");
+                    SkillDescription.transform.parent.gameObject.SetActive(true);
+                }
+                
                 GridScript.movementbuffercounter = 5;
                 return;
             }
         }
-        SkillDescription.transform.parent.gameObject.SetActive(false);
+        if (SkillDescription.transform.parent.gameObject.activeSelf)
+        {
+            SkillDescription.transform.parent.gameObject.SetActive(false);
+        }
     }
 
     private void ManageMasteryVisuals(Character unit)
@@ -356,7 +386,11 @@ public class BattleInfotext : MonoBehaviour
         }
         else
         {
-            MasteryText.transform.parent.gameObject.SetActive(false);
+            if(MasteryText.transform.parent.gameObject.activeSelf)
+            {
+                MasteryText.transform.parent.gameObject.SetActive(false);
+            }
+            
             return;
         }
 
@@ -402,7 +436,11 @@ public class BattleInfotext : MonoBehaviour
         }
         for (int i = barID; i < MasteryExpBars.Count; i++)
         {
-            MasteryExpBars[i].gameObject.SetActive(false);
+            if(MasteryExpBars[i].gameObject.activeSelf)
+            {
+                MasteryExpBars[i].gameObject.SetActive(false);
+            }
+            
         }
 
     }
@@ -428,7 +466,10 @@ public class BattleInfotext : MonoBehaviour
             }
             for (int i = Mathf.Min(unit.EquipedSkills.Count, 4); i < 4; i++)
             {
-                SkillButtonList[i + 1].gameObject.SetActive(false);
+                if (SkillButtonList[i + 1].gameObject.activeSelf)
+                {
+                    SkillButtonList[i + 1].gameObject.SetActive(false);
+                }
             }
         }
         else
@@ -444,7 +485,11 @@ public class BattleInfotext : MonoBehaviour
             }
             for (int i = Mathf.Min(unit.EquipedSkills.Count, 4); i < 4; i++)
             {
-                SkillButtonList[i].gameObject.SetActive(false);
+                if (SkillButtonList[i].gameObject.activeSelf)
+                {
+                    SkillButtonList[i].gameObject.SetActive(false);
+                }
+                
             }
         }
 
@@ -457,7 +502,11 @@ public class BattleInfotext : MonoBehaviour
         }
         else
         {
-            Skilltext.transform.parent.gameObject.SetActive(false);
+            if (Skilltext.transform.parent.gameObject.activeSelf)
+            {
+                Skilltext.transform.parent.gameObject.SetActive(false);
+            }
+            
         }
     }
 }

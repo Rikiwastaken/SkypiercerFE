@@ -13883,7 +13883,9 @@ MonoBehaviour:
   CurrentAction:
     Unit: {fileID: 0}
     actiontype: 0
-    previousPosition: {x: 0, y: 0}
+    previousPosition:
+    - {fileID: 0}
+    - {fileID: 0}
     ModifiedCharacters: []
     AttackData:
       defender: {fileID: 0}
@@ -20940,7 +20942,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8288987968783711351
 RectTransform:
   m_ObjectHideFlags: 0

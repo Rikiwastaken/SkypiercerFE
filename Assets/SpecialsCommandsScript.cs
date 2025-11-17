@@ -43,7 +43,7 @@ public class SpecialCommandsScript : MonoBehaviour
             for (int i = 0; i < SpecialInteractos.Count; i++)
             {
 
-                if (SpecialInteractos[i].GetComponent<UnitScript>()!=null)
+                if (SpecialInteractos[i].GetComponent<UnitScript>() != null)
                 {
                     buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "Talk";
                 }
@@ -81,10 +81,10 @@ public class SpecialCommandsScript : MonoBehaviour
 
 
         }
-        else if(SpecialInteractos[i].GetComponent<GridSquareScript>() != null)
+        else if (SpecialInteractos[i].GetComponent<GridSquareScript>() != null)
         {
             ActionManager.instance.Interract(target, SpecialInteractos[i].GetComponent<GridSquareScript>());
-            SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.isactivated = true;
+            SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.ChangeActivation(true);
             MapEventManager.instance.TriggerEventCheck();
             gameObject.SetActive(false);
             ActionsMenu.gameObject.SetActive(false);

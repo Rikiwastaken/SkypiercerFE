@@ -37,10 +37,10 @@ public class ExpBarScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
-        if(SceneManager.GetActiveScene().name == "BattleScene")
+        if (SceneManager.GetActiveScene().name == "BattleScene")
         {
             if (CombatSceneManager == null)
             {
@@ -143,7 +143,7 @@ public class ExpBarScript : MonoBehaviour
 
     private void SetupLevelUpText()
     {
-        if(levelupbonuses.Count > 0)
+        if (levelupbonuses.Count > 0)
         {
             LevelUpText.transform.parent.gameObject.SetActive(true);
             string leveluptext = "Level Up !\n";
@@ -212,16 +212,16 @@ public class ExpBarScript : MonoBehaviour
 
             LevelUpText.text = leveluptext;
         }
-        
+
     }
 
     public void SetupBar(Character character, int exptogain, List<int> levelupstats = null)
     {
         newcharacter = character;
         setupdone = true;
-        currentnumber = character.experience- exptogain;
+        currentnumber = character.experience - exptogain;
         targetnumber = character.experience;
-        if (currentnumber<0)
+        if (currentnumber < 0)
         {
             currentnumber = character.experience - exptogain + 100f;
             targetnumber = character.experience + 100;

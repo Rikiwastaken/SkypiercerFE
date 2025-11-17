@@ -48,12 +48,12 @@ public class NeutralMenuScript : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
 
         ManageSelection();
 
-        if (InputManager.canceljustpressed)
+        if (InputManager.cancelpressed)
         {
             if (OptionsMenuTransfrom.gameObject.activeSelf)
             {

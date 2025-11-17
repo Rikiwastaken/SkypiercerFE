@@ -70,6 +70,14 @@ public class GridSquareScript : MonoBehaviour
         public bool isactivated;
         public List<GridSquareScript> Triggers;
         public List<GridSquareScript> PairedTiles;
+
+        public event Action<MechanismClass> OnActivationChange;
+
+        public void ChangeActivation(bool newstate)
+        {
+            isactivated = newstate;
+            OnActivationChange?.Invoke(this);
+        }
     }
 
     public MechanismClass Mechanism;
@@ -103,7 +111,6 @@ public class GridSquareScript : MonoBehaviour
 
     private int autoupdatefillingcnt;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -117,6 +124,23 @@ public class GridSquareScript : MonoBehaviour
             rainparticle.gameObject.SetActive(false);
         }
         manageVisuals();
+    }
+
+    private void Start()
+    {
+        if (Mechanism == null || Mechanism.type != 1) return;
+
+        foreach (var square in Mechanism.Triggers)
+        {
+            if (square.Mechanism != null && square.Mechanism.type == 2)
+            {
+                // Subscribe to every lever�s event
+                square.Mechanism.OnActivationChange += CheckAllTriggers;
+            }
+        }
+
+        // Initial check (in case some levers start activated)
+        CheckAllTriggers(null);
     }
 
     public void InitializePosition()
@@ -133,36 +157,7 @@ public class GridSquareScript : MonoBehaviour
     private void Update()
     {
 
-        if (Mechanism != null)
-        {
-            if (Mechanism.type == 1)
-            {
-                if (!Mechanism.isactivated)
-                {
-                    isobstacle = true;
-                    bool alltriggersactive = true;
-                    foreach (GridSquareScript triggertile in Mechanism.Triggers)
-                    {
-                        if (triggertile.Mechanism != null)
-                        {
-                            if (triggertile.Mechanism.type == 2 && !triggertile.Mechanism.isactivated)
-                            {
-                                alltriggersactive = false;
-                                break;
-                            }
-                        }
-                    }
-                    if (alltriggersactive)
-                    {
-                        Mechanism.isactivated = true;
-                    }
-                }
-                if (Mechanism.isactivated)
-                {
-                    isobstacle = false;
-                }
-            }
-        }
+
 
         if (GridScript == null)
         {
@@ -194,7 +189,9 @@ public class GridSquareScript : MonoBehaviour
                 return;
             }
 
-            ManagePath();
+
+
+
 
             if (RemainingRainTurns < 3)
             {
@@ -203,19 +200,19 @@ public class GridSquareScript : MonoBehaviour
 
             if (RemainingRainTurns > 0)
             {
-                if(!rainparticle.gameObject.activeSelf)
+                if (!rainparticle.gameObject.activeSelf)
                 {
                     rainparticle.gameObject.SetActive(true);
                 }
-                
+
             }
             else
             {
-                if(rainparticle.gameObject.activeSelf)
+                if (rainparticle.gameObject.activeSelf)
                 {
                     rainparticle.gameObject.SetActive(false);
                 }
-                
+
             }
 
 
@@ -223,7 +220,7 @@ public class GridSquareScript : MonoBehaviour
 
             if (TurnManger.currentlyplaying == "")
             {
-                if (MapInitializer.playablepos.Contains(GridCoordinates) && filledimage.color!= new Color(0.45f, 0f, 0.42f, 0.5f))
+                if (MapInitializer.playablepos.Contains(GridCoordinates) && filledimage.color != new Color(0.45f, 0f, 0.42f, 0.5f))
                 {
 
                     filledimage.color = new Color(0.45f, 0f, 0.42f, 0.5f);
@@ -233,11 +230,11 @@ public class GridSquareScript : MonoBehaviour
 
             if (GridScript.selection == this && !cameraScript.incombat)
             {
-                if(!SelectRound.activeSelf)
+                if (!SelectRound.activeSelf)
                 {
                     SelectRound.SetActive(true);
                 }
-                
+
                 SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
             }
             else
@@ -246,14 +243,14 @@ public class GridSquareScript : MonoBehaviour
                 {
                     SelectRound.SetActive(false);
                 }
-                
+
             }
-            
-            if(InputManager.instance.movementjustpressed)
+
+            if (InputManager.instance.movementjustpressed)
             {
-                UpdateFilling();
+                ManagePath();
             }
-            
+
 
 
         }
@@ -263,12 +260,30 @@ public class GridSquareScript : MonoBehaviour
         previouslyincombat = cameraScript.incombat;
     }
 
+
+    private void CheckAllTriggers(MechanismClass _)
+    {
+        // Verify all trigger mechanisms are activated
+        foreach (var square in Mechanism.Triggers)
+        {
+            if (square.Mechanism != null &&
+                square.Mechanism.type == 2 &&
+                !square.Mechanism.isactivated)
+            {
+                return; // At least one inactive so do nothing
+            }
+        }
+
+        // All triggers activated so open door
+        Mechanism.ChangeActivation(true);
+        isobstacle = false;
+    }
     public void ReinitializeMechanismIfPairednotactive()
     {
-        if(Mechanism!=null && Mechanism.type==2 && Mechanism.PairedTiles!=null && Mechanism.PairedTiles.Count>0)
+        if (Mechanism != null && Mechanism.type == 2 && Mechanism.PairedTiles != null && Mechanism.PairedTiles.Count > 0)
         {
             bool pairedallactive = true;
-            foreach(GridSquareScript pairedtile in Mechanism.PairedTiles)
+            foreach (GridSquareScript pairedtile in Mechanism.PairedTiles)
             {
                 if (pairedtile.Mechanism != null && !pairedtile.Mechanism.isactivated)
                 {
@@ -276,19 +291,19 @@ public class GridSquareScript : MonoBehaviour
                     break;
                 }
             }
-            if(!pairedallactive)
+            if (!pairedallactive)
             {
-                Mechanism.isactivated = false;
+                Mechanism.ChangeActivation(false);
             }
         }
     }
 
     public void ManageLeverOrientation()
     {
-        if(LeverGO.activeSelf && Mechanism != null)
+        if (LeverGO.activeSelf && Mechanism != null)
         {
             Vector3 previousrot = LeverGO.transform.GetChild(0).localRotation.eulerAngles;
-            if(previousrot.y<100)
+            if (previousrot.y < 100)
             {
                 previousrot = new Vector3(previousrot.x, 135, previousrot.z);
             }
@@ -310,11 +325,11 @@ public class GridSquareScript : MonoBehaviour
                 int index = path.IndexOf(this);
                 if (index > 0)
                 {
-                    if(!PathPiecePrevious.gameObject.activeSelf)
+                    if (!PathPiecePrevious.gameObject.activeSelf)
                     {
                         PathPiecePrevious.gameObject.SetActive(true);
                     }
-                    
+
                     Vector3 direction = path[index - 1].transform.position - transform.position;
                     float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
                     PathPiecePrevious.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
@@ -324,7 +339,7 @@ public class GridSquareScript : MonoBehaviour
                         {
                             PathPieceEnd.gameObject.SetActive(true);
                         }
-                        
+
                         PathPieceEnd.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
                     }
                     else
@@ -333,7 +348,7 @@ public class GridSquareScript : MonoBehaviour
                         {
                             PathPieceEnd.gameObject.SetActive(false);
                         }
-                        
+
                     }
                 }
                 else
@@ -431,7 +446,7 @@ public class GridSquareScript : MonoBehaviour
                 filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
             }
         }
-        else if(unitenter)
+        else if (unitenter)
         {
             filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
         }
@@ -439,24 +454,23 @@ public class GridSquareScript : MonoBehaviour
         {
             filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithoutUnit;
         }
-        UpdateFilling();
-        
+
     }
 
     private void AutoUpdateFilling()
     {
 
-        if(autoupdatefillingcnt == 0)
+        if (autoupdatefillingcnt == 0)
         {
             UpdateFilling();
-            autoupdatefillingcnt = (int)(0.25f/Time.deltaTime);
+            autoupdatefillingcnt = (int)(0.25f / Time.deltaTime);
         }
         else
         {
             autoupdatefillingcnt--;
         }
 
-        
+
     }
 
     private void manageVisuals()
@@ -479,18 +493,19 @@ public class GridSquareScript : MonoBehaviour
     private void manageElevation()
     {
 
-        if(GridScript.instance.MapModel!=null)
+        if (GridScript.instance.MapModel != null)
         {
-            if(Cube.GetComponent<MeshRenderer>().enabled)
+            if (Cube.GetComponent<MeshRenderer>().enabled)
             {
                 Cube.GetComponent<MeshRenderer>().enabled = false;
                 Stairs.GetComponent<MeshRenderer>().enabled = false;
             }
-            if(Mechanism!=null && Mechanism.type==2 && LeverGO.activeSelf)
+            if (Mechanism != null && Mechanism.type == 2 && LeverGO.activeSelf)
             {
                 LeverGO.SetActive(false);
             }
-            
+            return;
+
         }
         else
         {
@@ -560,32 +575,42 @@ public class GridSquareScript : MonoBehaviour
 
             if (isobstacle && !(Mechanism != null && Mechanism.type == 2))
             {
-                if (Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f || GridScript.instance.MapModel!=null)
-                {
-                    transform.position = new Vector3(transform.position.x, elevation + walloffset, transform.position.z);
-                }
-                else if (transform.position.y < elevation + walloffset - 0.05f)
+                
+                if (transform.position.y < elevation + walloffset - 0.05f)
                 {
                     transform.position += new Vector3(0f, elevationchange * (1f * (float)Mathf.Abs(elevation) + walloffset) * Time.fixedDeltaTime, 0f);
+                    if (Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f)
+                    {
+                        transform.position = new Vector3(transform.position.x, elevation + walloffset, transform.position.z);
+                    }
                 }
                 else if (transform.position.y > elevation + walloffset + 0.05f)
                 {
                     transform.position += new Vector3(0f, -elevationchange * (1f * (float)Mathf.Abs(elevation) + walloffset) * Time.fixedDeltaTime, 0f);
+                    if (Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f || GridScript.instance.MapModel != null)
+                    {
+                        transform.position = new Vector3(transform.position.x, elevation + walloffset, transform.position.z);
+                    }
                 }
             }
             else
             {
-                if (Mathf.Abs(transform.position.y - elevation) <= 0.05f || GridScript.instance.MapModel != null)
-                {
-                    transform.position = new Vector3(transform.position.x, elevation, transform.position.z);
-                }
-                else if (transform.position.y < elevation - 0.05f)
+                
+                if (transform.position.y < elevation - 0.05f)
                 {
                     transform.position += new Vector3(0f, elevationchange * (1f * (float)Mathf.Abs(elevation) + 1f) * Time.fixedDeltaTime, 0f);
+                    if (Mathf.Abs(transform.position.y - elevation) <= 0.05f)
+                    {
+                        transform.position = new Vector3(transform.position.x, elevation, transform.position.z);
+                    }
                 }
                 else if (transform.position.y > elevation + 0.05f)
                 {
                     transform.position += new Vector3(0f, -elevationchange * (1f * (float)Mathf.Abs(elevation) + 1f) * Time.fixedDeltaTime, 0f);
+                    if (Mathf.Abs(transform.position.y - elevation) <= 0.05f)
+                    {
+                        transform.position = new Vector3(transform.position.x, elevation, transform.position.z);
+                    }
                 }
             }
         }
@@ -594,16 +619,16 @@ public class GridSquareScript : MonoBehaviour
         {
             for (int i = 0; i < transform.childCount; i++)
             {
-                if (transform.GetChild(i).gameObject != Cube)
+                if (transform.GetChild(i).gameObject == Stairs)
                 {
                     transform.GetChild(i).localPosition = initialpos[i] + new Vector3(0f, 0f, 1f);
                 }
             }
-            if(!Stairs.activeSelf)
+            if (!Stairs.activeSelf)
             {
                 Stairs.SetActive(true);
             }
-            
+
         }
         else
         {
@@ -611,7 +636,7 @@ public class GridSquareScript : MonoBehaviour
             {
                 Stairs.SetActive(false);
             }
-            
+
         }
 
 
@@ -624,11 +649,11 @@ public class GridSquareScript : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = true;
             for (int i = 0; i < transform.childCount; i++)
             {
-                if(!transform.GetChild(i).gameObject.activeSelf)
+                if (!transform.GetChild(i).gameObject.activeSelf)
                 {
                     transform.GetChild(i).gameObject.SetActive(true);
                 }
-                
+
             }
         }
         if (!activated && GetComponent<SpriteRenderer>().enabled)
@@ -640,7 +665,7 @@ public class GridSquareScript : MonoBehaviour
                 {
                     transform.GetChild(i).gameObject.SetActive(false);
                 }
-                
+
             }
         }
     }
@@ -648,7 +673,7 @@ public class GridSquareScript : MonoBehaviour
     public void UpdateFilling()
     {
         SpriteRenderer SR = SelectRoundFilling.GetComponent<SpriteRenderer>();
-        if(GridScript==null)
+        if (GridScript == null)
         {
             return;
         }
@@ -726,9 +751,9 @@ public class GridSquareScript : MonoBehaviour
 
         GameObject GO = GridScript.instance.GetUnit(this);
 
-        if(GO != null)
+        if (GO != null)
         {
-            UpdateInsideSprite(true,GO.GetComponent<UnitScript>().UnitCharacteristics);
+            UpdateInsideSprite(true, GO.GetComponent<UnitScript>().UnitCharacteristics);
         }
 
         Color newcolor = Color.red;
@@ -740,14 +765,14 @@ public class GridSquareScript : MonoBehaviour
     {
         Color newcolor = Color.blue;
         newcolor.a = 0.5f;
-        if(filledimage.color == newcolor)
+        if (filledimage.color == newcolor)
         {
             GameObject GO = GridScript.instance.GetUnit(this);
-            if (GO != null && GO.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size>0)
+            if (GO != null && GO.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size > 0)
             {
-                foreach(GridSquareScript tile in GO.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
+                foreach (GridSquareScript tile in GO.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
                 {
-                    tile.filledimage.color = newcolor ;
+                    tile.filledimage.color = newcolor;
                 }
             }
         }

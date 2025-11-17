@@ -20,12 +20,12 @@ public class CommandScript : MonoBehaviour
     public TextMeshProUGUI statstext;
     private ActionsMenu ActionsMenu;
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         inputManager = InputManager.instance;
 
-        if (inputManager.canceljustpressed)
+        if (inputManager.cancelpressed)
         {
             ItemMenuCancelButton.onClick.Invoke();
 

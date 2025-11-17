@@ -289,8 +289,8 @@ public class ForesightScript : MonoBehaviour
         {
             RevertTo(ButtonIDs[ButtonID]);
             gameObject.SetActive(false);
-            neutralmenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
+            // neutralmenu.SetActive(true);
+            // EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
         }
 
     }
@@ -363,7 +363,7 @@ public class ForesightScript : MonoBehaviour
                         tileModification.tile.type = tileModification.type;
                         tileModification.tile.RemainingRainTurns = tileModification.previousremainingrain;
                         tileModification.tile.RemainingSunTurns = tileModification.previousremainingsun;
-                        if(tileModification.MechanismClass!=null)
+                        if (tileModification.MechanismClass != null)
                         {
                             tileModification.tile.Mechanism = tileModification.MechanismClass;
                         }

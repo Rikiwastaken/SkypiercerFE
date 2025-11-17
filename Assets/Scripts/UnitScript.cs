@@ -379,7 +379,7 @@ public class UnitScript : MonoBehaviour
     void Update()
     {
 
-
+        ManageLifeBarRotation();
 
         if (cameraScript == null)
         {
@@ -641,19 +641,17 @@ public class UnitScript : MonoBehaviour
                 //    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + rotationadjust);
                 //}
 
-
-            }
-            else
-            {
-                transform.position = new Vector3(destination.x, transform.position.y, destination.y);
-                if (animator.gameObject.activeSelf)
+                if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) <= 0.1f)
                 {
-                    animator.SetBool("Walk", false);
+                    transform.position = new Vector3(destination.x, transform.position.y, destination.y);
+                    if (animator.gameObject.activeSelf)
+                    {
+                        animator.SetBool("Walk", false);
+                    }
                 }
 
             }
         }
-        ManageLifeBarRotation();
     }
 
     public void ResetPath()
