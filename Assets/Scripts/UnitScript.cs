@@ -417,23 +417,7 @@ public class UnitScript : MonoBehaviour
             initialpos = armature.localPosition;
             initialforward = armature.forward;
         }
-        if (animator != null)
-        {
-            if (!isinattackanimation() && !cameraScript.incombat)
-            {
-                if (Vector3.Distance(armature.localPosition, initialpos) > 0.1f)
-                {
-                    armature.localPosition += (initialpos - armature.localPosition).normalized * 0.2f * Time.deltaTime;
-                }
 
-                //armature.rotation = Quaternion.LookRotation(initialforward, Vector3.up);
-
-            }
-            if (!isinattackanimation() && !isinrunanimation() && Vector3.Distance(armature.localPosition, initialpos) > 0.15f)
-            {
-                armature.localPosition = initialpos;
-            }
-        }
 
         if (trylvlup)
         {
@@ -458,6 +442,23 @@ public class UnitScript : MonoBehaviour
         ManagePosition();
         ManageMovement();
         ManageFlyingWeaponPosition();
+        if (animator != null)
+        {
+            if (!isinattackanimation() && !cameraScript.incombat)
+            {
+                if (Vector3.Distance(armature.localPosition, initialpos) > 0.1f)
+                {
+                    armature.localPosition += (initialpos - armature.localPosition).normalized * 0.2f * Time.deltaTime;
+                }
+
+                //armature.rotation = Quaternion.LookRotation(initialforward, Vector3.up);
+
+            }
+            if (!isinattackanimation() && !isinrunanimation() && Vector3.Distance(armature.localPosition, initialpos) > 0.15f)
+            {
+                armature.localPosition = initialpos;
+            }
+        }
     }
 
     //Manage Vertical Position
@@ -641,7 +642,7 @@ public class UnitScript : MonoBehaviour
                 //    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + rotationadjust);
                 //}
 
-                if(Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) <= 0.1f)
+                if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) <= 0.1f)
                 {
                     transform.position = new Vector3(destination.x, transform.position.y, destination.y);
                     if (animator.gameObject.activeSelf)
@@ -707,7 +708,10 @@ public class UnitScript : MonoBehaviour
 
     private void ManageLifeBarRotation()
     {
-        CanvasTransform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        if (CanvasTransform.rotation != Quaternion.Euler(90f, 0f, 0f))
+        {
+            CanvasTransform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        }
     }
     public void ManageLifebars()
     {
@@ -824,13 +828,13 @@ public class UnitScript : MonoBehaviour
         switch (mastery.Level)
         {
             case 0:
-                if (mastery.Exp >= 30)
+                if (mastery.Exp >= 5)
                 {
                     levelup = true;
                 }
                 break;
             case 1:
-                if (mastery.Exp >= 30)
+                if (mastery.Exp >= 25)
                 {
                     levelup = true;
                 }

@@ -43,6 +43,8 @@ public class BattleInfotext : MonoBehaviour
 
     public GameObject ForeSightMenu;
 
+    private EventSystem eventSystem;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -50,6 +52,7 @@ public class BattleInfotext : MonoBehaviour
         inputManager = InputManager.instance;
         GridScript = GridScript.instance;
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
+        transform.parent.GetComponent<Image>().enabled = false;
     }
 
     // Update is called once per frame
@@ -57,7 +60,7 @@ public class BattleInfotext : MonoBehaviour
     {
         if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf || ForeSightMenu.activeSelf)
         {
-            transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
+            GetComponent<TextMeshProUGUI>().enabled = false;
             transform.parent.GetComponent<Image>().enabled = false;
             if (MasteryText.transform.parent.gameObject.activeSelf)
             {
@@ -65,10 +68,11 @@ public class BattleInfotext : MonoBehaviour
             }
 
         }
-        else if(!transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled)
+        else if (!GetComponent<TextMeshProUGUI>().enabled && (!PreBattleMenu.activeSelf || PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
         {
-            transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = true;
+            GetComponent<TextMeshProUGUI>().enabled = true;
             transform.parent.GetComponent<Image>().enabled = true;
+            Debug.Log("here");
         }
         if ((AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf || ForeSightMenu.activeSelf))
         {
@@ -103,6 +107,11 @@ public class BattleInfotext : MonoBehaviour
             battlecamera = FindAnyObjectByType<cameraScript>();
         }
 
+        if(eventSystem == null)
+        {
+            eventSystem=FindAnyObjectByType<EventSystem>();
+        }
+
         if (turnManger == null)
         {
             turnManger = FindAnyObjectByType<TurnManger>();
@@ -135,8 +144,10 @@ public class BattleInfotext : MonoBehaviour
             
             if (!(PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
             {
-                FindAnyObjectByType<EventSystem>().SetSelectedGameObject(null);
+                
+                eventSystem.SetSelectedGameObject(null);
             }
+            
         }
         else
         {
@@ -167,6 +178,7 @@ public class BattleInfotext : MonoBehaviour
             {
                 selectedunit = GridScript.GetUnit(GridScript.selection);
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
+                
             }
             if (selectedunit != null && selectedunitCharacter != null)
             {
@@ -338,8 +350,6 @@ public class BattleInfotext : MonoBehaviour
 
         }
         TMP.text = stringtoshow;
-
-
     }
 
     private void ManageSkillDescription()
@@ -350,7 +360,7 @@ public class BattleInfotext : MonoBehaviour
         }
         if (inputManager.canceljustpressed && SkillButtonIDList.Count > 0)
         {
-            FindAnyObjectByType<EventSystem>().SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(null);
         }
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         for (int i = 0; i < SkillButtonList.Count; i++)
@@ -360,7 +370,6 @@ public class BattleInfotext : MonoBehaviour
                 SkillDescription.text = DataScript.instance.SkillList[SkillButtonIDList[i]].Descriptions;
                 if(!SkillDescription.transform.parent.gameObject.activeSelf)
                 {
-                    Debug.Log("there");
                     SkillDescription.transform.parent.gameObject.SetActive(true);
                 }
                 

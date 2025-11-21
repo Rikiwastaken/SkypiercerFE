@@ -1,12 +1,10 @@
-using System.Threading;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-
     public static InputManager instance;
-
 
     [Header("Sticks")]
     public Vector2 movementValue;
@@ -21,7 +19,6 @@ public class InputManager : MonoBehaviour
     private InputAction movecaminput;
 
     [Header("Validate Button")]
-
     public bool activatepressed;
     public bool activatejustpressed;
     public InputActionReference activate;
@@ -29,7 +26,6 @@ public class InputManager : MonoBehaviour
     private bool activatepressedonce;
 
     [Header("Cancel Button")]
-
     public bool cancelpressed;
     public bool canceljustpressed;
     public InputActionReference cancel;
@@ -37,7 +33,6 @@ public class InputManager : MonoBehaviour
     private bool cancelpressedonce;
 
     [Header("NextWeapon Button")]
-
     public bool NextWeaponpressed;
     public bool NextWeaponjustpressed;
     public InputActionReference NextWeapon;
@@ -45,7 +40,6 @@ public class InputManager : MonoBehaviour
     private bool NextWeaponpressedonce;
 
     [Header("PreviousWeapon Button")]
-
     public bool PreviousWeaponpressed;
     public bool PreviousWeaponjustpressed;
     public InputActionReference PreviousWeapon;
@@ -53,7 +47,6 @@ public class InputManager : MonoBehaviour
     private bool PreviousWeaponpressedonce;
 
     [Header("NextTarget Button")]
-
     public bool NextTargetpressed;
     public bool NextTargetjustpressed;
     public InputActionReference NextTarget;
@@ -61,7 +54,6 @@ public class InputManager : MonoBehaviour
     private bool NextTargetpressedonce;
 
     [Header("PreviousTarget Button")]
-
     public bool PreviousTargetpressed;
     public bool PreviousTargetjustpressed;
     public InputActionReference PreviousTarget;
@@ -69,7 +61,6 @@ public class InputManager : MonoBehaviour
     private bool PreviousTargetpressedonce;
 
     [Header("Telekinesis Button")]
-
     public bool Telekinesispressed;
     public bool Telekinesisjustpressed;
     public InputActionReference Telekinesis;
@@ -77,7 +68,6 @@ public class InputManager : MonoBehaviour
     private bool Telekinesispressedonce;
 
     [Header("Select Button")]
-
     public bool Selectpressed;
     public bool Selectjustpressed;
     public InputActionReference Select;
@@ -85,7 +75,6 @@ public class InputManager : MonoBehaviour
     private bool Selectpressedonce;
 
     [Header("Start Button")]
-
     public bool Startpressed;
     public bool Startjustpressed;
     public InputActionReference Startbtn;
@@ -93,35 +82,46 @@ public class InputManager : MonoBehaviour
     private bool Startpressedonce;
 
     [Header("Show Details")]
-
     public bool ShowDetailspressed;
     public bool ShowDetailsjustpressed;
     public InputActionReference ShowDetailsbtn;
     private InputAction ShowDetailsinput;
     private bool ShowDetailspressedonce;
 
+    // ---------- EVENTS ----------
+    public event Action OnMovementJustPressed;
+    public event Action OnMoveCamJustPressed;
+    public event Action OnActivateJustPressed;
+    public event Action OnCancelJustPressed;
+    public event Action OnNextWeaponJustPressed;
+    public event Action OnPreviousWeaponJustPressed;
+    public event Action OnNextTargetJustPressed;
+    public event Action OnPreviousTargetJustPressed;
+    public event Action OnTelekinesisJustPressed;
+    public event Action OnSelectJustPressed;
+    public event Action OnStartJustPressed;
+    public event Action OnShowDetailsJustPressed;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
     }
+
     void Start()
     {
-        //setup of the inputs
+        // Setup of the inputs
         moveinput = move.ToInputAction();
         movecaminput = movecam.ToInputAction();
         moveinput.canceled += context => movementValue = Vector2.zero;
         movecaminput.canceled += context => cammovementValue = Vector2.zero;
 
         activateinput = activate.ToInputAction();
-
         cancelinput = cancel.ToInputAction();
         NextWeaponinput = NextWeapon.ToInputAction();
         PreviousWeaponinput = PreviousWeapon.ToInputAction();
-
         NextTargetinput = NextTarget.ToInputAction();
         PreviousTargetinput = PreviousTarget.ToInputAction();
         Telekinesisinput = Telekinesis.ToInputAction();
@@ -132,11 +132,13 @@ public class InputManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // ---------- ACTIVATE ----------
         activatepressed = activateinput.IsPressed();
         if (activatepressed && !activatejustpressed && !activatepressedonce)
         {
             activatejustpressed = true;
             activatepressedonce = true;
+            OnActivateJustPressed?.Invoke();
         }
         else
         {
@@ -144,186 +146,166 @@ public class InputManager : MonoBehaviour
         }
 
         if (!activatepressed)
-        {
             activatepressedonce = false;
-        }
 
-        if (FindAnyObjectByType<cameraScript>().incombat)
+        if (cameraScript.instance.incombat)
         {
             activatepressed = false;
             activatejustpressed = false;
             activatepressedonce = false;
         }
 
+        // ---------- CANCEL ----------
         cancelpressed = cancelinput.IsPressed();
         if (cancelpressed && !canceljustpressed && !cancelpressedonce)
         {
             canceljustpressed = true;
             cancelpressedonce = true;
+            OnCancelJustPressed?.Invoke();
         }
         else
-        {
             canceljustpressed = false;
-        }
 
         if (!cancelpressed)
-        {
             cancelpressedonce = false;
-        }
 
+        // ---------- NEXT WEAPON ----------
         NextWeaponpressed = NextWeaponinput.IsPressed();
         if (NextWeaponpressed && !NextWeaponjustpressed && !NextWeaponpressedonce)
         {
             NextWeaponjustpressed = true;
             NextWeaponpressedonce = true;
+            OnNextWeaponJustPressed?.Invoke();
         }
         else
-        {
             NextWeaponjustpressed = false;
-        }
 
         if (!NextWeaponpressed)
-        {
             NextWeaponpressedonce = false;
-        }
 
+        // ---------- PREVIOUS WEAPON ----------
         PreviousWeaponpressed = PreviousWeaponinput.IsPressed();
         if (PreviousWeaponpressed && !PreviousWeaponjustpressed && !PreviousWeaponpressedonce)
         {
             PreviousWeaponjustpressed = true;
             PreviousWeaponpressedonce = true;
+            OnPreviousWeaponJustPressed?.Invoke();
         }
         else
-        {
             PreviousWeaponjustpressed = false;
-        }
 
         if (!PreviousWeaponpressed)
-        {
             PreviousWeaponpressedonce = false;
-        }
 
+        // ---------- NEXT TARGET ----------
         NextTargetpressed = NextTargetinput.IsPressed();
         if (NextTargetpressed && !NextTargetjustpressed && !NextTargetpressedonce)
         {
             NextTargetjustpressed = true;
             NextTargetpressedonce = true;
+            OnNextTargetJustPressed?.Invoke();
         }
         else
-        {
             NextTargetjustpressed = false;
-        }
 
         if (!NextTargetpressed)
-        {
             NextTargetpressedonce = false;
-        }
 
+        // ---------- PREVIOUS TARGET ----------
         PreviousTargetpressed = PreviousTargetinput.IsPressed();
         if (PreviousTargetpressed && !PreviousTargetjustpressed && !PreviousTargetpressedonce)
         {
             PreviousTargetjustpressed = true;
             PreviousTargetpressedonce = true;
+            OnPreviousTargetJustPressed?.Invoke();
         }
         else
-        {
             PreviousTargetjustpressed = false;
-        }
 
         if (!PreviousTargetpressed)
-        {
             PreviousTargetpressedonce = false;
-        }
 
+        // ---------- TELEKINESIS ----------
         Telekinesispressed = Telekinesisinput.IsPressed();
         if (Telekinesispressed && !Telekinesisjustpressed && !Telekinesispressedonce)
         {
             Telekinesisjustpressed = true;
             Telekinesispressedonce = true;
+            OnTelekinesisJustPressed?.Invoke();
         }
         else
-        {
             Telekinesisjustpressed = false;
-        }
 
         if (!Telekinesispressed)
-        {
             Telekinesispressedonce = false;
-        }
 
+        // ---------- SELECT ----------
         Selectpressed = Selectinput.IsPressed();
         if (Selectpressed && !Selectjustpressed && !Selectpressedonce)
         {
             Selectjustpressed = true;
             Selectpressedonce = true;
+            OnSelectJustPressed?.Invoke();
         }
         else
-        {
             Selectjustpressed = false;
-        }
 
         if (!Selectpressed)
-        {
             Selectpressedonce = false;
-        }
 
+        // ---------- START ----------
         Startpressed = Startinput.IsPressed();
         if (Startpressed && !Startjustpressed && !Startpressedonce)
         {
             Startjustpressed = true;
             Startpressedonce = true;
+            OnStartJustPressed?.Invoke();
         }
         else
-        {
             Startjustpressed = false;
-        }
 
         if (!Startpressed)
-        {
             Startpressedonce = false;
-        }
 
+        // ---------- SHOW DETAILS ----------
         ShowDetailspressed = ShowDetailsinput.IsPressed();
         if (ShowDetailspressed && !ShowDetailsjustpressed && !ShowDetailspressedonce)
         {
             ShowDetailsjustpressed = true;
             ShowDetailspressedonce = true;
+            OnShowDetailsJustPressed?.Invoke();
         }
         else
-        {
             ShowDetailsjustpressed = false;
-        }
 
         if (!ShowDetailspressed)
-        {
             ShowDetailspressedonce = false;
-        }
 
-        if(movementValue != Vector2.zero & !movementpressedonce)
+        // ---------- MOVEMENT ----------
+        if (movementValue != Vector2.zero & !movementpressedonce)
         {
             movementpressedonce = true;
             movementjustpressed = true;
+            OnMovementJustPressed?.Invoke();
         }
         else
-        {
             movementjustpressed = false;
-        }
 
-        if(movementValue == Vector2.zero)
+        if (movementValue == Vector2.zero)
         {
             movementpressedonce = false;
             movementjustpressed = false;
         }
 
+        // ---------- CAMERA MOVEMENT ----------
         if (cammovementValue != Vector2.zero & !movecampressedonce)
         {
             movecampressedonce = true;
             movecamjustpressed = true;
+            OnMoveCamJustPressed?.Invoke();
         }
         else
-        {
             movecamjustpressed = false;
-        }
 
         if (cammovementValue == Vector2.zero)
         {
@@ -335,68 +317,20 @@ public class InputManager : MonoBehaviour
     void OnMovement(InputValue value)
     {
         movementValue = value.Get<Vector2>();
-        if (movementValue.x >= 0.5f)
-        {
-            movementValue.x = 1f;
-        }
-        else if (movementValue.x <= -0.5f)
-        {
-            movementValue.x = -1f;
-        }
-        else
-        {
-            movementValue.x = 0f;
-        }
-        if (movementValue.y >= 0.5f)
-        {
-            movementValue.y = 1f;
-        }
-        else if (movementValue.y <= -0.5f)
-        {
-            movementValue.y = -1f;
-        }
-        else
-        {
-            movementValue.y = 0f;
-        }
-
+        movementValue.x = Mathf.Abs(movementValue.x) >= 0.5f ? Mathf.Sign(movementValue.x) : 0f;
+        movementValue.y = Mathf.Abs(movementValue.y) >= 0.5f ? Mathf.Sign(movementValue.y) : 0f;
     }
 
     void OnResetcam(InputValue value)
     {
         cameraScript cameraScript = FindAnyObjectByType<cameraScript>();
-        if (cameraScript != null)
-        {
-            cameraScript.ResetRotation();
-        }
+        cameraScript?.ResetRotation();
     }
 
     void OnMoveCam(InputValue value)
     {
         cammovementValue = value.Get<Vector2>();
-        if (cammovementValue.x >= 0.5f)
-        {
-            cammovementValue.x = 1f;
-        }
-        else if (cammovementValue.x <= -0.5f)
-        {
-            cammovementValue.x = -1f;
-        }
-        else
-        {
-            cammovementValue.x = 0f;
-        }
-        if (cammovementValue.y >= 0.5f)
-        {
-            cammovementValue.y = 1f;
-        }
-        else if (cammovementValue.y <= -0.5f)
-        {
-            cammovementValue.y = -1f;
-        }
-        else
-        {
-            cammovementValue.y = 0f;
-        }
+        cammovementValue.x = Mathf.Abs(cammovementValue.x) >= 0.5f ? Mathf.Sign(cammovementValue.x) : 0f;
+        cammovementValue.y = Mathf.Abs(cammovementValue.y) >= 0.5f ? Mathf.Sign(cammovementValue.y) : 0f;
     }
 }

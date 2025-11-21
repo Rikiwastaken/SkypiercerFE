@@ -109,7 +109,7 @@ public class GridSquareScript : MonoBehaviour
 
     public GameObject LeverGO;
 
-    private int autoupdatefillingcnt;
+    private int autoupdatecnt;
 
     void Awake()
     {
@@ -128,6 +128,15 @@ public class GridSquareScript : MonoBehaviour
 
     private void Start()
     {
+        InputManager.instance.OnMovementJustPressed += fixupdatecnt;
+
+        SetupBaseElevation();
+
+
+        // Initial check (in case some levers start activated)
+        CheckAllTriggers(null);
+
+
         if (Mechanism == null || Mechanism.type != 1) return;
 
         foreach (var square in Mechanism.Triggers)
@@ -139,8 +148,7 @@ public class GridSquareScript : MonoBehaviour
             }
         }
 
-        // Initial check (in case some levers start activated)
-        CheckAllTriggers(null);
+        
     }
 
     public void InitializePosition()
@@ -156,111 +164,13 @@ public class GridSquareScript : MonoBehaviour
 
     private void Update()
     {
-
-
-
-        if (GridScript == null)
-        {
-            GridScript = GridScript.instance;
-        }
-        if (cameraScript == null)
-        {
-            cameraScript = FindAnyObjectByType<cameraScript>();
-        }
-        if (TurnManger == null)
-        {
-            TurnManger = FindAnyObjectByType<TurnManger>();
-        }
-
-        if (MapInitializer == null)
-        {
-            MapInitializer = FindAnyObjectByType<MapInitializer>();
-        }
-
-        if (cameraScript.incombat)
-        {
-            //SelectRoundFilling.GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f,0f);
-        }
-        else
-        {
-            ManageActivation();
-            if (!activated)
-            {
-                return;
-            }
-
-
-
-
-
-            if (RemainingRainTurns < 3)
-            {
-                justbecamerain = false;
-            }
-
-            if (RemainingRainTurns > 0)
-            {
-                if (!rainparticle.gameObject.activeSelf)
-                {
-                    rainparticle.gameObject.SetActive(true);
-                }
-
-            }
-            else
-            {
-                if (rainparticle.gameObject.activeSelf)
-                {
-                    rainparticle.gameObject.SetActive(false);
-                }
-
-            }
-
-
-
-
-            if (TurnManger.currentlyplaying == "")
-            {
-                if (MapInitializer.playablepos.Contains(GridCoordinates) && filledimage.color != new Color(0.45f, 0f, 0.42f, 0.5f))
-                {
-
-                    filledimage.color = new Color(0.45f, 0f, 0.42f, 0.5f);
-                }
-            }
-
-
-            if (GridScript.selection == this && !cameraScript.incombat)
-            {
-                if (!SelectRound.activeSelf)
-                {
-                    SelectRound.SetActive(true);
-                }
-
-                SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
-            }
-            else
-            {
-                if (SelectRound.activeSelf)
-                {
-                    SelectRound.SetActive(false);
-                }
-
-            }
-
-            if (InputManager.instance.movementjustpressed)
-            {
-                ManagePath();
-            }
-
-
-
-        }
-
-        manageElevation();
-        AutoUpdateFilling();
-        previouslyincombat = cameraScript.incombat;
+        UpdateDelay();
     }
 
-
+    private void fixupdatecnt()
+    {
+        autoupdatecnt = 1;
+    }
     private void CheckAllTriggers(MechanismClass _)
     {
         // Verify all trigger mechanisms are activated
@@ -423,7 +333,6 @@ public class GridSquareScript : MonoBehaviour
             {
                 filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnitBigEnemies;
                 int index = unitchar.currentTile.IndexOf(this);
-                Debug.Log(index);
                 switch (index)
                 {
                     case 0:
@@ -457,20 +366,122 @@ public class GridSquareScript : MonoBehaviour
 
     }
 
-    private void AutoUpdateFilling()
+    private void UpdateFunction()
     {
 
-        if (autoupdatefillingcnt == 0)
+
+        if (GridScript == null)
         {
-            UpdateFilling();
-            autoupdatefillingcnt = (int)(0.25f / Time.deltaTime);
+            GridScript = GridScript.instance;
+        }
+        if (cameraScript == null)
+        {
+            cameraScript = FindAnyObjectByType<cameraScript>();
+        }
+        if (TurnManger == null)
+        {
+            TurnManger = FindAnyObjectByType<TurnManger>();
+        }
+
+        if (MapInitializer == null)
+        {
+            MapInitializer = FindAnyObjectByType<MapInitializer>();
+        }
+
+        if (cameraScript.incombat)
+        {
+            //SelectRoundFilling.GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f,0f);
         }
         else
         {
-            autoupdatefillingcnt--;
+            ManageActivation();
+            if (!activated)
+            {
+                return;
+            }
+
+
+
+
+
+            if (RemainingRainTurns < 3)
+            {
+                justbecamerain = false;
+            }
+
+            if (RemainingRainTurns > 0)
+            {
+                if (!rainparticle.gameObject.activeSelf)
+                {
+                    rainparticle.gameObject.SetActive(true);
+                }
+
+            }
+            else
+            {
+                if (rainparticle.gameObject.activeSelf)
+                {
+                    rainparticle.gameObject.SetActive(false);
+                }
+
+            }
+
+
+
+
+            if (TurnManger.currentlyplaying == "")
+            {
+                if (MapInitializer.playablepos.Contains(GridCoordinates) && filledimage.color != new Color(0.45f, 0f, 0.42f, 0.5f))
+                {
+
+                    filledimage.color = new Color(0.45f, 0f, 0.42f, 0.5f);
+                }
+            }
+
+
+            if (GridScript.selection == this && !cameraScript.incombat)
+            {
+                if (!SelectRound.activeSelf)
+                {
+                    SelectRound.SetActive(true);
+                }
+
+                SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
+            }
+            else
+            {
+                if (SelectRound.activeSelf)
+                {
+                    SelectRound.SetActive(false);
+                }
+
+            }
+
+            if (InputManager.instance.movementjustpressed)
+            {
+                ManagePath();
+            }
+
+
+
         }
 
+        manageElevation();
+        UpdateFilling();
+        previouslyincombat = cameraScript.incombat;
+    }
 
+    private void UpdateDelay()
+    {
+        if (autoupdatecnt <= 0)
+        {
+            UpdateFunction();
+            autoupdatecnt = (int)(0.1f / Time.deltaTime) + (int)UnityEngine.Random.Range(-5,5);
+        }
+        else
+        {
+            autoupdatecnt--;
+        }
     }
 
     private void manageVisuals()
@@ -584,7 +595,7 @@ public class GridSquareScript : MonoBehaviour
                         transform.position = new Vector3(transform.position.x, elevation + walloffset, transform.position.z);
                     }
                 }
-                else if (transform.position.y > elevation + walloffset + 0.05f)
+                if (transform.position.y > elevation + walloffset + 0.05f)
                 {
                     transform.position += new Vector3(0f, -elevationchange * (1f * (float)Mathf.Abs(elevation) + walloffset) * Time.fixedDeltaTime, 0f);
                     if (Mathf.Abs(transform.position.y - (elevation + walloffset)) <= 0.05f || GridScript.instance.MapModel != null)
@@ -604,7 +615,7 @@ public class GridSquareScript : MonoBehaviour
                         transform.position = new Vector3(transform.position.x, elevation, transform.position.z);
                     }
                 }
-                else if (transform.position.y > elevation + 0.05f)
+                if (transform.position.y > elevation + 0.05f)
                 {
                     transform.position += new Vector3(0f, -elevationchange * (1f * (float)Mathf.Abs(elevation) + 1f) * Time.fixedDeltaTime, 0f);
                     if (Mathf.Abs(transform.position.y - elevation) <= 0.05f)
@@ -613,6 +624,74 @@ public class GridSquareScript : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if (isstairs)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).gameObject == Stairs)
+                {
+                    transform.GetChild(i).localPosition = initialpos[i] + new Vector3(0f, 0f, 1f);
+                }
+            }
+            if (!Stairs.activeSelf)
+            {
+                Stairs.SetActive(true);
+            }
+
+        }
+        else
+        {
+            if (Stairs.activeSelf)
+            {
+                Stairs.SetActive(false);
+            }
+
+        }
+
+
+    }
+
+    private void SetupBaseElevation()
+    {
+
+        if (GridScript.instance.MapModel != null)
+        {
+            if (Cube.GetComponent<MeshRenderer>().enabled)
+            {
+                Cube.GetComponent<MeshRenderer>().enabled = false;
+                Stairs.GetComponent<MeshRenderer>().enabled = false;
+            }
+            if (Mechanism != null && Mechanism.type == 2 && LeverGO.activeSelf)
+            {
+                LeverGO.SetActive(false);
+            }
+            return;
+
+        }
+        else
+        {
+            if (!Cube.GetComponent<MeshRenderer>().enabled)
+            {
+                Cube.GetComponent<MeshRenderer>().enabled = true;
+                Stairs.GetComponent<MeshRenderer>().enabled = true;
+            }
+            if (Mechanism != null && Mechanism.type == 2 && !LeverGO.activeSelf)
+            {
+                LeverGO.SetActive(true);
+            }
+        }
+
+        if (isobstacle && !(Mechanism != null && Mechanism.type == 2))
+        {
+
+            transform.position = new Vector3(transform.position.x, elevation + walloffset, transform.position.z);
+        }
+        else
+        {
+
+            transform.position = new Vector3(transform.position.x, elevation, transform.position.z);
         }
 
         if (isstairs)

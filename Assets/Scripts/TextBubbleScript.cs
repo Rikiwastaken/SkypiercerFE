@@ -8,6 +8,8 @@ using TMPro;
 public class TextBubbleScript : MonoBehaviour
 {
 
+    public static TextBubbleScript Instance;
+
     [Serializable]
     public class TextBubbleInfo
     {
@@ -51,7 +53,10 @@ public class TextBubbleScript : MonoBehaviour
 
         if (sentence != null)
             sentence.ForceMeshUpdate();
-
+        if(Instance==null)
+        {
+            Instance = this;
+        }
     }
 
 

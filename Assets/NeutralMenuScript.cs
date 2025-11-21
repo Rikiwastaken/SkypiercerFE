@@ -53,7 +53,7 @@ public class NeutralMenuScript : MonoBehaviour
 
         ManageSelection();
 
-        if (InputManager.cancelpressed)
+        if (InputManager.cancelpressed || (TextBubbleScript.Instance!=null && TextBubbleScript.Instance.indialogue))
         {
             if (OptionsMenuTransfrom.gameObject.activeSelf)
             {
@@ -63,8 +63,6 @@ public class NeutralMenuScript : MonoBehaviour
             {
                 CloseMenu();
             }
-
-
         }
 
     }

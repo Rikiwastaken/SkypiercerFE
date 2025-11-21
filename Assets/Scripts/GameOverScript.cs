@@ -20,21 +20,27 @@ public class GameOverScript : MonoBehaviour
 
     private int chosenSlot;
 
+    public bool InHideout;
+
     private void OnEnable()
     {
-        Time.timeScale = 0f;
-        if (victory)
+        if(!InHideout)
         {
-            VictoryMenu.gameObject.SetActive(true);
-            GameOverMenu.gameObject.SetActive(false);
-            EventSystem.current.SetSelectedGameObject(VictoryMenu.GetChild(1).gameObject);
+            Time.timeScale = 0f;
+            if (victory)
+            {
+                VictoryMenu.gameObject.SetActive(true);
+                GameOverMenu.gameObject.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(VictoryMenu.GetChild(1).gameObject);
+            }
+            else
+            {
+                VictoryMenu.gameObject.SetActive(false);
+                GameOverMenu.gameObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(GameOverMenu.GetChild(1).gameObject);
+            }
         }
-        else
-        {
-            VictoryMenu.gameObject.SetActive(false);
-            GameOverMenu.gameObject.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(GameOverMenu.GetChild(1).gameObject);
-        }
+        
         sceneLoader = FindAnyObjectByType<SceneLoader>();
     }
 
@@ -54,7 +60,10 @@ public class GameOverScript : MonoBehaviour
 
     private void Update()
     {
-        Time.timeScale = 0f;
+        if(!InHideout)
+        {
+            Time.timeScale = 0f;
+        }
         ManageSelection();
     }
 
@@ -75,7 +84,7 @@ public class GameOverScript : MonoBehaviour
     {
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         
-        if (GameOverMenu.gameObject.activeSelf)
+        if (GameOverMenu!=null && GameOverMenu.gameObject.activeSelf)
         {
             if (currentSelected == null)
             {
@@ -86,7 +95,7 @@ public class GameOverScript : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(GameOverMenu.GetChild(1).gameObject);
             }
         }
-        else if (VictoryMenu.gameObject.activeSelf)
+        else if (VictoryMenu != null && VictoryMenu.gameObject.activeSelf)
         {
             if (currentSelected == null)
             {
@@ -113,8 +122,8 @@ public class GameOverScript : MonoBehaviour
     public void Continue()
     {
         int nextsceneindex = FindAnyObjectByType<MapInitializer>().ChapterID;
-        string scenetoload = "Chapter" + (nextsceneindex+1);
-
+        string scenetoload = "Hideout";
+        saveManager.currentchapter = nextsceneindex + 1;
         sceneLoader.LoadScene(scenetoload);
     }
 

@@ -17,6 +17,8 @@ public class SaveManager : MonoBehaviour
 
     public int activeSlot;
 
+    public int currentchapter;
+
     [Serializable]
     public class SaveClass
     {
@@ -26,6 +28,7 @@ public class SaveManager : MonoBehaviour
         public List<Character> PlayableCharacterList;
         public Inventory PlayerInventory;
         public float secondselapsed;
+        public bool inHideout;
     }
 
     [Serializable]
@@ -199,7 +202,22 @@ public class SaveManager : MonoBehaviour
                 int numberofminutes = (int)save.secondselapsed / 60;
                 int numberofhours = numberofminutes / 60;
                 numberofminutes = numberofminutes % 60;
-                string text = "Slot : " + (i + 1) + "  Time played : " + numberofhours + "h" + numberofminutes + "min\nChapter : " + save.chapter;
+                string text = "Slot : " + (i + 1) + "  Time played : " + numberofhours + "h" + numberofminutes + "min";
+                if(save.inHideout)
+                {
+                    text += "\nChapter: " + save.chapter + ", before battle.";
+                }
+                else
+                {
+                    if(save.chapter>1)
+                    {
+                        text += "\nChapter: " + (save.chapter - 1) + ", after battle.";
+                    }
+                    else
+                    {
+                        text += "\nPrologue, after battle.";
+                    }
+                }
                 buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = text;
             }
             else
@@ -235,6 +253,7 @@ public class SaveManager : MonoBehaviour
             DS.PlayableCharacterList = SaveClasses[slot].PlayableCharacterList;
             DS.PlayerInventory = SaveClasses[slot].PlayerInventory;
             secondselapsed = SaveClasses[slot].secondselapsed;
+            currentchapter = SaveClasses[slot].chapter;
         }
         else if (slot == -1)
         {
@@ -245,10 +264,11 @@ public class SaveManager : MonoBehaviour
 
     }
 
-    public void SaveCurrentSlot()
+    public void SaveCurrentSlot(int chapter = 0)
     {
 
-        int currentchapter = 0;
+        currentchapter = chapter;
+        bool Hideout = false;
         string scenename = SceneManager.GetActiveScene().name;
 
         for(int i = 0; i < SceneManager.sceneCount;i++)
@@ -271,6 +291,10 @@ public class SaveManager : MonoBehaviour
             currentchapter = 1;
             DataScript.instance.UpdatePlayableUnits();
         }
+        if (scenename.Contains("Hideout"))
+        {
+            Hideout = true;
+        }
 
         SaveClass save = new SaveClass
         {
@@ -279,8 +303,8 @@ public class SaveManager : MonoBehaviour
             chapter = currentchapter,
             PlayableCharacterList = DataScript.instance.PlayableCharacterList,
             PlayerInventory = DataScript.instance.PlayerInventory,
-            secondselapsed = secondselapsed
-
+            secondselapsed = secondselapsed,
+            inHideout = Hideout
         };
 
         string json = JsonUtility.ToJson(save, true);

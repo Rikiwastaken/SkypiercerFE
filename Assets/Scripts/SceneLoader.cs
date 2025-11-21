@@ -5,6 +5,9 @@ using TMPro;
 
 public class SceneLoader : MonoBehaviour
 {
+
+    public static SceneLoader instance;
+
     private string SceneToToad;
     public GameObject loadingCanvas;
     private int framestoloading;
@@ -12,6 +15,14 @@ public class SceneLoader : MonoBehaviour
     public TextMeshProUGUI loadingtext;
 
     public Image LoadingImage;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -65,6 +76,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
+
+
         SceneToToad = sceneName;
         SceneManager.LoadScene("LoadingScene");
     }

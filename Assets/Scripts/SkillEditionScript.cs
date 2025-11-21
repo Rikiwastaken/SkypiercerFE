@@ -32,12 +32,19 @@ public class SkillEditionScript : MonoBehaviour
     public TextMeshProUGUI SkillDescriptionText;
     public TextMeshProUGUI SkillPointsText;
 
+    public bool InHideout;
+    public GameObject HideoutMenu;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        gridscript = GridScript.instance;
-        inputmanager = InputManager.instance;
+        if(!InHideout)
+        {
+            gridscript = GridScript.instance;
+            inputmanager = InputManager.instance;
+        }
+        
         InitializeButtons();
     }
 
@@ -46,29 +53,42 @@ public class SkillEditionScript : MonoBehaviour
     {
         InitializeInventorySkillList();
 
-        gridscript.movementbuffercounter = 3;
-
-        if (inputmanager.canceljustpressed)
+        if(!InHideout)
         {
-            if (SkillList.activeSelf)
+            gridscript.movementbuffercounter = 3;
+            if (inputmanager.canceljustpressed)
             {
-                SkillList.SetActive(false);
-            }
-            else
-            {
-                if (numberofSelectedUnits() > 0)
+                if (SkillList.activeSelf)
                 {
-                    foreach (GameObject go in PreBattleMenuItems)
-                    {
-                        go.SetActive(true);
-                    }
-                    gameObject.SetActive(false);
-                    gridscript.InitializeGOList();
-                    return;
+                    SkillList.SetActive(false);
                 }
-            }
+                foreach (GameObject go in PreBattleMenuItems)
+                {
+                    go.SetActive(true);
+                }
+                gameObject.SetActive(false);
+                gridscript.InitializeGOList();
+                return;
 
+            }
         }
+        else
+        {
+            if (inputmanager.canceljustpressed)
+            {
+                if (SkillList.activeSelf)
+                {
+                    SkillList.SetActive(false);
+                }
+                HideoutMenu.SetActive(true);
+                gameObject.SetActive(false);
+                return;
+
+            }
+        }
+
+
+
 
         PageNumberText.text = (characterwindowindex + 1) + "/" + (DataScript.instance.PlayableCharacterList.Count / 10 + 1);
         if (SkillPageNumberText.gameObject.activeSelf)
@@ -344,7 +364,7 @@ public class SkillEditionScript : MonoBehaviour
         int numberofunits = 0;
         foreach (Character character in DataScript.instance.PlayableCharacterList)
         {
-            if (character.playableStats.deployunit)
+            if (character.playableStats.unlocked)
             {
                 numberofunits++;
             }

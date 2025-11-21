@@ -90,6 +90,7 @@ public class UnitDeploymentButton : MonoBehaviour
                     lockimage.SetActive(false);
                 }
                 GetComponentInChildren<TextMeshProUGUI>().text = "None";
+                GetComponent<Image>().color = Color.white;
             }
         }
         if (Item != null)
@@ -114,6 +115,7 @@ public class UnitDeploymentButton : MonoBehaviour
             else if (transform.parent.gameObject.name == "EditSkills")
             {
                 GetComponentInChildren<TextMeshProUGUI>().text = "None";
+                GetComponent<Image>().color = Color.white;
             }
             return;
         }

@@ -146,7 +146,7 @@ public class cameraScript : MonoBehaviour
         {
             return;
         }
-        if(TurnManger.instance.currentlyplaying=="playable")
+        if(TurnManger.instance.currentlyplaying=="playable" || (PreBattleMenu.activeSelf && PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
         {
             Destination = new Vector2(GridScript.selection.transform.position.x, GridScript.selection.transform.position.z);
         }
