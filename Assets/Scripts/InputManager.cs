@@ -148,7 +148,7 @@ public class InputManager : MonoBehaviour
         if (!activatepressed)
             activatepressedonce = false;
 
-        if (cameraScript.instance.incombat)
+        if (cameraScript.instance!=null && cameraScript.instance.incombat)
         {
             activatepressed = false;
             activatejustpressed = false;

@@ -116,7 +116,7 @@ public class DataScript : MonoBehaviour
             if (skill.ID != 0)
             {
                 InventoryItem inventoryItem = new InventoryItem();
-                inventoryItem.Quantity = 50;
+                inventoryItem.Quantity = 0;
                 inventoryItem.type = 1;
                 inventoryItem.ID = skill.ID;
                 PlayerInventory.inventoryItems.Add(inventoryItem);
@@ -184,15 +184,6 @@ public class DataScript : MonoBehaviour
         copy.type = itemtocopy.type;
         copy.ID = itemtocopy.ID;
         return copy;
-    }
-
-    public void CreateEmptyInventory()
-    {
-        //InventoryItem copy = new InventoryItem();
-        //copy.Quantity = itemtocopy.Quantity;
-        //copy.type = itemtocopy.type;
-        //copy.ID = itemtocopy.ID;
-        //return copy;
     }
 
     private void SetupEquipment()

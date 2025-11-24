@@ -72,16 +72,15 @@ public class BattleInfotext : MonoBehaviour
         {
             GetComponent<TextMeshProUGUI>().enabled = true;
             transform.parent.GetComponent<Image>().enabled = true;
-            Debug.Log("here");
         }
         if ((AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf || ForeSightMenu.activeSelf))
         {
-            if(transform.parent.GetChild(1).gameObject.activeSelf)
+            if (transform.parent.GetChild(1).gameObject.activeSelf)
             {
                 transform.parent.GetChild(1).gameObject.SetActive(false);
                 transform.parent.GetChild(2).gameObject.SetActive(false);
             }
-            
+
             return;
         }
         else if (!PreBattleMenu.activeSelf)
@@ -107,9 +106,9 @@ public class BattleInfotext : MonoBehaviour
             battlecamera = FindAnyObjectByType<cameraScript>();
         }
 
-        if(eventSystem == null)
+        if (eventSystem == null)
         {
-            eventSystem=FindAnyObjectByType<EventSystem>();
+            eventSystem = FindAnyObjectByType<EventSystem>();
         }
 
         if (turnManger == null)
@@ -141,13 +140,12 @@ public class BattleInfotext : MonoBehaviour
             //    SkillDescription.transform.parent.gameObject.SetActive(false);
             //    MasteryText.transform.parent.gameObject.SetActive(false);
             //}
-            
-            if (!(PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
+
+            if (!(PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) && !(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf))
             {
-                
                 eventSystem.SetSelectedGameObject(null);
             }
-            
+
         }
         else
         {
@@ -178,7 +176,7 @@ public class BattleInfotext : MonoBehaviour
             {
                 selectedunit = GridScript.GetUnit(GridScript.selection);
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
-                
+
             }
             if (selectedunit != null && selectedunitCharacter != null)
             {
@@ -368,11 +366,11 @@ public class BattleInfotext : MonoBehaviour
             if (SkillButtonList[i].gameObject == currentSelected)
             {
                 SkillDescription.text = DataScript.instance.SkillList[SkillButtonIDList[i]].Descriptions;
-                if(!SkillDescription.transform.parent.gameObject.activeSelf)
+                if (!SkillDescription.transform.parent.gameObject.activeSelf)
                 {
                     SkillDescription.transform.parent.gameObject.SetActive(true);
                 }
-                
+
                 GridScript.movementbuffercounter = 5;
                 return;
             }
@@ -395,11 +393,11 @@ public class BattleInfotext : MonoBehaviour
         }
         else
         {
-            if(MasteryText.transform.parent.gameObject.activeSelf)
+            if (MasteryText.transform.parent.gameObject.activeSelf)
             {
                 MasteryText.transform.parent.gameObject.SetActive(false);
             }
-            
+
             return;
         }
 
@@ -445,11 +443,11 @@ public class BattleInfotext : MonoBehaviour
         }
         for (int i = barID; i < MasteryExpBars.Count; i++)
         {
-            if(MasteryExpBars[i].gameObject.activeSelf)
+            if (MasteryExpBars[i].gameObject.activeSelf)
             {
                 MasteryExpBars[i].gameObject.SetActive(false);
             }
-            
+
         }
 
     }
@@ -498,7 +496,7 @@ public class BattleInfotext : MonoBehaviour
                 {
                     SkillButtonList[i].gameObject.SetActive(false);
                 }
-                
+
             }
         }
 
@@ -515,7 +513,7 @@ public class BattleInfotext : MonoBehaviour
             {
                 Skilltext.transform.parent.gameObject.SetActive(false);
             }
-            
+
         }
     }
 }

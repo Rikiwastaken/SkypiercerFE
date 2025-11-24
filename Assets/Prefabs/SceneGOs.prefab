@@ -792,7 +792,6 @@ RectTransform:
   - {fileID: 8900079939754405877}
   - {fileID: 1843945418321676665}
   - {fileID: 4764547575855107838}
-  - {fileID: 3685356435070556631}
   - {fileID: 3811498641961382266}
   - {fileID: 3506929047582384804}
   - {fileID: 6258871262150013205}
@@ -4859,6 +4858,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3685356435070556631}
   - {fileID: 2092104300854544591}
   - {fileID: 5599686708436773862}
   - {fileID: 4095376809589321731}
@@ -18958,11 +18958,11 @@ Transform:
   m_GameObject: {fileID: 8374343343581193621}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -316, y: -10, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 116.34, y: 297.9, z: 0}
+  m_LocalScale: {x: 1.385, y: 1.385, z: 1.385}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4095376809589321731}
+  m_Father: {fileID: 38206123502173926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1642976342296212934
 MonoBehaviour:
@@ -18976,7 +18976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1826472959952730890}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!114 &6048489095151320385
@@ -18991,23 +18991,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
+  m_SendPointerHoverToParent: 0
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_PointAction: {fileID: 0}
+  m_PointAction: {fileID: 3041688926759653433, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_MoveAction: {fileID: -1532734421975673802, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_SubmitAction: {fileID: -5830892883210326830, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_CancelAction: {fileID: -3879855657358017652, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_LeftClickAction: {fileID: 0}
-  m_MiddleClickAction: {fileID: 0}
-  m_RightClickAction: {fileID: 0}
-  m_ScrollWheelAction: {fileID: 0}
-  m_TrackedDevicePositionAction: {fileID: 0}
-  m_TrackedDeviceOrientationAction: {fileID: 0}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
+  m_LeftClickAction: {fileID: -6113539504830526078, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_MiddleClickAction: {fileID: 5832799658592930524, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_RightClickAction: {fileID: 7519360445776334655, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_ScrollWheelAction: {fileID: 8915397633196103238, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 4041653130233353332, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 360110656358371381, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_DeselectOnBackgroundClick: 0
+  m_PointerBehavior: 1
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
 --- !u!1 &8376733426172754466

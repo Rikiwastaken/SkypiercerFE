@@ -50,6 +50,7 @@ public class TipsMenuScript : MonoBehaviour
         {
             if (currentSelected.transform.parent != transform)
             {
+
                 EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
             }
 
@@ -63,7 +64,7 @@ public class TipsMenuScript : MonoBehaviour
                 ChangeButtonID(1);
             }
 
-            if (Buttons.IndexOf(currentSelected.GetComponent<Button>()) < ButtonIDs.Count && Buttons.IndexOf(currentSelected.GetComponent<Button>()) !=-1 && ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())] != -1)
+            if (Buttons.IndexOf(currentSelected.GetComponent<Button>()) < ButtonIDs.Count && Buttons.IndexOf(currentSelected.GetComponent<Button>()) != -1 && ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())] != -1)
             {
                 if (!descriptionText.transform.parent.gameObject.activeSelf)
                 {
@@ -116,6 +117,7 @@ public class TipsMenuScript : MonoBehaviour
         {
             gameObject.SetActive(false);
             neutralmenu.SetActive(true);
+
             EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
         }
 

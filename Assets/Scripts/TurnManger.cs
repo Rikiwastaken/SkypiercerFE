@@ -232,7 +232,7 @@ public class TurnManger : MonoBehaviour
         {
             GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>().AddAction(action);
         }
-        minimapScript.UpdateMinimap();
+        
 
         if(charactertoappy==playableunitGO) // true change of turns;
         {
@@ -247,7 +247,7 @@ public class TurnManger : MonoBehaviour
             }
         }
 
-        
+        minimapScript.UpdateMinimap();
     }
 
     /// <summary>

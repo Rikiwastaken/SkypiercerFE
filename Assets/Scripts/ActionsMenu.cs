@@ -362,7 +362,7 @@ public class ActionsMenu : MonoBehaviour
     {
         CommandUsedID = 0;
         // on essaie de trouver un combo arme/telekinesie pour pouvoir attaquer un ennemi
-        if(target==null)
+        if (target == null)
         {
             return;
         }
@@ -750,6 +750,10 @@ public class ActionsMenu : MonoBehaviour
 
     private void SelectionSafeGuard()
     {
+        if (GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf)
+        {
+            return;
+        }
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
 
         List<GameObject> listofChildren = new List<GameObject>();
@@ -2010,11 +2014,11 @@ public class ActionsMenu : MonoBehaviour
         if (target != null && target.activeSelf)
         {
             chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-            if(chartarget.position!=null && GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y)!=null)
+            if (chartarget.position != null && GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y) != null)
             {
                 targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
             }
-            
+
             TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
             basestatdef = chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
         }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class HideoutScript : MonoBehaviour
@@ -6,21 +7,22 @@ public class HideoutScript : MonoBehaviour
 
     SaveManager saveManager;
 
+    public Transform BaseMenu;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (DataScript.instance == null)
+        {
+            SceneManager.LoadScene("FirstScene");
+        }
+        EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
     }
 
     public void LoadNextChapter()
     {
-        if(saveManager == null)
+        if (saveManager == null)
         {
             saveManager = SaveManager.instance;
         }

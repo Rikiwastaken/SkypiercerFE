@@ -80,6 +80,7 @@ public class UnitDeploymentScript : MonoBehaviour
         }
         if (!buttonselected || currentselected == null)
         {
+
             EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
         }
         Character currentchar = EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>().Character;

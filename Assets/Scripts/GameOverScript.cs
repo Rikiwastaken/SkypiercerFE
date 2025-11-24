@@ -1,70 +1,107 @@
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 
 public class GameOverScript : MonoBehaviour
 {
+    public static GameOverScript instance;
+
     public bool victory;
+    public bool InHideout;
 
     private SceneLoader sceneLoader;
+    private SaveManager saveManager;
 
     public Transform GameOverMenu;
     public Transform VictoryMenu;
     public Transform SaveMenu;
     public Transform ConfirmMenu;
 
-    private SaveManager saveManager;
-
     private int chosenSlot;
 
-    public bool InHideout;
+    private bool selectionInitialized = false;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
 
     private void OnEnable()
     {
-        if(!InHideout)
+        sceneLoader = SceneLoader.instance;
+        selectionInitialized = false;
+
+        if (!InHideout)
         {
-            Time.timeScale = 0f;
-            if (victory)
-            {
-                VictoryMenu.gameObject.SetActive(true);
-                GameOverMenu.gameObject.SetActive(false);
-                EventSystem.current.SetSelectedGameObject(VictoryMenu.GetChild(1).gameObject);
-            }
-            else
-            {
-                VictoryMenu.gameObject.SetActive(false);
-                GameOverMenu.gameObject.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(GameOverMenu.GetChild(1).gameObject);
-            }
+
+            VictoryMenu.gameObject.SetActive(victory);
+            GameOverMenu.gameObject.SetActive(!victory);
+
+            StartCoroutine(InitializeSelection());
         }
-        
-        sceneLoader = FindAnyObjectByType<SceneLoader>();
+    }
+
+    private void FixedUpdate()
+    {
+        GameObject buttonToSelect = EventSystem.current.currentSelectedGameObject;
+        if (buttonToSelect==null)
+        {
+            if (GameOverMenu.gameObject.activeSelf)
+                buttonToSelect = GameOverMenu.GetChild(1).gameObject;
+            else if (VictoryMenu.gameObject.activeSelf)
+                buttonToSelect = VictoryMenu.GetChild(1).gameObject;
+            else if (SaveMenu.gameObject.activeSelf)
+                buttonToSelect = SaveMenu.GetChild(0).gameObject;
+
+            EventSystem.current.SetSelectedGameObject(buttonToSelect);
+        }
+    }
+
+    private IEnumerator InitializeSelection()
+    {
+        yield return null; // wait one frame so UI activates
+
+        GameObject buttonToSelect = null;
+
+        if (GameOverMenu.gameObject.activeSelf)
+            buttonToSelect = GameOverMenu.GetChild(1).gameObject;
+        else if (VictoryMenu.gameObject.activeSelf)
+            buttonToSelect = VictoryMenu.GetChild(1).gameObject;
+        else if (SaveMenu.gameObject.activeSelf)
+            buttonToSelect = SaveMenu.GetChild(0).gameObject;
+
+        if (buttonToSelect == null)
+            yield break;
+
+        Button btn = buttonToSelect.GetComponent<Button>();
+        if (btn == null || !btn.interactable)
+            yield break;
+
+        // wait one more frame to ensure EventSystem is ready
+        yield return new WaitForEndOfFrame();
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(buttonToSelect);
+
+        selectionInitialized = true;
     }
 
     public void InitializeSaveButtons()
     {
-        if(saveManager == null)
-        {
+        if (saveManager == null)
             saveManager = FindAnyObjectByType<SaveManager>();
-        }
+
         List<Button> buttons = new List<Button>();
         for (int i = 0; i < SaveMenu.childCount - 1; i++)
-        {
             buttons.Add(SaveMenu.GetChild(i).GetComponent<Button>());
-        }
-        saveManager.InitializeSaveButtons(buttons);
-    }
 
-    private void Update()
-    {
-        if(!InHideout)
-        {
-            Time.timeScale = 0f;
-        }
-        ManageSelection();
+        saveManager.InitializeSaveButtons(buttons);
     }
 
     public void ConfirmSave()
@@ -77,54 +114,19 @@ public class GameOverScript : MonoBehaviour
     public void ChooseSaveFile(int slot)
     {
         chosenSlot = slot;
-        ConfirmMenu.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Overwrite Slot " + (slot + 1) + " ?";
-    }
-
-    private void ManageSelection()
-    {
-        GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
-        
-        if (GameOverMenu!=null && GameOverMenu.gameObject.activeSelf)
-        {
-            if (currentSelected == null)
-            {
-                EventSystem.current.SetSelectedGameObject(GameOverMenu.GetChild(1).gameObject);
-            }
-            else if (!currentSelected.transform.IsChildOf(GameOverMenu.transform) )
-            {
-                EventSystem.current.SetSelectedGameObject(GameOverMenu.GetChild(1).gameObject);
-            }
-        }
-        else if (VictoryMenu != null && VictoryMenu.gameObject.activeSelf)
-        {
-            if (currentSelected == null)
-            {
-                EventSystem.current.SetSelectedGameObject(VictoryMenu.GetChild(1).gameObject);
-            }
-            else if (!currentSelected.transform.IsChildOf(VictoryMenu.transform))
-            {
-                EventSystem.current.SetSelectedGameObject(VictoryMenu.GetChild(1).gameObject);
-            }
-        }
-        else if (SaveMenu.gameObject.activeSelf)
-        {
-            if (currentSelected == null)
-            {
-                EventSystem.current.SetSelectedGameObject(SaveMenu.GetChild(0).gameObject);
-            }
-            else if (!currentSelected.transform.IsChildOf(SaveMenu.transform))
-            {
-                EventSystem.current.SetSelectedGameObject(SaveMenu.GetChild(0).gameObject);
-            }
-        }
+        ConfirmMenu.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text =
+            $"Overwrite Slot {slot + 1} ?";
     }
 
     public void Continue()
     {
+        if (saveManager == null)
+            saveManager = SaveManager.instance;
+
         int nextsceneindex = FindAnyObjectByType<MapInitializer>().ChapterID;
-        string scenetoload = "Hideout";
         saveManager.currentchapter = nextsceneindex + 1;
-        sceneLoader.LoadScene(scenetoload);
+
+        sceneLoader.LoadScene("Hideout");
     }
 
     public void ReturnToMainMenu()
@@ -138,5 +140,4 @@ public class GameOverScript : MonoBehaviour
         Time.timeScale = 1f;
         sceneLoader.LoadScene(SceneManager.GetActiveScene().name);
     }
-
 }

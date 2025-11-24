@@ -128,7 +128,7 @@ public class MinimapScript : MonoBehaviour
                 for (int j = 0; j < gridScript.Grid[i].Count; j++)
                 {
                     GridSquareScript tile = gridScript.GetTile(i, j);
-                    if (gridScript.GetTile(i, j).isobstacle)
+                    if (tile.isobstacle)
                     {
                         SetTileColor(i, j, Color.grey);
                     }

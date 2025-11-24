@@ -148,7 +148,7 @@ public class GridSquareScript : MonoBehaviour
             }
         }
 
-        
+
     }
 
     public void InitializePosition()
@@ -165,6 +165,41 @@ public class GridSquareScript : MonoBehaviour
     private void Update()
     {
         UpdateDelay();
+        
+    }
+
+
+    private void FixedUpdate()
+    {
+        if(GridScript!=null)
+        {
+            GridScript = GridScript.instance;
+        }
+        if (cameraScript != null)
+        {
+            cameraScript = cameraScript.instance;
+        }
+        if(GridScript!=null && cameraScript!=null)
+        {
+            if (GridScript.selection == this && !cameraScript.incombat)
+            {
+                if (!SelectRound.activeSelf)
+                {
+                    SelectRound.SetActive(true);
+                }
+
+                SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
+            }
+            else
+            {
+                if (SelectRound.activeSelf)
+                {
+                    SelectRound.SetActive(false);
+                }
+
+            }
+        }
+        
     }
 
     private void fixupdatecnt()
@@ -173,6 +208,10 @@ public class GridSquareScript : MonoBehaviour
     }
     private void CheckAllTriggers(MechanismClass _)
     {
+        if (Mechanism == null || Mechanism.type != 1)
+        {
+            return;
+        }
         // Verify all trigger mechanisms are activated
         foreach (var square in Mechanism.Triggers)
         {
@@ -439,23 +478,7 @@ public class GridSquareScript : MonoBehaviour
             }
 
 
-            if (GridScript.selection == this && !cameraScript.incombat)
-            {
-                if (!SelectRound.activeSelf)
-                {
-                    SelectRound.SetActive(true);
-                }
-
-                SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
-            }
-            else
-            {
-                if (SelectRound.activeSelf)
-                {
-                    SelectRound.SetActive(false);
-                }
-
-            }
+            
 
             if (InputManager.instance.movementjustpressed)
             {
@@ -466,7 +489,7 @@ public class GridSquareScript : MonoBehaviour
 
         }
 
-        manageElevation();
+        //manageElevation();
         UpdateFilling();
         previouslyincombat = cameraScript.incombat;
     }
@@ -476,13 +499,15 @@ public class GridSquareScript : MonoBehaviour
         if (autoupdatecnt <= 0)
         {
             UpdateFunction();
-            autoupdatecnt = (int)(0.1f / Time.deltaTime) + (int)UnityEngine.Random.Range(-5,5);
+            autoupdatecnt = (int)(0.1f / Time.deltaTime) + (int)UnityEngine.Random.Range(-5, 5);
         }
         else
         {
             autoupdatecnt--;
         }
     }
+
+
 
     private void manageVisuals()
     {
@@ -586,7 +611,7 @@ public class GridSquareScript : MonoBehaviour
 
             if (isobstacle && !(Mechanism != null && Mechanism.type == 2))
             {
-                
+
                 if (transform.position.y < elevation + walloffset - 0.05f)
                 {
                     transform.position += new Vector3(0f, elevationchange * (1f * (float)Mathf.Abs(elevation) + walloffset) * Time.fixedDeltaTime, 0f);
@@ -606,7 +631,7 @@ public class GridSquareScript : MonoBehaviour
             }
             else
             {
-                
+
                 if (transform.position.y < elevation - 0.05f)
                 {
                     transform.position += new Vector3(0f, elevationchange * (1f * (float)Mathf.Abs(elevation) + 1f) * Time.fixedDeltaTime, 0f);
@@ -667,7 +692,6 @@ public class GridSquareScript : MonoBehaviour
             {
                 LeverGO.SetActive(false);
             }
-            return;
 
         }
         else

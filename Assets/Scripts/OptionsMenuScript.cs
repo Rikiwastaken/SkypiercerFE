@@ -25,7 +25,7 @@ public class OptionsMenuScript : MonoBehaviour
     private void Start()
     {
         SaveManager = SaveManager.instance;
-        if(SaveManager.Options.Fullscreen)
+        if (SaveManager.Options.Fullscreen)
         {
             fullscreentext.text = "Fullscreen : On";
         }
@@ -65,6 +65,7 @@ public class OptionsMenuScript : MonoBehaviour
     {
         if (selected == MusicLess.gameObject)
         {
+
             EventSystem.current.SetSelectedGameObject(MusicMain.gameObject);
             SaveManager.Options.musicvolume -= 0.1f;
             if (SaveManager.Options.musicvolume < 0.000001f)
@@ -75,6 +76,7 @@ public class OptionsMenuScript : MonoBehaviour
         }
         if (selected == MusicMore.gameObject)
         {
+
             EventSystem.current.SetSelectedGameObject(MusicMain.gameObject);
             SaveManager.Options.musicvolume += 0.1f;
             if (SaveManager.Options.musicvolume > 2.000001f)
@@ -83,13 +85,14 @@ public class OptionsMenuScript : MonoBehaviour
             }
             SaveManager.SaveOptions();
         }
-        MusicMain.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Music : "+(int)(SaveManager.Options.musicvolume*100);
+        MusicMain.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Music : " + (int)(SaveManager.Options.musicvolume * 100);
     }
 
     private void ManageSEVol(GameObject selected)
     {
         if (selected == SELess.gameObject)
         {
+
             EventSystem.current.SetSelectedGameObject(SEMain.gameObject);
             SaveManager.Options.SEVolume -= 0.1f;
             if (SaveManager.Options.SEVolume < 0.000001f)
@@ -100,6 +103,7 @@ public class OptionsMenuScript : MonoBehaviour
         }
         if (selected == SEMore.gameObject)
         {
+
             EventSystem.current.SetSelectedGameObject(SEMain.gameObject);
             SaveManager.Options.SEVolume += 0.1f;
             if (SaveManager.Options.SEVolume > 2.000001f)

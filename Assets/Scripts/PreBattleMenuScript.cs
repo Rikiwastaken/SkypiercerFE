@@ -58,8 +58,9 @@ public class PreBattleMenuScript : MonoBehaviour
                     }
                 }
             }
-            if (!buttonselected || currentselected == null)
+            if (!(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf) && (!buttonselected || currentselected == null))
             {
+
                 EventSystem.current.SetSelectedGameObject(transform.GetChild(2).gameObject);
             }
         }

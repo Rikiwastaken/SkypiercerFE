@@ -2898,193 +2898,193 @@ MonoBehaviour:
     inventoryItems:
     - type: 1
       ID: 1
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 2
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 3
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 4
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 5
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 6
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 7
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 8
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 9
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 10
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 11
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 12
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 13
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 14
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 15
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 16
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 17
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 18
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 19
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 20
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 21
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 22
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 23
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 24
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 25
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 26
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 27
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 28
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 29
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 30
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 31
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 32
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 33
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 34
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 35
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 36
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 37
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 38
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 39
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 40
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 41
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 42
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 43
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 44
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 45
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 46
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 47
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 48
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 49
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 50
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 51
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 52
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 53
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 54
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 55
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 56
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 57
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 58
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 59
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 60
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 61
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 62
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 63
-      Quantity: 50
+      Quantity: 0
   DefaultPlayableCharacterList:
   - name: Zack
     ID: 0
@@ -3334,7 +3334,7 @@ MonoBehaviour:
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 1100000001000000
+    equipmentsIDs: 
     equipments: []
     UnitSkill: 2
     EquipedSkills: 
@@ -3373,13 +3373,13 @@ MonoBehaviour:
   - name: Lyv
     ID: 0
     stats:
-      HP: 17
+      HP: 19
       Strength: 3
-      Psyche: 6
-      Defense: 7
+      Psyche: 7
+      Defense: 8
       Resistance: 4
-      Speed: 8
-      Dexterity: 5
+      Speed: 9
+      Dexterity: 6
     AjustedStats:
       HP: 0
       Strength: 0
@@ -3388,7 +3388,7 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
-    level: 3
+    level: 5
     experience: 0
     affiliation: 
     growth:
@@ -3405,9 +3405,9 @@ MonoBehaviour:
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 0500000019000000
+    equipmentsIDs: 
     equipments: []
-    UnitSkill: 31
+    UnitSkill: 30
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
@@ -3463,22 +3463,22 @@ MonoBehaviour:
     experience: 0
     affiliation: 
     growth:
-      HPGrowth: 50
-      StrengthGrowth: 20
+      HPGrowth: 40
+      StrengthGrowth: 30
       PsycheGrowth: 70
-      DefenseGrowth: 40
-      ResistanceGrowth: 30
+      DefenseGrowth: 30
+      ResistanceGrowth: 20
       SpeedGrowth: 70
       DexterityGrowth: 60
     currentHP: 0
-    movements: 6
+    movements: 5
     position: {x: 0, y: 0}
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
     equipmentsIDs: 0d000000
     equipments: []
-    UnitSkill: 38
+    UnitSkill: 2
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
@@ -4013,193 +4013,193 @@ MonoBehaviour:
     inventoryItems:
     - type: 1
       ID: 1
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 2
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 3
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 4
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 5
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 6
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 7
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 8
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 9
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 10
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 11
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 12
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 13
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 14
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 15
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 16
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 17
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 18
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 19
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 20
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 21
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 22
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 23
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 24
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 25
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 26
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 27
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 28
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 29
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 30
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 31
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 32
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 33
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 34
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 35
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 36
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 37
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 38
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 39
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 40
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 41
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 42
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 43
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 44
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 45
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 46
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 47
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 48
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 49
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 50
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 51
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 52
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 53
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 54
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 55
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 56
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 57
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 58
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 59
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 60
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 61
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 62
-      Quantity: 50
+      Quantity: 0
     - type: 1
       ID: 63
-      Quantity: 50
+      Quantity: 0
   DialogueSpriteList:
   - {fileID: 21300000, guid: beef65ca32621bc4d8e4fb7e0bce0df7, type: 3}
   - {fileID: 21300000, guid: 95a4432c0a5facf4b96a82497eae6937, type: 3}
@@ -4220,8 +4220,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96044cd774742f64cbd6546a776f0941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  versionID: 060
+  versionID: 062
   activeSlot: 0
+  currentchapter: 0
   numberofslots: 6
   SaveClasses: []
   secondselapsed: 0
@@ -4233,6 +4234,7 @@ MonoBehaviour:
     PlayerInventory:
       inventoryItems: []
     secondselapsed: 0
+    inHideout: 0
   Options:
     versionID: 
     musicvolume: 0

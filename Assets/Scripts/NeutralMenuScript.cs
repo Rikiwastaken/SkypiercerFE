@@ -53,7 +53,7 @@ public class NeutralMenuScript : MonoBehaviour
 
         ManageSelection();
 
-        if (InputManager.cancelpressed || (TextBubbleScript.Instance!=null && TextBubbleScript.Instance.indialogue))
+        if (InputManager.cancelpressed || (TextBubbleScript.Instance != null && TextBubbleScript.Instance.indialogue))
         {
             if (OptionsMenuTransfrom.gameObject.activeSelf)
             {
@@ -91,6 +91,7 @@ public class NeutralMenuScript : MonoBehaviour
         else
         {
             RedoMenuTransfrom.gameObject.SetActive(true);
+
             EventSystem.current.SetSelectedGameObject(RedoMenuTransfrom.GetChild(0).gameObject);
             gameObject.SetActive(false);
         }
@@ -98,15 +99,21 @@ public class NeutralMenuScript : MonoBehaviour
 
     private void ManageSelection()
     {
+        if (GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf)
+        {
+            return;
+        }
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         if (RedoMenuTransfrom.gameObject.activeSelf)
         {
             if (currentSelected == null)
             {
+
                 EventSystem.current.SetSelectedGameObject(RedoMenuTransfrom.GetChild(0).gameObject);
             }
             else if (currentSelected.transform.parent != RedoMenuTransfrom)
             {
+
                 EventSystem.current.SetSelectedGameObject(RedoMenuTransfrom.GetChild(0).gameObject);
             }
         }
@@ -114,10 +121,12 @@ public class NeutralMenuScript : MonoBehaviour
         {
             if (currentSelected == null)
             {
+
                 EventSystem.current.SetSelectedGameObject(OptionsMenuTransfrom.GetChild(0).gameObject);
             }
             else if (currentSelected.transform.parent != OptionsMenuTransfrom && currentSelected.transform.parent.parent != OptionsMenuTransfrom)
             {
+
                 EventSystem.current.SetSelectedGameObject(OptionsMenuTransfrom.GetChild(0).gameObject);
             }
         }
@@ -125,6 +134,7 @@ public class NeutralMenuScript : MonoBehaviour
         {
             if (currentSelected == null)
             {
+
                 EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
             }
         }

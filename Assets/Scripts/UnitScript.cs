@@ -439,10 +439,16 @@ public class UnitScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (cameraScript == null)
+        {
+            cameraScript = cameraScript.instance;
+        }
+
         ManagePosition();
         ManageMovement();
         ManageFlyingWeaponPosition();
-        if (animator != null)
+        if (animator != null && armature != null)
         {
             if (!isinattackanimation() && !cameraScript.incombat)
             {
@@ -641,16 +647,14 @@ public class UnitScript : MonoBehaviour
                 //    animator.transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
                 //    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + rotationadjust);
                 //}
-
-                if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) <= 0.1f)
+            }
+            if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) <= 0.1f)
+            {
+                transform.position = new Vector3(destination.x, transform.position.y, destination.y);
+                if (animator.gameObject.activeSelf)
                 {
-                    transform.position = new Vector3(destination.x, transform.position.y, destination.y);
-                    if (animator.gameObject.activeSelf)
-                    {
-                        animator.SetBool("Walk", false);
-                    }
+                    animator.SetBool("Walk", false);
                 }
-
             }
         }
     }

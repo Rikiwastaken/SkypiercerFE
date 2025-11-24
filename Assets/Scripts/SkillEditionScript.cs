@@ -39,12 +39,12 @@ public class SkillEditionScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        if(!InHideout)
+        if (!InHideout)
         {
             gridscript = GridScript.instance;
-            inputmanager = InputManager.instance;
         }
-        
+        inputmanager = InputManager.instance;
+
         InitializeButtons();
     }
 
@@ -53,7 +53,7 @@ public class SkillEditionScript : MonoBehaviour
     {
         InitializeInventorySkillList();
 
-        if(!InHideout)
+        if (!InHideout)
         {
             gridscript.movementbuffercounter = 3;
             if (inputmanager.canceljustpressed)
@@ -156,6 +156,7 @@ public class SkillEditionScript : MonoBehaviour
         }
         if ((!buttonselected || currentselected == null) && !SkillList.activeSelf)
         {
+
             EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
         }
         if (EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>())
@@ -269,6 +270,20 @@ public class SkillEditionScript : MonoBehaviour
                 InventorySkillList.Add(item);
             }
         }
+        foreach (Character playablechar in DataScript.instance.PlayableCharacterList)
+        {
+
+            if(playablechar.playableStats.unlocked && playablechar.UnitSkill!=0)
+            {
+                foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
+                {
+                    if (item.ID== playablechar.UnitSkill)
+                    {
+                        InventorySkillList.Add(item);
+                    }
+                }
+            }
+        }
     }
 
     private void InitializeButtons()
@@ -282,6 +297,7 @@ public class SkillEditionScript : MonoBehaviour
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = null;
         }
+
         EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
     }
 
@@ -295,6 +311,7 @@ public class SkillEditionScript : MonoBehaviour
         {
             SkillList.transform.GetChild(i).GetComponent<UnitDeploymentButton>().Item = null;
         }
+
         EventSystem.current.SetSelectedGameObject(SkillList.transform.GetChild(0).gameObject);
     }
 
