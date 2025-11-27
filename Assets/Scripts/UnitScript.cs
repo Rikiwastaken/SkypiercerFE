@@ -291,6 +291,14 @@ public class UnitScript : MonoBehaviour
     public Sprite StaffSprite;
     public Image WeaponImage;
 
+    public Sprite SkillNotCopiedSprite;
+    public Sprite SkillCopiedSprite;
+    public Image CopiedSkillImage;
+
+    private int delayedUpdateCounter;
+
+    public float delayedUpdateTime;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -367,6 +375,17 @@ public class UnitScript : MonoBehaviour
 
         ResetChildRenderers();
         OnHealthChanged += HealthChangedHandler;
+
+
+        if(UnitCharacteristics.UnitSkill!=0 && UnitCharacteristics.affiliation!="playable")
+        {
+            CopiedSkillImage.sprite=SkillNotCopiedSprite;
+        }
+        else
+        {
+            CopiedSkillImage.color = Color.clear;
+        }
+
     }
 
 
@@ -399,18 +418,7 @@ public class UnitScript : MonoBehaviour
 
 
         }
-        if (animator.GetBool("Ismachine") != UnitCharacteristics.enemyStats.monsterStats.ismachine)
-        {
-            animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
-        }
-        if (animator.GetBool("Ispluvial") != UnitCharacteristics.enemyStats.monsterStats.ispluvial)
-        {
-            animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
-        }
-        if (animator.GetBool("UsingTelekinesis") != UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow")
-        {
-            animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow");
-        }
+        
         if (armature == null)
         {
             armature = animator.transform;
@@ -419,22 +427,18 @@ public class UnitScript : MonoBehaviour
         }
 
 
-        if (trylvlup)
-        {
-            trylvlup = false;
-            LevelUp();
-        }
+        
         HPForEvent = UnitCharacteristics.currentHP;
 
 
 
 
         //TemporaryColor();
-        UpdateRendererLayer();
+        
         ManageDamagenumber();
-        Hidedeactivated();
-        ManageSize();
-
+        
+        
+        DelayedUpdate();
     }
 
     private void FixedUpdate()
@@ -464,6 +468,57 @@ public class UnitScript : MonoBehaviour
             {
                 armature.localPosition = initialpos;
             }
+        }
+    }
+
+    //Update that only happens once every couple of frames to improve performance
+    private void DelayedUpdate()
+    {
+        if(delayedUpdateCounter <= 0)
+        {
+            delayedUpdateCounter = (int)(UnityEngine.Random.Range(0.9f,1.1f)*delayedUpdateTime/Time.deltaTime);
+
+            //dostuff
+
+
+            if(copied && CopiedSkillImage.sprite != SkillCopiedSprite)
+            {
+                CopiedSkillImage.sprite = SkillCopiedSprite;
+            }
+            else if(!copied && CopiedSkillImage.sprite == SkillCopiedSprite)
+            {
+                CopiedSkillImage.sprite = SkillNotCopiedSprite;
+            }
+
+
+
+            if (animator.GetBool("Ismachine") != UnitCharacteristics.enemyStats.monsterStats.ismachine)
+            {
+                animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
+            }
+            if (animator.GetBool("Ispluvial") != UnitCharacteristics.enemyStats.monsterStats.ispluvial)
+            {
+                animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
+            }
+            if (animator.GetBool("UsingTelekinesis") != UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow")
+            {
+                animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow");
+            }
+
+
+            UpdateRendererLayer();
+            ManageSize();
+            Hidedeactivated();
+
+            if (trylvlup)
+            {
+                trylvlup = false;
+                LevelUp();
+            }
+        }
+        else
+        {
+            delayedUpdateCounter--;
         }
     }
 

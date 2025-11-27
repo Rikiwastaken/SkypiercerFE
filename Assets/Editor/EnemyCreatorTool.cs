@@ -403,12 +403,15 @@ public class EnemyStatsEditorWindow : EditorWindow
     [MenuItem("Tools/Hide Characters Positions")]
     public static void HideCharacter()
     {
-        Transform gridGO = GameObject.Find("Grid").transform;
-        for (int i = 0; i < gridGO.childCount; i++)
+        if(GameObject.Find("Grid"))
         {
-            Color newcolor = Color.white;
-            newcolor.a = 0f;
-            gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = newcolor;
+            Transform gridGO = GameObject.Find("Grid").transform;
+            for (int i = 0; i < gridGO.childCount; i++)
+            {
+                Color newcolor = Color.white;
+                newcolor.a = 0f;
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = newcolor;
+            }
         }
     }
 }

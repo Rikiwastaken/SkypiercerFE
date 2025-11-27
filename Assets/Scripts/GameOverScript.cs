@@ -24,7 +24,6 @@ public class GameOverScript : MonoBehaviour
 
     private int chosenSlot;
 
-    private bool selectionInitialized = false;
 
     private void Awake()
     {
@@ -35,7 +34,6 @@ public class GameOverScript : MonoBehaviour
     private void OnEnable()
     {
         sceneLoader = SceneLoader.instance;
-        selectionInitialized = false;
 
         if (!InHideout)
         {
@@ -88,8 +86,6 @@ public class GameOverScript : MonoBehaviour
 
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(buttonToSelect);
-
-        selectionInitialized = true;
     }
 
     public void InitializeSaveButtons()
