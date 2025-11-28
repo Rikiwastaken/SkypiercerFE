@@ -1215,6 +1215,42 @@ MonoBehaviour:
       SpeedGrowth: 0
       DexterityGrowth: 0
     ID: 12
+  - name: Guardian
+    BaseStats:
+      HP: 22
+      Strength: 4
+      Psyche: 0
+      Defense: 6
+      Resistance: 0
+      Speed: 3
+      Dexterity: 4
+    StatGrowth:
+      HPGrowth: 90
+      StrengthGrowth: 50
+      PsycheGrowth: 0
+      DefenseGrowth: 70
+      ResistanceGrowth: 20
+      SpeedGrowth: 30
+      DexterityGrowth: 30
+    ID: 13
+  - name: Reaper
+    BaseStats:
+      HP: 15
+      Strength: 5
+      Psyche: 5
+      Defense: 3
+      Resistance: 3
+      Speed: 5
+      Dexterity: 3
+    StatGrowth:
+      HPGrowth: 40
+      StrengthGrowth: 60
+      PsycheGrowth: 60
+      DefenseGrowth: 30
+      ResistanceGrowth: 30
+      SpeedGrowth: 60
+      DexterityGrowth: 40
+    ID: 14
   SkillList:
   - name: No Skill
     Descriptions: No skil
@@ -1714,7 +1750,7 @@ MonoBehaviour:
       SpeedGrowth: 60
       DexterityGrowth: 60
     currentHP: 25
-    movements: 5
+    movements: 6
     position: {x: 6, y: 2}
     alreadyplayed: 0
     alreadymoved: 0
@@ -1807,7 +1843,7 @@ MonoBehaviour:
       SpeedGrowth: 30
       DexterityGrowth: 50
     currentHP: 25
-    movements: 5
+    movements: 6
     position: {x: 6, y: 2}
     alreadyplayed: 0
     alreadymoved: 0
@@ -1900,7 +1936,7 @@ MonoBehaviour:
       SpeedGrowth: 50
       DexterityGrowth: 60
     currentHP: 13
-    movements: 5
+    movements: 6
     position: {x: 6, y: 2}
     alreadyplayed: 0
     alreadymoved: 0
@@ -2179,7 +2215,7 @@ MonoBehaviour:
       SpeedGrowth: 70
       DexterityGrowth: 60
     currentHP: 16
-    movements: 5
+    movements: 6
     position: {x: 6, y: 2}
     alreadyplayed: 0
     alreadymoved: 0

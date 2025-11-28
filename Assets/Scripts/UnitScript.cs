@@ -384,10 +384,18 @@ public class UnitScript : MonoBehaviour
         OnHealthChanged += HealthChangedHandler;
 
 
-        if(UnitCharacteristics.UnitSkill!=0 && UnitCharacteristics.affiliation!="playable")
+        if(UnitCharacteristics.affiliation!="playable")
         {
-            CopiedSkillImage.sprite=SkillNotCopiedSprite;
-            if(UnitCharacteristics.enemyStats.monsterStats.ispluvial)
+            if(UnitCharacteristics.UnitSkill != 0)
+            {
+                CopiedSkillImage.sprite = SkillNotCopiedSprite;
+            }
+            else
+            {
+                CopiedSkillImage.color = Color.clear;
+            }
+
+            if (UnitCharacteristics.enemyStats.monsterStats.ispluvial)
             {
                 UnitTypeImage.sprite = PluvialSprite;
             }
@@ -500,20 +508,6 @@ public class UnitScript : MonoBehaviour
 
             //dostuff
 
-
-
-            //if (UnitCharacteristics.enemyStats.monsterStats.ispluvial && UnitTypeImage.sprite != PluvialSprite)
-            //{
-            //    UnitTypeImage.sprite = PluvialSprite;
-            //}
-            //else if (UnitCharacteristics.enemyStats.monsterStats.ismachine && UnitTypeImage.sprite != MachineSprite)
-            //{
-            //    UnitTypeImage.sprite = MachineSprite;
-            //}
-            //else if(!UnitCharacteristics.enemyStats.monsterStats.ismachine && !UnitCharacteristics.enemyStats.monsterStats.ispluvial && UnitTypeImage.color != Color.clear)
-            //{
-            //    UnitTypeImage.color = Color.clear;
-            //}
 
 
             if (copied && CopiedSkillImage.sprite != SkillCopiedSprite)

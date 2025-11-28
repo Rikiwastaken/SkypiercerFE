@@ -131,7 +131,7 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = 0;
         }
 
-        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !NeutralMenu.activeSelf && !ForesightMenu.activeSelf && !TutorialWindowMenu.activeSelf && !(GameOverScript.instance!=null && GameOverScript.instance.gameObject.activeSelf))
+        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !NeutralMenu.activeSelf && !ForesightMenu.activeSelf && !TutorialWindowMenu.activeSelf && !(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf))
         {
 
 
@@ -453,7 +453,7 @@ public class GridScript : MonoBehaviour
 
         for (int i = 0; i < unitholder.childCount; i++)
         {
-            if(unitholder.GetChild(i).gameObject.activeSelf)
+            if (unitholder.GetChild(i).gameObject.activeSelf)
             {
                 UnitScript character = unitholder.GetChild(i).GetComponent<UnitScript>();
                 allunits.Add(character.UnitCharacteristics);
@@ -557,7 +557,7 @@ public class GridScript : MonoBehaviour
 
 
         }
-        
+
         Recolor();
     }
 
@@ -1397,9 +1397,13 @@ public class GridScript : MonoBehaviour
 
                 int cost = 1;
                 if (newtile.elevation > tile.elevation)
-                    cost += newtile.elevation - tile.elevation;
+                    cost += (newtile.elevation - tile.elevation) * 2;
+                Debug.Log("cost modification : " + (cost - 1));
 
-                SpreadMovements(newpos, remainingMovements - cost, tilestolight, selectedunit, visited);
+                if(remainingMovements - cost>0)
+                {
+                    SpreadMovements(newpos, remainingMovements - cost, tilestolight, selectedunit, visited);
+                }
             }
         }
     }
@@ -1632,7 +1636,7 @@ public class GridScript : MonoBehaviour
 
                 int cost = 1;
                 if (neighborTile.elevation > currentTile.elevation)
-                    cost += neighborTile.elevation - currentTile.elevation;
+                    cost += (neighborTile.elevation - currentTile.elevation) * 2;
 
                 float tentativeG = current.G + cost;
 

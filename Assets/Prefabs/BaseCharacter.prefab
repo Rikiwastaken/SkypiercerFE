@@ -717,7 +717,7 @@ MonoBehaviour:
       SpeedGrowth: 30
       DexterityGrowth: 40
     currentHP: 25
-    movements: 5
+    movements: 6
     position: {x: 0, y: 0}
     alreadyplayed: 0
     alreadymoved: 0
