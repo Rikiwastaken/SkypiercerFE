@@ -1,9 +1,64 @@
 fileFormatVersion: 2
-guid: 76544e555f7857048b8f456a9c7cee96
+guid: c4bbf65695a4f184da10c72363f0f083
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: 2100000, guid: 99fa84efc3a12f14da3237a4677e10cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkerGrey
+    second: {fileID: 2100000, guid: 477723e731822c245948366bf99d46b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Darkgreen
+    second: {fileID: 2100000, guid: 5d1a467d3dbf23840829480c559c3c03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Green
+    second: {fileID: 2100000, guid: 88978c4d96982bc4bb29412fe4ee17f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightGrey
+    second: {fileID: 2100000, guid: ff796aec810fde741ba8b363cd445ad0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightWhite
+    second: {fileID: 2100000, guid: 83a33a03f467a0c459d80e9225a9ffae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rust
+    second: {fileID: 2100000, guid: c8351e1f36862cd4c9aa3edc782595d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SandMat
+    second: {fileID: 2100000, guid: f42a9f580723ced4cb9e358300fb3da5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodDark
+    second: {fileID: 2100000, guid: 1d3be8d3f1da53c4da281428cc86bcf7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodLight
+    second: {fileID: 2100000, guid: 3266d4e1a462b0c4a9e2917ba4c25dee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodVeryLight
+    second: {fileID: 2100000, guid: e7dc0283492cfe649b2fa8b183a6b46b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

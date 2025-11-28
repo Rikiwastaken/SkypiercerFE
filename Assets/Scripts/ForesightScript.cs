@@ -94,7 +94,6 @@ public class ForesightScript : MonoBehaviour
         {
             if (currentSelected.transform.parent != transform)
             {
-                Debug.Log("Resetting selected to first button");
                 EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
             }
 
@@ -145,7 +144,6 @@ public class ForesightScript : MonoBehaviour
         {
             gameObject.SetActive(false);
             neutralmenu.SetActive(true);
-            Debug.Log("Resetting selected to first button");
             EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
         }
 

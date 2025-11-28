@@ -47,20 +47,20 @@ public class UnitDeploymentButton : MonoBehaviour
         GetComponentInChildren<TextMeshProUGUI>().text = "None";
         if (Character != null)
         {
-            
+
             if (Character.name != "")
             {
-                if (lockimage != null &&  !lockimage.activeSelf && MapInitializer!= null && MapInitializer.ForcedCharacters.Contains(Character.ID))
+                if (lockimage != null && !lockimage.activeSelf && MapInitializer != null && MapInitializer.ForcedCharacters.Contains(Character.ID))
                 {
                     lockimage.SetActive(true);
                 }
 
-                if (lockimage != null && lockimage.activeSelf && (MapInitializer == null ||!MapInitializer.ForcedCharacters.Contains(Character.ID)))
+                if (lockimage != null && lockimage.activeSelf && (MapInitializer == null || !MapInitializer.ForcedCharacters.Contains(Character.ID)))
                 {
                     lockimage.SetActive(false);
                 }
 
-                if (Character.playableStats.battalion != "Zack" && Character.playableStats.battalion != "Kira" && Character.playableStats.battalion != "Gale")
+                if (Character.playableStats.battalion.ToLower() != "zack" && Character.playableStats.battalion.ToLower() != "kira" && Character.playableStats.battalion.ToLower() != "gale")
                 {
                     Character.playableStats.battalion = "Zack";
                 }
@@ -85,7 +85,7 @@ public class UnitDeploymentButton : MonoBehaviour
             }
             else
             {
-                if (lockimage!=null && lockimage.activeSelf)
+                if (lockimage != null && lockimage.activeSelf)
                 {
                     lockimage.SetActive(false);
                 }
@@ -145,7 +145,7 @@ public class UnitDeploymentButton : MonoBehaviour
             GaleUnlocked = true;
         }
 
-        if (Character.playableStats.battalion == "Zack")
+        if (Character.playableStats.battalion.ToLower() == "zack")
         {
             if (KiraUnlocked)
             {
@@ -156,7 +156,7 @@ public class UnitDeploymentButton : MonoBehaviour
                 Character.playableStats.battalion = "Gale";
             }
         }
-        else if (Character.playableStats.battalion == "Kira")
+        else if (Character.playableStats.battalion.ToLower() == "kira")
         {
             if (GaleUnlocked)
             {

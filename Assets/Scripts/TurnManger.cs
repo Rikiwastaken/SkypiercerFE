@@ -48,7 +48,7 @@ public class TurnManger : MonoBehaviour
     public bool skipothersTurn;
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -65,7 +65,7 @@ public class TurnManger : MonoBehaviour
 
         InputManager = InputManager.instance;
 
-        if(GetComponent<AttackTurnScript>().attackanimationhappeningcnt > 0)
+        if (GetComponent<AttackTurnScript>().attackanimationhappeningcnt > 0)
         {
             return;
         }
@@ -122,7 +122,7 @@ public class TurnManger : MonoBehaviour
     {
 
 
-        
+
 
 
         ForesightScript.Action action = new ForesightScript.Action();
@@ -149,10 +149,10 @@ public class TurnManger : MonoBehaviour
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
             action.ModifiedCharacters.Add(unit.GetComponent<UnitScript>().CreateCopy());
             //Kira Battalion Side Effect
-            if (unitchar.playableStats.battalion == "Kira")
+            if (unitchar.playableStats.battalion.ToLower() == "kira")
             {
 
-                unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(unitchar.AjustedStats.HP * 0.1f), (int)unitchar.AjustedStats.HP - unitchar.currentHP), true, "Kira Battalion");
+                unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(unitchar.AjustedStats.HP * 0.1f), (int)unitchar.AjustedStats.HP - unitchar.currentHP), true, "Kira's Battalion");
                 unitchar.currentHP += (int)(unitchar.AjustedStats.HP * 0.1f);
                 //Loyal
                 if (unit.GetComponent<UnitScript>().GetSkill(35))
@@ -232,9 +232,9 @@ public class TurnManger : MonoBehaviour
         {
             GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>().AddAction(action);
         }
-        
 
-        if(charactertoappy==playableunitGO) // true change of turns;
+
+        if (charactertoappy == playableunitGO) // true change of turns;
         {
             MapEventManager.instance.TriggerEventCheck(currentTurn);
             //reset mechanisms
@@ -298,7 +298,7 @@ public class TurnManger : MonoBehaviour
             }
             if (alldone)
             {
-                if(skipothersTurn)
+                if (skipothersTurn)
                 {
                     foreach (Character character in playableunit)
                     {
@@ -326,7 +326,7 @@ public class TurnManger : MonoBehaviour
                         phaseTextScript.SetupText(currentlyplaying);
                     }
                 }
-                    
+
                 updatevisuals = true;
                 return;
             }
@@ -386,7 +386,7 @@ public class TurnManger : MonoBehaviour
                     numberremaining++;
                 }
             }
-            turntext.text = "Turn "+currentTurn+" : Allies \nRemaining : " + numberremaining;
+            turntext.text = "Turn " + currentTurn + " : Allies \nRemaining : " + numberremaining;
         }
         else if (currentlyplaying == "enemy")
         {
@@ -398,7 +398,7 @@ public class TurnManger : MonoBehaviour
                     numberremaining++;
                 }
             }
-            turntext.text = "Turn "+currentTurn+" : Enemies \nRemaining : " + numberremaining;
+            turntext.text = "Turn " + currentTurn + " : Enemies \nRemaining : " + numberremaining;
         }
         else if (currentlyplaying == "other")
         {
@@ -410,7 +410,7 @@ public class TurnManger : MonoBehaviour
                     numberremaining++;
                 }
             }
-            turntext.text = "Turn "+currentTurn+" : Others \nRemaining : " + numberremaining;
+            turntext.text = "Turn " + currentTurn + " : Others \nRemaining : " + numberremaining;
         }
         else
         {

@@ -827,7 +827,7 @@ MonoBehaviour:
   StaffSprite: {fileID: 21300000, guid: 38c1db0046699c640bbc71c7b479587d, type: 3}
   WeaponImage: {fileID: 7404989548781359901}
   SkillNotCopiedSprite: {fileID: 21300000, guid: 9f472bdd607e69f49bd7e0ce08242a0c, type: 3}
-  SkillCopiedSprite: {fileID: 21300000, guid: c10e2ab3f1a04e743b91a701c4725949, type: 3}
+  SkillCopiedSprite: {fileID: 21300000, guid: bde3add3cb2928a4a8e5e4e44760ae73, type: 3}
   CopiedSkillImage: {fileID: 3130064589254881934}
   delayedUpdateTime: 0.15
 --- !u!114 &5380667576583153213

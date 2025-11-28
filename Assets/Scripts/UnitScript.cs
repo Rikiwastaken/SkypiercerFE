@@ -2195,7 +2195,7 @@ public class UnitScript : MonoBehaviour
         foreach (GameObject characterGO in allunitsGO)
         {
             Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
-            if (ManhattanDistance(UnitCharacteristics, character) == 1 && character.playableStats.battalion == "Gale" && character.affiliation == UnitCharacteristics.affiliation)
+            if (ManhattanDistance(UnitCharacteristics, character) == 1 && character.playableStats.battalion.ToLower() == "gale" && character.affiliation == UnitCharacteristics.affiliation)
             {
                 statbonuses.FixedDamageReduction += (int)character.AjustedStats.Defense / 5;
                 statbonuses.FixedDamageBonus += (int)character.AjustedStats.Strength / 5;
@@ -2212,11 +2212,11 @@ public class UnitScript : MonoBehaviour
         if (UnitCharacteristics.playableStats.protagonist)
         {
             //Zack main effect
-            if (UnitCharacteristics.playableStats.battalion == "Zack")
+            if (UnitCharacteristics.playableStats.battalion.ToLower() == "zack")
             {
                 foreach (Character character in allunits)
                 {
-                    if (character.playableStats.battalion == "Zack" && character != UnitCharacteristics)
+                    if (character.playableStats.battalion.ToLower() == "zack" && character != UnitCharacteristics)
                     {
                         statbonuses.Hit += 1;
                         statbonuses.Crit += 1;
@@ -2224,11 +2224,11 @@ public class UnitScript : MonoBehaviour
                 }
             }
             //Gale main effect
-            if (UnitCharacteristics.playableStats.battalion == "Gale")
+            if (UnitCharacteristics.playableStats.battalion.ToLower() == "gale")
             {
                 foreach (Character character in allunits)
                 {
-                    if (character.playableStats.battalion == "Gale" && character != UnitCharacteristics)
+                    if (character.playableStats.battalion.ToLower() == "gale" && character != UnitCharacteristics)
                     {
                         statbonuses.Defense += (int)character.AjustedStats.Defense / 20;
                         statbonuses.Strength += (int)character.AjustedStats.Strength / 20;
@@ -2236,11 +2236,11 @@ public class UnitScript : MonoBehaviour
                 }
             }
             //Kira main effect
-            if (UnitCharacteristics.playableStats.battalion == "Kira")
+            if (UnitCharacteristics.playableStats.battalion.ToLower() == "kira")
             {
                 foreach (Character character in allunits)
                 {
-                    if (character.playableStats.battalion == "Kira" && character != UnitCharacteristics)
+                    if (character.playableStats.battalion.ToLower() == "kira" && character != UnitCharacteristics)
                     {
                         statbonuses.Psyche += (int)character.AjustedStats.Psyche / 20;
 
@@ -2251,7 +2251,7 @@ public class UnitScript : MonoBehaviour
         else
         {
             //Zack Side Effect
-            if (UnitCharacteristics.playableStats.battalion == "Zack")
+            if (UnitCharacteristics.playableStats.battalion.ToLower() == "zack")
             {
                 statbonuses.Hit += 5;
                 statbonuses.Crit += 5;
