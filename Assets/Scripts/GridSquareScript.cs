@@ -199,7 +199,10 @@ public class GridSquareScript : MonoBehaviour
 
             }
         }
-        
+        if (InputManager.instance.movementValue!=Vector2.zero)
+        {
+            ManagePath();
+        }
     }
 
     private void fixupdatecnt()
@@ -480,15 +483,12 @@ public class GridSquareScript : MonoBehaviour
 
             
 
-            if (InputManager.instance.movementjustpressed)
-            {
-                ManagePath();
-            }
+            
 
 
 
         }
-
+        ManagePath();
         //manageElevation();
         UpdateFilling();
         previouslyincombat = cameraScript.incombat;

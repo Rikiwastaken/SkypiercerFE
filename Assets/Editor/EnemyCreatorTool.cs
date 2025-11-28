@@ -109,7 +109,7 @@ public class EnemyStatsEditorWindow : EditorWindow
             {
                 foreach (var s in dataScriptPrefab.SkillList)
                 {
-                    string label = s.ID +" : "+s.name + (s.IsCommand ? " (command)" : " (passive)");
+                    string label = s.ID + " : " + s.name + (s.IsCommand ? " (command)" : " (passive)");
                     skillNames.Add(label);
                     skillIDs.Add(s.ID);
                 }
@@ -120,7 +120,7 @@ public class EnemyStatsEditorWindow : EditorWindow
             {
                 foreach (var e in dataScriptPrefab.equipmentList)
                 {
-                    string label = e.ID +$" : {e.type} {e.Grade}";
+                    string label = e.ID + $" : {e.type} {e.Grade}";
                     equipmentNames.Add(label);
                     equipmentIDs.Add(e.ID);
                 }
@@ -353,36 +353,74 @@ public class EnemyStatsEditorWindow : EditorWindow
         List<Vector2> playablepositions = new List<Vector2>();
         foreach (var character in mapInitializer.EnemyList)
         {
-            if(character.isother)
+            if (character.isother)
             {
                 otherpositions.Add(character.startpos);
             }
             else
             {
                 enemypositions.Add(character.startpos);
-                if(character.monsterStats.size>1)
+                if (character.monsterStats.size > 1)
                 {
-                    enemypositions.Add(character.startpos + new Vector2(0,1));
+                    enemypositions.Add(character.startpos + new Vector2(0, 1));
                     enemypositions.Add(character.startpos + new Vector2(-1, 0));
                     enemypositions.Add(character.startpos + new Vector2(-1, 1));
                 }
             }
-                
+
         }
         foreach (Vector2 playablepos in mapInitializer.playablepos)
         {
             playablepositions.Add(playablepos);
         }
-
         for (int i = 0; i < gridGO.childCount; i++)
         {
             Vector2 position = new Vector2(gridGO.GetChild(i).position.x, gridGO.GetChild(i).position.z);
-            if(enemypositions.Contains(position))
+
+            GridSquareScript tile = gridGO.GetChild(i).GetComponent<GridSquareScript>();
+
+            switch (tile.elevation)
+            {
+                case -4:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.25f, 0f);
+                    break;
+                case -3:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.35f, 0f);
+                    break;
+                case -2:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.45f, 0f);
+                    break;
+                case -1:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.8f, 0.55f, 0f);
+                    break;
+                case 0:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.65f, 0f);
+                    break;
+                case 1:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.75f, 0.25f);
+                    break;
+                case 2:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.85f, 0.5f);
+                    break;
+                case 3:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.95f, 0.75f);
+                    break;
+                case 4:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+                    break;
+            }
+
+            if(tile.isstairs)
+            {
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(128f / 256f,0f, 128f / 256f);
+            }
+
+            if (enemypositions.Contains(position))
             {
                 gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
                 enemypositions.Remove(position);
             }
-            if(playablepositions.Contains(position))
+            if (playablepositions.Contains(position))
             {
                 gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.blue;
                 enemypositions.Remove(position);
@@ -392,7 +430,7 @@ public class EnemyStatsEditorWindow : EditorWindow
                 gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
                 enemypositions.Remove(position);
             }
-            if(gridGO.GetChild(i).GetComponent<GridSquareScript>().isobstacle)
+            if (gridGO.GetChild(i).GetComponent<GridSquareScript>().isobstacle)
             {
                 gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.black;
             }
@@ -403,7 +441,7 @@ public class EnemyStatsEditorWindow : EditorWindow
     [MenuItem("Tools/Hide Characters Positions")]
     public static void HideCharacter()
     {
-        if(GameObject.Find("Grid"))
+        if (GameObject.Find("Grid"))
         {
             Transform gridGO = GameObject.Find("Grid").transform;
             for (int i = 0; i < gridGO.childCount; i++)

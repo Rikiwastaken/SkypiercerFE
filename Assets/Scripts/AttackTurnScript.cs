@@ -89,7 +89,6 @@ public class AttackTurnScript : MonoBehaviour
 
         if (previousattacker != null)
         {
-            Debug.Log(previousattacker+"   "+ previoustarget);
             previousattacker.GetComponent<UnitScript>().disableLifebar = false;
             previousattacker.GetComponent<UnitScript>().ManageLifebars();
             AttackWithAnimationEndOfFight(previousattacker, previoustarget);

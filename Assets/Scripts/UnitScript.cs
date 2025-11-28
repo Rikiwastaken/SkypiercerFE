@@ -295,6 +295,13 @@ public class UnitScript : MonoBehaviour
     public Sprite SkillCopiedSprite;
     public Image CopiedSkillImage;
 
+    public Sprite PluvialSprite;
+    public Sprite MachineSprite;
+    public Image UnitTypeImage;
+
+    public Image Lifebar;
+    public Image LBBackground;
+
     private int delayedUpdateCounter;
 
     public float delayedUpdateTime;
@@ -380,10 +387,23 @@ public class UnitScript : MonoBehaviour
         if(UnitCharacteristics.UnitSkill!=0 && UnitCharacteristics.affiliation!="playable")
         {
             CopiedSkillImage.sprite=SkillNotCopiedSprite;
+            if(UnitCharacteristics.enemyStats.monsterStats.ispluvial)
+            {
+                UnitTypeImage.sprite = PluvialSprite;
+            }
+            else if (UnitCharacteristics.enemyStats.monsterStats.ismachine)
+            {
+                UnitTypeImage.sprite = MachineSprite;
+            }
+            else
+            {
+                UnitTypeImage.color = Color.clear;
+            }
         }
         else
         {
             CopiedSkillImage.color = Color.clear;
+            UnitTypeImage.color = Color.clear;
         }
 
     }
@@ -481,7 +501,22 @@ public class UnitScript : MonoBehaviour
             //dostuff
 
 
-            if(copied && CopiedSkillImage.sprite != SkillCopiedSprite)
+
+            //if (UnitCharacteristics.enemyStats.monsterStats.ispluvial && UnitTypeImage.sprite != PluvialSprite)
+            //{
+            //    UnitTypeImage.sprite = PluvialSprite;
+            //}
+            //else if (UnitCharacteristics.enemyStats.monsterStats.ismachine && UnitTypeImage.sprite != MachineSprite)
+            //{
+            //    UnitTypeImage.sprite = MachineSprite;
+            //}
+            //else if(!UnitCharacteristics.enemyStats.monsterStats.ismachine && !UnitCharacteristics.enemyStats.monsterStats.ispluvial && UnitTypeImage.color != Color.clear)
+            //{
+            //    UnitTypeImage.color = Color.clear;
+            //}
+
+
+            if (copied && CopiedSkillImage.sprite != SkillCopiedSprite)
             {
                 CopiedSkillImage.sprite = SkillCopiedSprite;
             }
@@ -774,10 +809,8 @@ public class UnitScript : MonoBehaviour
     }
     public void ManageLifebars()
     {
-
+        
         ManageLifeBarRotation();
-        Image LifebarBehind = CanvasTransform.GetChild(1).GetComponent<Image>();
-        Image Lifebar = CanvasTransform.GetChild(2).GetComponent<Image>();
 
         //if (cameraScript.incombat || disableLifebar)
         //{
@@ -796,13 +829,13 @@ public class UnitScript : MonoBehaviour
             if (Lifebar.gameObject.activeSelf)
             {
                 Lifebar.gameObject.SetActive(false);
-                LifebarBehind.gameObject.SetActive(false);
+                LBBackground.gameObject.SetActive(false);
             }
         }
         else if (!Lifebar.gameObject.activeSelf)
         {
             Lifebar.gameObject.SetActive(true);
-            LifebarBehind.gameObject.SetActive(true);
+            LBBackground.gameObject.SetActive(true);
         }
         Lifebar.type = Image.Type.Filled;
         Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.AjustedStats.HP;
