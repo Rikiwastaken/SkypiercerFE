@@ -2025,12 +2025,31 @@ MonoBehaviour:
       they are under Sunny weather, the solar energy repairs them a bit every turn.
       This effect only triggers outside and never during Cloudy or Rainy weather.'
     chapterWhereUnlocks: 1
-  - name: Test11
-    description: Test11Test11Test11Test11Test11Test11Test11Test11Test11Test11Test11Test11
-    chapterWhereUnlocks: 0
-  - name: Test12
-    description: Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12Test12
-    chapterWhereUnlocks: 0
+  - name: Skills
+    description: 'Skills are special upgrades than can be equipped to characters.
+      They can give passive bonuses or access to an active Command.
+
+
+      Each
+      character has an innate skill that cannot be removed and 4 slots for additional
+      skills.
+
+
+      Additional skills require Skill Points to equip. These Skill
+      Points are obtained when levelling up.'
+    chapterWhereUnlocks: 3
+  - name: Copying Skills
+    description: 'The Copy Skill gives the user access to the Copy Command.
+
+
+      Enemies
+      with a unique skill can be targeted by this command to obtain said skill. These
+      enemies have a magnifying glass icon near their health bar.
+
+
+      Each enemy
+      can be copied only once. If an enemy dies, their skill is lost.'
+    chapterWhereUnlocks: 3
 --- !u!1 &1117708666303132778
 GameObject:
   m_ObjectHideFlags: 0

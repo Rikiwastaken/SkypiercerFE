@@ -98,6 +98,22 @@ public class DataScript : MonoBehaviour
         SetupClasses();
         SetupInventory();
         SetupDefaultCharacterList();
+        CalculateMaxSP();
+    }
+
+    private void CalculateMaxSP()
+    {
+        GameObject USGO = new GameObject();
+        USGO.AddComponent<UnitScript>();
+
+        UnitScript US = USGO.GetComponent<UnitScript>();
+
+        foreach (Character character in PlayableCharacterList)
+        {
+            US.CalculateSkillPoints(character);
+        }
+
+        DestroyImmediate(USGO);
     }
 
     private void SetupCharacterIDs()

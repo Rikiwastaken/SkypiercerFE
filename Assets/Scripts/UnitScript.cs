@@ -1789,6 +1789,21 @@ public class UnitScript : MonoBehaviour
 
         return GrowthtoApply;
     }
+
+    public void CalculateSkillPoints( Character Character = null)
+    {
+        if(Character==null)
+        {
+            Character = UnitCharacteristics;
+        }
+        int newmaxskillpoints = 5;
+
+        newmaxskillpoints += Character.level;
+
+        Character.playableStats.MaxSkillpoints = newmaxskillpoints;
+
+    }
+
     public List<int> LevelUp()
     {
 
@@ -1811,6 +1826,9 @@ public class UnitScript : MonoBehaviour
             UnitCharacteristics.experience = 0;
         }
         UnitCharacteristics.level += 1;
+
+        CalculateSkillPoints();
+
         if (fixedgrowth)
         {
             float oldHP = UnitCharacteristics.stats.HP;
