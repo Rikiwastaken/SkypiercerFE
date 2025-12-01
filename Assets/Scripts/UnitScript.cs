@@ -280,8 +280,16 @@ public class UnitScript : MonoBehaviour
             }
         }
     }
+    public Image Lifebar;
+    public Image LBBackground;
 
+    private int delayedUpdateCounter;
 
+    public float delayedUpdateTime;
+
+    [Header("\nEquipment/Type/Copy/Telekinesis Sprites")]
+    [Header("Equipment Sprites")]
+    public Sprite BareHandSprite;
     public Sprite SwordSprite;
     public Sprite SpearSprite;
     public Sprite GreatSwordSprite;
@@ -291,20 +299,22 @@ public class UnitScript : MonoBehaviour
     public Sprite StaffSprite;
     public Image WeaponImage;
 
+    [Header("Copy Sprites")]
     public Sprite SkillNotCopiedSprite;
     public Sprite SkillCopiedSprite;
     public Image CopiedSkillImage;
 
+    [Header("Type Sprites")]
     public Sprite PluvialSprite;
     public Sprite MachineSprite;
     public Image UnitTypeImage;
 
-    public Image Lifebar;
-    public Image LBBackground;
+    [Header("Type Sprites")]
+    public Sprite TelekinesisSprite;
+    public Image TelekinesisImage;
 
-    private int delayedUpdateCounter;
 
-    public float delayedUpdateTime;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -1406,13 +1416,12 @@ public class UnitScript : MonoBehaviour
 
         }
 
-        UpdateWeaponIcon(GetFirstWeapon());
+        UpdateWeaponIcon(GetFirstWeapon(), UnitCharacteristics.telekinesisactivated);
 
     }
 
-    private void UpdateWeaponIcon(equipment weapon)
+    private void UpdateWeaponIcon(equipment weapon, bool telekinesis)
     {
-        WeaponImage.color = Color.white;
         switch (weapon.type.ToLower())
         {
             case ("sword"):
@@ -1437,11 +1446,17 @@ public class UnitScript : MonoBehaviour
                 WeaponImage.sprite = StaffSprite;
                 break;
             default:
-                Color color = Color.white;
-                color.a = 0f;
-                WeaponImage.color = color;
-                WeaponImage.sprite = null;
+                WeaponImage.sprite = BareHandSprite;
                 break;
+        }
+
+        if(telekinesis && TelekinesisImage.color!=Color.white)
+        {
+            TelekinesisImage.color = Color.white;
+        }
+        else if (!telekinesis && TelekinesisImage.color == Color.white)
+        {
+            TelekinesisImage.color = Color.clear;
         }
     }
 

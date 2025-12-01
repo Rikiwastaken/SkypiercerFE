@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9f472bdd607e69f49bd7e0ce08242a0c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 87c8d7bd99d7f5c4eb3de0564e2773f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -318,6 +318,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2176472965249292112}
+  - {fileID: 7224601337588356649}
   - {fileID: 5757939118527509411}
   - {fileID: 9157061906873881611}
   - {fileID: 6014816820726553487}
@@ -491,7 +492,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d6f805ddd51d40c4aaaa58dc8bebde4d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 237a02bb084af974dbe54f95e78933b9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -819,22 +820,25 @@ MonoBehaviour:
   telekinesisWeaponRot: {x: -90, y: -90, z: 0}
   flyingmovingspeed: 0.1
   maxmovementrangevertical: 0.2
-  SwordSprite: {fileID: 21300000, guid: 1d6643a93f15b734987f7539befb166f, type: 3}
-  SpearSprite: {fileID: 21300000, guid: 6a7253ebf603a3e4884b45e232e8f080, type: 3}
-  GreatSwordSprite: {fileID: 21300000, guid: b369144b6e3904a4485a4fd99d49743d, type: 3}
-  BowSprite: {fileID: 21300000, guid: 55465a1620fdc4f418fb6e6d3f3c9341, type: 3}
-  ScytheSprite: {fileID: 21300000, guid: 099d791944ed6e949b6780941f76a57d, type: 3}
+  Lifebar: {fileID: 8559566756738704147}
+  LBBackground: {fileID: 4284076034004194230}
+  BareHandSprite: {fileID: 21300000, guid: 39ec93f01cc92b24c81e5e8be00377c1, type: 3}
+  SwordSprite: {fileID: 21300000, guid: 237a02bb084af974dbe54f95e78933b9, type: 3}
+  SpearSprite: {fileID: 21300000, guid: e1128e532357cde4bb71aeba2ed4571b, type: 3}
+  GreatSwordSprite: {fileID: 21300000, guid: 91d5b60f468ffdd44b8e608d48c7f937, type: 3}
+  BowSprite: {fileID: 21300000, guid: a5e52ea7962b3d1478a16ad71ba73057, type: 3}
+  ScytheSprite: {fileID: 21300000, guid: 654e9ea0f0ca6c64f8c413799ffc405a, type: 3}
   ShieldSprite: {fileID: 21300000, guid: 4a51f359eb3b33545bafd57e3216382d, type: 3}
   StaffSprite: {fileID: 21300000, guid: 38c1db0046699c640bbc71c7b479587d, type: 3}
   WeaponImage: {fileID: 7404989548781359901}
-  SkillNotCopiedSprite: {fileID: 21300000, guid: 9f472bdd607e69f49bd7e0ce08242a0c, type: 3}
-  SkillCopiedSprite: {fileID: 21300000, guid: bde3add3cb2928a4a8e5e4e44760ae73, type: 3}
+  SkillNotCopiedSprite: {fileID: 21300000, guid: 87c8d7bd99d7f5c4eb3de0564e2773f4, type: 3}
+  SkillCopiedSprite: {fileID: 21300000, guid: 5b92d7d9a7620e34b938fdf6f36094d0, type: 3}
   CopiedSkillImage: {fileID: 3130064589254881934}
-  PluvialSprite: {fileID: 21300000, guid: 3235e86c8dfed74419eba1d7501efccb, type: 3}
-  MachineSprite: {fileID: 21300000, guid: 5043fe0d61806a2419edc2f028012e53, type: 3}
+  PluvialSprite: {fileID: 21300000, guid: 0275e03ae95b13846842d46bfd58b24e, type: 3}
+  MachineSprite: {fileID: 21300000, guid: a222ba95ace4aa047aa44319f1fa9095, type: 3}
   UnitTypeImage: {fileID: 7675947302083197681}
-  Lifebar: {fileID: 8559566756738704147}
-  LBBackground: {fileID: 4284076034004194230}
+  TelekinesisSprite: {fileID: 21300000, guid: b1d7f2c33538cc8448731c01734ffdd4, type: 3}
+  TelekinesisImage: {fileID: 5008612612863498597}
   delayedUpdateTime: 0.15
 --- !u!114 &5380667576583153213
 MonoBehaviour:
@@ -1011,7 +1015,82 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3235e86c8dfed74419eba1d7501efccb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a222ba95ace4aa047aa44319f1fa9095, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8633445701557081113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7224601337588356649}
+  - component: {fileID: 7217666836466631487}
+  - component: {fileID: 5008612612863498597}
+  m_Layer: 5
+  m_Name: TelekinesisIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7224601337588356649
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8633445701557081113}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7896460887252013346}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.65, y: -0.65}
+  m_SizeDelta: {x: 0.75, y: 0.75}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7217666836466631487
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8633445701557081113}
+  m_CullTransparentMesh: 1
+--- !u!114 &5008612612863498597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8633445701557081113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b1d7f2c33538cc8448731c01734ffdd4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
