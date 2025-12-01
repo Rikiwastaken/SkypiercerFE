@@ -1397,8 +1397,10 @@ public class GridScript : MonoBehaviour
 
                 int cost = 1;
                 if (newtile.elevation > tile.elevation)
+                {
                     cost += (newtile.elevation - tile.elevation) * 2;
-                Debug.Log("cost modification : " + (cost - 1));
+                }
+                    
 
                 if (remainingMovements - cost > 0)
                 {

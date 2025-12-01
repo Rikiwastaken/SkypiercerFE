@@ -650,6 +650,7 @@ GameObject:
   - component: {fileID: 6360257754374888536}
   - component: {fileID: 5380667576583153213}
   - component: {fileID: 7304497144401952652}
+  - component: {fileID: -1379636208530306937}
   m_Layer: 0
   m_Name: BaseCharacter
   m_TagString: Untagged
@@ -822,6 +823,7 @@ MonoBehaviour:
   maxmovementrangevertical: 0.2
   Lifebar: {fileID: 8559566756738704147}
   LBBackground: {fileID: 4284076034004194230}
+  delayedUpdateTime: 0.15
   BareHandSprite: {fileID: 21300000, guid: 39ec93f01cc92b24c81e5e8be00377c1, type: 3}
   SwordSprite: {fileID: 21300000, guid: 237a02bb084af974dbe54f95e78933b9, type: 3}
   SpearSprite: {fileID: 21300000, guid: e1128e532357cde4bb71aeba2ed4571b, type: 3}
@@ -839,7 +841,6 @@ MonoBehaviour:
   UnitTypeImage: {fileID: 7675947302083197681}
   TelekinesisSprite: {fileID: 21300000, guid: b1d7f2c33538cc8448731c01734ffdd4, type: 3}
   TelekinesisImage: {fileID: 5008612612863498597}
-  delayedUpdateTime: 0.15
 --- !u!114 &5380667576583153213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,6 +874,18 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 094615e19f01df245b1b4ebb41e4d2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1379636208530306937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081702220094403406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e89569f33fcc1e438c9087954b4c9a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7336564532334944263

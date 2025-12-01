@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnitScript;
-using TMPro;
 
 public class TextBubbleScript : MonoBehaviour
 {
@@ -18,6 +18,7 @@ public class TextBubbleScript : MonoBehaviour
         public Vector3 CameraDestination;
         public Sprite Portrait;
         public int characterindex = -1;
+        public Sprite ImageToShow;
     }
 
     private List<TextBubbleInfo> Dialogue;
@@ -45,6 +46,8 @@ public class TextBubbleScript : MonoBehaviour
     private GridScript gridScript;
 
     private cameraScript cameraScript;
+
+    public Image Imagetoshow;
 
     void Awake()
     {
@@ -110,6 +113,11 @@ public class TextBubbleScript : MonoBehaviour
             {
                 cameraScript.Destination = new Vector2(Dialogue[currentTextBubble].CameraDestination.x, Dialogue[currentTextBubble].CameraDestination.z);
             }
+            else if(GetCharacterCoordinates() != Vector2.zero)
+            {
+                cameraScript.Destination = GetCharacterCoordinates();
+            }
+
 
             if (isPrinting && charIndex < texttodisplay.Length)
             {
@@ -150,19 +158,28 @@ public class TextBubbleScript : MonoBehaviour
         {
             ActivateBubble();
 
+            
+
+
             var info = Dialogue[currentTextBubble];
 
 
-            if(info.characterindex>=0)
+            if(info.ImageToShow != null)
             {
-                foreach(Character character in DataScript.instance.PlayableCharacterList)
-                {
-                    if(character.ID == info.characterindex)
-                    {
-                        charactername.text = character.name;
-                        characterportrait.sprite = DataScript.instance.DialogueSpriteList[character.ID];
-                    }
-                }
+                Imagetoshow.color = Color.white;
+                Imagetoshow.sprite = info.ImageToShow;
+            }
+            else if(Imagetoshow.color != Color.clear)
+            {
+                Imagetoshow.color = Color.clear;
+            }
+
+            Character character = GetCharacter();
+
+            if (character!=null)
+            {
+                charactername.text = character.name;
+                characterportrait.sprite = DataScript.instance.DialogueSpriteList[character.ID];
             }
             else
             {
@@ -199,9 +216,49 @@ public class TextBubbleScript : MonoBehaviour
     {
         currentTextBubble = -1;
         Dialogue = dialogue;
-        GoToNextPage();
         indialogue = true;
+        GoToNextPage();
         gridScript.ShowMovement();
+    }
+
+    private Character GetCharacter()
+    {
+        if(indialogue)
+        {
+            if (currentTextBubble < Dialogue.Count)
+            {
+                var info = Dialogue[currentTextBubble];
+                if (info.characterindex >= 0)
+                {
+                    foreach (Character character in DataScript.instance.PlayableCharacterList)
+                    {
+                        if (character.ID == info.characterindex)
+                        {
+                            return character;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+        
+    }
+
+    private Vector2 GetCharacterCoordinates()
+    {
+        Character character = GetCharacter();
+        if(character != null)
+        {
+            foreach (Character otherchar in gridScript.allunits)
+            {
+                if (otherchar.ID == character.ID)
+                {
+                    return otherchar.currentTile[0].GridCoordinates;
+                }
+            }
+        }
+        
+        return Vector2.zero;
     }
 
     private void ActivateBubble()

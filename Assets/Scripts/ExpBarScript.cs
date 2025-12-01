@@ -143,7 +143,7 @@ public class ExpBarScript : MonoBehaviour
 
     private void SetupLevelUpText()
     {
-        if (levelupbonuses.Count > 0)
+        if (levelupbonuses != null && levelupbonuses.Count > 0)
         {
             LevelUpText.transform.parent.gameObject.SetActive(true);
             string leveluptext = "Level Up !\n";

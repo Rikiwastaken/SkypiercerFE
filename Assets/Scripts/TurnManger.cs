@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnitScript;
+using static UnityEngine.UI.CanvasScaler;
 
 public class TurnManger : MonoBehaviour
 {
@@ -152,23 +153,7 @@ public class TurnManger : MonoBehaviour
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
             action.ModifiedCharacters.Add(unit.GetComponent<UnitScript>().CreateCopy());
 
-            // Tile Effects
-            foreach (GridSquareScript tile in unitchar.currentTile)
-            {
-                switch(tile.type.ToLower())
-                {
-                    case "fire":
-                        int hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
-                        unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
-                        unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Fire");
-                        break;
-                    case "fortification":
-                        int hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
-                        unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
-                        unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Fortification");
-                        break;
-                }
-            }
+            
 
             //Kira Battalion Side Effect
             if (unitchar.playableStats.battalion.ToLower() == "kira")
@@ -267,6 +252,11 @@ public class TurnManger : MonoBehaviour
                     tile.GetComponent<GridSquareScript>().ReinitializeMechanismIfPairednotactive();
                 }
             }
+
+            // Tile Effects
+            TileEffects(playableunitGO);
+            TileEffects(enemyunitGO);
+            TileEffects(otherunitsGO);
         }
 
         minimapScript.UpdateMinimap();
@@ -378,6 +368,30 @@ public class TurnManger : MonoBehaviour
                 BeginningOfTurnsTrigger(playableunitGO);
                 updatevisuals = true;
                 return;
+            }
+        }
+    }
+
+    private void TileEffects(List<GameObject> grouptoapplyto)
+    {
+        foreach (GameObject unit in grouptoapplyto)
+        {
+            Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+            foreach (GridSquareScript tile in unitchar.currentTile)
+            {
+                switch (tile.type.ToLower())
+                {
+                    case "fire":
+                        int hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
+                        unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
+                        unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Fire");
+                        break;
+                    case "fortification":
+                        int hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
+                        unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
+                        unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Fortification");
+                        break;
+                }
             }
         }
     }

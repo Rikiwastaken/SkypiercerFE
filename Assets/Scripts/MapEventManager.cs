@@ -306,6 +306,7 @@ public class MapEventManager : MonoBehaviour
                 Debug.Log("Tutorial Window trigger");
 
                 TutorialwindowScript.InitializeWindow(Event.TutorialWindow.WindowDimensions, Event.TutorialWindow.text);
+                TriggerEventCheck(currentturn);
                 break;
             case 6:
                 Debug.Log("spawn enemy dtrigger");

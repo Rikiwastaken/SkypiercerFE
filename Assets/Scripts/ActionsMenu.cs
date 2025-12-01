@@ -1996,6 +1996,7 @@ public class ActionsMenu : MonoBehaviour
 
     public int CalculateDamage(GameObject unit, GameObject target = null)
     {
+
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = null;
         GridSquareScript targetTile = null;
@@ -2013,11 +2014,9 @@ public class ActionsMenu : MonoBehaviour
 
         if (target != null && target.activeSelf)
         {
+            
             chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-            if (chartarget.position != null && GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y) != null)
-            {
-                targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
-            }
+            targetTile = chartarget.currentTile[0];
 
             TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
             basestatdef = chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
@@ -2231,8 +2230,8 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
-        GridSquareScript unitTile = GridScript.GetTile((int)charunit.position.x, (int)charunit.position.y);
-        GridSquareScript targetTile = GridScript.GetTile((int)chartarget.position.x, (int)chartarget.position.y);
+        GridSquareScript unitTile = charunit.currentTile[0];
+        GridSquareScript targetTile = chartarget.currentTile[0];
 
         AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
         AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
