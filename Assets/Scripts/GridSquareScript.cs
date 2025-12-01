@@ -39,10 +39,10 @@ public class GridSquareScript : MonoBehaviour
     /*type is for potential bonus : 
         Forest : +30% dodge
         Ruins : +10% Dodge, -10% Accuracy
-        Fire : -1 movement, +10% Damage taken
+        Fire : -1 movement, +10% Damage taken and lose 33% of max hp each turn;
         Water : -1 movement, -10% dodge
         HighGround : +20% Accuracy, +10% Dodge
-        Fortification : +5% Dodge, +15% accuracy
+        Fortification : +5% Dodge, +15% accuracy, restore 10% HP Each turn;
         Fog : +20% Dodge, -20% accuracy
     */
     public string type;
@@ -62,6 +62,7 @@ public class GridSquareScript : MonoBehaviour
     public string VisualType;
 
     private ParticleSystem rainparticle;
+    public GameObject FireParticles;
 
     [Serializable]
     public class MechanismClass
@@ -488,6 +489,22 @@ public class GridSquareScript : MonoBehaviour
 
 
         }
+
+        if(type.ToLower()== "fire")
+        {
+            if(!FireParticles.activeSelf)
+            {
+                FireParticles.SetActive(true);
+            }
+        }
+        else
+        {
+            if (FireParticles.activeSelf)
+            {
+                FireParticles.SetActive(false);
+            }
+        }
+
         ManagePath();
         //manageElevation();
         UpdateFilling();

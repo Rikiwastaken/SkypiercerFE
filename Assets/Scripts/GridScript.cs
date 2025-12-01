@@ -335,7 +335,7 @@ public class GridScript : MonoBehaviour
             }
             if (selection.type.ToLower() == "fire")
             {
-                text = "Fire \n-1 mvt\n-10% Def/Res";
+                text = "Fire \n-1 mvt\n-10% Def/Res\n-33% HP";
             }
             if (selection.type.ToLower() == "water")
             {
@@ -347,7 +347,7 @@ public class GridScript : MonoBehaviour
             }
             if (selection.type.ToLower() == "fortification")
             {
-                text = "Fortification \n+5% Dodge\n+15% Hit";
+                text = "Fortification \n+5% Dodge\n+15% Hit\n+10% HP";
             }
             if (selection.type.ToLower() == "fog")
             {
@@ -1400,7 +1400,7 @@ public class GridScript : MonoBehaviour
                     cost += (newtile.elevation - tile.elevation) * 2;
                 Debug.Log("cost modification : " + (cost - 1));
 
-                if(remainingMovements - cost>0)
+                if (remainingMovements - cost > 0)
                 {
                     SpreadMovements(newpos, remainingMovements - cost, tilestolight, selectedunit, visited);
                 }

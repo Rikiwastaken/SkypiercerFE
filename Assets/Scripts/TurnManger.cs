@@ -145,9 +145,31 @@ public class TurnManger : MonoBehaviour
 
         foreach (GameObject unit in charactertoappy)
         {
+
+
+
             unit.GetComponent<UnitScript>().waittedbonusturns--;
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
             action.ModifiedCharacters.Add(unit.GetComponent<UnitScript>().CreateCopy());
+
+            // Tile Effects
+            foreach (GridSquareScript tile in unitchar.currentTile)
+            {
+                switch(tile.type.ToLower())
+                {
+                    case "fire":
+                        int hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
+                        unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
+                        unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Fire");
+                        break;
+                    case "fortification":
+                        int hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
+                        unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
+                        unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Fortification");
+                        break;
+                }
+            }
+
             //Kira Battalion Side Effect
             if (unitchar.playableStats.battalion.ToLower() == "kira")
             {
