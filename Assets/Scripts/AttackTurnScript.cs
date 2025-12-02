@@ -56,8 +56,6 @@ public class AttackTurnScript : MonoBehaviour
     public PhaseTextScript phaseTextScript;
     private MinimapScript minimapScript;
 
-    public ForesightScript.Action CurrentAction;
-
     public ForesightScript foresightScript;
 
     private SaveManager saveManager;
@@ -395,17 +393,10 @@ public class AttackTurnScript : MonoBehaviour
 
         int commandID = ActionsMenu.CommandUsedID;
 
-        CurrentAction = new ForesightScript.Action();
-
-        CurrentAction.actiontype = 3;
-        CurrentAction.commandID = commandID;
-        CurrentAction.Unit = User.GetComponent<UnitScript>();
-        CurrentAction.previousPosition = User.GetComponent<UnitScript>().previouspos;
-        CurrentAction.ModifiedCharacters = new List<Character>() { User.GetComponent<UnitScript>().CreateCopy() };
 
         if (commandID == 47) //Transfuse
         {
-            CurrentAction.ModifiedCharacters.Add(Target.GetComponent<UnitScript>().CreateCopy());
+            foresightScript.CreateAction(3, User, Target);
             int previousHPUser = CharUser.currentHP;
             int previousHPTarget = CharTarget.currentHP;
 
@@ -436,14 +427,14 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 48) //Motivate
         {
-            CurrentAction.ModifiedCharacters.Add(Target.GetComponent<UnitScript>().CreateCopy());
+            foresightScript.CreateAction(3, User, Target);
             CharTarget.alreadymoved = false;
             CharTarget.alreadyplayed = false;
             Target.GetComponent<UnitScript>().AddNumber(0, true, "Motivate");
         }
         else if (commandID == 49) //Swap
         {
-            CurrentAction.ModifiedCharacters.Add(Target.GetComponent<UnitScript>().CreateCopy());
+            foresightScript.CreateAction(3, User, Target);
             Vector2 previoususerpos = CharUser.position;
             User.GetComponent<UnitScript>().MoveTo(CharTarget.position);
             Target.GetComponent<UnitScript>().MoveTo(previoususerpos);
@@ -452,7 +443,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 50) //Reinvigorate
         {
-            CurrentAction.ModifiedCharacters.Add(Target.GetComponent<UnitScript>().CreateCopy());
+            foresightScript.CreateAction(3, User, Target);
             foreach (equipment equ in CharTarget.equipments)
             {
                 if (equ.Currentuses < equ.Maxuses)
@@ -464,6 +455,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 51) // Jump
         {
+            foresightScript.CreateAction(3, User);
             GridSquareScript targettile = Target.GetComponent<GridSquareScript>();
             Vector2 coorddiff = targettile.GridCoordinates - FindAnyObjectByType<GridScript>().GetTile(CharUser.position).GridCoordinates;
 
@@ -486,8 +478,9 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 52) // Fortify
         {
+            foresightScript.CreateAction(3, User);
             GridSquareScript tile = CharUser.currentTile[0];
-            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() { new ForesightScript.TileModification() { tile = tile, type = tile.type, previousremainingrain = tile.RemainingRainTurns, previousremainingsun = tile.RemainingSunTurns } };
+            
 
             tile.type = "Fortification";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Fortify");
@@ -495,19 +488,20 @@ public class AttackTurnScript : MonoBehaviour
         else if (commandID == 53) // Smoke Bomb
         {
             GridSquareScript tile = CharUser.currentTile[0];
-            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() { new ForesightScript.TileModification() { tile = tile, type = tile.type, previousremainingrain = tile.RemainingRainTurns, previousremainingsun = tile.RemainingSunTurns } };
+            foresightScript.CreateAction(3, User);
             tile.type = "Fog";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Smoke Bomb");
         }
         else if (commandID == 54) // Chakra
         {
+            foresightScript.CreateAction(3, User);
             int healthrestored = (int)((CharUser.AjustedStats.HP - CharUser.currentHP) * 0.25f);
             CharUser.currentHP += healthrestored;
             User.GetComponent<UnitScript>().AddNumber(healthrestored, true, "Chakra");
         }
         else if (commandID == 56) // Copy
         {
-            CurrentAction.skilltoremovefrominventory = CharTarget.UnitSkill;
+            foresightScript.CreateAction(3, User, CharTarget.UnitSkill);
             if (CharTarget.UnitSkill != 0 && !Target.GetComponent<UnitScript>().copied)
             {
                 Target.GetComponent<UnitScript>().copied = true;
@@ -534,7 +528,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 59) // Sundance
         {
-            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() { };
+            foresightScript.CreateAction(3, User);
             WeatherManager weathermanager = FindAnyObjectByType<WeatherManager>();
             if (weathermanager.rainymap)
             {
@@ -557,7 +551,6 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 foreach (GridSquareScript tile in tilestochange)
                 {
-                    CurrentAction.ModifiedTiles.Add(new ForesightScript.TileModification() { tile = tile, type = tile.type, previousremainingrain = tile.RemainingRainTurns, previousremainingsun = tile.RemainingSunTurns });
                     tile.RemainingRainTurns = 0;
                     tile.RemainingSunTurns = 3;
                 }
@@ -565,7 +558,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 60) // RainDance
         {
-            CurrentAction.ModifiedTiles = new List<ForesightScript.TileModification>() { };
+            foresightScript.CreateAction(3, User);
             WeatherManager weathermanager = FindAnyObjectByType<WeatherManager>();
             if (weathermanager.rainymap)
             {
@@ -588,13 +581,11 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 foreach (GridSquareScript tile in tilestochange)
                 {
-                    CurrentAction.ModifiedTiles.Add(new ForesightScript.TileModification() { tile = tile, type = tile.type, previousremainingrain = tile.RemainingRainTurns, previousremainingsun = tile.RemainingSunTurns });
                     tile.RemainingRainTurns = 3;
                     tile.RemainingSunTurns = 0;
                 }
             }
         }
-        foresightScript.AddAction(CurrentAction);
         ActionsMenu.FinalizeAttack();
 
     }
@@ -703,7 +694,6 @@ public class AttackTurnScript : MonoBehaviour
                 waittingforexp = true;
                 expdistributed = true;
                 unitalreadyattacked = false;
-                foresightScript.AddAction(CurrentAction);
             }
             else if (CurrentOther == null && CurrentEnemy == null && CurrentPlayable == null && CharAttacker.affiliation != "playable") //end fight if no attacker
             {
@@ -712,7 +702,6 @@ public class AttackTurnScript : MonoBehaviour
                 waittingforexp = true;
                 expdistributed = true;
                 unitalreadyattacked = false;
-                foresightScript.AddAction(CurrentAction);
             }
             else // begin fight
             {
@@ -747,7 +736,6 @@ public class AttackTurnScript : MonoBehaviour
                             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));
                             if (ishealing)
                             {
-                                CurrentAction.actiontype = 1;
                                 doubleattacker = null;
                                 triple = false;
                             }
@@ -900,23 +888,8 @@ public class AttackTurnScript : MonoBehaviour
 
                 waittingforcamera = true;
 
+                foresightScript.CreateAction(0, Attacker, target);
 
-                CurrentAction = new ForesightScript.Action();
-                foresightScript.AddAction(CurrentAction);
-                CurrentAction.actiontype = 0;
-                CurrentAction.Unit = Attacker.GetComponent<UnitScript>();
-                CurrentAction.previousPosition = Attacker.GetComponent<UnitScript>().previouspos;
-                CurrentAction.ModifiedCharacters = new List<Character>() { Attacker.GetComponent<UnitScript>().CreateCopy() };
-                CurrentAction.AttackData = new ForesightScript.AttackData();
-                CurrentAction.AttackData.previousattackerhitindex = Attacker.GetComponent<RandomScript>().hitvaluesindex;
-                CurrentAction.AttackData.previousattackercritindex = Attacker.GetComponent<RandomScript>().CritValuesindex;
-                CurrentAction.AttackData.previousattackerlvlupindex = Attacker.GetComponent<RandomScript>().levelvaluesindex;
-
-                CurrentAction.AttackData.defender = target.GetComponent<UnitScript>();
-                CurrentAction.ModifiedCharacters.Add(target.GetComponent<UnitScript>().CreateCopy());
-                CurrentAction.AttackData.previousdefenderhitindex = target.GetComponent<RandomScript>().hitvaluesindex;
-                CurrentAction.AttackData.previousdefendercritindex = target.GetComponent<RandomScript>().CritValuesindex;
-                CurrentAction.AttackData.previousdefenderlvlupindex = target.GetComponent<RandomScript>().levelvaluesindex;
 
                 battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
                 unitalreadyattacked = false;
@@ -989,6 +962,7 @@ public class AttackTurnScript : MonoBehaviour
 
             Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
 
+
             
 
             triggercleanup = true;
@@ -1012,32 +986,21 @@ public class AttackTurnScript : MonoBehaviour
                 previousattacker = Attacker;
                 previoustarget = target;
 
-                Character Chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+                
 
+                Character Chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
                 Character Targetcopy = target.GetComponent<UnitScript>().CreateCopy();
 
-                CurrentAction = new ForesightScript.Action();
-                foresightScript.AddAction(CurrentAction);
-                CurrentAction.actiontype = 0;
-                CurrentAction.Unit = Attacker.GetComponent<UnitScript>();
-                CurrentAction.previousPosition = Attacker.GetComponent<UnitScript>().previouspos;
-                CurrentAction.ModifiedCharacters = new List<Character>() { Attacker.GetComponent<UnitScript>().CreateCopy() };
-                CurrentAction.AttackData = new ForesightScript.AttackData();
-                CurrentAction.AttackData.previousattackerhitindex = Attacker.GetComponent<RandomScript>().hitvaluesindex;
-                CurrentAction.AttackData.previousattackercritindex = Attacker.GetComponent<RandomScript>().CritValuesindex;
-                CurrentAction.AttackData.previousattackerlvlupindex = Attacker.GetComponent<RandomScript>().levelvaluesindex;
-
-                CurrentAction.AttackData.defender = target.GetComponent<UnitScript>();
-                CurrentAction.ModifiedCharacters.Add(target.GetComponent<UnitScript>().CreateCopy());
-                CurrentAction.AttackData.previousdefenderhitindex = target.GetComponent<RandomScript>().hitvaluesindex;
-                CurrentAction.AttackData.previousdefendercritindex = target.GetComponent<RandomScript>().CritValuesindex;
-                CurrentAction.AttackData.previousdefenderlvlupindex = target.GetComponent<RandomScript>().levelvaluesindex;
 
                 (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
                 bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));
                 if (ishealing)
                 {
-                    CurrentAction.actiontype = 1;
+                    foresightScript.CreateAction(1, Attacker, target);
+                }
+                else
+                {
+                    foresightScript.CreateAction(0, Attacker, target);
                 }
 
                 (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus) = ActionsMenu.ApplyDamage(Attacker, target, false);
@@ -1149,7 +1112,6 @@ public class AttackTurnScript : MonoBehaviour
         Character charunit1 = unit1.GetComponent<UnitScript>().UnitCharacteristics;
         if (unit1.GetComponent<UnitScript>().GetSkill(32)) // Survivor
         {
-            CurrentAction.AttackData.attackersurvivorstats = unit1.GetComponent<UnitScript>().SurvivorStacks;
             unit1.GetComponent<UnitScript>().SurvivorStacks++;
             unit1.GetComponent<UnitScript>().AddNumber(unit1.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
         }
@@ -1159,7 +1121,6 @@ public class AttackTurnScript : MonoBehaviour
             Character charunit2 = unit2.GetComponent<UnitScript>().UnitCharacteristics;
             if (unit2.GetComponent<UnitScript>().GetSkill(32)) // Survivor
             {
-                CurrentAction.AttackData.attackersurvivorstats = unit2.GetComponent<UnitScript>().SurvivorStacks;
                 unit2.GetComponent<UnitScript>().SurvivorStacks++;
                 unit2.GetComponent<UnitScript>().AddNumber(unit2.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
             }

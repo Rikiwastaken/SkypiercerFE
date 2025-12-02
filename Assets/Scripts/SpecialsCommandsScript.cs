@@ -85,6 +85,7 @@ public class SpecialCommandsScript : MonoBehaviour
         {
             ActionManager.instance.Interract(target, SpecialInteractos[i].GetComponent<GridSquareScript>());
             SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.ChangeActivation(true);
+            SpecialInteractos[i].GetComponent<GridSquareScript>().ManageLeverOrientation();
             MapEventManager.instance.TriggerEventCheck();
             gameObject.SetActive(false);
             ActionsMenu.gameObject.SetActive(false);

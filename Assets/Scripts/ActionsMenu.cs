@@ -1752,7 +1752,6 @@ public class ActionsMenu : MonoBehaviour
 
             if (othertarget.GetComponent<UnitScript>().GetSkill(40) && ManhattanDistance(charTarget, charOthertarget) <= 3)
             {
-                attackTurnScript.CurrentAction.ModifiedCharacters.Add(charOthertarget);
                 allforonetransfertarget = charOthertarget;
                 allforonetransfertargetGO = othertarget;
                 break;
@@ -1821,10 +1820,6 @@ public class ActionsMenu : MonoBehaviour
                 foreach (GameObject unit in list)
                 {
                     Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-                    if (!attackTurnScript.CurrentAction.ModifiedCharacters.Contains(unitchar))
-                    {
-                        attackTurnScript.CurrentAction.ModifiedCharacters.Add(unitchar);
-                    }
 
                     unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)unitchar.AjustedStats.HP - unitchar.currentHP, (int)(DamageDealt * 0.1f)), true, "Rebound");
                     unitchar.currentHP += (int)(DamageDealt * 0.1f);
@@ -1915,7 +1910,6 @@ public class ActionsMenu : MonoBehaviour
         {
 
             Character Chartarget = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics;
-            attackTurnScript.CurrentAction.ModifiedCharacters.Add(Chartarget);
 
             int baseHP = Chartarget.currentHP;
 

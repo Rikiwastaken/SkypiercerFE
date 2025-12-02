@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static DataScript;
-using static UnitScript;
 using static GridSquareScript;
+using static UnitScript;
 
 public class ForesightScript : MonoBehaviour
 {
@@ -293,6 +294,82 @@ public class ForesightScript : MonoBehaviour
             // EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
         }
 
+    }
+
+    public void CreateAction(int type, GameObject User, GameObject target, int skilltoremove = 0, int beginningofturn = -1)
+    {
+        Action CurrentAction = new Action();
+        AddAction(CurrentAction);
+        CurrentAction.skilltoremovefrominventory = skilltoremove;
+        CurrentAction.ModifiedCharacters = new List<Character>();
+
+        if(beginningofturn!=-1)
+        {
+            CurrentAction.beginningofturn = beginningofturn;
+        }
+
+        foreach (GameObject unit in GridScript.instance.allunitGOs)
+        {
+            CurrentAction.ModifiedCharacters.Add(unit.GetComponent<UnitScript>().CreateCopy());
+        }
+        if(User != null)
+        {
+            CurrentAction.Unit = User.GetComponent<UnitScript>();
+            CurrentAction.previousPosition = User.GetComponent<UnitScript>().previouspos;
+            CurrentAction.AttackData = new ForesightScript.AttackData();
+            CurrentAction.AttackData.attackersurvivorstats = User.GetComponent<UnitScript>().SurvivorStacks;
+            CurrentAction.AttackData.previousattackerhitindex = User.GetComponent<RandomScript>().hitvaluesindex;
+            CurrentAction.AttackData.previousattackercritindex = User.GetComponent<RandomScript>().CritValuesindex;
+            CurrentAction.AttackData.previousattackerlvlupindex = User.GetComponent<RandomScript>().levelvaluesindex;
+        }
+        if(target != null)
+        {
+            CurrentAction.AttackData.defender = target.GetComponent<UnitScript>();
+            CurrentAction.AttackData.defendersurvivorstats = target.GetComponent<UnitScript>().SurvivorStacks;
+            CurrentAction.AttackData.previousdefenderhitindex = target.GetComponent<RandomScript>().hitvaluesindex;
+            CurrentAction.AttackData.previousdefendercritindex = target.GetComponent<RandomScript>().CritValuesindex;
+            CurrentAction.AttackData.previousdefenderlvlupindex = target.GetComponent<RandomScript>().levelvaluesindex;
+        }
+        CurrentAction.actiontype = type;
+        CurrentAction.ModifiedTiles = new List<TileModification>();
+        
+        foreach(List<GameObject> tiles in GridScript.instance.Grid)
+        {
+            foreach (GameObject tile in tiles)
+            {
+                GridSquareScript tileScript = tile.GetComponent<GridSquareScript>();
+                TileModification mod = new TileModification();
+                mod.tile = tileScript;
+                mod.previousremainingrain = tileScript.RemainingRainTurns;
+                mod.previousremainingsun = tileScript.RemainingSunTurns;
+                mod.type = tileScript.type;
+                MechanismClass mechanismClass = new MechanismClass();
+                mechanismClass.isactivated = tileScript.Mechanism.isactivated;
+                mechanismClass.type = tileScript.Mechanism.type;
+                mechanismClass.Triggers = tileScript.Mechanism.Triggers;
+                mod.MechanismClass = mechanismClass;
+                CurrentAction.ModifiedTiles.Add(mod);
+            }
+        }
+
+    }
+
+    public void CreateAction(int type, GameObject User, int skilltoremove = 0)
+    {
+
+        CreateAction(type, User, null, skilltoremove);
+    }
+
+    public void CreateAction(int type, int skilltoremove = 0)
+    {
+
+        CreateAction(type, null, null, skilltoremove);
+    }
+
+    public void CreateAction(int type, int beginningofturn, int skilltoremove = 0)
+    {
+
+        CreateAction(type, null, null, skilltoremove,beginningofturn);
     }
     private void RevertTo(int ID)
     {

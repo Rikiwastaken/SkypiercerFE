@@ -122,27 +122,20 @@ public class TurnManger : MonoBehaviour
     private void BeginningOfTurnsTrigger(List<GameObject> charactertoappy)
     {
 
-
-
-
-
-        ForesightScript.Action action = new ForesightScript.Action();
-        action.actiontype = 4;
+        ForesightScript FSS = GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>();
 
         if (charactertoappy == playableunitGO)
         {
-            action.beginningofturn = 0;
+            FSS.CreateAction(4, 0, 0);
         }
         else if (charactertoappy == enemyunitGO)
         {
-            action.beginningofturn = 1;
+            FSS.CreateAction(4, 1, 0);
         }
         else if (charactertoappy == otherunitsGO)
         {
-            action.beginningofturn = 2;
+            FSS.CreateAction(4, 2, 0);
         }
-
-        action.ModifiedCharacters = new List<Character>();
 
         foreach (GameObject unit in charactertoappy)
         {
@@ -151,7 +144,6 @@ public class TurnManger : MonoBehaviour
 
             unit.GetComponent<UnitScript>().waittedbonusturns--;
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-            action.ModifiedCharacters.Add(unit.GetComponent<UnitScript>().CreateCopy());
 
             
 
@@ -234,10 +226,6 @@ public class TurnManger : MonoBehaviour
 
             //Reset Verso movements
             unit.GetComponent<UnitScript>().tilesmoved = 0;
-        }
-        if (charactertoappy.Count > 0)
-        {
-            GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>().AddAction(action);
         }
 
 
