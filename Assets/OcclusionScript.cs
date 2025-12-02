@@ -20,13 +20,16 @@ public class OcclusionScript : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        if (GetComponent<GridSquareScript>() != null && GetComponent<GridSquareScript>().enabled)
+        if (Application.isPlaying)
         {
-            GetComponent<GridSquareScript>().enabled = false;
-        }
-        if (GetComponent<UnitScript>() != null && GetComponent<UnitScript>().enabled)
-        {
-            GetComponent<UnitScript>().enabled = false;
+            if (GetComponent<GridSquareScript>() != null && GetComponent<GridSquareScript>().enabled)
+            {
+                GetComponent<GridSquareScript>().enabled = false;
+            }
+            if (GetComponent<UnitScript>() != null && GetComponent<UnitScript>().enabled)
+            {
+                GetComponent<UnitScript>().enabled = false;
+            }
         }
     }
 }

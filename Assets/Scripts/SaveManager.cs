@@ -27,6 +27,7 @@ public class SaveManager : MonoBehaviour
         public int chapter;
         public List<Character> PlayableCharacterList;
         public Inventory PlayerInventory;
+        public List<Bonds> BondList;
         public float secondselapsed;
         public bool inHideout;
     }
@@ -68,6 +69,7 @@ public class SaveManager : MonoBehaviour
         DefaultSave.chapter = 0;
         DefaultSave.PlayableCharacterList = DataScript.instance.PlayableCharacterList;
         DefaultSave.PlayerInventory = DataScript.instance.PlayerInventory;
+        DefaultSave.BondList = DataScript.instance.BondsList;
         DefaultSave.secondselapsed = 0;
     }
 
@@ -252,6 +254,7 @@ public class SaveManager : MonoBehaviour
         {
             DS.PlayableCharacterList = SaveClasses[slot].PlayableCharacterList;
             DS.PlayerInventory = SaveClasses[slot].PlayerInventory;
+            DS.BondsList = SaveClasses[slot].BondList;
             secondselapsed = SaveClasses[slot].secondselapsed;
             currentchapter = SaveClasses[slot].chapter;
         }
@@ -259,6 +262,7 @@ public class SaveManager : MonoBehaviour
         {
             DS.PlayableCharacterList = DefaultSave.PlayableCharacterList;
             DS.PlayerInventory = DefaultSave.PlayerInventory;
+            DS.BondsList = DefaultSave.BondList;
             secondselapsed = 0;
         }
 
@@ -304,7 +308,8 @@ public class SaveManager : MonoBehaviour
             PlayableCharacterList = DataScript.instance.PlayableCharacterList,
             PlayerInventory = DataScript.instance.PlayerInventory,
             secondselapsed = secondselapsed,
-            inHideout = Hideout
+            inHideout = Hideout,
+            BondList = DataScript.instance.BondsList
         };
 
         string json = JsonUtility.ToJson(save, true);

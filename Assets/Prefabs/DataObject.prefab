@@ -1316,7 +1316,7 @@ MonoBehaviour:
   - name: Inexhaustible
     Descriptions: Blade durability never goes down.
     IsCommand: 0
-    Cost: 15
+    Cost: 20
     targettype: 0
     range: 0
     ID: 8

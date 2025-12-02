@@ -22,6 +22,8 @@ public class DataScript : MonoBehaviour
 
     public List<Character> PlayableCharacterList;
 
+    public List<Bonds> BondsList;
+
     public float manualgamespeed = -1;
 
     public Inventory PlayerInventory;
@@ -44,6 +46,15 @@ public class DataScript : MonoBehaviour
     public class Inventory
     {
         public List<InventoryItem> inventoryItems;
+    }
+
+    [Serializable]
+    public class Bonds
+    {
+        public List<int> Characters;
+        public int BondPoints;
+        public int BondLevel;
+        public int BondDialogueSeen;
     }
 
     [Serializable]
@@ -390,6 +401,7 @@ public class DataScript : MonoBehaviour
         }
         Character.equipments = newequipmentlist;
     }
+
 #if UNITY_EDITOR
     [ContextMenu("Calculate IDs and fillout out classes")]
     void CalculateIDs()
