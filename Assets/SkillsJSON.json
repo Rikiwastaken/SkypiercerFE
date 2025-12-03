@@ -644,7 +644,7 @@
             "Descriptions": "Lowers Blade durability to zero to regain 50% max HP.",
             "IsCommand": true,
             "Cost": 10,
-            "targettype": 0,
+            "targettype": 3,
             "range": 0,
             "ID": 70
         },
@@ -653,7 +653,7 @@
             "Descriptions": "Sacrifices 50% of max HP to fully replenish durability of equipped blade.",
             "IsCommand": true,
             "Cost": 10,
-            "targettype": 0,
+            "targettype": 3,
             "range": 0,
             "ID": 71
         },
@@ -667,7 +667,7 @@
             "ID": 72
         },
         {
-            "name": "Hero's heir",
+            "name": "Hero's Heir",
             "Descriptions": "Increases all stat growth and exp gained by 10% (exclusive to Gale).",
             "IsCommand": false,
             "Cost": 0,

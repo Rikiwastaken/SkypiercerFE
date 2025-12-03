@@ -273,38 +273,50 @@ public class DataScript : MonoBehaviour
         return bondscopy;
     }
 
-    public void SpreadBonds(int UnitID)
+    public void IncreaseBonds(int UnitID, int otherunitID)
     {
+
+        GameObject MainUnit = null;
+        GameObject OtherUnit = null;
+
         TurnManger turnManger  = TurnManger.instance;
         if(turnManger == null)
         {
             return;
         }
 
-        List<Bonds> usefulbonds = new List<Bonds>();
+        foreach (GameObject unit in turnManger.playableunitGO)
+        {
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.ID == UnitID)
+            {
+                MainUnit = unit;
+            }
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.ID == otherunitID)
+            {
+                OtherUnit = unit;
+            }
+        }
+
 
         foreach (Bonds bond in BondsList)
         {
-            if(bond.Characters.Contains(UnitID))
+            if(bond.Characters.Contains(UnitID) && bond.Characters.Contains(UnitID))
             {
-                usefulbonds.Add(bond);
-            }
-        }
+                bond.BondPoints += bondincreaseperaction;
 
-        foreach(Bonds bond in usefulbonds)
-        {
-            foreach (Character otherunit in turnManger.playableunit)
-            {
-                if(otherunit.ID!=UnitID && bond.Characters.Contains(otherunit.ID))
+                if (OtherUnit.GetComponent<UnitScript>().GetSkill(66)) //Friendly
                 {
                     bond.BondPoints += bondincreaseperaction;
-                    
                 }
+
+                if (MainUnit.GetComponent<UnitScript>().GetSkill(66)) //Friendly
+                {
+                    bond.BondPoints += bondincreaseperaction;
+                }
+
+                return;
             }
         }
-
-        
-
     }
 
     public void UpdatePlayableUnits()

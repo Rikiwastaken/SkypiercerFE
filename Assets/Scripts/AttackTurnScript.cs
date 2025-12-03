@@ -586,6 +586,22 @@ public class AttackTurnScript : MonoBehaviour
                 }
             }
         }
+        else if (commandID == 70) // Blade Conversion
+        {
+            foresightScript.CreateAction(3, User);
+            int healthrestored = (int)Mathf.Min((CharUser.AjustedStats.HP - CharUser.currentHP), CharUser.AjustedStats.HP * 0.5f) ;
+            CharUser.currentHP += healthrestored;
+            User.GetComponent<UnitScript>().GetFirstWeapon().Currentuses = 0;
+            User.GetComponent<UnitScript>().AddNumber(healthrestored, true, "Blade Conversion");
+        }
+        else if (commandID == 71) // Blade Sacrifice
+        {
+            foresightScript.CreateAction(3, User);
+            int healthlost = (int)Mathf.Min(CharUser.currentHP-1, CharUser.AjustedStats.HP * 0.5f);
+            CharUser.currentHP -= healthlost;
+            User.GetComponent<UnitScript>().GetFirstWeapon().Currentuses = 0;
+            User.GetComponent<UnitScript>().AddNumber(healthlost, false, "Blade Sacrifice");
+        }
         ActionsMenu.FinalizeAttack();
 
     }

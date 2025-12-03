@@ -314,7 +314,7 @@ public class UnitScript : MonoBehaviour
     public Image TelekinesisImage;
 
 
-    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -394,9 +394,9 @@ public class UnitScript : MonoBehaviour
         OnHealthChanged += HealthChangedHandler;
 
 
-        if(UnitCharacteristics.affiliation!="playable")
+        if (UnitCharacteristics.affiliation != "playable")
         {
-            if(UnitCharacteristics.UnitSkill != 0)
+            if (UnitCharacteristics.UnitSkill != 0)
             {
                 CopiedSkillImage.sprite = SkillNotCopiedSprite;
             }
@@ -456,7 +456,7 @@ public class UnitScript : MonoBehaviour
 
 
         }
-        
+
         if (armature == null)
         {
             armature = animator.transform;
@@ -465,17 +465,17 @@ public class UnitScript : MonoBehaviour
         }
 
 
-        
+
         HPForEvent = UnitCharacteristics.currentHP;
 
 
 
 
         //TemporaryColor();
-        
+
         ManageDamagenumber();
-        
-        
+
+
         DelayedUpdate();
     }
 
@@ -512,9 +512,9 @@ public class UnitScript : MonoBehaviour
     //Update that only happens once every couple of frames to improve performance
     private void DelayedUpdate()
     {
-        if(delayedUpdateCounter <= 0)
+        if (delayedUpdateCounter <= 0)
         {
-            delayedUpdateCounter = (int)(UnityEngine.Random.Range(0.9f,1.1f)*delayedUpdateTime/Time.deltaTime);
+            delayedUpdateCounter = (int)(UnityEngine.Random.Range(0.9f, 1.1f) * delayedUpdateTime / Time.deltaTime);
 
             //dostuff
 
@@ -524,7 +524,7 @@ public class UnitScript : MonoBehaviour
             {
                 CopiedSkillImage.sprite = SkillCopiedSprite;
             }
-            else if(!copied && CopiedSkillImage.sprite == SkillCopiedSprite)
+            else if (!copied && CopiedSkillImage.sprite == SkillCopiedSprite)
             {
                 CopiedSkillImage.sprite = SkillNotCopiedSprite;
             }
@@ -813,7 +813,7 @@ public class UnitScript : MonoBehaviour
     }
     public void ManageLifebars()
     {
-        
+
         ManageLifeBarRotation();
 
         //if (cameraScript.incombat || disableLifebar)
@@ -1450,7 +1450,7 @@ public class UnitScript : MonoBehaviour
                 break;
         }
 
-        if(telekinesis && TelekinesisImage.color!=Color.white)
+        if (telekinesis && TelekinesisImage.color != Color.white)
         {
             TelekinesisImage.color = Color.white;
         }
@@ -1732,9 +1732,8 @@ public class UnitScript : MonoBehaviour
             GrowthtoApply.SpeedGrowth += geniusgrowthboost;
             GrowthtoApply.DexterityGrowth += geniusgrowthboost;
         }
-
-        //Crystal Heart
-        if (GetSkill(57))
+        //Crystal Heart, Guardian Spirit, Hero's Heir
+        if (GetSkill(57) || GetSkill(72) || GetSkill(73))
         {
             int cystalheartgrowthboost = 10;
             GrowthtoApply.HPGrowth += cystalheartgrowthboost;
@@ -1805,9 +1804,9 @@ public class UnitScript : MonoBehaviour
         return GrowthtoApply;
     }
 
-    public void CalculateSkillPoints( Character Character = null)
+    public void CalculateSkillPoints(Character Character = null)
     {
-        if(Character==null)
+        if (Character == null)
         {
             Character = UnitCharacteristics;
         }
@@ -2686,6 +2685,36 @@ public class UnitScript : MonoBehaviour
                 statbonuses.TelekDamage += 3;
                 statbonuses.PhysDamage += 3;
             }
+        }
+
+        //Showdown (this unit)
+        if (GetSkill(64))
+        {
+            statbonuses.Crit += 25;
+        }
+
+        //Showdown (enemy unit)
+        if (enemy != null && enemy.GetComponent<UnitScript>().GetSkill(64))
+        {
+            statbonuses.Crit += 25;
+        }
+
+        //Fair Play (this unit)
+        if (GetSkill(65))
+        {
+            statbonuses.Crit -= 25;
+        }
+
+        //Fair Play (enemy unit)
+        if (enemy != null && enemy.GetComponent<UnitScript>().GetSkill(65))
+        {
+            statbonuses.Crit -= 25;
+        }
+
+        //Violent Misuse
+        if (GetSkill(68))
+        {
+            statbonuses.FixedDamageBonus += GetFirstWeapon().BaseDamage / 2;
         }
 
 

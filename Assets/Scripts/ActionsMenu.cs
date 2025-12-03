@@ -1013,6 +1013,14 @@ public class ActionsMenu : MonoBehaviour
         {
             BasicCommandWindow(unit, target);
         }
+        else if (command.ID == 70) //Blade Conversion
+        {
+            BladeConversionCommandWindow(unit);
+        }
+        else if (command.ID == 71) //Blade Sacrifice
+        {
+            BladeSacrificeCommandWindow(unit);
+        }
 
     }
 
@@ -1104,6 +1112,82 @@ public class ActionsMenu : MonoBehaviour
         TargetOrangeLifeBar.fillAmount = 1f;
 
         UnitGreenLifebar.fillAmount = Mathf.Min((float)(charunit.currentHP + healthrestored) / (float)charunit.AjustedStats.HP, 1f);
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
+    }
+
+    private void BladeConversionCommandWindow(GameObject unit)
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+
+        int healthrestored = (int)Mathf.Min((charunit.AjustedStats.HP - charunit.currentHP), charunit.AjustedStats.HP * 0.5f);
+
+        string UnitText = "\n" + charunit.name + "\n";
+        UnitText += "HP : " + charunit.currentHP + " + <color=green>" + healthrestored + "</color> / " + charunit.AjustedStats.HP + "\n";
+        UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+        UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " -> <color=red>0</color> / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        UnitText += "Dmg : - \n";
+        UnitText += "Hit : - \n";
+        UnitText += "Crit : - \n";
+        if (charunit.telekinesisactivated)
+        {
+            UnitText += "Telekinesis : On\n";
+        }
+        else
+        {
+            UnitText += "Telekinesis : Off\n";
+        }
+
+
+
+        string TargetText = "\n";
+
+        unitAttackText.text = UnitText;
+        targetAttackText.text = TargetText;
+
+        TargetGreenLifebar.fillAmount = 1f;
+        TargetOrangeLifeBar.fillAmount = 1f;
+
+        UnitGreenLifebar.fillAmount = Mathf.Min((float)(charunit.currentHP + healthrestored) / (float)charunit.AjustedStats.HP, 1f);
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
+    }
+
+    private void BladeSacrificeCommandWindow(GameObject unit)
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+
+        int healthlost = (int)Mathf.Min(charunit.currentHP - 1, charunit.AjustedStats.HP * 0.5f);
+
+        string UnitText = "\n" + charunit.name + "\n";
+        UnitText += "HP : " + charunit.currentHP + " - <color=red>" + healthlost + "</color> / " + charunit.AjustedStats.HP + "\n";
+        UnitText += "Wpn : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Name + "\n";
+        UnitText += "Uses : " + unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " -> <color=green> " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + " </color> / " + unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+        UnitText += "Dmg : - \n";
+        UnitText += "Hit : - \n";
+        UnitText += "Crit : - \n";
+        if (charunit.telekinesisactivated)
+        {
+            UnitText += "Telekinesis : On\n";
+        }
+        else
+        {
+            UnitText += "Telekinesis : Off\n";
+        }
+
+
+
+        string TargetText = "\n";
+
+        unitAttackText.text = UnitText;
+        targetAttackText.text = TargetText;
+
+        TargetGreenLifebar.fillAmount = 1f;
+        TargetOrangeLifeBar.fillAmount = 1f;
+
+        UnitGreenLifebar.fillAmount = Mathf.Min((float)(charunit.currentHP - healthlost) / (float)charunit.AjustedStats.HP, 1f);
         UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
     }
 
@@ -1854,6 +1938,10 @@ public class ActionsMenu : MonoBehaviour
         if (weapon.Maxuses > 0)
         {
             weapon.Currentuses--;
+            if (Attacker.GetComponent<UnitScript>().GetSkill(68))//Violent Misuse
+            {
+                weapon.Currentuses--;
+            }
         }
         if (weapon.Currentuses <= 0)
         {
@@ -1963,7 +2051,7 @@ public class ActionsMenu : MonoBehaviour
             adjustedexp = 1;
         }
 
-        if (unit.GetComponent<UnitScript>().GetSkill(57)) // Crystal Heart
+        if (unit.GetComponent<UnitScript>().GetSkill(57) || unit.GetComponent<UnitScript>().GetSkill(72) || unit.GetComponent<UnitScript>().GetSkill(73)) // Crystal Heart, Guardian Spirit, Hero's Heir
         {
             adjustedexp = (int)(adjustedexp * 1.1f);
         }
@@ -2008,12 +2096,21 @@ public class ActionsMenu : MonoBehaviour
 
         if (target != null && target.activeSelf)
         {
-            
+
             chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
             targetTile = chartarget.currentTile[0];
 
             TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
-            basestatdef = chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
+
+            if (target.GetComponent<UnitScript>().GetSkill(69)) // Redirection
+            {
+                basestatdef = chartarget.AjustedStats.Resistance + TargetSkillBonus.Resistance;
+            }
+            else
+            {
+                basestatdef = chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
+            }
+
         }
 
 
@@ -2023,7 +2120,15 @@ public class ActionsMenu : MonoBehaviour
             basestatdamage = charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
             if (target != null)
             {
-                basestatdef = chartarget.AjustedStats.Resistance + TargetSkillBonus.Resistance;
+                if (target.GetComponent<UnitScript>().GetSkill(69)) // Redirection
+                {
+                    basestatdef = chartarget.AjustedStats.Defense + TargetSkillBonus.Defense;
+                }
+                else
+                {
+                    basestatdef = chartarget.AjustedStats.Resistance + TargetSkillBonus.Resistance;
+                }
+
             }
 
         }
