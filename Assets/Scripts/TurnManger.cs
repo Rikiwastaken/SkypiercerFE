@@ -126,15 +126,15 @@ public class TurnManger : MonoBehaviour
 
         if (charactertoappy == playableunitGO)
         {
-            FSS.CreateAction(4, 0, 0);
+            FSS.CreateAction(4, 0, -1);
         }
         else if (charactertoappy == enemyunitGO)
         {
-            FSS.CreateAction(4, 1, 0);
+            FSS.CreateAction(4, 1, -1);
         }
         else if (charactertoappy == otherunitsGO)
         {
-            FSS.CreateAction(4, 2, 0);
+            FSS.CreateAction(4, 2, -1);
         }
 
         foreach (GameObject unit in charactertoappy)

@@ -15,7 +15,6 @@ public class OcclusionScript : MonoBehaviour
                 GetComponent<UnitScript>().enabled = true;
             }
         }
-        
     }
 
     private void OnBecameInvisible()

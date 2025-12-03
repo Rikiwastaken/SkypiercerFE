@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -76,6 +77,9 @@ public class DataScript : MonoBehaviour
         public int range;
         public int ID;
     }
+
+    public int bondincreaseperaction;
+    public int maxdistanceforbondincrease;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -254,6 +258,55 @@ public class DataScript : MonoBehaviour
         }
     }
 
+    public List<Bonds> CreateBondsCopy()
+    {
+        List<Bonds> bondscopy = new List<Bonds>();
+        foreach(Bonds bond in BondsList)
+        {
+            Bonds bondcopy = new Bonds();
+            bondcopy.Characters = bond.Characters;
+            bondcopy.BondDialogueSeen = bond.BondDialogueSeen;
+            bondcopy.BondLevel = bond.BondLevel;
+            bondcopy.BondPoints = bond.BondPoints;
+            bondscopy.Add(bondcopy);
+        }
+        return bondscopy;
+    }
+
+    public void SpreadBonds(int UnitID)
+    {
+        TurnManger turnManger  = TurnManger.instance;
+        if(turnManger == null)
+        {
+            return;
+        }
+
+        List<Bonds> usefulbonds = new List<Bonds>();
+
+        foreach (Bonds bond in BondsList)
+        {
+            if(bond.Characters.Contains(UnitID))
+            {
+                usefulbonds.Add(bond);
+            }
+        }
+
+        foreach(Bonds bond in usefulbonds)
+        {
+            foreach (Character otherunit in turnManger.playableunit)
+            {
+                if(otherunit.ID!=UnitID && bond.Characters.Contains(otherunit.ID))
+                {
+                    bond.BondPoints += bondincreaseperaction;
+                    
+                }
+            }
+        }
+
+        
+
+    }
+
     public void UpdatePlayableUnits()
     {
         UnitScript[] unitscripts = GameObject.FindObjectsByType<UnitScript>(FindObjectsSortMode.None);
@@ -402,6 +455,11 @@ public class DataScript : MonoBehaviour
         Character.equipments = newequipmentlist;
     }
 
+    int ManhattanDistance(Vector2 point1, Vector2 point2)
+    {
+        return (int)(Mathf.Abs(point1.x - point2.x) + Mathf.Abs(point1.y - point2.y));
+    }
+
 #if UNITY_EDITOR
     [ContextMenu("Calculate IDs and fillout out classes")]
     void CalculateIDs()
@@ -448,6 +506,32 @@ public class DataScript : MonoBehaviour
             }
         }
         EditorUtility.SetDirty(this);
+    }
+    [ContextMenu("Load Skills From JSON")]
+    public void LoadSkills()
+    {
+        string path = EditorUtility.OpenFilePanel("Select Skill JSON File", "", "json");
+        if (string.IsNullOrEmpty(path))
+            return;
+
+        string json = File.ReadAllText(path);
+
+        SkillListWrapper wrapper = JsonUtility.FromJson<SkillListWrapper>(json);
+        if (wrapper == null || wrapper.SkillList == null)
+        {
+            Debug.LogError("JSON file format invalid. Needs { \"SkillList\": [ ... ] }");
+            return;
+        }
+
+        SkillList = wrapper.SkillList;
+
+        Debug.Log("Loaded " + wrapper.SkillList.Count + " skills into the SkillList!");
+    }
+
+    [System.Serializable]
+    private class SkillListWrapper
+    {
+        public List<Skill> SkillList;
     }
 
 #endif

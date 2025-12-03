@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -34,6 +33,7 @@ public class ForesightScript : MonoBehaviour
         public int skilltoremovefrominventory = -1;
         public int beginningofturn = -1; //0 : player, 1 : enemy, 2 : other
         public List<MapEventManager.EventCondition> PreviousEvents;
+        public List<Bonds> PreviousBonds;
     }
 
 
@@ -85,8 +85,6 @@ public class ForesightScript : MonoBehaviour
         InputManager = InputManager.instance;
 
     }
-
-
     private void FixedUpdate()
     {
 
@@ -296,17 +294,14 @@ public class ForesightScript : MonoBehaviour
 
     }
 
-    public void CreateAction(int type, GameObject User, GameObject target, int skilltoremove = 0, int beginningofturn = -1)
+    public void CreateAction(int type, GameObject User, GameObject target, int skilltoremove = -1, int beginningofturn = -1)
     {
         Action CurrentAction = new Action();
         AddAction(CurrentAction);
         CurrentAction.skilltoremovefrominventory = skilltoremove;
+        CurrentAction.beginningofturn = beginningofturn;
         CurrentAction.ModifiedCharacters = new List<Character>();
-
-        if(beginningofturn!=-1)
-        {
-            CurrentAction.beginningofturn = beginningofturn;
-        }
+        CurrentAction.PreviousBonds = DataScript.instance.CreateBondsCopy();
 
         foreach (GameObject unit in GridScript.instance.allunitGOs)
         {
@@ -354,19 +349,21 @@ public class ForesightScript : MonoBehaviour
 
     }
 
-    public void CreateAction(int type, GameObject User, int skilltoremove = 0)
+     
+
+    public void CreateAction(int type, GameObject User, int skilltoremove = -1)
     {
 
         CreateAction(type, User, null, skilltoremove);
     }
 
-    public void CreateAction(int type, int skilltoremove = 0)
+    public void CreateAction(int type, int skilltoremove = -1)
     {
 
         CreateAction(type, null, null, skilltoremove);
     }
 
-    public void CreateAction(int type, int beginningofturn, int skilltoremove = 0)
+    public void CreateAction(int type, int beginningofturn, int skilltoremove = -1)
     {
 
         CreateAction(type, null, null, skilltoremove,beginningofturn);
@@ -377,6 +374,10 @@ public class ForesightScript : MonoBehaviour
         for (int i = actionLength - 1; i > ID; i--)
         {
             Action ActionToRevert = actions[i];
+
+
+            DataScript.instance.BondsList = ActionToRevert.PreviousBonds;
+
 
             if (CharacterHolder == null)
             {
@@ -392,7 +393,6 @@ public class ForesightScript : MonoBehaviour
                 {
                     if (GO.GetComponent<UnitScript>().UnitCharacteristics.ID == Character.ID)
                     {
-                        Debug.Log("reverting : " + Character.name);
                         GO.GetComponent<UnitScript>().UnitCharacteristics = Character;
                     }
 

@@ -100,9 +100,15 @@ public class MusicManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        cameraScript = FindAnyObjectByType<cameraScript>();
-
-        TurnManager=FindAnyObjectByType<TurnManger>();
+        if(cameraScript == null)
+        {
+            cameraScript = FindAnyObjectByType<cameraScript>();
+        }
+        
+        if(TurnManager == null)
+        {
+            TurnManager = FindAnyObjectByType<TurnManger>();
+        }
 
         if(PlayPrepMusic)
         {

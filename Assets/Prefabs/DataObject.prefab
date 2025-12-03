@@ -1680,7 +1680,7 @@ MonoBehaviour:
     range: 0
     ID: 58
   - name: Sundance
-    Descriptions: Turn the weather of the tiles at 1 distance to Sunny (only available
+    Descriptions: Turns the weather of the tiles at 1 distance to Sunny (only available
       outside).
     IsCommand: 1
     Cost: 5
@@ -1688,7 +1688,7 @@ MonoBehaviour:
     range: 1
     ID: 59
   - name: Raindance
-    Descriptions: urn the weather of the tiles at 1 distance to Rainy (only available
+    Descriptions: urns the weather of the tiles at 1 distance to Rainy (only available
       outside).
     IsCommand: 1
     Cost: 5
@@ -1696,7 +1696,7 @@ MonoBehaviour:
     range: 1
     ID: 60
   - name: Amphibian
-    Descriptions: Increase Dodge rate and hit rate by 15% when on a Water or Rainy
+    Descriptions: Increases Dodge rate and hit rate by 15% when on a Water or Rainy
       Tile.
     IsCommand: 0
     Cost: 5
@@ -1704,7 +1704,7 @@ MonoBehaviour:
     range: 0
     ID: 61
   - name: Shut-in
-    Descriptions: Increase damage by 3 when not on a Sunny Tile but reduces it by
+    Descriptions: Increases damage by 3 when not on a Sunny Tile but reduces it by
       6 otherwise.
     IsCommand: 0
     Cost: 5
@@ -2929,6 +2929,7 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
+  BondsList: []
   manualgamespeed: 1
   PlayerInventory:
     inventoryItems:
@@ -4244,6 +4245,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1ae4ac2249c552842a7555d345088b75, type: 3}
   - {fileID: 21300000, guid: 42e125a7c5eb2b9439638a8d5a4dc6cc, type: 3}
   - {fileID: 21300000, guid: a6917331ada75f148afaf32f0ca6664e, type: 3}
+  bondincreaseperaction: 0
+  maxdistanceforbondincrease: 0
 --- !u!114 &6877748070760658668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4269,6 +4272,7 @@ MonoBehaviour:
     PlayableCharacterList: []
     PlayerInventory:
       inventoryItems: []
+    BondList: []
     secondselapsed: 0
     inHideout: 0
   Options:
