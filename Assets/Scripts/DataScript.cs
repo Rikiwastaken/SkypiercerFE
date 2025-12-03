@@ -273,11 +273,11 @@ public class DataScript : MonoBehaviour
         return bondscopy;
     }
 
-    public void IncreaseBonds(int UnitID, int otherunitID)
+    public void IncreaseBonds(GameObject MainUnit, GameObject OtherUnit)
     {
 
-        GameObject MainUnit = null;
-        GameObject OtherUnit = null;
+        int UnitID = MainUnit.GetComponent<UnitScript>().UnitCharacteristics.ID;
+        int OtherUnitID = OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.ID;
 
         TurnManger turnManger  = TurnManger.instance;
         if(turnManger == null)
@@ -285,22 +285,11 @@ public class DataScript : MonoBehaviour
             return;
         }
 
-        foreach (GameObject unit in turnManger.playableunitGO)
-        {
-            if (unit.GetComponent<UnitScript>().UnitCharacteristics.ID == UnitID)
-            {
-                MainUnit = unit;
-            }
-            if (unit.GetComponent<UnitScript>().UnitCharacteristics.ID == otherunitID)
-            {
-                OtherUnit = unit;
-            }
-        }
 
 
         foreach (Bonds bond in BondsList)
         {
-            if(bond.Characters.Contains(UnitID) && bond.Characters.Contains(UnitID))
+            if(bond.Characters.Contains(UnitID) && bond.Characters.Contains(OtherUnitID))
             {
                 bond.BondPoints += bondincreaseperaction;
 
@@ -317,6 +306,28 @@ public class DataScript : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void SpreadBonds(GameObject Unit)
+    {
+        TurnManger turnManger = TurnManger.instance;
+
+        Character charunit = Unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+        if (charunit.affiliation.ToLower()!="playable" || turnManger == null)
+        {
+            return;
+        }
+
+        foreach(GameObject otherunit in turnManger.playableunitGO)
+        {
+            Character charother = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
+            if (charother != charunit && charother.currentHP>0 && ManhattanDistance(charunit.currentTile[0].GridCoordinates, charother.currentTile[0].GridCoordinates)<=2)
+            {
+                IncreaseBonds(Unit,otherunit);
+            }
+        }
+
     }
 
     public void UpdatePlayableUnits()

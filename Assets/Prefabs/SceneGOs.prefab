@@ -13370,28 +13370,6 @@ MonoBehaviour:
   expbar: {fileID: 4384917138213913139}
   delaybeforenxtunit: 0
   phaseTextScript: {fileID: 3028186298790515499}
-  CurrentAction:
-    Unit: {fileID: 0}
-    actiontype: 0
-    previousPosition:
-    - {fileID: 0}
-    - {fileID: 0}
-    ModifiedCharacters: []
-    AttackData:
-      defender: {fileID: 0}
-      previousattackerhitindex: 0
-      previousdefenderhitindex: 0
-      previousattackercritindex: 0
-      previousdefendercritindex: 0
-      previousattackerlvlupindex: 0
-      previousdefenderlvlupindex: 0
-      attackersurvivorstats: -1
-      defendersurvivorstats: -1
-    commandID: 0
-    ModifiedTiles: []
-    skilltoremovefrominventory: -1
-    beginningofturn: -1
-    PreviousEvents: []
   foresightScript: {fileID: 4945345412159395524}
   attackanimationhappeningcnt: 0
 --- !u!114 &5264566689360548286

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -520,6 +521,7 @@ public class ActionsMenu : MonoBehaviour
 
     public void FinalizeAttack()
     {
+        DataScript.instance.SpreadBonds(target);
         target.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         targetlist = new List<GameObject>();
         GameObject oldtarget = target;

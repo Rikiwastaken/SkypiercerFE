@@ -2327,6 +2327,55 @@ public class UnitScript : MonoBehaviour
 
         return statbonuses;
     }
+
+    public AllStatsSkillBonus GetBondCombatBonus()
+    {
+        AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
+
+        TurnManger TM = TurnManger.instance;
+        
+        List<Bonds> pertinentbonds = new List<Bonds>();
+
+        foreach(Bonds bond in DataScript.instance.BondsList)
+        {
+            if(bond.Characters.Contains(UnitCharacteristics.ID))
+            {
+                pertinentbonds.Add(bond);
+            }
+        }
+
+        foreach(GameObject otherunitGO in TM.playableunitGO)
+        {
+            Character otherunit = otherunitGO.GetComponent<UnitScript>().UnitCharacteristics;
+            if(otherunit.currentHP > 0 && otherunit != UnitCharacteristics && ManhattanDistance(UnitCharacteristics,otherunit)<=2)
+            {
+                foreach(Bonds bond in pertinentbonds)
+                {
+                    if(bond.Characters.Contains(otherunit.ID))
+                    {
+                        statbonuses.Crit += 2 * bond.BondLevel;
+                        statbonuses.Hit += 3 * bond.BondLevel;
+                        statbonuses.Dodge += 2 * bond.BondLevel;
+                        if(GetSkill(67)) // Friends are power
+                        {
+                            statbonuses.Crit += 2 * bond.BondLevel;
+                            statbonuses.Hit += 3 * bond.BondLevel;
+                            statbonuses.Dodge += 2 * bond.BondLevel;
+                        }
+                        if (otherunitGO.GetComponent<UnitScript>().GetSkill(67)) // Friends are power
+                        {
+                            statbonuses.Crit += 2 * bond.BondLevel;
+                            statbonuses.Hit += 3 * bond.BondLevel;
+                            statbonuses.Dodge += 2 * bond.BondLevel;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        return statbonuses;
+    }
     public AllStatsSkillBonus GetStatSkillBonus(GameObject enemy)
     {
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
@@ -2719,6 +2768,16 @@ public class UnitScript : MonoBehaviour
 
 
         AllStatsSkillBonus battalionskillbonus = GetBattalionCombatBonus();
+
+
+        if (UnitCharacteristics.affiliation.ToLower()=="playable")
+        {
+            AllStatsSkillBonus bondbonus = GetBondCombatBonus();
+            statbonuses.Hit += bondbonus.Hit;
+            statbonuses.Crit += bondbonus.Crit;
+            statbonuses.Dodge += bondbonus.Dodge;
+        }
+        
 
         statbonuses.FixedDamageBonus += battalionskillbonus.FixedDamageBonus;
         statbonuses.FixedDamageReduction += battalionskillbonus.FixedDamageReduction;
