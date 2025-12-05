@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnitScript;
 using static DataScript;
+using static UnitScript;
 
 public class SkillEditionScript : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class SkillEditionScript : MonoBehaviour
     public TextMeshProUGUI SkillPointsText;
 
     public bool InHideout;
+    public bool IsBonds;
     public GameObject HideoutMenu;
 
 
@@ -43,6 +45,7 @@ public class SkillEditionScript : MonoBehaviour
         {
             gridscript = GridScript.instance;
         }
+
         inputmanager = InputManager.instance;
 
         InitializeButtons();
@@ -76,12 +79,36 @@ public class SkillEditionScript : MonoBehaviour
         {
             if (inputmanager.canceljustpressed)
             {
-                if (SkillList.activeSelf)
+                if(IsBonds)
                 {
-                    SkillList.SetActive(false);
+                    if(!BondsScript.instance.bondsSubMenu.activeSelf)
+                    {
+                        if (SkillList.activeSelf)
+                        {
+                            SkillList.SetActive(false);
+                        }
+                        HideoutMenu.SetActive(true);
+                        gameObject.SetActive(false);
+                        EventSystem.current.SetSelectedGameObject(HideoutMenu.transform.GetChild(1).gameObject);
+                    }
                 }
-                HideoutMenu.SetActive(true);
-                gameObject.SetActive(false);
+                else
+                {
+                    if (SkillList.activeSelf)
+                    {
+                        SkillList.SetActive(false);
+                        EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
+                    }
+                    else
+                    {
+                        HideoutMenu.SetActive(true);
+                        gameObject.SetActive(false);
+                        EventSystem.current.SetSelectedGameObject(HideoutMenu.transform.GetChild(0).gameObject);
+                    }
+                        
+                    
+                }
+                
                 return;
 
             }
@@ -154,7 +181,7 @@ public class SkillEditionScript : MonoBehaviour
                 }
             }
         }
-        if ((!buttonselected || currentselected == null) && !SkillList.activeSelf)
+        if ((!buttonselected || currentselected == null) && !SkillList.activeSelf && !IsBonds)
         {
 
             EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
@@ -288,12 +315,50 @@ public class SkillEditionScript : MonoBehaviour
 
     private void InitializeButtons()
     {
-        for (int i = 0; i < Mathf.Min(DataScript.instance.PlayableCharacterList.Count - 10 * (characterwindowindex), 10); i++)
+
+        List<Character> ListToUse = new List<Character>();
+        if(IsBonds)
         {
-            transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = DataScript.instance.PlayableCharacterList[i + 10 * (characterwindowindex)];
+            List<int> characterswithbonds = new List<int>();
+
+            foreach(Bonds bond in DataScript.instance.BondsList)
+            {
+                foreach(int ID in bond.Characters)
+                {
+                    if(!characterswithbonds.Contains(ID))
+                    {
+                        characterswithbonds.Add(ID);
+                    }
+                }
+            }
+
+
+            foreach (Character playablechar in DataScript.instance.PlayableCharacterList)
+            {
+                if (playablechar.playableStats.unlocked && characterswithbonds.Contains(playablechar.ID))
+                {
+                    ListToUse.Add(playablechar);
+                }
+            }
+        }
+        else
+        {
+
+            foreach(Character playablechar in DataScript.instance.PlayableCharacterList)
+            {
+                if(playablechar.playableStats.unlocked)
+                {
+                    ListToUse.Add(playablechar);
+                }
+            }
+        }
+
+        for (int i = 0; i < Mathf.Min(ListToUse.Count - 10 * (characterwindowindex), 10); i++)
+        {
+            transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = ListToUse[i + 10 * (characterwindowindex)];
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i + 10 * (characterwindowindex);
         }
-        for (int i = Mathf.Min(DataScript.instance.PlayableCharacterList.Count - 10 * (characterwindowindex), 10); i < 10; i++)
+        for (int i = Mathf.Min(ListToUse.Count - 10 * (characterwindowindex), 10); i < 10; i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = null;
         }
@@ -317,14 +382,25 @@ public class SkillEditionScript : MonoBehaviour
 
     public void SelectUnit(int ButtonID)
     {
+        if(TextBubbleScript.Instance.indialogue)
+        {
+            return;
+        }
         if (transform.GetChild(ButtonID).GetComponent<UnitDeploymentButton>().Character != null)
         {
             if (transform.GetChild(ButtonID).GetComponent<UnitDeploymentButton>().Character.name != "")
             {
                 selectedcharacter = DataScript.instance.PlayableCharacterList[ButtonID + characterwindowindex * 10];
-                SkillList.SetActive(true);
-                InitializeSkillButtons();
-                skillwindowindex = 0;
+                if (IsBonds)
+                {
+                    BondsScript.instance.LoadCharacterBonds(selectedcharacter);
+                }
+                else
+                {
+                    SkillList.SetActive(true);
+                    InitializeSkillButtons();
+                    skillwindowindex = 0;
+                } 
             }
         }
     }

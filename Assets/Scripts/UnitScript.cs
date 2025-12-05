@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -287,6 +288,8 @@ public class UnitScript : MonoBehaviour
 
     public float delayedUpdateTime;
 
+    public Image AffinityArrow;
+
     [Header("\nEquipment/Type/Copy/Telekinesis Sprites")]
     [Header("Equipment Sprites")]
     public Sprite BareHandSprite;
@@ -519,7 +522,7 @@ public class UnitScript : MonoBehaviour
             //dostuff
 
 
-
+            
             if (copied && CopiedSkillImage.sprite != SkillCopiedSprite)
             {
                 CopiedSkillImage.sprite = SkillCopiedSprite;
@@ -544,7 +547,7 @@ public class UnitScript : MonoBehaviour
                 animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow");
             }
 
-
+            ShowAffinityArrow();
             UpdateRendererLayer();
             ManageSize();
             Hidedeactivated();
@@ -918,6 +921,74 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+    public void ShowAffinityArrow()
+    {
+        DataScript DS = DataScript.instance;
+        if(GridScript.GetUnit(GridScript.selection)==gameObject)
+        {
+
+            List<GameObject> BondedUnitsList = new List<GameObject>();
+            List<int> BondedUnitIDsList = new List<int>();
+
+            foreach (Bonds bond in DS.BondsList)
+            {
+                if(bond.Characters.Contains(UnitCharacteristics.ID))
+                {
+                    foreach(int ID in bond.Characters)
+                    {
+                        if(ID!= UnitCharacteristics.ID)
+                        {
+                            BondedUnitIDsList.Add(ID);
+                        }
+                    }
+                }
+            }
+
+            foreach(GameObject unitGO in TurnManger.instance.playableunitGO)
+            {
+                Character character = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
+                if(BondedUnitIDsList.Contains(character.ID))
+                {
+                    unitGO.GetComponent<UnitScript>().PointArrowToTarget(UnitCharacteristics);
+                }
+                else
+                {
+                    unitGO.GetComponent<UnitScript>().HideAffinityArrow();
+                }
+            }
+
+        }
+    }
+
+    public void PointArrowToTarget(Character target)
+    {
+        if(!AffinityArrow.gameObject.activeSelf)
+        {
+            AffinityArrow.gameObject.SetActive(true);
+            Vector3 myPos = UnitCharacteristics.currentTile[0].GridCoordinates;
+            Vector3 targetPos = target.currentTile[0].GridCoordinates;
+
+            Vector3 midpoint = (myPos + targetPos) * 0.5f;
+
+            AffinityArrow.transform.position = new Vector3(midpoint.x, midpoint.y, AffinityArrow.transform.position.z);
+
+            Vector2 direction = targetPos - myPos;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            AffinityArrow.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+        }
+
+        
+
+    }
+
+    public void HideAffinityArrow()
+    {
+        if (AffinityArrow.gameObject.activeSelf)
+        {
+            AffinityArrow.gameObject.SetActive(false);
+        }
+    }
     private void LevelupMasteryCheck(WeaponMastery mastery)
     {
         bool levelup = false;
@@ -2353,18 +2424,18 @@ public class UnitScript : MonoBehaviour
                 {
                     if(bond.Characters.Contains(otherunit.ID))
                     {
-                        statbonuses.Crit += 2 * bond.BondLevel;
+                        statbonuses.Crit += 1 * bond.BondLevel;
                         statbonuses.Hit += 3 * bond.BondLevel;
                         statbonuses.Dodge += 2 * bond.BondLevel;
                         if(GetSkill(67)) // Friends are power
                         {
-                            statbonuses.Crit += 2 * bond.BondLevel;
+                            statbonuses.Crit += 1 * bond.BondLevel;
                             statbonuses.Hit += 3 * bond.BondLevel;
                             statbonuses.Dodge += 2 * bond.BondLevel;
                         }
                         if (otherunitGO.GetComponent<UnitScript>().GetSkill(67)) // Friends are power
                         {
-                            statbonuses.Crit += 2 * bond.BondLevel;
+                            statbonuses.Crit += 1 * bond.BondLevel;
                             statbonuses.Hit += 3 * bond.BondLevel;
                             statbonuses.Dodge += 2 * bond.BondLevel;
                         }

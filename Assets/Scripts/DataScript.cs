@@ -52,10 +52,18 @@ public class DataScript : MonoBehaviour
     [Serializable]
     public class Bonds
     {
+        public int ID;
+        public string Name;
         public List<int> Characters;
         public int BondPoints;
         public int BondLevel;
         public int BondDialogueSeen;
+    }
+
+    [Serializable]
+    public class BondClassForLoading
+    {
+        public List<Bonds> BondList;
     }
 
     [Serializable]
@@ -76,6 +84,12 @@ public class DataScript : MonoBehaviour
         public int targettype; // 0 enemies, 1 allies, 2 walls, 3 self
         public int range;
         public int ID;
+    }
+
+    [Serializable]
+    private class SkillListWrapper
+    {
+        public List<Skill> SkillList;
     }
 
     public int bondincreaseperaction;
@@ -547,14 +561,31 @@ public class DataScript : MonoBehaviour
         }
 
         SkillList = wrapper.SkillList;
-
+        EditorUtility.SetDirty(this);
         Debug.Log("Loaded " + wrapper.SkillList.Count + " skills into the SkillList!");
     }
 
-    [System.Serializable]
-    private class SkillListWrapper
+    
+
+    [ContextMenu("Load Bonds From JSON")]
+    public void LoadBonds()
     {
-        public List<Skill> SkillList;
+        string path = EditorUtility.OpenFilePanel("Select Bond JSON File", "", "json");
+        if (string.IsNullOrEmpty(path))
+            return;
+
+        string json = File.ReadAllText(path);
+
+        BondClassForLoading wrapper = JsonUtility.FromJson<BondClassForLoading>(json);
+        if (wrapper == null || wrapper.BondList == null)
+        {
+            Debug.LogError("JSON file format invalid. Needs { \"BondList\": [ ... ] }");
+            return;
+        }
+
+        BondsList = wrapper.BondList;
+        EditorUtility.SetDirty(this);
+        Debug.Log("Loaded " + wrapper.BondList.Count + " bonds into the BondsList!");
     }
 
 #endif

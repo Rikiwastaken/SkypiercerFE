@@ -20,6 +20,14 @@ public class HideoutScript : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
     }
 
+    private void Update()
+    {
+        if(EventSystem.current.currentSelectedGameObject==null || !EventSystem.current.currentSelectedGameObject.activeSelf || !EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.activeSelf)
+        {
+            EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
+        }
+    }
+
     public void LoadNextChapter()
     {
         if (saveManager == null)

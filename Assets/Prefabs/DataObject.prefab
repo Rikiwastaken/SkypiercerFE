@@ -1253,7 +1253,7 @@ MonoBehaviour:
     ID: 14
   SkillList:
   - name: No Skill
-    Descriptions: No skil
+    Descriptions: No skill
     IsCommand: 0
     Cost: 0
     targettype: 0
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   - name: Fast Legs
     Descriptions: Adds one movement.
     IsCommand: 0
-    Cost: 3
+    Cost: 5
     targettype: 0
     range: 0
     ID: 5
@@ -1342,36 +1342,37 @@ MonoBehaviour:
     range: 0
     ID: 11
   - name: Medic
-    Descriptions: Heals each adjacent unit 10% of their max HP at beginning of turn.
+    Descriptions: Heals each adjacent friendly unit 10% of their max HP at beginning
+      of turn.
     IsCommand: 0
     Cost: 10
     targettype: 0
     range: 0
     ID: 12
   - name: Fast and Deadly
-    Descriptions: Increase critical chance by Speed/2
+    Descriptions: Increases critical chance by Speed/2.
     IsCommand: 0
     Cost: 10
     targettype: 0
     range: 0
     ID: 13
   - name: Invigorating
-    Descriptions: Heals the attacker of 10% of damage dealt
+    Descriptions: Heals the attacker of 10% of damage dealt.
     IsCommand: 0
     Cost: 10
     targettype: 0
     range: 0
     ID: 14
   - name: Sore Loser
-    Descriptions: If the unit has less health than the enemy after combat, set the
-      enemy's health points to the unit's
+    Descriptions: If the unit has less health than the enemy after combat, sets the
+      enemy's health points to the unit's.
     IsCommand: 0
     Cost: 15
     targettype: 0
     range: 0
     ID: 15
   - name: Sniper
-    Descriptions: Always 100% hit rate.
+    Descriptions: Unit always has 100% hit rate.
     IsCommand: 0
     Cost: 15
     targettype: 0
@@ -1385,23 +1386,21 @@ MonoBehaviour:
     range: 0
     ID: 17
   - name: Nimble
-    Descriptions: Increases dodge rate by 20% and damage taken by 30%
+    Descriptions: Increases dodge rate by 20% and damage taken by 30%.
     IsCommand: 0
     Cost: 5
     targettype: 0
     range: 0
     ID: 18
   - name: Lucky Seven
-    Descriptions: Increase strength, psyche, speed, dexterity, defense and resistance
-      by 7 when last digit of Health Points is 7
+    Descriptions: Increases all stats by 7 when last digit of HP is 7.
     IsCommand: 0
-    Cost: 0
+    Cost: 7
     targettype: 0
     range: 0
     ID: 19
   - name: Patient
-    Descriptions: Restores twice the durability and restores 10% max of Health Points
-      when waiting.
+    Descriptions: Restores twice the durability and 10% of max HP when waiting.
     IsCommand: 0
     Cost: 5
     targettype: 0
@@ -1415,8 +1414,7 @@ MonoBehaviour:
     range: 0
     ID: 21
   - name: Competitive
-    Descriptions: Increases damage dealt by 5 when facing the an enemy with the same
-      blade type.
+    Descriptions: Increases damage dealt by 5 when facing enemy with same blade type.
     IsCommand: 0
     Cost: 3
     targettype: 0
@@ -1431,7 +1429,7 @@ MonoBehaviour:
     range: 0
     ID: 23
   - name: Last Stand
-    Descriptions: If the Unit is the last one alive, increases all stats by 25%
+    Descriptions: If the Unit is the last one alive, increases all stats by 25%.
     IsCommand: 0
     Cost: 2
     targettype: 0
@@ -1446,7 +1444,7 @@ MonoBehaviour:
     ID: 25
   - name: Solitary
     Descriptions: Increases damage dealt by 5 if there is no other ally units in
-      3 tiles range
+      3 tiles range.
     IsCommand: 0
     Cost: 5
     targettype: 0
@@ -1474,7 +1472,7 @@ MonoBehaviour:
     range: 0
     ID: 29
   - name: Compassion
-    Descriptions: When healing an ally, recovers the same number of Health.
+    Descriptions: When healing an ally, recovers the same amount of HP.
     IsCommand: 0
     Cost: 5
     targettype: 0
@@ -1502,7 +1500,7 @@ MonoBehaviour:
     range: 0
     ID: 33
   - name: Rebound
-    Descriptions: When healing, also heals other allies 10% of the amount.
+    Descriptions: When healing, also heals other allies 5% of the amount.
     IsCommand: 0
     Cost: 15
     targettype: 0
@@ -1516,15 +1514,14 @@ MonoBehaviour:
     range: 0
     ID: 35
   - name: Bravery
-    Descriptions: If enemy's level is higher, increases all stats by 1 for every
-      2 levels.
+    Descriptions: If enemy level is higher, increases all stats by 1 per 2 levels.
     IsCommand: 0
     Cost: 5
     targettype: 0
     range: 0
     ID: 36
   - name: Noble Fight
-    Descriptions: Lowers the unit and the enemy's dodge by 30%
+    Descriptions: Lowers unit and enemy dodge rate by 30%.
     IsCommand: 0
     Cost: 5
     targettype: 0
@@ -1544,8 +1541,8 @@ MonoBehaviour:
     targettype: 0
     range: 0
     ID: 39
-  - name: All for One
-    Descriptions: 50% of damage taken by allies within 3 tiles get transferred to
+  - name: One for All
+    Descriptions: 50% of damage taken by allies within 3 tiles is transferred to
       this unit.
     IsCommand: 0
     Cost: 10
@@ -1553,16 +1550,16 @@ MonoBehaviour:
     range: 0
     ID: 40
   - name: Together we ride
-    Descriptions: Increases all stats by 1 for every 2 ally in a 2 tile radius.
+    Descriptions: Increases all stats by 1 for every 2 allies in 2 tiles.
     IsCommand: 0
     Cost: 10
     targettype: 0
     range: 0
     ID: 41
   - name: Readiness
-    Descriptions: Increases damage dealt by 5% each time unit waits, up to 30%.
+    Descriptions: Increases damage by 5% each time unit waits, up to 30%.
     IsCommand: 0
-    Cost: 10
+    Cost: 5
     targettype: 0
     range: 0
     ID: 42
@@ -1573,30 +1570,36 @@ MonoBehaviour:
     targettype: 0
     range: 0
     ID: 43
+  - name: Offensive defense
+    Descriptions: Increases damage dealt by 4 but cannot counterattack.
+    IsCommand: 0
+    Cost: 5
+    targettype: 0
+    range: 0
+    ID: 43
   - name: Unyielding
-    Descriptions: If Unit is at max HP when combat starts, their HP cannot go below
-      1 HP.
+    Descriptions: If at max HP when combat starts, HP cannot go below 1.
     IsCommand: 0
     Cost: 10
     targettype: 0
     range: 0
     ID: 44
   - name: Transparent Crossbow
-    Descriptions: TBD
+    Descriptions: Unit's max HP is 1. Increases all stats by 5.
     IsCommand: 0
-    Cost: 0
+    Cost: 5
     targettype: 0
     range: 0
     ID: 45
   - name: Warming Up
-    Descriptions: If an unit waits, they gain 1 more movement for 1 turn.
+    Descriptions: If unit waits, gains 1 movement for 1 turn.
     IsCommand: 0
     Cost: 5
     targettype: 0
     range: 0
     ID: 46
   - name: Transfuse
-    Descriptions: Exchanges HP % with an ally.
+    Descriptions: Exchanges HP % with an ally
     IsCommand: 1
     Cost: 5
     targettype: 1
@@ -1617,28 +1620,28 @@ MonoBehaviour:
     range: 1
     ID: 49
   - name: Reinvigorate
-    Descriptions: Restores durability of all of an ally's blade by 1.
+    Descriptions: Restores durability of all blades of an ally by 1.
     IsCommand: 1
     Cost: 5
     targettype: 1
     range: 1
     ID: 50
   - name: Jump
-    Descriptions: Move on the other side of a wall.
+    Descriptions: Moves on the other side of a small wall.
     IsCommand: 1
-    Cost: 10
+    Cost: 15
     targettype: 2
     range: 1
     ID: 51
   - name: Fortify
-    Descriptions: Change the effect of the Tile to a Fortification Tile.
+    Descriptions: Changes tile to Fortification Tile.
     IsCommand: 1
     Cost: 10
-    targettype: 3
+    targettype: 0
     range: 0
     ID: 52
   - name: Smoke Bomb
-    Descriptions: Change the effect of the Tile to a Fog Tile.
+    Descriptions: Changes tile to Fog Tile.
     IsCommand: 1
     Cost: 10
     targettype: 3
@@ -1652,21 +1655,21 @@ MonoBehaviour:
     range: 0
     ID: 54
   - name: Enduring
-    Descriptions: Adds half of missing health to damage.
+    Descriptions: Adds half of missing HP to damage.
     IsCommand: 0
     Cost: 5
     targettype: 0
     range: 0
     ID: 55
   - name: Copy
-    Descriptions: Extracts Skill from enemy.
+    Descriptions: Extracts skill from enemy.
     IsCommand: 1
     Cost: 5
     targettype: 0
     range: 1
     ID: 56
   - name: Crystal Heart
-    Descriptions: Increases all stat growth and exp gained by 10% (exclusive to Zack)
+    Descriptions: Increases all growth and exp by 10% (exclusive toZack).
     IsCommand: 0
     Cost: 0
     targettype: 0
@@ -1688,7 +1691,7 @@ MonoBehaviour:
     range: 1
     ID: 59
   - name: Raindance
-    Descriptions: urns the weather of the tiles at 1 distance to Rainy (only available
+    Descriptions: Turns the weather of the tiles at 1 distance to Rainy (only available
       outside).
     IsCommand: 1
     Cost: 5
@@ -1712,13 +1715,85 @@ MonoBehaviour:
     range: 0
     ID: 62
   - name: Master Hunter
-    Descriptions: Increase hit rate by 80% and damage by 3 if not wielding any blade
-      (exclusive to Mir)
+    Descriptions: Increases hit rate by 80% and damage by 3 if not wielding any blade
+      (exclusive to Mir).
+    IsCommand: 0
+    Cost: 0
+    targettype: 0
+    range: 0
+    ID: 63
+  - name: Showdown
+    Descriptions: Increases attacker and defender critical rate by 25%.
     IsCommand: 0
     Cost: 5
     targettype: 0
     range: 0
-    ID: 63
+    ID: 64
+  - name: Fair Play
+    Descriptions: Decreases attacker and defender critical rate by 25%.
+    IsCommand: 0
+    Cost: 5
+    targettype: 0
+    range: 0
+    ID: 65
+  - name: Friendly
+    Descriptions: Creates Bonds faster.
+    IsCommand: 0
+    Cost: 10
+    targettype: 0
+    range: 0
+    ID: 66
+  - name: Friends are power
+    Descriptions: Doubles Bonds effects.
+    IsCommand: 0
+    Cost: 10
+    targettype: 0
+    range: 0
+    ID: 67
+  - name: Violent Misuse
+    Descriptions: Increases weapon damage by 50% and doubles durability use.
+    IsCommand: 0
+    Cost: 10
+    targettype: 0
+    range: 0
+    ID: 68
+  - name: Redirection
+    Descriptions: Physical dmg is calculated with Resistance and Telekinesis dmg
+      with Defense.
+    IsCommand: 0
+    Cost: 10
+    targettype: 0
+    range: 0
+    ID: 69
+  - name: Blade Conversion
+    Descriptions: Lowers Blade durability to zero to regain 50% max HP.
+    IsCommand: 1
+    Cost: 10
+    targettype: 3
+    range: 0
+    ID: 70
+  - name: Blade Sacrifice
+    Descriptions: Sacrifices 50% of max HP to fully replenish durability of equipped
+      blade.
+    IsCommand: 1
+    Cost: 10
+    targettype: 3
+    range: 0
+    ID: 71
+  - name: Guardian Spirit
+    Descriptions: Increases all stat growth and exp gained by 10% (exclusive to Kira).
+    IsCommand: 0
+    Cost: 0
+    targettype: 0
+    range: 0
+    ID: 72
+  - name: Hero's Heir
+    Descriptions: Increases all stat growth and exp gained by 10% (exclusive to Gale).
+    IsCommand: 0
+    Cost: 0
+    targettype: 0
+    range: 0
+    ID: 73
   PlayableCharacterList:
   - name: Zack
     ID: 0
@@ -2929,7 +3004,79 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-  BondsList: []
+  BondsList:
+  - ID: 0
+    Name: Zack-Lea
+    Characters: 0000000001000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 1
+    Name: Zack-Elwyn
+    Characters: 0000000002000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 2
+    Name: Zack-Sorak
+    Characters: 0000000003000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 3
+    Name: Zack-Lyv
+    Characters: 0000000004000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 4
+    Name: Zack-Sieg
+    Characters: 0000000005000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 5
+    Name: Lea-Elwyn
+    Characters: 0100000002000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 6
+    Name: Lea-Sorak
+    Characters: 0100000003000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 7
+    Name: Lea-Lyv
+    Characters: 0100000004000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 8
+    Name: Elwyn-Sorak
+    Characters: 0200000003000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 9
+    Name: Elwyn-Lyv
+    Characters: 0200000004000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 10
+    Name: Sorak-Lyv
+    Characters: 0300000004000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 11
+    Name: Sieg-Lyv
+    Characters: 0500000004000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
   manualgamespeed: 1
   PlayerInventory:
     inventoryItems:

@@ -93,30 +93,48 @@ public class TextBubbleScript : MonoBehaviour
         if (Dialogue == null && indialogue)
         {
             DeactivateBubble();
-            MapEventManager.instance.TriggerEventCheck();
+            if(MapEventManager.instance!=null)
+            {
+                MapEventManager.instance.TriggerEventCheck();
+            }
+            
         }
         else if (Dialogue.Count <= currentTextBubble)
         {
 
             DeactivateBubble();
-            MapEventManager.instance.TriggerEventCheck();
+            if (MapEventManager.instance != null)
+            {
+                MapEventManager.instance.TriggerEventCheck();
+            }
         }
         else
         {
-            ActionManager.instance.frameswherenotlock = 5;
+            if(ActionManager.instance!=null)
+            {
+                ActionManager.instance.frameswherenotlock = 5;
+            }
+            
 
             indialogue = true;
 
-            FindAnyObjectByType<GridScript>().lockselection = false;
-
-            if (Dialogue[currentTextBubble].CameraDestination != Vector3.zero)
+            if(gridScript!=null)
             {
-                cameraScript.Destination = new Vector2(Dialogue[currentTextBubble].CameraDestination.x, Dialogue[currentTextBubble].CameraDestination.z);
+                gridScript.lockselection = false;
             }
-            else if(GetCharacterCoordinates() != Vector2.zero)
+            
+            if(cameraScript!=null)
             {
-                cameraScript.Destination = GetCharacterCoordinates();
+                if (Dialogue[currentTextBubble].CameraDestination != Vector3.zero)
+                {
+                    cameraScript.Destination = new Vector2(Dialogue[currentTextBubble].CameraDestination.x, Dialogue[currentTextBubble].CameraDestination.z);
+                }
+                else if (GetCharacterCoordinates() != Vector2.zero)
+                {
+                    cameraScript.Destination = GetCharacterCoordinates();
+                }
             }
+            
 
 
             if (isPrinting && charIndex < texttodisplay.Length)
@@ -208,7 +226,10 @@ public class TextBubbleScript : MonoBehaviour
         else
         {
             DeactivateBubble();
-            MapEventManager.instance.TriggerEventCheck();
+            if(MapEventManager.instance!=null)
+            {
+                MapEventManager.instance.TriggerEventCheck();
+            }
         }
     }
 
@@ -218,7 +239,11 @@ public class TextBubbleScript : MonoBehaviour
         Dialogue = dialogue;
         indialogue = true;
         GoToNextPage();
-        gridScript.ShowMovement();
+        if(gridScript != null)
+        {
+            gridScript.ShowMovement();
+        }
+        
     }
 
     private Character GetCharacter()

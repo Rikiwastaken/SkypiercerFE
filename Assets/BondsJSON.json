@@ -1,0 +1,136 @@
+{
+    "BondList": [
+        {
+            "ID": 0,
+            "Name": "Zack-Lea",
+            "Characters": [
+                0,
+                1
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 1,
+            "Name": "Zack-Elwyn",
+            "Characters": [
+                0,
+                2
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 2,
+            "Name": "Zack-Sorak",
+            "Characters": [
+                0,
+                3
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 3,
+            "Name": "Zack-Lyv",
+            "Characters": [
+                0,
+                4
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 4,
+            "Name": "Zack-Sieg",
+            "Characters": [
+                0,
+                5
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 5,
+            "Name": "Lea-Elwyn",
+            "Characters": [
+                1,
+                2
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 6,
+            "Name": "Lea-Sorak",
+            "Characters": [
+                1,
+                3
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 7,
+            "Name": "Lea-Lyv",
+            "Characters": [
+                1,
+                4
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 8,
+            "Name": "Elwyn-Sorak",
+            "Characters": [
+                2,
+                3
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 9,
+            "Name": "Elwyn-Lyv",
+            "Characters": [
+                2,
+                4
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 10,
+            "Name": "Sorak-Lyv",
+            "Characters": [
+                3,
+                4
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 11,
+            "Name": "Sieg-Lyv",
+            "Characters": [
+                5,
+                4
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        }
+    ]
+}

@@ -2,7 +2,6 @@
 
 [[Elwyn]]
 [[Lea]]
-[[Elwyn]]
 [[Sorak]]
 [[Lyv]]
 [[Sieg]]
