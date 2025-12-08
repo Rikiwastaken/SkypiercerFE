@@ -12,7 +12,7 @@ public class GameOverScript : MonoBehaviour
     public static GameOverScript instance;
 
     public bool victory;
-    public bool InHideout;
+    public bool InCamp;
 
     private SceneLoader sceneLoader;
     private SaveManager saveManager;
@@ -35,7 +35,7 @@ public class GameOverScript : MonoBehaviour
     {
         sceneLoader = SceneLoader.instance;
 
-        if (!InHideout)
+        if (!InCamp)
         {
 
             VictoryMenu.gameObject.SetActive(victory);
@@ -48,7 +48,7 @@ public class GameOverScript : MonoBehaviour
     private void FixedUpdate()
     {
         GameObject buttonToSelect = EventSystem.current.currentSelectedGameObject;
-        if (buttonToSelect==null)
+        if (buttonToSelect == null)
         {
             if (GameOverMenu.gameObject.activeSelf)
                 buttonToSelect = GameOverMenu.GetChild(1).gameObject;
@@ -120,7 +120,7 @@ public class GameOverScript : MonoBehaviour
             saveManager = SaveManager.instance;
 
         int nextsceneindex = FindAnyObjectByType<MapInitializer>().ChapterID;
-        
+
         saveManager.currentchapter = nextsceneindex + 1;
 
         if (saveManager.currentchapter == 1)
@@ -129,9 +129,9 @@ public class GameOverScript : MonoBehaviour
         }
         else
         {
-            sceneLoader.LoadScene("Hideout");
+            sceneLoader.LoadScene("Camp");
         }
-            
+
     }
 
     public void ReturnToMainMenu()

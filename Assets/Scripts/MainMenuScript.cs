@@ -105,7 +105,7 @@ public class MainMenuScript : MonoBehaviour
         {
             saveManager.activeSlot = slot;
             saveManager.ApplySave(slot);
-            sceneLoader.LoadScene("Hideout");
+            sceneLoader.LoadScene("Camp");
         }
         else
         {

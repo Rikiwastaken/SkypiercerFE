@@ -29,7 +29,7 @@ public class SaveManager : MonoBehaviour
         public Inventory PlayerInventory;
         public List<Bonds> BondList;
         public float secondselapsed;
-        public bool inHideout;
+        public bool inCamp;
     }
 
     [Serializable]
@@ -55,7 +55,7 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance== null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -184,7 +184,7 @@ public class SaveManager : MonoBehaviour
             Debug.LogError($"Error when saving options : {e.Message}");
         }
 
-        if(MusicManager.instance != null)
+        if (MusicManager.instance != null)
         {
             MusicManager.instance.ChangeVolume();
 
@@ -205,13 +205,13 @@ public class SaveManager : MonoBehaviour
                 int numberofhours = numberofminutes / 60;
                 numberofminutes = numberofminutes % 60;
                 string text = "Slot : " + (i + 1) + "  Time played : " + numberofhours + "h" + numberofminutes + "min";
-                if(save.inHideout)
+                if (save.inCamp)
                 {
                     text += "\nChapter: " + save.chapter + ", before battle.";
                 }
                 else
                 {
-                    if(save.chapter>1)
+                    if (save.chapter > 1)
                     {
                         text += "\nChapter: " + (save.chapter - 1) + ", after battle.";
                     }
@@ -272,12 +272,12 @@ public class SaveManager : MonoBehaviour
     {
 
         currentchapter = chapter;
-        bool Hideout = false;
+        bool inCamp = false;
         string scenename = SceneManager.GetActiveScene().name;
 
-        for(int i = 0; i < SceneManager.sceneCount;i++)
+        for (int i = 0; i < SceneManager.sceneCount; i++)
         {
-            if(SceneManager.GetSceneAt(i).name== "Prologue" || SceneManager.GetSceneAt(i).name.Contains("Chapter"))
+            if (SceneManager.GetSceneAt(i).name == "Prologue" || SceneManager.GetSceneAt(i).name.Contains("Chapter"))
             {
                 scenename = SceneManager.GetSceneAt(i).name;
                 break;
@@ -286,18 +286,18 @@ public class SaveManager : MonoBehaviour
 
         if (scenename.Contains("Chapter"))
         {
-            scenename =scenename.Replace("Chapter", "");
+            scenename = scenename.Replace("Chapter", "");
             currentchapter = int.Parse(scenename) + 1;
             DataScript.instance.UpdatePlayableUnits();
         }
-        if(scenename.Contains("Prologue"))
+        if (scenename.Contains("Prologue"))
         {
             currentchapter = 1;
             DataScript.instance.UpdatePlayableUnits();
         }
-        if (scenename.Contains("Hideout"))
+        if (scenename.Contains("Camp"))
         {
-            Hideout = true;
+            inCamp = true;
         }
 
         SaveClass save = new SaveClass
@@ -308,7 +308,7 @@ public class SaveManager : MonoBehaviour
             PlayableCharacterList = DataScript.instance.PlayableCharacterList,
             PlayerInventory = DataScript.instance.PlayerInventory,
             secondselapsed = secondselapsed,
-            inHideout = Hideout,
+            inCamp = inCamp,
             BondList = DataScript.instance.BondsList
         };
 

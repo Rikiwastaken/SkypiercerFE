@@ -33,15 +33,15 @@ public class SkillEditionScript : MonoBehaviour
     public TextMeshProUGUI SkillDescriptionText;
     public TextMeshProUGUI SkillPointsText;
 
-    public bool InHideout;
+    public bool inCamp;
     public bool IsBonds;
-    public GameObject HideoutMenu;
+    public GameObject CampMenu;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        if (!InHideout)
+        if (!inCamp)
         {
             gridscript = GridScript.instance;
         }
@@ -56,7 +56,7 @@ public class SkillEditionScript : MonoBehaviour
     {
         InitializeInventorySkillList();
 
-        if (!InHideout)
+        if (!inCamp)
         {
             gridscript.movementbuffercounter = 3;
             if (inputmanager.canceljustpressed)
@@ -79,17 +79,17 @@ public class SkillEditionScript : MonoBehaviour
         {
             if (inputmanager.canceljustpressed)
             {
-                if(IsBonds)
+                if (IsBonds)
                 {
-                    if(!BondsScript.instance.bondsSubMenu.activeSelf)
+                    if (!BondsScript.instance.bondsSubMenu.activeSelf)
                     {
                         if (SkillList.activeSelf)
                         {
                             SkillList.SetActive(false);
                         }
-                        HideoutMenu.SetActive(true);
+                        CampMenu.SetActive(true);
                         gameObject.SetActive(false);
-                        EventSystem.current.SetSelectedGameObject(HideoutMenu.transform.GetChild(1).gameObject);
+                        EventSystem.current.SetSelectedGameObject(CampMenu.transform.GetChild(1).gameObject);
                     }
                 }
                 else
@@ -101,14 +101,14 @@ public class SkillEditionScript : MonoBehaviour
                     }
                     else
                     {
-                        HideoutMenu.SetActive(true);
+                        CampMenu.SetActive(true);
                         gameObject.SetActive(false);
-                        EventSystem.current.SetSelectedGameObject(HideoutMenu.transform.GetChild(0).gameObject);
+                        EventSystem.current.SetSelectedGameObject(CampMenu.transform.GetChild(0).gameObject);
                     }
-                        
-                    
+
+
                 }
-                
+
                 return;
 
             }
@@ -300,11 +300,11 @@ public class SkillEditionScript : MonoBehaviour
         foreach (Character playablechar in DataScript.instance.PlayableCharacterList)
         {
 
-            if(playablechar.playableStats.unlocked && playablechar.UnitSkill!=0)
+            if (playablechar.playableStats.unlocked && playablechar.UnitSkill != 0)
             {
                 foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                 {
-                    if (item.ID== playablechar.UnitSkill)
+                    if (item.ID == playablechar.UnitSkill)
                     {
                         InventorySkillList.Add(item);
                     }
@@ -317,15 +317,15 @@ public class SkillEditionScript : MonoBehaviour
     {
 
         List<Character> ListToUse = new List<Character>();
-        if(IsBonds)
+        if (IsBonds)
         {
             List<int> characterswithbonds = new List<int>();
 
-            foreach(Bonds bond in DataScript.instance.BondsList)
+            foreach (Bonds bond in DataScript.instance.BondsList)
             {
-                foreach(int ID in bond.Characters)
+                foreach (int ID in bond.Characters)
                 {
-                    if(!characterswithbonds.Contains(ID))
+                    if (!characterswithbonds.Contains(ID))
                     {
                         characterswithbonds.Add(ID);
                     }
@@ -344,9 +344,9 @@ public class SkillEditionScript : MonoBehaviour
         else
         {
 
-            foreach(Character playablechar in DataScript.instance.PlayableCharacterList)
+            foreach (Character playablechar in DataScript.instance.PlayableCharacterList)
             {
-                if(playablechar.playableStats.unlocked)
+                if (playablechar.playableStats.unlocked)
                 {
                     ListToUse.Add(playablechar);
                 }
@@ -382,7 +382,7 @@ public class SkillEditionScript : MonoBehaviour
 
     public void SelectUnit(int ButtonID)
     {
-        if(TextBubbleScript.Instance.indialogue)
+        if (TextBubbleScript.Instance.indialogue)
         {
             return;
         }
@@ -400,7 +400,7 @@ public class SkillEditionScript : MonoBehaviour
                     SkillList.SetActive(true);
                     InitializeSkillButtons();
                     skillwindowindex = 0;
-                } 
+                }
             }
         }
     }

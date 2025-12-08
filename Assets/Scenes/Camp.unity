@@ -1586,6 +1586,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6964617544263555075, guid: c7734873917cdc540a33b76656d2a77f, type: 3}
+      propertyPath: CampMenu
+      value: 
+      objectReference: {fileID: 1052042401}
+    - target: {fileID: 6964617544263555075, guid: c7734873917cdc540a33b76656d2a77f, type: 3}
       propertyPath: InHideout
       value: 1
       objectReference: {fileID: 0}
@@ -2773,7 +2777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052042402}
   m_Layer: 5
-  m_Name: HideoutMenu
+  m_Name: CampMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3506,7 +3510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   victory: 0
-  InHideout: 1
+  InCamp: 0
   GameOverMenu: {fileID: 0}
   VictoryMenu: {fileID: 0}
   SaveMenu: {fileID: 1880538424}
@@ -4489,6 +4493,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6964617544263555075, guid: c7734873917cdc540a33b76656d2a77f, type: 3}
+      propertyPath: CampMenu
+      value: 
+      objectReference: {fileID: 1052042401}
     - target: {fileID: 6964617544263555075, guid: c7734873917cdc540a33b76656d2a77f, type: 3}
       propertyPath: InHideout
       value: 1

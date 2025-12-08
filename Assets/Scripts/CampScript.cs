@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class HideoutScript : MonoBehaviour
+public class CampScript : MonoBehaviour
 {
 
     SaveManager saveManager;
