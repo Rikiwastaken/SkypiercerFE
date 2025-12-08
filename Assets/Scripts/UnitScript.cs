@@ -932,7 +932,7 @@ public class UnitScript : MonoBehaviour
 
             foreach (Bonds bond in DS.BondsList)
             {
-                if(bond.Characters.Contains(UnitCharacteristics.ID))
+                if(bond.Characters.Contains(UnitCharacteristics.ID) && bond.BondLevel >0)
                 {
                     foreach(int ID in bond.Characters)
                     {
@@ -958,29 +958,66 @@ public class UnitScript : MonoBehaviour
             }
 
         }
+        else if(GridScript.GetUnit(GridScript.selection)==null)
+        {
+            HideAffinityArrow();
+        }
     }
 
     public void PointArrowToTarget(Character target)
     {
+
         if(!AffinityArrow.gameObject.activeSelf)
         {
             AffinityArrow.gameObject.SetActive(true);
-            Vector3 myPos = UnitCharacteristics.currentTile[0].GridCoordinates;
-            Vector3 targetPos = target.currentTile[0].GridCoordinates;
-
-            Vector3 midpoint = (myPos + targetPos) * 0.5f;
-
-            AffinityArrow.transform.position = new Vector3(midpoint.x, midpoint.y, AffinityArrow.transform.position.z);
-
-            Vector2 direction = targetPos - myPos;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            AffinityArrow.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
         }
 
-        
+        if (target == null || AffinityArrow == null) return;
 
+        // fixed height above ground for the arrow
+        const float arrowHeight = 1f;
+
+        // Read grid coordinates (you said movement is X and Z in world)
+        Vector3 myGrid = UnitCharacteristics.currentTile[0].GridCoordinates;
+        Vector3 targetGrid = target.currentTile[0].GridCoordinates;
+
+        // Heuristic: prefer Grid.z if it contains meaningful data; otherwise use Grid.y as Z.
+        float myZ = (Mathf.Abs(myGrid.z) > 0.0001f || Mathf.Abs(targetGrid.z) > 0.0001f) ? myGrid.z : myGrid.y;
+        float targetZ = (Mathf.Abs(targetGrid.z) > 0.0001f || Mathf.Abs(myGrid.z) > 0.0001f) ? targetGrid.z : targetGrid.y;
+
+        Vector3 myPos = new Vector3(myGrid.x, arrowHeight, myZ);
+        Vector3 targetPos = new Vector3(targetGrid.x, arrowHeight, targetZ);
+
+        // Put arrow halfway (or change to any rule you want)
+        Vector3 midpoint = (myPos + targetPos) * 0.5f;
+        AffinityArrow.transform.position = midpoint; // Y is fixed by myPos/targetPos
+
+        AffinityArrow.transform.localPosition = new Vector3(AffinityArrow.transform.localPosition.x, AffinityArrow.transform.localPosition.y, 1f);
+
+        // Direction on XZ plane
+        Vector3 dir = targetPos - myPos;
+        dir.y = 0f;
+
+
+        if (dir.sqrMagnitude <= 0.0001f)
+        {
+            // degenerate case: same tile — don't change rotation
+            return;
+        }
+
+        // Compute yaw so the arrow faces the target on X-Z plane.
+        // Angle from Z axis: Atan2(dir.x, dir.z) -> degrees
+        float yaw = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+
+        // Make the arrow flat (so it's seen from above) and rotate only around Y.
+        // Many arrows/quads are created facing +Z. This sets X to 90 so the arrow face is horizontal.
+        // If your arrow already lies flat, use Quaternion.Euler(0, yaw, 0) instead.
+        AffinityArrow.transform.rotation = Quaternion.Euler(90f, yaw, 0f);
+
+        
     }
+
+
 
     public void HideAffinityArrow()
     {

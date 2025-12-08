@@ -165,6 +165,11 @@ public class TextBubbleScript : MonoBehaviour
                 }
 
             }
+
+            if (InputManager.Startjustpressed)
+            {
+                EndDialogue();
+            }
         }
     }
 
@@ -225,11 +230,16 @@ public class TextBubbleScript : MonoBehaviour
         }
         else
         {
-            DeactivateBubble();
-            if(MapEventManager.instance!=null)
-            {
-                MapEventManager.instance.TriggerEventCheck();
-            }
+            EndDialogue();
+        }
+    }
+
+    private void EndDialogue()
+    {
+        DeactivateBubble();
+        if (MapEventManager.instance != null)
+        {
+            MapEventManager.instance.TriggerEventCheck();
         }
     }
 
