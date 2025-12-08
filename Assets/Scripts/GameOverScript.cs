@@ -120,9 +120,18 @@ public class GameOverScript : MonoBehaviour
             saveManager = SaveManager.instance;
 
         int nextsceneindex = FindAnyObjectByType<MapInitializer>().ChapterID;
+        
         saveManager.currentchapter = nextsceneindex + 1;
 
-        sceneLoader.LoadScene("Hideout");
+        if (saveManager.currentchapter == 1)
+        {
+            sceneLoader.LoadScene("Chapter1");
+        }
+        else
+        {
+            sceneLoader.LoadScene("Hideout");
+        }
+            
     }
 
     public void ReturnToMainMenu()

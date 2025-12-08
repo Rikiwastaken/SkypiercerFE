@@ -702,13 +702,22 @@ public class CombaSceneManager : MonoBehaviour
                 }
                 else
                 {
-                    Modeltomove.transform.position = Vector3.Lerp(Modeltomove.transform.position, ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
+                    float speed = 10f;
+                    Vector3 targetPos = ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f);
+
+                    Modeltomove.transform.position = Vector3.MoveTowards(Modeltomove.transform.position, targetPos, speed * Time.fixedDeltaTime);
+
+                    //Modeltomove.transform.position = Vector3.Lerp(Modeltomove.transform.position, ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
                 }
                     
             }
             else
             {
-                Modeltomove.transform.position += (ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f) - Modeltomove.transform.position) * Time.fixedDeltaTime * 2f;
+                float speed = 10f;
+                Vector3 targetPos = ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f);
+
+                Modeltomove.transform.position = Vector3.MoveTowards(Modeltomove.transform.position, targetPos, speed * Time.fixedDeltaTime);
+                //Modeltomove.transform.position += (ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f) - Modeltomove.transform.position) * Time.fixedDeltaTime * 2f;
             }
 
 
