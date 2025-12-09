@@ -2391,10 +2391,6 @@ public class ActionsMenu : MonoBehaviour
         {
             tilebonus += 10;
         }
-        else if (unittype.ToLower() == "highground")
-        {
-            tilebonus += 10;
-        }
         else if (unittype.ToLower() == "water")
         {
             tilebonus -= 10;
@@ -2411,10 +2407,6 @@ public class ActionsMenu : MonoBehaviour
         if (targettype.ToLower() == "ruins")
         {
             tilebonus += 10;
-        }
-        else if (targettype.ToLower() == "highground")
-        {
-            tilebonus -= 20;
         }
         else if (targettype.ToLower() == "fortification")
         {

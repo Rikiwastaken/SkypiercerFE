@@ -2027,6 +2027,15 @@ MonoBehaviour:
       they are under Sunny weather, the solar energy repairs them a bit every turn.
       This effect only triggers outside and never during Cloudy or Rainy weather.'
     chapterWhereUnlocks: 1
+  - name: Bonds
+    description: 'Some characters can form Bonds together. When these characters
+      fight together enough time, they can have a Bond Conversation at Camp.
+
+
+      If
+      two characters with a high enough bond fight next to each other, they gain
+      a bonus in hit rate, dodge rate and critical rate.'
+    chapterWhereUnlocks: 2
   - name: Skills
     description: 'Skills are special upgrades than can be equipped to characters.
       They can give passive bonuses or access to an active Command.
@@ -2052,6 +2061,33 @@ MonoBehaviour:
       Each enemy
       can be copied only once. If an enemy dies, their skill is lost.'
     chapterWhereUnlocks: 3
+  - name: Elevation
+    description: 'Each tile has a different elevation, which can influence the way
+      battles unfold and movement.
+
+
+      Attacking an enemy at a higher elevation
+      reduces dodge rate and hit rate, and the enemy gets a bonus in dodge rate and
+      hit rate.
+
+
+      Moving to a higher tile also cost more movement points than
+      moving to a lower or same elevation.
+
+
+      Stair tiles do not have any bonus
+      or penalty in terms of movement or combat.'
+    chapterWhereUnlocks: 4
+  - name: Special Tiles
+    description: "Some tiles can have special effects that can be positive or negative
+      :\n\n - Forest : Increases Dodge Rate by 30%.\n - Ruins : Increases Dodge Rate
+      by 10% and reduces Hit Rate by 10%.\n - Fog : Increases Dodge Rate by 20% and
+      reduces Hit Rate by 20%.\n - Fire : Reduces movement points by 1. Increases
+      damage taken by 10% and lowers HP by 33% each turn.\n - Water : Reduces movement
+      points by 1 and Dodge Rate by 10%.\n - Fortification : Increases Dodge Rate
+      by 5%, Hit rate by 15% and restores 10% HP each turn.\n - Medicinal Water :
+      Restores 50% HP each turn.\n - Desert : Lowers HP by 10% each turn."
+    chapterWhereUnlocks: 4
 --- !u!1 &1117708666303132778
 GameObject:
   m_ObjectHideFlags: 0
@@ -13747,6 +13783,7 @@ MonoBehaviour:
     dialoguetoShow: []
     UnitsToUnlockID: 
     UnitsToLockID: 
+    skillsToAdd: []
     turnswheretotrigger: 
     tileModification:
       TilesIdCouples: []
@@ -13777,6 +13814,7 @@ MonoBehaviour:
     dialoguetoShow: []
     UnitsToUnlockID: 
     UnitsToLockID: 
+    skillsToAdd: []
     turnswheretotrigger: 
     tileModification:
       TilesIdCouples:

@@ -341,9 +341,9 @@ public class GridScript : MonoBehaviour
             {
                 text = "Water \n-1 mvt\n-10% Dodge";
             }
-            if (selection.type.ToLower() == "highground")
+            if (selection.type.ToLower() == "medicinalwater")
             {
-                text = "High Ground \n+20% Hit\n+10% Dodge";
+                text = "Medicinal Water \n+50% HP";
             }
             if (selection.type.ToLower() == "fortification")
             {
@@ -352,6 +352,10 @@ public class GridScript : MonoBehaviour
             if (selection.type.ToLower() == "fog")
             {
                 text = "Fog \n+20% Dodge\n-20% Hit";
+            }
+            if (selection.type.ToLower() == "desert")
+            {
+                text = "Desert \n-10% HP";
             }
             text += "\n Elevation : " + selection.elevation;
             UpdateWeatherImage(selection);
@@ -1400,7 +1404,7 @@ public class GridScript : MonoBehaviour
                 {
                     cost += (newtile.elevation - tile.elevation) * 2;
                 }
-                    
+
 
                 if (remainingMovements - cost > 0)
                 {

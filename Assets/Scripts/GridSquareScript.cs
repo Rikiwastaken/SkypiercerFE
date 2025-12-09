@@ -41,9 +41,10 @@ public class GridSquareScript : MonoBehaviour
         Ruins : +10% Dodge, -10% Accuracy
         Fire : -1 movement, +10% Damage taken and lose 33% of max hp each turn;
         Water : -1 movement, -10% dodge
-        HighGround : +20% Accuracy, +10% Dodge
         Fortification : +5% Dodge, +15% accuracy, restore 10% HP Each turn;
         Fog : +20% Dodge, -20% accuracy
+        MedicinalWater : +50% HP each turn
+        Desert : -10% HP each turn
     */
     public string type;
 
@@ -166,13 +167,13 @@ public class GridSquareScript : MonoBehaviour
     private void Update()
     {
         UpdateDelay();
-        
+
     }
 
 
     private void FixedUpdate()
     {
-        if(GridScript!=null)
+        if (GridScript != null)
         {
             GridScript = GridScript.instance;
         }
@@ -180,7 +181,7 @@ public class GridSquareScript : MonoBehaviour
         {
             cameraScript = cameraScript.instance;
         }
-        if(GridScript!=null && cameraScript!=null)
+        if (GridScript != null && cameraScript != null)
         {
             if (GridScript.selection == this && !cameraScript.incombat)
             {
@@ -200,7 +201,7 @@ public class GridSquareScript : MonoBehaviour
 
             }
         }
-        if (InputManager.instance.movementValue!=Vector2.zero)
+        if (InputManager.instance.movementValue != Vector2.zero)
         {
             ManagePath();
         }
@@ -482,17 +483,17 @@ public class GridSquareScript : MonoBehaviour
             }
 
 
-            
 
-            
+
+
 
 
 
         }
 
-        if(type.ToLower()== "fire")
+        if (type.ToLower() == "fire")
         {
-            if(!FireParticles.activeSelf)
+            if (!FireParticles.activeSelf)
             {
                 FireParticles.SetActive(true);
             }

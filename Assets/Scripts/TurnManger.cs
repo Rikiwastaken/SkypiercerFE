@@ -145,7 +145,7 @@ public class TurnManger : MonoBehaviour
             unit.GetComponent<UnitScript>().waittedbonusturns--;
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
-            
+
 
             //Kira Battalion Side Effect
             if (unitchar.playableStats.battalion.ToLower() == "kira")
@@ -374,10 +374,20 @@ public class TurnManger : MonoBehaviour
                         unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
                         unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Fire");
                         break;
+                    case "desert":
+                        int hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 10);
+                        unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 10);
+                        unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Desert");
+                        break;
                     case "fortification":
                         int hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
                         unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
                         unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Fortification");
+                        break;
+                    case "medicinalwater":
+                        int hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 2);
+                        unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 2);
+                        unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Medicinal Water");
                         break;
                 }
             }
