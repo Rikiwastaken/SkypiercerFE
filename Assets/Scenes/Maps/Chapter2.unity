@@ -14311,6 +14311,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].skillsToAdd.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[0].NameUnitList.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -14842,6 +14846,10 @@ PrefabInstance:
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[2].dialoguetoShow.Array.data[9].text
       value: We are supposed to find a stone in a crumbled ruin ?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].skillsToAdd.Array.data[0].SkillID
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].TutorialWindow.WindowDimensions.x
@@ -15763,6 +15771,10 @@ PrefabInstance:
       propertyPath: EventsToMonitor.Array.data[3].dialoguetoShow.Array.data[26].Portrait
       value: 
       objectReference: {fileID: 21300000, guid: c6a1704e47f6dcf4cafcb92a6be35997, type: 3}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[2].skillsToAdd.Array.data[0].SkillQuantity
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[3].CharactersToSpawn.Array.data[0].classID
       value: 7

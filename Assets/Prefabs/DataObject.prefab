@@ -2298,7 +2298,7 @@ MonoBehaviour:
     equipmentsIDs: 0d000000
     equipments: []
     UnitSkill: 2
-    EquipedSkills: 
+    EquipedSkills: 38000000
     isboss: 0
     attacksfriends: 0
     playableStats:
@@ -4421,7 +4421,7 @@ MonoBehaviour:
       inventoryItems: []
     BondList: []
     secondselapsed: 0
-    inHideout: 0
+    inCamp: 0
   Options:
     versionID: 
     musicvolume: 0

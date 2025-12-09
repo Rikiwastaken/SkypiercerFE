@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using static MapEventManager;
 using static TextBubbleScript;
 using static UnitScript;
+using static UnityEditor.Progress;
 
 
 
@@ -64,11 +65,19 @@ public class MapEventManager : MonoBehaviour
         public List<TextBubbleInfo> dialoguetoShow;
         public List<int> UnitsToUnlockID;
         public List<int> UnitsToLockID;
+        public List<SkillsToAdd> skillsToAdd;
         public List<int> turnswheretotrigger;
         public TileModification tileModification;
         public UnitPlacement UnitPlacement;
         public TutorialWindow TutorialWindow;
         public List<EnemyStats> CharactersToSpawn;
+    }
+
+    [Serializable]
+    public class SkillsToAdd
+    {
+        public int SkillID; //ID of skill to add
+        public int SkillQuantity; //Quantity of skill to add
     }
 
     [Serializable]
@@ -279,6 +288,7 @@ public class MapEventManager : MonoBehaviour
         ManageUnitPlacement(Event.UnitPlacement);
         UnitAddTrigger(Event.UnitsToUnlockID, true);
         UnitAddTrigger(Event.UnitsToLockID, false);
+        AddSkillToInventory(Event.skillsToAdd);
         switch (Event.triggerEffectType)
         {
             case 1:
@@ -703,6 +713,31 @@ public class MapEventManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Adds Skill to Inventory.
+    /// </summary>
+    private void AddSkillToInventory(List<SkillsToAdd> SkillsToAdd)
+    {
+
+        DataScript DS = DataScript.instance;
+
+        if(DS!=null)
+        {
+            foreach(SkillsToAdd skill in SkillsToAdd)
+            {
+                foreach (DataScript.InventoryItem inventoryItem in DS.PlayerInventory.inventoryItems)
+                {
+                    if (inventoryItem.type == 1 && inventoryItem.ID == skill.SkillID)
+                    {
+                        inventoryItem.Quantity += skill.SkillQuantity;
+                    }
+                    continue;
+                }
+            }
+            
+        }
+    }
+
     private int ManhattanDistance(Character unit, Character otherunit)
     {
         return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));

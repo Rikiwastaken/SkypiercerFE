@@ -298,6 +298,7 @@ public class MapEventEditorWindow : EditorWindow
         eProp.FindPropertyRelative("UnitsToUnlockID").ClearArray();
         eProp.FindPropertyRelative("UnitsToLockID").ClearArray();
         eProp.FindPropertyRelative("turnswheretotrigger").ClearArray();
+        eProp.FindPropertyRelative("skillsToAdd")?.ClearArray();
 
         // Initialize CharactersToSpawn (EnemyStats list)
         SerializedProperty charsToSpawnProp = eProp.FindPropertyRelative("CharactersToSpawn");
@@ -339,6 +340,60 @@ public class MapEventEditorWindow : EditorWindow
         return max + 1;
     }
 
+    private void DrawSkillsToAddList(SerializedProperty listProp)
+    {
+        if (listProp == null) return;
+
+        int toRemove = -1;
+
+        for (int i = 0; i < listProp.arraySize; i++)
+        {
+            var elem = listProp.GetArrayElementAtIndex(i);
+
+            EditorGUILayout.BeginVertical("box");
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField($"Skill To Add #{i}", EditorStyles.boldLabel);
+
+            if (GUILayout.Button("x", GUILayout.MaxWidth(20)))
+                toRemove = i;
+
+            EditorGUILayout.EndHorizontal();
+
+            // SkillID dropdown
+            var skillIdProp = elem.FindPropertyRelative("SkillID");
+            if (skillIDs.Count > 0 && skillIdProp != null)
+            {
+                int current = Mathf.Max(0, skillIDs.IndexOf(skillIdProp.intValue));
+                int selected = EditorGUILayout.Popup("Skill", current, skillNames.ToArray());
+                skillIdProp.intValue = skillIDs[Mathf.Clamp(selected, 0, skillIDs.Count - 1)];
+            }
+            else if (skillIdProp != null)
+            {
+                EditorGUILayout.PropertyField(skillIdProp);
+            }
+
+            // Quantity
+            var qtyProp = elem.FindPropertyRelative("SkillQuantity");
+            if (qtyProp != null)
+            {
+                qtyProp.intValue = EditorGUILayout.IntField("Quantity", qtyProp.intValue);
+            }
+
+            EditorGUILayout.EndVertical();
+        }
+
+        if (GUILayout.Button("Add Skill To Add"))
+        {
+            listProp.arraySize++;
+            var newElem = listProp.GetArrayElementAtIndex(listProp.arraySize - 1);
+
+            newElem.FindPropertyRelative("SkillID").intValue = skillIDs.Count > 0 ? skillIDs[0] : 0;
+            newElem.FindPropertyRelative("SkillQuantity").intValue = 1;
+        }
+
+        if (toRemove >= 0)
+            listProp.DeleteArrayElementAtIndex(toRemove);
+    }
     private void DrawEventProperty(SerializedProperty eProp, int index)
     {
         eProp.isExpanded = EditorGUILayout.Foldout(eProp.isExpanded, string.Format("[{0}] {1}", index, eProp.FindPropertyRelative("eventname").stringValue), true);
@@ -429,6 +484,12 @@ public class MapEventEditorWindow : EditorWindow
         DrawIDListDropdown(eProp.FindPropertyRelative("UnitsToUnlockID"), characternames, characterIDs);
         EditorGUILayout.LabelField("Units To Lock:");
         DrawIDListDropdown(eProp.FindPropertyRelative("UnitsToLockID"), characternames, characterIDs);
+
+        // --- Skills to Unlock ---
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("Skills To Add to Inventory", EditorStyles.boldLabel);
+        DrawSkillsToAddList(eProp.FindPropertyRelative("skillsToAdd"));
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Turns when event triggers (turnswheretotrigger)");

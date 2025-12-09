@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/BattleScene.unity
     guid: f32c3280bf9ba034d83e0d93735d4213
   - enabled: 1
-    path: Assets/Scenes/Hideout.unity
+    path: Assets/Scenes/Camp.unity
     guid: 0a516a7c0049b3842b9a776aa1af176a
   - enabled: 1
     path: Assets/Scenes/TestMap.unity

@@ -3528,6 +3528,328 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseMenu: {fileID: 1052042402}
+  StartDialogueList:
+  - Chapter: 2
+    Dialogue:
+    - Charactername: 
+      text: Home sweet home ! I'm exhausted.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah, what a day...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Can you believe it ? We just met THE Mir. Sorak and Lyv talk about him
+        all the time.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: He doesn't seem like such a big shot to me.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Well he was way better than you despite not even wielding a Blade. So
+        at least he's a bigger shot than you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Aren't you such a Joker...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Anyway, you boys can keep chatting but I'm going to bed. See you tomorrow.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+  - Chapter: 3
+    Dialogue:
+    - Charactername: 
+      text: You kids are back ! Did it go well ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Being order around by a brat swinging random weapons haphazardly can
+        hardly be called fun.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I'm also glad you're part of team, Sorak.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Hello, Mister Mir. Glad to see you safe.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'You made it through the caves, Sieg ! You still convinced going up the
+        mountains was less dangerous ? '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Let's just say I am glad Zack and his friends found me.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You know each other ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: A Renais kid trying to reach Landfall village by going under the mountains
+        ? Hard to forget ! Anyway, did you find the stone ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Here it is. Couldn't you get it yourself ? It looks like you had a pretty
+        good idea of the layout of the ruins.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It wouldn't have been fun, right ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Just take it. This things gives me the chills.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Thank you. You all did well. Now there is something else I would like
+        to ask you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Good thing we cleared out these ruins then if we'll be going there back
+        and forth.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Actually, this time I need your help for real. The Elder needs to go
+        to Renais.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: Elder Farron
+      text: I need to see Darius. More than half of the village left in the draft
+        a few days ago.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: f9f0b7b0584129949998471b8702086b, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: As Sieg said, the only safe way to leave Landfall Crater is through the
+        mountain path. I need your help to dispatch any pluvials there. I could do
+        it alone, but it would take much longer.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: Elder Farron
+      text: You have never left the village, Zack. This could be a great opportunity
+        to see the capital of the Renais Alliance.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: f9f0b7b0584129949998471b8702086b, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: This is where the best Old World workshops are ! Count me in ! And count
+        all of them in too !
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Do we really have to leave too ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I've always wanted to see a bigger settlement than Landfall Village !
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It looks like it's settled then.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I will come with you guys too. After all, I told Kira would only be gone
+        for a day or two and it has been more than a week.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Perfect. Go get some rest. If we leave tomorrow morning, we should  be
+        able to clean the mountain by the evening.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'One last thing, Zack. Take these. They''re some things I developed in
+        my research. It should allow you turn learn from Pluvials. '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Obtained 2 "Copy" Skills.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+  - Chapter: 4
+    Dialogue:
+    - Charactername: 
+      text: Are you all fine ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Fine ? How the heck do you think we could be fine. Granpa... The Village...
+        They're gone...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: That's not what I meant. Damn it, if only we'd been faster...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah, if only the so called master had deemed useful to use his blade
+        rather than show off and punch pluvials !
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I know alright. I screwed up. I didn't think it would blow so soon...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You knew ? Then why didn't you warn us ? We could have taken them with
+        us.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I... I didn't want to cause a panic. I thought we had time to clear the
+        mountains and then safely...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's all your damn fault. You're such a fraud.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Stop Zack... He tried to help us.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Maybe I can't say it's not my fault, but I know whose fault it is.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What did you just say ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: The ones who opened the ruins and activated the self destruct function.
+        I came here to stop them. That's why I sent you into the ruins instead of
+        going there myself. I was looking for them.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Why ? Why would they blow up the whole village. As if we care for some
+        old ruins. We could have given them anything they wanted. Who would do this
+        ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'They are called Caelum. Their goal is to use the war between Renais
+        and Archades to take control of both nations when they''re at their lowest. '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What does that have to do with us ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: That crystal, the Xenolith. It holds more power than you think. But that
+        power is now in our hands and it might be what we need to stop them.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
 --- !u!114 &1176254971
 MonoBehaviour:
   m_ObjectHideFlags: 0
