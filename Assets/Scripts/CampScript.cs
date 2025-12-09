@@ -21,6 +21,8 @@ public class CampScript : MonoBehaviour
 
     public List<StartDialogue> StartDialogueList;
 
+    private bool previousindialogue;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,10 +46,27 @@ public class CampScript : MonoBehaviour
 
     private void Update()
     {
+
+        if(TextBubbleScript.Instance.indialogue && BaseMenu.gameObject.activeSelf)
+        {
+            BaseMenu.gameObject.SetActive(false);
+        }
+
+        if(previousindialogue && ! TextBubbleScript.Instance.indialogue)
+        {
+            if(!BaseMenu.gameObject.activeSelf)
+            {
+                BaseMenu.gameObject.SetActive(true);
+            }
+        }
+
         if(EventSystem.current.currentSelectedGameObject==null || !EventSystem.current.currentSelectedGameObject.activeSelf || !EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.activeSelf)
         {
             EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
         }
+
+
+        previousindialogue =TextBubbleScript.Instance.indialogue;
     }
 
     public void LoadNextChapter()
