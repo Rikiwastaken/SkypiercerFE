@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -13,6 +14,33 @@ public class MapLoader : EditorWindow
     private Texture2D MechanismMap;
     private Transform GridObject;
 
+    [Serializable]
+    public class AllColors
+    {
+        public Color wall;
+        public Color Elevation0;
+        public Color Elevation1;
+        public Color Elevation2;
+        public Color Elevation3;
+        public Color Elevation4;
+        public Color ElevationNeg1;
+        public Color ElevationNeg2;
+        public Color ElevationNeg3;
+        public Color ElevationNeg4;
+        public Color LeverColor;
+        public Color DoorColor;
+        public Color StairsColor;
+        public Color ForestColor;
+        public Color RuinsColor;
+        public Color FireColor;
+        public Color WaterColor;
+        public Color FortificationColor;
+        public Color FogColor;
+        public Color MedicinalWaterColor;
+        public Color DesertColor;
+    }
+
+    private AllColors colors;
 
     [MenuItem("Tools/Map Creator")]
     public static void ShowWindow()
@@ -140,6 +168,8 @@ public class MapLoader : EditorWindow
                 GameObject newtile = (GameObject)newtileObject;
                 newtile.transform.position = position;
 
+                InitializeColors();
+
                 ManageActivation(newtile, x, y);
                 ManageObstable(newtile, x, y);
                 ManageElevation(newtile, x, y);
@@ -206,8 +236,8 @@ public class MapLoader : EditorWindow
     private void ManageObstable(GameObject Tile, int x, int y)
     {
         Color pixelColor = ObstacleMap.GetPixel(x, y);
-        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4, Color LeverColor, Color DoorColor, Color StairsColor) = InitializeColors();
-        if (pixelColor.Equals(wall))
+        
+        if (pixelColor.Equals(colors.wall))
         {
             Tile.GetComponent<GridSquareScript>().isobstacle = true;
         }
@@ -220,8 +250,8 @@ public class MapLoader : EditorWindow
     private void ManageActivation(GameObject Tile, int x, int y)
     {
         Color pixelColor = ActivationMap.GetPixel(x, y);
-        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4, Color LeverColor, Color DoorColor, Color StairsColor) = InitializeColors();
-        if (pixelColor.Equals(wall))
+        
+        if (pixelColor.Equals(colors.wall))
         {
             Tile.GetComponent<GridSquareScript>().activated = false;
         }
@@ -238,24 +268,90 @@ public class MapLoader : EditorWindow
             if(x!=0)
             {
                 Color pixelColor = MechanismMap.GetPixel(x, y);
-                (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4, Color LeverColor, Color DoorColor, Color StairsColor) = InitializeColors();
-                if (pixelColor.Equals(LeverColor))
+           
+                if (pixelColor.Equals(colors.LeverColor))
                 {
                     MechanismClass Mechanism = new MechanismClass();
                     Mechanism.type = 2;
                     Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
                 }
-                else if (pixelColor.Equals(DoorColor))
+                else if (pixelColor.Equals(colors.DoorColor))
                 {
                     MechanismClass Mechanism = new MechanismClass();
                     Mechanism.type = 1;
                     Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
                 }
-                else if (pixelColor.Equals(StairsColor))
+                else if (pixelColor.Equals(colors.StairsColor))
                 {
                     Debug.Log("stairsfound");
                     Tile.GetComponent<GridSquareScript>().isstairs = true;
                 }
+                else if (pixelColor.Equals(colors.ForestColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Forest";
+                }
+                else if (pixelColor.Equals(colors.RuinsColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Ruins";
+                }
+                else if (pixelColor.Equals(colors.FireColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Fire";
+                }
+                else if (pixelColor.Equals(colors.WaterColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Water";
+                }
+                else if (pixelColor.Equals(colors.FortificationColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Fortification";
+                }
+                else if (pixelColor.Equals(colors.FogColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Fog";
+                }
+                else if (pixelColor.Equals(colors.MedicinalWaterColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "MedicinalWater";
+                }
+            }
+            else
+            {
+                Color pixelColor = MechanismMap.GetPixel(x+1, y);
+                if (pixelColor.Equals(colors.StairsColor))
+                {
+                    Debug.Log("stairsfound");
+                    Tile.GetComponent<GridSquareScript>().isstairs = true;
+                }
+                else if (pixelColor.Equals(colors.ForestColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Forest";
+                }
+                else if (pixelColor.Equals(colors.RuinsColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Ruins";
+                }
+                else if (pixelColor.Equals(colors.FireColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Fire";
+                }
+                else if (pixelColor.Equals(colors.WaterColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Water";
+                }
+                else if (pixelColor.Equals(colors.FortificationColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Fortification";
+                }
+                else if (pixelColor.Equals(colors.FogColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "Fog";
+                }
+                else if (pixelColor.Equals(colors.MedicinalWaterColor))
+                {
+                    Tile.GetComponent<GridSquareScript>().type = "MedicinalWater";
+                }
+
             }
         }
     }
@@ -273,40 +369,39 @@ public class MapLoader : EditorWindow
         }
 
 
-        (Color wall, Color Elevation0, Color Elevation1, Color Elevation2, Color Elevation3, Color Elevation4, Color ElevationNeg1, Color ElevationNeg2, Color ElevationNeg3, Color ElevationNeg4, Color LeverColor, Color DoorColor, Color StairsColor) = InitializeColors();
-        if (pixelColor.Equals(Elevation0))
+        if (pixelColor.Equals(colors.Elevation0))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 0;
         }
-        else if (pixelColor.Equals(Elevation1))
+        else if (pixelColor.Equals(colors.Elevation1))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 1;
         }
-        else if (pixelColor.Equals(Elevation2))
+        else if (pixelColor.Equals(colors.Elevation2))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 2;
         }
-        else if (pixelColor.Equals(Elevation3))
+        else if (pixelColor.Equals(colors.Elevation3))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 3;
         }
-        else if (pixelColor.Equals(Elevation4))
+        else if (pixelColor.Equals(colors.Elevation4))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 4;
         }
-        else if (pixelColor.Equals(ElevationNeg1))
+        else if (pixelColor.Equals(colors.ElevationNeg1))
         {
             Tile.GetComponent<GridSquareScript>().elevation = -1;
         }
-        else if (pixelColor.Equals(ElevationNeg2))
+        else if (pixelColor.Equals(colors.ElevationNeg2))
         {
             Tile.GetComponent<GridSquareScript>().elevation = -2;
         }
-        else if (pixelColor.Equals(ElevationNeg3))
+        else if (pixelColor.Equals(colors.ElevationNeg3))
         {
             Tile.GetComponent<GridSquareScript>().elevation = -3;
         }
-        else if (pixelColor.Equals(ElevationNeg4))
+        else if (pixelColor.Equals(colors.ElevationNeg4))
         {
             Tile.GetComponent<GridSquareScript>().elevation = -4;
         }
@@ -317,29 +412,47 @@ public class MapLoader : EditorWindow
         
     }
 
-    private (Color,Color,Color,Color,Color, Color, Color, Color, Color, Color, Color, Color, Color) InitializeColors()
+    private void InitializeColors()
     {
-        Color grey = ObstacleMap.GetPixel(0, 0);
-        Color Elevation4 = ElevationMap.GetPixel(0, 8);
-        Color Elevation3 = ElevationMap.GetPixel(0, 7);
-        Color Elevation2 = ElevationMap.GetPixel(0, 6);
-        Color Elevation1 = ElevationMap.GetPixel(0, 5);
-        Color Elevation0 = ElevationMap.GetPixel(0, 4);
-        Color ElevationNeg1 = ElevationMap.GetPixel(0, 3);
-        Color ElevationNeg2 = ElevationMap.GetPixel(0, 2);
-        Color ElevationNeg3= ElevationMap.GetPixel(0, 1);
-        Color ElevationNeg4 = ElevationMap.GetPixel(0, 0);
-        Color Trigger = Color.white;
-        Color Door = Color.white;
-        Color Stairs = Color.white;
+
+        AllColors NewColor = new AllColors();
+
+        NewColor.wall = ObstacleMap.GetPixel(0, 0);
+        NewColor.Elevation0 = ElevationMap.GetPixel(0, 4);
+        NewColor.Elevation1 = ElevationMap.GetPixel(0, 5);
+        NewColor.Elevation2 = ElevationMap.GetPixel(0, 6);
+        NewColor.Elevation3 = ElevationMap.GetPixel(0, 7);
+        NewColor.Elevation4 = ElevationMap.GetPixel(0, 8);
+        NewColor.ElevationNeg1 = ElevationMap.GetPixel(0, 3);
+        NewColor.ElevationNeg2 = ElevationMap.GetPixel(0, 2);
+        NewColor.ElevationNeg3 = ElevationMap.GetPixel(0, 1);
+        NewColor.ElevationNeg4 = ElevationMap.GetPixel(0, 0);
+        NewColor.LeverColor = Color.white;
+        NewColor.DoorColor = Color.white;
+        NewColor.StairsColor = Color.white;
+        NewColor.ForestColor = Color.white;
+        NewColor.RuinsColor = Color.white;
+        NewColor.FireColor = Color.white;
+        NewColor.WaterColor = Color.white;
+        NewColor.FortificationColor = Color.white;
+        NewColor.FogColor = Color.white;
+        NewColor.MedicinalWaterColor = Color.white;
+
         if (MechanismMap!=null)
         {
-            Trigger = MechanismMap.GetPixel(0, 1);
-            Door = MechanismMap.GetPixel(0, 2);
-            Stairs = MechanismMap.GetPixel(0, 3);
-            
+            NewColor.LeverColor = MechanismMap.GetPixel(0, 1);
+            NewColor.DoorColor = MechanismMap.GetPixel(0, 2);
+            NewColor.StairsColor = MechanismMap.GetPixel(0, 3);
+            NewColor.ForestColor = MechanismMap.GetPixel(0, 4);
+            NewColor.RuinsColor = MechanismMap.GetPixel(0, 5);
+            NewColor.FireColor = MechanismMap.GetPixel(0, 6);
+            NewColor.WaterColor = MechanismMap.GetPixel(0, 7);
+            NewColor.FortificationColor = MechanismMap.GetPixel(0, 8);
+            NewColor.FogColor = MechanismMap.GetPixel(0, 9);
+            NewColor.MedicinalWaterColor = MechanismMap.GetPixel(0, 10);
         }
-        return (grey,Elevation0,Elevation1,Elevation2,Elevation3, Elevation4, ElevationNeg1, ElevationNeg2, ElevationNeg3, ElevationNeg4, Trigger, Door, Stairs);
+
+        colors = NewColor; 
     }
 }
 #endif

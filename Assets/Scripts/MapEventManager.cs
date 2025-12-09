@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static MapEventManager;
 using static TextBubbleScript;
 using static UnitScript;
-using static UnityEditor.Progress;
 
 
 
