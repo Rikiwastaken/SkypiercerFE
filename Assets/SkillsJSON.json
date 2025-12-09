@@ -397,15 +397,6 @@
             "ID": 43
         },
         {
-            "name": "Offensive defense",
-            "Descriptions": "Increases damage dealt by 4 but cannot counterattack.",
-            "IsCommand": false,
-            "Cost": 5,
-            "targettype": 0,
-            "range": 0,
-            "ID": 43
-        },
-        {
             "name": "Unyielding",
             "Descriptions": "If at max HP when combat starts, HP cannot go below 1.",
             "IsCommand": false,

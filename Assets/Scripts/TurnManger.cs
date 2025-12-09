@@ -367,25 +367,27 @@ public class TurnManger : MonoBehaviour
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
             foreach (GridSquareScript tile in unitchar.currentTile)
             {
+                int hplost = 0;
+                int hpgained = 0;
                 switch (tile.type.ToLower())
                 {
                     case "fire":
-                        int hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
+                        hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
                         unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
                         unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Fire");
                         break;
                     case "desert":
-                        int hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 10);
+                        hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 10);
                         unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 10);
                         unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Desert");
                         break;
                     case "fortification":
-                        int hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
+                        hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
                         unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
                         unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Fortification");
                         break;
                     case "medicinalwater":
-                        int hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 2);
+                        hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 2);
                         unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 2);
                         unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Medicinal Water");
                         break;

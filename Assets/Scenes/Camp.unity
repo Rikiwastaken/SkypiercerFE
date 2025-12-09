@@ -3850,6 +3850,63 @@ MonoBehaviour:
       Portrait: {fileID: 0}
       characterindex: 6
       ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Let me go with you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: If they're the ones who did this... If it's really them, I want to make
+        them pay.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I see... Then we will do this together. How about the rest of you ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Landfall Village was my home... I want to make them pay too !
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I will come with you too.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's not like we have anywhere else to go.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Where are we going then ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Renais. Darius needs to be informed of what happened, and I need to cash
+        in some favors. We'll be going through the Drenched Plains tomorrow. Get
+        some rest.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
 --- !u!114 &1176254971
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -460,16 +460,22 @@ public class BattleInfotext : MonoBehaviour
             {
                 SkillButtonList[0].gameObject.SetActive(true);
             }
-            SkillButtonList[0].GetComponentInChildren<TextMeshProUGUI>().text = DataScript.instance.SkillList[unit.UnitSkill].name;
-            SkillButtonIDList.Add(DataScript.instance.SkillList[unit.UnitSkill].ID);
+
+            DataScript.Skill unitskill = GetSkill(unit.UnitSkill);
+
+            SkillButtonList[0].GetComponentInChildren<TextMeshProUGUI>().text = unitskill.name;
+            SkillButtonIDList.Add(unitskill.ID);
             for (int i = 0; i < Mathf.Min(unit.EquipedSkills.Count, 4); i++)
             {
                 if (!SkillButtonList[i + 1].gameObject.activeSelf)
                 {
                     SkillButtonList[i + 1].gameObject.SetActive(true);
                 }
-                SkillButtonList[i + 1].GetComponentInChildren<TextMeshProUGUI>().text = DataScript.instance.SkillList[unit.EquipedSkills[i]].name;
-                SkillButtonIDList.Add(DataScript.instance.SkillList[unit.EquipedSkills[i]].ID);
+
+                DataScript.Skill equipedskill = GetSkill(unit.EquipedSkills[i]);
+
+                SkillButtonList[i + 1].GetComponentInChildren<TextMeshProUGUI>().text = equipedskill.name;
+                SkillButtonIDList.Add(equipedskill.ID);
             }
             for (int i = Mathf.Min(unit.EquipedSkills.Count, 4); i < 4; i++)
             {
@@ -487,8 +493,11 @@ public class BattleInfotext : MonoBehaviour
                 {
                     SkillButtonList[i].gameObject.SetActive(true);
                 }
-                SkillButtonList[i].GetComponentInChildren<TextMeshProUGUI>().text = DataScript.instance.SkillList[unit.EquipedSkills[i]].name;
-                SkillButtonIDList.Add(DataScript.instance.SkillList[unit.EquipedSkills[unit.EquipedSkills[i]]].ID);
+
+                DataScript.Skill equipedskill = GetSkill(unit.EquipedSkills[i]);
+
+                SkillButtonList[i].GetComponentInChildren<TextMeshProUGUI>().text = equipedskill.name;
+                SkillButtonIDList.Add(equipedskill.ID);
             }
             for (int i = Mathf.Min(unit.EquipedSkills.Count, 4); i < 4; i++)
             {
@@ -515,5 +524,20 @@ public class BattleInfotext : MonoBehaviour
             }
 
         }
+    }
+
+    private DataScript.Skill GetSkill(int skillID)
+    {
+        DataScript.Skill unitskill = null;
+
+        foreach (DataScript.Skill skill in DataScript.instance.SkillList)
+        {
+            if (skill.ID == skillID)
+            {
+                unitskill = skill;
+                break;
+            }
+        }
+        return unitskill;
     }
 }

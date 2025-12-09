@@ -1570,13 +1570,6 @@ MonoBehaviour:
     targettype: 0
     range: 0
     ID: 43
-  - name: Offensive defense
-    Descriptions: Increases damage dealt by 4 but cannot counterattack.
-    IsCommand: 0
-    Cost: 5
-    targettype: 0
-    range: 0
-    ID: 43
   - name: Unyielding
     Descriptions: If at max HP when combat starts, HP cannot go below 1.
     IsCommand: 0
@@ -3009,7 +3002,7 @@ MonoBehaviour:
     Name: Zack-Lea
     Characters: 0000000001000000
     BondPoints: 0
-    BondLevel: 2
+    BondLevel: 0
     BondDialogueSeen: 0
   - ID: 1
     Name: Zack-Elwyn
@@ -3069,7 +3062,7 @@ MonoBehaviour:
     Name: Sorak-Lyv
     Characters: 0300000004000000
     BondPoints: 0
-    BondLevel: 0
+    BondLevel: 1
     BondDialogueSeen: 0
   - ID: 11
     Name: Sieg-Lyv
