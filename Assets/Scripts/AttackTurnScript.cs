@@ -90,7 +90,7 @@ public class AttackTurnScript : MonoBehaviour
             previousattacker.GetComponent<UnitScript>().disableLifebar = false;
             previousattacker.GetComponent<UnitScript>().ManageLifebars();
             AttackWithAnimationEndOfFight(previousattacker, previoustarget);
-            if(previoustarget!=null)
+            if (previoustarget != null)
             {
                 previoustarget.GetComponent<UnitScript>().disableLifebar = false;
                 previoustarget.GetComponent<UnitScript>().ManageLifebars();
@@ -480,7 +480,7 @@ public class AttackTurnScript : MonoBehaviour
         {
             foresightScript.CreateAction(3, User);
             GridSquareScript tile = CharUser.currentTile[0];
-            
+
 
             tile.type = "Fortification";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Fortify");
@@ -589,7 +589,7 @@ public class AttackTurnScript : MonoBehaviour
         else if (commandID == 70) // Blade Conversion
         {
             foresightScript.CreateAction(3, User);
-            int healthrestored = (int)Mathf.Min((CharUser.AjustedStats.HP - CharUser.currentHP), CharUser.AjustedStats.HP * 0.5f) ;
+            int healthrestored = (int)Mathf.Min((CharUser.AjustedStats.HP - CharUser.currentHP), CharUser.AjustedStats.HP * 0.5f);
             CharUser.currentHP += healthrestored;
             User.GetComponent<UnitScript>().GetFirstWeapon().Currentuses = 0;
             User.GetComponent<UnitScript>().AddNumber(healthrestored, true, "Blade Conversion");
@@ -597,7 +597,7 @@ public class AttackTurnScript : MonoBehaviour
         else if (commandID == 71) // Blade Sacrifice
         {
             foresightScript.CreateAction(3, User);
-            int healthlost = (int)Mathf.Min(CharUser.currentHP-1, CharUser.AjustedStats.HP * 0.5f);
+            int healthlost = (int)Mathf.Min(CharUser.currentHP - 1, CharUser.AjustedStats.HP * 0.5f);
             CharUser.currentHP -= healthlost;
             User.GetComponent<UnitScript>().GetFirstWeapon().Currentuses = 0;
             User.GetComponent<UnitScript>().AddNumber(healthlost, false, "Blade Sacrifice");
@@ -608,7 +608,7 @@ public class AttackTurnScript : MonoBehaviour
 
     private void ManageAttackWithoutAnimation(GameObject Attacker)
     {
-
+        triggercleanup = true;
         Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
         if (counterbeforeattack > 0)
         {
@@ -681,7 +681,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     expdistributed = true;
                 }
-                
+
             }
 
         }
@@ -979,7 +979,7 @@ public class AttackTurnScript : MonoBehaviour
             Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
 
 
-            
+
 
             triggercleanup = true;
 
@@ -1002,7 +1002,7 @@ public class AttackTurnScript : MonoBehaviour
                 previousattacker = Attacker;
                 previoustarget = target;
 
-                
+
 
                 Character Chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
                 Character Targetcopy = target.GetComponent<UnitScript>().CreateCopy();
@@ -1132,6 +1132,11 @@ public class AttackTurnScript : MonoBehaviour
             unit1.GetComponent<UnitScript>().AddNumber(unit1.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
         }
 
+        if(charunit1.affiliation=="playable")
+        {
+            DataScript.instance.SpreadBonds(unit1);
+        }
+
         if (unit2 != null)
         {
             Character charunit2 = unit2.GetComponent<UnitScript>().UnitCharacteristics;
@@ -1139,6 +1144,10 @@ public class AttackTurnScript : MonoBehaviour
             {
                 unit2.GetComponent<UnitScript>().SurvivorStacks++;
                 unit2.GetComponent<UnitScript>().AddNumber(unit2.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
+            }
+            if (charunit2.affiliation == "playable")
+            {
+                DataScript.instance.SpreadBonds(unit2);
             }
 
             if (unit1.GetComponent<UnitScript>().GetSkill(15)) // Sore Loser

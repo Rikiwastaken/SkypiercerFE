@@ -518,7 +518,6 @@ public class ActionsMenu : MonoBehaviour
 
     public void FinalizeAttack()
     {
-        DataScript.instance.SpreadBonds(target);
         target.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         targetlist = new List<GameObject>();
         GameObject oldtarget = target;

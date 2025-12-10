@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static DataScript;
 using static UnitScript;
+using static UnityEngine.UI.CanvasScaler;
 
 public class DataScript : MonoBehaviour
 {
@@ -305,16 +306,26 @@ public class DataScript : MonoBehaviour
         {
             if(bond.Characters.Contains(UnitID) && bond.Characters.Contains(OtherUnitID))
             {
-                bond.BondPoints += bondincreaseperaction;
+                
+                
 
-                if (OtherUnit.GetComponent<UnitScript>().GetSkill(66)) //Friendly
+                if (OtherUnit.GetComponent<UnitScript>().GetSkill(66) && MainUnit.GetComponent<UnitScript>().GetSkill(66)) //Friendly
                 {
-                    bond.BondPoints += bondincreaseperaction;
+                    bond.BondPoints += bondincreaseperaction*3;
+                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 3, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
+                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 3, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
                 }
-
-                if (MainUnit.GetComponent<UnitScript>().GetSkill(66)) //Friendly
+                else if(OtherUnit.GetComponent<UnitScript>().GetSkill(66) || MainUnit.GetComponent<UnitScript>().GetSkill(66))
+                {
+                    bond.BondPoints += bondincreaseperaction*2;
+                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 2, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
+                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 2, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
+                }
+                else
                 {
                     bond.BondPoints += bondincreaseperaction;
+                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
+                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
                 }
 
                 return;

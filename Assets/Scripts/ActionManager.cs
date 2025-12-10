@@ -91,7 +91,7 @@ public class ActionManager : MonoBehaviour
             return;
         }
 
-        if (TurnManager.currentlyplaying == "playable")
+        if (TurnManager.currentlyplaying == "playable" && (GameOverScript.instance==null || !GameOverScript.instance.gameObject.activeSelf))
         {
             if (currentcharacter != null)
             {

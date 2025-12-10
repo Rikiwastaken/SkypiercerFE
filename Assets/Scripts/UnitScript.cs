@@ -397,7 +397,7 @@ public class UnitScript : MonoBehaviour
         OnHealthChanged += HealthChangedHandler;
 
 
-        if (UnitCharacteristics.affiliation != "playable")
+        if (UnitCharacteristics.affiliation == "enemy" || UnitCharacteristics.attacksfriends)
         {
             if (UnitCharacteristics.UnitSkill != 0)
             {
