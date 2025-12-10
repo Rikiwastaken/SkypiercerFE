@@ -88,7 +88,7 @@ public class WeatherManager : MonoBehaviour
             }
         }
 
-        int randomvalue = Random.Range(0, 100);
+        int randomvalue = Tile.GetRandomNumber() ;
 
         if(rainingTilenear)
         {

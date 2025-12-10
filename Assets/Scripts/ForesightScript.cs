@@ -44,6 +44,7 @@ public class ForesightScript : MonoBehaviour
         public string type;
         public int previousremainingsun;
         public int previousremainingrain;
+        public int previousRandomIndex;
         public MechanismClass MechanismClass;
     }
 
@@ -338,6 +339,7 @@ public class ForesightScript : MonoBehaviour
                 mod.previousremainingrain = tileScript.RemainingRainTurns;
                 mod.previousremainingsun = tileScript.RemainingSunTurns;
                 mod.type = tileScript.type;
+                mod.previousRandomIndex = tileScript.randomnumberlistcounter;
                 MechanismClass mechanismClass = new MechanismClass();
                 mechanismClass.isactivated = tileScript.Mechanism.isactivated;
                 mechanismClass.type = tileScript.Mechanism.type;
@@ -440,6 +442,7 @@ public class ForesightScript : MonoBehaviour
                         tileModification.tile.type = tileModification.type;
                         tileModification.tile.RemainingRainTurns = tileModification.previousremainingrain;
                         tileModification.tile.RemainingSunTurns = tileModification.previousremainingsun;
+                        tileModification.tile.randomnumberlistcounter = tileModification.previousRandomIndex;
                         if (tileModification.MechanismClass != null)
                         {
                             tileModification.tile.Mechanism = tileModification.MechanismClass;

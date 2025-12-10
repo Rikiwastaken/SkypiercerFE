@@ -113,6 +113,9 @@ public class GridSquareScript : MonoBehaviour
 
     private int autoupdatecnt;
 
+    public List<int> RandomNumberlist;
+    public int randomnumberlistcounter;
+
     void Awake()
     {
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -150,6 +153,10 @@ public class GridSquareScript : MonoBehaviour
             }
         }
 
+        for(int i = 0;i<100;i++)
+        {
+            RandomNumberlist.Add(UnityEngine.Random.Range(0, 100));
+        }
 
     }
 
@@ -939,4 +946,15 @@ public class GridSquareScript : MonoBehaviour
         }
 
     }
+
+    public int GetRandomNumber()
+    {
+        randomnumberlistcounter++;
+        if(randomnumberlistcounter>=RandomNumberlist.Count)
+        {
+            randomnumberlistcounter = 0;
+        }
+        return RandomNumberlist[randomnumberlistcounter];
+    }
+
 }
