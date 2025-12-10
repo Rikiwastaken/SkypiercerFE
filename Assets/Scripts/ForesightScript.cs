@@ -401,12 +401,12 @@ public class ForesightScript : MonoBehaviour
                 }
             }
             UpdateCharacterLists();
-            if (ActionToRevert.Unit != null)
+            if (ActionToRevert.Unit != null && ActionToRevert.Unit.UnitCharacteristics != null)
             {
                 foreach (GameObject GO in GridScript.instance.allunitGOs)
                 {
 
-                    if (GO.GetComponent<UnitScript>().UnitCharacteristics.ID == ActionToRevert.Unit.UnitCharacteristics.ID)
+                    if (GO!=null && GO.GetComponent<UnitScript>() != null && GO.GetComponent<UnitScript>().UnitCharacteristics!=null && GO.GetComponent<UnitScript>().UnitCharacteristics.ID == ActionToRevert.Unit.UnitCharacteristics.ID)
                     {
                         GO.GetComponent<UnitScript>().MoveTo(ActionToRevert.previousPosition[0].GridCoordinates);
                         GO.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;

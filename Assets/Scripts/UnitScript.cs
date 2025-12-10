@@ -187,6 +187,7 @@ public class UnitScript : MonoBehaviour
         public int number;
         public bool ishealing;
         public int framesremaining;
+        public bool isBond;
     }
 
     public Character UnitCharacteristics;
@@ -1390,13 +1391,14 @@ public class UnitScript : MonoBehaviour
         return;
     }
 
-    public void AddNumber(int amount, bool ishealing, string effectname)
+    public void AddNumber(int amount, bool ishealing, string effectname, bool isbond=false)
     {
         NumberToShow newnumber = new NumberToShow();
         newnumber.number = amount;
         newnumber.ishealing = ishealing;
         newnumber.EffectName = effectname;
         newnumber.framesremaining = (int)(timeforshowingnumbers / Time.deltaTime);
+        newnumber.isBond = isbond;
         damagestoshow.Add(newnumber);
     }
 
@@ -1436,7 +1438,7 @@ public class UnitScript : MonoBehaviour
             {
                 damagestoshow.RemoveAt(0);
             }
-            else
+            else if(!damagestoshow[0].isBond)
             {
                 AttackTurnScript.delaybeforenxtunit = 3;
             }

@@ -99,7 +99,7 @@ public class DataScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -276,7 +276,7 @@ public class DataScript : MonoBehaviour
     public List<Bonds> CreateBondsCopy()
     {
         List<Bonds> bondscopy = new List<Bonds>();
-        foreach(Bonds bond in BondsList)
+        foreach (Bonds bond in BondsList)
         {
             Bonds bondcopy = new Bonds();
             bondcopy.Characters = bond.Characters;
@@ -294,8 +294,8 @@ public class DataScript : MonoBehaviour
         int UnitID = MainUnit.GetComponent<UnitScript>().UnitCharacteristics.ID;
         int OtherUnitID = OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.ID;
 
-        TurnManger turnManger  = TurnManger.instance;
-        if(turnManger == null)
+        TurnManger turnManger = TurnManger.instance;
+        if (turnManger == null)
         {
             return;
         }
@@ -304,28 +304,28 @@ public class DataScript : MonoBehaviour
 
         foreach (Bonds bond in BondsList)
         {
-            if(bond.Characters.Contains(UnitID) && bond.Characters.Contains(OtherUnitID))
+            if (bond.Characters.Contains(UnitID) && bond.Characters.Contains(OtherUnitID))
             {
-                
-                
+
+
 
                 if (OtherUnit.GetComponent<UnitScript>().GetSkill(66) && MainUnit.GetComponent<UnitScript>().GetSkill(66)) //Friendly
                 {
-                    bond.BondPoints += bondincreaseperaction*3;
-                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 3, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
-                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 3, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
+                    bond.BondPoints += bondincreaseperaction * 3;
+                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 3, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
+                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 3, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
                 }
-                else if(OtherUnit.GetComponent<UnitScript>().GetSkill(66) || MainUnit.GetComponent<UnitScript>().GetSkill(66))
+                else if (OtherUnit.GetComponent<UnitScript>().GetSkill(66) || MainUnit.GetComponent<UnitScript>().GetSkill(66))
                 {
-                    bond.BondPoints += bondincreaseperaction*2;
-                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 2, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
-                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 2, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
+                    bond.BondPoints += bondincreaseperaction * 2;
+                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 2, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
+                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 2, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
                 }
                 else
                 {
                     bond.BondPoints += bondincreaseperaction;
-                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
-                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +");
+                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
+                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
                 }
 
                 return;
@@ -339,17 +339,17 @@ public class DataScript : MonoBehaviour
 
         Character charunit = Unit.GetComponent<UnitScript>().UnitCharacteristics;
 
-        if (charunit.affiliation.ToLower()!="playable" || turnManger == null)
+        if (charunit.affiliation.ToLower() != "playable" || turnManger == null)
         {
             return;
         }
 
-        foreach(GameObject otherunit in turnManger.playableunitGO)
+        foreach (GameObject otherunit in turnManger.playableunitGO)
         {
             Character charother = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
-            if (charother != charunit && charother.currentHP>0 && ManhattanDistance(charunit.currentTile[0].GridCoordinates, charother.currentTile[0].GridCoordinates)<=2)
+            if (charother != charunit && charother.currentHP > 0 && ManhattanDistance(charunit.currentTile[0].GridCoordinates, charother.currentTile[0].GridCoordinates) <= 2)
             {
-                IncreaseBonds(Unit,otherunit);
+                IncreaseBonds(Unit, otherunit);
             }
         }
 
@@ -359,9 +359,9 @@ public class DataScript : MonoBehaviour
     {
         UnitScript[] unitscripts = GameObject.FindObjectsByType<UnitScript>(FindObjectsSortMode.None);
 
-        List< Character > playablecopy = new List< Character >();
+        List<Character> playablecopy = new List<Character>();
 
-        foreach( Character c in PlayableCharacterList)
+        foreach (Character c in PlayableCharacterList)
         {
             UnitScript uS = new UnitScript();
             playablecopy.Add(uS.CreateCopy(c));
@@ -372,7 +372,7 @@ public class DataScript : MonoBehaviour
             foreach (Character character in PlayableCharacterList)
             {
                 Character currentchar = unitscript.UnitCharacteristics;
-                if(currentchar.affiliation=="playable" && character.ID==currentchar.ID)
+                if (currentchar.affiliation == "playable" && character.ID == currentchar.ID)
                 {
                     playablecopy[PlayableCharacterList.IndexOf(character)] = currentchar;
                 }
