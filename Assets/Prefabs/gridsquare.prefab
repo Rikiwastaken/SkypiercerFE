@@ -5764,7 +5764,7 @@ MonoBehaviour:
     PairedTiles: []
   MaterialsList:
   - name: Cave
-    groundmaterial: {fileID: 2100000, guid: 2cd2a7435494f914f888b66f850aa6a9, type: 2}
+    groundmaterial: {fileID: 2100000, guid: bb39d5ceab859b441844d2f8a1bcb724, type: 2}
     wallmaterial: {fileID: 2100000, guid: 47d234b6593cc064dbfdbf19b8edfa87, type: 2}
   - name: Village
     groundmaterial: {fileID: 2100000, guid: 38efa2495a27ae64cb42617019e33b32, type: 2}
@@ -5773,6 +5773,18 @@ MonoBehaviour:
     groundmaterial: {fileID: 2100000, guid: c33dc14a09201ea4cb788f05e6c381a5, type: 2}
     wallmaterial: {fileID: 2100000, guid: c33dc14a09201ea4cb788f05e6c381a5, type: 2}
   - name: Dungeon
+    groundmaterial: {fileID: 2100000, guid: 2cd2a7435494f914f888b66f850aa6a9, type: 2}
+    wallmaterial: {fileID: 2100000, guid: 2cd2a7435494f914f888b66f850aa6a9, type: 2}
+  - name: Water
+    groundmaterial: {fileID: 2100000, guid: 7d53f22039b5eba47b74dccdc78bc951, type: 2}
+    wallmaterial: {fileID: 2100000, guid: 7d53f22039b5eba47b74dccdc78bc951, type: 2}
+  - name: Forest
+    groundmaterial: {fileID: 2100000, guid: 5be5068aad440bd4dadad713f1c8b352, type: 2}
+    wallmaterial: {fileID: 2100000, guid: 5be5068aad440bd4dadad713f1c8b352, type: 2}
+  - name: Ruins
+    groundmaterial: {fileID: 2100000, guid: 2bbbb4850d795e34e85ef1590a144f91, type: 2}
+    wallmaterial: {fileID: 2100000, guid: 2bbbb4850d795e34e85ef1590a144f91, type: 2}
+  - name: Fortification
     groundmaterial: {fileID: 2100000, guid: 2cd2a7435494f914f888b66f850aa6a9, type: 2}
     wallmaterial: {fileID: 2100000, guid: 2cd2a7435494f914f888b66f850aa6a9, type: 2}
   gridsquareinsideWithoutUnit: {fileID: 21300000, guid: 922cc7db09ed86b42a1f3d4be7636464, type: 3}
@@ -5784,6 +5796,8 @@ MonoBehaviour:
   gridsquareFilling: {fileID: 21300000, guid: d8b13aea50db65640bec861515fe28f7, type: 3}
   gridsquareFillingBigEnemies: {fileID: 21300000, guid: eb63ec6f9ffdea64ba07dc48827b3bdc, type: 3}
   LeverGO: {fileID: 1151336907143010243}
+  RandomNumberlist: 
+  randomnumberlistcounter: 0
 --- !u!114 &4360266379203733301
 MonoBehaviour:
   m_ObjectHideFlags: 0

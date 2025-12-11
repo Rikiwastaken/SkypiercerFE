@@ -12,6 +12,7 @@ public class MapLoader : EditorWindow
     private Texture2D ElevationMap;
     private Texture2D ActivationMap;
     private Texture2D MechanismMap;
+    private Texture2D RainmMap;
     private Transform GridObject;
 
     [Serializable]
@@ -91,25 +92,21 @@ public class MapLoader : EditorWindow
         // Allow manual prefab assignment
         MechanismMap = (Texture2D)EditorGUILayout.ObjectField("Mechanism Map Image", MechanismMap, typeof(Texture2D), false);
 
+        // Allow manual prefab assignment
+        RainmMap = (Texture2D)EditorGUILayout.ObjectField("Rain Map Image", RainmMap, typeof(Texture2D), false);
+
 
         if (GUILayout.Button("Create Map"))
         {
-            if (ObstacleMap == null)
+            if(ObstacleMap!=null)
             {
-                EditorGUILayout.HelpBox("Please add an obstacle map.", MessageType.Warning);
-            }
-            else if (ElevationMap == null)
-            {
-                EditorGUILayout.HelpBox("Please add an elevation map.", MessageType.Warning);
-            }
-            else if (ActivationMap == null)
-            {
-                EditorGUILayout.HelpBox("Please add an activation map.", MessageType.Warning);
+                LoadMap();
             }
             else
             {
-                LoadMap();
-            } 
+                EditorGUILayout.HelpBox("Please add an obstacle map.", MessageType.Warning);
+            }
+            
         }
             
 
@@ -174,6 +171,7 @@ public class MapLoader : EditorWindow
                 ManageObstable(newtile, x, y);
                 ManageElevation(newtile, x, y);
                 ManageMechanism(newtile, x, y);
+                ManageRain(newtile, x, y);
 
                 newtile.GetComponent<GridSquareScript>().activated = true;
                 newtile.transform.parent = GridObject;
@@ -184,6 +182,10 @@ public class MapLoader : EditorWindow
                 if(newtile.GetComponent<GridSquareScript>().isobstacle)
                 {
                     tilename = "wall";
+                }
+                else if (newtile.GetComponent<GridSquareScript>().isstairs)
+                {
+                    tilename = "stairs";
                 }
                 else if(newtile.GetComponent<GridSquareScript>().type!="")
                 {
@@ -236,6 +238,12 @@ public class MapLoader : EditorWindow
     private void ManageObstable(GameObject Tile, int x, int y)
     {
         Color pixelColor = ObstacleMap.GetPixel(x, y);
+        if (x==0)
+        {
+            pixelColor = ObstacleMap.GetPixel(x+1, y);
+        }
+
+        
         
         if (pixelColor.Equals(colors.wall))
         {
@@ -249,6 +257,11 @@ public class MapLoader : EditorWindow
 
     private void ManageActivation(GameObject Tile, int x, int y)
     {
+        if(ActivationMap==null)
+        {
+            Tile.GetComponent<GridSquareScript>().activated = true;
+            return;
+        }
         Color pixelColor = ActivationMap.GetPixel(x, y);
         
         if (pixelColor.Equals(colors.wall))
@@ -263,101 +276,148 @@ public class MapLoader : EditorWindow
 
     private void ManageMechanism(GameObject Tile, int x, int y)
     {
-        if(MechanismMap!=null)
+        if(MechanismMap==null)
         {
-            if(x!=0)
-            {
-                Color pixelColor = MechanismMap.GetPixel(x, y);
-           
-                if (pixelColor.Equals(colors.LeverColor))
-                {
-                    MechanismClass Mechanism = new MechanismClass();
-                    Mechanism.type = 2;
-                    Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
-                }
-                else if (pixelColor.Equals(colors.DoorColor))
-                {
-                    MechanismClass Mechanism = new MechanismClass();
-                    Mechanism.type = 1;
-                    Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
-                }
-                else if (pixelColor.Equals(colors.StairsColor))
-                {
-                    Debug.Log("stairsfound");
-                    Tile.GetComponent<GridSquareScript>().isstairs = true;
-                }
-                else if (pixelColor.Equals(colors.ForestColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Forest";
-                }
-                else if (pixelColor.Equals(colors.RuinsColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Ruins";
-                }
-                else if (pixelColor.Equals(colors.FireColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Fire";
-                }
-                else if (pixelColor.Equals(colors.WaterColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Water";
-                }
-                else if (pixelColor.Equals(colors.FortificationColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Fortification";
-                }
-                else if (pixelColor.Equals(colors.FogColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Fog";
-                }
-                else if (pixelColor.Equals(colors.MedicinalWaterColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "MedicinalWater";
-                }
-            }
-            else
-            {
-                Color pixelColor = MechanismMap.GetPixel(x+1, y);
-                if (pixelColor.Equals(colors.StairsColor))
-                {
-                    Debug.Log("stairsfound");
-                    Tile.GetComponent<GridSquareScript>().isstairs = true;
-                }
-                else if (pixelColor.Equals(colors.ForestColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Forest";
-                }
-                else if (pixelColor.Equals(colors.RuinsColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Ruins";
-                }
-                else if (pixelColor.Equals(colors.FireColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Fire";
-                }
-                else if (pixelColor.Equals(colors.WaterColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Water";
-                }
-                else if (pixelColor.Equals(colors.FortificationColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Fortification";
-                }
-                else if (pixelColor.Equals(colors.FogColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "Fog";
-                }
-                else if (pixelColor.Equals(colors.MedicinalWaterColor))
-                {
-                    Tile.GetComponent<GridSquareScript>().type = "MedicinalWater";
-                }
+            return ;
+        }
+        if (x != 0)
+        {
+            Color pixelColor = MechanismMap.GetPixel(x, y);
 
+            if (pixelColor.Equals(colors.LeverColor))
+            {
+                MechanismClass Mechanism = new MechanismClass();
+                Mechanism.type = 2;
+                Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
             }
+            else if (pixelColor.Equals(colors.DoorColor))
+            {
+                MechanismClass Mechanism = new MechanismClass();
+                Mechanism.type = 1;
+                Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
+            }
+            else if (pixelColor.Equals(colors.StairsColor))
+            {
+                Debug.Log("stairsfound");
+                Tile.GetComponent<GridSquareScript>().isstairs = true;
+            }
+            else if (pixelColor.Equals(colors.ForestColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Forest";
+            }
+            else if (pixelColor.Equals(colors.RuinsColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Ruins";
+            }
+            else if (pixelColor.Equals(colors.FireColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Fire";
+            }
+            else if (pixelColor.Equals(colors.WaterColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Water";
+            }
+            else if (pixelColor.Equals(colors.FortificationColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Fortification";
+            }
+            else if (pixelColor.Equals(colors.FogColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Fog";
+            }
+            else if (pixelColor.Equals(colors.MedicinalWaterColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "MedicinalWater";
+            }
+        }
+        else
+        {
+            Color pixelColor = MechanismMap.GetPixel(x + 1, y);
+            if (pixelColor.Equals(colors.StairsColor))
+            {
+                Debug.Log("stairsfound");
+                Tile.GetComponent<GridSquareScript>().isstairs = true;
+            }
+            else if (pixelColor.Equals(colors.ForestColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Forest";
+            }
+            else if (pixelColor.Equals(colors.RuinsColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Ruins";
+            }
+            else if (pixelColor.Equals(colors.FireColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Fire";
+            }
+            else if (pixelColor.Equals(colors.WaterColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Water";
+            }
+            else if (pixelColor.Equals(colors.FortificationColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Fortification";
+            }
+            else if (pixelColor.Equals(colors.FogColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Fog";
+            }
+            else if (pixelColor.Equals(colors.MedicinalWaterColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "MedicinalWater";
+            }
+
+        }
+    }
+
+    private void ManageRain(GameObject Tile, int x, int y)
+    {
+        if (RainmMap == null)
+        {
+            return;
+        }
+
+        Color RainColor = RainmMap.GetPixel(0, 1);
+        Color SunColor = RainmMap.GetPixel(0, 2);
+
+
+        if (x != 0)
+        {
+            Color pixelColor = RainmMap.GetPixel(x, y);
+
+            if (pixelColor.Equals(RainColor))
+            {
+                Tile.GetComponent<GridSquareScript>().RemainingRainTurns = 3;
+            }
+            else if (pixelColor.Equals(SunColor))
+            {
+                Tile.GetComponent<GridSquareScript>().RemainingSunTurns = 3;
+            }
+        }
+        else
+        {
+            Color pixelColor = RainmMap.GetPixel(x + 1, y);
+            if (pixelColor.Equals(RainColor))
+            {
+                Tile.GetComponent<GridSquareScript>().RemainingRainTurns = 3;
+            }
+            else if (pixelColor.Equals(SunColor))
+            {
+                Tile.GetComponent<GridSquareScript>().RemainingSunTurns = 3;
+            }
+
         }
     }
 
     private void ManageElevation(GameObject Tile, int x, int y)
     {
+
+        if(ElevationMap==null)
+        {
+            Tile.GetComponent<GridSquareScript>().elevation = 0;
+            return;
+        }
+
         Color pixelColor = new Color();
         if (x==0 && y<=8)
         {
@@ -418,15 +478,19 @@ public class MapLoader : EditorWindow
         AllColors NewColor = new AllColors();
 
         NewColor.wall = ObstacleMap.GetPixel(0, 0);
-        NewColor.Elevation0 = ElevationMap.GetPixel(0, 4);
-        NewColor.Elevation1 = ElevationMap.GetPixel(0, 5);
-        NewColor.Elevation2 = ElevationMap.GetPixel(0, 6);
-        NewColor.Elevation3 = ElevationMap.GetPixel(0, 7);
-        NewColor.Elevation4 = ElevationMap.GetPixel(0, 8);
-        NewColor.ElevationNeg1 = ElevationMap.GetPixel(0, 3);
-        NewColor.ElevationNeg2 = ElevationMap.GetPixel(0, 2);
-        NewColor.ElevationNeg3 = ElevationMap.GetPixel(0, 1);
-        NewColor.ElevationNeg4 = ElevationMap.GetPixel(0, 0);
+        if(ElevationMap!=null)
+        {
+            NewColor.Elevation0 = ElevationMap.GetPixel(0, 4);
+            NewColor.Elevation1 = ElevationMap.GetPixel(0, 5);
+            NewColor.Elevation2 = ElevationMap.GetPixel(0, 6);
+            NewColor.Elevation3 = ElevationMap.GetPixel(0, 7);
+            NewColor.Elevation4 = ElevationMap.GetPixel(0, 8);
+            NewColor.ElevationNeg1 = ElevationMap.GetPixel(0, 3);
+            NewColor.ElevationNeg2 = ElevationMap.GetPixel(0, 2);
+            NewColor.ElevationNeg3 = ElevationMap.GetPixel(0, 1);
+            NewColor.ElevationNeg4 = ElevationMap.GetPixel(0, 0);
+        }
+        
         NewColor.LeverColor = Color.white;
         NewColor.DoorColor = Color.white;
         NewColor.StairsColor = Color.white;

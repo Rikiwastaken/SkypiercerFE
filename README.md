@@ -1,6 +1,6 @@
 # SkypiercerFE
 
-Demo level rebuilt from Fire Emblem Radiant Dawn
+Test level rebuilt from Fire Emblem Radiant Dawn, 4 original maps (yet)
 
 Music from Fire Emblem Three Houses
 

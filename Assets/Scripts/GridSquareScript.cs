@@ -128,6 +128,10 @@ public class GridSquareScript : MonoBehaviour
         {
             rainparticle.gameObject.SetActive(false);
         }
+        if (type.ToLower() == "water" || type.ToLower() == "ruins" || type.ToLower() == "fortification" || type.ToLower() == "forest")
+        {
+            VisualType = type;
+        }
         manageVisuals();
     }
 
@@ -141,6 +145,7 @@ public class GridSquareScript : MonoBehaviour
         // Initial check (in case some levers start activated)
         CheckAllTriggers(null);
 
+        
 
         if (Mechanism == null || Mechanism.type != 1) return;
 
@@ -157,6 +162,8 @@ public class GridSquareScript : MonoBehaviour
         {
             RandomNumberlist.Add(UnityEngine.Random.Range(0, 100));
         }
+
+        
 
     }
 
