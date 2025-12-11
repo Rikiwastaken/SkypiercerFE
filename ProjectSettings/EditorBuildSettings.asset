@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TestMap.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Maps/Prologue1.unity
+    path: Assets/Scenes/Maps/Prologue.unity
     guid: e4bd82864b6ee614cb4d3a96907695ed
   - enabled: 1
     path: Assets/Scenes/Maps/Chapter1.unity
@@ -36,7 +36,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Maps/Chapter3.unity
     guid: 19350d6164845a8428699902acf708dc
   - enabled: 1
-    path: Assets/Scenes/Maps/Prologue.unity
+    path: Assets/Scenes/Maps/Chapter4.unity
     guid: dee83dac6eedb5748a1b29f03fcadf28
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
