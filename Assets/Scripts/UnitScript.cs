@@ -2116,6 +2116,22 @@ public class UnitScript : MonoBehaviour
             levelupstring += level + " ";
         }
 
+        bool levelupwasnull = true;
+        foreach (int statincrease in lvlupresult)
+        {
+            if(statincrease!=0)
+            {
+                levelupwasnull = false;
+                break;
+            }
+        }
+
+        if(levelupwasnull)
+        {
+            UnitCharacteristics.stats.HP = (int)UnitCharacteristics.stats.HP + 1;
+            lvlupresult[0] = 1;
+        }
+
         calculateStats();
         return lvlupresult;
     }

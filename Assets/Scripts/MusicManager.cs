@@ -52,7 +52,7 @@ public class MusicManager : MonoBehaviour
     {
         beforecombatmusicvol = BeforeCombat.volume;
         SaveManager = FindAnyObjectByType<SaveManager>();
-        ChangeVolume();
+        
 
         if (BeforeCombat.isPlaying)
         {

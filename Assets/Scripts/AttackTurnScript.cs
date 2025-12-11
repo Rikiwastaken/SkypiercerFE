@@ -659,7 +659,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     expdistributed = true;
                 }
-                else if (CharAttacker.affiliation == "playable")
+                else if (CharAttacker.affiliation == "playable" && levelupbonuses!= new List<int>())
                 {
                     expbar.gameObject.SetActive(true);
                     if (!expbar.setupdone)
@@ -668,7 +668,7 @@ public class AttackTurnScript : MonoBehaviour
                     }
 
                 }
-                else if (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
+                else if (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && levelupbonuses != new List<int>())
                 {
                     expbar.gameObject.SetActive(true);
                     if (!expbar.setupdone)
