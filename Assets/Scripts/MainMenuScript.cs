@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static SaveManager;
 
@@ -19,6 +20,12 @@ public class MainMenuScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        if(DataScript.instance == null)
+        {
+            SceneManager.LoadScene("FirstScene");
+        }
+
         saveManager = FindAnyObjectByType<SaveManager>();
         saveManager.LoadSaves();
         BaseMenu.GetChild(0).GetComponent<Button>().Select();
@@ -105,7 +112,14 @@ public class MainMenuScript : MonoBehaviour
         {
             saveManager.activeSlot = slot;
             saveManager.ApplySave(slot);
-            sceneLoader.LoadScene("Camp");
+            if(saveManager.currentchapter==1)
+            {
+                sceneLoader.LoadScene("Chapter1");
+            }
+            else
+            {
+                sceneLoader.LoadScene("Camp");
+            }
         }
         else
         {

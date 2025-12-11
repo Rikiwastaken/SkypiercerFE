@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static TextBubbleScript;
 
 public class CampScript : MonoBehaviour
@@ -23,9 +24,13 @@ public class CampScript : MonoBehaviour
 
     private bool previousindialogue;
 
+    public Transform SaveButtonList;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        saveManager = SaveManager.instance;
 
         if (DataScript.instance == null)
         {
@@ -41,7 +46,14 @@ public class CampScript : MonoBehaviour
                 break;
             }
         }
-        
+
+        List<Button> buttons = new List<Button>();
+        for (int i = 0; i < SaveButtonList.childCount - 1; i++)
+        {
+            buttons.Add(SaveButtonList.GetChild(i).GetComponent<Button>());
+        }
+        saveManager.InitializeSaveButtons(buttons);
+
     }
 
     private void Update()

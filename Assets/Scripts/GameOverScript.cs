@@ -102,8 +102,12 @@ public class GameOverScript : MonoBehaviour
 
     public void ConfirmSave()
     {
+        if(saveManager == null)
+        {
+            saveManager = SaveManager.instance;
+        }
         saveManager.activeSlot = chosenSlot;
-        saveManager.SaveCurrentSlot();
+        saveManager.SaveCurrentSlot(saveManager.currentchapter);
         InitializeSaveButtons();
     }
 

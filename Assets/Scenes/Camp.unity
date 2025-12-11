@@ -3911,6 +3911,7 @@ MonoBehaviour:
       Portrait: {fileID: 0}
       characterindex: 6
       ImageToShow: {fileID: 0}
+  SaveButtonList: {fileID: 1880538424}
 --- !u!114 &1176254971
 MonoBehaviour:
   m_ObjectHideFlags: 0
