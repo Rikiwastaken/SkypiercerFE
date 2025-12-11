@@ -73,7 +73,7 @@ public class SpecialCommandsScript : MonoBehaviour
     {
         if (SpecialInteractos[i].GetComponent<UnitScript>() != null)
         {
-            ActionManager.instance.Interract(target, null, SpecialInteractos[i].GetComponent<UnitScript>());
+            ActionManager.instance.Interract(target, null, SpecialInteractos[i]);
             SpecialInteractos[i].GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkedto = true;
             MapEventManager.instance.TriggerEventCheck();
             gameObject.SetActive(false);
