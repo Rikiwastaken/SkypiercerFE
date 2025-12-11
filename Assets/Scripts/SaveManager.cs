@@ -71,6 +71,7 @@ public class SaveManager : MonoBehaviour
         DefaultSave.PlayerInventory = DataScript.instance.PlayerInventory;
         DefaultSave.BondList = DataScript.instance.BondsList;
         DefaultSave.secondselapsed = 0;
+        MusicManager.instance.ChangeVolume();
     }
 
     private void FixedUpdate()
