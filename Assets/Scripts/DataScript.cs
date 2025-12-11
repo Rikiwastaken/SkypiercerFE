@@ -166,6 +166,11 @@ public class DataScript : MonoBehaviour
                 inventoryItem.type = 1;
                 inventoryItem.ID = skill.ID;
                 PlayerInventory.inventoryItems.Add(inventoryItem);
+
+                if(skill.ID == 74)
+                {
+                    inventoryItem.Quantity = 99;
+                }
             }
         }
     }

@@ -2876,6 +2876,13 @@ public class UnitScript : MonoBehaviour
             statbonuses.FixedDamageBonus += GetFirstWeapon().BaseDamage / 2;
         }
 
+        //Eye of Shining Justice
+        if (GetSkill(74))
+        {
+            statbonuses.FixedDamageBonus += 100;
+            statbonuses.FixedDamageReduction += 100;
+        }
+
 
         AllStatsSkillBonus battalionskillbonus = GetBattalionCombatBonus();
 
