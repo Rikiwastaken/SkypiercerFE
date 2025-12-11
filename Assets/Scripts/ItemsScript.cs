@@ -91,7 +91,7 @@ public class ItemsScript : MonoBehaviour
 
             }
         }
-        else if (currentselected.transform.parent == transform)
+        else
         {
             statstext.transform.parent.gameObject.SetActive(false);
         }
