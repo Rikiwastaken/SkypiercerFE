@@ -229,6 +229,17 @@ public class DataScript : MonoBehaviour
         newsave.slot = 0;
         newsave.chapter = Chapter;
 
+        Inventory inventory = new Inventory();
+        inventory.inventoryItems = new List<InventoryItem>();
+
+        foreach (InventoryItem item in DefaultInventory.inventoryItems)
+        {
+            inventory.inventoryItems.Add(item);
+        }
+
+        SetupInventoryForChapter(Chapter, inventory);
+
+        PlayerInventory = inventory;
 
         switch (Chapter)
         {
@@ -359,6 +370,40 @@ public class DataScript : MonoBehaviour
         newsave.PlayableCharacterList = PlayableCharacterList;
 
     }
+    public void SetupInventoryForChapter(int Chapter, Inventory inventory)
+    {
+
+        if(Chapter >= 3)
+        {
+            foreach(InventoryItem item in inventory.inventoryItems)
+            {
+                if(item.ID == 56)
+                {
+                    item.Quantity += 2;
+                }
+            }
+        }
+        if (Chapter >= 4)
+        {
+            foreach (InventoryItem item in inventory.inventoryItems)
+            {
+                if (item.ID == 6)
+                {
+                    item.Quantity += 1;
+                }
+                if (item.ID == 3)
+                {
+                    item.Quantity += 1;
+                }
+                if (item.ID == 4)
+                {
+                    item.Quantity += 1;
+                }
+            }
+        }
+
+    }
+
 
 
     private void SetupClasses()
