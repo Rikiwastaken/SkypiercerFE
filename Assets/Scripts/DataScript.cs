@@ -167,12 +167,197 @@ public class DataScript : MonoBehaviour
                 inventoryItem.ID = skill.ID;
                 PlayerInventory.inventoryItems.Add(inventoryItem);
 
-                if(skill.ID == 74)
+                if (skill.ID == 74)
                 {
                     inventoryItem.Quantity = 99;
                 }
             }
         }
+    }
+
+    public void UpdateCharacter(int characterID, int level, int experience, List<int> EquipedSkills, List<WeaponMastery> masteries, string battallion, bool unlocked)
+    {
+        GameObject TempGO = new GameObject();
+        TempGO.AddComponent<UnitScript>();
+        TempGO.GetComponent<UnitScript>().enabled = false;
+        TempGO.AddComponent<RandomScript>();
+        TempGO.GetComponent<RandomScript>().numberofLevelValues = 50;
+        TempGO.GetComponent<RandomScript>().numberofRandomValues = 50;
+        foreach (Character character in PlayableCharacterList)
+        {
+            if (character.ID == characterID)
+            {
+
+                
+
+                character.Masteries = masteries;
+                UpdateEquipmentID(character);
+                TempGO.GetComponent<UnitScript>().UnitCharacteristics = character;
+                TempGO.GetComponent<RandomScript>().InitializeRandomValues();
+
+                GenerateEquipmentList(character);
+
+                int baselevel = character.level;
+
+                for(int i = baselevel;i< level;i++)
+                {
+                    TempGO.GetComponent<UnitScript>().LevelUp();
+                }
+                character.experience = experience;
+                character.EquipedSkills = EquipedSkills;
+                character.playableStats.battalion = battallion;
+                character.playableStats.unlocked = unlocked;
+
+                break;
+            }
+        }
+
+        DestroyImmediate(TempGO);
+    }
+
+
+    public void SetupCharactersForChapter(int Chapter)
+    {
+
+        SaveManager SM = SaveManager.instance;
+
+        SM.activeSlot = 0;
+
+        SaveManager.SaveClass newsave = new SaveManager.SaveClass();
+
+        newsave.versionID = SM.versionID;
+        newsave.slot = 0;
+        newsave.chapter = Chapter;
+
+
+        switch (Chapter)
+        {
+            case 1:
+                // Zack
+
+                List<int> Zackequipedskills = new List<int>();
+
+                Zackequipedskills.Add(7);
+
+                List<WeaponMastery> Zackmasteries = new List<WeaponMastery>();
+
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 1, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 3, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 3, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 4, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = 1 });
+
+                UpdateCharacter(0, 2, 86, Zackequipedskills, Zackmasteries, "zack", true);
+
+                // Lea
+
+                List<int> Leaequipedskills = new List<int>();
+
+
+                List<WeaponMastery> Leamasteries = new List<WeaponMastery>();
+                Leamasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 2, Level = 0 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 0 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 7, Level = 1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(1, 4, 25, Leaequipedskills, Leamasteries, "zack", true);
+
+
+                // Elwyn
+
+                List<int> Elwynequipedskills = new List<int>();
+
+
+                List<WeaponMastery> Elwynmasteries = new List<WeaponMastery>();
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 6, Level = 1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = 0 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = 0 });
+
+                UpdateCharacter(2, 3, 80, Elwynequipedskills, Elwynmasteries, "zack", true);
+
+                break;
+            case 2:
+                // Zack
+
+                Zackequipedskills = new List<int>();
+
+                Zackequipedskills.Add(7);
+
+                Zackmasteries = new List<WeaponMastery>();
+
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 1, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 9, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 4, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 3, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 4, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 2, Level = 1 });
+
+                UpdateCharacter(0, 4, 58, Zackequipedskills, Zackmasteries, "zack", true);
+
+                // Lea
+
+                Leaequipedskills = new List<int>();
+
+
+                Leamasteries = new List<WeaponMastery>();
+                Leamasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 3, Level = 0 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 0 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 17, Level = 1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(1, 7, 7, Leaequipedskills, Leamasteries, "zack", true);
+
+
+                // Elwyn
+
+                Elwynequipedskills = new List<int>();
+
+
+                Elwynmasteries = new List<WeaponMastery>();
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 13, Level = 1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 2, Level = 0 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 2, Level = 0 });
+
+                UpdateCharacter(2, 6, 23, Elwynequipedskills, Elwynmasteries, "zack", true);
+
+                // Mir
+
+                List<int> Mirequipedskills = new List<int>();
+
+
+                List<WeaponMastery> Mirmasteries = new List<WeaponMastery>();
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(6, 20, 7, Mirequipedskills, Mirmasteries, "zack", true);
+
+                break;
+        }
+
+        newsave.PlayableCharacterList = PlayableCharacterList;
+
     }
 
 

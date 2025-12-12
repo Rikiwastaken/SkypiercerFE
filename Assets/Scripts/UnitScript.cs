@@ -523,7 +523,7 @@ public class UnitScript : MonoBehaviour
             //dostuff
 
 
-            
+
             if (copied && CopiedSkillImage.sprite != SkillCopiedSprite)
             {
                 CopiedSkillImage.sprite = SkillCopiedSprite;
@@ -894,6 +894,35 @@ public class UnitScript : MonoBehaviour
             UnitCharacteristics.AjustedStats.Dexterity = (int)UnitCharacteristics.stats.Dexterity;
         }
 
+        if (UnitCharacteristics.AjustedStats.HP < 0)
+        {
+            UnitCharacteristics.AjustedStats.HP = 0;
+        }
+        if (UnitCharacteristics.AjustedStats.Strength < 0)
+        {
+            UnitCharacteristics.AjustedStats.Strength = 0;
+        }
+        if (UnitCharacteristics.AjustedStats.Psyche < 0)
+        {
+            UnitCharacteristics.AjustedStats.Psyche = 0;
+        }
+        if (UnitCharacteristics.AjustedStats.Defense < 0)
+        {
+            UnitCharacteristics.AjustedStats.Defense = 0;
+        }
+        if (UnitCharacteristics.AjustedStats.Resistance < 0)
+        {
+            UnitCharacteristics.AjustedStats.Resistance = 0;
+        }
+        if (UnitCharacteristics.AjustedStats.Speed < 0)
+        {
+            UnitCharacteristics.AjustedStats.Speed = 0;
+        }
+        if (UnitCharacteristics.AjustedStats.Dexterity < 0)
+        {
+            UnitCharacteristics.AjustedStats.Dexterity = 0;
+        }
+
     }
 
     private void GainMastery(Character character, string weapontounlock = "", bool secundary = false)
@@ -925,7 +954,7 @@ public class UnitScript : MonoBehaviour
     public void ShowAffinityArrow()
     {
         DataScript DS = DataScript.instance;
-        if(GridScript.GetUnit(GridScript.selection)==gameObject)
+        if (GridScript.GetUnit(GridScript.selection) == gameObject)
         {
 
             List<GameObject> BondedUnitsList = new List<GameObject>();
@@ -933,11 +962,11 @@ public class UnitScript : MonoBehaviour
 
             foreach (Bonds bond in DS.BondsList)
             {
-                if(bond.Characters.Contains(UnitCharacteristics.ID) && bond.BondLevel >0)
+                if (bond.Characters.Contains(UnitCharacteristics.ID) && bond.BondLevel > 0)
                 {
-                    foreach(int ID in bond.Characters)
+                    foreach (int ID in bond.Characters)
                     {
-                        if(ID!= UnitCharacteristics.ID)
+                        if (ID != UnitCharacteristics.ID)
                         {
                             BondedUnitIDsList.Add(ID);
                         }
@@ -945,10 +974,10 @@ public class UnitScript : MonoBehaviour
                 }
             }
 
-            foreach(GameObject unitGO in TurnManger.instance.playableunitGO)
+            foreach (GameObject unitGO in TurnManger.instance.playableunitGO)
             {
                 Character character = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-                if(BondedUnitIDsList.Contains(character.ID))
+                if (BondedUnitIDsList.Contains(character.ID))
                 {
                     unitGO.GetComponent<UnitScript>().PointArrowToTarget(UnitCharacteristics);
                 }
@@ -959,7 +988,7 @@ public class UnitScript : MonoBehaviour
             }
 
         }
-        else if(GridScript.GetUnit(GridScript.selection)==null)
+        else if (GridScript.GetUnit(GridScript.selection) == null)
         {
             HideAffinityArrow();
         }
@@ -968,7 +997,7 @@ public class UnitScript : MonoBehaviour
     public void PointArrowToTarget(Character target)
     {
 
-        if(!AffinityArrow.gameObject.activeSelf)
+        if (!AffinityArrow.gameObject.activeSelf)
         {
             AffinityArrow.gameObject.SetActive(true);
         }
@@ -1002,7 +1031,7 @@ public class UnitScript : MonoBehaviour
 
         if (dir.sqrMagnitude <= 0.0001f)
         {
-            // degenerate case: same tile — don't change rotation
+            // degenerate case: same tile ï¿½ don't change rotation
             return;
         }
 
@@ -1015,7 +1044,7 @@ public class UnitScript : MonoBehaviour
         // If your arrow already lies flat, use Quaternion.Euler(0, yaw, 0) instead.
         AffinityArrow.transform.rotation = Quaternion.Euler(90f, yaw, 0f);
 
-        
+
     }
 
 
@@ -1391,7 +1420,7 @@ public class UnitScript : MonoBehaviour
         return;
     }
 
-    public void AddNumber(int amount, bool ishealing, string effectname, bool isbond=false)
+    public void AddNumber(int amount, bool ishealing, string effectname, bool isbond = false)
     {
         NumberToShow newnumber = new NumberToShow();
         newnumber.number = amount;
@@ -1438,7 +1467,7 @@ public class UnitScript : MonoBehaviour
             {
                 damagestoshow.RemoveAt(0);
             }
-            else if(!damagestoshow[0].isBond)
+            else if (!damagestoshow[0].isBond)
             {
                 AttackTurnScript.delaybeforenxtunit = 3;
             }
@@ -1871,45 +1900,48 @@ public class UnitScript : MonoBehaviour
         }
 
         int bonussize = 20;
-
-        switch (GetFirstWeapon().type.ToLower())
+        if(GetFirstWeapon()!=null && GetFirstWeapon().type!=null)
         {
-            case "sword":
-                GrowthtoApply.SpeedGrowth += bonussize;
-                GrowthtoApply.DexterityGrowth += bonussize;
-                GrowthtoApply.HPGrowth -= bonussize;
-                break;
-            case "spear":
-                GrowthtoApply.StrengthGrowth += bonussize;
-                GrowthtoApply.PsycheGrowth += bonussize;
-                GrowthtoApply.ResistanceGrowth -= bonussize;
-                break;
-            case "greatsword":
-                GrowthtoApply.StrengthGrowth += bonussize;
-                GrowthtoApply.DefenseGrowth += bonussize;
-                GrowthtoApply.SpeedGrowth -= bonussize;
-                break;
-            case "bow":
-                GrowthtoApply.StrengthGrowth += bonussize;
-                GrowthtoApply.DexterityGrowth += bonussize;
-                GrowthtoApply.DefenseGrowth -= bonussize;
-                break;
-            case "scythe":
-                GrowthtoApply.PsycheGrowth += bonussize;
-                GrowthtoApply.DexterityGrowth += bonussize;
-                GrowthtoApply.SpeedGrowth -= bonussize;
-                break;
-            case "shield":
-                GrowthtoApply.HPGrowth += bonussize;
-                GrowthtoApply.DefenseGrowth += bonussize;
-                GrowthtoApply.PsycheGrowth -= bonussize;
-                break;
-            case "staff":
-                GrowthtoApply.PsycheGrowth += bonussize;
-                GrowthtoApply.ResistanceGrowth += bonussize;
-                GrowthtoApply.StrengthGrowth -= bonussize;
-                break;
+            switch (GetFirstWeapon().type.ToLower())
+            {
+                case "sword":
+                    GrowthtoApply.SpeedGrowth += bonussize;
+                    GrowthtoApply.DexterityGrowth += bonussize;
+                    GrowthtoApply.HPGrowth -= bonussize;
+                    break;
+                case "spear":
+                    GrowthtoApply.StrengthGrowth += bonussize;
+                    GrowthtoApply.PsycheGrowth += bonussize;
+                    GrowthtoApply.ResistanceGrowth -= bonussize;
+                    break;
+                case "greatsword":
+                    GrowthtoApply.StrengthGrowth += bonussize;
+                    GrowthtoApply.DefenseGrowth += bonussize;
+                    GrowthtoApply.SpeedGrowth -= bonussize;
+                    break;
+                case "bow":
+                    GrowthtoApply.StrengthGrowth += bonussize;
+                    GrowthtoApply.DexterityGrowth += bonussize;
+                    GrowthtoApply.DefenseGrowth -= bonussize;
+                    break;
+                case "scythe":
+                    GrowthtoApply.PsycheGrowth += bonussize;
+                    GrowthtoApply.DexterityGrowth += bonussize;
+                    GrowthtoApply.SpeedGrowth -= bonussize;
+                    break;
+                case "shield":
+                    GrowthtoApply.HPGrowth += bonussize;
+                    GrowthtoApply.DefenseGrowth += bonussize;
+                    GrowthtoApply.PsycheGrowth -= bonussize;
+                    break;
+                case "staff":
+                    GrowthtoApply.PsycheGrowth += bonussize;
+                    GrowthtoApply.ResistanceGrowth += bonussize;
+                    GrowthtoApply.StrengthGrowth -= bonussize;
+                    break;
+            }
         }
+        
 
         return GrowthtoApply;
     }
@@ -2119,14 +2151,14 @@ public class UnitScript : MonoBehaviour
         bool levelupwasnull = true;
         foreach (int statincrease in lvlupresult)
         {
-            if(statincrease!=0)
+            if (statincrease != 0)
             {
                 levelupwasnull = false;
                 break;
             }
         }
 
-        if(levelupwasnull)
+        if (levelupwasnull)
         {
             UnitCharacteristics.stats.HP = (int)UnitCharacteristics.stats.HP + 1;
             lvlupresult[0] = 1;
@@ -2459,30 +2491,30 @@ public class UnitScript : MonoBehaviour
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
 
         TurnManger TM = TurnManger.instance;
-        
+
         List<Bonds> pertinentbonds = new List<Bonds>();
 
-        foreach(Bonds bond in DataScript.instance.BondsList)
+        foreach (Bonds bond in DataScript.instance.BondsList)
         {
-            if(bond.Characters.Contains(UnitCharacteristics.ID))
+            if (bond.Characters.Contains(UnitCharacteristics.ID))
             {
                 pertinentbonds.Add(bond);
             }
         }
 
-        foreach(GameObject otherunitGO in TM.playableunitGO)
+        foreach (GameObject otherunitGO in TM.playableunitGO)
         {
             Character otherunit = otherunitGO.GetComponent<UnitScript>().UnitCharacteristics;
-            if(otherunit.currentHP > 0 && otherunit != UnitCharacteristics && ManhattanDistance(UnitCharacteristics,otherunit)<=2)
+            if (otherunit.currentHP > 0 && otherunit != UnitCharacteristics && ManhattanDistance(UnitCharacteristics, otherunit) <= 2)
             {
-                foreach(Bonds bond in pertinentbonds)
+                foreach (Bonds bond in pertinentbonds)
                 {
-                    if(bond.Characters.Contains(otherunit.ID))
+                    if (bond.Characters.Contains(otherunit.ID))
                     {
                         statbonuses.Crit += 1 * bond.BondLevel;
                         statbonuses.Hit += 3 * bond.BondLevel;
                         statbonuses.Dodge += 2 * bond.BondLevel;
-                        if(GetSkill(67)) // Friends are power
+                        if (GetSkill(67)) // Friends are power
                         {
                             statbonuses.Crit += 1 * bond.BondLevel;
                             statbonuses.Hit += 3 * bond.BondLevel;
@@ -2903,14 +2935,14 @@ public class UnitScript : MonoBehaviour
         AllStatsSkillBonus battalionskillbonus = GetBattalionCombatBonus();
 
 
-        if (UnitCharacteristics.affiliation.ToLower()=="playable")
+        if (UnitCharacteristics.affiliation.ToLower() == "playable")
         {
             AllStatsSkillBonus bondbonus = GetBondCombatBonus();
             statbonuses.Hit += bondbonus.Hit;
             statbonuses.Crit += bondbonus.Crit;
             statbonuses.Dodge += bondbonus.Dodge;
         }
-        
+
 
         statbonuses.FixedDamageBonus += battalionskillbonus.FixedDamageBonus;
         statbonuses.FixedDamageReduction += battalionskillbonus.FixedDamageReduction;

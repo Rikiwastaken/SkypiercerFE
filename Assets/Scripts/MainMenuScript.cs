@@ -16,6 +16,7 @@ public class MainMenuScript : MonoBehaviour
     public Button OptionsMenuButton;
     public Transform BaseMenu;
     public Transform ContinueMenu;
+    public Transform ManuallyLoadChapterMenu;
     public Button ContinueMenuButton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -57,7 +58,17 @@ public class MainMenuScript : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(ContinueMenu.GetChild(0).gameObject);
             }
         }
-
+        else if (ManuallyLoadChapterMenu.gameObject.activeSelf)
+        {
+            if (currentSelected == null)
+            {
+                EventSystem.current.SetSelectedGameObject(ManuallyLoadChapterMenu.GetChild(0).gameObject);
+            }
+            else if (currentSelected.transform.parent != ManuallyLoadChapterMenu)
+            {
+                EventSystem.current.SetSelectedGameObject(ManuallyLoadChapterMenu.GetChild(0).gameObject);
+            }
+        }
     }
 
     public void InitializeSaveButtons()
@@ -74,6 +85,14 @@ public class MainMenuScript : MonoBehaviour
     {
         saveManager.ApplySave(-1);
         sceneLoader.LoadScene("TestMap");
+    }
+
+    public void ManuallyLoadChapter(int Chapter)
+    {
+        DataScript.instance.SetupCharactersForChapter(Chapter);
+
+
+        sceneLoader.LoadScene("Chapter"+Chapter);
     }
 
     public void OnCancel()
