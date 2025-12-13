@@ -37,10 +37,10 @@ public class GridSquareScript : MonoBehaviour
     private List<Vector3> initialpos = new List<Vector3>();
 
     /*type is for potential bonus : 
-        Forest : +30% dodge
-        Ruins : +10% Dodge, -10% Accuracy
+        Forest : +20% dodge
+        Ruins : +10% Dodge, +10% Accuracy
         Fire : -1 movement, +10% Damage taken and lose 33% of max hp each turn;
-        Water : -1 movement, -10% dodge
+        Water : -1 movement, -20% dodge
         Fortification : +5% Dodge, +15% accuracy, restore 10% HP Each turn;
         Fog : +20% Dodge, -20% accuracy
         MedicinalWater : +50% HP each turn

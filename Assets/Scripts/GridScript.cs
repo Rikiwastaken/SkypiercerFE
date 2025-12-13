@@ -327,11 +327,11 @@ public class GridScript : MonoBehaviour
 
             if (selection.type.ToLower() == "forest")
             {
-                text = "Forest \n+30% Dodge";
+                text = "Forest \n+20% Dodge";
             }
             if (selection.type.ToLower() == "ruins")
             {
-                text = "Ruins \n+10% Dodge\n-10% Hit";
+                text = "Ruins \n+10% Dodge\n+10% Hit";
             }
             if (selection.type.ToLower() == "fire")
             {
@@ -339,7 +339,7 @@ public class GridScript : MonoBehaviour
             }
             if (selection.type.ToLower() == "water")
             {
-                text = "Water \n-1 mvt\n-10% Dodge";
+                text = "Water \n-1 mvt\n-20% Dodge";
             }
             if (selection.type.ToLower() == "medicinalwater")
             {

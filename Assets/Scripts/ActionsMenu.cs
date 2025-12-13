@@ -2381,7 +2381,7 @@ public class ActionsMenu : MonoBehaviour
 
         if (unittype.ToLower() == "forest")
         {
-            tilebonus += 30;
+            tilebonus += 20;
         }
         else if (unittype.ToLower() == "ruins")
         {
@@ -2389,7 +2389,7 @@ public class ActionsMenu : MonoBehaviour
         }
         else if (unittype.ToLower() == "water")
         {
-            tilebonus -= 10;
+            tilebonus -= 20;
         }
         else if (unittype.ToLower() == "fortification")
         {
@@ -2402,7 +2402,7 @@ public class ActionsMenu : MonoBehaviour
 
         if (targettype.ToLower() == "ruins")
         {
-            tilebonus += 10;
+            tilebonus -= 10;
         }
         else if (targettype.ToLower() == "fortification")
         {

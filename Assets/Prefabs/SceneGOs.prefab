@@ -1910,38 +1910,41 @@ MonoBehaviour:
       be detailed in another tip, and WAIT ends the turn of the unit.'
     chapterWhereUnlocks: 0
   - name: Telekinesis
-    description: 'You can toggle telekinesis by pressing Y on Controller or O on
-      Keyboard.
+    description: 'You can toggle <size=25><sprite=12></size> telekinesis by pressing
+      Y on Controller or O on Keyboard.
 
 
-      When telekinesis is activated, the attack range is increased
-      by 1 but damage is reduced by 25%.
+      When <size=25><sprite=12></size>
+      telekinesis is activated, the attack range is increased by 1 but damage is
+      reduced by 25%.
 
 
-      When it is activated, damage depends
-      on Psyche and Resistance instead of Attack and Defense.
+      When it is activated, damage depends on Psyche and
+      Resistance instead of Attack and Defense.
 
 '
     chapterWhereUnlocks: 0
   - name: Blades (1/2)
     description: "Blades are the summoned weapons Hunters use to fight pluvials.
       The blade are sorted into 7 types. Each type gives different bonus in combat
-      and when leveling up.\n\nSwords increase the speed and dexterity of their wielder
-      by 10%.\n  Growth modification : +10% spd, +10% dex, -10% HP\n\nSpears decrease
-      the enemy's dexterity by 10%.\n  Growth modification : +10% str, +10% psy,
-      -10% res\n\nGreatswords decrease the enemy's defense and resistance by 10%
-      while decreasing the wielder's speed by 10%.\n  Growth modification : +10%
-      str, +10% def, -10% spd"
+      and when leveling up.\n\n<size=25><sprite=0></size> Swords increase the speed
+      and dexterity of their wielder by 10%.\n  Growth modification : +10% spd, +10%
+      dex, -10% HP\n\n<size=25><sprite=1> </size> Spears decrease the enemy's dexterity
+      by 10%.\n  Growth modification : +10% str, +10% psy, -10% res\n\n<size=25><sprite=2></size>
+      Greatswords decrease the enemy's defense and resistance by 10% while decreasing
+      the wielder's speed by 10%.\n  Growth modification : +10% str, +10% def, -10%
+      spd"
     chapterWhereUnlocks: 0
   - name: Blades (2/2)
-    description: "Bows are the only physical blade by the same maximum range as a
-      telekinesis attack (2 tiles). When used with telekinesis, they can hit a target
-      up to 4 tiles away. However, it cannot attack in melee range (1 tile).\n  Growth
-      modification : +10% str, +10% dex, -10% def\n  \nScythes deal bonus damage
-      to each enemy adjacent to the initial target equal to 25% of the damage they
-      would have taken had they been attacked directly.\n  Growth modification :
-      +10% psy, +10% dex, -10% spd\n\nShields increase the wielder's defense by 10%
-      of their strength.\n  Growth modification : +10% hp, +10% def, -10% psy\n\nStaffs
+    description: "<size=25><sprite=3></size> Bows are the only physical blade by
+      the same maximum range as a telekinesis attack (2 tiles). When used with telekinesis,
+      they can hit a target up to 4 tiles away. However, it cannot attack in melee
+      range (1 tile).\n  Growth modification : +10% str, +10% dex, -10% def\n  \n<size=25><sprite=4></size>
+      Scythes deal bonus damage to each enemy adjacent to the initial target equal
+      to 25% of the damage they would have taken had they been attacked directly.\n 
+      Growth modification : +10% psy, +10% dex, -10% spd\n\n<size=25><sprite=6></size>
+      Shields increase the wielder's defense by 10% of their strength.\n  Growth
+      modification : +10% hp, +10% def, -10% psy\n\n<size=25><sprite=7></size> Staffs
       can heal allies (using always psyche) but their damage is reduced by 50% and
       they cannot initiate combat.\n  Growth modification : +10% psy, +10% res, -10%
       str"
@@ -1985,19 +1988,20 @@ MonoBehaviour:
       use Fixed Growth by default.'
     chapterWhereUnlocks: 0
   - name: Pluvials
-    description: 'Pluvials are monsters created by the Beast''s power.
+    description: 'Pluvials <size=25><sprite=10></size> are monsters created by the
+      Beast''s power.
 
 
-      These
-      reanimated corpses can use blades and skills.
+      These reanimated corpses can use blades and skills.
 
 
-      They get stronger under
-      Rainy Weather and weaker under Sunny weather.
+      They
+      get stronger under Rainy Weather and weaker under Sunny weather.
 
 
-      They are usually found
-      in caves where yellow crystals appear, and outside when it starts to rain.'
+      They
+      are usually found in caves where yellow crystals appear, and outside when it
+      starts to rain.'
     chapterWhereUnlocks: 0
   - name: Other Units
     description: 'Some units are displayed in Yellow. These units are neither allies
@@ -2015,17 +2019,18 @@ MonoBehaviour:
       menu."
     chapterWhereUnlocks: 1
   - name: Machines
-    description: 'Machines are an enemy type which can usually be found in old world
-      ruins.
+    description: 'Machines <size=25><sprite=11></size> are an enemy type which can
+      usually be found in old world ruins.
 
 
-      These contraptions cannot use blades nor telekinesis, but the
-      strong materials used to make them also give their weapon unlimited durability.
+      These contraptions cannot use
+      blades nor telekinesis, but the strong materials used to make them also give
+      their weapon unlimited durability.
 
 
-      When
-      they are under Sunny weather, the solar energy repairs them a bit every turn.
-      This effect only triggers outside and never during Cloudy or Rainy weather.'
+      When they are under Sunny weather,
+      the solar energy repairs them a bit every turn. This effect only triggers outside
+      and never during Cloudy or Rainy weather.'
     chapterWhereUnlocks: 1
   - name: Bonds
     description: 'Some characters can form Bonds together. When these characters
@@ -2055,11 +2060,12 @@ MonoBehaviour:
 
       Enemies
       with a unique skill can be targeted by this command to obtain said skill. These
-      enemies have a magnifying glass icon near their health bar.
+      enemies have a <size=25><sprite=8></size>  icon near their health bar.
 
 
-      Each enemy
-      can be copied only once. If an enemy dies, their skill is lost.'
+      Each
+      enemy can be copied only once. After copying the icon will change to <size=25><sprite=9></size>
+      . If an enemy dies, their skill is lost.'
     chapterWhereUnlocks: 3
   - name: Elevation
     description: 'Each tile has a different elevation, which can influence the way
@@ -2080,13 +2086,13 @@ MonoBehaviour:
     chapterWhereUnlocks: 4
   - name: Special Tiles
     description: "Some tiles can have special effects that can be positive or negative
-      :\n\n - Forest : Increases Dodge Rate by 30%.\n - Ruins : Increases Dodge Rate
-      by 10% and reduces Hit Rate by 10%.\n - Fog : Increases Dodge Rate by 20% and
-      reduces Hit Rate by 20%.\n - Fire : Reduces movement points by 1. Increases
-      damage taken by 10% and lowers HP by 33% each turn.\n - Water : Reduces movement
-      points by 1 and Dodge Rate by 10%.\n - Fortification : Increases Dodge Rate
-      by 5%, Hit rate by 15% and restores 10% HP each turn.\n - Medicinal Water :
-      Restores 50% HP each turn.\n - Desert : Lowers HP by 10% each turn."
+      :\n\n - Forest : Increases Dodge Rate by 20%.\n - Ruins : Increases Dodge Rate
+      by 10% and Hit Rate by 10%.\n - Fog : Increases Dodge Rate by 20% and reduces
+      Hit Rate by 20%.\n - Fire : Reduces movement points by 1. Increases damage
+      taken by 10% and lowers HP by 33% each turn.\n - Water : Reduces movement points
+      by 1 and Dodge Rate by 20%.\n - Fortification : Increases Dodge Rate by 5%,
+      Hit rate by 15% and restores 10% HP each turn.\n - Medicinal Water : Restores
+      50% HP each turn.\n - Desert : Lowers HP by 10% each turn."
     chapterWhereUnlocks: 4
 --- !u!1 &1117708666303132778
 GameObject:
@@ -6167,7 +6173,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bob the baldemaster
+  m_text: Bob the baldemaster   <sprite=0> <sprite=1> text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6186,7 +6192,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: a33e5ff6c8d8e924e827c79a605f44a4, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901

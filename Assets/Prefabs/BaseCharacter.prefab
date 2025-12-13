@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 87c8d7bd99d7f5c4eb3de0564e2773f4, type: 3}
+  m_Sprite: {fileID: -1318376045, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 237a02bb084af974dbe54f95e78933b9, type: 3}
+  m_Sprite: {fileID: 1920345974, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -826,22 +826,22 @@ MonoBehaviour:
   LBBackground: {fileID: 4284076034004194230}
   delayedUpdateTime: 0.15
   AffinityArrow: {fileID: 6302232031548568297}
-  BareHandSprite: {fileID: 21300000, guid: 39ec93f01cc92b24c81e5e8be00377c1, type: 3}
-  SwordSprite: {fileID: 21300000, guid: 237a02bb084af974dbe54f95e78933b9, type: 3}
-  SpearSprite: {fileID: 21300000, guid: e1128e532357cde4bb71aeba2ed4571b, type: 3}
-  GreatSwordSprite: {fileID: 21300000, guid: 91d5b60f468ffdd44b8e608d48c7f937, type: 3}
-  BowSprite: {fileID: 21300000, guid: a5e52ea7962b3d1478a16ad71ba73057, type: 3}
-  ScytheSprite: {fileID: 21300000, guid: 654e9ea0f0ca6c64f8c413799ffc405a, type: 3}
-  ShieldSprite: {fileID: 21300000, guid: 4a51f359eb3b33545bafd57e3216382d, type: 3}
-  StaffSprite: {fileID: 21300000, guid: 38c1db0046699c640bbc71c7b479587d, type: 3}
+  BareHandSprite: {fileID: -128759721, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
+  SwordSprite: {fileID: 1920345974, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
+  SpearSprite: {fileID: -515257448, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
+  GreatSwordSprite: {fileID: 484207780, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
+  BowSprite: {fileID: 292585417, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
+  ScytheSprite: {fileID: 1183342994, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
+  ShieldSprite: {fileID: 1514134476, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
+  StaffSprite: {fileID: -884870251, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
   WeaponImage: {fileID: 7404989548781359901}
-  SkillNotCopiedSprite: {fileID: 21300000, guid: 87c8d7bd99d7f5c4eb3de0564e2773f4, type: 3}
-  SkillCopiedSprite: {fileID: 21300000, guid: 5b92d7d9a7620e34b938fdf6f36094d0, type: 3}
+  SkillNotCopiedSprite: {fileID: -1318376045, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
+  SkillCopiedSprite: {fileID: 1530098242, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
   CopiedSkillImage: {fileID: 3130064589254881934}
-  PluvialSprite: {fileID: 21300000, guid: 0275e03ae95b13846842d46bfd58b24e, type: 3}
-  MachineSprite: {fileID: 21300000, guid: a222ba95ace4aa047aa44319f1fa9095, type: 3}
+  PluvialSprite: {fileID: 1175632330, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
+  MachineSprite: {fileID: 2113790815, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
   UnitTypeImage: {fileID: 7675947302083197681}
-  TelekinesisSprite: {fileID: 21300000, guid: b1d7f2c33538cc8448731c01734ffdd4, type: 3}
+  TelekinesisSprite: {fileID: -444454151, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
   TelekinesisImage: {fileID: 5008612612863498597}
 --- !u!114 &5380667576583153213
 MonoBehaviour:
@@ -1180,7 +1180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b1d7f2c33538cc8448731c01734ffdd4, type: 3}
+  m_Sprite: {fileID: -444454151, guid: 873be45b5038fa040b8930865b362ee8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

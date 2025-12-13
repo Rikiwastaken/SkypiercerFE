@@ -411,22 +411,13 @@ public class EnemyStatsEditorWindow : EditorWindow
                     break;
             }
 
-            if(tile.isstairs)
+            if (tile.isstairs)
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(128f / 256f,0f, 128f / 256f);
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(128f / 256f, 0f, 128f / 256f);
             }
 
-            switch(tile.type.ToLower())
+            switch (tile.type.ToLower())
             {
-
-                //        Forest: +30 % dodge
-                //Ruins: +10 % Dodge, -10 % Accuracy
-                //Fire: -1 movement, +10 % Damage taken and lose 33 % of max hp each turn;
-                //Water: -1 movement, -10 % dodge
-                //Fortification: +5 % Dodge, +15 % accuracy, restore 10 % HP Each turn;
-                //Fog: +20 % Dodge, -20 % accuracy
-                //MedicinalWater: +50 % HP each turn
-                //Desert: -10 % HP each turn
                 case "forest":
                     gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
                     break;
@@ -447,7 +438,7 @@ public class EnemyStatsEditorWindow : EditorWindow
                     break;
                 case "medicinalwater":
                     gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5510659f, 0.8608279f, 0.9371068f);
-                    break; 
+                    break;
                 case "desert":
                     gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
                     break;
