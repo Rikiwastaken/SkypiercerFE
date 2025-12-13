@@ -1,3 +1,4 @@
+using Codice.Client.BaseCommands;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -413,6 +414,43 @@ public class EnemyStatsEditorWindow : EditorWindow
             if(tile.isstairs)
             {
                 gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(128f / 256f,0f, 128f / 256f);
+            }
+
+            switch(tile.type.ToLower())
+            {
+
+                //        Forest: +30 % dodge
+                //Ruins: +10 % Dodge, -10 % Accuracy
+                //Fire: -1 movement, +10 % Damage taken and lose 33 % of max hp each turn;
+                //Water: -1 movement, -10 % dodge
+                //Fortification: +5 % Dodge, +15 % accuracy, restore 10 % HP Each turn;
+                //Fog: +20 % Dodge, -20 % accuracy
+                //MedicinalWater: +50 % HP each turn
+                //Desert: -10 % HP each turn
+                case "forest":
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
+                    break;
+                case "ruins":
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.gray;
+                    break;
+                case "fire":
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.magenta;
+                    break;
+                case "water":
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.cyan;
+                    break;
+                case "fortification":
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.black;
+                    break;
+                case "fog":
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
+                    break;
+                case "medicinalwater":
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5510659f, 0.8608279f, 0.9371068f);
+                    break; 
+                case "desert":
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+                    break;
             }
 
             if (enemypositions.Contains(position))
