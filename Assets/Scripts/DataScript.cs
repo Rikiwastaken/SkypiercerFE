@@ -295,6 +295,22 @@ public class DataScript : MonoBehaviour
 
                 UpdateCharacter(2, 3, 80, Elwynequipedskills, Elwynmasteries, "zack", true);
 
+                // Mir
+
+                List<int> Mirequipedskills = new List<int>();
+
+
+                List<WeaponMastery> Mirmasteries = new List<WeaponMastery>();
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(6, 20, 0, Mirequipedskills, Mirmasteries, "zack", true);
+
                 break;
             case 2:
                 // Zack
@@ -348,12 +364,45 @@ public class DataScript : MonoBehaviour
 
                 UpdateCharacter(2, 6, 23, Elwynequipedskills, Elwynmasteries, "zack", true);
 
+                // Sorak
+
+                List<int> Sorakequipedskills = new List<int>();
+
+
+                List<WeaponMastery> Sorakmasteries = new List<WeaponMastery>();
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = 1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 0 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = 0 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(3, 4, 0, Sorakequipedskills, Sorakmasteries, "zack", true);
+
+
+                // Lyv
+
+                List<int> Lyvequipedskills = new List<int>();
+
+
+                List<WeaponMastery> Lyvmasteries = new List<WeaponMastery>();
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = 1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = 0 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = 1 });
+
+                UpdateCharacter(4, 5, 0, Lyvequipedskills, Lyvmasteries, "zack", true);
+
                 // Mir
 
-                List<int> Mirequipedskills = new List<int>();
+                Mirequipedskills = new List<int>();
 
 
-                List<WeaponMastery> Mirmasteries = new List<WeaponMastery>();
+                Mirmasteries = new List<WeaponMastery>();
                 Mirmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
                 Mirmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
                 Mirmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
@@ -362,7 +411,7 @@ public class DataScript : MonoBehaviour
                 Mirmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
                 Mirmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
 
-                UpdateCharacter(6, 20, 7, Mirequipedskills, Mirmasteries, "zack", true);
+                UpdateCharacter(6, 20, 7, Mirequipedskills, Mirmasteries, "zack", false);
 
                 break;
         }
