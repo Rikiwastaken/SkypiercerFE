@@ -79,8 +79,9 @@ public class WeatherManager : MonoBehaviour
                 rainingTilenear = true;
             }
         }
-        if (Tile.GridCoordinates.y < grid.Count - 1)
+        if (Tile.GridCoordinates.y < grid[0].Count - 1)
         {
+
             GridSquareScript newtile = grid[(int)Tile.GridCoordinates.x][(int)Tile.GridCoordinates.y + 1].GetComponent<GridSquareScript>();
             if (newtile.RemainingRainTurns > 0 && !newtile.justbecamerain)
             {

@@ -152,6 +152,38 @@ public class MinimapScript : MonoBehaviour
                     {
                         SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
                     }
+                    switch (tile.type.ToLower())
+                    {
+                        case "forest":
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.green, 0f);
+                            break;
+                        case "ruins":
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.gray, 0f);
+                            break;
+                        case "fire":
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red, 0f);
+
+                            break;
+                        case "water":
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.cyan, 0f);
+                            break;
+
+
+                        case "fortification":
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, new Color(0.545f, 0.271f, 0.075f), 0f);
+
+                            break;
+                        case "fog":
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.black, 0f);
+
+                            break;
+                        case "medicinalwater":
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, new Color(0.5510659f, 0.8608279f, 0.9371068f), 0f);
+                            break;
+                        case "desert":
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
+                            break;
+                    }
                 }
             }
             foreach (Character character in gridScript.allunits)

@@ -62,7 +62,8 @@ public class GridSquareScript : MonoBehaviour
 
     public string VisualType;
 
-    private ParticleSystem rainparticle;
+    public ParticleSystem rainparticle;
+    public ParticleSystem sunparticle;
     public GameObject FireParticles;
 
     [Serializable]
@@ -121,18 +122,25 @@ public class GridSquareScript : MonoBehaviour
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
         SelectRound = transform.GetChild(1).gameObject;
         SelectRoundFilling = transform.GetChild(2).gameObject;
-        rainparticle = GetComponentInChildren<ParticleSystem>();
         InitializePosition();
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
         if (rainparticle != null && rainparticle.gameObject.activeSelf)
         {
             rainparticle.gameObject.SetActive(false);
         }
+        if (sunparticle != null && sunparticle.gameObject.activeSelf)
+        {
+            sunparticle.gameObject.SetActive(false);
+        }
         if (type.ToLower() == "water" || type.ToLower() == "ruins" || type.ToLower() == "fortification" || type.ToLower() == "forest")
         {
             VisualType = type;
         }
         manageVisuals();
+        for (int i = 0; i < 100; i++)
+        {
+            RandomNumberlist.Add(UnityEngine.Random.Range(0, 100));
+        }
     }
 
     private void Start()
@@ -158,10 +166,7 @@ public class GridSquareScript : MonoBehaviour
             }
         }
 
-        for(int i = 0;i<100;i++)
-        {
-            RandomNumberlist.Add(UnityEngine.Random.Range(0, 100));
-        }
+        
 
         
 
@@ -480,6 +485,23 @@ public class GridSquareScript : MonoBehaviour
                 if (rainparticle.gameObject.activeSelf)
                 {
                     rainparticle.gameObject.SetActive(false);
+                }
+
+            }
+
+            if (RemainingSunTurns > 0)
+            {
+                if (!sunparticle.gameObject.activeSelf)
+                {
+                    sunparticle.gameObject.SetActive(true);
+                }
+
+            }
+            else
+            {
+                if (sunparticle.gameObject.activeSelf)
+                {
+                    sunparticle.gameObject.SetActive(false);
                 }
 
             }
