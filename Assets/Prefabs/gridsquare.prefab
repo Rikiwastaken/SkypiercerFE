@@ -113,14 +113,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943496720188862793}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7504462, y: -0.118500635, z: -0.10141771, w: 0.64226353}
-  m_LocalPosition: {x: -0.057, y: -0.102, z: 0.713}
+  m_LocalRotation: {x: 0.9910669, y: -0, z: -0, w: 0.13336591}
+  m_LocalPosition: {x: 0, y: 0, z: 0.63001764}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6934100115173624098}
   m_Father: {fileID: 6362861168717063375}
-  m_LocalEulerAnglesHint: {x: 109.95999, y: 63.103996, z: 64.509}
+  m_LocalEulerAnglesHint: {x: 164.672, y: 0, z: 0}
 --- !u!198 &712572309731521850
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -428,7 +428,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -958,7 +958,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10306,7 +10306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6934100115173624098
 Transform:
   m_ObjectHideFlags: 0
@@ -10315,13 +10315,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4247741795309933958}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7504463, y: 0.11850065, z: 0.10141773, w: 0.6422636}
-  m_LocalPosition: {x: 0.025878472, y: -0.7147472, z: 0.0053510666}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.057, y: -0.13, z: 0.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1985927916091726336}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6606766313102194531
 SpriteRenderer:
   m_ObjectHideFlags: 0

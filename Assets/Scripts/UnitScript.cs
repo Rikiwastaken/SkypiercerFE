@@ -1090,6 +1090,7 @@ public class UnitScript : MonoBehaviour
         if (levelup)
         {
             mastery.Level++;
+            mastery.Exp = 0;
         }
     }
 

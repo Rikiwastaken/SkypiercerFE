@@ -45,7 +45,6 @@ public class SceneLoader : MonoBehaviour
                 loadingtext.gameObject.SetActive(true);
                 
             }
-           
         }
         else
         {
@@ -74,10 +73,33 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
+    private void UnlockCharactersWhenLoading(int chapter)
+    {
+        switch(chapter)
+        {
+            case 4:
+                //Unlocking Ruben for Chapter4;
+                foreach(UnitScript.Character character in DataScript.instance.PlayableCharacterList)
+                {
+                    if(character.ID == 7)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                }
+                break;
+        }
+        
+
+    }
     public void LoadScene(string sceneName)
     {
 
+        if(sceneName.ToLower().Contains("chapter"))
+        {
+            int chapternumber = int.Parse(sceneName.ToLower().Replace("chapter", ""));
 
+            UnlockCharactersWhenLoading(chapternumber);
+        }
         SceneToToad = sceneName;
         SceneManager.LoadScene("LoadingScene");
     }

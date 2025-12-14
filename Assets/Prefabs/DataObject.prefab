@@ -2447,16 +2447,16 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: -1
-  - name: Sothe
+  - name: Ruben
     ID: 7
     stats:
-      HP: 35
-      Strength: 18
-      Psyche: 4
-      Defense: 14
-      Resistance: 9
-      Speed: 20
-      Dexterity: 20
+      HP: 15
+      Strength: 3
+      Psyche: 3
+      Defense: 5
+      Resistance: 5
+      Speed: 4
+      Dexterity: 4
     AjustedStats:
       HP: 0
       Strength: 0
@@ -2465,31 +2465,31 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
-    level: 20
+    level: 2
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 30
-      StrengthGrowth: 60
-      PsycheGrowth: 20
-      DefenseGrowth: 20
+      HPGrowth: 60
+      StrengthGrowth: 50
+      PsycheGrowth: 10
+      DefenseGrowth: 30
       ResistanceGrowth: 30
       SpeedGrowth: 50
-      DexterityGrowth: 80
-    currentHP: 350
+      DexterityGrowth: 70
+    currentHP: 15
     movements: 7
     position: {x: 0, y: 11}
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 1100000001000000
+    equipmentsIDs: 
     equipments: []
-    UnitSkill: 0
+    UnitSkill: 10
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
     playableStats:
-      MaxSkillpoints: 25
+      MaxSkillpoints: 7
       deployunit: 0
       unlocked: 0
       protagonist: 0
@@ -2520,8 +2520,8 @@ MonoBehaviour:
     modelID: 0
     Masteries:
     - weapontype: sword
-      Exp: 0
-      Level: -1
+      Exp: 4
+      Level: 0
     - weapontype: spear
       Exp: 0
       Level: -1
@@ -2530,13 +2530,13 @@ MonoBehaviour:
       Level: -1
     - weapontype: bow
       Exp: 0
-      Level: -1
+      Level: 1
     - weapontype: scythe
       Exp: 0
       Level: -1
     - weapontype: shield
       Exp: 0
-      Level: -1
+      Level: 0
     - weapontype: staff
       Exp: 0
       Level: -1
@@ -3374,9 +3374,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: 1
+    - weapontype: spear
+      Exp: 0
+      Level: 1
+    - weapontype: greatsword
+      Exp: 0
+      Level: 1
+    - weapontype: bow
+      Exp: 0
+      Level: 1
+    - weapontype: scythe
+      Exp: 0
+      Level: 1
+    - weapontype: shield
+      Exp: 0
+      Level: 1
+    - weapontype: staff
+      Exp: 0
+      Level: 1
   - name: Lea
-    ID: 0
+    ID: 1
     stats:
       HP: 23
       Strength: 6
@@ -3445,9 +3466,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: 0
+    - weapontype: greatsword
+      Exp: 0
+      Level: 0
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: 1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Elwyn
-    ID: 0
+    ID: 2
     stats:
       HP: 14
       Strength: 1
@@ -3516,9 +3558,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: 1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: 0
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: 0
   - name: Sorak
-    ID: 0
+    ID: 3
     stats:
       HP: 20
       Strength: 9
@@ -3587,9 +3650,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: 1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: 0
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: 0
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Lyv
-    ID: 0
+    ID: 4
     stats:
       HP: 19
       Strength: 3
@@ -3658,9 +3742,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: 1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: 0
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: 1
   - name: Sieg
-    ID: 0
+    ID: 5
     stats:
       HP: 16
       Strength: 3
@@ -3729,9 +3834,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: 0
+    - weapontype: spear
+      Exp: 0
+      Level: 0
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: 1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Mir
-    ID: 0
+    ID: 6
     stats:
       HP: 20
       Strength: 10
@@ -3800,17 +3926,38 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
-  - name: Sothe
-    ID: 0
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
+  - name: Ruben
+    ID: 7
     stats:
-      HP: 35
-      Strength: 18
-      Psyche: 4
-      Defense: 14
-      Resistance: 9
-      Speed: 20
-      Dexterity: 20
+      HP: 15
+      Strength: 3
+      Psyche: 3
+      Defense: 5
+      Resistance: 5
+      Speed: 4
+      Dexterity: 4
     AjustedStats:
       HP: 0
       Strength: 0
@@ -3819,31 +3966,31 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
-    level: 20
+    level: 2
     experience: 0
     affiliation: 
     growth:
-      HPGrowth: 30
-      StrengthGrowth: 60
-      PsycheGrowth: 20
-      DefenseGrowth: 20
+      HPGrowth: 60
+      StrengthGrowth: 50
+      PsycheGrowth: 10
+      DefenseGrowth: 30
       ResistanceGrowth: 30
       SpeedGrowth: 50
-      DexterityGrowth: 80
+      DexterityGrowth: 70
     currentHP: 0
     movements: 7
     position: {x: 0, y: 0}
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 1100000001000000
+    equipmentsIDs: 
     equipments: []
-    UnitSkill: 0
+    UnitSkill: 10
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
     playableStats:
-      MaxSkillpoints: 25
+      MaxSkillpoints: 7
       deployunit: 0
       unlocked: 0
       protagonist: 0
@@ -3871,9 +4018,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 4
+      Level: 0
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: 1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: 0
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Laura
-    ID: 0
+    ID: 8
     stats:
       HP: 16
       Strength: 3
@@ -3942,9 +4110,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Nolan
-    ID: 0
+    ID: 9
     stats:
       HP: 29
       Strength: 12
@@ -4013,9 +4202,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Leonardo
-    ID: 0
+    ID: 10
     stats:
       HP: 17
       Strength: 8
@@ -4084,9 +4294,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Edward
-    ID: 0
+    ID: 11
     stats:
       HP: 19
       Strength: 7
@@ -4155,9 +4386,30 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   - name: Xora
-    ID: 0
+    ID: 12
     stats:
       HP: 20
       Strength: 9
@@ -4226,7 +4478,28 @@ MonoBehaviour:
       talkedto: 0
     currentTile: []
     modelID: 0
-    Masteries: []
+    Masteries:
+    - weapontype: sword
+      Exp: 0
+      Level: -1
+    - weapontype: spear
+      Exp: 0
+      Level: -1
+    - weapontype: greatsword
+      Exp: 0
+      Level: -1
+    - weapontype: bow
+      Exp: 0
+      Level: -1
+    - weapontype: scythe
+      Exp: 0
+      Level: -1
+    - weapontype: shield
+      Exp: 0
+      Level: -1
+    - weapontype: staff
+      Exp: 0
+      Level: -1
   DefaultInventory:
     inventoryItems:
     - type: 1
@@ -4461,6 +4734,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a6917331ada75f148afaf32f0ca6664e, type: 3}
   bondincreaseperaction: 0
   maxdistanceforbondincrease: 0
+  MasteryforLevel0: 5
+  MasteryforLevel1: 25
+  MasteryforLevel2: 50
+  MasteryforLevel3: 100
 --- !u!114 &6877748070760658668
 MonoBehaviour:
   m_ObjectHideFlags: 0

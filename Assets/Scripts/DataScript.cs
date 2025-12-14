@@ -96,6 +96,11 @@ public class DataScript : MonoBehaviour
     public int bondincreaseperaction;
     public int maxdistanceforbondincrease;
 
+    public int MasteryforLevel0;
+    public int MasteryforLevel1;
+    public int MasteryforLevel2;
+    public int MasteryforLevel3;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -188,7 +193,7 @@ public class DataScript : MonoBehaviour
             if (character.ID == characterID)
             {
 
-                
+
 
                 character.Masteries = masteries;
                 UpdateEquipmentID(character);
@@ -199,7 +204,7 @@ public class DataScript : MonoBehaviour
 
                 int baselevel = character.level;
 
-                for(int i = baselevel;i< level;i++)
+                for (int i = baselevel; i < level; i++)
                 {
                     TempGO.GetComponent<UnitScript>().LevelUp();
                 }
@@ -422,11 +427,11 @@ public class DataScript : MonoBehaviour
     public void SetupInventoryForChapter(int Chapter, Inventory inventory)
     {
 
-        if(Chapter >= 3)
+        if (Chapter >= 3)
         {
-            foreach(InventoryItem item in inventory.inventoryItems)
+            foreach (InventoryItem item in inventory.inventoryItems)
             {
-                if(item.ID == 56)
+                if (item.ID == 56)
                 {
                     item.Quantity += 2;
                 }
@@ -494,6 +499,7 @@ public class DataScript : MonoBehaviour
     private Character CopyChararacter(Character charactertoCopy)
     {
         Character copy = new Character();
+        copy.ID = charactertoCopy.ID;
         copy.name = charactertoCopy.name;
         copy.stats = charactertoCopy.stats;
         copy.movements = charactertoCopy.movements;
@@ -504,6 +510,12 @@ public class DataScript : MonoBehaviour
         copy.playableStats = charactertoCopy.playableStats;
         copy.level = charactertoCopy.level;
         copy.experience = charactertoCopy.experience;
+        List<WeaponMastery> masteriescopy = new List<WeaponMastery>();
+        foreach(WeaponMastery mastery in charactertoCopy.Masteries)
+        {
+            masteriescopy.Add(new WeaponMastery() { Exp = mastery.Exp, Level = mastery.Level, weapontype = mastery.weapontype});
+        }
+        copy.Masteries = masteriescopy;
         return copy;
     }
 
@@ -860,7 +872,6 @@ public class DataScript : MonoBehaviour
         Debug.Log("Loaded " + wrapper.SkillList.Count + " skills into the SkillList!");
     }
 
-    
 
     [ContextMenu("Load Bonds From JSON")]
     public void LoadBonds()

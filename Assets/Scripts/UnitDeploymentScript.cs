@@ -200,25 +200,26 @@ public class UnitDeploymentScript : MonoBehaviour
         {
             MasteryExpBars[i].gameObject.SetActive(true);
             string masterylevel = "";
+            DataScript ds = DataScript.instance;
             switch (masteries[i].Level)
             {
                 case (-1):
                     continue;
                 case (0):
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / 30f;
+                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel0;
                     masterylevel = "X";
                     break;
                 case (1):
                     masterylevel = "D";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / 30f;
+                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel1;
                     break;
                 case (2):
                     masterylevel = "C";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / 50f;
+                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel2;
                     break;
                 case (3):
                     masterylevel = "B";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / 100f;
+                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel3;
                     break;
                 case (4):
                     masterylevel = "A";
