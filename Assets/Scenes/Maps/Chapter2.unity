@@ -14422,6 +14422,10 @@ PrefabInstance:
       value: Zack
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EventsToMonitor.Array.data[0].UnitsToUnlockID.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[0].tileModification.modiftype
       value: 1
       objectReference: {fileID: 0}
@@ -14604,6 +14608,10 @@ PrefabInstance:
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[9].CharactersToSpawn.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EventsToMonitor.Array.data[0].UnitsToUnlockID.Array.data[0]'
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3706195574740214509, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EventsToMonitor.Array.data[10].CharactersToSpawn.Array.size

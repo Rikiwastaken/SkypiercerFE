@@ -3911,6 +3911,110 @@ MonoBehaviour:
       Portrait: {fileID: 0}
       characterindex: 6
       ImageToShow: {fileID: 0}
+  - Chapter: 5
+    Dialogue:
+    - Charactername: 
+      text: Ruben, how are you holding up ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: When I was in the mud, playing dead, I thought I was a goner.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 7
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's alright, Ruben. We're here with you now.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I... I just want to go home. To hell with Renais and the war.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 7
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I'm sorry, but we can't...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Why ? Who cares about the war. It's not our problem.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 7
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's gone.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 7
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: There is no Landfall Village anymore, Ruben ! It's gone, all of it. And
+        I... I watched it burn. Grandpa, the others, they're all dead ! Dead !
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What happened ? Was it the pluvials ? Weren't you Hunters supposed to
+        stay to protect it ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 7
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Shut up. You don't know anything.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Who even are you ? What do you know about our village ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 7
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I lived there once. You probably don't remember. Trust me, I'm as devastated
+        as you all are. But we have to keep going.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: We'll find the ones who did this and made them pay tenfold. Now, you
+        can stay here and cry all you want, or you can move forward with us.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Stop it, Zack. Cut him some slack, will you ? Ruben, it's fine you don't
+        have to fight with us. You're still weak. Just take some time to gather your
+        strength.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I... Thank you, Elwyn, I will do that.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 7
+      ImageToShow: {fileID: 0}
   SaveButtonList: {fileID: 1880538424}
 --- !u!114 &1176254971
 MonoBehaviour:
