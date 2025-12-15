@@ -1062,25 +1062,25 @@ public class UnitScript : MonoBehaviour
         switch (mastery.Level)
         {
             case 0:
-                if (mastery.Exp >= 5)
+                if (mastery.Exp >= DataScript.instance.MasteryforLevel0)
                 {
                     levelup = true;
                 }
                 break;
             case 1:
-                if (mastery.Exp >= 25)
+                if (mastery.Exp >= DataScript.instance.MasteryforLevel1)
                 {
                     levelup = true;
                 }
                 break;
             case 2:
-                if (mastery.Exp >= 50)
+                if (mastery.Exp >= DataScript.instance.MasteryforLevel2)
                 {
                     levelup = true;
                 }
                 break;
             case 3:
-                if (mastery.Exp >= 100)
+                if (mastery.Exp >= DataScript.instance.MasteryforLevel3)
                 {
                     levelup = true;
                 }
