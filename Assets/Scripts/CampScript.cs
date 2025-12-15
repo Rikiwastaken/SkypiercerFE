@@ -26,6 +26,11 @@ public class CampScript : MonoBehaviour
 
     public Transform SaveButtonList;
 
+    public Animator SittingCharacter;
+    public Animator Sitting2Character;
+    public Animator Sitting3Character;
+    public Animator LeaningCharacter;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -53,7 +58,10 @@ public class CampScript : MonoBehaviour
             buttons.Add(SaveButtonList.GetChild(i).GetComponent<Button>());
         }
         saveManager.InitializeSaveButtons(buttons);
-
+        SittingCharacter.SetBool("Sitting", true);
+        Sitting2Character.SetBool("Sitting2", true);
+        Sitting3Character.SetBool("Sitting3", true);
+        LeaningCharacter.SetBool("Leaning", true);
     }
 
     private void Update()
