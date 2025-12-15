@@ -1400,7 +1400,7 @@ public class GridScript : MonoBehaviour
                 GridSquareScript newtile = GetTile(newpos);
 
                 int cost = 1;
-                if (newtile.elevation > tile.elevation)
+                if (newtile.elevation > tile.elevation && !tile.isstairs)
                 {
                     cost += (newtile.elevation - tile.elevation) * 2;
                 }

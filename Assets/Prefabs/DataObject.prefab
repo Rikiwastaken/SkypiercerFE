@@ -998,6 +998,7 @@ MonoBehaviour:
       ResistanceGrowth: 30
       SpeedGrowth: 40
       DexterityGrowth: 50
+    movements: 6
     ID: 0
   - name: Priest
     BaseStats:
@@ -1016,6 +1017,7 @@ MonoBehaviour:
       ResistanceGrowth: 40
       SpeedGrowth: 70
       DexterityGrowth: 70
+    movements: 6
     ID: 1
   - name: Archer
     BaseStats:
@@ -1034,6 +1036,7 @@ MonoBehaviour:
       ResistanceGrowth: 40
       SpeedGrowth: 50
       DexterityGrowth: 50
+    movements: 6
     ID: 2
   - name: Fighter
     BaseStats:
@@ -1052,6 +1055,7 @@ MonoBehaviour:
       ResistanceGrowth: 30
       SpeedGrowth: 40
       DexterityGrowth: 60
+    movements: 5
     ID: 3
   - name: Zaitan
     BaseStats:
@@ -1070,6 +1074,7 @@ MonoBehaviour:
       ResistanceGrowth: 10
       SpeedGrowth: 20
       DexterityGrowth: 20
+    movements: 5
     ID: 4
   - name: Myrmidon
     BaseStats:
@@ -1088,6 +1093,7 @@ MonoBehaviour:
       ResistanceGrowth: 40
       SpeedGrowth: 50
       DexterityGrowth: 40
+    movements: 6
     ID: 5
   - name: Psychic
     BaseStats:
@@ -1106,6 +1112,7 @@ MonoBehaviour:
       ResistanceGrowth: 50
       SpeedGrowth: 40
       DexterityGrowth: 40
+    movements: 6
     ID: 6
   - name: Melee Machine
     BaseStats:
@@ -1124,6 +1131,7 @@ MonoBehaviour:
       ResistanceGrowth: 40
       SpeedGrowth: 35
       DexterityGrowth: 45
+    movements: 6
     ID: 7
   - name: Ranged Machine
     BaseStats:
@@ -1142,6 +1150,7 @@ MonoBehaviour:
       ResistanceGrowth: 35
       SpeedGrowth: 40
       DexterityGrowth: 55
+    movements: 6
     ID: 8
   - name: LyvNPC
     BaseStats:
@@ -1160,6 +1169,7 @@ MonoBehaviour:
       ResistanceGrowth: 30
       SpeedGrowth: 60
       DexterityGrowth: 50
+    movements: 6
     ID: 9
   - name: SorakNPC
     BaseStats:
@@ -1178,6 +1188,7 @@ MonoBehaviour:
       ResistanceGrowth: 50
       SpeedGrowth: 30
       DexterityGrowth: 40
+    movements: 6
     ID: 10
   - name: Villager
     BaseStats:
@@ -1196,6 +1207,7 @@ MonoBehaviour:
       ResistanceGrowth: 40
       SpeedGrowth: 40
       DexterityGrowth: 40
+    movements: 5
     ID: 11
   - name: SiegNPC
     BaseStats:
@@ -1214,6 +1226,7 @@ MonoBehaviour:
       ResistanceGrowth: 0
       SpeedGrowth: 0
       DexterityGrowth: 0
+    movements: 6
     ID: 12
   - name: Guardian
     BaseStats:
@@ -1232,6 +1245,7 @@ MonoBehaviour:
       ResistanceGrowth: 20
       SpeedGrowth: 30
       DexterityGrowth: 30
+    movements: 5
     ID: 13
   - name: Reaper
     BaseStats:
@@ -1250,7 +1264,27 @@ MonoBehaviour:
       ResistanceGrowth: 30
       SpeedGrowth: 60
       DexterityGrowth: 40
+    movements: 5
     ID: 14
+  - name: Ranger
+    BaseStats:
+      HP: 10
+      Strength: 5
+      Psyche: 2
+      Defense: 2
+      Resistance: 3
+      Speed: 4
+      Dexterity: 4
+    StatGrowth:
+      HPGrowth: 40
+      StrengthGrowth: 60
+      PsycheGrowth: 20
+      DefenseGrowth: 30
+      ResistanceGrowth: 40
+      SpeedGrowth: 50
+      DexterityGrowth: 50
+    movements: 7
+    ID: 15
   SkillList:
   - name: No Skill
     Descriptions: No skill

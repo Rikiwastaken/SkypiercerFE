@@ -1694,6 +1694,7 @@ public class UnitScript : MonoBehaviour
             UnitCharacteristics.growth.ResistanceGrowth = classtoapply.StatGrowth.ResistanceGrowth;
             UnitCharacteristics.growth.SpeedGrowth = classtoapply.StatGrowth.SpeedGrowth;
             UnitCharacteristics.growth.DexterityGrowth = classtoapply.StatGrowth.DexterityGrowth;
+            UnitCharacteristics.movements = classtoapply.movements;
             fixedgrowth = true;
             int numberoflevelups = UnitCharacteristics.enemyStats.desiredlevel - UnitCharacteristics.level;
 
@@ -2139,7 +2140,7 @@ public class UnitScript : MonoBehaviour
 
 
             float Dexteritygain = GetLevelUpStatsChange(GrowthtoApply.DexterityGrowth, levelValues.DexterityRandomValue);
-            UnitCharacteristics.stats.Speed += Dexteritygain;
+            UnitCharacteristics.stats.Dexterity += Dexteritygain;
             lvlupresult.Add((int)Dexteritygain);
         }
 
@@ -2174,12 +2175,7 @@ public class UnitScript : MonoBehaviour
         float gain = 0f;
         if (growth > 100)
         {
-            gain++;
-
-            if (randomvalue <= growth - 100f)
-            {
-                gain++;
-            }
+            gain  = 1 + GetLevelUpStatsChange(growth - 100f, randomvalue);
         }
         else if (growth < 0)
         {

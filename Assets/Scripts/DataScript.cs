@@ -41,6 +41,7 @@ public class DataScript : MonoBehaviour
         public string name;
         public BaseStats BaseStats;
         public StatGrowth StatGrowth;
+        public int movements = 6;
         public int ID;
     }
 
