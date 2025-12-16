@@ -245,6 +245,9 @@ public class TurnManger : MonoBehaviour
             TileEffects(playableunitGO);
             TileEffects(enemyunitGO);
             TileEffects(otherunitsGO);
+
+            GetComponent<AttackTurnScript>().DeathCleanup();
+
         }
 
         minimapScript.UpdateMinimap();
@@ -372,8 +375,8 @@ public class TurnManger : MonoBehaviour
                 switch (tile.type.ToLower())
                 {
                     case "fire":
-                        hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
-                        unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 3);
+                        hplost = (int)(unitchar.AjustedStats.HP / 3);
+                        unitchar.currentHP = (int)(unitchar.currentHP - unitchar.AjustedStats.HP / 3);
                         unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Fire");
                         break;
                     case "desert":
