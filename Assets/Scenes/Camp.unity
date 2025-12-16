@@ -4822,6 +4822,93 @@ MonoBehaviour:
       Portrait: {fileID: 0}
       characterindex: 0
       ImageToShow: {fileID: 0}
+  - BondID: 12
+    Bond:
+      ID: 0
+      Name: 
+      Characters: 
+      BondPoints: 0
+      BondLevel: 0
+      BondDialogueSeen: 0
+    dialogueLvl1:
+    - Charactername: 
+      text: Zack-Ruben 1
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    dialogueLvl2:
+    - Charactername: 
+      text: Zack-Ruben 2
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    dialogueLvl3:
+    - Charactername: 
+      text: Zack-Ruben 3
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+  - BondID: 13
+    Bond:
+      ID: 0
+      Name: 
+      Characters: 
+      BondPoints: 0
+      BondLevel: 0
+      BondDialogueSeen: 0
+    dialogueLvl1:
+    - Charactername: 
+      text: Lyv-Ruben 1
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    dialogueLvl2:
+    - Charactername: 
+      text: Lyv-Ruben 2
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    dialogueLvl3:
+    - Charactername: 
+      text: Lyv-Ruben 3
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+  - BondID: 14
+    Bond:
+      ID: 0
+      Name: 
+      Characters: 
+      BondPoints: 0
+      BondLevel: 0
+      BondDialogueSeen: 0
+    dialogueLvl1:
+    - Charactername: 
+      text: Elwyn-Ruben 1
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    dialogueLvl2:
+    - Charactername: 
+      text: Elwyn-Ruben 2
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    dialogueLvl3:
+    - Charactername: 
+      text: Elwyn-Ruben 3
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
   BondsMenu: {fileID: 580205256}
   bondsSubMenu: {fileID: 2034277204}
 --- !u!1 &1205192119

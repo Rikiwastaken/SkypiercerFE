@@ -3112,6 +3112,24 @@ MonoBehaviour:
     BondPoints: 0
     BondLevel: 0
     BondDialogueSeen: 0
+  - ID: 12
+    Name: Zack-Ruben
+    Characters: 0000000007000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 13
+    Name: Lyv-Ruben
+    Characters: 0400000007000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
+  - ID: 14
+    Name: Elwyn-Ruben
+    Characters: 0200000007000000
+    BondPoints: 0
+    BondLevel: 0
+    BondDialogueSeen: 0
   manualgamespeed: 1
   PlayerInventory:
     inventoryItems:

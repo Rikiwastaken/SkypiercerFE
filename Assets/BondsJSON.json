@@ -131,6 +131,39 @@
             "BondPoints": 0,
             "BondLevel": 0,
             "BondDialogueSeen": 0
+        },
+        {
+            "ID": 12,
+            "Name": "Zack-Ruben",
+            "Characters": [
+                0,
+                7
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 13,
+            "Name": "Lyv-Ruben",
+            "Characters": [
+                4,
+                7
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
+        },
+        {
+            "ID": 14,
+            "Name": "Elwyn-Ruben",
+            "Characters": [
+                2,
+                7
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0
         }
     ]
 }
