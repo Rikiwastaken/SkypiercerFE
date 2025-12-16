@@ -569,11 +569,10 @@ public class ActionsMenu : MonoBehaviour
                     GameObject potentialtarget = GridScript.GetUnit(tile);
                     if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable")
                     {
-                        if(commandID!= 56 || potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.UnitSkill!=0)//copy
+                        if(commandID!= 56 || potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.UnitSkill!=0) //copy
                         {
                             targetlist.Add(potentialtarget);
                         }
-                        
                     }
                 }
                 if (targetlist.Count > 0)

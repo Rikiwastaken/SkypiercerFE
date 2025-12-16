@@ -32,7 +32,8 @@ public class ForesightScript : MonoBehaviour
         public List<TileModification> ModifiedTiles;
         public int skilltoremovefrominventory = -1;
         public int beginningofturn = -1; //0 : player, 1 : enemy, 2 : other
-        public List<MapEventManager.EventCondition> PreviousEvents;
+        public int currentturn;
+        public List<bool> PreviousEventStates;
         public List<Bonds> PreviousBonds;
     }
 
@@ -298,11 +299,21 @@ public class ForesightScript : MonoBehaviour
     public void CreateAction(int type, GameObject User, GameObject target, int skilltoremove = -1, int beginningofturn = -1)
     {
         Action CurrentAction = new Action();
-        AddAction(CurrentAction);
+        actions.Add(CurrentAction);
         CurrentAction.skilltoremovefrominventory = skilltoremove;
         CurrentAction.beginningofturn = beginningofturn;
         CurrentAction.ModifiedCharacters = new List<Character>();
         CurrentAction.PreviousBonds = DataScript.instance.CreateBondsCopy();
+        CurrentAction.currentturn = TurnManger.instance.currentTurn;
+
+        List<bool> eventstates = new List<bool>();
+
+        foreach (MapEventManager.EventCondition evnt in MapEventManager.instance.EventsToMonitor)
+        {
+            eventstates.Add(evnt.triggered);
+        }
+
+        CurrentAction.PreviousEventStates = eventstates;
 
         foreach (GameObject unit in GridScript.instance.allunitGOs)
         {
@@ -380,13 +391,17 @@ public class ForesightScript : MonoBehaviour
 
             DataScript.instance.BondsList = ActionToRevert.PreviousBonds;
 
+            TurnManger.instance.currentTurn = ActionToRevert.currentturn;
 
             if (CharacterHolder == null)
             {
                 CharacterHolder = GameObject.Find("Characters");
             }
 
-            MapEventManager.instance.EventsToMonitor = ActionToRevert.PreviousEvents;
+            foreach (MapEventManager.EventCondition evnt in MapEventManager.instance.EventsToMonitor)
+            {
+                evnt.triggered = ActionToRevert.PreviousEventStates[evnt.ID];
+            }
 
             for (int j = 0; j < CharacterHolder.transform.childCount; j++)
             {
@@ -406,7 +421,7 @@ public class ForesightScript : MonoBehaviour
                 foreach (GameObject GO in GridScript.instance.allunitGOs)
                 {
 
-                    if (GO!=null && GO.GetComponent<UnitScript>() != null && GO.GetComponent<UnitScript>().UnitCharacteristics!=null && GO.GetComponent<UnitScript>().UnitCharacteristics.ID == ActionToRevert.Unit.UnitCharacteristics.ID)
+                    if (GO!=null && GO.GetComponent<UnitScript>() != null && GO.GetComponent<UnitScript>().UnitCharacteristics!=null && GO.GetComponent<UnitScript>().UnitCharacteristics.ID == ActionToRevert.Unit.UnitCharacteristics.ID && ActionToRevert.previousPosition!=null && ActionToRevert.previousPosition[0] && ActionToRevert.previousPosition[0] != null)
                     {
                         GO.GetComponent<UnitScript>().MoveTo(ActionToRevert.previousPosition[0].GridCoordinates);
                         GO.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;
@@ -437,17 +452,7 @@ public class ForesightScript : MonoBehaviour
 
                     break;
                 case 3:
-                    foreach (TileModification tileModification in ActionToRevert.ModifiedTiles)
-                    {
-                        tileModification.tile.type = tileModification.type;
-                        tileModification.tile.RemainingRainTurns = tileModification.previousremainingrain;
-                        tileModification.tile.RemainingSunTurns = tileModification.previousremainingsun;
-                        tileModification.tile.randomnumberlistcounter = tileModification.previousRandomIndex;
-                        if (tileModification.MechanismClass != null)
-                        {
-                            tileModification.tile.Mechanism = tileModification.MechanismClass;
-                        }
-                    }
+                    
                     if (ActionToRevert.skilltoremovefrominventory != -1)
                     {
                         foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
@@ -467,16 +472,7 @@ public class ForesightScript : MonoBehaviour
                     }
                     break;
                 case 6:
-                    foreach (TileModification tileModification in ActionToRevert.ModifiedTiles)
-                    {
-                        tileModification.tile.type = tileModification.type;
-                        tileModification.tile.RemainingRainTurns = tileModification.previousremainingrain;
-                        tileModification.tile.RemainingSunTurns = tileModification.previousremainingsun;
-                        if (tileModification.MechanismClass != null)
-                        {
-                            tileModification.tile.Mechanism = tileModification.MechanismClass;
-                        }
-                    }
+                    
                     if (ActionToRevert.skilltoremovefrominventory != -1)
                     {
                         foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
@@ -496,6 +492,17 @@ public class ForesightScript : MonoBehaviour
                     }
                     break;
             }
+            foreach (TileModification tileModification in ActionToRevert.ModifiedTiles)
+            {
+                tileModification.tile.type = tileModification.type;
+                tileModification.tile.RemainingRainTurns = tileModification.previousremainingrain;
+                tileModification.tile.RemainingSunTurns = tileModification.previousremainingsun;
+                tileModification.tile.randomnumberlistcounter = tileModification.previousRandomIndex;
+                if (tileModification.MechanismClass != null)
+                {
+                    tileModification.tile.Mechanism = tileModification.MechanismClass;
+                }
+            }
             GridScript.instance.InitializeGOList();
             RevertRolls(ActionToRevert);
             actions.Remove(ActionToRevert);
@@ -503,12 +510,6 @@ public class ForesightScript : MonoBehaviour
         MinimapScript.UpdateMinimap();
     }
 
-
-    public void AddAction(Action actiontoAdd)
-    {
-        actiontoAdd.PreviousEvents = MapEventManager.instance.CloneEvents();
-        actions.Add(actiontoAdd);
-    }
 
     private void RevertRolls(Action action)
     {
