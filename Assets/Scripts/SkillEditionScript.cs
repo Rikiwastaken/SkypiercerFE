@@ -292,7 +292,7 @@ public class SkillEditionScript : MonoBehaviour
         InventorySkillList = new List<InventoryItem>();
         foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
         {
-            if (item.type == 1 && item.Quantity > 0)
+            if (!InventorySkillList.Contains(item) &&  item.type == 1 && item.Quantity > 0)
             {
                 InventorySkillList.Add(item);
             }
@@ -304,12 +304,23 @@ public class SkillEditionScript : MonoBehaviour
             {
                 foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                 {
-                    if (item.ID == playablechar.UnitSkill)
+                    if (!InventorySkillList.Contains(item) &&  item.ID == playablechar.UnitSkill)
                     {
                         InventorySkillList.Add(item);
                     }
                 }
+                foreach (int EquipedSkillID in playablechar.EquipedSkills)
+                {
+                    foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
+                    {
+                        if (!InventorySkillList.Contains(item) && item.type == 1 && item.ID==EquipedSkillID)
+                        {
+                            InventorySkillList.Add(item);
+                        }
+                    }
+                }
             }
+            
         }
     }
 

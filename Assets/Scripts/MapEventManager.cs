@@ -170,13 +170,16 @@ public class MapEventManager : MonoBehaviour
             eventinitialized = true;
             EventInitialization();
         }
-        if (ManualEventTrigger >= 0 && EventsToMonitor.Count > ManualEventTrigger)
+        if(ManualEventTrigger >=0)
         {
-            if (!EventsToMonitor[ManualEventTrigger].triggered)
+            foreach(EventCondition evnt in EventsToMonitor)
             {
-                Debug.Log("triggering : " + EventsToMonitor[ManualEventTrigger].eventname);
-                TriggerEvent(EventsToMonitor[ManualEventTrigger], -1);
-                EventsToMonitor[ManualEventTrigger].triggered = true;
+                if(evnt.ID == ManualEventTrigger && !evnt.triggered)
+                {
+                    Debug.Log("triggering : " + evnt.eventname);
+                    TriggerEvent(evnt, -1);
+                    evnt.triggered = true;
+                }
             }
         }
     }
@@ -705,6 +708,7 @@ public class MapEventManager : MonoBehaviour
         {
             if (UnitsToUnlockID.Contains(unit.ID))
             {
+                Debug.Log("unlocking : " + unit.name);
                 unit.playableStats.unlocked = unlock;
                 unit.playableStats.deployunit = unlock;
             }

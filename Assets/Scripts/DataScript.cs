@@ -197,8 +197,12 @@ public class DataScript : MonoBehaviour
 
 
                 character.Masteries = masteries;
-                UpdateEquipmentID(character);
+                //UpdateEquipmentID(character);
                 TempGO.GetComponent<UnitScript>().UnitCharacteristics = character;
+                foreach (WeaponMastery mastery in character.Masteries)
+                {
+                    TempGO.GetComponent<UnitScript>().GetNewWeaponFromMastery(mastery);
+                }
                 TempGO.GetComponent<RandomScript>().InitializeRandomValues();
 
                 GenerateEquipmentList(character);
@@ -952,6 +956,18 @@ public class DataScript : MonoBehaviour
             }
         }
     }
+    
+    public equipment GetWeaponFromID(int ID)
+    {
+        foreach(equipment equipment in equipmentList)
+        {
+            if(equipment.ID == ID)
+            {
+                return equipment;
+            }
+        }
+        return null;
+    }
 
     private int GetWeaponID(string type, int grade)
     {
@@ -987,7 +1003,15 @@ public class DataScript : MonoBehaviour
 
     public void GenerateEquipmentList(Character Character)
     {
-        UpdateEquipmentID(Character);
+        GameObject TempGO = new GameObject();
+        TempGO.AddComponent<UnitScript>();
+        TempGO.GetComponent<UnitScript>().enabled = false;
+        TempGO.GetComponent<UnitScript>().UnitCharacteristics = Character;
+        foreach (WeaponMastery mastery in Character.Masteries)
+        {
+            TempGO.GetComponent<UnitScript>().GetNewWeaponFromMastery(mastery,Character);
+        }
+        //UpdateEquipmentID(Character);
         List<int> equipmentListIDs = Character.equipmentsIDs;
         List<equipment> newequipmentlist = new List<equipment>();
         foreach (int equipmentID in equipmentListIDs)
@@ -1040,6 +1064,7 @@ public class DataScript : MonoBehaviour
             }
         }
         Character.equipments = newequipmentlist;
+        DestroyImmediate(TempGO);
     }
 
     int ManhattanDistance(Vector2 point1, Vector2 point2)

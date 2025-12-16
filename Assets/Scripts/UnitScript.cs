@@ -947,8 +947,11 @@ public class UnitScript : MonoBehaviour
                     mastery.Exp += 1;
                 }
             }
-            LevelupMasteryCheck(mastery);
+            LevelupMasteryCheck(mastery, character);
+            DataScript.instance.GenerateEquipmentList(character);
+            //GetNewWeaponFromMastery(mastery);
         }
+        
     }
 
     public void ShowAffinityArrow()
@@ -1056,7 +1059,7 @@ public class UnitScript : MonoBehaviour
             AffinityArrow.gameObject.SetActive(false);
         }
     }
-    private void LevelupMasteryCheck(WeaponMastery mastery)
+    private void LevelupMasteryCheck(WeaponMastery mastery, Character character)
     {
         bool levelup = false;
         switch (mastery.Level)
@@ -1091,6 +1094,54 @@ public class UnitScript : MonoBehaviour
         {
             mastery.Level++;
             mastery.Exp = 0;
+            
+        }
+        GetNewWeaponFromMastery(mastery, character);
+    }
+
+    public void GetNewWeaponFromMastery(WeaponMastery mastery, Character character = null)
+    {
+        Character Chartouse = UnitCharacteristics;
+        if (character != null)
+        {
+            Chartouse = character;
+        }
+        if(mastery.Level<=0)
+        {
+            return;
+        }
+        int oldweaponID = 0;
+        int newweaponID = 0;
+        foreach (int ID in Chartouse.equipmentsIDs)
+        {
+            if(DataScript.instance.GetWeaponFromID(ID).type.ToLower()==mastery.weapontype.ToLower())
+            {
+                oldweaponID = ID;
+                break;
+            }
+        }
+        foreach (equipment weapon in DataScript.instance.equipmentList)
+        {
+            if (weapon.type.ToLower() == mastery.weapontype.ToLower() && weapon.Grade == mastery.Level)
+            {
+                newweaponID = weapon.ID;
+                break;
+            }
+        }
+        if (oldweaponID!=newweaponID)
+        {
+            
+            if (Chartouse.equipmentsIDs.Contains(oldweaponID))
+            {
+                int previouspos = -1;
+                previouspos = Chartouse.equipmentsIDs.IndexOf(oldweaponID);
+                Chartouse.equipmentsIDs.Remove(oldweaponID);
+                Chartouse.equipmentsIDs[previouspos] = newweaponID;
+            }
+            else
+            {
+                Chartouse.equipmentsIDs.Add(newweaponID);
+            }
         }
     }
 
