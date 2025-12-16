@@ -2631,7 +2631,7 @@ MonoBehaviour:
   - Model: {fileID: 6249495662714807654, guid: aa0e14650798e154b949fe856cfeba19, type: 3}
     position: {x: -16.5, y: 0.3, z: 16.5}
     rotation: {x: 0, y: 0, z: 0}
-    ChapterInWhichToUse: 00000000
+    ChapterInWhichToUse: 000000000300000004000000
   - Model: {fileID: 6640663240667536817, guid: 4accdb4417fe4af4e8abdb377619baf5, type: 3}
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
