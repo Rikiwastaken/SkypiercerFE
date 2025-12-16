@@ -351,7 +351,7 @@ public class DataScript : MonoBehaviour
                 Leamasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 17, Level = 1 });
                 Leamasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
 
-                UpdateCharacter(1, 7, 7, Leaequipedskills, Leamasteries, "zack", true);
+                UpdateCharacter(1, 5, 7, Leaequipedskills, Leamasteries, "zack", true);
 
 
                 // Elwyn
@@ -368,7 +368,7 @@ public class DataScript : MonoBehaviour
                 Elwynmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
                 Elwynmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 2, Level = 0 });
 
-                UpdateCharacter(2, 6, 23, Elwynequipedskills, Elwynmasteries, "zack", true);
+                UpdateCharacter(2, 4, 23, Elwynequipedskills, Elwynmasteries, "zack", true);
 
                 // Sorak
 
@@ -420,6 +420,248 @@ public class DataScript : MonoBehaviour
                 UpdateCharacter(6, 20, 7, Mirequipedskills, Mirmasteries, "zack", false);
 
                 break;
+            case 3:
+                // Zack
+
+                Zackequipedskills = new List<int>();
+
+                Zackequipedskills.Add(7);
+
+                Zackmasteries = new List<WeaponMastery>();
+
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 1, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 9, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 4, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 3, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 4, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 2, Level = 1 });
+
+                UpdateCharacter(0, 6, 58, Zackequipedskills, Zackmasteries, "zack", true);
+
+                // Lea
+
+                Leaequipedskills = new List<int>();
+
+
+                Leamasteries = new List<WeaponMastery>();
+                Leamasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 3, Level = 0 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 0 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 17, Level = 1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(1, 7, 7, Leaequipedskills, Leamasteries, "zack", true);
+
+
+                // Elwyn
+
+                Elwynequipedskills = new List<int>();
+
+
+                Elwynmasteries = new List<WeaponMastery>();
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 13, Level = 1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 2, Level = 0 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 2, Level = 0 });
+
+                UpdateCharacter(2, 6, 23, Elwynequipedskills, Elwynmasteries, "zack", true);
+
+                // Sorak
+
+                Sorakequipedskills = new List<int>();
+
+
+                Sorakmasteries = new List<WeaponMastery>();
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 10, Level = 1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 3, Level = 0 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 3, Level = 0 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(3, 6, 0, Sorakequipedskills, Sorakmasteries, "zack", true);
+
+
+                // Lyv
+
+                Lyvequipedskills = new List<int>();
+
+
+                Lyvmasteries = new List<WeaponMastery>();
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 5, Level = 1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 3, Level = 0 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 3, Level = 1 });
+
+                UpdateCharacter(4, 6, 0, Lyvequipedskills, Lyvmasteries, "zack", true);
+
+                // Sieg
+
+                List<int> Siegequipedskills = new List<int>();
+
+
+                List<WeaponMastery> Siegmasteries = new List<WeaponMastery>();
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = 0 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = 0 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = 1 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(5, 4, 0, Siegequipedskills, Siegmasteries, "zack", true);
+
+                // Mir
+
+                Mirequipedskills = new List<int>();
+
+
+                Mirmasteries = new List<WeaponMastery>();
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(6, 20, 7, Mirequipedskills, Mirmasteries, "zack", true);
+
+                
+
+                break;
+
+            case 4:
+                // Zack
+
+                Zackequipedskills = new List<int>();
+
+                Zackequipedskills.Add(7);
+
+                Zackmasteries = new List<WeaponMastery>();
+
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 1, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 9, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 8, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 9, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 8, Level = 1 });
+                Zackmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 3, Level = 1 });
+
+                UpdateCharacter(0, 8, 5, Zackequipedskills, Zackmasteries, "zack", true);
+
+                // Lea
+
+                Leaequipedskills = new List<int>();
+
+
+                Leamasteries = new List<WeaponMastery>();
+                Leamasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 8, Level = 0 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 0 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 19, Level = 1 });
+                Leamasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(1, 8, 45, Leaequipedskills, Leamasteries, "zack", true);
+
+
+                // Elwyn
+
+                Elwynequipedskills = new List<int>();
+
+
+                Elwynmasteries = new List<WeaponMastery>();
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 16, Level = 1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 15, Level = 1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Elwynmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 3, Level = 0 });
+
+                UpdateCharacter(2, 9, 23, Elwynequipedskills, Elwynmasteries, "zack", true);
+
+                // Sorak
+
+                Sorakequipedskills = new List<int>();
+
+
+                Sorakmasteries = new List<WeaponMastery>();
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 10, Level = 1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 3, Level = 0 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 4, Level = 0 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(3, 7, 0, Sorakequipedskills, Sorakmasteries, "zack", true);
+
+
+                // Lyv
+
+                Lyvequipedskills = new List<int>();
+
+
+                Lyvmasteries = new List<WeaponMastery>();
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 10, Level = 1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 4, Level = 0 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 3, Level = 1 });
+
+                UpdateCharacter(4, 8, 50, Lyvequipedskills, Lyvmasteries, "zack", true);
+
+                // Sieg
+
+                Siegequipedskills = new List<int>();
+
+
+                Siegmasteries = new List<WeaponMastery>();
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 3, Level = 0 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 3, Level = 0 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 10, Level = 1 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Siegmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(5, 7, 0, Siegequipedskills, Siegmasteries, "zack", true);
+
+                // Mir
+
+                Mirequipedskills = new List<int>();
+
+
+                Mirmasteries = new List<WeaponMastery>();
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
+                Mirmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
+
+                UpdateCharacter(6, 20, 15, Mirequipedskills, Mirmasteries, "zack", true);
+
+
+
+                break;
+
         }
 
         newsave.PlayableCharacterList = PlayableCharacterList;
