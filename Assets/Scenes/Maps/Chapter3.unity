@@ -38587,7 +38587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2155600876534263014, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: elevation
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.a

@@ -16171,7 +16171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[1].classID
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[1].isother
@@ -16727,7 +16727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[1].usetelekinesis
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[2].usetelekinesis
@@ -16783,7 +16783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[1].Skills.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[1].monsterStats.size
@@ -16915,11 +16915,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[1].Skills.Array.data[1]'
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[1].Skills.Array.data[2]'
-      value: 8
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[2].Skills.Array.data[0]'

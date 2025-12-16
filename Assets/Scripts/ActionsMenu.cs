@@ -569,7 +569,11 @@ public class ActionsMenu : MonoBehaviour
                     GameObject potentialtarget = GridScript.GetUnit(tile);
                     if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable")
                     {
-                        targetlist.Add(potentialtarget);
+                        if(commandID!= 56 || potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.UnitSkill!=0)//copy
+                        {
+                            targetlist.Add(potentialtarget);
+                        }
+                        
                     }
                 }
                 if (targetlist.Count > 0)
@@ -1825,7 +1829,7 @@ public class ActionsMenu : MonoBehaviour
             activelist = FindAnyObjectByType<TurnManger>().otherunitsGO;
         }
 
-        //All for one
+        //One for All
         Character allforonetransfertarget = null;
         GameObject allforonetransfertargetGO = null;
         foreach (GameObject othertarget in activelist)
