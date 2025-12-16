@@ -969,7 +969,7 @@ public class UnitScript : MonoBehaviour
                 {
                     foreach (int ID in bond.Characters)
                     {
-                        if (ID != UnitCharacteristics.ID)
+                        if (ID != UnitCharacteristics.ID && ManhattanDistance(UnitCharacteristics, DS.PlayableCharacterList[ID])<=2)
                         {
                             BondedUnitIDsList.Add(ID);
                         }
