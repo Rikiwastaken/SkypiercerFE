@@ -438,8 +438,36 @@ public class BattleInfotext : MonoBehaviour
                     MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = 1f;
                     break;
             }
+            string masteryicontype = "<size=15>";
+            switch (masteries[i].weapontype.ToLower())
+            {
+                case (""):
+                    continue;
+                case ("sword"):
+                    masteryicontype += "<sprite=0>";
+                    break;
+                case ("spear"):
+                    masteryicontype += "<sprite=1>";
+                    break;
+                case ("greatsword"):
+                    masteryicontype += "<sprite=2>";
+                    break;
+                case ("bow"):
+                    masteryicontype += "<sprite=3>";
+                    break;
+                case ("scythe"):
+                    masteryicontype += "<sprite=4>";
+                    break;
+                case ("shield"):
+                    masteryicontype += "<sprite=6>";
+                    break;
+                case ("staff"):
+                    masteryicontype += "<sprite=7>";
+                    break;
+            }
+            masteryicontype += "</size>";
             barID++;
-            MasteryText.text += masteries[i].weapontype[0] + (masteries[i].weapontype[1] + " : " + masterylevel + "\n");
+            MasteryText.text += masteryicontype + " : " + masterylevel + "\n";
         }
         for (int i = barID; i < MasteryExpBars.Count; i++)
         {
