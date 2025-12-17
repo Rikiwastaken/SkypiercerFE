@@ -1154,21 +1154,21 @@ MonoBehaviour:
     ID: 8
   - name: LyvNPC
     BaseStats:
-      HP: 17
-      Strength: 3
+      HP: 19
+      Strength: 6
       Psyche: 6
-      Defense: 7
-      Resistance: 4
-      Speed: 8
-      Dexterity: 5
+      Defense: 6
+      Resistance: 3
+      Speed: 9
+      Dexterity: 6
     StatGrowth:
-      HPGrowth: 70
-      StrengthGrowth: 20
-      PsycheGrowth: 60
-      DefenseGrowth: 60
-      ResistanceGrowth: 30
-      SpeedGrowth: 60
-      DexterityGrowth: 50
+      HPGrowth: 0
+      StrengthGrowth: 0
+      PsycheGrowth: 0
+      DefenseGrowth: 0
+      ResistanceGrowth: 0
+      SpeedGrowth: 0
+      DexterityGrowth: 0
     movements: 6
     ID: 9
   - name: SorakNPC
@@ -1181,13 +1181,13 @@ MonoBehaviour:
       Speed: 3
       Dexterity: 5
     StatGrowth:
-      HPGrowth: 70
-      StrengthGrowth: 60
-      PsycheGrowth: 10
-      DefenseGrowth: 60
-      ResistanceGrowth: 50
-      SpeedGrowth: 30
-      DexterityGrowth: 40
+      HPGrowth: 0
+      StrengthGrowth: 0
+      PsycheGrowth: 0
+      DefenseGrowth: 0
+      ResistanceGrowth: 0
+      SpeedGrowth: 0
+      DexterityGrowth: 0
     movements: 6
     ID: 10
   - name: Villager
@@ -2206,8 +2206,8 @@ MonoBehaviour:
     ID: 4
     stats:
       HP: 19
-      Strength: 3
-      Psyche: 7
+      Strength: 6
+      Psyche: 6
       Defense: 8
       Resistance: 4
       Speed: 9
@@ -2224,12 +2224,12 @@ MonoBehaviour:
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 70
-      StrengthGrowth: 20
-      PsycheGrowth: 60
-      DefenseGrowth: 60
+      HPGrowth: 60
+      StrengthGrowth: 50
+      PsycheGrowth: 50
+      DefenseGrowth: 50
       ResistanceGrowth: 30
-      SpeedGrowth: 60
+      SpeedGrowth: 50
       DexterityGrowth: 50
     currentHP: 150
     movements: 6
@@ -2279,10 +2279,10 @@ MonoBehaviour:
       Level: -1
     - weapontype: spear
       Exp: 0
-      Level: 1
+      Level: 0
     - weapontype: greatsword
       Exp: 0
-      Level: -1
+      Level: 1
     - weapontype: bow
       Exp: 0
       Level: -1
