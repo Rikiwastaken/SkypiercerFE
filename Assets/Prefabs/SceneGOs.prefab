@@ -1928,12 +1928,13 @@ MonoBehaviour:
     description: "Blades are the summoned weapons Hunters use to fight pluvials.
       The blade are sorted into 7 types. Each type gives different bonus in combat
       and when leveling up.\n\n<size=25><sprite=0></size> Swords increase the speed
-      and dexterity of their wielder by 10%.\n  Growth modification : +10% spd, +10%
-      dex, -10% HP\n\n<size=25><sprite=1> </size> Spears decrease the enemy's dexterity
-      by 10%.\n  Growth modification : +10% str, +10% psy, -10% res\n\n<size=25><sprite=2></size>
-      Greatswords decrease the enemy's defense and resistance by 10% while decreasing
-      the wielder's speed by 10%.\n  Growth modification : +10% str, +10% def, -10%
-      spd"
+      and dexterity of their wielder by 2 per weapon grade.\n  Growth modification
+      : +10% spd, +10% dex, -10% HP\n\n<size=25><sprite=1> </size> Spears decrease
+      the enemy's dexterity by 2 per weapon grade..\n  Growth modification : +10%
+      str, +10% psy, -10% res\n\n<size=25><sprite=2></size> Greatswords decrease
+      the enemy's defense and resistance by 1 per weapon grade while decreasing the
+      wielder's speed by 1 per weapon grade.\n  Growth modification : +10% str, +10%
+      def, -10% spd"
     chapterWhereUnlocks: 0
   - name: Blades (2/2)
     description: "<size=25><sprite=3></size> Bows are the only physical blade by
@@ -1943,11 +1944,10 @@ MonoBehaviour:
       Scythes deal bonus damage to each enemy adjacent to the initial target equal
       to 25% of the damage they would have taken had they been attacked directly.\n 
       Growth modification : +10% psy, +10% dex, -10% spd\n\n<size=25><sprite=6></size>
-      Shields increase the wielder's defense by 10% of their strength.\n  Growth
-      modification : +10% hp, +10% def, -10% psy\n\n<size=25><sprite=7></size> Staffs
-      can heal allies (using always psyche) but their damage is reduced by 50% and
-      they cannot initiate combat.\n  Growth modification : +10% psy, +10% res, -10%
-      str"
+      Shields increase the wielder's defense by 2 per weapon grade.\n  Growth modification
+      : +10% hp, +10% def, -10% psy\n\n<size=25><sprite=7></size> Staffs can heal
+      allies (using always psyche) but their damage is reduced by 50% and they cannot
+      initiate combat.\n  Growth modification : +10% psy, +10% res, -10% str"
     chapterWhereUnlocks: 0
   - name: Leveling up
     description: 'When an ally unit reaches 100 experience points, their level increase
