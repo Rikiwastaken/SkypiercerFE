@@ -172,7 +172,7 @@ MonoBehaviour:
   - Name: Durandal
     BaseDamage: 5
     BaseHit: 90
-    BaseCrit: 3
+    BaseCrit: 6
     Range: 1
     type: Sword
     Currentuses: 10
@@ -187,7 +187,7 @@ MonoBehaviour:
   - Name: Tizona
     BaseDamage: 8
     BaseHit: 80
-    BaseCrit: 5
+    BaseCrit: 11
     Range: 1
     type: Sword
     Currentuses: 8
@@ -202,7 +202,7 @@ MonoBehaviour:
   - Name: Laevateinn
     BaseDamage: 11
     BaseHit: 70
-    BaseCrit: 7
+    BaseCrit: 16
     Range: 1
     type: Sword
     Currentuses: 6
@@ -217,7 +217,7 @@ MonoBehaviour:
   - Name: Caliburn
     BaseDamage: 14
     BaseHit: 60
-    BaseCrit: 8
+    BaseCrit: 20
     Range: 1
     type: Sword
     Currentuses: 5
@@ -231,7 +231,7 @@ MonoBehaviour:
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Gaebolg
     BaseDamage: 5
-    BaseHit: 90
+    BaseHit: 95
     BaseCrit: 3
     Range: 1
     type: Spear
@@ -246,7 +246,7 @@ MonoBehaviour:
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Rhongomiant
     BaseDamage: 8
-    BaseHit: 80
+    BaseHit: 90
     BaseCrit: 5
     Range: 1
     type: Spear
@@ -261,7 +261,7 @@ MonoBehaviour:
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Gugnir
     BaseDamage: 11
-    BaseHit: 70
+    BaseHit: 85
     BaseCrit: 7
     Range: 1
     type: Spear
@@ -276,7 +276,7 @@ MonoBehaviour:
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Longinus
     BaseDamage: 14
-    BaseHit: 60
+    BaseHit: 80
     BaseCrit: 8
     Range: 1
     type: Spear
@@ -290,7 +290,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Wallace
-    BaseDamage: 5
+    BaseDamage: 6
     BaseHit: 90
     BaseCrit: 3
     Range: 1
@@ -305,7 +305,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Caladbolg
-    BaseDamage: 8
+    BaseDamage: 10
     BaseHit: 80
     BaseCrit: 5
     Range: 1
@@ -320,7 +320,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: War
-    BaseDamage: 11
+    BaseDamage: 14
     BaseHit: 70
     BaseCrit: 7
     Range: 1
@@ -335,7 +335,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Gram
-    BaseDamage: 14
+    BaseDamage: 18
     BaseHit: 60
     BaseCrit: 8
     Range: 1
@@ -350,7 +350,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Skadi
-    BaseDamage: 5
+    BaseDamage: 4
     BaseHit: 90
     BaseCrit: 3
     Range: 2
@@ -365,7 +365,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Gandiva
-    BaseDamage: 8
+    BaseDamage: 6
     BaseHit: 80
     BaseCrit: 5
     Range: 2
@@ -380,7 +380,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Robin
-    BaseDamage: 11
+    BaseDamage: 8
     BaseHit: 70
     BaseCrit: 7
     Range: 2
@@ -395,7 +395,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Odysseus
-    BaseDamage: 14
+    BaseDamage: 10
     BaseHit: 60
     BaseCrit: 8
     Range: 2
@@ -410,7 +410,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Morana
-    BaseDamage: 5
+    BaseDamage: 6
     BaseHit: 90
     BaseCrit: 3
     Range: 1
@@ -425,7 +425,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Kronos
-    BaseDamage: 8
+    BaseDamage: 10
     BaseHit: 80
     BaseCrit: 5
     Range: 1
@@ -440,7 +440,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Yama
-    BaseDamage: 11
+    BaseDamage: 14
     BaseHit: 70
     BaseCrit: 7
     Range: 1
@@ -455,7 +455,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Death
-    BaseDamage: 14
+    BaseDamage: 18
     BaseHit: 60
     BaseCrit: 8
     Range: 1
@@ -470,7 +470,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Ancilia
-    BaseDamage: 5
+    BaseDamage: 4
     BaseHit: 90
     BaseCrit: 3
     Range: 1
@@ -485,7 +485,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Svalinn
-    BaseDamage: 8
+    BaseDamage: 6
     BaseHit: 80
     BaseCrit: 5
     Range: 1
@@ -500,7 +500,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Pridwen
-    BaseDamage: 11
+    BaseDamage: 8
     BaseHit: 70
     BaseCrit: 7
     Range: 1
@@ -515,7 +515,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Aegis
-    BaseDamage: 14
+    BaseDamage: 10
     BaseHit: 60
     BaseCrit: 8
     Range: 1
@@ -650,7 +650,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Machine Spring
-    BaseDamage: 5
+    BaseDamage: 4
     BaseHit: 90
     BaseCrit: 3
     Range: 2
@@ -665,7 +665,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Machine Nailgun
-    BaseDamage: 8
+    BaseDamage: 6
     BaseHit: 80
     BaseCrit: 5
     Range: 2
@@ -680,7 +680,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Machine Crossbow
-    BaseDamage: 11
+    BaseDamage: 8
     BaseHit: 70
     BaseCrit: 7
     Range: 2
@@ -695,7 +695,7 @@ MonoBehaviour:
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: Machine Laser
-    BaseDamage: 14
+    BaseDamage: 10
     BaseHit: 60
     BaseCrit: 8
     Range: 2
@@ -3705,13 +3705,13 @@ MonoBehaviour:
     Masteries:
     - weapontype: sword
       Exp: 0
-      Level: 1
+      Level: 0
     - weapontype: spear
       Exp: 0
       Level: -1
     - weapontype: greatsword
       Exp: 0
-      Level: 0
+      Level: 1
     - weapontype: bow
       Exp: 0
       Level: -1
@@ -3728,8 +3728,8 @@ MonoBehaviour:
     ID: 4
     stats:
       HP: 19
-      Strength: 3
-      Psyche: 7
+      Strength: 6
+      Psyche: 6
       Defense: 8
       Resistance: 4
       Speed: 9
@@ -3746,12 +3746,12 @@ MonoBehaviour:
     experience: 0
     affiliation: 
     growth:
-      HPGrowth: 70
-      StrengthGrowth: 20
-      PsycheGrowth: 60
-      DefenseGrowth: 60
+      HPGrowth: 60
+      StrengthGrowth: 50
+      PsycheGrowth: 50
+      DefenseGrowth: 50
       ResistanceGrowth: 30
-      SpeedGrowth: 60
+      SpeedGrowth: 50
       DexterityGrowth: 50
     currentHP: 0
     movements: 6
@@ -3800,10 +3800,10 @@ MonoBehaviour:
       Level: -1
     - weapontype: spear
       Exp: 0
-      Level: 1
+      Level: 0
     - weapontype: greatsword
       Exp: 0
-      Level: -1
+      Level: 1
     - weapontype: bow
       Exp: 0
       Level: -1

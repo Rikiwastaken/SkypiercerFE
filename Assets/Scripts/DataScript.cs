@@ -807,6 +807,29 @@ public class DataScript : MonoBehaviour
                     equipmentList[i].Range = 1;
                     equipmentList[i].equipmentmodel.localposition = Vector3.zero;
                 }
+
+                switch(equipmentList[i].type.ToLower())
+                {
+                    case ("sword"):
+                        equipmentList[i].BaseCrit += 3 * equipmentList[i].Grade;
+                        break;
+                    case ("spear"):
+                        equipmentList[i].BaseHit += 5 * equipmentList[i].Grade;
+                        break;
+                    case ("greatsword"):
+                        equipmentList[i].BaseDamage += 1 * equipmentList[i].Grade;
+                        break;
+                    case ("bow"):
+                        equipmentList[i].BaseDamage -= 1 * equipmentList[i].Grade;
+                        break;
+                    case ("scythe"):
+                        equipmentList[i].BaseDamage += 1 * equipmentList[i].Grade;
+                        break;
+                    case ("shield"):
+                        equipmentList[i].BaseDamage -= 1 * equipmentList[i].Grade;
+                        break;
+                }
+
                 equipmentList[i].equipmentmodel.localrotation = Vector3.zero;
                 equipmentList[i].equipmentmodel.localscale = Vector3.one;
 

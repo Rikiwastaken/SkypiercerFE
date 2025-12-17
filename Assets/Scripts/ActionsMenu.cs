@@ -569,7 +569,7 @@ public class ActionsMenu : MonoBehaviour
                     GameObject potentialtarget = GridScript.GetUnit(tile);
                     if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable")
                     {
-                        if(commandID!= 56 || potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.UnitSkill!=0) //copy
+                        if (commandID != 56 || potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.UnitSkill != 0) //copy
                         {
                             targetlist.Add(potentialtarget);
                         }
@@ -2147,11 +2147,11 @@ public class ActionsMenu : MonoBehaviour
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
         {
-            basestatdef = basestatdef * 0.9f;
+            basestatdef = basestatdef - unit.GetComponent<UnitScript>().GetFirstWeapon().Grade;
         }
         if (target != null && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield")
         {
-            basestatdef += chartarget.AjustedStats.Strength * 0.1f;
+            basestatdef += target.GetComponent<UnitScript>().GetFirstWeapon().Grade * 2;
         }
 
         float finaldamagefloat = unitbasedamage - basestatdef;
@@ -2283,22 +2283,22 @@ public class ActionsMenu : MonoBehaviour
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
-            unitbasespeed = (int)(unitbasespeed * 1.1f);
+            unitbasespeed += unit.GetComponent<UnitScript>().GetFirstWeapon().Grade * 2;
         }
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
         {
-            unitbasespeed = (int)(unitbasespeed * 0.9f);
+            unitbasespeed -= unit.GetComponent<UnitScript>().GetFirstWeapon().Grade;
         }
 
         int targetbasespeed = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed;
 
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
-            targetbasespeed = (int)(targetbasespeed * 1.1f);
+            targetbasespeed += target.GetComponent<UnitScript>().GetFirstWeapon().Grade * 2;
         }
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
         {
-            targetbasespeed = (int)(targetbasespeed * 0.9f);
+            targetbasespeed -= target.GetComponent<UnitScript>().GetFirstWeapon().Grade;
         }
 
         int SpeedDiff = unitbasespeed - targetbasespeed;
@@ -2343,21 +2343,21 @@ public class ActionsMenu : MonoBehaviour
         int dexunit = (int)charunit.AjustedStats.Dexterity + UnitSkillBonus.Dexterity;
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
-            dexunit = (int)(dexunit * 1.1f);
+            dexunit += unit.GetComponent<UnitScript>().GetFirstWeapon().Grade * 2;
         }
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "spear")
         {
-            dexunit = (int)(dexunit * 0.9f);
+            dexunit -= target.GetComponent<UnitScript>().GetFirstWeapon().Grade * 2;
         }
 
         int spdtarget = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed;
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
-            spdtarget = (int)(spdtarget * 1.1f);
+            spdtarget += target.GetComponent<UnitScript>().GetFirstWeapon().Grade * 2;
         }
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
         {
-            spdtarget = (int)(spdtarget * 0.9f);
+            spdtarget -= target.GetComponent<UnitScript>().GetFirstWeapon().Grade * 2;
         }
 
         int finalhitrate = (int)(hitrateweapon + (dexunit - spdtarget) * 0.2f) + tilebonus + UnitSkillBonus.Hit - TargetSkillBonus.Dodge;
@@ -2446,21 +2446,21 @@ public class ActionsMenu : MonoBehaviour
         int dexunit = (int)charunit.AjustedStats.Dexterity + UnitSkillBonus.Dexterity;
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
-            dexunit = (int)(dexunit * 1.1f);
+            dexunit += unit.GetComponent<UnitScript>().GetFirstWeapon().Grade * 2;
         }
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "spear")
         {
-            dexunit = (int)(dexunit * 0.9f);
+            dexunit -= target.GetComponent<UnitScript>().GetFirstWeapon().Grade;
         }
 
         int spdtarget = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed;
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "sword")
         {
-            spdtarget = (int)(spdtarget * 1.1f);
+            spdtarget += target.GetComponent<UnitScript>().GetFirstWeapon().Grade * 2;
         }
         if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
         {
-            spdtarget = (int)(spdtarget * 0.9f);
+            spdtarget -= target.GetComponent<UnitScript>().GetFirstWeapon().Grade;
         }
 
         int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f + UnitSkillBonus.Crit);
