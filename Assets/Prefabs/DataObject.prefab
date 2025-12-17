@@ -2183,13 +2183,13 @@ MonoBehaviour:
     Masteries:
     - weapontype: sword
       Exp: 0
-      Level: 1
+      Level: 0
     - weapontype: spear
       Exp: 0
       Level: -1
     - weapontype: greatsword
       Exp: 0
-      Level: 0
+      Level: 1
     - weapontype: bow
       Exp: 0
       Level: -1
