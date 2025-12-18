@@ -193,7 +193,7 @@ public class UnitScript : MonoBehaviour
     public Character UnitCharacteristics;
 
 
-    public bool trylvlup;
+
     public bool fixedgrowth;
 
     public equipment Fists;
@@ -317,6 +317,10 @@ public class UnitScript : MonoBehaviour
     public Sprite TelekinesisSprite;
     public Image TelekinesisImage;
 
+    [Header("Tools")]
+    public bool trylvlup;
+    public bool forcemoveTO;
+    public Vector2 forcemovetonewpos;
 
 
 
@@ -481,6 +485,13 @@ public class UnitScript : MonoBehaviour
 
 
         DelayedUpdate();
+
+
+        if(forcemoveTO)
+        {
+            forcemoveTO = false;
+            MoveTo(forcemovetonewpos);
+        }
     }
 
     private void FixedUpdate()

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using static UnitScript;
 
 public class GridSquareScript : MonoBehaviour
@@ -79,8 +80,13 @@ public class GridSquareScript : MonoBehaviour
         public void ChangeActivation(bool newstate)
         {
             isactivated = newstate;
+            
             OnActivationChange?.Invoke(this);
         }
+
+        public GameObject ActivatedGO;
+        public GameObject DeactivatedGO;
+
     }
 
     public MechanismClass Mechanism;
@@ -273,18 +279,55 @@ public class GridSquareScript : MonoBehaviour
 
     public void ManageLeverOrientation()
     {
-        if (LeverGO.activeSelf && Mechanism != null)
+        if(Mechanism != null)
         {
-            Vector3 previousrot = LeverGO.transform.GetChild(0).localRotation.eulerAngles;
-            if (previousrot.y < 100)
+            if (LeverGO.activeSelf)
             {
-                previousrot = new Vector3(previousrot.x, 135, previousrot.z);
+                Vector3 previousrot = LeverGO.transform.GetChild(0).localRotation.eulerAngles;
+                if (previousrot.y < 100)
+                {
+                    previousrot = new Vector3(previousrot.x, 135, previousrot.z);
+                }
+                else
+                {
+                    previousrot = new Vector3(previousrot.x, 45, previousrot.z);
+                }
+                LeverGO.transform.GetChild(0).localRotation = Quaternion.Euler(previousrot);
             }
-            else
+            if(Mechanism.ActivatedGO != null)
             {
-                previousrot = new Vector3(previousrot.x, 45, previousrot.z);
+                if(Mechanism.isactivated)
+                {
+                    if(!Mechanism.ActivatedGO.activeSelf)
+                    {
+                        Mechanism.ActivatedGO.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (Mechanism.ActivatedGO.activeSelf)
+                    {
+                        Mechanism.ActivatedGO.SetActive(false);
+                    }
+                }
             }
-            LeverGO.transform.GetChild(0).localRotation = Quaternion.Euler(previousrot);
+            if (Mechanism.DeactivatedGO != null)
+            {
+                if (Mechanism.isactivated)
+                {
+                    if (Mechanism.DeactivatedGO.activeSelf)
+                    {
+                        Mechanism.DeactivatedGO.SetActive(false);
+                    }
+                }
+                else
+                {
+                    if (!Mechanism.DeactivatedGO.activeSelf)
+                    {
+                        Mechanism.DeactivatedGO.SetActive(true);
+                    }
+                }
+            }
         }
     }
 
@@ -464,7 +507,7 @@ public class GridSquareScript : MonoBehaviour
             }
 
 
-
+            ManageLeverOrientation();
 
 
             if (RemainingRainTurns < 3)

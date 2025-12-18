@@ -312,7 +312,33 @@ public class GridScript : MonoBehaviour
 
         if (selection != null)
         {
-            if (selection.isobstacle)
+            if(selection.Mechanism!=null && selection.Mechanism.type!=0)
+            {
+                switch(selection.Mechanism.type)
+                {
+                    case (1):
+                        if(selection.Mechanism.isactivated)
+                        {
+                            text += "Open Door\nNo effect";
+                        }
+                        else
+                        {
+                            text += "Closed Door\nNo effect";
+                        }
+                        break;
+                    case (2):
+                        if (selection.Mechanism.isactivated)
+                        {
+                            text += "Activated Mechanism\nNo effect";
+                        }
+                        else
+                        {
+                            text += "Mechanism\nNo effect";
+                        }
+                        break;
+                }
+            }
+            else if (selection.isobstacle)
             {
                 text += "Wall\nNo effect";
             }
