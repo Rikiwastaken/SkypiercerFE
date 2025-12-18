@@ -380,9 +380,9 @@ public class DataScript : MonoBehaviour
 
 
                 List<WeaponMastery> Sorakmasteries = new List<WeaponMastery>();
-                Sorakmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = 1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = 0 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
-                Sorakmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 0 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = 0 });
@@ -398,8 +398,8 @@ public class DataScript : MonoBehaviour
 
                 List<WeaponMastery> Lyvmasteries = new List<WeaponMastery>();
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
-                Lyvmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = 1 });
-                Lyvmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = 1 });
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = 0 });
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
@@ -482,9 +482,9 @@ public class DataScript : MonoBehaviour
 
 
                 Sorakmasteries = new List<WeaponMastery>();
-                Sorakmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 10, Level = 1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = 1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
-                Sorakmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 3, Level = 0 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 5, Level = 1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 3, Level = 0 });
@@ -500,8 +500,8 @@ public class DataScript : MonoBehaviour
 
                 Lyvmasteries = new List<WeaponMastery>();
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
-                Lyvmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 5, Level = 1 });
-                Lyvmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 5, Level = 1 });
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 3, Level = 0 });
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
@@ -603,9 +603,9 @@ public class DataScript : MonoBehaviour
 
 
                 Sorakmasteries = new List<WeaponMastery>();
-                Sorakmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 10, Level = 1 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 3, Level = 1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
-                Sorakmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 3, Level = 0 });
+                Sorakmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 7, Level = 1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 0, Level = -1 });
                 Sorakmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 4, Level = 0 });
@@ -621,8 +621,8 @@ public class DataScript : MonoBehaviour
 
                 Lyvmasteries = new List<WeaponMastery>();
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "sword", Exp = 0, Level = -1 });
-                Lyvmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 10, Level = 1 });
-                Lyvmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "spear", Exp = 0, Level = -1 });
+                Lyvmasteries.Add(new WeaponMastery() { weapontype = "greatsword", Exp = 10, Level = 1 });
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "bow", Exp = 0, Level = -1 });
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "scythe", Exp = 4, Level = 0 });
                 Lyvmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });

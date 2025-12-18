@@ -2279,7 +2279,7 @@ MonoBehaviour:
       Level: -1
     - weapontype: spear
       Exp: 0
-      Level: 0
+      Level: -1
     - weapontype: greatsword
       Exp: 0
       Level: 1
@@ -4803,7 +4803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96044cd774742f64cbd6546a776f0941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  versionID: 080
+  versionID: 082
   activeSlot: 0
   currentchapter: 0
   numberofslots: 6
