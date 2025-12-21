@@ -1021,11 +1021,27 @@ public class AttackTurnScript : MonoBehaviour
 
                 (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus) = ActionsMenu.ApplyDamage(Attacker, target, false);
 
-                bool defenderdodged = false;
-                if (attackerhits == 0)
+                int defenderdodged = 0;
+
+                int basenumberofhits = 0;
+
+                if(doubleattacker== Attacker)
                 {
-                    defenderdodged = true;
+                    if(triple)
+                    {
+                        basenumberofhits = 3;
+                    }
+                    else
+                    {
+                        basenumberofhits = 2;
+                    }
                 }
+                else
+                {
+                    basenumberofhits = 1;
+                }
+
+                defenderdodged = basenumberofhits - attackerhits;
 
                 bool defenderattacks = true;
 
@@ -1052,7 +1068,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     defenderdied = true;
                 }
-                bool attackerdodged = false;
+                int attackerdodged = 0;
                 int defenderhits = 0;
                 int defenderdamage = 0;
                 int defendercrits = 0;
@@ -1061,10 +1077,27 @@ public class AttackTurnScript : MonoBehaviour
                 if (defenderattacks)
                 {
                     (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus) = ActionsMenu.ApplyDamage(Attacker, target, true);
-                    if (defenderhits == 0)
+
+                    basenumberofhits = 0;
+
+                    if (doubleattacker == target)
                     {
-                        attackerdodged = true;
+                        if (triple)
+                        {
+                            basenumberofhits = 3;
+                        }
+                        else
+                        {
+                            basenumberofhits = 2;
+                        }
                     }
+                    else
+                    {
+                        basenumberofhits = 1;
+                    }
+
+                    attackerdodged = basenumberofhits - defenderhits;
+
                 }
 
                 bool attackerdied = false;

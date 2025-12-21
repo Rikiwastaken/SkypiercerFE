@@ -1,1 +1,39 @@
-[[Lyv]]
+[[Lyv]] : 
+- 1->2 : 
+- Lyv : Hi Sorak, are you training?
+- Sorak : Oh, hello, Lyv. I thought I would try my hand at the spear.
+- Lyv : It's... Not going well, is it?
+- Sorak : Not yet, but one day. Young Elwyn wields the spear, and I still want to help him learn.
+- Lyv : Maybe you can leave that to me? I don't really know the spear, but I can teach him the staff and the scythe.
+- Sorak : Right, maybe I should focus on Lea, then. 
+- Lyv : Yes, her style is right your alley. But then that leaves...
+- Sorak : Zack ? You want to take care of him?
+- Lyv : Well, I am not sure he needs us... He is just as good as us if not better with every weapon.
+- Sorak : Just because he is a lazy genius doesn't mean he doesn't need training! Let's get him!
+- Lyv : Right now? 
+- Sorak : Yes, right now! With the two of us we will teach him discipline! After all it's training that separates a living hunter from a corpse!
+- Lyv : Let's do it then. Together.
+
+- 2 ->3 :
+- Sorak : Lyv, are you alright?
+- Lyv : It's... It's nothing.
+- Sorak : What do you mean it's nothing? You got stabbed when you tried to heal me!
+- Lyv: Maybe, but you are safe, right?
+- Sorak : You idiot, I am the one who is supposed to protect you.
+- Lyv : And why would that be? 
+- Sorak : Because... Well... Because I'm sturdier!
+- Lyv : Then you'll have to be even sturdier, because I won't stop helping you as long as you get in trouble.
+- Sorak : What? That's stupid! If you're in danger because you're healing us without caring about your safety, then I'll have to jump in.
+- Lyv : I guess I'll be in you care, then. After all, the safety of the whole team rides on it!
+- Sorak : You're impossible...
+
+- 3 -> 4 :
+- Sorak : Hi, Lyv, what are you doing all alone?
+- Lyv : I have been thinking. Say, do you have any plans for after the war? 
+- Sorak : I haven't given it much thought. After all, it's not like we have anywhere to come back to.
+- Lyv : Then why don't we make one?
+- Sorak : What do you mean?
+- Lyv : Well, there will always be pluvials, so we should build a new Hunter School. Don't you think?
+- Sorak : I think that's a wonderful idea, as long as we do it together.
+- Lyv : I wouldn't dream of doing it without you.
+- Sorak : Let's build a home to come back to.

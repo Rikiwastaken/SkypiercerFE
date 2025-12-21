@@ -60,6 +60,7 @@ public class DataScript : MonoBehaviour
         public int BondPoints;
         public int BondLevel;
         public int BondDialogueSeen;
+        public int MaxLevel;
     }
 
     [Serializable]
@@ -849,6 +850,7 @@ public class DataScript : MonoBehaviour
             bondcopy.BondDialogueSeen = bond.BondDialogueSeen;
             bondcopy.BondLevel = bond.BondLevel;
             bondcopy.BondPoints = bond.BondPoints;
+            bondcopy.MaxLevel = bond.MaxLevel;
             bondscopy.Add(bondcopy);
         }
         return bondscopy;

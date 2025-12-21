@@ -35,8 +35,8 @@ public class CombaSceneManager : MonoBehaviour
         public int defenderdamage;
         public int attackercrits;
         public int defendercrits;
-        public bool attackerdodged;
-        public bool defenderdodged;
+        public int attackerdodged;
+        public int defenderdodged;
         public bool attackerdied;
         public bool defenderdied;
         public bool defenderattacks;
@@ -373,7 +373,7 @@ public class CombaSceneManager : MonoBehaviour
                 if ((attackerSceneGO.GetComponent<UnitScript>().AttackAnimationAlmostdone(ActiveCombatData.attackerAnimator, 0.8f) && attackbuffer <= 0) || attackbuffer< -2f/Time.deltaTime)
                 {
                     attackerLaunchAttack = false;
-                    if (ActiveCombatData.defenderdodged)
+                    if (ActiveCombatData.defenderdodged>0)
                     {
                         ActiveCombatData.defenderAnimator.SetTrigger("Dodge");
                     }
@@ -414,11 +414,13 @@ public class CombaSceneManager : MonoBehaviour
             if (!firsttextcreated)
             {
                 CreateText(true);
-                if(!ActiveCombatData.defenderdodged)
-                {
-                    ChangeDefenderLifebar = true;
-                }
-                
+                //if(!ActiveCombatData.defenderdodged)
+                //{
+                //    ChangeDefenderLifebar = true;
+                //}
+
+                ChangeDefenderLifebar = true;
+
                 firsttextcreated = true;
             }
 
@@ -567,7 +569,7 @@ public class CombaSceneManager : MonoBehaviour
                 {
                     DefenderLaunchAttack = false;
                     AttackerResponse = true;
-                    if (ActiveCombatData.attackerdodged)
+                    if (ActiveCombatData.attackerdodged > 0)
                     {
                         ActiveCombatData.attackerAnimator.SetTrigger("Dodge");
                     }
@@ -607,10 +609,11 @@ public class CombaSceneManager : MonoBehaviour
             if (!secondtextcreated)
             {
                 CreateText(false);
-                if(!ActiveCombatData.attackerdodged)
-                {
-                    ChangeAttackerLifebar = true;
-                }
+                //if(!ActiveCombatData.attackerdodged)
+                //{
+                //    ChangeAttackerLifebar = true;
+                //}
+                ChangeAttackerLifebar = true;
                 secondtextcreated = true;
             }
 
@@ -680,7 +683,7 @@ public class CombaSceneManager : MonoBehaviour
                 if(Modeltomove == null)
                 {
                     waitForAttackerProjectile = false;
-                    if (ActiveCombatData.defenderdodged)
+                    if (ActiveCombatData.defenderdodged>0)
                     {
                         ActiveCombatData.defenderAnimator.SetTrigger("Dodge");
                     }
@@ -725,7 +728,7 @@ public class CombaSceneManager : MonoBehaviour
             if (Mathf.Abs(Modeltomove.transform.position.x - ActiveCombatData.defenderAnimator.transform.position.x) < 0.1f)
             {
                 waitForAttackerProjectile = false;
-                if (ActiveCombatData.defenderdodged)
+                if (ActiveCombatData.defenderdodged>0)
                 {
                     ActiveCombatData.defenderAnimator.SetTrigger("Dodge");
                 }
@@ -753,7 +756,7 @@ public class CombaSceneManager : MonoBehaviour
                 if (Modeltomove == null)
                 {
                     waitForDefenderProjectile = false;
-                    if (ActiveCombatData.attackerdodged)
+                    if (ActiveCombatData.attackerdodged>0)
                     {
                         ActiveCombatData.attackerAnimator.SetTrigger("Dodge");
                     }
@@ -788,7 +791,7 @@ public class CombaSceneManager : MonoBehaviour
             if (Mathf.Abs(Modeltomove.transform.position.x - ActiveCombatData.attackerAnimator.transform.position.x) < 0.1f)
             {
                 waitForDefenderProjectile = false;
-                if (ActiveCombatData.attackerdodged)
+                if (ActiveCombatData.attackerdodged > 0)
                 {
                     ActiveCombatData.attackerAnimator.SetTrigger("Dodge");
                 }
@@ -840,39 +843,45 @@ public class CombaSceneManager : MonoBehaviour
 
                 Color colortouse = Color.white;
 
-                if (ActiveCombatData.defenderdodged)
+                int numberofhits = -ActiveCombatData.defenderdodged;
+
+                if (ActiveCombatData.doubleAttacker == ActiveCombatData.attacker)
                 {
-                    attacktext = "Miss";
-                }
-                else
-                {
-                    if (ActiveCombatData.doubleAttacker == ActiveCombatData.attacker)
+                    if (ActiveCombatData.triplehit)
                     {
-                        if (ActiveCombatData.triplehit)
-                        {
-                            attacktext = "3 hits\n";
-                        }
-                        else
-                        {
-                            attacktext = "2 hits\n";
-                        }
+                        numberofhits += 3;
                     }
                     else
                     {
-                        attacktext = "1 hit\n";
+                        numberofhits += 2;
                     }
-                    if (ActiveCombatData.attackercrits == 1)
-                    {
-                        attacktext += " Critical !\n";
-                        colortouse = Color.yellow;
-                    }
-                    else if (ActiveCombatData.attackercrits > 1)
-                    {
-                        attacktext += " Critical x" + ActiveCombatData.attackercrits + " !\n";
-                        colortouse = Color.yellow;
-                    }
-                    attacktext += ActiveCombatData.attackerdamage;
                 }
+                else
+                {
+                    numberofhits += 1;
+                }
+
+                if (numberofhits <= 0)
+                {
+                    attacktext = "Miss\n";
+                }
+                else if (ActiveCombatData.defenderdodged > 0)
+                {
+                    attacktext = numberofhits + " hits\n" + ActiveCombatData.defenderdodged + " dodges\n";
+                }
+                else
+                {
+                    attacktext = numberofhits + " hits\n";
+                }
+
+                if (ActiveCombatData.attackercrits > 0)
+                {
+                    attacktext += ActiveCombatData.attackercrits + " crits !\n";
+                    colortouse = Color.yellow;
+                }
+                attacktext += ActiveCombatData.attackerdamage;
+
+
                 AnimText.InitializeText(attacktext, colortouse);
             }
         }
@@ -882,39 +891,50 @@ public class CombaSceneManager : MonoBehaviour
 
             Color colortouse = Color.white;
 
-            if (ActiveCombatData.attackerdodged)
+            int numberofhits = -ActiveCombatData.attackerdodged;
+
+            if (ActiveCombatData.doubleAttacker == ActiveCombatData.defender)
             {
-                attacktext = "Miss";
-            }
-            else
-            {
-                if (ActiveCombatData.doubleAttacker == ActiveCombatData.defender)
+                if (ActiveCombatData.triplehit)
                 {
-                    if (ActiveCombatData.triplehit)
-                    {
-                        attacktext = "3 hits\n";
-                    }
-                    else
-                    {
-                        attacktext = "2 hits\n";
-                    }
+                    numberofhits += 3;
                 }
                 else
                 {
-                    attacktext = "1 hit\n";
+                    numberofhits += 2;
                 }
-                if (ActiveCombatData.defendercrits > 0)
-                {
-                    attacktext += ActiveCombatData.defendercrits + " crits !\n";
-                    colortouse = Color.yellow;
-                }
-                attacktext += ActiveCombatData.defenderdamage;
             }
+            else
+            {
+                numberofhits += 1;
+            }
+
+            if(numberofhits <=0)
+            {
+                attacktext = "Miss\n";
+            }
+            else if(ActiveCombatData.attackerdodged>0)
+            {
+                attacktext = numberofhits+" hits\n" + ActiveCombatData.attackerdodged +" dodges\n";
+            }
+            else
+            {
+                attacktext = numberofhits + " hits\n";
+            }
+
+            if (ActiveCombatData.defendercrits > 0)
+            {
+                attacktext += ActiveCombatData.defendercrits + " crits !\n";
+                colortouse = Color.yellow;
+            }
+            attacktext += ActiveCombatData.defenderdamage;
+
+            
             AnimText.InitializeText(attacktext, colortouse);
         }
     }
 
-    public void SetupScene(Character attacker, Character defender, equipment attackerweapon, equipment defenderweapon, Character doubleattacker, bool triplehit, bool healing, bool attackerdodged, bool defenderattacks, bool defenderdodged, bool attackerdied, bool defenderdied, int expgained, List<int> levelupbonuses, Character attackerbeforecombat, Character defenderbeforecombat, int attackerdamage, int defenderdamage, int attackercrits, int defendercrits)
+    public void SetupScene(Character attacker, Character defender, equipment attackerweapon, equipment defenderweapon, Character doubleattacker, bool triplehit, bool healing, int attackerdodged, bool defenderattacks, int defenderdodged, bool attackerdied, bool defenderdied, int expgained, List<int> levelupbonuses, Character attackerbeforecombat, Character defenderbeforecombat, int attackerdamage, int defenderdamage, int attackercrits, int defendercrits)
     {
         Debug.Log("Setting up combat scene with the following data : Attacker - " + attacker.name + ", Defender - " + defender.name + ", Attacker Weapon - " + attackerweapon.Name + ", Defender Weapon - " + defenderweapon.Name + ", Double Attacker - " + (doubleattacker != null ? doubleattacker.name : "None") + ", Triple Hit - " + triplehit.ToString() + ", Healing - " + healing.ToString() + ", Attacker Dodged - " + attackerdodged.ToString() + ", Defender Attacks - " + defenderattacks.ToString() + ", Defender Dodged - " + defenderdodged.ToString() + ", Attacker Died - " + attackerdied.ToString() + ", Defender Died - " + defenderdied.ToString() + ", Exp Gained - " + expgained.ToString() + ", Level Up Bonuses Count - " + (levelupbonuses != null ? levelupbonuses.Count.ToString() : "None") + ", Attacker Before Combat HP - " + attackerbeforecombat.currentHP.ToString() + ", Defender Before Combat HP - " + defenderbeforecombat.currentHP.ToString() + ", Attacker Damage - " + attackerdamage.ToString() + ", Defender Damage - " + defenderdamage.ToString() + ", Attacker Crits - " + attackercrits.ToString() + ", Defender Crits - " + defendercrits.ToString());
 
@@ -957,92 +977,112 @@ public class CombaSceneManager : MonoBehaviour
                 if(newdata.triplehit)
                 {
 
-                    if(newdata.attackercrits ==3)
-                    {
-                        newdata.attackerdamage *= 9;
-                    }
-                    else if(newdata.attackercrits == 2)
-                    {
-                        newdata.attackerdamage *= 7;
-                    }
-                    else if (newdata.attackercrits == 1)
-                    {
-                        newdata.attackerdamage *= 5;
-                    }
-                    else
-                    {
-                        newdata.attackerdamage *= 3;
-                    }
+                    //if(newdata.attackercrits ==3)
+                    //{
+                    //    newdata.attackerdamage *= 9;
+                    //}
+                    //else if(newdata.attackercrits == 2)
+                    //{
+                    //    newdata.attackerdamage *= 7;
+                    //}
+                    //else if (newdata.attackercrits == 1)
+                    //{
+                    //    newdata.attackerdamage *= 5;
+                    //}
+                    //else
+                    //{
+                    //    newdata.attackerdamage *= 3;
+                    //}
+                    newdata.attackerdamage *= (3-defenderdodged);
+
+                    
+
                 }
                 else
                 {
-                    if (newdata.attackercrits == 2)
-                    {
-                        newdata.attackerdamage *= 6;
-                    }
-                    else if (newdata.attackercrits == 1)
-                    {
-                        newdata.attackerdamage *= 4;
-                    }
-                    else
-                    {
-                        newdata.attackerdamage *= 2;
-                    }
+                    //if (newdata.attackercrits == 2)
+                    //{
+                    //    newdata.attackerdamage *= 6;
+                    //}
+                    //else if (newdata.attackercrits == 1)
+                    //{
+                    //    newdata.attackerdamage *= 4;
+                    //}
+                    //else
+                    //{
+                    //    newdata.attackerdamage *= 2;
+                    //}
+                    newdata.attackerdamage *= (2 - defenderdodged);
                 }
             }
             else
             {
-                if(newdata.attackercrits>0)
-                {
-                    newdata.attackerdamage *= 3;
-                }
+                newdata.attackerdamage *= (1 - defenderdodged);
             }
+
+            newdata.attackerdamage += attackerdamage * 2 * attackercrits;
+
+            //else
+            //{
+            //    if(newdata.attackercrits>0)
+            //    {
+            //        newdata.attackerdamage *= 3;
+            //    }
+            //}
 
             if (newdata.doubleAttacker == defender)
             {
                 if (newdata.triplehit)
                 {
 
-                    if (newdata.defendercrits == 3)
-                    {
-                        newdata.defenderdamage *= 9;
-                    }
-                    else if (newdata.defendercrits == 2)
-                    {
-                        newdata.defenderdamage *= 7;
-                    }
-                    else if (newdata.defendercrits == 1)
-                    {
-                        newdata.defenderdamage *= 5;
-                    }
-                    else
-                    {
-                        newdata.defenderdamage *= 3;
-                    }
+                    //if (newdata.defendercrits == 3)
+                    //{
+                    //    newdata.defenderdamage *= 9;
+                    //}
+                    //else if (newdata.defendercrits == 2)
+                    //{
+                    //    newdata.defenderdamage *= 7;
+                    //}
+                    //else if (newdata.defendercrits == 1)
+                    //{
+                    //    newdata.defenderdamage *= 5;
+                    //}
+                    //else
+                    //{
+                    //    newdata.defenderdamage *= 3;
+                    //}
+                    newdata.defenderdamage *= (3 - attackerdodged);
                 }
                 else
                 {
-                    if (newdata.defendercrits == 2)
-                    {
-                        newdata.defenderdamage *= 6;
-                    }
-                    else if (newdata.defendercrits == 1)
-                    {
-                        newdata.defenderdamage *= 4;
-                    }
-                    else
-                    {
-                        newdata.defenderdamage *= 2;
-                    }
+                    //if (newdata.defendercrits == 2)
+                    //{
+                    //    newdata.defenderdamage *= 6;
+                    //}
+                    //else if (newdata.defendercrits == 1)
+                    //{
+                    //    newdata.defenderdamage *= 4;
+                    //}
+                    //else
+                    //{
+                    //    newdata.defenderdamage *= 2;
+                    //}
+                    newdata.defenderdamage *= (2 - attackerdodged);
                 }
             }
             else
             {
-                if (newdata.defendercrits > 0)
-                {
-                    newdata.defenderdamage *= 3;
-                }
+                newdata.defenderdamage *= (1 - attackerdodged);
             }
+
+            newdata.defenderdamage += defenderdamage * 2 * defendercrits;
+            //else
+            //{
+            //    if (newdata.defendercrits > 0)
+            //    {
+            //        newdata.defenderdamage *= 3;
+            //    }
+            //}
 
             newdata.attackerdodged = attackerdodged;
             newdata.defenderdodged = defenderdodged;

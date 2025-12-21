@@ -1,0 +1,1058 @@
+{
+    "AllBondDialogueToLoadClass": [
+        {
+            "BondID": 0,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 1,
+                    "text": "Hi, Zack, what are you doing?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "The camping stove is broken, so I'm trying to fix it. Do you want to help?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I don't think it's a good idea."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Why not ? If you don't know I can teach you."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "It's more that I risk breaking it further..."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Fine, could you give me the spare gas canister then?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Sure thing, here you go!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Did you actually just bend the canister by grabbing it ?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Sorry !"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 1,
+                    "text": "Zack, do you really need to be that careless?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "What do you mean?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "The way just rush at enemies, only to dodge at the last second! it's way too dangerous."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "It would be dangerous if I actually get hit!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Sorry !"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Come on, don't play dumb. What if you tripped? Or what if someone attacked you from behind?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Sorry !"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "That won't happen."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "How do you know?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You always have my back, right?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Then let's both keep fighting exactly the way we do."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Please don't."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 1,
+                    "text": "Zack, do you have a minute? I think I have a problem."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "What's going on ?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "You remember when you asked me if I wanted to help you fix stuff ?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Well, I wanted to help, so I tried to study the camping stove..."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Right."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "And I may have dismantled it to see what it's like inside."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "And you don't know how to assemble it back."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Precisely. I'm sorry."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Nah, it's alright. Give me the pieces."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Here they are."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Lea, do you know what \"screws\" are ? "
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Aren't they the same as nails ?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Almost, except you are not supposed to pull them."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "But, they were so loose I barely had to pull."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Good thing we have a spare one."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I'm so sorry."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Next time you want to learn, just tell me. We'll do it together."
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 0,
+                    "text": "Hi, Lea. Are you free right now?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Sure!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Here, I made you something."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Really? For me? What is it?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "It's a full toolbox. You have been making lots of progress with your tinkering, so I thought you might need your own tools."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "It's so nice of you, I don't know what to say."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Just say thanks."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "But... What's the occasion?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You don't need any special occasions to give something to the one you love, right ?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "The one... You love?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Lea? You alright? She fainted..."
+                }
+            ]
+        },
+        {
+            "BondID": 1,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 2,
+                    "text": "Hey, Zack. Still slacking off?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You spend too much time with Sorak, man."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Come on, you don't have to keep pretending to be lazy."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I am lazy, though."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "You're not kidding anyone. We know you pretended to be a bad student to avoid the draft."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Not even old man Sorak?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "At any rate, I've seen you train in your garage."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You never know when you might get in trouble, right? I wouldn't want to be a burden. Especially not to you and Lea."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "You are literally the opposite of a burden, you keep pushing us around..."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I am not the team leader?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Then stop slacking of and start training, leader."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 2,
+                    "text": "Ha! Take this!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "That's not how you should be holding your spear, you know?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Zack! You startled me."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Why are you fighting with your hand. Be both know you're better at telekinesis."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Last battle, I almost hit Lea. I tried helping her, and I almost hit her with my spear."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I saw. But what are you saying, you didn't miss. Without you she would have been dead."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "It was too close. Next time, I might not be so lucky."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Why don't you train your telekinesis, then?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "It's less precise. I want to try wielding my spear with my own hands."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "With those scrawny arms?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I'm being serious, Zack."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "And so am I. Lea can protect her front, and leave her back to me. Focus on taking down the enemies far from us and we'll all be ok."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Yeah, you're right. You want to train with me?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Hell no, it's nap time!"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 2,
+                    "text": "I knew it! You're actually training."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Well, it happens from time to time. I don't want to end up a dead man. "
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "You should tell Sorak, you know. It might ease the tension between the two of you."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Let him think what he wants. I don't really care. It's also way funnier this way."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Come on. You know he's not that dumb."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Isn't he?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Stop screwing around, man. You really think your little scheme worked, back in the village? "
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "well, duh."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "But it didn't."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "What do you mean?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "It was all Lyv. She vouched for you. The soldier from Renais wanted you to be drafted. He wanted to put some discipline in you."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I... I never knew."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "You don't need to invent clever schemes and to try and solve everything yourself."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You're right. I'm sorry."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Just remember you are not alone, leader. We're with you, now and always."
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 2,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 0,
+                    "text": "Hi Sorak, how's your day?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "It just got a whole lot worse."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "That's sad. Is there anything I can do to make it better?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "If you stopped being so obnoxious it would be a great help."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You had to ask for the only thing out of my grasp..."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Stop it. What do you want ? Or did you come here just to make fun of me?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "No, as a matter of fact I wanted to check up on you. You look even grumpier than usual when you're by yourself."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "You came to check up on me? You?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Incredible, right?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Listen, I appreciate the gesture, but next time don't joke around, ok?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Sure thing, my man. I hate it when my underlings mop around!"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 0,
+                    "text": "What's up, Sorak?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "I don't have time for you. Just say your piece and leave."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I've been wondering. Why don't you like me?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Are you really asking me that? Do you even hear how you talk to me."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "No, that's not what I meant. Even when I was a kid, you've always hated me. I wasn't badmouthing you back then, so why?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Because you've always been the worst. You're talented, and that is why. I know that even though you never trained with us, you still trained on your own."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "However, no one short of a genius can master so many different Blade types in such a short time. I only know one person capable of wielding so many different Blades."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "So what ?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "I'm not done. While you're an insult to hard work, that's not the real reason I hate you. You can do what you want, as long as you take responsibility."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "The thing is, you never took responsibility. Elwyn and Lea have always covered for you. Always. They had to work even more because you were to lazy to play according to the rules."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Listen, I know I screwed up, ok? What can I do to make up for it?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Nothing, Zack. I'll keep following you and obeying your orders because it's what Sir Mir told me to do, but I am not and will never be your friend. If you really want to make up for it, do it with your friends."
+                }
+            ],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 3,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 4,
+                    "text": "Hello, Zack. Do you need any help with the cooking?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Hi, Lyv. Sure, you can help. Could you watch the pot while I cut the vegetables?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Of course."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Thanks a lot. I appreciate it!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I wonder, can you teach me how this device works?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Which device? The camping stove?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Yes. Sorak always cooks, so I have never used one before."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Ever since I've been a kid, you taught me so much. It's nice to be the other way around for once."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I remember you used to spend a lot of time with us back then. "
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah, Granpa was always busy."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "It takes me back..."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Hold on, what's that burnt smell?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I may have forgotten about the pot."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 0,
+                    "text": "Hey, Lyv. So it's your turn to cook today?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Yep! The others went hunting and brought back some meat."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Are you making some kind of stew ?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Precisely. I'll try to make Sorak's stew."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Did he give you his recipe ?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "No but I've seen him make it so many times I know it by heart."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Do you need a hand ?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Sure, could you cut up the vegetables? They are over there."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You got it. I can't wait. It has been so long since I last ate it."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Yeah... It's a bit of a shame that you stopped eating with us."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "It would have been hard to ditch class if I ate with the teachers. Sorak would have probably refused to feed me..."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Maybe so, but you would have deserved it! You shouldn't stay locked up in your room. Young boys and girls should play around together outside!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I should have asked Elwyn and Lea to ditch classes with me..."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "No, that's not what I meant!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Is Sorak's stew usually this black?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "NOOOOOOOOOO."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 4,
+                    "text": "Zack, you're holding your arm. Are you alright ?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "It's just a bruise from the last battle. It hurts but it's really nothing."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Show me. I'll heal you."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "It's fine. Don't bother."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Don't be stupid and let me heal you! What will you do if it gets infected ?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Ok, ok."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Here, all better. Be more careful next time, please."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Thanks a lot."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Say, Zack. Why did you choose to become a Hunter ? Elwyn grew up in the school. Lyv has a past with pluvials. But you ?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I don't really know, it sort of happened. I spent a lot of time with Elwyn and Lyv, so when they asked me if I wanted to be part of their squad, I just accepted."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "But you stopped following classes barely a few months after starting. Why didn't you choose another way."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Well I couldn't leave them hanging now, could I? Who knows what kind of trouble they would have gotten in without me."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I don't think they would have been in more trouble than now..."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You may have a point."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "It's alright, as long as you're here for them and they're here for you."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Don't worry, I'm here for you too!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Likewise, Zack."
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 4,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 0,
+                    "text": "Sieg, I need your help !"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "What? You need my help? Really?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah, I figured you must be pretty knowledgeable about Old World tech."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Yes, I am an archaeologist after all."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Ok, so I found, this thing in a half buried ruin. Do you know what this is ?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I do ! It was used for cooking bread. I think it was called a \"toaster\"."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Cooking bread? Isn't bread already baked?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Yes, but in the Old World there was a custom which was to cut slices of bread and cook them a second time."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "What? But why not just make thinner loaves of bread?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Well, according to books, they hated crust. They even sometimes cut the crust before selling it."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You could buy bread without crust?! It truly was the peak of civilisation."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 5,
+                    "text": "Hi, Zack. Are you free ?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Sure thing. What can I do for you, Sieg ?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Well, I have a question. How do you manage to fight ?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Usually, I just summon my Blade and I start hitting stuff with it."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "No, that's not what I meant. How do you keep your cool while fighting? Whenever an enemy gets close to me, I start to freak out."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "So that's why your specialty is bows."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Yes, it's so that I can be as far from the enemies as possible."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You say you freak out, but I have seen you fight. Even when you get hurt, you're even fiercer than usual!"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "But I'm scared of getting hurt, Zack! That's why I use a bow! "
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah, of course. Sorry. How about this: if you're ever in real trouble just call me and I'll cover you."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I wouldn't endanger you for my sake!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "It's alright, danger is my middle name. Just call me, ok ?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "If you say so..."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 0,
+                    "text": "Sieg, are you ok?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "It's not as bad as it looks, don't worry. The others already did all the healing they could. I just need a bit of rest."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I'm sorry man, you got hurt because of me."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Don't apologize. It's not like I'm dying. Also, when I saw you were in danger, I knew I could get overthrown by fear. The fear of losing you was way worse than the fear of getting hurt."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I see. Thanks for the save, Sieg. I don't know if I would be there now without you."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "You're welcome. I know you have my back, but I also want you to know that I have yours."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Of course I know that, you idiot. Now, look what I found."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Some kind of tin can ?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah, it says on the label that it's canned bread! Do you want to try it out ?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Sure."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Damn it's true. It doesn't have crust."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "It's awful, though."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah, it's easily the worst bread I've eaten in my entire life."
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 5,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 6,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 7,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 8,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 9,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 10,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 4,
+                    "text": "Hi Sorak, are you training?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Oh, hello, Lyv. I thought I would try my hand at the spear."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "It's... Not going well, is it?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Not yet, but one day. Young Elwyn wields the spear, and I still want to help him learn."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Maybe you can leave that to me? I don't really know the spear, but I can teach him the staff and the scythe."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Right, maybe I should focus on Lea, then. "
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Yes, her style is right your alley. But then that leaves..."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Zack ? You want to take care of him?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Well, I am not sure he needs us... He is just as good as us if not better with every weapon."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Just because he is a lazy genius doesn't mean he doesn't need training! Let's get him!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "MRight now? "
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Yes, right now! With the two of us we will teach him discipline! After all it's training that separates a living hunter from a corpse!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Let's do it then. Together."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 3,
+                    "text": "Lyv, are you alright?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "It's... It's nothing."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "What do you mean it's nothing? You got stabbed when you tried to heal me!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Maybe, but you are safe, right?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "You idiot, I am the one who is supposed to protect you."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "And why would that be? "
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Because... Well... Because I'm sturdier!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Then you'll have to be even sturdier, because I won't stop helping you as long as you get in trouble."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "What? That's stupid! If you're in danger because you're healing us without caring about your safety, then I'll have to jump in."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I guess I'll be in you care, then. After all, the safety of the whole team rides on it!"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "You're impossible..."
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 3,
+                    "text": "Hi, Lyv, what are you doing all alone?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I have been thinking. Say, do you have any plans for after the war?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "I haven't given it much thought. After all, it's not like we have anywhere to come back to."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Then why don't we make one?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "What do you mean?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Well, there will always be pluvials, so we should build a new Hunter School. Don't you think?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "I think that's a wonderful idea, as long as we do it together."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I wouldn't dream of doing it without you."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Let's build a home to come back to."
+                }
+            ]
+        },
+        {
+            "BondID": 11,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 12,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 13,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 14,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 15,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        }
+    ]
+}
