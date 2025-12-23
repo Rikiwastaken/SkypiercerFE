@@ -13402,15 +13402,16 @@ MonoBehaviour:
   CurrentPlayable: {fileID: 0}
   CurrentOther: {fileID: 0}
   ActionsMenu: {fileID: 4915612603892297116}
-  delaybeforeMove: 1
-  delaybeforeAttack: 0.5
-  delaybeforeFirstAttack: 0.4
+  delaybeforeMove: 0.5
+  delaybeforeAttack: 0.25
+  delaybeforeFirstAttack: 0.25
   delaybetweenAttack: 0.2
-  delayafterAttack: 0.5
+  delayafterAttack: 0.25
   waittingforexp: 0
   expdistributed: 0
   expbar: {fileID: 4384917138213913139}
   delaybeforenxtunit: 0
+  TimebeforeAnimationAttack: 0.5
   phaseTextScript: {fileID: 3028186298790515499}
   foresightScript: {fileID: 4945345412159395524}
   attackanimationhappeningcnt: 0

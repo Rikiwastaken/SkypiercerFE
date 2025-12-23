@@ -53,6 +53,8 @@ public class AttackTurnScript : MonoBehaviour
 
     public int delaybeforenxtunit;
 
+    public float TimebeforeAnimationAttack;
+
     public PhaseTextScript phaseTextScript;
     private MinimapScript minimapScript;
 
@@ -973,7 +975,7 @@ public class AttackTurnScript : MonoBehaviour
     {
         if (attackanimationhappeningcnt == 0)
         {
-            attackanimationhappeningcnt = (int)(2f / Time.deltaTime);
+            attackanimationhappeningcnt = (int)(TimebeforeAnimationAttack / Time.deltaTime);
             Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
 
             Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
