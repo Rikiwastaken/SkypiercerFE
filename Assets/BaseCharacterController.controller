@@ -1712,7 +1712,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: c5c0708df07d13c48bec99b501c026b7, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: b8c98de929fe901438adf503450a7c90, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -4477,7 +4477,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 70ef5a24bcd6d594ba287144199e41d5, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 2235dc1b17d16e2449433fd6303fdef3, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -4652,6 +4652,9 @@ AnimatorStateMachine:
   m_EntryTransitions:
   - {fileID: 522702881420548946}
   m_StateMachineTransitions:
+  - first: {fileID: -7143231109159083651}
+    second:
+    - {fileID: 6568531394730373156}
   - first: {fileID: 3303802020257945095}
     second:
     - {fileID: 2133465657390896192}
@@ -4659,21 +4662,18 @@ AnimatorStateMachine:
     - {fileID: 5506621716669820187}
     - {fileID: -2383213148648783382}
     - {fileID: -2770786847563291828}
-  - first: {fileID: 3230167274809713022}
-    second:
-    - {fileID: 1646338870343737087}
-  - first: {fileID: 350125662454467851}
-    second:
-    - {fileID: -3304902851216339647}
-  - first: {fileID: -7143231109159083651}
-    second:
-    - {fileID: 6568531394730373156}
-  - first: {fileID: 6188557739030045979}
-    second:
-    - {fileID: -8200182555887936654}
   - first: {fileID: 6616058646755856543}
     second:
     - {fileID: 4019460428357157372}
+  - first: {fileID: 3230167274809713022}
+    second:
+    - {fileID: 1646338870343737087}
+  - first: {fileID: 6188557739030045979}
+    second:
+    - {fileID: -8200182555887936654}
+  - first: {fileID: 350125662454467851}
+    second:
+    - {fileID: -3304902851216339647}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -100, y: -110, z: 0}
   m_EntryPosition: {x: 30, y: 170, z: 0}

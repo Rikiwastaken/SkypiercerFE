@@ -844,16 +844,347 @@
         },
         {
             "BondID": 5,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
-            "dialogueLvl4": []
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 1,
+                    "text": "Elwyn, I'm looking for Zack. Have you seen him?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "No, sorry. Do you want any help?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Yeah. He's been missing for a while. I'm starting to get worried."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Do you think something happened to him?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I hope not... We have to find him. For all we know he could be all alone surrounded by pluvials."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I'll go ask the others."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Already have... No one has seen him. What if he is already..."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Calm down. he can probably look after himself. It's Zack we're talking about. When we were kids it was him who found us when we were lost in the forest, remember?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Yeah, you were crying so loud he heard us."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Hold on, do you hear that?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Could it be snoring?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Damn it, he is napping on that tree !"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 2,
+                    "text": "Thanks for earlier, Lea. You really saved my bacon."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "It's alright. I was only able to do it because you got that enemy when I was getting overwhelmed."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Don't mention it."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "We're really efficient when we're together, we should fight like this more often."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Yeah. We really compensate for each other's weaknesses."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "If you want, I could teach you how to use shields."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I don't know how to summon a shield Blade, though."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Well, you could just take a real, tangible shield? "
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I mean... It doesn't hurt to try, I guess."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Ok, let's train with this pot lid. Hold it firmly and try to defend against my punch."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Are you sure about this? "
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Here I go!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "OOF."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "It sent him flying. Elwyn, are you alright?"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 1,
+                    "text": "Hi Elwyn, still training? It's pretty late."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Really? Time flies. "
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "The others just finished eating. I brought our portions. Let's eat."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Thanks a lot. I'm starving."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Say, don't you think you train a bit too much? You must rest from time to time or you won't last..."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I can't. If I neglect my training, I could die. Even worse, one of you could die."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Don't you worry about me. You know how sturdy I am!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I know, but still. I don't want to see you hurt."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Neither do I, but don't you want to call it a day? "
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Yeah, maybe you're right. I had something I wanted to ask Zack anyway."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Next time you want to train, come find me, alright? We'll do it together."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Sure! I'd be glad to do it with you."
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 1,
+                    "text": "Elwyn! Ready for our training session?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Sure, but first I have something to say."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "What is it?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Well, you know, we have been together ever since childhood."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Yeah? "
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "And you know that you and Zack are my best friends. No, you're more than that. You're both family to me."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Keep going."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "But you, Lea, you're even more than that to me. You're the most important person in the whole world. And... That's why I want to give you this."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "A ring? You took your sweet time, you dummy."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Lea, would you be my wife."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Of course, yes! I'll be your forever."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Forever and ever."
+                }
+            ]
         },
         {
             "BondID": 6,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 1,
+                    "text": "Sorak, do you have a minute?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Of course, Lea, what can I do for you?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "You have been fighting pluvials for a long time, right?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Yes for some years, now. Although it was mostly the weak pluvials that dared to attack the village. Why do you ask?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Well, I am struggling a bit when we fight in the rain. I mean, it gets muddy and whenever I try to block an attack I'm always close to losing my footing."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "I see what you mean. The answer is simple, really. Pluvials usually act on instincts from their past life. They will usually either blindly follow you or never move from where they are."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "In the first case, you should lure them outside the rain, on rocky ground for example. In the second case, just rely on Elwyn's telekinesis, or the other idiot's bow."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I get it. But what do you do when they don't want to target you? What I usually do is just ram them to make they focus on me."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "I mean, another valid strategy is putting the enemy of their misery before having to block anything."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I'll tell Elwyn and Zack to do just that."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Just tell Elwyn, the other idiot would just rush head on."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Noted."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 1,
+                    "text": "Hi Sorak, what's up?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Zack has been messing up with me even more since he has become our leader. Other than that, I'm good."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I wanted to ask you something."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Of course, what is it?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Why did you choose to become a hunter?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "I think you and I have the same reason. There was someone I wished to protect, and so I enrolled. It's as simple as that."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I think I know who it is."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "It's obvious, isn't it. Anyway, I can say the same. It's good. We all need a reason to keep going. Protecting those you love is one of the very best there is."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 3,
+                    "text": "Lea, you really got better!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "It was just a fluke."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "No, you won this duel fair and square..."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "What's wrong Sorak? You're usually more into it."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "You know what? I just realized something."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "What is it?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "You all grew up so much. It feels like yesterday you were a little kid and now look at you."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Come on, your embarrassing me."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Bear with it, because I won't say it twice. I know it wasn't easy, but now you're all as good as me and Lyv, maybe even better."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Sorak..."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "I just wanted to say... I'm proud of you all."
+                }
+            ],
             "dialogueLvl4": []
         },
         {

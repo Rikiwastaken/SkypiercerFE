@@ -4482,6 +4482,7 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
       text: Hi, Zack, what are you doing?
@@ -4799,26 +4800,259 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
-      text: Zack-Elwyn 1
+      text: Hey, Zack. Still slacking off?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You spend too much time with Sorak, man.
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
       ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Come on, you don't have to keep pretending to be lazy.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I am lazy, though.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You're not kidding anyone. We know you pretended to be a bad student
+        to avoid the draft.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Not even old man Sorak?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: At any rate, I've seen you train in your garage.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You never know when you might get in trouble, right? I wouldn't want
+        to be a burden. Especially not to you and Lea.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You are literally the opposite of a burden, you keep pushing us around...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I am not the team leader?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Then stop slacking of and start training, leader.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
     dialogueLvl2:
     - Charactername: 
-      text: Zack-Elwyn 2
+      text: Ha! Take this!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: That's not how you should be holding your spear, you know?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Zack! You startled me.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Why are you fighting with your hand. Be both know you're better at telekinesis.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Last battle, I almost hit Lea. I tried helping her, and I almost hit
+        her with my spear.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I saw. But what are you saying, you didn't miss. Without you she would
+        have been dead.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It was too close. Next time, I might not be so lucky.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Why don't you train your telekinesis, then?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's less precise. I want to try wielding my spear with my own hands.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: With those scrawny arms?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I'm being serious, Zack.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: And so am I. Lea can protect her front, and leave her back to me. Focus
+        on taking down the enemies far from us and we'll all be ok.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah, you're right. You want to train with me?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Hell no, it's nap time!
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
       ImageToShow: {fileID: 0}
     dialogueLvl3:
     - Charactername: 
-      text: Zack-Elwyn 3
+      text: I knew it! You're actually training.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'Well, it happens from time to time. I don''t want to end up a dead man. '
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You should tell Sorak, you know. It might ease the tension between the
+        two of you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Let him think what he wants. I don't really care. It's also way funnier
+        this way.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Come on. You know he's not that dumb.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Isn't he?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'Stop screwing around, man. You really think your little scheme worked,
+        back in the village? '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: well, duh.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: But it didn't.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What do you mean?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It was all Lyv. She vouched for you. The soldier from Renais wanted you
+        to be drafted. He wanted to put some discipline in you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I... I never knew.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You don't need to invent clever schemes and to try and solve everything
+        yourself.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You're right. I'm sorry.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Just remember you are not alone, leader. We're with you, now and always.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
       ImageToShow: {fileID: 0}
     dialogueLvl4: []
   - BondID: 2
@@ -4829,19 +5063,170 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
-      text: Zack-Sorak 1
+      text: Hi Sorak, how's your day?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It just got a whole lot worse.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: That's sad. Is there anything I can do to make it better?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: If you stopped being so obnoxious it would be a great help.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You had to ask for the only thing out of my grasp...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Stop it. What do you want ? Or did you come here just to make fun of
+        me?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: No, as a matter of fact I wanted to check up on you. You look even grumpier
+        than usual when you're by yourself.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You came to check up on me? You?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Incredible, right?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Listen, I appreciate the gesture, but next time don't joke around, ok?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Sure thing, my man. I hate it when my underlings mop around!
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
       ImageToShow: {fileID: 0}
     dialogueLvl2:
     - Charactername: 
-      text: Zack-Sorak 2
+      text: What's up, Sorak?
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I don't have time for you. Just say your piece and leave.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I've been wondering. Why don't you like me?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Are you really asking me that? Do you even hear how you talk to me.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: No, that's not what I meant. Even when I was a kid, you've always hated
+        me. I wasn't badmouthing you back then, so why?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Because you've always been the worst. You're talented, and that is why.
+        I know that even though you never trained with us, you still trained on your
+        own.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: ...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: However, no one short of a genius can master so many different Blade
+        types in such a short time. I only know one person capable of wielding so
+        many different Blades.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: So what ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I'm not done. While you're an insult to hard work, that's not the real
+        reason I hate you. You can do what you want, as long as you take responsibility.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: ...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: The thing is, you never took responsibility. Elwyn and Lea have always
+        covered for you. Always. They had to work even more because you were to lazy
+        to play according to the rules.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Listen, I know I screwed up, ok? What can I do to make up for it?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Nothing, Zack. I'll keep following you and obeying your orders because
+        it's what Sir Mir told me to do, but I am not and will never be your friend.
+        If you really want to make up for it, do it with your friends.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
       ImageToShow: {fileID: 0}
     dialogueLvl3:
     - Charactername: 
@@ -4859,26 +5244,295 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
-      text: Zack-Lyv 1
+      text: Hello, Zack. Do you need any help with the cooking?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Hi, Lyv. Sure, you can help. Could you watch the pot while I cut the
+        vegetables?
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Of course.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Thanks a lot. I appreciate it!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I wonder, can you teach me how this device works?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Which device? The camping stove?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yes. Sorak always cooks, so I have never used one before.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Ever since I've been a kid, you taught me so much. It's nice to be the
+        other way around for once.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'I remember you used to spend a lot of time with us back then. '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah, Granpa was always busy.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It takes me back...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Hold on, what's that burnt smell?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I may have forgotten about the pot.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
       ImageToShow: {fileID: 0}
     dialogueLvl2:
     - Charactername: 
-      text: Zack-Lyv 2
+      text: Hey, Lyv. So it's your turn to cook today?
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
       ImageToShow: {fileID: 0}
-    dialogueLvl3:
     - Charactername: 
-      text: Zack-Lyv 3
+      text: Yep! The others went hunting and brought back some meat.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Are you making some kind of stew ?
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Precisely. I'll try to make Sorak's stew.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Did he give you his recipe ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: No but I've seen him make it so many times I know it by heart.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Do you need a hand ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Sure, could you cut up the vegetables? They are over there.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You got it. I can't wait. It has been so long since I last ate it.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah... It's a bit of a shame that you stopped eating with us.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It would have been hard to ditch class if I ate with the teachers. Sorak
+        would have probably refused to feed me...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Maybe so, but you would have deserved it! You shouldn't stay locked up
+        in your room. Young boys and girls should play around together outside!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I should have asked Elwyn and Lea to ditch classes with me...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: No, that's not what I meant!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Is Sorak's stew usually this black?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: NOOOOOOOOOO.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    dialogueLvl3:
+    - Charactername: 
+      text: Zack, you're holding your arm. Are you alright ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's just a bruise from the last battle. It hurts but it's really nothing.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Show me. I'll heal you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's fine. Don't bother.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Don't be stupid and let me heal you! What will you do if it gets infected
+        ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Ok, ok.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Here, all better. Be more careful next time, please.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Thanks a lot.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Say, Zack. Why did you choose to become a Hunter ? Elwyn grew up in the
+        school. Lyv has a past with pluvials. But you ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I don't really know, it sort of happened. I spent a lot of time with
+        Elwyn and Lyv, so when they asked me if I wanted to be part of their squad,
+        I just accepted.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: But you stopped following classes barely a few months after starting.
+        Why didn't you choose another way.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Well I couldn't leave them hanging now, could I? Who knows what kind
+        of trouble they would have gotten in without me.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I don't think they would have been in more trouble than now...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You may have a point.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's alright, as long as you're here for them and they're here for you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Don't worry, I'm here for you too!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Likewise, Zack.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
       ImageToShow: {fileID: 0}
     dialogueLvl4: []
   - BondID: 4
@@ -4889,23 +5543,240 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
-      text: Zack-Sieg 1
+      text: Sieg, I need your help !
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What? You need my help? Really?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah, I figured you must be pretty knowledgeable about Old World tech.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yes, I am an archaeologist after all.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Ok, so I found, this thing in a half buried ruin. Do you know what this
+        is ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I do ! It was used for cooking bread. I think it was called a "toaster".
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Cooking bread? Isn't bread already baked?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yes, but in the Old World there was a custom which was to cut slices
+        of bread and cook them a second time.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What? But why not just make thinner loaves of bread?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Well, according to books, they hated crust. They even sometimes cut the
+        crust before selling it.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You could buy bread without crust?! It truly was the peak of civilisation.
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
       ImageToShow: {fileID: 0}
     dialogueLvl2:
     - Charactername: 
-      text: Zack-Sieg 2
+      text: Hi, Zack. Are you free ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Sure thing. What can I do for you, Sieg ?
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
       ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Well, I have a question. How do you manage to fight ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Usually, I just summon my Blade and I start hitting stuff with it.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: No, that's not what I meant. How do you keep your cool while fighting?
+        Whenever an enemy gets close to me, I start to freak out.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: So that's why your specialty is bows.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yes, it's so that I can be as far from the enemies as possible.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You say you freak out, but I have seen you fight. Even when you get hurt,
+        you're even fiercer than usual!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'But I''m scared of getting hurt, Zack! That''s why I use a bow! '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'Yeah, of course. Sorry. How about this: if you''re ever in real trouble
+        just call me and I''ll cover you.'
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I wouldn't endanger you for my sake!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's alright, danger is my middle name. Just call me, ok ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: If you say so...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
     dialogueLvl3:
     - Charactername: 
-      text: Zack-Sieg 3
+      text: Sieg, are you ok?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's not as bad as it looks, don't worry. The others already did all
+        the healing they could. I just need a bit of rest.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I'm sorry man, you got hurt because of me.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Don't apologize. It's not like I'm dying. Also, when I saw you were in
+        danger, I knew I could get overthrown by fear. The fear of losing you was
+        way worse than the fear of getting hurt.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I see. Thanks for the save, Sieg. I don't know if I would be there now
+        without you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You're welcome. I know you have my back, but I also want you to know
+        that I have yours.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Of course I know that, you idiot. Now, look what I found.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Some kind of tin can ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah, it says on the label that it's canned bread! Do you want to try
+        it out ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Sure.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Damn it's true. It doesn't have crust.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's awful, though.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah, it's easily the worst bread I've eaten in my entire life.
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
@@ -4919,28 +5790,321 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
-      text: Lea-Elwyn 1
+      text: Elwyn, I'm looking for Zack. Have you seen him?
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
-      characterindex: 0
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: No, sorry. Do you want any help?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah. He's been missing for a while. I'm starting to get worried.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Do you think something happened to him?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I hope not... We have to find him. For all we know he could be all alone
+        surrounded by pluvials.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I'll go ask the others.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Already have... No one has seen him. What if he is already...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Calm down. he can probably look after himself. It's Zack we're talking
+        about. When we were kids it was him who found us when we were lost in the
+        forest, remember?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah, you were crying so loud he heard us.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Hold on, do you hear that?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Could it be snoring?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Damn it, he is napping on that tree !
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
       ImageToShow: {fileID: 0}
     dialogueLvl2:
     - Charactername: 
-      text: Lea-Elwyn 2
+      text: Thanks for earlier, Lea. You really saved my bacon.
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
-      characterindex: 0
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's alright. I was only able to do it because you got that enemy when
+        I was getting overwhelmed.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Don't mention it.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: We're really efficient when we're together, we should fight like this
+        more often.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah. We really compensate for each other's weaknesses.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: If you want, I could teach you how to use shields.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I don't know how to summon a shield Blade, though.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'Well, you could just take a real, tangible shield? '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I mean... It doesn't hurt to try, I guess.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Ok, let's train with this pot lid. Hold it firmly and try to defend against
+        my punch.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'Are you sure about this? '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Here I go!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: OOF.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It sent him flying. Elwyn, are you alright?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
       ImageToShow: {fileID: 0}
     dialogueLvl3:
     - Charactername: 
-      text: Lea-Elwyn 3
+      text: Hi Elwyn, still training? It's pretty late.
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
-      characterindex: 0
+      characterindex: 1
       ImageToShow: {fileID: 0}
-    dialogueLvl4: []
+    - Charactername: 
+      text: 'Really? Time flies. '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: The others just finished eating. I brought our portions. Let's eat.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Thanks a lot. I'm starving.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Say, don't you think you train a bit too much? You must rest from time
+        to time or you won't last...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I can't. If I neglect my training, I could die. Even worse, one of you
+        could die.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Don't you worry about me. You know how sturdy I am!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I know, but still. I don't want to see you hurt.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'Neither do I, but don''t you want to call it a day? '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah, maybe you're right. I had something I wanted to ask Zack anyway.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Next time you want to train, come find me, alright? We'll do it together.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Sure! I'd be glad to do it with you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    dialogueLvl4:
+    - Charactername: 
+      text: Elwyn! Ready for our training session?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Sure, but first I have something to say.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What is it?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Well, you know, we have been together ever since childhood.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'Yeah? '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: And you know that you and Zack are my best friends. No, you're more than
+        that. You're both family to me.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Keep going.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: But you, Lea, you're even more than that to me. You're the most important
+        person in the whole world. And... That's why I want to give you this.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: A ring? You took your sweet time, you dummy.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Lea, would you be my wife.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Of course, yes! I'll be your forever.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Forever and ever.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
   - BondID: 6
     Bond:
       ID: 0
@@ -4949,26 +6113,210 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
-      text: Lea-Sorak 1
+      text: Sorak, do you have a minute?
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
-      characterindex: 0
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Of course, Lea, what can I do for you?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You have been fighting pluvials for a long time, right?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yes for some years, now. Although it was mostly the weak pluvials that
+        dared to attack the village. Why do you ask?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Well, I am struggling a bit when we fight in the rain. I mean, it gets
+        muddy and whenever I try to block an attack I'm always close to losing my
+        footing.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I see what you mean. The answer is simple, really. Pluvials usually act
+        on instincts from their past life. They will usually either blindly follow
+        you or never move from where they are.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: In the first case, you should lure them outside the rain, on rocky ground
+        for example. In the second case, just rely on Elwyn's telekinesis, or the
+        other idiot's bow.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I get it. But what do you do when they don't want to target you? What
+        I usually do is just ram them to make they focus on me.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I mean, another valid strategy is putting the enemy of their misery before
+        having to block anything.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I'll tell Elwyn and Zack to do just that.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Just tell Elwyn, the other idiot would just rush head on.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Noted.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
       ImageToShow: {fileID: 0}
     dialogueLvl2:
     - Charactername: 
-      text: Lea-Sorak 2
+      text: Hi Sorak, what's up?
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
-      characterindex: 0
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Zack has been messing up with me even more since he has become our leader.
+        Other than that, I'm good.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I wanted to ask you something.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Of course, what is it?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Why did you choose to become a hunter?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I think you and I have the same reason. There was someone I wished to
+        protect, and so I enrolled. It's as simple as that.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I think I know who it is.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's obvious, isn't it. Anyway, I can say the same. It's good. We all
+        need a reason to keep going. Protecting those you love is one of the very
+        best there is.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
       ImageToShow: {fileID: 0}
     dialogueLvl3:
     - Charactername: 
-      text: Lea-Sorak 3
+      text: Lea, you really got better!
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
-      characterindex: 0
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It was just a fluke.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: No, you won this duel fair and square...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What's wrong Sorak? You're usually more into it.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You know what? I just realized something.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What is it?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You all grew up so much. It feels like yesterday you were a little kid
+        and now look at you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Come on, your embarrassing me.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Bear with it, because I won't say it twice. I know it wasn't easy, but
+        now you're all as good as me and Lyv, maybe even better.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Sorak...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I just wanted to say... I'm proud of you all.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 3
       ImageToShow: {fileID: 0}
     dialogueLvl4: []
   - BondID: 7
@@ -4979,6 +6327,7 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
       text: Lea-Lyv 1
@@ -5009,6 +6358,7 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
       text: Elwyn-Sorak 1
@@ -5039,6 +6389,7 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
       text: Elwyn-Lyv 1
@@ -5069,6 +6420,7 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
       text: Sorak-Lyv 1
@@ -5296,6 +6648,7 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
       text: Sieg-Lyv 1
@@ -5326,6 +6679,7 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
       text: Zack-Ruben 1
@@ -5356,6 +6710,7 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
       text: Lyv-Ruben 1
@@ -5386,6 +6741,7 @@ MonoBehaviour:
       BondPoints: 0
       BondLevel: 0
       BondDialogueSeen: 0
+      MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
       text: Elwyn-Ruben 1

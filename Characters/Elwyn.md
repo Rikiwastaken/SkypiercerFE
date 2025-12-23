@@ -30,6 +30,34 @@
 - Elwyn : OOF.
 - Lea : It sent him flying. Elwyn, are you alright?
 
+- 2 -> 3 
+- Lea : Hi Elwyn, still training? It's pretty late.
+- Elwyn : Really? Time flies. 
+- Lea : The others just finished eating. I brought our portions. Let's eat.
+- Elwyn : Thanks a lot. I'm starving.
+- Lea : Say, don't you think you train a bit too much? You must rest from time to time or you won't last...
+- Elwyn : I can't. If I neglect my training, I could die. Even worse, one of you could die.
+- Lea : Don't you worry about me. You know how sturdy I am!
+- Elwyn : I know, but still. I don't want to see you hurt.
+- Lea : Neither do I, but don't you want to call it a day? 
+- Elwyn : Yeah, maybe you're right. I had something I wanted to ask Zack anyway.
+- Lea : Next time you want to train, come find me, alright? We'll do it together.
+- Elwyn : Sure! I'd be glad to do it with you.
+
+- 3 -> 4
+- Lea : Elwyn! Ready for our training session?
+- Elwyn : Sure, but first I have something to say.
+- Lea : What is it?
+- Elwyn : Well, you know, we have been together ever since childhood.
+- Lea : Yeah? 
+- Elwyn : And you know that you and Zack are my best friends. No, you're more than that. You're both family to me.
+- Lea : Keep going.
+- Elwyn : But you, Lea, you're even more than that to me. You're the most important person in the whole world. And... That's why I want to give you this.
+- Lea : A ring? You took your sweet time, you dummy.
+- Elwyn : Lea, would you be my wife.
+- Lea : Of course, yes! I'll be your forever.
+- Elwyn : Forever and ever.
+
 [[Sorak]]
 
 [[Bob]]
