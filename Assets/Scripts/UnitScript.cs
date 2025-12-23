@@ -1,8 +1,6 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -487,7 +485,7 @@ public class UnitScript : MonoBehaviour
         DelayedUpdate();
 
 
-        if(forcemoveTO)
+        if (forcemoveTO)
         {
             forcemoveTO = false;
             MoveTo(forcemovetonewpos);
@@ -718,12 +716,25 @@ public class UnitScript : MonoBehaviour
                 animator.SetBool("Walk", true);
                 Vector2 direction = (pathtotake[0] - new Vector2(transform.position.x, transform.position.z)).normalized;
                 transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.deltaTime;
-                //if (!cameraScript.incombat)
-                //{
-                //    transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                //    animator.transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                //    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + rotationadjust);
-                //}
+                switch (direction.x)
+                {
+                    case > 0.1f:
+                        transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+                        break;
+                    case < -0.1f:
+                        transform.localRotation = Quaternion.Euler(0f, 270f, 0f);
+                        break;
+                }
+                switch (direction.y)
+                {
+                    case > 0.1f:
+                        transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                        break;
+                    case < -0.1f:
+                        transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
+                        break;
+                }
+
             }
             else
             {
@@ -962,7 +973,7 @@ public class UnitScript : MonoBehaviour
             DataScript.instance.GenerateEquipmentList(character);
             //GetNewWeaponFromMastery(mastery);
         }
-        
+
     }
 
     public void ShowAffinityArrow()
@@ -980,7 +991,7 @@ public class UnitScript : MonoBehaviour
                 {
                     foreach (int ID in bond.Characters)
                     {
-                        if (ID != UnitCharacteristics.ID && ManhattanDistance(UnitCharacteristics, DS.PlayableCharacterList[ID])<=2)
+                        if (ID != UnitCharacteristics.ID && ManhattanDistance(UnitCharacteristics, DS.PlayableCharacterList[ID]) <= 2)
                         {
                             BondedUnitIDsList.Add(ID);
                         }
@@ -1105,7 +1116,7 @@ public class UnitScript : MonoBehaviour
         {
             mastery.Level++;
             mastery.Exp = 0;
-            
+
         }
         GetNewWeaponFromMastery(mastery, character);
     }
@@ -1117,7 +1128,7 @@ public class UnitScript : MonoBehaviour
         {
             Chartouse = character;
         }
-        if(mastery.Level<=0)
+        if (mastery.Level <= 0)
         {
             return;
         }
@@ -1125,7 +1136,7 @@ public class UnitScript : MonoBehaviour
         int newweaponID = 0;
         foreach (int ID in Chartouse.equipmentsIDs)
         {
-            if(DataScript.instance.GetWeaponFromID(ID).type.ToLower()==mastery.weapontype.ToLower())
+            if (DataScript.instance.GetWeaponFromID(ID).type.ToLower() == mastery.weapontype.ToLower())
             {
                 oldweaponID = ID;
                 break;
@@ -1139,9 +1150,9 @@ public class UnitScript : MonoBehaviour
                 break;
             }
         }
-        if (oldweaponID!=newweaponID)
+        if (oldweaponID != newweaponID)
         {
-            
+
             if (Chartouse.equipmentsIDs.Contains(oldweaponID))
             {
                 int previouspos = -1;
@@ -1964,7 +1975,7 @@ public class UnitScript : MonoBehaviour
         }
 
         int bonussize = 20;
-        if(GetFirstWeapon()!=null && GetFirstWeapon().type!=null)
+        if (GetFirstWeapon() != null && GetFirstWeapon().type != null)
         {
             switch (GetFirstWeapon().type.ToLower())
             {
@@ -2005,7 +2016,7 @@ public class UnitScript : MonoBehaviour
                     break;
             }
         }
-        
+
 
         return GrowthtoApply;
     }
@@ -2237,7 +2248,7 @@ public class UnitScript : MonoBehaviour
         float gain = 0f;
         if (growth > 100)
         {
-            gain  = 1 + GetLevelUpStatsChange(growth - 100f, randomvalue);
+            gain = 1 + GetLevelUpStatsChange(growth - 100f, randomvalue);
         }
         else if (growth < 0)
         {
