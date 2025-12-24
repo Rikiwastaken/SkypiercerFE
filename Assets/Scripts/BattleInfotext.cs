@@ -407,6 +407,11 @@ public class BattleInfotext : MonoBehaviour
         int barID = 0;
         for (int i = 0; i < masteries.Count; i++)
         {
+            if (MasteryExpBars==null || MasteryExpBars.Count<=i || MasteryExpBars[i]==null)
+            {
+                continue;
+            }
+
             if (MasteryExpBars[i].gameObject.activeSelf == false)
             {
                 MasteryExpBars[i].gameObject.SetActive(true);
