@@ -339,11 +339,15 @@ public class MapEventManager : MonoBehaviour
                         e.UnitList = new List<Character>();
                         foreach (string name in e.NameUnitList)
                         {
-                            foreach (GameObject unit in GridScript.allunitGOs)
+                            Transform AllUnitGOsHolder = GameObject.Find("Characters").transform;
+                            if(AllUnitGOsHolder != null)
                             {
-                                if (unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == name.ToLower())
+                                foreach(Transform unitTransform in AllUnitGOsHolder)
                                 {
-                                    e.UnitList.Add(unit.GetComponent<UnitScript>().UnitCharacteristics);
+                                    if (unitTransform.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == name.ToLower())
+                                    {
+                                        e.UnitList.Add(unitTransform.GetComponent<UnitScript>().UnitCharacteristics);
+                                    }
                                 }
                             }
                         }

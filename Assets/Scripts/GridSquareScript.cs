@@ -245,9 +245,7 @@ public class GridSquareScript : MonoBehaviour
         // Verify all trigger mechanisms are activated
         foreach (var square in Mechanism.Triggers)
         {
-            if (square.Mechanism != null &&
-                square.Mechanism.type == 2 &&
-                !square.Mechanism.isactivated)
+            if (square.Mechanism != null && square.Mechanism.type == 2 && !square.Mechanism.isactivated)
             {
                 return; // At least one inactive so do nothing
             }
