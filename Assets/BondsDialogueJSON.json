@@ -59,15 +59,7 @@
                 },
                 {
                     "CharacterID": 1,
-                    "text": "Sorry !"
-                },
-                {
-                    "CharacterID": 0,
                     "text": "Come on, don't play dumb. What if you tripped? Or what if someone attacked you from behind?"
-                },
-                {
-                    "CharacterID": 1,
-                    "text": "Sorry !"
                 },
                 {
                     "CharacterID": 0,
@@ -83,10 +75,14 @@
                 },
                 {
                     "CharacterID": 1,
-                    "text": "Then let's both keep fighting exactly the way we do."
+                    "text": "Well I try to, but you don't make it easy!"
                 },
                 {
                     "CharacterID": 0,
+                    "text": "Then let's both keep fighting exactly the way we do."
+                },
+                {
+                    "CharacterID": 1,
                     "text": "Please don't."
                 }
             ],
