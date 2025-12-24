@@ -1189,9 +1189,184 @@
         },
         {
             "BondID": 7,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 4,
+                    "text": "Hi, Lea. How are you?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Lyv! You're just the person I needed."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Oh my! What can I do for you?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Can you teach me telekinesis?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Sure, but why so suddenly? I mean, I tried several times already but..."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I know, I broke more windows than I can count, but being able to attack from a distance can be a real lifesaver in a brawl."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "You know what? Let's try it! Here, focus and try to hit the target."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Here I go!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "What the heck?!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Holy cow, you almost decapitated Zack! "
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "How? I was behind you."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Sorry..."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "It's alright. Let's go over the basics."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 1,
+                    "text": "Lyv, I need a hand."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Please, Lea, if it's about the telekinesis, I can't do anything about it anymore. I am sorry to say this, but you might be a lost cause. Sorry. But it's true."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Ok that hurts a bit, but let's forget it. I need you to teach me about staves."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Oh, heavens... Don't you mean, like, greatswords? You can't hit things very well with a staff."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I know. I want to be able to heal the others. Sometimes, just protecting them with my shield is not enough."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Hmm. I see. Ok, try to summon a staff."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Ok, here it is."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "It's really... Quaint?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Listen, I know it looks like an oversized twig, but it must work all the same, right?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "You know what? Let's try hit. As a matter of fact, I have a small bruise from the last battle. It's nothing, so it shouldn't be hard to heal it."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Here I go!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Ouch! Did you just hit me?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I... Isn't it how you're supposed to use it?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "No, not exactly. Listen, I'll go over it with you, once again..."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 1,
+                    "text": "Look, Lyv, now my staff looks more than yours now! I mean, it still looks like a tree branch, but it's still a bit better!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "That's some progress, well done! Zack told me you trained with him and managed to make his eczema less itchy. Well done."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Yeah, I trained for hours on end, but it all paid off!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Well, it's certainly an improvement. What is that."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Pluvials! Watch out ! I'll take them on, support me from behind."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Ok !"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Take that !"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Lea, be careful, that tree!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Thanks. Eat this !"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Did you just hit the remaining pluvials with the tree?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Sheesh, that was the last of them. I'm a bit tired, now."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "You know what, with a strength like this, you probably don't need to use anything else than you shield and your strength."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "You think?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Yes. Believe in your skills, they're well enough to protect everyone. I mean, you did protect me just now."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I... Thanks. I guess it's must fun that way too!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Right, you've always liked whacking things. "
+                }
+            ],
             "dialogueLvl4": []
         },
         {

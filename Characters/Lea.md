@@ -1,5 +1,54 @@
 [[Lyv]]
 
+- 0 -> 1
+- Lyv : Hi, Lea. How are you?
+- Lea : Lyv! You're just the person I needed.
+- Lyv : Oh my! What can I do for you?
+- Lea : Can you teach me telekinesis?
+- Lyv : Sure, but why so suddenly? I mean, I tried several times already but...
+- Lea : I know, I broke more windows than I can count, but being able to attack from a distance can be a real lifesaver in a brawl.
+- Lyv : You know what? Let's try it! Here, focus and try to hit the target.
+- Lea : Here I go!
+- Zack : What the heck?
+- Lyv : Holy cow, you almost decapitated Zack! 
+- Zack : How? I was behind you.
+- Lea : Sorry...
+- Lyv : It's alright. Let's go over the basics.
+
+- 1 -> 2
+- Lea : Lyv, I need a hand.
+- Lyv : Please, Lea, if it's about the telekinesis, I can't do anything about it anymore. I am sorry to say this, but you might be a lost cause. Sorry. But it's true.
+- Lea : Ok that hurts a bit, but let's forget it. I need you to teach me about staves.
+- Lyv : Oh, heavens... Don't you mean, like, greatswords? You can't hit things very well with a staff.
+- Lea : I know. I want to be able to heal the others. Sometimes, just protecting them with my shield is not enough.
+- Lyv : Hmm. I see. Ok, try to summon a staff.
+- Lea : Ok, here it is.
+- Lyv : It's really... Quaint?
+- Lea : Listen, I know it looks like an oversized twig, but it must work all the same, right?
+- Lyv : You know what? Let's try hit. As a matter of fact, I have a small bruise from the last battle. It's nothing, so it shouldn't be hard to heal it.
+- Lea : Here I go!
+- Lyv : Ouch! Did you just hit me?
+- Lea : I... Isn't it how you're supposed to use it?
+- Lyv : No, not exactly. Listen, I'll go over it with you, once again...
+
+- 2 -> 3
+- Lea : Look, Lyv, now my staff looks more than yours now! I mean, it still looks like a tree branch, but it's still a bit better!
+- Lyv : That's some progress, well done! Zack told me you trained with him and managed to make his eczema less itchy. Well done.
+- Lea : Yeah, I trained for hours on end, but it all paid off!
+- Lyv : Well, it's certainly an improvement. What is that.
+- Lea : Pluvials! Watch out ! I'll take them on, support me from behind.
+- Lyv : Ok !
+- Lea : Take that !
+- Lyv : Lea, be careful, that tree!
+- Lea : Thanks. Eat this !
+- Lyv : Did you just hit the remaining pluvials with the tree?
+- Lea : Sheesh, that was the last of them. I'm a bit tired, now.
+- Lyv : You know what, with a strength like this, you probably don't need to use anything else than you shield and your strength.
+- Lea : You think?
+- Lyv : Yes. Believe in your skills, they're well enough to protect everyone. I mean, you did protect me just now.
+- Lea : I... Thanks. I guess it's must fun that way too!
+- Lyv : Right, you've always liked whacking things. 
+
 [[Sorak]]
 
 - 0 -> 1

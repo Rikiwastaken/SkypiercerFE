@@ -88,7 +88,7 @@ public class BattleInfotext : MonoBehaviour
             if (!transform.parent.GetChild(1).gameObject.activeSelf)
             {
                 transform.parent.GetChild(1).gameObject.SetActive(true);
-                transform.parent.GetChild(2).gameObject.SetActive(true);
+                //transform.parent.GetChild(2).gameObject.SetActive(true);
             }
 
         }

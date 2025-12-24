@@ -6330,24 +6330,276 @@ MonoBehaviour:
       MaxLevel: 0
     dialogueLvl1:
     - Charactername: 
-      text: Lea-Lyv 1
+      text: Hi, Lea. How are you?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Lyv! You're just the person I needed.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Oh my! What can I do for you?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Can you teach me telekinesis?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Sure, but why so suddenly? I mean, I tried several times already but...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I know, I broke more windows than I can count, but being able to attack
+        from a distance can be a real lifesaver in a brawl.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You know what? Let's try it! Here, focus and try to hit the target.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Here I go!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What the heck?!
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
       characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'Holy cow, you almost decapitated Zack! '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: How? I was behind you.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Sorry...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's alright. Let's go over the basics.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
       ImageToShow: {fileID: 0}
     dialogueLvl2:
     - Charactername: 
-      text: Lea-Lyv 2
+      text: Lyv, I need a hand.
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
-      characterindex: 0
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Please, Lea, if it's about the telekinesis, I can't do anything about
+        it anymore. I am sorry to say this, but you might be a lost cause. Sorry.
+        But it's true.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Ok that hurts a bit, but let's forget it. I need you to teach me about
+        staves.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Oh, heavens... Don't you mean, like, greatswords? You can't hit things
+        very well with a staff.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I know. I want to be able to heal the others. Sometimes, just protecting
+        them with my shield is not enough.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Hmm. I see. Ok, try to summon a staff.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Ok, here it is.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's really... Quaint?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Listen, I know it looks like an oversized twig, but it must work all
+        the same, right?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You know what? Let's try hit. As a matter of fact, I have a small bruise
+        from the last battle. It's nothing, so it shouldn't be hard to heal it.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Here I go!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Ouch! Did you just hit me?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I... Isn't it how you're supposed to use it?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: No, not exactly. Listen, I'll go over it with you, once again...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
       ImageToShow: {fileID: 0}
     dialogueLvl3:
     - Charactername: 
-      text: Lea-Lyv 3
+      text: Look, Lyv, now my staff looks more than yours now! I mean, it still looks
+        like a tree branch, but it's still a bit better!
       CameraDestination: {x: 0, y: 0, z: 0}
       Portrait: {fileID: 0}
-      characterindex: 0
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: That's some progress, well done! Zack told me you trained with him and
+        managed to make his eczema less itchy. Well done.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yeah, I trained for hours on end, but it all paid off!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Well, it's certainly an improvement. What is that.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Pluvials! Watch out ! I'll take them on, support me from behind.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Ok !
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Take that !
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Lea, be careful, that tree!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Thanks. Eat this !
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Did you just hit the remaining pluvials with the tree?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Sheesh, that was the last of them. I'm a bit tired, now.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You know what, with a strength like this, you probably don't need to
+        use anything else than you shield and your strength.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: You think?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yes. Believe in your skills, they're well enough to protect everyone.
+        I mean, you did protect me just now.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I... Thanks. I guess it's must fun that way too!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: 'Right, you''ve always liked whacking things. '
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 4
       ImageToShow: {fileID: 0}
     dialogueLvl4: []
   - BondID: 8

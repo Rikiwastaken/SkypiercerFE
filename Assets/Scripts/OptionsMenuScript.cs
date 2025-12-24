@@ -120,6 +120,7 @@ public class OptionsMenuScript : MonoBehaviour
     {
         SaveManager.Options.Fullscreen = !Screen.fullScreen;
         SaveManager.SaveOptions();
+        Screen.fullScreen = SaveManager.Options.Fullscreen;
         if (SaveManager.Options.Fullscreen)
         {
             fullscreentext.text = "Fullscreen : On";
