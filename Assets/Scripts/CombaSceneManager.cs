@@ -657,7 +657,7 @@ public class CombaSceneManager : MonoBehaviour
             {
                 AwaitExp = false;
             }
-
+            timebeforeendcounter = (int)(timebeforeending / Time.deltaTime);
         }
         else // Return to Map Scene
         {
