@@ -384,8 +384,7 @@ public class ActionManager : MonoBehaviour
 
         
 
-        Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
-        Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+        
 
         if (tilechanged != null)
         {
@@ -397,6 +396,9 @@ public class ActionManager : MonoBehaviour
         { 
             Foresight.CreateAction(5, Unittouse, OneTalkedTo);
         }
+
+        Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
+        Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
 
         Unittouse.GetComponent<UnitScript>().RestoreUses(1);
         GridScript.ResetAllSelections();

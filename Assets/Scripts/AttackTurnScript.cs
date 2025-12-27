@@ -1047,15 +1047,15 @@ public class AttackTurnScript : MonoBehaviour
 
                 bool defenderattacks = true;
 
-
-                if ((target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && CharAttacker.affiliation == "playable" && CharAttacker.currentHP > 0) || (CharAttacker.currentHP <= 0 && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP > 0))
+                if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
                 {
                     defenderattacks = false;
                 }
-                if ((CharAttacker.affiliation == "playable" && CharAttacker.currentHP <= 0) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0))
-                {
-                    defenderattacks = false;
-                }
+                //if ((target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && CharAttacker.affiliation == "playable" && CharAttacker.currentHP > 0) || (CharAttacker.currentHP <= 0 && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP > 0))
+                //{
+                //    defenderattacks = false;
+                //}
+                
                 if (ishealing)
                 {
                     defenderattacks = false;

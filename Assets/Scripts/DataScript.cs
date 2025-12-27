@@ -271,7 +271,7 @@ public class DataScript : MonoBehaviour
                 Zackmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 4, Level = 1 });
                 Zackmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = 1 });
 
-                UpdateCharacter(0, 2, 86, Zackequipedskills, Zackmasteries, "zack", true);
+                UpdateCharacter(0, 3, 0, Zackequipedskills, Zackmasteries, "zack", true);
 
                 // Lea
 
@@ -287,7 +287,7 @@ public class DataScript : MonoBehaviour
                 Leamasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 7, Level = 1 });
                 Leamasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
 
-                UpdateCharacter(1, 4, 25, Leaequipedskills, Leamasteries, "zack", true);
+                UpdateCharacter(1, 3, 50, Leaequipedskills, Leamasteries, "zack", true);
 
 
                 // Elwyn
@@ -304,7 +304,7 @@ public class DataScript : MonoBehaviour
                 Elwynmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
                 Elwynmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = 0 });
 
-                UpdateCharacter(2, 3, 80, Elwynequipedskills, Elwynmasteries, "zack", true);
+                UpdateCharacter(2, 3, 50, Elwynequipedskills, Elwynmasteries, "zack", true);
 
                 // Mir
 
@@ -340,7 +340,7 @@ public class DataScript : MonoBehaviour
                 Zackmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 4, Level = 1 });
                 Zackmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 2, Level = 1 });
 
-                UpdateCharacter(0, 4, 58, Zackequipedskills, Zackmasteries, "zack", true);
+                UpdateCharacter(0, 5, 0, Zackequipedskills, Zackmasteries, "zack", true);
 
                 // Lea
 
@@ -356,7 +356,7 @@ public class DataScript : MonoBehaviour
                 Leamasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 17, Level = 1 });
                 Leamasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
 
-                UpdateCharacter(1, 5, 7, Leaequipedskills, Leamasteries, "zack", true);
+                UpdateCharacter(1, 6, 7, Leaequipedskills, Leamasteries, "zack", true);
 
 
                 // Elwyn
@@ -373,7 +373,7 @@ public class DataScript : MonoBehaviour
                 Elwynmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
                 Elwynmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 2, Level = 0 });
 
-                UpdateCharacter(2, 4, 23, Elwynequipedskills, Elwynmasteries, "zack", true);
+                UpdateCharacter(2, 5, 50, Elwynequipedskills, Elwynmasteries, "zack", true);
 
                 // Sorak
 
@@ -442,7 +442,7 @@ public class DataScript : MonoBehaviour
                 Zackmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 4, Level = 1 });
                 Zackmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 2, Level = 1 });
 
-                UpdateCharacter(0, 6, 58, Zackequipedskills, Zackmasteries, "zack", true);
+                UpdateCharacter(0, 7, 58, Zackequipedskills, Zackmasteries, "zack", true);
 
                 // Lea
 
@@ -458,7 +458,7 @@ public class DataScript : MonoBehaviour
                 Leamasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 17, Level = 1 });
                 Leamasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 0, Level = -1 });
 
-                UpdateCharacter(1, 7, 7, Leaequipedskills, Leamasteries, "zack", true);
+                UpdateCharacter(1, 7, 37, Leaequipedskills, Leamasteries, "zack", true);
 
 
                 // Elwyn
@@ -475,7 +475,7 @@ public class DataScript : MonoBehaviour
                 Elwynmasteries.Add(new WeaponMastery() { weapontype = "shield", Exp = 0, Level = -1 });
                 Elwynmasteries.Add(new WeaponMastery() { weapontype = "staff", Exp = 2, Level = 0 });
 
-                UpdateCharacter(2, 6, 23, Elwynequipedskills, Elwynmasteries, "zack", true);
+                UpdateCharacter(2, 7, 23, Elwynequipedskills, Elwynmasteries, "zack", true);
 
                 // Sorak
 

@@ -167,7 +167,7 @@ public class GridSquareScript : MonoBehaviour
         {
             if (square.Mechanism != null && square.Mechanism.type == 2)
             {
-                // Subscribe to every lever�s event
+                // Subscribe to every levers event
                 square.Mechanism.OnActivationChange += CheckAllTriggers;
             }
         }
@@ -1025,6 +1025,41 @@ public class GridSquareScript : MonoBehaviour
             randomnumberlistcounter = 0;
         }
         return RandomNumberlist[randomnumberlistcounter];
+    }
+
+    public MechanismClass CreateMechanismCopy(GridSquareScript tilescripttouse = null)
+    {
+        GridSquareScript tiletouse = null;
+        if(tilescripttouse != null)
+        {
+            tiletouse = tilescripttouse;
+        }
+        else
+        {
+            tiletouse = this;
+        }
+
+
+        MechanismClass mechtouse = tiletouse.Mechanism;
+
+        MechanismClass mechanismClass = new MechanismClass();
+        mechanismClass.isactivated = mechtouse.isactivated;
+        mechanismClass.type = mechtouse.type;
+        mechanismClass.Triggers = mechtouse.Triggers;
+        mechanismClass.ActivatedGO = mechtouse.ActivatedGO;
+        mechanismClass.DeactivatedGO = mechtouse.DeactivatedGO;
+
+        foreach (var square in mechtouse.Triggers)
+        {
+            if (square.Mechanism != null && square.Mechanism.type == 2)
+            {
+                // Subscribe to every levers event
+                square.Mechanism.OnActivationChange += tiletouse.CheckAllTriggers;
+            }
+        }
+
+
+        return mechanismClass;
     }
 
 }

@@ -256,7 +256,37 @@
 - Kira : I don't know. It's always been there when I need him.
 - Zack : You're such a weirdo.
 - Kira : You're the weird one. At least I'm a human being.
-- Zack : Hey, come back! I'm human too! Kira!
+- Zack : Yeah, a haunted one.
+
+- 1 -> 2
+- Kira : Listen, Zack. This won't do.
+- Zack : What?
+- Kira : There can't be several commanders in our army! You give orders, I give orders, our guys are lost.
+- Zack : Hmmmm, let me take the wheel, then.
+- Kira : Hell no, let ME take the wheel.
+- Zack : This is going nowhere. How about this. On Mondays, Wednesday and Fridays I'm the boss and on Tuesdays, Thursdays and Saturdays you're the boss.
+- Kira : What about Sundays?
+- Zack : Do we work on Sundays?
+- Kira : Well, yeah, no rest for the wicked, right?
+- Zack : This is way too complicated.
+- Kira : How about we just keep doing what we're doing?
+- Zack : Great idea. After all, our people know who to turn to. I don't think their lost if we're both commanding our battalions.
+- Kira : Right. Our army is big enough for more than one commander.
+- Zack
+
+- 2 -> 3
+- Kira : Hey what's
+- Zack : What?
+- Kira : There can't be several commanders in our army! You give orders, I give orders, our guys are lost.
+- Zack : Hmmmm, let me take the wheel, then.
+- Kira : Hell no, let ME take the wheel.
+- Zack : This is going nowhere. How about this. On Mondays, Wednesday and Fridays I'm the boss and on Tuesdays, Thursdays and Saturdays you're the boss.
+- Kira : What about Sundays?
+- Zack : Do we work on Sundays?
+- Kira : Well, yeah, no rest for the wicked, right?
+- Zack : This is way too complicated.
+- Kira : How about we just keep doing what we're doing?
+- Zack : Great idea.
 
 
 [[Cross]]

@@ -351,11 +351,7 @@ public class ForesightScript : MonoBehaviour
                 mod.previousremainingsun = tileScript.RemainingSunTurns;
                 mod.type = tileScript.type;
                 mod.previousRandomIndex = tileScript.randomnumberlistcounter;
-                MechanismClass mechanismClass = new MechanismClass();
-                mechanismClass.isactivated = tileScript.Mechanism.isactivated;
-                mechanismClass.type = tileScript.Mechanism.type;
-                mechanismClass.Triggers = tileScript.Mechanism.Triggers;
-                mod.MechanismClass = mechanismClass;
+                mod.MechanismClass = tileScript.CreateMechanismCopy();
                 CurrentAction.ModifiedTiles.Add(mod);
             }
         }
