@@ -542,7 +542,7 @@ public class DataScript : MonoBehaviour
 
                 UpdateCharacter(6, 20, 7, Mirequipedskills, Mirmasteries, "zack", true);
 
-                
+
 
                 break;
 
@@ -759,9 +759,9 @@ public class DataScript : MonoBehaviour
         copy.level = charactertoCopy.level;
         copy.experience = charactertoCopy.experience;
         List<WeaponMastery> masteriescopy = new List<WeaponMastery>();
-        foreach(WeaponMastery mastery in charactertoCopy.Masteries)
+        foreach (WeaponMastery mastery in charactertoCopy.Masteries)
         {
-            masteriescopy.Add(new WeaponMastery() { Exp = mastery.Exp, Level = mastery.Level, weapontype = mastery.weapontype});
+            masteriescopy.Add(new WeaponMastery() { Exp = mastery.Exp, Level = mastery.Level, weapontype = mastery.weapontype });
         }
         copy.Masteries = masteriescopy;
         return copy;
@@ -809,7 +809,7 @@ public class DataScript : MonoBehaviour
                     equipmentList[i].equipmentmodel.localposition = Vector3.zero;
                 }
 
-                switch(equipmentList[i].type.ToLower())
+                switch (equipmentList[i].type.ToLower())
                 {
                     case ("sword"):
                         equipmentList[i].BaseCrit += 3 * equipmentList[i].Grade;
@@ -981,12 +981,12 @@ public class DataScript : MonoBehaviour
             }
         }
     }
-    
+
     public equipment GetWeaponFromID(int ID)
     {
-        foreach(equipment equipment in equipmentList)
+        foreach (equipment equipment in equipmentList)
         {
-            if(equipment.ID == ID)
+            if (equipment.ID == ID)
             {
                 return equipment;
             }
@@ -1034,7 +1034,7 @@ public class DataScript : MonoBehaviour
         TempGO.GetComponent<UnitScript>().UnitCharacteristics = Character;
         foreach (WeaponMastery mastery in Character.Masteries)
         {
-            TempGO.GetComponent<UnitScript>().GetNewWeaponFromMastery(mastery,Character);
+            TempGO.GetComponent<UnitScript>().GetNewWeaponFromMastery(mastery, Character);
         }
         //UpdateEquipmentID(Character);
         List<int> equipmentListIDs = Character.equipmentsIDs;
