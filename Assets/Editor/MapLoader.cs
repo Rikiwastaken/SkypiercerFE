@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.Collections.Generic;
 using System;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -13,7 +14,9 @@ public class MapLoader : EditorWindow
     private Texture2D ActivationMap;
     private Texture2D MechanismMap;
     private Texture2D RainmMap;
+    private Texture2D UnitMap;
     private Transform GridObject;
+    private MapInitializer MapInitializer;
 
     [Serializable]
     public class AllColors
@@ -39,6 +42,8 @@ public class MapLoader : EditorWindow
         public Color FogColor;
         public Color MedicinalWaterColor;
         public Color DesertColor;
+        public Color UnitColor;
+        public Color FinishTileColor;
     }
 
     private AllColors colors;
@@ -72,7 +77,7 @@ public class MapLoader : EditorWindow
         EditorGUILayout.Space();
 
         // Allow manual prefab assignment
-        Tileprefab = (GameObject)EditorGUILayout.ObjectField("Tile Prefab", Tileprefab, typeof(GameObject), false);
+        MapInitializer = (MapInitializer)EditorGUILayout.ObjectField("Map Initialiszer Script", MapInitializer, typeof(MapInitializer), true);
 
         EditorGUILayout.Space();
 
@@ -95,11 +100,15 @@ public class MapLoader : EditorWindow
         // Allow manual prefab assignment
         RainmMap = (Texture2D)EditorGUILayout.ObjectField("Rain Map Image", RainmMap, typeof(Texture2D), false);
 
+        // Allow manual prefab assignment
+        UnitMap = (Texture2D)EditorGUILayout.ObjectField("Unit Map Image", UnitMap, typeof(Texture2D), false);
+
 
         if (GUILayout.Button("Create Map"))
         {
             if(ObstacleMap!=null)
             {
+                FindGridSquareScriptPrefab();
                 LoadMap();
             }
             else
@@ -121,7 +130,16 @@ public class MapLoader : EditorWindow
     private void RefreshTarget()
     {
         if (GridObject == null)
+        {
             GridObject = GameObject.Find("Grid").transform;
+        }
+
+        if (MapInitializer == null)
+        {
+            MapInitializer = FindAnyObjectByType<MapInitializer>();
+        }
+
+        MapInitializer.playablepos = new List<Vector2>();
 
         if (Tileprefab == null)
         {
@@ -182,6 +200,10 @@ public class MapLoader : EditorWindow
                 if(newtile.GetComponent<GridSquareScript>().isobstacle)
                 {
                     tilename = "wall";
+                }
+                else if (newtile.GetComponent<GridSquareScript>().isfinishtile)
+                {
+                    tilename = "Finish";
                 }
                 else if (newtile.GetComponent<GridSquareScript>().isstairs)
                 {
@@ -253,6 +275,34 @@ public class MapLoader : EditorWindow
         {
             Tile.GetComponent<GridSquareScript>().isobstacle = false;
         }
+    }
+
+    private void ManageUnitsAndFinish(GameObject Tile, int x, int y)
+    {
+        if (x == 0)
+        {
+            return;
+        }
+        Color pixelColor = UnitMap.GetPixel(x, y);
+
+        if (pixelColor.Equals(colors.UnitColor))
+        {
+            MapInitializer.playablepos.Add(new Vector2(x, y));
+        }
+
+
+        if (pixelColor.Equals(colors.FinishTileColor))
+        {
+            Tile.GetComponent<GridSquareScript>().isfinishtile = true;
+        }
+        else
+        {
+            Tile.GetComponent<GridSquareScript>().isfinishtile = false;
+        }
+
+
+
+
     }
 
     private void ManageActivation(GameObject Tile, int x, int y)
@@ -516,7 +566,36 @@ public class MapLoader : EditorWindow
             NewColor.MedicinalWaterColor = MechanismMap.GetPixel(0, 10);
         }
 
+        if(UnitMap=null)
+        {
+            NewColor.UnitColor = UnitMap.GetPixel(0, 0);
+            NewColor.FinishTileColor = UnitMap.GetPixel(0, 1);
+        }
+
         colors = NewColor; 
+    }
+
+    private void FindGridSquareScriptPrefab()
+    {
+        Tileprefab = null;
+
+        // Search all prefabs in project
+        string[] guids = AssetDatabase.FindAssets("t:Prefab");
+        foreach (string guid in guids)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (prefab != null)
+            {
+                // Include inactive children
+                GridSquareScript[] tmsArray = prefab.GetComponentsInChildren<GridSquareScript>(true);
+                if (tmsArray.Length > 0)
+                {
+                    Tileprefab = prefab;
+                    break;
+                }
+            }
+        }
     }
 }
 #endif

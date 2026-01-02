@@ -123,6 +123,8 @@ public class GridSquareScript : MonoBehaviour
     public List<int> RandomNumberlist;
     public int randomnumberlistcounter;
 
+    public bool isfinishtile;
+
     void Awake()
     {
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();

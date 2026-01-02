@@ -51,7 +51,7 @@ public class MapEventEditorWindow : EditorWindow
         "2 : Get Playable Units",
         "3 : Get Enemy Units",
         "4 : Get Other Units",
-        "5 : (unused)",
+        "5 : Get Finish Tiles",
         "6 : (unused)"
     };
 

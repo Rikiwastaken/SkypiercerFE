@@ -47,7 +47,7 @@ public class MapEventManager : MonoBehaviour
          * 2 : Get Playable Units
          * 3 : Get Enemy Units
          * 4 : Get Other Units
-         * 5 : 
+         * 5 : Get Finish Tiles
          * 6 : 
          */
         public bool triggered;
@@ -362,7 +362,17 @@ public class MapEventManager : MonoBehaviour
                         e.UnitList = turnManger.otherunits;
                         break;
                     case (5):
-
+                        e.TilesList = new List<GridSquareScript>();
+                        foreach (List<GameObject> line in GridScript.instance.Grid)
+                        {
+                            foreach (GameObject tile in line)
+                            {
+                                if(tile.GetComponent<GridSquareScript>().isfinishtile)
+                                {
+                                    e.TilesList.Add(tile.GetComponent<GridSquareScript>());
+                                }
+                            }
+                        }
                         break;
                     case (6):
 
