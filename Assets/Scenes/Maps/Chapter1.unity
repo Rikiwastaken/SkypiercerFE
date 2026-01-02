@@ -649,7 +649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38985,7 +38985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[7].startpos.y
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[8].startpos.x
@@ -39297,7 +39297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[0].Skills.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[0].monsterStats.size
@@ -39309,7 +39309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[1].Skills.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[1].monsterStats.size
@@ -39425,7 +39425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[0].Skills.Array.data[2]'
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[1].Skills.Array.data[0]'
@@ -39437,7 +39437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[1].Skills.Array.data[2]'
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[2].Skills.Array.data[0]'
@@ -58307,7 +58307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.g
-      value: 0.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_LocalPosition.x

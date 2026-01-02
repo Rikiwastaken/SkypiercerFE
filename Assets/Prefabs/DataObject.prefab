@@ -1211,12 +1211,12 @@ MonoBehaviour:
     ID: 11
   - name: SiegNPC
     BaseStats:
-      HP: 18
+      HP: 16
       Strength: 3
       Psyche: 9
-      Defense: 6
+      Defense: 5
       Resistance: 4
-      Speed: 10
+      Speed: 9
       Dexterity: 8
     StatGrowth:
       HPGrowth: 0

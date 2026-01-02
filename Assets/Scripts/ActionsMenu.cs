@@ -491,15 +491,15 @@ public class ActionsMenu : MonoBehaviour
         bool newfrapperenmelee = true;
         if (targetcharacter.telekinesisactivated)
         {
-            // if (weapon.type.ToLower() == "bow")
+            // if (newweapon.type.ToLower() == "bow")
             // {
-            //     rangebonus = 2;
+            //     newrangebonus = 2;
             // }
             // else
             // {
-            //     rangebonus = 1;
+            //     newrangebonus = 1;
             // }
-            rangebonus = 1;
+            newrangebonus = 1;
             if (target.GetComponent<UnitScript>().GetSkill(33))
             {
                 newrangebonus += 1;

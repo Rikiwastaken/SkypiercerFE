@@ -1939,7 +1939,7 @@ MonoBehaviour:
   - name: Blades (2/2)
     description: "<size=25><sprite=3></size> Bows are the only physical blade by
       the same maximum range as a telekinesis attack (2 tiles). When used with telekinesis,
-      they can hit a target up to 4 tiles away. However, it cannot attack in melee
+      they can hit a target up to 3 tiles away. However, it cannot attack in melee
       range (1 tile).\n  Growth modification : +10% str, +10% dex, -10% def\n  \n<size=25><sprite=4></size>
       Scythes deal bonus damage to each enemy adjacent to the initial target equal
       to 25% of the damage they would have taken had they been attacked directly.\n 
