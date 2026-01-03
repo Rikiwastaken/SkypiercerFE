@@ -79,7 +79,13 @@ public class ItemsScript : MonoBehaviour
                                 break;
                         }
 
-                        statstext.text = equ.Name + "\nDmg : " + equ.BaseDamage + "\nHit : " + equ.BaseHit + " %\nCrit : " + equ.BaseCrit + " %\nRange : " + equ.Range + "\nType: " + equ.type + "\nGrade: " + grade + " \nUses : " + equ.Currentuses + " / " + equ.Maxuses;
+                        string modifer = equ.Modifier;
+                        if (modifer==null || modifer=="")
+                        {
+                            modifer = "None";
+                        }
+
+                        statstext.text = equ.Name + "\nDmg : " + equ.BaseDamage + "\nHit : " + equ.BaseHit + " %\nCrit : " + equ.BaseCrit + " %\nRange : " + equ.Range + "\nType: " + equ.type + "\nGrade: " + grade +"\nModifier : "+ modifer + " \nUses : " + equ.Currentuses + " / " + equ.Maxuses;
                         statstext.transform.parent.gameObject.SetActive(true);
                     }
                     else
@@ -177,7 +183,39 @@ public class ItemsScript : MonoBehaviour
                     }
                     else
                     {
-                        buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = target.equipments[i].Name + " " + target.equipments[i].Currentuses + "/" + target.equipments[i].Maxuses;
+
+                        int spriteID = 0;
+                        switch(target.equipments[i].type.ToLower())
+                        {
+                            default:
+                                spriteID = 5;
+                                break;
+                            case ("sword"):
+                                spriteID = 0;
+                                break;
+                            case ("spear"):
+                                spriteID = 1;
+                                break;
+                            case ("greatsword"):
+                                spriteID = 2;
+                                break;
+                            case ("bow"):
+                                spriteID = 3;
+                                break;
+                            case ("scythe"):
+                                spriteID = 4;
+                                break;
+                            case ("shield"):
+                                spriteID = 6;
+                                break;
+                            case ("staff"):
+                                spriteID = 7;
+                                break;
+                            
+
+                        }
+
+                        buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = target.equipments[i].Name + " <sprite=" + spriteID + "> " + target.equipments[i].Currentuses + "/" + target.equipments[i].Maxuses;
                     }
                 }
                 else

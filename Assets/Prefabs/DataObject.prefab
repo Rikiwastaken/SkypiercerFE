@@ -160,6 +160,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 1
     type: None
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 0
@@ -175,6 +176,7 @@ MonoBehaviour:
     BaseCrit: 6
     Range: 1
     type: Sword
+    Modifier: 
     Currentuses: 10
     Maxuses: 10
     ID: 1
@@ -190,6 +192,7 @@ MonoBehaviour:
     BaseCrit: 11
     Range: 1
     type: Sword
+    Modifier: 
     Currentuses: 8
     Maxuses: 8
     ID: 2
@@ -205,6 +208,7 @@ MonoBehaviour:
     BaseCrit: 16
     Range: 1
     type: Sword
+    Modifier: 
     Currentuses: 6
     Maxuses: 6
     ID: 3
@@ -220,6 +224,7 @@ MonoBehaviour:
     BaseCrit: 20
     Range: 1
     type: Sword
+    Modifier: 
     Currentuses: 5
     Maxuses: 5
     ID: 4
@@ -235,6 +240,7 @@ MonoBehaviour:
     BaseCrit: 3
     Range: 1
     type: Spear
+    Modifier: 
     Currentuses: 10
     Maxuses: 10
     ID: 5
@@ -250,6 +256,7 @@ MonoBehaviour:
     BaseCrit: 5
     Range: 1
     type: Spear
+    Modifier: 
     Currentuses: 8
     Maxuses: 8
     ID: 6
@@ -265,6 +272,7 @@ MonoBehaviour:
     BaseCrit: 7
     Range: 1
     type: Spear
+    Modifier: 
     Currentuses: 6
     Maxuses: 6
     ID: 7
@@ -280,6 +288,7 @@ MonoBehaviour:
     BaseCrit: 8
     Range: 1
     type: Spear
+    Modifier: 
     Currentuses: 5
     Maxuses: 5
     ID: 8
@@ -295,6 +304,7 @@ MonoBehaviour:
     BaseCrit: 3
     Range: 1
     type: Greatsword
+    Modifier: 
     Currentuses: 10
     Maxuses: 10
     ID: 9
@@ -310,6 +320,7 @@ MonoBehaviour:
     BaseCrit: 5
     Range: 1
     type: Greatsword
+    Modifier: 
     Currentuses: 8
     Maxuses: 8
     ID: 10
@@ -325,6 +336,7 @@ MonoBehaviour:
     BaseCrit: 7
     Range: 1
     type: Greatsword
+    Modifier: 
     Currentuses: 6
     Maxuses: 6
     ID: 11
@@ -340,6 +352,7 @@ MonoBehaviour:
     BaseCrit: 8
     Range: 1
     type: Greatsword
+    Modifier: 
     Currentuses: 5
     Maxuses: 5
     ID: 12
@@ -355,6 +368,7 @@ MonoBehaviour:
     BaseCrit: 3
     Range: 2
     type: Bow
+    Modifier: 
     Currentuses: 10
     Maxuses: 10
     ID: 13
@@ -370,6 +384,7 @@ MonoBehaviour:
     BaseCrit: 5
     Range: 2
     type: Bow
+    Modifier: 
     Currentuses: 8
     Maxuses: 8
     ID: 14
@@ -385,6 +400,7 @@ MonoBehaviour:
     BaseCrit: 7
     Range: 2
     type: Bow
+    Modifier: 
     Currentuses: 6
     Maxuses: 6
     ID: 15
@@ -400,6 +416,7 @@ MonoBehaviour:
     BaseCrit: 8
     Range: 2
     type: Bow
+    Modifier: 
     Currentuses: 5
     Maxuses: 5
     ID: 16
@@ -415,6 +432,7 @@ MonoBehaviour:
     BaseCrit: 3
     Range: 1
     type: Scythe
+    Modifier: 
     Currentuses: 10
     Maxuses: 10
     ID: 17
@@ -430,6 +448,7 @@ MonoBehaviour:
     BaseCrit: 5
     Range: 1
     type: Scythe
+    Modifier: 
     Currentuses: 8
     Maxuses: 8
     ID: 18
@@ -445,6 +464,7 @@ MonoBehaviour:
     BaseCrit: 7
     Range: 1
     type: Scythe
+    Modifier: 
     Currentuses: 6
     Maxuses: 6
     ID: 19
@@ -460,6 +480,7 @@ MonoBehaviour:
     BaseCrit: 8
     Range: 1
     type: Scythe
+    Modifier: 
     Currentuses: 5
     Maxuses: 5
     ID: 20
@@ -475,6 +496,7 @@ MonoBehaviour:
     BaseCrit: 3
     Range: 1
     type: Shield
+    Modifier: 
     Currentuses: 10
     Maxuses: 10
     ID: 21
@@ -490,6 +512,7 @@ MonoBehaviour:
     BaseCrit: 5
     Range: 1
     type: Shield
+    Modifier: 
     Currentuses: 8
     Maxuses: 8
     ID: 22
@@ -505,6 +528,7 @@ MonoBehaviour:
     BaseCrit: 7
     Range: 1
     type: Shield
+    Modifier: 
     Currentuses: 6
     Maxuses: 6
     ID: 23
@@ -520,6 +544,7 @@ MonoBehaviour:
     BaseCrit: 8
     Range: 1
     type: Shield
+    Modifier: 
     Currentuses: 5
     Maxuses: 5
     ID: 24
@@ -535,6 +560,7 @@ MonoBehaviour:
     BaseCrit: 3
     Range: 1
     type: Staff
+    Modifier: 
     Currentuses: 10
     Maxuses: 10
     ID: 25
@@ -550,6 +576,7 @@ MonoBehaviour:
     BaseCrit: 5
     Range: 1
     type: Staff
+    Modifier: 
     Currentuses: 8
     Maxuses: 8
     ID: 26
@@ -565,6 +592,7 @@ MonoBehaviour:
     BaseCrit: 7
     Range: 1
     type: Staff
+    Modifier: 
     Currentuses: 6
     Maxuses: 6
     ID: 27
@@ -580,6 +608,7 @@ MonoBehaviour:
     BaseCrit: 8
     Range: 1
     type: Staff
+    Modifier: 
     Currentuses: 5
     Maxuses: 5
     ID: 28
@@ -595,6 +624,7 @@ MonoBehaviour:
     BaseCrit: 3
     Range: 1
     type: Machine
+    Modifier: 
     Currentuses: 99
     Maxuses: 99
     ID: 29
@@ -610,6 +640,7 @@ MonoBehaviour:
     BaseCrit: 5
     Range: 1
     type: Machine
+    Modifier: 
     Currentuses: 99
     Maxuses: 99
     ID: 30
@@ -625,6 +656,7 @@ MonoBehaviour:
     BaseCrit: 7
     Range: 1
     type: Machine
+    Modifier: 
     Currentuses: 99
     Maxuses: 99
     ID: 31
@@ -640,6 +672,7 @@ MonoBehaviour:
     BaseCrit: 8
     Range: 1
     type: Machine
+    Modifier: 
     Currentuses: 99
     Maxuses: 99
     ID: 32
@@ -655,6 +688,7 @@ MonoBehaviour:
     BaseCrit: 3
     Range: 2
     type: Bow
+    Modifier: 
     Currentuses: 99
     Maxuses: 99
     ID: 33
@@ -670,6 +704,7 @@ MonoBehaviour:
     BaseCrit: 5
     Range: 2
     type: Bow
+    Modifier: 
     Currentuses: 99
     Maxuses: 99
     ID: 34
@@ -685,6 +720,7 @@ MonoBehaviour:
     BaseCrit: 7
     Range: 2
     type: Bow
+    Modifier: 
     Currentuses: 99
     Maxuses: 99
     ID: 35
@@ -700,6 +736,7 @@ MonoBehaviour:
     BaseCrit: 8
     Range: 2
     type: Bow
+    Modifier: 
     Currentuses: 99
     Maxuses: 99
     ID: 36
@@ -715,6 +752,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 37
@@ -730,6 +768,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 38
@@ -745,6 +784,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 39
@@ -760,6 +800,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 40
@@ -775,6 +816,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 41
@@ -790,6 +832,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 42
@@ -805,6 +848,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 43
@@ -820,6 +864,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 44
@@ -835,6 +880,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 45
@@ -850,6 +896,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 46
@@ -865,6 +912,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 47
@@ -880,6 +928,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 48
@@ -895,6 +944,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 0
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 49
@@ -911,6 +961,7 @@ MonoBehaviour:
     BaseCrit: 0
     Range: 1
     type: 
+    Modifier: 
     Currentuses: 0
     Maxuses: 0
     ID: 0
@@ -926,6 +977,7 @@ MonoBehaviour:
     BaseCrit: 3
     Range: 1
     type: 
+    Modifier: 
     Currentuses: 10
     Maxuses: 10
     ID: 0
@@ -941,6 +993,7 @@ MonoBehaviour:
     BaseCrit: 5
     Range: 1
     type: 
+    Modifier: 
     Currentuses: 8
     Maxuses: 8
     ID: 0
@@ -956,6 +1009,7 @@ MonoBehaviour:
     BaseCrit: 7
     Range: 1
     type: 
+    Modifier: 
     Currentuses: 6
     Maxuses: 6
     ID: 0
@@ -971,6 +1025,7 @@ MonoBehaviour:
     BaseCrit: 8
     Range: 1
     type: 
+    Modifier: 
     Currentuses: 5
     Maxuses: 5
     ID: 0
@@ -1905,24 +1960,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: 1
+      Modifier: Ranged
   - name: Lea
     ID: 1
     stats:
@@ -1998,24 +2060,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Elwyn
     ID: 2
     stats:
@@ -2091,24 +2160,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: 0
+      Modifier: 
   - name: Sorak
     ID: 3
     stats:
@@ -2184,24 +2260,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Lyv
     ID: 4
     stats:
@@ -2277,24 +2360,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: 1
+      Modifier: 
   - name: Sieg
     ID: 5
     stats:
@@ -2370,24 +2460,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Mir
     ID: 6
     stats:
@@ -2463,24 +2560,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Ruben
     ID: 7
     stats:
@@ -2556,24 +2660,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 4
       Level: 0
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Laura
     ID: 8
     stats:
@@ -2649,24 +2760,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Nolan
     ID: 9
     stats:
@@ -2742,24 +2860,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Leonardo
     ID: 10
     stats:
@@ -2835,24 +2960,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Edward
     ID: 11
     stats:
@@ -2928,24 +3060,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Xora
     ID: 12
     stats:
@@ -3021,24 +3160,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   BondsList:
   - ID: 0
     Name: Zack-Lea
@@ -3445,24 +3591,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: 1
+      Modifier: 
   - name: Lea
     ID: 1
     stats:
@@ -3537,24 +3690,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Elwyn
     ID: 2
     stats:
@@ -3629,24 +3789,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: 0
+      Modifier: 
   - name: Sorak
     ID: 3
     stats:
@@ -3721,24 +3888,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Lyv
     ID: 4
     stats:
@@ -3813,24 +3987,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: 1
+      Modifier: 
   - name: Sieg
     ID: 5
     stats:
@@ -3905,24 +4086,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Mir
     ID: 6
     stats:
@@ -3997,24 +4185,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Ruben
     ID: 7
     stats:
@@ -4089,24 +4284,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 4
       Level: 0
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: 1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: 0
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Laura
     ID: 8
     stats:
@@ -4181,24 +4383,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Nolan
     ID: 9
     stats:
@@ -4273,24 +4482,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Leonardo
     ID: 10
     stats:
@@ -4365,24 +4581,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Edward
     ID: 11
     stats:
@@ -4457,24 +4680,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   - name: Xora
     ID: 12
     stats:
@@ -4549,24 +4779,31 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: spear
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: greatsword
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: bow
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: scythe
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: shield
       Exp: 0
       Level: -1
+      Modifier: 
     - weapontype: staff
       Exp: 0
       Level: -1
+      Modifier: 
   DefaultInventory:
     inventoryItems:
     - type: 1

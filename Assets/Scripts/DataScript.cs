@@ -195,7 +195,16 @@ public class DataScript : MonoBehaviour
             if (character.ID == characterID)
             {
 
-
+                foreach(WeaponMastery newmastery in masteries)
+                {
+                    foreach(WeaponMastery basemastery in character.Masteries)
+                    {
+                        if(newmastery.weapontype==basemastery.weapontype)
+                        {
+                            newmastery.Modifier = basemastery.Modifier;
+                        }
+                    }
+                }
 
                 character.Masteries = masteries;
                 //UpdateEquipmentID(character);
@@ -1086,10 +1095,58 @@ public class DataScript : MonoBehaviour
 
                     }
                 }
+
+                foreach (WeaponMastery mastery in Character.Masteries)
+                {
+                    if(mastery.weapontype.ToLower()==equipmenttocopy.type.ToLower())
+                    {
+                        newequipment.Modifier= mastery.Modifier;
+                        break;
+                    }
+                }
+
+                CalculateModifierStatChanges(newequipment);
+
+                newequipment.Currentuses = newequipment.Maxuses;
             }
         }
         Character.equipments = newequipmentlist;
         DestroyImmediate(TempGO);
+    }
+
+    private void CalculateModifierStatChanges(equipment equipment)
+    {
+        if(equipment.Modifier==null || equipment.Modifier == "")
+        {
+            return;
+        }
+        switch(equipment.Modifier.ToLower())
+        {
+            case ("sharp"):
+                equipment.BaseHit -= 5 * equipment.Grade;
+                equipment.BaseCrit += 2 * equipment.BaseCrit;
+                break;
+            case ("handy"):
+                equipment.BaseHit += 5 * equipment.Grade;
+                equipment.BaseCrit -= 2 * equipment.BaseCrit;
+                break;
+            case ("raw"):
+                equipment.BaseDamage += 1 * equipment.Grade;
+                equipment.BaseCrit -= 2 * equipment.BaseCrit;
+                break;
+            case ("farsight"):
+                equipment.Range += 1;
+                equipment.BaseHit -= 20;
+                break;
+            case ("focused"):
+                equipment.BaseDamage *=2;
+                equipment.Maxuses /= 2;
+                break;
+            case ("ranged"):
+                equipment.BaseDamage /= 2;
+                equipment.Range += 3;
+                break;
+        }
     }
 
     int ManhattanDistance(Vector2 point1, Vector2 point2)

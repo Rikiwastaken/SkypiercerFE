@@ -48,6 +48,7 @@ public class UnitScript : MonoBehaviour
         public string weapontype;
         public int Exp;
         public int Level;
+        public string Modifier;
     }
 
     [Serializable]
@@ -118,6 +119,7 @@ public class UnitScript : MonoBehaviour
         public int BaseCrit;
         public int Range;
         public string type;
+        public string Modifier;
         public int Currentuses;
         public int Maxuses;
         public int ID;
