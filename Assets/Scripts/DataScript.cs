@@ -1092,7 +1092,64 @@ public class DataScript : MonoBehaviour
                         case "staff":
                             newequipment.Name = "Stino";
                             break;
+                    }
+                    switch (newequipment.Grade)
+                    {
+                        case 2:
+                            newequipment.Name += "+";
+                            break;
+                        case 3:
+                            newequipment.Name += "Ex";
+                            break;
+                        case 4:
+                            newequipment.Name += "Ult";
+                            break;
+                        case 5:
+                            newequipment.Name += "Final";
+                            break;
+                    }
+                }
 
+                if (Character.name == "Kira")
+                {
+                    if(newequipment.type.ToLower()== "sword")
+                    {
+                        newequipment.Name = "Reshine";
+                        switch (newequipment.Grade)
+                        {
+                            case 3:
+                                newequipment.Name += "II";
+                                break;
+                            case 4:
+                                newequipment.Name += "III";
+                                break;
+                            case 5:
+                                newequipment.Name += "IV";
+                                break;
+                        }
+                    }
+                }
+
+                if (Character.name == "Gale")
+                {
+                    if (newequipment.type.ToLower() == "greatsword")
+                    {
+                        newequipment.Name = "Abyssal";
+                        switch (newequipment.Grade)
+                        {
+                            case 2:
+                                newequipment.Name += "2";
+                                break;
+                            case 3:
+                                newequipment.Name += "3";
+                                break;
+                            case 4:
+                                newequipment.Name += "4";
+                                break;
+                            case 5:
+                                newequipment.Name += "5";
+                                break;
+                        }
                     }
                 }
 

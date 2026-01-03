@@ -431,7 +431,7 @@ public class EnemyStatsEditorWindow : EditorWindow
                     gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.cyan;
                     break;
                 case "fortification":
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.black;
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f);
                     break;
                 case "fog":
                     gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);

@@ -18,6 +18,8 @@ public class MapLoader : EditorWindow
     private Transform GridObject;
     private MapInitializer MapInitializer;
 
+    public List<Vector2> newplayablepos = new List<Vector2>();
+
     [Serializable]
     public class AllColors
     {
@@ -139,8 +141,6 @@ public class MapLoader : EditorWindow
             MapInitializer = FindAnyObjectByType<MapInitializer>();
         }
 
-        MapInitializer.playablepos = new List<Vector2>();
-
         if (Tileprefab == null)
         {
             // Load prefab from project if not in scene
@@ -190,6 +190,12 @@ public class MapLoader : EditorWindow
                 ManageElevation(newtile, x, y);
                 ManageMechanism(newtile, x, y);
                 ManageRain(newtile, x, y);
+                ManageUnitsAndFinish(newtile, x, y);
+
+                if(newplayablepos!=null && newplayablepos.Count>0)
+                {
+                    MapInitializer.playablepos = newplayablepos;
+                }
 
                 newtile.GetComponent<GridSquareScript>().activated = true;
                 newtile.transform.parent = GridObject;
@@ -279,7 +285,7 @@ public class MapLoader : EditorWindow
 
     private void ManageUnitsAndFinish(GameObject Tile, int x, int y)
     {
-        if (x == 0)
+        if (x == 0 || UnitMap==null)
         {
             return;
         }
@@ -287,7 +293,8 @@ public class MapLoader : EditorWindow
 
         if (pixelColor.Equals(colors.UnitColor))
         {
-            MapInitializer.playablepos.Add(new Vector2(x, y));
+            newplayablepos.Add(new Vector2(x, y));
+            
         }
 
 
@@ -566,7 +573,7 @@ public class MapLoader : EditorWindow
             NewColor.MedicinalWaterColor = MechanismMap.GetPixel(0, 10);
         }
 
-        if(UnitMap=null)
+        if(UnitMap!=null)
         {
             NewColor.UnitColor = UnitMap.GetPixel(0, 0);
             NewColor.FinishTileColor = UnitMap.GetPixel(0, 1);

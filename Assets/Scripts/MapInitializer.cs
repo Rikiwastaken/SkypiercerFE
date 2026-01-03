@@ -207,6 +207,18 @@ public class MapInitializer : MonoBehaviour
         {
             Character.affiliation = "enemy";
         }
+
+        if(Character.name.ToLower().Contains("kira"))
+        {
+            foreach(equipment equ in Character.equipments)
+            {
+                if(equ.type.ToLower()=="sword")
+                {
+                    equ.Name = "Reshine";
+                }
+            }
+        }
+
         newcharacter.GetComponent<RandomScript>().InitializeRandomValues();
     }
 

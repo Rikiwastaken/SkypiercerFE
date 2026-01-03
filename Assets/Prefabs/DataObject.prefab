@@ -746,21 +746,21 @@ MonoBehaviour:
       localposition: {x: -0.04, y: 0.065, z: 0}
       localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
-  - Name: 
-    BaseDamage: 0
-    BaseHit: 0
-    BaseCrit: 0
-    Range: 0
-    type: 
+  - Name: Reshine
+    BaseDamage: 8
+    BaseHit: 80
+    BaseCrit: 11
+    Range: 1
+    type: sword
     Modifier: 
-    Currentuses: 0
-    Maxuses: 0
+    Currentuses: 8
+    Maxuses: 8
     ID: 37
-    Grade: 0
+    Grade: 2
     equipmentmodel:
       Model: {fileID: 0}
       localposition: {x: 0, y: 0, z: 0}
-      localscale: {x: 0, y: 0, z: 0}
+      localscale: {x: 1, y: 1, z: 1}
       localrotation: {x: 0, y: 0, z: 0}
   - Name: 
     BaseDamage: 0
@@ -1340,6 +1340,44 @@ MonoBehaviour:
       DexterityGrowth: 50
     movements: 7
     ID: 15
+  - name: GustoNPC
+    BaseStats:
+      HP: 25
+      Strength: 6
+      Psyche: 1
+      Defense: 11
+      Resistance: 6
+      Speed: 3
+      Dexterity: 6
+    StatGrowth:
+      HPGrowth: 0
+      StrengthGrowth: 0
+      PsycheGrowth: 0
+      DefenseGrowth: 0
+      ResistanceGrowth: 0
+      SpeedGrowth: 0
+      DexterityGrowth: 0
+    movements: 5
+    ID: 16
+  - name: KiraNPC
+    BaseStats:
+      HP: 16
+      Strength: 2
+      Psyche: 12
+      Defense: 5
+      Resistance: 11
+      Speed: 9
+      Dexterity: 11
+    StatGrowth:
+      HPGrowth: 0
+      StrengthGrowth: 0
+      PsycheGrowth: 0
+      DefenseGrowth: 0
+      ResistanceGrowth: 0
+      SpeedGrowth: 0
+      DexterityGrowth: 0
+    movements: 6
+    ID: 17
   SkillList:
   - name: No Skill
     Descriptions: No skill
@@ -2685,16 +2723,16 @@ MonoBehaviour:
       Exp: 0
       Level: -1
       Modifier: 
-  - name: Laura
+  - name: Gusto
     ID: 8
     stats:
-      HP: 16
-      Strength: 3
-      Psyche: 8
-      Defense: 2
-      Resistance: 10
+      HP: 25
+      Strength: 6
+      Psyche: 1
+      Defense: 11
+      Resistance: 6
       Speed: 5
-      Dexterity: 3
+      Dexterity: 6
     AjustedStats:
       HP: 0
       Strength: 0
@@ -2703,18 +2741,18 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
-    level: 1
+    level: 8
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 50
-      StrengthGrowth: 20
-      PsycheGrowth: 70
-      DefenseGrowth: 20
-      ResistanceGrowth: 40
-      SpeedGrowth: 70
-      DexterityGrowth: 70
-    currentHP: 160
+      HPGrowth: 90
+      StrengthGrowth: 40
+      PsycheGrowth: 10
+      DefenseGrowth: 80
+      ResistanceGrowth: 30
+      SpeedGrowth: 30
+      DexterityGrowth: 40
+    currentHP: 25
     movements: 5
     position: {x: 4, y: 0}
     alreadyplayed: 0
@@ -2722,12 +2760,12 @@ MonoBehaviour:
     telekinesisactivated: 0
     equipmentsIDs: 19000000
     equipments: []
-    UnitSkill: 2
-    EquipedSkills: 030000001e00000033000000
+    UnitSkill: 9
+    EquipedSkills: 
     isboss: 0
     attacksfriends: 0
     playableStats:
-      MaxSkillpoints: 6
+      MaxSkillpoints: 13
       deployunit: 0
       unlocked: 0
       protagonist: 0
@@ -2771,7 +2809,7 @@ MonoBehaviour:
       Modifier: 
     - weapontype: bow
       Exp: 0
-      Level: -1
+      Level: 0
       Modifier: 
     - weapontype: scythe
       Exp: 0
@@ -2779,21 +2817,21 @@ MonoBehaviour:
       Modifier: 
     - weapontype: shield
       Exp: 0
-      Level: -1
-      Modifier: 
+      Level: 2
+      Modifier: spiked
     - weapontype: staff
       Exp: 0
-      Level: -1
-      Modifier: 
-  - name: Nolan
+      Level: 0
+      Modifier: focused
+  - name: Kira
     ID: 9
     stats:
-      HP: 29
-      Strength: 12
-      Psyche: 0
-      Defense: 9
-      Resistance: 3
-      Speed: 10
+      HP: 16
+      Strength: 2
+      Psyche: 12
+      Defense: 5
+      Resistance: 11
+      Speed: 9
       Dexterity: 11
     AjustedStats:
       HP: 0
@@ -2803,7 +2841,7 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
-    level: 9
+    level: 8
     experience: 0
     affiliation: playable
     growth:
@@ -2814,23 +2852,23 @@ MonoBehaviour:
       ResistanceGrowth: 40
       SpeedGrowth: 60
       DexterityGrowth: 70
-    currentHP: 290
+    currentHP: 16
     movements: 6
     position: {x: 6, y: 1}
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 09000000
+    equipmentsIDs: 
     equipments: []
-    UnitSkill: 37
+    UnitSkill: 72
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
     playableStats:
-      MaxSkillpoints: 14
+      MaxSkillpoints: 13
       deployunit: 0
       unlocked: 0
-      protagonist: 0
+      protagonist: 1
       battalion: 
       ID: 9
     enemyStats:
@@ -2859,8 +2897,8 @@ MonoBehaviour:
     Masteries:
     - weapontype: sword
       Exp: 0
-      Level: -1
-      Modifier: 
+      Level: 2
+      Modifier: Raw
     - weapontype: spear
       Exp: 0
       Level: -1
@@ -2875,11 +2913,11 @@ MonoBehaviour:
       Modifier: 
     - weapontype: scythe
       Exp: 0
-      Level: -1
-      Modifier: 
+      Level: 1
+      Modifier: Serrated
     - weapontype: shield
       Exp: 0
-      Level: -1
+      Level: 0
       Modifier: 
     - weapontype: staff
       Exp: 0
@@ -3990,7 +4028,7 @@ MonoBehaviour:
       Modifier: 
     - weapontype: spear
       Exp: 0
-      Level: 0
+      Level: -1
       Modifier: 
     - weapontype: greatsword
       Exp: 0
@@ -4309,16 +4347,16 @@ MonoBehaviour:
       Exp: 0
       Level: -1
       Modifier: 
-  - name: Laura
+  - name: Gusto
     ID: 8
     stats:
-      HP: 16
-      Strength: 3
-      Psyche: 8
-      Defense: 2
-      Resistance: 10
+      HP: 25
+      Strength: 6
+      Psyche: 1
+      Defense: 11
+      Resistance: 6
       Speed: 5
-      Dexterity: 3
+      Dexterity: 6
     AjustedStats:
       HP: 0
       Strength: 0
@@ -4327,17 +4365,17 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
-    level: 1
+    level: 8
     experience: 0
     affiliation: 
     growth:
-      HPGrowth: 50
-      StrengthGrowth: 20
-      PsycheGrowth: 70
-      DefenseGrowth: 20
-      ResistanceGrowth: 40
-      SpeedGrowth: 70
-      DexterityGrowth: 70
+      HPGrowth: 90
+      StrengthGrowth: 40
+      PsycheGrowth: 10
+      DefenseGrowth: 80
+      ResistanceGrowth: 30
+      SpeedGrowth: 30
+      DexterityGrowth: 40
     currentHP: 0
     movements: 5
     position: {x: 0, y: 0}
@@ -4346,12 +4384,12 @@ MonoBehaviour:
     telekinesisactivated: 0
     equipmentsIDs: 19000000
     equipments: []
-    UnitSkill: 2
-    EquipedSkills: 030000001e00000033000000
+    UnitSkill: 9
+    EquipedSkills: 
     isboss: 0
     attacksfriends: 0
     playableStats:
-      MaxSkillpoints: 6
+      MaxSkillpoints: 13
       deployunit: 0
       unlocked: 0
       protagonist: 0
@@ -4394,7 +4432,7 @@ MonoBehaviour:
       Modifier: 
     - weapontype: bow
       Exp: 0
-      Level: -1
+      Level: 0
       Modifier: 
     - weapontype: scythe
       Exp: 0
@@ -4402,21 +4440,21 @@ MonoBehaviour:
       Modifier: 
     - weapontype: shield
       Exp: 0
-      Level: -1
+      Level: 2
       Modifier: 
     - weapontype: staff
       Exp: 0
-      Level: -1
+      Level: 0
       Modifier: 
-  - name: Nolan
+  - name: Kira
     ID: 9
     stats:
-      HP: 29
-      Strength: 12
-      Psyche: 0
-      Defense: 9
-      Resistance: 3
-      Speed: 10
+      HP: 16
+      Strength: 2
+      Psyche: 12
+      Defense: 5
+      Resistance: 11
+      Speed: 9
       Dexterity: 11
     AjustedStats:
       HP: 0
@@ -4426,7 +4464,7 @@ MonoBehaviour:
       Resistance: 0
       Speed: 0
       Dexterity: 0
-    level: 9
+    level: 8
     experience: 0
     affiliation: 
     growth:
@@ -4443,17 +4481,17 @@ MonoBehaviour:
     alreadyplayed: 0
     alreadymoved: 0
     telekinesisactivated: 0
-    equipmentsIDs: 09000000
+    equipmentsIDs: 
     equipments: []
-    UnitSkill: 37
+    UnitSkill: 72
     EquipedSkills: 
     isboss: 0
     attacksfriends: 0
     playableStats:
-      MaxSkillpoints: 14
+      MaxSkillpoints: 13
       deployunit: 0
       unlocked: 0
-      protagonist: 0
+      protagonist: 1
       battalion: 
       ID: 9
     enemyStats:
@@ -4481,7 +4519,7 @@ MonoBehaviour:
     Masteries:
     - weapontype: sword
       Exp: 0
-      Level: -1
+      Level: 2
       Modifier: 
     - weapontype: spear
       Exp: 0
@@ -4497,11 +4535,11 @@ MonoBehaviour:
       Modifier: 
     - weapontype: scythe
       Exp: 0
-      Level: -1
+      Level: 1
       Modifier: 
     - weapontype: shield
       Exp: 0
-      Level: -1
+      Level: 0
       Modifier: 
     - weapontype: staff
       Exp: 0
@@ -5037,6 +5075,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 42e125a7c5eb2b9439638a8d5a4dc6cc, type: 3}
   - {fileID: 21300000, guid: a6917331ada75f148afaf32f0ca6664e, type: 3}
   - {fileID: 21300000, guid: 7684c7deda7da554da6f588e04e6a65a, type: 3}
+  - {fileID: 21300000, guid: 6cae66aee8b18724f838934245675acb, type: 3}
+  - {fileID: 21300000, guid: d27d3d46b9da79a4096541a3e8a97539, type: 3}
   bondincreaseperaction: 0
   maxdistanceforbondincrease: 0
   MasteryforLevel0: 5
