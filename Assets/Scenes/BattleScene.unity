@@ -2333,6 +2333,7 @@ MonoBehaviour:
       BaseCrit: 0
       Range: 0
       type: 
+      Modifier: 
       Currentuses: 0
       Maxuses: 0
       ID: 0
@@ -2494,6 +2495,7 @@ MonoBehaviour:
       BaseCrit: 0
       Range: 0
       type: 
+      Modifier: 
       Currentuses: 0
       Maxuses: 0
       ID: 0
@@ -2640,6 +2642,10 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0}
     ChapterInWhichToUse: 02000000
+  - Model: {fileID: 525896440682759472, guid: 5fa4e776701af9941be8b7e06cca0f8d, type: 3}
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    ChapterInWhichToUse: 03000000
 --- !u!4 &1449378730
 Transform:
   m_ObjectHideFlags: 0
