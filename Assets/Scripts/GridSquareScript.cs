@@ -809,6 +809,11 @@ public class GridSquareScript : MonoBehaviour
 
             transform.position = new Vector3(transform.position.x, elevation + walloffset, transform.position.z);
         }
+        else if (isstairs)
+        {
+
+            transform.position = new Vector3(transform.position.x, elevation + 0.5f, transform.position.z);
+        }
         else
         {
 

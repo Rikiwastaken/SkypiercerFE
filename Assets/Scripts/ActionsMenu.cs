@@ -2154,7 +2154,7 @@ public class ActionsMenu : MonoBehaviour
 
         float unitbasedamage = baseweapondamage + basestatdamage;
 
-        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield" && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "spiked")
+        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield" && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier!=null && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "spiked")
         {
             unitbasedamage += (charunit.AjustedStats.Defense + UnitSkillBonus.Defense) / 2f;
         }
