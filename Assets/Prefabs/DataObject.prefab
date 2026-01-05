@@ -5077,7 +5077,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7684c7deda7da554da6f588e04e6a65a, type: 3}
   - {fileID: 21300000, guid: 6cae66aee8b18724f838934245675acb, type: 3}
   - {fileID: 21300000, guid: d27d3d46b9da79a4096541a3e8a97539, type: 3}
-  bondincreaseperaction: 0
+  bondincreaseperaction: 1
   maxdistanceforbondincrease: 0
   MasteryforLevel0: 5
   MasteryforLevel1: 25
