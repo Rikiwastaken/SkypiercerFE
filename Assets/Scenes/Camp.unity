@@ -4456,6 +4456,221 @@ MonoBehaviour:
       Portrait: {fileID: 0}
       characterindex: 7
       ImageToShow: {fileID: 0}
+  - Chapter: 6
+    Dialogue:
+    - Charactername: Darius
+      text: I see... What a tragedy. First the village and then the recruits...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: c6ccd4774dc94844abc2f3db82cf4953, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Easy for you to say! If you hadn't sent them to their death then maybe
+        we could have saved the village!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Watch your mouth! He's our leader.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 9
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: "She is right, Zack. Darius isn\u2019t the one you should turn your anger
+        toward."
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Whatever.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: Darius
+      text: I am sorry, Zack, but that is how war is. The Archadians are trying to
+        annihilate us, and so is Caelum.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: c6ccd4774dc94844abc2f3db82cf4953, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: No matter how you slice it there will be no winners in this war unless
+        we stop them.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: Darius
+      text: Right. And for that we need troops.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: c6ccd4774dc94844abc2f3db82cf4953, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I didn't see you on the battlefield trying to defend your own town.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: Darius
+      text: That's right. Not everyone is a fighter, but those who can protect others
+        shouldn't hide away. That is why I was there and my daughter and my general
+        were outside.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: c6ccd4774dc94844abc2f3db82cf4953, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Anyway, about my demand, Darius. Did you arrange it?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: Darius
+      text: A ship... It is a prized possession in times of war, but you paid us
+        more than enough.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: c6ccd4774dc94844abc2f3db82cf4953, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: A ship?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: That's right. We'll need it to reach the Southern Continent.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: That's right. We'll need it to reach the Southern Continent.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: Darius
+      text: It is waiting for you at Seafront Village.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: c6ccd4774dc94844abc2f3db82cf4953, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Soooooo, can I go with them?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 9
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: What?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Does the lady want to come with us ?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: I've been stuck in the city for years. Please Dad, let me go with them.
+        At Mir's side, I would be even safer than here!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 9
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: It's not like you need any of us to protect you, seeing how you fought.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Right.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 9
+      ImageToShow: {fileID: 0}
+    - Charactername: Darius
+      text: Fine... You'll be Renais' envoy, then.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: c6ccd4774dc94844abc2f3db82cf4953, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Don't I get a say in this?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 0
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Looks like you just got demoted to underling! I'm the new boss!
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 9
+      ImageToShow: {fileID: 0}
+    - Charactername: Darius
+      text: Also, Sieg, can you go with them?
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: c6ccd4774dc94844abc2f3db82cf4953, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: But I just go back...
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: Darius
+      text: She'll need strong companions. I can't force you, but please consider
+        going with them.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: c6ccd4774dc94844abc2f3db82cf4953, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Who knows, we might be able to visit some ruins in our travels.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 6
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Fine, fine. I'm coming.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 5
+      ImageToShow: {fileID: 0}
+    - Charactername: Darius
+      text: Great. Gusto, you'll also be going with them.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 21300000, guid: c6ccd4774dc94844abc2f3db82cf4953, type: 3}
+      characterindex: -1
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Yes, Sir.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 8
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: "I feel a sense of d\xE9j\xE0 vu."
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 2
+      ImageToShow: {fileID: 0}
+    - Charactername: 
+      text: Tell me about it.
+      CameraDestination: {x: 0, y: 0, z: 0}
+      Portrait: {fileID: 0}
+      characterindex: 1
+      ImageToShow: {fileID: 0}
   SaveButtonList: {fileID: 1880538424}
   SittingCharacter: {fileID: 2061086367}
   Sitting2Character: {fileID: 833370848}

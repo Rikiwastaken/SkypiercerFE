@@ -53,7 +53,7 @@ public class MinimapScript : MonoBehaviour
         }
         if (updatedelay <= 0)
         {
-            updatedelay = (int)(0.1f / Time.deltaTime);
+            updatedelay = (int)(0.25f / Time.deltaTime);
             showposition += 1;
             if (showposition > 8)
             {

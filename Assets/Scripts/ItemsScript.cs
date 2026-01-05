@@ -80,12 +80,12 @@ public class ItemsScript : MonoBehaviour
                         }
 
                         string modifer = equ.Modifier;
-                        if (modifer==null || modifer=="")
+                        if (modifer == null || modifer == "" || modifer == "Basic")
                         {
-                            modifer = "None";
+                            modifer = "Basic";
                         }
 
-                        statstext.text = equ.Name + "\nDmg : " + equ.BaseDamage + "\nHit : " + equ.BaseHit + " %\nCrit : " + equ.BaseCrit + " %\nRange : " + equ.Range + "\nType: " + equ.type + "\nGrade: " + grade +"\nModifier : "+ modifer + " \nUses : " + equ.Currentuses + " / " + equ.Maxuses;
+                        statstext.text = equ.Name + "\nDmg : " + equ.BaseDamage + "\nHit : " + equ.BaseHit + " %\nCrit : " + equ.BaseCrit + " %\nRange : " + equ.Range + "\nType: " + equ.type + "\nGrade: " + grade + "\nModifier : " + modifer + " \nUses : " + equ.Currentuses + " / " + equ.Maxuses;
                         statstext.transform.parent.gameObject.SetActive(true);
                     }
                     else
@@ -185,7 +185,7 @@ public class ItemsScript : MonoBehaviour
                     {
 
                         int spriteID = 0;
-                        switch(target.equipments[i].type.ToLower())
+                        switch (target.equipments[i].type.ToLower())
                         {
                             default:
                                 spriteID = 5;
@@ -211,7 +211,7 @@ public class ItemsScript : MonoBehaviour
                             case ("staff"):
                                 spriteID = 7;
                                 break;
-                            
+
 
                         }
 

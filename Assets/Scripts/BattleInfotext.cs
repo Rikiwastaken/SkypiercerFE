@@ -316,7 +316,7 @@ public class BattleInfotext : MonoBehaviour
 
                 int BaseDamage = ActionsMenu.CalculateDamage(selectedunit);
 
-                stringtoshow += "\nBaseDmg: " + BaseDamage + "\nMvt: " + selectedunitCharacter.movements + "\n\n";
+                stringtoshow += "\nBaseDmg: " + BaseDamage + "\nMvt: " + (selectedunitCharacter.movements-1) + "\n\n";
 
 
                 if (selectedunitCharacter.telekinesisactivated)

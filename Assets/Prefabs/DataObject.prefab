@@ -1047,7 +1047,7 @@ MonoBehaviour:
       Dexterity: 4
     StatGrowth:
       HPGrowth: 80
-      StrengthGrowth: 40
+      StrengthGrowth: 50
       PsycheGrowth: 10
       DefenseGrowth: 40
       ResistanceGrowth: 30
@@ -1085,7 +1085,7 @@ MonoBehaviour:
       Dexterity: 4
     StatGrowth:
       HPGrowth: 60
-      StrengthGrowth: 50
+      StrengthGrowth: 60
       PsycheGrowth: 10
       DefenseGrowth: 30
       ResistanceGrowth: 40
@@ -1104,7 +1104,7 @@ MonoBehaviour:
       Dexterity: 3
     StatGrowth:
       HPGrowth: 80
-      StrengthGrowth: 50
+      StrengthGrowth: 60
       PsycheGrowth: 10
       DefenseGrowth: 40
       ResistanceGrowth: 30
@@ -1142,7 +1142,7 @@ MonoBehaviour:
       Dexterity: 4
     StatGrowth:
       HPGrowth: 60
-      StrengthGrowth: 40
+      StrengthGrowth: 50
       PsycheGrowth: 20
       DefenseGrowth: 40
       ResistanceGrowth: 40
@@ -1162,7 +1162,7 @@ MonoBehaviour:
     StatGrowth:
       HPGrowth: 50
       StrengthGrowth: 20
-      PsycheGrowth: 70
+      PsycheGrowth: 80
       DefenseGrowth: 30
       ResistanceGrowth: 50
       SpeedGrowth: 40
@@ -1180,7 +1180,7 @@ MonoBehaviour:
       Dexterity: 4
     StatGrowth:
       HPGrowth: 80
-      StrengthGrowth: 45
+      StrengthGrowth: 55
       PsycheGrowth: 0
       DefenseGrowth: 40
       ResistanceGrowth: 40
@@ -1199,7 +1199,7 @@ MonoBehaviour:
       Dexterity: 5
     StatGrowth:
       HPGrowth: 70
-      StrengthGrowth: 40
+      StrengthGrowth: 50
       PsycheGrowth: 0
       DefenseGrowth: 35
       ResistanceGrowth: 35
@@ -1294,7 +1294,7 @@ MonoBehaviour:
       Dexterity: 4
     StatGrowth:
       HPGrowth: 90
-      StrengthGrowth: 50
+      StrengthGrowth: 60
       PsycheGrowth: 0
       DefenseGrowth: 70
       ResistanceGrowth: 20
@@ -1313,8 +1313,8 @@ MonoBehaviour:
       Dexterity: 3
     StatGrowth:
       HPGrowth: 40
-      StrengthGrowth: 60
-      PsycheGrowth: 60
+      StrengthGrowth: 70
+      PsycheGrowth: 70
       DefenseGrowth: 30
       ResistanceGrowth: 30
       SpeedGrowth: 60
@@ -1332,7 +1332,7 @@ MonoBehaviour:
       Dexterity: 4
     StatGrowth:
       HPGrowth: 40
-      StrengthGrowth: 60
+      StrengthGrowth: 70
       PsycheGrowth: 20
       DefenseGrowth: 30
       ResistanceGrowth: 40
@@ -2022,7 +2022,7 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: 1
-      Modifier: Ranged
+      Modifier: 
   - name: Lea
     ID: 1
     stats:
@@ -2102,11 +2102,11 @@ MonoBehaviour:
     - weapontype: spear
       Exp: 0
       Level: 0
-      Modifier: 
+      Modifier: Handy
     - weapontype: greatsword
       Exp: 0
       Level: 0
-      Modifier: 
+      Modifier: Heavyweight
     - weapontype: bow
       Exp: 0
       Level: -1
@@ -2202,7 +2202,7 @@ MonoBehaviour:
     - weapontype: spear
       Exp: 0
       Level: 1
-      Modifier: 
+      Modifier: Precise
     - weapontype: greatsword
       Exp: 0
       Level: -1
@@ -2222,7 +2222,7 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: 0
-      Modifier: 
+      Modifier: Focused
   - name: Sorak
     ID: 3
     stats:
@@ -2298,7 +2298,7 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: 0
-      Modifier: 
+      Modifier: Raw
     - weapontype: spear
       Exp: 0
       Level: -1
@@ -2306,7 +2306,7 @@ MonoBehaviour:
     - weapontype: greatsword
       Exp: 0
       Level: 1
-      Modifier: 
+      Modifier: Lightweight
     - weapontype: bow
       Exp: 0
       Level: -1
@@ -2406,7 +2406,7 @@ MonoBehaviour:
     - weapontype: greatsword
       Exp: 0
       Level: 1
-      Modifier: 
+      Modifier: Lightweight
     - weapontype: bow
       Exp: 0
       Level: -1
@@ -2414,7 +2414,7 @@ MonoBehaviour:
     - weapontype: scythe
       Exp: 0
       Level: 0
-      Modifier: 
+      Modifier: Sharp
     - weapontype: shield
       Exp: 0
       Level: -1
@@ -2422,7 +2422,7 @@ MonoBehaviour:
     - weapontype: staff
       Exp: 0
       Level: 1
-      Modifier: 
+      Modifier: Ranged
   - name: Sieg
     ID: 5
     stats:
@@ -2498,11 +2498,11 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 0
       Level: 0
-      Modifier: 
+      Modifier: Quick
     - weapontype: spear
       Exp: 0
       Level: 0
-      Modifier: 
+      Modifier: Handy
     - weapontype: greatsword
       Exp: 0
       Level: -1
@@ -2698,7 +2698,7 @@ MonoBehaviour:
     - weapontype: sword
       Exp: 4
       Level: 0
-      Modifier: 
+      Modifier: Raw
     - weapontype: spear
       Exp: 0
       Level: -1
@@ -2710,7 +2710,7 @@ MonoBehaviour:
     - weapontype: bow
       Exp: 0
       Level: 1
-      Modifier: 
+      Modifier: Raw
     - weapontype: scythe
       Exp: 0
       Level: -1
@@ -2718,7 +2718,7 @@ MonoBehaviour:
     - weapontype: shield
       Exp: 0
       Level: 0
-      Modifier: 
+      Modifier: Raw
     - weapontype: staff
       Exp: 0
       Level: -1

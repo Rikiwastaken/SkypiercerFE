@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -972,8 +973,6 @@ public class UnitScript : MonoBehaviour
                 }
             }
             LevelupMasteryCheck(mastery, character);
-            DataScript.instance.GenerateEquipmentList(character);
-            //GetNewWeaponFromMastery(mastery);
         }
 
     }
@@ -1159,7 +1158,6 @@ public class UnitScript : MonoBehaviour
             {
                 int previouspos = -1;
                 previouspos = Chartouse.equipmentsIDs.IndexOf(oldweaponID);
-                Chartouse.equipmentsIDs.Remove(oldweaponID);
                 Chartouse.equipmentsIDs[previouspos] = newweaponID;
             }
             else
@@ -1167,6 +1165,57 @@ public class UnitScript : MonoBehaviour
                 Chartouse.equipmentsIDs.Add(newweaponID);
             }
         }
+        foreach(equipment equip in Chartouse.equipments)
+        {
+            if(equip==null || equip.type==null)
+            {
+                continue;
+            }
+            foreach(int ID in Chartouse.equipmentsIDs)
+            {
+                if (equip.type.ToLower() == DataScript.instance.equipmentList[ID].type.ToLower() && equip.ID != ID)
+                {
+                    Chartouse.equipments[Chartouse.equipments.IndexOf(equip)] = DataScript.instance.equipmentList[ID];
+                    return;
+                }
+            }
+        }
+        int IDtoAdd = -1;
+        foreach (int ID in Chartouse.equipmentsIDs)
+        {
+            bool IDnotinequipments = true;
+            foreach (equipment equip in Chartouse.equipments)
+            {
+                if (equip == null || equip.type == null)
+                {
+                    continue;
+                }
+                if (equip.type.ToLower() == DataScript.instance.equipmentList[ID].type.ToLower())
+                {
+                    IDnotinequipments = false;
+                    break;
+                }
+            }
+            if(IDnotinequipments)
+            {
+                IDtoAdd = ID;
+
+            }
+        }
+        if(IDtoAdd>0)
+        {
+            foreach (equipment equip in Chartouse.equipments)
+            {
+                if (equip == null || equip.type == null || equip.Name=="")
+                {
+                    Chartouse.equipments[Chartouse.equipments.IndexOf(equip)] =DataScript.instance.equipmentList[IDtoAdd];
+                    break;
+                }
+            }
+            
+        }
+        
+
     }
 
     public void GainCombatMastery()

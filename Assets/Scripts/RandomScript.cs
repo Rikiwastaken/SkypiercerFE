@@ -91,6 +91,10 @@ public class RandomScript : MonoBehaviour
 
     public int GetHitValue()
     {
+        if (hitvaluesindex >= HitValues.Count)
+        {
+            hitvaluesindex = 0;
+        }
         int value = HitValues[hitvaluesindex];
         hitvaluesindex++;
         return value;
@@ -98,6 +102,10 @@ public class RandomScript : MonoBehaviour
 
     public int GetCritValue()
     {
+        if (CritValuesindex >= CritValues.Count)
+        {
+            CritValuesindex = 0;
+        }
         int value = CritValues[CritValuesindex];
         CritValuesindex++;
         return value;
@@ -105,6 +113,10 @@ public class RandomScript : MonoBehaviour
 
     public int GetPersonalityValue()
     {
+        if(personalityvaluesindex>= personalityValues.Count)
+        {
+            personalityvaluesindex = 0;
+        }
         int value = personalityValues[personalityvaluesindex];
         personalityvaluesindex++;
         return value;
@@ -112,6 +124,10 @@ public class RandomScript : MonoBehaviour
 
     public RandomLevelValues GetLevelUpRandomValues()
     {
+        if (levelvaluesindex >= levelValues.Count)
+        {
+            levelvaluesindex = 0;
+        }
         RandomLevelValues randomLevelValues = levelValues[levelvaluesindex];
         levelvaluesindex++;
         return randomLevelValues;

@@ -1438,6 +1438,7 @@ public class ActionsMenu : MonoBehaviour
 
     public (int, int, int, int, List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
     {
+        Debug.Log(unit.GetComponent<UnitScript>().GetFirstWeapon().Name);
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         List<int> levelup = null;
@@ -1775,10 +1776,11 @@ public class ActionsMenu : MonoBehaviour
         //using a staff
         else
         {
+            Debug.Log(unit.GetComponent<UnitScript>().GetFirstWeapon().Name);
             bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38); //Spite
-
+            Debug.Log(unit.GetComponent<UnitScript>().GetFirstWeapon().Name);
             int unitdamage = (int)Mathf.Max(CalculateHealing(unit), chartarget.AjustedStats.HP - chartarget.currentHP);
-
+            Debug.Log(unit.GetComponent<UnitScript>().GetFirstWeapon().Name);
             int numberofhits = 1;
             int numberofcritials = 0;
 
@@ -1802,10 +1804,12 @@ public class ActionsMenu : MonoBehaviour
                 numberofhits = 0;
                 finaldamage = 0;
             }
+            Debug.Log(unit.GetComponent<UnitScript>().GetFirstWeapon().Name);
             if (charunit.currentHP > 0 && chartarget.affiliation == "playable" && charunit.affiliation == "playable")
             {
                 (exp, levelup) = AwardExp(unit, target, true);
             }
+            Debug.Log(unit.GetComponent<UnitScript>().GetFirstWeapon().Name);
             return (numberofhits, numberofcritials, finaldamage, exp, levelup);
         }
 
