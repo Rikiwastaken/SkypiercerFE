@@ -182,7 +182,8 @@ public class MinimapScript : MonoBehaviour
                     }
                     if (gridScript.attacktiles.Contains(tile) || gridScript.lockedattacktiles.Contains(tile))
                     {
-                        SetTileColor(i, j, new Color(245f / 255f, 176f / 255f, 66f / 255f)); //orange
+                        //SetTileColor(i, j, new Color(245f / 255f, 176f / 255f, 66f / 255f)); //orange
+                        SetTileColor(i, j, Color.red);
                     }
                     if (gridScript.healingtiles.Contains(tile) || gridScript.lockedhealingtiles.Contains(tile))
                     {
@@ -209,20 +210,24 @@ public class MinimapScript : MonoBehaviour
                     {
                         if (character.affiliation == "playable")
                         {
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.cyan);
+                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.blue);
+                            UnitTile(tile);
                         }
                         else if (character.affiliation == "enemy")
                         {
                             SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
+                            UnitTile(tile);
                         }
                         else if (character.affiliation == "other")
                         {
                             SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
+                            UnitTile(tile);
                         }
                         if (!tile.activated)
                         {
                             SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
                         }
+                        
                     }
 
                 }
@@ -302,6 +307,28 @@ public class MinimapScript : MonoBehaviour
 
             minimapTexture.Apply();
         }
+    }
+
+    private void UnitTile(GridSquareScript tile)
+    {
+
+        int selectedx = (int)tile.GridCoordinates.x;
+        int selectedy = (int)tile.GridCoordinates.y;
+
+        for (int i = 0; i < 8; i++)
+        {
+            minimapTexture.SetPixel(selectedx * 8 + i, selectedy * 8 , Color.black);
+            minimapTexture.SetPixel(selectedx * 8 + i, selectedy * 8+7, Color.black);
+        }
+        for (int i = 1; i < 7; i++)
+        {
+            minimapTexture.SetPixel(selectedx * 8 , selectedy * 8+i, Color.black);
+            minimapTexture.SetPixel(selectedx * 8 + 7, selectedy * 8 + i, Color.black);
+        }
+
+        
+        minimapTexture.Apply();
+        
     }
 
     private void manageselectionicon()
