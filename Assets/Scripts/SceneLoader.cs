@@ -1,7 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class SceneLoader : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -29,7 +29,7 @@ public class SceneLoader : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "LoadingScene")
         {
-            if(SceneToToad!="")
+            if (SceneToToad != "")
             {
                 framestoloading = 5;
                 Debug.Log("loading : " + SceneToToad);
@@ -43,12 +43,12 @@ public class SceneLoader : MonoBehaviour
                 newcolor.a = 1;
                 LoadingImage.color = newcolor;
                 loadingtext.gameObject.SetActive(true);
-                
+
             }
         }
         else
         {
-            if(framestoloading >5)
+            if (framestoloading > 5)
             {
                 framestoloading--;
             }
@@ -58,13 +58,13 @@ public class SceneLoader : MonoBehaviour
             }
         }
 
-        if(fondu)
+        if (fondu)
         {
             LoadingImage.gameObject.SetActive(false);
             Color newcolor = LoadingImage.color;
             newcolor.a -= Time.fixedDeltaTime;
             LoadingImage.color = newcolor;
-            if(LoadingImage.color.a <= 0)
+            if (LoadingImage.color.a <= 0)
             {
                 LoadingImage.gameObject.SetActive(false);
                 loadingtext.gameObject.SetActive(false);
@@ -72,33 +72,14 @@ public class SceneLoader : MonoBehaviour
             }
         }
     }
-
-    private void UnlockCharactersWhenLoading(int chapter)
-    {
-        switch(chapter)
-        {
-            case 4:
-                //Unlocking Ruben for Chapter4;
-                foreach(UnitScript.Character character in DataScript.instance.PlayableCharacterList)
-                {
-                    if(character.ID == 7)
-                    {
-                        character.playableStats.unlocked = true;
-                    }
-                }
-                break;
-        }
-        
-
-    }
     public void LoadScene(string sceneName)
     {
 
-        if(sceneName.ToLower().Contains("chapter"))
+        if (sceneName.ToLower().Contains("chapter"))
         {
             int chapternumber = int.Parse(sceneName.ToLower().Replace("chapter", ""));
 
-            UnlockCharactersWhenLoading(chapternumber);
+            DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
         }
         SceneToToad = sceneName;
         SceneManager.LoadScene("LoadingScene");

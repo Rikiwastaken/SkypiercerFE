@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static DataScript;
 using static UnitScript;
-using static UnityEngine.UI.CanvasScaler;
 
 public class DataScript : MonoBehaviour
 {
@@ -195,11 +192,11 @@ public class DataScript : MonoBehaviour
             if (character.ID == characterID)
             {
 
-                foreach(WeaponMastery newmastery in masteries)
+                foreach (WeaponMastery newmastery in masteries)
                 {
-                    foreach(WeaponMastery basemastery in character.Masteries)
+                    foreach (WeaponMastery basemastery in character.Masteries)
                     {
-                        if(newmastery.weapontype==basemastery.weapontype)
+                        if (newmastery.weapontype == basemastery.weapontype)
                         {
                             newmastery.Modifier = basemastery.Modifier;
                         }
@@ -1062,6 +1059,97 @@ public class DataScript : MonoBehaviour
         }
     }
 
+    public void CharacterUnlockingSafeguard(int chapter)
+    {
+        foreach (Character character in PlayableCharacterList)
+        {
+            switch (character.ID)
+            {
+                case 0: //Zack
+                    character.playableStats.unlocked = true;
+                    break;
+                case 1: //Lea
+                    character.playableStats.unlocked = true;
+                    break;
+                case 2: //Elwyn
+                    character.playableStats.unlocked = true;
+                    break;
+                case 3: //Sorak
+                    if (chapter >= 2)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    else
+                    {
+                        character.playableStats.unlocked = false;
+                    }
+                    break;
+                case 4: //Lyv
+                    if (chapter >= 2)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    else
+                    {
+                        character.playableStats.unlocked = false;
+                    }
+                    break;
+                case 5: // Sieg
+                    if (chapter >= 3)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    else
+                    {
+                        character.playableStats.unlocked = false;
+                    }
+                    break;
+                case 6: // Mir
+                    if (chapter >= 1 && chapter != 2)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    else
+                    {
+                        character.playableStats.unlocked = false;
+                    }
+                    break;
+                case 7: // Ruben
+                    if (chapter >= 4)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    else
+                    {
+                        character.playableStats.unlocked = false;
+                    }
+                    break;
+                case 8: // Gusto
+                    if (chapter >= 6)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    else
+                    {
+                        character.playableStats.unlocked = false;
+                    }
+                    break;
+                case 9: // Kira
+                    if (chapter >= 6)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    else
+                    {
+                        character.playableStats.unlocked = false;
+                    }
+                    break;
+
+
+            }
+        }
+    }
+
     public void SpreadBonds(GameObject Unit)
     {
         TurnManger turnManger = TurnManger.instance;
@@ -1264,7 +1352,7 @@ public class DataScript : MonoBehaviour
 
                 if (Character.name == "Kira")
                 {
-                    if(newequipment.type.ToLower()== "sword")
+                    if (newequipment.type.ToLower() == "sword")
                     {
                         newequipment.Name = "Reshine";
                         switch (newequipment.Grade)
@@ -1307,14 +1395,14 @@ public class DataScript : MonoBehaviour
 
                 foreach (WeaponMastery mastery in Character.Masteries)
                 {
-                    if(mastery.weapontype.ToLower()==equipmenttocopy.type.ToLower())
+                    if (mastery.weapontype.ToLower() == equipmenttocopy.type.ToLower())
                     {
-                        newequipment.Modifier= mastery.Modifier;
+                        newequipment.Modifier = mastery.Modifier;
                         break;
                     }
                 }
 
-                if(newequipment.Modifier==null || newequipment.Modifier == "")
+                if (newequipment.Modifier == null || newequipment.Modifier == "")
                 {
                     newequipment.Modifier = "Basic";
                 }
@@ -1330,11 +1418,11 @@ public class DataScript : MonoBehaviour
 
     private void CalculateModifierStatChanges(equipment equipment)
     {
-        if(equipment.Modifier==null || equipment.Modifier == "" || equipment.Modifier == "Basic")
+        if (equipment.Modifier == null || equipment.Modifier == "" || equipment.Modifier == "Basic")
         {
             return;
         }
-        switch(equipment.Modifier.ToLower())
+        switch (equipment.Modifier.ToLower())
         {
             case ("sharp"):
                 equipment.BaseHit -= 5 * equipment.Grade;
@@ -1353,7 +1441,7 @@ public class DataScript : MonoBehaviour
                 equipment.BaseHit -= 20;
                 break;
             case ("focused"):
-                equipment.BaseDamage *=2;
+                equipment.BaseDamage *= 2;
                 equipment.Maxuses /= 2;
                 break;
             case ("ranged"):
@@ -1391,12 +1479,12 @@ public class DataScript : MonoBehaviour
             return;
         }
 
-        foreach(Character character in PlayableCharacterList)
+        foreach (Character character in PlayableCharacterList)
         {
-            if(character.Masteries.Count <7)
+            if (character.Masteries.Count < 7)
             {
                 List<WeaponMastery> masteries = new List<WeaponMastery>();
-                WeaponMastery swordmastery = new WeaponMastery() {weapontype= "sword",Level=-1,Exp=0 };
+                WeaponMastery swordmastery = new WeaponMastery() { weapontype = "sword", Level = -1, Exp = 0 };
                 WeaponMastery spearmastery = new WeaponMastery() { weapontype = "spear", Level = -1, Exp = 0 };
                 WeaponMastery greatswordmastery = new WeaponMastery() { weapontype = "greatsword", Level = -1, Exp = 0 };
                 WeaponMastery bowmastery = new WeaponMastery() { weapontype = "bow", Level = -1, Exp = 0 };
