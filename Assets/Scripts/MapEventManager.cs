@@ -170,11 +170,11 @@ public class MapEventManager : MonoBehaviour
             eventinitialized = true;
             EventInitialization();
         }
-        if(ManualEventTrigger >=0)
+        if (ManualEventTrigger >= 0)
         {
-            foreach(EventCondition evnt in EventsToMonitor)
+            foreach (EventCondition evnt in EventsToMonitor)
             {
-                if(evnt.ID == ManualEventTrigger && !evnt.triggered)
+                if (evnt.ID == ManualEventTrigger && !evnt.triggered)
                 {
                     Debug.Log("triggering : " + evnt.eventname);
                     TriggerEvent(evnt, -1);
@@ -340,9 +340,9 @@ public class MapEventManager : MonoBehaviour
                         foreach (string name in e.NameUnitList)
                         {
                             Transform AllUnitGOsHolder = GameObject.Find("Characters").transform;
-                            if(AllUnitGOsHolder != null)
+                            if (AllUnitGOsHolder != null)
                             {
-                                foreach(Transform unitTransform in AllUnitGOsHolder)
+                                foreach (Transform unitTransform in AllUnitGOsHolder)
                                 {
                                     if (unitTransform.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == name.ToLower())
                                     {
@@ -367,7 +367,7 @@ public class MapEventManager : MonoBehaviour
                         {
                             foreach (GameObject tile in line)
                             {
-                                if(tile.GetComponent<GridSquareScript>().isfinishtile)
+                                if (tile.GetComponent<GridSquareScript>().isfinishtile)
                                 {
                                     e.TilesList.Add(tile.GetComponent<GridSquareScript>());
                                 }
@@ -386,7 +386,7 @@ public class MapEventManager : MonoBehaviour
 
     public void TriggerEventCheck(int beginningofTurn = -1)
     {
-        if(SceneManager.GetActiveScene().name=="BattleScene" || TextBubbleScript.indialogue)
+        if (SceneManager.GetActiveScene().name == "BattleScene" || TextBubbleScript.indialogue)
         {
             return;
         }
@@ -736,9 +736,9 @@ public class MapEventManager : MonoBehaviour
 
         DataScript DS = DataScript.instance;
 
-        if(DS!=null)
+        if (DS != null)
         {
-            foreach(SkillsToAdd skill in SkillsToAdd)
+            foreach (SkillsToAdd skill in SkillsToAdd)
             {
                 foreach (DataScript.InventoryItem inventoryItem in DS.PlayerInventory.inventoryItems)
                 {
@@ -749,7 +749,7 @@ public class MapEventManager : MonoBehaviour
                     continue;
                 }
             }
-            
+
         }
     }
 

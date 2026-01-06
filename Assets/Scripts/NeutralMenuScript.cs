@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using static UnitScript;
 
 public class NeutralMenuScript : MonoBehaviour
 {

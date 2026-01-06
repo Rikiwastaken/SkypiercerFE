@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnitScript;
@@ -312,12 +311,12 @@ public class GridScript : MonoBehaviour
 
         if (selection != null)
         {
-            if(selection.Mechanism!=null && selection.Mechanism.type!=0)
+            if (selection.Mechanism != null && selection.Mechanism.type != 0)
             {
-                switch(selection.Mechanism.type)
+                switch (selection.Mechanism.type)
                 {
                     case (1):
-                        if(selection.Mechanism.isactivated)
+                        if (selection.Mechanism.isactivated)
                         {
                             text += "Open Door\nNo effect";
                         }

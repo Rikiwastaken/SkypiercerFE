@@ -40162,10 +40162,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 126400787788112992, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 525896440682759472, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
       propertyPath: m_Name
       value: Chapter3Model3D
@@ -40208,46 +40204,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1669000319172344054, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2639236880885807099, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3552354659881006271, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4353802533626975505, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4353802533626975505, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_StaticShadowCaster
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436779322104835079, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6632802452613868446, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 6632802452613868446, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 6632802452613868446, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730836966305755930, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6958222578919390510, guid: 062107beca8a5ee46ab9a2a57e715c84, type: 3}
-      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

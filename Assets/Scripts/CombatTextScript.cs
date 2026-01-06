@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
-using static UnitScript;
 using UnityEngine.UI;
+using static UnitScript;
 public class CombatTextScript : MonoBehaviour
 {
 
@@ -29,16 +29,16 @@ public class CombatTextScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(cameraScript == null)
+        if (cameraScript == null)
         {
             cameraScript = FindAnyObjectByType<cameraScript>();
         }
 
-        
 
-        if (cameraScript.incombat && attacker!=null)
+
+        if (cameraScript.incombat && attacker != null)
         {
-            
+
             AttackerLifebarRemaining.fillAmount = (float)attacker.currentHP / (float)attacker.AjustedStats.HP;
             DefenderLifebarRemaining.fillAmount = (float)defender.currentHP / (float)defender.AjustedStats.HP;
 
@@ -54,7 +54,7 @@ public class CombatTextScript : MonoBehaviour
             }
             AttackerLifebarLost.fillAmount = newlost;
 
-           
+
 
             newlost = DefenderLifebarLost.fillAmount;
             if (DefenderLifebarRemaining.fillAmount > newlost)
@@ -63,7 +63,7 @@ public class CombatTextScript : MonoBehaviour
             }
             else
             {
-                
+
                 newlost -= fillspeed * Time.fixedDeltaTime;
             }
 
@@ -89,12 +89,12 @@ public class CombatTextScript : MonoBehaviour
         AttackerLifebarLost.fillAmount = (float)(attacker.currentHP / attacker.AjustedStats.HP);
         DefenderLifebarLost.fillAmount = (float)(defender.currentHP / defender.AjustedStats.HP);
 
-        string attackerText = attacker.name+"\n";
+        string attackerText = attacker.name + "\n";
         string defenderText = defender.name + "\n";
-        if (newattacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower()=="staff")
+        if (newattacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
             int healing = ActionsMenu.CalculateHealing(newattacker);
-            attackerText += "healing: " + healing+"  hit: 100%  crit: NA";
+            attackerText += "healing: " + healing + "  hit: 100%  crit: NA";
             defenderText += "dmg: NA  hit: NA  crit: NA";
         }
         else
@@ -107,9 +107,9 @@ public class CombatTextScript : MonoBehaviour
             int critrateattacker = ActionsMenu.CalculateCrit(newattacker, newdefender);
 
             attackerText += "dmg: " + damagedealtattacker;
-            if(doubler==newattacker)
+            if (doubler == newattacker)
             {
-                if(istriple)
+                if (istriple)
                 {
                     attackerText += "x3";
                 }
@@ -117,9 +117,9 @@ public class CombatTextScript : MonoBehaviour
                 {
                     attackerText += "x2";
                 }
-                    
+
             }
-            attackerText += "  hit: " + hitrateattacker + "%  crit: " + critrateattacker+"%";
+            attackerText += "  hit: " + hitrateattacker + "%  crit: " + critrateattacker + "%";
 
 
             int damagedealtDefender = ActionsMenu.CalculateDamage(newdefender, newattacker);
@@ -142,7 +142,7 @@ public class CombatTextScript : MonoBehaviour
             defenderText += "  hit: " + hitrateDefender + "%  crit: " + critrateDefender + "%";
 
         }
-        
+
 
 
         attackertext.text = attackerText;
@@ -185,6 +185,6 @@ public class CombatTextScript : MonoBehaviour
             }
             combattext.text += "\n" + newdefender.name + " lost " + finaldamage + " Health.";
         }
-            
+
     }
 }

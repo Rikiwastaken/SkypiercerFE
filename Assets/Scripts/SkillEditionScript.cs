@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -292,7 +291,7 @@ public class SkillEditionScript : MonoBehaviour
         InventorySkillList = new List<InventoryItem>();
         foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
         {
-            if (!InventorySkillList.Contains(item) &&  item.type == 1 && item.Quantity > 0)
+            if (!InventorySkillList.Contains(item) && item.type == 1 && item.Quantity > 0)
             {
                 InventorySkillList.Add(item);
             }
@@ -304,7 +303,7 @@ public class SkillEditionScript : MonoBehaviour
             {
                 foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                 {
-                    if (!InventorySkillList.Contains(item) &&  item.ID == playablechar.UnitSkill)
+                    if (!InventorySkillList.Contains(item) && item.ID == playablechar.UnitSkill)
                     {
                         InventorySkillList.Add(item);
                     }
@@ -313,14 +312,14 @@ public class SkillEditionScript : MonoBehaviour
                 {
                     foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                     {
-                        if (!InventorySkillList.Contains(item) && item.type == 1 && item.ID==EquipedSkillID)
+                        if (!InventorySkillList.Contains(item) && item.type == 1 && item.ID == EquipedSkillID)
                         {
                             InventorySkillList.Add(item);
                         }
                     }
                 }
             }
-            
+
         }
     }
 

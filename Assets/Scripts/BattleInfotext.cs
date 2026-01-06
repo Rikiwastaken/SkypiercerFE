@@ -316,7 +316,7 @@ public class BattleInfotext : MonoBehaviour
 
                 int BaseDamage = ActionsMenu.CalculateDamage(selectedunit);
 
-                stringtoshow += "\nBaseDmg: " + BaseDamage + "\nMvt: " + (selectedunitCharacter.movements-1) + "\n\n";
+                stringtoshow += "\nBaseDmg: " + BaseDamage + "\nMvt: " + (selectedunitCharacter.movements - 1) + "\n\n";
 
 
                 if (selectedunitCharacter.telekinesisactivated)
@@ -407,7 +407,7 @@ public class BattleInfotext : MonoBehaviour
         int barID = 0;
         for (int i = 0; i < masteries.Count; i++)
         {
-            if (MasteryExpBars==null || MasteryExpBars.Count<=i || MasteryExpBars[i]==null)
+            if (MasteryExpBars == null || MasteryExpBars.Count <= i || MasteryExpBars[i] == null)
             {
                 continue;
             }

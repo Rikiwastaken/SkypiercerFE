@@ -19,22 +19,22 @@ public class WeatherManager : MonoBehaviour
 
     public void UpdateRain()
     {
-        if(!rainymap)
+        if (!rainymap)
         {
             return;
         }
 
-        if(grid == null)
+        if (grid == null)
         {
             grid = gridScript.Grid;
         }
 
         for (int x = 0; x < grid.Count; x++)
         {
-            for(int y=0; y < grid[0].Count; y++)
+            for (int y = 0; y < grid[0].Count; y++)
             {
                 GridSquareScript Tile = grid[x][y].GetComponent<GridSquareScript>();
-                if(Tile.RemainingRainTurns > 0)
+                if (Tile.RemainingRainTurns > 0)
                 {
                     Tile.RemainingRainTurns--;
                 }
@@ -55,7 +55,7 @@ public class WeatherManager : MonoBehaviour
     {
         bool rainingTilenear = false;
 
-        if(Tile.GridCoordinates.x>0)
+        if (Tile.GridCoordinates.x > 0)
         {
             GridSquareScript newtile = grid[(int)Tile.GridCoordinates.x - 1][(int)Tile.GridCoordinates.y].GetComponent<GridSquareScript>();
             if (newtile.RemainingRainTurns > 0 && !newtile.justbecamerain)
@@ -71,7 +71,7 @@ public class WeatherManager : MonoBehaviour
                 rainingTilenear = true;
             }
         }
-        if (Tile.GridCoordinates.x <grid.Count-1)
+        if (Tile.GridCoordinates.x < grid.Count - 1)
         {
             GridSquareScript newtile = grid[(int)Tile.GridCoordinates.x + 1][(int)Tile.GridCoordinates.y].GetComponent<GridSquareScript>();
             if (newtile.RemainingRainTurns > 0 && !newtile.justbecamerain)
@@ -89,11 +89,11 @@ public class WeatherManager : MonoBehaviour
             }
         }
 
-        int randomvalue = Tile.GetRandomNumber() ;
+        int randomvalue = Tile.GetRandomNumber();
 
-        if(rainingTilenear)
+        if (rainingTilenear)
         {
-            if(randomvalue < 30)
+            if (randomvalue < 30)
             {
                 Tile.RemainingRainTurns = 3;
                 Tile.justbecamerain = true;
@@ -101,7 +101,7 @@ public class WeatherManager : MonoBehaviour
         }
         else
         {
-            if(randomvalue<15)
+            if (randomvalue < 15)
             {
                 Tile.RemainingRainTurns = 3;
                 Tile.justbecamerain = true;

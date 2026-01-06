@@ -1,9 +1,7 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -72,7 +70,7 @@ public class BondsScript : MonoBehaviour
     public Button BondButton;
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -81,11 +79,11 @@ public class BondsScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        foreach(BondsDialogueClass bonddialogue in AllbondsDialogue)
+        foreach (BondsDialogueClass bonddialogue in AllbondsDialogue)
         {
-            foreach(Bonds bond in DataScript.instance.BondsList)
+            foreach (Bonds bond in DataScript.instance.BondsList)
             {
-                if(bond.ID==bonddialogue.BondID)
+                if (bond.ID == bonddialogue.BondID)
                 {
                     bonddialogue.Bond = bond;
                 }
@@ -98,14 +96,14 @@ public class BondsScript : MonoBehaviour
     {
         if (inputmanager.canceljustpressed)
         {
-            if(bondsSubMenu.activeSelf)
+            if (bondsSubMenu.activeSelf)
             {
                 bondsSubMenu.SetActive(false);
-                EventSystem.current.SetSelectedGameObject(BondsMenu.transform.GetChild(0).gameObject); 
+                EventSystem.current.SetSelectedGameObject(BondsMenu.transform.GetChild(0).gameObject);
             }
 
         }
-        if(GetComponent<CampScript>().BaseMenu.gameObject.activeSelf)
+        if (GetComponent<CampScript>().BaseMenu.gameObject.activeSelf)
         {
             bool anybondcanincrease = false;
             foreach (Bonds bond in DataScript.instance.BondsList)
@@ -139,7 +137,7 @@ public class BondsScript : MonoBehaviour
         PertinentbondsDialogue = new List<BondsDialogueClass>();
         foreach (BondsDialogueClass bond in AllbondsDialogue)
         {
-            if(bond.Bond.Characters.Contains(Character.ID))
+            if (bond.Bond.Characters.Contains(Character.ID))
             {
 
                 bool skipcharacter = false;
@@ -153,7 +151,7 @@ public class BondsScript : MonoBehaviour
                     }
                 }
 
-                if(skipcharacter)
+                if (skipcharacter)
                 {
                     continue;
                 }
@@ -161,7 +159,7 @@ public class BondsScript : MonoBehaviour
                 PertinentbondsDialogue.Add(bond);
                 foreach (int ID in bond.Bond.Characters)
                 {
-                    if(ID != Character.ID)
+                    if (ID != Character.ID)
                     {
                         SubMenuCharactersID.Add(ID);
                         break;
@@ -171,25 +169,25 @@ public class BondsScript : MonoBehaviour
         }
 
 
-        for(int i = 0; i< Mathf.Min(bondsSubMenu.transform.childCount, SubMenuCharactersID.Count);i++)
+        for (int i = 0; i < Mathf.Min(bondsSubMenu.transform.childCount, SubMenuCharactersID.Count); i++)
         {
 
             int othercharacterID = SubMenuCharactersID[i];
 
             Character othercharacter = null;
 
-            
+
 
             foreach (Character character in DataScript.instance.PlayableCharacterList)
+            {
+                if (character.ID == othercharacterID)
                 {
-                    if (character.ID == othercharacterID)
-                    {
-                        othercharacter = character;
-                        break;
-                    }
+                    othercharacter = character;
+                    break;
                 }
+            }
 
-            bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = othercharacter.name + "\nBond Lvl "+PertinentbondsDialogue[i].Bond.BondLevel +" (Max "+ PertinentbondsDialogue[i].Bond.MaxLevel+")";
+            bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = othercharacter.name + "\nBond Lvl " + PertinentbondsDialogue[i].Bond.BondLevel + " (Max " + PertinentbondsDialogue[i].Bond.MaxLevel + ")";
 
             if (CheckIfBondCanIncrease(PertinentbondsDialogue[i].Bond))
             {
@@ -204,10 +202,10 @@ public class BondsScript : MonoBehaviour
                 colors.normalColor = Color.white;
                 bondsSubMenu.transform.GetChild(i).GetComponent<Button>().colors = colors;
                 bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-                switch(PertinentbondsDialogue[i].Bond.BondLevel)
+                switch (PertinentbondsDialogue[i].Bond.BondLevel)
                 {
                     case 0:
-                        bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text += " ("+ PertinentbondsDialogue[i].Bond .BondPoints+ "/10)";
+                        bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text += " (" + PertinentbondsDialogue[i].Bond.BondPoints + "/10)";
                         break;
                     case 1:
                         bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text += " (" + PertinentbondsDialogue[i].Bond.BondPoints + "/35)";
@@ -219,7 +217,7 @@ public class BondsScript : MonoBehaviour
                         bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text += " (Max)";
                         break;
                 }
-                
+
             }
         }
 
@@ -238,10 +236,10 @@ public class BondsScript : MonoBehaviour
         bool result = false;
 
 
-        switch(bond.BondLevel)
+        switch (bond.BondLevel)
         {
             case 0:
-                if(bond.BondPoints>=10)
+                if (bond.BondPoints >= 10)
                 {
                     result = true;
                 }
@@ -253,7 +251,7 @@ public class BondsScript : MonoBehaviour
                 }
                 break;
             case 2:
-                if (bond.BondPoints >= 85 && bond.MaxLevel>2)
+                if (bond.BondPoints >= 85 && bond.MaxLevel > 2)
                 {
                     result = true;
                 }
@@ -271,16 +269,16 @@ public class BondsScript : MonoBehaviour
     private bool CheckIfBondLevel4isAvailable(Bonds bond)
     {
 
-        if(bond.MaxLevel<=3)
+        if (bond.MaxLevel <= 3)
         {
             return false;
         }
 
-        foreach(Bonds otherbond in DataScript.instance.BondsList)
+        foreach (Bonds otherbond in DataScript.instance.BondsList)
         {
-            if(bond.ID!= otherbond.ID)
+            if (bond.ID != otherbond.ID)
             {
-                if ((otherbond.Characters.Contains(bond.Characters[0]) || otherbond.Characters.Contains(bond.Characters[1])) && otherbond.BondLevel>=4)
+                if ((otherbond.Characters.Contains(bond.Characters[0]) || otherbond.Characters.Contains(bond.Characters[1])) && otherbond.BondLevel >= 4)
                 {
                     return false;
                 }
@@ -291,10 +289,10 @@ public class BondsScript : MonoBehaviour
 
     public void OpenBondDialogue(int buttonID)
     {
-        if (PertinentbondsDialogue.Count> buttonID && CheckIfBondCanIncrease(PertinentbondsDialogue[buttonID].Bond))
+        if (PertinentbondsDialogue.Count > buttonID && CheckIfBondCanIncrease(PertinentbondsDialogue[buttonID].Bond))
         {
             PertinentbondsDialogue[buttonID].Bond.BondLevel++;
-            if(PertinentbondsDialogue[buttonID].Bond.BondLevel==1)
+            if (PertinentbondsDialogue[buttonID].Bond.BondLevel == 1)
             {
                 TextBubbleScript.Instance.InitializeDialogue(PertinentbondsDialogue[buttonID].dialogueLvl1);
                 if (bondsSubMenu.activeSelf)
@@ -334,7 +332,7 @@ public class BondsScript : MonoBehaviour
                     EventSystem.current.SetSelectedGameObject(BondsMenu.transform.GetChild(0).gameObject);
                 }
             }
-        }           
+        }
     }
 #if UNITY_EDITOR
 
@@ -354,18 +352,18 @@ public class BondsScript : MonoBehaviour
             return;
         }
 
-        foreach(BondsDialogueToLoadClass bonddialogue in wrapper.AllBondDialogueToLoadClass)
+        foreach (BondsDialogueToLoadClass bonddialogue in wrapper.AllBondDialogueToLoadClass)
         {
-            foreach(BondsDialogueClass bond in AllbondsDialogue)
+            foreach (BondsDialogueClass bond in AllbondsDialogue)
             {
-                if(bonddialogue.BondID == bond.BondID)
+                if (bonddialogue.BondID == bond.BondID)
                 {
-                    if(bonddialogue.dialogueLvl1.Count() > 0)
+                    if (bonddialogue.dialogueLvl1.Count() > 0)
                     {
-                        List< TextBubbleInfo > newdialogue1list = new List< TextBubbleInfo >();
+                        List<TextBubbleInfo> newdialogue1list = new List<TextBubbleInfo>();
                         for (int i = 0; i < bonddialogue.dialogueLvl1.Count; i++)
                         {
-                            newdialogue1list.Add(new TextBubbleInfo() { characterindex = bonddialogue.dialogueLvl1[i].CharacterID,text = bonddialogue.dialogueLvl1[i].text});
+                            newdialogue1list.Add(new TextBubbleInfo() { characterindex = bonddialogue.dialogueLvl1[i].CharacterID, text = bonddialogue.dialogueLvl1[i].text });
                         }
                         bond.dialogueLvl1 = newdialogue1list;
                     }

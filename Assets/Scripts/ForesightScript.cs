@@ -319,7 +319,7 @@ public class ForesightScript : MonoBehaviour
         {
             CurrentAction.ModifiedCharacters.Add(unit.GetComponent<UnitScript>().CreateCopy());
         }
-        if(User != null)
+        if (User != null)
         {
             CurrentAction.Unit = User.GetComponent<UnitScript>();
             CurrentAction.previousPosition = User.GetComponent<UnitScript>().previouspos;
@@ -329,7 +329,7 @@ public class ForesightScript : MonoBehaviour
             CurrentAction.AttackData.previousattackercritindex = User.GetComponent<RandomScript>().CritValuesindex;
             CurrentAction.AttackData.previousattackerlvlupindex = User.GetComponent<RandomScript>().levelvaluesindex;
         }
-        if(target != null)
+        if (target != null)
         {
             CurrentAction.AttackData.defender = target.GetComponent<UnitScript>();
             CurrentAction.AttackData.defendersurvivorstats = target.GetComponent<UnitScript>().SurvivorStacks;
@@ -339,8 +339,8 @@ public class ForesightScript : MonoBehaviour
         }
         CurrentAction.actiontype = type;
         CurrentAction.ModifiedTiles = new List<TileModification>();
-        
-        foreach(List<GameObject> tiles in GridScript.instance.Grid)
+
+        foreach (List<GameObject> tiles in GridScript.instance.Grid)
         {
             foreach (GameObject tile in tiles)
             {
@@ -358,7 +358,7 @@ public class ForesightScript : MonoBehaviour
 
     }
 
-     
+
 
     public void CreateAction(int type, GameObject User, int skilltoremove = -1)
     {
@@ -375,7 +375,7 @@ public class ForesightScript : MonoBehaviour
     public void CreateAction(int type, int beginningofturn, int skilltoremove = -1)
     {
 
-        CreateAction(type, null, null, skilltoremove,beginningofturn);
+        CreateAction(type, null, null, skilltoremove, beginningofturn);
     }
     private void RevertTo(int ID)
     {
@@ -417,7 +417,7 @@ public class ForesightScript : MonoBehaviour
                 foreach (GameObject GO in GridScript.instance.allunitGOs)
                 {
 
-                    if (GO!=null && GO.GetComponent<UnitScript>() != null && GO.GetComponent<UnitScript>().UnitCharacteristics!=null && GO.GetComponent<UnitScript>().UnitCharacteristics.ID == ActionToRevert.Unit.UnitCharacteristics.ID && ActionToRevert.previousPosition!=null && ActionToRevert.previousPosition[0] && ActionToRevert.previousPosition[0] != null)
+                    if (GO != null && GO.GetComponent<UnitScript>() != null && GO.GetComponent<UnitScript>().UnitCharacteristics != null && GO.GetComponent<UnitScript>().UnitCharacteristics.ID == ActionToRevert.Unit.UnitCharacteristics.ID && ActionToRevert.previousPosition != null && ActionToRevert.previousPosition[0] && ActionToRevert.previousPosition[0] != null)
                     {
                         GO.GetComponent<UnitScript>().MoveTo(ActionToRevert.previousPosition[0].GridCoordinates);
                         GO.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;
@@ -448,7 +448,7 @@ public class ForesightScript : MonoBehaviour
 
                     break;
                 case 3:
-                    
+
                     if (ActionToRevert.skilltoremovefrominventory != -1)
                     {
                         foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
@@ -468,7 +468,7 @@ public class ForesightScript : MonoBehaviour
                     }
                     break;
                 case 6:
-                    
+
                     if (ActionToRevert.skilltoremovefrominventory != -1)
                     {
                         foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)

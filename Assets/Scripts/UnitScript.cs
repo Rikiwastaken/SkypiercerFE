@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -1165,13 +1164,13 @@ public class UnitScript : MonoBehaviour
                 Chartouse.equipmentsIDs.Add(newweaponID);
             }
         }
-        foreach(equipment equip in Chartouse.equipments)
+        foreach (equipment equip in Chartouse.equipments)
         {
-            if(equip==null || equip.type==null)
+            if (equip == null || equip.type == null)
             {
                 continue;
             }
-            foreach(int ID in Chartouse.equipmentsIDs)
+            foreach (int ID in Chartouse.equipmentsIDs)
             {
                 if (equip.type.ToLower() == DataScript.instance.equipmentList[ID].type.ToLower() && equip.ID != ID)
                 {
@@ -1196,25 +1195,25 @@ public class UnitScript : MonoBehaviour
                     break;
                 }
             }
-            if(IDnotinequipments)
+            if (IDnotinequipments)
             {
                 IDtoAdd = ID;
 
             }
         }
-        if(IDtoAdd>0)
+        if (IDtoAdd > 0)
         {
             foreach (equipment equip in Chartouse.equipments)
             {
-                if (equip == null || equip.type == null || equip.Name=="")
+                if (equip == null || equip.type == null || equip.Name == "")
                 {
-                    Chartouse.equipments[Chartouse.equipments.IndexOf(equip)] =DataScript.instance.equipmentList[IDtoAdd];
+                    Chartouse.equipments[Chartouse.equipments.IndexOf(equip)] = DataScript.instance.equipmentList[IDtoAdd];
                     break;
                 }
             }
-            
+
         }
-        
+
 
     }
 

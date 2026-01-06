@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using static UnitScript;
-using static UnityEngine.UI.CanvasScaler;
 
 public class TurnManger : MonoBehaviour
 {

@@ -1,6 +1,6 @@
 #if UNITY_EDITOR
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -108,7 +108,7 @@ public class MapLoader : EditorWindow
 
         if (GUILayout.Button("Create Map"))
         {
-            if(ObstacleMap!=null)
+            if (ObstacleMap != null)
             {
                 FindGridSquareScriptPrefab();
                 LoadMap();
@@ -117,16 +117,16 @@ public class MapLoader : EditorWindow
             {
                 EditorGUILayout.HelpBox("Please add an obstacle map.", MessageType.Warning);
             }
-            
+
         }
-            
+
 
         if (GUILayout.Button("Delete Map"))
             DeletePreviousMap();
 
         EditorGUILayout.Space();
 
-      
+
     }
 
     private void RefreshTarget()
@@ -162,7 +162,7 @@ public class MapLoader : EditorWindow
 
         GridSquareScript lasttile = null;
         int number = 0;
-        if (GridObject.childCount>0)
+        if (GridObject.childCount > 0)
         {
             Debug.LogError("GridObject is not empty.");
             return;
@@ -174,7 +174,7 @@ public class MapLoader : EditorWindow
 
                 Color pixelColor = ObstacleMap.GetPixel(x, y);
 
-             
+
 
                 Vector3 position = new Vector3(x, 0, y);
 
@@ -192,18 +192,18 @@ public class MapLoader : EditorWindow
                 ManageRain(newtile, x, y);
                 ManageUnitsAndFinish(newtile, x, y);
 
-                if(newplayablepos!=null && newplayablepos.Count>0)
+                if (newplayablepos != null && newplayablepos.Count > 0)
                 {
                     MapInitializer.playablepos = newplayablepos;
                 }
 
                 newtile.GetComponent<GridSquareScript>().activated = true;
                 newtile.transform.parent = GridObject;
-                newtile.transform.localRotation = Quaternion.Euler(-90,0,0);
+                newtile.transform.localRotation = Quaternion.Euler(-90, 0, 0);
 
                 string tilename = "";
 
-                if(newtile.GetComponent<GridSquareScript>().isobstacle)
+                if (newtile.GetComponent<GridSquareScript>().isobstacle)
                 {
                     tilename = "wall";
                 }
@@ -215,7 +215,7 @@ public class MapLoader : EditorWindow
                 {
                     tilename = "stairs";
                 }
-                else if(newtile.GetComponent<GridSquareScript>().type!="")
+                else if (newtile.GetComponent<GridSquareScript>().type != "")
                 {
                     tilename = newtile.GetComponent<GridSquareScript>().type;
                 }
@@ -238,7 +238,7 @@ public class MapLoader : EditorWindow
 
                 tilename += "_" + number;
                 newtile.name = tilename;
-                
+
                 number++;
                 lasttile = newtile.GetComponent<GridSquareScript>();
             }
@@ -266,13 +266,13 @@ public class MapLoader : EditorWindow
     private void ManageObstable(GameObject Tile, int x, int y)
     {
         Color pixelColor = ObstacleMap.GetPixel(x, y);
-        if (x==0)
+        if (x == 0)
         {
-            pixelColor = ObstacleMap.GetPixel(x+1, y);
+            pixelColor = ObstacleMap.GetPixel(x + 1, y);
         }
 
-        
-        
+
+
         if (pixelColor.Equals(colors.wall))
         {
             Tile.GetComponent<GridSquareScript>().isobstacle = true;
@@ -285,7 +285,7 @@ public class MapLoader : EditorWindow
 
     private void ManageUnitsAndFinish(GameObject Tile, int x, int y)
     {
-        if (x == 0 || UnitMap==null)
+        if (x == 0 || UnitMap == null)
         {
             return;
         }
@@ -294,7 +294,7 @@ public class MapLoader : EditorWindow
         if (pixelColor.Equals(colors.UnitColor))
         {
             newplayablepos.Add(new Vector2(x, y));
-            
+
         }
 
 
@@ -314,13 +314,13 @@ public class MapLoader : EditorWindow
 
     private void ManageActivation(GameObject Tile, int x, int y)
     {
-        if(ActivationMap==null)
+        if (ActivationMap == null)
         {
             Tile.GetComponent<GridSquareScript>().activated = true;
             return;
         }
         Color pixelColor = ActivationMap.GetPixel(x, y);
-        
+
         if (pixelColor.Equals(colors.wall))
         {
             Tile.GetComponent<GridSquareScript>().activated = false;
@@ -333,9 +333,9 @@ public class MapLoader : EditorWindow
 
     private void ManageMechanism(GameObject Tile, int x, int y)
     {
-        if(MechanismMap==null)
+        if (MechanismMap == null)
         {
-            return ;
+            return;
         }
         if (x != 0)
         {
@@ -469,16 +469,16 @@ public class MapLoader : EditorWindow
     private void ManageElevation(GameObject Tile, int x, int y)
     {
 
-        if(ElevationMap==null)
+        if (ElevationMap == null)
         {
             Tile.GetComponent<GridSquareScript>().elevation = 0;
             return;
         }
 
         Color pixelColor = new Color();
-        if (x==0 && y<=8)
+        if (x == 0 && y <= 8)
         {
-            pixelColor = ElevationMap.GetPixel(x+1, y);
+            pixelColor = ElevationMap.GetPixel(x + 1, y);
         }
         else
         {
@@ -526,7 +526,7 @@ public class MapLoader : EditorWindow
         {
             Debug.LogError("Unrecognized color in Elevation Map at (" + x + "," + y + "): " + pixelColor);
         }
-        
+
     }
 
     private void InitializeColors()
@@ -535,7 +535,7 @@ public class MapLoader : EditorWindow
         AllColors NewColor = new AllColors();
 
         NewColor.wall = ObstacleMap.GetPixel(0, 0);
-        if(ElevationMap!=null)
+        if (ElevationMap != null)
         {
             NewColor.Elevation0 = ElevationMap.GetPixel(0, 4);
             NewColor.Elevation1 = ElevationMap.GetPixel(0, 5);
@@ -547,7 +547,7 @@ public class MapLoader : EditorWindow
             NewColor.ElevationNeg3 = ElevationMap.GetPixel(0, 1);
             NewColor.ElevationNeg4 = ElevationMap.GetPixel(0, 0);
         }
-        
+
         NewColor.LeverColor = Color.white;
         NewColor.DoorColor = Color.white;
         NewColor.StairsColor = Color.white;
@@ -559,7 +559,7 @@ public class MapLoader : EditorWindow
         NewColor.FogColor = Color.white;
         NewColor.MedicinalWaterColor = Color.white;
 
-        if (MechanismMap!=null)
+        if (MechanismMap != null)
         {
             NewColor.LeverColor = MechanismMap.GetPixel(0, 1);
             NewColor.DoorColor = MechanismMap.GetPixel(0, 2);
@@ -573,13 +573,13 @@ public class MapLoader : EditorWindow
             NewColor.MedicinalWaterColor = MechanismMap.GetPixel(0, 10);
         }
 
-        if(UnitMap!=null)
+        if (UnitMap != null)
         {
             NewColor.UnitColor = UnitMap.GetPixel(0, 0);
             NewColor.FinishTileColor = UnitMap.GetPixel(0, 1);
         }
 
-        colors = NewColor; 
+        colors = NewColor;
     }
 
     private void FindGridSquareScriptPrefab()

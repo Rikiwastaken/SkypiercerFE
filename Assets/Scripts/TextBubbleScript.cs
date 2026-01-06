@@ -56,7 +56,7 @@ public class TextBubbleScript : MonoBehaviour
 
         if (sentence != null)
             sentence.ForceMeshUpdate();
-        if(Instance==null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -86,18 +86,18 @@ public class TextBubbleScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Dialogue == null && !indialogue)
+        if (Dialogue == null && !indialogue)
         {
             return;
         }
         if (Dialogue == null && indialogue)
         {
             DeactivateBubble();
-            if(MapEventManager.instance!=null)
+            if (MapEventManager.instance != null)
             {
                 MapEventManager.instance.TriggerEventCheck();
             }
-            
+
         }
         else if (Dialogue.Count <= currentTextBubble)
         {
@@ -110,20 +110,20 @@ public class TextBubbleScript : MonoBehaviour
         }
         else
         {
-            if(ActionManager.instance!=null)
+            if (ActionManager.instance != null)
             {
                 ActionManager.instance.frameswherenotlock = 5;
             }
-            
+
 
             indialogue = true;
 
-            if(gridScript!=null)
+            if (gridScript != null)
             {
                 gridScript.lockselection = false;
             }
-            
-            if(cameraScript!=null)
+
+            if (cameraScript != null)
             {
                 if (Dialogue[currentTextBubble].CameraDestination != Vector3.zero)
                 {
@@ -134,7 +134,7 @@ public class TextBubbleScript : MonoBehaviour
                     cameraScript.Destination = GetCharacterCoordinates();
                 }
             }
-            
+
 
 
             if (isPrinting && charIndex < texttodisplay.Length)
@@ -181,25 +181,25 @@ public class TextBubbleScript : MonoBehaviour
         {
             ActivateBubble();
 
-            
+
 
 
             var info = Dialogue[currentTextBubble];
 
 
-            if(info.ImageToShow != null)
+            if (info.ImageToShow != null)
             {
                 Imagetoshow.color = Color.white;
                 Imagetoshow.sprite = info.ImageToShow;
             }
-            else if(Imagetoshow.color != Color.clear)
+            else if (Imagetoshow.color != Color.clear)
             {
                 Imagetoshow.color = Color.clear;
             }
 
             Character character = GetCharacter();
 
-            if (character!=null)
+            if (character != null)
             {
                 charactername.text = character.name;
                 characterportrait.sprite = DataScript.instance.DialogueSpriteList[character.ID];
@@ -212,10 +212,10 @@ public class TextBubbleScript : MonoBehaviour
                 }
                 charactername.text = info.Charactername;
             }
-                
+
 
             texttodisplay = info.text;
-            
+
 
             sentence.textWrappingMode = TextWrappingModes.NoWrap; // Temporarily disable wrapping
             sentence.text = texttodisplay;
@@ -249,16 +249,16 @@ public class TextBubbleScript : MonoBehaviour
         Dialogue = dialogue;
         indialogue = true;
         GoToNextPage();
-        if(gridScript != null)
+        if (gridScript != null)
         {
             gridScript.ShowMovement();
         }
-        
+
     }
 
     private Character GetCharacter()
     {
-        if(indialogue)
+        if (indialogue)
         {
             if (currentTextBubble < Dialogue.Count)
             {
@@ -276,13 +276,13 @@ public class TextBubbleScript : MonoBehaviour
             }
         }
         return null;
-        
+
     }
 
     private Vector2 GetCharacterCoordinates()
     {
         Character character = GetCharacter();
-        if(character != null)
+        if (character != null)
         {
             foreach (Character otherchar in gridScript.allunits)
             {
@@ -292,7 +292,7 @@ public class TextBubbleScript : MonoBehaviour
                 }
             }
         }
-        
+
         return Vector2.zero;
     }
 

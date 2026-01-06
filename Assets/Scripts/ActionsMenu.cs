@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -2013,10 +2012,10 @@ public class ActionsMenu : MonoBehaviour
             if (Chartarget.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
             {
                 int damage = CalculateDamage(attacker, potentialtarget);
-                
+
                 //Cleaver
                 int truedamage = damage / 4;
-                if(attacker.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower()=="serrated")
+                if (attacker.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "serrated")
                 {
                     truedamage += damage / 4;
                 }
@@ -2145,7 +2144,7 @@ public class ActionsMenu : MonoBehaviour
 
         }
 
-        
+
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
         {
@@ -2158,7 +2157,7 @@ public class ActionsMenu : MonoBehaviour
 
         float unitbasedamage = baseweapondamage + basestatdamage;
 
-        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield" && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier!=null && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "spiked")
+        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield" && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier != null && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "spiked")
         {
             unitbasedamage += (charunit.AjustedStats.Defense + UnitSkillBonus.Defense) / 2f;
         }
@@ -2166,7 +2165,7 @@ public class ActionsMenu : MonoBehaviour
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
         {
             basestatdef = basestatdef - unit.GetComponent<UnitScript>().GetFirstWeapon().Grade;
-            if(unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower()=="heavyweight")
+            if (unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "heavyweight")
             {
                 basestatdef -= unit.GetComponent<UnitScript>().GetFirstWeapon().Grade;
             }
@@ -2308,7 +2307,7 @@ public class ActionsMenu : MonoBehaviour
 
         int unitbasespeed = (int)charunit.AjustedStats.Speed + UnitSkillBonus.Speed + (int)unitweaponstatbonus.Speed;
 
-        
+
 
         int targetbasespeed = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed + (int)targetweaponstatbonus.Speed;
 
@@ -2338,7 +2337,7 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
-    public (BaseStats,BaseStats) GetWeaponStatBonus(GameObject unit, GameObject target)
+    public (BaseStats, BaseStats) GetWeaponStatBonus(GameObject unit, GameObject target)
     {
         BaseStats unitstatbonus = new BaseStats();
         BaseStats targetstatbonus = new BaseStats();
@@ -2349,7 +2348,7 @@ public class ActionsMenu : MonoBehaviour
         if (unitfirstweapon.type.ToLower() == "sword")
         {
             int increaseamount = 2;
-            if(unitfirstweapon.Modifier.ToLower()=="quick")
+            if (unitfirstweapon.Modifier.ToLower() == "quick")
             {
                 increaseamount = 3;
             }
@@ -2369,16 +2368,16 @@ public class ActionsMenu : MonoBehaviour
 
         if (unitfirstweapon.type.ToLower() == "greatsword")
         {
-            if(unitfirstweapon.Modifier.ToLower() == "heavyweight")
+            if (unitfirstweapon.Modifier.ToLower() == "heavyweight")
             {
-                unitstatbonus.Speed -= unitfirstweapon.Grade*2;
+                unitstatbonus.Speed -= unitfirstweapon.Grade * 2;
             }
-            else if(unitfirstweapon.Modifier.ToLower() != "lightweight")
+            else if (unitfirstweapon.Modifier.ToLower() != "lightweight")
             {
                 unitstatbonus.Speed -= unitfirstweapon.Grade;
             }
-            
-        }      
+
+        }
         if (targetfirstweapon.type.ToLower() == "greatsword")
         {
             if (targetfirstweapon.Modifier.ToLower() == "heavyweight")
@@ -2393,7 +2392,7 @@ public class ActionsMenu : MonoBehaviour
 
         if (targetfirstweapon.type.ToLower() == "spear")
         {
-            if(targetfirstweapon.Modifier.ToLower() == "precise")
+            if (targetfirstweapon.Modifier.ToLower() == "precise")
             {
                 unitstatbonus.Dexterity -= targetfirstweapon.Grade * 3;
             }
@@ -2401,7 +2400,7 @@ public class ActionsMenu : MonoBehaviour
             {
                 unitstatbonus.Dexterity -= targetfirstweapon.Grade * 2;
             }
-                
+
         }
         if (unitfirstweapon.type.ToLower() == "spear")
         {
@@ -2439,10 +2438,10 @@ public class ActionsMenu : MonoBehaviour
         (unitweaponstatbonus, targetweaponstatbonus) = GetWeaponStatBonus(unit, target);
 
         int dexunit = (int)charunit.AjustedStats.Dexterity + UnitSkillBonus.Dexterity + (int)unitweaponstatbonus.Dexterity;
-       
+
 
         int spdtarget = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed + (int)targetweaponstatbonus.Dexterity;
-       
+
 
         int finalhitrate = (int)(hitrateweapon + (dexunit - spdtarget) * 0.2f) + tilebonus + UnitSkillBonus.Hit - TargetSkillBonus.Dodge;
 
@@ -2535,7 +2534,7 @@ public class ActionsMenu : MonoBehaviour
         int dexunit = (int)charunit.AjustedStats.Dexterity + UnitSkillBonus.Dexterity + (int)unitweaponstatbonus.Dexterity;
 
         int spdtarget = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed + (int)targetweaponstatbonus.Speed;
-        
+
 
         int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f + UnitSkillBonus.Crit);
 

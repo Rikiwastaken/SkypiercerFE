@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static ForesightScript;
-using static GridSquareScript;
 using static UnitScript;
 
 public class ActionManager : MonoBehaviour
@@ -91,7 +89,7 @@ public class ActionManager : MonoBehaviour
             return;
         }
 
-        if (TurnManager.currentlyplaying == "playable" && (GameOverScript.instance==null || !GameOverScript.instance.gameObject.activeSelf))
+        if (TurnManager.currentlyplaying == "playable" && (GameOverScript.instance == null || !GameOverScript.instance.gameObject.activeSelf))
         {
             if (currentcharacter != null)
             {
@@ -120,7 +118,7 @@ public class ActionManager : MonoBehaviour
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
                     }
-                    else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed && TurnManager.currentlyplaying == "playable" && NeutralMenuCD == 0 && !TextBubbleScript.indialogue) 
+                    else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed && TurnManager.currentlyplaying == "playable" && NeutralMenuCD == 0 && !TextBubbleScript.indialogue)
                     {
                         NeutralMenu.SetActive(true);
                     }
@@ -166,7 +164,7 @@ public class ActionManager : MonoBehaviour
                         WeaponChange(currentcharacter);
                         GridScript.ShowMovement();
                     }
-                    if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation=="playable")
+                    if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
                     {
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
                         WeaponChange(currentcharacter);
@@ -368,7 +366,7 @@ public class ActionManager : MonoBehaviour
         GridScript.lockselection = false;
         frameswherenotlock = 10;
         currentcharacter = null;
-        
+
 
         MapEventManager.instance.TriggerEventCheck();
 
@@ -382,18 +380,18 @@ public class ActionManager : MonoBehaviour
             Unittouse = Unit;
         }
 
-        
 
-        
+
+
 
         if (tilechanged != null)
         {
             Foresight.CreateAction(6, Unittouse);
-            
-            
+
+
         }
         if (OneTalkedTo != null)
-        { 
+        {
             Foresight.CreateAction(5, Unittouse, OneTalkedTo);
         }
 

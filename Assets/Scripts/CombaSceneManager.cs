@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -255,7 +254,7 @@ public class CombaSceneManager : MonoBehaviour
             float t = LowerDefenderHPBarTimeCounter / totalSteps;
 
             // Lerp from pre-change HP to actual HP
-            float displayedRatio = Mathf.Lerp( endRatio, startRatio, t);
+            float displayedRatio = Mathf.Lerp(endRatio, startRatio, t);
 
             // Apply
             DefenderHPLost.fillAmount = displayedRatio;
@@ -348,7 +347,7 @@ public class CombaSceneManager : MonoBehaviour
             MiddleTransform.position = (ActiveCombatData.attackerAnimator.transform.position + ActiveCombatData.defenderAnimator.transform.position) / 2f;
 
 
-            
+
             if (ActiveCombatData.attackerWeapon.type.ToLower() == "bow")
             {
 
@@ -370,10 +369,10 @@ public class CombaSceneManager : MonoBehaviour
             }
             else
             {
-                if ((attackerSceneGO.GetComponent<UnitScript>().AttackAnimationAlmostdone(ActiveCombatData.attackerAnimator, 0.8f) && attackbuffer <= 0) || attackbuffer< -2f/Time.deltaTime)
+                if ((attackerSceneGO.GetComponent<UnitScript>().AttackAnimationAlmostdone(ActiveCombatData.attackerAnimator, 0.8f) && attackbuffer <= 0) || attackbuffer < -2f / Time.deltaTime)
                 {
                     attackerLaunchAttack = false;
-                    if (ActiveCombatData.defenderdodged>0)
+                    if (ActiveCombatData.defenderdodged > 0)
                     {
                         ActiveCombatData.defenderAnimator.SetTrigger("Dodge");
                     }
@@ -382,7 +381,7 @@ public class CombaSceneManager : MonoBehaviour
                         ActiveCombatData.defenderAnimator.SetTrigger("Death");
                         deathcharactercounter = (int)(deathtimeoutduration / Time.fixedDeltaTime);
                     }
-                    else if(!ActiveCombatData.healing)
+                    else if (!ActiveCombatData.healing)
                     {
                         ActiveCombatData.defenderAnimator.SetTrigger("Damage");
                     }
@@ -543,10 +542,10 @@ public class CombaSceneManager : MonoBehaviour
             MiddleTransform.rotation = Quaternion.Lerp(MiddleTransform.rotation, Quaternion.Euler(new Vector3(0, 180, 0)), Time.fixedDeltaTime * CamRotSpeed);
 
 
-            
+
             if (ActiveCombatData.defenderWeapon.type.ToLower() == "bow")
             {
-                if ((attackerSceneGO.GetComponent<UnitScript>().AttackAnimationAlmostdone(ActiveCombatData.attackerAnimator, 0.8f) && attackbuffer <= 0) || attackbuffer<- 2f / Time.deltaTime)
+                if ((attackerSceneGO.GetComponent<UnitScript>().AttackAnimationAlmostdone(ActiveCombatData.attackerAnimator, 0.8f) && attackbuffer <= 0) || attackbuffer < -2f / Time.deltaTime)
                 {
                     NewArrow = Instantiate(Arrow);
 
@@ -680,10 +679,10 @@ public class CombaSceneManager : MonoBehaviour
             if (Modeltomove == null)
             {
                 Modeltomove = attackerSceneGO.GetComponent<UnitScript>().FlyingWeapon;
-                if(Modeltomove == null)
+                if (Modeltomove == null)
                 {
                     waitForAttackerProjectile = false;
-                    if (ActiveCombatData.defenderdodged>0)
+                    if (ActiveCombatData.defenderdodged > 0)
                     {
                         ActiveCombatData.defenderAnimator.SetTrigger("Dodge");
                     }
@@ -712,7 +711,7 @@ public class CombaSceneManager : MonoBehaviour
 
                     //Modeltomove.transform.position = Vector3.Lerp(Modeltomove.transform.position, ActiveCombatData.defenderAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
                 }
-                    
+
             }
             else
             {
@@ -728,7 +727,7 @@ public class CombaSceneManager : MonoBehaviour
             if (Mathf.Abs(Modeltomove.transform.position.x - ActiveCombatData.defenderAnimator.transform.position.x) < 0.1f)
             {
                 waitForAttackerProjectile = false;
-                if (ActiveCombatData.defenderdodged>0)
+                if (ActiveCombatData.defenderdodged > 0)
                 {
                     ActiveCombatData.defenderAnimator.SetTrigger("Dodge");
                 }
@@ -756,7 +755,7 @@ public class CombaSceneManager : MonoBehaviour
                 if (Modeltomove == null)
                 {
                     waitForDefenderProjectile = false;
-                    if (ActiveCombatData.attackerdodged>0)
+                    if (ActiveCombatData.attackerdodged > 0)
                     {
                         ActiveCombatData.attackerAnimator.SetTrigger("Dodge");
                     }
@@ -781,7 +780,7 @@ public class CombaSceneManager : MonoBehaviour
                     Modeltomove.transform.position = Vector3.Lerp(Modeltomove.transform.position, ActiveCombatData.attackerAnimator.transform.position + new Vector3(0f, 1f, 0f), Time.fixedDeltaTime * 3f);
                 }
 
-                    
+
             }
             else
             {
@@ -909,13 +908,13 @@ public class CombaSceneManager : MonoBehaviour
                 numberofhits += 1;
             }
 
-            if(numberofhits <=0)
+            if (numberofhits <= 0)
             {
                 attacktext = "Miss\n";
             }
-            else if(ActiveCombatData.attackerdodged>0)
+            else if (ActiveCombatData.attackerdodged > 0)
             {
-                attacktext = numberofhits+" hits\n" + ActiveCombatData.attackerdodged +" dodges\n";
+                attacktext = numberofhits + " hits\n" + ActiveCombatData.attackerdodged + " dodges\n";
             }
             else
             {
@@ -929,7 +928,7 @@ public class CombaSceneManager : MonoBehaviour
             }
             attacktext += ActiveCombatData.defenderdamage;
 
-            
+
             AnimText.InitializeText(attacktext, colortouse);
         }
     }
@@ -972,9 +971,9 @@ public class CombaSceneManager : MonoBehaviour
             newdata.expGained = expgained;
             newdata.levelupbonuses = levelupbonuses;
 
-            if(newdata.doubleAttacker == attacker)
+            if (newdata.doubleAttacker == attacker)
             {
-                if(newdata.triplehit)
+                if (newdata.triplehit)
                 {
 
                     //if(newdata.attackercrits ==3)
@@ -993,9 +992,9 @@ public class CombaSceneManager : MonoBehaviour
                     //{
                     //    newdata.attackerdamage *= 3;
                     //}
-                    newdata.attackerdamage *= (3-defenderdodged);
+                    newdata.attackerdamage *= (3 - defenderdodged);
 
-                    
+
 
                 }
                 else
@@ -1117,7 +1116,7 @@ public class CombaSceneManager : MonoBehaviour
             float attackerHPRatio = (float)ActiveCombatData.attackerBeforeCombat.currentHP / (float)ActiveCombatData.attackerBeforeCombat.AjustedStats.HP;
             float defenderHPRatio = (float)ActiveCombatData.defenderBeforeCombat.currentHP / (float)ActiveCombatData.defenderBeforeCombat.AjustedStats.HP;
 
-            
+
             AttackerHPTMP.text = "" + (int)(ActiveCombatData.attackerBeforeCombat.currentHP);
             DefenderHPTMP.text = "" + (int)(ActiveCombatData.defenderBeforeCombat.currentHP);
             Debug.Log(AttackerHPTMP.text);

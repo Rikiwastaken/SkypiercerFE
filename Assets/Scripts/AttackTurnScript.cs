@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using static DataScript;
 using static UnitScript;
-using static UnityEngine.GraphicsBuffer;
 public class AttackTurnScript : MonoBehaviour
 {
 
@@ -661,7 +660,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     expdistributed = true;
                 }
-                else if (CharAttacker.affiliation == "playable" && levelupbonuses!= new List<int>())
+                else if (CharAttacker.affiliation == "playable" && levelupbonuses != new List<int>())
                 {
                     expbar.gameObject.SetActive(true);
                     if (!expbar.setupdone)
@@ -791,11 +790,13 @@ public class AttackTurnScript : MonoBehaviour
                                 waittingforexp = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
                                 waittingforcamera = false;
+                                EndOfCombatTrigger(Attacker, target);
                             }
                             else if (ishealing) //distribute exp if attacker healed (no counterattack)
                             {
                                 waittingforexp = true;
                                 waittingforcamera = false;
+                                EndOfCombatTrigger(Attacker, target);
                             }
                             else if ((CharAttacker.affiliation == "playable" && CharAttacker.currentHP <= 0) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)) // end fight if attacker died and attacker was allied
                             {
@@ -803,6 +804,7 @@ public class AttackTurnScript : MonoBehaviour
                                 waittingforexp = true;
                                 expdistributed = true;
                                 waittingforcamera = false;
+                                EndOfCombatTrigger(Attacker, target);
                             }
                             else if (ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38)) // counterattack
                             {
@@ -832,6 +834,7 @@ public class AttackTurnScript : MonoBehaviour
                                 waittingforexp = true;
                                 expdistributed = true;
                                 waittingforcamera = false;
+                                EndOfCombatTrigger(Attacker, target);
 
 
 
@@ -841,6 +844,7 @@ public class AttackTurnScript : MonoBehaviour
                                 waittingforexp = true;
                                 counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
                                 waittingforcamera = false;
+                                EndOfCombatTrigger(Attacker, target);
                             }
                         }
                         else
@@ -874,16 +878,16 @@ public class AttackTurnScript : MonoBehaviour
                                     waittingforcamera = false;
                                 }
 
-                                if (target != null)
-                                {
-                                    EndOfCombatTrigger(Attacker, target);
-                                    waittingforcamera = false;
-                                }
-                                else
-                                {
-                                    EndOfCombatTrigger(Attacker, target);
-                                    waittingforcamera = false;
-                                }
+                                //if (target != null)
+                                //{
+                                //    EndOfCombatTrigger(Attacker, target);
+                                //    waittingforcamera = false;
+                                //}
+                                //else
+                                //{
+                                //    EndOfCombatTrigger(Attacker, target);
+                                //    waittingforcamera = false;
+                                //}
                             }
                         }
                     }
@@ -1027,9 +1031,9 @@ public class AttackTurnScript : MonoBehaviour
 
                 int basenumberofhits = 0;
 
-                if(doubleattacker== Attacker)
+                if (doubleattacker == Attacker)
                 {
-                    if(triple)
+                    if (triple)
                     {
                         basenumberofhits = 3;
                     }
@@ -1055,7 +1059,7 @@ public class AttackTurnScript : MonoBehaviour
                 //{
                 //    defenderattacks = false;
                 //}
-                
+
                 if (ishealing)
                 {
                     defenderattacks = false;
@@ -1167,7 +1171,7 @@ public class AttackTurnScript : MonoBehaviour
             unit1.GetComponent<UnitScript>().AddNumber(unit1.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
         }
 
-        if(charunit1.affiliation=="playable")
+        if (charunit1.affiliation == "playable")
         {
             DataScript.instance.SpreadBonds(unit1);
         }

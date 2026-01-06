@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static SaveManager;
 
 public class MainMenuScript : MonoBehaviour
 {
@@ -22,7 +20,7 @@ public class MainMenuScript : MonoBehaviour
     void Start()
     {
 
-        if(DataScript.instance == null)
+        if (DataScript.instance == null)
         {
             SceneManager.LoadScene("FirstScene");
         }
@@ -92,7 +90,7 @@ public class MainMenuScript : MonoBehaviour
         DataScript.instance.SetupCharactersForChapter(Chapter);
 
 
-        sceneLoader.LoadScene("Chapter"+Chapter);
+        sceneLoader.LoadScene("Chapter" + Chapter);
     }
 
     public void OnCancel()
@@ -131,7 +129,7 @@ public class MainMenuScript : MonoBehaviour
         {
             saveManager.activeSlot = slot;
             saveManager.ApplySave(slot);
-            if(saveManager.currentchapter==1)
+            if (saveManager.currentchapter == 1)
             {
                 sceneLoader.LoadScene("Chapter1");
             }

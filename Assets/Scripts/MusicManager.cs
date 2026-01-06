@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -18,7 +18,7 @@ public class MusicManager : MonoBehaviour
     private cameraScript cameraScript;
 
     private TurnManger TurnManager;
-    
+
     private SaveManager SaveManager;
 
     private float beforecombatmusicvol;
@@ -42,7 +42,7 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -52,7 +52,7 @@ public class MusicManager : MonoBehaviour
     {
         beforecombatmusicvol = BeforeCombat.volume;
         SaveManager = FindAnyObjectByType<SaveManager>();
-        
+
 
         if (BeforeCombat.isPlaying)
         {
@@ -62,18 +62,18 @@ public class MusicManager : MonoBehaviour
 
     public void ChangeVolume()
     {
-        mixer.SetFloat("MusicVol",Mathf.Log10(SaveManager.Options.musicvolume)*20f);
+        mixer.SetFloat("MusicVol", Mathf.Log10(SaveManager.Options.musicvolume) * 20f);
     }
 
     public void InitializeMusics(string ChapterToLoad)
     {
         int Chapter = -1;
-        if(ChapterToLoad.Contains("Chapter"))
+        if (ChapterToLoad.Contains("Chapter"))
         {
             ChapterToLoad = ChapterToLoad.Replace("Chapter", "");
             Chapter = int.Parse(ChapterToLoad);
         }
-        if(ChapterToLoad.Contains("Prologue") || ChapterToLoad.Contains("TestMap"))
+        if (ChapterToLoad.Contains("Prologue") || ChapterToLoad.Contains("TestMap"))
         {
             Chapter = 0;
         }
@@ -81,9 +81,9 @@ public class MusicManager : MonoBehaviour
         outcombat.Stop();
         BeforeCombat.Stop();
 
-        if (Chapter!=-1)
+        if (Chapter != -1)
         {
-            
+
             foreach (MapBattleMusic MusicClass in MusicList)
             {
                 if (MusicClass.Chapters.Contains(Chapter))
@@ -100,17 +100,17 @@ public class MusicManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(cameraScript == null)
+        if (cameraScript == null)
         {
             cameraScript = FindAnyObjectByType<cameraScript>();
         }
-        
-        if(TurnManager == null)
+
+        if (TurnManager == null)
         {
             TurnManager = FindAnyObjectByType<TurnManger>();
         }
 
-        if(PlayPrepMusic)
+        if (PlayPrepMusic)
         {
             PlayPrepMusic = false;
             BeforeCombat.Play();
@@ -143,9 +143,9 @@ public class MusicManager : MonoBehaviour
             outcombat.PlayScheduled(startTime);
         }
 
-        if(incombat.isPlaying)
+        if (incombat.isPlaying)
         {
-            if ((cameraScript!=null && cameraScript.incombat) || SceneManager.GetActiveScene().name == "BattleScene")
+            if ((cameraScript != null && cameraScript.incombat) || SceneManager.GetActiveScene().name == "BattleScene")
             {
                 if (incombat.volume < maxvolume)
                 {
@@ -177,7 +177,7 @@ public class MusicManager : MonoBehaviour
             }
         }
 
-          
+
     }
 
 }

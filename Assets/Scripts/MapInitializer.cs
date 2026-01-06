@@ -158,7 +158,7 @@ public class MapInitializer : MonoBehaviour
         if (GridScript.instance.checkifvalidpos(enemyStats.startpos, newcharacter, 0))
         {
             newcharacter.transform.position = new Vector3(enemyStats.startpos.x, 0, enemyStats.startpos.y);
-            newcharacter.GetComponent<UnitScript>().previouspos = new List<GridSquareScript>(){ GridScript.GetTile(enemyStats.startpos)};
+            newcharacter.GetComponent<UnitScript>().previouspos = new List<GridSquareScript>() { GridScript.GetTile(enemyStats.startpos) };
             newcharacter.GetComponent<UnitScript>().MoveTo(enemyStats.startpos);
         }
         else
@@ -208,11 +208,11 @@ public class MapInitializer : MonoBehaviour
             Character.affiliation = "enemy";
         }
 
-        if(Character.name.ToLower().Contains("kira"))
+        if (Character.name.ToLower().Contains("kira"))
         {
-            foreach(equipment equ in Character.equipments)
+            foreach (equipment equ in Character.equipments)
             {
-                if(equ.type.ToLower()=="sword")
+                if (equ.type.ToLower() == "sword")
                 {
                     equ.Name = "Reshine";
                 }

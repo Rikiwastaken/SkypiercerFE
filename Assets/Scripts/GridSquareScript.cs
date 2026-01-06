@@ -1,9 +1,6 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 using static UnitScript;
 
 public class GridSquareScript : MonoBehaviour
@@ -80,7 +77,7 @@ public class GridSquareScript : MonoBehaviour
         public void ChangeActivation(bool newstate)
         {
             isactivated = newstate;
-            
+
             OnActivationChange?.Invoke(this);
         }
 
@@ -161,7 +158,7 @@ public class GridSquareScript : MonoBehaviour
         // Initial check (in case some levers start activated)
         CheckAllTriggers(null);
 
-        
+
 
         if (Mechanism == null || Mechanism.type != 1) return;
 
@@ -174,9 +171,9 @@ public class GridSquareScript : MonoBehaviour
             }
         }
 
-        
 
-        
+
+
 
     }
 
@@ -279,7 +276,7 @@ public class GridSquareScript : MonoBehaviour
 
     public void ManageLeverOrientation()
     {
-        if(Mechanism != null)
+        if (Mechanism != null)
         {
             if (LeverGO.activeSelf)
             {
@@ -294,11 +291,11 @@ public class GridSquareScript : MonoBehaviour
                 }
                 LeverGO.transform.GetChild(0).localRotation = Quaternion.Euler(previousrot);
             }
-            if(Mechanism.ActivatedGO != null)
+            if (Mechanism.ActivatedGO != null)
             {
-                if(Mechanism.isactivated)
+                if (Mechanism.isactivated)
                 {
-                    if(!Mechanism.ActivatedGO.activeSelf)
+                    if (!Mechanism.ActivatedGO.activeSelf)
                     {
                         Mechanism.ActivatedGO.SetActive(true);
                     }
@@ -1027,7 +1024,7 @@ public class GridSquareScript : MonoBehaviour
     public int GetRandomNumber()
     {
         randomnumberlistcounter++;
-        if(randomnumberlistcounter>=RandomNumberlist.Count)
+        if (randomnumberlistcounter >= RandomNumberlist.Count)
         {
             randomnumberlistcounter = 0;
         }
@@ -1037,7 +1034,7 @@ public class GridSquareScript : MonoBehaviour
     public MechanismClass CreateMechanismCopy(GridSquareScript tilescripttouse = null)
     {
         GridSquareScript tiletouse = null;
-        if(tilescripttouse != null)
+        if (tilescripttouse != null)
         {
             tiletouse = tilescripttouse;
         }

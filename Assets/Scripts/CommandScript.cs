@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static DataScript;
-using static UnitScript;
 
 
 public class CommandScript : MonoBehaviour

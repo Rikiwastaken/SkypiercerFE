@@ -113,7 +113,7 @@ public class RandomScript : MonoBehaviour
 
     public int GetPersonalityValue()
     {
-        if(personalityvaluesindex>= personalityValues.Count)
+        if (personalityvaluesindex >= personalityValues.Count)
         {
             personalityvaluesindex = 0;
         }

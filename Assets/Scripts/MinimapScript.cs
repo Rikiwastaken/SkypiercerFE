@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnitScript;
@@ -45,6 +44,11 @@ public class MinimapScript : MonoBehaviour
             {
                 CreateMinimap();
             }
+        }
+
+        if (InputManager.instance.movementjustpressed)
+        {
+            updatedelay = 1;
         }
 
         if (updatedelay > 0)
@@ -227,7 +231,7 @@ public class MinimapScript : MonoBehaviour
                         {
                             SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
                         }
-                        
+
                     }
 
                 }
@@ -317,18 +321,18 @@ public class MinimapScript : MonoBehaviour
 
         for (int i = 0; i < 8; i++)
         {
-            minimapTexture.SetPixel(selectedx * 8 + i, selectedy * 8 , Color.black);
-            minimapTexture.SetPixel(selectedx * 8 + i, selectedy * 8+7, Color.black);
+            minimapTexture.SetPixel(selectedx * 8 + i, selectedy * 8, Color.black);
+            minimapTexture.SetPixel(selectedx * 8 + i, selectedy * 8 + 7, Color.black);
         }
         for (int i = 1; i < 7; i++)
         {
-            minimapTexture.SetPixel(selectedx * 8 , selectedy * 8+i, Color.black);
+            minimapTexture.SetPixel(selectedx * 8, selectedy * 8 + i, Color.black);
             minimapTexture.SetPixel(selectedx * 8 + 7, selectedy * 8 + i, Color.black);
         }
 
-        
+
         minimapTexture.Apply();
-        
+
     }
 
     private void manageselectionicon()
