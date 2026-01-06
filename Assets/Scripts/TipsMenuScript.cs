@@ -32,10 +32,13 @@ public class TipsMenuScript : MonoBehaviour
 
     public List<Tip> Tips;
 
+    public List<Tip> TipsToUse;
+
     private GameObject previousselection;
 
     private void OnEnable()
     {
+        SelectTipsToUse();
         ButtonInitialization();
 
         InputManager = InputManager.instance;
@@ -70,7 +73,7 @@ public class TipsMenuScript : MonoBehaviour
                 {
                     descriptionText.transform.parent.gameObject.SetActive(true);
                 }
-                descriptionText.text = Tips[ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())]].description;
+                descriptionText.text = TipsToUse[ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())]].description;
             }
             else
             {
@@ -128,7 +131,7 @@ public class TipsMenuScript : MonoBehaviour
     {
         if (direction == 1)
         {
-            if (ButtonIDs[Buttons.Count - 1] < Tips.Count - 1)
+            if (ButtonIDs[Buttons.Count - 1] < TipsToUse.Count - 1)
             {
                 for (int i = 0; i < Buttons.Count; i++)
                 {
@@ -163,8 +166,31 @@ public class TipsMenuScript : MonoBehaviour
             else
             {
                 Buttons[i].transform.GetChild(0).gameObject.SetActive(true);
-                Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Tips[ButtonIDs[i]].name;
+                Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = TipsToUse[ButtonIDs[i]].name;
 
+            }
+        }
+    }
+
+    private void SelectTipsToUse()
+    {
+        int currentchapter = 0;
+        string SceneName = DataScript.instance.GetComponent<CombatSceneLoader>().MainSceneName.ToLower();
+        if (SceneName.Contains("chapter"))
+        {
+            SceneName = SceneName.Replace("chapter", "");
+            currentchapter = int.Parse(SceneName);
+        }
+        else if (!SceneName.Contains("prologue"))
+        {
+            currentchapter = 999;
+        }
+        TipsToUse = new List<Tip>();
+        foreach (Tip tip in Tips)
+        {
+            if (tip.chapterWhereUnlocks <= currentchapter)
+            {
+                TipsToUse.Add(tip);
             }
         }
     }

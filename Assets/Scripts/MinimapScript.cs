@@ -46,18 +46,13 @@ public class MinimapScript : MonoBehaviour
             }
         }
 
-        if (InputManager.instance.movementjustpressed)
-        {
-            updatedelay = 1;
-        }
-
         if (updatedelay > 0)
         {
             updatedelay--;
         }
         if (updatedelay <= 0)
         {
-            updatedelay = (int)(0.25f / Time.deltaTime);
+            updatedelay = (int)(0.5f / Time.deltaTime);
             showposition += 1;
             if (showposition > 8)
             {
@@ -77,6 +72,7 @@ public class MinimapScript : MonoBehaviour
         }
 
     }
+
     public void CreateMinimap()
     {
         if (minimapTexture == null)

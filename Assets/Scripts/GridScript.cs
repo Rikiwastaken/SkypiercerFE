@@ -17,6 +17,8 @@ public class GridScript : MonoBehaviour
 
     public GridSquareScript selection;
 
+    public GridSquareScript previousselection;
+
     private InputManager inputManager;
 
     private Vector2 previousmovevalue;
@@ -58,6 +60,8 @@ public class GridScript : MonoBehaviour
     public GameObject TutorialWindowMenu;
 
     public GameObject MapModel;
+
+    private int mapchangecnt;
 
     public class Node
     {
@@ -259,6 +263,23 @@ public class GridScript : MonoBehaviour
         {
             lockselection = false;
         }
+
+        if (selection != previousselection)
+        {
+            if (mapchangecnt == 0)
+            {
+                mapchangecnt = (int)(0.5f / Time.timeScale);
+                MinimapScript.instance.UpdateMinimap();
+                previousselection = selection;
+            }
+            else
+            {
+                mapchangecnt--;
+            }
+
+        }
+
+
     }
 
     public void InstantiateGrid()

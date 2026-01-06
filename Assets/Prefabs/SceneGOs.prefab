@@ -1949,6 +1949,30 @@ MonoBehaviour:
       allies (using always psyche) but their damage is reduced by 50% and they cannot
       initiate combat.\n  Growth modification : +10% psy, +10% res, -10% str"
     chapterWhereUnlocks: 0
+  - name: Blades Modifiers (1/3)
+    description: "All blade used by playable characters can have unique modifiers
+      which change their behaviors.\n\n  Basic : No special effect\n\n  Sharp (all
+      Blades) : Increases crit rate by 2% per grade but reduce hit rate by 5% per
+      grade.\n\n  Handy (all Blades) : Reduces crit rate by 2% per grade but increase
+      hit rate by 5% per grade.\n\n  Raw (all Blades) : Increase damage by 1 per
+      grade but reduces crit rate by 2% per grade."
+    chapterWhereUnlocks: 3
+  - name: Blades Modifiers (2/3)
+    description: "All blade used by playable characters can have unique modifiers
+      which change their behaviors.\n\n  Quick (swords) : Increases the speed and
+      dexterity bonus by 1 per grade.\n\n  Precise (spears) : Increases dexterity
+      reduction by 1 per grade.\n\n  Lightweight (greatsword) : No longer lowers
+      speed.\n\n  Heavyweight (greatsword) : Increases the enemy's defense and resistance
+      reduction by 1 per grade and the wielder's speed reduction by 1 per grade."
+    chapterWhereUnlocks: 3
+  - name: Blades Modifiers (3/3)
+    description: "All blade used by playable characters can have unique modifiers
+      which change their behaviors.\n\n  Farsight (bows) : Increases range by one
+      but reduces hit rate by 20%.\n\n  Serrated (scythe) : Increases secondary damage
+      by 25%.\n\n  Spiked (shield) : Increases damage dealt by half the defense of
+      the user.\n\n  Focused (staff) : Doubles base healing and halves durability.\n\n 
+      Ranged (staff) : halves base healing and increase range by 3."
+    chapterWhereUnlocks: 3
   - name: Leveling up
     description: 'When an ally unit reaches 100 experience points, their level increase
       and their experience goes back to 0.

@@ -1159,6 +1159,7 @@ public class AttackTurnScript : MonoBehaviour
     }
     private void EndOfCombatTrigger(GameObject unit1, GameObject unit2 = null)
     {
+        MinimapScript.instance.UpdateMinimap();
         if (unit1 != null)
         {
             unit1.GetComponent<UnitScript>().UpdateWeaponModel();

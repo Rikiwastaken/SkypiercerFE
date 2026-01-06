@@ -1437,7 +1437,6 @@ public class ActionsMenu : MonoBehaviour
 
     public (int, int, int, int, List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
     {
-        Debug.Log(unit.GetComponent<UnitScript>().GetFirstWeapon().Name);
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         List<int> levelup = null;
