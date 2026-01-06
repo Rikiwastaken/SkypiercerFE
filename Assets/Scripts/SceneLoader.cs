@@ -32,8 +32,8 @@ public class SceneLoader : MonoBehaviour
             if (SceneToToad != "")
             {
                 framestoloading = 5;
-                Debug.Log("loading : " + SceneToToad);
                 SceneManager.LoadScene(SceneToToad);
+                GetComponent<CombatSceneLoader>().combatLoaded = false;
                 GetComponent<CombatSceneLoader>().MainSceneName = SceneToToad;
                 GetComponent<CombatSceneLoader>().LoadCombatScene();
                 MusicManager.instance.InitializeMusics(SceneToToad);

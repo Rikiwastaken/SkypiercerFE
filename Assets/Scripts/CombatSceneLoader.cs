@@ -16,7 +16,7 @@ public class CombatSceneLoader : MonoBehaviour
 
     private Scene combatScene;
     private Scene mainScene;
-    private bool combatLoaded = false;
+    public bool combatLoaded = false;
 
     private void Awake()
     {
@@ -26,6 +26,7 @@ public class CombatSceneLoader : MonoBehaviour
     // Preload Combat Scene
     public void LoadCombatScene()
     {
+        Debug.Log(combatLoaded);
         if (!combatLoaded)
             StartCoroutine(LoadCombatSceneRoutine());
     }

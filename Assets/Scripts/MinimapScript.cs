@@ -21,6 +21,10 @@ public class MinimapScript : MonoBehaviour
 
     private int showposition;
 
+    private bool firstinitialization;
+
+    private GridSquareScript previoustile;
+
     private void Awake()
     {
         if (instance == null)
@@ -140,46 +144,50 @@ public class MinimapScript : MonoBehaviour
                 for (int j = 0; j < gridScript.Grid[i].Count; j++)
                 {
                     GridSquareScript tile = gridScript.GetTile(i, j);
-                    if (tile.isobstacle)
+                    if (firstinitialization || (tile == previoustile && gridScript.selection != null && previoustile != gridScript.selection))
                     {
-                        SetTileColor(i, j, Color.grey);
+                        if (tile.isobstacle)
+                        {
+                            SetTileColor(i, j, Color.grey);
+                        }
+                        else
+                        {
+                            SetTileColor(i, j, Color.white);
+                        }
+                        switch (tile.type.ToLower())
+                        {
+                            case "forest":
+                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.green);
+                                break;
+                            case "ruins":
+                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.gray);
+                                break;
+                            case "fire":
+                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
+
+                                break;
+                            case "water":
+                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.cyan);
+                                break;
+
+
+                            case "fortification":
+                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, new Color(0.545f, 0.271f, 0.075f));
+
+                                break;
+                            case "fog":
+                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.black);
+
+                                break;
+                            case "medicinalwater":
+                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, new Color(0.5510659f, 0.8608279f, 0.9371068f));
+                                break;
+                            case "desert":
+                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
+                                break;
+                        }
                     }
-                    else
-                    {
-                        SetTileColor(i, j, Color.white);
-                    }
-                    switch (tile.type.ToLower())
-                    {
-                        case "forest":
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.green);
-                            break;
-                        case "ruins":
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.gray);
-                            break;
-                        case "fire":
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
 
-                            break;
-                        case "water":
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.cyan);
-                            break;
-
-
-                        case "fortification":
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, new Color(0.545f, 0.271f, 0.075f));
-
-                            break;
-                        case "fog":
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.black);
-
-                            break;
-                        case "medicinalwater":
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, new Color(0.5510659f, 0.8608279f, 0.9371068f));
-                            break;
-                        case "desert":
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
-                            break;
-                    }
                     if (gridScript.attacktiles.Contains(tile) || gridScript.lockedattacktiles.Contains(tile))
                     {
                         //SetTileColor(i, j, new Color(245f / 255f, 176f / 255f, 66f / 255f)); //orange
@@ -234,10 +242,11 @@ public class MinimapScript : MonoBehaviour
             }
 
             manageselectionicon();
-
+            firstinitialization = false;
 
 
         }
+
 
     }
 
@@ -333,13 +342,12 @@ public class MinimapScript : MonoBehaviour
 
     private void manageselectionicon()
     {
-        //if (gridScript.selection != null && showposition <= 4)
-        if (gridScript.selection != null) // show selection as a red and yellow ring
+        if (gridScript.selection != null && previoustile != gridScript.selection) // show selection as a red and yellow ring
         {
             int selectedx = (int)gridScript.selection.GridCoordinates.x;
             int selectedy = (int)gridScript.selection.GridCoordinates.y;
 
-
+            previoustile = gridScript.selection;
 
             minimapTexture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 0, Color.yellow);
             minimapTexture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 0, Color.red);
