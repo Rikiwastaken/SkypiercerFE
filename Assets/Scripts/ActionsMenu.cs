@@ -2200,6 +2200,11 @@ public class ActionsMenu : MonoBehaviour
 
         finaldamagefloat = finaldamagefloat * CalculateRainDamageBonus(unit);
 
+        if (finaldamagefloat < 0)
+        {
+            finaldamagefloat = 0;
+        }
+
         int finaldamage = (int)finaldamagefloat + UnitSkillBonus.FixedDamageBonus;
 
         if (target != null && TargetSkillBonus != null)
