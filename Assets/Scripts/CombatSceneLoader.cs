@@ -26,7 +26,7 @@ public class CombatSceneLoader : MonoBehaviour
     // Preload Combat Scene
     public void LoadCombatScene()
     {
-        Debug.Log(combatLoaded);
+        Debug.Log("combat scene loaded : " + combatLoaded);
         if (!combatLoaded)
             StartCoroutine(LoadCombatSceneRoutine());
     }
@@ -131,7 +131,6 @@ public class CombatSceneLoader : MonoBehaviour
     // Enable/Disable all root GameObjects in a scene
     private void SetSceneVisible(Scene scene, bool visible)
     {
-        //Debug.Log(scene.name + " " + visible);
         if (!scene.IsValid()) return;
 
         var roots = scene.GetRootGameObjects();

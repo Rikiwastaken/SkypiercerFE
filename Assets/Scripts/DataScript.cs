@@ -1061,6 +1061,7 @@ public class DataScript : MonoBehaviour
 
     public void CharacterUnlockingSafeguard(int chapter)
     {
+        Debug.Log("chapter " + chapter);
         foreach (Character character in PlayableCharacterList)
         {
             switch (character.ID)
@@ -1079,19 +1080,11 @@ public class DataScript : MonoBehaviour
                     {
                         character.playableStats.unlocked = true;
                     }
-                    else
-                    {
-                        character.playableStats.unlocked = false;
-                    }
                     break;
                 case 4: //Lyv
                     if (chapter >= 2)
                     {
                         character.playableStats.unlocked = true;
-                    }
-                    else
-                    {
-                        character.playableStats.unlocked = false;
                     }
                     break;
                 case 5: // Sieg
@@ -1099,10 +1092,7 @@ public class DataScript : MonoBehaviour
                     {
                         character.playableStats.unlocked = true;
                     }
-                    else
-                    {
-                        character.playableStats.unlocked = false;
-                    }
+
                     break;
                 case 6: // Mir
                     if (chapter >= 1 && chapter != 2)
@@ -1119,19 +1109,11 @@ public class DataScript : MonoBehaviour
                     {
                         character.playableStats.unlocked = true;
                     }
-                    else
-                    {
-                        character.playableStats.unlocked = false;
-                    }
                     break;
                 case 8: // Gusto
                     if (chapter >= 6)
                     {
                         character.playableStats.unlocked = true;
-                    }
-                    else
-                    {
-                        character.playableStats.unlocked = false;
                     }
                     break;
                 case 9: // Kira
@@ -1139,10 +1121,7 @@ public class DataScript : MonoBehaviour
                     {
                         character.playableStats.unlocked = true;
                     }
-                    else
-                    {
-                        character.playableStats.unlocked = false;
-                    }
+
                     break;
 
 

@@ -355,7 +355,6 @@ public class MapLoader : EditorWindow
             }
             else if (pixelColor.Equals(colors.StairsColor))
             {
-                Debug.Log("stairsfound");
                 Tile.GetComponent<GridSquareScript>().isstairs = true;
             }
             else if (pixelColor.Equals(colors.ForestColor))
@@ -392,7 +391,6 @@ public class MapLoader : EditorWindow
             Color pixelColor = MechanismMap.GetPixel(x + 1, y);
             if (pixelColor.Equals(colors.StairsColor))
             {
-                Debug.Log("stairsfound");
                 Tile.GetComponent<GridSquareScript>().isstairs = true;
             }
             else if (pixelColor.Equals(colors.ForestColor))

@@ -33,6 +33,12 @@ public class SceneLoader : MonoBehaviour
             {
                 framestoloading = 5;
                 SceneManager.LoadScene(SceneToToad);
+                int chapternumber = 0;
+                if (SceneToToad.ToLower().Contains("chapter"))
+                {
+                    chapternumber = int.Parse(SceneToToad.ToLower().Replace("chapter", ""));
+                }
+                DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
                 GetComponent<CombatSceneLoader>().combatLoaded = false;
                 GetComponent<CombatSceneLoader>().MainSceneName = SceneToToad;
                 GetComponent<CombatSceneLoader>().LoadCombatScene();
@@ -74,13 +80,12 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadScene(string sceneName)
     {
-
+        int chapternumber = 0;
         if (sceneName.ToLower().Contains("chapter"))
         {
-            int chapternumber = int.Parse(sceneName.ToLower().Replace("chapter", ""));
-
-            DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
+            chapternumber = int.Parse(sceneName.ToLower().Replace("chapter", ""));
         }
+        DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
         SceneToToad = sceneName;
         SceneManager.LoadScene("LoadingScene");
     }

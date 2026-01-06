@@ -1119,11 +1119,6 @@ public class CombaSceneManager : MonoBehaviour
 
             AttackerHPTMP.text = "" + (int)(ActiveCombatData.attackerBeforeCombat.currentHP);
             DefenderHPTMP.text = "" + (int)(ActiveCombatData.defenderBeforeCombat.currentHP);
-            Debug.Log(AttackerHPTMP.text);
-            Debug.Log(DefenderHPTMP.text);
-
-            Debug.Log("attacker ratio : " + attackerHPRatio);
-            Debug.Log("defender ratio : " + defenderHPRatio);
 
             AttackerHPRemaining.fillAmount = attackerHPRatio;
             AttackerHPLost.fillAmount = attackerHPRatio;
@@ -1226,7 +1221,6 @@ public class CombaSceneManager : MonoBehaviour
 
     private IEnumerator LoadEnvironmentAsync(string ChapterToLoad, Scene SceneToLoadin)
     {
-        Debug.Log(ChapterToLoad);
         int Chapter = -1;
         if (ChapterToLoad.Contains("Chapter"))
         {
@@ -1243,7 +1237,6 @@ public class CombaSceneManager : MonoBehaviour
             Chapter = UnityEngine.Random.Range(0, 1);
         }
 
-        Debug.Log(Chapter);
 
         foreach (CombatEnvirnoment env in EnvirnomentList)
         {

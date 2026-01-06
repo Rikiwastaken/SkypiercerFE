@@ -402,7 +402,6 @@ public class BondsScript : MonoBehaviour
             }
         }
         EditorUtility.SetDirty(this);
-        Debug.Log("Loaded bond dialogues into the list !");
     }
 
 #endif
