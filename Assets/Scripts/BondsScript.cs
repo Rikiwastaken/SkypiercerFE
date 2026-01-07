@@ -94,7 +94,11 @@ public class BondsScript : MonoBehaviour
 
     private void Update()
     {
-        if (inputmanager.canceljustpressed)
+        if (inputmanager == null)
+        {
+            inputmanager = InputManager.instance;
+        }
+        else if (inputmanager.canceljustpressed)
         {
             if (bondsSubMenu.activeSelf)
             {
@@ -105,28 +109,32 @@ public class BondsScript : MonoBehaviour
         }
         if (GetComponent<CampScript>().BaseMenu.gameObject.activeSelf)
         {
-            bool anybondcanincrease = false;
-            foreach (Bonds bond in DataScript.instance.BondsList)
+            if (DataScript.instance != null)
             {
-                if (CheckIfBondCanIncrease(bond))
+                bool anybondcanincrease = false;
+                foreach (Bonds bond in DataScript.instance.BondsList)
                 {
-                    anybondcanincrease = true;
-                    break;
+                    if (CheckIfBondCanIncrease(bond))
+                    {
+                        anybondcanincrease = true;
+                        break;
+                    }
+                }
+
+                if (anybondcanincrease)
+                {
+                    var colors = BondButton.colors;
+                    colors.normalColor = Color.green;
+                    BondButton.colors = colors;
+                }
+                else
+                {
+                    var colors = BondButton.colors;
+                    colors.normalColor = Color.white;
+                    BondButton.colors = colors;
                 }
             }
 
-            if (anybondcanincrease)
-            {
-                var colors = BondButton.colors;
-                colors.normalColor = Color.green;
-                BondButton.colors = colors;
-            }
-            else
-            {
-                var colors = BondButton.colors;
-                colors.normalColor = Color.white;
-                BondButton.colors = colors;
-            }
         }
     }
 
@@ -186,7 +194,6 @@ public class BondsScript : MonoBehaviour
                     break;
                 }
             }
-
             bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = othercharacter.name + "\nBond Lvl " + PertinentbondsDialogue[i].Bond.BondLevel + " (Max " + PertinentbondsDialogue[i].Bond.MaxLevel + ")";
 
             if (CheckIfBondCanIncrease(PertinentbondsDialogue[i].Bond))
@@ -231,7 +238,7 @@ public class BondsScript : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(bondsSubMenu.transform.GetChild(0).gameObject);
     }
 
-    private bool CheckIfBondCanIncrease(Bonds bond)
+    public bool CheckIfBondCanIncrease(Bonds bond)
     {
         bool result = false;
 

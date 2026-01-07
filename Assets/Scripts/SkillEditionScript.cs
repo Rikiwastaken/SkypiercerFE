@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static DataScript;
 using static UnitScript;
 
@@ -67,12 +68,7 @@ public class SkillEditionScript : MonoBehaviour
                 }
                 else
                 {
-                    foreach (GameObject go in PreBattleMenuItems)
-                    {
-                        go.SetActive(true);
-                    }
-                    gameObject.SetActive(false);
-                    gridscript.InitializeGOList();
+
                 }
 
                 return;
@@ -206,6 +202,11 @@ public class SkillEditionScript : MonoBehaviour
 
         }
 
+
+        if (IsBonds)
+        {
+            changeBondsbuttoncolor();
+        }
 
     }
 
@@ -373,6 +374,32 @@ public class SkillEditionScript : MonoBehaviour
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = ListToUse[i + 10 * (characterwindowindex)];
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i + 10 * (characterwindowindex);
+
+            if (IsBonds)
+            {
+                foreach (Bonds bond in DataScript.instance.BondsList)
+                {
+                    if (BondsScript.instance.CheckIfBondCanIncrease(bond))
+                    {
+                        foreach (int ID in bond.Characters)
+                        {
+                            if (ID == ListToUse[i + 10 * (characterwindowindex)].ID)
+                            {
+                                var colors = transform.GetChild(i).GetComponent<Button>().colors;
+                                colors.normalColor = Color.green;
+                                transform.GetChild(i).GetComponent<Button>().colors = colors;
+                            }
+                            else
+                            {
+                                var colors = transform.GetChild(i).GetComponent<Button>().colors;
+                                colors.normalColor = Color.white;
+                                transform.GetChild(i).GetComponent<Button>().colors = colors;
+                            }
+                        }
+                    }
+                }
+            }
+
         }
         for (int i = Mathf.Min(ListToUse.Count - 10 * (characterwindowindex), 10); i < 10; i++)
         {
@@ -380,6 +407,47 @@ public class SkillEditionScript : MonoBehaviour
         }
 
         EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
+    }
+
+    private void changeBondsbuttoncolor()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (!transform.GetChild(i).GetComponent<Button>() && !transform.GetChild(i).GetComponent<UnitDeploymentButton>())
+            {
+                continue;
+            }
+            var colors = transform.GetChild(i).GetComponent<Button>().colors;
+            colors.normalColor = Color.white;
+            transform.GetChild(i).GetComponent<Button>().colors = colors;
+
+        }
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (!transform.GetChild(i).GetComponent<Button>() && !transform.GetChild(i).GetComponent<UnitDeploymentButton>())
+            {
+                continue;
+            }
+            if (transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID != -1)
+            {
+                foreach (Bonds bond in DataScript.instance.BondsList)
+                {
+                    if (BondsScript.instance.CheckIfBondCanIncrease(bond))
+                    {
+                        foreach (int ID in bond.Characters)
+                        {
+                            if (ID == transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID)
+                            {
+                                var colors = transform.GetChild(i).GetComponent<Button>().colors;
+                                colors.normalColor = Color.green;
+                                transform.GetChild(i).GetComponent<Button>().colors = colors;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
     }
 
     private void InitializeSkillButtons()
