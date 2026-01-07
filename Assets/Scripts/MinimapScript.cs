@@ -8,8 +8,10 @@ public class MinimapScript : MonoBehaviour
     public static MinimapScript instance;
 
     public Image minimapImage;
+    public Image minimapBGImage;
 
     private Texture2D minimapTexture;
+    private Texture2D minimapBackgroundTexture;
 
     private GridScript gridScript;
 
@@ -107,20 +109,58 @@ public class MinimapScript : MonoBehaviour
 
             float zoom = 8f;
             minimapImage.rectTransform.sizeDelta = new Vector2(gridWidth * zoom, gridHeight * zoom);
-            GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
-            GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
+            minimapImage.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
+            minimapImage.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
 
             // Pivot also bottom-left
-            GetComponent<RectTransform>().pivot = new Vector2(1, 0);
+            minimapImage.GetComponent<RectTransform>().pivot = new Vector2(1, 0);
 
             // Position with offset (e.g., 10px from edges)
-            GetComponent<RectTransform>().anchoredPosition = new Vector2(-5, 5);
+            //minimapImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(-5, 5);
         }
 
+        if (minimapBackgroundTexture == null)
+        {
+            int gridHeight = gridScript.Grid[0].Count;
+            int gridWidth = gridScript.Grid.Count;
+            minimapBackgroundTexture = new Texture2D(gridWidth, gridHeight, TextureFormat.RGBA32, false);
+            minimapBackgroundTexture.filterMode = FilterMode.Point;
+
+            Color[] pixels = new Color[gridWidth * gridHeight];
+            for (int i = 0; i < pixels.Length; i++)
+            {
+                pixels[i] = Color.clear;
+            }
+
+            minimapBackgroundTexture.SetPixels(pixels);
+            minimapBackgroundTexture.Apply();
+
+            minimapBGImage.sprite = Sprite.Create(minimapBackgroundTexture,
+                new Rect(0, 0, minimapBackgroundTexture.width, minimapBackgroundTexture.height),
+                new Vector2(0.5f, 0.5f),
+                1, // pixels per unit
+                0,
+                SpriteMeshType.FullRect
+            );
+
+            minimapBGImage.rectTransform.sizeDelta = new Vector2(gridWidth, gridHeight);
+
+            float zoom = 8f;
+            minimapBGImage.rectTransform.sizeDelta = new Vector2(gridWidth * zoom, gridHeight * zoom);
+            minimapBGImage.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
+            minimapBGImage.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
+
+            // Pivot also bottom-left
+            minimapBGImage.GetComponent<RectTransform>().pivot = new Vector2(1, 0);
+
+            // Position with offset (e.g., 10px from edges)
+            minimapBGImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(-5, 5);
+        }
+        FirstInitializationMinimapBG();
         UpdateMinimap();
     }
 
-    private void SetTileColor(int x, int y, Color color, float alpha = 0.75f)
+    private void SetTileColor(int x, int y, Color color, float alpha = 1f)
     {
         color.a = alpha;
         for (int i = 0; i < 8; i++)
@@ -132,7 +172,78 @@ public class MinimapScript : MonoBehaviour
 
         }
 
-        minimapTexture.Apply();
+
+    }
+
+    private void SetBGTileColor(int x, int y, Color color, float alpha = 0.75f)
+    {
+        color.a = alpha;
+        minimapBackgroundTexture.SetPixel(x, y, color);
+
+        minimapBackgroundTexture.Apply();
+    }
+
+    public void FirstInitializationMinimapBG()
+    {
+        if (waitforinitialization <= 0)
+        {
+            for (int i = 0; i < gridScript.Grid.Count; i++)
+            {
+                for (int j = 0; j < gridScript.Grid[i].Count; j++)
+                {
+                    GridSquareScript tile = gridScript.GetTile(i, j);
+                    if ((tile.Mechanism != null && tile.Mechanism.type != 0))
+                    {
+                        continue;
+                    }
+                    if (tile.activated)
+                    {
+                        if (tile.isobstacle)
+                        {
+                            SetBGTileColor(i, j, Color.grey);
+                        }
+                        else
+                        {
+                            SetBGTileColor(i, j, Color.white);
+                        }
+                        switch (tile.type.ToLower())
+                        {
+                            case "forest":
+                                SetBGTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.green);
+                                break;
+                            case "ruins":
+                                SetBGTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.gray);
+                                break;
+                            case "fire":
+                                SetBGTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
+
+                                break;
+                            case "water":
+                                SetBGTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.cyan);
+                                break;
+
+
+                            case "fortification":
+                                SetBGTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, new Color(0.545f, 0.271f, 0.075f));
+
+                                break;
+                            case "fog":
+                                SetBGTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.black);
+
+                                break;
+                            case "medicinalwater":
+                                SetBGTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, new Color(0.5510659f, 0.8608279f, 0.9371068f));
+                                break;
+                            case "desert":
+                                SetBGTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
+                                break;
+                        }
+                    }
+
+
+                }
+            }
+        }
     }
 
     public void UpdateMinimap()
@@ -144,50 +255,7 @@ public class MinimapScript : MonoBehaviour
                 for (int j = 0; j < gridScript.Grid[i].Count; j++)
                 {
                     GridSquareScript tile = gridScript.GetTile(i, j);
-                    if (firstinitialization || (tile == previoustile && gridScript.selection != null && previoustile != gridScript.selection))
-                    {
-                        if (tile.isobstacle)
-                        {
-                            SetTileColor(i, j, Color.grey);
-                        }
-                        else
-                        {
-                            SetTileColor(i, j, Color.white);
-                        }
-                        switch (tile.type.ToLower())
-                        {
-                            case "forest":
-                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.green);
-                                break;
-                            case "ruins":
-                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.gray);
-                                break;
-                            case "fire":
-                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
-
-                                break;
-                            case "water":
-                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.cyan);
-                                break;
-
-
-                            case "fortification":
-                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, new Color(0.545f, 0.271f, 0.075f));
-
-                                break;
-                            case "fog":
-                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.black);
-
-                                break;
-                            case "medicinalwater":
-                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, new Color(0.5510659f, 0.8608279f, 0.9371068f));
-                                break;
-                            case "desert":
-                                SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
-                                break;
-                        }
-                    }
-
+                    SetTileColor(i, j, Color.clear, 0f);
                     if (gridScript.attacktiles.Contains(tile) || gridScript.lockedattacktiles.Contains(tile))
                     {
                         //SetTileColor(i, j, new Color(245f / 255f, 176f / 255f, 66f / 255f)); //orange
@@ -244,7 +312,7 @@ public class MinimapScript : MonoBehaviour
             manageselectionicon();
             firstinitialization = false;
 
-
+            minimapTexture.Apply();
         }
 
 
