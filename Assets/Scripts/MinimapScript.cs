@@ -23,8 +23,6 @@ public class MinimapScript : MonoBehaviour
 
     private int showposition;
 
-    private bool firstinitialization;
-
     private GridSquareScript previoustile;
 
     private void Awake()
@@ -310,7 +308,6 @@ public class MinimapScript : MonoBehaviour
             }
 
             manageselectionicon();
-            firstinitialization = false;
 
             minimapTexture.Apply();
         }

@@ -74,10 +74,10 @@ public class TurnManger : MonoBehaviour
             GridScript = GridScript.instance;
         }
 
-        if (InputManager.Startpressed && waittingforstart && !preBattleMenuScript.gameObject.activeSelf && !textBubbleScript.indialogue && !TutorialWindows.activeSelf)
-        {
-            waittingforstart = false;
-        }
+        // if (InputManager.Startpressed && waittingforstart && !preBattleMenuScript.gameObject.activeSelf && !textBubbleScript.indialogue && !TutorialWindows.activeSelf)
+        // {
+        //     waittingforstart = false;
+        // }
 
 
         if (!textBubbleScript.indialogue && !preBattleMenuScript.gameObject.activeSelf && currentlyplaying == "" && !TutorialWindows.activeSelf)

@@ -12,7 +12,9 @@ public class GridSquareScript : MonoBehaviour
 
     public float rotationperframe;
 
-    private GameObject SelectRound;
+    public GameObject SelectRound;
+
+    public GameObject LockedSelectRound;
 
     private GameObject SelectRoundFilling;
 
@@ -125,7 +127,6 @@ public class GridSquareScript : MonoBehaviour
     void Awake()
     {
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        SelectRound = transform.GetChild(1).gameObject;
         SelectRoundFilling = transform.GetChild(2).gameObject;
         InitializePosition();
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
@@ -221,6 +222,23 @@ public class GridSquareScript : MonoBehaviour
                 if (SelectRound.activeSelf)
                 {
                     SelectRound.SetActive(false);
+                }
+
+            }
+            if ((GridScript.lockselection && ActionManager.instance.currentcharacter != null && ActionManager.instance.currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(this)) || (PreBattleMenuScript.instance != null && PreBattleMenuScript.instance.selectedunit != null && PreBattleMenuScript.instance.selectedunit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(this)))
+            {
+                if (!LockedSelectRound.activeSelf)
+                {
+                    LockedSelectRound.SetActive(true);
+                }
+
+                LockedSelectRound.transform.rotation = Quaternion.Euler(LockedSelectRound.transform.rotation.eulerAngles + new Vector3(0f, -rotationperframe, 0f));
+            }
+            else
+            {
+                if (LockedSelectRound.activeSelf)
+                {
+                    LockedSelectRound.SetActive(false);
                 }
 
             }

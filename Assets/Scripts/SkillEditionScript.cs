@@ -63,13 +63,18 @@ public class SkillEditionScript : MonoBehaviour
                 if (SkillList.activeSelf)
                 {
                     SkillList.SetActive(false);
+                    EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
                 }
-                foreach (GameObject go in PreBattleMenuItems)
+                else
                 {
-                    go.SetActive(true);
+                    foreach (GameObject go in PreBattleMenuItems)
+                    {
+                        go.SetActive(true);
+                    }
+                    gameObject.SetActive(false);
+                    gridscript.InitializeGOList();
                 }
-                gameObject.SetActive(false);
-                gridscript.InitializeGOList();
+
                 return;
 
             }
@@ -95,6 +100,7 @@ public class SkillEditionScript : MonoBehaviour
                 {
                     if (SkillList.activeSelf)
                     {
+                        Debug.Log("here");
                         SkillList.SetActive(false);
                         EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
                     }

@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnitScript;
 
 public class PreBattleMenuScript : MonoBehaviour
 {
+
+    public static PreBattleMenuScript instance;
 
     public GameObject ReplaceUnitButton;
     private GridScript GridScript;
@@ -12,6 +13,14 @@ public class PreBattleMenuScript : MonoBehaviour
     private InputManager InputManager;
     public GameObject selectedunit;
     private MapInitializer MapInitializer;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

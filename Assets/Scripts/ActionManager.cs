@@ -173,6 +173,7 @@ public class ActionManager : MonoBehaviour
                     }
                     if (InputManager.canceljustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                     {
+                        Debug.Log("Resetting action");
                         currentcharacter = null;
                         GridScript.ResetAllSelections();
                         GridScript.Recolor();

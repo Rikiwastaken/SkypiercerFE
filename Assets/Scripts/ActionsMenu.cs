@@ -116,12 +116,11 @@ public class ActionsMenu : MonoBehaviour
         inputManager = InputManager.instance;
 
 
-        if (inputManager.canceljustpressed && !ItemsScript.activeSelf && !CommandGO.activeSelf)
+        if (inputManager.canceljustpressed && !ItemsScript.activeSelf && !CommandGO.activeSelf && !AttackButton.transform.parent.gameObject.activeSelf)
         {
             ActionsCancelButton.onClick.Invoke();
         }
-
-        if (inputManager.canceljustpressed && AttackButton.transform.parent.gameObject.activeSelf)
+        else if (inputManager.canceljustpressed && AttackButton.transform.parent.gameObject.activeSelf)
         {
             AttackCancelButton.onClick.Invoke();
         }
