@@ -44,7 +44,7 @@ public class GridSquareScript : MonoBehaviour
         Fortification : +5% Dodge, +15% accuracy, restore 10% HP Each turn;
         Fog : +20% Dodge, -20% accuracy
         MedicinalWater : +50% HP each turn
-        Desert : -10% HP each turn
+        Desert : -25% HP each turn
     */
     public string type;
 

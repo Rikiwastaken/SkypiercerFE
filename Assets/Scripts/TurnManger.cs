@@ -378,8 +378,8 @@ public class TurnManger : MonoBehaviour
                         unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Fire");
                         break;
                     case "desert":
-                        hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 10);
-                        unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 10);
+                        hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 4);
+                        unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 4);
                         unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Desert");
                         break;
                     case "fortification":

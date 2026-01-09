@@ -385,6 +385,10 @@ public class MapLoader : EditorWindow
             {
                 Tile.GetComponent<GridSquareScript>().type = "MedicinalWater";
             }
+            else if (pixelColor.Equals(colors.DesertColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Desert";
+            }
         }
         else
         {
@@ -420,6 +424,10 @@ public class MapLoader : EditorWindow
             else if (pixelColor.Equals(colors.MedicinalWaterColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "MedicinalWater";
+            }
+            else if (pixelColor.Equals(colors.DesertColor))
+            {
+                Tile.GetComponent<GridSquareScript>().type = "Desert";
             }
 
         }
@@ -556,6 +564,7 @@ public class MapLoader : EditorWindow
         NewColor.FortificationColor = Color.white;
         NewColor.FogColor = Color.white;
         NewColor.MedicinalWaterColor = Color.white;
+        NewColor.DesertColor = Color.white;
 
         if (MechanismMap != null)
         {
@@ -569,6 +578,7 @@ public class MapLoader : EditorWindow
             NewColor.FortificationColor = MechanismMap.GetPixel(0, 8);
             NewColor.FogColor = MechanismMap.GetPixel(0, 9);
             NewColor.MedicinalWaterColor = MechanismMap.GetPixel(0, 10);
+            NewColor.DesertColor = MechanismMap.GetPixel(0, 11);
         }
 
         if (UnitMap != null)
