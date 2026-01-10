@@ -553,7 +553,7 @@ public class AttackTurnScript : MonoBehaviour
                 foreach (GridSquareScript tile in tilestochange)
                 {
                     tile.RemainingRainTurns = 0;
-                    tile.RemainingSunTurns = 3;
+                    tile.RemainingSunTurns = 2;
                 }
             }
         }
@@ -582,7 +582,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 foreach (GridSquareScript tile in tilestochange)
                 {
-                    tile.RemainingRainTurns = 3;
+                    tile.RemainingRainTurns = 2;
                     tile.RemainingSunTurns = 0;
                 }
             }

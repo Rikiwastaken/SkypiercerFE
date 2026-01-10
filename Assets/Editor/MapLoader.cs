@@ -450,11 +450,11 @@ public class MapLoader : EditorWindow
 
             if (pixelColor.Equals(RainColor))
             {
-                Tile.GetComponent<GridSquareScript>().RemainingRainTurns = 3;
+                Tile.GetComponent<GridSquareScript>().RemainingRainTurns = 2;
             }
             else if (pixelColor.Equals(SunColor))
             {
-                Tile.GetComponent<GridSquareScript>().RemainingSunTurns = 3;
+                Tile.GetComponent<GridSquareScript>().RemainingSunTurns = 2;
             }
         }
         else
@@ -462,11 +462,11 @@ public class MapLoader : EditorWindow
             Color pixelColor = RainmMap.GetPixel(x + 1, y);
             if (pixelColor.Equals(RainColor))
             {
-                Tile.GetComponent<GridSquareScript>().RemainingRainTurns = 3;
+                Tile.GetComponent<GridSquareScript>().RemainingRainTurns = 2;
             }
             else if (pixelColor.Equals(SunColor))
             {
-                Tile.GetComponent<GridSquareScript>().RemainingSunTurns = 3;
+                Tile.GetComponent<GridSquareScript>().RemainingSunTurns = 2;
             }
 
         }

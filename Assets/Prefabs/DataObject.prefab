@@ -1916,12 +1916,19 @@ MonoBehaviour:
     ID: 73
   - name: Eye of Shining Justice
     Descriptions: Increases Damage by 100, reduces damage taken by 100. (for Debug
-      use)
+      use).
     IsCommand: 0
     Cost: 0
     targettype: 0
     range: 0
     ID: 74
+  - name: Dried
+    Descriptions: Negates the effects of the Desert.
+    IsCommand: 0
+    Cost: 0
+    targettype: 0
+    range: 0
+    ID: 75
   PlayableCharacterList:
   - name: Zack
     ID: 0
@@ -2669,7 +2676,7 @@ MonoBehaviour:
       deployunit: 0
       unlocked: 0
       protagonist: 0
-      battalion: 
+      battalion: zack
       ID: 7
     enemyStats:
       classID: 0
@@ -2769,7 +2776,7 @@ MonoBehaviour:
       deployunit: 0
       unlocked: 0
       protagonist: 0
-      battalion: 
+      battalion: kira
       ID: 8
     enemyStats:
       classID: 0
@@ -2869,7 +2876,7 @@ MonoBehaviour:
       deployunit: 0
       unlocked: 0
       protagonist: 1
-      battalion: 
+      battalion: kira
       ID: 9
     enemyStats:
       classID: 0

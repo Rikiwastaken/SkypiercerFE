@@ -2107,7 +2107,7 @@ MonoBehaviour:
 
       Stair tiles do not have any bonus
       or penalty in terms of movement or combat.'
-    chapterWhereUnlocks: 4
+    chapterWhereUnlocks: 3
   - name: Special Tiles
     description: "Some tiles can have special effects that can be positive or negative
       :\n\n - Forest : Increases Dodge Rate by 20%.\n - Ruins : Increases Dodge Rate
@@ -2117,6 +2117,30 @@ MonoBehaviour:
       by 1 and Dodge Rate by 20%.\n - Fortification : Increases Dodge Rate by 5%,
       Hit rate by 15% and restores 10% HP each turn.\n - Medicinal Water : Restores
       50% HP each turn.\n - Desert : Lowers HP by 10% each turn."
+    chapterWhereUnlocks: 4
+  - name: Weather
+    description: 'The influence of the Beast can sometimes unleash a blighted rain.
+
+
+      The
+      rain <size=25><sprite=14></size> lasts for 2 turns and is always followed by
+      sun <size=25><sprite=15></size>, which also lasts two turns before turning
+      cloudy <size=25><sprite=13></size>.
+
+
+      A cloudy <size=25><sprite=13></size>
+      tile has a random chance to become rainy <size=25><sprite=14></size>, which
+      is higher if a neighboring tile is already rainy <size=25><sprite=14></size>.
+
+
+      Under
+      the rain <size=25><sprite=14></size>, pluvials <size=25><sprite=10></size>
+      get stronger. However, they also get weaker under the sun <size=25><sprite=15></size>.
+
+
+      Machines
+      <size=25><sprite=11></size> use solar power to repair themselves under the
+      sun <size=25><sprite=15></size>.'
     chapterWhereUnlocks: 4
   TipsToUse: []
 --- !u!1 &1117708666303132778

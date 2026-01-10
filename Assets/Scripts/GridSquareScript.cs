@@ -525,7 +525,7 @@ public class GridSquareScript : MonoBehaviour
             ManageLeverOrientation();
 
 
-            if (RemainingRainTurns < 3)
+            if (RemainingRainTurns < 2)
             {
                 justbecamerain = false;
             }

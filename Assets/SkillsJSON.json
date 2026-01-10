@@ -665,6 +665,24 @@
             "targettype": 0,
             "range": 0,
             "ID": 73
+        },
+        {
+            "name": "Eye of Shining Justice",
+            "Descriptions": "Increases Damage by 100, reduces damage taken by 100. (for Debug use).",
+            "IsCommand": false,
+            "Cost": 0,
+            "targettype": 0,
+            "range": 0,
+            "ID": 74
+        },
+        {
+            "name": "Dried",
+            "Descriptions": "Negates the effects of the Desert.",
+            "IsCommand": false,
+            "Cost": 0,
+            "targettype": 0,
+            "range": 0,
+            "ID": 75
         }
     ]
 }

@@ -378,6 +378,11 @@ public class TurnManger : MonoBehaviour
                         unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Fire");
                         break;
                     case "desert":
+                        if (unit.GetComponent<UnitScript>().GetSkill(75)) // Dried
+                        {
+                            unit.GetComponent<UnitScript>().AddNumber(0, false, "Dried");
+                            break;
+                        }
                         hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 4);
                         unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 4);
                         unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Desert");

@@ -95,7 +95,7 @@ public class WeatherManager : MonoBehaviour
         {
             if (randomvalue < 30)
             {
-                Tile.RemainingRainTurns = 3;
+                Tile.RemainingRainTurns = 2;
                 Tile.justbecamerain = true;
             }
         }
@@ -103,7 +103,7 @@ public class WeatherManager : MonoBehaviour
         {
             if (randomvalue < 15)
             {
-                Tile.RemainingRainTurns = 3;
+                Tile.RemainingRainTurns = 2;
                 Tile.justbecamerain = true;
             }
         }
