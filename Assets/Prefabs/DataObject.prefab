@@ -1945,13 +1945,13 @@ MonoBehaviour:
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 70
-      StrengthGrowth: 60
+      HPGrowth: 60
+      StrengthGrowth: 50
       PsycheGrowth: 20
       DefenseGrowth: 40
       ResistanceGrowth: 40
-      SpeedGrowth: 60
-      DexterityGrowth: 60
+      SpeedGrowth: 55
+      DexterityGrowth: 50
     currentHP: 25
     movements: 6
     position: {x: 6, y: 2}
@@ -2029,9 +2029,9 @@ MonoBehaviour:
       HP: 23
       Strength: 6
       Psyche: 0
-      Defense: 7
+      Defense: 6
       Resistance: 4
-      Speed: 6
+      Speed: 5
       Dexterity: 6
     AjustedStats:
       HP: 0
@@ -2045,10 +2045,10 @@ MonoBehaviour:
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 80
+      HPGrowth: 70
       StrengthGrowth: 60
       PsycheGrowth: 10
-      DefenseGrowth: 70
+      DefenseGrowth: 65
       ResistanceGrowth: 30
       SpeedGrowth: 30
       DexterityGrowth: 50
@@ -2147,11 +2147,11 @@ MonoBehaviour:
     growth:
       HPGrowth: 50
       StrengthGrowth: 10
-      PsycheGrowth: 60
+      PsycheGrowth: 55
       DefenseGrowth: 30
-      ResistanceGrowth: 60
-      SpeedGrowth: 50
-      DexterityGrowth: 60
+      ResistanceGrowth: 55
+      SpeedGrowth: 40
+      DexterityGrowth: 50
     currentHP: 13
     movements: 6
     position: {x: 6, y: 2}
@@ -2246,11 +2246,11 @@ MonoBehaviour:
     affiliation: playable
     growth:
       HPGrowth: 70
-      StrengthGrowth: 60
+      StrengthGrowth: 50
       PsycheGrowth: 10
-      DefenseGrowth: 60
-      ResistanceGrowth: 50
-      SpeedGrowth: 30
+      DefenseGrowth: 55
+      ResistanceGrowth: 45
+      SpeedGrowth: 20
       DexterityGrowth: 40
     currentHP: 180
     movements: 5
@@ -2345,12 +2345,12 @@ MonoBehaviour:
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 60
-      StrengthGrowth: 50
-      PsycheGrowth: 50
-      DefenseGrowth: 50
+      HPGrowth: 40
+      StrengthGrowth: 45
+      PsycheGrowth: 45
+      DefenseGrowth: 40
       ResistanceGrowth: 30
-      SpeedGrowth: 50
+      SpeedGrowth: 40
       DexterityGrowth: 50
     currentHP: 150
     movements: 6
@@ -2445,13 +2445,13 @@ MonoBehaviour:
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 40
+      HPGrowth: 20
       StrengthGrowth: 30
-      PsycheGrowth: 70
+      PsycheGrowth: 60
       DefenseGrowth: 30
       ResistanceGrowth: 20
-      SpeedGrowth: 70
-      DexterityGrowth: 60
+      SpeedGrowth: 50
+      DexterityGrowth: 70
     currentHP: 16
     movements: 6
     position: {x: 6, y: 2}
@@ -2545,13 +2545,13 @@ MonoBehaviour:
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 40
-      StrengthGrowth: 20
-      PsycheGrowth: 80
-      DefenseGrowth: 20
-      ResistanceGrowth: 90
-      SpeedGrowth: 40
-      DexterityGrowth: 40
+      HPGrowth: 100
+      StrengthGrowth: 100
+      PsycheGrowth: 100
+      DefenseGrowth: 100
+      ResistanceGrowth: 100
+      SpeedGrowth: 100
+      DexterityGrowth: 100
     currentHP: 20
     movements: 6
     position: {x: 4, y: 2}
@@ -2750,7 +2750,7 @@ MonoBehaviour:
       PsycheGrowth: 10
       DefenseGrowth: 80
       ResistanceGrowth: 30
-      SpeedGrowth: 30
+      SpeedGrowth: 15
       DexterityGrowth: 40
     currentHP: 25
     movements: 5
@@ -2845,13 +2845,13 @@ MonoBehaviour:
     experience: 0
     affiliation: playable
     growth:
-      HPGrowth: 60
-      StrengthGrowth: 50
-      PsycheGrowth: 20
-      DefenseGrowth: 40
-      ResistanceGrowth: 40
-      SpeedGrowth: 60
-      DexterityGrowth: 70
+      HPGrowth: 30
+      StrengthGrowth: 10
+      PsycheGrowth: 65
+      DefenseGrowth: 30
+      ResistanceGrowth: 60
+      SpeedGrowth: 40
+      DexterityGrowth: 60
     currentHP: 16
     movements: 6
     position: {x: 6, y: 1}
@@ -5149,6 +5149,7 @@ MonoBehaviour:
   CombatSceneName: BattleScene
   fadeCanvasGroup: {fileID: 7496421367425056967}
   fadeDuration: 0.5
+  combatLoaded: 0
 --- !u!114 &-8206881994709787371
 MonoBehaviour:
   m_ObjectHideFlags: 0
