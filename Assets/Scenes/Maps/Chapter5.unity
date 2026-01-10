@@ -5322,11 +5322,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8048,7 +8048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.g
-      value: 0.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14069,7 +14069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.size
-      value: 17
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: playablepos.Array.size
@@ -14213,15 +14213,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[17].Name
-      value: Pluvial Reaper
+      value: Pluvial Swordsman
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[18].Name
-      value: New Enemy
+      value: Pluvial Reaper
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[19].Name
-      value: 'Ranged Machine '
+      value: Pluvial Fighter
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[20].Name
@@ -14413,7 +14413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[17].classID
-      value: 14
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[17].modelID
@@ -14421,7 +14421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[18].classID
-      value: 0
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[18].modelID
@@ -14429,11 +14429,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[19].classID
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[19].modelID
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[20].classID
@@ -14605,15 +14605,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[17].startpos.x
-      value: 11
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[17].startpos.y
-      value: 18
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[18].startpos.x
-      value: 0
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[18].startpos.y
@@ -14621,11 +14621,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[19].startpos.x
-      value: 4
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[19].startpos.y
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[1].personality
@@ -14721,7 +14721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[19].personality
-      value: Hunter
+      value: nothing
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[1].desiredlevel
@@ -14797,15 +14797,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[17].desiredlevel
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[18].desiredlevel
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[19].desiredlevel
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[20].desiredlevel
@@ -14865,6 +14865,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[16].usetelekinesis
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].usetelekinesis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[19].usetelekinesis
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
@@ -15000,6 +15008,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].Skills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[19].Skills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[21].RemainingLifebars
       value: 1
       objectReference: {fileID: 0}
@@ -15112,6 +15128,14 @@ PrefabInstance:
       value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EnemyList.Array.data[18].Skills.Array.data[1]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: 'EnemyList.Array.data[19].Skills.Array.data[1]'
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[1].equipments.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -15189,7 +15213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[18].equipments.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[19].equipments.Array.size
@@ -15241,7 +15265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[5].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[6].monsterStats.ismachine
@@ -15249,7 +15273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[6].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[7].monsterStats.ismachine
@@ -15257,7 +15281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[7].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[8].monsterStats.ismachine
@@ -15265,7 +15289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[8].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[9].monsterStats.ismachine
@@ -15273,7 +15297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[9].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[10].monsterStats.ismachine
@@ -15281,7 +15305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[10].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[11].monsterStats.ismachine
@@ -15289,7 +15313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[11].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[12].monsterStats.ismachine
@@ -15297,7 +15321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[12].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[13].monsterStats.ismachine
@@ -15305,7 +15329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[13].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[14].monsterStats.ismachine
@@ -15313,7 +15337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[14].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[15].monsterStats.ismachine
@@ -15321,7 +15345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[15].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[16].monsterStats.ismachine
@@ -15329,7 +15353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[16].monsterStats.ispluvial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[17].monsterStats.ismachine
@@ -15344,7 +15368,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[18].monsterStats.ispluvial
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: EnemyList.Array.data[19].monsterStats.ismachine
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
+      propertyPath: EnemyList.Array.data[19].monsterStats.ispluvial
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
@@ -15425,15 +15457,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[17].equipments.Array.data[0]'
-      value: 17
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[18].equipments.Array.data[0]'
-      value: 33
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[19].equipments.Array.data[0]'
-      value: 33
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5264566689360548286, guid: fbb8c4a06e2a6834695644c47e607f17, type: 3}
       propertyPath: 'EnemyList.Array.data[20].equipments.Array.data[0]'
@@ -17367,8 +17399,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
-      propertyPath: m_Color.r
+      propertyPath: m_Color.g
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6362861168717063375, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17779,6 +17815,10 @@ PrefabInstance:
     - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
+      propertyPath: m_Color.g
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5993513729733334164, guid: 6f2bde57e29d6eb41a0a59338460782f, type: 3}
       propertyPath: m_Color.r
