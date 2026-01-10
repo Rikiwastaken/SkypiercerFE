@@ -30,6 +30,8 @@ Test level rebuilt from Fire Emblem Radiant Dawn
 
 Music from Fire Emblem Three Houses
 
+<a href="http://www.freepik.com">Designed by macrovector / Freepik</a>
+
 ## Controls
 
 (for Xbox Controller and AZERTY keyboard)
