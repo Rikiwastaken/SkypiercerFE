@@ -829,6 +829,11 @@ public class GridSquareScript : MonoBehaviour
 
             transform.position = new Vector3(transform.position.x, elevation + 0.5f, transform.position.z);
         }
+        else if (type != null && type.ToLower() == "water")
+        {
+
+            transform.position = new Vector3(transform.position.x, elevation - 0.7f, transform.position.z);
+        }
         else
         {
 
