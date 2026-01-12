@@ -116,3 +116,10 @@ InitTestScene*.unity*
 .DS_Store
 
 /[Aa]ssets/Samples
+
+# Windows thumbnail cache
+Thumbs.db
+
+# Unity generated asset bundles (if not needed in repo)
+*.unity3d
+*.assetbundle
