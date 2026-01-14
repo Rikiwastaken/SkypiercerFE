@@ -32,6 +32,8 @@ public class DataScript : MonoBehaviour
 
     public List<Sprite> DialogueSpriteList;
 
+    public List<Sprite> EnemySprites;
+
     [Serializable]
     public class ClassInfo
     {

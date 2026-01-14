@@ -108,6 +108,7 @@ public class UnitScript : MonoBehaviour
         public int modelID;
         public bool talkable;
         public bool talkedto;
+        public int SpriteID;
     }
 
     [Serializable]

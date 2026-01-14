@@ -473,7 +473,7 @@
             "Descriptions": "Changes tile to Fortification Tile.",
             "IsCommand": true,
             "Cost": 10,
-            "targettype": 0,
+            "targettype": 3,
             "range": 0,
             "ID": 52
         },
@@ -683,6 +683,15 @@
             "targettype": 0,
             "range": 0,
             "ID": 75
+        },
+        {
+            "name": "Taunt",
+            "Descriptions": "Forces enemies to target this unit.",
+            "IsCommand": false,
+            "Cost": 10,
+            "targettype": 0,
+            "range": 0,
+            "ID": 76
         }
     ]
 }
