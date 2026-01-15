@@ -28,8 +28,7 @@ Game design & concept by Riki.
 
 Test level rebuilt from Fire Emblem Radiant Dawn
 
-Music from Fire Emblem Three Houses
-
+Music by <a href="https://maou.audio/category/bgm/"> Maoudamashii </a> and<a href="https://youfulca.com/en/music_assets/"> Youfulca </a> 
 <a href="http://www.freepik.com">Designed by macrovector / Freepik</a>
 
 ## Controls

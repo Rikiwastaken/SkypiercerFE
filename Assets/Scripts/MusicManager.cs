@@ -11,6 +11,8 @@ public class MusicManager : MonoBehaviour
     public AudioSource outcombat;
     public AudioSource BeforeCombat;
 
+    public AudioSource CampMusic;
+
     public float maxvolume;
 
     public AudioMixer mixer;
@@ -177,6 +179,24 @@ public class MusicManager : MonoBehaviour
             }
         }
 
+        if (SceneManager.GetActiveScene().name == "Camp")
+        {
+            if (CampMusic.volume < maxvolume)
+            {
+                CampMusic.volume += Time.fixedDeltaTime;
+            }
+            if (!CampMusic.isPlaying)
+            {
+                CampMusic.Play();
+            }
+        }
+        else
+        {
+            if (CampMusic.volume > 0)
+            {
+                CampMusic.volume -= Time.fixedDeltaTime;
+            }
+        }
 
     }
 
