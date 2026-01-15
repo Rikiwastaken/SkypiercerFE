@@ -19,6 +19,7 @@ public class TextBubbleScript : MonoBehaviour
         public Sprite Portrait;
         public int characterindex = -1;
         public Sprite ImageToShow;
+        public int musictoplay = -1;
     }
 
     private List<TextBubbleInfo> Dialogue;
@@ -227,6 +228,9 @@ public class TextBubbleScript : MonoBehaviour
             charIndex = 0;
             charTimer = 0f;
             isPrinting = true;
+
+            MusicManager.instance.SetDialogueMusic(info.musictoplay);
+
         }
         else
         {

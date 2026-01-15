@@ -13,6 +13,17 @@ public class MusicManager : MonoBehaviour
 
     public AudioSource CampMusic;
 
+
+
+    public AudioSource DialogueAudioSource;
+    public AudioSource DialogueAudioSource2;
+
+    private AudioSource currentAudioSource;
+
+    public int CurrentDialogueMusic;
+
+    public List<AudioClip> DialogueMusics;
+
     public float maxvolume;
 
     public AudioMixer mixer;
@@ -198,6 +209,83 @@ public class MusicManager : MonoBehaviour
             }
         }
 
+        if (TextBubbleScript.Instance != null && TextBubbleScript.Instance.indialogue)
+        {
+
+            if (currentAudioSource != null && currentAudioSource.isPlaying && currentAudioSource.volume > 0 && CurrentDialogueMusic != -1)
+            {
+                if (CampMusic.volume > 0)
+                {
+                    CampMusic.volume -= Time.fixedDeltaTime * 2;
+                }
+                if (outcombat.volume > 0)
+                {
+                    outcombat.volume -= Time.fixedDeltaTime * 2;
+                }
+                if (incombat.volume > 0)
+                {
+                    incombat.volume -= Time.fixedDeltaTime * 2;
+                }
+                if (BeforeCombat.volume > 0)
+                {
+                    BeforeCombat.volume -= Time.fixedDeltaTime * 2;
+                }
+
+                if (currentAudioSource == DialogueAudioSource)
+                {
+                    if (DialogueAudioSource2.volume > 0)
+                    {
+                        DialogueAudioSource2.volume -= Time.fixedDeltaTime * 2;
+                    }
+                }
+                else
+                {
+                    if (DialogueAudioSource.volume > 0)
+                    {
+                        DialogueAudioSource.volume -= Time.fixedDeltaTime * 2;
+                    }
+                }
+
+
+                if (currentAudioSource.volume <= maxvolume)
+                {
+                    currentAudioSource.volume += maxvolume;
+                }
+            }
+            else
+            {
+                if (currentAudioSource != null && currentAudioSource.volume > 0)
+                {
+                    currentAudioSource.volume -= Time.fixedDeltaTime * 2;
+                }
+            }
+        }
+
+    }
+
+    public void SetDialogueMusic(int musicID = 0)
+    {
+        if (musicID > 0 && musicID != CurrentDialogueMusic)
+        {
+
+            if (currentAudioSource == DialogueAudioSource)
+            {
+                currentAudioSource = DialogueAudioSource2;
+            }
+            else
+            {
+                currentAudioSource = DialogueAudioSource;
+            }
+
+            CurrentDialogueMusic = musicID;
+            currentAudioSource.clip = DialogueMusics[CurrentDialogueMusic];
+            currentAudioSource.volume = Time.deltaTime;
+            currentAudioSource.Play();
+        }
+        else if (musicID == -1)
+        {
+            CurrentDialogueMusic = -1;
+        }
     }
 
 }
