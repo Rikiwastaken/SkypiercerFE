@@ -797,92 +797,11 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.parent.gameObject.SetActive(true);
 
-        Sprite unitnewsprite = null;
 
-        if (charunit.affiliation.ToLower() == "playable")
-        {
-            unitnewsprite = DataScript.instance.DialogueSpriteList[charunit.ID];
-        }
-        else
-        {
-            unitnewsprite = DataScript.instance.EnemySprites[charunit.enemyStats.SpriteID];
-        }
-
-        unitSprite.sprite = unitnewsprite;
-
-        Sprite targetnewsprite = null;
-
-        if (chartarget.affiliation.ToLower() == "playable")
-        {
-            targetnewsprite = DataScript.instance.DialogueSpriteList[chartarget.ID];
-        }
-        else
-        {
-            targetnewsprite = DataScript.instance.EnemySprites[chartarget.enemyStats.SpriteID];
-        }
-
-        targetSprite.sprite = targetnewsprite;
 
         (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
 
-        string unitweapontxt = "";
 
-        equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (unitweapon.type.ToLower())
-        {
-            case ("sword"):
-                unitweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                unitweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                unitweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                unitweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                unitweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                unitweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                unitweapontxt += "<sprite=7>";
-                break;
-            default:
-                unitweapontxt += "<sprite=5>";
-                break;
-        }
-
-        UnitNameTMP.text = charunit.name;
-
-        if (charunit.telekinesisactivated && !UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(true);
-        }
-
-        if (!charunit.telekinesisactivated && UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(false);
-        }
-
-        if (charunit.currentTile[0].type != "")
-        {
-            UnitTileTMP.text = charunit.currentTile[0].type + " ";
-        }
-        else
-        {
-            UnitTileTMP.text = "Ground ";
-        }
-
-        UnitTileTMP.text += charunit.currentTile[0].elevation;
-
-        unitweapontxt += " " + unitweapon.Name + " " + unitweapon.Currentuses + "/" + unitweapon.Maxuses;
-
-        UnitWeapon.text = unitweapontxt;
 
         string damageunittxt = "";
         int FinalUnitdmg = CalculateDamage(unit, target);
@@ -926,17 +845,17 @@ public class ActionsMenu : MonoBehaviour
         {
             if (tripleattack)
             {
-                damageunittxt += "Dmg : " + CalculateDamage(unit, target) + " x 3 \n";
+                damageunittxt += CalculateDamage(unit, target) + " x 3";
             }
             else
             {
-                damageunittxt += "Dmg : " + CalculateDamage(unit, target) + " x 2 \n";
+                damageunittxt += CalculateDamage(unit, target) + " x 2";
             }
 
         }
         else
         {
-            damageunittxt += "Dmg : " + CalculateDamage(unit, target) + "\n";
+            damageunittxt += CalculateDamage(unit, target);
         }
 
         string UnitText = "<align=left>" + (int)Mathf.Max(charunit.currentHP - FinalTargetdmg, 0f) + "<align=center>\n";
@@ -947,99 +866,32 @@ public class ActionsMenu : MonoBehaviour
         UnitText += "Hit : " + CalculateHit(unit, target) + " %\n";
         UnitText += "Crit : " + CalculateCrit(unit, target) + " %\n";
 
-
-        unitAttackText.text = UnitText;
-
-        string targetweapontxt = "";
-
-        equipment targetweapon = target.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (targetweapon.type.ToLower())
-        {
-            case ("sword"):
-                targetweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                targetweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                targetweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                targetweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                targetweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                targetweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                targetweapontxt += "<sprite=7>";
-                break;
-            default:
-                targetweapontxt += "<sprite=5>";
-                break;
-        }
-
-        TargetNameTMP.text = chartarget.name;
-
-        if (chartarget.telekinesisactivated && !TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(true);
-        }
-
-        if (!chartarget.telekinesisactivated && TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(false);
-        }
-
-        targetweapontxt += " " + targetweapon.Name + " " + targetweapon.Currentuses + "/" + targetweapon.Maxuses;
-
-        TargetWeapon.text = targetweapontxt;
-
-        if (chartarget.currentTile[0].type != "")
-        {
-            TargetTileTMP.text = chartarget.currentTile[0].type + " ";
-        }
-        else
-        {
-            TargetTileTMP.text = "Ground ";
-        }
-
-        TargetTileTMP.text += chartarget.currentTile[0].elevation;
+        SetupCombatHUD(unit, true, true, (int)Mathf.Max(charunit.currentHP - FinalTargetdmg, 0f), false, damageunittxt, CalculateHit(unit, target) + "%", CalculateCrit(unit, target) + "%");
 
         if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38)) //Spite
         {
-            string TargetText = "<align=left>" + (int)Mathf.Max(chartarget.currentHP - FinalUnitdmg, 0f) + "<align=center>\n";
+            string TargetDmgText = "";
             if (doubleattacker == target)
             {
                 if (tripleattack)
                 {
-                    TargetText += "Dmg : " + CalculateDamage(target, unit) + " x 3 \n";
+                    TargetDmgText += CalculateDamage(target, unit) + " x 3";
                 }
                 else
                 {
-                    TargetText += "Dmg : " + CalculateDamage(target, unit) + " x 2 \n";
+                    TargetDmgText += CalculateDamage(target, unit) + " x 2";
                 }
 
             }
             else
             {
-                TargetText += "Dmg : " + CalculateDamage(target, unit) + "\n";
+                TargetDmgText += CalculateDamage(target, unit);
             }
-
-            TargetText += "Hit : " + CalculateHit(target, unit) + " %\n";
-            TargetText += "Crit : " + CalculateCrit(target, unit) + " %\n";
-            targetAttackText.text = TargetText;
+            SetupCombatHUD(target, false, true, (int)Mathf.Max(chartarget.currentHP - FinalUnitdmg, 0f), false, TargetDmgText, CalculateHit(target, unit) + "%", CalculateCrit(target, unit) + "%");
         }
         else
         {
-            string TargetText = "<align=left>" + (int)Mathf.Max(chartarget.currentHP - FinalUnitdmg, 0f) + "<align=center>\n";
-            TargetText += "Dmg : -\n";
-            TargetText += "Hit : -\n";
-            TargetText += "Crit : -\n";
-            targetAttackText.text = TargetText;
+            SetupCombatHUD(target, false, true, (int)Mathf.Max(chartarget.currentHP - FinalUnitdmg, 0f));
         }
 
 
@@ -1098,170 +950,12 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.parent.gameObject.SetActive(true);
 
-        Sprite unitnewsprite = null;
-
-        if (charunit.affiliation.ToLower() == "playable")
-        {
-            unitnewsprite = DataScript.instance.DialogueSpriteList[charunit.ID];
-        }
-        else
-        {
-            unitnewsprite = DataScript.instance.EnemySprites[charunit.enemyStats.SpriteID];
-        }
-
-        unitSprite.sprite = unitnewsprite;
-
-        Sprite targetnewsprite = null;
-
-        if (chartarget.affiliation.ToLower() == "playable")
-        {
-            targetnewsprite = DataScript.instance.DialogueSpriteList[chartarget.ID];
-        }
-        else
-        {
-            targetnewsprite = DataScript.instance.EnemySprites[chartarget.enemyStats.SpriteID];
-        }
-
-        targetSprite.sprite = targetnewsprite;
-
-        string unitweapontxt = "";
-
-        equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (unitweapon.type.ToLower())
-        {
-            case ("sword"):
-                unitweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                unitweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                unitweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                unitweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                unitweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                unitweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                unitweapontxt += "<sprite=7>";
-                break;
-            default:
-                unitweapontxt += "<sprite=5>";
-                break;
-        }
-
-        UnitNameTMP.text = charunit.name;
-
-        if (charunit.telekinesisactivated && !UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(true);
-        }
-
-        if (!charunit.telekinesisactivated && UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(false);
-        }
-
-        if (charunit.currentTile[0].type != "")
-        {
-            UnitTileTMP.text = charunit.currentTile[0].type + " ";
-        }
-        else
-        {
-            UnitTileTMP.text = "Ground ";
-        }
-
-        UnitTileTMP.text += charunit.currentTile[0].elevation;
-
-        unitweapontxt += " " + unitweapon.Name + " " + unitweapon.Currentuses + "/" + unitweapon.Maxuses;
-
-        UnitWeapon.text = unitweapontxt;
-
         int FinalHealingdmg = CalculateHealing(unit);
 
-        string UnitText = "<align=left>" + (int)Mathf.Max(charunit.currentHP, 0f) + "<align=center>\n";
 
-        UnitText += "Healing : " + FinalHealingdmg + "\n";
+        SetupCombatHUD(unit, true, true, (int)Mathf.Max(charunit.currentHP, 0f), false, FinalHealingdmg + "", "100%", "-", true);
 
-
-        UnitText += "Hit : 100 %\n";
-        UnitText += "Crit : -\n";
-
-
-        unitAttackText.text = UnitText;
-
-        string targetweapontxt = "";
-
-        equipment targetweapon = target.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (targetweapon.type.ToLower())
-        {
-            case ("sword"):
-                targetweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                targetweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                targetweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                targetweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                targetweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                targetweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                targetweapontxt += "<sprite=7>";
-                break;
-            default:
-                targetweapontxt += "<sprite=5>";
-                break;
-        }
-
-        TargetNameTMP.text = chartarget.name;
-
-        if (chartarget.telekinesisactivated && !TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(true);
-        }
-
-        if (!chartarget.telekinesisactivated && TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(false);
-        }
-
-        targetweapontxt += " " + targetweapon.Name + " " + targetweapon.Currentuses + "/" + targetweapon.Maxuses;
-
-        TargetWeapon.text = targetweapontxt;
-
-        if (chartarget.currentTile[0].type != "")
-        {
-            TargetTileTMP.text = chartarget.currentTile[0].type + " ";
-        }
-        else
-        {
-            TargetTileTMP.text = "Ground ";
-        }
-
-        TargetTileTMP.text += chartarget.currentTile[0].elevation;
-
-        string TargetText = "<align=left>" + (int)Mathf.Min(Mathf.Max(chartarget.currentHP + FinalHealingdmg, 0f), chartarget.AjustedStats.HP) + "<align=center>\n";
-        TargetText += "Dmg : -\n";
-        TargetText += "Hit : -\n";
-        TargetText += "Crit : -\n";
-
-        unitAttackText.text = UnitText;
-        targetAttackText.text = TargetText;
+        SetupCombatHUD(target, false, true, (int)Mathf.Min(Mathf.Max(chartarget.currentHP + FinalHealingdmg, 0f), chartarget.AjustedStats.HP));
 
         TargetGreenLifebar.fillAmount = Mathf.Min((float)(chartarget.currentHP + CalculateHealing(unit)) / (float)chartarget.AjustedStats.HP, 1f);
         TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
@@ -1332,170 +1026,16 @@ public class ActionsMenu : MonoBehaviour
 
     private void BasicCommandWindow(GameObject unit, GameObject target)
     {
+
+
+
+
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.parent.gameObject.SetActive(true);
 
-        Sprite unitnewsprite = null;
-
-        if (charunit.affiliation.ToLower() == "playable")
-        {
-            unitnewsprite = DataScript.instance.DialogueSpriteList[charunit.ID];
-        }
-        else
-        {
-            unitnewsprite = DataScript.instance.EnemySprites[charunit.enemyStats.SpriteID];
-        }
-
-        unitSprite.sprite = unitnewsprite;
-
-        Sprite targetnewsprite = null;
-
-        if (chartarget.affiliation.ToLower() == "playable")
-        {
-            targetnewsprite = DataScript.instance.DialogueSpriteList[chartarget.ID];
-        }
-        else
-        {
-            targetnewsprite = DataScript.instance.EnemySprites[chartarget.enemyStats.SpriteID];
-        }
-
-        targetSprite.sprite = targetnewsprite;
-
-        string unitweapontxt = "";
-
-        equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (unitweapon.type.ToLower())
-        {
-            case ("sword"):
-                unitweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                unitweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                unitweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                unitweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                unitweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                unitweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                unitweapontxt += "<sprite=7>";
-                break;
-            default:
-                unitweapontxt += "<sprite=5>";
-                break;
-        }
-
-        UnitNameTMP.text = charunit.name;
-
-        if (charunit.telekinesisactivated && !UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(true);
-        }
-
-        if (!charunit.telekinesisactivated && UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(false);
-        }
-
-        if (charunit.currentTile[0].type != "")
-        {
-            UnitTileTMP.text = charunit.currentTile[0].type + " ";
-        }
-        else
-        {
-            UnitTileTMP.text = "Ground ";
-        }
-
-        UnitTileTMP.text += charunit.currentTile[0].elevation;
-
-        unitweapontxt += " " + unitweapon.Name + " " + unitweapon.Currentuses + "/" + unitweapon.Maxuses;
-
-        UnitWeapon.text = unitweapontxt;
-
-        string UnitText = "<align=left>" + (int)Mathf.Max(charunit.currentHP, 0f) + "<align=center>\n";
-
-        UnitText += "Dmg : -\n";
-        UnitText += "Hit : -\n";
-        UnitText += "Crit : -\n";
-
-
-        unitAttackText.text = UnitText;
-
-        string targetweapontxt = "";
-
-        equipment targetweapon = target.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (targetweapon.type.ToLower())
-        {
-            case ("sword"):
-                targetweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                targetweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                targetweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                targetweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                targetweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                targetweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                targetweapontxt += "<sprite=7>";
-                break;
-            default:
-                targetweapontxt += "<sprite=5>";
-                break;
-        }
-
-        TargetNameTMP.text = chartarget.name;
-
-        if (chartarget.telekinesisactivated && !TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(true);
-        }
-
-        if (!chartarget.telekinesisactivated && TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(false);
-        }
-
-        targetweapontxt += " " + targetweapon.Name + " " + targetweapon.Currentuses + "/" + targetweapon.Maxuses;
-
-        TargetWeapon.text = targetweapontxt;
-
-        if (chartarget.currentTile[0].type != "")
-        {
-            TargetTileTMP.text = chartarget.currentTile[0].type + " ";
-        }
-        else
-        {
-            TargetTileTMP.text = "Ground ";
-        }
-
-        TargetTileTMP.text += chartarget.currentTile[0].elevation;
-
-        string TargetText = "<align=left>" + (int)Mathf.Min(Mathf.Max(chartarget.currentHP, 0f), chartarget.AjustedStats.HP) + "<align=center>\n";
-        TargetText += "Dmg : -\n";
-        TargetText += "Hit : -\n";
-        TargetText += "Crit : -\n";
-
-        unitAttackText.text = UnitText;
-        targetAttackText.text = TargetText;
+        SetupCombatHUD(unit, true, true, charunit.currentHP);
+        SetupCombatHUD(target, false, true, chartarget.currentHP);
 
         TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP, 1f);
         TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
@@ -1512,103 +1052,8 @@ public class ActionsMenu : MonoBehaviour
 
         int healthrestored = (int)((charunit.AjustedStats.HP - charunit.currentHP) * 0.25f);
 
-        Sprite unitnewsprite = null;
-
-        if (charunit.affiliation.ToLower() == "playable")
-        {
-            unitnewsprite = DataScript.instance.DialogueSpriteList[charunit.ID];
-        }
-        else
-        {
-            unitnewsprite = DataScript.instance.EnemySprites[charunit.enemyStats.SpriteID];
-        }
-
-        unitSprite.sprite = unitnewsprite;
-
-        targetSprite.sprite = EmptySprite;
-
-        string unitweapontxt = "";
-
-        equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (unitweapon.type.ToLower())
-        {
-            case ("sword"):
-                unitweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                unitweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                unitweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                unitweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                unitweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                unitweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                unitweapontxt += "<sprite=7>";
-                break;
-            default:
-                unitweapontxt += "<sprite=5>";
-                break;
-        }
-
-        UnitNameTMP.text = charunit.name;
-
-        if (charunit.telekinesisactivated && !UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(true);
-        }
-
-        if (!charunit.telekinesisactivated && UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(false);
-        }
-
-        if (charunit.currentTile[0].type != "")
-        {
-            UnitTileTMP.text = charunit.currentTile[0].type + " ";
-        }
-        else
-        {
-            UnitTileTMP.text = "Ground ";
-        }
-
-        UnitTileTMP.text += charunit.currentTile[0].elevation;
-
-        unitweapontxt += " " + unitweapon.Name + " " + unitweapon.Currentuses + "/" + unitweapon.Maxuses;
-
-        UnitWeapon.text = unitweapontxt;
-
-        string UnitText = "<align=left>" + (int)Mathf.Min(Mathf.Max(charunit.currentHP + healthrestored, 0f), charunit.AjustedStats.HP) + "<align=center>\n";
-
-        UnitText += "Healing : " + healthrestored + "\n";
-        UnitText += "Hit : -\n";
-        UnitText += "Crit : -\n";
-
-
-        unitAttackText.text = UnitText;
-
-
-
-        TargetNameTMP.text = "";
-
-        if (TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(false);
-        }
-
-        TargetWeapon.text = " ";
-
-        TargetTileTMP.text = "";
-
-        targetAttackText.text = "";
+        SetupCombatHUD(unit, true, true, (int)Mathf.Min(Mathf.Max(charunit.currentHP + healthrestored, 0f), charunit.AjustedStats.HP), false, healthrestored + "", "-", "-", true);
+        SetupCombatHUD(target, false, true, 0, true);
 
         TargetGreenLifebar.fillAmount = 1f;
         TargetOrangeLifeBar.fillAmount = 1f;
@@ -1625,20 +1070,8 @@ public class ActionsMenu : MonoBehaviour
 
         int healthrestored = (int)Mathf.Min((charunit.AjustedStats.HP - charunit.currentHP), charunit.AjustedStats.HP * 0.5f);
 
-        Sprite unitnewsprite = null;
-
-        if (charunit.affiliation.ToLower() == "playable")
-        {
-            unitnewsprite = DataScript.instance.DialogueSpriteList[charunit.ID];
-        }
-        else
-        {
-            unitnewsprite = DataScript.instance.EnemySprites[charunit.enemyStats.SpriteID];
-        }
-
-        unitSprite.sprite = unitnewsprite;
-
-        targetSprite.sprite = EmptySprite;
+        SetupCombatHUD(unit, true, true, (int)Mathf.Min(Mathf.Max(charunit.currentHP + healthrestored, 0f), charunit.AjustedStats.HP), false, healthrestored + "", "-", "-", true);
+        SetupCombatHUD(target, false, true, 0, true);
 
         string unitweapontxt = "";
 
@@ -1672,59 +1105,11 @@ public class ActionsMenu : MonoBehaviour
                 break;
         }
 
-        UnitNameTMP.text = charunit.name;
 
-        if (charunit.telekinesisactivated && !UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(true);
-        }
-
-        if (!charunit.telekinesisactivated && UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(false);
-        }
-
-        if (charunit.currentTile[0].type != "")
-        {
-            UnitTileTMP.text = charunit.currentTile[0].type + " ";
-        }
-        else
-        {
-            UnitTileTMP.text = "Ground ";
-        }
-
-        UnitTileTMP.text += charunit.currentTile[0].elevation;
 
         unitweapontxt += " " + unitweapon.Name + " <color=red>0</color>/" + unitweapon.Maxuses;
 
         UnitWeapon.text = unitweapontxt;
-
-        string UnitText = "<align=left>" + (int)Mathf.Min(Mathf.Max(charunit.currentHP + healthrestored, 0f), charunit.AjustedStats.HP) + "<align=center>\n";
-
-        UnitText += "Healing : " + healthrestored + "\n";
-        UnitText += "Hit : -\n";
-        UnitText += "Crit : -\n";
-
-
-        unitAttackText.text = UnitText;
-
-
-
-        TargetNameTMP.text = "";
-
-        if (TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(false);
-        }
-
-        TargetWeapon.text = " ";
-
-        TargetTileTMP.text = "";
-
-        targetAttackText.text = "";
-
-
-
 
         TargetGreenLifebar.fillAmount = 1f;
         TargetOrangeLifeBar.fillAmount = 1f;
@@ -1741,20 +1126,11 @@ public class ActionsMenu : MonoBehaviour
 
         int healthlost = (int)Mathf.Min(charunit.currentHP - 1, charunit.AjustedStats.HP * 0.5f);
 
-        Sprite unitnewsprite = null;
 
-        if (charunit.affiliation.ToLower() == "playable")
-        {
-            unitnewsprite = DataScript.instance.DialogueSpriteList[charunit.ID];
-        }
-        else
-        {
-            unitnewsprite = DataScript.instance.EnemySprites[charunit.enemyStats.SpriteID];
-        }
+        SetupCombatHUD(unit, true, true, (int)Mathf.Min(Mathf.Max(charunit.currentHP - healthlost, 0f), charunit.AjustedStats.HP), false, healthlost + "");
+        SetupCombatHUD(target, false, true, 0, true);
 
-        unitSprite.sprite = unitnewsprite;
 
-        targetSprite.sprite = EmptySprite;
 
         string unitweapontxt = "";
 
@@ -1788,56 +1164,11 @@ public class ActionsMenu : MonoBehaviour
                 break;
         }
 
-        UnitNameTMP.text = charunit.name;
 
-        if (charunit.telekinesisactivated && !UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(true);
-        }
-
-        if (!charunit.telekinesisactivated && UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(false);
-        }
-
-        if (charunit.currentTile[0].type != "")
-        {
-            UnitTileTMP.text = charunit.currentTile[0].type + " ";
-        }
-        else
-        {
-            UnitTileTMP.text = "Ground ";
-        }
-
-        UnitTileTMP.text += charunit.currentTile[0].elevation;
 
         unitweapontxt += " " + unitweapon.Name + " <color=green>" + unitweapon.Maxuses + "</color>/" + unitweapon.Maxuses;
 
         UnitWeapon.text = unitweapontxt;
-
-        string UnitText = "<align=left>" + (int)Mathf.Min(Mathf.Max(charunit.currentHP - healthlost, 0f), charunit.AjustedStats.HP) + "<align=center>\n";
-
-        UnitText += "Self Dmg : " + healthlost + "\n";
-        UnitText += "Hit : -\n";
-        UnitText += "Crit : -\n";
-
-
-        unitAttackText.text = UnitText;
-
-
-
-        TargetNameTMP.text = "";
-
-        if (TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(false);
-        }
-
-        TargetWeapon.text = " ";
-
-        TargetTileTMP.text = "";
-
-        targetAttackText.text = "";
 
         TargetGreenLifebar.fillAmount = 1f;
         TargetOrangeLifeBar.fillAmount = 1f;
@@ -1852,99 +1183,10 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.parent.gameObject.SetActive(true);
 
-        Sprite unitnewsprite = null;
-
-        if (charunit.affiliation.ToLower() == "playable")
-        {
-            unitnewsprite = DataScript.instance.DialogueSpriteList[charunit.ID];
-        }
-        else
-        {
-            unitnewsprite = DataScript.instance.EnemySprites[charunit.enemyStats.SpriteID];
-        }
-
-        unitSprite.sprite = unitnewsprite;
-
-        Sprite targetnewsprite = null;
-
-        if (chartarget.affiliation.ToLower() == "playable")
-        {
-            targetnewsprite = DataScript.instance.DialogueSpriteList[chartarget.ID];
-        }
-        else
-        {
-            targetnewsprite = DataScript.instance.EnemySprites[chartarget.enemyStats.SpriteID];
-        }
-
-        targetSprite.sprite = targetnewsprite;
-
-        string unitweapontxt = "";
-
-        equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (unitweapon.type.ToLower())
-        {
-            case ("sword"):
-                unitweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                unitweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                unitweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                unitweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                unitweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                unitweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                unitweapontxt += "<sprite=7>";
-                break;
-            default:
-                unitweapontxt += "<sprite=5>";
-                break;
-        }
-
-        UnitNameTMP.text = charunit.name;
-
-        if (charunit.telekinesisactivated && !UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(true);
-        }
-
-        if (!charunit.telekinesisactivated && UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(false);
-        }
-
-        if (charunit.currentTile[0].type != "")
-        {
-            UnitTileTMP.text = charunit.currentTile[0].type + " ";
-        }
-        else
-        {
-            UnitTileTMP.text = "Ground ";
-        }
-
-        UnitTileTMP.text += charunit.currentTile[0].elevation;
-
-        unitweapontxt += " " + unitweapon.Name + " " + unitweapon.Currentuses + "/" + unitweapon.Maxuses;
-
-        UnitWeapon.text = unitweapontxt;
-
-        string UnitText = "<align=left>" + (int)Mathf.Max(charunit.currentHP, 0f) + "<align=center>\n";
-
-        UnitText += "Dmg : -\n";
-        UnitText += "Hit : -\n";
-        UnitText += "Crit : -\n";
+        SetupCombatHUD(unit, true, true, charunit.currentHP);
+        SetupCombatHUD(target, false, true, chartarget.currentHP);
 
 
-        unitAttackText.text = UnitText;
 
         string targetweapontxt = "";
 
@@ -1978,17 +1220,7 @@ public class ActionsMenu : MonoBehaviour
                 break;
         }
 
-        TargetNameTMP.text = chartarget.name;
 
-        if (chartarget.telekinesisactivated && !TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(true);
-        }
-
-        if (!chartarget.telekinesisactivated && TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(false);
-        }
         if (targetweapon.Currentuses < targetweapon.Maxuses)
         {
             targetweapontxt += " " + targetweapon.Name + " <color=green>" + (targetweapon.Currentuses + 1) + "</color>/" + targetweapon.Maxuses;
@@ -2001,25 +1233,6 @@ public class ActionsMenu : MonoBehaviour
 
         TargetWeapon.text = targetweapontxt;
 
-        if (chartarget.currentTile[0].type != "")
-        {
-            TargetTileTMP.text = chartarget.currentTile[0].type + " ";
-        }
-        else
-        {
-            TargetTileTMP.text = "Ground ";
-        }
-
-        TargetTileTMP.text += chartarget.currentTile[0].elevation;
-
-        string TargetText = "<align=left>" + (int)Mathf.Min(Mathf.Max(chartarget.currentHP, 0f), chartarget.AjustedStats.HP) + "<align=center>\n";
-        TargetText += "Dmg : -\n";
-        TargetText += "Hit : -\n";
-        TargetText += "Crit : -\n";
-
-        unitAttackText.text = UnitText;
-        targetAttackText.text = TargetText;
-
         TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP, 1f);
         TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
 
@@ -2027,96 +1240,19 @@ public class ActionsMenu : MonoBehaviour
         UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
     }
 
+
+
     private void WallTargettingWindow(GameObject unit, GameObject target, string change = "")
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         GridSquareScript Walltarget = target.GetComponent<GridSquareScript>();
         unitAttackText.transform.parent.parent.gameObject.SetActive(true);
 
-        int healthrestored = (int)((charunit.AjustedStats.HP - charunit.currentHP) * 0.25f);
 
-        Sprite unitnewsprite = null;
-
-        if (charunit.affiliation.ToLower() == "playable")
-        {
-            unitnewsprite = DataScript.instance.DialogueSpriteList[charunit.ID];
-        }
-        else
-        {
-            unitnewsprite = DataScript.instance.EnemySprites[charunit.enemyStats.SpriteID];
-        }
-
-        unitSprite.sprite = unitnewsprite;
-
-        targetSprite.sprite = EmptySprite;
-
-        string unitweapontxt = "";
-
-        equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (unitweapon.type.ToLower())
-        {
-            case ("sword"):
-                unitweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                unitweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                unitweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                unitweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                unitweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                unitweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                unitweapontxt += "<sprite=7>";
-                break;
-            default:
-                unitweapontxt += "<sprite=5>";
-                break;
-        }
-
-        UnitNameTMP.text = charunit.name;
-
-        if (charunit.telekinesisactivated && !UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(true);
-        }
-
-        if (!charunit.telekinesisactivated && UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(false);
-        }
-
-        if (charunit.currentTile[0].type != "")
-        {
-            UnitTileTMP.text = charunit.currentTile[0].type + " ";
-        }
-        else
-        {
-            UnitTileTMP.text = "Ground ";
-        }
-
-        UnitTileTMP.text += charunit.currentTile[0].elevation;
-
-        unitweapontxt += " " + unitweapon.Name + " " + unitweapon.Currentuses + "/" + unitweapon.Maxuses;
-
-        UnitWeapon.text = unitweapontxt;
-
-        string UnitText = "<align=left>" + (int)Mathf.Min(Mathf.Max(charunit.currentHP, 0f), charunit.AjustedStats.HP) + "<align=center>\n";
-
-        UnitText += "Healing : -\n";
-        UnitText += "Hit : -\n";
-        UnitText += "Crit : -\n";
+        SetupCombatHUD(unit, true, true, charunit.currentHP);
+        SetupCombatHUD(target, false, true, 0, false);
 
 
-        unitAttackText.text = UnitText;
 
         string TargetText = "\n";
 
@@ -2158,7 +1294,6 @@ public class ActionsMenu : MonoBehaviour
             TargetText += "->" + change + "\n";
         }
 
-        unitAttackText.text = UnitText;
         targetAttackText.text = TargetText;
 
         TargetGreenLifebar.fillAmount = 1f;
@@ -2174,153 +1309,6 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.parent.gameObject.SetActive(true);
 
-        Sprite unitnewsprite = null;
-
-        if (charunit.affiliation.ToLower() == "playable")
-        {
-            unitnewsprite = DataScript.instance.DialogueSpriteList[charunit.ID];
-        }
-        else
-        {
-            unitnewsprite = DataScript.instance.EnemySprites[charunit.enemyStats.SpriteID];
-        }
-
-        unitSprite.sprite = unitnewsprite;
-
-        Sprite targetnewsprite = null;
-
-        if (chartarget.affiliation.ToLower() == "playable")
-        {
-            targetnewsprite = DataScript.instance.DialogueSpriteList[chartarget.ID];
-        }
-        else
-        {
-            targetnewsprite = DataScript.instance.EnemySprites[chartarget.enemyStats.SpriteID];
-        }
-
-        targetSprite.sprite = targetnewsprite;
-
-        string unitweapontxt = "";
-
-        equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (unitweapon.type.ToLower())
-        {
-            case ("sword"):
-                unitweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                unitweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                unitweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                unitweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                unitweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                unitweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                unitweapontxt += "<sprite=7>";
-                break;
-            default:
-                unitweapontxt += "<sprite=5>";
-                break;
-        }
-
-        UnitNameTMP.text = charunit.name;
-
-        if (charunit.telekinesisactivated && !UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(true);
-        }
-
-        if (!charunit.telekinesisactivated && UnitTelekinesis.activeSelf)
-        {
-            UnitTelekinesis.SetActive(false);
-        }
-
-        if (charunit.currentTile[0].type != "")
-        {
-            UnitTileTMP.text = charunit.currentTile[0].type + " ";
-        }
-        else
-        {
-            UnitTileTMP.text = "Ground ";
-        }
-
-        UnitTileTMP.text += charunit.currentTile[0].elevation;
-
-        unitweapontxt += " " + unitweapon.Name + " " + unitweapon.Currentuses + "/" + unitweapon.Maxuses;
-
-        UnitWeapon.text = unitweapontxt;
-
-
-
-        string targetweapontxt = "";
-
-        equipment targetweapon = target.GetComponent<UnitScript>().GetFirstWeapon();
-
-        switch (targetweapon.type.ToLower())
-        {
-            case ("sword"):
-                targetweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                targetweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                targetweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                targetweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                targetweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                targetweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                targetweapontxt += "<sprite=7>";
-                break;
-            default:
-                targetweapontxt += "<sprite=5>";
-                break;
-        }
-
-        TargetNameTMP.text = chartarget.name;
-
-        if (chartarget.telekinesisactivated && !TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(true);
-        }
-
-        if (!chartarget.telekinesisactivated && TargetTelekinesis.activeSelf)
-        {
-            TargetTelekinesis.SetActive(false);
-        }
-
-        targetweapontxt += " " + targetweapon.Name + " " + targetweapon.Currentuses + "/" + targetweapon.Maxuses;
-
-        TargetWeapon.text = targetweapontxt;
-
-        if (chartarget.currentTile[0].type != "")
-        {
-            TargetTileTMP.text = chartarget.currentTile[0].type + " ";
-        }
-        else
-        {
-            TargetTileTMP.text = "Ground ";
-        }
-
-        TargetTileTMP.text += chartarget.currentTile[0].elevation;
-
-
 
 
         float unithealthpercent = (float)((float)charunit.currentHP / (float)charunit.AjustedStats.HP);
@@ -2333,19 +1321,8 @@ public class ActionsMenu : MonoBehaviour
 
             int targethealthgained = (int)(unithealthpercent * chartarget.AjustedStats.HP) - chartarget.currentHP;
 
-            string UnitText = "<align=left><color=red>" + (int)(unithealthpercent * chartarget.AjustedStats.HP) + "</color><align=center>\n";
-
-            UnitText += "Dmg : -\n";
-            UnitText += "Hit : -\n";
-            UnitText += "Crit : -\n";
-
-            string TargetText = "<align=left><color=green>" + (int)(unithealthpercent * chartarget.AjustedStats.HP) + "</color><align=center>\n";
-            TargetText += "Dmg : -\n";
-            TargetText += "Hit : -\n";
-            TargetText += "Crit : -\n";
-
-            unitAttackText.text = UnitText;
-            targetAttackText.text = TargetText;
+            SetupCombatHUD(unit, true, true, (int)(unithealthpercent * chartarget.AjustedStats.HP));
+            SetupCombatHUD(target, false, true, (int)(unithealthpercent * chartarget.AjustedStats.HP));
 
             TargetGreenLifebar.fillAmount = Mathf.Min((float)(chartarget.currentHP + targethealthgained) / (float)chartarget.AjustedStats.HP, 1f);
             TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
@@ -2359,19 +1336,9 @@ public class ActionsMenu : MonoBehaviour
 
             int targethealthlost = chartarget.currentHP - (int)(unithealthpercent * chartarget.AjustedStats.HP);
 
-            string UnitText = "<align=left><color=green>" + (int)(unithealthpercent * chartarget.AjustedStats.HP) + "</color><align=center>\n";
+            SetupCombatHUD(unit, true, true, (int)(unithealthpercent * chartarget.AjustedStats.HP));
+            SetupCombatHUD(target, false, true, (int)(unithealthpercent * chartarget.AjustedStats.HP));
 
-            UnitText += "Dmg : -\n";
-            UnitText += "Hit : -\n";
-            UnitText += "Crit : -\n";
-
-            string TargetText = "<align=left><color=red>" + (int)(unithealthpercent * chartarget.AjustedStats.HP) + "</color>< align=center>\n";
-            TargetText += "Dmg : -\n";
-            TargetText += "Hit : -\n";
-            TargetText += "Crit : -\n";
-
-            unitAttackText.text = UnitText;
-            targetAttackText.text = TargetText;
 
             TargetGreenLifebar.fillAmount = Mathf.Min((float)(chartarget.currentHP - targethealthlost) / (float)chartarget.AjustedStats.HP, 1f);
             TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
@@ -2382,6 +1349,173 @@ public class ActionsMenu : MonoBehaviour
         }
 
 
+    }
+
+    private void SetupCombatHUD(GameObject GOToUse, bool isUnit, bool isnormalUnit, int hptoshow, bool isnull = false, string dmgorhealing = "-", string hit = "-", string crit = "-", bool ishealing = false)
+    {
+        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+
+
+        if (isnull)
+        {
+            GameObject TelekinesisGOToUse = null;
+            TextMeshProUGUI weapontext = null;
+            TextMeshProUGUI nametext = null;
+            TextMeshProUGUI tiletext = null;
+            TextMeshProUGUI MainText = null;
+            if (isUnit)
+            {
+                unitSprite.sprite = EmptySprite;
+                TelekinesisGOToUse = UnitTelekinesis;
+                weapontext = UnitWeapon;
+                nametext = UnitNameTMP;
+                tiletext = UnitTileTMP;
+                MainText = unitAttackText;
+            }
+            else
+            {
+                targetSprite.sprite = EmptySprite;
+                TelekinesisGOToUse = TargetTelekinesis;
+                weapontext = TargetWeapon;
+                nametext = TargetNameTMP;
+                tiletext = TargetTileTMP;
+                MainText = targetAttackText;
+            }
+            weapontext.text = "";
+            nametext.text = "";
+            tiletext.text = "";
+            MainText.text = "";
+
+
+            return;
+        }
+
+        Character character = GOToUse.GetComponent<UnitScript>().UnitCharacteristics;
+
+
+
+
+        if (isnormalUnit)
+        {
+
+            Sprite spriteToUse = null;
+            if (character.affiliation.ToLower() == "playable")
+            {
+                spriteToUse = DataScript.instance.DialogueSpriteList[character.ID];
+            }
+            else
+            {
+                spriteToUse = DataScript.instance.EnemySprites[character.enemyStats.SpriteID];
+            }
+
+            GameObject TelekinesisGOToUse = null;
+            TextMeshProUGUI weapontext = null;
+            TextMeshProUGUI nametext = null;
+            TextMeshProUGUI tiletext = null;
+            TextMeshProUGUI MainText = null;
+
+            if (isUnit)
+            {
+                unitSprite.sprite = spriteToUse;
+                TelekinesisGOToUse = UnitTelekinesis;
+                weapontext = UnitWeapon;
+                nametext = UnitNameTMP;
+                tiletext = UnitTileTMP;
+                MainText = unitAttackText;
+            }
+            else
+            {
+                targetSprite.sprite = spriteToUse;
+                TelekinesisGOToUse = TargetTelekinesis;
+                weapontext = TargetWeapon;
+                nametext = TargetNameTMP;
+                tiletext = TargetTileTMP;
+                MainText = targetAttackText;
+            }
+
+
+            string weapontxt = "";
+
+            equipment weapon = GOToUse.GetComponent<UnitScript>().GetFirstWeapon();
+
+            switch (weapon.type.ToLower())
+            {
+                case ("sword"):
+                    weapontxt += "<sprite=0>";
+                    break;
+                case ("spear"):
+                    weapontxt += "<sprite=1>";
+                    break;
+                case ("greatsword"):
+                    weapontxt += "<sprite=2>";
+                    break;
+                case ("bow"):
+                    weapontxt += "<sprite=3>";
+                    break;
+                case ("scythe"):
+                    weapontxt += "<sprite=4>";
+                    break;
+                case ("shield"):
+                    weapontxt += "<sprite=6>";
+                    break;
+                case ("staff"):
+                    weapontxt += "<sprite=7>";
+                    break;
+                default:
+                    weapontxt += "<sprite=5>";
+                    break;
+            }
+
+            if (character.telekinesisactivated && !TelekinesisGOToUse.activeSelf)
+            {
+                TelekinesisGOToUse.SetActive(true);
+            }
+
+            if (!character.telekinesisactivated && TelekinesisGOToUse.activeSelf)
+            {
+                TelekinesisGOToUse.SetActive(false);
+            }
+
+            weapontext.text = weapontxt + " " + weapon.Name + " " + weapon.Currentuses + "/" + weapon.Maxuses; ;
+            nametext.text = character.name;
+            if (character.currentTile[0].type != "")
+            {
+                tiletext.text = character.currentTile[0].type + " ";
+            }
+            else
+            {
+                tiletext.text = "Ground ";
+            }
+            tiletext.text += character.currentTile[0].elevation;
+
+            string MainTextstring = "<align=left>" + hptoshow + "<align=center>\n";
+            if (ishealing)
+            {
+                MainTextstring += "Healing : " + dmgorhealing + "\n";
+            }
+            else
+            {
+                MainTextstring += "Dmg : " + dmgorhealing + "\n";
+            }
+            MainTextstring += "Hit : " + hit + "\n";
+            MainTextstring += "Crit : " + crit + "\n";
+
+            MainText.text = MainTextstring;
+
+
+        }
+        else
+        {
+            if (isUnit)
+            {
+                unitSprite.sprite = EmptySprite;
+            }
+            else
+            {
+                targetSprite.sprite = EmptySprite;
+            }
+
+        }
     }
 
     public bool CheckifInRange(GameObject unit, GameObject target)
