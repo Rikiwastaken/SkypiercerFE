@@ -1645,6 +1645,7 @@ public class UnitScript : MonoBehaviour
             {
                 currentequipmentmodel = Instantiate(equipmentmodel.Model);
                 currentequipmentmodel.transform.localScale = Vector3.one * scalemultiplier;
+                Debug.Log(currentequipmentmodel.transform.localScale.x);
                 foreach (ModelInfo modelInfo in ModelList)
                 {
                     if (modelInfo.active)

@@ -13,7 +13,7 @@ public class MusicManager : MonoBehaviour
     public AudioSource BeforeCombat;
 
     public AudioSource CampMusic;
-
+    public AudioSource MainMenuMusic;
 
 
     public AudioSource DialogueAudioSource;
@@ -208,12 +208,35 @@ public class MusicManager : MonoBehaviour
             {
                 CampMusic.Play();
             }
+            if (MainMenuMusic.volume > 0)
+            {
+                MainMenuMusic.volume -= Time.fixedDeltaTime;
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            if (MainMenuMusic.volume < maxvolume)
+            {
+                MainMenuMusic.volume += Time.fixedDeltaTime;
+            }
+            if (!MainMenuMusic.isPlaying)
+            {
+                MainMenuMusic.Play();
+            }
+            if (CampMusic.volume > 0)
+            {
+                CampMusic.volume -= Time.fixedDeltaTime;
+            }
         }
         else
         {
             if (CampMusic.volume > 0)
             {
                 CampMusic.volume -= Time.fixedDeltaTime;
+            }
+            if (MainMenuMusic.volume > 0)
+            {
+                MainMenuMusic.volume -= Time.fixedDeltaTime;
             }
         }
 
