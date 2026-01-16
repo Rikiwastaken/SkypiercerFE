@@ -20,6 +20,7 @@ public class TextBubbleScript : MonoBehaviour
         public int characterindex = -1;
         public Sprite ImageToShow;
         public int musictoplay = -1;
+        public float voicepitch = 0f;
     }
 
     private List<TextBubbleInfo> Dialogue;
@@ -49,7 +50,8 @@ public class TextBubbleScript : MonoBehaviour
     private cameraScript cameraScript;
 
     public Image Imagetoshow;
-
+    private float currentcharacterpitch;
+    private MusicManager musicManager;
     void Awake()
     {
         if (charactername != null)
@@ -87,6 +89,11 @@ public class TextBubbleScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (musicManager == null)
+        {
+            musicManager = MusicManager.instance;
+        }
+
         if (Dialogue == null && !indialogue)
         {
             return;
@@ -143,6 +150,15 @@ public class TextBubbleScript : MonoBehaviour
                 charTimer += Time.fixedDeltaTime;
                 if (charTimer >= charDelay)
                 {
+                    if (currentcharacterpitch != 0)
+                    {
+                        musicManager.PlayVoiceSE(currentcharacterpitch);
+                    }
+                    else
+                    {
+                        musicManager.PlayVoiceSE(1f);
+                    }
+
                     charTimer = 0f;
                     charIndex++;
                     sentence.maxVisibleCharacters = charIndex;
@@ -197,13 +213,17 @@ public class TextBubbleScript : MonoBehaviour
             {
                 Imagetoshow.color = Color.clear;
             }
-
+            currentcharacterpitch = 0;
             Character character = GetCharacter();
 
             if (character != null)
             {
                 charactername.text = character.name;
                 characterportrait.sprite = DataScript.instance.DialogueSpriteList[character.ID];
+                if (character.DialoguePitch != 0)
+                {
+                    currentcharacterpitch = character.DialoguePitch;
+                }
             }
             else
             {
@@ -211,6 +231,7 @@ public class TextBubbleScript : MonoBehaviour
                 {
                     characterportrait.sprite = info.Portrait;
                 }
+                currentcharacterpitch = info.voicepitch;
                 charactername.text = info.Charactername;
             }
 
@@ -229,7 +250,7 @@ public class TextBubbleScript : MonoBehaviour
             charTimer = 0f;
             isPrinting = true;
 
-            MusicManager.instance.SetDialogueMusic(info.musictoplay);
+            musicManager.SetDialogueMusic(info.musictoplay);
 
         }
         else

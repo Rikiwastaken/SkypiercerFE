@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -26,6 +27,8 @@ public class MusicManager : MonoBehaviour
 
     public float maxvolume;
 
+    public float SFXVolume;
+
     public AudioMixer mixer;
 
     private cameraScript cameraScript;
@@ -37,6 +40,10 @@ public class MusicManager : MonoBehaviour
     private float beforecombatmusicvol;
 
     public static MusicManager instance;
+
+    public GameObject GeneratedSoundHolder;
+
+    public List<AudioClip> VoiceSFXList;
 
     [Serializable]
     public class MapBattleMusic
@@ -76,6 +83,7 @@ public class MusicManager : MonoBehaviour
     public void ChangeVolume()
     {
         mixer.SetFloat("MusicVol", Mathf.Log10(SaveManager.Options.musicvolume) * 20f);
+        mixer.SetFloat("SEVol", Mathf.Log10(SaveManager.Options.SEVolume) * 20f);
     }
 
     public void InitializeMusics(string ChapterToLoad)
@@ -288,4 +296,24 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    public void PlayVoiceSE(float pitch)
+    {
+        StartCoroutine(CreateVoiceFE(pitch));
+    }
+
+
+    private IEnumerator CreateVoiceFE(float pitch)
+    {
+        GameObject SEholder = new GameObject();
+        SEholder.transform.parent = GeneratedSoundHolder.transform;
+        SEholder.AddComponent<AudioSource>();
+        AudioSource AS = SEholder.GetComponent<AudioSource>();
+        AS.outputAudioMixerGroup = mixer.FindMatchingGroups("SoundEffects")[0];
+        AS.clip = VoiceSFXList[UnityEngine.Random.Range(0, VoiceSFXList.Count)];
+        AS.volume = SFXVolume;
+        AS.pitch = pitch + UnityEngine.Random.Range(-0.025f, 0.025f);
+        AS.Play();
+        yield return new WaitForSeconds(AS.clip.length);
+        Destroy(SEholder);
+    }
 }
