@@ -33,6 +33,8 @@ public class SkillEditionScript : MonoBehaviour
     public TextMeshProUGUI SkillDescriptionText;
     public TextMeshProUGUI SkillPointsText;
 
+    public List<GameObject> PreBattleMenu;
+
     public bool inCamp;
     public bool IsBonds;
     public GameObject CampMenu;
@@ -68,7 +70,15 @@ public class SkillEditionScript : MonoBehaviour
                 }
                 else
                 {
-
+                    if (!PreBattleMenu[0].activeSelf)
+                    {
+                        foreach (GameObject item in PreBattleMenu)
+                        {
+                            item.SetActive(true);
+                        }
+                        EventSystem.current.SetSelectedGameObject(PreBattleMenu[0]);
+                        gameObject.SetActive(false);
+                    }
                 }
 
                 return;

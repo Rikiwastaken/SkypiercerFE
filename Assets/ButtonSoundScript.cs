@@ -23,11 +23,6 @@ public class ButtonSoundScript : MonoBehaviour
         }
     }
 
-    void OnClick()
-    {
-        StartCoroutine(PlaySFX());
-    }
-
 
     private IEnumerator PlaySFX()
     {
