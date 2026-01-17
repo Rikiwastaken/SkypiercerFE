@@ -9,21 +9,35 @@ using UnityEngine.SceneManagement;
 public class MusicManager : MonoBehaviour
 {
     public AudioSource incombat;
+    public AudioSource incombatintro;
     public AudioSource outcombat;
+    public AudioSource outcombatintro;
     public AudioSource BeforeCombat;
+    public AudioSource BeforeCombatintro;
 
     public AudioSource CampMusic;
+    public AudioSource CampMusicintro;
     public AudioSource MainMenuMusic;
+    public AudioSource MainMenuMusicintro;
 
 
     public AudioSource DialogueAudioSource;
+    public AudioSource DialogueAudioSourceIntro;
     public AudioSource DialogueAudioSource2;
+    public AudioSource DialogueAudioSource2Intro;
 
-    private AudioSource currentAudioSource;
+    private AudioSource currentDialogueAudioSource;
+    private AudioSource currentDialogueAudioSourceIntro;
 
     public int CurrentDialogueMusic;
 
-    public List<AudioClip> DialogueMusics;
+    [Serializable]
+    public class Audios
+    {
+        public AudioClip Intro;
+        public AudioClip Music;
+    }
+    public List<Audios> DialogueMusicsWithIntro;
 
     public float maxvolume;
 
@@ -49,8 +63,11 @@ public class MusicManager : MonoBehaviour
     public class MapBattleMusic
     {
         public AudioClip BattleMusic;
+        public AudioClip BattleMusicIntro;
         public AudioClip MapMusic;
+        public AudioClip MapMusicIntro;
         public AudioClip PrepMusic;
+        public AudioClip PrepMusicIntro;
         public List<int> Chapters;
     }
 
@@ -110,14 +127,19 @@ public class MusicManager : MonoBehaviour
                 if (MusicClass.Chapters.Contains(Chapter))
                 {
                     incombat.clip = MusicClass.BattleMusic;
+                    incombatintro.clip = MusicClass.BattleMusicIntro;
                     outcombat.clip = MusicClass.MapMusic;
+                    outcombatintro.clip = MusicClass.MapMusicIntro;
                     BeforeCombat.clip = MusicClass.PrepMusic;
+                    BeforeCombatintro.clip = MusicClass.PrepMusicIntro;
                     break;
                 }
             }
             PlayPrepMusic = true;
         }
     }
+
+
 
     private void FixedUpdate()
     {
@@ -134,7 +156,7 @@ public class MusicManager : MonoBehaviour
         if (PlayPrepMusic)
         {
             PlayPrepMusic = false;
-            BeforeCombat.Play();
+            PlayMusicWithIntro(4);
         }
 
 
@@ -158,10 +180,8 @@ public class MusicManager : MonoBehaviour
         if (PrepFinished && !incombat.isPlaying)
         {
             BeforeCombat.Stop();
-            double startTime = AudioSettings.dspTime + 0.1; // small delay to guarantee readiness
-
-            incombat.PlayScheduled(startTime);
-            outcombat.PlayScheduled(startTime);
+            PlayMusicWithIntro(2);
+            PlayMusicWithIntro(3);
         }
 
         if (incombat.isPlaying)
@@ -204,9 +224,13 @@ public class MusicManager : MonoBehaviour
             {
                 CampMusic.volume += Time.fixedDeltaTime;
             }
-            if (!CampMusic.isPlaying)
+            if (CampMusicintro.volume < maxvolume)
             {
-                CampMusic.Play();
+                CampMusicintro.volume += Time.fixedDeltaTime;
+            }
+            if (!CampMusic.isPlaying && !CampMusicintro.isPlaying)
+            {
+                PlayMusicWithIntro(1);
             }
             if (MainMenuMusic.volume > 0)
             {
@@ -219,9 +243,12 @@ public class MusicManager : MonoBehaviour
             {
                 MainMenuMusic.volume += Time.fixedDeltaTime;
             }
+
             if (!MainMenuMusic.isPlaying)
             {
-                MainMenuMusic.Play();
+                MainMenuMusic.volume = maxvolume;
+                MainMenuMusicintro.volume = maxvolume;
+                PlayMusicWithIntro(0);
             }
             if (CampMusic.volume > 0)
             {
@@ -243,7 +270,7 @@ public class MusicManager : MonoBehaviour
         if (TextBubbleScript.Instance != null && TextBubbleScript.Instance.indialogue)
         {
 
-            if (currentAudioSource != null && currentAudioSource.isPlaying && currentAudioSource.volume > 0 && CurrentDialogueMusic != -1)
+            if (currentDialogueAudioSource != null && (currentDialogueAudioSource.isPlaying || currentDialogueAudioSourceIntro.isPlaying) && currentDialogueAudioSource.volume > 0 && CurrentDialogueMusic != -1)
             {
                 if (CampMusic.volume > 0)
                 {
@@ -262,7 +289,7 @@ public class MusicManager : MonoBehaviour
                     BeforeCombat.volume -= Time.fixedDeltaTime * 2;
                 }
 
-                if (currentAudioSource == DialogueAudioSource)
+                if (currentDialogueAudioSource == DialogueAudioSource)
                 {
                     if (DialogueAudioSource2.volume > 0)
                     {
@@ -278,19 +305,69 @@ public class MusicManager : MonoBehaviour
                 }
 
 
-                if (currentAudioSource.volume <= maxvolume)
+                if (currentDialogueAudioSource.volume <= maxvolume)
                 {
-                    currentAudioSource.volume += maxvolume;
+                    currentDialogueAudioSource.volume += maxvolume;
                 }
             }
             else
             {
-                if (currentAudioSource != null && currentAudioSource.volume > 0)
+                if (currentDialogueAudioSource != null && currentDialogueAudioSource.volume > 0)
                 {
-                    currentAudioSource.volume -= Time.fixedDeltaTime * 2;
+                    currentDialogueAudioSource.volume -= Time.fixedDeltaTime * 2;
                 }
             }
         }
+
+    }
+
+    private void PlayMusicWithIntro(int TypeID)
+    {
+        AudioSource Main = null;
+        AudioSource intro = null;
+
+        switch (TypeID)
+        {
+            case (0): //MainMenu
+                Main = MainMenuMusic;
+                intro = MainMenuMusicintro;
+                break;
+            case (1): //Camp
+                Main = CampMusic;
+                intro = CampMusicintro;
+                break;
+            case (2): //OutCombat
+                Main = outcombat;
+                intro = outcombatintro;
+                break;
+            case (3): //InCombat
+                Main = incombat;
+                intro = incombatintro;
+                break;
+            case (4): //BeforeComabt
+                Main = BeforeCombat;
+                intro = BeforeCombatintro;
+                break;
+            case (5): //DialogueAudio
+                Main = currentDialogueAudioSource;
+                intro = currentDialogueAudioSourceIntro;
+                break;
+
+        }
+
+        if (intro.clip == null)
+        {
+            Main.PlayScheduled(AudioSettings.dspTime);
+        }
+        else
+        {
+            intro.PlayScheduled(AudioSettings.dspTime);
+
+            double introduration = (double)intro.clip.samples / intro.clip.frequency;
+
+            Main.PlayScheduled(AudioSettings.dspTime + introduration);
+        }
+
 
     }
 
@@ -299,19 +376,23 @@ public class MusicManager : MonoBehaviour
         if (musicID > 0 && musicID != CurrentDialogueMusic)
         {
 
-            if (currentAudioSource == DialogueAudioSource)
+            if (currentDialogueAudioSource == DialogueAudioSource)
             {
-                currentAudioSource = DialogueAudioSource2;
+                currentDialogueAudioSourceIntro = DialogueAudioSource2Intro;
+                currentDialogueAudioSource = DialogueAudioSource2;
             }
             else
             {
-                currentAudioSource = DialogueAudioSource;
+                currentDialogueAudioSourceIntro = DialogueAudioSourceIntro;
+                currentDialogueAudioSource = DialogueAudioSource;
             }
 
             CurrentDialogueMusic = musicID;
-            currentAudioSource.clip = DialogueMusics[CurrentDialogueMusic];
-            currentAudioSource.volume = Time.deltaTime;
-            currentAudioSource.Play();
+            currentDialogueAudioSource.clip = DialogueMusicsWithIntro[CurrentDialogueMusic].Music;
+            currentDialogueAudioSourceIntro.clip = DialogueMusicsWithIntro[CurrentDialogueMusic].Intro;
+            currentDialogueAudioSource.volume = maxvolume;
+            currentDialogueAudioSourceIntro.volume = maxvolume;
+            PlayMusicWithIntro(5);
         }
         else if (musicID == -1)
         {

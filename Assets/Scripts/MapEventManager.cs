@@ -176,7 +176,6 @@ public class MapEventManager : MonoBehaviour
             {
                 if (evnt.ID == ManualEventTrigger && !evnt.triggered)
                 {
-                    Debug.Log("triggering : " + evnt.eventname);
                     TriggerEvent(evnt, -1);
                     evnt.triggered = true;
                 }
@@ -276,7 +275,6 @@ public class MapEventManager : MonoBehaviour
         }
         if (unitPlacement.CameraPosition != Vector2.zero)
         {
-            Debug.Log("moving camera to : " + unitPlacement.CameraPosition);
             FindAnyObjectByType<cameraScript>().Destination = unitPlacement.CameraPosition;
         }
 
@@ -284,7 +282,6 @@ public class MapEventManager : MonoBehaviour
 
     public void TriggerEvent(EventCondition Event, int currentturn)
     {
-        Debug.Log("event trigger : " + Event.ID);
         ManageUnitPlacement(Event.UnitPlacement);
         UnitAddTrigger(Event.UnitsToUnlockID, true);
         UnitAddTrigger(Event.UnitsToLockID, false);
