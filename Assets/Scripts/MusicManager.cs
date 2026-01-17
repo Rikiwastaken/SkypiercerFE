@@ -31,6 +31,8 @@ public class MusicManager : MonoBehaviour
 
     public int CurrentDialogueMusic;
 
+    private bool lowerdialogue;
+
     [Serializable]
     public class Audios
     {
@@ -152,11 +154,20 @@ public class MusicManager : MonoBehaviour
         {
             TurnManager = FindAnyObjectByType<TurnManger>();
         }
-
         if (PlayPrepMusic)
         {
             PlayPrepMusic = false;
             PlayMusicWithIntro(4);
+        }
+
+        if (SceneLoader.instance.LoadingImage.gameObject.activeSelf)
+        {
+            return;
+        }
+
+        if (lowerdialogue && currentDialogueAudioSource != null)
+        {
+            currentDialogueAudioSource.volume -= Time.deltaTime;
         }
 
 
@@ -184,7 +195,7 @@ public class MusicManager : MonoBehaviour
             PlayMusicWithIntro(3);
         }
 
-        if (incombat.isPlaying)
+        if (incombat.isPlaying && !(FindAnyObjectByType<GameOverScript>() != null && FindAnyObjectByType<GameOverScript>().gameObject.activeSelf))
         {
             if ((cameraScript != null && cameraScript.incombat) || SceneManager.GetActiveScene().name == "BattleScene")
             {
@@ -220,14 +231,6 @@ public class MusicManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Camp")
         {
-            if (CampMusic.volume < maxvolume)
-            {
-                CampMusic.volume += Time.fixedDeltaTime;
-            }
-            if (CampMusicintro.volume < maxvolume)
-            {
-                CampMusicintro.volume += Time.fixedDeltaTime;
-            }
             if (!CampMusic.isPlaying && !CampMusicintro.isPlaying)
             {
                 PlayMusicWithIntro(1);
@@ -235,24 +238,19 @@ public class MusicManager : MonoBehaviour
             if (MainMenuMusic.volume > 0)
             {
                 MainMenuMusic.volume -= Time.fixedDeltaTime;
+                MainMenuMusicintro.volume -= Time.fixedDeltaTime;
             }
         }
         else if (SceneManager.GetActiveScene().name == "MainMenu")
         {
-            if (MainMenuMusic.volume < maxvolume)
-            {
-                MainMenuMusic.volume += Time.fixedDeltaTime;
-            }
-
             if (!MainMenuMusic.isPlaying)
             {
-                MainMenuMusic.volume = maxvolume;
-                MainMenuMusicintro.volume = maxvolume;
                 PlayMusicWithIntro(0);
             }
             if (CampMusic.volume > 0)
             {
                 CampMusic.volume -= Time.fixedDeltaTime;
+                CampMusicintro.volume -= Time.fixedDeltaTime;
             }
         }
         else
@@ -260,10 +258,12 @@ public class MusicManager : MonoBehaviour
             if (CampMusic.volume > 0)
             {
                 CampMusic.volume -= Time.fixedDeltaTime;
+                CampMusicintro.volume -= Time.fixedDeltaTime;
             }
             if (MainMenuMusic.volume > 0)
             {
                 MainMenuMusic.volume -= Time.fixedDeltaTime;
+                MainMenuMusicintro.volume -= Time.fixedDeltaTime;
             }
         }
 
@@ -331,39 +331,50 @@ public class MusicManager : MonoBehaviour
             case (0): //MainMenu
                 Main = MainMenuMusic;
                 intro = MainMenuMusicintro;
+                lowerdialogue = true;
                 break;
             case (1): //Camp
                 Main = CampMusic;
                 intro = CampMusicintro;
+                lowerdialogue = true;
                 break;
             case (2): //OutCombat
                 Main = outcombat;
                 intro = outcombatintro;
+                lowerdialogue = true;
                 break;
             case (3): //InCombat
                 Main = incombat;
                 intro = incombatintro;
+                lowerdialogue = true;
                 break;
             case (4): //BeforeComabt
                 Main = BeforeCombat;
                 intro = BeforeCombatintro;
+                incombat.Stop();
+                outcombat.Stop();
+                lowerdialogue = true;
                 break;
             case (5): //DialogueAudio
+                lowerdialogue = false;
                 Main = currentDialogueAudioSource;
                 intro = currentDialogueAudioSourceIntro;
                 break;
 
         }
-
+        Main.volume = maxvolume;
         if (intro.clip == null)
         {
             Main.PlayScheduled(AudioSettings.dspTime);
         }
         else
         {
+            intro.volume = maxvolume;
+
             intro.PlayScheduled(AudioSettings.dspTime);
 
             double introduration = (double)intro.clip.samples / intro.clip.frequency;
+
 
             Main.PlayScheduled(AudioSettings.dspTime + introduration);
         }

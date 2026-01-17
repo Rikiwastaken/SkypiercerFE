@@ -2969,7 +2969,7 @@ public class UnitScript : MonoBehaviour
             bool onwatertile = false;
             foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
             {
-                if (tile.RemainingRainTurns > 0 || tile.type.ToLower() == "water")
+                if (tile.RemainingRainTurns > 0 || tile.type.ToLower() == "water" || tile.type.ToLower() == "medicinalwater")
                 {
                     onwatertile = true;
                     break;

@@ -10,6 +10,8 @@ public class EnemyStatsEditorWindow : EditorWindow
     private SerializedProperty enemyListProp;
     private Vector2 scrollPos;
 
+    private bool showPositionInsteadOfElevation;
+
     // Class dropdown
     private List<string> classNames = new List<string>();
     private List<int> classIDs = new List<int>();
@@ -130,6 +132,11 @@ public class EnemyStatsEditorWindow : EditorWindow
 
     private void OnGUI()
     {
+
+        EditorGUILayout.Space();
+
+        showPositionInsteadOfElevation = EditorGUILayout.Toggle("Position/Elevation", showPositionInsteadOfElevation);
+
         EditorGUILayout.Space();
 
         // Allow manual prefab assignment
@@ -196,7 +203,15 @@ public class EnemyStatsEditorWindow : EditorWindow
 
         so.ApplyModifiedProperties();
         HideCharacter();
-        ShowCharacter();
+        if (showPositionInsteadOfElevation)
+        {
+            ShowCharacter();
+        }
+        else
+        {
+            ShowElevation();
+        }
+
     }
 
     private void OnDisable()
@@ -442,6 +457,103 @@ public class EnemyStatsEditorWindow : EditorWindow
                     gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
                     break;
             }
+
+            if (enemypositions.Contains(position))
+            {
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+                enemypositions.Remove(position);
+            }
+            if (playablepositions.Contains(position))
+            {
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.blue;
+                enemypositions.Remove(position);
+            }
+            if (otherpositions.Contains(position))
+            {
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+                enemypositions.Remove(position);
+            }
+            if (gridGO.GetChild(i).GetComponent<GridSquareScript>().isobstacle)
+            {
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.black;
+            }
+        }
+
+    }
+
+    [MenuItem("Tools/Show Elevation")]
+    public static void ShowElevation()
+    {
+        Transform gridGO = GameObject.Find("Grid").transform;
+        MapInitializer mapInitializer = FindAnyObjectByType<MapInitializer>();
+        List<Vector2> enemypositions = new List<Vector2>();
+        List<Vector2> otherpositions = new List<Vector2>();
+        List<Vector2> playablepositions = new List<Vector2>();
+        foreach (var character in mapInitializer.EnemyList)
+        {
+            if (character.isother)
+            {
+                otherpositions.Add(character.startpos);
+            }
+            else
+            {
+                enemypositions.Add(character.startpos);
+                if (character.monsterStats.size > 1)
+                {
+                    enemypositions.Add(character.startpos + new Vector2(0, 1));
+                    enemypositions.Add(character.startpos + new Vector2(-1, 0));
+                    enemypositions.Add(character.startpos + new Vector2(-1, 1));
+                }
+            }
+
+        }
+        foreach (Vector2 playablepos in mapInitializer.playablepos)
+        {
+            playablepositions.Add(playablepos);
+        }
+        for (int i = 0; i < gridGO.childCount; i++)
+        {
+            Vector2 position = new Vector2(gridGO.GetChild(i).position.x, gridGO.GetChild(i).position.z);
+
+            GridSquareScript tile = gridGO.GetChild(i).GetComponent<GridSquareScript>();
+
+            switch (tile.elevation)
+            {
+                case -4:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.25f, 0f);
+                    break;
+                case -3:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.35f, 0f);
+                    break;
+                case -2:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.45f, 0f);
+                    break;
+                case -1:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.8f, 0.55f, 0f);
+                    break;
+                case 0:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.65f, 0f);
+                    break;
+                case 1:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.75f, 0.25f);
+                    break;
+                case 2:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.85f, 0.5f);
+                    break;
+                case 3:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.95f, 0.75f);
+                    break;
+                case 4:
+                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+                    break;
+            }
+
+            if (tile.isstairs)
+            {
+                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(128f / 256f, 0f, 128f / 256f);
+            }
+
+
 
             if (enemypositions.Contains(position))
             {
