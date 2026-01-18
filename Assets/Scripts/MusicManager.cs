@@ -113,6 +113,13 @@ public class MusicManager : MonoBehaviour
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
+
+        if (scene.name == "Camp" && currentscene != scene.name && currentDialogueAudioSource != null)
+        {
+            ChangeVolume(currentDialogueAudioSource, 0f);
+            PlayMusicWithIntro(1);
+        }
+
         currentscene = scene.name;
     }
 
@@ -154,7 +161,7 @@ public class MusicManager : MonoBehaviour
 
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (cameraScript == null)
         {

@@ -145,7 +145,6 @@ public class GridSquareScript : MonoBehaviour
 
     private void Start()
     {
-        InputManager.instance.OnMovementJustPressed += fixupdatecnt;
 
         SetupBaseElevation();
 
@@ -187,28 +186,6 @@ public class GridSquareScript : MonoBehaviour
     {
         UpdateDelay();
 
-    }
-
-
-    private void FixedUpdate()
-    {
-        if (GridScript != null)
-        {
-            GridScript = GridScript.instance;
-        }
-        if (cameraScript != null)
-        {
-            cameraScript = cameraScript.instance;
-        }
-        if (InputManager.instance.movementValue != Vector2.zero)
-        {
-            ManagePath();
-        }
-    }
-
-    private void fixupdatecnt()
-    {
-        autoupdatecnt = 1;
     }
     private void CheckAllTriggers(MechanismClass _)
     {
@@ -303,105 +280,7 @@ public class GridSquareScript : MonoBehaviour
         }
     }
 
-    private void ManagePath()
-    {
-        List<GridSquareScript> path = ActionManager.instance.currentpath;
-        if (path != null)
-        {
-            if (path.Contains(this))
-            {
-                int index = path.IndexOf(this);
-                if (index > 0)
-                {
-                    if (!PathPiecePrevious.gameObject.activeSelf)
-                    {
-                        PathPiecePrevious.gameObject.SetActive(true);
-                    }
 
-                    Vector3 direction = path[index - 1].transform.position - transform.position;
-                    float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-                    PathPiecePrevious.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
-                    if (index == path.Count - 1)
-                    {
-                        if (!PathPieceEnd.gameObject.activeSelf)
-                        {
-                            PathPieceEnd.gameObject.SetActive(true);
-                        }
-
-                        PathPieceEnd.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
-                    }
-                    else
-                    {
-                        if (PathPieceEnd.gameObject.activeSelf)
-                        {
-                            PathPieceEnd.gameObject.SetActive(false);
-                        }
-
-                    }
-                }
-                else
-                {
-                    if (PathPiecePrevious.gameObject.activeSelf)
-                    {
-                        PathPiecePrevious.gameObject.SetActive(false);
-                    }
-                    if (PathPieceEnd.gameObject.activeSelf)
-                    {
-                        PathPieceEnd.gameObject.SetActive(false);
-                    }
-                }
-                if (index < path.Count - 1)
-                {
-                    if (!PathPieceNext.gameObject.activeSelf)
-                    {
-                        PathPieceNext.gameObject.SetActive(true);
-                    }
-                    Vector3 direction = path[index + 1].transform.position - transform.position;
-                    float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-                    PathPieceNext.rotation = Quaternion.Euler(90f, -angle + 90f, 0f);
-
-                }
-                else
-                {
-                    if (PathPieceNext.gameObject.activeSelf)
-                    {
-                        PathPieceNext.gameObject.SetActive(false);
-                    }
-
-                }
-            }
-            else
-            {
-                if (PathPiecePrevious.gameObject.activeSelf)
-                {
-                    PathPiecePrevious.gameObject.SetActive(false);
-                }
-                if (PathPieceEnd.gameObject.activeSelf)
-                {
-                    PathPieceEnd.gameObject.SetActive(false);
-                }
-                if (PathPieceNext.gameObject.activeSelf)
-                {
-                    PathPieceNext.gameObject.SetActive(false);
-                }
-            }
-        }
-        else
-        {
-            if (PathPiecePrevious.gameObject.activeSelf)
-            {
-                PathPiecePrevious.gameObject.SetActive(false);
-            }
-            if (PathPieceEnd.gameObject.activeSelf)
-            {
-                PathPieceEnd.gameObject.SetActive(false);
-            }
-            if (PathPieceNext.gameObject.activeSelf)
-            {
-                PathPieceNext.gameObject.SetActive(false);
-            }
-        }
-    }
 
     public void UpdateInsideSprite(bool unitenter, Character unitchar = null)
     {
@@ -533,13 +412,6 @@ public class GridSquareScript : MonoBehaviour
                 }
             }
 
-
-
-
-
-
-
-
         }
 
         if (type.ToLower() == "fire")
@@ -556,13 +428,10 @@ public class GridSquareScript : MonoBehaviour
                 FireParticles.SetActive(false);
             }
         }
-
-        ManagePath();
         //manageElevation();
         UpdateFilling();
         previouslyincombat = cameraScript.incombat;
     }
-
     private void UpdateDelay()
     {
         if (autoupdatecnt <= 0)
