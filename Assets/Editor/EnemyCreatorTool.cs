@@ -258,6 +258,19 @@ public class EnemyStatsEditorWindow : EditorWindow
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("Name"));
+        if (GUILayout.Button("Copy", GUILayout.MaxWidth(80)))
+        {
+            enemyListProp.arraySize++;
+            so.ApplyModifiedProperties();
+            SerializedProperty newEnemy = enemyListProp.GetArrayElementAtIndex(enemyListProp.arraySize - 1);
+            newEnemy.serializedObject.Update();
+            EditorUtility.CopySerialized(eProp.serializedObject.targetObject, newEnemy.serializedObject.targetObject);
+            newEnemy.serializedObject.ApplyModifiedProperties();
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndVertical();
+            EditorGUI.indentLevel--;
+            return;
+        }
         if (GUILayout.Button("Remove", GUILayout.MaxWidth(80)))
         {
             enemyListProp.DeleteArrayElementAtIndex(index);
