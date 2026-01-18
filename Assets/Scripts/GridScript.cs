@@ -111,7 +111,7 @@ public class GridScript : MonoBehaviour
 
         if (SkillEditionScript == null)
         {
-            SkillEditionScript = FindAnyObjectByType<SkillEditionScript>();
+            SkillEditionScript = FindAnyObjectByType<SkillEditionScript>(FindObjectsInactive.Include);
         }
 
 
@@ -433,7 +433,7 @@ public class GridScript : MonoBehaviour
         if (selection == null)
         {
             selection = GetTile(GetComponent<MapInitializer>().playablepos[0]);
-            FindAnyObjectByType<cameraScript>().transform.position = new Vector3(selection.GridCoordinates.x, FindAnyObjectByType<cameraScript>().transform.position.y, selection.GridCoordinates.y);
+            battlecamera.transform.position = new Vector3(selection.GridCoordinates.x, battlecamera.transform.position.y, selection.GridCoordinates.y);
         }
         else
         {

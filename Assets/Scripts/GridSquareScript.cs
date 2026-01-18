@@ -10,12 +10,6 @@ public class GridSquareScript : MonoBehaviour
 
     public Vector2 GridCoordinates;
 
-    public float rotationperframe;
-
-    public GameObject SelectRound;
-
-    public GameObject LockedSelectRound;
-
     private GameObject SelectRoundFilling;
 
     private GridScript GridScript;
@@ -129,7 +123,7 @@ public class GridSquareScript : MonoBehaviour
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
         SelectRoundFilling = transform.GetChild(2).gameObject;
         InitializePosition();
-        textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
+        textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         if (rainparticle != null && rainparticle.gameObject.activeSelf)
         {
             rainparticle.gameObject.SetActive(false);
@@ -205,43 +199,6 @@ public class GridSquareScript : MonoBehaviour
         if (cameraScript != null)
         {
             cameraScript = cameraScript.instance;
-        }
-        if (GridScript != null && cameraScript != null)
-        {
-            if (GridScript.selection == this && !cameraScript.incombat)
-            {
-                if (!SelectRound.activeSelf)
-                {
-                    SelectRound.SetActive(true);
-                }
-
-                SelectRound.transform.rotation = Quaternion.Euler(SelectRound.transform.rotation.eulerAngles + new Vector3(0f, rotationperframe, 0f));
-            }
-            else
-            {
-                if (SelectRound.activeSelf)
-                {
-                    SelectRound.SetActive(false);
-                }
-
-            }
-            if ((GridScript.lockselection && ActionManager.instance.currentcharacter != null && ActionManager.instance.currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(this)) || (PreBattleMenuScript.instance != null && PreBattleMenuScript.instance.selectedunit != null && PreBattleMenuScript.instance.selectedunit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(this)))
-            {
-                if (!LockedSelectRound.activeSelf)
-                {
-                    LockedSelectRound.SetActive(true);
-                }
-
-                LockedSelectRound.transform.rotation = Quaternion.Euler(LockedSelectRound.transform.rotation.eulerAngles + new Vector3(0f, -rotationperframe, 0f));
-            }
-            else
-            {
-                if (LockedSelectRound.activeSelf)
-                {
-                    LockedSelectRound.SetActive(false);
-                }
-
-            }
         }
         if (InputManager.instance.movementValue != Vector2.zero)
         {
@@ -497,16 +454,16 @@ public class GridSquareScript : MonoBehaviour
         }
         if (cameraScript == null)
         {
-            cameraScript = FindAnyObjectByType<cameraScript>();
+            cameraScript = FindAnyObjectByType<cameraScript>(FindObjectsInactive.Include);
         }
         if (TurnManger == null)
         {
-            TurnManger = FindAnyObjectByType<TurnManger>();
+            TurnManger = FindAnyObjectByType<TurnManger>(FindObjectsInactive.Include);
         }
 
         if (MapInitializer == null)
         {
-            MapInitializer = FindAnyObjectByType<MapInitializer>();
+            MapInitializer = FindAnyObjectByType<MapInitializer>(FindObjectsInactive.Include);
         }
 
         if (cameraScript.incombat)
@@ -1031,11 +988,11 @@ public class GridSquareScript : MonoBehaviour
     {
         if (TurnManger == null)
         {
-            TurnManger = FindAnyObjectByType<TurnManger>();
+            TurnManger = FindAnyObjectByType<TurnManger>(FindObjectsInactive.Include);
         }
         if (MapInitializer == null)
         {
-            MapInitializer = FindAnyObjectByType<MapInitializer>();
+            MapInitializer = FindAnyObjectByType<MapInitializer>(FindObjectsInactive.Include);
         }
         if (TurnManger.currentlyplaying != "" || !MapInitializer.playablepos.Contains(GridCoordinates) && filledimage != null)
         {

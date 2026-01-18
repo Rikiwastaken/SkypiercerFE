@@ -1,7 +1,4 @@
-using NUnit.Framework;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class cameraScript : MonoBehaviour
 {
@@ -47,7 +44,7 @@ public class cameraScript : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -62,7 +59,7 @@ public class cameraScript : MonoBehaviour
         transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (Destination != null)
         {
@@ -146,11 +143,11 @@ public class cameraScript : MonoBehaviour
         {
             return;
         }
-        if(TurnManger.instance.currentlyplaying=="playable" || (PreBattleMenu.activeSelf && PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
+        if (TurnManger.instance.currentlyplaying == "playable" || (PreBattleMenu.activeSelf && PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
         {
             Destination = new Vector2(GridScript.selection.transform.position.x, GridScript.selection.transform.position.z);
         }
-        
+
 
 
         InputManager = InputManager.instance;
