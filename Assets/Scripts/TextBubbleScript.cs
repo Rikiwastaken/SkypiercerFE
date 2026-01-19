@@ -150,14 +150,18 @@ public class TextBubbleScript : MonoBehaviour
                 charTimer += Time.fixedDeltaTime;
                 if (charTimer >= charDelay)
                 {
-                    if (currentcharacterpitch != 0)
+                    if (charIndex % 2 == 0)
                     {
-                        musicManager.PlayVoiceSE(currentcharacterpitch);
+                        if (currentcharacterpitch != 0)
+                        {
+                            musicManager.PlayVoiceSE(currentcharacterpitch);
+                        }
+                        else
+                        {
+                            musicManager.PlayVoiceSE(1f);
+                        }
                     }
-                    else
-                    {
-                        musicManager.PlayVoiceSE(1f);
-                    }
+
 
                     charTimer = 0f;
                     charIndex++;
@@ -249,7 +253,10 @@ public class TextBubbleScript : MonoBehaviour
             charIndex = 0;
             charTimer = 0f;
             isPrinting = true;
-
+            if (musicManager == null)
+            {
+                musicManager = MusicManager.instance;
+            }
             musicManager.SetDialogueMusic(info.musictoplay);
 
         }

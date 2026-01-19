@@ -82,7 +82,7 @@ public class MusicManager : MonoBehaviour
 
     private GameOverScript GameOverScript;
 
-    private string currentscene;
+    public string currentscene;
 
     private void Awake()
     {
@@ -113,14 +113,23 @@ public class MusicManager : MonoBehaviour
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-
-        if (scene.name == "Camp" && currentscene != scene.name && currentDialogueAudioSource != null)
+        if (scene.name == "BattleScene")
         {
-            ChangeVolume(currentDialogueAudioSource, 0f);
+            return;
+        }
+        if (currentDialogueAudioSource != null)
+        {
+            currentDialogueAudioSource.volume = 0f;
+            currentDialogueAudioSourceIntro.volume = 0f;
+        }
+        if (scene.name == "Camp" && currentscene != scene.name)
+        {
+
             PlayMusicWithIntro(1);
         }
 
         currentscene = scene.name;
+        MusicManager.instance.InitializeMusics(currentscene);
     }
 
     public void InitializeMusics(string ChapterToLoad)
@@ -219,6 +228,7 @@ public class MusicManager : MonoBehaviour
             BeforeCombat.Stop();
             PlayMusicWithIntro(2);
             PlayMusicWithIntro(3);
+            incombat.volume = 0f;
         }
 
         if (incombat.isPlaying && !(GameOverScript != null && GameOverScript.gameObject.activeSelf))

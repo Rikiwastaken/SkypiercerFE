@@ -178,6 +178,78 @@
             "BondPoints": 0,
             "BondLevel": 0,
             "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 15,
+            "Name": "Kira-Ruben",
+            "Characters": [
+                9,
+                7
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 16,
+            "Name": "Kira-Gusto",
+            "Characters": [
+                9,
+                8
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 17,
+            "Name": "Kira-Sieg",
+            "Characters": [
+                9,
+                5
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 18,
+            "Name": "Kira-Zack",
+            "Characters": [
+                9,
+                0
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 19,
+            "Name": "Gusto-Sieg",
+            "Characters": [
+                8,
+                5
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 20,
+            "Name": "Gusto-Zack",
+            "Characters": [
+                8,
+                0
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
             "MaxLevel": 3
         }
     ]
