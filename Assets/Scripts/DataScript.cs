@@ -111,8 +111,6 @@ public class DataScript : MonoBehaviour
         {
             instance = this;
         }
-        Application.targetFrameRate = 60;
-        DontDestroyOnLoad(gameObject);
         if (SceneManager.GetActiveScene().name == "FirstScene")
         {
             SceneManager.LoadScene("MainMenu");

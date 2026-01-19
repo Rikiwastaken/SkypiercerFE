@@ -84,6 +84,7 @@ public class MusicManager : MonoBehaviour
 
     public string currentscene;
 
+    public bool inCombatBool;
     private void Awake()
     {
         if (instance == null)
@@ -234,7 +235,7 @@ public class MusicManager : MonoBehaviour
         if (incombat.isPlaying && !(GameOverScript != null && GameOverScript.gameObject.activeSelf))
         {
 
-            if (!lowermap && (cameraScript != null && cameraScript.incombat) || currentscene == "BattleScene")
+            if (!lowermap && (cameraScript != null && cameraScript.incombat) || inCombatBool)
             {
                 ChangeVolume(incombat, maxvolume);
                 ChangeVolume(incombatintro, maxvolume);

@@ -1,20 +1,18 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class FPSCounter : MonoBehaviour
 {
-    private Queue<float> frameTimes = new Queue<float>();
-    private float timeAccumulator = 0f;
+    private List<float> frameTimes = new List<float>();
 
     void Update()
     {
-        float dt = Time.unscaledDeltaTime;
-        frameTimes.Enqueue(dt);
-        timeAccumulator += dt;
+        float dt = Time.deltaTime;
+        frameTimes.Add(dt);
 
-        while (timeAccumulator > 1f)
+        if (frameTimes.Count > 100)
         {
-            timeAccumulator -= frameTimes.Dequeue();
+            frameTimes.RemoveAt(0);
         }
     }
 
@@ -28,8 +26,14 @@ public class FPSCounter : MonoBehaviour
         style.fontSize = h * 2 / 50;
         style.normal.textColor = Color.white;
 
-        int fps = frameTimes.Count;                   
-        float avgFrameTime = 1f / Mathf.Max(fps, 1);  
+        float sum = 0;
+        foreach (float time in frameTimes)
+        {
+            sum += time;
+        }
+        float avgFrameTime = sum / frameTimes.Count;
+
+        int fps = (int)(1 / avgFrameTime);
 
         string text = $"{(avgFrameTime * 1000f):0.0} ms  ({fps} fps)";
         GUI.Label(rect, text, style);

@@ -114,7 +114,7 @@ public class AttackTurnScript : MonoBehaviour
 
         if (combatTextScript == null)
         {
-            combatTextScript = FindAnyObjectByType<CombatTextScript>();
+            combatTextScript = FindAnyObjectByType<CombatTextScript>(FindObjectsInactive.Include);
         }
 
         if (TurnManager.currentlyplaying != "enemy")
@@ -922,7 +922,7 @@ public class AttackTurnScript : MonoBehaviour
                 attacktrigger = true;
                 if (combatTextScript == null)
                 {
-                    combatTextScript = FindAnyObjectByType<CombatTextScript>();
+                    combatTextScript = FindAnyObjectByType<CombatTextScript>(FindObjectsInactive.Include);
                 }
                 combatTextScript.ResetInfo();
             }

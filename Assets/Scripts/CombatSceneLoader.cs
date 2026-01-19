@@ -82,6 +82,8 @@ public class CombatSceneLoader : MonoBehaviour
 
         mainScene = SceneManager.GetSceneByName(MainSceneName);
 
+        MusicManager.instance.inCombatBool = true;
+
         StartCoroutine(SwitchSceneRoutine(
             fromScene: mainScene,
             toScene: combatScene,
@@ -105,6 +107,8 @@ public class CombatSceneLoader : MonoBehaviour
             Debug.LogWarning("Scenes not fully initialized.");
             return;
         }
+
+        MusicManager.instance.inCombatBool = false;
 
         StartCoroutine(SwitchSceneRoutine(
             fromScene: combatScene,
