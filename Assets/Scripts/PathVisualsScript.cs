@@ -28,7 +28,7 @@ public class PathVisualsScript : MonoBehaviour
     {
         path = ActionManager.instance.currentpath;
 
-        if (lastpath != path && path != null)
+        if (lastpath != path)
         {
             ManagePath();
         }
@@ -75,12 +75,33 @@ public class PathVisualsScript : MonoBehaviour
 
             GridSquareScript tile = path[i];
             PathGOList[i].transform.position = new Vector3(tile.GridCoordinates.x, elevation + tile.transform.position.y, tile.GridCoordinates.y);
+            PathGOList[i].name = "PathPiece " + i;
         }
 
     }
 
     private void ManagePath()
     {
+
+        if (path == null)
+        {
+
+            if (PathGOList.Count > 0)
+            {
+                int lengthofPathGOList = PathGOList.Count;
+                int safeguard = 0;
+                while (lengthofPathGOList > 0 && safeguard < 20)
+                {
+                    GameObject pathpiece = PathGOList[0];
+                    PathGOList.Remove(pathpiece);
+                    Destroy(pathpiece);
+                    lengthofPathGOList = PathGOList.Count;
+                    safeguard++;
+                }
+            }
+
+            return;
+        }
 
         InitializeGOList();
 

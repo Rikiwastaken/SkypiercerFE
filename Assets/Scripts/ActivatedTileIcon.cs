@@ -72,6 +72,10 @@ public class ActivatedTileIcon : MonoBehaviour
         {
             LockedSelectedTile = ActionManager.instance.currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
         }
+        else
+        {
+            LockedSelectedTile = null;
+        }
 
         if (PreBattleMenuScript.instance != null && PreBattleMenuScript.instance.selectedunit != null)
         {

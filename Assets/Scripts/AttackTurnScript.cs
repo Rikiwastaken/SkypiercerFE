@@ -66,6 +66,8 @@ public class AttackTurnScript : MonoBehaviour
     private GameObject previousattacker;
     private GameObject previoustarget;
 
+    private CombatSceneLoader combatsceneloader;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -74,6 +76,7 @@ public class AttackTurnScript : MonoBehaviour
         gridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<cameraScript>();
         saveManager = FindAnyObjectByType<SaveManager>();
+        combatsceneloader = FindAnyObjectByType<CombatSceneLoader>();
     }
 
     // Update is called once per frame
@@ -458,7 +461,7 @@ public class AttackTurnScript : MonoBehaviour
         {
             foresightScript.CreateAction(3, User);
             GridSquareScript targettile = Target.GetComponent<GridSquareScript>();
-            Vector2 coorddiff = targettile.GridCoordinates - FindAnyObjectByType<GridScript>().GetTile(CharUser.position).GridCoordinates;
+            Vector2 coorddiff = targettile.GridCoordinates - gridScript.GetTile(CharUser.position).GridCoordinates;
 
             int normalizedx = 0;
             int normalizedy = 0;
@@ -1143,7 +1146,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
                 CharAttacker.alreadyplayed = true;
-                FindAnyObjectByType<CombatSceneLoader>().ActivateCombatScene(CharAttacker, Chartarget, Attacker.GetComponent<UnitScript>().GetFirstWeapon(), target.GetComponent<UnitScript>().GetFirstWeapon(), Chardoubleattacker, triple, ishealing, attackerdodged, defenderattacks, defenderdodged, attackerdied, defenderdied, expearned, levelbonus, Attackercopy, Targetcopy, attackerdamage, defenderdamage, attackercrits, defendercrits);
+                combatsceneloader.ActivateCombatScene(CharAttacker, Chartarget, Attacker.GetComponent<UnitScript>().GetFirstWeapon(), target.GetComponent<UnitScript>().GetFirstWeapon(), Chardoubleattacker, triple, ishealing, attackerdodged, defenderattacks, defenderdodged, attackerdied, defenderdied, expearned, levelbonus, Attackercopy, Targetcopy, attackerdamage, defenderdamage, attackercrits, defendercrits);
 
             }
             else

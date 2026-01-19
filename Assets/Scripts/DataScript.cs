@@ -819,7 +819,7 @@ public class DataScript : MonoBehaviour
     public void SetupInventoryForChapter(int Chapter, Inventory inventory)
     {
 
-        if (Chapter >= 3)
+        if (Chapter > 2)
         {
             foreach (InventoryItem item in inventory.inventoryItems)
             {
@@ -829,7 +829,7 @@ public class DataScript : MonoBehaviour
                 }
             }
         }
-        if (Chapter >= 4)
+        if (Chapter > 3)
         {
             foreach (InventoryItem item in inventory.inventoryItems)
             {
@@ -847,7 +847,7 @@ public class DataScript : MonoBehaviour
                 }
             }
         }
-        if (Chapter >= 5)
+        if (Chapter > 4)
         {
             foreach (InventoryItem item in inventory.inventoryItems)
             {
@@ -855,11 +855,29 @@ public class DataScript : MonoBehaviour
                 {
                     item.Quantity += 1;
                 }
-                if (item.ID == 5)
+                if (item.ID == 18)
                 {
                     item.Quantity += 1;
                 }
                 if (item.ID == 40)
+                {
+                    item.Quantity += 1;
+                }
+            }
+        }
+        if (Chapter > 5)
+        {
+            foreach (InventoryItem item in inventory.inventoryItems)
+            {
+                if (item.ID == 42)
+                {
+                    item.Quantity += 1;
+                }
+                if (item.ID == 41)
+                {
+                    item.Quantity += 1;
+                }
+                if (item.ID == 32)
                 {
                     item.Quantity += 1;
                 }

@@ -10,8 +10,6 @@ public class GridSquareScript : MonoBehaviour
 
     public Vector2 GridCoordinates;
 
-    private GameObject SelectRoundFilling;
-
     private GridScript GridScript;
 
     private MapInitializer MapInitializer;
@@ -121,7 +119,6 @@ public class GridSquareScript : MonoBehaviour
     void Awake()
     {
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        SelectRoundFilling = transform.GetChild(2).gameObject;
         InitializePosition();
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         if (rainparticle != null && rainparticle.gameObject.activeSelf)
@@ -429,7 +426,7 @@ public class GridSquareScript : MonoBehaviour
             }
         }
         //manageElevation();
-        UpdateFilling();
+        //UpdateFilling();
         previouslyincombat = cameraScript.incombat;
     }
     private void UpdateDelay()
@@ -721,74 +718,7 @@ public class GridSquareScript : MonoBehaviour
         }
     }
 
-    public void UpdateFilling()
-    {
-        SpriteRenderer SR = SelectRoundFilling.GetComponent<SpriteRenderer>();
-        if (GridScript == null)
-        {
-            return;
-        }
-        GameObject unit = GridScript.GetUnit(this);
-        Color newcolor = new Color();
-        if (unit == null)
-        {
-            newcolor.a = 0;
-        }
-        else
-        {
-            Character Char = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
-            if (Char.enemyStats.monsterStats.size > 1)
-            {
-                SR.sprite = gridsquareFillingBigEnemies;
-                int index = Char.currentTile.IndexOf(this);
-                switch (index)
-                {
-                    case 0:
-                        SelectRoundFilling.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
-                        break;
-                    case 1:
-                        SelectRoundFilling.transform.localRotation = Quaternion.Euler(0f, 0f, 180f);
-                        break;
-                    case 2:
-                        SelectRoundFilling.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-                        break;
-                    case 3:
-                        SelectRoundFilling.transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
-                        break;
-                }
-            }
-            else
-            {
-                SR.sprite = gridsquareFilling;
-            }
-
-
-            if (Char.affiliation == "playable")
-            {
-                if (Char.alreadyplayed)
-                {
-                    newcolor = Color.blue;
-                }
-                else
-                {
-                    newcolor = Color.cyan;
-
-                }
-
-            }
-            else if (Char.affiliation == "enemy")
-            {
-                newcolor = Color.red;
-            }
-            else if (Char.affiliation == "other")
-            {
-                newcolor = Color.yellow;
-            }
-            newcolor.a = 0.5f;
-        }
-        SR.color = newcolor;
-    }
 
     public void fillwithblue()
     {
