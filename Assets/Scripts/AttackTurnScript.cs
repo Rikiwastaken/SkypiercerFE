@@ -68,6 +68,8 @@ public class AttackTurnScript : MonoBehaviour
 
     private CombatSceneLoader combatsceneloader;
 
+    private GameObject currentenemytarget;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -179,7 +181,9 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 else
                 {
-                    GridSquareScript Destination = CalculateDestinationForOffensiveUnits(CurrentEnemy);
+                    currentenemytarget = null;
+                    GridSquareScript Destination = null;
+                    (Destination, currentenemytarget) = CalculateDestinationForOffensiveUnitsV2(CurrentEnemy);
                     Vector2 DestinationVector = CharCurrentEnemy.position;
                     if (Destination != null)
                     {
@@ -302,7 +306,10 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 else
                 {
-                    GridSquareScript Destination = CalculateDestinationForOffensiveUnits(CurrentOther);
+                    currentenemytarget = null;
+                    GridSquareScript Destination = null;
+                    (Destination, currentenemytarget) = CalculateDestinationForOffensiveUnitsV2(CurrentOther);
+
                     Vector2 DestinationVector = Charcurrentother.position;
                     if (Destination != null)
                     {
@@ -352,13 +359,23 @@ public class AttackTurnScript : MonoBehaviour
     {
 
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+        if (charunit.enemyStats.personality.ToLower() == "hunter")
+        {
+            return true;
+        }
+
+
         Vector2 originalpos = charunit.position;
         gridScript.ShowMovementOfUnit(unit);
-        GridSquareScript Destination = CalculateDestinationForOffensiveUnits(unit, charunit.attacksfriends);
+
+        GridSquareScript Destination = null;
+        GameObject target = null;
+
+        (Destination, target) = CalculateDestinationForOffensiveUnitsV2(unit);
+
         if (Destination == null)
         {
-
-            GameObject target = CalculateBestTargetForOffensiveUnits(unit, charunit.attacksfriends);
             if (target == null)
             {
                 return false;
@@ -371,7 +388,7 @@ public class AttackTurnScript : MonoBehaviour
         else
         {
             unit.GetComponent<UnitScript>().MoveTo(Destination.GridCoordinates);
-            GameObject target = CalculateBestTargetForOffensiveUnits(unit, charunit.attacksfriends);
+            (Destination, target) = CalculateDestinationForOffensiveUnitsV2(unit);
             unit.GetComponent<UnitScript>().MoveTo(originalpos);
             unit.GetComponent<UnitScript>().ResetPath();
             if (target == null && Destination.GridCoordinates == originalpos)
@@ -653,7 +670,7 @@ public class AttackTurnScript : MonoBehaviour
                 GameObject target = null;
                 if (CharAttacker.affiliation != "playable")
                 {
-                    target = CalculateBestTargetForOffensiveUnits(Attacker, CharAttacker.attacksfriends);
+                    target = currentenemytarget;
                 }
                 else
                 {
@@ -696,7 +713,7 @@ public class AttackTurnScript : MonoBehaviour
             GameObject target = null;
             if (CharAttacker.affiliation != "playable")
             {
-                target = CalculateBestTargetForOffensiveUnits(Attacker, CharAttacker.attacksfriends);
+                target = currentenemytarget;
             }
             else
             {
@@ -902,7 +919,7 @@ public class AttackTurnScript : MonoBehaviour
             GameObject target = null;
             if (CharAttacker.affiliation != "playable")
             {
-                target = CalculateBestTargetForOffensiveUnits(Attacker, CharAttacker.attacksfriends);
+                target = currentenemytarget;
             }
             else
             {
@@ -995,7 +1012,7 @@ public class AttackTurnScript : MonoBehaviour
             GameObject target = null;
             if (CharAttacker.affiliation != "playable")
             {
-                target = CalculateBestTargetForOffensiveUnits(Attacker, CharAttacker.attacksfriends);
+                target = currentenemytarget;
             }
             else
             {
@@ -1404,6 +1421,255 @@ public class AttackTurnScript : MonoBehaviour
         }
         return bestsquare;
     }
+
+    /// <summary>
+    /// Calculate attack Destination and target for AI Characters (second version)
+    /// </summary>
+    /// <param name="currentCharacter"></param>
+    /// <param name="attacksfriend"></param>
+    /// <returns></returns>
+    private (GridSquareScript, GameObject) CalculateDestinationForOffensiveUnitsV2(GameObject currentCharacter)
+    {
+
+        Character character = currentCharacter.GetComponent<UnitScript>().UnitCharacteristics;
+
+        List<GridSquareScript> movementtouse = gridScript.movementtiles;
+
+        List<GridSquareScript> attacktiles = gridScript.attacktiles;
+
+        if (character.enemyStats.personality.ToLower() == "guard")
+        {
+            movementtouse = new List<GridSquareScript>() { character.currentTile[0] };
+            (int attackerrange, bool attackermelee) = currentCharacter.GetComponent<UnitScript>().GetRangeAndMele();
+            attacktiles = gridScript.GetAttack(attackerrange, attackermelee, character.currentTile[0], character.enemyStats.monsterStats.size, character);
+        }
+
+
+
+        List<GameObject> potentialtargets = new List<GameObject>();
+
+        foreach (GameObject unit in gridScript.allunitGOs)
+        {
+            Character otherchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+            bool skip = true;
+
+            if (character.affiliation.ToLower() == "playable" && ((otherchar.affiliation.ToLower() == "other" && otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "enemy"))
+            {
+                skip = false;
+            }
+            if (character.affiliation.ToLower() == "other" && ((otherchar.affiliation.ToLower() == "playable" && character.attacksfriends) || otherchar.affiliation.ToLower() == "enemy"))
+            {
+                skip = false;
+            }
+            if (character.affiliation.ToLower() == "enemy" && ((otherchar.affiliation.ToLower() == "playable" && !otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "playable"))
+            {
+                skip = false;
+            }
+            if (skip)
+            {
+                continue;
+            }
+
+            foreach (GridSquareScript tile in attacktiles)
+            {
+                if (otherchar.currentTile.Contains(tile))
+                {
+                    potentialtargets.Add(unit);
+                    continue;
+                }
+            }
+
+
+        }
+
+        GameObject truetarget = null;
+
+        if (potentialtargets.Count > 0)
+        {
+
+
+            float maxreward = 0;
+
+            if (character.enemyStats.personality.ToLower() == "deviant" || (character.enemyStats.personality.ToLower() == "coward" && character.currentHP > character.AjustedStats.HP * 0.3f))
+            {
+                if (potentialtargets.Count > 1)
+                {
+                    float randomvalue = (float)currentCharacter.GetComponent<RandomScript>().GetPersonalityValue() / 100f;
+
+                    int rankinlist = (int)Mathf.Max(0, (randomvalue * potentialtargets.Count - 1));
+
+                    truetarget = potentialtargets[rankinlist];
+
+                }
+                else
+                {
+                    truetarget = potentialtargets[0];
+                }
+            }
+            else
+            {
+                foreach (GameObject target in potentialtargets)
+                {
+                    float reward = calculateRewardforAttacking(currentCharacter, target);
+                    if (reward > maxreward)
+                    {
+                        maxreward = reward;
+                        truetarget = target;
+                    }
+                }
+            }
+
+
+
+            List<GridSquareScript> targepositiontiles = truetarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
+
+            (int range, bool melee) = currentCharacter.GetComponent<UnitScript>().GetRangeAndMele();
+
+            List<GridSquareScript> potentialmovementtile = new List<GridSquareScript>();
+
+            foreach (GridSquareScript movementtile in movementtouse)
+            {
+                foreach (GridSquareScript attacktilesFromPosition in gridScript.GetAttack(range, melee, movementtile, character.enemyStats.monsterStats.size, character))
+                {
+                    if (targepositiontiles.Contains(attacktilesFromPosition))
+                    {
+                        potentialmovementtile.Add(movementtile);
+                        continue;
+                    }
+                }
+            }
+
+
+            List<GridSquareScript> potentialmovementtilesecondFilter = new List<GridSquareScript>();
+
+            Vector2 baseposition = character.currentTile[0].GridCoordinates;
+
+
+            foreach (GridSquareScript tile in potentialmovementtile)
+            {
+                currentCharacter.GetComponent<UnitScript>().MoveTo(tile.GridCoordinates);
+
+                if (ActionsMenu.CheckifInRange(truetarget, currentCharacter) && !ActionsMenu.CheckifInRange(currentCharacter, truetarget))
+                {
+                    potentialmovementtilesecondFilter.Add(tile);
+                }
+            }
+            currentCharacter.GetComponent<UnitScript>().MoveTo(baseposition);
+            GridSquareScript finaltile = null;
+
+            if (potentialmovementtilesecondFilter.Count == 1)
+            {
+                finaltile = potentialmovementtilesecondFilter[0];
+            }
+            else if (potentialmovementtilesecondFilter.Count > 1)
+            {
+                int mindistance = 999;
+
+                foreach (GridSquareScript tile in potentialmovementtilesecondFilter)
+                {
+                    int distance = ManhattanDistance(tile.GridCoordinates, character.currentTile[0].GridCoordinates);
+                    if (distance < mindistance)
+                    {
+                        finaltile = tile;
+                        mindistance = distance;
+                    }
+                }
+            }
+            else
+            {
+                int mindistance = 999;
+
+                foreach (GridSquareScript tile in potentialmovementtile)
+                {
+                    int distance = ManhattanDistance(tile.GridCoordinates, character.currentTile[0].GridCoordinates);
+                    if (distance < mindistance)
+                    {
+                        finaltile = tile;
+                        mindistance = distance;
+                    }
+                }
+            }
+
+            return (finaltile, truetarget);
+        }
+        else
+        {
+            float randomvalue = (float)currentCharacter.GetComponent<RandomScript>().GetPersonalityValue() / 100f;
+
+            int rankinlist = (int)Mathf.Max(0, (randomvalue * gridScript.movementtiles.Count - 1));
+
+            return (gridScript.movementtiles[rankinlist], null);
+
+        }
+
+
+    }
+
+    /// <summary>
+    /// Calculate Reward for attacking target
+    /// </summary>
+    /// <param name="attacker"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    private float calculateRewardforAttacking(GameObject attacker, GameObject target)
+    {
+        float reward = 0f;
+
+        Character attackerChar = attacker.GetComponent<UnitScript>().UnitCharacteristics;
+        Character targetChar = target.GetComponent<UnitScript>().UnitCharacteristics;
+
+
+        float killFactor = 10f;
+        float NoCounterFactor = 3f;
+        float hitchanceFactor = 1f;
+        float DodgeChanceFactor = 1f;
+        float SurvivesFactor = 2f;
+
+        if (attackerChar.enemyStats.personality.ToLower() == "survivor" || (attackerChar.enemyStats.personality.ToLower() == "coward" && attackerChar.currentHP < attackerChar.AjustedStats.HP * 0.1f))
+        {
+            DodgeChanceFactor *= 3f;
+            SurvivesFactor *= 3f;
+            NoCounterFactor *= 2;
+        }
+
+        int rawdamage = ActionsMenu.CalculateDamage(attacker, target);
+        int rawdamagetaken = ActionsMenu.CalculateDamage(target, attacker);
+        int hitrate = ActionsMenu.CalculateHit(attacker, target);
+        int dodgerate = 100 - ActionsMenu.CalculateHit(target, attacker);
+
+        bool inrange = ActionsMenu.CheckifInRange(attacker, target);
+        if (!inrange)
+        {
+            rawdamagetaken = 0;
+        }
+
+
+        float ratioofhptaken = Mathf.Max(0, targetChar.currentHP - rawdamage) / targetChar.currentHP;
+
+        reward += killFactor * ratioofhptaken;
+
+        if (rawdamage >= targetChar.currentHP)
+        {
+            reward += killFactor;
+        }
+
+        if (rawdamagetaken == 0)
+        {
+            reward += NoCounterFactor;
+        }
+
+        reward += hitchanceFactor * hitrate;
+        reward += DodgeChanceFactor * dodgerate;
+
+        float ratioofhptakenbyattacker = Mathf.Max(0, attackerChar.currentHP - rawdamagetaken) / attackerChar.currentHP;
+
+        reward += SurvivesFactor * ratioofhptakenbyattacker;
+
+        return reward;
+    }
+
+
 
     /// <summary>
     /// Calculate Reward for target position for AI Unit
