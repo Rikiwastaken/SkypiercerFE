@@ -45,6 +45,18 @@ public class BattleInfotext : MonoBehaviour
 
     private EventSystem eventSystem;
 
+    [Header("CharacterInfo")]
+
+    public TextMeshProUGUI NameTMP;
+    public TextMeshProUGUI HPTMP;
+    public TextMeshProUGUI StatTMP;
+    public TextMeshProUGUI LevelTMP;
+    public TextMeshProUGUI WeaponTMP;
+    public Image CharacterSprite;
+    public Image ExpBarFilling;
+    public Image BackgroundImage;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -52,7 +64,6 @@ public class BattleInfotext : MonoBehaviour
         inputManager = InputManager.instance;
         GridScript = GridScript.instance;
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
-        transform.parent.GetComponent<Image>().enabled = false;
     }
 
     // Update is called once per frame
@@ -60,44 +71,45 @@ public class BattleInfotext : MonoBehaviour
     {
         if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf || ForeSightMenu.activeSelf)
         {
-            GetComponent<TextMeshProUGUI>().enabled = false;
-            transform.parent.GetComponent<Image>().enabled = false;
+            if (transform.GetChild(0).gameObject.activeSelf)
+            {
+                transform.GetChild(0).gameObject.SetActive(false);
+            }
             if (MasteryText.transform.parent.gameObject.activeSelf)
             {
                 MasteryText.transform.parent.gameObject.SetActive(false);
             }
 
         }
-        else if (!GetComponent<TextMeshProUGUI>().enabled && (!PreBattleMenu.activeSelf || PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
+        else if ((!PreBattleMenu.activeSelf || PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
         {
-            GetComponent<TextMeshProUGUI>().enabled = true;
-            transform.parent.GetComponent<Image>().enabled = true;
+            if (!transform.GetChild(0).gameObject.activeSelf)
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+            }
         }
         if ((AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf || ForeSightMenu.activeSelf))
         {
-            if (transform.parent.GetChild(1).gameObject.activeSelf)
+            if (transform.GetChild(0).gameObject.activeSelf)
             {
-                transform.parent.GetChild(1).gameObject.SetActive(false);
-                transform.parent.GetChild(2).gameObject.SetActive(false);
+                transform.GetChild(0).gameObject.SetActive(false);
             }
 
             return;
         }
         else if (!PreBattleMenu.activeSelf)
         {
-            if (!transform.parent.GetChild(1).gameObject.activeSelf)
+            if (!transform.parent.GetChild(0).gameObject.activeSelf)
             {
-                transform.parent.GetChild(1).gameObject.SetActive(true);
-                //transform.parent.GetChild(2).gameObject.SetActive(true);
+                transform.parent.GetChild(0).gameObject.SetActive(true);
             }
 
         }
         else
         {
-            if (transform.parent.GetChild(1).gameObject.activeSelf)
+            if (transform.parent.GetChild(0).gameObject.activeSelf)
             {
-                transform.parent.GetChild(1).gameObject.SetActive(false);
-                transform.parent.GetChild(2).gameObject.SetActive(false);
+                transform.parent.GetChild(0).gameObject.SetActive(false);
             }
         }
 
@@ -129,17 +141,6 @@ public class BattleInfotext : MonoBehaviour
 
         if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && GridScript.GetComponent<TurnManger>().currentlyplaying != "playable"))
         {
-
-            //if(!Skilltext.transform.parent.gameObject.activeSelf)
-            //{
-            //    stringtoshow = string.Empty;
-            //    Color color = transform.parent.GetComponent<Image>().color;
-            //    color.a = 0f;
-            //    transform.parent.GetComponent<Image>().color = color;
-            //    Skilltext.transform.parent.gameObject.SetActive(false);
-            //    SkillDescription.transform.parent.gameObject.SetActive(false);
-            //    MasteryText.transform.parent.gameObject.SetActive(false);
-            //}
 
             if (!(PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) && !(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf))
             {
@@ -205,149 +206,104 @@ public class BattleInfotext : MonoBehaviour
                 ManageSkillDescription();
                 ManageMasteryVisuals(selectedunitCharacter);
 
+                NameTMP.text = selectedunitCharacter.name;
+                LevelTMP.text = "Lvl\n" + selectedunitCharacter.level;
+                HPTMP.text = "HP\n" + selectedunitCharacter.currentHP + "/" + selectedunitCharacter.AjustedStats.HP;
 
-                stringtoshow = " " + selectedunitCharacter.name + "\n";
-                stringtoshow += " Level : " + selectedunitCharacter.level + "\n";
-                stringtoshow += " Health : " + selectedunitCharacter.currentHP + " / " + selectedunitCharacter.AjustedStats.HP;
-                if (selectedunitCharacter.enemyStats.RemainingLifebars > 0)
+                Sprite spriteToUse = null;
+                if (selectedunitCharacter.affiliation.ToLower() == "playable")
                 {
-                    stringtoshow += " x " + (selectedunitCharacter.enemyStats.RemainingLifebars + 1);
+                    spriteToUse = DataScript.instance.DialogueSpriteList[selectedunitCharacter.ID];
                 }
                 else
                 {
-                    stringtoshow += "\n";
+                    spriteToUse = DataScript.instance.EnemySprites[selectedunitCharacter.enemyStats.SpriteID];
                 }
-                if (selectedunitCharacter.affiliation == "playable")
+                CharacterSprite.sprite = spriteToUse;
+                if (selectedunitCharacter.affiliation.ToLower() == "playable")
                 {
-                    stringtoshow += " Exp : " + selectedunitCharacter.experience + " / 100\n\n";
+                    if (!ExpBarFilling.transform.parent.gameObject.activeSelf)
+                    {
+                        ExpBarFilling.transform.parent.gameObject.SetActive(true);
+                    }
+                    ExpBarFilling.fillAmount = selectedunitCharacter.experience / 100f;
                 }
                 else
                 {
-                    stringtoshow += "\n";
+                    if (ExpBarFilling.transform.parent.gameObject.activeSelf)
+                    {
+                        ExpBarFilling.transform.parent.gameObject.SetActive(false);
+                    }
                 }
+
                 AllStatsSkillBonus statsmods = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null);
-
-                if (statsmods.Strength > 0)
-                {
-                    stringtoshow += " Strength : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength) + "</color>\n";
-                }
-                else if (statsmods.Strength < 0)
-                {
-                    stringtoshow += " Strength : <color=red>" + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength) + "</color>\n";
-                }
-                else
-                {
-                    stringtoshow += " Strength : " + selectedunitCharacter.AjustedStats.Strength + "\n";
-                }
-                if (statsmods.Psyche > 0)
-                {
-                    stringtoshow += " Psyche : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche) + "</color>\n";
-                }
-                else if (statsmods.Psyche < 0)
-                {
-                    stringtoshow += " Psyche : <color=red>" + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche) + "</color>\n";
-                }
-                else
-                {
-                    stringtoshow += " Psyche : " + selectedunitCharacter.AjustedStats.Psyche + "\n";
-                }
-
-                if (statsmods.Defense > 0)
-                {
-                    stringtoshow += " Defense : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense) + "</color>\n";
-                }
-                else if (statsmods.Defense < 0)
-                {
-                    stringtoshow += " Defense : <color=red>" + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense) + "</color>\n";
-                }
-                else
-                {
-                    stringtoshow += " Defense : " + selectedunitCharacter.AjustedStats.Defense + "\n";
-                }
-
-                if (statsmods.Resistance > 0)
-                {
-                    stringtoshow += " Resistance : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance) + "</color>\n";
-                }
-                else if (statsmods.Resistance < 0)
-                {
-                    stringtoshow += " Resistance : <color=red>" + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance) + "</color>\n";
-                }
-                else
-                {
-                    stringtoshow += " Resistance : " + selectedunitCharacter.AjustedStats.Resistance + "\n";
-                }
-
-                if (statsmods.Dexterity > 0)
-                {
-                    stringtoshow += " Dexterity : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity) + "</color>\n";
-                }
-                else if (statsmods.Dexterity < 0)
-                {
-                    stringtoshow += " Dexterity : <color=red>" + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity) + "</color>\n";
-                }
-                else
-                {
-                    stringtoshow += " Dexterity : " + selectedunitCharacter.AjustedStats.Dexterity + "\n";
-                }
-
-                if (statsmods.Speed > 0)
-                {
-                    stringtoshow += " Speed : <color=#017a01>" + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed) + "</color>\n\n";
-                }
-                else if (statsmods.Speed < 0)
-                {
-                    stringtoshow += " Speed : <color=red>" + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed) + "</color>\n\n";
-                }
-                else
-                {
-                    stringtoshow += " Speed : " + selectedunitCharacter.AjustedStats.Speed + "\n";
-                }
-
-                string weapontype = selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type;
-                if (selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
-                {
-                    weapontype = "Gr.Sword";
-                }
-
-
-
-                stringtoshow += "\nWeapon : " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Name + " (" + weapontype + " " + gradeletter + ")  " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses + " / " + selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses + "\n";
+                string statstring = "";
+                statstring += "Str: " + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength);
+                statstring += "\nPsy: " + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche);
+                statstring += "\nDef: " + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense);
+                statstring += "\nRes: " + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance);
+                statstring += "\nDex: " + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity);
+                statstring += "\nSpd: " + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed);
 
                 int BaseDamage = ActionsMenu.CalculateDamage(selectedunit);
 
-                stringtoshow += "\nBaseDmg: " + BaseDamage + "\nMvt: " + (selectedunitCharacter.movements - 1) + "\n\n";
+                statstring += "\nDmg: " + BaseDamage + "\nMvt: " + (selectedunitCharacter.movements - 1);
+
+                StatTMP.text = statstring;
+
+                string weaponstring = "";
+                foreach (equipment weapon in selectedunitCharacter.equipments)
+                {
+                    if (weapon.Name != "" && weapon.type != null)
+                    {
+                        switch (weapon.type.ToLower())
+                        {
+                            case ("sword"):
+                                weaponstring += "<sprite=0>";
+                                break;
+                            case ("spear"):
+                                weaponstring += "<sprite=1>";
+                                break;
+                            case ("greatsword"):
+                                weaponstring += "<sprite=2>";
+                                break;
+                            case ("bow"):
+                                weaponstring += "<sprite=3>";
+                                break;
+                            case ("scythe"):
+                                weaponstring += "<sprite=4>";
+                                break;
+                            case ("shield"):
+                                weaponstring += "<sprite=6>";
+                                break;
+                            case ("staff"):
+                                weaponstring += "<sprite=7>";
+                                break;
+                            default:
+                                weaponstring += "<sprite=5>";
+                                break;
+                        }
+                        weaponstring += " " + weapon.Name + "\n";
+                    }
+
+                }
+
+                WeaponTMP.text = weaponstring;
 
 
-                if (selectedunitCharacter.telekinesisactivated)
-                {
-                    stringtoshow += "Telekinesis : on";
-                }
-                else
-                {
-                    stringtoshow += "Telekinesis : off";
-                }
-                Color color = transform.parent.GetComponent<Image>().color;
-                color.a = 0.8f;
-                transform.parent.GetComponent<Image>().color = color;
             }
             else
             {
                 if (!Skilltext.transform.parent.gameObject.activeSelf)
                 {
-                    stringtoshow = string.Empty;
-                    Color color = transform.parent.GetComponent<Image>().color;
-                    color.a = 0f;
-                    transform.parent.GetComponent<Image>().color = color;
+
                     Skilltext.transform.parent.gameObject.SetActive(false);
                     SkillDescription.transform.parent.gameObject.SetActive(false);
                     MasteryText.transform.parent.gameObject.SetActive(false);
                 }
-                stringtoshow = "";
             }
 
         }
-        TMP.text = stringtoshow;
     }
 
     private void ManageSkillDescription()

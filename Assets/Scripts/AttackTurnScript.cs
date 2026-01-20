@@ -1619,8 +1619,8 @@ public class AttackTurnScript : MonoBehaviour
                 reward += NoCounterFactor;
             }
 
-            reward += hitchanceFactor * hitrate;
-            reward += DodgeChanceFactor * dodgerate;
+            reward += hitchanceFactor * (float)hitrate / 100f;
+            reward -= DodgeChanceFactor * (float)(1 - dodgerate) / 100f;
 
             float ratioofhptakenbyattacker = Mathf.Max(0, attackerChar.currentHP - rawdamagetaken) / attackerChar.currentHP;
 
