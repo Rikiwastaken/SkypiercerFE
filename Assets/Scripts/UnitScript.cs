@@ -2491,9 +2491,14 @@ public class UnitScript : MonoBehaviour
         }
         UpdateWeaponModel();
     }
-    public (int, bool) GetRangeAndMele()
+    public (int, bool) GetRangeAndMele(equipment weapon = null)
     {
         equipment firstweapon = GetFirstWeapon();
+        if (weapon != null)
+        {
+            firstweapon = weapon;
+        }
+
         int range = firstweapon.Range;
         bool melee = true;
         if (firstweapon.type.ToLower() == "bow")

@@ -1266,6 +1266,90 @@ public class AttackTurnScript : MonoBehaviour
         return affiliationtoattack;
     }
 
+    private void WeaponDecison(GameObject unit)
+    {
+        List<equipment> weaponlist = new List<equipment>();
+
+        int staffID = -1;
+
+        Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+        foreach (equipment weapon in unitchar.equipments)
+        {
+            if (weapon.Name != "" && weapon.Name != null && weapon.BaseDamage != 0)
+            {
+                weaponlist.Add(weapon);
+            }
+            else
+            {
+                continue;
+            }
+            if (weapon.type != "" && weapon.type != null && weapon.type.ToLower() == "staff")
+            {
+                staffID = weaponlist.IndexOf(weapon);
+            }
+
+        }
+
+        if (weaponlist.Count > 1)
+        {
+            if (staffID != -1)
+            {
+                GameObject healingtarget = null;
+
+                (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele(weaponlist[staffID]);
+                gridScript.ShowAttack(range, melee, true, false, unitchar.enemyStats.monsterStats.size, unitchar);
+                foreach (GameObject otherunit in gridScript.allunitGOs)
+                {
+                    if (unit == otherunit)
+                    {
+                        continue;
+                    }
+
+                    if (gridScript.healingtiles.Contains(otherunit.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0]))
+                    {
+                        if (unitchar.affiliation.ToLower() == otherunit.GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower() || (unitchar.affiliation.ToLower() == "other" && !unitchar.attacksfriends))
+                        {
+                            if (otherunit.GetComponent<UnitScript>().UnitCharacteristics.currentHP / otherunit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP <= 0.5f)
+                            {
+                                healingtarget = otherunit;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (healingtarget != null)
+                {
+                    int safeguard = 0;
+                    while (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() != "staff" && safeguard < 30)
+                    {
+                        safeguard++;
+                        unit.GetComponent<UnitScript>().GetNextWeapon();
+                    }
+                    return;
+                }
+                else
+                {
+                    int safeguard = 0;
+                    while (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && safeguard < 30)
+                    {
+                        safeguard++;
+                        unit.GetComponent<UnitScript>().GetNextWeapon();
+                    }
+                    return;
+                }
+
+            }
+            if (unit.GetComponent<RandomScript>().GetPersonalityValue() < 20)
+            {
+                unit.GetComponent<UnitScript>().GetNextWeapon();
+            }
+        }
+
+    }
+
+
     /// <summary>
     /// Calculate attack Destination and target for AI Characters (second version)
     /// </summary>
@@ -1274,7 +1358,7 @@ public class AttackTurnScript : MonoBehaviour
     /// <returns></returns>
     private (GridSquareScript, GameObject) CalculateDestinationForOffensiveUnitsV2(GameObject currentCharacter)
     {
-
+        WeaponDecison(currentCharacter);
         Character character = currentCharacter.GetComponent<UnitScript>().UnitCharacteristics;
 
         List<GridSquareScript> movementtouse = gridScript.movementtiles;
@@ -1301,6 +1385,10 @@ public class AttackTurnScript : MonoBehaviour
 
             bool skip = true;
 
+            if (unit == currentCharacter)
+            {
+                continue;
+            }
 
             if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
             {
