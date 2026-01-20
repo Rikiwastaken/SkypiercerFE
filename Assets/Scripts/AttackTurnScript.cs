@@ -1266,162 +1266,6 @@ public class AttackTurnScript : MonoBehaviour
         return affiliationtoattack;
     }
 
-
-    public GameObject CalculateBestTargetForOffensiveUnits(GameObject unit, bool attacksfriend = true)
-    {
-        int maxreward = 0;
-        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
-        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, gridScript.GetTile(charunit.position), charunit.enemyStats.monsterStats.size, charunit);
-        List<string> affiliationtoattack = Whotoattack(charunit.affiliation, attacksfriend);
-        GameObject chosenUnit = null;
-
-        foreach (GridSquareScript tile in potentialAttackPosition)
-        {
-            foreach (GameObject otherunit in gridScript.allunitGOs)
-            {
-                Character charotherunit = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
-                if (affiliationtoattack.Contains(charotherunit.affiliation.ToLower()) && charotherunit.position == tile.GridCoordinates)
-                {
-                    int reward = 0;
-                    //that means that an enemy unit is in the zone
-                    int rawdamage = ActionsMenu.CalculateDamage(unit, otherunit);
-                    int rawdamagetaken = ActionsMenu.CalculateDamage(otherunit, unit);
-                    int hitrate = ActionsMenu.CalculateHit(unit, otherunit);
-                    int dodgerate = 100 - ActionsMenu.CalculateHit(otherunit, unit);
-
-                    bool inrange = ActionsMenu.CheckifInRange(unit, otherunit);
-                    if (!inrange)
-                    {
-                        rawdamagetaken = 0;
-                    }
-                    else if (charunit.enemyStats.personality.ToLower() != "survivor")
-                    {
-                        reward = -999;
-                    }
-
-                    (GameObject doubleattacker, bool tripleattack) = ActionsMenu.CalculatedoubleAttack(unit, otherunit);
-                    int potentialdamage = rawdamage;
-                    if (doubleattacker == unit)
-                    {
-                        if (tripleattack)
-                        {
-                            potentialdamage *= 3;
-                        }
-                        else
-                        {
-                            potentialdamage *= 2;
-                        }
-                    }
-
-                    if (potentialdamage > 0)
-                    {
-                        reward += 20;
-                        if (potentialdamage >= charotherunit.currentHP)
-                        {
-                            reward += 20;
-                        }
-                        reward += (int)(hitrate / 10f);
-                    }
-
-
-                    int potentialdamagetaken = rawdamagetaken;
-
-                    if (doubleattacker == otherunit)
-                    {
-                        if (tripleattack)
-                        {
-                            potentialdamagetaken *= 3;
-                        }
-                        else
-                        {
-                            potentialdamagetaken *= 2;
-                        }
-                    }
-
-                    if (charunit.enemyStats.personality.ToLower() != "daredevil")
-                    {
-                        if (potentialdamagetaken == 0)
-                        {
-                            reward += 10;
-                        }
-                        else
-                        {
-                            reward += (int)(dodgerate / 10f);
-                            if (potentialdamagetaken <= charunit.currentHP)
-                            {
-                                reward += 5;
-                            }
-                        }
-                    }
-
-
-                    if (charunit.enemyStats.personality.ToLower() == "deviant" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.33f))
-                    {
-                        reward += unit.GetComponent<RandomScript>().GetPersonalityValue() - 50;
-                    }
-
-                    if (charunit.enemyStats.personality.ToLower() != "survivor")
-                    {
-                        if (potentialdamagetaken == 0)
-                        {
-                            reward += 50;
-                        }
-                        else
-                        {
-                            reward += (int)(dodgerate / 10f);
-                            if (potentialdamagetaken <= charunit.currentHP)
-                            {
-                                reward += 5;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        reward -= 999;
-                    }
-
-
-                    if (reward > maxreward || chosenUnit == null)
-                    {
-                        chosenUnit = otherunit;
-                        maxreward = reward;
-                    }
-                }
-            }
-        }
-        if (charunit.enemyStats.personality.ToLower() == "survivor")
-        {
-            chosenUnit = null;
-        }
-        return chosenUnit;
-    }
-
-    /// <summary>
-    /// Calculate movement Destination for AI Characters 
-    /// </summary>
-    /// <param name="currentCharacter"></param>
-    /// <param name="attacksfriend"></param>
-    /// <returns></returns>
-    private GridSquareScript CalculateDestinationForOffensiveUnits(GameObject currentCharacter, bool attacksfriend = true)
-    {
-        List<GridSquareScript> movementlist = gridScript.movementtiles;
-
-        int maxreward = 0;
-
-        GridSquareScript bestsquare = null;
-
-        foreach (GridSquareScript movement in movementlist)
-        {
-            if (RewardForDestination(currentCharacter, movement, attacksfriend) > maxreward)
-            {
-                bestsquare = movement;
-                maxreward = RewardForDestination(currentCharacter, movement, attacksfriend);
-            }
-        }
-        return bestsquare;
-    }
-
     /// <summary>
     /// Calculate attack Destination and target for AI Characters (second version)
     /// </summary>
@@ -1444,7 +1288,10 @@ public class AttackTurnScript : MonoBehaviour
             attacktiles = gridScript.GetAttack(attackerrange, attackermelee, character.currentTile[0], character.enemyStats.monsterStats.size, character);
         }
 
-
+        if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+        {
+            attacktiles = gridScript.healingtiles;
+        }
 
         List<GameObject> potentialtargets = new List<GameObject>();
 
@@ -1454,18 +1301,31 @@ public class AttackTurnScript : MonoBehaviour
 
             bool skip = true;
 
-            if (character.affiliation.ToLower() == "playable" && ((otherchar.affiliation.ToLower() == "other" && otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "enemy"))
+
+            if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
             {
-                skip = false;
+                if (character.affiliation.ToLower() == otherchar.affiliation.ToLower() || (character.affiliation.ToLower() == "other" && !character.attacksfriends))
+                {
+                    skip = false;
+                }
             }
-            if (character.affiliation.ToLower() == "other" && ((otherchar.affiliation.ToLower() == "playable" && character.attacksfriends) || otherchar.affiliation.ToLower() == "enemy"))
+            else
             {
-                skip = false;
+                if (character.affiliation.ToLower() == "playable" && ((otherchar.affiliation.ToLower() == "other" && otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "enemy"))
+                {
+                    skip = false;
+                }
+                if (character.affiliation.ToLower() == "other" && ((otherchar.affiliation.ToLower() == "playable" && character.attacksfriends) || otherchar.affiliation.ToLower() == "enemy"))
+                {
+                    skip = false;
+                }
+                if (character.affiliation.ToLower() == "enemy" && ((otherchar.affiliation.ToLower() == "playable" && !otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "playable"))
+                {
+                    skip = false;
+                }
             }
-            if (character.affiliation.ToLower() == "enemy" && ((otherchar.affiliation.ToLower() == "playable" && !otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "playable"))
-            {
-                skip = false;
-            }
+
+
             if (skip)
             {
                 continue;
@@ -1619,52 +1479,67 @@ public class AttackTurnScript : MonoBehaviour
         Character attackerChar = attacker.GetComponent<UnitScript>().UnitCharacteristics;
         Character targetChar = target.GetComponent<UnitScript>().UnitCharacteristics;
 
-
-        float killFactor = 10f;
-        float NoCounterFactor = 3f;
-        float hitchanceFactor = 1f;
-        float DodgeChanceFactor = 1f;
-        float SurvivesFactor = 2f;
-
-        if (attackerChar.enemyStats.personality.ToLower() == "survivor" || (attackerChar.enemyStats.personality.ToLower() == "coward" && attackerChar.currentHP < attackerChar.AjustedStats.HP * 0.1f))
+        if (attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
-            DodgeChanceFactor *= 3f;
-            SurvivesFactor *= 3f;
-            NoCounterFactor *= 2;
+            reward = 10f * (targetChar.AjustedStats.HP - targetChar.currentHP) / targetChar.AjustedStats.HP;
+        }
+        else
+        {
+            float killFactor = 10f;
+            float NoCounterFactor = 3f;
+            float hitchanceFactor = 1f;
+            float DodgeChanceFactor = 1f;
+            float SurvivesFactor = 2f;
+
+            if (attackerChar.enemyStats.personality.ToLower() == "survivor" || (attackerChar.enemyStats.personality.ToLower() == "coward" && attackerChar.currentHP < attackerChar.AjustedStats.HP * 0.1f))
+            {
+                DodgeChanceFactor *= 3f;
+                SurvivesFactor *= 3f;
+                NoCounterFactor *= 2;
+            }
+
+            if (attackerChar.enemyStats.personality.ToLower() == "daredevil")
+            {
+                DodgeChanceFactor = 0f;
+                SurvivesFactor = 0f;
+                NoCounterFactor = 0f;
+            }
+
+            int rawdamage = ActionsMenu.CalculateDamage(attacker, target);
+            int rawdamagetaken = ActionsMenu.CalculateDamage(target, attacker);
+            int hitrate = ActionsMenu.CalculateHit(attacker, target);
+            int dodgerate = 100 - ActionsMenu.CalculateHit(target, attacker);
+
+            bool inrange = ActionsMenu.CheckifInRange(attacker, target);
+            if (!inrange)
+            {
+                rawdamagetaken = 0;
+            }
+
+
+            float ratioofhptaken = Mathf.Max(0, targetChar.currentHP - rawdamage) / targetChar.currentHP;
+
+            reward += killFactor * ratioofhptaken;
+
+            if (rawdamage >= targetChar.currentHP)
+            {
+                reward += killFactor;
+            }
+
+            if (rawdamagetaken == 0)
+            {
+                reward += NoCounterFactor;
+            }
+
+            reward += hitchanceFactor * hitrate;
+            reward += DodgeChanceFactor * dodgerate;
+
+            float ratioofhptakenbyattacker = Mathf.Max(0, attackerChar.currentHP - rawdamagetaken) / attackerChar.currentHP;
+
+            reward += SurvivesFactor * ratioofhptakenbyattacker;
         }
 
-        int rawdamage = ActionsMenu.CalculateDamage(attacker, target);
-        int rawdamagetaken = ActionsMenu.CalculateDamage(target, attacker);
-        int hitrate = ActionsMenu.CalculateHit(attacker, target);
-        int dodgerate = 100 - ActionsMenu.CalculateHit(target, attacker);
 
-        bool inrange = ActionsMenu.CheckifInRange(attacker, target);
-        if (!inrange)
-        {
-            rawdamagetaken = 0;
-        }
-
-
-        float ratioofhptaken = Mathf.Max(0, targetChar.currentHP - rawdamage) / targetChar.currentHP;
-
-        reward += killFactor * ratioofhptaken;
-
-        if (rawdamage >= targetChar.currentHP)
-        {
-            reward += killFactor;
-        }
-
-        if (rawdamagetaken == 0)
-        {
-            reward += NoCounterFactor;
-        }
-
-        reward += hitchanceFactor * hitrate;
-        reward += DodgeChanceFactor * dodgerate;
-
-        float ratioofhptakenbyattacker = Mathf.Max(0, attackerChar.currentHP - rawdamagetaken) / attackerChar.currentHP;
-
-        reward += SurvivesFactor * ratioofhptakenbyattacker;
 
         return reward;
     }
