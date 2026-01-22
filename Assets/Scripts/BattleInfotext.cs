@@ -207,8 +207,8 @@ public class BattleInfotext : MonoBehaviour
                 ManageMasteryVisuals(selectedunitCharacter);
 
                 NameTMP.text = selectedunitCharacter.name;
-                LevelTMP.text = "Lvl\n" + selectedunitCharacter.level;
-                HPTMP.text = "HP\n" + selectedunitCharacter.currentHP + "/" + selectedunitCharacter.AjustedStats.HP;
+                LevelTMP.text = "Lvl: " + selectedunitCharacter.level;
+                HPTMP.text = "HP: " + selectedunitCharacter.currentHP + "/" + selectedunitCharacter.AjustedStats.HP;
 
                 Sprite spriteToUse = null;
                 if (selectedunitCharacter.affiliation.ToLower() == "playable")
