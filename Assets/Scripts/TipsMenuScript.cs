@@ -36,8 +36,11 @@ public class TipsMenuScript : MonoBehaviour
 
     private GameObject previousselection;
 
+    private Color BaseColor;
+
     private void OnEnable()
     {
+        BaseColor = Buttons[0].GetComponent<Image>().color;
         SelectTipsToUse();
         ButtonInitialization();
 
@@ -161,12 +164,12 @@ public class TipsMenuScript : MonoBehaviour
             if (ButtonIDs[i] == -1)
             {
                 Buttons[i].GetComponent<Image>().color = Color.grey;
-                Buttons[i].transform.GetChild(0).gameObject.SetActive(false);
+                Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().text = "";
             }
             else
             {
-                Buttons[i].transform.GetChild(0).gameObject.SetActive(true);
-                Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = TipsToUse[ButtonIDs[i]].name;
+                Buttons[i].GetComponent<Image>().color = BaseColor;
+                Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().text = TipsToUse[ButtonIDs[i]].name;
 
             }
         }
