@@ -23,6 +23,7 @@ public class MainMenuScript : MonoBehaviour
         if (DataScript.instance == null)
         {
             SceneManager.LoadScene("FirstScene");
+            return;
         }
 
         saveManager = FindAnyObjectByType<SaveManager>();

@@ -181,26 +181,7 @@ public class BattleInfotext : MonoBehaviour
             }
             if (selectedunit != null && selectedunitCharacter != null)
             {
-                string gradeletter = "E";
-                int grade = selectedunit.GetComponent<UnitScript>().GetFirstWeapon().Grade;
-                switch (grade)
-                {
-                    case 1:
-                        gradeletter = "D";
-                        break;
-                    case 2:
-                        gradeletter = "C";
-                        break;
-                    case 3:
-                        gradeletter = "B";
-                        break;
-                    case 4:
-                        gradeletter = "A";
-                        break;
-                    case 5:
-                        gradeletter = "S";
-                        break;
-                }
+
 
                 ManagedSkillVisuals(selectedunitCharacter);
                 ManageSkillDescription();
@@ -254,6 +235,28 @@ public class BattleInfotext : MonoBehaviour
                 string weaponstring = "";
                 foreach (equipment weapon in selectedunitCharacter.equipments)
                 {
+
+                    string gradeletter = "E";
+                    int grade = weapon.Grade;
+                    switch (grade)
+                    {
+                        case 1:
+                            gradeletter = "D";
+                            break;
+                        case 2:
+                            gradeletter = "C";
+                            break;
+                        case 3:
+                            gradeletter = "B";
+                            break;
+                        case 4:
+                            gradeletter = "A";
+                            break;
+                        case 5:
+                            gradeletter = "S";
+                            break;
+                    }
+
                     if (weapon.Name != "" && weapon.type != null)
                     {
                         switch (weapon.type.ToLower())
@@ -283,7 +286,7 @@ public class BattleInfotext : MonoBehaviour
                                 weaponstring += "<sprite=5>";
                                 break;
                         }
-                        weaponstring += " " + weapon.Name + "\n";
+                        weaponstring += " (" + gradeletter + ") " + weapon.Name + "\n";
                     }
 
                 }

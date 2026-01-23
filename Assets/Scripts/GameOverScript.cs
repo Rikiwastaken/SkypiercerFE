@@ -113,8 +113,7 @@ public class GameOverScript : MonoBehaviour
     public void ChooseSaveFile(int slot)
     {
         chosenSlot = slot;
-        ConfirmMenu.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text =
-            $"Overwrite Slot {slot + 1} ?";
+        ConfirmMenu.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"Overwrite Slot {slot + 1} ?";
     }
 
     public void Continue()

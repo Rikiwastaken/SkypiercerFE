@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class NeutralMenuScript : MonoBehaviour
@@ -90,6 +91,7 @@ public class NeutralMenuScript : MonoBehaviour
         else
         {
             RedoMenuTransfrom.gameObject.SetActive(true);
+            RedoMenuTransfrom.GetComponent<Volume>().weight = 0f;
 
             EventSystem.current.SetSelectedGameObject(RedoMenuTransfrom.GetChild(0).gameObject);
             gameObject.SetActive(false);

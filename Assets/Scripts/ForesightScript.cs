@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 using static DataScript;
 using static GridSquareScript;
@@ -81,14 +82,25 @@ public class ForesightScript : MonoBehaviour
     private int framesuppressed;
     private int framesdownpressed;
 
+    private bool initiatestop;
+
     private void OnEnable()
     {
         ButtonInitialization();
         InputManager = InputManager.instance;
 
     }
+
+    public Volume PostProcessingVolume;
+
     private void FixedUpdate()
     {
+
+
+        if (PostProcessingVolume.weight < 1f && !initiatestop)
+        {
+            PostProcessingVolume.weight += Time.fixedDeltaTime * 2f;
+        }
 
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         if (currentSelected != null)
@@ -143,9 +155,20 @@ public class ForesightScript : MonoBehaviour
 
         if (InputManager.canceljustpressed)
         {
-            gameObject.SetActive(false);
-            neutralmenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
+            initiatestop = true;
+        }
+
+
+        if (initiatestop)
+        {
+            PostProcessingVolume.weight -= Time.fixedDeltaTime * 4f;
+            if (PostProcessingVolume.weight <= 0)
+            {
+                initiatestop = false;
+                gameObject.SetActive(false);
+                neutralmenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
+            }
         }
 
     }

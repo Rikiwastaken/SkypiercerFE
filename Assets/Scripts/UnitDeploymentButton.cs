@@ -26,6 +26,9 @@ public class UnitDeploymentButton : MonoBehaviour
 
     public GameObject lockimage;
 
+    public Image ButtonBGImage;
+
+    public Color ImageDefaultColor;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +36,7 @@ public class UnitDeploymentButton : MonoBehaviour
         UnitDeploymentScript = GetComponentInParent<UnitDeploymentScript>();
         MapInitializer = FindAnyObjectByType<MapInitializer>();
         InputManager = InputManager.instance;
+        ImageDefaultColor = ButtonBGImage.color;
     }
 
     private void FixedUpdate()
@@ -68,11 +72,11 @@ public class UnitDeploymentButton : MonoBehaviour
                 {
                     if (Character.playableStats.deployunit)
                     {
-                        GetComponent<Image>().color = Color.green;
+                        ButtonBGImage.color = Color.green * 0.5f;
                     }
                     else
                     {
-                        GetComponent<Image>().color = Color.red;
+                        ButtonBGImage.color = Color.red * 0.5f;
                     }
                 }
                 if (InputManager.Telekinesisjustpressed && EventSystem.current.currentSelectedGameObject == gameObject && !Character.playableStats.protagonist)
@@ -89,7 +93,7 @@ public class UnitDeploymentButton : MonoBehaviour
                     lockimage.SetActive(false);
                 }
                 GetComponentInChildren<TextMeshProUGUI>().text = "None";
-                GetComponent<Image>().color = Color.white;
+                ButtonBGImage.color = ImageDefaultColor;
             }
         }
         if (Item != null)
@@ -100,21 +104,21 @@ public class UnitDeploymentButton : MonoBehaviour
                 GetComponentInChildren<TextMeshProUGUI>().text = skill.name + " : " + Item.Quantity;
                 if (SkillEditionScript.selectedcharacter.UnitSkill == Item.ID)
                 {
-                    GetComponent<Image>().color = Color.green;
+                    ButtonBGImage.color = Color.green * 0.5f;
                 }
                 else if (SkillEditionScript.selectedcharacter.EquipedSkills.Contains(Item.ID))
                 {
-                    GetComponent<Image>().color = Color.cyan;
+                    ButtonBGImage.color = Color.red * 0.5f;
                 }
                 else
                 {
-                    GetComponent<Image>().color = Color.white;
+                    ButtonBGImage.color = ImageDefaultColor;
                 }
             }
             else if (transform.parent.gameObject.name == "EditSkills")
             {
                 GetComponentInChildren<TextMeshProUGUI>().text = "None";
-                GetComponent<Image>().color = Color.white;
+                ButtonBGImage.color = ImageDefaultColor;
             }
             return;
         }

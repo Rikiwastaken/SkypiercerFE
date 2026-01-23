@@ -186,7 +186,7 @@ public class UnitDeploymentScript : MonoBehaviour
         }
 
         List<Transform> MasteryExpBars = new List<Transform>();
-        for (int i = 1; i < Mastery.childCount; i++)
+        for (int i = 2; i < Mastery.childCount; i++)
         {
             MasteryExpBars.Add(Mastery.GetChild(i).transform);
         }

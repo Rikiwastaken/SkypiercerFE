@@ -221,12 +221,12 @@ public class SaveManager : MonoBehaviour
                         text += "\nPrologue, after battle.";
                     }
                 }
-                buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = text;
+                buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().text = text;
             }
             else
             {
                 string text = "Slot : " + (i + 1) + "  Empty";
-                buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = text;
+                buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().text = text;
             }
         }
     }
