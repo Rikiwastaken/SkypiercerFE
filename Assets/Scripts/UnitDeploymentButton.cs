@@ -26,7 +26,7 @@ public class UnitDeploymentButton : MonoBehaviour
 
     public GameObject lockimage;
 
-    public Image ButtonBGImage;
+    private Image ButtonBGImage;
 
     public Color ImageDefaultColor;
 
@@ -36,6 +36,7 @@ public class UnitDeploymentButton : MonoBehaviour
         UnitDeploymentScript = GetComponentInParent<UnitDeploymentScript>();
         MapInitializer = FindAnyObjectByType<MapInitializer>();
         InputManager = InputManager.instance;
+        ButtonBGImage = GetComponent<Button>().image;
         ImageDefaultColor = ButtonBGImage.color;
     }
 
@@ -47,7 +48,7 @@ public class UnitDeploymentButton : MonoBehaviour
         }
 
 
-        GetComponentInChildren<TextMeshProUGUI>().text = "None";
+        GetComponentInChildren<TextMeshProUGUI>().text = "";
         if (Character != null)
         {
 
@@ -72,11 +73,15 @@ public class UnitDeploymentButton : MonoBehaviour
                 {
                     if (Character.playableStats.deployunit)
                     {
-                        ButtonBGImage.color = Color.green * 0.5f;
+                        Color newcolor = Color.green * 0.5f;
+                        newcolor.a = 1;
+                        ButtonBGImage.color = newcolor;
                     }
                     else
                     {
-                        ButtonBGImage.color = Color.red * 0.5f;
+                        Color newcolor = Color.blue * 0.5f;
+                        newcolor.a = 1;
+                        ButtonBGImage.color = newcolor;
                     }
                 }
                 if (InputManager.Telekinesisjustpressed && EventSystem.current.currentSelectedGameObject == gameObject && !Character.playableStats.protagonist)
@@ -92,7 +97,7 @@ public class UnitDeploymentButton : MonoBehaviour
                 {
                     lockimage.SetActive(false);
                 }
-                GetComponentInChildren<TextMeshProUGUI>().text = "None";
+                GetComponentInChildren<TextMeshProUGUI>().text = "";
                 ButtonBGImage.color = ImageDefaultColor;
             }
         }
@@ -104,11 +109,15 @@ public class UnitDeploymentButton : MonoBehaviour
                 GetComponentInChildren<TextMeshProUGUI>().text = skill.name + " : " + Item.Quantity;
                 if (SkillEditionScript.selectedcharacter.UnitSkill == Item.ID)
                 {
-                    ButtonBGImage.color = Color.green * 0.5f;
+                    Color newcolor = Color.green * 0.5f;
+                    newcolor.a = 1;
+                    ButtonBGImage.color = newcolor;
                 }
                 else if (SkillEditionScript.selectedcharacter.EquipedSkills.Contains(Item.ID))
                 {
-                    ButtonBGImage.color = Color.red * 0.5f;
+                    Color newcolor = Color.blue * 0.5f;
+                    newcolor.a = 1;
+                    ButtonBGImage.color = newcolor;
                 }
                 else
                 {
@@ -117,7 +126,7 @@ public class UnitDeploymentButton : MonoBehaviour
             }
             else if (transform.parent.gameObject.name == "EditSkills")
             {
-                GetComponentInChildren<TextMeshProUGUI>().text = "None";
+                GetComponentInChildren<TextMeshProUGUI>().text = "";
                 ButtonBGImage.color = ImageDefaultColor;
             }
             return;
