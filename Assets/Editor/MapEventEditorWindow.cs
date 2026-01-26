@@ -714,7 +714,7 @@ public class MapEventEditorWindow : EditorWindow
                 EditorGUILayout.LabelField("Skills");
                 DrawIDListDropdown(eProp.FindPropertyRelative("Skills"), skillNames, skillIDs);
 
-                EditorGUILayout.PropertyField(eProp.FindPropertyRelative("isboss"));
+                EditorGUILayout.PropertyField(eProp.FindPropertyRelative("bossiD"));
                 EditorGUILayout.PropertyField(eProp.FindPropertyRelative("isother"));
 
                 // MonsterStats block (if present)
@@ -763,7 +763,7 @@ public class MapEventEditorWindow : EditorWindow
         if (eProp.FindPropertyRelative("usetelekinesis") != null) eProp.FindPropertyRelative("usetelekinesis").boolValue = false;
         if (eProp.FindPropertyRelative("personality") != null) eProp.FindPropertyRelative("personality").stringValue = "nothing";
         if (eProp.FindPropertyRelative("startpos") != null) eProp.FindPropertyRelative("startpos").vector2Value = Vector2.zero;
-        if (eProp.FindPropertyRelative("isboss") != null) eProp.FindPropertyRelative("isboss").boolValue = false;
+        if (eProp.FindPropertyRelative("bossiD") != null) eProp.FindPropertyRelative("bossiD").intValue = 0;
         if (eProp.FindPropertyRelative("isother") != null) eProp.FindPropertyRelative("isother").boolValue = false;
         if (eProp.FindPropertyRelative("RemainingLifebars") != null) eProp.FindPropertyRelative("RemainingLifebars").intValue = 0;
         if (eProp.FindPropertyRelative("modelID") != null) eProp.FindPropertyRelative("modelID").intValue = 0;

@@ -115,6 +115,12 @@ public class GridSquareScript : MonoBehaviour
     public int randomnumberlistcounter;
 
     public bool isfinishtile;
+    public bool isbossAttackTile;
+
+    public Color AttackTileColor;
+    public Color MovementTileColor;
+    public Color HealingColor;
+    public Color BossAttackColor;
 
     void Awake()
     {
@@ -722,9 +728,13 @@ public class GridSquareScript : MonoBehaviour
 
     public void fillwithblue()
     {
-        Color newcolor = Color.blue;
-        newcolor.a = 0.5f;
-        filledimage.color = newcolor;
+        GameObject GO = GridScript.instance.GetUnit(this);
+
+        if (GO != null)
+        {
+            UpdateInsideSprite(true, GO.GetComponent<UnitScript>().UnitCharacteristics);
+        }
+        filledimage.color = MovementTileColor;
     }
 
     public void fillwithRed()
@@ -737,23 +747,19 @@ public class GridSquareScript : MonoBehaviour
             UpdateInsideSprite(true, GO.GetComponent<UnitScript>().UnitCharacteristics);
         }
 
-        Color newcolor = Color.red;
-        newcolor.a = 0.5f;
-        filledimage.color = newcolor;
+        filledimage.color = AttackTileColor;
     }
 
     public void CorrectColor()
     {
-        Color newcolor = Color.blue;
-        newcolor.a = 0.5f;
-        if (filledimage.color == newcolor)
+        if (filledimage.color == MovementTileColor)
         {
             GameObject GO = GridScript.instance.GetUnit(this);
             if (GO != null && GO.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size > 0)
             {
                 foreach (GridSquareScript tile in GO.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
                 {
-                    tile.filledimage.color = newcolor;
+                    tile.filledimage.color = MovementTileColor;
                 }
             }
         }
@@ -761,16 +767,12 @@ public class GridSquareScript : MonoBehaviour
 
     public void fillwithGreen()
     {
-        Color newcolor = Color.green;
-        newcolor.a = 0.5f;
-        filledimage.color = newcolor;
+        filledimage.color = HealingColor;
     }
 
     public void fillwithPurple()
     {
-        Color newcolor = Color.magenta;
-        newcolor.a = 0.5f;
-        filledimage.color = newcolor;
+        filledimage.color = BossAttackColor;
     }
     public void fillwithGrey()
     {

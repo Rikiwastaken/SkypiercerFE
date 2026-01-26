@@ -623,6 +623,13 @@ public class AttackTurnScript : MonoBehaviour
             User.GetComponent<UnitScript>().GetFirstWeapon().Currentuses = 0;
             User.GetComponent<UnitScript>().AddNumber(healthlost, false, "Blade Sacrifice");
         }
+        else if (commandID == 76) // Taunt
+        {
+            foresightScript.CreateAction(3, User, Target);
+            User.GetComponent<UnitScript>().UnitCharacteristics.TauntTurns = 1;
+            User.GetComponent<UnitScript>().AddNumber(0, true, "Taunt");
+        }
+
         ActionsMenu.FinalizeAttack();
 
     }
@@ -1354,7 +1361,6 @@ public class AttackTurnScript : MonoBehaviour
     /// Calculate attack Destination and target for AI Characters (second version)
     /// </summary>
     /// <param name="currentCharacter"></param>
-    /// <param name="attacksfriend"></param>
     /// <returns></returns>
     private (GridSquareScript, GameObject) CalculateDestinationForOffensiveUnitsV2(GameObject currentCharacter)
     {
@@ -1566,6 +1572,11 @@ public class AttackTurnScript : MonoBehaviour
 
         Character attackerChar = attacker.GetComponent<UnitScript>().UnitCharacteristics;
         Character targetChar = target.GetComponent<UnitScript>().UnitCharacteristics;
+
+        if (targetChar.TauntTurns > 0)
+        {
+            reward += 999f;
+        }
 
         if (attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {

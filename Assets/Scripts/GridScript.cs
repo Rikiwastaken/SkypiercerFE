@@ -32,7 +32,6 @@ public class GridScript : MonoBehaviour
     public List<GridSquareScript> lockedmovementtiles;
     public List<GridSquareScript> lockedattacktiles;
     public List<GridSquareScript> lockedhealingtiles;
-    public List<GridSquareScript> dangerousTiles;
 
     public GridSquareScript lastSquare;
 
@@ -1302,13 +1301,11 @@ public class GridScript : MonoBehaviour
                 {
                     Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
                 }
-
+                if (Grid[x][y].GetComponent<GridSquareScript>().isbossAttackTile)
+                {
+                    Grid[x][y].GetComponent<GridSquareScript>().fillwithPurple();
+                }
             }
-        }
-
-        foreach (GridSquareScript tile in dangerousTiles)
-        {
-            tile.fillwithPurple();
         }
 
         if (!lockselection)

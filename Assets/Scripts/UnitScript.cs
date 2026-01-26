@@ -31,7 +31,6 @@ public class UnitScript : MonoBehaviour
         public List<equipment> equipments;
         public int UnitSkill;
         public List<int> EquipedSkills;
-        public bool isboss;
         public bool attacksfriends;
 
         public PlayableStats playableStats;
@@ -41,6 +40,7 @@ public class UnitScript : MonoBehaviour
         public int modelID;
         public List<WeaponMastery> Masteries;
         public float DialoguePitch;
+        public int TauntTurns;
     }
 
     [Serializable]
@@ -102,7 +102,7 @@ public class UnitScript : MonoBehaviour
         public List<int> equipments;
         public List<int> Skills;
         public String Name;
-        public bool isboss;
+        public int bossiD;
         public bool isother;
         public MonsterStats monsterStats;
         public int RemainingLifebars;
@@ -224,6 +224,7 @@ public class UnitScript : MonoBehaviour
     public int tilesmoved;
     public int numberoftimeswaitted;
     public int SurvivorStacks;
+
 
     public TextMeshProUGUI DmgText;
     public TextMeshProUGUI DmgEffectNameText;
@@ -663,7 +664,6 @@ public class UnitScript : MonoBehaviour
             equipments = CharacterToCopy.equipments,
             UnitSkill = CharacterToCopy.UnitSkill,
             EquipedSkills = new List<int>(CharacterToCopy.EquipedSkills),
-            isboss = CharacterToCopy.isboss,
             attacksfriends = CharacterToCopy.attacksfriends,
             playableStats = new PlayableStats
             {
@@ -685,7 +685,7 @@ public class UnitScript : MonoBehaviour
                 equipments = new List<int>(CharacterToCopy.enemyStats.equipments),
                 Skills = new List<int>(CharacterToCopy.enemyStats.Skills),
                 Name = CharacterToCopy.enemyStats.Name,
-                isboss = CharacterToCopy.enemyStats.isboss,
+                bossiD = CharacterToCopy.enemyStats.bossiD,
                 isother = CharacterToCopy.enemyStats.isother,
                 monsterStats = new MonsterStats
                 {
@@ -703,7 +703,9 @@ public class UnitScript : MonoBehaviour
                 weapontype = m.weapontype,
                 Exp = m.Exp,
                 Level = m.Level
-            }).ToList()
+            }).ToList(),
+            DialoguePitch = CharacterToCopy.DialoguePitch,
+            TauntTurns = CharacterToCopy.TauntTurns
         };
 
         return copy;
@@ -2769,7 +2771,7 @@ public class UnitScript : MonoBehaviour
         {
             if (enemy != null)
             {
-                if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
+                if (enemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats != null && enemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
                 {
                     statbonuses.PhysDamage += 1;
                     statbonuses.TelekDamage += 10;
@@ -2841,29 +2843,19 @@ public class UnitScript : MonoBehaviour
         {
             if (enemy != null)
             {
-                if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
-                {
-                    statbonuses.FixedDamageBonus += ((int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP);
-                }
+                statbonuses.FixedDamageBonus += ((int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP);
             }
 
         }
         //KillingSpree
         if (GetSkill(29))
         {
-            if (enemy != null)
-            {
-                if (enemy.GetComponent<UnitScript>().UnitCharacteristics.isboss)
-                {
-                    statbonuses.Strength += 1 * unitkilled;
-                    statbonuses.Psyche += 1 * unitkilled;
-                    statbonuses.Resistance += 1 * unitkilled;
-                    statbonuses.Defense += 1 * unitkilled;
-                    statbonuses.Speed += 1 * unitkilled;
-                    statbonuses.Dexterity += 1 * unitkilled;
-                }
-            }
-
+            statbonuses.Strength += 1 * unitkilled;
+            statbonuses.Psyche += 1 * unitkilled;
+            statbonuses.Resistance += 1 * unitkilled;
+            statbonuses.Defense += 1 * unitkilled;
+            statbonuses.Speed += 1 * unitkilled;
+            statbonuses.Dexterity += 1 * unitkilled;
         }
 
         //Survivor
@@ -3056,6 +3048,12 @@ public class UnitScript : MonoBehaviour
         {
             statbonuses.FixedDamageBonus += 100;
             statbonuses.FixedDamageReduction += 100;
+        }
+
+        //Caelum General
+        if (GetSkill(77))
+        {
+            statbonuses.DamageReduction += 50;
         }
 
 

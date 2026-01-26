@@ -228,7 +228,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         eProp.FindPropertyRelative("usetelekinesis").boolValue = false;
         eProp.FindPropertyRelative("personality").stringValue = "nothing";
         eProp.FindPropertyRelative("startpos").vector2Value = Vector2.zero;
-        eProp.FindPropertyRelative("isboss").boolValue = false;
+        eProp.FindPropertyRelative("bossiD").intValue = 0;
         eProp.FindPropertyRelative("isother").boolValue = false;
         eProp.FindPropertyRelative("talkable").boolValue = false;
         eProp.FindPropertyRelative("RemainingLifebars").intValue = 0;

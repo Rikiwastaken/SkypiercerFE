@@ -48,6 +48,7 @@ public class ForesightScript : MonoBehaviour
         public int previousremainingrain;
         public int previousRandomIndex;
         public MechanismClass MechanismClass;
+        public bool isbosstile;
     }
 
     [Serializable]
@@ -61,6 +62,7 @@ public class ForesightScript : MonoBehaviour
         public int previousattackerlvlupindex;
         public int previousdefenderlvlupindex;
         public int attackersurvivorstats = -1;
+        public int AttackerTauntStacks = -1;
         public int defendersurvivorstats = -1;
     }
 
@@ -95,8 +97,6 @@ public class ForesightScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-
         if (PostProcessingVolume.weight < 1f && !initiatestop)
         {
             PostProcessingVolume.weight += Time.fixedDeltaTime * 2f;
@@ -375,6 +375,7 @@ public class ForesightScript : MonoBehaviour
                 mod.type = tileScript.type;
                 mod.previousRandomIndex = tileScript.randomnumberlistcounter;
                 mod.MechanismClass = tileScript.CreateMechanismCopy();
+                mod.isbosstile = tileScript.isbossAttackTile;
                 CurrentAction.ModifiedTiles.Add(mod);
             }
         }
@@ -521,6 +522,7 @@ public class ForesightScript : MonoBehaviour
                 {
                     tileModification.tile.Mechanism = tileModification.MechanismClass;
                 }
+                tileModification.tile.isbossAttackTile = tileModification.isbosstile;
             }
             GridScript.instance.InitializeGOList();
             RevertRolls(ActionToRevert);

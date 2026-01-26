@@ -549,7 +549,7 @@ public class ActionsMenu : MonoBehaviour
         if (targetlist.Count > 0)
         {
             confirmattack = true;
-            unitAttackText.transform.parent.parent.gameObject.SetActive(false);
+            unitAttackText.transform.parent.gameObject.SetActive(false);
             gameObject.SetActive(false);
             GridScript.ResetAllSelections();
         }
@@ -795,7 +795,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+        unitAttackText.transform.parent.gameObject.SetActive(true);
 
 
 
@@ -948,7 +948,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+        unitAttackText.transform.parent.gameObject.SetActive(true);
 
         int FinalHealingdmg = CalculateHealing(unit);
 
@@ -1020,6 +1020,10 @@ public class ActionsMenu : MonoBehaviour
         {
             BladeSacrificeCommandWindow(unit);
         }
+        else if (command.ID == 76) // Taunt
+        {
+            BasicCommandWindow(unit, target);
+        }
 
     }
 
@@ -1032,7 +1036,7 @@ public class ActionsMenu : MonoBehaviour
 
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+        unitAttackText.transform.parent.gameObject.SetActive(true);
 
         SetupCombatHUD(unit, true, true, charunit.currentHP);
         SetupCombatHUD(target, false, true, chartarget.currentHP);
@@ -1048,7 +1052,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+        unitAttackText.transform.parent.gameObject.SetActive(true);
 
         int healthrestored = (int)((charunit.AjustedStats.HP - charunit.currentHP) * 0.25f);
 
@@ -1066,7 +1070,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+        unitAttackText.transform.parent.gameObject.SetActive(true);
 
         int healthrestored = (int)Mathf.Min((charunit.AjustedStats.HP - charunit.currentHP), charunit.AjustedStats.HP * 0.5f);
 
@@ -1122,7 +1126,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+        unitAttackText.transform.parent.gameObject.SetActive(true);
 
         int healthlost = (int)Mathf.Min(charunit.currentHP - 1, charunit.AjustedStats.HP * 0.5f);
 
@@ -1181,7 +1185,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+        unitAttackText.transform.parent.gameObject.SetActive(true);
 
         SetupCombatHUD(unit, true, true, charunit.currentHP);
         SetupCombatHUD(target, false, true, chartarget.currentHP);
@@ -1246,7 +1250,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         GridSquareScript Walltarget = target.GetComponent<GridSquareScript>();
-        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+        unitAttackText.transform.parent.gameObject.SetActive(true);
 
 
         SetupCombatHUD(unit, true, true, charunit.currentHP);
@@ -1307,7 +1311,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+        unitAttackText.transform.parent.gameObject.SetActive(true);
 
 
 
@@ -1353,7 +1357,7 @@ public class ActionsMenu : MonoBehaviour
 
     private void SetupCombatHUD(GameObject GOToUse, bool isUnit, bool isnormalUnit, int hptoshow, bool isnull = false, string dmgorhealing = "-", string hit = "-", string crit = "-", bool ishealing = false)
     {
-        unitAttackText.transform.parent.parent.gameObject.SetActive(true);
+        unitAttackText.transform.parent.gameObject.SetActive(true);
 
 
         if (isnull)
@@ -2168,7 +2172,7 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         int baseexp = 15;
-        if (chartarget.isboss)
+        if (chartarget.enemyStats != null && chartarget.enemyStats.bossiD > 0)
         {
             baseexp = 50;
         }

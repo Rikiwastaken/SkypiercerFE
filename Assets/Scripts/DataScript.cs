@@ -1230,7 +1230,6 @@ public class DataScript : MonoBehaviour
 
     public void CharacterUnlockingSafeguard(int chapter)
     {
-        Debug.Log("chapter " + chapter);
         foreach (Character character in PlayableCharacterList)
         {
             switch (character.ID)

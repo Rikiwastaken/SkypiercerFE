@@ -686,12 +686,21 @@
         },
         {
             "name": "Taunt",
-            "Descriptions": "Forces enemies to target this unit.",
-            "IsCommand": false,
+            "Descriptions": "Forces enemies to target this unit until the next turn.",
+            "IsCommand": true,
             "Cost": 10,
-            "targettype": 0,
+            "targettype": 3,
             "range": 0,
             "ID": 76
+        },
+        {
+            "name": "Caelum General",
+            "Descriptions": "Reduce damage taken by 50% and always counterattacks.",
+            "IsCommand": true,
+            "Cost": 0,
+            "targettype": 0,
+            "range": 0,
+            "ID": 77
         }
     ]
 }

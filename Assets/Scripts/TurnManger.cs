@@ -141,8 +141,9 @@ public class TurnManger : MonoBehaviour
 
 
             unit.GetComponent<UnitScript>().waittedbonusturns--;
-            Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
+            Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+            unitchar.TauntTurns--;
 
 
             //Kira Battalion Side Effect
