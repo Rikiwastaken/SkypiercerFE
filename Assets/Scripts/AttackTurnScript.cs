@@ -183,7 +183,18 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     currentenemytarget = null;
                     GridSquareScript Destination = null;
-                    (Destination, currentenemytarget) = CalculateDestinationForOffensiveUnitsV2(CurrentEnemy);
+
+                    if (CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
+                    {
+                        CurrentEnemy.GetComponent<BossScript>().nextTarget = CalculateDestinationForBoss(CurrentEnemy);
+                        Destination = CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
+                    }
+                    else
+                    {
+                        (Destination, currentenemytarget) = CalculateDestinationForOffensiveUnitsV2(CurrentEnemy);
+                    }
+
+
                     Vector2 DestinationVector = CharCurrentEnemy.position;
                     if (Destination != null)
                     {
@@ -203,13 +214,17 @@ public class AttackTurnScript : MonoBehaviour
             }
             else if (CurrentEnemy != null && !CharCurrentEnemy.alreadyplayed)
             {
-                if (saveManager.Options.BattleAnimations)
+                if (CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
+                {
+                    CurrentEnemy.GetComponent<BossScript>().TriggerBossAttack();
+                    CharCurrentEnemy.alreadyplayed = true;
+                }
+                else if (saveManager.Options.BattleAnimations)
                 {
                     if (Vector2.Distance(CharCurrentEnemy.currentTile[0].GridCoordinates, new Vector2(CurrentEnemy.transform.position.x, CurrentEnemy.transform.position.z)) <= 1f)
                     {
                         ManageAttackWithAnimation(CurrentEnemy);
                     }
-
                 }
                 else
                 {
@@ -360,7 +375,7 @@ public class AttackTurnScript : MonoBehaviour
 
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
-        if (charunit.enemyStats.personality.ToLower() == "hunter")
+        if (charunit.enemyStats.personality.ToLower() == "hunter" || charunit.enemyStats.bossiD > 0)
         {
             return true;
         }
@@ -391,7 +406,7 @@ public class AttackTurnScript : MonoBehaviour
             (Destination, target) = CalculateDestinationForOffensiveUnitsV2(unit);
             unit.GetComponent<UnitScript>().MoveTo(originalpos);
             unit.GetComponent<UnitScript>().ResetPath();
-            if (target == null && Destination.GridCoordinates == originalpos)
+            if (target == null && (Destination == null || Destination.GridCoordinates == originalpos))
             {
                 return false;
             }
@@ -1549,15 +1564,87 @@ public class AttackTurnScript : MonoBehaviour
         }
         else
         {
-            float randomvalue = (float)currentCharacter.GetComponent<RandomScript>().GetPersonalityValue() / 100f;
 
-            int rankinlist = (int)Mathf.Max(0, (randomvalue * gridScript.movementtiles.Count - 1));
+            int personalityvalue = currentCharacter.GetComponent<RandomScript>().GetPersonalityValue();
 
-            return (gridScript.movementtiles[rankinlist], null);
+
+
+            if (personalityvalue <= 5 || character.enemyStats.personality.ToLower() == "deviant" || (character.enemyStats.personality.ToLower() == "coward" && character.currentHP > character.AjustedStats.HP * 0.3f))
+            {
+                float randomvalue = (float)personalityvalue / 100f;
+                int rankinlist = (int)Mathf.Max(0, (randomvalue * gridScript.movementtiles.Count - 1));
+
+                return (gridScript.movementtiles[rankinlist], null);
+            }
+            else
+            {
+                return (null, null);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Calculate attack Destination and target for AI Characters (second version)
+    /// </summary>
+    /// <param name="currentCharacter"></param>
+    /// <returns></returns>
+    private GameObject CalculateDestinationForBoss(GameObject currentCharacter)
+    {
+        WeaponDecison(currentCharacter);
+        Character character = currentCharacter.GetComponent<UnitScript>().UnitCharacteristics;
+
+        List<GridSquareScript> attacktiles = gridScript.attacktiles;
+
+        List<GameObject> potentialtargets = new List<GameObject>();
+
+        foreach (GameObject unit in gridScript.allunitGOs)
+        {
+            Character otherchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+            bool skip = true;
+
+            if (unit == currentCharacter)
+            {
+                continue;
+            }
+
+            if (character.affiliation.ToLower() == "playable" && ((otherchar.affiliation.ToLower() == "other" && otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "enemy"))
+            {
+                skip = false;
+            }
+            if (character.affiliation.ToLower() == "other" && ((otherchar.affiliation.ToLower() == "playable" && character.attacksfriends) || otherchar.affiliation.ToLower() == "enemy"))
+            {
+                skip = false;
+            }
+            if (character.affiliation.ToLower() == "enemy" && otherchar.affiliation.ToLower() == "playable")
+            {
+                skip = false;
+            }
+
+
+            if (!skip)
+            {
+                potentialtargets.Add(unit);
+            }
+
 
         }
 
+        GameObject truetarget = null;
 
+        float maxreward = 0;
+
+        foreach (GameObject target in potentialtargets)
+        {
+            float reward = calculateRewardforAttacking(currentCharacter, target, true);
+            if (reward > maxreward)
+            {
+                maxreward = reward;
+                truetarget = target;
+            }
+        }
+
+        return truetarget;
     }
 
     /// <summary>
@@ -1566,7 +1653,7 @@ public class AttackTurnScript : MonoBehaviour
     /// <param name="attacker"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    private float calculateRewardforAttacking(GameObject attacker, GameObject target)
+    private float calculateRewardforAttacking(GameObject attacker, GameObject target, bool isboss = false)
     {
         float reward = 0f;
 
@@ -1589,6 +1676,13 @@ public class AttackTurnScript : MonoBehaviour
             float hitchanceFactor = 1f;
             float DodgeChanceFactor = 1f;
             float SurvivesFactor = 2f;
+
+            if (isboss)
+            {
+                NoCounterFactor = 0f;
+                DodgeChanceFactor = 0f;
+                reward += 50 - ManhattanDistance(attackerChar, targetChar);
+            }
 
             if (attackerChar.enemyStats.personality.ToLower() == "survivor" || (attackerChar.enemyStats.personality.ToLower() == "coward" && attackerChar.currentHP < attackerChar.AjustedStats.HP * 0.1f))
             {

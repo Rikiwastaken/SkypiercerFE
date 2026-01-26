@@ -4,13 +4,13 @@ public class OcclusionScript : MonoBehaviour
 {
     private void OnBecameVisible()
     {
-        if(Application.isPlaying)
+        if (Application.isPlaying)
         {
             if (GetComponent<GridSquareScript>() != null && !GetComponent<GridSquareScript>().enabled)
             {
                 GetComponent<GridSquareScript>().enabled = true;
             }
-            if (GetComponent<UnitScript>()!=null && !GetComponent<UnitScript>().enabled)
+            if (GetComponent<UnitScript>() != null && !GetComponent<UnitScript>().enabled)
             {
                 GetComponent<UnitScript>().enabled = true;
             }

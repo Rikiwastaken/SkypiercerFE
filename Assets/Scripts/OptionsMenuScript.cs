@@ -22,6 +22,9 @@ public class OptionsMenuScript : MonoBehaviour
 
     private SaveManager SaveManager;
 
+    public TextMeshProUGUI musictext;
+    public TextMeshProUGUI SEtext;
+
     private void Start()
     {
         SaveManager = SaveManager.instance;
@@ -49,8 +52,8 @@ public class OptionsMenuScript : MonoBehaviour
         {
             FixedGrowth.text = "Fixed Growth : Off";
         }
-        MusicMain.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Music : " + (int)(SaveManager.Options.musicvolume * 100);
-        SEMain.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Sound : " + (int)(SaveManager.Options.SEVolume * 100);
+        musictext.text = "Music : " + (int)(SaveManager.Options.musicvolume * 100);
+        SEtext.text = "Sound : " + (int)(SaveManager.Options.SEVolume * 100);
     }
 
     // Update is called once per frame
@@ -85,7 +88,7 @@ public class OptionsMenuScript : MonoBehaviour
             }
             SaveManager.SaveOptions();
         }
-        MusicMain.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Music : " + (int)(SaveManager.Options.musicvolume * 100);
+        musictext.text = "Music : " + (int)(SaveManager.Options.musicvolume * 100);
     }
 
     private void ManageSEVol(GameObject selected)
@@ -112,7 +115,7 @@ public class OptionsMenuScript : MonoBehaviour
             }
             SaveManager.SaveOptions();
         }
-        SEMain.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Sound : " + (int)(SaveManager.Options.SEVolume * 100);
+        SEtext.text = "Sound : " + (int)(SaveManager.Options.SEVolume * 100);
     }
 
 
