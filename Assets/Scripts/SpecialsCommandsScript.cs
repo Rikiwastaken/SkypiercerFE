@@ -42,7 +42,15 @@ public class SpecialCommandsScript : MonoBehaviour
 
                 if (SpecialInteractos[i].GetComponent<UnitScript>() != null)
                 {
-                    buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "Talk";
+                    if (SpecialInteractos[i].GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
+                    {
+                        buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "Intercept";
+                    }
+                    else
+                    {
+                        buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "Talk";
+                    }
+
                 }
                 else
                 {
@@ -71,12 +79,17 @@ public class SpecialCommandsScript : MonoBehaviour
         if (SpecialInteractos[i].GetComponent<UnitScript>() != null)
         {
             ActionManager.instance.Interract(target, null, SpecialInteractos[i]);
-            SpecialInteractos[i].GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkedto = true;
-            MapEventManager.instance.TriggerEventCheck();
+            if (SpecialInteractos[i].GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
+            {
+                target.GetComponent<UnitScript>().UnitCharacteristics.isintercepting = true;
+            }
+            else
+            {
+                SpecialInteractos[i].GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkedto = true;
+                MapEventManager.instance.TriggerEventCheck();
+            }
             gameObject.SetActive(false);
             ActionsMenu.gameObject.SetActive(false);
-
-
         }
         else if (SpecialInteractos[i].GetComponent<GridSquareScript>() != null)
         {

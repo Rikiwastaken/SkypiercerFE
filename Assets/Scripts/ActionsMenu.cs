@@ -60,6 +60,11 @@ public class ActionsMenu : MonoBehaviour
 
     private AttackTurnScript attackTurnScript;
 
+    public float DamageReductionWhenIntercepted;
+    public float DamageReductionForIntercepter;
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -1573,7 +1578,7 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
-    public (int, int, int, int, List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked)
+    public (int, int, int, int, List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked, bool isbossdamage = false, bool AttackIntercepted = false, bool IsIntercepter = false)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
@@ -1586,18 +1591,69 @@ public class ActionsMenu : MonoBehaviour
             bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38);//spite
 
             int unithitrate = CalculateHit(unit, target);
-            int targethitrate = CalculateHit(target, unit);
+
 
             int unitdamage = CalculateDamage(unit, target);
-            int targetdamage = CalculateDamage(target, unit);
+
 
             int unitcrit = CalculateCrit(unit, target);
-            int targetcrit = CalculateCrit(target, unit);
 
             int numberofhits = 0;
             int numberofcritials = 0;
 
             int finaldamage = 0;
+
+
+            if (isbossdamage)
+            {
+                int totaldamage = 0;
+                if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
+                {
+                    numberofhits++;
+
+                    if (AttackIntercepted)
+                    {
+                        if (IsIntercepter)
+                        {
+                            totaldamage += (int)(DamageReductionForIntercepter * unitdamage);
+                        }
+                        else
+                        {
+                            totaldamage += (int)(DamageReductionWhenIntercepted * unitdamage);
+                        }
+                    }
+                    else
+                    {
+                        totaldamage += unitdamage;
+                    }
+
+
+
+                    AffectDamage(unit, target, totaldamage);
+
+                    OnDamageEffect(unit, totaldamage, false);
+                    finaldamage = unitdamage;
+
+
+
+                    if (charunit.currentHP <= 0)
+                    {
+                        target.GetComponent<UnitScript>().unitkilled++;
+                    }
+
+                    return (numberofhits, numberofcritials, finaldamage, 0, levelup);
+
+                }
+
+
+            }
+
+
+            int targethitrate = CalculateHit(target, unit);
+
+            int targetdamage = CalculateDamage(target, unit);
+
+            int targetcrit = CalculateCrit(target, unit);
 
             if (!unitalreadyattacked)
             {

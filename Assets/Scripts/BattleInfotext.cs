@@ -51,7 +51,8 @@ public class BattleInfotext : MonoBehaviour
     public TextMeshProUGUI HPTMP;
     public TextMeshProUGUI StatTMP;
     public TextMeshProUGUI LevelTMP;
-    public TextMeshProUGUI WeaponTMP;
+    public Transform WeaponObject;
+    public Transform WeaponIconsObject;
     public Image CharacterSprite;
     public Image ExpBarFilling;
     public Image BackgroundImage;
@@ -232,10 +233,12 @@ public class BattleInfotext : MonoBehaviour
 
                 StatTMP.text = statstring;
 
-                string weaponstring = "";
+                int currentindex = 0;
+
+
                 foreach (equipment weapon in selectedunitCharacter.equipments)
                 {
-
+                    string weaponstring = "";
                     string gradeletter = "E";
                     int grade = weapon.Grade;
                     switch (grade)
@@ -286,13 +289,20 @@ public class BattleInfotext : MonoBehaviour
                                 weaponstring += "<sprite=5>";
                                 break;
                         }
-                        weaponstring += " (" + gradeletter + ") " + weapon.Name + "\n";
-                    }
+                        WeaponIconsObject.GetChild(currentindex).GetComponent<TextMeshProUGUI>().text = weaponstring;
+                        weaponstring = " (" + gradeletter + ") " + weapon.Name;
 
+                        WeaponObject.GetChild(currentindex).GetComponent<TextMeshProUGUI>().text = weaponstring;
+
+                        currentindex++;
+                    }
                 }
 
-                WeaponTMP.text = weaponstring;
-
+                for (int i = currentindex; i < WeaponObject.childCount; i++)
+                {
+                    WeaponObject.GetChild(i).GetComponent<TextMeshProUGUI>().text = "";
+                    WeaponIconsObject.GetChild(i).GetComponent<TextMeshProUGUI>().text = "";
+                }
 
             }
             else

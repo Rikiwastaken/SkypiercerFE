@@ -313,7 +313,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         EditorGUILayout.LabelField("Skills");
         DrawIDListDropdown(eProp.FindPropertyRelative("Skills"), skillNames, skillIDs);
 
-        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("isboss"));
+        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("bossiD"));
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("isother"));
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("talkable"));
 

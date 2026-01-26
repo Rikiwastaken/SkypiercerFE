@@ -144,6 +144,10 @@ public class TurnManger : MonoBehaviour
 
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
             unitchar.TauntTurns--;
+            if (unitchar.isintercepting)
+            {
+                unitchar.isintercepting = false;
+            }
 
 
             //Kira Battalion Side Effect

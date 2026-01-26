@@ -41,6 +41,7 @@ public class UnitScript : MonoBehaviour
         public List<WeaponMastery> Masteries;
         public float DialoguePitch;
         public int TauntTurns;
+        public bool isintercepting;
     }
 
     [Serializable]
@@ -705,7 +706,8 @@ public class UnitScript : MonoBehaviour
                 Level = m.Level
             }).ToList(),
             DialoguePitch = CharacterToCopy.DialoguePitch,
-            TauntTurns = CharacterToCopy.TauntTurns
+            TauntTurns = CharacterToCopy.TauntTurns,
+            isintercepting = CharacterToCopy.isintercepting,
         };
 
         return copy;
@@ -3182,6 +3184,17 @@ public class UnitScript : MonoBehaviour
                 interactables.Add(newtile);
             }
         }
+
+        //check if there are any bosses
+        foreach (GameObject unit in GridScript.allunitGOs)
+        {
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0 && UnitCharacteristics.playableStats.protagonist && UnitCharacteristics.currentTile != null && UnitCharacteristics.currentTile[0] != null && UnitCharacteristics.currentTile[0].isbossAttackTile)
+            {
+                interactables.Add(unit);
+                break;
+            }
+        }
+
 
         return interactables;
 

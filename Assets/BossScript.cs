@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static UnitScript;
 
@@ -8,6 +9,8 @@ public class BossScript : MonoBehaviour
 
     public GameObject nextTarget;
 
+    private ActionsMenu ActionsMenu;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,16 +20,39 @@ public class BossScript : MonoBehaviour
     public void TriggerBossAttack(GameObject characterwhoblocked = null)
     {
 
+        if (ActionsMenu == null)
+        {
+            ActionsMenu = GridScript.GetComponent<ActionsMenu>();
+        }
+
         Debug.Log(nextTarget.name);
 
+        List<GameObject> unitsinthezone = new List<GameObject>();
+
+        bool intercepted = false;
+        GameObject intercepter = null;
         for (int i = 0; i < GridScript.Grid.Count; i++)
         {
             for (int j = 0; j < GridScript.Grid[0].Count; j++)
             {
                 GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
                 tile.isbossAttackTile = false;
-                //dodamage
+                GameObject UnitOnTile = GridScript.GetUnit(tile);
+                if (UnitOnTile != null && UnitOnTile.GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower() != GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower())
+                {
+                    unitsinthezone.Add(UnitOnTile);
+                    if (UnitOnTile.GetComponent<UnitScript>().UnitCharacteristics.isintercepting)
+                    {
+                        intercepted = true;
+                        intercepter = UnitOnTile;
+                    }
+                }
             }
+        }
+
+        foreach (GameObject unit in unitsinthezone)
+        {
+            ActionsMenu.ApplyDamage(gameObject, unit, true, true, intercepted, intercepter == unit);
         }
 
 

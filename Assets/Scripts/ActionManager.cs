@@ -372,7 +372,7 @@ public class ActionManager : MonoBehaviour
 
     }
 
-    public void Interract(GameObject Unit = null, GridSquareScript tilechanged = null, GameObject OneTalkedTo = null) // Appele quand l'unite parle a une autre unite ou qu'elle interragit avec un objet
+    public void Interract(GameObject Unit = null, GridSquareScript tilechanged = null, GameObject SpecialCommandUnit = null) // Appele quand l'unite parle a une autre unite ou qu'elle interragit avec un objet
     {
         GameObject Unittouse = currentcharacter;
         if (Unit != null)
@@ -390,9 +390,9 @@ public class ActionManager : MonoBehaviour
 
 
         }
-        if (OneTalkedTo != null)
+        if (SpecialCommandUnit != null)
         {
-            Foresight.CreateAction(5, Unittouse, OneTalkedTo);
+            Foresight.CreateAction(5, Unittouse, SpecialCommandUnit);
         }
 
         Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
