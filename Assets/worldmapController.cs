@@ -55,7 +55,7 @@ public class worldmapController : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, 0.05f);
+            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, 0.5f);
         }
 
         if (Mathf.Abs(playermodel.forward.x - forwardtarget.x) > 1.5f)

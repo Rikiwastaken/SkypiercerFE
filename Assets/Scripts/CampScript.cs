@@ -91,12 +91,9 @@ public class CampScript : MonoBehaviour
 
     public void LoadNextChapter()
     {
-        if (saveManager == null)
-        {
-            saveManager = SaveManager.instance;
-        }
 
-        SceneLoader.instance.LoadScene("Chapter" + saveManager.currentchapter);
+
+        SceneLoader.instance.LoadScene("WorldMap");
 
     }
 

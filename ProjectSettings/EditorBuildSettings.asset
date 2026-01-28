@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestMap.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/WorldMap.unity
+    guid: 95a3f779ea42ca64e94b38e8da76a4f3
+  - enabled: 1
     path: Assets/Scenes/Maps/Prologue.unity
     guid: e4bd82864b6ee614cb4d3a96907695ed
   - enabled: 1
