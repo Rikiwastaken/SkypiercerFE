@@ -812,7 +812,7 @@ public class ActionsMenu : MonoBehaviour
         int FinalUnitdmg = CalculateDamage(unit, target);
         int FinalTargetdmg = CalculateDamage(target, unit);
 
-        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38)) //Spite
+        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
         {
             if (doubleattacker == target)
             {
@@ -873,7 +873,7 @@ public class ActionsMenu : MonoBehaviour
 
         SetupCombatHUD(unit, true, true, (int)Mathf.Max(charunit.currentHP - FinalTargetdmg, 0f), false, damageunittxt, CalculateHit(unit, target) + "%", CalculateCrit(unit, target) + "%");
 
-        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38)) //Spite
+        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
         {
             string TargetDmgText = "";
             if (doubleattacker == target)
@@ -920,7 +920,7 @@ public class ActionsMenu : MonoBehaviour
             TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
         }
 
-        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38)) //Spite
+        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
         {
             if (doubleattacker == target)
             {
@@ -1588,7 +1588,7 @@ public class ActionsMenu : MonoBehaviour
         {
             (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
 
-            bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38);//spite
+            bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77);//spite, Caelum General
 
             int unithitrate = CalculateHit(unit, target);
 
@@ -1793,7 +1793,7 @@ public class ActionsMenu : MonoBehaviour
 
                 OnDamageEffect(unit, totaldamage, false);
                 finaldamage = unitdamage;
-                if (chartarget.currentHP <= 0 || !(CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38))) //Spite
+                if (chartarget.currentHP <= 0 || !(CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77))) //Spite, Caelum General
                 {
                     if (charunit.currentHP > 0 && charunit.affiliation == "playable")
                     {
@@ -1968,7 +1968,7 @@ public class ActionsMenu : MonoBehaviour
         //using a staff
         else
         {
-            bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38); //Spite
+            bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77); //Spite, Caelum General
             int unitdamage = (int)Mathf.Min(CalculateHealing(unit), chartarget.AjustedStats.HP - chartarget.currentHP);
             int numberofhits = 1;
             int numberofcritials = 0;
