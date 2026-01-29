@@ -39,13 +39,23 @@ public class WorldMapManager : MonoBehaviour
     {
         initialPosition = ChapterUI.transform.localPosition;
 
-        foreach (Transform child in StoryPointTrsfrm)
+        int maxchapter = DataScript.instance.GetComponent<SaveManager>().maxchapterreached;
+
+        if (maxchapter == 0)
         {
-            if (DataScript.instance.GetComponent<SaveManager>().currentchapter == child.GetComponent<StoryPointScript>().chapterID)
+            Character.transform.position = StoryPointTrsfrm.GetChild(0).position;
+        }
+        else
+        {
+            foreach (Transform child in StoryPointTrsfrm)
             {
-                Character.transform.position = child.position;
+                if (maxchapter - 1 == child.GetComponent<StoryPointScript>().chapterID)
+                {
+                    Character.transform.position = child.position;
+                }
             }
         }
+
     }
 
     // Update is called once per frame

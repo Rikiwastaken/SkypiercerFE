@@ -17,6 +17,10 @@ public class MusicManager : MonoBehaviour
 
     public AudioSource CampMusic;
     public AudioSource CampMusicintro;
+    public AudioSource WorldMapMusic;
+    public AudioSource WorldMapMusicintro;
+
+
     public AudioSource MainMenuMusic;
     public AudioSource MainMenuMusicintro;
 
@@ -123,10 +127,11 @@ public class MusicManager : MonoBehaviour
             currentDialogueAudioSource.volume = 0f;
             currentDialogueAudioSourceIntro.volume = 0f;
         }
-        if (scene.name == "Camp" && currentscene != scene.name)
+        if ((scene.name == "Camp" || scene.name == "WorldMap") && currentscene != scene.name)
         {
 
-            PlayMusicWithIntro(1);
+            PlayMusicWithIntro(1, 0f);
+            PlayMusicWithIntro(6, 0f);
         }
 
         currentscene = scene.name;
@@ -195,7 +200,7 @@ public class MusicManager : MonoBehaviour
         if (PlayPrepMusic)
         {
             PlayPrepMusic = false;
-            PlayMusicWithIntro(4);
+            PlayMusicWithIntro(4, maxvolume);
         }
 
 
@@ -227,8 +232,8 @@ public class MusicManager : MonoBehaviour
         if (PrepFinished && !incombat.isPlaying)
         {
             BeforeCombat.Stop();
-            PlayMusicWithIntro(2);
-            PlayMusicWithIntro(3);
+            PlayMusicWithIntro(2, maxvolume);
+            PlayMusicWithIntro(3, maxvolume);
             incombat.volume = 0f;
         }
 
@@ -259,16 +264,36 @@ public class MusicManager : MonoBehaviour
         {
             if (!CampMusic.isPlaying && !CampMusicintro.isPlaying)
             {
-                PlayMusicWithIntro(1);
+                PlayMusicWithIntro(1, 0f);
             }
             ChangeVolume(MainMenuMusic, 0f);
             ChangeVolume(MainMenuMusicintro, 0f);
+
+            ChangeVolume(CampMusic, maxvolume);
+            ChangeVolume(CampMusicintro, maxvolume);
+            ChangeVolume(WorldMapMusic, 0f);
+            ChangeVolume(WorldMapMusicintro, 0f);
+
+        }
+        else if (currentscene == "WorldMap")
+        {
+            if (!WorldMapMusic.isPlaying && !WorldMapMusicintro.isPlaying)
+            {
+                PlayMusicWithIntro(6, 0f);
+            }
+            ChangeVolume(MainMenuMusic, 0f);
+            ChangeVolume(MainMenuMusicintro, 0f);
+
+            ChangeVolume(CampMusic, 0f);
+            ChangeVolume(CampMusicintro, 0f);
+            ChangeVolume(WorldMapMusic, maxvolume);
+            ChangeVolume(WorldMapMusicintro, maxvolume);
         }
         else if (currentscene == "MainMenu")
         {
             if (!MainMenuMusic.isPlaying)
             {
-                PlayMusicWithIntro(0);
+                PlayMusicWithIntro(0, maxvolume);
             }
             ChangeVolume(CampMusic, 0f);
             ChangeVolume(CampMusicintro, 0f);
@@ -335,7 +360,7 @@ public class MusicManager : MonoBehaviour
 
     }
 
-    private void PlayMusicWithIntro(int TypeID)
+    private void PlayMusicWithIntro(int TypeID, float startvolume)
     {
         AudioSource Main = null;
         AudioSource intro = null;
@@ -380,16 +405,22 @@ public class MusicManager : MonoBehaviour
                 Main = currentDialogueAudioSource;
                 intro = currentDialogueAudioSourceIntro;
                 break;
+            case (6): //WorldMap
+                lowerdialogue = true;
+                lowermap = true;
+                Main = WorldMapMusic;
+                intro = WorldMapMusicintro;
+                break;
 
         }
-        Main.volume = maxvolume;
+        Main.volume = startvolume;
         if (intro.clip == null)
         {
             Main.PlayScheduled(AudioSettings.dspTime);
         }
         else
         {
-            intro.volume = maxvolume;
+            intro.volume = startvolume;
 
             intro.PlayScheduled(AudioSettings.dspTime);
 
@@ -423,7 +454,7 @@ public class MusicManager : MonoBehaviour
             currentDialogueAudioSourceIntro.clip = DialogueMusicsWithIntro[CurrentDialogueMusic].Intro;
             currentDialogueAudioSource.volume = maxvolume;
             currentDialogueAudioSourceIntro.volume = maxvolume;
-            PlayMusicWithIntro(5);
+            PlayMusicWithIntro(5, maxvolume);
         }
         else if (musicID == -1)
         {

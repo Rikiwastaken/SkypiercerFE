@@ -11,7 +11,7 @@ public class StoryPointScript : MonoBehaviour
 
     private void Start()
     {
-        if (DataScript.instance.GetComponent<SaveManager>().currentchapter < chapterID)
+        if (DataScript.instance.GetComponent<SaveManager>().maxchapterreached < chapterID)
         {
             ChapterChangeVisuals.SetActive(false);
         }
@@ -20,7 +20,7 @@ public class StoryPointScript : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
 
-        if (DataScript.instance.GetComponent<SaveManager>().currentchapter >= chapterID)
+        if (DataScript.instance.GetComponent<SaveManager>().maxchapterreached >= chapterID)
         {
             if (collision.transform.CompareTag("Player"))
             {
@@ -33,7 +33,7 @@ public class StoryPointScript : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (DataScript.instance.GetComponent<SaveManager>().currentchapter >= chapterID)
+        if (DataScript.instance.GetComponent<SaveManager>().maxchapterreached >= chapterID)
         {
             if (collision.transform.CompareTag("Player"))
             {

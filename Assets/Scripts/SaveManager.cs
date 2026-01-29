@@ -18,6 +18,7 @@ public class SaveManager : MonoBehaviour
     public int activeSlot;
 
     public int currentchapter;
+    public int maxchapterreached;
 
     [Serializable]
     public class SaveClass
@@ -25,6 +26,8 @@ public class SaveManager : MonoBehaviour
         public string versionID;
         public int slot;
         public int chapter;
+        public int MaxChapterReached;
+        public bool inworldmap;
         public List<Character> PlayableCharacterList;
         public Inventory PlayerInventory;
         public List<Bonds> BondList;
@@ -80,6 +83,10 @@ public class SaveManager : MonoBehaviour
         if (activescenename != "MainMenu" && activescenename != "FirstScene" && activescenename != "LoadingScene")
         {
             secondselapsed += Time.fixedDeltaTime;
+        }
+        if (currentchapter > maxchapterreached)
+        {
+            maxchapterreached = currentchapter;
         }
 
     }
@@ -210,11 +217,15 @@ public class SaveManager : MonoBehaviour
                 {
                     text += "\nChapter: " + save.chapter + ", before battle.";
                 }
+                else if (save.inworldmap)
+                {
+                    text += "\nChapter: " + save.chapter + ", World Map.";
+                }
                 else
                 {
-                    if (save.chapter > 1)
+                    if (save.MaxChapterReached > 1)
                     {
-                        text += "\nChapter: " + (save.chapter - 1) + ", after battle.";
+                        text += "\nChapter: " + (save.MaxChapterReached - 1) + ", after battle.";
                     }
                     else
                     {
@@ -258,6 +269,7 @@ public class SaveManager : MonoBehaviour
             DS.BondsList = SaveClasses[slot].BondList;
             secondselapsed = SaveClasses[slot].secondselapsed;
             currentchapter = SaveClasses[slot].chapter;
+            maxchapterreached = SaveClasses[slot].MaxChapterReached;
         }
         else if (slot == -1)
         {
@@ -265,6 +277,8 @@ public class SaveManager : MonoBehaviour
             DS.PlayerInventory = DefaultSave.PlayerInventory;
             DS.BondsList = DefaultSave.BondList;
             secondselapsed = 0;
+            currentchapter = 0;
+            maxchapterreached = 0;
         }
 
     }
@@ -274,6 +288,7 @@ public class SaveManager : MonoBehaviour
 
         currentchapter = chapter;
         bool inCamp = false;
+        bool inworldmap = false;
         string scenename = SceneManager.GetActiveScene().name;
 
         for (int i = 0; i < SceneManager.sceneCount; i++)
@@ -300,6 +315,10 @@ public class SaveManager : MonoBehaviour
         {
             inCamp = true;
         }
+        if (scenename.Contains("WorldMap"))
+        {
+            inworldmap = true;
+        }
 
         SaveClass save = new SaveClass
         {
@@ -310,6 +329,8 @@ public class SaveManager : MonoBehaviour
             PlayerInventory = DataScript.instance.PlayerInventory,
             secondselapsed = secondselapsed,
             inCamp = inCamp,
+            inworldmap = inworldmap,
+            MaxChapterReached = maxchapterreached,
             BondList = DataScript.instance.BondsList
         };
 
@@ -328,7 +349,7 @@ public class SaveManager : MonoBehaviour
         try
         {
             File.WriteAllText(fullPath, json);
-            Debug.Log($"Sauvegarde effectu�e : {fullPath}");
+            Debug.Log($"Sauvegarde effectuee : {fullPath}");
         }
         catch (System.Exception e)
         {
