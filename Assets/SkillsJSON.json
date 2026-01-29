@@ -696,11 +696,20 @@
         {
             "name": "Caelum General",
             "Descriptions": "Reduce damage taken by 50% and always counterattacks.",
-            "IsCommand": true,
+            "IsCommand": false,
             "Cost": 0,
             "targettype": 0,
             "range": 0,
             "ID": 77
+        },
+        {
+            "name": "Overly Caustious",
+            "Descriptions": "Increases dodge rate by 20% but reduces crit chance by 30%.",
+            "IsCommand": false,
+            "Cost": 0,
+            "targettype": 0,
+            "range": 0,
+            "ID": 78
         }
     ]
 }

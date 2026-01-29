@@ -197,6 +197,10 @@ public class BattleInfotext : MonoBehaviour
                 {
                     spriteToUse = DataScript.instance.DialogueSpriteList[selectedunitCharacter.ID];
                 }
+                else if (selectedunitCharacter.enemyStats.PlayableSpriteID > 0)
+                {
+                    spriteToUse = DataScript.instance.DialogueSpriteList[selectedunitCharacter.enemyStats.PlayableSpriteID];
+                }
                 else
                 {
                     spriteToUse = DataScript.instance.EnemySprites[selectedunitCharacter.enemyStats.SpriteID];

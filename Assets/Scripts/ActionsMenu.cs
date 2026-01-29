@@ -1412,8 +1412,13 @@ public class ActionsMenu : MonoBehaviour
             {
                 spriteToUse = DataScript.instance.DialogueSpriteList[character.ID];
             }
+            else if (character.enemyStats.PlayableSpriteID > 0)
+            {
+                spriteToUse = DataScript.instance.DialogueSpriteList[character.enemyStats.PlayableSpriteID];
+            }
             else
             {
+
                 spriteToUse = DataScript.instance.EnemySprites[character.enemyStats.SpriteID];
             }
 

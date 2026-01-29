@@ -1136,6 +1136,13 @@ public class DataScript : MonoBehaviour
                     equipmentList[i].equipmentmodel.localposition = Vector3.zero;
                 }
 
+                if (equipmentList[i].Name.Contains("Garland"))
+                {
+                    equipmentList[i].Range = 2;
+                    equipmentList[i].Currentuses = 99;
+                    equipmentList[i].Maxuses = 99;
+                }
+
                 switch (equipmentList[i].type.ToLower())
                 {
                     case ("sword"):

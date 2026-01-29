@@ -111,6 +111,7 @@ public class UnitScript : MonoBehaviour
         public bool talkable;
         public bool talkedto;
         public int SpriteID;
+        public int PlayableSpriteID;
     }
 
     [Serializable]
@@ -3056,6 +3057,13 @@ public class UnitScript : MonoBehaviour
         if (GetSkill(77))
         {
             statbonuses.DamageReduction += 50;
+        }
+
+        //Overly Cautious
+        if (GetSkill(78))
+        {
+            statbonuses.Crit -= 30;
+            statbonuses.Dodge += 20;
         }
 
 

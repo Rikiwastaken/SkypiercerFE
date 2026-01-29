@@ -294,6 +294,8 @@ public class EnemyStatsEditorWindow : EditorWindow
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("desiredlevel"));
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("itemtodropID"));
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("usetelekinesis"));
+        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("SpriteID"));
+        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("PlayableSpriteID"));
 
         // Personality dropdown
         var personalityProp = eProp.FindPropertyRelative("personality");
