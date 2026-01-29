@@ -30,6 +30,7 @@ public class UnitScript : MonoBehaviour
         public List<int> equipmentsIDs;
         public List<equipment> equipments;
         public int UnitSkill;
+        public int TemporarySkill;
         public List<int> EquipedSkills;
         public bool attacksfriends;
 
@@ -42,6 +43,7 @@ public class UnitScript : MonoBehaviour
         public float DialoguePitch;
         public int TauntTurns;
         public bool isintercepting;
+
     }
 
     [Serializable]
@@ -696,7 +698,11 @@ public class UnitScript : MonoBehaviour
                     ismachine = CharacterToCopy.enemyStats.monsterStats.ismachine
                 },
                 RemainingLifebars = CharacterToCopy.enemyStats.RemainingLifebars,
-                modelID = CharacterToCopy.enemyStats.modelID
+                modelID = CharacterToCopy.enemyStats.modelID,
+                talkable = CharacterToCopy.enemyStats.talkable,
+                talkedto = CharacterToCopy.enemyStats.talkedto,
+                SpriteID = CharacterToCopy.enemyStats.SpriteID,
+                PlayableSpriteID = CharacterToCopy.enemyStats.PlayableSpriteID,
             },
             currentTile = new List<GridSquareScript>(CharacterToCopy.currentTile),
             modelID = CharacterToCopy.modelID,
@@ -709,6 +715,7 @@ public class UnitScript : MonoBehaviour
             DialoguePitch = CharacterToCopy.DialoguePitch,
             TauntTurns = CharacterToCopy.TauntTurns,
             isintercepting = CharacterToCopy.isintercepting,
+            TemporarySkill = CharacterToCopy.TemporarySkill
         };
 
         return copy;

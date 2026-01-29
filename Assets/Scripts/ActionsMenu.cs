@@ -588,7 +588,7 @@ public class ActionsMenu : MonoBehaviour
                     GameObject potentialtarget = GridScript.GetUnit(tile);
                     if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable")
                     {
-                        if (commandID != 56 || potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.UnitSkill != 0) //copy
+                        if ((commandID != 56 && commandID != 79) || potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.UnitSkill != 0 || potentialtarget.GetComponent<UnitScript>().GetFirstWeapon().Currentuses > 0) //copy ad break
                         {
                             targetlist.Add(potentialtarget);
                         }
@@ -1029,6 +1029,10 @@ public class ActionsMenu : MonoBehaviour
         {
             BasicCommandWindow(unit, target);
         }
+        else if (command.ID == 79) // Break
+        {
+            BreakCommandWindow(unit, target);
+        }
 
     }
 
@@ -1045,6 +1049,28 @@ public class ActionsMenu : MonoBehaviour
 
         SetupCombatHUD(unit, true, true, charunit.currentHP);
         SetupCombatHUD(target, false, true, chartarget.currentHP);
+
+        TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP, 1f);
+        TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
+
+        UnitGreenLifebar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
+        UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
+    }
+
+    private void BreakCommandWindow(GameObject unit, GameObject target)
+    {
+
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        unitAttackText.transform.parent.gameObject.SetActive(true);
+
+        SetupCombatHUD(unit, true, true, charunit.currentHP);
+
+        int lostdurability = (int)Mathf.Max(1, charunit.AjustedStats.Strength / (target.GetComponent<UnitScript>().GetFirstWeapon().Grade));
+
+        int remainingdurability = (int)Mathf.Max(target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses - lostdurability, 0);
+
+        SetupCombatHUD(target, false, true, chartarget.currentHP, false, "", "-", "-", false, remainingdurability);
 
         TargetGreenLifebar.fillAmount = Mathf.Max((float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP, 1f);
         TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
@@ -1360,7 +1386,7 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
-    private void SetupCombatHUD(GameObject GOToUse, bool isUnit, bool isnormalUnit, int hptoshow, bool isnull = false, string dmgorhealing = "-", string hit = "-", string crit = "-", bool ishealing = false)
+    private void SetupCombatHUD(GameObject GOToUse, bool isUnit, bool isnormalUnit, int hptoshow, bool isnull = false, string dmgorhealing = "-", string hit = "-", string crit = "-", bool ishealing = false, int targetdurabilityaftereffect = -1)
     {
         unitAttackText.transform.parent.gameObject.SetActive(true);
 
@@ -1490,7 +1516,15 @@ public class ActionsMenu : MonoBehaviour
                 TelekinesisGOToUse.SetActive(false);
             }
 
-            weapontext.text = weapontxt + " " + weapon.Name + " " + weapon.Currentuses + "/" + weapon.Maxuses; ;
+
+            int durabilitytouse = weapon.Currentuses;
+
+            if (targetdurabilityaftereffect != -1)
+            {
+                durabilitytouse = targetdurabilityaftereffect;
+            }
+
+            weapontext.text = weapontxt + " " + weapon.Name + " " + durabilitytouse + "/" + weapon.Maxuses; ;
             nametext.text = character.name;
             if (character.currentTile[0].type != "")
             {

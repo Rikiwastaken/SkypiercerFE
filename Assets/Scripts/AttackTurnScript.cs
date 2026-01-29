@@ -557,7 +557,7 @@ public class AttackTurnScript : MonoBehaviour
                     newitem.Quantity = 1;
                     newitem.ID = CharTarget.UnitSkill;
                 }
-
+                CharUser.TemporarySkill = CharTarget.UnitSkill;
                 Target.GetComponent<UnitScript>().AddNumber(0, true, DataScript.instance.SkillList[CharTarget.UnitSkill].name + " copied");
                 User.GetComponent<UnitScript>().AddNumber(0, true, DataScript.instance.SkillList[CharTarget.UnitSkill].name + " copied");
             }
@@ -643,6 +643,13 @@ public class AttackTurnScript : MonoBehaviour
             foresightScript.CreateAction(3, User, Target);
             User.GetComponent<UnitScript>().UnitCharacteristics.TauntTurns = 1;
             User.GetComponent<UnitScript>().AddNumber(0, true, "Taunt");
+        }
+        else if (commandID == 79) // Break
+        {
+            foresightScript.CreateAction(3, User, Target);
+            int lostdurability = (int)Mathf.Max(1, CharUser.AjustedStats.Strength / (Target.GetComponent<UnitScript>().GetFirstWeapon().Grade));
+            Target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses = Mathf.Max(Target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses - lostdurability, 0);
+            Target.GetComponent<UnitScript>().AddNumber(0, true, "Break");
         }
 
         ActionsMenu.FinalizeAttack();

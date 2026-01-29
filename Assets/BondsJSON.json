@@ -251,6 +251,66 @@
             "BondLevel": 0,
             "BondDialogueSeen": 0,
             "MaxLevel": 3
+        },
+        {
+            "ID": 21,
+            "Name": "Kira-Gwenie",
+            "Characters": [
+                9,
+                10
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 22,
+            "Name": "Gwenie-Zack",
+            "Characters": [
+                10,
+                0
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 2
+        },
+        {
+            "ID": 23,
+            "Name": "Gwenie-Lea",
+            "Characters": [
+                10,
+                1
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 24,
+            "Name": "Gwenie-Elwyn",
+            "Characters": [
+                10,
+                2
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 25,
+            "Name": "Gwenie-Sieg",
+            "Characters": [
+                10,
+                5
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 2
         }
     ]
 }

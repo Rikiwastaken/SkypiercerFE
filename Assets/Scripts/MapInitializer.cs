@@ -99,6 +99,7 @@ public class MapInitializer : MonoBehaviour
                 newcharacter.name = playable.name;
                 index++;
             }
+
         }
 
         foreach (Character playable in DataScript.instance.PlayableCharacterList)
@@ -116,7 +117,10 @@ public class MapInitializer : MonoBehaviour
                 newcharacter.name = playable.name;
                 index++;
             }
-
+            playable.TauntTurns = 0;
+            playable.isintercepting = false;
+            playable.TemporarySkill = 0;
+            playable.currentHP = (int)playable.AjustedStats.HP;
         }
 
         GridScript.InitializeGOList();
