@@ -86,6 +86,7 @@ public class SpecialCommandsScript : MonoBehaviour
             else
             {
                 SpecialInteractos[i].GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkedto = true;
+                DataScript.instance.SaveCharacterTalkedToFlag(SpecialInteractos[i].GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkID);
                 MapEventManager.instance.TriggerEventCheck();
             }
             gameObject.SetActive(false);

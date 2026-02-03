@@ -111,9 +111,11 @@ public class UnitScript : MonoBehaviour
         public int RemainingLifebars;
         public int modelID;
         public bool talkable;
+        public int talkID;
         public bool talkedto;
         public int SpriteID;
         public int PlayableSpriteID;
+        public int CopyID;
     }
 
     [Serializable]
@@ -700,8 +702,10 @@ public class UnitScript : MonoBehaviour
                 RemainingLifebars = CharacterToCopy.enemyStats.RemainingLifebars,
                 modelID = CharacterToCopy.enemyStats.modelID,
                 talkable = CharacterToCopy.enemyStats.talkable,
+                talkID = CharacterToCopy.enemyStats.talkID,
                 talkedto = CharacterToCopy.enemyStats.talkedto,
                 SpriteID = CharacterToCopy.enemyStats.SpriteID,
+                CopyID = CharacterToCopy.enemyStats.CopyID,
                 PlayableSpriteID = CharacterToCopy.enemyStats.PlayableSpriteID,
             },
             currentTile = new List<GridSquareScript>(CharacterToCopy.currentTile),

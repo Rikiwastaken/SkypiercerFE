@@ -39,6 +39,7 @@ public class MapInitializer : MonoBehaviour
         EmptyPlayables();
         InitializePlayers(true);
         InitializeNonPlayers();
+        InitializeCopyAndTalkID();
     }
 
     private void EmptyPlayables()
@@ -136,6 +137,50 @@ public class MapInitializer : MonoBehaviour
         {
             InitializeNonPlayable(enemyStats, index);
             index++;
+        }
+
+    }
+
+    private void InitializeCopyAndTalkID()
+    {
+        int talkindex = 0;
+        int copyindex = 0;
+
+        if (DataScript.instance.ChapterFlagsList.Count <= ChapterID)
+        {
+            SaveManager.ChapterFlags newcurrentflags = new SaveManager.ChapterFlags();
+            newcurrentflags.talkflags = new List<bool>();
+            newcurrentflags.copyflags = new List<bool>();
+            DataScript.instance.ChapterFlagsList.Add(newcurrentflags);
+        }
+
+        SaveManager.ChapterFlags currentflags = DataScript.instance.ChapterFlagsList[ChapterID];
+
+        for (int i = 0; i < Characters.transform.childCount; i++)
+        {
+            GameObject CharGO = Characters.transform.GetChild(i).gameObject;
+            Character Char = CharGO.GetComponent<UnitScript>().UnitCharacteristics;
+            if (Char.affiliation != "playable")
+            {
+
+                if (Char.UnitSkill != 0)
+                {
+                    Char.enemyStats.CopyID = copyindex;
+                    copyindex++;
+                }
+
+                if (currentflags.copyflags != null && currentflags.copyflags.Count > copyindex && currentflags.copyflags[copyindex])
+                {
+                    CharGO.GetComponent<UnitScript>().copied = true;
+                }
+
+
+                if (Char.enemyStats.talkable)
+                {
+                    Char.enemyStats.talkID = talkindex;
+                    talkindex++;
+                }
+            }
         }
     }
 

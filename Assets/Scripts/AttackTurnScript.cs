@@ -541,6 +541,7 @@ public class AttackTurnScript : MonoBehaviour
             if (CharTarget.UnitSkill != 0 && !Target.GetComponent<UnitScript>().copied)
             {
                 Target.GetComponent<UnitScript>().copied = true;
+                DataScript.instance.SaveCopyFlag(CharTarget.enemyStats.CopyID);
                 bool itemadded = false;
                 foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                 {

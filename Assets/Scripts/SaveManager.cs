@@ -31,8 +31,16 @@ public class SaveManager : MonoBehaviour
         public List<Character> PlayableCharacterList;
         public Inventory PlayerInventory;
         public List<Bonds> BondList;
+        public List<ChapterFlags> ChapterFlagsList;
         public float secondselapsed;
         public bool inCamp;
+    }
+
+    [Serializable]
+    public class ChapterFlags
+    {
+        public List<bool> copyflags;
+        public List<bool> talkflags;
     }
 
     [Serializable]
@@ -270,6 +278,7 @@ public class SaveManager : MonoBehaviour
             secondselapsed = SaveClasses[slot].secondselapsed;
             currentchapter = SaveClasses[slot].chapter;
             maxchapterreached = SaveClasses[slot].MaxChapterReached;
+            DS.ChapterFlagsList = SaveClasses[slot].ChapterFlagsList;
         }
         else if (slot == -1)
         {
@@ -279,6 +288,12 @@ public class SaveManager : MonoBehaviour
             secondselapsed = 0;
             currentchapter = 0;
             maxchapterreached = 0;
+            DS.ChapterFlagsList = new List<ChapterFlags>(40);
+            foreach (ChapterFlags flag in DS.ChapterFlagsList)
+            {
+                flag.talkflags = new List<bool>(10);
+                flag.copyflags = new List<bool>(10);
+            }
         }
 
     }
@@ -331,7 +346,8 @@ public class SaveManager : MonoBehaviour
             inCamp = inCamp,
             inworldmap = inworldmap,
             MaxChapterReached = maxchapterreached,
-            BondList = DataScript.instance.BondsList
+            BondList = DataScript.instance.BondsList,
+            ChapterFlagsList = DataScript.instance.ChapterFlagsList
         };
 
         string json = JsonUtility.ToJson(save, true);

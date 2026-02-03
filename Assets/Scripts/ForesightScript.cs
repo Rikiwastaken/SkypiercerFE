@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 using static DataScript;
 using static GridSquareScript;
+using static SaveManager;
 using static UnitScript;
 
 public class ForesightScript : MonoBehaviour
@@ -36,6 +37,7 @@ public class ForesightScript : MonoBehaviour
         public int currentturn;
         public List<bool> PreviousEventStates;
         public List<Bonds> PreviousBonds;
+        public List<ChapterFlags> chapterflags;
     }
 
 
@@ -328,6 +330,7 @@ public class ForesightScript : MonoBehaviour
         CurrentAction.ModifiedCharacters = new List<Character>();
         CurrentAction.PreviousBonds = DataScript.instance.CreateBondsCopy();
         CurrentAction.currentturn = TurnManger.instance.currentTurn;
+        CurrentAction.chapterflags = DataScript.instance.ChapterFlagsList;
 
         List<bool> eventstates = new List<bool>();
 
@@ -408,7 +411,7 @@ public class ForesightScript : MonoBehaviour
         {
             Action ActionToRevert = actions[i];
 
-
+            DataScript.instance.ChapterFlagsList = ActionToRevert.chapterflags;
             DataScript.instance.BondsList = ActionToRevert.PreviousBonds;
 
             TurnManger.instance.currentTurn = ActionToRevert.currentturn;

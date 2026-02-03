@@ -4,6 +4,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static SaveManager;
 using static UnitScript;
 
 public class DataScript : MonoBehaviour
@@ -34,6 +35,7 @@ public class DataScript : MonoBehaviour
 
     public List<Sprite> EnemySprites;
 
+    public List<ChapterFlags> ChapterFlagsList;
 
 
     [Serializable]
@@ -951,6 +953,22 @@ public class DataScript : MonoBehaviour
     }
     public void SetupInventoryForChapter(int Chapter, Inventory inventory)
     {
+        int chapterlistlength = ChapterFlagsList.Count;
+
+        while (chapterlistlength < Chapter)
+        {
+            ChapterFlags flags = new ChapterFlags();
+            ChapterFlagsList.Add(flags);
+            flags.talkflags = new List<bool>();
+            flags.copyflags = new List<bool>();
+            for (int i = 0; i < 10; i++)
+            {
+                flags.talkflags.Add(true);
+                flags.copyflags.Add(true);
+            }
+            chapterlistlength = ChapterFlagsList.Count;
+        }
+
 
         if (Chapter > 2)
         {
@@ -1025,6 +1043,24 @@ public class DataScript : MonoBehaviour
                     item.Quantity += 1;
                 }
                 if (item.ID == 19)
+                {
+                    item.Quantity += 1;
+                }
+            }
+        }
+        if (Chapter > 7)
+        {
+            foreach (InventoryItem item in inventory.inventoryItems)
+            {
+                if (item.ID == 64)
+                {
+                    item.Quantity += 1;
+                }
+                if (item.ID == 25)
+                {
+                    item.Quantity += 1;
+                }
+                if (item.ID == 79)
                 {
                     item.Quantity += 1;
                 }
@@ -1293,6 +1329,12 @@ public class DataScript : MonoBehaviour
                     break;
                 case 9: // Kira
                     if (chapter >= 6)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    break;
+                case 10: // Gwenie
+                    if (chapter >= 7 && ChapterFlagsList[7].talkflags[0])
                     {
                         character.playableStats.unlocked = true;
                     }
@@ -1609,6 +1651,36 @@ public class DataScript : MonoBehaviour
     {
         return (int)(Mathf.Abs(point1.x - point2.x) + Mathf.Abs(point1.y - point2.y));
     }
+
+
+    public void SaveCharacterTalkedToFlag(int characterTalkID)
+    {
+        ChapterFlags currentflags = ChapterFlagsList[SaveManager.instance.currentchapter];
+
+        int sizeofflaglist = currentflags.talkflags.Count;
+
+        while (sizeofflaglist <= characterTalkID)
+        {
+            currentflags.talkflags.Add(false);
+            sizeofflaglist = currentflags.talkflags.Count;
+        }
+        currentflags.talkflags[characterTalkID] = true;
+    }
+
+    public void SaveCopyFlag(int characterCopiedID)
+    {
+        ChapterFlags currentflags = ChapterFlagsList[SaveManager.instance.currentchapter];
+
+        int sizeofflaglist = currentflags.copyflags.Count;
+
+        while (sizeofflaglist <= characterCopiedID)
+        {
+            currentflags.copyflags.Add(false);
+            sizeofflaglist = currentflags.copyflags.Count;
+        }
+        currentflags.talkflags[characterCopiedID] = true;
+    }
+
 
 #if UNITY_EDITOR
     [ContextMenu("Calculate IDs and fillout out classes")]
