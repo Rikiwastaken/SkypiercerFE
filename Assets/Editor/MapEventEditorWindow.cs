@@ -63,7 +63,8 @@ public class MapEventEditorWindow : EditorWindow
         "3 : Modify Tiles",
         "4 : Show Dialogue",
         "5 : Show Tutorial Window",
-        "6 : Spawn Units"
+        "6 : Spawn Units",
+        "7 : Change Units affiliation"
     };
 
     private static readonly string[] PersonalityOptions = new string[]

@@ -58,6 +58,7 @@ public class MapEventManager : MonoBehaviour
          * 4 : ShowDialogue
          * 5 : Show Tutorial Window
          * 6 : Spawn Units
+         * 7 : Change Units From Enemy To Other
          */
         public List<TextBubbleInfo> dialoguetoShow;
         public List<int> UnitsToUnlockID;
@@ -316,8 +317,13 @@ public class MapEventManager : MonoBehaviour
                 TriggerEventCheck(currentturn);
                 break;
             case 6:
-                Debug.Log("spawn enemy dtrigger");
+                Debug.Log("spawn enemy trigger");
                 SpawnnewEnemies(Event);
+                TriggerEventCheck(currentturn);
+                break;
+            case 7:
+                Debug.Log("Change Unit Status trigger");
+                ChangeEnemiesToOther(Event);
                 TriggerEventCheck(currentturn);
                 break;
         }
@@ -762,6 +768,19 @@ public class MapEventManager : MonoBehaviour
             foreach (EnemyStats enemyStats in e.CharactersToSpawn)
             {
                 FindAnyObjectByType<MapInitializer>().InitializeNonPlayable(enemyStats);
+            }
+            GridScript.InitializeGOList();
+
+        }
+    }
+
+    private void ChangeEnemiesToOther(EventCondition e)
+    {
+        if (e.UnitList != null && e.UnitList.Count > 0)
+        {
+            foreach (Character charactertochange in e.UnitList)
+            {
+                charactertochange.affiliation = "other";
             }
             GridScript.InitializeGOList();
 

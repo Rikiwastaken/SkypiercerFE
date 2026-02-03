@@ -1800,7 +1800,7 @@ public class UnitScript : MonoBehaviour
 
     public bool GetSkill(int SkillID)
     {
-        if (UnitCharacteristics.EquipedSkills.Contains(SkillID) || UnitCharacteristics.UnitSkill == SkillID)
+        if (UnitCharacteristics.EquipedSkills.Contains(SkillID) || UnitCharacteristics.UnitSkill == SkillID || UnitCharacteristics.UnitSkill == SkillID)
         {
             return true;
         }
@@ -3071,6 +3071,13 @@ public class UnitScript : MonoBehaviour
         {
             statbonuses.Crit -= 30;
             statbonuses.Dodge += 20;
+        }
+
+        //Brawl Master
+        if (GetSkill(80))
+        {
+            statbonuses.Hit += (int)(UnitCharacteristics.AjustedStats.Dexterity + statbonuses.Dexterity) * 5;
+            statbonuses.PhysDamage += (int)(UnitCharacteristics.AjustedStats.Strength + statbonuses.Strength) / 4;
         }
 
 

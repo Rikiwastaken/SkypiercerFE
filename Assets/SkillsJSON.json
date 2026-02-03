@@ -719,6 +719,15 @@
             "targettype": 0,
             "range": 1,
             "ID": 79
+        },
+        {
+            "name": "Brawl Master",
+            "Descriptions": "Increases hit rate by Dexterity*5 and physical damage by Strength/4 if not wielding any blade.",
+            "IsCommand": false,
+            "Cost": 7,
+            "targettype": 0,
+            "range": 0,
+            "ID": 80
         }
     ]
 }
