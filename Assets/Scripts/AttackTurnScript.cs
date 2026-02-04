@@ -1391,14 +1391,21 @@ public class AttackTurnScript : MonoBehaviour
         Character character = currentCharacter.GetComponent<UnitScript>().UnitCharacteristics;
 
         List<GridSquareScript> movementtouse = gridScript.movementtiles;
+        (int attackerrange, bool attackermelee) = currentCharacter.GetComponent<UnitScript>().GetRangeAndMele();
 
-        List<GridSquareScript> attacktiles = gridScript.attacktiles;
+
+        List<GridSquareScript> attacktiles = null;
 
         if (character.enemyStats.personality.ToLower() == "guard")
         {
             movementtouse = new List<GridSquareScript>() { character.currentTile[0] };
-            (int attackerrange, bool attackermelee) = currentCharacter.GetComponent<UnitScript>().GetRangeAndMele();
+
             attacktiles = gridScript.GetAttack(attackerrange, attackermelee, character.currentTile[0], character.enemyStats.monsterStats.size, character);
+        }
+        else
+        {
+            gridScript.ShowAttack(attackerrange, attackermelee, currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff", false, character.enemyStats.monsterStats.size, character);
+            attacktiles = gridScript.attacktiles;
         }
 
         if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
@@ -1467,6 +1474,10 @@ public class AttackTurnScript : MonoBehaviour
 
 
             float maxreward = 0;
+            if (currentCharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
+            {
+                maxreward = -10000;
+            }
 
             if (character.enemyStats.personality.ToLower() == "deviant" || (character.enemyStats.personality.ToLower() == "coward" && character.currentHP > character.AjustedStats.HP * 0.3f))
             {
@@ -1486,6 +1497,7 @@ public class AttackTurnScript : MonoBehaviour
             }
             else
             {
+
                 foreach (GameObject target in potentialtargets)
                 {
                     float reward = calculateRewardforAttacking(currentCharacter, target);
@@ -1497,7 +1509,10 @@ public class AttackTurnScript : MonoBehaviour
                 }
             }
 
-
+            if (truetarget == null)
+            {
+                return (CalculateDestinationIfTargetNotFound(currentCharacter), null);
+            }
 
             List<GridSquareScript> targepositiontiles = truetarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
 
@@ -1586,10 +1601,72 @@ public class AttackTurnScript : MonoBehaviour
             }
             else
             {
-                return (null, null);
+
+                return (CalculateDestinationIfTargetNotFound(currentCharacter), null);
             }
         }
     }
+
+    private GridSquareScript CalculateDestinationIfTargetNotFound(GameObject currentCharacter)
+    {
+        Character Character = currentCharacter.GetComponent<UnitScript>().UnitCharacteristics;
+
+        List<GridSquareScript> movementtiles = gridScript.movementtiles;
+        foreach (GridSquareScript square in movementtiles)
+        {
+            if (square == Character.currentTile[0] || !gridScript.CheckIfFree(square.GridCoordinates, Character))
+            {
+                continue;
+            }
+            foreach (GameObject unit in gridScript.allunitGOs)
+            {
+                Character otherchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+                bool skip = true;
+
+                if (unit == currentCharacter)
+                {
+                    continue;
+                }
+
+                if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+                {
+                    if (Character.affiliation.ToLower() == otherchar.affiliation.ToLower() || (Character.affiliation.ToLower() == "other" && !Character.attacksfriends))
+                    {
+                        skip = false;
+                    }
+                }
+                else
+                {
+                    if (Character.affiliation.ToLower() == "other" && ((otherchar.affiliation.ToLower() == "playable" && Character.attacksfriends) || otherchar.affiliation.ToLower() == "enemy"))
+                    {
+
+                        skip = false;
+                    }
+                    if (Character.affiliation.ToLower() == "enemy" && ((otherchar.affiliation.ToLower() == "other" && !otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "playable"))
+                    {
+                        skip = false;
+                    }
+                }
+
+
+
+                if (skip)
+                {
+                    continue;
+                }
+
+                int distancediff = ManhattanDistance(otherchar, Character) - (Character.movements - 2) - ManhattanDistance(otherchar.currentTile[0].GridCoordinates, square.GridCoordinates);
+
+                if (distancediff <= 0)
+                {
+                    return square;
+                }
+            }
+        }
+        return null;
+    }
+
 
     /// <summary>
     /// Calculate attack Destination and target for AI Characters (second version)

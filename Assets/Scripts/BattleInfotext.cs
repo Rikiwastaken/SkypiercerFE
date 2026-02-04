@@ -198,6 +198,10 @@ public class BattleInfotext : MonoBehaviour
                 NameTMP.text = selectedunitCharacter.name;
                 LevelTMP.text = "Lvl: " + selectedunitCharacter.level;
                 HPTMP.text = "HP: " + selectedunitCharacter.currentHP + "/" + selectedunitCharacter.AjustedStats.HP;
+                if (selectedunitCharacter.enemyStats != null && selectedunitCharacter.enemyStats.RemainingLifebars > 0)
+                {
+                    HPTMP.text += "( +" + (selectedunitCharacter.enemyStats.RemainingLifebars * selectedunitCharacter.AjustedStats.HP) + ")";
+                }
 
                 Sprite spriteToUse = null;
                 if (selectedunitCharacter.affiliation.ToLower() == "playable")

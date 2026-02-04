@@ -22,10 +22,8 @@ public class BossScript : MonoBehaviour
 
         if (ActionsMenu == null)
         {
-            ActionsMenu = GridScript.GetComponent<ActionsMenu>();
+            ActionsMenu = FindAnyObjectByType<ActionsMenu>(FindObjectsInactive.Include);
         }
-
-        Debug.Log(nextTarget.name);
 
         List<GameObject> unitsinthezone = new List<GameObject>();
 
@@ -36,22 +34,28 @@ public class BossScript : MonoBehaviour
             for (int j = 0; j < GridScript.Grid[0].Count; j++)
             {
                 GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
-                tile.isbossAttackTile = false;
-                GameObject UnitOnTile = GridScript.GetUnit(tile);
-                if (UnitOnTile != null && UnitOnTile.GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower() != GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower())
+                if (tile.isbossAttackTile)
                 {
-                    unitsinthezone.Add(UnitOnTile);
-                    if (UnitOnTile.GetComponent<UnitScript>().UnitCharacteristics.isintercepting)
+                    tile.isbossAttackTile = false;
+                    GameObject UnitOnTile = GridScript.GetUnit(tile);
+                    if (UnitOnTile != null && UnitOnTile.GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower() != GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower())
                     {
-                        intercepted = true;
-                        intercepter = UnitOnTile;
+                        unitsinthezone.Add(UnitOnTile);
+                        if (UnitOnTile.GetComponent<UnitScript>().UnitCharacteristics.isintercepting)
+                        {
+                            intercepted = true;
+                            intercepter = UnitOnTile;
+                        }
                     }
                 }
+
             }
         }
 
         foreach (GameObject unit in unitsinthezone)
         {
+            Debug.Log(unit.name);
+            Debug.Log(ActionsMenu);
             ActionsMenu.ApplyDamage(gameObject, unit, true, true, intercepted, intercepter == unit);
         }
 
