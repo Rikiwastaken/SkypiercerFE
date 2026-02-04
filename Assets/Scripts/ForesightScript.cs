@@ -38,6 +38,7 @@ public class ForesightScript : MonoBehaviour
         public List<bool> PreviousEventStates;
         public List<Bonds> PreviousBonds;
         public List<ChapterFlags> chapterflags;
+        public string FactionCurrentlyPlayingAtTime;
     }
 
 
@@ -88,6 +89,8 @@ public class ForesightScript : MonoBehaviour
 
     private bool initiatestop;
 
+    private ActionManager ActionManager;
+
     private void OnEnable()
     {
         ButtonInitialization();
@@ -95,10 +98,18 @@ public class ForesightScript : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        ActionManager = FindAnyObjectByType<ActionManager>(FindObjectsInactive.Include);
+    }
+
     public Volume PostProcessingVolume;
 
     private void FixedUpdate()
     {
+
+        ActionManager.NeutralMenuCD = 5;
+
         if (PostProcessingVolume.weight < 1f && !initiatestop)
         {
             PostProcessingVolume.weight += Time.fixedDeltaTime * 2f;
@@ -311,12 +322,12 @@ public class ForesightScript : MonoBehaviour
 
     public void RevertButton(int ButtonID)
     {
-        if (ButtonID != -1)
+        if (ButtonID != -1 && ButtonIDs[ButtonID] != -1)
         {
             RevertTo(ButtonIDs[ButtonID]);
             gameObject.SetActive(false);
-            // neutralmenu.SetActive(true);
-            // EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
+            neutralmenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
         }
 
     }
@@ -331,6 +342,8 @@ public class ForesightScript : MonoBehaviour
         CurrentAction.PreviousBonds = DataScript.instance.CreateBondsCopy();
         CurrentAction.currentturn = TurnManger.instance.currentTurn;
         CurrentAction.chapterflags = DataScript.instance.ChapterFlagsList;
+        CurrentAction.FactionCurrentlyPlayingAtTime = TurnManger.instance.currentlyplaying;
+
 
         List<bool> eventstates = new List<bool>();
 
@@ -411,6 +424,8 @@ public class ForesightScript : MonoBehaviour
         {
             Action ActionToRevert = actions[i];
 
+
+            TurnManger.instance.currentlyplaying = ActionToRevert.FactionCurrentlyPlayingAtTime;
             DataScript.instance.ChapterFlagsList = ActionToRevert.chapterflags;
             DataScript.instance.BondsList = ActionToRevert.PreviousBonds;
 

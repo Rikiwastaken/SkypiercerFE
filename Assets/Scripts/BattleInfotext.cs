@@ -45,6 +45,8 @@ public class BattleInfotext : MonoBehaviour
 
     public int framesbeforeactivation;
 
+    public GameObject previousEnemy;
+    public GameObject previousOther;
 
     [Header("CharacterInfo")]
 
@@ -165,9 +167,9 @@ public class BattleInfotext : MonoBehaviour
             }
             else if (turnManger.currentlyplaying == "enemy")
             {
-                if (attackTurnScript.CurrentEnemy != null)
+                if (previousEnemy != null)
                 {
-                    selectedunit = attackTurnScript.CurrentEnemy;
+                    selectedunit = previousEnemy;
                     selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
                 }
                 else
@@ -176,9 +178,9 @@ public class BattleInfotext : MonoBehaviour
                 }
 
             }
-            else if (attackTurnScript.CurrentOther != null)
+            else if (previousOther != null)
             {
-                selectedunit = attackTurnScript.CurrentOther;
+                selectedunit = previousOther;
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             }
             else if (turnManger.currentlyplaying == "")

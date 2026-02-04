@@ -70,6 +70,8 @@ public class AttackTurnScript : MonoBehaviour
 
     private GameObject currentenemytarget;
 
+    private BattleInfotext battleInfotextScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -79,6 +81,7 @@ public class AttackTurnScript : MonoBehaviour
         battlecamera = FindAnyObjectByType<cameraScript>();
         saveManager = FindAnyObjectByType<SaveManager>();
         combatsceneloader = FindAnyObjectByType<CombatSceneLoader>();
+        battleInfotextScript = FindAnyObjectByType<BattleInfotext>(FindObjectsInactive.Include);
     }
 
     // Update is called once per frame
@@ -154,6 +157,7 @@ public class AttackTurnScript : MonoBehaviour
                         }
 
                         CurrentEnemy = unit;
+                        battleInfotextScript.previousEnemy = unit;
                         counterbeforemove = (int)(delaybeforeMove / Time.fixedDeltaTime);
                         gridScript.ShowMovementOfUnit(unit);
                         break;
@@ -295,6 +299,7 @@ public class AttackTurnScript : MonoBehaviour
                         }
 
                         CurrentOther = unit;
+                        battleInfotextScript.previousOther = unit;
                         counterbeforemove = (int)(delaybeforeMove / Time.fixedDeltaTime);
                         gridScript.ShowMovementOfUnit(unit);
                         break;
@@ -1273,7 +1278,6 @@ public class AttackTurnScript : MonoBehaviour
             unit2.GetComponent<UnitScript>().UpdateWeaponModel();
 
         }
-
 
 
 

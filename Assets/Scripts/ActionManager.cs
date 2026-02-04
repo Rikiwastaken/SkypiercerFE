@@ -37,7 +37,7 @@ public class ActionManager : MonoBehaviour
 
     public ForesightScript Foresight;
 
-    private int NeutralMenuCD;
+    public int NeutralMenuCD;
 
     private void Awake()
     {
@@ -366,7 +366,6 @@ public class ActionManager : MonoBehaviour
         GridScript.lockselection = false;
         frameswherenotlock = 10;
         currentcharacter = null;
-
 
         MapEventManager.instance.TriggerEventCheck();
 

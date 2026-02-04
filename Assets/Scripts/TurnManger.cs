@@ -117,7 +117,7 @@ public class TurnManger : MonoBehaviour
     /// Skills, blade durability recovery and Protagonist effects to trigger when a new turn starts
     /// </summary>
     /// <param name="charactertoappy"></param>
-    private void BeginningOfTurnsTrigger(List<GameObject> charactertoappy)
+    public void BeginningOfTurnsTrigger(List<GameObject> charactertoappy)
     {
 
         ForesightScript FSS = GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>();
