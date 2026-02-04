@@ -43,6 +43,9 @@ public class BattleInfotext : MonoBehaviour
 
     private EventSystem eventSystem;
 
+    public int framesbeforeactivation;
+
+
     [Header("CharacterInfo")]
 
     public TextMeshProUGUI NameTMP;
@@ -64,6 +67,8 @@ public class BattleInfotext : MonoBehaviour
     public TextMeshProUGUI SkillDescription;
     private Color BaseSkillColor;
 
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -77,8 +82,30 @@ public class BattleInfotext : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf || ForeSightMenu.activeSelf)
+        if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf || ForeSightMenu.activeSelf || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (TipsMenuScript.instance != null && TipsMenuScript.instance.gameObject.activeSelf) || (TutorialWindowScript.instance != null && TutorialWindowScript.instance.gameObject.activeSelf))
         {
+            framesbeforeactivation = 5;
+
+
+        }
+        if ((AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf || ForeSightMenu.activeSelf))
+        {
+            framesbeforeactivation = 5;
+
+
+        }
+
+
+        if (framesbeforeactivation <= 0)
+        {
+            if (!transform.GetChild(0).gameObject.activeSelf)
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            framesbeforeactivation--;
             if (transform.GetChild(0).gameObject.activeSelf)
             {
                 transform.GetChild(0).gameObject.SetActive(false);
@@ -87,38 +114,11 @@ public class BattleInfotext : MonoBehaviour
             {
                 MasteryText.transform.parent.gameObject.SetActive(false);
             }
-
-        }
-        else if ((!PreBattleMenu.activeSelf || PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
-        {
-            if (!transform.GetChild(0).gameObject.activeSelf)
+            if (Skilltext.transform.parent.gameObject.activeSelf)
             {
-                transform.GetChild(0).gameObject.SetActive(true);
+                Skilltext.transform.parent.gameObject.SetActive(false);
             }
-        }
-        if ((AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf || ForeSightMenu.activeSelf))
-        {
-            if (transform.GetChild(0).gameObject.activeSelf)
-            {
-                transform.GetChild(0).gameObject.SetActive(false);
-            }
-
             return;
-        }
-        else if (!PreBattleMenu.activeSelf)
-        {
-            if (!transform.parent.GetChild(0).gameObject.activeSelf)
-            {
-                transform.parent.GetChild(0).gameObject.SetActive(true);
-            }
-
-        }
-        else
-        {
-            if (transform.parent.GetChild(0).gameObject.activeSelf)
-            {
-                transform.parent.GetChild(0).gameObject.SetActive(false);
-            }
         }
 
         if (battlecamera == null)

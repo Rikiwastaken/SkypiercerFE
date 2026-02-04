@@ -2,10 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 public class TutorialWindowScript : MonoBehaviour
 {
+
+    public static TutorialWindowScript instance;
 
     private float timecounter;
 
@@ -16,6 +17,11 @@ public class TutorialWindowScript : MonoBehaviour
     public float delay;
 
     private bool abletocontinue;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void InitializeWindow(Vector2 Dimensions, string text)
     {

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class TipsMenuScript : MonoBehaviour
 {
 
+    public static TipsMenuScript instance;
+
     public List<Button> Buttons;
 
     public List<int> ButtonIDs;
@@ -37,6 +39,11 @@ public class TipsMenuScript : MonoBehaviour
     private GameObject previousselection;
 
     private Color BaseColor;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void OnEnable()
     {
