@@ -1447,7 +1447,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     skip = false;
                 }
-                if (character.affiliation.ToLower() == "enemy" && ((otherchar.affiliation.ToLower() == "playable" && !otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "playable"))
+                if (character.affiliation.ToLower() == "enemy" && ((otherchar.affiliation.ToLower() == "other" && !otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "playable"))
                 {
                     skip = false;
                 }
@@ -1705,7 +1705,7 @@ public class AttackTurnScript : MonoBehaviour
             {
                 skip = false;
             }
-            if (character.affiliation.ToLower() == "enemy" && otherchar.affiliation.ToLower() == "playable")
+            if (character.affiliation.ToLower() == "enemy" && (otherchar.affiliation.ToLower() == "playable" || (otherchar.affiliation.ToLower() == "other" && !otherchar.attacksfriends)))
             {
                 skip = false;
             }
