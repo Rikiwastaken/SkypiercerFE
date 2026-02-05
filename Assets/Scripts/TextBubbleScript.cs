@@ -109,8 +109,6 @@ public class TextBubbleScript : MonoBehaviour
             EndDialogue();
             return;
         }
-
-        Debug.Log($"Typing: {charIndex} / {sentence.textInfo.characterCount} | isPrinting={isPrinting}");
         if (musicManager == null)
             musicManager = MusicManager.instance;
 
@@ -132,11 +130,17 @@ public class TextBubbleScript : MonoBehaviour
 
         if (InputManager.activatejustpressed || InputManager.canceljustpressed)
         {
-
             if (charIndex < totalChars)
-                charIndex = totalChars;
+            {
+                if (charIndex > totalChars * 0.05f)
+                {
+                    charIndex = totalChars;
+                }
+            }
             else
+            {
                 GoToNextPage();
+            }
         }
 
         if (InputManager.Startjustpressed)

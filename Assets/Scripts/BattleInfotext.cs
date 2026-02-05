@@ -306,6 +306,10 @@ public class BattleInfotext : MonoBehaviour
                                 weaponstring += "<sprite=5>";
                                 break;
                         }
+                        if (currentindex >= WeaponIconsObject.childCount)
+                        {
+                            continue;
+                        }
                         WeaponIconsObject.GetChild(currentindex).GetComponent<TextMeshProUGUI>().text = weaponstring;
                         weaponstring = " (" + gradeletter + ") " + weapon.Name;
 
