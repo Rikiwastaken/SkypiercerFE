@@ -1761,10 +1761,10 @@ public class AttackTurnScript : MonoBehaviour
         else
         {
             float killFactor = 10f;
-            float NoCounterFactor = 3f;
-            float hitchanceFactor = 1f;
-            float DodgeChanceFactor = 1f;
-            float SurvivesFactor = 2f;
+            float NoCounterFactor = 5f;
+            float hitchanceFactor = 2f;
+            float DodgeChanceFactor = 2f;
+            float SurvivesFactor = 3f;
 
             if (isboss)
             {

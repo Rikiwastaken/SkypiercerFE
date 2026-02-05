@@ -98,6 +98,12 @@ public class NeutralMenuScript : MonoBehaviour
         }
     }
 
+
+    public void ReturnToMainMenu()
+    {
+        SceneLoader.instance.LoadScene("MainMenu");
+    }
+
     private void ManageSelection()
     {
         if (GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf)
