@@ -56,6 +56,7 @@ public class TurnManger : MonoBehaviour
     {
         weatherManager = GetComponent<WeatherManager>();
         minimapScript = FindAnyObjectByType<MinimapScript>();
+        textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
     }
 
     // Update is called once per frame

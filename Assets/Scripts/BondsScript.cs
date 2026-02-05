@@ -66,6 +66,7 @@ public class BondsScript : MonoBehaviour
 
     private InputManager inputmanager;
 
+    private TextBubbleScript TextBubbleScript;
 
     public Button BondButton;
     private void Awake()
@@ -89,6 +90,9 @@ public class BondsScript : MonoBehaviour
                 }
             }
         }
+
+        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+
         inputmanager = InputManager.instance;
     }
 
@@ -208,7 +212,7 @@ public class BondsScript : MonoBehaviour
                 var colors = bondsSubMenu.transform.GetChild(i).GetComponent<Button>().colors;
                 colors.normalColor = Color.white;
                 bondsSubMenu.transform.GetChild(i).GetComponent<Button>().colors = colors;
-                bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+                bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
                 switch (PertinentbondsDialogue[i].Bond.BondLevel)
                 {
                     case 0:
@@ -301,7 +305,7 @@ public class BondsScript : MonoBehaviour
             PertinentbondsDialogue[buttonID].Bond.BondLevel++;
             if (PertinentbondsDialogue[buttonID].Bond.BondLevel == 1)
             {
-                TextBubbleScript.Instance.InitializeDialogue(PertinentbondsDialogue[buttonID].dialogueLvl1);
+                TextBubbleScript.InitializeDialogue(PertinentbondsDialogue[buttonID].dialogueLvl1);
                 if (bondsSubMenu.activeSelf)
                 {
                     BondsMenu.gameObject.SetActive(false);
@@ -311,7 +315,7 @@ public class BondsScript : MonoBehaviour
             }
             else if (PertinentbondsDialogue[buttonID].Bond.BondLevel == 2)
             {
-                TextBubbleScript.Instance.InitializeDialogue(PertinentbondsDialogue[buttonID].dialogueLvl2);
+                TextBubbleScript.InitializeDialogue(PertinentbondsDialogue[buttonID].dialogueLvl2);
                 if (bondsSubMenu.activeSelf)
                 {
                     BondsMenu.gameObject.SetActive(false);
@@ -321,7 +325,7 @@ public class BondsScript : MonoBehaviour
             }
             else if (PertinentbondsDialogue[buttonID].Bond.BondLevel == 3)
             {
-                TextBubbleScript.Instance.InitializeDialogue(PertinentbondsDialogue[buttonID].dialogueLvl3);
+                TextBubbleScript.InitializeDialogue(PertinentbondsDialogue[buttonID].dialogueLvl3);
                 if (bondsSubMenu.activeSelf)
                 {
                     BondsMenu.gameObject.SetActive(false);
@@ -331,7 +335,7 @@ public class BondsScript : MonoBehaviour
             }
             else if (PertinentbondsDialogue[buttonID].Bond.BondLevel == 4)
             {
-                TextBubbleScript.Instance.InitializeDialogue(PertinentbondsDialogue[buttonID].dialogueLvl4);
+                TextBubbleScript.InitializeDialogue(PertinentbondsDialogue[buttonID].dialogueLvl4);
                 if (bondsSubMenu.activeSelf)
                 {
                     BondsMenu.gameObject.SetActive(false);

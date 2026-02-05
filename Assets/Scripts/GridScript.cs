@@ -100,7 +100,7 @@ public class GridScript : MonoBehaviour
         lockedattacktiles = new List<GridSquareScript>();
         lockedhealingtiles = new List<GridSquareScript>();
         InitializeGOList();
-        textBubble = FindAnyObjectByType<TextBubbleScript>();
+        textBubble = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         battlecamera = FindAnyObjectByType<cameraScript>();
 
     }

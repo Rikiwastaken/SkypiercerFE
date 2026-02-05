@@ -31,6 +31,8 @@ public class CampScript : MonoBehaviour
     public Animator Sitting3Character;
     public Animator LeaningCharacter;
 
+    private TextBubbleScript textBubbleScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,11 +45,13 @@ public class CampScript : MonoBehaviour
         }
         EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
 
+        textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+
         foreach (StartDialogue startdialogue in StartDialogueList)
         {
             if (startdialogue.Chapter == SaveManager.instance.currentchapter)
             {
-                TextBubbleScript.Instance.InitializeDialogue(startdialogue.Dialogue);
+                textBubbleScript.InitializeDialogue(startdialogue.Dialogue);
                 break;
             }
         }
@@ -67,12 +71,12 @@ public class CampScript : MonoBehaviour
     private void Update()
     {
 
-        if (TextBubbleScript.Instance.indialogue && BaseMenu.gameObject.activeSelf)
+        if (textBubbleScript.indialogue && BaseMenu.gameObject.activeSelf)
         {
             BaseMenu.gameObject.SetActive(false);
         }
 
-        if (previousindialogue && !TextBubbleScript.Instance.indialogue)
+        if (previousindialogue && !textBubbleScript.indialogue)
         {
             if (!BaseMenu.gameObject.activeSelf)
             {
@@ -86,7 +90,7 @@ public class CampScript : MonoBehaviour
         }
 
 
-        previousindialogue = TextBubbleScript.Instance.indialogue;
+        previousindialogue = textBubbleScript.indialogue;
     }
 
     public void LoadNextChapter()

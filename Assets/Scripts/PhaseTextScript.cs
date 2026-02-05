@@ -23,12 +23,13 @@ public class PhaseTextScript : MonoBehaviour
         transform.localPosition = new Vector2(-restingXpos, 0);
         TMP = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         BackTMP = GetComponent<TextMeshProUGUI>();
-        textbubblescript = FindAnyObjectByType<TextBubbleScript>();
+        textbubblescript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (textbubblescript.indialogue)
         {
             return;

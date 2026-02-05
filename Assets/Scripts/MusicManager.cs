@@ -89,6 +89,9 @@ public class MusicManager : MonoBehaviour
     public string currentscene;
 
     public bool inCombatBool;
+
+    private TextBubbleScript textBubbleScript;
+
     private void Awake()
     {
         if (instance == null)
@@ -191,6 +194,11 @@ public class MusicManager : MonoBehaviour
         if (GameOverScript == null)
         {
             GameOverScript = FindAnyObjectByType<GameOverScript>(FindObjectsInactive.Include);
+        }
+
+        if (textBubbleScript == null)
+        {
+            textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         }
 
         if (SceneLoader.instance.LoadingImage.gameObject.activeSelf)
@@ -306,7 +314,7 @@ public class MusicManager : MonoBehaviour
             ChangeVolume(CampMusicintro, 0f);
         }
 
-        if (TextBubbleScript.Instance != null && TextBubbleScript.Instance.indialogue)
+        if (textBubbleScript != null && textBubbleScript.indialogue)
         {
             if (lowermap)
             {

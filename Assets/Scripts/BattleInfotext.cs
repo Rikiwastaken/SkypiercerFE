@@ -77,7 +77,7 @@ public class BattleInfotext : MonoBehaviour
         TMP = GetComponent<TextMeshProUGUI>();
         inputManager = InputManager.instance;
         GridScript = GridScript.instance;
-        textBubbleScript = FindAnyObjectByType<TextBubbleScript>();
+        textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         BaseSkillColor = SkillButtonList[0].image.color;
     }
 

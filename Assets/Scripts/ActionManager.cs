@@ -55,7 +55,7 @@ public class ActionManager : MonoBehaviour
         InputManager = InputManager.instance;
         GridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<cameraScript>();
-        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>();
+        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
     }
 
     // Update is called once per frame

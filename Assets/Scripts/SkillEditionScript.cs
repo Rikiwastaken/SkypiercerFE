@@ -39,6 +39,8 @@ public class SkillEditionScript : MonoBehaviour
     public bool IsBonds;
     public GameObject CampMenu;
 
+    private TextBubbleScript TextBubbleScript;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -49,7 +51,7 @@ public class SkillEditionScript : MonoBehaviour
         }
 
         inputmanager = InputManager.instance;
-
+        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         InitializeButtons();
     }
 
@@ -476,7 +478,7 @@ public class SkillEditionScript : MonoBehaviour
 
     public void SelectUnit(int ButtonID)
     {
-        if (TextBubbleScript.Instance.indialogue)
+        if (TextBubbleScript.indialogue)
         {
             return;
         }

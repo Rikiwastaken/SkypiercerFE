@@ -22,6 +22,8 @@ public class NeutralMenuScript : MonoBehaviour
 
     private InputManager InputManager;
 
+    private TextBubbleScript textBubbleScript;
+
     // Update is called once per frame
 
     private void Start()
@@ -46,6 +48,9 @@ public class NeutralMenuScript : MonoBehaviour
         {
             ForeSightButtonText.text = "Locked";
         }
+
+        textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+
     }
 
     void Update()
@@ -53,7 +58,7 @@ public class NeutralMenuScript : MonoBehaviour
 
         ManageSelection();
 
-        if (InputManager.cancelpressed || (TextBubbleScript.Instance != null && TextBubbleScript.Instance.indialogue))
+        if (InputManager.cancelpressed || (textBubbleScript != null && textBubbleScript.indialogue))
         {
             if (OptionsMenuTransfrom.gameObject.activeSelf)
             {

@@ -161,7 +161,7 @@ public class MapEventManager : MonoBehaviour
         GridScript = GetComponent<GridScript>();
         grid = GameObject.Find("Grid");
         turnManger = GetComponent<TurnManger>();
-        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>();
+        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
     }
 
     private void FixedUpdate()

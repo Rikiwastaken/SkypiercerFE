@@ -54,7 +54,7 @@ public class cameraScript : MonoBehaviour
         initialrotation = transform.GetChild(0).rotation.eulerAngles;
         previouselevation = transform.position.y;
         GridScript = GridScript.instance;
-        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>();
+        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
         transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
     }

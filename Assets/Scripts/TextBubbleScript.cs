@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -52,6 +53,9 @@ public class TextBubbleScript : MonoBehaviour
     public Image Imagetoshow;
     private float currentcharacterpitch;
     private MusicManager musicManager;
+
+    private Coroutine fixTMPRoutine;
+
     void Awake()
     {
         if (charactername != null)
@@ -65,6 +69,8 @@ public class TextBubbleScript : MonoBehaviour
         }
     }
 
+
+    private bool ignoreInputThisFrame;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -87,111 +93,72 @@ public class TextBubbleScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (musicManager == null)
+        if (ignoreInputThisFrame)
         {
-            musicManager = MusicManager.instance;
-        }
-
-        if (Dialogue == null && !indialogue)
-        {
+            ignoreInputThisFrame = false;
             return;
         }
-        if (Dialogue == null && indialogue)
-        {
-            DeactivateBubble();
-            if (MapEventManager.instance != null)
-            {
-                MapEventManager.instance.TriggerEventCheck();
-            }
 
+        if (Dialogue == null)
+            return;
+
+        if (currentTextBubble >= Dialogue.Count)
+        {
+            EndDialogue();
+            return;
         }
-        else if (Dialogue.Count <= currentTextBubble)
+
+        Debug.Log($"Typing: {charIndex} / {sentence.textInfo.characterCount} | isPrinting={isPrinting}");
+        if (musicManager == null)
+            musicManager = MusicManager.instance;
+
+        indialogue = true;
+
+        //if (isPrinting && charIndex < texttodisplay.Length)
+        int totalChars = sentence.textInfo.characterCount;
+
+        if (isPrinting && charIndex < totalChars)
         {
-
-            DeactivateBubble();
-            if (MapEventManager.instance != null)
+            charTimer += Time.deltaTime;
+            if (charTimer >= charDelay)
             {
-                MapEventManager.instance.TriggerEventCheck();
-            }
-        }
-        else
-        {
-            if (ActionManager.instance != null)
-            {
-                ActionManager.instance.frameswherenotlock = 5;
-            }
-
-
-            indialogue = true;
-
-            if (gridScript != null)
-            {
-                gridScript.lockselection = false;
-            }
-
-            if (cameraScript != null)
-            {
-                if (Dialogue[currentTextBubble].CameraDestination != Vector3.zero)
-                {
-                    cameraScript.Destination = new Vector2(Dialogue[currentTextBubble].CameraDestination.x, Dialogue[currentTextBubble].CameraDestination.z);
-                }
-                else if (GetCharacterCoordinates() != Vector2.zero)
-                {
-                    cameraScript.Destination = GetCharacterCoordinates();
-                }
-            }
-
-
-
-            if (isPrinting && charIndex < texttodisplay.Length)
-            {
-                charTimer += Time.fixedDeltaTime;
-                if (charTimer >= charDelay)
-                {
-                    if (charIndex % 2 == 0)
-                    {
-                        if (currentcharacterpitch != 0)
-                        {
-                            musicManager.PlayVoiceSE(currentcharacterpitch);
-                        }
-                        else
-                        {
-                            musicManager.PlayVoiceSE(1f);
-                        }
-                    }
-
-
-                    charTimer = 0f;
-                    charIndex++;
-                    sentence.maxVisibleCharacters = charIndex;
-                }
-            }
-            else if (isPrinting)
-            {
-                isPrinting = false;
-            }
-
-
-            if (InputManager.activatejustpressed || InputManager.canceljustpressed)
-            {
-                if (charIndex < texttodisplay.Length - 1)
-                {
-                    charIndex = texttodisplay.Length - 1;
-                }
-                else
-                {
-                    GoToNextPage();
-                }
-
-            }
-
-            if (InputManager.Startjustpressed)
-            {
-                EndDialogue();
+                charTimer = 0f;
+                charIndex = Mathf.Min(charIndex + 1, totalChars);
+                sentence.maxVisibleCharacters = charIndex;
             }
         }
+
+        if (InputManager.activatejustpressed || InputManager.canceljustpressed)
+        {
+
+            if (charIndex < totalChars)
+                charIndex = totalChars;
+            else
+                GoToNextPage();
+        }
+
+        if (InputManager.Startjustpressed)
+        {
+            EndDialogue();
+        }
+    }
+
+    private void FixTMPVisibility()
+    {
+        if (fixTMPRoutine != null)
+            StopCoroutine(fixTMPRoutine);
+
+        fixTMPRoutine = StartCoroutine(FixTMPNextFrame());
+    }
+
+    private IEnumerator FixTMPNextFrame()
+    {
+        yield return null; // wait 1 frame
+
+        sentence.ForceMeshUpdate();
+        sentence.maxVisibleCharacters = charIndex;
     }
 
     private void GoToNextPage()
@@ -253,6 +220,10 @@ public class TextBubbleScript : MonoBehaviour
             charIndex = 0;
             charTimer = 0f;
             isPrinting = true;
+            sentence.maxVisibleCharacters = 0;
+
+            FixTMPVisibility();
+
             if (musicManager == null)
             {
                 musicManager = MusicManager.instance;
@@ -269,6 +240,7 @@ public class TextBubbleScript : MonoBehaviour
     private void EndDialogue()
     {
         DeactivateBubble();
+        gameObject.SetActive(false);
         if (MapEventManager.instance != null)
         {
             MapEventManager.instance.TriggerEventCheck();
@@ -277,9 +249,12 @@ public class TextBubbleScript : MonoBehaviour
 
     public void InitializeDialogue(List<TextBubbleInfo> dialogue)
     {
+        gameObject.SetActive(true);
+        ignoreInputThisFrame = true;
         currentTextBubble = -1;
         Dialogue = dialogue;
         indialogue = true;
+        sentence.maxVisibleCharacters = 0;
         GoToNextPage();
         if (gridScript != null)
         {
@@ -339,12 +314,13 @@ public class TextBubbleScript : MonoBehaviour
     private void DeactivateBubble()
     {
         indialogue = false;
+
         for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
-        currentTextBubble = 0;
-        Dialogue = null;
 
+        Dialogue = null;
+        currentTextBubble = -1;
     }
 }
