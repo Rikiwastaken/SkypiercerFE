@@ -37,7 +37,7 @@ public class VisualOptions : MonoBehaviour
 
     private void ApplyFPSSettings(FullScreenMode mode)
     {
-        int refreshRate = Screen.currentResolution.refreshRate;
+        int refreshRate = (int)Screen.currentResolution.refreshRateRatio.numerator / (int)Screen.currentResolution.refreshRateRatio.denominator;
         if (refreshRate <= 0) refreshRate = 60; // fallback
 
         if (mode == FullScreenMode.ExclusiveFullScreen)

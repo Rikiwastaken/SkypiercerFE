@@ -221,10 +221,6 @@ public class UnitScript : MonoBehaviour
 
     private AttackTurnScript AttackTurnScript;
 
-    public Material AllyMat;
-    public Material EnemyMat;
-    public GameObject Head;
-
     public int unitkilled;
 
     public int tilesmoved;
@@ -1691,6 +1687,11 @@ public class UnitScript : MonoBehaviour
                 {
                     currentequipmentmodel.transform.localPosition = equipmentmodel.localposition;
                     currentequipmentmodel.transform.localRotation = Quaternion.Euler(equipmentmodel.localrotation);
+                    if (UnitCharacteristics.modelID == 2)
+                    {
+                        currentequipmentmodel.transform.localPosition = Vector3.zero;
+                        currentequipmentmodel.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 180));
+                    }
                 }
 
             }

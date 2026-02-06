@@ -39,15 +39,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 0.5
-    - _CellDensity: 0.0001
+    - _CellDensity: 0.001
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RippleSlimness: 9.5
     - _RippleSpeed: 1
     - _Smoothness: 0.1
     - _WaterDepth: 10
-    - _WaveHeight: 0.02
-    - _WaveSpeed: 7
+    - _WaveHeight: 0.001
+    - _WaveSpeed: 1
     - _foamamount: 0.5
     - _foamcutoff: 1
     - _foamscale: 0.03

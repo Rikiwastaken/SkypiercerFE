@@ -21,6 +21,13 @@ public class worldmapController : MonoBehaviour
 
     private Vector3 targetcamrotation;
 
+    public bool isshipping;
+    public float waterwheelrotationpersecond;
+    public Transform Waterwheel;
+
+    public GameObject ShipModel;
+    public GameObject HumanModel;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +40,29 @@ public class worldmapController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isshipping)
+        {
+            if (!ShipModel.activeSelf)
+            {
+                HumanModel.SetActive(false);
+                ShipModel.SetActive(true);
+                playermodel = ShipModel.transform;
+            }
+
+            Waterwheel.Rotate(waterwheelrotationpersecond * Time.deltaTime * rb.linearVelocity.magnitude / speed, 0f, 0f);
+
+        }
+        else
+        {
+            if (ShipModel.activeSelf)
+            {
+                HumanModel.SetActive(true);
+                ShipModel.SetActive(false);
+                playermodel = HumanModel.transform;
+            }
+        }
+
+
         if (inputManager.movementValue.magnitude != 0)
         {
             Vector3 movement = new Vector3(inputManager.movementValue.x * speed, 0.0f, inputManager.movementValue.y * speed);
@@ -75,13 +105,18 @@ public class worldmapController : MonoBehaviour
             CamHolder.localRotation = Quaternion.Euler(Vector3.Lerp(CamHolder.localRotation.eulerAngles, CamHolder.localRotation.eulerAngles + new Vector3(0f, inputManager.cammovementValue.x * cammovepersec * Time.deltaTime, 0f), 0.3f));
         }
 
-        if (Mathf.Abs(rb.linearVelocity.x) > 0.1f || Mathf.Abs(rb.linearVelocity.z) > 0.1f)
+        if (playermodel.GetComponent<Animator>())
         {
-            playermodel.GetComponent<Animator>().SetBool("Walk", true);
+            if (Mathf.Abs(rb.linearVelocity.x) > 0.1f || Mathf.Abs(rb.linearVelocity.z) > 0.1f)
+            {
+                playermodel.GetComponent<Animator>().SetBool("Walk", true);
+            }
+            else
+            {
+                playermodel.GetComponent<Animator>().SetBool("Walk", false);
+            }
         }
-        else
-        {
-            playermodel.GetComponent<Animator>().SetBool("Walk", false);
-        }
+
+
     }
 }
