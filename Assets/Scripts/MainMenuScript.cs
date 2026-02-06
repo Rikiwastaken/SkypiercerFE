@@ -16,6 +16,11 @@ public class MainMenuScript : MonoBehaviour
     public Transform ContinueMenu;
     public Transform ManuallyLoadChapterMenu;
     public Button ContinueMenuButton;
+
+    public Transform Waterwheel;
+
+    public float waterwheelrotationpersecond;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,6 +39,8 @@ public class MainMenuScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Waterwheel.Rotate(waterwheelrotationpersecond * Time.deltaTime, 0f, 0f);
+
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         if (BaseMenu.gameObject.activeSelf)
         {
