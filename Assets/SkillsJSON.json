@@ -724,10 +724,28 @@
             "name": "Brawl Master",
             "Descriptions": "Increases hit rate by Dexterity*5 and physical damage by Strength/4 if not wielding any blade.",
             "IsCommand": false,
-            "Cost": 7,
+            "Cost": 10,
             "targettype": 0,
             "range": 0,
             "ID": 80
+        },
+        {
+            "name": "Hook",
+            "Descriptions": "Drags a character up to 3 tiles away next to the user if their resistance is lower than the user's psyche.",
+            "IsCommand": true,
+            "Cost": 10,
+            "targettype": 4,
+            "range": 3,
+            "ID": 81
+        },
+        {
+            "name": "Throw",
+            "Descriptions": "Throws a character next to the user up to 3 tiles away if their defense is lower than the user's strength.",
+            "IsCommand": true,
+            "Cost": 10,
+            "targettype": 4,
+            "range": 1,
+            "ID": 82
         }
     ]
 }

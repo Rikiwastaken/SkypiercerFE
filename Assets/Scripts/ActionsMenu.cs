@@ -210,12 +210,13 @@ public class ActionsMenu : MonoBehaviour
                 if (activetargetid < targetlist.Count)
                 {
                     cameraScript.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
+                    CheckCorrectInfo(target, targetlist[activetargetid]);
                 }
                 else
                 {
                     cameraScript.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.position;
                 }
-                CheckCorrectInfo(target, targetlist[activetargetid]);
+
             }
         }
     }
@@ -575,7 +576,7 @@ public class ActionsMenu : MonoBehaviour
         if (usecommand)
         {
 
-            Skill command = DataScript.instance.SkillList[commandID]; // targetting : 0 enemies, 1 allies, 2 walls, 3 self
+            Skill command = DataScript.instance.SkillList[commandID]; // targetting : 0 enemies, 1 allies, 2 walls, 3 self, 4 allunits
             CommandUsedID = command.ID;
             if (command.targettype == 0)
             {
@@ -676,6 +677,93 @@ public class ActionsMenu : MonoBehaviour
                 }
                 AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
                 AttackButton.Select();
+            }
+            else if (command.targettype == 4)
+            {
+                Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, false, chartarget.enemyStats.monsterStats.size, chartarget);
+                if (commandID == 81 || commandID == 82) // Hook and Throw
+                {
+                    Vector2 chartargetposition = chartarget.currentTile[0].GridCoordinates;
+                    List<GridSquareScript> newtileslist = new List<GridSquareScript>();
+                    foreach (GridSquareScript tile in GridScript.attacktiles)
+                    {
+                        if (Mathf.Abs(tile.GridCoordinates.x) - Mathf.Abs(chartargetposition.x) == 0 || Mathf.Abs(tile.GridCoordinates.y) - Mathf.Abs(chartargetposition.y) == 0) // check if characters are aligned
+                        {
+                            newtileslist.Add(tile);
+                        }
+                    }
+                    GridScript.attacktiles = newtileslist;
+                    Debug.Log(GridScript.attacktiles.Count);
+                }
+                GridScript.lockedattacktiles = GridScript.attacktiles;
+
+                foreach (GridSquareScript tile in GridScript.lockedattacktiles)
+                {
+                    GameObject potentialtarget = GridScript.GetUnit(tile);
+                    if (potentialtarget != null)
+                    {
+                        if (commandID == 81) // Hook
+                        {
+                            if (ManhattanDistance(chartarget, potentialtarget.GetComponent<UnitScript>().UnitCharacteristics) > 1)
+                            {
+
+                                Vector2 chartargetposition = chartarget.currentTile[0].GridCoordinates;
+                                Vector2 potentialtargetposition = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+
+                                Vector2 direction = (potentialtargetposition - chartargetposition).normalized;
+                                GridSquareScript potentialblockerTile = GridScript.GetTile(chartargetposition + direction);
+                                GameObject potentialblocker = GridScript.GetUnit(potentialblockerTile);
+                                if (potentialblocker == null && chartarget.AjustedStats.Psyche > potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Resistance)
+                                {
+                                    targetlist.Add(potentialtarget);
+                                }
+                            }
+                        }
+                        else if (commandID == 82) // Throw
+                        {
+                            if (ManhattanDistance(chartarget, potentialtarget.GetComponent<UnitScript>().UnitCharacteristics) == 1)
+                            {
+
+                                Vector2 chartargetposition = chartarget.currentTile[0].GridCoordinates;
+                                Vector2 potentialtargetposition = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+
+                                Vector2 direction = (potentialtargetposition - chartargetposition).normalized;
+                                GridSquareScript potentialblockerTile = GridScript.GetTile(chartargetposition + direction * 3);
+                                GameObject potentialblocker = GridScript.GetUnit(potentialblockerTile);
+                                if (potentialblocker == null && chartarget.AjustedStats.Strength > potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Defense)
+                                {
+
+                                    targetlist.Add(potentialtarget);
+                                }
+                                else
+                                {
+                                    potentialblockerTile = GridScript.GetTile(chartargetposition + direction * 2);
+                                    potentialblocker = GridScript.GetUnit(potentialblockerTile);
+                                    if (potentialblocker == null && chartarget.AjustedStats.Strength > potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Defense)
+                                    {
+                                        targetlist.Add(potentialtarget);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            targetlist.Add(potentialtarget);
+                        }
+                    }
+                }
+                if (targetlist.Count > 0)
+                {
+                    activetargetid = 0;
+                    initializeSkillWindow(target, targetlist[activetargetid], command);
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        transform.GetChild(i).gameObject.SetActive(false);
+                    }
+                    AttackButton.GetComponentInChildren<TextMeshProUGUI>().text = "Use";
+                    AttackButton.Select();
+                }
             }
 
             if (targetlist.Count == 0)
@@ -1032,6 +1120,14 @@ public class ActionsMenu : MonoBehaviour
         else if (command.ID == 79) // Break
         {
             BreakCommandWindow(unit, target);
+        }
+        else if (command.ID == 81) //Hook
+        {
+            BasicCommandWindow(unit, target);
+        }
+        else if (command.ID == 82) //Throw
+        {
+            BasicCommandWindow(unit, target);
         }
 
     }

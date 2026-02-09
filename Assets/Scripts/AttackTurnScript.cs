@@ -657,6 +657,46 @@ public class AttackTurnScript : MonoBehaviour
             Target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses = Mathf.Max(Target.GetComponent<UnitScript>().GetFirstWeapon().Currentuses - lostdurability, 0);
             Target.GetComponent<UnitScript>().AddNumber(0, true, "Break");
         }
+        else if (commandID == 81) // Hook
+        {
+            foresightScript.CreateAction(3, User, Target);
+
+
+
+            Vector2 targetposition = Target.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+            Vector2 Userposition = User.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+
+            Vector2 direction = (targetposition - Userposition).normalized;
+            Target.GetComponent<UnitScript>().MoveTo(Userposition + direction, true, true);
+            Target.GetComponent<UnitScript>().AddNumber(0, true, "Hook");
+        }
+        else if (commandID == 82) // Throw
+        {
+            foresightScript.CreateAction(3, User, Target);
+
+
+
+            Vector2 targetposition = Target.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+            Vector2 Userposition = User.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+
+            Vector2 direction = (targetposition - Userposition).normalized;
+
+
+            GridSquareScript potentialblockerTile = GridScript.instance.GetTile(Userposition + direction * 3);
+            GameObject potentialblocker = GridScript.instance.GetUnit(potentialblockerTile);
+            if (potentialblocker == null)
+            {
+                Target.GetComponent<UnitScript>().MoveTo(Userposition + direction * 3, true, true);
+                Target.GetComponent<UnitScript>().AddNumber(0, true, "Throw");
+            }
+            else
+            {
+                potentialblockerTile = GridScript.instance.GetTile(Userposition + direction * 2);
+                potentialblocker = GridScript.instance.GetUnit(potentialblockerTile);
+                Target.GetComponent<UnitScript>().MoveTo(Userposition + direction * 2, true, true);
+                Target.GetComponent<UnitScript>().AddNumber(0, true, "Throw");
+            }
+        }
 
         ActionsMenu.FinalizeAttack();
 
