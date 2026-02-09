@@ -287,6 +287,24 @@ public class UnitScript : MonoBehaviour
             }
         }
     }
+
+    private Color InitialCharacterColor;
+    private event Action<bool> OnPlayedChanged;
+    private bool previousalreadyplayedforevent;
+    private bool PlayedEvent
+    {
+        get => previousalreadyplayedforevent;
+        set
+        {
+            if (previousalreadyplayedforevent != value) // Only trigger if the value actually changes
+            {
+                previousalreadyplayedforevent = value;
+                OnPlayedChanged?.Invoke(previousalreadyplayedforevent); // Fire the event
+            }
+        }
+    }
+
+
     public Image Lifebar;
     public Image LBBackground;
 
@@ -327,6 +345,9 @@ public class UnitScript : MonoBehaviour
     public bool forcemoveTO;
     public Vector2 forcemovetonewpos;
 
+
+
+    public GameObject ActiveModel;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -403,8 +424,17 @@ public class UnitScript : MonoBehaviour
         }
 
 
+        if (animator.GetBool("Ismachine") != UnitCharacteristics.enemyStats.monsterStats.ismachine)
+        {
+            animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
+        }
+        if (animator.GetBool("Ispluvial") != UnitCharacteristics.enemyStats.monsterStats.ispluvial)
+        {
+            animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
+        }
         ResetChildRenderers();
         OnHealthChanged += HealthChangedHandler;
+        OnPlayedChanged += PlayedChangedHandler;
 
 
         if (UnitCharacteristics.affiliation == "enemy" || UnitCharacteristics.attacksfriends)
@@ -464,6 +494,7 @@ public class UnitScript : MonoBehaviour
                 {
                     animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
                     rotationadjust = modelInfo.rotationadjust;
+                    ActiveModel = modelInfo.wholeModel;
                 }
             }
 
@@ -481,7 +512,7 @@ public class UnitScript : MonoBehaviour
 
         HPForEvent = UnitCharacteristics.currentHP;
 
-
+        PlayedEvent = UnitCharacteristics.alreadyplayed && UnitCharacteristics.affiliation.ToLower() == TurnManger.instance.currentlyplaying.ToLower();
 
 
         //TemporaryColor();
@@ -549,16 +580,6 @@ public class UnitScript : MonoBehaviour
                 CopiedSkillImage.sprite = SkillNotCopiedSprite;
             }
 
-
-
-            if (animator.GetBool("Ismachine") != UnitCharacteristics.enemyStats.monsterStats.ismachine)
-            {
-                animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
-            }
-            if (animator.GetBool("Ispluvial") != UnitCharacteristics.enemyStats.monsterStats.ispluvial)
-            {
-                animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
-            }
             if (animator.GetBool("UsingTelekinesis") != UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow")
             {
                 animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow");
@@ -1745,6 +1766,29 @@ public class UnitScript : MonoBehaviour
     void HealthChangedHandler(int newHealth)
     {
         ManageLifebars();
+    }
+
+    void PlayedChangedHandler(bool newPlayed)
+    {
+        Debug.Log(UnitCharacteristics.name + " played change : " + newPlayed);
+        if (ActiveModel != null && UnitCharacteristics.currentTile[0].activated)
+        {
+            if (newPlayed)
+            {
+                if (ActiveModel.GetComponentInChildren<Renderer>().material.GetColor("_BaseColor") != Color.grey)
+                {
+                    InitialCharacterColor = ActiveModel.GetComponentInChildren<Renderer>().material.GetColor("_BaseColor");
+                    ActiveModel.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", Color.grey);
+                }
+            }
+            else
+            {
+                if (ActiveModel.GetComponentInChildren<Renderer>().material.GetColor("_BaseColor") != InitialCharacterColor)
+                {
+                    ActiveModel.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", InitialCharacterColor); ;
+                }
+            }
+        }
     }
     public void RetreatTrigger() // Effect of Retreat or Verso
     {

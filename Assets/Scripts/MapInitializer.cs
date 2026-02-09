@@ -298,6 +298,7 @@ public class MapInitializer : MonoBehaviour
             {
                 modelinf.active = true;
                 modelinf.wholeModel.SetActive(true);
+                character.GetComponent<UnitScript>().ActiveModel = modelinf.wholeModel;
             }
             else
             {
