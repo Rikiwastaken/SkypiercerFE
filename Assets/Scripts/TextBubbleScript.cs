@@ -120,11 +120,14 @@ public class TextBubbleScript : MonoBehaviour
         if (isPrinting && charIndex < totalChars)
         {
             charTimer += Time.deltaTime;
+
+
             if (charTimer >= charDelay)
             {
                 charTimer = 0f;
                 charIndex = Mathf.Min(charIndex + 1, totalChars);
                 sentence.maxVisibleCharacters = charIndex;
+                musicManager.PlayVoiceSE(currentcharacterpitch);
             }
         }
 
@@ -135,6 +138,7 @@ public class TextBubbleScript : MonoBehaviour
                 if (charIndex > totalChars * 0.05f)
                 {
                     charIndex = totalChars;
+                    sentence.maxVisibleCharacters = charIndex;
                 }
             }
             else
