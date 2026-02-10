@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class worldmapController : MonoBehaviour
 {
-
+    public static worldmapController instance;
     private InputManager inputManager;
 
     private Camera cam;
@@ -27,6 +27,11 @@ public class worldmapController : MonoBehaviour
 
     public GameObject ShipModel;
     public GameObject HumanModel;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -14,6 +14,7 @@ public class StoryPointScript : MonoBehaviour
         if (DataScript.instance.GetComponent<SaveManager>().maxchapterreached < chapterID)
         {
             ChapterChangeVisuals.SetActive(false);
+            GetComponent<BoxCollider>().isTrigger = false;
         }
     }
 

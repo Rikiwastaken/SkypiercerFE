@@ -19,6 +19,8 @@ public class MusicManager : MonoBehaviour
     public AudioSource CampMusicintro;
     public AudioSource WorldMapMusic;
     public AudioSource WorldMapMusicintro;
+    public AudioSource ShipMusic;
+    public AudioSource ShipMusicintro;
 
 
     public AudioSource MainMenuMusic;
@@ -135,6 +137,7 @@ public class MusicManager : MonoBehaviour
 
             PlayMusicWithIntro(1, 0f);
             PlayMusicWithIntro(6, 0f);
+            PlayMusicWithIntro(7, 0f);
         }
 
         currentscene = scene.name;
@@ -156,6 +159,9 @@ public class MusicManager : MonoBehaviour
         incombat.Stop();
         outcombat.Stop();
         BeforeCombat.Stop();
+        CampMusic.Stop();
+        WorldMapMusic.Stop();
+        ShipMusic.Stop();
 
         if (Chapter != -1)
         {
@@ -308,14 +314,28 @@ public class MusicManager : MonoBehaviour
             if (!WorldMapMusic.isPlaying && !WorldMapMusicintro.isPlaying)
             {
                 PlayMusicWithIntro(6, 0f);
+                PlayMusicWithIntro(7, 0f);
             }
             ChangeVolume(MainMenuMusic, 0f);
             ChangeVolume(MainMenuMusicintro, 0f);
 
             ChangeVolume(CampMusic, 0f);
             ChangeVolume(CampMusicintro, 0f);
-            ChangeVolume(WorldMapMusic, maxvolume);
-            ChangeVolume(WorldMapMusicintro, maxvolume);
+            if (worldmapController.instance.isshipping)
+            {
+                ChangeVolume(WorldMapMusic, 0f);
+                ChangeVolume(WorldMapMusicintro, 0f);
+                ChangeVolume(ShipMusic, maxvolume);
+                ChangeVolume(ShipMusicintro, maxvolume);
+            }
+            else
+            {
+                ChangeVolume(ShipMusic, 0f);
+                ChangeVolume(ShipMusicintro, 0f);
+                ChangeVolume(WorldMapMusic, maxvolume);
+                ChangeVolume(WorldMapMusicintro, maxvolume);
+            }
+
         }
         else if (currentscene == "MainMenu")
         {
@@ -438,6 +458,12 @@ public class MusicManager : MonoBehaviour
                 lowermap = true;
                 Main = WorldMapMusic;
                 intro = WorldMapMusicintro;
+                break;
+            case (7): //Ship
+                lowerdialogue = true;
+                lowermap = true;
+                Main = ShipMusic;
+                intro = ShipMusicintro;
                 break;
 
         }
