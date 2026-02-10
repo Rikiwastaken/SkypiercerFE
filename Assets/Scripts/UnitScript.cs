@@ -1770,7 +1770,6 @@ public class UnitScript : MonoBehaviour
 
     void PlayedChangedHandler(bool newPlayed)
     {
-        Debug.Log(UnitCharacteristics.name + " played change : " + newPlayed);
         if (ActiveModel != null && UnitCharacteristics.currentTile[0].activated)
         {
             if (newPlayed)

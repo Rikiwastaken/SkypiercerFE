@@ -25,6 +25,7 @@ public class FreezeFrameCapture : MonoBehaviour
     public RectTransform TextHolder;
     public InputActionReference activate;
     public float timebeforesplit;
+    public RectTransform Canvas;
 
     public bool playsplit;
     private GameObject MusicGO;
@@ -184,12 +185,13 @@ public class FreezeFrameCapture : MonoBehaviour
             }
             else
             {
-                StatIncreaseTxt = "HP : " + (characterWhoLeveledUp.AjustedStats.HP - levelip[0]) + " <sprite=17> " + characterWhoLeveledUp.AjustedStats.HP;
+                StatIncreaseTxt = "HP : " + (characterWhoLeveledUp.AjustedStats.HP - levelip[0]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.HP;
             }
             StatTexts[0].text = StatIncreaseTxt;
             string statincreaseBG = StatIncreaseTxt;
             statincreaseBG = statincreaseBG.Replace("<sprite=17>", "<sprite=18>");
             statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
             StatTextBG[0].text = statincreaseBG;
             if (levelip[1] == 0)
             {
@@ -197,12 +199,13 @@ public class FreezeFrameCapture : MonoBehaviour
             }
             else
             {
-                StatIncreaseTxt = "Str : " + (characterWhoLeveledUp.AjustedStats.Strength - levelip[1]) + " <sprite=17> " + characterWhoLeveledUp.AjustedStats.Strength;
+                StatIncreaseTxt = "Str : " + (characterWhoLeveledUp.AjustedStats.Strength - levelip[1]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.Strength;
             }
             StatTexts[1].text = StatIncreaseTxt;
             statincreaseBG = StatIncreaseTxt;
             statincreaseBG = statincreaseBG.Replace("<sprite=17>", "<sprite=18>");
             statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
             StatTextBG[1].text = statincreaseBG;
             if (levelip[2] == 0)
             {
@@ -210,12 +213,13 @@ public class FreezeFrameCapture : MonoBehaviour
             }
             else
             {
-                StatIncreaseTxt = "Psy : " + (characterWhoLeveledUp.AjustedStats.Psyche - levelip[2]) + " <sprite=17> " + characterWhoLeveledUp.AjustedStats.Psyche;
+                StatIncreaseTxt = "Psy : " + (characterWhoLeveledUp.AjustedStats.Psyche - levelip[2]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.Psyche;
             }
             StatTexts[2].text = StatIncreaseTxt;
             statincreaseBG = StatIncreaseTxt;
             statincreaseBG = statincreaseBG.Replace("<sprite=17>", "<sprite=18>");
             statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
             StatTextBG[2].text = statincreaseBG;
             if (levelip[3] == 0)
             {
@@ -223,12 +227,13 @@ public class FreezeFrameCapture : MonoBehaviour
             }
             else
             {
-                StatIncreaseTxt = "Def : " + (characterWhoLeveledUp.AjustedStats.Defense - levelip[3]) + " <sprite=17> " + characterWhoLeveledUp.AjustedStats.Defense;
+                StatIncreaseTxt = "Def : " + (characterWhoLeveledUp.AjustedStats.Defense - levelip[3]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.Defense;
             }
             StatTexts[3].text = StatIncreaseTxt;
             statincreaseBG = StatIncreaseTxt;
             statincreaseBG = statincreaseBG.Replace("<sprite=17>", "<sprite=18>");
             statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
             StatTextBG[3].text = statincreaseBG;
             if (levelip[4] == 0)
             {
@@ -236,12 +241,13 @@ public class FreezeFrameCapture : MonoBehaviour
             }
             else
             {
-                StatIncreaseTxt = "Res : " + (characterWhoLeveledUp.AjustedStats.Resistance - levelip[4]) + " <sprite=17> " + characterWhoLeveledUp.AjustedStats.Resistance;
+                StatIncreaseTxt = "Res : " + (characterWhoLeveledUp.AjustedStats.Resistance - levelip[4]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.Resistance;
             }
             StatTexts[4].text = StatIncreaseTxt;
             statincreaseBG = StatIncreaseTxt;
             statincreaseBG = statincreaseBG.Replace("<sprite=17>", "<sprite=18>");
             statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
             StatTextBG[4].text = statincreaseBG;
             if (levelip[5] == 0)
             {
@@ -249,12 +255,13 @@ public class FreezeFrameCapture : MonoBehaviour
             }
             else
             {
-                StatIncreaseTxt = "Spd : " + (characterWhoLeveledUp.AjustedStats.Speed - levelip[5]) + " <sprite=17> " + characterWhoLeveledUp.AjustedStats.Speed;
+                StatIncreaseTxt = "Spd : " + (characterWhoLeveledUp.AjustedStats.Speed - levelip[5]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.Speed;
             }
             StatTexts[5].text = StatIncreaseTxt;
             statincreaseBG = StatIncreaseTxt;
             statincreaseBG = statincreaseBG.Replace("<sprite=17>", "<sprite=18>");
             statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
             StatTextBG[5].text = statincreaseBG;
             if (levelip[6] == 0)
             {
@@ -262,12 +269,13 @@ public class FreezeFrameCapture : MonoBehaviour
             }
             else
             {
-                StatIncreaseTxt = "Dex : " + (characterWhoLeveledUp.AjustedStats.Dexterity - levelip[6]) + " <sprite=17> " + characterWhoLeveledUp.AjustedStats.Dexterity;
+                StatIncreaseTxt = "Dex : " + (characterWhoLeveledUp.AjustedStats.Dexterity - levelip[6]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.Dexterity;
             }
             StatTexts[6].text = StatIncreaseTxt;
             statincreaseBG = StatIncreaseTxt;
             statincreaseBG = statincreaseBG.Replace("<sprite=17>", "<sprite=18>");
             statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
             StatTextBG[6].text = statincreaseBG;
         }
 
@@ -336,7 +344,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
         if (MusicGO != null)
         {
-            Destroy(MusicGO);
+            StartCoroutine(LowerMusic(MusicGO));
         }
 
         ShowingLevelUp = false;
@@ -360,9 +368,34 @@ public class FreezeFrameCapture : MonoBehaviour
         right.transform.localPosition = new Vector2(1000, 0);
     }
 
+    IEnumerator LowerMusic(GameObject musicGO)
+    {
+        float t = 0f;
+        float basevol = musicGO.GetComponent<AudioSource>().volume;
+
+
+
+        while (t < 1f)
+        {
+            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher même si Time.timeScale = 0
+
+            float eased = EaseOutCubic(t);
+            if (musicGO != null)
+            {
+                musicGO.GetComponent<AudioSource>().volume = eased * basevol;
+            }
+
+
+            yield return null;
+        }
+        if (musicGO != null)
+        {
+            Destroy(musicGO);
+        }
+    }
+
     void SetupRectTransforms(Texture2D tex)
     {
-        RectTransform canvasRect = GetComponent<RectTransform>();
 
 
         left.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
@@ -375,20 +408,20 @@ public class FreezeFrameCapture : MonoBehaviour
 
         // Preserve texture aspect ratio
         float texRatio = (float)tex.width / tex.height;
-        float canvasRatio = canvasRect.rect.width / canvasRect.rect.height;
+        float canvasRatio = Canvas.rect.width / Canvas.rect.height;
 
         Vector2 size;
         if (texRatio > canvasRatio)
         {
             // Texture is wider than canvas, fit width
-            float height = canvasRect.rect.width / texRatio;
-            size = new Vector2(canvasRect.rect.width, height);
+            float height = Canvas.rect.width / texRatio;
+            size = new Vector2(Canvas.rect.width, height);
         }
         else
         {
             // Texture is taller than canvas, fit height
-            float width = canvasRect.rect.height * texRatio;
-            size = new Vector2(width, canvasRect.rect.height);
+            float width = Canvas.rect.height * texRatio;
+            size = new Vector2(width, Canvas.rect.height);
         }
 
         left.rectTransform.sizeDelta = size;

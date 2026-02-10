@@ -1346,6 +1346,12 @@ public class DataScript : MonoBehaviour
                     equipmentList[i].Maxuses = 99;
                 }
 
+                if (equipmentList[i].Name.Contains("Bonnie & Clyde"))
+                {
+                    equipmentList[i].Currentuses = 99;
+                    equipmentList[i].Maxuses = 99;
+                }
+
                 switch (equipmentList[i].type.ToLower())
                 {
                     case ("sword"):
