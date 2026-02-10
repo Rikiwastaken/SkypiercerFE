@@ -452,6 +452,72 @@ TextureImporter:
       name: AllIcons_16
       rect:
         serializedVersion: 2
+        x: 0
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a57557d467b982a4caa9b55a6c2cdaee
+      internalID: 463234073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AllIcons_17
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f8b7febbef406f478c98b1c2bfb37c7
+      internalID: 399197078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AllIcons_18
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e4d758c2395ab742ad1156f789f7fa5
+      internalID: 116349040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AllIcons_19
+      rect:
+        serializedVersion: 2
         x: 1800
         y: 300
         width: 300
@@ -464,14 +530,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76cc319baaabb4043a605dceff21f64d
-      internalID: 463234073
+      spriteID: 9799a3a179a67d44981d88ba6d0113d4
+      internalID: -1823507855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AllIcons_17
+      name: AllIcons_20
       rect:
         serializedVersion: 2
         x: 2100
@@ -486,8 +552,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ded16f2d772e5a34e98794b6e82d1731
-      internalID: 399197078
+      spriteID: b90faac3a2d245c4f8cfc367903b76be
+      internalID: 1840705775
       vertices: []
       indices: 
       edges: []
@@ -516,7 +582,10 @@ TextureImporter:
       AllIcons_15: -810860690
       AllIcons_16: 463234073
       AllIcons_17: 399197078
+      AllIcons_18: 116349040
+      AllIcons_19: -1823507855
       AllIcons_2: 484207780
+      AllIcons_20: 1840705775
       AllIcons_3: 292585417
       AllIcons_4: 1183342994
       AllIcons_5: -128759721

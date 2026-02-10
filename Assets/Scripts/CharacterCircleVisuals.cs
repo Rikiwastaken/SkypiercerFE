@@ -88,6 +88,11 @@ public class CharacterCircleVisuals : MonoBehaviour
         {
             GameObject unit = allunitGOsList[i];
 
+            if (unit == null)
+            {
+                continue;
+            }
+
             Character Char = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
             Color newcolor = new Color();

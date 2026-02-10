@@ -38,7 +38,10 @@ public class ExpBarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (FreezeFrameCapture.instance != null && FreezeFrameCapture.instance.ShowingLevelUp)
+        {
+            return;
+        }
         if (SceneManager.GetActiveScene().name == "BattleScene")
         {
             if (CombatSceneManager == null)
@@ -144,6 +147,12 @@ public class ExpBarScript : MonoBehaviour
     {
         if (levelupbonuses != null && levelupbonuses.Count > 0)
         {
+            FreezeFrameCapture.instance.PlayFullAnimation(newcharacter, levelupbonuses);
+            AttackTurnScript.expdistributed = true;
+            LevelUpText.transform.parent.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+            setupdone = false;
+            return;
             LevelUpText.transform.parent.gameObject.SetActive(true);
             string leveluptext = "Level Up !\n";
             leveluptext += newcharacter.name + "\n";

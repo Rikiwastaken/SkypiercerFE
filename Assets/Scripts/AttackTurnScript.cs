@@ -94,6 +94,11 @@ public class AttackTurnScript : MonoBehaviour
             return;
         }
 
+        if (FreezeFrameCapture.instance != null && FreezeFrameCapture.instance.ShowingLevelUp)
+        {
+            return;
+        }
+
         if (previousattacker != null)
         {
             previousattacker.GetComponent<UnitScript>().disableLifebar = false;

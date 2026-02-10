@@ -247,8 +247,27 @@ public class MusicManager : MonoBehaviour
 
         if (incombat.isPlaying && !(GameOverScript != null && GameOverScript.gameObject.activeSelf))
         {
+            if (FreezeFrameCapture.instance != null && FreezeFrameCapture.instance.ShowingLevelUp)
+            {
+                if (incombat.volume > 0)
+                {
+                    ChangeVolume(incombat, 0.1f);
+                    ChangeVolume(incombatintro, 0.1f);
 
-            if (!lowermap && (cameraScript != null && cameraScript.incombat) || inCombatBool)
+                    ChangeVolume(outcombat, 0f);
+                    ChangeVolume(outcombatintro, 0f);
+                }
+                else
+                {
+                    ChangeVolume(incombat, 0f);
+                    ChangeVolume(incombatintro, 0f);
+
+                    ChangeVolume(outcombat, 0.1f);
+                    ChangeVolume(outcombatintro, 0.1f);
+                }
+
+            }
+            else if (!lowermap && (cameraScript != null && cameraScript.incombat) || inCombatBool)
             {
                 ChangeVolume(incombat, maxvolume);
                 ChangeVolume(incombatintro, maxvolume);
@@ -266,6 +285,7 @@ public class MusicManager : MonoBehaviour
                 ChangeVolume(incombat, 0f);
                 ChangeVolume(incombatintro, 0f);
             }
+
         }
 
         if (currentscene == "Camp")
@@ -496,6 +516,37 @@ public class MusicManager : MonoBehaviour
         AS.pitch = pitch + UnityEngine.Random.Range(-0.025f, 0.025f);
         AS.Play();
         yield return new WaitForSeconds(AS.clip.length);
-        Destroy(SEholder);
+        if (SEholder != null)
+        {
+            Destroy(SEholder);
+        }
+
+    }
+
+
+    public GameObject PlaySFX(AudioClip clip, float pitch = 1f)
+    {
+        GameObject SEholder = new GameObject();
+        StartCoroutine(CreateSFX(clip, SEholder, pitch));
+        return SEholder;
+    }
+
+
+    private IEnumerator CreateSFX(AudioClip clip, GameObject SEholder, float pitch)
+    {
+
+        SEholder.transform.parent = GeneratedSoundHolder.transform;
+        SEholder.AddComponent<AudioSource>();
+        AudioSource AS = SEholder.GetComponent<AudioSource>();
+        AS.outputAudioMixerGroup = mixer.FindMatchingGroups("SoundEffects")[0];
+        AS.clip = clip;
+        AS.volume = SFXVolume;
+        AS.pitch = pitch + UnityEngine.Random.Range(-0.025f, 0.025f);
+        AS.Play();
+        yield return new WaitForSeconds(AS.clip.length);
+        if (SEholder != null)
+        {
+            Destroy(SEholder);
+        }
     }
 }
