@@ -171,8 +171,8 @@ public class FreezeFrameCapture : MonoBehaviour
         ApplyDistortion(LvlUpText, "Level " + characterWhoLeveledUp.level, lefttextsizeratioLvlUp, righttextsizeratioLvlUp);
         ApplyDistortion(LvlUpTextBG, "Level " + characterWhoLeveledUp.level, lefttextsizeratioLvlUp, righttextsizeratioLvlUp);
 
-        ApplyDistortion(Continuetxt, "Continue", leftContinueratio, rightContinueratio);
-        ApplyDistortion(ContinueBGtxt, "Continue", leftContinueratio, rightContinueratio);
+        ApplyDistortion(Continuetxt, "continue", leftContinueratio, rightContinueratio);
+        ApplyDistortion(ContinueBGtxt, "continue", leftContinueratio, rightContinueratio);
 
 
         string StatIncreaseTxt = "";

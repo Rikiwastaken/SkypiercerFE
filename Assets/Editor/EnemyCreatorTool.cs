@@ -403,6 +403,9 @@ public class EnemyStatsEditorWindow : EditorWindow
         {
             playablepositions.Add(playablepos);
         }
+
+        EditorUtility.SetDirty(mapInitializer.gameObject);
+
         for (int i = 0; i < gridGO.childCount; i++)
         {
             Vector2 position = new Vector2(gridGO.GetChild(i).position.x, gridGO.GetChild(i).position.z);

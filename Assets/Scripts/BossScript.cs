@@ -54,8 +54,6 @@ public class BossScript : MonoBehaviour
 
         foreach (GameObject unit in unitsinthezone)
         {
-            Debug.Log(unit.name);
-            Debug.Log(ActionsMenu);
             ActionsMenu.ApplyDamage(gameObject, unit, true, true, intercepted, intercepter == unit);
         }
 
@@ -64,6 +62,9 @@ public class BossScript : MonoBehaviour
         {
             case 1:
                 DetermineNextAttackTilesRagnall(nextTarget);
+                break;
+            case 2:
+                DetermineNextAttackTilesKay(nextTarget);
                 break;
         }
     }
@@ -146,6 +147,81 @@ public class BossScript : MonoBehaviour
                                 tile.isbossAttackTile = true;
                             }
                             else if (TargetPosition.x > RagnallPosition.x && tile.GridCoordinates.x > RagnallPosition.x)
+                            {
+                                tile.isbossAttackTile = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void DetermineNextAttackTilesKay(GameObject target)
+    {
+        Character character = GetComponent<UnitScript>().UnitCharacteristics;
+
+        Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
+
+        Vector2 KayPosition = character.currentTile[0].GridCoordinates;
+
+        Vector2 TargetPosition = targetcharacter.currentTile[0].GridCoordinates;
+
+        int distance = ManhanttanDistance(KayPosition, TargetPosition);
+
+        if (distance <= 2)
+        {
+            for (int i = 0; i < GridScript.Grid.Count; i++)
+            {
+                for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                {
+                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+                    if (ManhanttanDistance(KayPosition, tile.GridCoordinates) <= 2)
+                    {
+                        if (tile != character.currentTile[0])
+                        {
+                            tile.isbossAttackTile = true;
+                        }
+
+                    }
+                    else if (ManhanttanDistance(KayPosition, tile.GridCoordinates) == 3 && (Mathf.Abs(KayPosition.x) == Mathf.Abs(TargetPosition.x) || Mathf.Abs(KayPosition.y) == Mathf.Abs(TargetPosition.y)))
+                    {
+                        tile.isbossAttackTile = true;
+                    }
+                }
+            }
+        }
+        else
+        {
+            int personnalityValue = GetComponent<RandomScript>().GetPersonalityValue();
+            if (personnalityValue <= 50)
+            {
+                for (int i = 0; i < GridScript.Grid.Count; i++)
+                {
+                    for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                    {
+                        GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+                        if (ManhanttanDistance(TargetPosition, tile.GridCoordinates) <= 2)
+                        {
+                            if (tile != character.currentTile[0])
+                            {
+                                tile.isbossAttackTile = true;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < GridScript.Grid.Count; i++)
+                {
+                    for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                    {
+                        GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+                        if (ManhanttanDistance(TargetPosition, tile.GridCoordinates) == 0 || ManhanttanDistance(TargetPosition, tile.GridCoordinates) == 2 || ManhanttanDistance(TargetPosition, tile.GridCoordinates) == 4)
+                        {
+                            if (tile != character.currentTile[0])
                             {
                                 tile.isbossAttackTile = true;
                             }
