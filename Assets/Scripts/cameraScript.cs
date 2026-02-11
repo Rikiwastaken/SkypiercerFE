@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class cameraScript : MonoBehaviour
 {
@@ -42,6 +44,11 @@ public class cameraScript : MonoBehaviour
     public float rotationSmoothTime = 0.3f;
     public float rotationSpeed = 45f;
 
+
+    public List<VolumeProfile> PostProcessingVolumeProfileList;
+
+    public VolumeProfile DefaultVolumeProfile;
+
     private void Awake()
     {
         if (instance == null)
@@ -57,6 +64,7 @@ public class cameraScript : MonoBehaviour
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
         transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
+
     }
 
     void LateUpdate()
@@ -277,5 +285,18 @@ public class cameraScript : MonoBehaviour
         return directions[outputIndex];
     }
 
+
+    private void ManagePostProcessing()
+    {
+        int chapterID = MapInitializer.instance.ChapterID;
+        if (chapterID < PostProcessingVolumeProfileList.Count && PostProcessingVolumeProfileList[chapterID] != null)
+        {
+            transform.GetChild(0).GetComponent<Volume>().profile = PostProcessingVolumeProfileList[chapterID];
+        }
+        else
+        {
+            transform.GetChild(0).GetComponent<Volume>().profile = DefaultVolumeProfile;
+        }
+    }
 
 }
