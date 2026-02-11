@@ -2559,7 +2559,7 @@ public class ActionsMenu : MonoBehaviour
             baseweapondamage = (int)(baseweapondamage * 0.25f);
         }
 
-        int unitbasedamage = baseweapondamage + (int)(basestatdamage / 4f);
+        int unitbasedamage = baseweapondamage + (int)(basestatdamage * 3f / 4f);
         return unitbasedamage;
 
     }
