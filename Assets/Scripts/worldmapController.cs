@@ -67,6 +67,10 @@ public class worldmapController : MonoBehaviour
             }
         }
 
+        if (WorldMapManager.Instance.FastTravelMenu.activeSelf)
+        {
+            return;
+        }
 
         if (inputManager.movementValue.magnitude != 0)
         {
