@@ -76,6 +76,10 @@ public class ActionManager : MonoBehaviour
             if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow") == null && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
             {
                 currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+                if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
+                {
+                    currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = false;
+                }
                 currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                 (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
                 GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
@@ -124,7 +128,12 @@ public class ActionManager : MonoBehaviour
                     }
                     if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
                     {
+
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+                        if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
+                        {
+                            currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = false;
+                        }
                         currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                         GridScript.ShowMovement();
                     }
@@ -166,7 +175,12 @@ public class ActionManager : MonoBehaviour
                     }
                     if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
                     {
+
                         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+                        if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
+                        {
+                            currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = false;
+                        }
                         WeaponChange(currentcharacter);
                         currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                         GridScript.ShowMovement();

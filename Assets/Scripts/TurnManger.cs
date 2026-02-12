@@ -230,6 +230,10 @@ public class TurnManger : MonoBehaviour
 
             //Reset Verso movements
             unit.GetComponent<UnitScript>().tilesmoved = 0;
+
+            //status effects trigger
+            unit.GetComponent<UnitScript>().TriggerStatusEffectsBegOfTurn();
+
         }
 
 

@@ -43,7 +43,7 @@ public class UnitScript : MonoBehaviour
         public float DialoguePitch;
         public int TauntTurns;
         public bool isintercepting;
-
+        public StatusEffects statusEffects;
     }
 
     [Serializable]
@@ -53,6 +53,19 @@ public class UnitScript : MonoBehaviour
         public int Exp;
         public int Level;
         public string Modifier;
+    }
+
+    [Serializable]
+    public class StatusEffects
+    {
+        public int BurnTurns;
+        public int StunTurns;
+        public int ParalyzedTurns;
+        public int ConcussionTunrs;
+        public int WeaknessTurns;
+        public int RegenTurns;
+        public int AccelerationTurns;
+        public int PowerTurns;
     }
 
     [Serializable]
@@ -736,7 +749,18 @@ public class UnitScript : MonoBehaviour
             DialoguePitch = CharacterToCopy.DialoguePitch,
             TauntTurns = CharacterToCopy.TauntTurns,
             isintercepting = CharacterToCopy.isintercepting,
-            TemporarySkill = CharacterToCopy.TemporarySkill
+            TemporarySkill = CharacterToCopy.TemporarySkill,
+            statusEffects = new StatusEffects
+            {
+                BurnTurns = CharacterToCopy.statusEffects.BurnTurns,
+                StunTurns = CharacterToCopy.statusEffects.StunTurns,
+                ParalyzedTurns = CharacterToCopy.statusEffects.ParalyzedTurns,
+                ConcussionTunrs = CharacterToCopy.statusEffects.ConcussionTunrs,
+                WeaknessTurns = CharacterToCopy.statusEffects.WeaknessTurns,
+                RegenTurns = CharacterToCopy.statusEffects.RegenTurns,
+                AccelerationTurns = CharacterToCopy.statusEffects.AccelerationTurns,
+                PowerTurns = CharacterToCopy.statusEffects.PowerTurns
+            }
         };
 
         return copy;
@@ -1636,6 +1660,54 @@ public class UnitScript : MonoBehaviour
             DmgText.enabled = false;
             DmgEffectNameText.enabled = false;
         }
+    }
+
+    public void TriggerStatusEffectsBegOfTurn()
+    {
+        if (UnitCharacteristics.statusEffects.BurnTurns > 0)
+        {
+            UnitCharacteristics.currentHP = (int)Mathf.Max(0f, UnitCharacteristics.currentHP - UnitCharacteristics.AjustedStats.HP * 0.1f);
+            UnitCharacteristics.statusEffects.BurnTurns--;
+        }
+        if (UnitCharacteristics.statusEffects.StunTurns > 0)
+        {
+            UnitCharacteristics.alreadymoved = true;
+            UnitCharacteristics.alreadyplayed = true;
+            UnitCharacteristics.statusEffects.StunTurns--;
+        }
+        if (UnitCharacteristics.statusEffects.ParalyzedTurns > 0)
+        {
+            UnitCharacteristics.statusEffects.ParalyzedTurns--;
+        }
+        if (UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
+        {
+            UnitCharacteristics.statusEffects.ConcussionTunrs--;
+            UnitCharacteristics.telekinesisactivated = false;
+            if (UnitCharacteristics.statusEffects.ConcussionTunrs == 0 && UnitCharacteristics.affiliation.ToLower() != "playable" && UnitCharacteristics.enemyStats != null && UnitCharacteristics.enemyStats.usetelekinesis)
+            {
+                UnitCharacteristics.telekinesisactivated = true;
+            }
+        }
+        if (UnitCharacteristics.statusEffects.WeaknessTurns > 0)
+        {
+            UnitCharacteristics.statusEffects.WeaknessTurns--;
+        }
+        if (UnitCharacteristics.statusEffects.RegenTurns > 0)
+        {
+            UnitCharacteristics.currentHP = (int)Mathf.Min(UnitCharacteristics.AjustedStats.HP, UnitCharacteristics.currentHP + UnitCharacteristics.AjustedStats.HP * 0.1f);
+            UnitCharacteristics.statusEffects.RegenTurns--;
+        }
+        if (UnitCharacteristics.statusEffects.AccelerationTurns > 0)
+        {
+            UnitCharacteristics.statusEffects.AccelerationTurns--;
+        }
+        if (UnitCharacteristics.statusEffects.PowerTurns > 0)
+        {
+            UnitCharacteristics.statusEffects.PowerTurns--;
+        }
+
+        // add logic for visuals
+
     }
 
     public void ResetForward()
@@ -3129,6 +3201,8 @@ public class UnitScript : MonoBehaviour
         }
 
 
+
+        // Battalion Bonuses
         AllStatsSkillBonus battalionskillbonus = GetBattalionCombatBonus();
 
 
@@ -3155,6 +3229,28 @@ public class UnitScript : MonoBehaviour
         statbonuses.Defense += battalionskillbonus.Defense;
         statbonuses.Speed += battalionskillbonus.Speed;
         statbonuses.Dexterity += battalionskillbonus.Dexterity;
+
+        // Status Effect Bonus/Malus
+
+        if (UnitCharacteristics.statusEffects.WeaknessTurns > 0)
+        {
+            statbonuses.Strength -= 5;
+            statbonuses.Psyche -= 5;
+            statbonuses.Defense -= 5;
+            statbonuses.Resistance -= 5;
+            statbonuses.Dexterity -= 5;
+            statbonuses.Speed -= 5;
+        }
+
+        if (UnitCharacteristics.statusEffects.PowerTurns > 0)
+        {
+            statbonuses.Strength += 5;
+            statbonuses.Psyche += 5;
+            statbonuses.Defense += 5;
+            statbonuses.Resistance += 5;
+            statbonuses.Dexterity += 5;
+            statbonuses.Speed += 5;
+        }
 
         return statbonuses;
     }

@@ -121,6 +121,7 @@ public class MapInitializer : MonoBehaviour
             playable.TauntTurns = 0;
             playable.isintercepting = false;
             playable.TemporarySkill = 0;
+            playable.statusEffects = new StatusEffects() { BurnTurns = 0, ConcussionTunrs = 0, WeaknessTurns = 0, RegenTurns = 0, AccelerationTurns = 0, PowerTurns = 0, ParalyzedTurns = 0, StunTurns = 0 };
             playable.currentHP = (int)playable.AjustedStats.HP;
         }
 
@@ -267,7 +268,7 @@ public class MapInitializer : MonoBehaviour
                 }
             }
         }
-
+        Character.statusEffects = new StatusEffects() { BurnTurns = 0, ConcussionTunrs = 0, WeaknessTurns = 0, RegenTurns = 0, AccelerationTurns = 0, PowerTurns = 0, ParalyzedTurns = 0, StunTurns = 0 };
         newcharacter.GetComponent<RandomScript>().InitializeRandomValues();
     }
 

@@ -303,6 +303,10 @@ public class ActionsMenu : MonoBehaviour
     private void ToggleTelekinesis(GameObject PreviousFoe)
     {
         target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+        if (target.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
+        {
+            target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = false;
+        }
         WeaponChange();
         target.GetComponent<UnitScript>().UpdateWeaponModel();
         bool enemytargettable = false;
@@ -338,6 +342,10 @@ public class ActionsMenu : MonoBehaviour
         else
         {
             target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+            if (target.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
+            {
+                target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = false;
+            }
             WeaponChange();
             FindAttackers();
         }
@@ -435,6 +443,10 @@ public class ActionsMenu : MonoBehaviour
                 if (targetlist.Count == 0) //ici toujours pas d'ennemi trouve donc on essaie d'autres armes en chengeant le reglage de telekinesie
                 {
                     targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
+                    if (targetcharacter.statusEffects.ConcussionTunrs > 0)
+                    {
+                        targetcharacter.telekinesisactivated = false;
+                    }
                     foreach (equipment weapon in weapons)
                     {
                         if (weapon.type.ToLower() == "staff")
@@ -488,6 +500,10 @@ public class ActionsMenu : MonoBehaviour
             else
             {
                 targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
+                if (targetcharacter.statusEffects.ConcussionTunrs > 0)
+                {
+                    targetcharacter.telekinesisactivated = false;
+                }
                 FindAttackers();
                 if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le reglage original de telekinesie
                 {

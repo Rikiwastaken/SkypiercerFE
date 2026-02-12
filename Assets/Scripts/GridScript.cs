@@ -594,6 +594,14 @@ public class GridScript : MonoBehaviour
                     {
                         movements += 1;
                     }
+                    if (unit.statusEffects != null && unit.statusEffects.ParalyzedTurns > 0)
+                    {
+                        movements -= 1;
+                    }
+                    if (unit.statusEffects != null && unit.statusEffects.AccelerationTurns > 0)
+                    {
+                        movements += 1;
+                    }
                     SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
                     if (unit.enemyStats.monsterStats.size > 1)
                     {
@@ -682,6 +690,14 @@ public class GridScript : MonoBehaviour
                     {
                         movements += 1;
                     }
+                    if (unit.statusEffects != null && unit.statusEffects.ParalyzedTurns > 0)
+                    {
+                        movements -= 1;
+                    }
+                    if (unit.statusEffects != null && unit.statusEffects.AccelerationTurns > 0)
+                    {
+                        movements += 1;
+                    }
                     SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                     ShowAttack(range, melee, type.ToLower() == "staff", false, unit.enemyStats.monsterStats.size, unit);
@@ -732,6 +748,7 @@ public class GridScript : MonoBehaviour
         {
             movements -= 1;
         }
+
         SpreadMovements(unitchar.position, movements, movementtiles, unit, new Dictionary<GridSquareScript, int>());
         if (!lockselection)
         {
