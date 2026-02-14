@@ -27,10 +27,7 @@ public class MapInitializer : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            instance = this;
-        }
+        instance = this;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

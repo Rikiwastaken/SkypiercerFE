@@ -48,6 +48,8 @@ public class cameraScript : MonoBehaviour
     public List<VolumeProfile> PostProcessingVolumeProfileList;
 
     public VolumeProfile DefaultVolumeProfile;
+    private bool PostProcessingInitialized;
+
 
     private void Awake()
     {
@@ -65,10 +67,16 @@ public class cameraScript : MonoBehaviour
         Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
         transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
 
+
     }
 
     void LateUpdate()
     {
+        if (!PostProcessingInitialized)
+        {
+            ManagePostProcessing();
+            PostProcessingInitialized = true;
+        }
         if (Destination != null)
         {
             destTile = GridScript.GetTile(Destination);
