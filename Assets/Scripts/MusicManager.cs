@@ -23,10 +23,6 @@ public class MusicManager : MonoBehaviour
     public AudioSource ShipMusicintro;
 
 
-    public AudioSource MainMenuMusic;
-    public AudioSource MainMenuMusicintro;
-
-
     public AudioSource DialogueAudioSource;
     public AudioSource DialogueAudioSourceIntro;
     public AudioSource DialogueAudioSource2;
@@ -300,8 +296,6 @@ public class MusicManager : MonoBehaviour
             {
                 PlayMusicWithIntro(1, 0f);
             }
-            ChangeVolume(MainMenuMusic, 0f);
-            ChangeVolume(MainMenuMusicintro, 0f);
 
             ChangeVolume(CampMusic, maxvolume);
             ChangeVolume(CampMusicintro, maxvolume);
@@ -316,8 +310,6 @@ public class MusicManager : MonoBehaviour
                 PlayMusicWithIntro(6, 0f);
                 PlayMusicWithIntro(7, 0f);
             }
-            ChangeVolume(MainMenuMusic, 0f);
-            ChangeVolume(MainMenuMusicintro, 0f);
 
             ChangeVolume(CampMusic, 0f);
             ChangeVolume(CampMusicintro, 0f);
@@ -337,19 +329,9 @@ public class MusicManager : MonoBehaviour
             }
 
         }
-        else if (currentscene == "MainMenu")
-        {
-            if (!MainMenuMusic.isPlaying)
-            {
-                PlayMusicWithIntro(0, maxvolume);
-            }
-            ChangeVolume(CampMusic, 0f);
-            ChangeVolume(CampMusicintro, 0f);
-        }
+
         else
         {
-            ChangeVolume(MainMenuMusic, 0f);
-            ChangeVolume(MainMenuMusicintro, 0f);
             ChangeVolume(CampMusic, 0f);
             ChangeVolume(CampMusicintro, 0f);
         }
@@ -366,8 +348,6 @@ public class MusicManager : MonoBehaviour
             }
             if (currentDialogueAudioSource != null && (currentDialogueAudioSource.isPlaying || currentDialogueAudioSourceIntro.isPlaying) && currentDialogueAudioSource.volume > 0 && CurrentDialogueMusic != -1)
             {
-                ChangeVolume(MainMenuMusic, 0f);
-                ChangeVolume(MainMenuMusicintro, 0f);
                 ChangeVolume(CampMusic, 0f);
                 ChangeVolume(CampMusicintro, 0f);
                 if (outcombat.volume > 0)
@@ -415,11 +395,8 @@ public class MusicManager : MonoBehaviour
 
         switch (TypeID)
         {
-            case (0): //MainMenu
-                Main = MainMenuMusic;
-                intro = MainMenuMusicintro;
-                lowerdialogue = true;
-                lowermap = true;
+            case (0): //rien
+
                 break;
             case (1): //Camp
                 Main = CampMusic;

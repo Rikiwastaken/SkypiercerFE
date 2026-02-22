@@ -19,6 +19,9 @@ public class MainMenuScript : MonoBehaviour
 
     public Transform Waterwheel;
 
+    public AudioSource MusicIntro;
+    public AudioSource Music;
+
     public float waterwheelrotationpersecond;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,6 +38,7 @@ public class MainMenuScript : MonoBehaviour
         saveManager.LoadSaves();
         BaseMenu.GetChild(0).GetComponent<Button>().Select();
         sceneLoader = saveManager.GetComponent<SceneLoader>();
+        PlayMusicWithIntro();
     }
 
     private void FixedUpdate()
@@ -163,6 +167,19 @@ public class MainMenuScript : MonoBehaviour
     public void ResetSave()
     {
         DataScript.instance.RestoreBaseCharacterValues();
+    }
+
+    private void PlayMusicWithIntro()
+    {
+
+        MusicIntro.PlayScheduled(AudioSettings.dspTime);
+
+        double introduration = (double)MusicIntro.clip.samples / MusicIntro.clip.frequency;
+
+
+        Music.PlayScheduled(AudioSettings.dspTime + introduration);
+
+
     }
 
 }
