@@ -217,6 +217,18 @@ public class TextBubbleScript : MonoBehaviour
 
             texttodisplay = info.text;
 
+            if (cameraScript != null)
+            {
+                if (info.CameraDestination != Vector3.zero)
+                {
+                    cameraScript.Destination = new Vector3(info.CameraDestination.x, info.CameraDestination.z);
+                }
+                else if (character != null)
+                {
+                    cameraScript.Destination = character.currentTile[0].GridCoordinates;
+                }
+
+            }
 
             sentence.textWrappingMode = TextWrappingModes.NoWrap; // Temporarily disable wrapping
             sentence.text = texttodisplay;
