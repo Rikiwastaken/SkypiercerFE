@@ -146,7 +146,7 @@ public class MapEventManager : MonoBehaviour
 
     public TutorialWindowScript TutorialwindowScript;
 
-
+    public ForesightScript ForesightScript;
     private void Awake()
     {
         if (instance == null)
@@ -298,9 +298,15 @@ public class MapEventManager : MonoBehaviour
                 Debug.Log("gameover trigger");
                 //For new trigger foresight cause no true gameover
 
-                FindAnyObjectByType<NeutralMenuScript>(FindObjectsInactive.Include).OpenForesighMenu(true);
 
-                //GameOverScript.gameObject.SetActive(true);
+                if (ForesightScript.remaininguses > 0)
+                {
+                    FindAnyObjectByType<NeutralMenuScript>(FindObjectsInactive.Include).OpenForesighMenu(true);
+                }
+                else
+                {
+                    GameOverScript.gameObject.SetActive(true);
+                }
                 break;
             case 3:
                 Debug.Log("tilechange trigger");

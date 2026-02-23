@@ -93,6 +93,10 @@ public class ForesightScript : MonoBehaviour
 
     public bool ActivatedFromGameOver;
 
+    public int remaininguses;
+
+    public GameObject RemainingUsesGO;
+
     private void OnEnable()
     {
         ButtonInitialization();
@@ -103,6 +107,7 @@ public class ForesightScript : MonoBehaviour
     private void Start()
     {
         ActionManager = FindAnyObjectByType<ActionManager>(FindObjectsInactive.Include);
+        remaininguses += DataScript.instance.PlayableCharacterList[0].level / 3;
     }
 
     public Volume PostProcessingVolume;
@@ -242,17 +247,22 @@ public class ForesightScript : MonoBehaviour
 
     private void UpdateButtonVisuals()
     {
+
+
+        RemainingUsesGO.GetComponentInChildren<TextMeshProUGUI>().text = "Reamaining uses: " + remaininguses;
+
+
         for (int i = 0; i < ButtonIDs.Count; i++)
         {
             if (ButtonIDs[i] == -1)
             {
                 Buttons[i].GetComponent<Image>().color = Color.grey;
-                Buttons[i].transform.GetChild(0).gameObject.SetActive(false);
+                Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(false);
             }
             else
             {
                 string text = "";
-                Buttons[i].transform.GetChild(0).gameObject.SetActive(true);
+                Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>(true).gameObject.SetActive(true);
                 Action currentaction = actions[ButtonIDs[i]];
                 UnitScript unitwhoattacks = currentaction.Unit;
                 if (unitwhoattacks != null)
@@ -260,17 +270,17 @@ public class ForesightScript : MonoBehaviour
                     if (unitwhoattacks.UnitCharacteristics.affiliation == "playable")
                     {
                         Buttons[i].GetComponent<Image>().color = Color.blue;
-                        Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.white;
+                        Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
                     }
                     else if (unitwhoattacks.UnitCharacteristics.affiliation == "enemy")
                     {
                         Buttons[i].GetComponent<Image>().color = Color.red;
-                        Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.white;
+                        Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
                     }
                     else
                     {
                         Buttons[i].GetComponent<Image>().color = Color.yellow;
-                        Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.black;
+                        Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
                     }
                     text = unitwhoattacks.UnitCharacteristics.name;
                     switch (currentaction.actiontype)
@@ -303,22 +313,22 @@ public class ForesightScript : MonoBehaviour
                 {
                     text = "Beginning of Player Phase.";
                     Buttons[i].GetComponent<Image>().color = Color.blue;
-                    Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.white;
+                    Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
                 }
                 else if (currentaction.beginningofturn == 1)
                 {
                     Buttons[i].GetComponent<Image>().color = Color.red;
-                    Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.white;
+                    Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
                     text = "Beginning of Enemy Phase.";
                 }
                 else if (currentaction.beginningofturn == 2)
                 {
                     Buttons[i].GetComponent<Image>().color = Color.yellow;
-                    Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.black;
+                    Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
                     text = "Beginning of Other Phase.";
                 }
 
-                Buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = text;
+                Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().text = text;
 
             }
         }
@@ -327,8 +337,13 @@ public class ForesightScript : MonoBehaviour
 
     public void RevertButton(int ButtonID)
     {
+        if (remaininguses <= 0)
+        {
+            return;
+        }
         if (ButtonID != -1 && ButtonIDs[ButtonID] != -1)
         {
+            remaininguses--;
             RevertTo(ButtonIDs[ButtonID]);
             gameObject.SetActive(false);
             if (ActivatedFromGameOver)
