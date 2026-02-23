@@ -170,7 +170,7 @@ public class SaveManager : MonoBehaviour
             Options.musicvolume = 1.000001f;
             Options.SEVolume = 1.000001f;
             Options.Fullscreen = Screen.fullScreen;
-            Options.BattleAnimations = true;
+            Options.BattleAnimations = false;
             Options.FixedGrowth = false;
         }
     }
