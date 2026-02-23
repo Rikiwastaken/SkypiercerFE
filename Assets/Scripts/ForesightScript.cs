@@ -91,6 +91,8 @@ public class ForesightScript : MonoBehaviour
 
     private ActionManager ActionManager;
 
+    public bool ActivatedFromGameOver;
+
     private void OnEnable()
     {
         ButtonInitialization();
@@ -168,7 +170,10 @@ public class ForesightScript : MonoBehaviour
 
         if (InputManager.canceljustpressed)
         {
-            initiatestop = true;
+            if (!ActivatedFromGameOver)
+            {
+                initiatestop = true;
+            }
         }
 
 
@@ -326,8 +331,17 @@ public class ForesightScript : MonoBehaviour
         {
             RevertTo(ButtonIDs[ButtonID]);
             gameObject.SetActive(false);
-            neutralmenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
+            if (ActivatedFromGameOver)
+            {
+                ActivatedFromGameOver = false;
+            }
+            else
+            {
+                neutralmenu.SetActive(true);
+
+                EventSystem.current.SetSelectedGameObject(neutralmenu.transform.GetChild(0).gameObject);
+            }
+
         }
 
     }

@@ -296,7 +296,11 @@ public class MapEventManager : MonoBehaviour
                 break;
             case 2:
                 Debug.Log("gameover trigger");
-                GameOverScript.gameObject.SetActive(true);
+                //For new trigger foresight cause no true gameover
+
+                FindAnyObjectByType<NeutralMenuScript>(FindObjectsInactive.Include).OpenForesighMenu(true);
+
+                //GameOverScript.gameObject.SetActive(true);
                 break;
             case 3:
                 Debug.Log("tilechange trigger");

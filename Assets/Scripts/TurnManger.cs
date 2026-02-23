@@ -44,6 +44,8 @@ public class TurnManger : MonoBehaviour
     public TextBubbleScript textBubbleScript;
     public GameObject TutorialWindows;
 
+    private ForesightScript FSS;
+
     public bool skipothersTurn;
     private void Awake()
     {
@@ -57,6 +59,7 @@ public class TurnManger : MonoBehaviour
         weatherManager = GetComponent<WeatherManager>();
         minimapScript = FindAnyObjectByType<MinimapScript>();
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+        FSS = GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>();
     }
 
     // Update is called once per frame
@@ -65,7 +68,7 @@ public class TurnManger : MonoBehaviour
 
         InputManager = InputManager.instance;
 
-        if (GetComponent<AttackTurnScript>().attackanimationhappeningcnt > 0)
+        if (GetComponent<AttackTurnScript>().attackanimationhappeningcnt > 0 || FSS.gameObject.activeSelf)
         {
             return;
         }
@@ -120,8 +123,6 @@ public class TurnManger : MonoBehaviour
     /// <param name="charactertoappy"></param>
     public void BeginningOfTurnsTrigger(List<GameObject> charactertoappy)
     {
-
-        ForesightScript FSS = GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>();
 
         if (charactertoappy == playableunitGO)
         {

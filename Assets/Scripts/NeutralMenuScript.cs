@@ -87,7 +87,7 @@ public class NeutralMenuScript : MonoBehaviour
         CloseMenu();
     }
 
-    public void OpenForesighMenu()
+    public void OpenForesighMenu(bool lockforesight = false)
     {
         if (chapter < chapterforUnlockingForesight)
         {
@@ -97,7 +97,7 @@ public class NeutralMenuScript : MonoBehaviour
         {
             RedoMenuTransfrom.gameObject.SetActive(true);
             RedoMenuTransfrom.GetComponent<Volume>().weight = 0f;
-
+            RedoMenuTransfrom.GetComponent<ForesightScript>().ActivatedFromGameOver = lockforesight;
             EventSystem.current.SetSelectedGameObject(RedoMenuTransfrom.GetChild(0).gameObject);
             gameObject.SetActive(false);
         }
