@@ -18,6 +18,14 @@ public class ItemsScript : MonoBehaviour
     private InputManager inputManager;
     public GameObject ItemActionsMenu;
     public TextMeshProUGUI statstext;
+
+    private Vector3 initialpos;
+
+    private void Start()
+    {
+        initialpos = ItemActionsMenu.transform.position;
+    }
+
     private void FixedUpdate()
     {
 
@@ -110,8 +118,7 @@ public class ItemsScript : MonoBehaviour
 
     public void PlaceNextToSelected(int id)
     {
-        Vector3 initialpos = ItemActionsMenu.transform.position;
-        ItemActionsMenu.transform.position = new Vector3(initialpos.x, buttons[id].transform.position.y, initialpos.z);
+        ItemActionsMenu.transform.position = new Vector3(initialpos.x + 35, buttons[id].transform.position.y, initialpos.z);
         ItemActionsMenu.GetComponent<ItemActionsMenuScript>().slotID = id;
         ItemActionsMenu.GetComponent<ItemActionsMenuScript>().character = target;
         if (target.equipments[id].Name == null)
