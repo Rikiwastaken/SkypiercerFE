@@ -69,7 +69,8 @@ public class BattleInfotext : MonoBehaviour
     public TextMeshProUGUI SkillDescription;
     private Color BaseSkillColor;
 
-
+    private float timefordisappearsrpite;
+    public float Timefordisappearsrpite = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -90,11 +91,22 @@ public class BattleInfotext : MonoBehaviour
 
 
         }
-        if ((AttackMenu.activeSelf || ItemAction.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf || ForeSightMenu.activeSelf))
+        if ((AttackMenu.activeSelf || textBubbleScript.indialogue || NeutralMenu.activeSelf || ForeSightMenu.activeSelf))
         {
             framesbeforeactivation = 5;
 
 
+        }
+
+        if (GridScript.GetSelectedUnitGameObject() != null)
+        {
+            selectedunit = GridScript.GetSelectedUnitGameObject();
+            timefordisappearsrpite = Time.time + Timefordisappearsrpite;
+        }
+
+        if (Time.time > timefordisappearsrpite && ActionManager.instance.currentcharacter == null)
+        {
+            framesbeforeactivation = 1;
         }
 
 
@@ -143,10 +155,6 @@ public class BattleInfotext : MonoBehaviour
             attackTurnScript = FindAnyObjectByType<AttackTurnScript>();
         }
 
-        if (GridScript.GetSelectedUnitGameObject() != null)
-        {
-            selectedunit = GridScript.GetSelectedUnitGameObject();
-        }
 
 
         if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && GridScript.GetComponent<TurnManger>().currentlyplaying != "playable"))
