@@ -879,7 +879,7 @@ public class AttackTurnScript : MonoBehaviour
                         //first attack (attacker)
                         if (!unitalreadyattacked)
                         {
-                            (int hits, int crits, int damage, int exp, List<int> levelbonus) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
+                            (int hits, int crits, int damage, int exp, List<int> levelbonus, List<int> damagelist, List<int> critlist) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                             expgained = exp;
                             levelupbonuses = levelbonus;
 
@@ -956,7 +956,7 @@ public class AttackTurnScript : MonoBehaviour
                             }
                             else // does counterattack
                             {
-                                (int hits, int crits, int damage, int exp, List<int> levelbonus) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
+                                (int hits, int crits, int damage, int exp, List<int> levelbonus, List<int> damagelist, List<int> critlist) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                                 expgained = exp;
                                 levelupbonuses = levelbonus;
                                 combatTextScript.UpdateInfo(damage, hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, Attacker.GetComponent<UnitScript>().UnitCharacteristics);
@@ -1125,97 +1125,42 @@ public class AttackTurnScript : MonoBehaviour
                     foresightScript.CreateAction(0, Attacker, target);
                 }
 
-                (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus) = ActionsMenu.ApplyDamage(Attacker, target, false);
+                int attackerhit = ActionsMenu.CalculateHit(Attacker, target);
+                int defenderhit = ActionsMenu.CalculateHit(target, Attacker);
 
-                int defenderdodged = 0;
-
-                int basenumberofhits = 0;
-
-                if (doubleattacker == Attacker)
-                {
-                    if (triple)
-                    {
-                        basenumberofhits = 3;
-                    }
-                    else
-                    {
-                        basenumberofhits = 2;
-                    }
-                }
-                else
-                {
-                    basenumberofhits = 1;
-                }
-
-                defenderdodged = basenumberofhits - attackerhits;
-
-                bool defenderattacks = true;
-
-                if (target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
-                {
-                    defenderattacks = false;
-                }
-                //if ((target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && CharAttacker.affiliation == "playable" && CharAttacker.currentHP > 0) || (CharAttacker.currentHP <= 0 && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP > 0))
-                //{
-                //    defenderattacks = false;
-                //}
+                int attackerdmg = 0;
+                int attackercrit = 0;
 
                 if (ishealing)
                 {
-                    defenderattacks = false;
+                    attackerdmg = ActionsMenu.CalculateHealing(Attacker);
                 }
-                if (!ActionsMenu.CheckifInRange(Attacker, target) && !target.GetComponent<UnitScript>().GetSkill(38)) // counterattack
+                else
                 {
-                    defenderattacks = false;
+                    attackerdmg = ActionsMenu.CalculateDamage(Attacker, target);
+                    attackercrit = ActionsMenu.CalculateCrit(Attacker, target);
                 }
 
-                bool defenderdied = false;
-                if (Chartarget.currentHP <= 0)
-                {
-                    defenderdied = true;
-                }
-                int attackerdodged = 0;
+                int defenderdmg = ActionsMenu.CalculateDamage(target, Attacker);
+                int defendercrit = ActionsMenu.CalculateCrit(target, Attacker);
+
+
+                (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist) = ActionsMenu.ApplyDamage(Attacker, target, false);
+
+
+
                 int defenderhits = 0;
                 int defenderdamage = 0;
                 int defendercrits = 0;
                 int defenderexp = 0;
                 List<int> defenderlevelbonus = new List<int>();
-                if (defenderattacks)
+                List<int> defenderdamagelist = new List<int>();
+                List<int> defendercritlist = new List<int>();
+                if ((ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38)) && Chartarget.currentHP > 0 && !ishealing)
                 {
-                    (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus) = ActionsMenu.ApplyDamage(Attacker, target, true);
-
-                    basenumberofhits = 0;
-
-                    if (doubleattacker == target)
-                    {
-                        if (triple)
-                        {
-                            basenumberofhits = 3;
-                        }
-                        else
-                        {
-                            basenumberofhits = 2;
-                        }
-                    }
-                    else
-                    {
-                        basenumberofhits = 1;
-                    }
-
-                    attackerdodged = basenumberofhits - defenderhits;
-
+                    (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist) = ActionsMenu.ApplyDamage(Attacker, target, true);
                 }
 
-                bool attackerdied = false;
-                if (CharAttacker.currentHP <= 0)
-                {
-                    attackerdied = true;
-                }
-                Character Chardoubleattacker = null;
-                if (doubleattacker != null)
-                {
-                    Chardoubleattacker = doubleattacker.GetComponent<UnitScript>().UnitCharacteristics;
-                }
 
                 int expearned = 1;
 
@@ -1243,7 +1188,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
                 CharAttacker.alreadyplayed = true;
-                combatsceneloader.ActivateCombatScene(CharAttacker, Chartarget, Attacker.GetComponent<UnitScript>().GetFirstWeapon(), target.GetComponent<UnitScript>().GetFirstWeapon(), Chardoubleattacker, triple, ishealing, attackerdodged, defenderattacks, defenderdodged, attackerdied, defenderdied, expearned, levelbonus, Attackercopy, Targetcopy, attackerdamage, defenderdamage, attackercrits, defendercrits);
+                combatsceneloader.ActivateCombatScene(Attackercopy, Targetcopy, attackerdamagelist, attackercritlist, defenderdamagelist, defendercritlist, attackerhit, attackercrit, attackerdmg, defenderhit, defendercrit, defenderdmg, expearned, levelbonus);
 
             }
             else

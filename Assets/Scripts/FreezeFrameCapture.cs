@@ -366,6 +366,14 @@ public class FreezeFrameCapture : MonoBehaviour
         ContinueBGtxt.gameObject.SetActive(false);
         left.transform.localPosition = new Vector2(-1000, 0);
         right.transform.localPosition = new Vector2(1000, 0);
+
+
+        if (CombatSceneManagerV2.instance != null)
+        {
+            CombatSceneManagerV2.instance.CloseCombatScene();
+        }
+
+
     }
 
     IEnumerator LowerMusic(GameObject musicGO)

@@ -43,7 +43,8 @@ public class CombatSceneLoader : MonoBehaviour
         yield return new WaitUntil(() => asyncLoad.isDone);
 
         combatScene = SceneManager.GetSceneByName(CombatSceneName);
-        FindAnyObjectByType<CombaSceneManager>().LoadEnvironment(MainSceneName, combatScene);
+        //FindAnyObjectByType<CombaSceneManager>().LoadEnvironment(MainSceneName, combatScene);
+        FindAnyObjectByType<CombatSceneManagerV2>().LoadEnvironment(MainSceneName, combatScene);
         // Hide combat scene root objects
         SetSceneVisible(combatScene, false);
 
@@ -52,6 +53,31 @@ public class CombatSceneLoader : MonoBehaviour
     }
 
     // Activate combat scene
+    public void ActivateCombatScene(Character attacker, Character defender, List<int> attackerattacks, List<int> attackercriticals, List<int> defenderattacks, List<int> defendercriticals, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses)
+    {
+        if (!combatLoaded)
+        {
+            Debug.LogWarning("Combat scene not loaded yet! Call LoadCombatScene() first.");
+            return;
+        }
+
+        mainScene = SceneManager.GetSceneByName(MainSceneName);
+
+        MusicManager.instance.inCombatBool = true;
+
+        StartCoroutine(SwitchSceneRoutine(
+            fromScene: mainScene,
+            toScene: combatScene,
+            onSceneActivated: () =>
+            {
+                var combatManager = FindAnyObjectByType<CombatSceneManagerV2>();
+                if (combatManager != null)
+                {
+                    combatManager.SetupScene(attacker, defender, attackerattacks, attackercriticals, defenderattacks, defendercriticals, attackerhitrate, attackercritrate, attackerdamage, defenderhitrate, defendercritrate, defenderdamage, expgained, levelupbonuses);
+                }
+            }));
+    }
+    /*
     public void ActivateCombatScene(
         Character attacker,
         Character defender,
@@ -98,7 +124,7 @@ public class CombatSceneLoader : MonoBehaviour
                 }
             }));
     }
-
+    */
     // Return to Main Scene
     public void ActivateMainScene()
     {
