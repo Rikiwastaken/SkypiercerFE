@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnitScript;
 
@@ -61,6 +62,15 @@ public class ActionManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (EventSystem.current.currentSelectedGameObject != null)
+        {
+            Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+            if (EventSystem.current.currentSelectedGameObject.transform.parent != null)
+            {
+                Debug.Log(EventSystem.current.currentSelectedGameObject.transform.parent.name);
+            }
+        }
+
 
         if (NeutralMenu.activeSelf)
         {
@@ -125,6 +135,7 @@ public class ActionManager : MonoBehaviour
                     else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed && TurnManager.currentlyplaying == "playable" && NeutralMenuCD == 0 && !TextBubbleScript.indialogue)
                     {
                         NeutralMenu.SetActive(true);
+                        EventSystem.current.SetSelectedGameObject(NeutralMenu.transform.GetChild(0).gameObject);
                     }
                     if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
                     {
@@ -153,6 +164,7 @@ public class ActionManager : MonoBehaviour
                     if (InputManager.activatejustpressed && TurnManager.currentlyplaying == "playable" && NeutralMenuCD == 0)
                     {
                         NeutralMenu.SetActive(true);
+                        EventSystem.current.SetSelectedGameObject(NeutralMenu.transform.GetChild(0).gameObject);
                     }
                 }
             }

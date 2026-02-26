@@ -53,7 +53,6 @@ public class TutorialWindowScript : MonoBehaviour
             GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
             if (currentSelected != validatebutton.gameObject)
             {
-
                 EventSystem.current.SetSelectedGameObject(validatebutton.gameObject);
             }
         }
