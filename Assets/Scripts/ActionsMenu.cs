@@ -1729,13 +1729,19 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
-    public (int, int, int, int, List<int>, List<int>, List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked, bool isbossdamage = false, bool AttackIntercepted = false, bool IsIntercepter = false)
+    public (int, int, int, int, List<int>, List<int>, List<int>, bool, bool, bool, bool) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked, bool isbossdamage = false, bool AttackIntercepted = false, bool IsIntercepter = false)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         List<int> levelup = null;
         List<int> Damagelist = new List<int>();
         List<int> Critlist = new List<int>();
+        bool unyieldingactivated = false;
+        bool allforoneactive = false;
+        bool compassionused = false;
+        bool invigoratingused = false;
+
+
         int exp = 1;
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() != "staff")
         {
@@ -1788,9 +1794,9 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-                    AffectDamage(unit, target, totaldamage);
+                    (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage);
 
-                    OnDamageEffect(unit, totaldamage, false);
+                    (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false);
                     finaldamage = unitdamage;
 
 
@@ -1800,7 +1806,7 @@ public class ActionsMenu : MonoBehaviour
                         target.GetComponent<UnitScript>().unitkilled++;
                     }
 
-                    return (numberofhits, numberofcritials, finaldamage, 0, levelup, Damagelist, Critlist);
+                    return (numberofhits, numberofcritials, finaldamage, 0, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
 
                 }
 
@@ -1912,9 +1918,9 @@ public class ActionsMenu : MonoBehaviour
                 Damagelist.Add(damagetoaddtolist);
                 Critlist.Add(crittoaddtolist);
 
-                AffectDamage(unit, target, totaldamage);
+                (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage);
 
-                OnDamageEffect(unit, totaldamage, false);
+                (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false);
                 finaldamage = unitdamage;
                 if (chartarget.currentHP <= 0 || !(CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77))) //Spite, Caelum General
                 {
@@ -2026,8 +2032,8 @@ public class ActionsMenu : MonoBehaviour
                             Critlist.Add(crittoaddtolist);
                         }
                     }
-                    AffectDamage(target, unit, totaldamage);
-                    OnDamageEffect(target, targetdamage, false);
+                    (allforoneactive, unyieldingactivated) = AffectDamage(target, unit, totaldamage);
+                    (compassionused, invigoratingused) = OnDamageEffect(target, targetdamage, false);
                     finaldamage = targetdamage;
                 }
                 if (charunit.currentHP > 0 && charunit.affiliation == "playable")
@@ -2049,7 +2055,7 @@ public class ActionsMenu : MonoBehaviour
                 target.GetComponent<UnitScript>().unitkilled++;
             }
 
-            return (numberofhits, numberofcritials, finaldamage, exp, levelup, Damagelist, Critlist);
+            return (numberofhits, numberofcritials, finaldamage, exp, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
         }
         //using a staff
         else
@@ -2070,7 +2076,7 @@ public class ActionsMenu : MonoBehaviour
                 chartarget.currentHP += unitdamage;
                 Damagelist.Add(unitdamage);
                 Critlist.Add(0);
-                OnDamageEffect(unit, unitdamage, true);
+                (compassionused, invigoratingused) = OnDamageEffect(unit, unitdamage, true);
                 finaldamage = unitdamage;
             }
             else
@@ -2084,13 +2090,16 @@ public class ActionsMenu : MonoBehaviour
             {
                 (exp, levelup) = AwardExp(unit, target, true);
             }
-            return (numberofhits, numberofcritials, finaldamage, exp, levelup, Damagelist, Critlist);
+            return (numberofhits, numberofcritials, finaldamage, exp, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
         }
 
     }
 
-    private void AffectDamage(GameObject Attacker, GameObject target, int damage)
+    private (bool, bool) AffectDamage(GameObject Attacker, GameObject target, int damage)// oneforall active, unyieldingactive
     {
+
+        bool oneforallactive = false;
+        bool unyieldingactive = false;
 
         Character charTarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
@@ -2129,6 +2138,7 @@ public class ActionsMenu : MonoBehaviour
 
         if (allforonetransfertarget != null)
         {
+            oneforallactive = true;
             int transfertargethp = allforonetransfertarget.currentHP;
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage / 2;
             allforonetransfertarget.currentHP -= damage / 2;
@@ -2149,18 +2159,22 @@ public class ActionsMenu : MonoBehaviour
         {
             charTarget.currentHP = 1;
             target.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
+            unyieldingactive = true;
         }
 
-
+        return (oneforallactive, unyieldingactive);
     }
-    private void OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing)
-    {
 
+    private (bool, bool) OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing) // compassion, invigorating, 
+    {
+        bool compassionused = false;
+        bool invigoratingused = false;
 
         if (healing)
         {
             if (Attacker.GetComponent<UnitScript>().GetSkill(30)) // Compassion
             {
+                compassionused = true;
                 Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min(DamageDealt, (int)Attacker.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP - Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP), true, "Compassion");
                 Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP += DamageDealt;
                 if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP > Attacker.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP)
@@ -2201,6 +2215,7 @@ public class ActionsMenu : MonoBehaviour
         {
             if (Attacker.GetComponent<UnitScript>().GetSkill(14)) // Invigorating
             {
+                invigoratingused = true;
                 Character AttackerChar = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
                 Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)AttackerChar.AjustedStats.HP - AttackerChar.currentHP, (DamageDealt / 10)), true, "Invigorating");
                 AttackerChar.currentHP += (DamageDealt / 10);
@@ -2213,24 +2228,24 @@ public class ActionsMenu : MonoBehaviour
         }
 
         //Durability
-        if (Attacker.GetComponent<UnitScript>().GetSkill(8)) //inexhaustible
+        if (!Attacker.GetComponent<UnitScript>().GetSkill(8)) //inexhaustible
         {
-            return;
-        }
-        equipment weapon = Attacker.GetComponent<UnitScript>().GetFirstWeapon();
-        if (weapon.Maxuses > 0)
-        {
-            weapon.Currentuses--;
-            if (Attacker.GetComponent<UnitScript>().GetSkill(68))//Violent Misuse
+            equipment weapon = Attacker.GetComponent<UnitScript>().GetFirstWeapon();
+            if (weapon.Maxuses > 0)
             {
                 weapon.Currentuses--;
+                if (Attacker.GetComponent<UnitScript>().GetSkill(68))//Violent Misuse
+                {
+                    weapon.Currentuses--;
+                }
+            }
+            if (weapon.Currentuses <= 0)
+            {
+                Attacker.GetComponent<UnitScript>().UpdateWeaponModel();
             }
         }
-        if (weapon.Currentuses <= 0)
-        {
-            Attacker.GetComponent<UnitScript>().UpdateWeaponModel();
-        }
 
+        return (compassionused, invigoratingused);
     }
 
     private void DealScytheDamage(GameObject attacker, GameObject target)

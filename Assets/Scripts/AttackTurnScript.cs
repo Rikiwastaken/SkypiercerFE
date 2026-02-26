@@ -879,7 +879,7 @@ public class AttackTurnScript : MonoBehaviour
                         //first attack (attacker)
                         if (!unitalreadyattacked)
                         {
-                            (int hits, int crits, int damage, int exp, List<int> levelbonus, List<int> damagelist, List<int> critlist) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
+                            (int hits, int crits, int damage, int exp, List<int> levelbonus, List<int> damagelist, List<int> critlist, bool oneforallactive, bool unyieldingactive, bool compassionused, bool invigoratingused) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                             expgained = exp;
                             levelupbonuses = levelbonus;
 
@@ -956,7 +956,7 @@ public class AttackTurnScript : MonoBehaviour
                             }
                             else // does counterattack
                             {
-                                (int hits, int crits, int damage, int exp, List<int> levelbonus, List<int> damagelist, List<int> critlist) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
+                                (int hits, int crits, int damage, int exp, List<int> levelbonus, List<int> damagelist, List<int> critlist, bool oneforallactive, bool unyieldingactive, bool compassionused, bool invigoratingused) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
                                 expgained = exp;
                                 levelupbonuses = levelbonus;
                                 combatTextScript.UpdateInfo(damage, hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, Attacker.GetComponent<UnitScript>().UnitCharacteristics);
@@ -1151,7 +1151,8 @@ public class AttackTurnScript : MonoBehaviour
                 int defendercrit = ActionsMenu.CalculateCrit(target, Attacker);
 
 
-                (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist) = ActionsMenu.ApplyDamage(Attacker, target, false);
+
+                (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist, bool oneforallactiveattacker, bool unyieldingactiveattacker, bool compassionusedattacker, bool invigoratingusedattacker) = ActionsMenu.ApplyDamage(Attacker, target, false);
 
 
 
@@ -1164,12 +1165,17 @@ public class AttackTurnScript : MonoBehaviour
                 List<int> defendercritlist = new List<int>();
                 bool doesdefenderattacks = false;
 
+                bool oneforallactivedefender = false;
+                bool unyieldingactivedefender = false;
+                bool compassionuseddefender = false;
+                bool invigoratinguseddefender = false;
+
                 if ((ActionsMenu.CheckifInRange(target, Attacker) || target.GetComponent<UnitScript>().GetSkill(38)) && !ishealing)
                 {
                     doesdefenderattacks = true;
                     if (Chartarget.currentHP > 0)
                     {
-                        (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist) = ActionsMenu.ApplyDamage(Attacker, target, true);
+                        (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender) = ActionsMenu.ApplyDamage(Attacker, target, true);
                     }
                 }
 
@@ -1200,7 +1206,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
                 CharAttacker.alreadyplayed = true;
-                combatsceneloader.ActivateCombatScene(Attackercopy, Targetcopy, attackerdamagelist, attackercritlist, defenderdamagelist, defendercritlist, attackerhit, attackercrit, attackerdmg, defenderhit, defendercrit, defenderdmg, expearned, levelbonus, doesdefenderattacks);
+                combatsceneloader.ActivateCombatScene(Attackercopy, Targetcopy, attackerdamagelist, attackercritlist, defenderdamagelist, defendercritlist, attackerhit, attackercrit, attackerdmg, defenderhit, defendercrit, defenderdmg, expearned, levelbonus, doesdefenderattacks, oneforallactiveattacker, unyieldingactiveattacker, compassionusedattacker, invigoratingusedattacker, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender);
 
             }
             else

@@ -22,6 +22,10 @@ public class CombatSceneManagerV2 : MonoBehaviour
         public List<int> criticals;
         public Animator Animator;
         public int currentHP;
+        public bool unyieldingactivated;
+        public bool oneforallactivated;
+        public bool compassionactivated;
+        public bool invigoratingactivated;
 
         public void getweapon()
         {
@@ -155,7 +159,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         }
     }
 
-    public void SetupScene(Character attacker, Character defender, List<int> attackerattacks, List<int> attackercriticals, List<int> defenderattacks, List<int> defendercriticals, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses, bool doesdefenderattacks) // list<int> for attacks: -1 are dodges, >=0 are damages, for criticals, 1=critical, 0=not
+    public void SetupScene(Character attacker, Character defender, List<int> attackerattacks, List<int> attackercriticals, List<int> defenderattacks, List<int> defendercriticals, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses, bool doesdefenderattacks, bool attackeroneforall, bool attackerunyielding, bool attackercompassionused, bool attackerinvigorating, bool defenderoneforall, bool defenderunyielding, bool defendercompassionused, bool defenderinvigorating) // list<int> for attacks: -1 are dodges, >=0 are damages, for criticals, 1=critical, 0=not
     {
         Debug.Log("Setting up scene");
         Debug.Log(attacker.name + " vs " + defender.name);
@@ -171,6 +175,16 @@ public class CombatSceneManagerV2 : MonoBehaviour
         Debug.Log("Defender damage: " + defenderdamage);
         Debug.Log("Exp gained: " + expgained);
         Debug.Log("Level up bonuses: " + string.Join(", ", levelupbonuses));
+        Debug.Log("Does defender attack: " + doesdefenderattacks);
+        Debug.Log("Attacker oneforall: " + attackeroneforall);
+        Debug.Log("Attacker unyielding: " + attackerunyielding);
+        Debug.Log("Attacker compassion used: " + attackercompassionused);
+        Debug.Log("Attacker invigorating: " + attackerinvigorating);
+        Debug.Log("Defender oneforall: " + defenderoneforall);
+        Debug.Log("Defender unyielding: " + defenderunyielding);
+        Debug.Log("Defender compassion used: " + defendercompassionused);
+        Debug.Log("Defender invigorating: " + defenderinvigorating);
+
         //Filling out base classes
 
         AttackerInfo = new CharacterBattleInfo()
@@ -179,6 +193,10 @@ public class CombatSceneManagerV2 : MonoBehaviour
             attacks = attackerattacks,
             criticals = attackercriticals,
             currentHP = attacker.currentHP,
+            unyieldingactivated = attackerunyielding,
+            oneforallactivated = attackeroneforall,
+            compassionactivated = attackercompassionused,
+            invigoratingactivated = attackerinvigorating
         };
 
         AttackerInfo.getweapon();
@@ -189,6 +207,10 @@ public class CombatSceneManagerV2 : MonoBehaviour
             attacks = defenderattacks,
             criticals = defendercriticals,
             currentHP = defender.currentHP,
+            unyieldingactivated = defenderunyielding,
+            oneforallactivated = defenderoneforall,
+            compassionactivated = defendercompassionused,
+            invigoratingactivated = defenderinvigorating
         };
 
         DefenderInfo.getweapon();
@@ -347,34 +369,14 @@ public class CombatSceneManagerV2 : MonoBehaviour
             //Show text for damage
 
             int damage = AttackerInfo.attacks[attacksMade];
-            string texttoshow = "";
-            int HPbeforeDamage = DefenderInfo.currentHP;
             bool iscritical = false;
-            if (damage == -1)
+            if (AttackerInfo.criticals != null && AttackerInfo.criticals.Count > attacksMade)
             {
-                texttoshow = "Miss";
+                iscritical = AttackerInfo.criticals[attacksMade] == 1;
             }
-            else
-            {
-                if (ishealing)
-                {
-                    DefenderInfo.currentHP += AttackerInfo.attacks[attacksMade];
-                }
-                else
-                {
-                    DefenderInfo.currentHP -= AttackerInfo.attacks[attacksMade];
-                }
+            bool ismiss = damage == -1;
+            TakeDamageOrHealing(AttackerInfo, DefenderInfo, ishealing, damage, iscritical, ismiss);
 
-
-                if (AttackerInfo.criticals != null && AttackerInfo.criticals.Count > attacksMade)
-                {
-                    iscritical = AttackerInfo.criticals[attacksMade] == 1;
-                }
-                texttoshow = AttackerInfo.attacks[attacksMade] + "";
-            }
-            StartCoroutine(ChangeLifeBar(DefenderName.LifeBar, HPbeforeDamage, DefenderInfo.currentHP, (int)DefenderInfo.character.AjustedStats.HP, timeforLifebar));
-            GameObject textobject = Instantiate(TextObjectPrefab);
-            textobject.GetComponent<CombatNumberPopup>().InitializeTMP(texttoshow, DefenderGO.transform.position, iscritical, ishealing);
 
             if (!alreadydied)
             {
@@ -413,7 +415,6 @@ public class CombatSceneManagerV2 : MonoBehaviour
         isinAttackerTurn = false;
         StartCoroutine(DefenderTurn());
     }
-
     public IEnumerator DefenderTurn()
     {
         Debug.Log("DefenderTurn");
@@ -470,35 +471,15 @@ public class CombatSceneManagerV2 : MonoBehaviour
                 //Show text for damage
 
                 int damage = DefenderInfo.attacks[attacksMade];
-                string texttoshow = "";
                 bool iscritical = false;
-                int HPbeforeDamage = AttackerInfo.currentHP;
-                if (damage == -1)
+                if (DefenderInfo.criticals != null && DefenderInfo.criticals.Count > attacksMade)
                 {
-                    texttoshow = "Miss";
+                    iscritical = DefenderInfo.criticals[attacksMade] == 1;
                 }
-                else
-                {
-                    if (ishealing)
-                    {
-                        AttackerInfo.currentHP += DefenderInfo.attacks[attacksMade];
-                    }
-                    else
-                    {
-                        AttackerInfo.currentHP -= DefenderInfo.attacks[attacksMade];
-                    }
+                bool ismiss = damage == -1;
 
+                TakeDamageOrHealing(DefenderInfo, AttackerInfo, false, damage, iscritical, ismiss);
 
-                    if (DefenderInfo.criticals != null && DefenderInfo.criticals.Count > attacksMade)
-                    {
-                        iscritical = DefenderInfo.criticals[attacksMade] == 1;
-                    }
-                    texttoshow = DefenderInfo.attacks[attacksMade] + "";
-                }
-                GameObject textobject = Instantiate(TextObjectPrefab);
-                textobject.GetComponent<CombatNumberPopup>().InitializeTMP(texttoshow, DefenderGO.transform.position, iscritical, ishealing);
-
-                StartCoroutine(ChangeLifeBar(AttackerName.LifeBar, HPbeforeDamage, AttackerInfo.currentHP, (int)AttackerInfo.character.AjustedStats.HP, timeforLifebar));
                 if (!alreadydied)
                 {
                     if (DefenderInfo.currentHP <= 0)
@@ -529,6 +510,82 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
         isinDefenderTurn = false;
         StartCoroutine(EndOfCombat());
+    }
+
+    public void TakeDamageOrHealing(CharacterBattleInfo attacker, CharacterBattleInfo defender, bool ishealing, int damage, bool iscritical, bool ismiss)
+    {
+
+        int HPbeforeDamage = defender.currentHP;
+
+        string texttoshow = "";
+        if (ishealing)
+        {
+            int healing = Mathf.Min(damage, (int)defender.character.AjustedStats.HP - defender.currentHP);
+            texttoshow = healing + "";
+            defender.currentHP += healing;
+            if (attacker.compassionactivated)
+            {
+                int attackerHPBeforeDamage = attacker.currentHP;
+                attacker.currentHP += healing;
+                StartCoroutine(ChangeLifeBar(AttackerName.LifeBar, attackerHPBeforeDamage, attacker.currentHP, (int)attacker.character.AjustedStats.HP, timeforLifebar));
+                GameObject compassiontextobject = Instantiate(TextObjectPrefab);
+                compassiontextobject.GetComponent<CombatNumberPopup>().InitializeTMP("" + healing, AttackerGO.transform.position, false, true);
+            }
+        }
+        else if (ismiss)
+        {
+            texttoshow = "Miss";
+        }
+        else
+        {
+            int truedamage = damage;
+            if (iscritical)
+            {
+                truedamage *= 3;
+            }
+            if (defender.oneforallactivated)
+            {
+                truedamage = damage / 2;
+            }
+            if (defender.unyieldingactivated)
+            {
+                if (truedamage >= defender.currentHP)
+                {
+                    truedamage = defender.currentHP - 1;
+                }
+            }
+
+            defender.currentHP -= truedamage;
+            texttoshow = truedamage + "";
+            if (attacker.invigoratingactivated)
+            {
+                int attackerHPBeforeDamage = attacker.currentHP;
+                int healing = (int)Math.Min(attacker.character.AjustedStats.HP - attacker.currentHP, (int)(truedamage * 0.1f));
+                attacker.currentHP += healing;
+                Debug.Log(attacker.currentHP);
+                StartCoroutine(ChangeLifeBar(AttackerName.LifeBar, attackerHPBeforeDamage, attacker.currentHP, (int)attacker.character.AjustedStats.HP, timeforLifebar));
+                GameObject compassiontextobject = Instantiate(TextObjectPrefab);
+                compassiontextobject.GetComponent<CombatNumberPopup>().InitializeTMP("" + healing, AttackerGO.transform.position, false, true);
+            }
+
+        }
+        Image lifebartouse;
+        GameObject GOToUse;
+        if (defender == AttackerInfo)
+        {
+            lifebartouse = AttackerName.LifeBar;
+            GOToUse = AttackerGO;
+        }
+        else
+        {
+            lifebartouse = DefenderName.LifeBar;
+            GOToUse = DefenderGO;
+        }
+
+
+        StartCoroutine(ChangeLifeBar(lifebartouse, HPbeforeDamage, defender.currentHP, (int)defender.character.AjustedStats.HP, timeforLifebar));
+        GameObject textobject = Instantiate(TextObjectPrefab);
+        textobject.GetComponent<CombatNumberPopup>().InitializeTMP(texttoshow, GOToUse.transform.position, iscritical, ishealing);
     }
 
     public IEnumerator EndOfCombat()
