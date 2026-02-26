@@ -53,6 +53,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maps/Chapter8.unity
     guid: 5b4295a75b3f6b84ea82e408da96066c
+  - enabled: 1
+    path: Assets/Scenes/Maps/Chapter9.unity
+    guid: 47b9678c3f9f8154283558cb4ab88f6f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

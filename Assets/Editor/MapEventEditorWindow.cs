@@ -732,6 +732,8 @@ public class MapEventEditorWindow : EditorWindow
 
                 if (eProp.FindPropertyRelative("RemainingLifebars") != null) EditorGUILayout.PropertyField(eProp.FindPropertyRelative("RemainingLifebars"));
                 if (eProp.FindPropertyRelative("modelID") != null) EditorGUILayout.PropertyField(eProp.FindPropertyRelative("modelID"));
+                if (eProp.FindPropertyRelative("SpriteID") != null) EditorGUILayout.PropertyField(eProp.FindPropertyRelative("SpriteID"));
+                if (eProp.FindPropertyRelative("PlayableSpriteID") != null) EditorGUILayout.PropertyField(eProp.FindPropertyRelative("PlayableSpriteID"));
             }
 
             EditorGUILayout.EndVertical();

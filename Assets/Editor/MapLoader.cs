@@ -528,10 +528,6 @@ public class MapLoader : EditorWindow
         {
             Tile.GetComponent<GridSquareScript>().elevation = -4;
         }
-        else
-        {
-            Debug.LogError("Unrecognized color in Elevation Map at (" + x + "," + y + "): " + pixelColor);
-        }
 
     }
 

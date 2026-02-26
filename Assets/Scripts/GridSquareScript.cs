@@ -151,13 +151,22 @@ public class GridSquareScript : MonoBehaviour
 
         SetupBaseElevation();
 
+        if (Mechanism.type == 1)
+        {
+            isobstacle = true;
+        }
 
         // Initial check (in case some levers start activated)
         CheckAllTriggers(null);
 
 
 
-        if (Mechanism == null || Mechanism.type != 1) return;
+        if (Mechanism == null || Mechanism.type != 1)
+        {
+
+            return;
+        }
+
 
         foreach (var square in Mechanism.Triggers)
         {
@@ -165,6 +174,7 @@ public class GridSquareScript : MonoBehaviour
             {
                 // Subscribe to every levers event
                 square.Mechanism.OnActivationChange += CheckAllTriggers;
+
             }
         }
 
@@ -204,7 +214,6 @@ public class GridSquareScript : MonoBehaviour
                 return; // At least one inactive so do nothing
             }
         }
-
         // All triggers activated so open door
         Mechanism.ChangeActivation(true);
         isobstacle = false;
@@ -235,17 +244,28 @@ public class GridSquareScript : MonoBehaviour
         {
             if (LeverGO.activeSelf)
             {
-                Vector3 previousrot = LeverGO.transform.GetChild(0).localRotation.eulerAngles;
-                if (previousrot.y < 100)
+                if (Mechanism.isactivated)
                 {
-                    previousrot = new Vector3(previousrot.x, 135, previousrot.z);
+                    Vector3 previousrot = LeverGO.transform.GetChild(0).localRotation.eulerAngles;
+                    Vector3 rottoapply = new Vector3(previousrot.x, 135, previousrot.z);
+
+                    if (LeverGO.transform.GetChild(0).localRotation.eulerAngles != rottoapply)
+                    {
+                        LeverGO.transform.GetChild(0).localRotation = Quaternion.Euler(rottoapply);
+                    }
                 }
                 else
                 {
-                    previousrot = new Vector3(previousrot.x, 45, previousrot.z);
+                    Vector3 previousrot = LeverGO.transform.GetChild(0).localRotation.eulerAngles;
+                    Vector3 rottoapply = new Vector3(previousrot.x, 45, previousrot.z);
+
+                    if (LeverGO.transform.GetChild(0).localRotation.eulerAngles != rottoapply)
+                    {
+                        LeverGO.transform.GetChild(0).localRotation = Quaternion.Euler(rottoapply);
+                    }
                 }
-                LeverGO.transform.GetChild(0).localRotation = Quaternion.Euler(previousrot);
             }
+
             if (Mechanism.ActivatedGO != null)
             {
                 if (Mechanism.isactivated)
