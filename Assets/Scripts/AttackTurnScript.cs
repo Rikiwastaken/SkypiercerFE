@@ -1056,6 +1056,9 @@ public class AttackTurnScript : MonoBehaviour
 
     public void AttackWithAnimationEndOfFight(GameObject Attacker, GameObject Target)
     {
+
+        StartCoroutine(FreezeFrameGeneral.instance.Hide());
+
         Attacker.GetComponent<UnitScript>().disableLifebar = false;
         if (Target != null)
         {
@@ -1101,6 +1104,9 @@ public class AttackTurnScript : MonoBehaviour
 
             if (target != null)
             {
+
+                FreezeFrameGeneral.instance.Show();
+
 
                 Attacker.GetComponent<UnitScript>().disableLifebar = true;
                 target.GetComponent<UnitScript>().disableLifebar = true;
