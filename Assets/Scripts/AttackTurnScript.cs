@@ -1156,9 +1156,15 @@ public class AttackTurnScript : MonoBehaviour
                 List<int> defenderlevelbonus = new List<int>();
                 List<int> defenderdamagelist = new List<int>();
                 List<int> defendercritlist = new List<int>();
-                if ((ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38)) && Chartarget.currentHP > 0 && !ishealing)
+                bool doesdefenderattacks = false;
+
+                if ((ActionsMenu.CheckifInRange(target, Attacker) || target.GetComponent<UnitScript>().GetSkill(38)) && !ishealing)
                 {
-                    (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist) = ActionsMenu.ApplyDamage(Attacker, target, true);
+                    doesdefenderattacks = true;
+                    if (Chartarget.currentHP > 0)
+                    {
+                        (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist) = ActionsMenu.ApplyDamage(Attacker, target, true);
+                    }
                 }
 
 
@@ -1188,7 +1194,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
                 CharAttacker.alreadyplayed = true;
-                combatsceneloader.ActivateCombatScene(Attackercopy, Targetcopy, attackerdamagelist, attackercritlist, defenderdamagelist, defendercritlist, attackerhit, attackercrit, attackerdmg, defenderhit, defendercrit, defenderdmg, expearned, levelbonus);
+                combatsceneloader.ActivateCombatScene(Attackercopy, Targetcopy, attackerdamagelist, attackercritlist, defenderdamagelist, defendercritlist, attackerhit, attackercrit, attackerdmg, defenderhit, defendercrit, defenderdmg, expearned, levelbonus, doesdefenderattacks);
 
             }
             else

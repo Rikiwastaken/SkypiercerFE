@@ -4,11 +4,12 @@ using static UnitScript;
 public class BattleCharacterScript : MonoBehaviour
 {
 
-    private void OnEnable()
+    public void InitializeModels()
     {
-        foreach(ModelInfo modelinfo in GetComponent<UnitScript>().ModelList)
+        foreach (ModelInfo modelinfo in GetComponent<UnitScript>().ModelList)
         {
             modelinfo.wholeModel.SetActive(false);
+            modelinfo.active = false;
         }
     }
 
@@ -16,13 +17,14 @@ public class BattleCharacterScript : MonoBehaviour
     {
         foreach (ModelInfo modelinfo in GetComponent<UnitScript>().ModelList)
         {
-            if(modelinfo.ID == ID)
+            if (modelinfo.ID == ID)
             {
-                if(!modelinfo.wholeModel.activeSelf)
+                if (!modelinfo.wholeModel.activeSelf)
                 {
                     modelinfo.wholeModel.SetActive(true);
                 }
-                
+                modelinfo.active = true;
+
             }
             else
             {
@@ -32,7 +34,7 @@ public class BattleCharacterScript : MonoBehaviour
                 }
             }
 
-                
+
         }
     }
 

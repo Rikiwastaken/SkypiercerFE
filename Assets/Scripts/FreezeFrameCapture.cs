@@ -72,8 +72,10 @@ public class FreezeFrameCapture : MonoBehaviour
     public float rightContinueratio;
 
 
+    private InputAction ActivateAction;
+    private InputAction CancelAction;
 
-
+    public PlayerInput playerInput;
 
 
     private void Awake()
@@ -85,6 +87,8 @@ public class FreezeFrameCapture : MonoBehaviour
     {
         CharacterSpriteBasePos = CharacterSprite.GetComponent<RectTransform>().anchoredPosition;
         BackgroundImageBasePos = BackgroundImage.GetComponent<RectTransform>().anchoredPosition;
+        ActivateAction = playerInput.actions["Validate"];
+        CancelAction = playerInput.actions["Cancel"];
     }
 
     private void Update()
@@ -106,14 +110,15 @@ public class FreezeFrameCapture : MonoBehaviour
             PlayFullAnimation(DataScript.instance.PlayableCharacterList[1], list);
         }
 
-        if (ShowingLevelUp && InputManager.instance.cancelpressed)
+        if (ShowingLevelUp && CancelAction.IsPressed())
         {
             StopAllCoroutines();
             StartCoroutine(Close());
         }
 
-        if (continueAvailable && activate.ToInputAction().IsPressed())
+        if (continueAvailable && ActivateAction.IsPressed())
         {
+
             StopAllCoroutines();
             StartCoroutine(Close());
         }
@@ -314,6 +319,9 @@ public class FreezeFrameCapture : MonoBehaviour
 
     public IEnumerator Close()
     {
+
+
+
         Vector2 leftbasepos = left.rectTransform.anchoredPosition;
         Vector2 rightbasepos = right.rectTransform.anchoredPosition;
 
@@ -370,6 +378,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
         if (CombatSceneManagerV2.instance != null)
         {
+            Time.timeScale = 1;
             CombatSceneManagerV2.instance.CloseCombatScene();
         }
 

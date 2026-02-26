@@ -230,7 +230,7 @@ public class UnitScript : MonoBehaviour
     private Vector3 initialpos;
     private Vector3 initialforward;
 
-    private GameObject currentequipmentmodel;
+    public GameObject currentequipmentmodel;
 
     private AttackTurnScript AttackTurnScript;
 

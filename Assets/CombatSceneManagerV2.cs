@@ -42,6 +42,16 @@ public class CombatSceneManagerV2 : MonoBehaviour
         public List<int> ChapterInWhichToUse;
     }
 
+    [Serializable]
+    public class CamPosition
+    {
+        public Vector3 CamHolderPosition;
+        public Vector3 CamHolderRotation;
+        public Transform parent;
+        public Vector3 CameraPosition;
+        public Vector3 CameraRotation;
+    }
+
 
     [Serializable]
     public class InfoText
@@ -74,10 +84,21 @@ public class CombatSceneManagerV2 : MonoBehaviour
     public Vector3 ExpBarBasePos;
     public Vector3 ExptargetBasePos;
     public GameObject ExpBarHolder;
+    public Image ExpBarImage;
+    public TextMeshProUGUI ExpBarText;
     public FreezeFrameCapture LevelUpFreezeFrame;
     public List<CombatEnvirnoment> EnvirnomentList;
     private GameObject currentenv;
 
+    [Header("Camera Positions")]
+    public Transform Camera;
+    public Transform CameraHolder;
+    public CamPosition InitialCameraPosition;
+    public CamPosition CamPositionToSeeEnemy;
+    public CamPosition CamePositionAttackerRunning;
+    public CamPosition CamPositionEnemyRunning;
+    public CamPosition AttackerVictoryCam;
+    public CamPosition EnemyVictoryCam;
 
     [Header("Scene Unwinding Variables")]
     //PreBattle
@@ -93,6 +114,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
     //results
     public float TimeforExpBar;
+    public float TimeAfterExpBar;
 
 
 
@@ -123,17 +145,17 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
     private void Update()
     {
-        if (AttackerHP.text != "" + AttackerInfo.currentHP)
+        if (AttackerHP.text != "" + Mathf.Max(0, AttackerInfo.currentHP))
         {
-            AttackerHP.text = "" + AttackerInfo.currentHP;
+            AttackerHP.text = "" + Mathf.Max(0, AttackerInfo.currentHP);
         }
-        if (DefenderHP.text != "" + DefenderInfo.currentHP)
+        if (DefenderHP.text != "" + Mathf.Max(0, DefenderInfo.currentHP))
         {
-            DefenderHP.text = "" + DefenderInfo.currentHP;
+            DefenderHP.text = "" + Mathf.Max(0, DefenderInfo.currentHP);
         }
     }
 
-    public void SetupScene(Character attacker, Character defender, List<int> attackerattacks, List<int> attackercriticals, List<int> defenderattacks, List<int> defendercriticals, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses) // list<int> for attacks: -1 are dodges, >=0 are damages, for criticals, 1=critical, 0=not
+    public void SetupScene(Character attacker, Character defender, List<int> attackerattacks, List<int> attackercriticals, List<int> defenderattacks, List<int> defendercriticals, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses, bool doesdefenderattacks) // list<int> for attacks: -1 are dodges, >=0 are damages, for criticals, 1=critical, 0=not
     {
         Debug.Log("Setting up scene");
         Debug.Log(attacker.name + " vs " + defender.name);
@@ -183,19 +205,24 @@ public class CombatSceneManagerV2 : MonoBehaviour
         // Prefill Names and descriptions
 
         AttackerName.TMPComponent.text = AttackerInfo.character.name;
-        AttackerDescription.TMPComponent.text = CreateDescriptionString(attackerattacks, attackerhitrate, attackercritrate, attackerdamage);
+        AttackerDescription.TMPComponent.text = CreateDescriptionString(attackerattacks, attackerhitrate, attackercritrate, attackerdamage, true);
         DefenderName.TMPComponent.text = DefenderInfo.character.name;
-        DefenderDescription.TMPComponent.text = CreateDescriptionString(defenderattacks, defenderhitrate, defendercritrate, defenderdamage);
+        DefenderDescription.TMPComponent.text = CreateDescriptionString(defenderattacks, defenderhitrate, defendercritrate, defenderdamage, doesdefenderattacks);
 
         // Giving GameObjects their Character and load their models and get the animators
 
+        AttackerGO.GetComponent<BattleCharacterScript>().InitializeModels();
+        AttackerInfo.Animator = AttackerGO.GetComponent<UnitScript>().ModelList[attacker.modelID].wholeModel.GetComponentInChildren<Animator>();
         AttackerGO.GetComponent<UnitScript>().UnitCharacteristics = attacker;
-        AttackerGO.GetComponent<BattleCharacterScript>().ActivateModel(attacker.modelID);
-        AttackerInfo.Animator = AttackerGO.GetComponent<UnitScript>().ModelList[AttackerInfo.character.modelID].wholeModel.GetComponentInChildren<Animator>();
 
+        AttackerGO.GetComponent<BattleCharacterScript>().ActivateModel(attacker.modelID);
+
+
+        DefenderGO.GetComponent<BattleCharacterScript>().InitializeModels();
+        DefenderInfo.Animator = DefenderGO.GetComponent<UnitScript>().ModelList[defender.modelID].wholeModel.GetComponentInChildren<Animator>();
         DefenderGO.GetComponent<UnitScript>().UnitCharacteristics = defender;
         DefenderGO.GetComponent<BattleCharacterScript>().ActivateModel(defender.modelID);
-        DefenderInfo.Animator = DefenderGO.GetComponent<UnitScript>().ModelList[DefenderInfo.character.modelID].wholeModel.GetComponentInChildren<Animator>();
+
 
         //Initiliaze the animations and weapons
 
@@ -222,6 +249,13 @@ public class CombatSceneManagerV2 : MonoBehaviour
         DefenderGO.transform.position = DefenderStartpos;
         ExpBarHolder.GetComponent<RectTransform>().localPosition = ExpBarBasePos;
 
+        // Set Camera Position
+        CameraHolder.parent = InitialCameraPosition.parent;
+        CameraHolder.transform.localPosition = InitialCameraPosition.CamHolderPosition;
+        CameraHolder.transform.localRotation = Quaternion.Euler(InitialCameraPosition.CamHolderRotation);
+        Camera.transform.localPosition = InitialCameraPosition.CameraPosition;
+        Camera.transform.localRotation = Quaternion.Euler(InitialCameraPosition.CameraRotation);
+
         //Start the battle
         StartCoroutine(BeforeBattleStarts());
     }
@@ -243,7 +277,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
         StartCoroutine(ShowText(DefenderName, timetoshownames));
 
-        yield return new WaitForSeconds(timetolookatdefender);
+        yield return StartCoroutine(MoveCamera(CamPositionToSeeEnemy, timetolookatdefender));
 
         StartCoroutine(ShowText(AttackerDescription, timetoshownames));
         StartCoroutine(ShowText(DefenderDescription, timetoshownames));
@@ -263,6 +297,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         bool isranged = DetermineIfRanged(AttackerInfo);
         if (!isranged)
         {
+            yield return MoveCamera(CamePositionAttackerRunning, 0.1f);
             Vector3 startPos = AttackerGO.transform.position;
             Vector3 defenderPos = DefenderGO.transform.position;
 
@@ -274,7 +309,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
             float elapsed = 0f;
 
-            while (elapsed < TimeToWalkToEnnemies)
+            while (elapsed < TimeToWalkToEnnemies && Vector3.Distance(startPos, defenderPos) > DistanceForMelee)
             {
                 PlayAnimation(AttackerGO, 1);
                 elapsed += Time.deltaTime;
@@ -284,7 +319,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
                 yield return null;
             }
-
+            PlayAnimation(AttackerGO, 5);
             // Ensure exact final position
             AttackerGO.transform.position = targetPos;
         }
@@ -389,6 +424,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
             bool isranged = DetermineIfRanged(DefenderInfo);
             if (!isranged)
             {
+                yield return MoveCamera(CamPositionEnemyRunning, 0.25f);
                 Vector3 startPos = DefenderGO.transform.position;
                 Vector3 defenderPos = AttackerGO.transform.position;
 
@@ -400,7 +436,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
                 float elapsed = 0f;
 
-                while (elapsed < TimeToWalkToEnnemies)
+                while (elapsed < TimeToWalkToEnnemies && Vector3.Distance(startPos, defenderPos) > DistanceForMelee)
                 {
                     PlayAnimation(DefenderGO, 1);
                     elapsed += Time.deltaTime;
@@ -411,6 +447,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
                     yield return null;
                 }
 
+                PlayAnimation(DefenderGO, 5);
                 // Ensure exact final position
                 DefenderGO.transform.position = targetPos;
             }
@@ -505,22 +542,30 @@ public class CombatSceneManagerV2 : MonoBehaviour
         {
             importantGO = AttackerGO;
             importantInfo = AttackerInfo;
+            yield return MoveCamera(AttackerVictoryCam, 0.5f, true);
         }
         else if (DefenderInfo.character.affiliation.ToLower() == "playable" && DefenderInfo.currentHP > 0)
         {
             importantGO = DefenderGO;
             importantInfo = DefenderInfo;
+            yield return MoveCamera(EnemyVictoryCam, 0.5f, true);
         }
 
         if (importantGO != null)
         {
+            importantInfo.character.level++;
+            ExpBarImage.fillAmount = (float)importantInfo.character.experience / 100f;
+            ExpBarText.text = importantInfo.character.experience + "";
+
             // place la camera pour la fin du combat
 
             yield return StartCoroutine(ShowExpBar());
 
             yield return StartCoroutine(ChangeExpBar(importantInfo.character));
 
-            if (ExpBarHolder.GetComponentInChildren<Image>().fillAmount >= 1 || importantInfo.character.experience + exp >= 100)
+            yield return new WaitForSeconds(TimeAfterExpBar);
+
+            if (importantInfo.character.experience + exp >= 100)
             {
                 LevelUpFreezeFrame.PlayFullAnimation(importantInfo.character, levelupbonus);
             }
@@ -617,15 +662,13 @@ public class CombatSceneManagerV2 : MonoBehaviour
     public IEnumerator ChangeExpBar(Character current)
     {
 
-        Image ExpBar = ExpBarHolder.GetComponentInChildren<Image>();
-
         int baseexpbar = current.experience;
 
-        int targetexp = baseexpbar + exp;
+        int targetexp = Mathf.Min(100, baseexpbar + exp);
 
         float elapsedTime = 0f;
 
-        while (elapsedTime < TimeforExpBar && ExpBar.fillAmount < 1)
+        while (elapsedTime < TimeforExpBar)
         {
             elapsedTime += Time.deltaTime;
 
@@ -633,13 +676,20 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
             float FillAmount = (baseexpbar + (targetexp - baseexpbar) * ratio) / 100f;
 
-            ExpBar.fillAmount = FillAmount;
+            ExpBarText.text = (int)Mathf.Min(100, FillAmount * 100) + "";
+
+            ExpBarImage.fillAmount = FillAmount;
+
+            if (FillAmount > 1)
+            {
+                break;
+            }
 
             yield return null; // wait for next frame
         }
 
         // Ensure final position is exact
-        ExpBar.fillAmount = (float)targetexp / 100f;
+        ExpBarImage.fillAmount = (float)targetexp / 100f;
     }
 
     private void PlayAnimation(GameObject CharacterToAnimate, int animationtype, bool doubleattack = false, bool tripleattack = false, bool healing = false)
@@ -650,7 +700,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         CharacterUnitscript = CharacterToAnimate.GetComponent<UnitScript>();
         animator = CharacterUnitscript.ModelList[CharacterUnitscript.UnitCharacteristics.modelID].wholeModel.GetComponentInChildren<Animator>();
 
-        switch (animationtype) // 0 : atk, 1 : walk, 2 : Take Damage, 3 : Dodge, 4 : Die
+        switch (animationtype) // 0 : atk, 1 : walk, 2 : Take Damage, 3 : Dodge, 4 : Die, 5 : Idle
         {
             case 0:
                 CharacterUnitscript.PlayAttackAnimation(doubleattack, tripleattack, healing, animator);
@@ -667,13 +717,16 @@ public class CombatSceneManagerV2 : MonoBehaviour
             case 4:
                 animator.SetTrigger("Death");
                 break;
+            case 5:
+                animator.SetBool("Walk", false);
+                break;
         }
 
     }
 
-    private string CreateDescriptionString(List<int> attacks, int hitrate, int critrate, int basedamage)
+    private string CreateDescriptionString(List<int> attacks, int hitrate, int critrate, int basedamage, bool characterattacks)
     {
-        if (attacks == null || attacks.Count == 0)
+        if (!characterattacks)
         {
             return "Dmg -  Hit -  Crit -";
         }
@@ -703,6 +756,69 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
 
         return false;
+    }
+
+    IEnumerator MoveCamera(CamPosition newposition, float timetomovecam, bool instantaneous = false)
+    {
+        CameraHolder.SetParent(newposition.parent, true);
+        float elapsed = 0f;
+
+        // Store starting transforms
+        Vector3 startHolderPos = CameraHolder.localPosition;
+        Quaternion startHolderRot = CameraHolder.localRotation;
+
+        Vector3 startCamPos = Camera.localPosition;
+        Quaternion startCamRot = Camera.localRotation;
+
+        // Target transforms
+        Vector3 targetHolderPos = newposition.CamHolderPosition;
+        Quaternion targetHolderRot = Quaternion.Euler(newposition.CamHolderRotation);
+
+        Vector3 targetCamPos = newposition.CameraPosition;
+        Quaternion targetCamRot = Quaternion.Euler(newposition.CameraRotation);
+
+        if (instantaneous)
+        {
+            // Snap exactly to final values (avoids floating precision issues)
+            CameraHolder.localPosition = targetHolderPos;
+            CameraHolder.localRotation = targetHolderRot;
+
+            Camera.localPosition = targetCamPos;
+            Camera.localRotation = targetCamRot;
+        }
+        else
+        {
+            while (elapsed < timetomovecam)
+            {
+                elapsed += Time.deltaTime;
+                float time = elapsed / timetomovecam;
+
+                // Smooth interpolation (ease in/out)
+                time = Mathf.SmoothStep(0f, 1f, time);
+
+                // Move holder
+                CameraHolder.localPosition = Vector3.Lerp(startHolderPos, targetHolderPos, time);
+
+                CameraHolder.localRotation = Quaternion.Slerp(startHolderRot, targetHolderRot, time);
+
+                // Move camera
+                Camera.localPosition = Vector3.Lerp(startCamPos, targetCamPos, time);
+
+                Camera.localRotation = Quaternion.Slerp(startCamRot, targetCamRot, time);
+
+                yield return null;
+            }
+
+            // Snap exactly to final values (avoids floating precision issues)
+            CameraHolder.localPosition = targetHolderPos;
+            CameraHolder.localRotation = targetHolderRot;
+
+            Camera.localPosition = targetCamPos;
+            Camera.localRotation = targetCamRot;
+        }
+
+
+
     }
 
     private bool DetermineIfHealing()
