@@ -1779,6 +1779,7 @@ public class DataScript : MonoBehaviour
         foreach (Bonds bond in BondsList)
         {
             Bonds bondcopy = new Bonds();
+            bondcopy.ID = bond.ID;
             bondcopy.Characters = bond.Characters;
             bondcopy.BondDialogueSeen = bond.BondDialogueSeen;
             bondcopy.BondLevel = bond.BondLevel;

@@ -108,7 +108,6 @@ public class SkillEditionScript : MonoBehaviour
                 {
                     if (SkillList.activeSelf)
                     {
-                        Debug.Log("here");
                         SkillList.SetActive(false);
                         EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
                     }

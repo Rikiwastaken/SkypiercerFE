@@ -1222,6 +1222,10 @@ public class AttackTurnScript : MonoBehaviour
     }
     private void EndOfCombatTrigger(GameObject unit1, GameObject unit2 = null)
     {
+        if (FreezeFrameGeneral.instance.image.gameObject.activeSelf)
+        {
+            StartCoroutine(FreezeFrameGeneral.instance.Hide());
+        }
         MinimapScript.instance.UpdateMinimap();
         if (unit1 != null)
         {
