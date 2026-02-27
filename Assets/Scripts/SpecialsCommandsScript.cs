@@ -76,6 +76,10 @@ public class SpecialCommandsScript : MonoBehaviour
 
     public void ActivateButton(int i)
     {
+        if (SpecialInteractos.Count <= i)
+        {
+            return;
+        }
         if (SpecialInteractos[i].GetComponent<UnitScript>() != null)
         {
             ActionManager.instance.Interract(target, null, SpecialInteractos[i]);

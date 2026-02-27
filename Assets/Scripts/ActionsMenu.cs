@@ -55,6 +55,7 @@ public class ActionsMenu : MonoBehaviour
 
     private Color BaseButtonColor;
     private Color BaseButtonPressedColor;
+    private Color BaseTextColor;
 
     public GameObject commandmenu;
 
@@ -63,7 +64,12 @@ public class ActionsMenu : MonoBehaviour
     public float DamageReductionWhenIntercepted;
     public float DamageReductionForIntercepter;
 
+    private bool PreviousActivatedState = false;
 
+    private void OnDisable()
+    {
+        PreviousActivatedState = false;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,57 +77,21 @@ public class ActionsMenu : MonoBehaviour
         GridScript = GridScript.instance;
         cameraScript = FindAnyObjectByType<cameraScript>();
         attackTurnScript = FindAnyObjectByType<AttackTurnScript>();
-    }
-    private void OnEnable()
-    {
-        if (GridScript == null)
-        {
-            GridScript = GridScript.instance;
-        }
-        BaseButtonColor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
-        BaseButtonPressedColor = transform.GetChild(0).GetComponent<Button>().colors.pressedColor;
-        target = GridScript.GetSelectedUnitGameObject();
-
-        if (target.GetComponent<UnitScript>().GetCommands().Count > 0)
-        {
-            var colors = transform.GetChild(2).GetComponent<Button>().colors;
-            colors.normalColor = BaseButtonColor;
-            colors.pressedColor = BaseButtonPressedColor;
-            transform.GetChild(2).GetComponent<Button>().colors = colors;
-        }
-        else
-        {
-
-            var colors = transform.GetChild(2).GetComponent<Button>().colors;
-            colors.normalColor = Color.gray;
-            colors.pressedColor = Color.gray;
-            transform.GetChild(2).GetComponent<Button>().colors = colors;
-        }
-
-        if (target.GetComponent<UnitScript>().GetSpectialInteraction().Count > 0)
-        {
-            var colors = transform.GetChild(2).GetComponent<Button>().colors;
-            colors.normalColor = BaseButtonColor;
-            colors.pressedColor = BaseButtonPressedColor;
-            transform.GetChild(3).GetComponent<Button>().colors = colors;
-            transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 0f);
-        }
-        else
-        {
-
-            var colors = transform.GetChild(2).GetComponent<Button>().colors;
-            colors.normalColor = Color.gray;
-            colors.pressedColor = Color.gray;
-            transform.GetChild(3).GetComponent<Button>().colors = colors;
-            transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 1f);
-        }
 
     }
+
 
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (PreviousActivatedState != gameObject.activeSelf)
+        {
+            ActivationAchanged();
+            PreviousActivatedState = gameObject.activeSelf;
+        }
+
         if (GridScript == null)
         {
             GridScript = GridScript.instance;
@@ -219,6 +189,56 @@ public class ActionsMenu : MonoBehaviour
 
             }
         }
+    }
+
+    private void ActivationAchanged()
+    {
+        if (GridScript == null)
+        {
+            GridScript = GridScript.instance;
+        }
+        BaseButtonColor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
+        BaseButtonPressedColor = transform.GetChild(0).GetComponent<Button>().colors.pressedColor;
+        BaseTextColor = transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().color;
+
+        target = GridScript.GetSelectedUnitGameObject();
+
+        if (target.GetComponent<UnitScript>().GetCommands().Count > 0)
+        {
+            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            colors.normalColor = BaseButtonColor;
+            colors.pressedColor = BaseButtonPressedColor;
+            transform.GetChild(2).GetComponent<Button>().colors = colors;
+        }
+        else
+        {
+
+            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            colors.normalColor = Color.gray;
+            colors.pressedColor = Color.gray;
+            transform.GetChild(2).GetComponent<Button>().colors = colors;
+        }
+
+        if (target.GetComponent<UnitScript>().GetSpectialInteraction().Count > 0)
+        {
+            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            colors.normalColor = BaseButtonColor;
+            colors.pressedColor = BaseButtonPressedColor;
+            transform.GetChild(3).GetComponent<Button>().colors = colors;
+            transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 0f);
+            transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+        }
+        else
+        {
+
+            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            colors.normalColor = Color.gray;
+            colors.pressedColor = Color.gray;
+            transform.GetChild(3).GetComponent<Button>().colors = colors;
+            transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
+        }
+
     }
 
     private void CheckCorrectInfo(GameObject unit, GameObject enemy)
