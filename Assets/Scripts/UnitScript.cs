@@ -30,6 +30,7 @@ public class UnitScript : MonoBehaviour
         public List<int> equipmentsIDs;
         public List<equipment> equipments;
         public int UnitSkill;
+        public int SecondUnitSkill;
         public int TemporarySkill;
         public List<int> EquipedSkills;
         public bool attacksfriends;
@@ -1920,7 +1921,7 @@ public class UnitScript : MonoBehaviour
 
     public bool GetSkill(int SkillID)
     {
-        if (UnitCharacteristics.EquipedSkills.Contains(SkillID) || UnitCharacteristics.UnitSkill == SkillID || UnitCharacteristics.UnitSkill == SkillID)
+        if (UnitCharacteristics.EquipedSkills.Contains(SkillID) || UnitCharacteristics.UnitSkill == SkillID || UnitCharacteristics.TemporarySkill == SkillID || UnitCharacteristics.SecondUnitSkill == SkillID)
         {
             return true;
         }

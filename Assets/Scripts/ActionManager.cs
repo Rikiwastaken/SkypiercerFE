@@ -62,14 +62,6 @@ public class ActionManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (EventSystem.current.currentSelectedGameObject != null)
-        {
-            Debug.Log(EventSystem.current.currentSelectedGameObject.name);
-            if (EventSystem.current.currentSelectedGameObject.transform.parent != null)
-            {
-                Debug.Log(EventSystem.current.currentSelectedGameObject.transform.parent.name);
-            }
-        }
 
 
         if (NeutralMenu.activeSelf)

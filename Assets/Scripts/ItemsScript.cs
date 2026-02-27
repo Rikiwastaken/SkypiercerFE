@@ -17,7 +17,20 @@ public class ItemsScript : MonoBehaviour
     public Button ItemActionsMenuCancelButton;
     private InputManager inputManager;
     public GameObject ItemActionsMenu;
-    public TextMeshProUGUI statstext;
+
+    [Header("Blade Stats")]
+
+    public GameObject statstext;
+
+    public TextMeshProUGUI BladeName;
+    public TextMeshProUGUI BladeType;
+    public TextMeshProUGUI BladeDamage;
+    public TextMeshProUGUI BladeHitRate;
+    public TextMeshProUGUI BladeCritRate;
+    public TextMeshProUGUI BladeUses;
+    public TextMeshProUGUI BladeRange;
+    public TextMeshProUGUI BladeMod;
+    public TextMeshProUGUI BladeGrade;
 
     private Vector3 initialpos;
 
@@ -42,7 +55,7 @@ public class ItemsScript : MonoBehaviour
             {
                 ItemMenuCancelButton.onClick.Invoke();
             }
-            statstext.transform.parent.gameObject.SetActive(false);
+            statstext.SetActive(false);
         }
 
         GameObject currentselected = EventSystem.current.currentSelectedGameObject;
@@ -56,11 +69,11 @@ public class ItemsScript : MonoBehaviour
                     equipment equ = target.equipments[buttons.IndexOf(currentselected)];
                     if (equ == null)
                     {
-                        statstext.transform.parent.gameObject.SetActive(false);
+                        statstext.SetActive(false);
                     }
                     else if (equ.Name == null)
                     {
-                        statstext.transform.parent.gameObject.SetActive(false);
+                        statstext.SetActive(false);
                     }
                     else if (equ.Name.ToLower() != "fists" && equ.Name.ToLower() != "fist" && equ.Name != "")
                     {
@@ -93,12 +106,50 @@ public class ItemsScript : MonoBehaviour
                             modifer = "Basic";
                         }
 
-                        statstext.text = equ.Name + "\nDmg : " + equ.BaseDamage + "\nHit : " + equ.BaseHit + " %\nCrit : " + equ.BaseCrit + " %\nRange : " + equ.Range + "\nType: " + equ.type + "\nGrade: " + grade + "\nModifier : " + modifer + " \nUses : " + equ.Currentuses + " / " + equ.Maxuses;
-                        statstext.transform.parent.gameObject.SetActive(true);
+                        string typeicon = "";
+
+                        switch (equ.type.ToLower())
+                        {
+                            case ("sword"):
+                                typeicon += "<sprite=0>";
+                                break;
+                            case ("spear"):
+                                typeicon += "<sprite=1>";
+                                break;
+                            case ("greatsword"):
+                                typeicon += "<sprite=2>";
+                                break;
+                            case ("bow"):
+                                typeicon += "<sprite=3>";
+                                break;
+                            case ("scythe"):
+                                typeicon += "<sprite=4>";
+                                break;
+                            case ("shield"):
+                                typeicon += "<sprite=6>";
+                                break;
+                            case ("staff"):
+                                typeicon += "<sprite=7>";
+                                break;
+                            default:
+                                typeicon += "<sprite=5>";
+                                break;
+                        }
+
+                        BladeName.text = equ.Name;
+                        BladeType.text = typeicon;
+                        BladeDamage.text = "Damage: " + equ.BaseDamage;
+                        BladeHitRate.text = "Hit Rate: " + equ.BaseHit + "%";
+                        BladeCritRate.text = "Crit Rate: " + equ.BaseCrit + "%";
+                        BladeUses.text = "Uses : " + equ.Currentuses + " / " + equ.Maxuses;
+                        BladeRange.text = "Range: " + equ.Range;
+                        BladeMod.text = "Modifier: " + modifer;
+                        BladeGrade.text = "Grade: " + grade;
+                        statstext.SetActive(true);
                     }
                     else
                     {
-                        statstext.transform.parent.gameObject.SetActive(false);
+                        statstext.SetActive(false);
                     }
 
                 }
@@ -116,6 +167,19 @@ public class ItemsScript : MonoBehaviour
         InitializeButtons();
     }
 
+    private void FillWithEmpty()
+    {
+        BladeName.text = "";
+        BladeType.text = "";
+        BladeDamage.text = "";
+        BladeHitRate.text = "";
+        BladeCritRate.text = "";
+        BladeUses.text = "";
+        BladeRange.text = "";
+        BladeMod.text = "";
+        BladeGrade.text = "";
+    }
+
     public void PlaceNextToSelected(int id)
     {
         ItemActionsMenu.transform.position = new Vector3(initialpos.x + 35, buttons[id].transform.position.y, initialpos.z);
@@ -123,24 +187,26 @@ public class ItemsScript : MonoBehaviour
         ItemActionsMenu.GetComponent<ItemActionsMenuScript>().character = target;
         if (target.equipments[id].Name == null)
         {
-            statstext.text = "Empty Slot";
+            FillWithEmpty();
             ItemActionsMenu.gameObject.SetActive(false);
-            statstext.transform.parent.gameObject.SetActive(false);
+            statstext.SetActive(false);
             buttons[id].GetComponent<Button>().Select();
         }
         else if (target.equipments[id].Name.ToLower() == "fists" || target.equipments[id].Name.ToLower() == "fist" || target.equipments[id].Name == "")
         {
-            statstext.text = "Empty Slot";
+            FillWithEmpty();
             ItemActionsMenu.gameObject.SetActive(false);
-            statstext.transform.parent.gameObject.SetActive(false);
+            statstext.SetActive(false);
             buttons[id].GetComponent<Button>().Select();
 
         }
         else
         {
 
+            equipment equ = target.equipments[id];
+
             string grade = "";
-            switch (target.equipments[id].Grade)
+            switch (equ.Grade)
             {
                 case (0):
                     grade = "E";
@@ -162,8 +228,52 @@ public class ItemsScript : MonoBehaviour
                     break;
             }
 
-            statstext.text = target.equipments[id].Name + "\nDmg : " + target.equipments[id].BaseDamage + "\nHit : " + target.equipments[id].BaseHit + " %\nCrit : " + target.equipments[id].BaseCrit + " %\nRange : " + target.equipments[id].Range + "\nType: " + target.equipments[id].type + "\nGrade: " + grade + " \nUses : " + target.equipments[id].Currentuses + " / " + target.equipments[id].Maxuses;
-            statstext.transform.parent.gameObject.SetActive(true);
+            string modifer = equ.Modifier;
+            if (modifer == null || modifer == "" || modifer == "Basic")
+            {
+                modifer = "Basic";
+            }
+
+            string typeicon = "";
+
+            switch (equ.type.ToLower())
+            {
+                case ("sword"):
+                    typeicon += "<sprite=0>";
+                    break;
+                case ("spear"):
+                    typeicon += "<sprite=1>";
+                    break;
+                case ("greatsword"):
+                    typeicon += "<sprite=2>";
+                    break;
+                case ("bow"):
+                    typeicon += "<sprite=3>";
+                    break;
+                case ("scythe"):
+                    typeicon += "<sprite=4>";
+                    break;
+                case ("shield"):
+                    typeicon += "<sprite=6>";
+                    break;
+                case ("staff"):
+                    typeicon += "<sprite=7>";
+                    break;
+                default:
+                    typeicon += "<sprite=5>";
+                    break;
+            }
+
+            BladeName.text = equ.Name;
+            BladeType.text = typeicon;
+            BladeDamage.text = "Damage: " + equ.BaseDamage;
+            BladeHitRate.text = "Hit Rate: " + equ.BaseHit + "%";
+            BladeCritRate.text = "Crit Rate: " + equ.BaseCrit + "%";
+            BladeUses.text = "Uses : " + equ.Currentuses + " / " + equ.Maxuses;
+            BladeRange.text = "Range: " + equ.Range;
+            BladeMod.text = "Modifier: " + modifer;
+            BladeGrade.text = "Grade: " + grade;
+            statstext.SetActive(true);
         }
     }
 
