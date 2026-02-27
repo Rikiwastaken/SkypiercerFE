@@ -44,6 +44,7 @@ public class MapLoader : EditorWindow
         public Color FogColor;
         public Color MedicinalWaterColor;
         public Color DesertColor;
+        public Color TeleporterColor;
         public Color UnitColor;
         public Color FinishTileColor;
     }
@@ -353,6 +354,12 @@ public class MapLoader : EditorWindow
                 Mechanism.type = 1;
                 Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
             }
+            else if (pixelColor.Equals(colors.TeleporterColor))
+            {
+                MechanismClass Mechanism = new MechanismClass();
+                Mechanism.type = 3;
+                Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
+            }
             else if (pixelColor.Equals(colors.StairsColor))
             {
                 Tile.GetComponent<GridSquareScript>().isstairs = true;
@@ -561,6 +568,7 @@ public class MapLoader : EditorWindow
         NewColor.FogColor = Color.white;
         NewColor.MedicinalWaterColor = Color.white;
         NewColor.DesertColor = Color.white;
+        NewColor.TeleporterColor = Color.white;
 
         if (MechanismMap != null)
         {
@@ -575,6 +583,7 @@ public class MapLoader : EditorWindow
             NewColor.FogColor = MechanismMap.GetPixel(0, 9);
             NewColor.MedicinalWaterColor = MechanismMap.GetPixel(0, 10);
             NewColor.DesertColor = MechanismMap.GetPixel(0, 11);
+            NewColor.TeleporterColor = MechanismMap.GetPixel(0, 12);
         }
 
         if (UnitMap != null)

@@ -99,8 +99,16 @@ public class SpecialCommandsScript : MonoBehaviour
         else if (SpecialInteractos[i].GetComponent<GridSquareScript>() != null)
         {
             ActionManager.instance.Interract(target, SpecialInteractos[i].GetComponent<GridSquareScript>());
-            SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.ChangeActivation(true);
-            SpecialInteractos[i].GetComponent<GridSquareScript>().ManageLeverOrientation();
+            if (SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.type == 2)
+            {
+                SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.ChangeActivation(true);
+                SpecialInteractos[i].GetComponent<GridSquareScript>().ManageLeverOrientation();
+            }
+            else if (SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.type == 3)
+            {
+                target.GetComponent<UnitScript>().MoveTo(SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.PairedTiles[0].GridCoordinates, false, true);
+            }
+
             MapEventManager.instance.TriggerEventCheck();
             gameObject.SetActive(false);
             ActionsMenu.gameObject.SetActive(false);

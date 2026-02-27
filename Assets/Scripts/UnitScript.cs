@@ -3299,6 +3299,10 @@ public class UnitScript : MonoBehaviour
             {
                 interactables.Add(newtile);
             }
+            if (newtile.GetComponent<GridSquareScript>().Mechanism != null && newtile.GetComponent<GridSquareScript>().Mechanism.type == 3 && newtile.GetComponent<GridSquareScript>().Mechanism.PairedTiles.Count >= 1 && GridScript.GetUnit(newtile.GetComponent<GridSquareScript>().Mechanism.PairedTiles[0]) == null)
+            {
+                interactables.Add(newtile);
+            }
         }
 
         newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(-1, 0));
@@ -3313,6 +3317,10 @@ public class UnitScript : MonoBehaviour
                 }
             }
             if (newtile.GetComponent<GridSquareScript>().Mechanism != null && !newtile.GetComponent<GridSquareScript>().Mechanism.isactivated && newtile.GetComponent<GridSquareScript>().Mechanism.type == 2)
+            {
+                interactables.Add(newtile);
+            }
+            if (newtile.GetComponent<GridSquareScript>().Mechanism != null && newtile.GetComponent<GridSquareScript>().Mechanism.type == 3 && newtile.GetComponent<GridSquareScript>().Mechanism.PairedTiles.Count >= 1 && GridScript.GetUnit(newtile.GetComponent<GridSquareScript>().Mechanism.PairedTiles[0]) == null)
             {
                 interactables.Add(newtile);
             }
@@ -3333,6 +3341,10 @@ public class UnitScript : MonoBehaviour
             {
                 interactables.Add(newtile);
             }
+            if (newtile.GetComponent<GridSquareScript>().Mechanism != null && newtile.GetComponent<GridSquareScript>().Mechanism.type == 3 && newtile.GetComponent<GridSquareScript>().Mechanism.PairedTiles.Count >= 1 && GridScript.GetUnit(newtile.GetComponent<GridSquareScript>().Mechanism.PairedTiles[0]) == null)
+            {
+                interactables.Add(newtile);
+            }
         }
 
         newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(0, -1));
@@ -3347,6 +3359,10 @@ public class UnitScript : MonoBehaviour
                 }
             }
             if (newtile.GetComponent<GridSquareScript>().Mechanism != null && !newtile.GetComponent<GridSquareScript>().Mechanism.isactivated && newtile.GetComponent<GridSquareScript>().Mechanism.type == 2)
+            {
+                interactables.Add(newtile);
+            }
+            if (newtile.GetComponent<GridSquareScript>().Mechanism != null && newtile.GetComponent<GridSquareScript>().Mechanism.type == 3 && newtile.GetComponent<GridSquareScript>().Mechanism.PairedTiles.Count >= 1 && GridScript.GetUnit(newtile.GetComponent<GridSquareScript>().Mechanism.PairedTiles[0]) == null)
             {
                 interactables.Add(newtile);
             }
