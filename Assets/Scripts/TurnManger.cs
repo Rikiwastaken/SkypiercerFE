@@ -47,6 +47,9 @@ public class TurnManger : MonoBehaviour
     private ForesightScript FSS;
 
     public bool skipothersTurn;
+
+    private bool checkedbeginningevents = true;
+
     private void Awake()
     {
         if (instance == null)
@@ -82,6 +85,15 @@ public class TurnManger : MonoBehaviour
         // {
         //     waittingforstart = false;
         // }
+
+        if (checkedbeginningevents)
+        {
+            checkedbeginningevents = false;
+
+            MapEventManager.instance.TriggerEventCheck();
+            return;
+
+        }
 
 
         if (!textBubbleScript.indialogue && !preBattleMenuScript.gameObject.activeSelf && currentlyplaying == "" && !TutorialWindows.activeSelf)
