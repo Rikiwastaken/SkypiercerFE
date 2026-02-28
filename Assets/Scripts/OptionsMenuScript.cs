@@ -25,6 +25,8 @@ public class OptionsMenuScript : MonoBehaviour
     public TextMeshProUGUI musictext;
     public TextMeshProUGUI SEtext;
 
+    public ButtonSoundScript ButtonSoundScript;
+
     private void Start()
     {
         SaveManager = SaveManager.instance;
@@ -103,6 +105,7 @@ public class OptionsMenuScript : MonoBehaviour
                 SaveManager.Options.SEVolume = 0.000001f;
             }
             SaveManager.SaveOptions();
+            ButtonSoundScript.PlayButtonSFX();
         }
         if (selected == SEMore.gameObject)
         {
@@ -114,6 +117,7 @@ public class OptionsMenuScript : MonoBehaviour
                 SaveManager.Options.SEVolume = 2.000001f;
             }
             SaveManager.SaveOptions();
+            ButtonSoundScript.PlayButtonSFX();
         }
         SEtext.text = "Sound : " + (int)(SaveManager.Options.SEVolume * 100);
     }

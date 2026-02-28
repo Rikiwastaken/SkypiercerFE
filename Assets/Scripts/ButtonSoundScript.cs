@@ -12,19 +12,25 @@ public class ButtonSoundScript : MonoBehaviour
     public AudioClip SFX;
     public Button[] buttons;
 
+    public bool automaticallyplay = true;
+
     void Start()
     {
-        buttons = GameObject.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-
-        foreach (var b in buttons)
+        if (automaticallyplay)
         {
-            UnityAction l = delegate { StartCoroutine(PlaySFX()); };
-            b.onClick.AddListener(l);
+            buttons = GameObject.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+            foreach (var b in buttons)
+            {
+                UnityAction l = delegate { StartCoroutine(PlayButtonSFX()); };
+                b.onClick.AddListener(l);
+            }
         }
+
     }
 
 
-    private IEnumerator PlaySFX()
+    public IEnumerator PlayButtonSFX()
     {
         GameObject GO = new GameObject();
         GO.transform.parent = transform;
