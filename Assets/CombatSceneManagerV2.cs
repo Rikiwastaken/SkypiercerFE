@@ -539,10 +539,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         else
         {
             int truedamage = damage;
-            if (iscritical)
-            {
-                truedamage *= 3;
-            }
+
             if (defender.oneforallactivated)
             {
                 truedamage = damage / 2;

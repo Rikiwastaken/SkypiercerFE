@@ -263,6 +263,16 @@ public class BattleInfotext : MonoBehaviour
 
                 foreach (equipment weapon in selectedunitCharacter.equipments)
                 {
+                    if (weapon.Grade == 0)
+                    {
+                        if (selectedunitCharacter.equipments.IndexOf(weapon) < WeaponObject.childCount)
+                        {
+                            WeaponObject.GetChild(selectedunitCharacter.equipments.IndexOf(weapon)).GetComponent<TextMeshProUGUI>().text = "";
+                            WeaponIconsObject.GetChild(selectedunitCharacter.equipments.IndexOf(weapon)).GetComponent<TextMeshProUGUI>().text = "";
+                        }
+
+                        continue;
+                    }
                     string weaponstring = "";
                     string gradeletter = "E";
                     int grade = weapon.Grade;

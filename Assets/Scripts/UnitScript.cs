@@ -108,7 +108,7 @@ public class UnitScript : MonoBehaviour
         public bool usetelekinesis;
         public string personality;
         /* nothing : basic.
-         * Deviant : High Random.
+         * Deviant : High Randomy
          * Coward : deviant if below 33% hp, survivor if below 10%.
          * Daredevil : never takes into account their own HP.
          * Survivor : Always avoid enemies and attacks.
@@ -743,6 +743,7 @@ public class UnitScript : MonoBehaviour
             modelID = CharacterToCopy.modelID,
             Masteries = CharacterToCopy.Masteries.Select(m => new WeaponMastery
             {
+                Modifier = m.Modifier,
                 weapontype = m.weapontype,
                 Exp = m.Exp,
                 Level = m.Level
