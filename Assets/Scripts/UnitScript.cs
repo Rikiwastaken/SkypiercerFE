@@ -1236,7 +1236,7 @@ public class UnitScript : MonoBehaviour
                 if (equip.type.ToLower() == DataScript.instance.equipmentList[ID].type.ToLower() && equip.ID != ID)
                 {
                     Chartouse.equipments[Chartouse.equipments.IndexOf(equip)] = DataScript.instance.equipmentList[ID];
-                    return;
+                    continue;
                 }
             }
         }
@@ -1274,6 +1274,38 @@ public class UnitScript : MonoBehaviour
             }
 
         }
+
+        CheckWeaponsMod(Chartouse);
+    }
+
+    private void CheckWeaponsMod(Character chartouse = null)
+    {
+        Character character = chartouse;
+        if (character == null)
+        {
+            character = UnitCharacteristics;
+        }
+        foreach (equipment weapon in chartouse.equipments)
+        {
+            if (weapon.type == null || weapon.type == "")
+            {
+                continue;
+            }
+            foreach (WeaponMastery mastery in chartouse.Masteries)
+            {
+
+                if (mastery.weapontype != null && weapon.type != null && mastery.weapontype.ToLower() == weapon.type.ToLower())
+                {
+                    weapon.Modifier = mastery.Modifier;
+                    if (weapon.Modifier == "")
+                    {
+                        weapon.Modifier = "Basic";
+                    }
+                }
+            }
+            DataScript.instance.CalculateModifierStatChanges(weapon);
+        }
+
 
 
     }

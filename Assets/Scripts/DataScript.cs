@@ -2176,7 +2176,7 @@ public class DataScript : MonoBehaviour
         DestroyImmediate(TempGO);
     }
 
-    private void CalculateModifierStatChanges(equipment equipment)
+    public void CalculateModifierStatChanges(equipment equipment)
     {
         if (equipment.Modifier == null || equipment.Modifier == "" || equipment.Modifier == "Basic")
         {

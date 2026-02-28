@@ -18,6 +18,7 @@ public class VisualOptions : MonoBehaviour
         QualitySettings.maxQueuedFrames = 1;
 
         lastScreenMode = Screen.fullScreenMode;
+        Application.targetFrameRate = 60;
         ApplyFPSSettings(lastScreenMode);
 
         Debug.Log($"[DynamicFrameRateController] Initial setup: fullscreenMode={lastScreenMode}, targetFPS={Application.targetFrameRate}");
