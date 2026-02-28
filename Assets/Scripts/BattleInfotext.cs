@@ -339,9 +339,7 @@ public class BattleInfotext : MonoBehaviour
                 if (!Skilltext.transform.parent.gameObject.activeSelf)
                 {
 
-                    Skilltext.transform.parent.gameObject.SetActive(false);
-                    SkillDescription.transform.parent.gameObject.SetActive(false);
-                    MasteryText.transform.parent.gameObject.SetActive(false);
+                    Deactivate();
                 }
             }
 
@@ -350,7 +348,7 @@ public class BattleInfotext : MonoBehaviour
 
     private void ManageSkillDescription()
     {
-        if (inputManager.ShowDetailspressed && SkillButtonIDList.Count > 0 && !SkillDescription.transform.parent.gameObject.activeSelf)
+        if (inputManager.ShowDetailspressed && SkillButtonIDList.Count > 0 && !SkillDescription.transform.parent.gameObject.activeSelf && !ActionsMenu.gameObject.activeSelf && !NeutralMenu.activeSelf)
         {
             SkillButtonList[0].Select();
         }
@@ -359,7 +357,7 @@ public class BattleInfotext : MonoBehaviour
             eventSystem.SetSelectedGameObject(null);
             if (SkillDescription.transform.parent.gameObject.activeSelf)
             {
-                SkillDescription.transform.parent.gameObject.SetActive(false);
+                Deactivate();
             }
         }
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
@@ -380,6 +378,16 @@ public class BattleInfotext : MonoBehaviour
 
     }
 
+    private void Deactivate()
+    {
+        if (!Skilltext.transform.parent.gameObject.activeSelf)
+        {
+
+            Skilltext.transform.parent.gameObject.SetActive(false);
+            SkillDescription.transform.parent.gameObject.SetActive(false);
+            MasteryText.transform.parent.gameObject.SetActive(false);
+        }
+    }
     private void ManageMasteryVisuals(Character unit)
     {
         if (unit.affiliation == "playable")
@@ -574,95 +582,7 @@ public class BattleInfotext : MonoBehaviour
 
 
 
-        //if (unit.UnitSkill != 0)
-        //{
 
-        //    if (!SkillButtonList[0].gameObject.activeSelf)
-        //    {
-        //        SkillButtonList[0].gameObject.SetActive(true);
-        //    }
-
-        //    DataScript.Skill unitskill = GetSkill(unit.UnitSkill);
-        //    SkillButtonList[0].image.color = BaseSkillColor;
-        //    SkillButtonList[0].GetComponentInChildren<TextMeshProUGUI>().text = unitskill.name;
-        //    SkillButtonIDList.Add(unitskill.ID);
-        //    for (int i = 0; i < Mathf.Min(unit.EquipedSkills.Count, 5); i++)
-        //    {
-        //        SkillButtonList[i].image.color = BaseSkillColor;
-        //        if (!SkillButtonList[i + 1].gameObject.activeSelf)
-        //        {
-        //            SkillButtonList[i + 1].gameObject.SetActive(true);
-        //        }
-
-        //        DataScript.Skill equipedskill = GetSkill(unit.EquipedSkills[i]);
-
-        //        SkillButtonList[i + 1].GetComponentInChildren<TextMeshProUGUI>().text = equipedskill.name;
-        //        SkillButtonIDList.Add(equipedskill.ID);
-        //    }
-        //    for (int i = Mathf.Min(unit.EquipedSkills.Count, 5); i < 5; i++)
-        //    {
-        //        if (i == Mathf.Min(unit.EquipedSkills.Count, 5) && unit.TemporarySkill != 0)
-        //        {
-        //            SkillButtonList[i + 1].image.color = TemporarySkillColor;
-        //            if (!SkillButtonList[i + 1].gameObject.activeSelf)
-        //            {
-        //                SkillButtonList[i + 1].gameObject.SetActive(true);
-        //            }
-        //            DataScript.Skill tempskill = GetSkill(unit.TemporarySkill);
-
-        //            SkillButtonList[i + 1].GetComponentInChildren<TextMeshProUGUI>().text = tempskill.name;
-        //            SkillButtonIDList.Add(tempskill.ID);
-        //        }
-        //        else
-        //        {
-        //            if (SkillButtonList[i + 1].gameObject.activeSelf)
-        //            {
-        //                SkillButtonList[i + 1].gameObject.SetActive(false);
-        //            }
-        //        }
-
-        //    }
-        //}
-        //else
-        //{
-        //    for (int i = 0; i < Mathf.Min(unit.EquipedSkills.Count, 5); i++)
-        //    {
-        //        SkillButtonList[i].image.color = BaseSkillColor;
-        //        if (!SkillButtonList[i].gameObject.activeSelf)
-        //        {
-        //            SkillButtonList[i].gameObject.SetActive(true);
-        //        }
-
-        //        DataScript.Skill equipedskill = GetSkill(unit.EquipedSkills[i]);
-
-        //        SkillButtonList[i].GetComponentInChildren<TextMeshProUGUI>().text = equipedskill.name;
-        //        SkillButtonIDList.Add(equipedskill.ID);
-        //    }
-        //    for (int i = Mathf.Min(unit.EquipedSkills.Count, 4); i < 5; i++)
-        //    {
-        //        if (i == Mathf.Min(unit.EquipedSkills.Count, 4) && unit.TemporarySkill != 0)
-        //        {
-        //            SkillButtonList[i].image.color = TemporarySkillColor;
-        //            if (!SkillButtonList[i].gameObject.activeSelf)
-        //            {
-        //                SkillButtonList[i].gameObject.SetActive(true);
-        //            }
-        //            DataScript.Skill tempskill = GetSkill(unit.TemporarySkill);
-
-        //            SkillButtonList[i].GetComponentInChildren<TextMeshProUGUI>().text = tempskill.name;
-        //            SkillButtonIDList.Add(tempskill.ID);
-        //        }
-        //        else
-        //        {
-        //            if (SkillButtonList[i].gameObject.activeSelf)
-        //            {
-        //                SkillButtonList[i].gameObject.SetActive(false);
-        //            }
-        //        }
-
-
-        //    }
-        //}
 
         if (unit.UnitSkill != 0 || unit.SecondUnitSkill != 0 || unit.EquipedSkills.Count > 0)
         {
@@ -676,6 +596,7 @@ public class BattleInfotext : MonoBehaviour
             if (Skilltext.transform.parent.gameObject.activeSelf)
             {
                 Skilltext.transform.parent.gameObject.SetActive(false);
+                SkillDescription.transform.gameObject.SetActive(false);
             }
 
         }

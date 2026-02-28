@@ -777,7 +777,12 @@ public class MapEventManager : MonoBehaviour
         {
             foreach (EnemyStats enemyStats in e.CharactersToSpawn)
             {
-                FindAnyObjectByType<MapInitializer>().InitializeNonPlayable(enemyStats);
+                Vector2 postospawn = enemyStats.startpos;
+                if (GridScript.GetTile(postospawn) != null && GridScript.GetUnit(GridScript.GetTile(postospawn)) == null)
+                {
+                    FindAnyObjectByType<MapInitializer>().InitializeNonPlayable(enemyStats);
+                }
+
             }
             GridScript.InitializeGOList();
 

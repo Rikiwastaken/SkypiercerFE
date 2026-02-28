@@ -249,7 +249,7 @@ public class ForesightScript : MonoBehaviour
     {
 
 
-        RemainingUsesGO.GetComponentInChildren<TextMeshProUGUI>().text = "Reamaining uses: " + remaininguses;
+        RemainingUsesGO.GetComponentInChildren<TextMeshProUGUI>().text = "Remaining uses: " + remaininguses;
 
 
         for (int i = 0; i < ButtonIDs.Count; i++)
