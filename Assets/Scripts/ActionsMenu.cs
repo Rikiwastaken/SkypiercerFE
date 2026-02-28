@@ -1698,6 +1698,12 @@ public class ActionsMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Can Unit be Attacked by Target
+    /// </summary>
+    /// <param name="unit"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
     public bool CheckifInRange(GameObject unit, GameObject target)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;

@@ -1170,7 +1170,7 @@ public class AttackTurnScript : MonoBehaviour
                 bool compassionuseddefender = false;
                 bool invigoratinguseddefender = false;
 
-                if ((ActionsMenu.CheckifInRange(target, Attacker) || target.GetComponent<UnitScript>().GetSkill(38)) && !ishealing)
+                if ((ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38)) && !ishealing)
                 {
                     doesdefenderattacks = true;
                     if (Chartarget.currentHP > 0)
@@ -1772,18 +1772,24 @@ public class AttackTurnScript : MonoBehaviour
         }
         else
         {
+
+
             float killFactor = 10f;
             float NoCounterFactor = 5f;
             float hitchanceFactor = 2f;
             float DodgeChanceFactor = 2f;
-            float SurvivesFactor = 3f;
+            float SurvivesFactor = 2f;
 
-            if (isboss)
-            {
-                NoCounterFactor = 0f;
-                DodgeChanceFactor = 0f;
-                reward += 50 - ManhattanDistance(attackerChar, targetChar);
-            }
+
+            if (ActionsMenu.CheckifInRange(attacker, target))
+
+
+                if (isboss)
+                {
+                    NoCounterFactor = 0f;
+                    DodgeChanceFactor = 0f;
+                    reward += 50 - ManhattanDistance(attackerChar, targetChar);
+                }
 
             if (attackerChar.enemyStats.personality.ToLower() == "survivor" || (attackerChar.enemyStats.personality.ToLower() == "coward" && attackerChar.currentHP < attackerChar.AjustedStats.HP * 0.1f))
             {
@@ -1808,6 +1814,7 @@ public class AttackTurnScript : MonoBehaviour
             if (!inrange)
             {
                 rawdamagetaken = 0;
+                reward += 15f;
             }
 
 
