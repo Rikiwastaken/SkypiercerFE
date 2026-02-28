@@ -56,6 +56,7 @@ public class ActionsMenu : MonoBehaviour
     private Color BaseButtonColor;
     private Color BaseButtonPressedColor;
     private Color BaseTextColor;
+    private Color BaseImageColor;
 
     public GameObject commandmenu;
 
@@ -200,6 +201,7 @@ public class ActionsMenu : MonoBehaviour
         BaseButtonColor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
         BaseButtonPressedColor = transform.GetChild(0).GetComponent<Button>().colors.pressedColor;
         BaseTextColor = transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().color;
+        BaseImageColor = transform.GetChild(0).GetComponent<Image>().color;
 
         target = GridScript.GetSelectedUnitGameObject();
 
@@ -208,7 +210,9 @@ public class ActionsMenu : MonoBehaviour
             var colors = transform.GetChild(2).GetComponent<Button>().colors;
             colors.normalColor = BaseButtonColor;
             colors.pressedColor = BaseButtonPressedColor;
+            transform.GetChild(2).GetComponent<Image>().color = BaseImageColor;
             transform.GetChild(2).GetComponent<Button>().colors = colors;
+
         }
         else
         {
@@ -216,7 +220,9 @@ public class ActionsMenu : MonoBehaviour
             var colors = transform.GetChild(2).GetComponent<Button>().colors;
             colors.normalColor = Color.gray;
             colors.pressedColor = Color.gray;
+            transform.GetChild(2).GetComponent<Image>().color = new Color(1f, 1f, 1f);
             transform.GetChild(2).GetComponent<Button>().colors = colors;
+
         }
 
         if (target.GetComponent<UnitScript>().GetSpectialInteraction().Count > 0)
@@ -224,8 +230,9 @@ public class ActionsMenu : MonoBehaviour
             var colors = transform.GetChild(2).GetComponent<Button>().colors;
             colors.normalColor = BaseButtonColor;
             colors.pressedColor = BaseButtonPressedColor;
-            transform.GetChild(3).GetComponent<Button>().colors = colors;
             transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 0f);
+            transform.GetChild(3).GetComponent<Button>().colors = colors;
+
             transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
         }
         else
@@ -234,8 +241,9 @@ public class ActionsMenu : MonoBehaviour
             var colors = transform.GetChild(2).GetComponent<Button>().colors;
             colors.normalColor = Color.gray;
             colors.pressedColor = Color.gray;
-            transform.GetChild(3).GetComponent<Button>().colors = colors;
             transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(3).GetComponent<Button>().colors = colors;
+
             transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
         }
 

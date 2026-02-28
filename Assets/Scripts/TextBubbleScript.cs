@@ -56,6 +56,12 @@ public class TextBubbleScript : MonoBehaviour
 
     private Coroutine fixTMPRoutine;
 
+    public float timetoskipdialogue = 1f;
+    private float timetoskipdialoguecounter;
+
+    public float timebeforeskippingtonextdialogue = 3f;
+    private float timebeforeskippingtonextdialoguecounter;
+
     void Awake()
     {
         if (charactername != null)
@@ -147,9 +153,39 @@ public class TextBubbleScript : MonoBehaviour
             }
         }
 
-        if (InputManager.Startjustpressed)
+        if (totalChars >= charIndex)
         {
-            EndDialogue();
+            if (timebeforeskippingtonextdialoguecounter == 0)
+            {
+                timebeforeskippingtonextdialoguecounter = Time.time + timebeforeskippingtonextdialogue;
+            }
+            else if (Time.time > timebeforeskippingtonextdialoguecounter)
+            {
+                GoToNextPage();
+                timebeforeskippingtonextdialoguecounter = 0;
+            }
+
+        }
+        else
+        {
+            timebeforeskippingtonextdialoguecounter = 0;
+        }
+
+        if (InputManager.Startpressed)
+        {
+
+            if (timetoskipdialoguecounter == 0)
+            {
+                timetoskipdialoguecounter = Time.time + timetoskipdialogue;
+            }
+            else if (Time.time > timetoskipdialoguecounter)
+            {
+                EndDialogue();
+            }
+        }
+        else
+        {
+            timetoskipdialoguecounter = 0;
         }
     }
 
