@@ -22,6 +22,8 @@ public class RandomScript : MonoBehaviour
 
     public int levelvaluesindex;
 
+    public bool use2RN;
+
     [Serializable]
     public class RandomLevelValues
     {
@@ -64,26 +66,26 @@ public class RandomScript : MonoBehaviour
         levelValues = new List<RandomLevelValues> { };
         for (int i = 0; i < numberofRandomValues; i++)
         {
-            HitValues.Add((int)UnityEngine.Random.Range(0, 100));
-            CritValues.Add((int)UnityEngine.Random.Range(0, 100));
+            HitValues.Add(CalculateAValue());
+            CritValues.Add(CalculateAValue());
             if (UnitCharacter.affiliation == "playable")
             {
                 if (i < numberofLevelValues)
                 {
                     RandomLevelValues newlevelvalues = new RandomLevelValues();
-                    newlevelvalues.HPRandomValue = (int)UnityEngine.Random.Range(0, 100);
-                    newlevelvalues.StrengthRandomValue = (int)UnityEngine.Random.Range(0, 100);
-                    newlevelvalues.PsycheRandomValue = (int)UnityEngine.Random.Range(0, 100);
-                    newlevelvalues.DefenseRandomValue = (int)UnityEngine.Random.Range(0, 100);
-                    newlevelvalues.ResistanceRandomValue = (int)UnityEngine.Random.Range(0, 100);
-                    newlevelvalues.SpeedRandomValue = (int)UnityEngine.Random.Range(0, 100);
-                    newlevelvalues.DexterityRandomValue = (int)UnityEngine.Random.Range(0, 100);
+                    newlevelvalues.HPRandomValue = CalculateAValue();
+                    newlevelvalues.StrengthRandomValue = CalculateAValue();
+                    newlevelvalues.PsycheRandomValue = CalculateAValue();
+                    newlevelvalues.DefenseRandomValue = CalculateAValue();
+                    newlevelvalues.ResistanceRandomValue = CalculateAValue();
+                    newlevelvalues.SpeedRandomValue = CalculateAValue();
+                    newlevelvalues.DexterityRandomValue = CalculateAValue();
                     levelValues.Add(newlevelvalues);
                 }
             }
             else
             {
-                personalityValues.Add((int)UnityEngine.Random.Range(0, 100));
+                personalityValues.Add(CalculateAValue());
             }
 
         }
@@ -132,5 +134,18 @@ public class RandomScript : MonoBehaviour
         levelvaluesindex++;
         return randomLevelValues;
     }
+
+    private int CalculateAValue()
+    {
+        if (use2RN)
+        {
+            return (UnityEngine.Random.Range(1, 101) + UnityEngine.Random.Range(1, 101)) / 2;
+        }
+        else
+        {
+            return UnityEngine.Random.Range(1, 101);
+        }
+    }
+
 
 }
