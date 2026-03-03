@@ -44,13 +44,17 @@ public class cameraScript : MonoBehaviour
     public float rotationSmoothTime = 0.3f;
     public float rotationSpeed = 45f;
 
+    public float maxY = 20f;
+    public float minY = 5f;
 
     public List<VolumeProfile> PostProcessingVolumeProfileList;
 
     public VolumeProfile DefaultVolumeProfile;
     private bool PostProcessingInitialized;
 
+    private TurnManger turnmanager;
 
+    public float previousY;
     private void Awake()
     {
         if (instance == null)
@@ -66,8 +70,8 @@ public class cameraScript : MonoBehaviour
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
         transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
-
-
+        turnmanager = TurnManger.instance;
+        previousY = transform.position.y;
     }
 
     void LateUpdate()
@@ -120,46 +124,12 @@ public class cameraScript : MonoBehaviour
             float movez = (Destination.y - transform.position.z) * camspeed * Time.deltaTime;
             transform.position += new Vector3(movex, 0f, movez);
         }
-        /*
-        if(incombat)
-        {
-            Vector2 CoordUnit = fighter1.GetComponent<UnitScript>().UnitCharacteristics.position;
-            Vector2 CoordTarget = fighter2.GetComponent<UnitScript>().UnitCharacteristics.position;
-            transform.GetChild(0).LookAt(pointtolookat);
-            float targetelevation = Mathf.Min(0.5f, Mathf.Max(0.5f,1.5f- Vector2.Distance(CoordTarget, CoordUnit)));
-            float movey = (targetelevation - transform.position.y) * camspeed * Time.fixedDeltaTime;
-            if(transform.position.y> targetelevation)
-            {
-                transform.position += new Vector3(0f, movey, 0f);
-            }
-            else
-            {
-                transform.position = new Vector3(transform.position.x, targetelevation, transform.position.z);
-            }
-            resettingy = true;
-        }
-        else if(resettingy)
-        {
-            float movey = (previouselevation - transform.position.y) * camspeed * Time.fixedDeltaTime;
-            transform.position += new Vector3(0f, movey, 0f);
-            fighter1 = null;
-            fighter2 = null;
-            transform.GetChild(0).rotation = Quaternion.Euler(initialrotation);
-            if (Mathf.Abs(previouselevation - transform.position.y) < 0.1f)
-            {
-                resettingy = false;
-            }
-        }
-        else
-        {
-            previouselevation = transform.position.y;
-        }
-        */
+
         if (GridScript.actionsMenu.activeSelf || incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || TutorialWindowScript.gameObject.activeSelf || TextBubbleScript.indialogue || GridScript.NeutralMenu.activeSelf || GridScript.ForesightMenu.activeSelf)
         {
             return;
         }
-        if (TurnManger.instance.currentlyplaying == "playable" || (PreBattleMenu.activeSelf && PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
+        if (turnmanager.currentlyplaying == "playable" || (PreBattleMenu.activeSelf && PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
         {
             Destination = new Vector2(GridScript.selection.transform.position.x, GridScript.selection.transform.position.z);
         }
@@ -168,37 +138,50 @@ public class cameraScript : MonoBehaviour
 
         InputManager = InputManager.instance;
 
+        // Zoom and rotation
 
-        if (InputManager.movecamjustpressed)
+        if (turnmanager.currentlyplaying == "playable")
         {
-            if (InputManager.cammovementValue.x > 0)
-                targetangle -= rotationSpeed;
-            else if (InputManager.cammovementValue.x < 0)
-                targetangle += rotationSpeed;
+            if (InputManager.movecamjustpressed)
+            {
+                if (InputManager.cammovementValue.x > 0)
+                    targetangle -= rotationSpeed;
+                else if (InputManager.cammovementValue.x < 0)
+                    targetangle += rotationSpeed;
 
-            // Keep target angle in [-180, 180)
-            targetangle = Mathf.Repeat(targetangle + 180f, 360f) - 180f;
+                // Keep target angle in [-180, 180)
+                targetangle = Mathf.Repeat(targetangle + 180f, 360f) - 180f;
+
+            }
+
+            // Smooth rotation toward target
+            float currentY = transform.eulerAngles.y;
+            float newY = Mathf.SmoothDampAngle(currentY, targetangle, ref currentVelocity, rotationSmoothTime);
+
+            transform.rotation = Quaternion.Euler(0f, newY, 0f);
+
+
+            if (InputManager.cammovementValue.y != 0f)
+            {
+                previousY += InputManager.cammovementValue.y * -3f * Time.deltaTime;
+                previousY = Mathf.Clamp(previousY, minY, maxY);
+            }
+
+            float speed = 6f;
+            float newYPos = Mathf.MoveTowards(transform.position.y, previousY, speed * Time.deltaTime);
+
+            transform.position = new Vector3(transform.position.x, newYPos, transform.position.z);
 
         }
-
-        // Smooth rotation toward target
-        float currentY = transform.eulerAngles.y;
-        float newY = Mathf.SmoothDampAngle(currentY, targetangle, ref currentVelocity, rotationSmoothTime);
-
-        transform.rotation = Quaternion.Euler(0f, newY, 0f);
-
-        if (InputManager.cammovementValue.y != 0f)
+        else if (turnmanager.currentlyplaying == "other" || turnmanager.currentlyplaying == "enemy")
         {
-            transform.position += new Vector3(0f, InputManager.cammovementValue.y * -3f * Time.deltaTime, 0f);
+            if (transform.position.y <= maxY)
+            {
+                transform.position += new Vector3(0f, 3f * Time.deltaTime, 0f);
+            }
         }
-        if (transform.position.y < 5f)
-        {
-            transform.position = new Vector3(transform.position.x, 5f, transform.position.z);
-        }
-        if (transform.position.y > 20f)
-        {
-            transform.position = new Vector3(transform.position.x, 20f, transform.position.z);
-        }
+
+
 
         initialrotation = transform.GetChild(0).rotation.eulerAngles;
     }
