@@ -117,6 +117,7 @@ public class DataScript : MonoBehaviour
         {
             SceneManager.LoadScene("MainMenu");
         }
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

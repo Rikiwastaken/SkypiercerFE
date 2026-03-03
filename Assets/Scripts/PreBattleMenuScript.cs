@@ -25,10 +25,7 @@ public class PreBattleMenuScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GridScript = GridScript.instance;
-        TurnManager = FindAnyObjectByType<TurnManger>();
-        InputManager = InputManager.instance;
-        MapInitializer = FindAnyObjectByType<MapInitializer>();
+        InitializeVariables();
     }
 
     // Update is called once per frame
@@ -120,9 +117,18 @@ public class PreBattleMenuScript : MonoBehaviour
 
     public void BeginBattle()
     {
+        InitializeVariables();
         TurnManager.waittingforstart = false;
         gameObject.SetActive(false);
         GridScript.InitializeGOList();
+    }
+
+    private void InitializeVariables()
+    {
+        GridScript = GridScript.instance;
+        TurnManager = FindAnyObjectByType<TurnManger>();
+        InputManager = InputManager.instance;
+        MapInitializer = FindAnyObjectByType<MapInitializer>();
     }
 
 }

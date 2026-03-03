@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnitScript;
 
 public class TurnManger : MonoBehaviour
@@ -98,7 +99,15 @@ public class TurnManger : MonoBehaviour
 
         if (!textBubbleScript.indialogue && !preBattleMenuScript.gameObject.activeSelf && currentlyplaying == "" && !TutorialWindows.activeSelf)
         {
-            preBattleMenuScript.gameObject.SetActive(true);
+            if (SceneManager.GetActiveScene().name == "Prologue")
+            {
+                preBattleMenuScript.BeginBattle();
+            }
+            else
+            {
+                preBattleMenuScript.gameObject.SetActive(true);
+            }
+
         }
 
         if (updatevisuals)
