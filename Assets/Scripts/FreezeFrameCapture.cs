@@ -89,10 +89,18 @@ public class FreezeFrameCapture : MonoBehaviour
         BackgroundImageBasePos = BackgroundImage.GetComponent<RectTransform>().anchoredPosition;
         ActivateAction = playerInput.actions["Validate"];
         CancelAction = playerInput.actions["Cancel"];
+
     }
 
     private void Update()
     {
+
+        if (playerInput == null)
+        {
+            playerInput = FindAnyObjectByType<PlayerInput>();
+        }
+
+
         if (playsplit)
         {
             playsplit = false;
@@ -118,7 +126,6 @@ public class FreezeFrameCapture : MonoBehaviour
 
         if (continueAvailable && ActivateAction.IsPressed())
         {
-
             StopAllCoroutines();
             StartCoroutine(Close());
         }

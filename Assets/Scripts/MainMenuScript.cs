@@ -171,7 +171,8 @@ public class MainMenuScript : MonoBehaviour
 
     private void PlayMusicWithIntro()
     {
-
+        MusicIntro.volume = MusicManager.instance.maxvolume;
+        Music.volume = MusicManager.instance.maxvolume;
         MusicIntro.PlayScheduled(AudioSettings.dspTime);
 
         double introduration = (double)MusicIntro.clip.samples / MusicIntro.clip.frequency;
