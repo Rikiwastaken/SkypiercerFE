@@ -87,6 +87,10 @@ public class FreezeFrameCapture : MonoBehaviour
     {
         CharacterSpriteBasePos = CharacterSprite.GetComponent<RectTransform>().anchoredPosition;
         BackgroundImageBasePos = BackgroundImage.GetComponent<RectTransform>().anchoredPosition;
+        if (playerInput == null)
+        {
+            playerInput = FindAnyObjectByType<PlayerInput>();
+        }
         ActivateAction = playerInput.actions["Validate"];
         CancelAction = playerInput.actions["Cancel"];
 
@@ -95,7 +99,7 @@ public class FreezeFrameCapture : MonoBehaviour
     private void Update()
     {
 
-        if (playerInput == null)
+        if (playerInput == null || !playerInput.gameObject.activeSelf)
         {
             playerInput = FindAnyObjectByType<PlayerInput>();
         }

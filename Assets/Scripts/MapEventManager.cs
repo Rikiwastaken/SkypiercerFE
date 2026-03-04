@@ -166,20 +166,25 @@ public class MapEventManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ((GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "other" || GetComponent<TurnManger>().currentlyplaying == "enemy") && !eventinitialized)
+        if ((GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial" || GetComponent<TurnManger>().currentlyplaying == "other" || GetComponent<TurnManger>().currentlyplaying == "enemy") && !eventinitialized)
         {
             eventinitialized = true;
             EventInitialization();
         }
         if (ManualEventTrigger >= 0)
         {
-            foreach (EventCondition evnt in EventsToMonitor)
+            ManuallyTriggerEvent(ManualEventTrigger, -1);
+        }
+    }
+
+    public void ManuallyTriggerEvent(int ID, int currentturn)
+    {
+        foreach (EventCondition evnt in EventsToMonitor)
+        {
+            if (evnt.ID == ID && !evnt.triggered)
             {
-                if (evnt.ID == ManualEventTrigger && !evnt.triggered)
-                {
-                    TriggerEvent(evnt, -1);
-                    evnt.triggered = true;
-                }
+                TriggerEvent(evnt, currentturn);
+                evnt.triggered = true;
             }
         }
     }

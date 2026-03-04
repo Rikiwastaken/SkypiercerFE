@@ -102,6 +102,14 @@ public class TurnManger : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "Prologue")
             {
                 preBattleMenuScript.BeginBattle();
+                currentlyplaying = "tutorial";
+                Debug.Log("currently playing : " + currentlyplaying);
+                phaseTextScript.SetupText(currentlyplaying);
+                BeginningOfTurnsTrigger(playableunitGO);
+                weatherManager.UpdateRain();
+                MapEventManager.instance.EventInitialization();
+                MapEventManager.instance.TriggerEventCheck();
+                GetComponent<TutorialScript>().enabled = true;
             }
             else
             {
@@ -450,7 +458,7 @@ public class TurnManger : MonoBehaviour
     }
     private void UpdateText()
     {
-        if (currentlyplaying == "playable")
+        if (currentlyplaying == "playable" || currentlyplaying == "tutorial")
         {
             int numberremaining = 0;
             foreach (Character character in playableunit)

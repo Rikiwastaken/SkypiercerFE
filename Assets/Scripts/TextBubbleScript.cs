@@ -59,8 +59,11 @@ public class TextBubbleScript : MonoBehaviour
     public float timetoskipdialogue = 1f;
     private float timetoskipdialoguecounter;
 
-    public float timebeforeskippingtonextdialogue = 3f;
+    public float timebeforeskippingtonextdialogue = 10f;
     private float timebeforeskippingtonextdialoguecounter;
+
+    public float DelayBetweenSkips = 0.25f;
+    private float delayBetweenSkipsCounter;
 
     void Awake()
     {
@@ -139,27 +142,28 @@ public class TextBubbleScript : MonoBehaviour
 
         if (InputManager.activatejustpressed || InputManager.canceljustpressed)
         {
-            if (charIndex < totalChars)
+            if (Time.time > delayBetweenSkipsCounter)
             {
-                if (charIndex > totalChars * 0.05f)
+                delayBetweenSkipsCounter = Time.time + DelayBetweenSkips;
+                if (charIndex < totalChars)
                 {
-                    charIndex = totalChars;
-                    sentence.maxVisibleCharacters = charIndex;
+                    if (charIndex > totalChars * 0.05f)
+                    {
+                        charIndex = totalChars;
+                        sentence.maxVisibleCharacters = charIndex;
+                    }
+                }
+                else
+                {
+                    GoToNextPage();
                 }
             }
-            else
-            {
-                GoToNextPage();
-            }
+
         }
 
-        if (totalChars >= charIndex)
+        if (totalChars <= charIndex)
         {
-            if (timebeforeskippingtonextdialoguecounter == 0)
-            {
-                timebeforeskippingtonextdialoguecounter = Time.time + timebeforeskippingtonextdialogue;
-            }
-            else if (Time.time > timebeforeskippingtonextdialoguecounter)
+            if (Time.time > timebeforeskippingtonextdialoguecounter)
             {
                 GoToNextPage();
                 timebeforeskippingtonextdialoguecounter = 0;
@@ -168,7 +172,7 @@ public class TextBubbleScript : MonoBehaviour
         }
         else
         {
-            timebeforeskippingtonextdialoguecounter = 0;
+            timebeforeskippingtonextdialoguecounter = Time.time + timebeforeskippingtonextdialogue;
         }
 
         if (InputManager.Startpressed)
@@ -208,6 +212,8 @@ public class TextBubbleScript : MonoBehaviour
     private void GoToNextPage()
     {
         currentTextBubble++;
+        delayBetweenSkipsCounter = Time.time + DelayBetweenSkips;
+        timebeforeskippingtonextdialoguecounter = Time.time + timebeforeskippingtonextdialogue;
 
         if (currentTextBubble < Dialogue.Count)
         {

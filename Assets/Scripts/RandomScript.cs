@@ -6,6 +6,8 @@ using static UnitScript;
 public class RandomScript : MonoBehaviour
 {
 
+    [Header("Random Values")]
+
     public List<int> HitValues;
 
     public int hitvaluesindex;
@@ -22,7 +24,7 @@ public class RandomScript : MonoBehaviour
 
     public int levelvaluesindex;
 
-    public bool use2RN;
+
 
     [Serializable]
     public class RandomLevelValues
@@ -41,6 +43,10 @@ public class RandomScript : MonoBehaviour
     private bool initialized;
 
     private Character UnitCharacter;
+
+    [Header("Random Values Settings")]
+
+    public bool use2RN;
 
     public int numberofRandomValues;
 

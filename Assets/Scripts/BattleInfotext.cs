@@ -157,7 +157,7 @@ public class BattleInfotext : MonoBehaviour
 
 
 
-        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && GridScript.GetComponent<TurnManger>().currentlyplaying != "playable"))
+        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && GridScript.GetComponent<TurnManger>().currentlyplaying != "playable" && GridScript.GetComponent<TurnManger>().currentlyplaying != "tutorial"))
         {
 
             if (!(PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) && !(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf))
@@ -169,7 +169,7 @@ public class BattleInfotext : MonoBehaviour
         else
         {
             Character selectedunitCharacter = null;
-            if (turnManger.currentlyplaying == "playable")
+            if (turnManger.currentlyplaying == "playable" || turnManger.currentlyplaying == "tutorial")
             {
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
             }

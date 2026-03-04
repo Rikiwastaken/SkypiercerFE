@@ -135,7 +135,7 @@ public class AttackTurnScript : MonoBehaviour
         {
             CurrentOther = null;
         }
-        if (TurnManager.currentlyplaying != "playable" && ActionManager.instance != null)
+        if ((TurnManager.currentlyplaying != "playable" && TurnManager.currentlyplaying != "tutorial") && ActionManager.instance != null)
         {
             ActionManager.instance.preventfromlockingafteraction = true;
         }
@@ -249,7 +249,7 @@ public class AttackTurnScript : MonoBehaviour
         }
 
         //playerattack
-        if (TurnManager.currentlyplaying == "playable")
+        if (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial")
         {
             if (ActionsMenu.target == null)
             {

@@ -77,7 +77,7 @@ public class TipsMenuScript : MonoBehaviour
                 ChangeButtonID(1);
             }
 
-            if (Buttons.IndexOf(currentSelected.GetComponent<Button>()) < ButtonIDs.Count && Buttons.IndexOf(currentSelected.GetComponent<Button>()) != -1 && ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())] != -1)
+            if (Buttons.IndexOf(currentSelected.GetComponent<Button>()) < ButtonIDs.Count && Buttons.IndexOf(currentSelected.GetComponent<Button>()) < TipsToUse.Count && Buttons.IndexOf(currentSelected.GetComponent<Button>()) != -1 && ButtonIDs[Buttons.IndexOf(currentSelected.GetComponent<Button>())] != -1)
             {
                 if (!descriptionText.transform.parent.gameObject.activeSelf)
                 {
@@ -168,7 +168,7 @@ public class TipsMenuScript : MonoBehaviour
     {
         for (int i = 0; i < ButtonIDs.Count; i++)
         {
-            if (ButtonIDs[i] == -1)
+            if (ButtonIDs[i] == -1 || TipsToUse.Count <= ButtonIDs[i])
             {
                 Buttons[i].GetComponent<Image>().color = Color.grey;
                 Buttons[i].transform.GetComponentInChildren<TextMeshProUGUI>().text = "";

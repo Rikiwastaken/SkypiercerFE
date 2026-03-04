@@ -20,9 +20,22 @@ public class FreezeFrameGeneral : MonoBehaviour
     public float rotation;
     public float targetscale;
 
+    [Header("Safeguard")]
+    public float timeforsafeguard;
+    private float timeforsafeguardcounter;
+
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Update()
+    {
+        if (image.gameObject.activeSelf && Time.time > timeforsafeguardcounter)
+        {
+            image.gameObject.SetActive(false);
+            imageBG.gameObject.SetActive(false);
+        }
     }
 
     private Texture2D Capture()
@@ -111,6 +124,9 @@ public class FreezeFrameGeneral : MonoBehaviour
 
     public void Show()
     {
+
+        timeforsafeguardcounter = Time.time + timeforsafeguard;
+
         image.rectTransform.localScale = Vector3.one;
         image.rectTransform.localRotation = Quaternion.identity;
         image.gameObject.SetActive(true);

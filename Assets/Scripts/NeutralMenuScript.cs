@@ -79,6 +79,10 @@ public class NeutralMenuScript : MonoBehaviour
 
     public void EndTurn()
     {
+        if (TutorialScript.instance != null && TutorialScript.instance.enabled)
+        {
+            return;
+        }
         foreach (GameObject character in TurnManager.playableunitGO)
         {
             if (!character.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && !character.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
@@ -89,7 +93,11 @@ public class NeutralMenuScript : MonoBehaviour
 
     public void OpenForesighMenu(bool lockforesight = false)
     {
-        if (chapter < chapterforUnlockingForesight)
+        if (TutorialScript.instance != null && TutorialScript.instance.enabled)
+        {
+            return;
+        }
+        else if (chapter < chapterforUnlockingForesight)
         {
             return;
         }

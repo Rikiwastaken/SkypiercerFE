@@ -67,7 +67,7 @@ public class PhaseTextScript : MonoBehaviour
     public void SetupText(string currentlyplaying)
     {
         transform.localPosition = new Vector2(-restingXpos, 0);
-        if (currentlyplaying == "playable")
+        if (currentlyplaying == "playable" || currentlyplaying == "tutorial")
         {
             moveText = true;
             TMP.text = "Ally Phase";

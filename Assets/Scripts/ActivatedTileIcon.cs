@@ -93,7 +93,7 @@ public class ActivatedTileIcon : MonoBehaviour
         {
             if (LockedSelectedImage.transform.position.x != LockedSelectedTile.GridCoordinates.x || LockedSelectedImage.transform.position.z != LockedSelectedTile.GridCoordinates.y)
             {
-                LockedSelectedImage.transform.position = new Vector3(SelectedTile.GridCoordinates.x, baseYLocked + LockedSelectedImage.transform.position.y, SelectedTile.GridCoordinates.y);
+                LockedSelectedImage.transform.position = new Vector3(SelectedTile.GridCoordinates.x, baseYLocked + SelectedTile.transform.position.y, SelectedTile.GridCoordinates.y);
             }
 
 

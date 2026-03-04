@@ -142,7 +142,7 @@ public class GridSquareScript : MonoBehaviour
         manageVisuals();
         for (int i = 0; i < 100; i++)
         {
-            RandomNumberlist.Add(UnityEngine.Random.Range(0, 100));
+            RandomNumberlist.Add((UnityEngine.Random.Range(1, 101) + UnityEngine.Random.Range(1, 101)) / 2);
         }
     }
 

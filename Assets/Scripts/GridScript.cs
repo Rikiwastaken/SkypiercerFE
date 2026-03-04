@@ -133,7 +133,7 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = 0;
         }
 
-        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !NeutralMenu.activeSelf && !ForesightMenu.activeSelf && !TutorialWindowMenu.activeSelf && !(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf))
+        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !NeutralMenu.activeSelf && !ForesightMenu.activeSelf && !TutorialWindowMenu.activeSelf && !(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf))
         {
 
 
@@ -148,7 +148,7 @@ public class GridScript : MonoBehaviour
                 previousmovevalue = Vector2.zero;
             }
 
-            if ((inputManager.NextWeaponjustpressed || inputManager.PreviousWeaponjustpressed) && GetComponent<TurnManger>().currentlyplaying == "playable" && !lockselection)
+            if ((inputManager.NextWeaponjustpressed || inputManager.PreviousWeaponjustpressed) && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial") && !lockselection)
             {
                 GameObject GOSelected = GetUnit(selection);
                 if (GOSelected != null)

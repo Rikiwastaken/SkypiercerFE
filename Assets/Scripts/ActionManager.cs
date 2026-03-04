@@ -95,7 +95,7 @@ public class ActionManager : MonoBehaviour
             return;
         }
 
-        if (TurnManager.currentlyplaying == "playable" && (GameOverScript.instance == null || !GameOverScript.instance.gameObject.activeSelf))
+        if ((TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && (GameOverScript.instance == null || !GameOverScript.instance.gameObject.activeSelf))
         {
             if (currentcharacter != null)
             {
@@ -124,7 +124,7 @@ public class ActionManager : MonoBehaviour
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
                     }
-                    else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed && TurnManager.currentlyplaying == "playable" && NeutralMenuCD == 0 && !TextBubbleScript.indialogue)
+                    else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed && (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && NeutralMenuCD == 0 && !TextBubbleScript.indialogue)
                     {
                         NeutralMenu.SetActive(true);
                         EventSystem.current.SetSelectedGameObject(NeutralMenu.transform.GetChild(0).gameObject);
@@ -153,7 +153,7 @@ public class ActionManager : MonoBehaviour
                 }
                 else
                 {
-                    if (InputManager.activatejustpressed && TurnManager.currentlyplaying == "playable" && NeutralMenuCD == 0)
+                    if (InputManager.activatejustpressed && (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && NeutralMenuCD == 0)
                     {
                         NeutralMenu.SetActive(true);
                         EventSystem.current.SetSelectedGameObject(NeutralMenu.transform.GetChild(0).gameObject);
@@ -206,6 +206,30 @@ public class ActionManager : MonoBehaviour
 
                 if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates, currentcharacter) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                 {
+                    if (TutorialScript.instance != null && TutorialScript.instance.enabled)
+                    {
+                        if (!TutorialScript.instance.firstenemyattacked)
+                        {
+                            if (GridScript.selection != TutorialScript.instance.ZackTargetTile)
+                            {
+                                return;
+                            }
+                        }
+                        else if (!TutorialScript.instance.secondenemyattacked)
+                        {
+                            if (GridScript.selection != TutorialScript.instance.ElwynTargetTile)
+                            {
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            if (GridScript.selection != TutorialScript.instance.LeaTargetTile)
+                            {
+                                return;
+                            }
+                        }
+                    }
                     currentpath = null;
                     previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
                     currentcharacter.GetComponent<UnitScript>().MoveTo(GridScript.selection.GridCoordinates);

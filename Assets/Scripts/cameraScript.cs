@@ -129,7 +129,7 @@ public class cameraScript : MonoBehaviour
         {
             return;
         }
-        if (turnmanager.currentlyplaying == "playable" || (PreBattleMenu.activeSelf && PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
+        if (turnmanager.currentlyplaying == "playable" || turnmanager.currentlyplaying == "tutorial" || (PreBattleMenu.activeSelf && PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
         {
             Destination = new Vector2(GridScript.selection.transform.position.x, GridScript.selection.transform.position.z);
         }
@@ -140,7 +140,7 @@ public class cameraScript : MonoBehaviour
 
         // Zoom and rotation
 
-        if (turnmanager.currentlyplaying == "playable")
+        if (turnmanager.currentlyplaying == "playable" || turnmanager.currentlyplaying == "tutorial")
         {
             if (InputManager.movecamjustpressed)
             {

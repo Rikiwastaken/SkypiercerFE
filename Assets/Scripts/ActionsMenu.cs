@@ -78,7 +78,10 @@ public class ActionsMenu : MonoBehaviour
         GridScript = GridScript.instance;
         cameraScript = FindAnyObjectByType<cameraScript>();
         attackTurnScript = FindAnyObjectByType<AttackTurnScript>();
-
+        BaseButtonColor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
+        BaseButtonPressedColor = transform.GetChild(0).GetComponent<Button>().colors.pressedColor;
+        BaseTextColor = transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().color;
+        BaseImageColor = transform.GetChild(0).GetComponent<Image>().color;
     }
 
 
@@ -198,10 +201,18 @@ public class ActionsMenu : MonoBehaviour
         {
             GridScript = GridScript.instance;
         }
-        BaseButtonColor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
-        BaseButtonPressedColor = transform.GetChild(0).GetComponent<Button>().colors.pressedColor;
-        BaseTextColor = transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().color;
-        BaseImageColor = transform.GetChild(0).GetComponent<Image>().color;
+
+
+
+        for (int i = 1; i < transform.childCount; i++)
+        {
+            var colors = transform.GetChild(i).GetComponent<Button>().colors;
+            colors.normalColor = BaseButtonColor;
+            colors.pressedColor = BaseButtonPressedColor;
+            transform.GetChild(i).GetComponent<Image>().color = BaseImageColor;
+            transform.GetChild(i).GetComponent<Button>().colors = colors;
+            transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
+        }
 
         target = GridScript.GetSelectedUnitGameObject();
 
@@ -246,7 +257,38 @@ public class ActionsMenu : MonoBehaviour
 
             transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
         }
+        if (TutorialScript.instance != null && TutorialScript.instance.enabled)
+        {
+            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            colors.normalColor = Color.gray;
+            colors.pressedColor = Color.gray;
 
+            if (TutorialScript.instance.secondenemyattacked)
+            {
+                transform.GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+                transform.GetChild(0).GetComponent<Button>().colors = colors;
+                transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+            }
+            else
+            {
+                transform.GetChild(4).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+                transform.GetChild(4).GetComponent<Button>().colors = colors;
+                transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+            }
+
+            transform.GetChild(1).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(1).GetComponent<Button>().colors = colors;
+            transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+            transform.GetChild(2).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(2).GetComponent<Button>().colors = colors;
+            transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+            transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(3).GetComponent<Button>().colors = colors;
+            transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+            transform.GetChild(5).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(5).GetComponent<Button>().colors = colors;
+            transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+        }
     }
 
     private void CheckCorrectInfo(GameObject unit, GameObject enemy)
@@ -2883,6 +2925,35 @@ public class ActionsMenu : MonoBehaviour
         return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
     }
 
+    public void BladeMenuButton()
+    {
+        if (TutorialScript.instance != null && TutorialScript.instance.enabled)
+        {
+            return;
+        }
+        ItemsScript.gameObject.SetActive(true);
+        FindAnyObjectByType<EventSystem>().SetSelectedGameObject(ItemsScript.transform.GetChild(0).gameObject);
+    }
+
+    public void WaitButton()
+    {
+        if (TutorialScript.instance != null && TutorialScript.instance.enabled && !TutorialScript.instance.secondenemyattacked)
+        {
+            return;
+        }
+        gameObject.SetActive(false);
+        ActionManager.instance.WaitButton();
+    }
+
+    public void CancelButton()
+    {
+        if (TutorialScript.instance != null && TutorialScript.instance.enabled)
+        {
+            return;
+        }
+        gameObject.SetActive(false);
+        ActionManager.instance.ResetAction();
+    }
 
     public void CommandButtonFunction()
     {
