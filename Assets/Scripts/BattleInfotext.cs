@@ -364,13 +364,10 @@ public class BattleInfotext : MonoBehaviour
         {
             SkillButtonList[0].Select();
         }
-        if (inputManager.cancelpressed && SkillButtonIDList.Count > 0 && SkillDescription.transform.parent.gameObject.activeSelf)
+        if (inputManager.cancelpressed)
         {
             eventSystem.SetSelectedGameObject(null);
-            if (SkillDescription.transform.parent.gameObject.activeSelf)
-            {
-                Deactivate();
-            }
+            Deactivate();
         }
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         for (int i = 0; i < SkillButtonList.Count; i++)

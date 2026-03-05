@@ -372,6 +372,10 @@ public class ActionsMenu : MonoBehaviour
 
     private void ToggleTelekinesis(GameObject PreviousFoe)
     {
+        if (!allowtelekinesisChangeFromTutorial())
+        {
+            return;
+        }
         target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
         if (target.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
         {
@@ -2985,6 +2989,15 @@ public class ActionsMenu : MonoBehaviour
                 FindAnyObjectByType<EventSystem>().SetSelectedGameObject(SpecialCommandGO.transform.GetChild(0).gameObject);
             }
         }
+    }
+
+    private bool allowtelekinesisChangeFromTutorial()
+    {
+        if (TutorialScript.instance != null && TutorialScript.instance.enabled && !TutorialScript.instance.firstenemyattacked)
+        {
+            return false;
+        }
+        return true;
     }
 
 }
