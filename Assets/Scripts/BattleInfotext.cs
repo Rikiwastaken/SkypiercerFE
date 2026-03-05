@@ -10,10 +10,6 @@ public class BattleInfotext : MonoBehaviour
 {
 
     private GridScript GridScript;
-
-    private string stringtoshow;
-
-    TextMeshProUGUI TMP;
     private GameObject selectedunit;
 
     private cameraScript battlecamera;
@@ -75,11 +71,16 @@ public class BattleInfotext : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        TMP = GetComponent<TextMeshProUGUI>();
         inputManager = InputManager.instance;
         GridScript = GridScript.instance;
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         BaseSkillColor = SkillButtonList[0].image.color;
+    }
+
+
+    private void OnDisable()
+    {
+        SkillDescription.transform.parent.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -358,6 +359,7 @@ public class BattleInfotext : MonoBehaviour
 
     private void ManageSkillDescription()
     {
+
         if (inputManager.ShowDetailspressed && SkillButtonIDList.Count > 0 && !SkillDescription.transform.parent.gameObject.activeSelf && !ActionsMenu.gameObject.activeSelf && !NeutralMenu.activeSelf)
         {
             SkillButtonList[0].Select();
@@ -394,8 +396,12 @@ public class BattleInfotext : MonoBehaviour
         {
 
             Skilltext.transform.parent.gameObject.SetActive(false);
-            SkillDescription.transform.parent.gameObject.SetActive(false);
+
             MasteryText.transform.parent.gameObject.SetActive(false);
+        }
+        if (SkillDescription.transform.parent.gameObject.activeSelf)
+        {
+            SkillDescription.transform.parent.gameObject.SetActive(false);
         }
     }
     private void ManageMasteryVisuals(Character unit)
