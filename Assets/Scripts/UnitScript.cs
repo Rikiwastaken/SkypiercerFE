@@ -3507,6 +3507,9 @@ public class UnitScript : MonoBehaviour
             case 7: //acceleration
                 ChartoUse.statusEffects.AccelerationTurns = 0;
                 break;
+            case 8: //Power
+                ChartoUse.statusEffects.PowerTurns = 0;
+                break;
 
         }
 

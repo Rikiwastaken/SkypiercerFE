@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -56,6 +55,10 @@ public class BattleInfotext : MonoBehaviour
     public Image ExpBarFilling;
     public Image BackgroundImage;
 
+    [Header("StatusAilment")]
+
+    public List<TextMeshProUGUI> AilmentIconList;
+    public List<TextMeshProUGUI> AilmentDurationLst;
 
     [Header("Skill-related")]
 
@@ -205,6 +208,7 @@ public class BattleInfotext : MonoBehaviour
                 ManagedSkillVisuals(selectedunitCharacter);
                 ManageSkillDescription();
                 ManageMasteryVisuals(selectedunitCharacter);
+                ManageStatusAilmentVisuals(selectedunit);
 
                 NameTMP.text = selectedunitCharacter.name;
                 LevelTMP.text = "Lvl: " + selectedunitCharacter.level;
@@ -628,5 +632,115 @@ public class BattleInfotext : MonoBehaviour
             }
         }
         return unitskill;
+    }
+
+    private void ManageStatusAilmentVisuals(GameObject Unit)
+    {
+        Character UnitChar = Unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+        //     public class StatusEffects
+        // {
+        //     public int BurnTurns;
+        //     public int StunTurns;
+        //     public int ParalyzedTurns;
+        //     public int ConcussionTunrs;
+        //     public int WeaknessTurns;
+        //     public int RegenTurns;
+        //     public int AccelerationTurns;
+        //     public int PowerTurns;
+        // }
+
+        int lastactiveID = 0;
+
+        if (UnitChar.statusEffects.BurnTurns > 0)
+        {
+            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            {
+                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+            }
+            AilmentIconList[lastactiveID].text = "<sprite=19>";
+            AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.BurnTurns + "";
+            lastactiveID++;
+        }
+        if (UnitChar.statusEffects.StunTurns > 0)
+        {
+            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            {
+                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+            }
+            AilmentIconList[lastactiveID].text = "<sprite=20>";
+            AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.StunTurns + "";
+            lastactiveID++;
+        }
+        if (UnitChar.statusEffects.ParalyzedTurns > 0)
+        {
+            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            {
+                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+            }
+            AilmentIconList[lastactiveID].text = "<sprite=21>";
+            AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.ParalyzedTurns + "";
+            lastactiveID++;
+        }
+        if (UnitChar.statusEffects.ConcussionTunrs > 0)
+        {
+            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            {
+                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+            }
+            AilmentIconList[lastactiveID].text = "<sprite=22>";
+            AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.ConcussionTunrs + "";
+            lastactiveID++;
+        }
+        if (UnitChar.statusEffects.WeaknessTurns > 0)
+        {
+            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            {
+                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+            }
+            AilmentIconList[lastactiveID].text = "<sprite=23>";
+            AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.WeaknessTurns + "";
+            lastactiveID++;
+        }
+        if (UnitChar.statusEffects.RegenTurns > 0)
+        {
+            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            {
+                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+            }
+            AilmentIconList[lastactiveID].text = "<sprite=24>";
+            AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.RegenTurns + "";
+            lastactiveID++;
+        }
+        if (UnitChar.statusEffects.AccelerationTurns > 0)
+        {
+            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            {
+                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+            }
+            AilmentIconList[lastactiveID].text = "<sprite=25>";
+            AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.AccelerationTurns + "";
+            lastactiveID++;
+        }
+        if (UnitChar.statusEffects.PowerTurns > 0)
+        {
+            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            {
+                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+            }
+            AilmentIconList[lastactiveID].text = "<sprite=26>";
+            AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.PowerTurns + "";
+            lastactiveID++;
+        }
+        for (int i = lastactiveID; i < AilmentIconList.Count; i++)
+        {
+            if (AilmentIconList[i].gameObject.activeSelf)
+            {
+                AilmentIconList[i].gameObject.SetActive(false);
+            }
+            AilmentDurationLst[i].text = "";
+        }
+
+
     }
 }
