@@ -543,6 +543,7 @@ public class AttackTurnScript : MonoBehaviour
             foresightScript.CreateAction(3, User);
             int healthrestored = (int)((CharUser.AjustedStats.HP - CharUser.currentHP) * 0.25f);
             CharUser.currentHP += healthrestored;
+            User.GetComponent<UnitScript>().RemoveStatusAilments();
             User.GetComponent<UnitScript>().AddNumber(healthrestored, true, "Chakra");
         }
         else if (commandID == 56) // Copy
@@ -701,6 +702,25 @@ public class AttackTurnScript : MonoBehaviour
                 Target.GetComponent<UnitScript>().MoveTo(Userposition + direction * 2, true, true);
                 Target.GetComponent<UnitScript>().AddNumber(0, true, "Throw");
             }
+        }
+        else if (commandID == 84) // Reverse Blade Technique
+        {
+            foresightScript.CreateAction(3, User);
+            int healthrestored = (int)(CharUser.AjustedStats.HP - CharUser.currentHP);
+            CharUser.currentHP += healthrestored;
+
+            foreach (equipment equ in CharUser.equipments)
+            {
+                equ.Currentuses = equ.Maxuses;
+            }
+
+            CharUser.statusEffects.StunTurns++;
+            User.GetComponent<UnitScript>().AddNumber(healthrestored, true, "Reverse Blade Technique");
+        }
+        else if (commandID == 88) //Cure
+        {
+            foresightScript.CreateAction(3, User, Target);
+            Target.GetComponent<UnitScript>().RemoveStatusAilments();
         }
 
         ActionsMenu.FinalizeAttack();
@@ -906,7 +926,7 @@ public class AttackTurnScript : MonoBehaviour
                                 waittingforcamera = false;
                                 EndOfCombatTrigger(Attacker, target);
                             }
-                            else if (ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38)) // counterattack
+                            else if ((ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38)) && target.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.StunTurns <= 0) // counterattack
                             {
                                 unitalreadyattacked = true;
                                 counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
@@ -1170,7 +1190,7 @@ public class AttackTurnScript : MonoBehaviour
                 bool compassionuseddefender = false;
                 bool invigoratinguseddefender = false;
 
-                if ((ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38)) && !ishealing)
+                if ((ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38) && Chartarget.statusEffects.StunTurns <= 0) && !ishealing)
                 {
                     doesdefenderattacks = true;
                     if (Chartarget.currentHP > 0)

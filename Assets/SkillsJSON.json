@@ -488,7 +488,7 @@
         },
         {
             "name": "Chakra",
-            "Descriptions": "Restores 25% of missing HP.",
+            "Descriptions": "Restores 25% of missing HP and removes status ailment.",
             "IsCommand": true,
             "Cost": 5,
             "targettype": 3,
@@ -746,6 +746,60 @@
             "targettype": 4,
             "range": 1,
             "ID": 82
+        },
+        {
+            "name": "Born to burn",
+            "Descriptions": "Increases hit and dodge rate by 20% and Crit rate by 10%. Allows attacks to burn enemies. Only works when character is burning.",
+            "IsCommand": false,
+            "Cost": 3,
+            "targettype": 0,
+            "range": 0,
+            "ID": 83
+        },
+        {
+            "name": "Reverse Blade Technique",
+            "Descriptions": "Restores all HP and blade durability but stuns the user.",
+            "IsCommand": true,
+            "Cost": 3,
+            "targettype": 3,
+            "range": 0,
+            "ID": 84
+        },
+        {
+            "name": "Lightning Edge",
+            "Descriptions": "Attacks inflict paralyze.",
+            "IsCommand": false,
+            "Cost": 5,
+            "targettype": 0,
+            "range": 0,
+            "ID": 85
+        },
+        {
+            "name": "Blazing Edge",
+            "Descriptions": "Attacks inflict burn.",
+            "IsCommand": false,
+            "Cost": 5,
+            "targettype": 0,
+            "range": 0,
+            "ID": 86
+        },
+        {
+            "name": "Unphasable",
+            "Descriptions": "Prevents status ailment.",
+            "IsCommand": false,
+            "Cost": 15,
+            "targettype": 0,
+            "range": 0,
+            "ID": 87
+        },
+        {
+            "name": "Cure",
+            "Descriptions": "Removes Status ailments from target.",
+            "IsCommand": false,
+            "Cost": 5,
+            "targettype": 1,
+            "range": 1,
+            "ID": 88
         }
     ]
 }

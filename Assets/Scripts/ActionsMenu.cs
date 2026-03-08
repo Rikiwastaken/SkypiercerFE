@@ -1149,6 +1149,9 @@ public class ActionsMenu : MonoBehaviour
 
     public void initializeSkillWindow(GameObject unit, GameObject target, Skill command)
     {
+
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
         if (command.ID == 47) //Transfuse
         {
             TransferCommandWindow(unit, target);
@@ -1179,7 +1182,8 @@ public class ActionsMenu : MonoBehaviour
         }
         else if (command.ID == 54) // Chakra
         {
-            ChakraCommandWindow(unit);
+            int healthrestored = (int)((charunit.AjustedStats.HP - charunit.currentHP) * 0.25f);
+            SelfHealCommandWindow(unit, healthrestored, unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses);
         }
         else if (command.ID == 56) // Copy
         {
@@ -1216,6 +1220,15 @@ public class ActionsMenu : MonoBehaviour
             BasicCommandWindow(unit, target);
         }
         else if (command.ID == 82) //Throw
+        {
+            BasicCommandWindow(unit, target);
+        }
+        else if (command.ID == 84) // Reverse Blade Technique
+        {
+            int healthrestored = (int)(charunit.AjustedStats.HP - charunit.currentHP);
+            SelfHealCommandWindow(unit, healthrestored, unit.GetComponent<UnitScript>().GetFirstWeapon().Maxuses);
+        }
+        else if (command.ID == 88) //Cure
         {
             BasicCommandWindow(unit, target);
         }
@@ -1265,16 +1278,63 @@ public class ActionsMenu : MonoBehaviour
         UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
     }
 
-    private void ChakraCommandWindow(GameObject unit)
+    private void SelfHealCommandWindow(GameObject unit, int healthrestored, int newbladeuse)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.gameObject.SetActive(true);
 
-        int healthrestored = (int)((charunit.AjustedStats.HP - charunit.currentHP) * 0.25f);
+
 
         SetupCombatHUD(unit, true, true, (int)Mathf.Min(Mathf.Max(charunit.currentHP + healthrestored, 0f), charunit.AjustedStats.HP), false, healthrestored + "", "-", "-", true);
         SetupCombatHUD(target, false, true, 0, true);
+
+
+        string unitweapontxt = "";
+
+        equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
+
+        switch (unitweapon.type.ToLower())
+        {
+            case ("sword"):
+                unitweapontxt += "<sprite=0>";
+                break;
+            case ("spear"):
+                unitweapontxt += "<sprite=1>";
+                break;
+            case ("greatsword"):
+                unitweapontxt += "<sprite=2>";
+                break;
+            case ("bow"):
+                unitweapontxt += "<sprite=3>";
+                break;
+            case ("scythe"):
+                unitweapontxt += "<sprite=4>";
+                break;
+            case ("shield"):
+                unitweapontxt += "<sprite=6>";
+                break;
+            case ("staff"):
+                unitweapontxt += "<sprite=7>";
+                break;
+            default:
+                unitweapontxt += "<sprite=5>";
+                break;
+        }
+
+        string colorstring = " ";
+        if (newbladeuse > unitweapon.Currentuses)
+        {
+            colorstring = " <color=green>";
+        }
+        else if (newbladeuse < unitweapon.Currentuses)
+        {
+            colorstring = " <color=red>";
+        }
+
+        unitweapontxt += " " + unitweapon.Name + colorstring + newbladeuse + "</color>/" + unitweapon.Maxuses;
+
+        UnitWeapon.text = unitweapontxt;
 
         TargetGreenLifebar.fillAmount = 1f;
         TargetOrangeLifeBar.fillAmount = 1f;
@@ -2242,6 +2302,30 @@ public class ActionsMenu : MonoBehaviour
             unyieldingactive = true;
         }
 
+
+        if (Attacker.GetComponent<UnitScript>().GetSkill(83)) //born to burn
+        {
+            if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.BurnTurns > 0)
+            {
+                charTarget.statusEffects.BurnTurns++;
+            }
+        }
+
+        if (Attacker.GetComponent<UnitScript>().GetSkill(85)) //lightning edge
+        {
+            charTarget.statusEffects.ParalyzedTurns++;
+        }
+
+        if (Attacker.GetComponent<UnitScript>().GetSkill(86)) //blazing edge
+        {
+            charTarget.statusEffects.BurnTurns++;
+        }
+
+        if (target.GetComponent<UnitScript>().GetSkill(87)) //unphasable
+        {
+            target.GetComponent<UnitScript>().RemoveStatusAilments();
+        }
+
         return (oneforallactive, unyieldingactive);
     }
 
@@ -2304,6 +2388,8 @@ public class ActionsMenu : MonoBehaviour
                     AttackerChar.currentHP = (int)AttackerChar.AjustedStats.HP;
                 }
             }
+
+
 
         }
 

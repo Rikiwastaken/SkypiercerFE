@@ -3234,7 +3234,16 @@ public class UnitScript : MonoBehaviour
             statbonuses.PhysDamage += (int)(UnitCharacteristics.AjustedStats.Strength + statbonuses.Strength) / 4;
         }
 
-
+        //Born to burn
+        if (GetSkill(83))
+        {
+            if (UnitCharacteristics.statusEffects.BurnTurns > 0)
+            {
+                statbonuses.Hit += 20;
+                statbonuses.Dodge += 20;
+                statbonuses.Crit += 10;
+            }
+        }
 
         // Battalion Bonuses
         AllStatsSkillBonus battalionskillbonus = GetBattalionCombatBonus();
@@ -3449,4 +3458,62 @@ public class UnitScript : MonoBehaviour
 
         return (range, melee, type);
     }
+    /// <summary>
+    /// Removes status ailments from the target character. If no target is specified, it removes them from the unit itself. If statustoremove is -1, it removes all status ailments. Otherwise, it removes the specific status ailment corresponding to the number (0 for weakness, 1 for power, 2 for burn, 3 for stun, 4 for paralyze, 5 for concussion, 6 for regen, 7 for acceleration).
+    /// </summary>
+    /// <param name="statustoremove"></param>
+    /// <param name="target"></param>
+    public void RemoveStatusAilments(int statustoremove = -1, Character target = null)
+    {
+        Character ChartoUse = target;
+        if (ChartoUse == null)
+        {
+            ChartoUse = UnitCharacteristics;
+        }
+
+        switch (statustoremove)
+        {
+            case -1: //all
+                ChartoUse.statusEffects.WeaknessTurns = 0;
+                ChartoUse.statusEffects.PowerTurns = 0;
+                ChartoUse.statusEffects.BurnTurns = 0;
+                ChartoUse.statusEffects.StunTurns = 0;
+                ChartoUse.statusEffects.ParalyzedTurns = 0;
+                ChartoUse.statusEffects.ConcussionTunrs = 0;
+                ChartoUse.statusEffects.RegenTurns = 0;
+                ChartoUse.statusEffects.AccelerationTurns = 0;
+                break;
+            case 0: //weakness
+                ChartoUse.statusEffects.WeaknessTurns = 0;
+                break;
+            case 1: //power
+                ChartoUse.statusEffects.PowerTurns = 0;
+                break;
+            case 2: //burn
+                ChartoUse.statusEffects.BurnTurns = 0;
+                break;
+            case 3: //stun
+                ChartoUse.statusEffects.StunTurns = 0;
+                break;
+            case 4: //paralyze
+                ChartoUse.statusEffects.ParalyzedTurns = 0;
+                break;
+            case 5: //concussion
+                ChartoUse.statusEffects.ConcussionTunrs = 0;
+                break;
+            case 6: //regen
+                ChartoUse.statusEffects.RegenTurns = 0;
+                break;
+            case 7: //acceleration
+                ChartoUse.statusEffects.AccelerationTurns = 0;
+                break;
+
+        }
+
+
+
+        // add logic to reset visuals.
+
+    }
+
 }
