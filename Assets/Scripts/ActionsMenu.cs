@@ -2546,6 +2546,15 @@ public class ActionsMenu : MonoBehaviour
     public int CalculateDamage(GameObject unit, GameObject target = null)
     {
 
+        (int damage, int bonus) = CalculateDamage(unit, false, target);
+
+        return damage;
+
+    }
+
+
+    public (int, int) CalculateDamage(GameObject unit, bool returnbonuses, GameObject target = null)
+    {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = null;
         GridSquareScript targetTile = null;
@@ -2560,6 +2569,7 @@ public class ActionsMenu : MonoBehaviour
         float basestatdamage = charunit.AjustedStats.Strength + UnitSkillBonus.Strength;
         float basestatdef = 0;
 
+        float damagebonus = 0f;
 
         if (target != null && target.activeSelf)
         {
@@ -2602,6 +2612,8 @@ public class ActionsMenu : MonoBehaviour
 
 
 
+
+
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
         {
             basestatdamage = charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
@@ -2612,6 +2624,8 @@ public class ActionsMenu : MonoBehaviour
         }
 
         float unitbasedamage = baseweapondamage + basestatdamage;
+
+        int damagebeforebuffsanddefbuffs = (int)unitbasedamage;
 
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield" && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier != null && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "spiked")
         {
@@ -2664,6 +2678,8 @@ public class ActionsMenu : MonoBehaviour
 
         int finaldamage = (int)finaldamagefloat + UnitSkillBonus.FixedDamageBonus;
 
+        damagebonus = finaldamage - damagebeforebuffsanddefbuffs;
+
         if (target != null && TargetSkillBonus != null)
         {
             finaldamage = finaldamage - TargetSkillBonus.FixedDamageReduction;
@@ -2675,8 +2691,7 @@ public class ActionsMenu : MonoBehaviour
             finaldamage = 0;
         }
 
-        return finaldamage;
-
+        return (finaldamage, (int)damagebonus);
     }
 
     public int CalculateHealing(GameObject unit)

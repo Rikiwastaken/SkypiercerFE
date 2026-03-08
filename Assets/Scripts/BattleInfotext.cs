@@ -250,16 +250,30 @@ public class BattleInfotext : MonoBehaviour
 
                 AllStatsSkillBonus statsmods = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null);
                 string statstring = "";
-                statstring += "Str: " + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength);
-                statstring += "\nPsy: " + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche);
-                statstring += "\nDef: " + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense);
-                statstring += "\nRes: " + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance);
-                statstring += "\nDex: " + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity);
-                statstring += "\nSpd: " + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed);
 
-                int BaseDamage = ActionsMenu.CalculateDamage(selectedunit);
+                string colorstring = getcolorstring(statsmods.Strength);
 
-                statstring += "\nDmg: " + BaseDamage + "\nMvt: " + (selectedunitCharacter.movements - 1);
+                statstring += colorstring + "Str: " + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength);
+
+                colorstring = getcolorstring(statsmods.Psyche);
+
+                statstring += colorstring + "\nPsy: " + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche);
+
+                colorstring = getcolorstring(statsmods.Defense);
+                statstring += colorstring + "\nDef: " + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense);
+                colorstring = getcolorstring(statsmods.Resistance);
+                statstring += colorstring + "\nRes: " + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance);
+                colorstring = getcolorstring(statsmods.Dexterity);
+                statstring += colorstring + "\nDex: " + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity);
+                colorstring = getcolorstring(statsmods.Speed);
+                statstring += colorstring + "\nSpd: " + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed);
+
+
+                (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(selectedunit, true);
+
+                colorstring = getcolorstring(damagebonus);
+
+                statstring += "\nDmg: " + colorstring + BaseDamage + "</color>\nMvt: " + (selectedunitCharacter.movements - 1);
 
                 StatTMP.text = statstring;
 
@@ -742,5 +756,21 @@ public class BattleInfotext : MonoBehaviour
         }
 
 
+    }
+
+    private string getcolorstring(int valuemodifier)
+    {
+        if (valuemodifier > 0)
+        {
+            return "</color><color=green>";
+        }
+        else if (valuemodifier < 0)
+        {
+            return "</color><color=red>";
+        }
+        else
+        {
+            return "</color>";
+        }
     }
 }
