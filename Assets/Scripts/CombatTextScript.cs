@@ -34,8 +34,6 @@ public class CombatTextScript : MonoBehaviour
             cameraScript = FindAnyObjectByType<cameraScript>();
         }
 
-
-
         if (cameraScript.incombat && attacker != null)
         {
 

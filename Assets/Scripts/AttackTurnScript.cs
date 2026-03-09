@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static DataScript;
@@ -5,7 +6,9 @@ using static UnitScript;
 public class AttackTurnScript : MonoBehaviour
 {
 
+    [Header("Pointers")]
     private TurnManger TurnManager;
+    public ExpBarScript expbar;
 
     public GameObject CurrentEnemy;
     public GameObject CurrentPlayable;
@@ -16,6 +19,9 @@ public class AttackTurnScript : MonoBehaviour
     private cameraScript battlecamera;
 
     public ActionsMenu ActionsMenu;
+    public PhaseTextScript phaseTextScript;
+
+    [Header("combat timing variables")]
 
     public float delaybeforeMove;
     private int counterbeforemove;
@@ -40,7 +46,7 @@ public class AttackTurnScript : MonoBehaviour
 
     public bool expdistributed;
 
-    public ExpBarScript expbar;
+
 
     private int expgained;
 
@@ -54,7 +60,7 @@ public class AttackTurnScript : MonoBehaviour
 
     public float TimebeforeAnimationAttack;
 
-    public PhaseTextScript phaseTextScript;
+
     private MinimapScript minimapScript;
 
     public ForesightScript foresightScript;
@@ -71,6 +77,8 @@ public class AttackTurnScript : MonoBehaviour
     private GameObject currentenemytarget;
 
     private BattleInfotext battleInfotextScript;
+
+    public Coroutine AttackCoroutine;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -99,7 +107,7 @@ public class AttackTurnScript : MonoBehaviour
             return;
         }
 
-        if (previousattacker != null)
+        if (previousattacker != null && AttackCoroutine == null)
         {
             previousattacker.GetComponent<UnitScript>().disableLifebar = false;
             previousattacker.GetComponent<UnitScript>().ManageLifebars();
@@ -237,7 +245,10 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 else
                 {
-                    ManageAttackWithoutAnimation(CurrentEnemy);
+                    if (AttackCoroutine == null)
+                    {
+                        AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimationRework(CurrentEnemy));
+                    }
                 }
 
             }
@@ -270,7 +281,10 @@ public class AttackTurnScript : MonoBehaviour
                     }
                     else
                     {
-                        ManageAttackWithoutAnimation(CurrentPlayable);
+                        if (AttackCoroutine == null)
+                        {
+                            AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimationRework(CurrentPlayable));
+                        }
                     }
                 }
                 else
@@ -364,7 +378,10 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 else
                 {
-                    ManageAttackWithoutAnimation(CurrentOther);
+                    if (AttackCoroutine == null)
+                    {
+                        AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimationRework(CurrentOther));
+                    }
                 }
             }
             else
@@ -1234,6 +1251,233 @@ public class AttackTurnScript : MonoBehaviour
                 ActionManager.instance.Wait(Attacker);
             }
         }
+    }
+
+    public IEnumerator ManageAttackWithoutAnimationRework(GameObject Attacker)
+    {
+
+        Debug.Log("Starting the battle");
+
+        int safeguard = 0;
+        Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
+        Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
+
+        //setup target
+        GameObject target = null;
+
+        if (CharAttacker.affiliation != "playable")
+        {
+            target = currentenemytarget;
+        }
+        else
+        {
+            target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
+        }
+
+
+
+
+
+
+
+
+        triggercleanup = true;
+
+
+        //Begin fight
+        if (target != null)
+        {
+            if (combatTextScript == null)
+            {
+                combatTextScript = FindAnyObjectByType<CombatTextScript>(FindObjectsInactive.Include);
+            }
+            target.transform.LookAt(Attacker.transform);
+            Attacker.transform.LookAt(target.transform);
+            target.transform.GetChild(1).LookAt(Attacker.transform.GetChild(1));
+            Attacker.transform.GetChild(1).LookAt(target.transform.GetChild(1));
+
+            foreach (ModelInfo modelinfo in Attacker.GetComponent<UnitScript>().ModelList)
+            {
+                if (modelinfo.ID == 1 && modelinfo.active)
+                {
+                    Attacker.transform.GetChild(1).localRotation = Quaternion.Euler(0, 90, 0);
+                }
+            }
+            battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
+            yield return new WaitForSeconds(delaybeforeAttack);
+
+
+            Character Chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+            Character Targetcopy = target.GetComponent<UnitScript>().CreateCopy();
+
+
+            (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
+            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));
+            if (ishealing)
+            {
+                foresightScript.CreateAction(1, Attacker, target);
+            }
+            else
+            {
+                foresightScript.CreateAction(0, Attacker, target);
+            }
+
+            Debug.Log("Playing attacker attack animation");
+
+            if (doubleattacker == Attacker)
+            {
+                if (triple)
+                {
+                    Attacker.GetComponent<UnitScript>().PlayAttackAnimation(true, true, ishealing);
+                }
+                else
+                {
+                    Attacker.GetComponent<UnitScript>().PlayAttackAnimation(true, false, ishealing);
+                }
+            }
+            else
+            {
+                Attacker.GetComponent<UnitScript>().PlayAttackAnimation(false, false, ishealing);
+            }
+
+
+            yield return new WaitForSeconds(0.5f);
+
+
+            //play animation
+            safeguard = 0;
+            while (checkifattackanimationisplaying(Attacker, target) && safeguard < 600)
+            {
+                safeguard++;
+                yield return null;
+            }
+
+            Debug.Log("Apply attacker damage");
+
+            // apply damage
+            (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist, bool oneforallactiveattacker, bool unyieldingactiveattacker, bool compassionusedattacker, bool invigoratingusedattacker) = ActionsMenu.ApplyDamage(Attacker, target, false);
+
+            combatTextScript.UpdateInfo(attackerdamage, attackerhits, attackercrits, CharAttacker, Chartarget, ishealing);
+
+            bool defenderattacks = ((ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38) && Chartarget.statusEffects.StunTurns <= 0) && !ishealing && Chartarget.currentHP > 0);
+
+            int defenderhits = 0;
+            int defenderdamage = 0;
+            int defendercrits = 0;
+            int defenderexp = 0;
+            List<int> defenderlevelbonus = new List<int>();
+            List<int> defenderdamagelist = new List<int>();
+            List<int> defendercritlist = new List<int>();
+            bool oneforallactivedefender = false;
+            bool unyieldingactivedefender = false;
+            bool compassionuseddefender = false;
+            bool invigoratinguseddefender = false;
+
+
+            if (defenderattacks)
+            {
+
+                //play defender animation
+
+                yield return new WaitForSeconds(delaybetweenAttack);
+
+                Debug.Log("Playing defender attack animation");
+
+                if (doubleattacker == target)
+                {
+                    if (triple)
+                    {
+                        target.GetComponent<UnitScript>().PlayAttackAnimation(true, true);
+                    }
+                    else
+                    {
+                        target.GetComponent<UnitScript>().PlayAttackAnimation(true, false);
+                    }
+                }
+                else
+                {
+                    target.GetComponent<UnitScript>().PlayAttackAnimation(false, false);
+                }
+
+                yield return new WaitForSeconds(0.5f);
+
+                safeguard = 0;
+                while (checkifattackanimationisplaying(target, Attacker) && safeguard < 600)
+                {
+                    safeguard++;
+                    yield return null;
+                }
+
+                // deal damage
+                Debug.Log("Apply defender damage");
+                (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender) = ActionsMenu.ApplyDamage(Attacker, target, true);
+                combatTextScript.UpdateInfo(defenderdamage, defenderhits, defendercrits, Chartarget, CharAttacker, false);
+
+            }
+            yield return new WaitForSeconds(delayafterAttack);
+            Debug.Log("Distributing exp");
+
+            int expreceived = -1;
+            List<int> levelupbonuses = new List<int>();
+            Character characterwhogainedexp = null;
+            // manage exp
+            waittingforexp = true;
+            if (CharAttacker.affiliation == "playable" && CharAttacker.currentHP > 0)
+            {
+                expreceived = attackerexp;
+                levelupbonuses = attackerlevelbonus;
+                characterwhogainedexp = CharAttacker;
+            }
+            else if (Chartarget.affiliation == "playable" && Chartarget.currentHP > 0)
+            {
+                expreceived = defenderexp;
+                levelupbonuses = defenderlevelbonus;
+                characterwhogainedexp = Chartarget;
+            }
+
+            // exp distribution
+            if (expreceived != -1)
+            {
+                if (!expbar.gameObject.activeSelf)
+                {
+                    expbar.gameObject.SetActive(true);
+                }
+
+                if (!expbar.setupdone)
+                {
+                    expbar.SetupBar(characterwhogainedexp, expreceived, levelupbonuses);
+                }
+
+
+                safeguard = 0;
+                while (!expdistributed && safeguard < 600)
+                {
+                    safeguard++;
+                    yield return null;
+                }
+                expbar.gameObject.SetActive(false);
+                if (CharAttacker.affiliation == "playable")
+                {
+                    ActionsMenu.target = Attacker;
+                    ActionsMenu.FinalizeAttack();
+                }
+
+            }
+            Debug.Log("Ending combat");
+            waittingforexp = false;
+            expdistributed = false;
+            cameraScript.instance.incombat = false;
+            EndOfCombatTrigger(Attacker, target);
+
+            CharAttacker.alreadyplayed = true;
+        }
+        else
+        {
+            ActionManager.instance.Wait(Attacker);
+        }
+
+        Debug.Log("reseting coroutine");
+        AttackCoroutine = null;
     }
 
     private bool checkifattackanimationisplaying(GameObject attacker, GameObject target)

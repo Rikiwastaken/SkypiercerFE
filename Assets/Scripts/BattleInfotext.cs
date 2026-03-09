@@ -78,6 +78,7 @@ public class BattleInfotext : MonoBehaviour
         GridScript = GridScript.instance;
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         BaseSkillColor = SkillButtonList[0].image.color;
+        attackTurnScript = FindAnyObjectByType<AttackTurnScript>(FindObjectsInactive.Include);
     }
 
 
@@ -89,7 +90,7 @@ public class BattleInfotext : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf || ForeSightMenu.activeSelf || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (TipsMenuScript.instance != null && TipsMenuScript.instance.gameObject.activeSelf) || (TutorialWindowScript.instance != null && TutorialWindowScript.instance.gameObject.activeSelf))
+        if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf || ForeSightMenu.activeSelf || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (TipsMenuScript.instance != null && TipsMenuScript.instance.gameObject.activeSelf) || (TutorialWindowScript.instance != null && TutorialWindowScript.instance.gameObject.activeSelf) || (attackTurnScript != null && attackTurnScript.AttackCoroutine != null))
         {
             framesbeforeactivation = 5;
 
