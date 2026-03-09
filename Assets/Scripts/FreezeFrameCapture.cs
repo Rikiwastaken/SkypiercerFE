@@ -77,6 +77,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
     public PlayerInput playerInput;
 
+    private Coroutine CloseCoroutine;
 
     private void Awake()
     {
@@ -122,17 +123,21 @@ public class FreezeFrameCapture : MonoBehaviour
             PlayFullAnimation(DataScript.instance.PlayableCharacterList[1], list);
         }
 
-        if (ShowingLevelUp && CancelAction.IsPressed())
+        if (CloseCoroutine == null)
         {
-            StopAllCoroutines();
-            StartCoroutine(Close());
+            if (ShowingLevelUp && CancelAction.IsPressed())
+            {
+                StopAllCoroutines();
+                CloseCoroutine = StartCoroutine(Close());
+            }
+            else if (continueAvailable && ActivateAction.IsPressed())
+            {
+                StopAllCoroutines();
+                CloseCoroutine = StartCoroutine(Close());
+            }
         }
 
-        if (continueAvailable && ActivateAction.IsPressed())
-        {
-            StopAllCoroutines();
-            StartCoroutine(Close());
-        }
+
 
     }
 
@@ -393,6 +398,7 @@ public class FreezeFrameCapture : MonoBehaviour
             CombatSceneManagerV2.instance.CloseCombatScene();
         }
 
+        CloseCoroutine = null;
 
     }
 
