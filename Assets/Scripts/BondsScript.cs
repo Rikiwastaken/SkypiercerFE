@@ -198,6 +198,11 @@ public class BondsScript : MonoBehaviour
                     break;
                 }
             }
+
+            Debug.Log(bondsSubMenu.transform.GetChild(i));
+
+            Debug.Log(PertinentbondsDialogue[i]);
+
             bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = othercharacter.name + "\nBond Lvl " + PertinentbondsDialogue[i].Bond.BondLevel + " (Max " + PertinentbondsDialogue[i].Bond.MaxLevel + ")";
 
             if (CheckIfBondCanIncrease(PertinentbondsDialogue[i].Bond))

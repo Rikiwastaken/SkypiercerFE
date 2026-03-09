@@ -257,6 +257,7 @@ public class ActionsMenu : MonoBehaviour
 
             transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
         }
+        Debug.Log(TutorialScript.instance.enabled);
         if (TutorialScript.instance != null && TutorialScript.instance.enabled)
         {
             var colors = transform.GetChild(2).GetComponent<Button>().colors;
@@ -2825,7 +2826,7 @@ public class ActionsMenu : MonoBehaviour
         if (unitfirstweapon.type.ToLower() == "sword")
         {
             int increaseamount = 2;
-            if (unitfirstweapon.Modifier.ToLower() == "quick")
+            if (unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() == "quick")
             {
                 increaseamount = 3;
             }
@@ -2835,7 +2836,7 @@ public class ActionsMenu : MonoBehaviour
         if (targetfirstweapon.type.ToLower() == "sword")
         {
             int increaseamount = 2;
-            if (targetfirstweapon.Modifier.ToLower() == "quick")
+            if (unitfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "quick")
             {
                 increaseamount = 3;
             }
@@ -2845,11 +2846,11 @@ public class ActionsMenu : MonoBehaviour
 
         if (unitfirstweapon.type.ToLower() == "greatsword")
         {
-            if (unitfirstweapon.Modifier.ToLower() == "heavyweight")
+            if (unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() == "heavyweight")
             {
                 unitstatbonus.Speed -= unitfirstweapon.Grade * 2;
             }
-            else if (unitfirstweapon.Modifier.ToLower() != "lightweight")
+            else if (unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() != "lightweight")
             {
                 unitstatbonus.Speed -= unitfirstweapon.Grade;
             }
@@ -2857,11 +2858,11 @@ public class ActionsMenu : MonoBehaviour
         }
         if (targetfirstweapon.type.ToLower() == "greatsword")
         {
-            if (targetfirstweapon.Modifier.ToLower() == "heavyweight")
+            if (unitfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "heavyweight")
             {
                 targetstatbonus.Speed -= targetfirstweapon.Grade * 2;
             }
-            else if (targetfirstweapon.Modifier.ToLower() != "lightweight")
+            else if (unitfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() != "lightweight")
             {
                 targetstatbonus.Speed -= targetfirstweapon.Grade;
             }
@@ -2869,7 +2870,7 @@ public class ActionsMenu : MonoBehaviour
 
         if (targetfirstweapon.type.ToLower() == "spear")
         {
-            if (targetfirstweapon.Modifier.ToLower() == "precise")
+            if (unitfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "precise")
             {
                 unitstatbonus.Dexterity -= targetfirstweapon.Grade * 3;
             }
@@ -2881,7 +2882,7 @@ public class ActionsMenu : MonoBehaviour
         }
         if (unitfirstweapon.type.ToLower() == "spear")
         {
-            if (targetfirstweapon.Modifier.ToLower() == "precise")
+            if (unitfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "precise")
             {
                 targetstatbonus.Dexterity -= unitfirstweapon.Grade * 3;
             }

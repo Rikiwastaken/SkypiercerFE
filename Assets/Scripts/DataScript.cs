@@ -1640,10 +1640,10 @@ public class DataScript : MonoBehaviour
     {
         DefaultPlayableCharacterList = new List<Character>();
         DefaultInventory = new Inventory() { inventoryItems = new List<InventoryItem>() };
-
+        UnitScript unitScript = new UnitScript();
         foreach (Character character in PlayableCharacterList)
         {
-            DefaultPlayableCharacterList.Add(CopyChararacter(character));
+            DefaultPlayableCharacterList.Add(unitScript.CreateCopy(character));
         }
         foreach (InventoryItem item in PlayerInventory.inventoryItems)
         {

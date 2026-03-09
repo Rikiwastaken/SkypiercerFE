@@ -1256,8 +1256,6 @@ public class AttackTurnScript : MonoBehaviour
     public IEnumerator ManageAttackWithoutAnimationRework(GameObject Attacker)
     {
 
-        Debug.Log("Starting the battle");
-
         int safeguard = 0;
         Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
         Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
@@ -1322,7 +1320,6 @@ public class AttackTurnScript : MonoBehaviour
                 foresightScript.CreateAction(0, Attacker, target);
             }
 
-            Debug.Log("Playing attacker attack animation");
 
             if (doubleattacker == Attacker)
             {
@@ -1352,7 +1349,6 @@ public class AttackTurnScript : MonoBehaviour
                 yield return null;
             }
 
-            Debug.Log("Apply attacker damage");
 
             // apply damage
             (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist, bool oneforallactiveattacker, bool unyieldingactiveattacker, bool compassionusedattacker, bool invigoratingusedattacker) = ActionsMenu.ApplyDamage(Attacker, target, false);
@@ -1381,7 +1377,6 @@ public class AttackTurnScript : MonoBehaviour
 
                 yield return new WaitForSeconds(delaybetweenAttack);
 
-                Debug.Log("Playing defender attack animation");
 
                 if (doubleattacker == target)
                 {
@@ -1409,13 +1404,11 @@ public class AttackTurnScript : MonoBehaviour
                 }
 
                 // deal damage
-                Debug.Log("Apply defender damage");
                 (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender) = ActionsMenu.ApplyDamage(Attacker, target, true);
                 combatTextScript.UpdateInfo(defenderdamage, defenderhits, defendercrits, Chartarget, CharAttacker, false);
 
             }
             yield return new WaitForSeconds(delayafterAttack);
-            Debug.Log("Distributing exp");
 
             int expreceived = -1;
             List<int> levelupbonuses = new List<int>();
@@ -1463,7 +1456,6 @@ public class AttackTurnScript : MonoBehaviour
                 }
 
             }
-            Debug.Log("Ending combat");
             waittingforexp = false;
             expdistributed = false;
             cameraScript.instance.incombat = false;
@@ -1476,7 +1468,6 @@ public class AttackTurnScript : MonoBehaviour
             ActionManager.instance.Wait(Attacker);
         }
 
-        Debug.Log("reseting coroutine");
         AttackCoroutine = null;
     }
 
@@ -2123,7 +2114,7 @@ public class AttackTurnScript : MonoBehaviour
 
         int reward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        if (charunit.enemyStats.personality.ToLower() == "guard" && position.GridCoordinates != charunit.position)
+        if (charunit.enemyStats.personality.ToLower() == "guard" && position != charunit.currentTile[0])
         {
             return reward - 9999;
         }
