@@ -64,7 +64,7 @@ public class ActionManager : MonoBehaviour
     {
 
 
-        if (NeutralMenu.activeSelf)
+        if (NeutralMenu.activeSelf || GridScript.actionsMenu.activeSelf)
         {
             NeutralMenuCD = 5;
         }
