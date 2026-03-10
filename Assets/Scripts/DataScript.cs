@@ -1487,20 +1487,16 @@ public class DataScript : MonoBehaviour
             chapterlistlength = ChapterFlagsList.Count;
         }
 
-
-        if (Chapter > 2)
+        foreach (InventoryItem item in inventory.inventoryItems)
         {
-            foreach (InventoryItem item in inventory.inventoryItems)
+            if (Chapter > 2)
             {
                 if (item.ID == 56)
                 {
                     item.Quantity += 2;
                 }
             }
-        }
-        if (Chapter > 3)
-        {
-            foreach (InventoryItem item in inventory.inventoryItems)
+            if (Chapter > 3)
             {
                 if (item.ID == 6)
                 {
@@ -1515,10 +1511,7 @@ public class DataScript : MonoBehaviour
                     item.Quantity += 1;
                 }
             }
-        }
-        if (Chapter > 4)
-        {
-            foreach (InventoryItem item in inventory.inventoryItems)
+            if (Chapter > 4)
             {
                 if (item.ID == 61)
                 {
@@ -1533,10 +1526,7 @@ public class DataScript : MonoBehaviour
                     item.Quantity += 1;
                 }
             }
-        }
-        if (Chapter > 5)
-        {
-            foreach (InventoryItem item in inventory.inventoryItems)
+            if (Chapter > 5)
             {
                 if (item.ID == 42)
                 {
@@ -1551,10 +1541,7 @@ public class DataScript : MonoBehaviour
                     item.Quantity += 1;
                 }
             }
-        }
-        if (Chapter > 6)
-        {
-            foreach (InventoryItem item in inventory.inventoryItems)
+            if (Chapter > 6)
             {
                 if (item.ID == 11)
                 {
@@ -1565,10 +1552,7 @@ public class DataScript : MonoBehaviour
                     item.Quantity += 1;
                 }
             }
-        }
-        if (Chapter > 7)
-        {
-            foreach (InventoryItem item in inventory.inventoryItems)
+            if (Chapter > 7)
             {
                 if (item.ID == 64)
                 {
@@ -1583,10 +1567,7 @@ public class DataScript : MonoBehaviour
                     item.Quantity += 1;
                 }
             }
-        }
-        if (Chapter > 8)
-        {
-            foreach (InventoryItem item in inventory.inventoryItems)
+            if (Chapter > 8)
             {
                 if (item.ID == 66)
                 {
@@ -1601,10 +1582,7 @@ public class DataScript : MonoBehaviour
                     item.Quantity += 1;
                 }
             }
-        }
-        if (Chapter > 9)
-        {
-            foreach (InventoryItem item in inventory.inventoryItems)
+            if (Chapter > 9)
             {
                 if (item.ID == 69)
                 {
@@ -1623,7 +1601,30 @@ public class DataScript : MonoBehaviour
                     item.Quantity += 1;
                 }
             }
+            if (Chapter > 10)
+            {
+                if (item.ID == 54)
+                {
+                    item.Quantity += 1;
+                }
+                if (item.ID == 2)
+                {
+                    item.Quantity += 1;
+                }
+                if (item.ID == 21)
+                {
+                    item.Quantity += 1;
+                }
+                if (item.ID == 27)
+                {
+                    item.Quantity += 1;
+                }
+            }
         }
+
+
+
+
 
     }
 

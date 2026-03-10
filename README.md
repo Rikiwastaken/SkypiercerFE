@@ -1,6 +1,6 @@
 # Skypiercer
 
-Skypiercer is a turn-based tactical RPG inspired by Fire Emblem, featuring stat-driven combat, customizable weapons (“Blades”), battalion mechanics, and a story-driven campaign set in a world shaped by an apocalyptic cataclism.
+Skypiercer is a turn-based tactical RPG inspired by Fire Emblem, featuring stat-driven combat, customizable weapons (“Blades”), battalion mechanics, and a story-driven campaign set in a world shaped by an apocalyptic cataclysm.
 
 ## Core features
 
@@ -20,13 +20,15 @@ Dynamic weather affecting units differently (Humans, Pluvials, Machines).
 
 ## Story
 
-Follow *Zack Farron* and his allies as they travel the world in the midst of a terrifying war. What begins as a local incident escalates into a journey beyond their isolated village to stop Caelum, a force lurking  for the control of the world.
+Follow *Zack Farron* and his allies as they travel the world in the midst of a terrifying war. What begins as a local incident escalates into a journey beyond their isolated village to stop Caelum, a force plotting to take over the world.
 
 ## Credits
 
 Game design & concept by Riki.
 
 Music by <a href="https://maou.audio/category/bgm/"> Maoudamashii </a> and<a href="https://youfulca.com/en/music_assets/"> Youfulca </a> 
+
+
 <a href="http://www.freepik.com">Designed by macrovector / Freepik</a>
 
 ## Controls
