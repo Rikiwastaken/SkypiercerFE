@@ -210,6 +210,7 @@ public class UnitScript : MonoBehaviour
         public bool ishealing;
         public int framesremaining;
         public bool isBond;
+        public Sprite Image;
     }
 
     public Character UnitCharacteristics;
@@ -244,6 +245,7 @@ public class UnitScript : MonoBehaviour
 
     public TextMeshProUGUI DmgText;
     public TextMeshProUGUI DmgEffectNameText;
+    public Image AffinityImage;
     public int waittedbonusturns;
 
     private List<NumberToShow> damagestoshow = new List<NumberToShow>();
@@ -1652,8 +1654,16 @@ public class UnitScript : MonoBehaviour
     {
         if (damagestoshow.Count > 0 && !cameraScript.incombat)
         {
-            DmgText.enabled = true;
-            DmgEffectNameText.enabled = true;
+            if (!DmgText.enabled)
+            {
+                DmgText.enabled = true;
+            }
+            if (!DmgEffectNameText.enabled)
+            {
+                DmgEffectNameText.enabled = true;
+            }
+
+
             if (damagestoshow[0].number == 0)
             {
                 DmgText.enabled = false;
@@ -1671,7 +1681,10 @@ public class UnitScript : MonoBehaviour
                 }
             }
 
-
+            if (damagestoshow[0].isBond && !AffinityImage.gameObject.activeSelf)
+            {
+                AffinityImage.gameObject.SetActive(true);
+            }
 
 
             DmgEffectNameText.text = damagestoshow[0].EffectName;
@@ -1691,8 +1704,18 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            DmgText.enabled = false;
-            DmgEffectNameText.enabled = false;
+            if (DmgText.enabled)
+            {
+                DmgText.enabled = false;
+            }
+            if (DmgEffectNameText.enabled)
+            {
+                DmgEffectNameText.enabled = false;
+            }
+            if (AffinityImage.gameObject.activeSelf)
+            {
+                AffinityImage.gameObject.SetActive(false);
+            }
         }
     }
 

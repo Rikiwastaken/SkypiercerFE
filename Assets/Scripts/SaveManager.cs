@@ -272,7 +272,28 @@ public class SaveManager : MonoBehaviour
 
         if (slot >= 0 && slot < SaveClasses.Count)
         {
-            DS.PlayableCharacterList = SaveClasses[slot].PlayableCharacterList;
+
+
+            //apply save to datascript
+
+            List<Character> newplayablecharacterlist = new List<Character>();
+
+            foreach (Character chara in DS.PlayableCharacterList)
+            {
+                Character charatoadd = chara;
+                foreach (Character newchara in SaveClasses[slot].PlayableCharacterList)
+                {
+                    if (charatoadd.ID == newchara.ID)
+                    {
+                        charatoadd = newchara;
+                        continue;
+                    }
+                }
+                newplayablecharacterlist.Add(charatoadd);
+            }
+
+            DS.PlayableCharacterList = newplayablecharacterlist;
+
             DS.PlayerInventory = SaveClasses[slot].PlayerInventory;
             DS.BondsList = SaveClasses[slot].BondList;
             secondselapsed = SaveClasses[slot].secondselapsed;

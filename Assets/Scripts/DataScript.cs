@@ -1815,21 +1815,20 @@ public class DataScript : MonoBehaviour
                 if (OtherUnit.GetComponent<UnitScript>().GetSkill(66) && MainUnit.GetComponent<UnitScript>().GetSkill(66)) //Friendly
                 {
                     bond.BondPoints += bondincreaseperaction * 3;
-                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 3, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
-                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 3, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
+
                 }
                 else if (OtherUnit.GetComponent<UnitScript>().GetSkill(66) || MainUnit.GetComponent<UnitScript>().GetSkill(66))
                 {
                     bond.BondPoints += bondincreaseperaction * 2;
-                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 2, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
-                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction * 2, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
+
                 }
                 else
                 {
                     bond.BondPoints += bondincreaseperaction;
-                    MainUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction, true, "Bond with " + OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
-                    OtherUnit.GetComponent<UnitScript>().AddNumber(bondincreaseperaction, true, "Bond with " + MainUnit.GetComponent<UnitScript>().UnitCharacteristics.name + " +", true);
+
                 }
+                MainUnit.GetComponent<UnitScript>().AddNumber(0, true, "", true);
+                OtherUnit.GetComponent<UnitScript>().AddNumber(0, true, "", true);
 
                 return;
             }
