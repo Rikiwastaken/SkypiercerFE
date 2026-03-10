@@ -1818,11 +1818,16 @@ public class ActionsMenu : MonoBehaviour
     /// <param name="unit"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    public bool CheckifInRange(GameObject unit, GameObject target)
+    public bool CheckifInRange(GameObject unit, GameObject target, GridSquareScript position = null)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
+        GridSquareScript tiletouse = position;
+        if (tiletouse == null)
+        {
+            tiletouse = charunit.currentTile[0];
+        }
 
         if (chartarget.enemyStats.monsterStats.size > 0)
         {
@@ -1850,7 +1855,7 @@ public class ActionsMenu : MonoBehaviour
         }
         else
         {
-            int Distance = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
+            int Distance = (int)(Mathf.Abs(chartarget.position.x - tiletouse.GridCoordinates.x) + Mathf.Abs(chartarget.position.y - tiletouse.GridCoordinates.y));
             (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
             if (Distance <= 1)
             {

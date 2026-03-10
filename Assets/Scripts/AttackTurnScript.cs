@@ -1690,14 +1690,14 @@ public class AttackTurnScript : MonoBehaviour
 
             bool skip = true;
 
-            if (unit == currentCharacter)
+            if (unit == currentCharacter || !attacktiles.Contains(otherchar.currentTile[0]))
             {
                 continue;
             }
 
             if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
             {
-                if (character.affiliation.ToLower() == otherchar.affiliation.ToLower() || (character.affiliation.ToLower() == "other" && !character.attacksfriends))
+                if (character.affiliation.ToLower() == otherchar.affiliation.ToLower() || (character.affiliation.ToLower() == "other" && !character.attacksfriends && otherchar.affiliation.ToLower() == "playable"))
                 {
                     skip = false;
                 }
@@ -1724,16 +1724,7 @@ public class AttackTurnScript : MonoBehaviour
                 continue;
             }
 
-            foreach (GridSquareScript tile in attacktiles)
-            {
-                if (otherchar.currentTile.Contains(tile))
-                {
-                    potentialtargets.Add(unit);
-                    continue;
-                }
-            }
-
-
+            potentialtargets.Add(unit);
         }
 
         GameObject truetarget = null;
@@ -1925,7 +1916,7 @@ public class AttackTurnScript : MonoBehaviour
                     continue;
                 }
 
-                int distancediff = ManhattanDistance(otherchar, Character) - (Character.movements - 2) - ManhattanDistance(otherchar.currentTile[0].GridCoordinates, square.GridCoordinates);
+                int distancediff = ManhattanDistance(otherchar, Character) - Character.movements - ManhattanDistance(otherchar.currentTile[0].GridCoordinates, square.GridCoordinates);
 
                 if (distancediff <= 0)
                 {
@@ -2014,6 +2005,8 @@ public class AttackTurnScript : MonoBehaviour
         Character attackerChar = attacker.GetComponent<UnitScript>().UnitCharacteristics;
         Character targetChar = target.GetComponent<UnitScript>().UnitCharacteristics;
 
+        GridSquareScript tiletouse = GetClosestTileToattack(attacker, target, gridScript.movementtiles);
+
         if (targetChar.TauntTurns > 0)
         {
             reward += 999f;
@@ -2032,17 +2025,14 @@ public class AttackTurnScript : MonoBehaviour
             float hitchanceFactor = 2f;
             float DodgeChanceFactor = 2f;
             float SurvivesFactor = 2f;
+            float enemyoutofrangebonus = 40f;
 
-
-            if (ActionsMenu.CheckifInRange(attacker, target))
-
-
-                if (isboss)
-                {
-                    NoCounterFactor = 0f;
-                    DodgeChanceFactor = 0f;
-                    reward += 50 - ManhattanDistance(attackerChar, targetChar);
-                }
+            if (isboss)
+            {
+                NoCounterFactor = 0f;
+                DodgeChanceFactor = 0f;
+                reward += 50 - ManhattanDistance(attackerChar, targetChar);
+            }
 
             if (attackerChar.enemyStats.personality.ToLower() == "survivor" || (attackerChar.enemyStats.personality.ToLower() == "coward" && attackerChar.currentHP < attackerChar.AjustedStats.HP * 0.1f))
             {
@@ -2063,11 +2053,12 @@ public class AttackTurnScript : MonoBehaviour
             int hitrate = ActionsMenu.CalculateHit(attacker, target);
             int dodgerate = 100 - ActionsMenu.CalculateHit(target, attacker);
 
-            bool inrange = ActionsMenu.CheckifInRange(attacker, target);
+            bool inrange = ActionsMenu.CheckifInRange(attacker, target, tiletouse);
+
             if (!inrange)
             {
                 rawdamagetaken = 0;
-                reward += 15f;
+                reward += enemyoutofrangebonus;
             }
 
 
@@ -2086,11 +2077,12 @@ public class AttackTurnScript : MonoBehaviour
             }
 
             reward += hitchanceFactor * (float)hitrate / 100f;
-            reward -= DodgeChanceFactor * (float)(1 - dodgerate) / 100f;
+            reward -= DodgeChanceFactor * (float)(100 - dodgerate) / 100f;
 
             float ratioofhptakenbyattacker = Mathf.Max(0, attackerChar.currentHP - rawdamagetaken) / attackerChar.currentHP;
 
             reward += SurvivesFactor * ratioofhptakenbyattacker;
+
         }
 
 
@@ -2098,6 +2090,45 @@ public class AttackTurnScript : MonoBehaviour
         return reward;
     }
 
+
+    private GridSquareScript GetClosestTileToattack(GameObject Unit, GameObject Target, List<GridSquareScript> movementtilestouse)
+    {
+        Character UnitChar = Unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character TargetChar = Target.GetComponent<UnitScript>().UnitCharacteristics;
+        GridSquareScript targettile = UnitChar.currentTile[0];
+        (int range, bool melee) = Unit.GetComponent<UnitScript>().GetRangeAndMele();
+
+        int maxdist = 999;
+        foreach (GridSquareScript tile in movementtilestouse)
+        {
+            bool keeptile = false;
+            if (tile == TargetChar.currentTile[0])
+            {
+                continue;
+            }
+
+            if (Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile[0].GridCoordinates) == 1)
+            {
+                if (melee)
+                {
+                    keeptile = true;
+                }
+            }
+            else if (Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile[0].GridCoordinates) <= range)
+            {
+                keeptile = true;
+            }
+
+
+            if (keeptile && (int)Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile[0].GridCoordinates) < maxdist)
+            {
+                targettile = tile;
+                maxdist = (int)Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile[0].GridCoordinates);
+            }
+        }
+
+        return targettile;
+    }
 
 
     /// <summary>
