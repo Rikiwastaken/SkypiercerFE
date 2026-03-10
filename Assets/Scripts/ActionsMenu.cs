@@ -204,7 +204,7 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-        for (int i = 1; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
             var colors = transform.GetChild(i).GetComponent<Button>().colors;
             colors.normalColor = BaseButtonColor;
@@ -257,8 +257,7 @@ public class ActionsMenu : MonoBehaviour
 
             transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
         }
-        Debug.Log(TutorialScript.instance.enabled);
-        if (TutorialScript.instance != null && TutorialScript.instance.enabled)
+        if (TutorialScript.instance != null && TutorialScript.instance.enabled && !TutorialScript.instance.tutorialisover)
         {
             var colors = transform.GetChild(2).GetComponent<Button>().colors;
             colors.normalColor = Color.gray;

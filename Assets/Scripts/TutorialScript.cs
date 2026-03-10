@@ -16,6 +16,8 @@ public class TutorialScript : MonoBehaviour
 
     private MapEventManager mapEventManager;
 
+    public bool tutorialisover;
+
     [Header("Enemy Variables")]
     public int FirstEnemyID;
     private Character FirstEnemyGO;
@@ -107,6 +109,7 @@ public class TutorialScript : MonoBehaviour
                 TurnManger.instance.BeginningOfTurnsTrigger(TurnManger.instance.playableunitGO);
                 CrossSprite.gameObject.SetActive(false);
                 StartCoroutine(PlayEvent(5, 1f));
+                tutorialisover = true;
             }
 
 
