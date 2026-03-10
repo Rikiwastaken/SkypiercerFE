@@ -82,6 +82,8 @@ public class FreezeFrameCapture : MonoBehaviour
     private Coroutine fullfreezeframecoroutine;
     private Coroutine Splitcoroutine;
 
+    private float TimeSafeguard;
+
     private void Awake()
     {
         instance = this;
@@ -97,6 +99,7 @@ public class FreezeFrameCapture : MonoBehaviour
         }
         ActivateAction = playerInput.actions["Validate"];
         CancelAction = playerInput.actions["Cancel"];
+        TimeSafeguard = 1f;
 
     }
 
@@ -140,6 +143,11 @@ public class FreezeFrameCapture : MonoBehaviour
                 StopAllCoroutines();
                 CloseCoroutine = StartCoroutine(Close());
             }
+            if (TimeSafeguard != 0 && Time.time > TimeSafeguard)
+            {
+                StopAllCoroutines();
+                CloseCoroutine = StartCoroutine(Close());
+            }
         }
 
 
@@ -149,6 +157,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
     public void PlayFullAnimation(Character characterWhoLeveledUp, List<int> levelip)
     {
+        TimeSafeguard = Time.time + 15f;
         MusicGO = MusicManager.instance.PlaySFX(LevelUpJingleClip);
         if (fullfreezeframecoroutine != null)
         {

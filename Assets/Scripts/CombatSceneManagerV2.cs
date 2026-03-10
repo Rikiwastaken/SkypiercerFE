@@ -878,7 +878,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
     private bool DetermineIfHealing()
     {
 
-        if (AttackerInfo.weapon == null || AttackerInfo.weapon.type.ToLower() != "staff")
+        if (AttackerInfo.weapon == null || AttackerInfo.weapon.type == "" || AttackerInfo.weapon.type == null || AttackerInfo.weapon.type.ToLower() != "staff")
         {
             return false;
         }

@@ -16,6 +16,7 @@ public class ButtonSoundScript : MonoBehaviour
 
     void Start()
     {
+        return;
         if (automaticallyplay)
         {
             buttons = GameObject.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
