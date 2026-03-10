@@ -79,6 +79,9 @@ public class FreezeFrameCapture : MonoBehaviour
 
     private Coroutine CloseCoroutine;
 
+    private Coroutine fullfreezeframecoroutine;
+    private Coroutine Splitcoroutine;
+
     private void Awake()
     {
         instance = this;
@@ -127,11 +130,13 @@ public class FreezeFrameCapture : MonoBehaviour
         {
             if (ShowingLevelUp && CancelAction.IsPressed())
             {
+                Debug.Log("closing");
                 StopAllCoroutines();
                 CloseCoroutine = StartCoroutine(Close());
             }
             else if (continueAvailable && ActivateAction.IsPressed())
             {
+                Debug.Log("closing");
                 StopAllCoroutines();
                 CloseCoroutine = StartCoroutine(Close());
             }
@@ -145,9 +150,15 @@ public class FreezeFrameCapture : MonoBehaviour
     public void PlayFullAnimation(Character characterWhoLeveledUp, List<int> levelip)
     {
         MusicGO = MusicManager.instance.PlaySFX(LevelUpJingleClip);
-        StopCoroutine(FullFreezeFrame(null, null));
-        StopCoroutine(SplitCoroutine());
-        StartCoroutine(FullFreezeFrame(characterWhoLeveledUp, levelip));
+        if (fullfreezeframecoroutine != null)
+        {
+            StopCoroutine(fullfreezeframecoroutine);
+        }
+        if (Splitcoroutine != null)
+        {
+            StopCoroutine(Splitcoroutine);
+        }
+        fullfreezeframecoroutine = StartCoroutine(FullFreezeFrame(characterWhoLeveledUp, levelip));
     }
 
 
@@ -313,7 +324,8 @@ public class FreezeFrameCapture : MonoBehaviour
             StartCoroutine(MoveStatCoroutine(i, i * timebetweenStats));
         }
         StartCoroutine(MoveContinueCoroutine(9f * timebetweenStats));
-        yield return SplitCoroutine();
+        Splitcoroutine = StartCoroutine(SplitCoroutine());
+        yield return Splitcoroutine;
     }
 
 
@@ -392,7 +404,7 @@ public class FreezeFrameCapture : MonoBehaviour
         right.transform.localPosition = new Vector2(1000, 0);
 
 
-        if (CombatSceneManagerV2.instance != null)
+        if (CombatSceneManagerV2.instance != null && CombatSceneManagerV2.instance.gameObject.activeInHierarchy)
         {
             Time.timeScale = 1;
             CombatSceneManagerV2.instance.CloseCombatScene();

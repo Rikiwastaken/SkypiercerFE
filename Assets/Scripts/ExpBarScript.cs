@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +7,7 @@ using static UnitScript;
 public class ExpBarScript : MonoBehaviour
 {
     public Image Expbar;
+    public FreezeFrameCapture FreezeFrame;
 
     public int Speedpersecond;
 
@@ -24,8 +24,6 @@ public class ExpBarScript : MonoBehaviour
     public int filledupbardelaycounter;
     public float filledupbardelay;
 
-    public TextMeshProUGUI LevelUpText;
-
     private List<int> levelupbonuses;
 
     private Character newcharacter;
@@ -38,7 +36,7 @@ public class ExpBarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FreezeFrameCapture.instance != null && FreezeFrameCapture.instance.ShowingLevelUp)
+        if (FreezeFrame != null && FreezeFrame.ShowingLevelUp)
         {
             return;
         }
@@ -83,7 +81,6 @@ public class ExpBarScript : MonoBehaviour
                     {
                         CombatSceneManager.expdistributed = true;
                         setupdone = false;
-                        LevelUpText.transform.parent.gameObject.SetActive(false);
                     }
                 }
 
@@ -130,7 +127,6 @@ public class ExpBarScript : MonoBehaviour
                     {
                         AttackTurnScript.expdistributed = true;
                         setupdone = false;
-                        LevelUpText.transform.parent.gameObject.SetActive(false);
                     }
                 }
 
@@ -147,9 +143,8 @@ public class ExpBarScript : MonoBehaviour
     {
         if (levelupbonuses != null && levelupbonuses.Count > 0)
         {
-            FreezeFrameCapture.instance.PlayFullAnimation(newcharacter, levelupbonuses);
+            FreezeFrame.PlayFullAnimation(newcharacter, levelupbonuses);
             AttackTurnScript.expdistributed = true;
-            LevelUpText.transform.parent.gameObject.SetActive(false);
             gameObject.SetActive(false);
             setupdone = false;
             return;

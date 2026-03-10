@@ -628,8 +628,6 @@ public class ActionsMenu : MonoBehaviour
 
     public void FinalizeAttack()
     {
-
-        Debug.Log("finalize attack");
         target.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
         targetlist = new List<GameObject>();
         GameObject oldtarget = target;

@@ -1130,7 +1130,6 @@ public class CombaSceneManager : MonoBehaviour
             DefenderNameTMP.text = defender.name;
 
             ExpBarScript.gameObject.SetActive(false);
-            ExpBarScript.LevelUpText.transform.parent.gameObject.SetActive(false);
         }
 
 
@@ -1143,7 +1142,6 @@ public class CombaSceneManager : MonoBehaviour
         expdistributed = false;
         CombatStarted = false;
         ExpBarScript.gameObject.SetActive(false);
-        ExpBarScript.LevelUpText.transform.parent.gameObject.SetActive(false);
         if (FindAnyObjectByType<CombatSceneLoader>() != null)
         {
             FindAnyObjectByType<CombatSceneLoader>().ActivateMainScene();

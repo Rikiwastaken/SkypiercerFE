@@ -1273,22 +1273,18 @@ public class AttackTurnScript : MonoBehaviour
         }
 
 
-
-
-
-
-
-
         triggercleanup = true;
 
 
         //Begin fight
         if (target != null)
         {
+
             if (combatTextScript == null)
             {
                 combatTextScript = FindAnyObjectByType<CombatTextScript>(FindObjectsInactive.Include);
             }
+            combatTextScript.ResetInfo();
             target.transform.LookAt(Attacker.transform);
             Attacker.transform.LookAt(target.transform);
             target.transform.GetChild(1).LookAt(Attacker.transform.GetChild(1));
@@ -1427,6 +1423,8 @@ public class AttackTurnScript : MonoBehaviour
                 levelupbonuses = defenderlevelbonus;
                 characterwhogainedexp = Chartarget;
             }
+
+
 
             // exp distribution
             if (expreceived != -1)
