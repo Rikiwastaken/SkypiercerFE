@@ -2338,7 +2338,7 @@ public class AttackTurnScript : MonoBehaviour
                     {
                         charunit.enemyStats.RemainingLifebars--;
                         charunit.currentHP = (int)charunit.AjustedStats.HP;
-                        unit.GetComponent<UnitScript>().AddNumber((int)charunit.AjustedStats.HP, true, charunit.enemyStats.RemainingLifebars + " Healthbars remaining.");
+                        unit.GetComponent<UnitScript>().AddNumber((int)charunit.AjustedStats.HP, true, (charunit.enemyStats.RemainingLifebars + 1) * charunit.AjustedStats.HP + " HP remaining.");
                     }
                     else
                     {

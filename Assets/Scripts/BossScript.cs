@@ -64,7 +64,10 @@ public class BossScript : MonoBehaviour
                 DetermineNextAttackTilesRagnall(nextTarget);
                 break;
             case 2:
-                DetermineNextAttackTilesKay(nextTarget);
+                DetermineNextAttackTilesKayFirstEncounter(nextTarget);
+                break;
+            case 3:
+                DetermineNextAttackTilesKaySecondEncounter(nextTarget);
                 break;
         }
     }
@@ -158,7 +161,62 @@ public class BossScript : MonoBehaviour
 
     }
 
-    public void DetermineNextAttackTilesKay(GameObject target)
+    public void DetermineNextAttackTilesKaySecondEncounter(GameObject target)
+    {
+        Character character = GetComponent<UnitScript>().UnitCharacteristics;
+
+        Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
+
+        Vector2 KayPosition = character.currentTile[0].GridCoordinates;
+
+        Vector2 TargetPosition = targetcharacter.currentTile[0].GridCoordinates;
+
+        int distance = ManhanttanDistance(KayPosition, TargetPosition);
+
+        if (distance <= 2)
+        {
+            for (int i = 0; i < GridScript.Grid.Count; i++)
+            {
+                for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                {
+                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+                    if (ManhanttanDistance(KayPosition, tile.GridCoordinates) <= 2)
+                    {
+                        if (tile != character.currentTile[0])
+                        {
+                            tile.isbossAttackTile = true;
+                        }
+
+                    }
+                    else if (ManhanttanDistance(KayPosition, tile.GridCoordinates) == 3 && (Mathf.Abs(KayPosition.x) == Mathf.Abs(TargetPosition.x) || Mathf.Abs(KayPosition.y) == Mathf.Abs(TargetPosition.y)))
+                    {
+                        tile.isbossAttackTile = true;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < GridScript.Grid.Count; i++)
+            {
+                for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                {
+                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+
+                    if (tile.GridCoordinates.y < character.currentTile[0].GridCoordinates.y)
+                    {
+                        if (!GridScript.Grid[i - 1][j].GetComponent<GridSquareScript>().isobstacle)
+                        {
+                            tile.isbossAttackTile = true;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void DetermineNextAttackTilesKayFirstEncounter(GameObject target)
     {
         Character character = GetComponent<UnitScript>().UnitCharacteristics;
 
