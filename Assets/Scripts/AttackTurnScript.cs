@@ -1410,6 +1410,7 @@ public class AttackTurnScript : MonoBehaviour
             List<int> levelupbonuses = new List<int>();
             Character characterwhogainedexp = null;
             // manage exp
+
             waittingforexp = true;
             if (CharAttacker.affiliation == "playable" && CharAttacker.currentHP > 0)
             {

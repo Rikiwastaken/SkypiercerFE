@@ -2282,6 +2282,7 @@ public class UnitScript : MonoBehaviour
         if (UnitCharacteristics.affiliation == "playable")
         {
             fixedgrowth = SaveManager.instance.Options.FixedGrowth;
+            DataScript.instance.SkillCoins++;
         }
 
         BaseStats statsbeforelevelup = new BaseStats() { HP = UnitCharacteristics.stats.HP, Strength = UnitCharacteristics.stats.Strength, Psyche = UnitCharacteristics.stats.Psyche, Defense = UnitCharacteristics.stats.Defense, Resistance = UnitCharacteristics.stats.Resistance, Speed = UnitCharacteristics.stats.Speed, Dexterity = UnitCharacteristics.stats.Dexterity };

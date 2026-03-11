@@ -2067,17 +2067,33 @@ public class ActionsMenu : MonoBehaviour
 
                 (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false);
                 finaldamage = unitdamage;
-                if (chartarget.currentHP <= 0 || !(CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77))) //Spite, Caelum General
+
+                bool diddamage = false;
+                foreach (int damage in Damagelist)
                 {
-                    if (charunit.currentHP > 0 && charunit.affiliation == "playable")
+                    if (damage >= 0)
                     {
-                        (exp, levelup) = AwardExp(unit, target);
-                    }
-                    else if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
-                    {
-                        (exp, levelup) = AwardExp(unit, target, false, true);
+                        diddamage = true;
                     }
                 }
+
+
+                if (charunit.currentHP > 0 && charunit.affiliation == "playable")
+                {
+                    (exp, levelup) = AwardExp(unit, target, false, !diddamage);
+                }
+
+                //if (chartarget.currentHP <= 0 || !(CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77))) //Spite, Caelum General
+                //{
+                //    if (charunit.currentHP > 0 && charunit.affiliation == "playable")
+                //    {
+                //        (exp, levelup) = AwardExp(unit, target);
+                //    }
+                //    else if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
+                //    {
+                //        (exp, levelup) = AwardExp(unit, target, false, true);
+                //    }
+                //}
             }
             else
             {
@@ -2181,13 +2197,19 @@ public class ActionsMenu : MonoBehaviour
                     (compassionused, invigoratingused) = OnDamageEffect(target, targetdamage, false);
                     finaldamage = targetdamage;
                 }
-                if (charunit.currentHP > 0 && charunit.affiliation == "playable")
-                {
-                    (exp, levelup) = AwardExp(unit, target);
-                }
                 if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
                 {
-                    (exp, levelup) = AwardExp(target, unit);
+
+                    bool diddamage = false;
+                    foreach (int damage in Damagelist)
+                    {
+                        if (damage >= 0)
+                        {
+                            diddamage = true;
+                        }
+                    }
+
+                    (exp, levelup) = AwardExp(target, unit, false, !diddamage);
                 }
             }
 
@@ -2536,6 +2558,7 @@ public class ActionsMenu : MonoBehaviour
         {
             adjustedexp = 100;
         }
+
         charunit.experience += adjustedexp;
         List<int> levelup = new List<int>();
         if (charunit.experience > 100)

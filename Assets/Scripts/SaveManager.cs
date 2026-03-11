@@ -27,6 +27,7 @@ public class SaveManager : MonoBehaviour
         public int slot;
         public int chapter;
         public int MaxChapterReached;
+        public int SkillCoins;
         public bool inworldmap;
         public List<Character> PlayableCharacterList;
         public Inventory PlayerInventory;
@@ -300,6 +301,7 @@ public class SaveManager : MonoBehaviour
             currentchapter = SaveClasses[slot].chapter;
             maxchapterreached = SaveClasses[slot].MaxChapterReached;
             DS.ChapterFlagsList = SaveClasses[slot].ChapterFlagsList;
+            DS.SkillCoins = SaveClasses[slot].SkillCoins;
         }
         else if (slot == -1)
         {
@@ -315,6 +317,7 @@ public class SaveManager : MonoBehaviour
                 flag.talkflags = new List<bool>(10);
                 flag.copyflags = new List<bool>(10);
             }
+            DS.SkillCoins = 0;
         }
 
     }
@@ -368,7 +371,9 @@ public class SaveManager : MonoBehaviour
             inworldmap = inworldmap,
             MaxChapterReached = maxchapterreached,
             BondList = DataScript.instance.BondsList,
-            ChapterFlagsList = DataScript.instance.ChapterFlagsList
+            ChapterFlagsList = DataScript.instance.ChapterFlagsList,
+            SkillCoins = DataScript.instance.SkillCoins
+
         };
 
         string json = JsonUtility.ToJson(save, true);

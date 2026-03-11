@@ -37,6 +37,7 @@ public class DataScript : MonoBehaviour
 
     public List<ChapterFlags> ChapterFlagsList;
 
+    public int SkillCoins;
 
     [Serializable]
     public class ClassInfo

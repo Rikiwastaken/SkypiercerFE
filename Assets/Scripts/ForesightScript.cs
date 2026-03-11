@@ -39,6 +39,7 @@ public class ForesightScript : MonoBehaviour
         public List<Bonds> PreviousBonds;
         public List<ChapterFlags> chapterflags;
         public string FactionCurrentlyPlayingAtTime;
+        public int previousSkillCoins;
     }
 
 
@@ -372,6 +373,7 @@ public class ForesightScript : MonoBehaviour
         CurrentAction.currentturn = TurnManger.instance.currentTurn;
         CurrentAction.chapterflags = DataScript.instance.ChapterFlagsList;
         CurrentAction.FactionCurrentlyPlayingAtTime = TurnManger.instance.currentlyplaying;
+        CurrentAction.previousSkillCoins = DataScript.instance.SkillCoins;
 
 
         List<bool> eventstates = new List<bool>();
@@ -459,6 +461,8 @@ public class ForesightScript : MonoBehaviour
             DataScript.instance.BondsList = ActionToRevert.PreviousBonds;
 
             TurnManger.instance.currentTurn = ActionToRevert.currentturn;
+
+            DataScript.instance.SkillCoins = ActionToRevert.previousSkillCoins;
 
             if (CharacterHolder == null)
             {

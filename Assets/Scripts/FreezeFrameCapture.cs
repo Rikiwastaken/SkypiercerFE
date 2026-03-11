@@ -61,6 +61,12 @@ public class FreezeFrameCapture : MonoBehaviour
     public Vector2 BGOffSet;
     public float timebetweenStats;
 
+    [Header("StatTextVariables")]
+    public TextMeshProUGUI SkillCoinText;
+    public Vector2 BaseSkillCoinPosition;
+    public Vector2 TargetSkillCoinPosition;
+
+
     [Header("ContinueVariables")]
     public bool continueAvailable;
     public TextMeshProUGUI Continuetxt;
@@ -143,15 +149,21 @@ public class FreezeFrameCapture : MonoBehaviour
                 StopAllCoroutines();
                 CloseCoroutine = StartCoroutine(Close());
             }
-            if (TimeSafeguard != 0 && Time.time > TimeSafeguard)
-            {
-                StopAllCoroutines();
-                CloseCoroutine = StartCoroutine(Close());
-            }
+
         }
 
 
 
+    }
+
+    private void LateUpdate()
+    {
+        if (CloseCoroutine != null && TimeSafeguard != 0 && Time.time > TimeSafeguard && fullfreezeframecoroutine == null)
+        {
+            Debug.Log("closing");
+            StopAllCoroutines();
+            CloseCoroutine = StartCoroutine(Close());
+        }
     }
 
 
@@ -198,7 +210,11 @@ public class FreezeFrameCapture : MonoBehaviour
         ContinueBGtxt.gameObject.SetActive(true);
         ContinueBGtxt.rectTransform.anchoredPosition = BaseContinuePosition + ContinueOffSet;
 
+        SkillCoinText.gameObject.SetActive(true);
+        SkillCoinText.rectTransform.anchoredPosition = BaseSkillCoinPosition;
 
+
+        SkillCoinText.text = "Skill Coins: " + (DataScript.instance.SkillCoins - 1) + " <sprite=17><color=yellow> " + DataScript.instance.SkillCoins;
 
 
         CharacterSprite.GetComponent<Image>().sprite = DataScript.instance.DialogueSpriteList[characterWhoLeveledUp.ID];
@@ -290,20 +306,6 @@ public class FreezeFrameCapture : MonoBehaviour
             statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
             statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
             StatTextBG[4].text = statincreaseBG;
-            if (levelip[5] == 0)
-            {
-                StatIncreaseTxt = "Spd : " + characterWhoLeveledUp.AjustedStats.Speed + " <sprite=16> " + characterWhoLeveledUp.AjustedStats.Speed;
-            }
-            else
-            {
-                StatIncreaseTxt = "Spd : " + (characterWhoLeveledUp.AjustedStats.Speed - levelip[5]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.Speed;
-            }
-            StatTexts[5].text = StatIncreaseTxt;
-            statincreaseBG = StatIncreaseTxt;
-            statincreaseBG = statincreaseBG.Replace("<sprite=17>", "<sprite=18>");
-            statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
-            statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
-            StatTextBG[5].text = statincreaseBG;
             if (levelip[6] == 0)
             {
                 StatIncreaseTxt = "Dex : " + characterWhoLeveledUp.AjustedStats.Dexterity + " <sprite=16> " + characterWhoLeveledUp.AjustedStats.Dexterity;
@@ -311,6 +313,20 @@ public class FreezeFrameCapture : MonoBehaviour
             else
             {
                 StatIncreaseTxt = "Dex : " + (characterWhoLeveledUp.AjustedStats.Dexterity - levelip[6]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.Dexterity;
+            }
+            StatTexts[5].text = StatIncreaseTxt;
+            statincreaseBG = StatIncreaseTxt;
+            statincreaseBG = statincreaseBG.Replace("<sprite=17>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
+            StatTextBG[5].text = statincreaseBG;
+            if (levelip[5] == 0)
+            {
+                StatIncreaseTxt = "Spd : " + characterWhoLeveledUp.AjustedStats.Speed + " <sprite=16> " + characterWhoLeveledUp.AjustedStats.Speed;
+            }
+            else
+            {
+                StatIncreaseTxt = "Spd : " + (characterWhoLeveledUp.AjustedStats.Speed - levelip[5]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.Speed;
             }
             StatTexts[6].text = StatIncreaseTxt;
             statincreaseBG = StatIncreaseTxt;
@@ -373,7 +389,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
         while (t < 1f)
         {
-            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher même si Time.timeScale = 0
+            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher mï¿½me si Time.timeScale = 0
 
             float eased = EaseOutCubic(t);
 
@@ -409,6 +425,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
         Continuetxt.gameObject.SetActive(false);
         ContinueBGtxt.gameObject.SetActive(false);
+        SkillCoinText.gameObject.SetActive(false);
         left.transform.localPosition = new Vector2(-1000, 0);
         right.transform.localPosition = new Vector2(1000, 0);
 
@@ -432,7 +449,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
         while (t < 1f)
         {
-            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher même si Time.timeScale = 0
+            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher mï¿½me si Time.timeScale = 0
 
             float eased = EaseOutCubic(t);
             if (musicGO != null)
@@ -555,7 +572,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
         while (t < 1f)
         {
-            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher même si Time.timeScale = 0
+            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher mEme si Time.timeScale = 0
 
             float eased = EaseOutCubic(t);
 
@@ -567,6 +584,8 @@ public class FreezeFrameCapture : MonoBehaviour
 
             LvlUpText.rectTransform.anchoredPosition = Vector2.Lerp(BaseLvlUpPosition, TargetLvlUpPosition, eased);
             LvlUpTextBG.rectTransform.anchoredPosition = Vector2.Lerp(BaseLvlUpPosition + LvlUpBGOffset, TargetLvlUpPosition + LvlUpBGOffset, eased);
+
+            SkillCoinText.rectTransform.anchoredPosition = Vector2.Lerp(BaseSkillCoinPosition, TargetSkillCoinPosition, eased);
 
             yield return null;
         }
@@ -586,7 +605,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
         while (t < 1f)
         {
-            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher même si Time.timeScale = 0
+            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher meme si Time.timeScale = 0
 
             float eased = EaseOutCubic(t);
 
@@ -607,7 +626,7 @@ public class FreezeFrameCapture : MonoBehaviour
         continueAvailable = true;
         while (t < 1f)
         {
-            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher même si Time.timeScale = 0
+            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher meme si Time.timeScale = 0
 
             float eased = EaseOutCubic(t);
 
@@ -636,7 +655,7 @@ public class FreezeFrameCapture : MonoBehaviour
         // Appliquer le nouveau texte
         textMesh.text = newText;
 
-        // Forcer la génération du mesh
+        // Forcer la generation du mesh
         textMesh.ForceMeshUpdate();
         TMP_TextInfo textInfo = textMesh.textInfo;
 
@@ -651,18 +670,18 @@ public class FreezeFrameCapture : MonoBehaviour
             int materialIndex = textInfo.characterInfo[i].materialReferenceIndex;
             Vector3[] vertices = textInfo.meshInfo[materialIndex].vertices;
 
-            // Position X du centre du caractère (normalisée 0 à 1)
+            // Position X du centre du caractere (normalisee 0 ï¿½ 1)
             float charCenterX = (textInfo.characterInfo[i].bottomLeft.x + textInfo.characterInfo[i].topRight.x) / 2;
             float normalizedX = Mathf.InverseLerp(0, textWidth, charCenterX);
 
-            // Calcul du facteur d'échelle interpolé entre gauche et droite pour X et Y
+            // Calcul du facteur d'echelle interpole entre gauche et droite pour X et Y
             float scaleX = Mathf.Lerp(leftScale, rightScale, normalizedX);
-            float scaleY = Mathf.Lerp(leftScale, rightScale, normalizedX); // même logique pour Y
+            float scaleY = Mathf.Lerp(leftScale, rightScale, normalizedX); // meme logique pour Y
 
-            // Centre du caractère
+            // Centre du caractere
             Vector3 charCenter = (vertices[vertexIndex] + vertices[vertexIndex + 2]) / 2;
 
-            // Appliquer la mise à l'échelle sur les 4 vertices
+            // Appliquer la mise a l'echelle sur les 4 vertices
             for (int j = 0; j < 4; j++)
             {
                 vertices[vertexIndex + j] = charCenter + Vector3.Scale(vertices[vertexIndex + j] - charCenter, new Vector3(scaleX, scaleY, 1));
