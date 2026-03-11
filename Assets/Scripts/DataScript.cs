@@ -89,6 +89,7 @@ public class DataScript : MonoBehaviour
         public int Cost;
         public int targettype; // 0 enemies, 1 allies, 2 walls, 3 self
         public int range;
+        public bool buyable;
         public int ID;
     }
 

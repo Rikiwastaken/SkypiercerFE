@@ -7,6 +7,7 @@
             "Cost": 0,
             "targettype": 0,
             "range": 0,
+            "buyable": false,
             "ID": 0
         },
         {
@@ -16,6 +17,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 1
         },
         {
@@ -25,6 +27,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 2
         },
         {
@@ -34,6 +37,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 3
         },
         {
@@ -43,6 +47,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 4
         },
         {
@@ -52,6 +57,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 5
         },
         {
@@ -61,6 +67,7 @@
             "Cost": 2,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 6
         },
         {
@@ -70,6 +77,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 7
         },
         {
@@ -79,6 +87,7 @@
             "Cost": 20,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 8
         },
         {
@@ -88,6 +97,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 9
         },
         {
@@ -97,6 +107,7 @@
             "Cost": 20,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 10
         },
         {
@@ -106,6 +117,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 11
         },
         {
@@ -115,6 +127,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 12
         },
         {
@@ -124,6 +137,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 13
         },
         {
@@ -133,6 +147,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 14
         },
         {
@@ -142,6 +157,7 @@
             "Cost": 15,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 15
         },
         {
@@ -151,6 +167,7 @@
             "Cost": 15,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 16
         },
         {
@@ -160,6 +177,7 @@
             "Cost": 999,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 17
         },
         {
@@ -169,6 +187,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 18
         },
         {
@@ -178,6 +197,7 @@
             "Cost": 7,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 19
         },
         {
@@ -187,6 +207,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 20
         },
         {
@@ -196,6 +217,7 @@
             "Cost": 2,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 21
         },
         {
@@ -205,6 +227,7 @@
             "Cost": 3,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 22
         },
         {
@@ -214,6 +237,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 23
         },
         {
@@ -223,6 +247,7 @@
             "Cost": 2,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 24
         },
         {
@@ -232,6 +257,7 @@
             "Cost": 0,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 25
         },
         {
@@ -241,6 +267,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 26
         },
         {
@@ -250,6 +277,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 27
         },
         {
@@ -259,6 +287,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 28
         },
         {
@@ -268,6 +297,7 @@
             "Cost": 15,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 29
         },
         {
@@ -277,6 +307,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 30
         },
         {
@@ -286,6 +317,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 31
         },
         {
@@ -295,6 +327,7 @@
             "Cost": 20,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 32
         },
         {
@@ -304,6 +337,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 33
         },
         {
@@ -313,6 +347,7 @@
             "Cost": 15,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 34
         },
         {
@@ -322,6 +357,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 35
         },
         {
@@ -331,6 +367,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 36
         },
         {
@@ -340,6 +377,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 37
         },
         {
@@ -349,6 +387,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 38
         },
         {
@@ -358,6 +397,7 @@
             "Cost": 15,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 39
         },
         {
@@ -367,6 +407,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 40
         },
         {
@@ -376,6 +417,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 41
         },
         {
@@ -385,6 +427,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 42
         },
         {
@@ -394,6 +437,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 43
         },
         {
@@ -403,6 +447,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 44
         },
         {
@@ -412,6 +457,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 45
         },
         {
@@ -421,6 +467,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 46
         },
         {
@@ -430,6 +477,7 @@
             "Cost": 5,
             "targettype": 1,
             "range": 1,
+            "buyable": true,
             "ID": 47
         },
         {
@@ -439,6 +487,7 @@
             "Cost": 5,
             "targettype": 1,
             "range": 1,
+            "buyable": true,
             "ID": 48
         },
         {
@@ -448,6 +497,7 @@
             "Cost": 5,
             "targettype": 1,
             "range": 1,
+            "buyable": true,
             "ID": 49
         },
         {
@@ -457,15 +507,17 @@
             "Cost": 5,
             "targettype": 1,
             "range": 1,
+            "buyable": true,
             "ID": 50
         },
         {
             "name": "Jump",
             "Descriptions": "Moves on the other side of a small wall.",
             "IsCommand": true,
-            "Cost": 15,
+            "Cost": 20,
             "targettype": 2,
             "range": 1,
+            "buyable": true,
             "ID": 51
         },
         {
@@ -475,6 +527,7 @@
             "Cost": 10,
             "targettype": 3,
             "range": 0,
+            "buyable": true,
             "ID": 52
         },
         {
@@ -484,6 +537,7 @@
             "Cost": 10,
             "targettype": 3,
             "range": 0,
+            "buyable": true,
             "ID": 53
         },
         {
@@ -493,6 +547,7 @@
             "Cost": 5,
             "targettype": 3,
             "range": 0,
+            "buyable": true,
             "ID": 54
         },
         {
@@ -502,15 +557,17 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 55
         },
         {
             "name": "Copy",
             "Descriptions": "Permanently adds enemy skill to inventory. The user gets a temporary copy of the skill.",
             "IsCommand": true,
-            "Cost": 5,
+            "Cost": 3,
             "targettype": 0,
             "range": 1,
+            "buyable": true,
             "ID": 56
         },
         {
@@ -520,6 +577,7 @@
             "Cost": 0,
             "targettype": 0,
             "range": 0,
+            "buyable": false,
             "ID": 57
         },
         {
@@ -529,6 +587,7 @@
             "Cost": 0,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 58
         },
         {
@@ -538,6 +597,7 @@
             "Cost": 5,
             "targettype": 3,
             "range": 1,
+            "buyable": true,
             "ID": 59
         },
         {
@@ -547,6 +607,7 @@
             "Cost": 5,
             "targettype": 3,
             "range": 1,
+            "buyable": true,
             "ID": 60
         },
         {
@@ -556,6 +617,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 61
         },
         {
@@ -565,6 +627,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 62
         },
         {
@@ -574,6 +637,7 @@
             "Cost": 0,
             "targettype": 0,
             "range": 0,
+            "buyable": false,
             "ID": 63
         },
         {
@@ -583,6 +647,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 64
         },
         {
@@ -592,6 +657,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 65
         },
         {
@@ -601,6 +667,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 66
         },
         {
@@ -610,6 +677,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 67
         },
         {
@@ -619,6 +687,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 68
         },
         {
@@ -628,6 +697,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 69
         },
         {
@@ -637,6 +707,7 @@
             "Cost": 10,
             "targettype": 3,
             "range": 0,
+            "buyable": true,
             "ID": 70
         },
         {
@@ -646,6 +717,7 @@
             "Cost": 10,
             "targettype": 3,
             "range": 0,
+            "buyable": true,
             "ID": 71
         },
         {
@@ -655,6 +727,7 @@
             "Cost": 0,
             "targettype": 0,
             "range": 0,
+            "buyable": false,
             "ID": 72
         },
         {
@@ -664,6 +737,7 @@
             "Cost": 0,
             "targettype": 0,
             "range": 0,
+            "buyable": false,
             "ID": 73
         },
         {
@@ -673,6 +747,7 @@
             "Cost": 0,
             "targettype": 0,
             "range": 0,
+            "buyable": false,
             "ID": 74
         },
         {
@@ -682,15 +757,17 @@
             "Cost": 0,
             "targettype": 0,
             "range": 0,
+            "buyable": false,
             "ID": 75
         },
         {
             "name": "Taunt",
             "Descriptions": "Forces enemies to target this unit until the next turn.",
             "IsCommand": true,
-            "Cost": 10,
+            "Cost": 15,
             "targettype": 3,
             "range": 0,
+            "buyable": true,
             "ID": 76
         },
         {
@@ -700,6 +777,7 @@
             "Cost": 0,
             "targettype": 0,
             "range": 0,
+            "buyable": false,
             "ID": 77
         },
         {
@@ -709,6 +787,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 78
         },
         {
@@ -718,6 +797,7 @@
             "Cost": 7,
             "targettype": 0,
             "range": 1,
+            "buyable": true,
             "ID": 79
         },
         {
@@ -727,6 +807,7 @@
             "Cost": 10,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 80
         },
         {
@@ -736,6 +817,7 @@
             "Cost": 10,
             "targettype": 4,
             "range": 3,
+            "buyable": true,
             "ID": 81
         },
         {
@@ -745,6 +827,7 @@
             "Cost": 10,
             "targettype": 4,
             "range": 1,
+            "buyable": true,
             "ID": 82
         },
         {
@@ -754,6 +837,7 @@
             "Cost": 3,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 83
         },
         {
@@ -763,6 +847,7 @@
             "Cost": 3,
             "targettype": 3,
             "range": 0,
+            "buyable": true,
             "ID": 84
         },
         {
@@ -772,6 +857,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 85
         },
         {
@@ -781,6 +867,7 @@
             "Cost": 5,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 86
         },
         {
@@ -790,6 +877,7 @@
             "Cost": 15,
             "targettype": 0,
             "range": 0,
+            "buyable": true,
             "ID": 87
         },
         {
@@ -799,6 +887,7 @@
             "Cost": 5,
             "targettype": 1,
             "range": 1,
+            "buyable": true,
             "ID": 88
         }
     ]
