@@ -106,23 +106,28 @@ public class UnitDeploymentButton : MonoBehaviour
             if (Item.ID != 0)
             {
                 Skill skill = DataScript.instance.SkillList[Item.ID];
-                GetComponentInChildren<TextMeshProUGUI>().text = skill.name + " : " + Item.Quantity;
-                if (SkillEditionScript.selectedcharacter.UnitSkill == Item.ID)
+                GetComponentInChildren<TextMeshProUGUI>().text = skill.name;
+                if (SkillEditionScript != null)
                 {
-                    Color newcolor = Color.green * 0.5f;
-                    newcolor.a = 1;
-                    ButtonBGImage.color = newcolor;
+                    GetComponentInChildren<TextMeshProUGUI>().text += " : " + Item.Quantity;
+                    if (SkillEditionScript.selectedcharacter.UnitSkill == Item.ID)
+                    {
+                        Color newcolor = Color.green * 0.5f;
+                        newcolor.a = 1;
+                        ButtonBGImage.color = newcolor;
+                    }
+                    else if (SkillEditionScript.selectedcharacter.EquipedSkills.Contains(Item.ID))
+                    {
+                        Color newcolor = Color.blue * 0.5f;
+                        newcolor.a = 1;
+                        ButtonBGImage.color = newcolor;
+                    }
+                    else
+                    {
+                        ButtonBGImage.color = ImageDefaultColor;
+                    }
                 }
-                else if (SkillEditionScript.selectedcharacter.EquipedSkills.Contains(Item.ID))
-                {
-                    Color newcolor = Color.blue * 0.5f;
-                    newcolor.a = 1;
-                    ButtonBGImage.color = newcolor;
-                }
-                else
-                {
-                    ButtonBGImage.color = ImageDefaultColor;
-                }
+
             }
             else if (transform.parent.gameObject.name == "EditSkills")
             {

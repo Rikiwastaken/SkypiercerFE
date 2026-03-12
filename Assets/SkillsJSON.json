@@ -22,7 +22,7 @@
         },
         {
             "name": "Despair",
-            "Descriptions": "Is the unit's HP is below 33%, increase crit rate by 20% and dodge rate by 40%.",
+            "Descriptions": "If the unit's HP is below 33%, increase crit rate by 20% and dodge rate by 40%.",
             "IsCommand": false,
             "Cost": 5,
             "targettype": 0,
