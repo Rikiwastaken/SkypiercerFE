@@ -46,6 +46,8 @@ public class SkillShopScript : MonoBehaviour
             inputmanager = InputManager.instance;
         }
 
+
+        // Close Menu
         if (inputmanager.cancelpressed)
         {
             gameObject.SetActive(false);
@@ -55,6 +57,8 @@ public class SkillShopScript : MonoBehaviour
 
         }
 
+
+        // Change Windows
         if (inputmanager.PreviousWeaponjustpressed)
         {
             if (skillwindowindex > 0)
@@ -78,6 +82,8 @@ public class SkillShopScript : MonoBehaviour
 
         GameObject CurrentSelected = EventSystem.current.currentSelectedGameObject;
 
+
+        // If the current selected button is a skill button, update the description and buy text, and if the player presses the buy button and has enough skill coins, buy the skill and update the inventory and skill coin text, also updates the buy image to show the progress of buying the skill
         if (CurrentSelected.GetComponent<UnitDeploymentButton>())
         {
             if (previousselected != CurrentSelected)
@@ -130,7 +136,8 @@ public class SkillShopScript : MonoBehaviour
     }
 
 
-
+    //// <summary>/ Function called when pressing the button to open the skill shop, initializes the skills to show and the buttons, and selects the first button
+    //// </summary>
     public void ActivateShop()
     {
         SkillsToShow = new List<Skill>();
@@ -148,6 +155,8 @@ public class SkillShopScript : MonoBehaviour
         SkillCoinsText.text = "Skill Coins: " + DataScript.instance.SkillCoins;
     }
 
+    /// <summary>/ Function to update the description text when selecting a skill, also updates the buy text to show the cost and if the player can afford it
+    /// </summary>
     private void UpdateSkillDescriptionText(UnitDeploymentButton SkillButton)
     {
         if (SkillButton.Item != null)
@@ -190,6 +199,10 @@ public class SkillShopScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function to update the inventory text when selecting a skill, shows how many of that skill the player has in their inventory
+    /// </summary>
+    /// <param name="SkillButton"></param>
     private void InitializeInventoryText(UnitDeploymentButton SkillButton)
     {
         int numberheld = 0;
@@ -210,6 +223,9 @@ public class SkillShopScript : MonoBehaviour
         InventoryText.text = "In Inventory : " + numberheld;
     }
 
+    /// <summary>
+    /// Function to initialize the skill buttons, shows the skills in the current window and sets the item of the button to the corresponding inventory item if it exists, otherwise sets it to null
+    /// </summary>
     private void InitializeSkillButtons()
     {
         Buttons = new List<Button>();
@@ -239,6 +255,9 @@ public class SkillShopScript : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Function to initialize the list of skills in the player's inventory, checks the player's inventory and adds any skill that is in the inventory and has a quantity greater than 0, also adds any skill that is equipped by a playable character, even if the player doesn't have it in their inventory, to allow the player to see the description of the skill and buy it if they want to
+    /// </summary>
     private void InitializeInventorySkillList()
     {
         InventorySkillList = new List<InventoryItem>();

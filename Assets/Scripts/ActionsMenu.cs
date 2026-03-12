@@ -195,6 +195,9 @@ public class ActionsMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method that is called when the action menu is activated or deactivated, it updates the colors of the buttons and text to show which actions are available based on the selected unit and its target, it also checks if the tutorial is active and updates the buttons accordingly, it also updates the camera destination to the target if there are targets available
+    /// </summary>
     private void ActivationAchanged()
     {
         if (GridScript == null)
@@ -455,6 +458,9 @@ public class ActionsMenu : MonoBehaviour
         character.telekinesisactivated = previoustelekinesis;
     }
 
+    /// <summary>
+    /// Method that is called when the attack command is selected, it tries to find a combo of weapon and telekinesis to be able to attack an enemy, if no enemy is found it tries other weapons and telekinesis settings, if still no enemy is found it resets the character equipment to the previous state, it also updates the attack range and targetable enemies based on the current weapon and telekinesis settings
+    /// </summary>
     public void AttackCommand()
     {
         CommandUsedID = 0;
@@ -626,6 +632,9 @@ public class ActionsMenu : MonoBehaviour
         FindAttackers(true, CommandID);
     }
 
+    /// <summary>
+    /// Method that is called when the attack is confirmed, it sets the target as already played, it resets the target list and command used, it recolors the grid, it sets the current character in the action manager to null, it sets the camera in combat to false, it prevents from locking after action to true, it also triggers the retreat of the target if they have the skill to be able to move again after attacking (canto/retreat)
+    /// </summary>
     public void FinalizeAttack()
     {
         target.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
@@ -633,6 +642,7 @@ public class ActionsMenu : MonoBehaviour
         GameObject oldtarget = target;
         target = null;
         CommandUsedID = 0;
+        GridScript.CalculateDangerousTiles();
         GridScript.Recolor();
         confirmattack = false;
         ActionManager.instance.currentcharacter = null;
@@ -652,7 +662,11 @@ public class ActionsMenu : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Method that is called to find the possible targets for an attack or a command*
+    /// </summary>
+    /// <param name="usecommand"></param>
+    /// <param name="commandID"></param>
     private void FindAttackers(bool usecommand = false, int commandID = 0)
     {
 

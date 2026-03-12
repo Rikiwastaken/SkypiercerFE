@@ -287,7 +287,7 @@ public class TurnManger : MonoBehaviour
             GetComponent<AttackTurnScript>().DeathCleanup();
 
         }
-
+        GridScript.CalculateDangerousTiles();
         minimapScript.UpdateMinimap();
     }
 

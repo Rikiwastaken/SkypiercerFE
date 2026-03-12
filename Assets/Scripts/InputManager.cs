@@ -88,6 +88,17 @@ public class InputManager : MonoBehaviour
     private InputAction ShowDetailsinput;
     private bool ShowDetailspressedonce;
 
+    [Header("ShowDangerousTiles")]
+
+    public bool ShowDangerousTilespressed;
+    public bool ShowDangerousTilesjustpressed;
+
+    public InputActionReference ShowDangerousTilesbtn;
+
+    private InputAction ShowDangerousTilesinput;
+
+    private bool ShowDangerousTilespressedonce;
+
     // ---------- EVENTS ----------
     public event Action OnMovementJustPressed;
     public event Action OnMoveCamJustPressed;
@@ -128,6 +139,7 @@ public class InputManager : MonoBehaviour
         Selectinput = Select.ToInputAction();
         Startinput = Startbtn.ToInputAction();
         ShowDetailsinput = ShowDetailsbtn.ToInputAction();
+        ShowDangerousTilesinput = ShowDangerousTilesbtn.ToInputAction();
     }
 
     private void FixedUpdate()
@@ -281,6 +293,24 @@ public class InputManager : MonoBehaviour
         if (!ShowDetailspressed)
             ShowDetailspressedonce = false;
 
+
+
+        // ---------- SHOW DANGEROUS TILES ----------
+        ShowDangerousTilespressed = ShowDangerousTilesinput.IsPressed();
+        if (ShowDangerousTilespressed && !ShowDangerousTilesjustpressed && !ShowDangerousTilespressedonce)
+        {
+            ShowDangerousTilesjustpressed = true;
+            ShowDangerousTilespressedonce = true;
+        }
+        else
+        {
+            ShowDangerousTilesjustpressed = false;
+        }
+        if (!ShowDangerousTilespressed)
+        {
+            ShowDangerousTilespressedonce = false;
+        }
+
         // ---------- MOVEMENT ----------
         if (movementValue != Vector2.zero & !movementpressedonce)
         {
@@ -296,6 +326,8 @@ public class InputManager : MonoBehaviour
             movementpressedonce = false;
             movementjustpressed = false;
         }
+
+
 
         // ---------- CAMERA MOVEMENT ----------
         if (cammovementValue != Vector2.zero & !movecampressedonce)

@@ -33,6 +33,8 @@ public class GridScript : MonoBehaviour
     public List<GridSquareScript> lockedattacktiles;
     public List<GridSquareScript> lockedhealingtiles;
 
+    public List<GridSquareScript> DangerousTiles;
+
     public GridSquareScript lastSquare;
 
     private int moveCD;
@@ -61,6 +63,8 @@ public class GridScript : MonoBehaviour
     public GameObject MapModel;
 
     private int mapchangecnt;
+
+    private bool ShowDangerousTiles;
 
     public class Node
     {
@@ -117,6 +121,11 @@ public class GridScript : MonoBehaviour
 
         inputManager = InputManager.instance;
 
+        if (inputManager.ShowDangerousTilesjustpressed)
+        {
+            ShowDangerousTiles = !ShowDangerousTiles;
+            Recolor();
+        }
 
         if (moveCD > 0)
         {
@@ -322,6 +331,42 @@ public class GridScript : MonoBehaviour
         }
         GridDimensions = new Vector2(Grid.Count, Grid[0].Count);
         selection = GetTile(GetComponent<MapInitializer>().playablepos[0]);
+
+    }
+
+    public void CalculateDangerousTiles()
+    {
+        DangerousTiles = new List<GridSquareScript>();
+
+        foreach (GameObject unit in allunitGOs)
+        {
+            Character UnitChar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+            if (UnitChar.currentTile[0] == null || !UnitChar.currentTile[0].activated)
+            {
+                continue;
+            }
+            if (UnitChar.affiliation.ToLower() != "enemy")
+            {
+                continue;
+            }
+
+            ShowMovementOfUnit(unit, false);
+
+            (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
+
+            foreach (GridSquareScript tile in movementtiles)
+            {
+                List<GridSquareScript> attacktiles = GetAttack(range, melee, tile, 0, UnitChar);
+
+                foreach (GridSquareScript attacktile in attacktiles)
+                {
+                    if (!DangerousTiles.Contains(attacktile))
+                    {
+                        DangerousTiles.Add(attacktile);
+                    }
+                }
+            }
+        }
 
     }
 
@@ -650,7 +695,7 @@ public class GridScript : MonoBehaviour
         }
     }
 
-    public void ShowMovementOfUnit(GameObject Target)
+    public void ShowMovementOfUnit(GameObject Target, bool color = true)
     {
         for (int x = 0; x < Grid.Count; x++)
         {
@@ -707,18 +752,22 @@ public class GridScript : MonoBehaviour
 
 
         }
-        if (!lockselection)
+        if (color)
         {
-            foreach (GridSquareScript gridSquareScript in movementtiles)
+            if (!lockselection)
+            {
+                foreach (GridSquareScript gridSquareScript in movementtiles)
+                {
+                    gridSquareScript.fillwithblue();
+                }
+            }
+
+            foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
             {
                 gridSquareScript.fillwithblue();
             }
         }
 
-        foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
-        {
-            gridSquareScript.fillwithblue();
-        }
 
     }
 
@@ -1325,6 +1374,14 @@ public class GridScript : MonoBehaviour
             }
         }
 
+        if (ShowDangerousTiles)
+        {
+            foreach (GridSquareScript gridSquareScript in DangerousTiles)
+            {
+                gridSquareScript.fillwithPurple();
+            }
+        }
+
         if (!lockselection)
         {
             foreach (GridSquareScript gridSquareScript in attacktiles)
@@ -1357,6 +1414,8 @@ public class GridScript : MonoBehaviour
             gridSquareScript.fillwithblue();
             gridSquareScript.CorrectColor();
         }
+
+
 
 
     }

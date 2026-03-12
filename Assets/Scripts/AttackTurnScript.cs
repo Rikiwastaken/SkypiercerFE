@@ -96,17 +96,20 @@ public class AttackTurnScript : MonoBehaviour
     void Update()
     {
 
+        // If in the combat animation scene, ignore the update of this script to avoid bugs with the combat animation scene and to avoid the combat animation scene being skipped when an attack happens while the combat animation scene is playing
         if (attackanimationhappeningcnt > 0)
         {
             attackanimationhappeningcnt--;
             return;
         }
 
+        // Ignore update if level up screen is open to avoid bugs with attacking while level up screen is open and to avoid the level up screen closing when an attack happens
         if (FreezeFrameCapture.instance != null && FreezeFrameCapture.instance.ShowingLevelUp)
         {
             return;
         }
 
+        // If Combat Animation is over, reset the lifebars of the attacker and target, trigger the end of fight attack animation if the attacker is still alive, reset all selections on the grid, trigger the end of fight event, and reset variables related to the end of fight and combat animation
         if (previousattacker != null && AttackCoroutine == null)
         {
             previousattacker.GetComponent<UnitScript>().disableLifebar = false;
@@ -143,11 +146,14 @@ public class AttackTurnScript : MonoBehaviour
         {
             CurrentOther = null;
         }
+
+        // If the current turn is not the player's turn and the action manager exists, prevent the action manager from locking after an action is taken to allow the enemy and other units to move and attack without being locked out of taking further actions until their turn is over
         if ((TurnManager.currentlyplaying != "playable" && TurnManager.currentlyplaying != "tutorial") && ActionManager.instance != null)
         {
             ActionManager.instance.preventfromlockingafteraction = true;
         }
 
+        // Select the next enemy unit to move and attack if there is no current enemy unit selected
         if (CurrentEnemy == null && TurnManager.currentlyplaying == "enemy")
         {
             if (delaybeforenxtunit > 0)
@@ -180,9 +186,11 @@ public class AttackTurnScript : MonoBehaviour
 
             }
         }
+
+        // If the current turn is the enemy's turn and there is a current enemy, move the current enemy and attack 
         else if (TurnManager.currentlyplaying == "enemy")
         {
-
+            //move camera to enemy
             Character CharCurrentEnemy = CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics;
             if (!battlecamera.incombat)
             {
@@ -201,6 +209,7 @@ public class AttackTurnScript : MonoBehaviour
                     currentenemytarget = null;
                     GridSquareScript Destination = null;
 
+                    // Calculate Destination
                     if (CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
                     {
                         CurrentEnemy.GetComponent<BossScript>().nextTarget = CalculateDestinationForBoss(CurrentEnemy);
@@ -211,7 +220,7 @@ public class AttackTurnScript : MonoBehaviour
                         (Destination, currentenemytarget) = CalculateDestinationForOffensiveUnitsV2(CurrentEnemy);
                     }
 
-
+                    // Move Enemy
                     Vector2 DestinationVector = CharCurrentEnemy.position;
                     if (Destination != null)
                     {
@@ -229,6 +238,7 @@ public class AttackTurnScript : MonoBehaviour
 
                 }
             }
+            // Manage Attack for Enemy
             else if (CurrentEnemy != null && !CharCurrentEnemy.alreadyplayed)
             {
                 if (CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
@@ -295,6 +305,7 @@ public class AttackTurnScript : MonoBehaviour
             }
         }
 
+        // Select the next other unit to move and attack if there is no current other unit selected
         if (CurrentOther == null && TurnManager.currentlyplaying == "other")
         {
             if (delaybeforenxtunit > 0)
@@ -328,8 +339,10 @@ public class AttackTurnScript : MonoBehaviour
 
             }
         }
+
         else if (TurnManager.currentlyplaying == "other")
         {
+            //Attack Other
             Character Charcurrentother = CurrentOther.GetComponent<UnitScript>().UnitCharacteristics;
             if (!battlecamera.incombat)
             {
@@ -2001,7 +2014,7 @@ public class AttackTurnScript : MonoBehaviour
     /// <returns></returns>
     private float calculateRewardforAttacking(GameObject attacker, GameObject target, bool isboss = false)
     {
-        float reward = 0f;
+        float reward = 10f;
 
         Character attackerChar = attacker.GetComponent<UnitScript>().UnitCharacteristics;
         Character targetChar = target.GetComponent<UnitScript>().UnitCharacteristics;

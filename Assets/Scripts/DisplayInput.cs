@@ -134,6 +134,15 @@ public class DisplayInput : MonoBehaviour
             DeactivateButton(SelectButton);
         }
 
+        if (InputManager.ShowDangerousTilespressed)
+        {
+            ActivateButton(DPadUp);
+        }
+        else
+        {
+            DeactivateButton(DPadUp);
+        }
+
     }
 
     private void ActivateButton(GameObject button)
