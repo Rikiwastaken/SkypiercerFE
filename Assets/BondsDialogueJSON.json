@@ -1367,14 +1367,158 @@
         },
         {
             "BondID": 8,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 2,
+                    "text": "Hi Sorak, do you have a minute?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Of course, Elwyn, what can I do for you?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I wanted to ask you something."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Of course, what is it?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Why did you choose to become a hunter?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "There is no particular reason. When I was younger, I always got into fights. In the end, it was either the hunters or the army."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "And what made you choose the hunters over the army?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Let's just say that there was someone in Landfall Village who wanted to be a hunter too. It would have been lonely if I joined the army/"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 3,
+                    "text": "Hi, Elwyn, how are you doing? You look a bit down."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Oh, hi Sorak. Yeah, It just feels like I'm not getting any better. I know I have been training a lot, but I just don't feel like I'm improving at all."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Nonsense. If your father could see you, he would be so proud of you."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I... I wish I could meet him."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "He was the type of man you rarely meet in your life. When he died in the incident all these years ago, he made sure to save as many people as he could, you included. Each passing day, you are making him proud. I know it."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Thanks, Sorak. I really needed to hear that."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 2,
+                    "text": "Sorak, I'd like you to tell me more about the incident where my father died."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "That's a sudden request, but sure. I was there, so I can tell you everything I remember."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Thanks, Sorak."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "It was about when the ruins excavations was nearly concluded. Sir Mir was there. Actually, he was the one leading the whole operation."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Mir? I thought he was a hunter, not an archaeologist. Also, how old is he exactly?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "I've been wondering the same thing. Anyway, just as they opened the gates of the ruins, a whole army of machines swarmed out of it."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Machines? Like the ones when we returned from the Northern Cave?"
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Yes, but they just kept coming and coming, and they were all over the place. Sir Mir and the most of the workers were trapped inside the ruins. He was the only survivor."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I see. So he was the one who saved everyone else, including me."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "No. By the time he came out, it was over. It was mostly your father who saved as many villagers as he could. In the end, his injuries were too severe. He died with a smile on his face, knowing that you, in particular, was safe."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I wish I could have met him..."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Me too. You two are really alike. He made me promise to take care of you."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Thanks, Sorak. You kept your promise. He can rest easy. I've always been in good hands."
+                },
+                {
+                    "CharacterID": 3,
+                    "text": "Of course. I will always be there for you, Elwyn."
+                }
+            ],
             "dialogueLvl4": []
         },
         {
             "BondID": 9,
-            "dialogueLvl1": [],
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 4,
+                    "text": "What a tiring day! The others really need to be more careful."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Yeah, they might be putting a little bit too much trust in our healing abilities..."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "It reminds me of when Sorak and I were your age. He was always so reckless. It feels like Lea picked up on that trait of his."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Lea? She is not reckless. Most pluvials can't even make her flinch. Zack is the reckless one!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Ha ha ha. You are absolutely right. It's good that you have their back."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Without us, Zack would have probably died a hundred times already."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Probably."
+                }
+            ],
             "dialogueLvl2": [],
             "dialogueLvl3": [],
             "dialogueLvl4": []

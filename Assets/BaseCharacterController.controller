@@ -184,7 +184,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|spider_attack_1
+  m_Name: MachineAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -198,7 +198,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 6738579914442900489, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 8936716fc7e34354c818304c2113b633, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -525,7 +525,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|spider_attack_1 0 0 0 0
+  m_Name: MachineAttack 4
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -539,7 +539,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 6738579914442900489, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 8936716fc7e34354c818304c2113b633, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1090,7 +1090,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|spider_walk_slow
+  m_Name: MachineIdle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1108,7 +1108,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 3385910253854653712, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 84c6ed6f38359474bbd42153f1ee9070, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1543,7 +1543,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|spider_attack_1 0
+  m_Name: MachineAttack 0
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1557,7 +1557,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 6738579914442900489, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 8936716fc7e34354c818304c2113b633, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1714,7 +1714,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|spider_attack_1 0 0 0
+  m_Name: MachineAttack 3
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1728,7 +1728,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 6738579914442900489, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 8936716fc7e34354c818304c2113b633, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1762,7 +1762,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: b8c98de929fe901438adf503450a7c90, type: 3}
+  m_Motion: {fileID: -4671056281497532287, guid: dc5f12c916643074eb8fc5e89bec154e, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2720,7 +2720,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|spider_attack_1 0 1
+  m_Name: MachineAttack 2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -2734,7 +2734,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 6738579914442900489, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 8936716fc7e34354c818304c2113b633, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3281,7 +3281,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|spider_attack_1 0 0
+  m_Name: MachineAttack 1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -3295,7 +3295,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 6738579914442900489, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 8936716fc7e34354c818304c2113b633, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3989,7 +3989,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Armature|spider_walk_slow
+  m_Name: MachineIdle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4005,7 +4005,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 3385910253854653712, guid: e60f76b0c94cb8843a7249038303d36c, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 84c6ed6f38359474bbd42153f1ee9070, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -4347,7 +4347,7 @@ AnimatorStateMachine:
     m_Position: {x: 430, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5103182374897528611}
-    m_Position: {x: 550, y: 120, z: 0}
+    m_Position: {x: 550, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5987620253326515131}
     m_Position: {x: 410, y: 330, z: 0}
