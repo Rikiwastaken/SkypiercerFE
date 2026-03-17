@@ -118,7 +118,7 @@ public class ActionManager : MonoBehaviour
                 currentcharacter = GridScript.GetSelectedUnitGameObject();
                 if (currentcharacter != null)
                 {
-                    if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed && !preventfromlockingafteraction && frameswherenotlock == 0 && !TextBubbleScript.indialogue)
+                    if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed && !preventfromlockingafteraction && frameswherenotlock == 0 && !TextBubbleScript.indialogue)
                     {
                         GridScript.lockselection = true;
                         GridScript.LockcurrentSelection();
@@ -191,10 +191,15 @@ public class ActionManager : MonoBehaviour
                     }
                     if (InputManager.canceljustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                     {
-                        currentcharacter = null;
-                        GridScript.ResetAllSelections();
-                        GridScript.Recolor();
-                        currentpath = null;
+                        if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
+                        {
+                            currentcharacter = null;
+                            GridScript.ResetAllSelections();
+                            GridScript.Recolor();
+                            currentpath = null;
+                        }
+
+
                     }
                 }
                 else
