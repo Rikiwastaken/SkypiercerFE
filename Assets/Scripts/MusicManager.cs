@@ -22,6 +22,9 @@ public class MusicManager : MonoBehaviour
     public AudioSource ShipMusic;
     public AudioSource ShipMusicintro;
 
+    public AudioSource MainMenuMusic;
+    public AudioSource MainMenuMusicintro;
+
 
     public AudioSource DialogueAudioSource;
     public AudioSource DialogueAudioSourceIntro;
@@ -134,10 +137,13 @@ public class MusicManager : MonoBehaviour
         {
             PlayMusic(1);
         }
-
         else if (scene.name == "WorldMap")
         {
             PlayMusic(6);
+        }
+        else if (scene.name == "MainMenu")
+        {
+            PlayMusic(8, maxvolume);
         }
 
 
@@ -468,6 +474,12 @@ public class MusicManager : MonoBehaviour
                 lowermap = true;
                 Main = ShipMusic;
                 intro = ShipMusicintro;
+                break;
+            case (8):  //MainMenu
+                lowerdialogue = true;
+                lowermap = true;
+                Main = MainMenuMusic;
+                intro = MainMenuMusicintro;
                 break;
 
         }
