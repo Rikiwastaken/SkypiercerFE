@@ -90,6 +90,8 @@ public class MusicManager : MonoBehaviour
 
     private TextBubbleScript textBubbleScript;
 
+
+    private int currentMusicType = -1;
     private void Awake()
     {
         if (instance == null)
@@ -128,13 +130,16 @@ public class MusicManager : MonoBehaviour
             currentDialogueAudioSource.volume = 0f;
             currentDialogueAudioSourceIntro.volume = 0f;
         }
-        if ((scene.name == "Camp" || scene.name == "WorldMap") && currentscene != scene.name)
+        if (scene.name == "Camp")
         {
-
-            PlayMusicWithIntro(1, 0f);
-            PlayMusicWithIntro(6, 0f);
-            PlayMusicWithIntro(7, 0f);
+            PlayMusic(1);
         }
+
+        else if (scene.name == "WorldMap")
+        {
+            PlayMusic(6);
+        }
+
 
         currentscene = scene.name;
         MusicManager.instance.InitializeMusics(currentscene);
@@ -210,7 +215,7 @@ public class MusicManager : MonoBehaviour
         if (PlayPrepMusic)
         {
             PlayPrepMusic = false;
-            PlayMusicWithIntro(4, maxvolume);
+            PlayMusic(4, maxvolume);
         }
 
 
@@ -242,8 +247,7 @@ public class MusicManager : MonoBehaviour
         if (PrepFinished && !incombat.isPlaying)
         {
             BeforeCombat.Stop();
-            PlayMusicWithIntro(2, maxvolume);
-            PlayMusicWithIntro(3, maxvolume);
+            PlayMusic(2, maxvolume);
             incombat.volume = 0f;
         }
 
@@ -269,7 +273,7 @@ public class MusicManager : MonoBehaviour
                 }
 
             }
-            else if (!lowermap && (cameraScript != null && cameraScript.incombat) || inCombatBool)
+            else if (!lowermap && ((cameraScript != null && cameraScript.incombat) || inCombatBool))
             {
                 ChangeVolume(incombat, maxvolume);
                 ChangeVolume(incombatintro, maxvolume);
@@ -294,7 +298,7 @@ public class MusicManager : MonoBehaviour
         {
             if (!CampMusic.isPlaying && !CampMusicintro.isPlaying)
             {
-                PlayMusicWithIntro(1, 0f);
+                PlayMusic(1, 0f);
             }
 
             ChangeVolume(CampMusic, maxvolume);
@@ -307,8 +311,8 @@ public class MusicManager : MonoBehaviour
         {
             if (!WorldMapMusic.isPlaying && !WorldMapMusicintro.isPlaying)
             {
-                PlayMusicWithIntro(6, 0f);
-                PlayMusicWithIntro(7, 0f);
+                PlayMusic(6, 0f);
+                PlayMusic(7, 0f);
             }
 
             ChangeVolume(CampMusic, 0f);
@@ -388,6 +392,29 @@ public class MusicManager : MonoBehaviour
 
     }
 
+    void PlayMusic(int type, float startvolume = 0f)
+    {
+        if (currentMusicType == type)
+        {
+            return;
+        }
+
+
+        StopAllMusic();
+        currentMusicType = type;
+
+        if (type == 2 || type == 3)
+        {
+            PlayMusicWithIntro(2, startvolume);
+            PlayMusicWithIntro(3, startvolume);
+        }
+        else
+        {
+            PlayMusicWithIntro(type, startvolume);
+        }
+
+
+    }
     private void PlayMusicWithIntro(int TypeID, float startvolume)
     {
         AudioSource Main = null;
@@ -485,7 +512,7 @@ public class MusicManager : MonoBehaviour
             currentDialogueAudioSourceIntro.clip = DialogueMusicsWithIntro[CurrentDialogueMusic].Intro;
             currentDialogueAudioSource.volume = maxvolume;
             currentDialogueAudioSourceIntro.volume = maxvolume;
-            PlayMusicWithIntro(5, maxvolume);
+            PlayMusic(5, maxvolume);
         }
         else if (musicID == -1)
         {
@@ -551,5 +578,19 @@ public class MusicManager : MonoBehaviour
         {
             Destroy(SEholder);
         }
+    }
+
+    private void StopAllMusic()
+    {
+        incombat.Stop();
+        incombatintro.Stop();
+        outcombat.Stop();
+        outcombatintro.Stop();
+        CampMusic.Stop();
+        CampMusicintro.Stop();
+        WorldMapMusic.Stop();
+        WorldMapMusicintro.Stop();
+        ShipMusic.Stop();
+        ShipMusicintro.Stop();
     }
 }
