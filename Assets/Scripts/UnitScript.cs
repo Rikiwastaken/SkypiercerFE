@@ -1395,7 +1395,7 @@ public class UnitScript : MonoBehaviour
     public void UpdateTiles(GridSquareScript destination)
     {
         UnitCharacteristics.currentTile = new List<GridSquareScript> { destination };
-        if (UnitCharacteristics.enemyStats.monsterStats.size > 1)
+        if (UnitCharacteristics.enemyStats.monsterStats != null && UnitCharacteristics.enemyStats.monsterStats.size > 1)
         {
             UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(-1, 0)));
             UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(0, 1)));
@@ -1993,35 +1993,40 @@ public class UnitScript : MonoBehaviour
 
             UnitCharacteristics.telekinesisactivated = UnitCharacteristics.enemyStats.usetelekinesis;
 
-            ClassInfo classtoapply = DataScript.instance.ClassList[UnitCharacteristics.enemyStats.classID];
-            UnitCharacteristics.stats.HP = classtoapply.BaseStats.HP;
-            UnitCharacteristics.stats.Strength = classtoapply.BaseStats.Strength;
-            UnitCharacteristics.stats.Psyche = classtoapply.BaseStats.Psyche;
-            UnitCharacteristics.stats.Defense = classtoapply.BaseStats.Defense;
-            UnitCharacteristics.stats.Resistance = classtoapply.BaseStats.Resistance;
-            UnitCharacteristics.stats.Speed = classtoapply.BaseStats.Speed;
-            UnitCharacteristics.stats.Dexterity = classtoapply.BaseStats.Dexterity;
-            UnitCharacteristics.growth.HPGrowth = classtoapply.StatGrowth.HPGrowth;
-            UnitCharacteristics.growth.StrengthGrowth = classtoapply.StatGrowth.StrengthGrowth;
-            UnitCharacteristics.growth.PsycheGrowth = classtoapply.StatGrowth.PsycheGrowth;
-            UnitCharacteristics.growth.DefenseGrowth = classtoapply.StatGrowth.DefenseGrowth;
-            UnitCharacteristics.growth.ResistanceGrowth = classtoapply.StatGrowth.ResistanceGrowth;
-            UnitCharacteristics.growth.SpeedGrowth = classtoapply.StatGrowth.SpeedGrowth;
-            UnitCharacteristics.growth.DexterityGrowth = classtoapply.StatGrowth.DexterityGrowth;
-            UnitCharacteristics.movements = classtoapply.movements;
-            fixedgrowth = true;
-            int numberoflevelups = UnitCharacteristics.enemyStats.desiredlevel - UnitCharacteristics.level;
-
-            for (int i = 0; i < numberoflevelups; i++)
+            if (UnitCharacteristics.enemyStats.classID != -1)
             {
+                ClassInfo classtoapply = DataScript.instance.ClassList[UnitCharacteristics.enemyStats.classID];
+                UnitCharacteristics.stats.HP = classtoapply.BaseStats.HP;
+                UnitCharacteristics.stats.Strength = classtoapply.BaseStats.Strength;
+                UnitCharacteristics.stats.Psyche = classtoapply.BaseStats.Psyche;
+                UnitCharacteristics.stats.Defense = classtoapply.BaseStats.Defense;
+                UnitCharacteristics.stats.Resistance = classtoapply.BaseStats.Resistance;
+                UnitCharacteristics.stats.Speed = classtoapply.BaseStats.Speed;
+                UnitCharacteristics.stats.Dexterity = classtoapply.BaseStats.Dexterity;
+                UnitCharacteristics.growth.HPGrowth = classtoapply.StatGrowth.HPGrowth;
+                UnitCharacteristics.growth.StrengthGrowth = classtoapply.StatGrowth.StrengthGrowth;
+                UnitCharacteristics.growth.PsycheGrowth = classtoapply.StatGrowth.PsycheGrowth;
+                UnitCharacteristics.growth.DefenseGrowth = classtoapply.StatGrowth.DefenseGrowth;
+                UnitCharacteristics.growth.ResistanceGrowth = classtoapply.StatGrowth.ResistanceGrowth;
+                UnitCharacteristics.growth.SpeedGrowth = classtoapply.StatGrowth.SpeedGrowth;
+                UnitCharacteristics.growth.DexterityGrowth = classtoapply.StatGrowth.DexterityGrowth;
+                UnitCharacteristics.movements = classtoapply.movements;
+                fixedgrowth = true;
+                int numberoflevelups = UnitCharacteristics.enemyStats.desiredlevel - UnitCharacteristics.level;
 
-                List<int> statsgained = LevelUp();
-                string statsgainedstr = "";
-                foreach (int level in statsgained)
+                for (int i = 0; i < numberoflevelups; i++)
                 {
-                    statsgainedstr += level.ToString() + " , ";
+
+                    List<int> statsgained = LevelUp();
+                    string statsgainedstr = "";
+                    foreach (int level in statsgained)
+                    {
+                        statsgainedstr += level.ToString() + " , ";
+                    }
                 }
             }
+
+
         }
         calculateStats();
 

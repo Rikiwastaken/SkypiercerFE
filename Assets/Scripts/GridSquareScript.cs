@@ -206,6 +206,13 @@ public class GridSquareScript : MonoBehaviour
         {
             return;
         }
+        // if there is no trigger, the mechanisms are always closed
+        if (Mechanism.Triggers == null || Mechanism.Triggers.Count == 0)
+        {
+            Mechanism.ChangeActivation(false);
+            isobstacle = true;
+            return;
+        }
         // Verify all trigger mechanisms are activated
         foreach (var square in Mechanism.Triggers)
         {

@@ -265,7 +265,7 @@ public class TextBubbleScript : MonoBehaviour
                 {
                     cameraScript.Destination = new Vector3(info.CameraDestination.x, info.CameraDestination.z);
                 }
-                else if (character != null && character.currentTile != null && character.currentTile.Count > 0 && character.currentTile[0] != null)
+                else if (character != null && character.playableStats.deployunit && character.currentTile != null && character.currentTile.Count > 0 && character.currentTile[0] != null)
                 {
                     cameraScript.Destination = character.currentTile[0].GridCoordinates;
                 }

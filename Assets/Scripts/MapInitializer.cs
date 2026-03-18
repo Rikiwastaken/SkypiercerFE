@@ -182,10 +182,20 @@ public class MapInitializer : MonoBehaviour
         }
     }
 
-    public void InitializeNonPlayable(EnemyStats enemyStats, int index = -1)
+    /// <summary>
+    /// Creating a single nonplayable character based on the given EnemyStats. If index is given, it will be added to the name of the character, otherwise "spawned" will be added to the name.
+    /// </summary>
+    /// <param name="enemyStats"></param>
+    /// <param name="index"></param>
+    public void InitializeNonPlayable(EnemyStats enemyStats, int index = -1, Character chartouse = null)
     {
         GameObject newcharacter = Instantiate(BaseCharacter);
+        if (chartouse != null)
+        {
+            newcharacter.GetComponent<UnitScript>().UnitCharacteristics = newcharacter.GetComponent<UnitScript>().CreateCopy(chartouse);
+        }
         Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
+
         Character.enemyStats = enemyStats;
         Character.modelID = enemyStats.modelID;
         ManageModel(newcharacter);

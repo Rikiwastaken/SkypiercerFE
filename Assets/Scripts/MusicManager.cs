@@ -604,5 +604,7 @@ public class MusicManager : MonoBehaviour
         WorldMapMusicintro.Stop();
         ShipMusic.Stop();
         ShipMusicintro.Stop();
+        MainMenuMusic.Stop();
+        MainMenuMusicintro.Stop();
     }
 }

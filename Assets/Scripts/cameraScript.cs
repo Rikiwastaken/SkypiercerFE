@@ -55,6 +55,8 @@ public class cameraScript : MonoBehaviour
     private TurnManger turnmanager;
 
     public float previousY;
+
+    private Vector2 prevdest;
     private void Awake()
     {
         if (instance == null)
@@ -68,20 +70,27 @@ public class cameraScript : MonoBehaviour
         previouselevation = transform.position.y;
         GridScript = GridScript.instance;
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
-        Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
-        transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
+        //Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
+        //transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
         turnmanager = TurnManger.instance;
         previousY = transform.position.y;
     }
 
     void LateUpdate()
     {
+
+        if (prevdest == Vector2.zero && Destination != Vector2.zero)
+        {
+            transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
+            prevdest = Destination;
+        }
+
         if (!PostProcessingInitialized)
         {
             ManagePostProcessing();
             PostProcessingInitialized = true;
         }
-        if (Destination != null)
+        if (Destination != Vector2.zero)
         {
             destTile = GridScript.GetTile(Destination);
         }
@@ -117,7 +126,6 @@ public class cameraScript : MonoBehaviour
             transform.position += new Vector3(0f, -verticalautomovespeed * Time.deltaTime, 0f);
             elevationtoadd += verticalautomovespeed * Time.deltaTime;
         }
-
         if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), Destination) > 0.01f)
         {
             float movex = (Destination.x - transform.position.x) * camspeed * Time.deltaTime;

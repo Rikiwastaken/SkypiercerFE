@@ -41,6 +41,13 @@ public class UnitDeploymentScript : MonoBehaviour
         inputmanager = InputManager.instance;
         numberofunitstodeplay = MapInitializer.playablepos.Count;
         forcedunits = MapInitializer.ForcedCharacters;
+
+        Debug.Log("forced units :");
+        foreach (int i in forcedunits)
+        {
+            Debug.Log($"{i}");
+        }
+
         InitializeButtons();
     }
 
@@ -162,7 +169,14 @@ public class UnitDeploymentScript : MonoBehaviour
         {
             foreach (Character character in DataScript.PlayableCharacterList)
             {
-                if (character.playableStats.unlocked)
+                Debug.Log(character.ID);
+                if (forcedunits.Contains(character.ID))
+                {
+                    Debug.Log("forced character added: " + character.name);
+                    characterstoshow.Add(character);
+                    character.playableStats.unlocked = true;
+                }
+                else if (character.playableStats.unlocked)
                 {
                     characterstoshow.Add(character);
                 }
@@ -243,11 +257,30 @@ public class UnitDeploymentScript : MonoBehaviour
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = characterstoshow[i];
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i;
-            if (i < numberofunitstodeplay)
+            Debug.Log(characterstoshow[i].name);
+            if (forcedunits.Contains(characterstoshow[i].ID))
             {
+
                 transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit = true;
             }
+            else
+            {
+                transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit = false;
+            }
         }
+
+        int remainingcharacterstoplace = numberofunitstodeplay - forcedunits.Count;
+
+        for (int i = 0; i < Mathf.Min(characterstoshow.Count, 20); i++)
+        {
+            if (remainingcharacterstoplace > 0 && !transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit)
+            {
+                transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit = true;
+                remainingcharacterstoplace--;
+            }
+        }
+
+
         for (int i = characterstoshow.Count; i < Mathf.Min(characterstoshow.Count, 20); i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = null;
@@ -290,7 +323,7 @@ public class UnitDeploymentScript : MonoBehaviour
         }
         foreach (Character character in DataScript.PlayableCharacterList)
         {
-            if (!newcharacterlist.Contains(character) && (character.playableStats.unlocked || intestmap))
+            if (!newcharacterlist.Contains(character))
             {
                 newcharacterlist.Add(character);
             }
