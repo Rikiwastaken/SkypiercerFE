@@ -1938,14 +1938,10 @@ public class UnitScript : MonoBehaviour
             ActionManager.instance.framestoskip = 10;
             ActionManager.instance.currentcharacter = gameObject;
         }
-        if (GetSkill(31)) //Verso
+        else if (GetSkill(31) || GetFirstWeapon().Name.ToLower().Contains("abyssal")) //Verso
         {
             AddNumber(0, true, "Verso");
             int remainingMovements = UnitCharacteristics.movements - tilesmoved;
-            if (GetSkill(1))//checking if unit is using Retreat
-            {
-                remainingMovements -= 2;
-            }
             if (GetSkill(5)) // checking if unit is using Fast Legs
             {
                 remainingMovements += 1;

@@ -2140,17 +2140,14 @@ public class DataScript : MonoBehaviour
                         newequipment.Name = "Abyssal";
                         switch (newequipment.Grade)
                         {
-                            case 2:
-                                newequipment.Name += "2";
-                                break;
                             case 3:
-                                newequipment.Name += "3";
+                                newequipment.Name += " 2";
                                 break;
                             case 4:
-                                newequipment.Name += "4";
+                                newequipment.Name += " 3";
                                 break;
                             case 5:
-                                newequipment.Name += "5";
+                                newequipment.Name += " 4";
                                 break;
                         }
                     }

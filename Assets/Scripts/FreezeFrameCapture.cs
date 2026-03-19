@@ -135,24 +135,29 @@ public class FreezeFrameCapture : MonoBehaviour
             PlayFullAnimation(DataScript.instance.PlayableCharacterList[1], list);
         }
 
+
+
         if (CloseCoroutine == null)
         {
-            if (ShowingLevelUp && CancelAction.IsPressed())
+            if (ShowingLevelUp && CancelAction.triggered)
             {
                 Debug.Log("closing");
                 StopAllCoroutines();
                 CloseCoroutine = StartCoroutine(Close());
             }
-            else if (continueAvailable && ActivateAction.IsPressed())
+            else if (continueAvailable && ActivateAction.triggered)
             {
                 Debug.Log("closing");
                 StopAllCoroutines();
                 CloseCoroutine = StartCoroutine(Close());
             }
-
         }
 
 
+        if (ShowingLevelUp)
+        {
+            ActionManager.instance.framestoskip = 5;
+        }
 
     }
 
