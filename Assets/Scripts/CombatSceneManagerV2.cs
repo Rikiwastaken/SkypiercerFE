@@ -13,6 +13,8 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
     public static CombatSceneManagerV2 instance;
 
+    public GameObject EventSystem;
+
     [Serializable]
     public class CharacterBattleInfo
     {
@@ -161,29 +163,8 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
     public void SetupScene(Character attacker, Character defender, List<int> attackerattacks, List<int> attackercriticals, List<int> defenderattacks, List<int> defendercriticals, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses, bool doesdefenderattacks, bool attackeroneforall, bool attackerunyielding, bool attackercompassionused, bool attackerinvigorating, bool defenderoneforall, bool defenderunyielding, bool defendercompassionused, bool defenderinvigorating) // list<int> for attacks: -1 are dodges, >=0 are damages, for criticals, 1=critical, 0=not
     {
-        Debug.Log("Setting up scene");
-        Debug.Log(attacker.name + " vs " + defender.name);
-        Debug.Log("Attacker attacks: " + string.Join(", ", attackerattacks));
-        Debug.Log("Attacker criticals: " + string.Join(", ", attackercriticals));
-        Debug.Log("Defender attacks: " + string.Join(", ", defenderattacks));
-        Debug.Log("Defender criticals: " + string.Join(", ", defendercriticals));
-        Debug.Log("Attacker hitrate: " + attackerhitrate);
-        Debug.Log("Attacker critrate: " + attackercritrate);
-        Debug.Log("Attacker damage: " + attackerdamage);
-        Debug.Log("Defender hitrate: " + defenderhitrate);
-        Debug.Log("Defender critrate: " + defendercritrate);
-        Debug.Log("Defender damage: " + defenderdamage);
-        Debug.Log("Exp gained: " + expgained);
-        Debug.Log("Level up bonuses: " + string.Join(", ", levelupbonuses));
-        Debug.Log("Does defender attack: " + doesdefenderattacks);
-        Debug.Log("Attacker oneforall: " + attackeroneforall);
-        Debug.Log("Attacker unyielding: " + attackerunyielding);
-        Debug.Log("Attacker compassion used: " + attackercompassionused);
-        Debug.Log("Attacker invigorating: " + attackerinvigorating);
-        Debug.Log("Defender oneforall: " + defenderoneforall);
-        Debug.Log("Defender unyielding: " + defenderunyielding);
-        Debug.Log("Defender compassion used: " + defendercompassionused);
-        Debug.Log("Defender invigorating: " + defenderinvigorating);
+
+        EventSystem.SetActive(true);
 
         //Filling out base classes
 
@@ -590,6 +571,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         Debug.Log("EndOfCombat");
         isinEndOfCombat = true;
 
+
         GameObject importantGO = null;
         CharacterBattleInfo importantInfo = null;
         if (AttackerInfo.character.affiliation.ToLower() == "playable" && AttackerInfo.currentHP > 0)
@@ -638,6 +620,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
     public void CloseCombatScene()
     {
         Debug.Log("ClosingScene");
+        EventSystem.SetActive(false);
         isinEndOfCombat = false;
         if (FindAnyObjectByType<CombatSceneLoader>() != null)
         {
