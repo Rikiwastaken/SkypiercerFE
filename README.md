@@ -44,3 +44,4 @@ Music by <a href="https://maou.audio/category/bgm/"> Maoudamashii </a> and<a hre
 - Activate (or deactivate) telekinesis : Y / O
 - Next Target (resp previous) RT (LT) / 0 (1)
 - Next Weapon (resp previous) RB (LB) / P (A)
+- Show/Hide Dangerous Tiles D-pad Up / Right Maj
