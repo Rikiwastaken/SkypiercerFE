@@ -1844,12 +1844,26 @@ public class UnitScript : MonoBehaviour
                     }
                 }
 
+                UpdateLayer(currentequipmentmodel);
+
             }
 
         }
 
         UpdateWeaponIcon(GetFirstWeapon(), UnitCharacteristics.telekinesisactivated);
 
+    }
+
+    private void UpdateLayer(GameObject obj)
+    {
+        obj.layer = gameObject.layer;
+        if (obj.transform.childCount > 0)
+        {
+            for (int i = 0; i < obj.transform.childCount; i++)
+            {
+                UpdateLayer(obj.transform.GetChild(i).gameObject);
+            }
+        }
     }
 
     private void UpdateWeaponIcon(equipment weapon, bool telekinesis)
