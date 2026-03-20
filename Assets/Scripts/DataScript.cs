@@ -1705,75 +1705,118 @@ public class DataScript : MonoBehaviour
         for (int i = 0; i < equipmentList.Count; i++)
         {
 
-            if (equipmentList[i].Grade > 0)
-            {
-                equipment equipemnttoappy = BasicGradeList[equipmentList[i].Grade]; ;
-                equipmentList[i].BaseDamage = equipemnttoappy.BaseDamage;
-                equipmentList[i].BaseHit = equipemnttoappy.BaseHit;
-                equipmentList[i].BaseCrit = equipemnttoappy.BaseCrit;
-                if (equipmentList[i].Name.Contains("Machine"))
-                {
-                    equipmentList[i].Currentuses = 99;
-                    equipmentList[i].Maxuses = 99;
-                }
-                else
-                {
-                    equipmentList[i].Currentuses = equipemnttoappy.Maxuses;
-                    equipmentList[i].Maxuses = equipemnttoappy.Maxuses;
-                }
-
-                if (equipmentList[i].type.ToLower() == "bow")
-                {
-                    equipmentList[i].Range = 2;
-                    equipmentList[i].equipmentmodel.localposition = new Vector3(-0.04f, 0.065f, 0);
-                }
-                else
-                {
-                    equipmentList[i].Range = 1;
-                    equipmentList[i].equipmentmodel.localposition = Vector3.zero;
-                }
-
-                if (equipmentList[i].Name.Contains("Garland"))
-                {
-                    equipmentList[i].Range = 2;
-                    equipmentList[i].Currentuses = 99;
-                    equipmentList[i].Maxuses = 99;
-                }
-
-                if (equipmentList[i].Name.Contains("Bonnie & Clyde"))
-                {
-                    equipmentList[i].Currentuses = 99;
-                    equipmentList[i].Maxuses = 99;
-                }
-
-                switch (equipmentList[i].type.ToLower())
-                {
-                    case ("sword"):
-                        equipmentList[i].BaseCrit += 3 * equipmentList[i].Grade;
-                        break;
-                    case ("spear"):
-                        equipmentList[i].BaseHit += 5 * equipmentList[i].Grade;
-                        break;
-                    case ("greatsword"):
-                        equipmentList[i].BaseDamage += 1 * equipmentList[i].Grade;
-                        break;
-                    case ("bow"):
-                        equipmentList[i].BaseDamage -= 1 * equipmentList[i].Grade;
-                        break;
-                    case ("scythe"):
-                        equipmentList[i].BaseDamage += 1 * equipmentList[i].Grade;
-                        break;
-                    case ("shield"):
-                        equipmentList[i].BaseDamage -= 1 * equipmentList[i].Grade;
-                        break;
-                }
-
-                equipmentList[i].equipmentmodel.localrotation = Vector3.zero;
-                equipmentList[i].equipmentmodel.localscale = Vector3.one;
-
-            }
+            SetupBaseEquipment(equipmentList[i]);
 
             equipmentList[i].ID = i;
+        }
+    }
+
+    private void SetupBaseEquipment(equipment equipmenttoSetup)
+    {
+
+
+        if (equipmenttoSetup.Grade > 0)
+        {
+            equipment equipemnttoappy = BasicGradeList[equipmenttoSetup.Grade];
+            equipmenttoSetup.BaseDamage = equipemnttoappy.BaseDamage;
+            equipmenttoSetup.BaseHit = equipemnttoappy.BaseHit;
+            equipmenttoSetup.BaseCrit = equipemnttoappy.BaseCrit;
+            if (equipmenttoSetup.Name.Contains("Machine"))
+            {
+                equipmenttoSetup.Currentuses = 99;
+                equipmenttoSetup.Maxuses = 99;
+            }
+            else
+            {
+                equipmenttoSetup.Currentuses = equipemnttoappy.Maxuses;
+                equipmenttoSetup.Maxuses = equipemnttoappy.Maxuses;
+            }
+
+            if (equipmenttoSetup.type.ToLower() == "bow")
+            {
+                equipmenttoSetup.Range = 2;
+                equipmenttoSetup.equipmentmodel.localposition = new Vector3(-0.04f, 0.065f, 0);
+            }
+            else
+            {
+                equipmenttoSetup.Range = 1;
+                equipmenttoSetup.equipmentmodel.localposition = Vector3.zero;
+            }
+
+            if (equipmenttoSetup.Name.Contains("Garland"))
+            {
+                equipmenttoSetup.Range = 2;
+                equipmenttoSetup.Currentuses = 99;
+                equipmenttoSetup.Maxuses = 99;
+            }
+
+            if (equipmenttoSetup.Name.Contains("Bonnie & Clyde"))
+            {
+                equipmenttoSetup.Currentuses = 99;
+                equipmenttoSetup.Maxuses = 99;
+            }
+
+            switch (equipmenttoSetup.type.ToLower())
+            {
+                case ("sword"):
+                    equipmenttoSetup.BaseCrit = equipemnttoappy.BaseCrit + 3 * equipmenttoSetup.Grade;
+                    break;
+                case ("spear"):
+                    equipmenttoSetup.BaseHit = equipemnttoappy.BaseHit + 5 * equipmenttoSetup.Grade;
+                    break;
+                case ("greatsword"):
+                    equipmenttoSetup.BaseDamage = equipemnttoappy.BaseDamage + 1 * equipmenttoSetup.Grade;
+                    break;
+                case ("bow"):
+                    equipmenttoSetup.BaseDamage = equipemnttoappy.BaseDamage - 1 * equipmenttoSetup.Grade;
+                    break;
+                case ("scythe"):
+                    equipmenttoSetup.BaseDamage = equipemnttoappy.BaseDamage + 1 * equipmenttoSetup.Grade;
+                    break;
+                case ("shield"):
+                    equipmenttoSetup.BaseDamage = equipemnttoappy.BaseDamage - 1 * equipmenttoSetup.Grade;
+                    break;
+            }
+
+            equipmenttoSetup.equipmentmodel.localrotation = Vector3.zero;
+            equipmenttoSetup.equipmentmodel.localscale = Vector3.one;
+
+        }
+    }
+
+    public void CalculateModifierStatChanges(equipment equipment)
+    {
+        if (equipment.Modifier == null || equipment.Modifier == "" || equipment.Modifier == "Basic")
+        {
+            return;
+        }
+        SetupBaseEquipment(equipment);
+        switch (equipment.Modifier.ToLower())
+        {
+            case ("sharp"):
+                equipment.BaseHit -= 5 * equipment.Grade;
+                equipment.BaseCrit += 2 * equipment.BaseCrit;
+                break;
+            case ("handy"):
+                equipment.BaseHit += 5 * equipment.Grade;
+                equipment.BaseCrit -= 2 * equipment.BaseCrit;
+                break;
+            case ("raw"):
+                equipment.BaseDamage += 1 * equipment.Grade;
+                equipment.BaseCrit -= 2 * equipment.BaseCrit;
+                break;
+            case ("farsight"):
+                equipment.Range += 1;
+                equipment.BaseHit -= 20;
+                break;
+            case ("focused"):
+                equipment.BaseDamage *= 2;
+                equipment.Maxuses /= 2;
+                break;
+            case ("ranged"):
+                equipment.BaseDamage /= 2;
+                equipment.Range += 3;
+                break;
         }
     }
 
@@ -2176,40 +2219,7 @@ public class DataScript : MonoBehaviour
         DestroyImmediate(TempGO);
     }
 
-    public void CalculateModifierStatChanges(equipment equipment)
-    {
-        if (equipment.Modifier == null || equipment.Modifier == "" || equipment.Modifier == "Basic")
-        {
-            return;
-        }
-        switch (equipment.Modifier.ToLower())
-        {
-            case ("sharp"):
-                equipment.BaseHit -= 5 * equipment.Grade;
-                equipment.BaseCrit += 2 * equipment.BaseCrit;
-                break;
-            case ("handy"):
-                equipment.BaseHit += 5 * equipment.Grade;
-                equipment.BaseCrit -= 2 * equipment.BaseCrit;
-                break;
-            case ("raw"):
-                equipment.BaseDamage += 1 * equipment.Grade;
-                equipment.BaseCrit -= 2 * equipment.BaseCrit;
-                break;
-            case ("farsight"):
-                equipment.Range += 1;
-                equipment.BaseHit -= 20;
-                break;
-            case ("focused"):
-                equipment.BaseDamage *= 2;
-                equipment.Maxuses /= 2;
-                break;
-            case ("ranged"):
-                equipment.BaseDamage /= 2;
-                equipment.Range += 3;
-                break;
-        }
-    }
+
 
     int ManhattanDistance(Vector2 point1, Vector2 point2)
     {
