@@ -2575,7 +2575,7 @@ public class ActionsMenu : MonoBehaviour
 
         charunit.experience += adjustedexp;
         List<int> levelup = new List<int>();
-        if (charunit.experience > 100)
+        if (charunit.experience >= 100)
         {
             levelup = unit.GetComponent<UnitScript>().LevelUp();
         }
