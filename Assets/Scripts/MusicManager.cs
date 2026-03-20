@@ -194,25 +194,30 @@ public class MusicManager : MonoBehaviour
 
     private void Update()
     {
-        if (cameraScript == null)
+        string currentscenename = SceneManager.GetActiveScene().name;
+        if (currentscenename.Contains("Chapter") || currentscenename.Contains("Prologue") || currentscenename.Contains("TestMap"))
         {
-            cameraScript = FindAnyObjectByType<cameraScript>();
+            if (cameraScript == null)
+            {
+                cameraScript = FindAnyObjectByType<cameraScript>();
+            }
+
+            if (TurnManager == null)
+            {
+                TurnManager = FindAnyObjectByType<TurnManger>();
+            }
+
+            if (GameOverScript == null)
+            {
+                GameOverScript = FindAnyObjectByType<GameOverScript>(FindObjectsInactive.Include);
+            }
+
+            if (textBubbleScript == null)
+            {
+                textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+            }
         }
 
-        if (TurnManager == null)
-        {
-            TurnManager = FindAnyObjectByType<TurnManger>();
-        }
-
-        if (GameOverScript == null)
-        {
-            GameOverScript = FindAnyObjectByType<GameOverScript>(FindObjectsInactive.Include);
-        }
-
-        if (textBubbleScript == null)
-        {
-            textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
-        }
 
         if (SceneLoader.instance.LoadingImage.gameObject.activeSelf)
         {
