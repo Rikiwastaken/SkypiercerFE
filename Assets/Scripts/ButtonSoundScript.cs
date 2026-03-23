@@ -12,11 +12,10 @@ public class ButtonSoundScript : MonoBehaviour
     public AudioClip SFX;
     public Button[] buttons;
 
-    public bool automaticallyplay = true;
+    public bool automaticallyplay = false;
 
     void Start()
     {
-        return;
         if (automaticallyplay)
         {
             buttons = GameObject.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);

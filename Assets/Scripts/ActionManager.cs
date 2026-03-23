@@ -239,10 +239,10 @@ public class ActionManager : MonoBehaviour
                     previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
                     currentcharacter.GetComponent<UnitScript>().MoveTo(GridScript.selection.GridCoordinates);
                     currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
-                    if (currentcharacter.GetComponent<UnitScript>().GetSkill(31))
+                    if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
                     {
                         int movements = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.movements;
-                        if (currentcharacter.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using canto/Retreat
+                        if (currentcharacter.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using Retreat
                         {
                             movements -= 2;
                         }
