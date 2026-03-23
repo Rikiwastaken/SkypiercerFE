@@ -87,6 +87,7 @@ public class MapInitializer : MonoBehaviour
             if (ForcedCharacters.Contains(playable.ID))
             {
                 playable.playableStats.deployunit = true;
+                playable.playableStats.unlocked = true;
                 GameObject newcharacter = Instantiate(BaseCharacter);
                 newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
                 ManageModel(newcharacter);

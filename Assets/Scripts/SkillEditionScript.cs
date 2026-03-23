@@ -341,7 +341,7 @@ public class SkillEditionScript : MonoBehaviour
         }
     }
 
-    private void InitializeButtons()
+    public void InitializeButtons()
     {
 
         List<Character> ListToUse = new List<Character>();
@@ -485,7 +485,7 @@ public class SkillEditionScript : MonoBehaviour
         {
             if (transform.GetChild(ButtonID).GetComponent<UnitDeploymentButton>().Character.name != "")
             {
-                selectedcharacter = DataScript.instance.PlayableCharacterList[ButtonID + characterwindowindex * 10];
+                selectedcharacter = transform.GetChild(ButtonID).GetComponent<UnitDeploymentButton>().Character;
                 if (IsBonds)
                 {
                     BondsScript.instance.LoadCharacterBonds(selectedcharacter);
