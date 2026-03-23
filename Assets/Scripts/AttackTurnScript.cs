@@ -27,7 +27,6 @@ public class AttackTurnScript : MonoBehaviour
     private int counterbeforemove;
     public float delaybeforeAttack;
     private int counterbeforeattack;
-    private bool waittingforcamera;
 
     public float delaybeforeFirstAttack;
     private int counterbeforeFirstAttack;
@@ -132,7 +131,6 @@ public class AttackTurnScript : MonoBehaviour
             previousattacker = null;
             previoustarget = null;
 
-            waittingforcamera = false;
             triggercleanup = true;
             MapEventManager.instance.TriggerEventCheck();
         }

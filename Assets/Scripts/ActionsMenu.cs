@@ -2685,7 +2685,7 @@ public class ActionsMenu : MonoBehaviour
         }
         if (target != null && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "shield")
         {
-            basestatdef += target.GetComponent<UnitScript>().GetFirstWeapon().Grade * 2;
+            basestatdef += target.GetComponent<UnitScript>().GetFirstWeapon().Grade;
         }
 
         float finaldamagefloat = unitbasedamage - basestatdef;

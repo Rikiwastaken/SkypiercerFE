@@ -197,7 +197,7 @@ public class BossScript : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < GridScript.Grid.Count; i++)
+            for (int i = 1; i < GridScript.Grid.Count; i++)
             {
                 for (int j = 0; j < GridScript.Grid[0].Count; j++)
                 {
