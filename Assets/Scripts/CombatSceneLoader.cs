@@ -156,6 +156,13 @@ public class CombatSceneLoader : MonoBehaviour
         onSceneActivated?.Invoke();
 
         yield return Fade(0); // fade in
+
+        // triggers the end of figth function
+        if (toScene.name != "BattleScene")
+        {
+            GridScript.instance.GetComponent<AttackTurnScript>().triggerEndOfFightWithAnimations = true;
+        }
+
     }
 
     // Enable/Disable all root GameObjects in a scene

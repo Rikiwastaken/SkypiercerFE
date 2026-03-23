@@ -69,6 +69,8 @@ public class AttackTurnScript : MonoBehaviour
 
     public int attackanimationhappeningcnt;
 
+    public bool triggerEndOfFightWithAnimations;
+
     private GameObject previousattacker;
     private GameObject previoustarget;
 
@@ -96,6 +98,11 @@ public class AttackTurnScript : MonoBehaviour
     void Update()
     {
 
+        if (triggerEndOfFightWithAnimations)
+        {
+            attackanimationhappeningcnt = 0;
+        }
+
         // If in the combat animation scene, ignore the update of this script to avoid bugs with the combat animation scene and to avoid the combat animation scene being skipped when an attack happens while the combat animation scene is playing
         if (attackanimationhappeningcnt > 0)
         {
@@ -110,10 +117,12 @@ public class AttackTurnScript : MonoBehaviour
         }
 
         // If Combat Animation is over, reset the lifebars of the attacker and target, trigger the end of fight attack animation if the attacker is still alive, reset all selections on the grid, trigger the end of fight event, and reset variables related to the end of fight and combat animation
-        if (previousattacker != null && AttackCoroutine == null)
+        if (triggerEndOfFightWithAnimations && previousattacker != null && AttackCoroutine == null)
         {
+            triggerEndOfFightWithAnimations = false;
             previousattacker.GetComponent<UnitScript>().disableLifebar = false;
             previousattacker.GetComponent<UnitScript>().ManageLifebars();
+            gridScript.ResetAllSelections();
             AttackWithAnimationEndOfFight(previousattacker, previoustarget);
             if (previoustarget != null)
             {
@@ -122,7 +131,7 @@ public class AttackTurnScript : MonoBehaviour
             }
             previousattacker = null;
             previoustarget = null;
-            gridScript.ResetAllSelections();
+
             waittingforcamera = false;
             triggercleanup = true;
             MapEventManager.instance.TriggerEventCheck();
@@ -257,7 +266,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     if (AttackCoroutine == null)
                     {
-                        AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimationRework(CurrentEnemy));
+                        AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimation(CurrentEnemy));
                     }
                 }
 
@@ -293,7 +302,7 @@ public class AttackTurnScript : MonoBehaviour
                     {
                         if (AttackCoroutine == null)
                         {
-                            AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimationRework(CurrentPlayable));
+                            AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimation(CurrentPlayable));
                         }
                     }
                 }
@@ -393,7 +402,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     if (AttackCoroutine == null)
                     {
-                        AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimationRework(CurrentOther));
+                        AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimation(CurrentOther));
                     }
                 }
             }
@@ -757,353 +766,6 @@ public class AttackTurnScript : MonoBehaviour
 
     }
 
-    private void ManageAttackWithoutAnimation(GameObject Attacker)
-    {
-        triggercleanup = true;
-        Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
-        if (counterbeforeattack > 0)
-        {
-            counterbeforeattack--;
-
-        }
-        else if (counterafterattack > 0)
-        {
-            counterafterattack--;
-        }
-        // exp distribution
-        else if (waittingforexp)
-        {
-            if (expdistributed)
-            {
-                expdistributed = false;
-                waittingforexp = false;
-                expbar.gameObject.SetActive(false);
-                if (CharAttacker.affiliation == "playable")
-                {
-                    ActionsMenu.FinalizeAttack();
-                    unitalreadyattacked = false;
-                }
-                else
-                {
-                    CharAttacker.alreadyplayed = true;
-                    CurrentOther = null;
-                    CurrentEnemy = null;
-                    CurrentPlayable = null;
-                    battlecamera.incombat = false;
-                    waittingforcamera = false;
-                    unitalreadyattacked = false;
-
-                }
-            }
-            else
-            {
-                GameObject target = null;
-                if (CharAttacker.affiliation != "playable")
-                {
-                    target = currentenemytarget;
-                }
-                else
-                {
-                    target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
-                }
-                if (target == null)
-                {
-                    expdistributed = true;
-                }
-                else if (CharAttacker.affiliation == "playable" && levelupbonuses != new List<int>())
-                {
-                    expbar.gameObject.SetActive(true);
-                    if (!expbar.setupdone)
-                    {
-                        expbar.SetupBar(CharAttacker, expgained, levelupbonuses);
-                    }
-
-                }
-                else if (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && levelupbonuses != new List<int>())
-                {
-                    expbar.gameObject.SetActive(true);
-                    if (!expbar.setupdone)
-                    {
-                        expbar.SetupBar(target.GetComponent<UnitScript>().UnitCharacteristics, expgained, levelupbonuses);
-                    }
-
-                }
-                else
-                {
-                    expdistributed = true;
-                }
-
-            }
-
-        }
-        // Waitting for camera to be placed before fight officially begins.
-        else if (waittingforcamera)
-        {
-            //Seting up target
-            GameObject target = null;
-            if (CharAttacker.affiliation != "playable")
-            {
-                target = currentenemytarget;
-            }
-            else
-            {
-                target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
-            }
-
-            if (target == null) //end fight if no target
-            {
-                CharAttacker.alreadyplayed = true;
-                CurrentOther = null;
-                CurrentEnemy = null;
-                CurrentPlayable = null;
-                battlecamera.incombat = false;
-                waittingforcamera = false;
-                waittingforexp = true;
-                expdistributed = true;
-                unitalreadyattacked = false;
-            }
-            else if (CurrentOther == null && CurrentEnemy == null && CurrentPlayable == null && CharAttacker.affiliation != "playable") //end fight if no attacker
-            {
-                battlecamera.incombat = false;
-                waittingforcamera = false;
-                waittingforexp = true;
-                expdistributed = true;
-                unitalreadyattacked = false;
-            }
-            else // begin fight
-            {
-
-
-
-                target.transform.LookAt(Attacker.transform);
-                Attacker.transform.LookAt(target.transform);
-                target.transform.GetChild(1).LookAt(Attacker.transform.GetChild(1));
-                Attacker.transform.GetChild(1).LookAt(target.transform.GetChild(1));
-
-                foreach (ModelInfo modelinfo in Attacker.GetComponent<UnitScript>().ModelList)
-                {
-                    if (modelinfo.ID == 1 && modelinfo.active)
-                    {
-                        Attacker.transform.GetChild(1).localRotation = Quaternion.Euler(0, 90, 0);
-                    }
-                }
-                battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
-                //waitting for camera to be fully placed
-                if (Vector2.Distance(battlecamera.Destination, new Vector2(battlecamera.transform.position.x, battlecamera.transform.position.z)) <= 0.1f)
-                {
-                    //delay before first attack
-                    if (counterbeforeFirstAttack > 0)
-                    {
-                        counterbeforeFirstAttack--;
-                        if (attacktrigger)
-                        {
-                            attacktrigger = false;
-
-                            (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
-                            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));
-                            if (ishealing)
-                            {
-                                doubleattacker = null;
-                                triple = false;
-                            }
-                            if (doubleattacker == Attacker)
-                            {
-                                if (triple)
-                                {
-                                    Attacker.GetComponent<UnitScript>().PlayAttackAnimation(true, true, ishealing);
-                                }
-                                else
-                                {
-                                    Attacker.GetComponent<UnitScript>().PlayAttackAnimation(true, false, ishealing);
-                                }
-                            }
-                            else
-                            {
-                                Attacker.GetComponent<UnitScript>().PlayAttackAnimation(false, false, ishealing);
-                            }
-                        }
-                    }
-                    //attacks
-                    else if (!checkifattackanimationisplaying(Attacker, target))
-                    {
-                        //first attack (attacker)
-                        if (!unitalreadyattacked)
-                        {
-                            (int hits, int crits, int damage, int exp, List<int> levelbonus, List<int> damagelist, List<int> critlist, bool oneforallactive, bool unyieldingactive, bool compassionused, bool invigoratingused) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
-                            expgained = exp;
-                            levelupbonuses = levelbonus;
-
-                            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower() == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (Attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower() == "other" && !Attacker.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends));
-                            combatTextScript.UpdateInfo(damage, hits, crits, CharAttacker, target.GetComponent<UnitScript>().UnitCharacteristics, ishealing);
-                            if ((target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0 && CharAttacker.affiliation == "playable" && CharAttacker.currentHP > 0) || (CharAttacker.currentHP <= 0 && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP > 0)) // distribute exp if a character died and a ally lived
-                            {
-                                waittingforexp = true;
-                                counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
-                                waittingforcamera = false;
-                                EndOfCombatTrigger(Attacker, target);
-                            }
-                            else if (ishealing) //distribute exp if attacker healed (no counterattack)
-                            {
-                                waittingforexp = true;
-                                waittingforcamera = false;
-                                EndOfCombatTrigger(Attacker, target);
-                            }
-                            else if ((CharAttacker.affiliation == "playable" && CharAttacker.currentHP <= 0) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)) // end fight if attacker died and attacker was allied
-                            {
-                                counterafterattack = (int)(delayafterAttack * 2f / Time.fixedDeltaTime);
-                                waittingforexp = true;
-                                expdistributed = true;
-                                waittingforcamera = false;
-                                EndOfCombatTrigger(Attacker, target);
-                            }
-                            else if ((ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38)) && target.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.StunTurns <= 0) // counterattack
-                            {
-                                unitalreadyattacked = true;
-                                counterbetweenattack = (int)(delaybetweenAttack / Time.fixedDeltaTime);
-                                (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
-                                if (doubleattacker == target)
-                                {
-                                    if (triple)
-                                    {
-                                        target.GetComponent<UnitScript>().PlayAttackAnimation(true, true);
-                                    }
-                                    else
-                                    {
-                                        target.GetComponent<UnitScript>().PlayAttackAnimation(true);
-                                    }
-                                }
-                                else
-                                {
-                                    target.GetComponent<UnitScript>().PlayAttackAnimation();
-                                }
-
-                            }
-                            else if (CharAttacker.affiliation != "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable") // end directly the fight if no one died
-                            {
-                                counterafterattack = (int)(delayafterAttack * 2f / Time.fixedDeltaTime);
-                                waittingforexp = true;
-                                expdistributed = true;
-                                waittingforcamera = false;
-                                EndOfCombatTrigger(Attacker, target);
-
-
-
-                            }
-                            else // distribute exp if no one died and one of the characters is playable
-                            {
-                                waittingforexp = true;
-                                counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
-                                waittingforcamera = false;
-                                EndOfCombatTrigger(Attacker, target);
-                            }
-                        }
-                        else
-                        {
-                            // wait a while before counterattack
-                            if (counterbetweenattack > 0 && !checkifattackanimationisplaying(Attacker, target))
-                            {
-                                counterbetweenattack--;
-                            }
-                            else // does counterattack
-                            {
-                                (int hits, int crits, int damage, int exp, List<int> levelbonus, List<int> damagelist, List<int> critlist, bool oneforallactive, bool unyieldingactive, bool compassionused, bool invigoratingused) = ActionsMenu.ApplyDamage(Attacker, target, unitalreadyattacked);
-                                expgained = exp;
-                                levelupbonuses = levelbonus;
-                                combatTextScript.UpdateInfo(damage, hits, crits, target.GetComponent<UnitScript>().UnitCharacteristics, Attacker.GetComponent<UnitScript>().UnitCharacteristics);
-                                unitalreadyattacked = true;
-                                counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
-                                if ((CharAttacker.affiliation != "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable") || (CharAttacker.affiliation == "playable" && CharAttacker.currentHP <= 0))
-                                {
-                                    waittingforexp = true;
-                                    expdistributed = true;
-                                    counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
-                                    waittingforcamera = false;
-                                    EndOfCombatTrigger(Attacker, target);
-                                }
-                                else
-                                {
-                                    EndOfCombatTrigger(Attacker, target);
-                                    waittingforexp = true;
-                                    counterafterattack = (int)(delayafterAttack / Time.fixedDeltaTime);
-                                    waittingforcamera = false;
-                                }
-
-                                //if (target != null)
-                                //{
-                                //    EndOfCombatTrigger(Attacker, target);
-                                //    waittingforcamera = false;
-                                //}
-                                //else
-                                //{
-                                //    EndOfCombatTrigger(Attacker, target);
-                                //    waittingforcamera = false;
-                                //}
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            GameObject target = null;
-            if (CharAttacker.affiliation != "playable")
-            {
-                target = currentenemytarget;
-            }
-            else
-            {
-                target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
-            }
-            if (target != null)
-            {
-
-                waittingforcamera = true;
-
-                foresightScript.CreateAction(0, Attacker, target);
-
-
-                battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
-                unitalreadyattacked = false;
-                counterbeforeFirstAttack = (int)(delaybeforeFirstAttack / Time.fixedDeltaTime);
-                attacktrigger = true;
-                if (combatTextScript == null)
-                {
-                    combatTextScript = FindAnyObjectByType<CombatTextScript>(FindObjectsInactive.Include);
-                }
-                combatTextScript.ResetInfo();
-            }
-            else
-            {
-                if (target != null)
-                {
-                    EndOfCombatTrigger(Attacker, target);
-                    waittingforcamera = false;
-                }
-                else
-                {
-                    EndOfCombatTrigger(Attacker);
-                    waittingforcamera = false;
-                }
-                if (CharAttacker.affiliation == "playable")
-                {
-                    ActionsMenu.FinalizeAttack();
-                    waittingforcamera = false;
-                }
-                else
-                {
-                    CharAttacker.alreadyplayed = true;
-                    CurrentOther = null;
-                    CurrentEnemy = null;
-                    CurrentPlayable = null;
-                    waittingforcamera = false;
-                }
-
-            }
-            gridScript.ResetAllSelections();
-        }
-    }
-
     public void AttackWithAnimationEndOfFight(GameObject Attacker, GameObject Target)
     {
 
@@ -1266,7 +928,7 @@ public class AttackTurnScript : MonoBehaviour
         }
     }
 
-    public IEnumerator ManageAttackWithoutAnimationRework(GameObject Attacker)
+    public IEnumerator ManageAttackWithoutAnimation(GameObject Attacker)
     {
 
         int safeguard = 0;
