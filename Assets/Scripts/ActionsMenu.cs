@@ -2408,8 +2408,8 @@ public class ActionsMenu : MonoBehaviour
                 {
                     Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
-                    unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)unitchar.AjustedStats.HP - unitchar.currentHP, (int)(DamageDealt * 0.1f)), true, "Rebound");
-                    unitchar.currentHP += (int)(DamageDealt * 0.1f);
+                    unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)unitchar.AjustedStats.HP - unitchar.currentHP, (int)(DamageDealt * 0.25f)), true, "Rebound");
+                    unitchar.currentHP += (int)(DamageDealt * 0.25f);
                     if (unitchar.currentHP > unitchar.AjustedStats.HP)
                     {
                         unitchar.currentHP = (int)unitchar.AjustedStats.HP;
