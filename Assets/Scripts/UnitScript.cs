@@ -2910,6 +2910,10 @@ public class UnitScript : MonoBehaviour
 
             foreach (Character otherunitchar in activelist)
             {
+                if (otherunitchar == UnitCharacteristics)
+                {
+                    continue;
+                }
                 int movement = otherunitchar.movements;
                 if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= movement && otherunitchar.playableStats.battalion == UnitCharacteristics.playableStats.battalion && otherunitchar.playableStats.protagonist)
                 {

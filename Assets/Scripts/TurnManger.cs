@@ -423,8 +423,8 @@ public class TurnManger : MonoBehaviour
                             unit.GetComponent<UnitScript>().AddNumber(0, false, "Dried");
                             break;
                         }
-                        hplost = unitchar.currentHP - (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 4);
-                        unitchar.currentHP = (int)Mathf.Max(1, unitchar.currentHP - unitchar.AjustedStats.HP / 4);
+                        hplost = unitchar.currentHP - (int)Mathf.Max(0, unitchar.currentHP - unitchar.AjustedStats.HP * 0.2f);
+                        unitchar.currentHP = (int)Mathf.Max(0, unitchar.currentHP - unitchar.AjustedStats.HP * 0.2f);
                         unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Desert");
                         break;
                     case "fortification":
