@@ -142,13 +142,32 @@ public class FreezeFrameCapture : MonoBehaviour
             if (ShowingLevelUp && CancelAction.triggered)
             {
                 Debug.Log("closing");
-                StopAllCoroutines();
+                if (fullfreezeframecoroutine != null)
+                {
+                    StopCoroutine(fullfreezeframecoroutine);
+                }
+
+
+                if (Splitcoroutine != null)
+                {
+                    StopCoroutine(Splitcoroutine);
+                }
+
                 CloseCoroutine = StartCoroutine(Close());
             }
             else if (continueAvailable && ActivateAction.triggered)
             {
                 Debug.Log("closing");
-                StopAllCoroutines();
+                if (fullfreezeframecoroutine != null)
+                {
+                    StopCoroutine(fullfreezeframecoroutine);
+                }
+
+
+                if (Splitcoroutine != null)
+                {
+                    StopCoroutine(Splitcoroutine);
+                }
                 CloseCoroutine = StartCoroutine(Close());
             }
         }
@@ -163,10 +182,19 @@ public class FreezeFrameCapture : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (CloseCoroutine != null && TimeSafeguard != 0 && Time.time > TimeSafeguard && fullfreezeframecoroutine == null)
+        if (CloseCoroutine != null && TimeSafeguard != 0 && Time.time > TimeSafeguard)
         {
             Debug.Log("closing");
-            StopAllCoroutines();
+            if (fullfreezeframecoroutine != null)
+            {
+                StopCoroutine(fullfreezeframecoroutine);
+            }
+
+
+            if (Splitcoroutine != null)
+            {
+                StopCoroutine(Splitcoroutine);
+            }
             CloseCoroutine = StartCoroutine(Close());
         }
     }
@@ -355,7 +383,10 @@ public class FreezeFrameCapture : MonoBehaviour
         }
         StartCoroutine(MoveContinueCoroutine(9f * timebetweenStats));
         Splitcoroutine = StartCoroutine(SplitCoroutine());
+
         yield return Splitcoroutine;
+
+        fullfreezeframecoroutine = null;
     }
 
 
@@ -390,7 +421,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
         float t = 0f;
 
-        //yield return new WaitForSeconds(1);
+        //yield return new WaitForSecondsRealtime(1);
 
         while (t < 1f)
         {
@@ -573,7 +604,7 @@ public class FreezeFrameCapture : MonoBehaviour
         Vector2 leftEnd = new Vector2(-splitDistance, 0);
         Vector2 rightEnd = new Vector2(splitDistance, 0);
 
-        yield return new WaitForSeconds(timebeforesplit);
+        yield return new WaitForSecondsRealtime(timebeforesplit);
 
         while (t < 1f)
         {
@@ -597,6 +628,8 @@ public class FreezeFrameCapture : MonoBehaviour
 
         left.rectTransform.anchoredPosition = leftEnd;
         right.rectTransform.anchoredPosition = rightEnd;
+
+        Splitcoroutine = null;
     }
 
 
@@ -604,9 +637,9 @@ public class FreezeFrameCapture : MonoBehaviour
     {
         float t = 0f;
 
-        yield return new WaitForSeconds(durationbeforemove);
+        yield return new WaitForSecondsRealtime(durationbeforemove);
 
-        yield return new WaitForSeconds(timebeforesplit);
+        yield return new WaitForSecondsRealtime(timebeforesplit);
 
         while (t < 1f)
         {
@@ -625,9 +658,9 @@ public class FreezeFrameCapture : MonoBehaviour
     {
         float t = 0f;
 
-        yield return new WaitForSeconds(durationbeforemove);
+        yield return new WaitForSecondsRealtime(durationbeforemove);
 
-        yield return new WaitForSeconds(timebeforesplit);
+        yield return new WaitForSecondsRealtime(timebeforesplit);
         continueAvailable = true;
         while (t < 1f)
         {
