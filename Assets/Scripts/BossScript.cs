@@ -5,11 +5,19 @@ using static UnitScript;
 public class BossScript : MonoBehaviour
 {
 
+    public static BossScript instance;
+
     private GridScript GridScript;
 
     public GameObject nextTarget;
 
     private ActionsMenu ActionsMenu;
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -95,6 +103,7 @@ public class BossScript : MonoBehaviour
                     if (ManhanttanDistance(RagnallPosition, tile.GridCoordinates) <= 2 && tile != character.currentTile[0])
                     {
                         tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
                     }
                 }
             }
@@ -109,6 +118,7 @@ public class BossScript : MonoBehaviour
                     if (ManhanttanDistance(RagnallPosition, tile.GridCoordinates) <= 4 && ManhanttanDistance(RagnallPosition, tile.GridCoordinates) > 2 && tile != character.currentTile[0])
                     {
                         tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
                     }
                 }
             }
@@ -127,10 +137,12 @@ public class BossScript : MonoBehaviour
                             if (TargetPosition.y < RagnallPosition.y && tile.GridCoordinates.y < RagnallPosition.y)
                             {
                                 tile.isbossAttackTile = true;
+                                tile.BossTileChanged();
                             }
                             else if (TargetPosition.y > RagnallPosition.y && tile.GridCoordinates.y > RagnallPosition.y)
                             {
                                 tile.isbossAttackTile = true;
+                                tile.BossTileChanged();
                             }
                         }
                     }
@@ -148,10 +160,12 @@ public class BossScript : MonoBehaviour
                             if (TargetPosition.x < RagnallPosition.x && tile.GridCoordinates.x < RagnallPosition.x)
                             {
                                 tile.isbossAttackTile = true;
+                                tile.BossTileChanged();
                             }
                             else if (TargetPosition.x > RagnallPosition.x && tile.GridCoordinates.x > RagnallPosition.x)
                             {
                                 tile.isbossAttackTile = true;
+                                tile.BossTileChanged();
                             }
                         }
                     }
@@ -185,12 +199,14 @@ public class BossScript : MonoBehaviour
                         if (tile != character.currentTile[0])
                         {
                             tile.isbossAttackTile = true;
+                            tile.BossTileChanged();
                         }
 
                     }
                     else if (ManhanttanDistance(KayPosition, tile.GridCoordinates) == 3 && (Mathf.Abs(KayPosition.x) == Mathf.Abs(TargetPosition.x) || Mathf.Abs(KayPosition.y) == Mathf.Abs(TargetPosition.y)))
                     {
                         tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
                     }
                 }
             }
@@ -208,6 +224,7 @@ public class BossScript : MonoBehaviour
                         if (!GridScript.Grid[i - 1][j].GetComponent<GridSquareScript>().isobstacle)
                         {
                             tile.isbossAttackTile = true;
+                            tile.BossTileChanged();
                         }
                     }
                 }
@@ -240,12 +257,14 @@ public class BossScript : MonoBehaviour
                         if (tile != character.currentTile[0])
                         {
                             tile.isbossAttackTile = true;
+                            tile.BossTileChanged();
                         }
 
                     }
                     else if (ManhanttanDistance(KayPosition, tile.GridCoordinates) == 3 && (Mathf.Abs(KayPosition.x) == Mathf.Abs(TargetPosition.x) || Mathf.Abs(KayPosition.y) == Mathf.Abs(TargetPosition.y)))
                     {
                         tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
                     }
                 }
             }
@@ -265,6 +284,7 @@ public class BossScript : MonoBehaviour
                             if (tile != character.currentTile[0])
                             {
                                 tile.isbossAttackTile = true;
+                                tile.BossTileChanged();
                             }
                         }
                     }
@@ -282,6 +302,7 @@ public class BossScript : MonoBehaviour
                             if (tile != character.currentTile[0])
                             {
                                 tile.isbossAttackTile = true;
+                                tile.BossTileChanged();
                             }
                         }
                     }

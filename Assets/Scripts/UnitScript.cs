@@ -323,6 +323,8 @@ public class UnitScript : MonoBehaviour
 
     public Image Lifebar;
     public Image LBBackground;
+    public Image LifebarWhenBossTile;
+    public Image LBBackgroundWhenBossTile;
 
     private int delayedUpdateCounter;
 
@@ -1388,6 +1390,7 @@ public class UnitScript : MonoBehaviour
         {
             MinimapScript = MinimapScript.instance;
         }
+
         MinimapScript.UpdateMinimap();
 
     }
@@ -1401,6 +1404,8 @@ public class UnitScript : MonoBehaviour
             UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(0, 1)));
             UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(-1, 1)));
         }
+        destination.previousEnemyinTileForEvent = gameObject;
+        destination.BossTileChanged();
     }
 
     public bool isinattackanimation(Animator otheranimator = null)
@@ -1909,6 +1914,7 @@ public class UnitScript : MonoBehaviour
     void HealthChangedHandler(int newHealth)
     {
         ManageLifebars();
+        UnitCharacteristics.currentTile[0].BossTileChanged();
     }
 
     void PlayedChangedHandler(bool newPlayed)

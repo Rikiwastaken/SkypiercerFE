@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnitScript;
 
 public class GridSquareScript : MonoBehaviour
@@ -122,6 +123,39 @@ public class GridSquareScript : MonoBehaviour
     public Color HealingColor;
     public Color BossAttackColor;
 
+
+    private event Action<bool> OnTileChanged;
+    private bool previousIsBossTileForEvent;
+    private bool BossTileForEvent
+    {
+        get => previousIsBossTileForEvent;
+        set
+        {
+            if (previousIsBossTileForEvent != value) // Only trigger if the value actually changes
+            {
+                previousIsBossTileForEvent = value;
+                OnTileChanged?.Invoke(previousIsBossTileForEvent); // Fire the event
+            }
+        }
+    }
+
+    private event Action<GameObject> OnEnemyChanged;
+    public GameObject previousEnemyinTileForEvent;
+    private GameObject EnemyOnTileForEvent
+    {
+        get => previousEnemyinTileForEvent;
+        set
+        {
+            if (previousEnemyinTileForEvent != value) // Only trigger if the value actually changes
+            {
+                previousEnemyinTileForEvent = value;
+                OnEnemyChanged?.Invoke(previousEnemyinTileForEvent); // Fire the event
+            }
+        }
+    }
+
+    private ActionsMenu actionsmenu;
+
     void Awake()
     {
         filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -148,7 +182,7 @@ public class GridSquareScript : MonoBehaviour
 
     private void Start()
     {
-
+        actionsmenu = FindAnyObjectByType<ActionsMenu>(FindObjectsInactive.Include);
         SetupBaseElevation();
 
         if (Mechanism.type == 1)
@@ -179,8 +213,8 @@ public class GridSquareScript : MonoBehaviour
         }
 
 
-
-
+        OnTileChanged += BossTileChanged;
+        OnEnemyChanged += BossTileChanged;
 
     }
 
@@ -375,6 +409,8 @@ public class GridSquareScript : MonoBehaviour
             MapInitializer = FindAnyObjectByType<MapInitializer>(FindObjectsInactive.Include);
         }
 
+
+
         if (cameraScript.incombat)
         {
             //SelectRoundFilling.GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f,0f);
@@ -462,6 +498,11 @@ public class GridSquareScript : MonoBehaviour
         //UpdateFilling();
         previouslyincombat = cameraScript.incombat;
     }
+
+    private void LateUpdate()
+    {
+        previousIsBossTileForEvent = isbossAttackTile;
+    }
     private void UpdateDelay()
     {
         if (autoupdatecnt <= 0)
@@ -475,7 +516,51 @@ public class GridSquareScript : MonoBehaviour
         }
     }
 
+    public void BossTileChanged(bool isbosstile)
+    {
 
+
+
+        if (GridScript == null)
+        {
+            GridScript = GridScript.instance;
+        }
+
+        GameObject unit = GridScript.GetUnit(this);
+
+
+        if (unit == null)
+        {
+            return;
+        }
+        Image BossLifebar = unit.GetComponent<UnitScript>().LifebarWhenBossTile;
+        Image BossLifeBarBG = unit.GetComponent<UnitScript>().LBBackgroundWhenBossTile;
+
+        Debug.Log("tile : " + gameObject.name + " unit: " + unit.name + " isbosstile : " + isbossAttackTile);
+
+        if (isbossAttackTile)
+        {
+            BossLifeBarBG.gameObject.SetActive(true);
+            int damagetaken = actionsmenu.CalculateDamage(BossScript.instance.gameObject, unit);
+            BossLifebar.fillAmount = (float)(((float)unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP - damagetaken) / (float)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP);
+        }
+        else
+        {
+            BossLifeBarBG.gameObject.SetActive(false);
+        }
+    }
+
+    public void BossTileChanged(GameObject newunit)
+    {
+        BossTileChanged(isbossAttackTile);
+
+    }
+
+    public void BossTileChanged()
+    {
+        BossTileChanged(isbossAttackTile);
+
+    }
 
     private void manageVisuals()
     {
