@@ -1,5 +1,11 @@
 # To Do List
 
+## Bug Fixes
+
+- Crash when levelling up without animations.
+- No Walk Anim for Machines.
+- Delay when machines attack.
+
 ## System 
 
 - Rework Animation for Animation Tree
@@ -44,7 +50,7 @@
 
 ## Sound
 
-- Find voice SFX
+- Find voice SFX (Maybe TTS ?)
 
 ## Music
 

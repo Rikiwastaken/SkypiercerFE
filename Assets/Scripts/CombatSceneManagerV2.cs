@@ -335,6 +335,10 @@ public class CombatSceneManagerV2 : MonoBehaviour
         {
             PlayAnimation(AttackerGO, 0);
 
+
+            //wait 3 frames to ensure animation is playing
+            yield return null;
+            yield return null;
             yield return null;
 
             var animator = AttackerGO.GetComponent<UnitScript>().ModelList[AttackerInfo.character.modelID].wholeModel.GetComponentInChildren<Animator>();
