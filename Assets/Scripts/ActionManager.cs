@@ -456,7 +456,15 @@ public class ActionManager : MonoBehaviour
     {
         ActionsMenu actionsMenu = FindAnyObjectByType<ActionsMenu>();
         actionsMenu.target = currentcharacter;
-        actionsMenu.AttackCommand();
+        actionsMenu.AttackCommand(false);
+
+    }
+
+    public void Heal()
+    {
+        ActionsMenu actionsMenu = FindAnyObjectByType<ActionsMenu>();
+        actionsMenu.target = currentcharacter;
+        actionsMenu.AttackCommand(true);
 
     }
 

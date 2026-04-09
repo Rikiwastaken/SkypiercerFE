@@ -536,8 +536,6 @@ public class GridSquareScript : MonoBehaviour
         Image BossLifebar = unit.GetComponent<UnitScript>().LifebarWhenBossTile;
         Image BossLifeBarBG = unit.GetComponent<UnitScript>().LBBackgroundWhenBossTile;
 
-        Debug.Log("tile : " + gameObject.name + " unit: " + unit.name + " isbosstile : " + isbossAttackTile);
-
         if (isbossAttackTile)
         {
             BossLifeBarBG.gameObject.SetActive(true);

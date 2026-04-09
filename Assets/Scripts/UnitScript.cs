@@ -2715,27 +2715,15 @@ public class UnitScript : MonoBehaviour
         if (firstweapon.type.ToLower() == "bow")
         {
             melee = false;
-            if (UnitCharacteristics.telekinesisactivated)
-            {
-                range += 2;
-                if (GetSkill(33)) //focus
-                {
-                    range += 1;
-                }
-            }
         }
-        else
+        if (UnitCharacteristics.telekinesisactivated)
         {
-            if (UnitCharacteristics.telekinesisactivated)
+            range += 1;
+            if (GetSkill(33)) //focus
             {
                 range += 1;
-                if (GetSkill(33)) //focus
-                {
-                    range += 1;
-                }
             }
         }
-
         return (range, melee);
     }
 
@@ -3476,36 +3464,10 @@ public class UnitScript : MonoBehaviour
 
     public (int, bool, string) GetRangeMeleeAndType()
     {
-        equipment firstweapon = GetFirstWeapon();
-        int range = firstweapon.Range;
-        bool melee = true;
-        string type = firstweapon.type;
-        if (firstweapon.type.ToLower() == "bow")
-        {
-            melee = false;
-            if (UnitCharacteristics.telekinesisactivated)
-            {
-                range += 2;
+        (int range, bool melee) = GetRangeAndMele();
 
-                if (GetSkill(33)) //focus
-                {
-                    range += 1;
-                }
-            }
-        }
-        else
-        {
-            if (UnitCharacteristics.telekinesisactivated)
-            {
-                range += 1;
-                if (GetSkill(33)) //focus
-                {
-                    range += 1;
-                }
-            }
-        }
 
-        return (range, melee, type);
+        return (range, melee, GetFirstWeapon().type);
     }
     /// <summary>
     /// Removes status ailments from the target character. If no target is specified, it removes them from the unit itself. If statustoremove is -1, it removes all status ailments. Otherwise, it removes the specific status ailment corresponding to the number (0 for weakness, 1 for power, 2 for burn, 3 for stun, 4 for paralyze, 5 for concussion, 6 for regen, 7 for acceleration).

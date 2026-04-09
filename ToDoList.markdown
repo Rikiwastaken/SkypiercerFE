@@ -3,10 +3,12 @@
 ## Bug Fixes
 
 - Crash when levelling up without animations.
-- No Walk Anim for Machines.
-- Delay when machines attack.
 
 ## System 
+
+- arrows to change targets when about to attack/heal
+
+- pressing on an attackable enemy attacks directly
 
 - Rework Animation for Animation Tree
 
@@ -19,6 +21,10 @@
 ## Visuals
 
 - Do weapon swing particles
+
+- Make camera move a little bit more in battle (avoid fixed angles)
+
+- Rework grass, jpegs are fine (ground beneath need texture tho)
 
 ### 3D Models
 

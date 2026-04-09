@@ -67,6 +67,7 @@ public class ActionsMenu : MonoBehaviour
 
     private bool PreviousActivatedState = false;
 
+    private bool isUnithealing;
     private void OnDisable()
     {
         PreviousActivatedState = false;
@@ -122,25 +123,29 @@ public class ActionsMenu : MonoBehaviour
             {
                 ToggleTelekinesis(targetlist[activetargetid]);
             }
-            if (inputManager.NextWeaponjustpressed)
+            if (!isUnithealing)
             {
-                if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
+                if (inputManager.NextWeaponjustpressed)
                 {
-                    NextWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
+                    if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
+                    {
+                        NextWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
+                    }
+
+
                 }
-
-
-            }
-            if (inputManager.PreviousWeaponjustpressed)
-            {
-                if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
+                if (inputManager.PreviousWeaponjustpressed)
                 {
-                    PreviousWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
-                }
+                    if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
+                    {
+                        PreviousWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
+                    }
 
+                }
             }
 
-            if (inputManager.NextTargetjustpressed)
+
+            if (inputManager.NextTargetjustpressed || (inputManager.movementjustpressed && inputManager.movementValue.x > 0))
             {
                 if (activetargetid < targetlist.Count - 1)
                 {
@@ -150,7 +155,7 @@ public class ActionsMenu : MonoBehaviour
                 {
                     activetargetid = 0;
                 }
-                if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+                if (isUnithealing)
                 {
                     initializeHealingWindows(target, targetlist[activetargetid]);
                 }
@@ -160,7 +165,7 @@ public class ActionsMenu : MonoBehaviour
                 }
 
             }
-            if (inputManager.PreviousTargetjustpressed)
+            if (inputManager.PreviousTargetjustpressed || (inputManager.movementjustpressed && inputManager.movementValue.x < 0))
             {
                 if (activetargetid > 0)
                 {
@@ -170,7 +175,7 @@ public class ActionsMenu : MonoBehaviour
                 {
                     activetargetid = targetlist.Count - 1;
                 }
-                if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+                if (isUnithealing)
                 {
                     initializeHealingWindows(target, targetlist[activetargetid]);
                 }
@@ -433,7 +438,7 @@ public class ActionsMenu : MonoBehaviour
         targetlist = null;
     }
 
-    private (List<equipment>, List<int>, bool) previouscharacterstate(Character character)
+    private (List<equipment>, List<int>) previouscharacterstate(Character character)
     {
         List<equipment> previousequipmentstate = new List<equipment>();
         List<int> previousequipmentIDstate = new List<int>();
@@ -448,56 +453,59 @@ public class ActionsMenu : MonoBehaviour
                 previousequipmentIDstate.Add(character.equipmentsIDs[i]);
             }
         }
-        return (previousequipmentstate, previousequipmentIDstate, character.telekinesisactivated);
+        return (previousequipmentstate, previousequipmentIDstate);
     }
 
-    private void ResetCharacterEquipment(Character character, List<equipment> previousequipmentstate, List<int> previousequipmentIDstate, bool previoustelekinesis)
+    private void ResetCharacterEquipment(Character character, List<equipment> previousequipmentstate, List<int> previousequipmentIDstate)
     {
         character.equipments = previousequipmentstate;
         character.equipmentsIDs = previousequipmentIDstate;
-        character.telekinesisactivated = previoustelekinesis;
     }
 
     /// <summary>
-    /// Method that is called when the attack command is selected, it tries to find a combo of weapon and telekinesis to be able to attack an enemy, if no enemy is found it tries other weapons and telekinesis settings, if still no enemy is found it resets the character equipment to the previous state, it also updates the attack range and targetable enemies based on the current weapon and telekinesis settings
+    /// Method that is called when the attack command is selected, it tries to find a weapon to be able to attack an enemy, if no enemy is found it tries other weapons , if still no enemy is found it resets the character equipment to the previous state, it also updates the attack range and targetable enemies based on the current weapon and telekinesis settings
     /// </summary>
-    public void AttackCommand()
+    public void AttackCommand(bool ishealing)
     {
-        CommandUsedID = 0;
-        // on essaie de trouver un combo arme/telekinesie pour pouvoir attaquer un ennemi
         if (target == null)
         {
             return;
         }
+
+        if (ishealing)
+        {
+            int safeguard = 0;
+            while (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() != "staff" && safeguard < 10)
+            {
+                target.GetComponent<UnitScript>().GetNextWeapon();
+                safeguard++;
+            }
+            if (safeguard >= 10)
+            {
+                return;
+            }
+        }
+        isUnithealing = ishealing;
+        CommandUsedID = 0;
+        // on essaie de trouver une arme pour pouvoir attaquer un ennemi
+
+
         Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
-        FindAttackers();
+        FindAttackers(false, 0, ishealing);
         List<equipment> previousequipmentstate = new List<equipment>();
         List<int> previousequipmentIDstate = new List<int>();
-        bool previoustelekinesis = false;
-        (previousequipmentstate, previousequipmentIDstate, previoustelekinesis) = previouscharacterstate(targetcharacter);
+        (previousequipmentstate, previousequipmentIDstate) = previouscharacterstate(targetcharacter);
         if (targetlist.Count == 0) //ici pas d'ennemi trouve donc on essaie d'autres armes
         {
-            if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() != "staff")
+            if (!ishealing)
             {
                 List<equipment> weapons = target.GetComponent<UnitScript>().GetAllWeapons();
                 foreach (equipment weapon in weapons)
                 {
-                    if (weapon.type.ToLower() == "staff")
-                    {
-                        continue;
-                    }
                     int rangebonus = 0;
                     bool frapperenmelee = true;
                     if (targetcharacter.telekinesisactivated)
                     {
-                        // if (weapon.type.ToLower() == "bow")
-                        // {
-                        //     rangebonus = 2;
-                        // }
-                        // else
-                        // {
-                        //     rangebonus = 1;
-                        // }
                         rangebonus = 1;
                         if (target.GetComponent<UnitScript>().GetSkill(33))
                         {
@@ -520,82 +528,13 @@ public class ActionsMenu : MonoBehaviour
                         return;
                     }
                 }
-                if (targetlist.Count == 0) //ici toujours pas d'ennemi trouve donc on essaie d'autres armes en chengeant le reglage de telekinesie
-                {
-                    targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
-                    if (targetcharacter.statusEffects.ConcussionTunrs > 0)
-                    {
-                        targetcharacter.telekinesisactivated = false;
-                    }
-                    foreach (equipment weapon in weapons)
-                    {
-                        if (weapon.type.ToLower() == "staff")
-                        {
-                            continue;
-                        }
-                        int rangebonus = 0;
-                        bool frapperenmelee = true;
-                        if (targetcharacter.telekinesisactivated)
-                        {
-                            // if (weapon.type.ToLower() == "bow")
-                            // {
-                            //     rangebonus = 2;
-                            // }
-                            // else
-                            // {
-                            //     rangebonus = 1;
-                            // }
-                            rangebonus = 1;
-                            if (target.GetComponent<UnitScript>().GetSkill(33))
-                            {
-                                rangebonus += 1;
-                            }
-                        }
-                        if (weapon.type.ToLower() == "bow")
-                        {
-                            frapperenmelee = false;
-                        }
-                        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                        GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, chartarget.currentTile, weapon.type.ToLower() == "staff", chartarget.enemyStats.monsterStats.size, target.GetComponent<UnitScript>().UnitCharacteristics);
-                        GridScript.lockedattacktiles = GridScript.attacktiles;
-                        GridScript.lockedhealingtiles = GridScript.healingtiles;
-                        GridScript.Recolor();
-                        FindAttackers();
-                        if (targetlist.Count > 0)
-                        {
-                            if (weapon != target.GetComponent<UnitScript>().Fists)
-                            {
-                                target.GetComponent<UnitScript>().EquipWeapon(weapon);
-                            }
-                            return;
-                        }
-                    }
-                    if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le reglage original de telekinesie
-                    {
-                        ResetCharacterEquipment(targetcharacter, previousequipmentstate, previousequipmentIDstate, previoustelekinesis);
-
-                    }
-                }
             }
-            else
-            {
-                targetcharacter.telekinesisactivated = !targetcharacter.telekinesisactivated;
-                if (targetcharacter.statusEffects.ConcussionTunrs > 0)
-                {
-                    targetcharacter.telekinesisactivated = false;
-                }
-                FindAttackers();
-                if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le reglage original de telekinesie
-                {
-                    ResetCharacterEquipment(targetcharacter, previousequipmentstate, previousequipmentIDstate, previoustelekinesis);
 
-                }
-            }
 
         }
         if (targetlist.Count == 0)  //Finalement pas d'ennemi donc on remet le reglage original de telekinesie
         {
-            ResetCharacterEquipment(targetcharacter, previousequipmentstate, previousequipmentIDstate, previoustelekinesis);
+            ResetCharacterEquipment(targetcharacter, previousequipmentstate, previousequipmentIDstate);
 
         }
         equipment newweapon = target.GetComponent<UnitScript>().GetFirstWeapon();
@@ -668,7 +607,7 @@ public class ActionsMenu : MonoBehaviour
     /// </summary>
     /// <param name="usecommand"></param>
     /// <param name="commandID"></param>
-    private void FindAttackers(bool usecommand = false, int commandID = 0)
+    private void FindAttackers(bool usecommand = false, int commandID = 0, bool ishealing = false)
     {
 
         targetlist = new List<GameObject>();
@@ -879,7 +818,8 @@ public class ActionsMenu : MonoBehaviour
         else
         {
             CommandUsedID = 0;
-            if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+
+            if (ishealing)
             {
                 (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
@@ -907,7 +847,7 @@ public class ActionsMenu : MonoBehaviour
             }
             else
             {
-                foreach (GridSquareScript tile in GridScript.lockedattacktiles)
+                foreach (GridSquareScript tile in GridScript.attacktiles)
                 {
                     GameObject potentialtarget = GridScript.GetUnit(tile);
                     if (potentialtarget != null && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "enemy" || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)))
