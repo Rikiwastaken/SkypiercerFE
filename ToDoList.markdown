@@ -4,6 +4,8 @@
 
 - Crash when levelling up without animations.
 
+- Fix AI
+
 ## System 
 
 - arrows to change targets when about to attack/heal
@@ -17,6 +19,8 @@
 - Change skill shop so that it only shows skills which were shown.
 
 - Do Bonds for Gale and Aurora
+
+- Nerf Motivate to limit it to being used once per turn per character
 
 ## Visuals
 

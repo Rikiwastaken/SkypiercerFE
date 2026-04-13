@@ -1543,62 +1543,105 @@ public class AttackTurnScript : MonoBehaviour
 
     private GridSquareScript CalculateDestinationIfTargetNotFound(GameObject currentCharacter)
     {
-        Character Character = currentCharacter.GetComponent<UnitScript>().UnitCharacteristics;
+        UnitScript unitScript = currentCharacter.GetComponent<UnitScript>();
+        Character character = unitScript.UnitCharacteristics;
 
-        List<GridSquareScript> movementtiles = gridScript.movementtiles;
-        foreach (GridSquareScript square in movementtiles)
+        // Guard units don't move
+        if (character.enemyStats.personality.ToLower() == "guard")
         {
-            if (square == Character.currentTile[0] || !gridScript.CheckIfFree(square.GridCoordinates, Character))
+            return character.currentTile[0];
+        }
+
+        List<GridSquareScript> movementTiles = gridScript.movementtiles;
+
+        GridSquareScript bestSquare = null;
+        int bestDistance = int.MaxValue;
+
+        foreach (GridSquareScript square in movementTiles)
+        {
+            // Skip current tile or occupied tiles
+            if (square == character.currentTile[0] || !gridScript.CheckIfFree(square.GridCoordinates, character))
             {
                 continue;
             }
+
+
             foreach (GameObject unit in gridScript.allunitGOs)
             {
-                Character otherchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-
-                bool skip = true;
-
                 if (unit == currentCharacter)
                 {
                     continue;
                 }
 
-                if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
-                {
-                    if (Character.affiliation.ToLower() == otherchar.affiliation.ToLower() || (Character.affiliation.ToLower() == "other" && !Character.attacksfriends))
-                    {
-                        skip = false;
-                    }
-                }
-                else
-                {
-                    if (Character.affiliation.ToLower() == "other" && ((otherchar.affiliation.ToLower() == "playable" && Character.attacksfriends) || otherchar.affiliation.ToLower() == "enemy"))
-                    {
 
-                        skip = false;
-                    }
-                    if (Character.affiliation.ToLower() == "enemy" && ((otherchar.affiliation.ToLower() == "other" && !otherchar.attacksfriends) || otherchar.affiliation.ToLower() == "playable"))
-                    {
-                        skip = false;
-                    }
-                }
+                UnitScript otherUnitScript = unit.GetComponent<UnitScript>();
+                Character otherChar = otherUnitScript.UnitCharacteristics;
 
-
-
-                if (skip)
+                // Check if this unit is a valid target
+                if (!IsValidTarget(unitScript, character, otherChar))
                 {
                     continue;
                 }
 
-                int distancediff = ManhattanDistance(otherchar, Character) - Character.movements - ManhattanDistance(otherchar.currentTile[0].GridCoordinates, square.GridCoordinates);
 
-                if (distancediff <= 0)
+                // Distance from this tile to the target
+                int distance = ManhattanDistance(otherChar.currentTile[0].GridCoordinates, square.GridCoordinates);
+
+                // Prefer tiles that get closer to targets
+                if (distance < bestDistance)
                 {
-                    return square;
+                    bestDistance = distance;
+                    bestSquare = square;
                 }
             }
         }
-        return null;
+
+        return bestSquare;
+    }
+
+    private bool IsValidTarget(UnitScript currentUnit, Character self, Character other)
+    {
+        string selfAff = self.affiliation.ToLower();
+        string otherAff = other.affiliation.ToLower();
+        string weaponType = currentUnit.GetFirstWeapon().type.ToLower();
+
+        // Staff users (healers / support)
+        if (weaponType == "staff")
+        {
+            if (selfAff == otherAff)
+            {
+                return true;
+            }
+
+
+            if (selfAff == "other" && !self.attacksfriends)
+            {
+                return true;
+            }
+
+
+            return false;
+        }
+
+        // Offensive units
+        if (selfAff == "other")
+        {
+            if ((otherAff == "playable" && self.attacksfriends) || otherAff == "enemy")
+            {
+                return true;
+            }
+
+        }
+
+        if (selfAff == "enemy")
+        {
+            if ((otherAff == "other" && !other.attacksfriends) || otherAff == "playable")
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
