@@ -4,11 +4,8 @@
 
 - Crash when levelling up without animations.
 
-- Fix AI
-
 ## System 
 
-- arrows to change targets when about to attack/heal
 
 - pressing on an attackable enemy attacks directly
 
@@ -25,6 +22,8 @@
 ## Visuals
 
 - Do weapon swing particles
+
+- Do weapon animation when summoning weapon
 
 - Make camera move a little bit more in battle (avoid fixed angles)
 
