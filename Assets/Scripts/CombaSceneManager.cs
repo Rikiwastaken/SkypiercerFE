@@ -1086,8 +1086,8 @@ public class CombaSceneManager : MonoBehaviour
             newdata.attackerdodged = attackerdodged;
             newdata.defenderdodged = defenderdodged;
 
-            attackerSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.attackerAnimator, 1f);
-            defenderSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.defenderAnimator, 1f);
+            attackerSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.attackerAnimator);
+            defenderSceneGO.GetComponent<UnitScript>().UpdateWeaponModel(newdata.defenderAnimator);
 
             newdata.attackerAnimator.SetBool("Ismachine", attacker.enemyStats.monsterStats.ismachine);
             newdata.defenderAnimator.SetBool("Ismachine", defender.enemyStats.monsterStats.ismachine);

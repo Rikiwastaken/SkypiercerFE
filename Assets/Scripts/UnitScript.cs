@@ -367,10 +367,13 @@ public class UnitScript : MonoBehaviour
 
     public GameObject ActiveModel;
 
+    private WeaponPrefabScript _WeaponPrefabScript;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
         CanvasTransform = transform.GetChild(0);
         if (SceneManager.GetActiveScene().name == "BattleScene")
         {
@@ -1776,7 +1779,9 @@ public class UnitScript : MonoBehaviour
     {
         initialforward = armature.forward;
     }
-    public void UpdateWeaponModel(Animator otheranimator = null, float scalemultiplier = 0.5f)
+
+
+    public void UpdateWeaponModel(Animator otheranimator = null)
     {
 
         Animator animatortouse = otheranimator;
@@ -1802,57 +1807,59 @@ public class UnitScript : MonoBehaviour
 
         if (currentequipmentmodel != null)
         {
-            Destroy(currentequipmentmodel);
+            currentequipmentmodel = null;
             FlyingWeapon = null;
         }
-        if (GetFirstWeapon().Grade != 0 && GetFirstWeapon().Currentuses != 0)
+
+        equipment currentweapon = GetFirstWeapon();
+
+        if (currentweapon.Grade != 0 && currentweapon.Currentuses != 0)
         {
-            equipmentmodel equipmentmodel = GetFirstWeapon().equipmentmodel;
-            if (equipmentmodel.Model != null)
+            currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO(currentweapon.type.ToLower());
+            Transform parenttouse = null;
+            foreach (ModelInfo modelInfo in ModelList)
             {
-                currentequipmentmodel = Instantiate(equipmentmodel.Model);
-                currentequipmentmodel.transform.localScale = Vector3.one * scalemultiplier;
-                foreach (ModelInfo modelInfo in ModelList)
+                if (modelInfo.active)
                 {
-                    if (modelInfo.active)
+                    if (currentweapon.type.ToLower() == "bow")
                     {
-                        if (GetFirstWeapon().type.ToLower() == "bow")
-                        {
-                            currentequipmentmodel.transform.SetParent(modelInfo.Lefthandbone);
-                        }
-                        else if (UnitCharacteristics.telekinesisactivated)
-                        {
-                            FlyingWeapon = currentequipmentmodel;
-                            currentequipmentmodel.transform.SetParent(animatortouse.transform);
-                        }
-                        else if (GetFirstWeapon().type.ToLower() != "machine")
-                        {
-                            currentequipmentmodel.transform.SetParent(modelInfo.handbone);
-                        }
+                        parenttouse = modelInfo.Lefthandbone;
+                    }
+                    else if (UnitCharacteristics.telekinesisactivated)
+                    {
+                        FlyingWeapon = currentequipmentmodel;
+                        currentequipmentmodel.transform.SetParent(animatortouse.transform);
+                    }
+                    else if (currentweapon.type.ToLower() != "machine")
+                    {
+                        parenttouse = modelInfo.handbone;
                     }
                 }
+            }
 
 
-                if (UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow")
+            if (UnitCharacteristics.telekinesisactivated && currentweapon.type.ToLower() != "bow")
+            {
+                currentequipmentmodel.transform.localPosition = telekinesisWeaponPos;
+                currentequipmentmodel.transform.localRotation = Quaternion.Euler(telekinesisWeaponRot);
+            }
+            else
+            {
+
+                if (UnitCharacteristics.modelID == 2)
                 {
-                    currentequipmentmodel.transform.localPosition = telekinesisWeaponPos;
-                    currentequipmentmodel.transform.localRotation = Quaternion.Euler(telekinesisWeaponRot);
+                    currentequipmentmodel.transform.localPosition = Vector3.zero;
+                    currentequipmentmodel.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 180));
                 }
                 else
                 {
-                    currentequipmentmodel.transform.localPosition = equipmentmodel.localposition;
-                    currentequipmentmodel.transform.localRotation = Quaternion.Euler(equipmentmodel.localrotation);
-                    if (UnitCharacteristics.modelID == 2)
-                    {
-                        currentequipmentmodel.transform.localPosition = Vector3.zero;
-                        currentequipmentmodel.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 180));
-                    }
+
+                    _WeaponPrefabScript.PlaceWeapon(currentweapon.type, parenttouse);
                 }
-
-                UpdateLayer(currentequipmentmodel);
-
             }
 
+            UpdateLayer(currentequipmentmodel);
+            _WeaponPrefabScript.EquipWeaponVisuals(currentweapon.type.ToLower());
         }
 
         UpdateWeaponIcon(GetFirstWeapon(), UnitCharacteristics.telekinesisactivated);
@@ -1997,10 +2004,7 @@ public class UnitScript : MonoBehaviour
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
     private void LevelSetup()
     {
@@ -2077,11 +2081,6 @@ public class UnitScript : MonoBehaviour
         }
 
 
-    }
-
-    public string GetName()
-    {
-        return UnitCharacteristics.name;
     }
     public bool CheckIfOnActivated()
     {

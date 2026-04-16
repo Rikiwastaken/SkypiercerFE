@@ -229,8 +229,8 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
         //Initiliaze the animations and weapons
 
-        AttackerGO.GetComponent<UnitScript>().UpdateWeaponModel(AttackerInfo.Animator, 1f);
-        DefenderGO.GetComponent<UnitScript>().UpdateWeaponModel(DefenderInfo.Animator, 1f);
+        AttackerGO.GetComponent<UnitScript>().UpdateWeaponModel(AttackerInfo.Animator);
+        DefenderGO.GetComponent<UnitScript>().UpdateWeaponModel(DefenderInfo.Animator);
 
         AttackerInfo.Animator.SetBool("Ismachine", attacker.enemyStats.monsterStats.ismachine);
         DefenderInfo.Animator.SetBool("Ismachine", defender.enemyStats.monsterStats.ismachine);
