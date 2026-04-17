@@ -140,16 +140,7 @@ public class ActionManager : MonoBehaviour
                         currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                         GridScript.ShowMovement();
                     }
-                    if (InputManager.NextWeaponjustpressed)
-                    {
-                        currentcharacter.GetComponent<UnitScript>().GetNextWeapon();
-                        GridScript.ShowMovement();
-                    }
-                    if (InputManager.PreviousWeaponjustpressed)
-                    {
-                        currentcharacter.GetComponent<UnitScript>().GetPreviousWeapon();
-                        GridScript.ShowMovement();
-                    }
+
                 }
                 else
                 {
