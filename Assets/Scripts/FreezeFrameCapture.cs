@@ -90,6 +90,8 @@ public class FreezeFrameCapture : MonoBehaviour
 
     private float TimeSafeguard;
 
+    private bool isClosing = false;
+
     private void Awake()
     {
         instance = this;
@@ -97,6 +99,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
     private void Start()
     {
+        TimeSafeguard = Mathf.Infinity;
         CharacterSpriteBasePos = CharacterSprite.GetComponent<RectTransform>().anchoredPosition;
         BackgroundImageBasePos = BackgroundImage.GetComponent<RectTransform>().anchoredPosition;
         if (playerInput == null)
@@ -105,7 +108,6 @@ public class FreezeFrameCapture : MonoBehaviour
         }
         ActivateAction = playerInput.actions["Validate"];
         CancelAction = playerInput.actions["Cancel"];
-        TimeSafeguard = 1f;
 
     }
 
@@ -139,7 +141,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
         if (CloseCoroutine == null)
         {
-            if (ShowingLevelUp && CancelAction.triggered)
+            if (!isClosing && ShowingLevelUp && CancelAction.IsPressed())
             {
                 Debug.Log("closing");
                 if (fullfreezeframecoroutine != null)
@@ -182,7 +184,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (CloseCoroutine != null && TimeSafeguard != 0 && Time.time > TimeSafeguard)
+        if (CloseCoroutine == null && TimeSafeguard != 0 && Time.time > TimeSafeguard)
         {
             Debug.Log("closing");
             if (fullfreezeframecoroutine != null)
@@ -408,7 +410,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
     public IEnumerator Close()
     {
-
+        isClosing = true;
 
 
         Vector2 leftbasepos = left.rectTransform.anchoredPosition;
@@ -471,7 +473,7 @@ public class FreezeFrameCapture : MonoBehaviour
             Time.timeScale = 1;
             CombatSceneManagerV2.instance.CloseCombatScene();
         }
-
+        isClosing = false;
         CloseCoroutine = null;
 
     }
