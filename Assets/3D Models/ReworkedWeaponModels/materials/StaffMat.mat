@@ -111,7 +111,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DissolvePercent: 1.46
+    - _DissolvePercent: 0.52
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -121,10 +121,10 @@ Material:
     - _Metallic: 0
     - _Minimumopacity: 0
     - _MoveOverTime: 1
-    - _NoiseScale: 20
+    - _NoiseScale: 5
     - _NoiseType: 2
     - _OcclusionStrength: 1
-    - _OutlineThickness: 0.1
+    - _OutlineThickness: 0.2
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0

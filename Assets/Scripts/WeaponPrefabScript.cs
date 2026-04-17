@@ -11,7 +11,7 @@ public class WeaponPrefabScript : MonoBehaviour
         public string weaponType;
         public List<Material> materials;
         public GameObject weaponGO;
-
+        public Color WeaponEffectColor;
     }
 
 
@@ -41,6 +41,7 @@ public class WeaponPrefabScript : MonoBehaviour
             GameObject CurrentGo = Vis.weaponGO;
             Vis.materials = new List<Material>();
             SetMaterialsToList(Vis.materials, CurrentGo);
+            SetOutlineColor(Vis);
         }
         UnitScript = GetComponentInParent<UnitScript>();
     }
@@ -178,6 +179,18 @@ public class WeaponPrefabScript : MonoBehaviour
         foreach (Material mat in weapon.materials)
         {
             mat.SetFloat("_DissolvePercent", dissolve);
+        }
+    }
+
+    private void SetOutlineColor(weaponVisuals weapon)
+    {
+        if ((weapon.materials == null || weapon.materials.Count == 0) && weapon.weaponType != "")
+        {
+            SetMaterialsToList(weapon.materials, weapon.weaponGO);
+        }
+        foreach (Material mat in weapon.materials)
+        {
+            mat.SetColor("_OutlineColor", weapon.WeaponEffectColor);
         }
     }
 
