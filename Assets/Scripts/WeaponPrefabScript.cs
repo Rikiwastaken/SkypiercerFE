@@ -95,8 +95,6 @@ public class WeaponPrefabScript : MonoBehaviour
     {
         if (newweapontype != weapontypeequiped.weaponType)
         {
-
-            Debug.Log("equiping : " + newweapontype);
             if (weapontypeequiped.weaponGO != null)
             {
                 StartCoroutine(MakeWeaponVanish(weapontypeequiped));

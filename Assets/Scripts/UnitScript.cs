@@ -1413,7 +1413,7 @@ public class UnitScript : MonoBehaviour
 
     public bool isinattackanimation(Animator otheranimator = null)
     {
-        Animator animatortouse = otheranimator;
+        Animator animatortouse = null;
         if (otheranimator != null)
         {
             animatortouse = otheranimator;
@@ -1434,12 +1434,21 @@ public class UnitScript : MonoBehaviour
             animatortouse = animator;
         }
 
+        int attackLayerIndex = animatortouse.GetLayerIndex("Attack");
 
-        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Telekinesis Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("PluvialIdle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
-        {
+        if (attackLayerIndex == -1)
             return false;
-        }
-        return true;
+
+        if (animatortouse.IsInTransition(attackLayerIndex))
+            return true;
+
+        AnimatorStateInfo state = animatortouse.GetCurrentAnimatorStateInfo(attackLayerIndex);
+
+        if (state.IsTag("Attack"))
+            return state.normalizedTime < 1f;
+
+        return false;
+
     }
 
     public bool AttackAnimationAlmostdone(Animator otheranimator = null, float percentage = 1)
@@ -1868,6 +1877,10 @@ public class UnitScript : MonoBehaviour
 
     private void UpdateLayer(GameObject obj)
     {
+        if (obj == null)
+        {
+            return;
+        }
         obj.layer = gameObject.layer;
         if (obj.transform.childCount > 0)
         {
