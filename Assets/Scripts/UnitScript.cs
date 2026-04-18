@@ -1824,7 +1824,8 @@ public class UnitScript : MonoBehaviour
 
         if (currentweapon.Grade != 0 && currentweapon.Currentuses != 0)
         {
-            currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO(currentweapon.type.ToLower());
+            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Grade);
+            currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO();
             Transform parenttouse = null;
             foreach (ModelInfo modelInfo in ModelList)
             {
@@ -1863,12 +1864,12 @@ public class UnitScript : MonoBehaviour
                 else
                 {
 
-                    _WeaponPrefabScript.PlaceWeapon(currentweapon.type, parenttouse);
+                    _WeaponPrefabScript.PlaceWeapon(currentweapon.type.ToLower(), parenttouse, currentweapon.Grade);
                 }
             }
 
             UpdateLayer(currentequipmentmodel);
-            _WeaponPrefabScript.EquipWeaponVisuals(currentweapon.type.ToLower());
+
         }
 
         UpdateWeaponIcon(GetFirstWeapon(), UnitCharacteristics.telekinesisactivated);

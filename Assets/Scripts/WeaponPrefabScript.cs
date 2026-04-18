@@ -10,14 +10,23 @@ public class WeaponPrefabScript : MonoBehaviour
     {
         public string weaponType;
         public List<Material> materials;
-        public GameObject weaponGO;
+        public GameObject weaponPrefabLvl1;
+        public GameObject weaponPrefabLvl2;
+        public GameObject weaponPrefabLvl3;
+        public GameObject weaponPrefabLvl4;
+        public Texture2D WeaponSpriteLvl1;
+        public Texture2D WeaponSpriteLvl2;
+        public Texture2D WeaponSpriteLvl3;
+        public Texture2D WeaponSpriteLvl4;
         public Color WeaponEffectColor;
+
     }
 
 
     [Header("Weapon Gameobjects")]
 
     public List<weaponVisuals> WeaponVisualsList;
+    public GameObject currentWeaponGO = null;
 
     [Header("Variables")]
     public float timetoappear;
@@ -27,22 +36,19 @@ public class WeaponPrefabScript : MonoBehaviour
 
     private Coroutine AppearCoroutine;
     private weaponVisuals CurrentlyAppearing;
-    private string previousweapon;
+    private List<GameObject> weaponstovanish = new List<GameObject>();
+    private int currentEquipedLevel;
+    public Material TemplateMaterial;
+    public Shader Shader;
 
     [Header("Placement Variables")]
     public Vector3 positionoffset;
     public Vector3 rotationoffset;
 
+
+
     private void Awake()
     {
-        for (int i = 0; i < WeaponVisualsList.Count; i++)
-        {
-            weaponVisuals Vis = WeaponVisualsList[i];
-            GameObject CurrentGo = Vis.weaponGO;
-            Vis.materials = new List<Material>();
-            SetMaterialsToList(Vis.materials, CurrentGo);
-            SetOutlineColor(Vis);
-        }
         UnitScript = GetComponentInParent<UnitScript>();
     }
 
@@ -57,81 +63,146 @@ public class WeaponPrefabScript : MonoBehaviour
             return;
         }
 
-        if (UnitScript.GetFirstWeapon().type != previousweapon)
+        if (weaponstovanish.Count > 0)
         {
-            previousweapon = UnitScript.GetFirstWeapon().type;
-            EquipWeaponVisuals(previousweapon);
+            StartCoroutine(MakeWeaponVanish(weaponstovanish[0]));
+            weaponstovanish.RemoveAt(0);
         }
 
-
     }
-    // this function is used to place the weapon on the unit, it takes the weapon type and the parent transform as parameters, it then finds the corresponding weapon gameobject and sets its parent and local position and rotation based on the offset variables
-    public void PlaceWeapon(string type, Transform parent)
+
+    public void SwitchWeaponGO(string type, int level)
     {
+        if (CurrentlyAppearing.weaponType != null && CurrentlyAppearing.weaponType.ToLower() == type.ToLower() && currentEquipedLevel == level)
+        {
+            return;
+        }
+        GameObject newweapon = currentWeaponGO;
+        weaponVisuals weaponVis = WeaponVisualsList[0];
         foreach (weaponVisuals weapon in WeaponVisualsList)
         {
+            weaponVis = weapon;
             if (weapon.weaponType == type.ToLower())
             {
-                GameObject weaponGO = weapon.weaponGO;
-                weaponGO.transform.parent = parent;
-                weaponGO.transform.SetLocalPositionAndRotation(positionoffset, Quaternion.Euler(rotationoffset));
+                switch (level)
+                {
+                    case 1:
+                        newweapon = Instantiate(weapon.weaponPrefabLvl1);
+
+                        break;
+                    case 2:
+                        newweapon = Instantiate(weapon.weaponPrefabLvl2);
+                        break;
+                    case 3:
+                        newweapon = Instantiate(weapon.weaponPrefabLvl3);
+                        break;
+                    case 4:
+                        newweapon = Instantiate(weapon.weaponPrefabLvl4);
+                        break;
+                }
+
+                newweapon.transform.localScale *= 0.5f;
                 break;
             }
         }
-    }
-    // this function is used to get the weapon gameobject based on the type, it returns null if it fails
-    public GameObject GetWeaponGO(string type)
-    {
+        currentEquipedLevel = level;
         foreach (weaponVisuals weaponVisuals in WeaponVisualsList)
         {
             if (weaponVisuals.weaponType == type)
             {
-                return weaponVisuals.weaponGO;
+                CurrentlyAppearing = weaponVisuals;
+                weapontypeequiped = weaponVisuals;
+                break;
             }
         }
-        return null;
-    }
-    // this function is used to equip the weapon visuals, it checks if the new weapon type is different from the currently equiped one, if it is it will start the vanish coroutine for the currently equiped weapon and then start the appear coroutine for the new weapon
-    public void EquipWeaponVisuals(string newweapontype)
-    {
-        if (newweapontype != weapontypeequiped.weaponType)
+
+        if (newweapon != currentWeaponGO)
         {
-            if (weapontypeequiped.weaponGO != null)
+            if (newweapon != null)
             {
-                StartCoroutine(MakeWeaponVanish(weapontypeequiped));
+                CreateAndSetWeaponMaterial(newweapon, level, weaponVis);
+                weaponVis.materials = new List<Material>();
+
+                SetMaterialsToList(weaponVis.materials, newweapon);
+            }
+            if (currentWeaponGO != null)
+            {
+                weaponstovanish.Add(currentWeaponGO);
             }
 
+            currentWeaponGO = newweapon;
+            EquipWeaponVisuals();
+        }
 
 
-            foreach (weaponVisuals weaponVisuals in WeaponVisualsList)
+    }
+
+    public void CreateAndSetWeaponMaterial(GameObject GO, int level, weaponVisuals WeaponVis)
+    {
+        Material newMaterial = new Material(TemplateMaterial);
+        switch (level)
+        {
+            case 1:
+                newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl1);
+                break;
+            case 2:
+                newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl2);
+                break;
+            case 3:
+                newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl3);
+                break;
+            case 4:
+                newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl4);
+                break;
+        }
+        newMaterial.SetColor("_OutlineColor", WeaponVis.WeaponEffectColor);
+
+        SetMaterialToGO(GO, newMaterial);
+    }
+
+    // this function is used to place the weapon on the unit, it takes the weapon type and the parent transform as parameters, it then finds the corresponding weapon gameobject and sets its parent and local position and rotation based on the offset variables
+    public void PlaceWeapon(string type, Transform parent, int level)
+    {
+
+        foreach (weaponVisuals weapon in WeaponVisualsList)
+        {
+            if (weapon.weaponType == type.ToLower())
             {
-                if (weaponVisuals.weaponType == newweapontype)
-                {
-                    weapontypeequiped = weaponVisuals;
-                    break;
-                }
+                currentWeaponGO.transform.parent = parent;
+                currentWeaponGO.transform.SetLocalPositionAndRotation(positionoffset, Quaternion.Euler(rotationoffset));
+                break;
             }
+        }
+    }
+    // this function is used to get the weapon gameobject
+    public GameObject GetWeaponGO()
+    {
 
-            if (weapontypeequiped.weaponGO != null)
-            {
-                weapontypeequiped.weaponGO.SetActive(true);
+        return currentWeaponGO;
+    }
 
-                SetDissolve(weapontypeequiped, 0);
+    public void EquipWeaponVisuals()
+    {
+        if (currentWeaponGO != null)
+        {
+
+            SetDissolve(weapontypeequiped, 0, currentWeaponGO);
 
 
-                if (AppearCoroutine != null)
-                {
-                    StopCoroutine(AppearCoroutine);
-                }
+            //if (AppearCoroutine != null)
+            //{
+            //    StopCoroutine(AppearCoroutine);
+            //}
 
-                AppearCoroutine = StartCoroutine(MakeWeaponAppear(weapontypeequiped));
-            }
+            AppearCoroutine = StartCoroutine(MakeWeaponAppear());
         }
     }
     // this coroutine is used to make the weapon appear, it lerps the dissolve value from 1 to 0, if during the process the weapon to appear is not the same as the currently appearing weapon, it will stop lerping and just set the dissolve value to 0
-    private IEnumerator MakeWeaponAppear(weaponVisuals Weapon)
+    private IEnumerator MakeWeaponAppear()
     {
-        CurrentlyAppearing = Weapon;
+        List<Material> materials = new List<Material>();
+        SetMaterialsToList(materials, currentWeaponGO);
+
         float elapsedTime = 0f;
         while (elapsedTime < timetoappear)
         {
@@ -139,15 +210,18 @@ public class WeaponPrefabScript : MonoBehaviour
 
             float lerpedDissolve = Mathf.Lerp(0f, 1.1f, elapsedTime / timetoappear);
 
-            SetDissolve(Weapon, lerpedDissolve);
+            SetDissolve(materials, lerpedDissolve, currentWeaponGO);
 
             yield return null;
         }
         AppearCoroutine = null;
     }
     // this coroutine is used to make the weapon vanish, it lerps the dissolve value from 0 to 1 and then deactivates the gameobject, if during the process the weapon to vanish is not the same as the currently appearing weapon, it will stop lerping and just deactivate the gameobject
-    private IEnumerator MakeWeaponVanish(weaponVisuals Weapon)
+    private IEnumerator MakeWeaponVanish(GameObject GO)
     {
+        List<Material> materials = new List<Material>();
+        SetMaterialsToList(materials, GO);
+
         float elapsedTime = 0f;
         while (elapsedTime < timetovanish)
         {
@@ -155,26 +229,21 @@ public class WeaponPrefabScript : MonoBehaviour
             elapsedTime += Time.deltaTime;
 
             float lerpedDissolve = Mathf.Lerp(0.9f, 0f, elapsedTime / timetovanish);
-            if (CurrentlyAppearing.weaponGO != Weapon.weaponGO)
-            {
-                SetDissolve(Weapon, lerpedDissolve);
-            }
+            SetDissolve(materials, lerpedDissolve, GO);
 
 
             yield return null;
         }
-        if (CurrentlyAppearing.weaponGO != Weapon.weaponGO)
-        {
-            Weapon.weaponGO.SetActive(false);
-        }
+
+        Destroy(GO);
     }
 
     // sets the dissolve value for all materials in the list
-    private void SetDissolve(weaponVisuals weapon, float dissolve)
+    private void SetDissolve(weaponVisuals weapon, float dissolve, GameObject GO)
     {
         if ((weapon.materials == null || weapon.materials.Count == 0) && weapon.weaponType != "")
         {
-            SetMaterialsToList(weapon.materials, weapon.weaponGO);
+            SetMaterialsToList(weapon.materials, GO);
         }
         foreach (Material mat in weapon.materials)
         {
@@ -182,37 +251,19 @@ public class WeaponPrefabScript : MonoBehaviour
         }
     }
 
-    private void SetOutlineColor(weaponVisuals weapon)
+    private void SetDissolve(List<Material> materials, float dissolve, GameObject GO)
     {
-        if ((weapon.materials == null || weapon.materials.Count == 0) && weapon.weaponType != "")
+        if ((materials == null || materials.Count == 0) && GO != null)
         {
-            SetMaterialsToList(weapon.materials, weapon.weaponGO);
+            SetMaterialsToList(materials, GO);
         }
-        foreach (Material mat in weapon.materials)
+        foreach (Material mat in materials)
         {
-            mat.SetColor("_OutlineColor", weapon.WeaponEffectColor);
+            mat.SetFloat("_DissolvePercent", dissolve);
         }
     }
 
-    // gets the dissolve value for the first material in the list, if it fails it returns 0  
-    private float GetDissolve(weaponVisuals weapon, float dissolve)
-    {
 
-        try
-        {
-            if (weapon.materials == null || weapon.materials.Count == 0)
-            {
-                SetMaterialsToList(weapon.materials, weapon.weaponGO);
-            }
-            return weapon.materials[0].GetFloat("_DissolvePercent");
-        }
-        catch (Exception ex)
-        {
-            Debug.LogException(ex);
-            return 0f;
-        }
-
-    }
     //recursively adds material to the list
     private void SetMaterialsToList(List<Material> listotuse, GameObject GOtouse)
     {
@@ -227,6 +278,25 @@ public class WeaponPrefabScript : MonoBehaviour
         foreach (Transform child in GOtouse.transform)
         {
             SetMaterialsToList(listotuse, child.gameObject);
+        }
+    }
+
+    private void SetMaterialToGO(GameObject GOtouse, Material Mattoadd)
+    {
+        // Sets material
+        if (GOtouse.GetComponent<Renderer>())
+        {
+            GOtouse.GetComponent<Renderer>().material = Mattoadd;
+        }
+
+        // Also sets layer
+        GOtouse.layer = LayerMask.NameToLayer("Players");
+
+        // then for each child we do the same.
+
+        foreach (Transform child in GOtouse.transform)
+        {
+            SetMaterialToGO(child.gameObject, Mattoadd);
         }
     }
 
