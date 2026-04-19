@@ -45,7 +45,7 @@ public class WeaponPrefabScript : MonoBehaviour
     public Vector3 positionoffset;
     public Vector3 rotationoffset;
 
-
+    public GameObject ParticleSystem;
 
     private void Awake()
     {
@@ -92,16 +92,25 @@ public class WeaponPrefabScript : MonoBehaviour
                         break;
                     case 2:
                         newweapon = Instantiate(weapon.weaponPrefabLvl2);
+
                         break;
                     case 3:
                         newweapon = Instantiate(weapon.weaponPrefabLvl3);
+
                         break;
                     case 4:
                         newweapon = Instantiate(weapon.weaponPrefabLvl4);
+
                         break;
                 }
 
                 newweapon.transform.localScale *= 0.5f;
+                GameObject newparticlesystem = Instantiate(ParticleSystem);
+                newparticlesystem.transform.parent = newweapon.transform;
+                newparticlesystem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0)));
+                newparticlesystem.transform.localScale = Vector3.one;
+
+                newparticlesystem.SetActive(true);
                 break;
             }
         }

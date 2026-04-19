@@ -19,15 +19,13 @@
 
 ## Visuals
 
-- Do weapon swing particles
-
 - Make camera move a little bit more in battle (avoid fixed angles)
 
 - Rework grass, jpegs are fine (ground beneath need texture tho)
 
 ### 3D Models
 
-- Do Weapon Skins
+- Do Special Weapon skins (Zack, Gale, Kira, Ragnhall, Kay)
 
 - Chapter 9
 - Chapter 10

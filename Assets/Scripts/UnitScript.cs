@@ -652,7 +652,10 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
 
     public Character CreateCopy(Character CharacterToCopy = null)
     {
@@ -1434,18 +1437,25 @@ public class UnitScript : MonoBehaviour
             animatortouse = animator;
         }
 
-        int attackLayerIndex = animatortouse.GetLayerIndex("Attack");
-
-        if (attackLayerIndex == -1)
+        if (animatortouse == null)
             return false;
 
-        if (animatortouse.IsInTransition(attackLayerIndex))
-            return true;
+        int layerIndex = 0; // Substates are inside a layer, usually Base Layer (0)
 
-        AnimatorStateInfo state = animatortouse.GetCurrentAnimatorStateInfo(attackLayerIndex);
+        // If transitioning, check the NEXT state
+        if (animatortouse.IsInTransition(layerIndex))
+        {
+            AnimatorStateInfo nextState = animatortouse.GetNextAnimatorStateInfo(layerIndex);
 
-        if (state.IsTag("Attack"))
-            return state.normalizedTime < 1f;
+            if (nextState.IsTag("Attack"))
+                return true;
+        }
+
+        // Check CURRENT state
+        AnimatorStateInfo currentState = animatortouse.GetCurrentAnimatorStateInfo(layerIndex);
+
+        if (currentState.IsTag("Attack"))
+            return currentState.normalizedTime < 1f;
 
         return false;
 
@@ -1475,7 +1485,7 @@ public class UnitScript : MonoBehaviour
         }
 
 
-        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_slow") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Telekinesis Idle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("PluvialIdle") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
+        if (!isinattackanimation(animatortouse))
         {
             return false;
         }
@@ -1517,10 +1527,26 @@ public class UnitScript : MonoBehaviour
             }
             animatortouse = animator;
         }
-        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Armature|spider_walk_fast_3") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("HumanWalk"))
+        if (animatortouse == null)
+            return false;
+
+        int layerIndex = 0; // Substates are inside a layer, usually Base Layer (0)
+
+        // If transitioning, check the NEXT state
+        if (animatortouse.IsInTransition(layerIndex))
         {
-            return true;
+            AnimatorStateInfo nextState = animatortouse.GetNextAnimatorStateInfo(layerIndex);
+
+            if (nextState.IsTag("Walk"))
+                return true;
         }
+
+        // Check CURRENT state
+        AnimatorStateInfo currentState = animatortouse.GetCurrentAnimatorStateInfo(layerIndex);
+
+        if (currentState.IsTag("Walk"))
+            return currentState.normalizedTime < 1f;
+
         return false;
     }
 
@@ -1546,10 +1572,26 @@ public class UnitScript : MonoBehaviour
             }
             animatortouse = animator;
         }
-        if (animatortouse.GetCurrentAnimatorStateInfo(0).IsName("TakeDamage") || animatortouse.GetCurrentAnimatorStateInfo(0).IsName("Dodge"))
+        if (animatortouse == null)
+            return false;
+
+        int layerIndex = 0; // Substates are inside a layer, usually Base Layer (0)
+
+        // If transitioning, check the NEXT state
+        if (animatortouse.IsInTransition(layerIndex))
         {
-            return true;
+            AnimatorStateInfo nextState = animatortouse.GetNextAnimatorStateInfo(layerIndex);
+
+            if (nextState.IsTag("Damage"))
+                return true;
         }
+
+        // Check CURRENT state
+        AnimatorStateInfo currentState = animatortouse.GetCurrentAnimatorStateInfo(layerIndex);
+
+        if (currentState.IsTag("Damage"))
+            return currentState.normalizedTime < 1f;
+
         return false;
     }
 
