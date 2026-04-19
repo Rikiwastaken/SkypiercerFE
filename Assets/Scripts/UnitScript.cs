@@ -45,6 +45,7 @@ public class UnitScript : MonoBehaviour
         public int TauntTurns;
         public bool isintercepting;
         public StatusEffects statusEffects;
+        public bool motivateusedthisturn;
     }
 
     [Serializable]
@@ -772,7 +773,8 @@ public class UnitScript : MonoBehaviour
                 RegenTurns = CharacterToCopy.statusEffects.RegenTurns,
                 AccelerationTurns = CharacterToCopy.statusEffects.AccelerationTurns,
                 PowerTurns = CharacterToCopy.statusEffects.PowerTurns
-            }
+            },
+            motivateusedthisturn = CharacterToCopy.motivateusedthisturn
         };
 
         return copy;

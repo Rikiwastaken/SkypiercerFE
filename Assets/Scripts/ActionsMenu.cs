@@ -662,6 +662,10 @@ public class ActionsMenu : MonoBehaviour
                     GameObject potentialtarget = GridScript.GetUnit(tile);
                     if (potentialtarget != null && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && potentialtarget != target)
                     {
+                        if (commandID == 48 && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.motivateusedthisturn) //Motivate was already used on the character
+                        {
+                            continue;
+                        }
                         targetlist.Add(potentialtarget);
                     }
                 }

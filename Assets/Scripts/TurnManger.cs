@@ -263,7 +263,8 @@ public class TurnManger : MonoBehaviour
 
             //status effects trigger
             unit.GetComponent<UnitScript>().TriggerStatusEffectsBegOfTurn();
-
+            // Reset Motvate use
+            unit.GetComponent<UnitScript>().UnitCharacteristics.motivateusedthisturn = false;
         }
 
 

@@ -513,6 +513,7 @@ public class AttackTurnScript : MonoBehaviour
             foresightScript.CreateAction(3, User, Target);
             CharTarget.alreadymoved = false;
             CharTarget.alreadyplayed = false;
+            CharTarget.motivateusedthisturn = true;
             Target.GetComponent<UnitScript>().AddNumber(0, true, "Motivate");
         }
         else if (commandID == 49) //Swap
