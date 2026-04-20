@@ -226,48 +226,48 @@ public class ActionsMenu : MonoBehaviour
 
         if (target.GetComponent<UnitScript>().GetCommands().Count > 0)
         {
-            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            var colors = transform.GetChild(3).GetComponent<Button>().colors;
             colors.normalColor = BaseButtonColor;
             colors.pressedColor = BaseButtonPressedColor;
-            transform.GetChild(2).GetComponent<Image>().color = BaseImageColor;
-            transform.GetChild(2).GetComponent<Button>().colors = colors;
-
-        }
-        else
-        {
-
-            var colors = transform.GetChild(2).GetComponent<Button>().colors;
-            colors.normalColor = Color.gray;
-            colors.pressedColor = Color.gray;
-            transform.GetChild(2).GetComponent<Image>().color = new Color(1f, 1f, 1f);
-            transform.GetChild(2).GetComponent<Button>().colors = colors;
-
-        }
-
-        if (target.GetComponent<UnitScript>().GetSpectialInteraction().Count > 0)
-        {
-            var colors = transform.GetChild(2).GetComponent<Button>().colors;
-            colors.normalColor = BaseButtonColor;
-            colors.pressedColor = BaseButtonPressedColor;
-            transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 0f);
+            transform.GetChild(3).GetComponent<Image>().color = BaseImageColor;
             transform.GetChild(3).GetComponent<Button>().colors = colors;
 
-            transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
         }
         else
         {
 
-            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            var colors = transform.GetChild(3).GetComponent<Button>().colors;
             colors.normalColor = Color.gray;
             colors.pressedColor = Color.gray;
             transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 1f);
             transform.GetChild(3).GetComponent<Button>().colors = colors;
 
-            transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
+        }
+
+        if (target.GetComponent<UnitScript>().GetSpectialInteraction().Count > 0)
+        {
+            var colors = transform.GetChild(4).GetComponent<Button>().colors;
+            colors.normalColor = BaseButtonColor;
+            colors.pressedColor = BaseButtonPressedColor;
+            transform.GetChild(4).GetComponent<Image>().color = new Color(1f, 1f, 0f);
+            transform.GetChild(4).GetComponent<Button>().colors = colors;
+
+            transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+        }
+        else
+        {
+
+            var colors = transform.GetChild(4).GetComponent<Button>().colors;
+            colors.normalColor = Color.gray;
+            colors.pressedColor = Color.gray;
+            transform.GetChild(4).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(4).GetComponent<Button>().colors = colors;
+
+            transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
         }
         if (TutorialScript.instance != null && TutorialScript.instance.enabled && !TutorialScript.instance.tutorialisover)
         {
-            var colors = transform.GetChild(2).GetComponent<Button>().colors;
+            var colors = transform.GetChild(0).GetComponent<Button>().colors;
             colors.normalColor = Color.gray;
             colors.pressedColor = Color.gray;
 
@@ -279,23 +279,25 @@ public class ActionsMenu : MonoBehaviour
             }
             else
             {
-                transform.GetChild(4).GetComponent<Image>().color = new Color(1f, 1f, 1f);
-                transform.GetChild(4).GetComponent<Button>().colors = colors;
-                transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+                transform.GetChild(5).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+                transform.GetChild(5).GetComponent<Button>().colors = colors;
+                transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
             }
 
-            transform.GetChild(1).GetComponent<Image>().color = new Color(1f, 1f, 1f);
-            transform.GetChild(1).GetComponent<Button>().colors = colors;
-            transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+
             transform.GetChild(2).GetComponent<Image>().color = new Color(1f, 1f, 1f);
             transform.GetChild(2).GetComponent<Button>().colors = colors;
             transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
             transform.GetChild(3).GetComponent<Image>().color = new Color(1f, 1f, 1f);
             transform.GetChild(3).GetComponent<Button>().colors = colors;
             transform.GetChild(3).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-            transform.GetChild(5).GetComponent<Image>().color = new Color(1f, 1f, 1f);
-            transform.GetChild(5).GetComponent<Button>().colors = colors;
-            transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+            transform.GetChild(4).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(4).GetComponent<Button>().colors = colors;
+            transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+            transform.GetChild(6).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(6).GetComponent<Button>().colors = colors;
+            transform.GetChild(6).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+
         }
     }
 

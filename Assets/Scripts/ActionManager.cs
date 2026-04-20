@@ -202,76 +202,14 @@ public class ActionManager : MonoBehaviour
 
                 if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates, currentcharacter) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                 {
-                    if (TutorialScript.instance != null && TutorialScript.instance.enabled)
-                    {
-                        if (!TutorialScript.instance.firstenemyattacked)
-                        {
-                            if (GridScript.selection != TutorialScript.instance.ZackTargetTile)
-                            {
-                                return;
-                            }
-                        }
-                        else if (!TutorialScript.instance.secondenemyattacked)
-                        {
-                            if (GridScript.selection != TutorialScript.instance.ElwynTargetTile)
-                            {
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            if (GridScript.selection != TutorialScript.instance.LeaTargetTile)
-                            {
-                                return;
-                            }
-                        }
-                    }
-                    currentpath = null;
-                    previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
-                    currentcharacter.GetComponent<UnitScript>().MoveTo(GridScript.selection.GridCoordinates);
-                    currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
-                    if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
-                    {
-                        int movements = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.movements;
-                        if (currentcharacter.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using Retreat
-                        {
-                            movements -= 2;
-                        }
-                        if (currentcharacter.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
-                        {
-                            movements += 1;
-                        }
-                        currentcharacter.GetComponent<UnitScript>().tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
-                    }
-                    GridScript.UnlockSelection();
-                    if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
-                    {
-                        GridScript.ResetAllSelections();
-                        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
-                        GridScript.Recolor();
-                    }
-                    else
-                    {
-                        (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                        GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
-                        GridScript.LockcurrentSelection();
-                        if (!GridScript.actionsMenu.activeSelf)
-                        {
-                            GridScript.actionsMenu.SetActive(true);
-                        }
 
-                        for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
-                        {
-                            if (!GridScript.actionsMenu.transform.GetChild(i).gameObject.activeSelf)
-                            {
-                                GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
-                            }
-
-                            if (i == 0)
-                            {
-                                GridScript.actionsMenu.transform.GetChild(i).GetComponent<Button>().Select();
-                            }
-                        }
+                    MoveCharacterToSelection();
+                }
+                else if ((GridScript.lockedattacktiles.Contains(GridScript.selection) || GridScript.lockedhealingtiles.Contains(GridScript.selection)) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                {
+                    if (TutorialScript.instance == null || !TutorialScript.instance.enabled)
+                    {
+                        AttackDirectly();
                     }
 
                 }
@@ -285,6 +223,265 @@ public class ActionManager : MonoBehaviour
             GridScript.UnlockSelection();
         }
         preventfromlockingafteraction = false;
+    }
+
+    private void MoveCharacterToSelection()
+    {
+        if (TutorialScript.instance != null && TutorialScript.instance.enabled)
+        {
+            if (!TutorialScript.instance.firstenemyattacked)
+            {
+                if (GridScript.selection != TutorialScript.instance.ZackTargetTile)
+                {
+                    return;
+                }
+            }
+            else if (!TutorialScript.instance.secondenemyattacked)
+            {
+                if (GridScript.selection != TutorialScript.instance.ElwynTargetTile)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                if (GridScript.selection != TutorialScript.instance.LeaTargetTile)
+                {
+                    return;
+                }
+            }
+        }
+        currentpath = null;
+        previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
+        currentcharacter.GetComponent<UnitScript>().MoveTo(GridScript.selection.GridCoordinates);
+        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+        if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
+        {
+            int movements = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.movements;
+            if (currentcharacter.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using Retreat
+            {
+                movements -= 2;
+            }
+            if (currentcharacter.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
+            {
+                movements += 1;
+            }
+            currentcharacter.GetComponent<UnitScript>().tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
+        }
+        GridScript.UnlockSelection();
+        if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
+        {
+            GridScript.ResetAllSelections();
+            currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+            GridScript.Recolor();
+        }
+        else
+        {
+            (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+            GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+            GridScript.LockcurrentSelection();
+            if (!GridScript.actionsMenu.activeSelf)
+            {
+                GridScript.actionsMenu.SetActive(true);
+            }
+
+            for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
+            {
+                if (!GridScript.actionsMenu.transform.GetChild(i).gameObject.activeSelf)
+                {
+                    GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
+                }
+
+                if (i == 0)
+                {
+                    GridScript.actionsMenu.transform.GetChild(i).GetComponent<Button>().Select();
+                }
+            }
+        }
+    }
+
+    private void AttackDirectly()
+    {
+        GameObject otherunit = GridScript.GetUnit(GridScript.selection);
+        Character otherunitChar = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
+
+        Character currentChar = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics;
+
+        List<GridSquareScript> potentialmovementtiles = new List<GridSquareScript>();
+
+        bool Ishealing = (otherunitChar.affiliation == "playable" || (otherunitChar.affiliation == "other" && !otherunitChar.attacksfriends));
+        if (Ishealing)
+        {
+            if (otherunitChar.currentHP >= otherunitChar.AjustedStats.HP)
+            {
+                return;
+            }
+            // if we are healing it's kinda the same, but first check if the unit has a staff
+            bool hasstaff = false;
+            foreach (equipment equ in currentcharacter.GetComponent<UnitScript>().GetAllWeapons())
+            {
+                if (equ.type.ToLower() == "staff" && equ.Currentuses > 0)
+                {
+                    hasstaff = true;
+                    currentcharacter.GetComponent<UnitScript>().EquipWeapon(equ);
+                    break;
+                }
+            }
+            if (hasstaff)
+            {
+
+
+                // first, we find movement tiles in which attack tiles englobe the unit because we can attack them
+                (int newweaponrange, bool newmelee, string newtype) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                foreach (GridSquareScript movementtile in GridScript.lockedmovementtiles)
+                {
+                    GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, true, currentChar.enemyStats.monsterStats.size, currentChar);
+                    if (GridScript.healingtiles.Contains(otherunitChar.currentTile[0]))
+                    {
+                        potentialmovementtiles.Add(movementtile);
+                    }
+                }
+
+                //Then we get the closest tile
+
+                int movements = currentChar.movements;
+                if (currentcharacter.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using Retreat
+                {
+                    movements -= 2;
+                }
+                if (currentcharacter.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
+                {
+                    movements += 1;
+                }
+
+                int shortestdistance = 99;
+                GridSquareScript besttile = null;
+                foreach (GridSquareScript potentialtargettile in potentialmovementtiles)
+                {
+                    int pathdistance = GridScript.findshortestpath(currentChar.currentTile[0], potentialtargettile, movements);
+                    if (pathdistance < shortestdistance)
+                    {
+                        besttile = potentialtargettile;
+                        shortestdistance = pathdistance;
+                    }
+                }
+
+                // then we move to said tile
+
+                if (besttile != null)
+                {
+                    previouscoordinates = currentChar.position;
+                    currentcharacter.GetComponent<UnitScript>().MoveTo(besttile.GridCoordinates);
+                    currentChar.alreadymoved = true;
+                    if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
+                    {
+                        currentcharacter.GetComponent<UnitScript>().tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
+                    }
+                    GridScript.UnlockSelection();
+                    (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                    GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentChar.enemyStats.monsterStats.size, currentChar);
+                    GridScript.LockcurrentSelection();
+                    if (!GridScript.actionsMenu.activeSelf)
+                    {
+                        GridScript.actionsMenu.SetActive(true);
+                    }
+
+                    for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
+                    {
+                        if (!GridScript.actionsMenu.transform.GetChild(i).gameObject.activeSelf)
+                        {
+                            GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
+                        }
+
+                        if (i == 0)
+                        {
+                            GridScript.actionsMenu.transform.GetChild(i).GetComponent<Button>().Select();
+                        }
+                    }
+                    GridScript.selection = besttile;
+                    actionsMenu.GetComponent<ActionsMenu>().target = currentcharacter;
+                    actionsMenu.GetComponent<ActionsMenu>().AttackCommand(true);
+                    currentpath = null;
+                }
+            }
+        }
+        else
+        {
+            // first, we find movement tiles in which attack tiles englobe the unit because we can attack them
+            foreach (GridSquareScript movementtile in GridScript.lockedmovementtiles)
+            {
+                (int newweaponrange, bool newmelee, string newtype) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, false, currentChar.enemyStats.monsterStats.size, currentChar);
+                if (GridScript.attacktiles.Contains(otherunitChar.currentTile[0]))
+                {
+                    potentialmovementtiles.Add(movementtile);
+                }
+            }
+
+            //Then we get the closest tile
+
+            int movements = currentChar.movements;
+            if (currentcharacter.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using Retreat
+            {
+                movements -= 2;
+            }
+            if (currentcharacter.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
+            {
+                movements += 1;
+            }
+
+            int shortestdistance = 99;
+            GridSquareScript besttile = null;
+            foreach (GridSquareScript potentialtargettile in potentialmovementtiles)
+            {
+                int pathdistance = GridScript.findshortestpath(currentChar.currentTile[0], potentialtargettile, movements);
+                if (pathdistance < shortestdistance)
+                {
+                    besttile = potentialtargettile;
+                    shortestdistance = pathdistance;
+                }
+            }
+
+            // then we move to said tile
+
+            if (besttile != null)
+            {
+                previouscoordinates = currentChar.position;
+                currentcharacter.GetComponent<UnitScript>().MoveTo(besttile.GridCoordinates);
+                currentChar.alreadymoved = true;
+                if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
+                {
+                    currentcharacter.GetComponent<UnitScript>().tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
+                }
+                GridScript.UnlockSelection();
+                (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentChar.enemyStats.monsterStats.size, currentChar);
+                GridScript.LockcurrentSelection();
+                if (!GridScript.actionsMenu.activeSelf)
+                {
+                    GridScript.actionsMenu.SetActive(true);
+                }
+
+                for (int i = 0; i < GridScript.actionsMenu.transform.childCount; i++)
+                {
+                    if (!GridScript.actionsMenu.transform.GetChild(i).gameObject.activeSelf)
+                    {
+                        GridScript.actionsMenu.transform.GetChild(i).gameObject.SetActive(true);
+                    }
+
+                    if (i == 0)
+                    {
+                        GridScript.actionsMenu.transform.GetChild(i).GetComponent<Button>().Select();
+                    }
+                }
+                GridScript.selection = besttile;
+                actionsMenu.GetComponent<ActionsMenu>().target = currentcharacter;
+                actionsMenu.GetComponent<ActionsMenu>().AttackCommand(false);
+                currentpath = null;
+            }
+
+
+        }
     }
 
     public void ManagePath()

@@ -4,9 +4,6 @@
 
 ## System 
 
-
-- pressing on an attackable enemy attacks directly
-
 - Rework Animation for Animation Tree
 
 - Do cutscene system (or take a look at cinemachine to do it)
@@ -15,7 +12,6 @@
 
 - Do Bonds for Gale and Aurora
 
-- Nerf Motivate to limit it to being used once per turn per character
 
 ## Visuals
 
