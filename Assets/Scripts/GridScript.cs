@@ -356,7 +356,7 @@ public class GridScript : MonoBehaviour
 
             foreach (GridSquareScript tile in movementtiles)
             {
-                List<GridSquareScript> attacktiles = GetAttack(range, melee, tile, 0, UnitChar);
+                List<GridSquareScript> attacktiles = GetAttack(range, melee, tile, UnitChar);
 
                 foreach (GridSquareScript attacktile in attacktiles)
                 {
@@ -648,12 +648,8 @@ public class GridScript : MonoBehaviour
                         movements += 1;
                     }
                     SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
-                    if (unit.enemyStats.monsterStats.size > 1)
-                    {
-                        CheckMovementsForBigUnits(unit);
-                    }
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    ShowAttack(range, melee, type.ToLower() == "staff", false, unit.enemyStats.monsterStats.size, unit);
+                    ShowAttack(range, melee, type.ToLower() == "staff", false, unit);
                 }
             }
 
@@ -663,37 +659,7 @@ public class GridScript : MonoBehaviour
         Recolor();
     }
 
-    private void CheckMovementsForBigUnits(Character unit)
-    {
-        List<Vector2> Otherpositions = new List<Vector2>() { new Vector2(0, 0), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(-1, 1) };
-        List<GridSquareScript> tilestoremove = new List<GridSquareScript>();
-        foreach (GridSquareScript tile in movementtiles)
-        {
-            foreach (Vector2 newpos in Otherpositions)
-            {
-                GridSquareScript newtile = GetTile(tile.GridCoordinates + newpos);
-                if (newtile.isobstacle || !newtile.activated || tile.elevation != newtile.elevation)
-                {
-                    tilestoremove.Add(tile);
-                    continue;
-                }
-                GameObject newunit = GetUnit(newtile);
-                if (newunit != null)
-                {
-                    Character character = newunit.GetComponent<UnitScript>().UnitCharacteristics;
-                    if (character != unit && character != null)
-                    {
-                        tilestoremove.Add(tile);
-                        continue;
-                    }
-                }
-            }
-        }
-        foreach (GridSquareScript tile in tilestoremove)
-        {
-            movementtiles.Remove(tile);
-        }
-    }
+
 
     public void ShowMovementOfUnit(GameObject Target, bool color = true)
     {
@@ -745,7 +711,7 @@ public class GridScript : MonoBehaviour
                     }
                     SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    ShowAttack(range, melee, type.ToLower() == "staff", false, unit.enemyStats.monsterStats.size, unit);
+                    ShowAttack(range, melee, type.ToLower() == "staff", false, unit);
 
                 }
             }
@@ -888,39 +854,21 @@ public class GridScript : MonoBehaviour
         return SelectedUnit;
     }
 
-    public void ShowAttack(int range, bool frapperenmelee, bool usingstaff, bool uselockedmovementtile = false, int size = 0, Character attacker = null)
+    public void ShowAttack(int range, bool frapperenmelee, bool usingstaff, bool uselockedmovementtile = false, Character attacker = null)
     {
         attacktiles = new List<GridSquareScript>();
         healingtiles = new List<GridSquareScript>();
-        List<GridSquareScript> tilestousetemp = new List<GridSquareScript>();
         List<GridSquareScript> tilestouse = new List<GridSquareScript>();
         if (uselockedmovementtile)
         {
-            tilestousetemp = lockedmovementtiles;
+            tilestouse = lockedmovementtiles;
         }
         else
         {
-            tilestousetemp = movementtiles;
+            tilestouse = movementtiles;
         }
 
-        if (size > 1)
-        {
-            List<Vector2> addedvectors = new List<Vector2>() { new Vector2(0, 0), new Vector2(0, 1), new Vector2(-1, 1), new Vector2(-1, 0) };
-            foreach (GridSquareScript tile in tilestousetemp)
-            {
-                foreach (Vector2 vector in addedvectors)
-                {
-                    if (!tilestouse.Contains(GetTile(tile.GridCoordinates + vector)))
-                    {
-                        tilestouse.Add(GetTile(tile.GridCoordinates + vector));
-                    }
-                }
-            }
-        }
-        else
-        {
-            tilestouse = tilestousetemp;
-        }
+
         foreach (GridSquareScript tile in tilestouse)
         {
             for (int i = 1; i <= range; i++)
@@ -1058,25 +1006,14 @@ public class GridScript : MonoBehaviour
     /// <param name="range"></param>
     /// <param name="frapperenmelee"></param>
     /// <param name="tile"></param>
-    /// <param name="size"></param>
+
     /// <param name="unit"></param>
     /// <returns></returns>
-    public List<GridSquareScript> GetAttack(int range, bool frapperenmelee, GridSquareScript tile, int size = 0, Character unit = null)
+    public List<GridSquareScript> GetAttack(int range, bool frapperenmelee, GridSquareScript tile, Character unit = null)
     {
         List<GridSquareScript> newattacktiles = new List<GridSquareScript>();
         List<GridSquareScript> tilestouse = new List<GridSquareScript>() { tile };
-        if (size > 1)
-        {
-            List<Vector2> addedvectors = new List<Vector2>() { new Vector2(0, 1), new Vector2(-1, 1), new Vector2(-1, 0) };
-            foreach (Vector2 vector in addedvectors)
-            {
-                GridSquareScript newtile = GetTile(tile.GridCoordinates + vector);
-                if (!tilestouse.Contains(newtile))
-                {
-                    tilestouse.Add(newtile);
-                }
-            }
-        }
+
         foreach (GridSquareScript newtile in tilestouse)
         {
             for (int i = 1; i <= range; i++)
@@ -1165,38 +1102,14 @@ public class GridScript : MonoBehaviour
         return newattacktiles;
     }
 
-    public void ShowAttackAfterMovement(int range, bool frapperenmelee, List<GridSquareScript> tiles, bool usingstaff, int size, Character unit)
+    public void ShowAttackAfterMovement(int range, bool frapperenmelee, List<GridSquareScript> tiles, bool usingstaff, Character unit)
     {
         movementtiles.Clear();
         attacktiles = new List<GridSquareScript>();
         lockedattacktiles = new List<GridSquareScript>();
         lockedhealingtiles = new List<GridSquareScript>();
         healingtiles = new List<GridSquareScript>();
-        List<GridSquareScript> newtileslist = new List<GridSquareScript>();
-        if (size > 1)
-        {
-            List<Vector2> addedvectors = new List<Vector2>() { new Vector2(0, 1), new Vector2(-1, 1), new Vector2(-1, 0) };
-            foreach (GridSquareScript tile in tiles)
-            {
-                if (!newtileslist.Contains(tile))
-                {
-                    newtileslist.Add(tile);
-                }
-                foreach (Vector2 vector in addedvectors)
-                {
-                    GridSquareScript newtile = GetTile(tile.GridCoordinates + vector);
-                    if (!newtileslist.Contains(newtile))
-                    {
-                        newtileslist.Add(newtile);
-                    }
-                }
 
-            }
-        }
-        else
-        {
-            newtileslist = tiles;
-        }
         for (int i = 1; i <= range; i++)
         {
             if (i == 1 && !frapperenmelee)
@@ -1211,7 +1124,7 @@ public class GridScript : MonoBehaviour
                     {
                         if (Mathf.Abs(x) + Mathf.Abs(y) == i)
                         {
-                            foreach (GridSquareScript tile in newtileslist)
+                            foreach (GridSquareScript tile in tiles)
                             {
                                 Vector2 vectorforattack = tile.GridCoordinates + new Vector2(x, y);
                                 if (CheckIfPositionIsLegal(vectorforattack))
@@ -1239,7 +1152,7 @@ public class GridScript : MonoBehaviour
                     }
                 }
             }
-            foreach (GridSquareScript tile in newtileslist)
+            foreach (GridSquareScript tile in tiles)
             {
                 if (tile.GridCoordinates.x >= i)
                 {
@@ -1395,7 +1308,6 @@ public class GridScript : MonoBehaviour
             foreach (GridSquareScript gridSquareScript in movementtiles)
             {
                 gridSquareScript.fillwithblue();
-                gridSquareScript.CorrectColor();
             }
 
         }
@@ -1412,7 +1324,6 @@ public class GridScript : MonoBehaviour
         foreach (GridSquareScript gridSquareScript in lockedmovementtiles)
         {
             gridSquareScript.fillwithblue();
-            gridSquareScript.CorrectColor();
         }
 
 
@@ -1557,30 +1468,12 @@ public class GridScript : MonoBehaviour
                 }
             }
         }
-        if (selectedunit.enemyStats.monsterStats.size > 1)
-        {
-            List<Vector2> otherpositions = new List<Vector2>() { position + new Vector2(-1, 0), position + new Vector2(-1, 1), position + new Vector2(0, 1) };
-            foreach (Character unit in allunits)
-            {
-                foreach (Vector2 newposition in otherpositions)
-                {
-                    GridSquareScript newtile = GetTile(newposition);
-                    if (!CheckIfPositionIsLegal(newposition, selectedunit.enemyStats.monsterStats.size))
-                    {
-                        return false;
-                    }
-                    if (unit.currentTile.Contains(newtile) && unit != selectedunit && unit.affiliation != selectedunit.affiliation)
-                    {
-                        return false;
-                    }
-                }
-            }
-        }
+
 
         return true;
     }
 
-    public bool CheckIfPositionIsLegal(Vector2 position, int size = 0)
+    public bool CheckIfPositionIsLegal(Vector2 position)
     {
         if (position.x < 0 || position.x >= Grid.Count || position.y < 0 || position.y >= Grid[0].Count)
         {
@@ -1590,13 +1483,7 @@ public class GridScript : MonoBehaviour
         {
             return false;
         }
-        if (size > 0)
-        {
-            if (!(CheckIfPositionIsLegal(position + new Vector2(-1, 0)) && CheckIfPositionIsLegal(position + new Vector2(0, 1)) && CheckIfPositionIsLegal(position + new Vector2(-1, 1))))
-            {
-                return false;
-            }
-        }
+
         return true;
     }
 

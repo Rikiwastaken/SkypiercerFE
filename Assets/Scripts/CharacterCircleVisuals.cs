@@ -124,19 +124,8 @@ public class CharacterCircleVisuals : MonoBehaviour
 
 
             UnitCircles[i].GetComponent<SpriteRenderer>().color = newcolor;
-            if (Char.enemyStats.monsterStats.size > 1)
-            {
-                UnitCircles[i].transform.localScale = Vector3.one * 2;
-                UnitCircles[i].transform.position = new Vector3(Char.currentTile[0].GridCoordinates.x - 0.5f, YElevation + Char.currentTile[0].transform.position.y, Char.currentTile[0].GridCoordinates.y + 0.5f);
-
-
-
-            }
-            else
-            {
-                UnitCircles[i].transform.position = new Vector3(Char.currentTile[0].GridCoordinates.x, YElevation + Char.currentTile[0].transform.position.y, Char.currentTile[0].GridCoordinates.y);
-                UnitCircles[i].transform.localScale = Vector3.one;
-            }
+            UnitCircles[i].transform.position = new Vector3(Char.currentTile[0].GridCoordinates.x, YElevation + Char.currentTile[0].transform.position.y, Char.currentTile[0].GridCoordinates.y);
+            UnitCircles[i].transform.localScale = Vector3.one;
 
 
 

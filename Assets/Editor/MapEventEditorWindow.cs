@@ -724,7 +724,6 @@ public class MapEventEditorWindow : EditorWindow
                 {
                     EditorGUILayout.LabelField("Monster Stats", EditorStyles.boldLabel);
                     EditorGUI.indentLevel++;
-                    if (monsterStats.FindPropertyRelative("size") != null) EditorGUILayout.PropertyField(monsterStats.FindPropertyRelative("size"));
                     if (monsterStats.FindPropertyRelative("ispluvial") != null) EditorGUILayout.PropertyField(monsterStats.FindPropertyRelative("ispluvial"));
                     if (monsterStats.FindPropertyRelative("ismachine") != null) EditorGUILayout.PropertyField(monsterStats.FindPropertyRelative("ismachine"));
                     EditorGUI.indentLevel--;
@@ -777,7 +776,6 @@ public class MapEventEditorWindow : EditorWindow
         SerializedProperty monsterStats = eProp.FindPropertyRelative("monsterStats");
         if (monsterStats != null)
         {
-            if (monsterStats.FindPropertyRelative("size") != null) monsterStats.FindPropertyRelative("size").intValue = 0;
             if (monsterStats.FindPropertyRelative("ispluvial") != null) monsterStats.FindPropertyRelative("ispluvial").boolValue = false;
             if (monsterStats.FindPropertyRelative("ismachine") != null) monsterStats.FindPropertyRelative("ismachine").boolValue = false;
         }

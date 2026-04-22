@@ -90,7 +90,7 @@ public class MapInitializer : MonoBehaviour
                 playable.playableStats.unlocked = true;
                 GameObject newcharacter = Instantiate(BaseCharacter);
                 newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
-                ManageModel(newcharacter);
+                newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
                 newcharacter.GetComponent<UnitScript>().calculateStats();
                 newcharacter.transform.parent = Characters.transform;
                 newcharacter.transform.position = new Vector3(playablepos[index].x, 0, playablepos[index].y);
@@ -108,7 +108,7 @@ public class MapInitializer : MonoBehaviour
             {
                 GameObject newcharacter = Instantiate(BaseCharacter);
                 newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
-                ManageModel(newcharacter);
+                newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
                 newcharacter.GetComponent<UnitScript>().calculateStats();
                 newcharacter.transform.parent = Characters.transform;
                 newcharacter.transform.position = new Vector3(playablepos[index].x, 0, playablepos[index].y);
@@ -199,7 +199,7 @@ public class MapInitializer : MonoBehaviour
 
         Character.enemyStats = enemyStats;
         Character.modelID = enemyStats.modelID;
-        ManageModel(newcharacter);
+        newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
         Character.name = enemyStats.Name;
         if (enemyStats.Skills.Count > 0)
         {
@@ -297,24 +297,5 @@ public class MapInitializer : MonoBehaviour
         }
         previousid = maxid;
         return maxid;
-    }
-
-    private void ManageModel(GameObject character)
-    {
-        foreach (ModelInfo modelinf in character.GetComponent<UnitScript>().ModelList)
-        {
-            if (modelinf.ID == character.GetComponent<UnitScript>().UnitCharacteristics.modelID)
-            {
-                modelinf.active = true;
-                modelinf.wholeModel.SetActive(true);
-                character.GetComponent<UnitScript>().ActiveModel = modelinf.wholeModel;
-            }
-            else
-            {
-                modelinf.active = false;
-                DestroyImmediate(modelinf.wholeModel);
-            }
-        }
-        character.GetComponent<UnitScript>().ResetChildRenderers();
     }
 }

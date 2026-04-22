@@ -84,7 +84,7 @@ public class ActionManager : MonoBehaviour
                 }
                 currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                 (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
             }
             return;
         }
@@ -278,7 +278,7 @@ public class ActionManager : MonoBehaviour
         else
         {
             (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-            GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+            GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
             GridScript.LockcurrentSelection();
             if (!GridScript.actionsMenu.activeSelf)
             {
@@ -335,7 +335,7 @@ public class ActionManager : MonoBehaviour
                 (int newweaponrange, bool newmelee, string newtype) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
                 foreach (GridSquareScript movementtile in GridScript.lockedmovementtiles)
                 {
-                    GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, true, currentChar.enemyStats.monsterStats.size, currentChar);
+                    GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, true, currentChar);
                     if (GridScript.healingtiles.Contains(otherunitChar.currentTile[0]))
                     {
                         potentialmovementtiles.Add(movementtile);
@@ -379,7 +379,7 @@ public class ActionManager : MonoBehaviour
                     }
                     GridScript.UnlockSelection();
                     (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentChar.enemyStats.monsterStats.size, currentChar);
+                    GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentChar);
                     GridScript.LockcurrentSelection();
                     if (!GridScript.actionsMenu.activeSelf)
                     {
@@ -411,7 +411,7 @@ public class ActionManager : MonoBehaviour
             foreach (GridSquareScript movementtile in GridScript.lockedmovementtiles)
             {
                 (int newweaponrange, bool newmelee, string newtype) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, false, currentChar.enemyStats.monsterStats.size, currentChar);
+                GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, false, currentChar);
                 if (GridScript.attacktiles.Contains(otherunitChar.currentTile[0]))
                 {
                     potentialmovementtiles.Add(movementtile);
@@ -455,7 +455,7 @@ public class ActionManager : MonoBehaviour
                 }
                 GridScript.UnlockSelection();
                 (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentChar.enemyStats.monsterStats.size, currentChar);
+                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentChar);
                 GridScript.LockcurrentSelection();
                 if (!GridScript.actionsMenu.activeSelf)
                 {
@@ -530,7 +530,7 @@ public class ActionManager : MonoBehaviour
         (int range, bool frapperenmelee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
         bool usestaff = unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff";
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        GridScript.ShowAttack(range, frapperenmelee, usestaff, true, charunit.enemyStats.monsterStats.size, charunit);
+        GridScript.ShowAttack(range, frapperenmelee, usestaff, true, charunit);
         GridScript.lockedattacktiles = GridScript.attacktiles;
         GridScript.lockedhealingtiles = GridScript.healingtiles;
         GridScript.Recolor();

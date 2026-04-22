@@ -350,31 +350,7 @@ public class GridSquareScript : MonoBehaviour
     {
         if (unitchar != null)
         {
-            if (unitchar.enemyStats.monsterStats.size > 1)
-            {
-                filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnitBigEnemies;
-                int index = unitchar.currentTile.IndexOf(this);
-                switch (index)
-                {
-                    case 0:
-
-                        filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
-                        break;
-                    case 1:
-                        filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 180f);
-                        break;
-                    case 2:
-                        filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-                        break;
-                    case 3:
-                        filledimage.transform.localRotation = Quaternion.Euler(0f, 0f, -90f);
-                        break;
-                }
-            }
-            else
-            {
-                filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
-            }
+            filledimage.transform.GetComponent<SpriteRenderer>().sprite = gridsquareinsideWithUnit;
         }
         else if (unitenter)
         {
@@ -860,20 +836,7 @@ public class GridSquareScript : MonoBehaviour
         filledimage.color = AttackTileColor;
     }
 
-    public void CorrectColor()
-    {
-        if (filledimage.color == MovementTileColor)
-        {
-            GameObject GO = GridScript.instance.GetUnit(this);
-            if (GO != null && GO.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size > 0)
-            {
-                foreach (GridSquareScript tile in GO.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
-                {
-                    tile.filledimage.color = MovementTileColor;
-                }
-            }
-        }
-    }
+
 
     public void fillwithGreen()
     {

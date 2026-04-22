@@ -324,7 +324,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         (int range, bool frapperenmelee, string type) = target.GetComponent<UnitScript>().GetRangeMeleeAndType();
-        GridScript.ShowAttackAfterMovement(range, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, target.GetComponent<UnitScript>().UnitCharacteristics);
+        GridScript.ShowAttackAfterMovement(range, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics);
         GridScript.lockedattacktiles = GridScript.attacktiles;
         GridScript.lockedhealingtiles = GridScript.healingtiles;
         GridScript.Recolor();
@@ -519,7 +519,7 @@ public class ActionsMenu : MonoBehaviour
                         frapperenmelee = false;
                     }
 
-                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, weapon.type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.size, target.GetComponent<UnitScript>().UnitCharacteristics);
+                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, weapon.type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics);
                     GridScript.lockedattacktiles = GridScript.attacktiles;
                     GridScript.lockedhealingtiles = GridScript.healingtiles;
                     GridScript.Recolor();
@@ -564,7 +564,7 @@ public class ActionsMenu : MonoBehaviour
             newfrapperenmelee = false;
         }
         Character newchartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        GridScript.ShowAttackAfterMovement(newweapon.Range + newrangebonus, newfrapperenmelee, newchartarget.currentTile, newweapon.type.ToLower() == "staff", newchartarget.enemyStats.monsterStats.size, newchartarget);
+        GridScript.ShowAttackAfterMovement(newweapon.Range + newrangebonus, newfrapperenmelee, newchartarget.currentTile, newweapon.type.ToLower() == "staff", newchartarget);
     }
 
 
@@ -627,7 +627,7 @@ public class ActionsMenu : MonoBehaviour
             if (command.targettype == 0)
             {
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, false, chartarget.enemyStats.monsterStats.size, chartarget);
+                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, false, chartarget);
                 GridScript.lockedattacktiles = GridScript.attacktiles;
 
                 foreach (GridSquareScript tile in GridScript.lockedattacktiles)
@@ -657,7 +657,7 @@ public class ActionsMenu : MonoBehaviour
             else if (command.targettype == 1)
             {
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, true, chartarget.enemyStats.monsterStats.size, chartarget);
+                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, true, chartarget);
                 GridScript.lockedhealingtiles = GridScript.healingtiles;
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
@@ -731,7 +731,7 @@ public class ActionsMenu : MonoBehaviour
             else if (command.targettype == 4)
             {
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, false, chartarget.enemyStats.monsterStats.size, chartarget);
+                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, false, chartarget);
                 if (commandID == 81 || commandID == 82) // Hook and Throw
                 {
                     Vector2 chartargetposition = chartarget.currentTile[0].GridCoordinates;
@@ -829,7 +829,7 @@ public class ActionsMenu : MonoBehaviour
             {
                 (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(range, melee, chartarget.currentTile, true, chartarget.enemyStats.monsterStats.size, chartarget);
+                GridScript.ShowAttackAfterMovement(range, melee, chartarget.currentTile, true, chartarget);
                 GridScript.lockedhealingtiles = GridScript.healingtiles;
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
@@ -1790,47 +1790,20 @@ public class ActionsMenu : MonoBehaviour
             tiletouse = charunit.currentTile[0];
         }
 
-        if (chartarget.enemyStats.monsterStats.size > 0)
+        int Distance = (int)(Mathf.Abs(chartarget.position.x - tiletouse.GridCoordinates.x) + Mathf.Abs(chartarget.position.y - tiletouse.GridCoordinates.y));
+        (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
+        if (Distance <= 1)
         {
-            int DistanceSE = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
-            int DistanceSW = (int)(Mathf.Abs(chartarget.position.x - 1 - charunit.position.x) + Mathf.Abs(chartarget.position.y - charunit.position.y));
-            int DistanceNE = (int)(Mathf.Abs(chartarget.position.x - charunit.position.x) + Mathf.Abs(chartarget.position.y + 1 - charunit.position.y));
-            int DistanceNW = (int)(Mathf.Abs(chartarget.position.x - 1 - charunit.position.x) + Mathf.Abs(chartarget.position.y + 1 - charunit.position.y));
-
-
-
-
-            (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
-            if (DistanceSE <= 1 && DistanceSW <= 1 && DistanceNE <= 1 && DistanceNW <= 1)
-            {
-                if (!melee)
-                {
-                    return false;
-                }
-            }
-            else if (DistanceSE > range && DistanceSW > range && DistanceNE > range && DistanceNW > range)
+            if (!melee)
             {
                 return false;
             }
-            return true;
         }
-        else
+        else if (Distance > range)
         {
-            int Distance = (int)(Mathf.Abs(chartarget.position.x - tiletouse.GridCoordinates.x) + Mathf.Abs(chartarget.position.y - tiletouse.GridCoordinates.y));
-            (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
-            if (Distance <= 1)
-            {
-                if (!melee)
-                {
-                    return false;
-                }
-            }
-            else if (Distance > range)
-            {
-                return false;
-            }
-            return true;
+            return false;
         }
+        return true;
 
 
     }
@@ -1959,7 +1932,7 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe" || charunit.enemyStats.monsterStats.size > 0)
+                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
                             {
                                 DealScytheDamage(unit, target);
                             }

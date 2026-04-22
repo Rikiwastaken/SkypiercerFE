@@ -390,12 +390,6 @@ public class EnemyStatsEditorWindow : EditorWindow
             else
             {
                 enemypositions.Add(character.startpos);
-                if (character.monsterStats.size > 1)
-                {
-                    enemypositions.Add(character.startpos + new Vector2(0, 1));
-                    enemypositions.Add(character.startpos + new Vector2(-1, 0));
-                    enemypositions.Add(character.startpos + new Vector2(-1, 1));
-                }
             }
 
         }
@@ -516,12 +510,7 @@ public class EnemyStatsEditorWindow : EditorWindow
             else
             {
                 enemypositions.Add(character.startpos);
-                if (character.monsterStats.size > 1)
-                {
-                    enemypositions.Add(character.startpos + new Vector2(0, 1));
-                    enemypositions.Add(character.startpos + new Vector2(-1, 0));
-                    enemypositions.Add(character.startpos + new Vector2(-1, 1));
-                }
+
             }
 
         }

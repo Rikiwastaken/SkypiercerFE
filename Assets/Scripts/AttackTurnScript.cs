@@ -1272,7 +1272,7 @@ public class AttackTurnScript : MonoBehaviour
                 GameObject healingtarget = null;
 
                 (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele(weaponlist[staffID]);
-                gridScript.ShowAttack(range, melee, true, false, unitchar.enemyStats.monsterStats.size, unitchar);
+                gridScript.ShowAttack(range, melee, true, false, unitchar);
                 foreach (GameObject otherunit in gridScript.allunitGOs)
                 {
                     if (unit == otherunit)
@@ -1344,11 +1344,11 @@ public class AttackTurnScript : MonoBehaviour
         {
             movementtouse = new List<GridSquareScript>() { character.currentTile[0] };
 
-            attacktiles = gridScript.GetAttack(attackerrange, attackermelee, character.currentTile[0], character.enemyStats.monsterStats.size, character);
+            attacktiles = gridScript.GetAttack(attackerrange, attackermelee, character.currentTile[0], character);
         }
         else
         {
-            gridScript.ShowAttack(attackerrange, attackermelee, currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff", false, character.enemyStats.monsterStats.size, character);
+            gridScript.ShowAttack(attackerrange, attackermelee, currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff", false, character);
             attacktiles = gridScript.attacktiles;
         }
 
@@ -1457,7 +1457,7 @@ public class AttackTurnScript : MonoBehaviour
 
             foreach (GridSquareScript movementtile in movementtouse)
             {
-                foreach (GridSquareScript attacktilesFromPosition in gridScript.GetAttack(range, melee, movementtile, character.enemyStats.monsterStats.size, character))
+                foreach (GridSquareScript attacktilesFromPosition in gridScript.GetAttack(range, melee, movementtile, character))
                 {
                     if (targepositiontiles.Contains(attacktilesFromPosition))
                     {
@@ -1866,7 +1866,7 @@ public class AttackTurnScript : MonoBehaviour
             return reward - 9999;
         }
         (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
-        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position, charunit.enemyStats.monsterStats.size, charunit);
+        List<GridSquareScript> potentialAttackPosition = gridScript.GetAttack(range, melee, position, charunit);
         List<string> affiliationtoattack = Whotoattack(charunit.affiliation, attacksfriend);
 
         foreach (GridSquareScript tile in potentialAttackPosition)
@@ -2005,21 +2005,6 @@ public class AttackTurnScript : MonoBehaviour
                 if (FindIfAnyTarget(potentialAttackPosition, charunit.affiliation))
                 {
                     reward -= 99;
-                }
-            }
-
-            if (charunit.enemyStats.monsterStats.size > 1)
-            {
-                GridSquareScript tile1 = gridScript.GetTile(position.GridCoordinates + new Vector2(-1, 0));
-                GridSquareScript tile2 = gridScript.GetTile(position.GridCoordinates + new Vector2(-1, 1));
-                GridSquareScript tile3 = gridScript.GetTile(position.GridCoordinates + new Vector2(0, 1));
-                if (tile1.isobstacle || tile2.isobstacle || tile3.isobstacle)
-                {
-                    return reward - 9999;
-                }
-                if (gridScript.GetUnit(tile1) != unit || gridScript.GetUnit(tile2) != unit || gridScript.GetUnit(tile3) != unit)
-                {
-                    return reward - 9999;
                 }
             }
 

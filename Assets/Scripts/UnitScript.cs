@@ -75,16 +75,12 @@ public class UnitScript : MonoBehaviour
     {
         public int ID;
         public GameObject wholeModel;
-        public Transform handbone;
-        public Transform Lefthandbone;
-        public Vector3 rotationadjust;
         public bool active;
     }
 
     [Serializable]
     public class MonsterStats
     {
-        public int size;
         public bool ispluvial;
         public bool ismachine;
     }
@@ -374,6 +370,12 @@ public class UnitScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (ActiveModel == null)
+        {
+            InstantiateCharacterModel();
+        }
+
+
         _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
         CanvasTransform = transform.GetChild(0);
         if (SceneManager.GetActiveScene().name == "BattleScene")
@@ -419,14 +421,6 @@ public class UnitScript : MonoBehaviour
         }
         UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
         UpdateWeaponModel();
-        //if (UnitCharacteristics.affiliation == "playable")
-        //{
-        //    Head.GetComponent<SkinnedMeshRenderer>().material = AllyMat;
-        //}
-        //else
-        //{
-        //    Head.GetComponent<SkinnedMeshRenderer>().material = EnemyMat;
-        //}
 
         foreach (ModelInfo modelInfo in ModelList)
         {
@@ -491,6 +485,34 @@ public class UnitScript : MonoBehaviour
 
     }
 
+    public void InstantiateCharacterModel()
+    {
+        if (ModelList.Count <= UnitCharacteristics.modelID)
+        {
+            return;
+        }
+        if (ActiveModel != null)
+        {
+            Destroy(ActiveModel);
+        }
+        ActiveModel = Instantiate(ModelList[UnitCharacteristics.modelID].wholeModel);
+        ActiveModel.transform.SetParent(transform);
+        ActiveModel.transform.SetLocalPositionAndRotation(ActiveModel.GetComponent<Unit3DModelInfoScript>().positionadjust, Quaternion.Euler(ActiveModel.GetComponent<Unit3DModelInfoScript>().rotationadjust));
+        ActiveModel.transform.localScale = ActiveModel.GetComponent<Unit3DModelInfoScript>().scaleadjust;
+        if (ActiveModel.GetComponent<Animator>())
+        {
+            animator = ActiveModel.GetComponent<Animator>();
+        }
+        else
+        {
+            animator = ActiveModel.GetComponentInChildren<Animator>();
+        }
+        armature = animator.transform;
+        initialpos = armature.localPosition;
+        initialforward = armature.forward;
+        UpdateLayer(ActiveModel);
+        ActiveModel.SetActive(true);
+    }
 
     public void ResetChildRenderers()
     {
@@ -508,27 +530,7 @@ public class UnitScript : MonoBehaviour
             cameraScript = cameraScript.instance;
         }
 
-        if (animator == null)
-        {
-            foreach (ModelInfo modelInfo in ModelList)
-            {
-                if (modelInfo.active)
-                {
-                    animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
-                    rotationadjust = modelInfo.rotationadjust;
-                    ActiveModel = modelInfo.wholeModel;
-                }
-            }
 
-
-        }
-
-        if (armature == null)
-        {
-            armature = animator.transform;
-            initialpos = armature.localPosition;
-            initialforward = armature.forward;
-        }
 
 
 
@@ -537,7 +539,6 @@ public class UnitScript : MonoBehaviour
         PlayedEvent = UnitCharacteristics.alreadyplayed && UnitCharacteristics.affiliation.ToLower() == TurnManger.instance.currentlyplaying.ToLower();
 
 
-        //TemporaryColor();
 
         ManageDamagenumber();
 
@@ -609,7 +610,6 @@ public class UnitScript : MonoBehaviour
 
             ShowAffinityArrow();
             UpdateRendererLayer();
-            ManageSize();
             Hidedeactivated();
 
             if (trylvlup)
@@ -651,11 +651,6 @@ public class UnitScript : MonoBehaviour
             }
 
         }
-    }
-
-    public Animator GetAnimator()
-    {
-        return animator;
     }
 
     public Character CreateCopy(Character CharacterToCopy = null)
@@ -737,7 +732,6 @@ public class UnitScript : MonoBehaviour
                 isother = CharacterToCopy.enemyStats.isother,
                 monsterStats = new MonsterStats
                 {
-                    size = CharacterToCopy.enemyStats.monsterStats.size,
                     ispluvial = CharacterToCopy.enemyStats.monsterStats.ispluvial,
                     ismachine = CharacterToCopy.enemyStats.monsterStats.ismachine
                 },
@@ -819,14 +813,7 @@ public class UnitScript : MonoBehaviour
         else
         {
             Vector2 destination = new Vector2();
-            if (UnitCharacteristics.enemyStats.monsterStats.size > 1)
-            {
-                destination = UnitCharacteristics.position + new Vector2(-0.5f, 0.5f);
-            }
-            else
-            {
-                destination = UnitCharacteristics.position;
-            }
+            destination = UnitCharacteristics.position;
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) > 0.1f)
             {
                 if (animator.GetBool("Walk") != true)
@@ -836,12 +823,6 @@ public class UnitScript : MonoBehaviour
 
                 Vector2 direction = (destination - new Vector2(transform.position.x, transform.position.z)).normalized;
                 transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.deltaTime;
-                //if (!cameraScript.incombat)
-                //{
-                //    transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                //    animator.transform.forward = new Vector3(direction.x, 0f, direction.y).normalized;
-                //    transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + rotationadjust);
-                //}
             }
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) <= 0.1f)
             {
@@ -1406,12 +1387,6 @@ public class UnitScript : MonoBehaviour
     public void UpdateTiles(GridSquareScript destination)
     {
         UnitCharacteristics.currentTile = new List<GridSquareScript> { destination };
-        if (UnitCharacteristics.enemyStats.monsterStats != null && UnitCharacteristics.enemyStats.monsterStats.size > 1)
-        {
-            UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(-1, 0)));
-            UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(0, 1)));
-            UnitCharacteristics.currentTile.Add(GridScript.GetTile(destination.GridCoordinates + new Vector2(-1, 1)));
-        }
         destination.previousEnemyinTileForEvent = gameObject;
         destination.BossTileChanged();
     }
@@ -1425,17 +1400,6 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if (animator == null)
-            {
-                foreach (ModelInfo modelInfo in ModelList)
-                {
-                    if (modelInfo.active)
-                    {
-                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
-                        rotationadjust = modelInfo.rotationadjust;
-                    }
-                }
-            }
             animatortouse = animator;
         }
 
@@ -1472,17 +1436,7 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if (animator == null)
-            {
-                foreach (ModelInfo modelInfo in ModelList)
-                {
-                    if (modelInfo.active)
-                    {
-                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
-                        rotationadjust = modelInfo.rotationadjust;
-                    }
-                }
-            }
+
             animatortouse = animator;
         }
 
@@ -1516,17 +1470,7 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if (animator == null)
-            {
-                foreach (ModelInfo modelInfo in ModelList)
-                {
-                    if (modelInfo.active)
-                    {
-                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
-                        rotationadjust = modelInfo.rotationadjust;
-                    }
-                }
-            }
+
             animatortouse = animator;
         }
         if (animatortouse == null)
@@ -1561,17 +1505,7 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if (animator == null)
-            {
-                foreach (ModelInfo modelInfo in ModelList)
-                {
-                    if (modelInfo.active)
-                    {
-                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
-                        rotationadjust = modelInfo.rotationadjust;
-                    }
-                }
-            }
+
             animatortouse = animator;
         }
         if (animatortouse == null)
@@ -1607,17 +1541,7 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if (animator == null)
-            {
-                foreach (ModelInfo modelInfo in ModelList)
-                {
-                    if (modelInfo.active)
-                    {
-                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
-                        rotationadjust = modelInfo.rotationadjust;
-                    }
-                }
-            }
+
             animatortouse = animator;
         }
         if (tripleattack)
@@ -1828,11 +1752,6 @@ public class UnitScript : MonoBehaviour
 
     }
 
-    public void ResetForward()
-    {
-        initialforward = armature.forward;
-    }
-
 
     public void UpdateWeaponModel(Animator otheranimator = null)
     {
@@ -1844,17 +1763,7 @@ public class UnitScript : MonoBehaviour
         }
         else
         {
-            if (animator == null)
-            {
-                foreach (ModelInfo modelInfo in ModelList)
-                {
-                    if (modelInfo.active)
-                    {
-                        animator = modelInfo.wholeModel.GetComponentInChildren<Animator>();
-                        rotationadjust = modelInfo.rotationadjust;
-                    }
-                }
-            }
+
             animatortouse = animator;
         }
 
@@ -1877,7 +1786,7 @@ public class UnitScript : MonoBehaviour
                 {
                     if (currentweapon.type.ToLower() == "bow")
                     {
-                        parenttouse = modelInfo.Lefthandbone;
+                        parenttouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().Lefthandbone;
                     }
                     else if (UnitCharacteristics.telekinesisactivated)
                     {
@@ -1886,7 +1795,7 @@ public class UnitScript : MonoBehaviour
                     }
                     else if (currentweapon.type.ToLower() != "machine")
                     {
-                        parenttouse = modelInfo.handbone;
+                        parenttouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().handbone;
                     }
                 }
             }
@@ -1980,6 +1889,7 @@ public class UnitScript : MonoBehaviour
     {
         ManageLifebars();
         UnitCharacteristics.currentTile[0].BossTileChanged();
+        animator.SetFloat("HPratio", (float)newHealth / (float)UnitCharacteristics.AjustedStats.HP);
     }
 
     void PlayedChangedHandler(bool newPlayed)
@@ -2110,25 +2020,6 @@ public class UnitScript : MonoBehaviour
 
     }
 
-    private void ManageSize()
-    {
-        if (UnitCharacteristics.enemyStats.monsterStats.size > 0)
-        {
-            for (int i = 1; i < transform.childCount; i++)
-            {
-                Transform child = transform.GetChild(i);
-                if (child.localScale.x != UnitCharacteristics.enemyStats.monsterStats.size)
-                {
-                    child.localScale = Vector3.one * UnitCharacteristics.enemyStats.monsterStats.size;
-                }
-            }
-            if (CanvasTransform.position != new Vector3(CanvasTransform.position.x, canvaselevation + UnitCharacteristics.enemyStats.monsterStats.size, CanvasTransform.position.z))
-            {
-                CanvasTransform.position = new Vector3(CanvasTransform.position.x, canvaselevation + UnitCharacteristics.enemyStats.monsterStats.size, CanvasTransform.position.z);
-            }
-        }
-    }
-
     private void Hidedeactivated()
     {
         bool checkifonactivated = CheckIfOnActivated();
@@ -2195,50 +2086,6 @@ public class UnitScript : MonoBehaviour
             }
         }
 
-    }
-    private void TemporaryColor()
-    {
-
-        Color newcolor = Color.white;
-        if (UnitCharacteristics.affiliation == "playable")
-        {
-            newcolor = Color.blue;
-            if (UnitCharacteristics.alreadyplayed)
-            {
-                newcolor *= 0.5f;
-                newcolor.a = 1f;
-            }
-        }
-        else if (UnitCharacteristics.affiliation == "enemy")
-        {
-            newcolor = Color.red;
-            if (UnitCharacteristics.alreadyplayed)
-            {
-                newcolor *= 0.5f;
-                newcolor.a = 1f;
-            }
-        }
-        else
-        {
-            newcolor = Color.yellow;
-            if (UnitCharacteristics.alreadyplayed)
-            {
-                newcolor *= 0.5f;
-                newcolor.a = 1f;
-            }
-        }
-
-        if (cameraScript.incombat)
-        {
-            newcolor.a = 0f;
-            if (cameraScript.fighter1 == gameObject || cameraScript.fighter2 == gameObject)
-            {
-                newcolor.a = 1f;
-            }
-        }
-
-
-        GetComponent<MeshRenderer>().material.color = newcolor;
     }
 
 
