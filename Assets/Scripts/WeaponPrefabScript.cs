@@ -170,7 +170,7 @@ public class WeaponPrefabScript : MonoBehaviour
     }
 
     // this function is used to place the weapon on the unit, it takes the weapon type and the parent transform as parameters, it then finds the corresponding weapon gameobject and sets its parent and local position and rotation based on the offset variables
-    public void PlaceWeapon(string type, Transform parent, int level)
+    public void PlaceWeapon(string type, Transform parent, Vector3 modelpositionoffset, Vector3 modelscaleoffset, Vector3 modelrotationoffset)
     {
 
         foreach (weaponVisuals weapon in WeaponVisualsList)
@@ -178,7 +178,8 @@ public class WeaponPrefabScript : MonoBehaviour
             if (weapon.weaponType == type.ToLower())
             {
                 currentWeaponGO.transform.parent = parent;
-                currentWeaponGO.transform.SetLocalPositionAndRotation(positionoffset, Quaternion.Euler(rotationoffset));
+                currentWeaponGO.transform.SetLocalPositionAndRotation(positionoffset + modelpositionoffset, Quaternion.Euler(rotationoffset + modelrotationoffset));
+                currentWeaponGO.transform.localScale = new Vector3(currentWeaponGO.transform.localScale.x * modelscaleoffset.x, currentWeaponGO.transform.localScale.y * modelscaleoffset.y, currentWeaponGO.transform.localScale.z * modelscaleoffset.z);
                 break;
             }
         }

@@ -1809,16 +1809,7 @@ public class UnitScript : MonoBehaviour
             else
             {
 
-                if (UnitCharacteristics.modelID == 2)
-                {
-                    currentequipmentmodel.transform.localPosition = Vector3.zero;
-                    currentequipmentmodel.transform.localRotation = Quaternion.Euler(new Vector3(-90, 0, 180));
-                }
-                else
-                {
-
-                    _WeaponPrefabScript.PlaceWeapon(currentweapon.type.ToLower(), parenttouse, currentweapon.Grade);
-                }
+                _WeaponPrefabScript.PlaceWeapon(currentweapon.type.ToLower(), parenttouse, ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponpositionajust, ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponscameajust, ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponrotationajust);
             }
 
             UpdateLayer(currentequipmentmodel);
