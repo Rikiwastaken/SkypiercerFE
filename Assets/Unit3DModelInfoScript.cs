@@ -11,4 +11,6 @@ public class Unit3DModelInfoScript : MonoBehaviour
     public Vector3 weaponrotationajust;
     public Vector3 weaponpositionajust;
     public Vector3 weaponscameajust = Vector3.one;
+    public Vector3 leftweaponrotationajust;
+    public Vector3 leftweaponpositionajust;
 }

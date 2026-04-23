@@ -1809,7 +1809,20 @@ public class UnitScript : MonoBehaviour
             else
             {
 
-                _WeaponPrefabScript.PlaceWeapon(currentweapon.type.ToLower(), parenttouse, ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponpositionajust, ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponscameajust, ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponrotationajust);
+                Vector3 rotationtouse = Vector3.zero;
+                Vector3 positiontouse = Vector3.zero;
+                if (currentweapon.type.ToLower() == "bow")
+                {
+                    rotationtouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().leftweaponrotationajust;
+                    positiontouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().leftweaponpositionajust;
+                }
+                else
+                {
+                    rotationtouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponrotationajust;
+                    positiontouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponpositionajust;
+                }
+
+                _WeaponPrefabScript.PlaceWeapon(currentweapon.type.ToLower(), parenttouse, positiontouse, ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponscameajust, rotationtouse);
             }
 
             UpdateLayer(currentequipmentmodel);
