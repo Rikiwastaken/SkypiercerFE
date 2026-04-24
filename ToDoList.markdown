@@ -12,8 +12,6 @@
 
 - Do Bonds for Gale and Aurora
 
-- Make so that Pluvials randomly take models from characters
-
 - Fix Save system so that it only takes useful information
 
 ## Visuals
@@ -26,7 +24,7 @@
 
 - Do Special Weapon skins (Zack, Gale, Kira, Ragnhall, Kay)
 
-- Finish Character 3D Models (done : Zack, Lea)
+- Finish Character 3D Models (done : Zack, Lea, Elwyn)
 
 - Chapter 9
 - Chapter 10
