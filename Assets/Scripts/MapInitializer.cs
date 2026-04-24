@@ -198,7 +198,16 @@ public class MapInitializer : MonoBehaviour
         Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
 
         Character.enemyStats = enemyStats;
-        Character.modelID = enemyStats.modelID;
+        // in the cae of pluvials, randomly take a model.
+        if (enemyStats.monsterStats.ispluvial)
+        {
+            Character.modelID = Random.Range(3, newcharacter.GetComponent<UnitScript>().ModelList.Count);
+        }
+        else
+        {
+            Character.modelID = enemyStats.modelID;
+        }
+
         newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
         Character.name = enemyStats.Name;
         if (enemyStats.Skills.Count > 0)

@@ -76,6 +76,7 @@ public class UnitScript : MonoBehaviour
         public int ID;
         public GameObject wholeModel;
         public bool active;
+        public Texture2D Texture;
     }
 
     [Serializable]
@@ -258,7 +259,7 @@ public class UnitScript : MonoBehaviour
     private float canvaselevation;
     private MinimapScript MinimapScript;
 
-    public List<ModelInfo> ModelList;
+
 
     public Vector3 rotationadjust;
 
@@ -361,9 +362,10 @@ public class UnitScript : MonoBehaviour
     public Vector2 forcemovetonewpos;
 
 
-
+    [Header("3D Model Variables")]
     public GameObject ActiveModel;
-
+    public Material PluvialMat;
+    public List<ModelInfo> ModelList;
     private WeaponPrefabScript _WeaponPrefabScript;
 
 
@@ -507,11 +509,27 @@ public class UnitScript : MonoBehaviour
         {
             animator = ActiveModel.GetComponentInChildren<Animator>();
         }
+        if (UnitCharacteristics.enemyStats.monsterStats.ispluvial)
+        {
+            UpdateMaterial(ActiveModel, PluvialMat);
+        }
         armature = animator.transform;
         initialpos = armature.localPosition;
         initialforward = armature.forward;
         UpdateLayer(ActiveModel);
         ActiveModel.SetActive(true);
+    }
+
+    private void UpdateMaterial(GameObject go, Material material)
+    {
+        if (go.GetComponent<Renderer>())
+        {
+            go.GetComponent<Renderer>().material = material;
+        }
+        foreach (Transform child in go.transform)
+        {
+            UpdateMaterial(child.gameObject, material);
+        }
     }
 
     public void ResetChildRenderers()
