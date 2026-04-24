@@ -24,7 +24,7 @@
 
 - Do Special Weapon skins (Zack, Gale, Kira, Ragnhall, Kay)
 
-- Finish Character 3D Models (done : Zack, Lea, Elwyn)
+- Finish Character 3D Models (done : Zack, Lea, Elwyn, Sorak)
 
 - Chapter 9
 - Chapter 10
