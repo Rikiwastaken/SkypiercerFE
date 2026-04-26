@@ -1,5 +1,9 @@
 # To Do List
 
+
+Modify Story so that Ruben was not the only survivor but that the other managed to escape (which will lead to a paralogue)
+
+
 ## Bug Fixes
 
 ## System 
@@ -13,6 +17,8 @@
 - Do Bonds for Gale and Aurora
 
 - Fix Save system so that it only takes useful information
+
+- Show quote when levelling up.
 
 ## Visuals
 
