@@ -30,7 +30,7 @@ Modify Story so that Ruben was not the only survivor but that the other managed 
 
 - Do Special Weapon skins (Zack, Gale, Kira, Ragnhall, Kay)
 
-- Finish Character 3D Models (done : Zack, Lea, Elwyn, Sorak, Lyv, Sieg, Mir)
+- Finish Character 3D Models (done : Zack, Lea, Elwyn, Sorak, Lyv, Sieg, Mir, Ruben, Gusto, Kira)
 
 - Chapter 9
 - Chapter 10
