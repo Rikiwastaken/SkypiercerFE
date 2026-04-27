@@ -20,6 +20,10 @@ Modify Story so that Ruben was not the only survivor but that the other managed 
 
 - Show quote when levelling up.
 
+- Replace NPCs with their correct models in each map
+
+- Place Characters 3D Models in the Camp
+
 ## Visuals
 
 - Make camera move a little bit more in battle (avoid fixed angles)
@@ -30,7 +34,7 @@ Modify Story so that Ruben was not the only survivor but that the other managed 
 
 - Do Special Weapon skins (Zack, Gale, Kira, Ragnhall, Kay)
 
-- Finish Character 3D Models (done : Zack, Lea, Elwyn, Sorak, Lyv, Sieg, Mir, Ruben, Gusto, Kira)
+- Finish Character 3D Models (done : Zack, Lea, Elwyn, Sorak, Lyv, Sieg, Mir, Ruben, Gusto, Kira, Gwenie)
 
 - Chapter 9
 - Chapter 10
