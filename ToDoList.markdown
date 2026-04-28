@@ -18,8 +18,6 @@ Modify Story so that Ruben was not the only survivor but that the other managed 
 
 - Show quote when levelling up.
 
-- Place Characters 3D Models in the Camp
-
 ## Visuals
 
 - Make camera move a little bit more in battle (avoid fixed angles)
