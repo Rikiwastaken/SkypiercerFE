@@ -324,7 +324,6 @@ public class EnemyStatsEditorWindow : EditorWindow
         if (monsterStats != null)
         {
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(monsterStats.FindPropertyRelative("size"));
             EditorGUILayout.PropertyField(monsterStats.FindPropertyRelative("ispluvial"));
             EditorGUILayout.PropertyField(monsterStats.FindPropertyRelative("ismachine"));
             EditorGUI.indentLevel--;

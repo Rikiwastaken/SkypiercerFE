@@ -18,8 +18,6 @@ Modify Story so that Ruben was not the only survivor but that the other managed 
 
 - Show quote when levelling up.
 
-- Replace NPCs with their correct models in each map (do through character ID like the sprites)
-
 - Place Characters 3D Models in the Camp
 
 ## Visuals
