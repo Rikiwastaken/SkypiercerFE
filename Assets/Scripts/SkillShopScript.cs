@@ -32,8 +32,6 @@ public class SkillShopScript : MonoBehaviour
 
     private int necessarycost;
 
-
-
     [SerializeField] private float timenecessarytobuyitem;
     private float timeforbuy;
 
@@ -141,9 +139,35 @@ public class SkillShopScript : MonoBehaviour
     public void ActivateShop()
     {
         SkillsToShow = new List<Skill>();
+
+        List<int> skillIDshown = new List<int>();
+
+        foreach (SkillPerMap skillpermap in DataScript.instance.skillsPerMap)
+        {
+            if (skillpermap.SkillsOnTheMap == null && skillpermap.SkillsOnTheMap.Count == 0)
+            {
+                continue;
+            }
+            foreach (int skillID in skillpermap.SkillsOnTheMap)
+            {
+                if (!skillIDshown.Contains(skillID))
+                {
+                    skillIDshown.Add(skillID);
+                }
+            }
+        }
+
+        foreach (Character character in DataScript.instance.PlayableCharacterList)
+        {
+            if (character.playableStats.unlocked && !skillIDshown.Contains(character.UnitSkill))
+            {
+                skillIDshown.Add(character.UnitSkill);
+            }
+        }
+
         foreach (Skill skill in DataScript.instance.SkillList)
         {
-            if (skill.buyable)
+            if (skill.buyable && skillIDshown.Contains(skill.ID))
             {
                 SkillsToShow.Add(skill);
             }

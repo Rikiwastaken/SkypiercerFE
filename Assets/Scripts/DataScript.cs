@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static SaveManager;
@@ -38,6 +39,14 @@ public class DataScript : MonoBehaviour
     public List<ChapterFlags> ChapterFlagsList;
 
     public int SkillCoins;
+
+
+    [Serializable]
+    public class SkillPerMap
+    {
+        public int mapID;
+        public List<int> SkillsOnTheMap;
+    }
 
     [Serializable]
     public class ClassInfo
@@ -107,6 +116,8 @@ public class DataScript : MonoBehaviour
     public int MasteryforLevel1;
     public int MasteryforLevel2;
     public int MasteryforLevel3;
+
+    public List<SkillPerMap> skillsPerMap;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -2343,6 +2354,51 @@ public class DataScript : MonoBehaviour
         BondsList = wrapper.BondList;
         EditorUtility.SetDirty(this);
         Debug.Log("Loaded " + wrapper.BondList.Count + " bonds into the BondsList!");
+    }
+
+    [ContextMenu("Load Skill Per Map")]
+    public void LoadSkillPerMap()
+    {
+        string[] sceneGUIDs = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes/Maps" });
+
+        skillsPerMap = new List<SkillPerMap>();
+
+        foreach (string guid in sceneGUIDs)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+
+            Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+            string scenename = scene.name.ToLower();
+            int sceneID = 0;
+            if (scenename != "prologue")
+            {
+                if (!scenename.Contains("chapter"))
+                {
+                    continue;
+                }
+                scenename = scenename.Replace("chapter", "");
+                sceneID = int.Parse(scenename) + 1;
+            }
+
+            List<int> skillspresent = new List<int>();
+
+            MapInitializer target = FindAnyObjectByType<MapInitializer>(FindObjectsInactive.Include);
+
+            if (target != null)
+            {
+                Debug.Log($"Found in {path}: {target.name}", target);
+            }
+
+            foreach (EnemyStats enemy in target.EnemyList)
+            {
+                if (enemy.Skills.Count > 0 && enemy.Skills[0] > 0)
+                {
+                    skillspresent.Add(enemy.Skills[0]);
+                }
+            }
+            skillsPerMap.Add(new SkillPerMap() { mapID = sceneID, SkillsOnTheMap = skillspresent });
+        }
+
     }
 
 #endif

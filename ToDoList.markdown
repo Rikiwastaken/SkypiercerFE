@@ -12,8 +12,6 @@ Modify Story so that Ruben was not the only survivor but that the other managed 
 
 - Do cutscene system (or take a look at cinemachine to do it)
 
-- Change skill shop so that it only shows skills which were shown.
-
 - Do Bonds for Gale and Aurora
 
 - Show quote when levelling up.
@@ -50,7 +48,7 @@ Modify Story so that Ruben was not the only survivor but that the other managed 
 
 - Write Bond Dialogues
 
-- Find good font
+- Find good font (ptet d'autres en fonction de ce qu'on affiche, regarder google font)
 
 ## Sound
 
