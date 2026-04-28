@@ -34,8 +34,6 @@ Modify Story so that Ruben was not the only survivor but that the other managed 
 
 - Do Special Weapon skins (Zack, Gale, Kira, Ragnhall, Kay)
 
-- Finish Character 3D Models (Todo :  un modèle de soldat)
-
 - Chapter 9
 - Chapter 10
 - Chapter 11
