@@ -34,7 +34,7 @@ Modify Story so that Ruben was not the only survivor but that the other managed 
 
 - Do Special Weapon skins (Zack, Gale, Kira, Ragnhall, Kay)
 
-- Finish Character 3D Models (Todo : Ragnall, le Grand père de Zack, un modèle de soldat, un de pirate; un de villageois)
+- Finish Character 3D Models (Todo : Ragnall, un modèle de soldat, un de pirate)
 
 - Chapter 9
 - Chapter 10
