@@ -1467,8 +1467,7 @@ public class DataScript : MonoBehaviour
         }
 
 
-
-        newsave.PlayableCharacterList = PlayableCharacterList;
+        SM.ApplyCharacterSaves(PlayableCharacterList, newsave.PlayableCharacterList);
 
     }
     public void SetupInventoryForChapter(int Chapter, Inventory inventory)

@@ -29,12 +29,26 @@ public class SaveManager : MonoBehaviour
         public int MaxChapterReached;
         public int SkillCoins;
         public bool inworldmap;
-        public List<Character> PlayableCharacterList;
+        public List<CharacterSaveInfo> PlayableCharacterList;
         public Inventory PlayerInventory;
         public List<Bonds> BondList;
         public List<ChapterFlags> ChapterFlagsList;
         public float secondselapsed;
         public bool inCamp;
+    }
+
+    [Serializable]
+
+    public class CharacterSaveInfo
+    {
+        public int ID;
+        public int level;
+        public int exp;
+        public BaseStats Stats;
+        public List<int> equipedskills;
+        public List<WeaponMastery> WeaponMasteryList;
+        public bool unlocked;
+        public string battalion;
     }
 
     [Serializable]
@@ -79,7 +93,7 @@ public class SaveManager : MonoBehaviour
         DefaultSave.slot = -1;
         DefaultSave.versionID = versionID;
         DefaultSave.chapter = 0;
-        DefaultSave.PlayableCharacterList = DataScript.instance.PlayableCharacterList;
+        DefaultSave.PlayableCharacterList = CreateCharacterSaveList(DataScript.instance.PlayableCharacterList);
         DefaultSave.PlayerInventory = DataScript.instance.PlayerInventory;
         DefaultSave.BondList = DataScript.instance.BondsList;
         DefaultSave.secondselapsed = 0;
@@ -98,6 +112,48 @@ public class SaveManager : MonoBehaviour
             maxchapterreached = currentchapter;
         }
 
+    }
+
+    public List<CharacterSaveInfo> CreateCharacterSaveList(List<Character> Characters)
+    {
+        List<CharacterSaveInfo> returnlist = new List<CharacterSaveInfo>();
+        foreach (Character character in Characters)
+        {
+            CharacterSaveInfo characterSaveInfo = new CharacterSaveInfo()
+            {
+                ID = character.ID,
+                level = character.level,
+                exp = character.experience,
+                Stats = character.stats,
+                equipedskills = character.EquipedSkills,
+                WeaponMasteryList = character.Masteries,
+                unlocked = character.playableStats.unlocked,
+                battalion = character.playableStats.battalion
+            };
+            returnlist.Add(characterSaveInfo);
+        }
+        return returnlist;
+    }
+
+    public void ApplyCharacterSaves(List<Character> Characters, List<CharacterSaveInfo> CharacterSave)
+    {
+        List<CharacterSaveInfo> returnlist = new List<CharacterSaveInfo>();
+        foreach (Character character in Characters)
+        {
+            foreach (CharacterSaveInfo CharaSave in CharacterSave)
+            {
+                if (character.ID == CharaSave.ID)
+                {
+                    character.level = CharaSave.level;
+                    character.experience = CharaSave.exp;
+                    character.stats = CharaSave.Stats;
+                    character.EquipedSkills = CharaSave.equipedskills;
+                    character.Masteries = CharaSave.WeaponMasteryList;
+                    character.playableStats.unlocked = CharaSave.unlocked;
+                    character.playableStats.battalion = CharaSave.battalion;
+                }
+            }
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -277,23 +333,9 @@ public class SaveManager : MonoBehaviour
 
             //apply save to datascript
 
-            List<Character> newplayablecharacterlist = new List<Character>();
+            ApplyCharacterSaves(DS.PlayableCharacterList, SaveClasses[slot].PlayableCharacterList);
 
-            foreach (Character chara in DS.PlayableCharacterList)
-            {
-                Character charatoadd = chara;
-                foreach (Character newchara in SaveClasses[slot].PlayableCharacterList)
-                {
-                    if (charatoadd.ID == newchara.ID)
-                    {
-                        charatoadd = newchara;
-                        continue;
-                    }
-                }
-                newplayablecharacterlist.Add(charatoadd);
-            }
 
-            DS.PlayableCharacterList = newplayablecharacterlist;
 
             DS.PlayerInventory = SaveClasses[slot].PlayerInventory;
             DS.BondsList = SaveClasses[slot].BondList;
@@ -305,7 +347,7 @@ public class SaveManager : MonoBehaviour
         }
         else if (slot == -1)
         {
-            DS.PlayableCharacterList = DefaultSave.PlayableCharacterList;
+            ApplyCharacterSaves(DS.PlayableCharacterList, DefaultSave.PlayableCharacterList);
             DS.PlayerInventory = DefaultSave.PlayerInventory;
             DS.BondsList = DefaultSave.BondList;
             secondselapsed = 0;
@@ -364,7 +406,7 @@ public class SaveManager : MonoBehaviour
             versionID = versionID,
             slot = activeSlot,
             chapter = currentchapter,
-            PlayableCharacterList = DataScript.instance.PlayableCharacterList,
+            PlayableCharacterList = CreateCharacterSaveList(DataScript.instance.PlayableCharacterList),
             PlayerInventory = DataScript.instance.PlayerInventory,
             secondselapsed = secondselapsed,
             inCamp = inCamp,
