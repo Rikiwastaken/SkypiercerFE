@@ -941,10 +941,10 @@ public class CombaSceneManager : MonoBehaviour
         {
             CombatStarted = true;
             attackerSceneGO.GetComponent<UnitScript>().UnitCharacteristics = attacker;
-            attackerSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(attacker.modelID);
+
 
             defenderSceneGO.GetComponent<UnitScript>().UnitCharacteristics = defender;
-            defenderSceneGO.GetComponent<BattleCharacterScript>().ActivateModel(defender.modelID);
+
 
 
 

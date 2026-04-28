@@ -214,23 +214,23 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
         // Giving GameObjects their Character and load their models and get the animators
 
-        AttackerGO.GetComponent<BattleCharacterScript>().InitializeModels();
-        AttackerInfo.Animator = AttackerGO.GetComponent<UnitScript>().ModelList[attacker.modelID].wholeModel.GetComponentInChildren<Animator>();
         AttackerGO.GetComponent<UnitScript>().UnitCharacteristics = attacker;
+        AttackerGO.GetComponent<UnitScript>().InstantiateCharacterModel();
+        AttackerInfo.Animator = AttackerGO.GetComponent<UnitScript>().GetAnimator();
 
-        AttackerGO.GetComponent<BattleCharacterScript>().ActivateModel(attacker.modelID);
 
-
-        DefenderGO.GetComponent<BattleCharacterScript>().InitializeModels();
-        DefenderInfo.Animator = DefenderGO.GetComponent<UnitScript>().ModelList[defender.modelID].wholeModel.GetComponentInChildren<Animator>();
         DefenderGO.GetComponent<UnitScript>().UnitCharacteristics = defender;
-        DefenderGO.GetComponent<BattleCharacterScript>().ActivateModel(defender.modelID);
+        DefenderGO.GetComponent<UnitScript>().InstantiateCharacterModel();
+        DefenderInfo.Animator = DefenderGO.GetComponent<UnitScript>().GetAnimator();
+
 
 
         //Initiliaze the animations and weapons
 
         AttackerGO.GetComponent<UnitScript>().UpdateWeaponModel(AttackerInfo.Animator);
+        AttackerGO.GetComponent<UnitScript>().currentequipmentmodel.transform.localScale *= 2f;
         DefenderGO.GetComponent<UnitScript>().UpdateWeaponModel(DefenderInfo.Animator);
+        DefenderGO.GetComponent<UnitScript>().currentequipmentmodel.transform.localScale *= 2f;
 
         AttackerInfo.Animator.SetBool("Ismachine", attacker.enemyStats.monsterStats.ismachine);
         DefenderInfo.Animator.SetBool("Ismachine", defender.enemyStats.monsterStats.ismachine);
@@ -300,9 +300,11 @@ public class CombatSceneManagerV2 : MonoBehaviour
         bool isranged = DetermineIfRanged(AttackerInfo);
         if (!isranged)
         {
+            CamPositionEnemyRunning.parent = AttackerInfo.Animator.transform;
             yield return MoveCamera(CamePositionAttackerRunning, 0.1f);
-            Vector3 startPos = AttackerGO.transform.position;
-            Vector3 defenderPos = DefenderGO.transform.position;
+
+            Vector3 startPos = AttackerInfo.Animator.transform.position;
+            Vector3 defenderPos = DefenderInfo.Animator.transform.position;
 
             // Direction from attacker to defender
             Vector3 dir = (defenderPos - startPos).normalized;
@@ -312,19 +314,17 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
             float elapsed = 0f;
 
-            while (elapsed < TimeToWalkToEnnemies && Vector3.Distance(startPos, defenderPos) > DistanceForMelee)
+            while (elapsed < TimeToWalkToEnnemies && Vector3.Distance(AttackerInfo.Animator.transform.position, defenderPos) > DistanceForMelee)
             {
+
                 PlayAnimation(AttackerGO, 1);
                 elapsed += Time.deltaTime;
                 float t = elapsed / TimeToWalkToEnnemies;
 
                 AttackerGO.transform.position = Vector3.Lerp(startPos, targetPos, t);
-
                 yield return null;
             }
             PlayAnimation(AttackerGO, 5);
-            // Ensure exact final position
-            AttackerGO.transform.position = targetPos;
         }
 
         // Attack
@@ -341,9 +341,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
             yield return null;
             yield return null;
 
-            var animator = AttackerGO.GetComponent<UnitScript>().ModelList[AttackerInfo.character.modelID].wholeModel.GetComponentInChildren<Animator>();
-
-            var clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+            var clipInfo = AttackerInfo.Animator.GetCurrentAnimatorClipInfo(0);
 
             float animationLength = clipInfo[0].clip.length;
 
@@ -410,9 +408,10 @@ public class CombatSceneManagerV2 : MonoBehaviour
             bool isranged = DetermineIfRanged(DefenderInfo);
             if (!isranged)
             {
+                CamPositionEnemyRunning.parent = DefenderInfo.Animator.transform;
                 yield return MoveCamera(CamPositionEnemyRunning, 0.25f);
-                Vector3 startPos = DefenderGO.transform.position;
-                Vector3 defenderPos = AttackerGO.transform.position;
+                Vector3 startPos = DefenderInfo.Animator.transform.position;
+                Vector3 defenderPos = AttackerInfo.Animator.transform.position;
 
                 // Direction from attacker to defender
                 Vector3 dir = (defenderPos - startPos).normalized;
@@ -422,7 +421,8 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
                 float elapsed = 0f;
 
-                while (elapsed < TimeToWalkToEnnemies && Vector3.Distance(startPos, defenderPos) > DistanceForMelee)
+
+                while (elapsed < TimeToWalkToEnnemies && Vector3.Distance(DefenderInfo.Animator.transform.position, defenderPos) > DistanceForMelee)
                 {
                     PlayAnimation(DefenderGO, 1);
                     elapsed += Time.deltaTime;
@@ -431,6 +431,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
                     DefenderGO.transform.position = Vector3.Lerp(startPos, targetPos, t);
 
                     yield return null;
+
                 }
 
                 PlayAnimation(DefenderGO, 5);
@@ -449,7 +450,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
                 yield return null;
 
-                yield return new WaitForSeconds(DefenderGO.GetComponent<UnitScript>().ModelList[DefenderInfo.character.modelID].wholeModel.GetComponentInChildren<Animator>().GetCurrentAnimatorClipInfo(0).Length);
+                yield return new WaitForSeconds(DefenderGO.GetComponent<UnitScript>().GetAnimator().GetCurrentAnimatorClipInfo(0).Length);
 
                 //reaction
 
@@ -582,12 +583,14 @@ public class CombatSceneManagerV2 : MonoBehaviour
         {
             importantGO = AttackerGO;
             importantInfo = AttackerInfo;
+            AttackerVictoryCam.parent = AttackerInfo.Animator.transform;
             yield return MoveCamera(AttackerVictoryCam, 0.5f, true);
         }
         else if (DefenderInfo.character.affiliation.ToLower() == "playable" && DefenderInfo.currentHP > 0)
         {
             importantGO = DefenderGO;
             importantInfo = DefenderInfo;
+            AttackerVictoryCam.parent = DefenderInfo.Animator.transform;
             yield return MoveCamera(EnemyVictoryCam, 0.5f, true);
         }
 
@@ -739,7 +742,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         Animator animator = null;
         UnitScript CharacterUnitscript = null;
         CharacterUnitscript = CharacterToAnimate.GetComponent<UnitScript>();
-        animator = CharacterUnitscript.ModelList[CharacterUnitscript.UnitCharacteristics.modelID].wholeModel.GetComponentInChildren<Animator>();
+        animator = CharacterUnitscript.GetAnimator();
 
         switch (animationtype) // 0 : atk, 1 : walk, 2 : Take Damage, 3 : Dodge, 4 : Die, 5 : Idle
         {

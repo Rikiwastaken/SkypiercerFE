@@ -59,15 +59,15 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
-    - _CellDensity: 4.52
+    - _CellDensity: 7.26
     - _Cull: 2
     - _DstBlend: 10
     - _DstBlendAlpha: 10
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RippleSlimness: 2.4
-    - _RippleSpeed: 5
+    - _RippleSlimness: 5
+    - _RippleSpeed: 1.5
     - _Smoothness: 0
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1

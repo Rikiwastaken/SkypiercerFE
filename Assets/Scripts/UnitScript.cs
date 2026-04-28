@@ -384,7 +384,6 @@ public class UnitScript : MonoBehaviour
         {
             this.enabled = false;
             CanvasTransform.gameObject.SetActive(false);
-            GetComponent<BattleCharacterScript>().enabled = true;
             return;
         }
 
@@ -671,6 +670,8 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+    public Animator GetAnimator()
+    { return animator; }
     public Character CreateCopy(Character CharacterToCopy = null)
     {
         if (CharacterToCopy == null)
@@ -1792,9 +1793,12 @@ public class UnitScript : MonoBehaviour
         }
 
         equipment currentweapon = GetFirstWeapon();
-
         if (currentweapon.Grade != 0 && currentweapon.Currentuses != 0)
         {
+            if (_WeaponPrefabScript == null)
+            {
+                _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
+            }
             _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Grade);
             currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO();
             Transform parenttouse = null;

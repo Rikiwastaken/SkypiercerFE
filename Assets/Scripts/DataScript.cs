@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static SaveManager;
@@ -2277,7 +2275,7 @@ public class DataScript : MonoBehaviour
         }
 
         Setup();
-        EditorUtility.SetDirty(this);
+        UnityEditor.EditorUtility.SetDirty(this);
     }
 
     [ContextMenu("Initialize Unfilled Masteries")]
@@ -2311,12 +2309,12 @@ public class DataScript : MonoBehaviour
                 character.Masteries = masteries;
             }
         }
-        EditorUtility.SetDirty(this);
+        UnityEditor.EditorUtility.SetDirty(this);
     }
     [ContextMenu("Load Skills From JSON")]
     public void LoadSkills()
     {
-        string path = EditorUtility.OpenFilePanel("Select Skill JSON File", "", "json");
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Skill JSON File", "", "json");
         if (string.IsNullOrEmpty(path))
             return;
 
@@ -2330,7 +2328,7 @@ public class DataScript : MonoBehaviour
         }
 
         SkillList = wrapper.SkillList;
-        EditorUtility.SetDirty(this);
+        UnityEditor.EditorUtility.SetDirty(this);
         Debug.Log("Loaded " + wrapper.SkillList.Count + " skills into the SkillList!");
     }
 
@@ -2338,7 +2336,7 @@ public class DataScript : MonoBehaviour
     [ContextMenu("Load Bonds From JSON")]
     public void LoadBonds()
     {
-        string path = EditorUtility.OpenFilePanel("Select Bond JSON File", "", "json");
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Bond JSON File", "", "json");
         if (string.IsNullOrEmpty(path))
             return;
 
@@ -2352,22 +2350,22 @@ public class DataScript : MonoBehaviour
         }
 
         BondsList = wrapper.BondList;
-        EditorUtility.SetDirty(this);
+        UnityEditor.EditorUtility.SetDirty(this);
         Debug.Log("Loaded " + wrapper.BondList.Count + " bonds into the BondsList!");
     }
 
     [ContextMenu("Load Skill Per Map")]
     public void LoadSkillPerMap()
     {
-        string[] sceneGUIDs = AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes/Maps" });
+        string[] sceneGUIDs = UnityEditor.AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes/Maps" });
 
         skillsPerMap = new List<SkillPerMap>();
 
         foreach (string guid in sceneGUIDs)
         {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
+            string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
 
-            Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+            Scene scene = UnityEditor.SceneManagement.EditorSceneManager.OpenScene(path, UnityEditor.SceneManagement.OpenSceneMode.Single);
             string scenename = scene.name.ToLower();
             int sceneID = 0;
             if (scenename != "prologue")
