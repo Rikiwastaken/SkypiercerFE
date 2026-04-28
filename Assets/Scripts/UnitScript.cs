@@ -517,6 +517,7 @@ public class UnitScript : MonoBehaviour
         initialforward = armature.forward;
         UpdateLayer(ActiveModel);
         ActiveModel.SetActive(true);
+        animator.speed = UnityEngine.Random.Range(0.9f, 1.1f);
     }
 
     private void UpdateMaterial(GameObject go, Material material)
