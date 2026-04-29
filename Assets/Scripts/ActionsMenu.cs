@@ -284,7 +284,9 @@ public class ActionsMenu : MonoBehaviour
                 transform.GetChild(5).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
             }
 
-
+            transform.GetChild(1).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(1).GetComponent<Button>().colors = colors;
+            transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
             transform.GetChild(2).GetComponent<Image>().color = new Color(1f, 1f, 1f);
             transform.GetChild(2).GetComponent<Button>().colors = colors;
             transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
