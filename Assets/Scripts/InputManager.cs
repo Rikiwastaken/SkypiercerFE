@@ -92,12 +92,17 @@ public class InputManager : MonoBehaviour
 
     public bool ShowDangerousTilespressed;
     public bool ShowDangerousTilesjustpressed;
-
     public InputActionReference ShowDangerousTilesbtn;
-
     private InputAction ShowDangerousTilesinput;
-
     private bool ShowDangerousTilespressedonce;
+
+    [Header("ShowWeatherTiles")]
+
+    public bool ShowWeatherTilespressed;
+    public bool ShowWeatherTilesjustpressed;
+    public InputActionReference ShowWeatherTilesbtn;
+    private InputAction ShowWeatherTilesinput;
+    private bool ShowWeatherTilespressedonce;
 
     // ---------- EVENTS ----------
     public event Action OnMovementJustPressed;
@@ -140,6 +145,7 @@ public class InputManager : MonoBehaviour
         Startinput = Startbtn.ToInputAction();
         ShowDetailsinput = ShowDetailsbtn.ToInputAction();
         ShowDangerousTilesinput = ShowDangerousTilesbtn.ToInputAction();
+        ShowWeatherTilesinput = ShowWeatherTilesbtn.ToInputAction();
     }
 
     private void FixedUpdate()
@@ -310,6 +316,24 @@ public class InputManager : MonoBehaviour
         {
             ShowDangerousTilespressedonce = false;
         }
+
+        // ---------- SHOW WEATHER TILES ----------
+        ShowWeatherTilespressed = ShowWeatherTilesinput.IsPressed();
+        if (ShowWeatherTilespressed && !ShowWeatherTilesjustpressed && !ShowWeatherTilespressedonce)
+        {
+            ShowWeatherTilesjustpressed = true;
+            ShowWeatherTilespressedonce = true;
+        }
+        else
+        {
+            ShowWeatherTilesjustpressed = false;
+        }
+        if (!ShowWeatherTilespressed)
+        {
+            ShowWeatherTilespressedonce = false;
+        }
+
+
 
         // ---------- MOVEMENT ----------
         if (movementValue != Vector2.zero & !movementpressedonce)

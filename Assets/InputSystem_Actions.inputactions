@@ -131,6 +131,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ShowWeather",
+                    "type": "Button",
+                    "id": "d22909af-57c5-4ad0-b49f-ef871e730943",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -549,6 +558,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ShowDangerousTiles",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b58a06e-5f7d-4d2f-979c-ac22ff27b276",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowWeather",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c10792b7-0dd0-4e18-a057-69c57d9fb510",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowWeather",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

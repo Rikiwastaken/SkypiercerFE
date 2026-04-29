@@ -7,7 +7,7 @@ using static UnitScript;
 public class GridSquareScript : MonoBehaviour
 {
 
-    private SpriteRenderer filledimage;
+    public SpriteRenderer filledimage;
 
     public Vector2 GridCoordinates;
 
@@ -99,9 +99,7 @@ public class GridSquareScript : MonoBehaviour
 
     private TextBubbleScript textBubbleScript;
 
-    public Transform PathPiecePrevious;
-    public Transform PathPieceNext;
-    public Transform PathPieceEnd;
+    public SpriteRenderer WeatherColorSprite;
 
     public Sprite gridsquareFilling;
     public Sprite gridsquareFillingBigEnemies;
@@ -158,7 +156,6 @@ public class GridSquareScript : MonoBehaviour
 
     void Awake()
     {
-        filledimage = transform.GetChild(0).GetComponent<SpriteRenderer>();
         InitializePosition();
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         if (rainparticle != null && rainparticle.gameObject.activeSelf)
@@ -427,7 +424,7 @@ public class GridSquareScript : MonoBehaviour
 
             if (RemainingSunTurns > 0)
             {
-                if (!sunparticle.gameObject.activeSelf)
+                if (!GridScript.GetComponent<WeatherManager>().alwayssunny && !sunparticle.gameObject.activeSelf)
                 {
                     sunparticle.gameObject.SetActive(true);
                 }

@@ -143,6 +143,15 @@ public class DisplayInput : MonoBehaviour
             DeactivateButton(DPadUp);
         }
 
+        if (InputManager.ShowWeatherTilespressed)
+        {
+            ActivateButton(DPadLeft);
+        }
+        else
+        {
+            DeactivateButton(DPadLeft);
+        }
+
     }
 
     private void ActivateButton(GameObject button)
