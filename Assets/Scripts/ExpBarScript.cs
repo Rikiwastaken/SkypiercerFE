@@ -19,8 +19,6 @@ public class ExpBarScript : MonoBehaviour
 
     private AttackTurnScript AttackTurnScript;
 
-    private CombaSceneManager CombatSceneManager;
-
     public int filledupbardelaycounter;
     public float filledupbardelay;
 
@@ -42,49 +40,46 @@ public class ExpBarScript : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "BattleScene")
         {
-            if (CombatSceneManager == null)
-            {
-                CombatSceneManager = FindAnyObjectByType<CombaSceneManager>();
-            }
 
-            if (CombatSceneManager.waittingforexp)
-            {
-                if (filledupbardelaycounter == 0)
-                {
-                    currentnumber += Speedpersecond * Time.fixedDeltaTime;
-                    if (currentnumber > 99)
-                    {
-                        Expbar.fillAmount = (currentnumber - 100f) / 100f;
-                        SetupLevelUpText();
 
-                    }
-                    else
-                    {
-                        Expbar.fillAmount = currentnumber / 100f;
+            //if (CombatSceneManager.waittingforexp)
+            //{
+            //    if (filledupbardelaycounter == 0)
+            //    {
+            //        currentnumber += Speedpersecond * Time.fixedDeltaTime;
+            //        if (currentnumber > 99)
+            //        {
+            //            Expbar.fillAmount = (currentnumber - 100f) / 100f;
+            //            SetupLevelUpText();
 
-                    }
+            //        }
+            //        else
+            //        {
+            //            Expbar.fillAmount = currentnumber / 100f;
 
-                    if (currentnumber >= targetnumber)
-                    {
-                        filledupbardelaycounter = (int)(filledupbardelay / Time.fixedDeltaTime);
-                        if (currentnumber > 99)
-                        {
-                            filledupbardelaycounter += (int)(2f * filledupbardelay / Time.fixedDeltaTime);
-                        }
+            //        }
 
-                    }
-                }
-                else
-                {
-                    filledupbardelaycounter--;
-                    if (filledupbardelaycounter <= 0)
-                    {
-                        CombatSceneManager.expdistributed = true;
-                        setupdone = false;
-                    }
-                }
+            //        if (currentnumber >= targetnumber)
+            //        {
+            //            filledupbardelaycounter = (int)(filledupbardelay / Time.fixedDeltaTime);
+            //            if (currentnumber > 99)
+            //            {
+            //                filledupbardelaycounter += (int)(2f * filledupbardelay / Time.fixedDeltaTime);
+            //            }
 
-            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        filledupbardelaycounter--;
+            //        if (filledupbardelaycounter <= 0)
+            //        {
+            //            CombatSceneManager.expdistributed = true;
+            //            setupdone = false;
+            //        }
+            //    }
+
+            //}
         }
         else
         {

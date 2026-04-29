@@ -1773,7 +1773,7 @@ public class UnitScript : MonoBehaviour
     }
 
 
-    public void UpdateWeaponModel(Animator otheranimator = null)
+    public void UpdateWeaponModel(Animator otheranimator = null, float scale = 0.5f)
     {
 
         Animator animatortouse = otheranimator;
@@ -1800,7 +1800,7 @@ public class UnitScript : MonoBehaviour
             {
                 _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
             }
-            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Grade);
+            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Grade, scale);
             currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO();
             Transform parenttouse = null;
             foreach (ModelInfo modelInfo in ModelList)

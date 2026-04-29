@@ -255,8 +255,10 @@ public class FreezeFrameCapture : MonoBehaviour
         CharacterSprite.GetComponent<Image>().sprite = DataScript.instance.DialogueSpriteList[characterWhoLeveledUp.ID];
 
 
-        ApplyDistortion(CharacterName, characterWhoLeveledUp.name, lefttextsizeratio, righttextsizeratio);
-        ApplyDistortion(CharacterNameBG, characterWhoLeveledUp.name, lefttextsizeratio, righttextsizeratio);
+        ApplyDistortion(CharacterName, characterWhoLeveledUp.name, righttextsizeratio, righttextsizeratio);
+        ApplyDistortion(CharacterNameBG, characterWhoLeveledUp.name, righttextsizeratio, righttextsizeratio);
+        //ApplyDistortion(CharacterName, characterWhoLeveledUp.name, lefttextsizeratio, righttextsizeratio);
+        //ApplyDistortion(CharacterNameBG, characterWhoLeveledUp.name, lefttextsizeratio, righttextsizeratio);
 
         ApplyDistortion(LvlUpText, "Level " + characterWhoLeveledUp.level, lefttextsizeratioLvlUp, righttextsizeratioLvlUp);
         ApplyDistortion(LvlUpTextBG, "Level " + characterWhoLeveledUp.level, lefttextsizeratioLvlUp, righttextsizeratioLvlUp);

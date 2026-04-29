@@ -71,7 +71,7 @@ public class WeaponPrefabScript : MonoBehaviour
 
     }
 
-    public void SwitchWeaponGO(string type, int level)
+    public void SwitchWeaponGO(string type, int level, float scale = 0.5f)
     {
         if (CurrentlyAppearing.weaponType != null && CurrentlyAppearing.weaponType.ToLower() == type.ToLower() && currentEquipedLevel == level)
         {
@@ -104,7 +104,7 @@ public class WeaponPrefabScript : MonoBehaviour
                         break;
                 }
 
-                newweapon.transform.localScale *= 0.5f;
+                newweapon.transform.localScale *= scale;
                 GameObject newparticlesystem = Instantiate(ParticleSystem);
                 newparticlesystem.transform.parent = newweapon.transform;
                 newparticlesystem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0)));

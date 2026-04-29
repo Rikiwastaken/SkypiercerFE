@@ -227,10 +227,8 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
         //Initiliaze the animations and weapons
 
-        AttackerGO.GetComponent<UnitScript>().UpdateWeaponModel(AttackerInfo.Animator);
-        AttackerGO.GetComponent<UnitScript>().currentequipmentmodel.transform.localScale *= 2f;
-        DefenderGO.GetComponent<UnitScript>().UpdateWeaponModel(DefenderInfo.Animator);
-        DefenderGO.GetComponent<UnitScript>().currentequipmentmodel.transform.localScale *= 2f;
+        AttackerGO.GetComponent<UnitScript>().UpdateWeaponModel(AttackerInfo.Animator, 1f);
+        DefenderGO.GetComponent<UnitScript>().UpdateWeaponModel(DefenderInfo.Animator, 1f);
 
         AttackerInfo.Animator.SetBool("Ismachine", attacker.enemyStats.monsterStats.ismachine);
         DefenderInfo.Animator.SetBool("Ismachine", defender.enemyStats.monsterStats.ismachine);
@@ -943,26 +941,5 @@ public class CombatSceneManagerV2 : MonoBehaviour
         }
         yield return null;
     }
-
-#if UNITY_EDITOR
-    [ContextMenu("CopyEnvironments")]
-    void CopyEnvironments()
-    {
-        List<CombatEnvirnoment> newcombatenvlist = new List<CombatEnvirnoment>();
-        foreach (CombaSceneManager.CombatEnvirnoment env in GetComponent<CombaSceneManager>().EnvirnomentList)
-        {
-            CombatEnvirnoment combatEnvirnoment = new CombatEnvirnoment();
-            combatEnvirnoment.ChapterInWhichToUse = env.ChapterInWhichToUse;
-            combatEnvirnoment.Model = env.Model;
-            combatEnvirnoment.position = env.position;
-            combatEnvirnoment.rotation = env.rotation;
-            newcombatenvlist.Add(combatEnvirnoment);
-        }
-        EnvirnomentList = newcombatenvlist;
-    }
-
-
-
-#endif
 
 }
