@@ -582,6 +582,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
             importantGO = AttackerGO;
             importantInfo = AttackerInfo;
             AttackerVictoryCam.parent = AttackerInfo.Animator.transform;
+            PlayAnimation(AttackerGO, 6);
             yield return MoveCamera(AttackerVictoryCam, 0.5f, true);
         }
         else if (DefenderInfo.character.affiliation.ToLower() == "playable" && DefenderInfo.currentHP > 0)
@@ -589,6 +590,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
             importantGO = DefenderGO;
             importantInfo = DefenderInfo;
             AttackerVictoryCam.parent = DefenderInfo.Animator.transform;
+            PlayAnimation(DefenderGO, 6);
             yield return MoveCamera(EnemyVictoryCam, 0.5f, true);
         }
 
@@ -741,8 +743,8 @@ public class CombatSceneManagerV2 : MonoBehaviour
         UnitScript CharacterUnitscript = null;
         CharacterUnitscript = CharacterToAnimate.GetComponent<UnitScript>();
         animator = CharacterUnitscript.GetAnimator();
-
-        switch (animationtype) // 0 : atk, 1 : walk, 2 : Take Damage, 3 : Dodge, 4 : Die, 5 : Idle
+        animator.SetBool("victory", false);
+        switch (animationtype) // 0 : atk, 1 : walk, 2 : Take Damage, 3 : Dodge, 4 : Die, 5 : Idle, 6 Victory
         {
             case 0:
                 CharacterUnitscript.PlayAttackAnimation(doubleattack, tripleattack, healing, animator);
@@ -761,6 +763,9 @@ public class CombatSceneManagerV2 : MonoBehaviour
                 break;
             case 5:
                 animator.SetBool("Walk", false);
+                break;
+            case 6:
+                animator.SetBool("victory", true);
                 break;
         }
 

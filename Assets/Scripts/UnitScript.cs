@@ -1564,6 +1564,7 @@ public class UnitScript : MonoBehaviour
 
             animatortouse = animator;
         }
+
         if (tripleattack)
         {
             animatortouse.SetBool("Double", false);
@@ -1589,6 +1590,7 @@ public class UnitScript : MonoBehaviour
         animatortouse.SetBool("GreatSword", false);
         animatortouse.SetBool("Heal", false);
         animatortouse.SetBool("Bow", false);
+        animatortouse.SetBool("victory", false);
 
         if (UnitCharacteristics.telekinesisactivated && weapon.type.ToLower() != "bow")
         {

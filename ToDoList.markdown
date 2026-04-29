@@ -14,8 +14,6 @@
 
 - Make visuals for telekinesis with animations activated.
 
-- Make weather show in individual groups.
-
 ## Visuals
 
 - Make camera move a little bit more in battle (avoid fixed angles)
@@ -26,7 +24,6 @@
 
 - Do Special Weapon skins (Zack, Gale, Kira, Ragnhall, Kay)
 
-- Chapter 9
 - Chapter 10
 - Chapter 11
 

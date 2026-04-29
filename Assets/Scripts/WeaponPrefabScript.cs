@@ -277,8 +277,12 @@ public class WeaponPrefabScript : MonoBehaviour
     //recursively adds material to the list
     private void SetMaterialsToList(List<Material> listotuse, GameObject GOtouse)
     {
+        if (GOtouse == null)
+        {
+            return;
+        }
         // if object has renderer, add material to list
-        if (GOtouse != null && GOtouse.GetComponent<Renderer>() != null && !listotuse.Contains(GOtouse.GetComponent<Renderer>().material))
+        if (GOtouse.GetComponent<Renderer>() != null && !listotuse.Contains(GOtouse.GetComponent<Renderer>().material))
         {
             listotuse.Add(GOtouse.GetComponent<Renderer>().material);
         }
