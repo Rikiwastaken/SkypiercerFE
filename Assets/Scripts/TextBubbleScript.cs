@@ -136,7 +136,11 @@ public class TextBubbleScript : MonoBehaviour
                 charTimer = 0f;
                 charIndex = Mathf.Min(charIndex + 1, totalChars);
                 sentence.maxVisibleCharacters = charIndex;
-                musicManager.PlayVoiceSE(currentcharacterpitch);
+                if (musicManager != null)
+                {
+                    musicManager.PlayVoiceSE(currentcharacterpitch);
+                }
+
             }
         }
 
@@ -290,7 +294,11 @@ public class TextBubbleScript : MonoBehaviour
             {
                 musicManager = MusicManager.instance;
             }
-            musicManager.SetDialogueMusic(info.musictoplay);
+            if (musicManager != null)
+            {
+                musicManager.SetDialogueMusic(info.musictoplay);
+            }
+
 
         }
         else
@@ -332,7 +340,7 @@ public class TextBubbleScript : MonoBehaviour
             if (currentTextBubble < Dialogue.Count)
             {
                 var info = Dialogue[currentTextBubble];
-                if (info.characterindex >= 0)
+                if (info.characterindex >= 0 && DataScript.instance != null)
                 {
                     foreach (Character character in DataScript.instance.PlayableCharacterList)
                     {
