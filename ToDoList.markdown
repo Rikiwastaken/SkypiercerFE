@@ -20,6 +20,8 @@
 
 - Rework grass, jpegs are fine (ground beneath need texture tho)
 
+- Make animations use root motions (in combat scene manager move animaotr transform instead of parent GO)
+
 ### 3D Models
 
 - Do Special Weapon skins (Zack, Gale, Kira, Ragnhall, Kay)
