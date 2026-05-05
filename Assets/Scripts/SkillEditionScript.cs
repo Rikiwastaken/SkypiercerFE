@@ -41,6 +41,7 @@ public class SkillEditionScript : MonoBehaviour
 
     private TextBubbleScript TextBubbleScript;
 
+    private List<Character> unlockedplayables;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -53,6 +54,11 @@ public class SkillEditionScript : MonoBehaviour
         inputmanager = InputManager.instance;
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         InitializeButtons();
+    }
+
+    private void Start()
+    {
+        Calculateplayables();
     }
 
     // Update is called once per frame
@@ -129,7 +135,7 @@ public class SkillEditionScript : MonoBehaviour
 
 
 
-        PageNumberText.text = (characterwindowindex + 1) + "/" + (DataScript.instance.PlayableCharacterList.Count / 10 + 1);
+        PageNumberText.text = (characterwindowindex + 1) + "/" + (unlockedplayables.Count / 10 + 1);
         if (SkillPageNumberText.gameObject.activeSelf)
         {
             SkillPageNumberText.text = (skillwindowindex + 1) + "/" + (InventorySkillList.Count / 10 + 1);
@@ -169,7 +175,7 @@ public class SkillEditionScript : MonoBehaviour
             }
             else
             {
-                if (characterwindowindex * 10 < DataScript.instance.PlayableCharacterList.Count - 9)
+                if (characterwindowindex * 10 < unlockedplayables.Count - 9)
                 {
                     characterwindowindex++;
                     InitializeButtons();
@@ -221,6 +227,17 @@ public class SkillEditionScript : MonoBehaviour
 
     }
 
+    private void Calculateplayables()
+    {
+        unlockedplayables = new List<Character>();
+        foreach (Character character in DataScript.instance.PlayableCharacterList)
+        {
+            if (character.playableStats.unlocked)
+            {
+                unlockedplayables.Add(character);
+            }
+        }
+    }
     private void UpdateEquipedSkillText()
     {
         string equipedskills = "";

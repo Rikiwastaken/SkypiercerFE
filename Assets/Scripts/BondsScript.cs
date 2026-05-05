@@ -69,6 +69,9 @@ public class BondsScript : MonoBehaviour
     private TextBubbleScript TextBubbleScript;
 
     public Button BondButton;
+
+    private int cancelcounter;
+
     private void Awake()
     {
         if (instance == null)
@@ -98,14 +101,19 @@ public class BondsScript : MonoBehaviour
 
     private void Update()
     {
+        if (cancelcounter > 0)
+        {
+            cancelcounter--;
+        }
         if (inputmanager == null)
         {
             inputmanager = InputManager.instance;
         }
-        else if (inputmanager.canceljustpressed)
+        else if (inputmanager.cancelpressed)
         {
-            if (bondsSubMenu.activeSelf)
+            if (bondsSubMenu.activeSelf && cancelcounter <= 0)
             {
+                cancelcounter = (int)(0.5f / Time.deltaTime);
                 bondsSubMenu.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(BondsMenu.transform.GetChild(0).gameObject);
             }
