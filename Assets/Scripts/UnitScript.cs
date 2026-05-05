@@ -645,6 +645,10 @@ public class UnitScript : MonoBehaviour
     //Manage Vertical Position
     private void ManagePosition()
     {
+        if (GridScript == null)
+        {
+            return;
+        }
         if (UnitCharacteristics.currentTile.Count <= 0)
         {
             MoveTo(UnitCharacteristics.position);

@@ -17,7 +17,7 @@ public class WeaponParticleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (unitScript.isinattackanimation())
+        if (unitScript.enabled && unitScript.isinattackanimation())
         {
 
             if (!ParticleSystem.isPlaying)
