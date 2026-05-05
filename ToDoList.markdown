@@ -20,12 +20,6 @@
 
 - regler les dialogue skip
 
-- bloqué sur l'écran des bonds 
-
-- erreur en faisant A et P sur la liste des persos
-
-- entrer dans le skill shop achète ptet automatiquement despair
-
 ## System 
 
 - Rework Animation for Animation Tree

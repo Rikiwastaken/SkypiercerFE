@@ -177,6 +177,7 @@ public class SkillShopScript : MonoBehaviour
         InitializeInventorySkillList();
 
         SkillCoinsText.text = "Skill Coins: " + DataScript.instance.SkillCoins;
+        timeforbuy = Time.time + timenecessarytobuyitem;
     }
 
     /// <summary>/ Function to update the description text when selecting a skill, also updates the buy text to show the cost and if the player can afford it
