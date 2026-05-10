@@ -1331,7 +1331,7 @@ public class AttackTurnScript : MonoBehaviour
     /// <returns></returns>
     private (GridSquareScript, GameObject) CalculateDestinationForOffensiveUnitsV2(GameObject currentCharacter)
     {
-        WeaponDecison(currentCharacter);
+        WeaponDecison(currentCharacter); // Decide which weapon to use before calculating destination and target
         Character character = currentCharacter.GetComponent<UnitScript>().UnitCharacteristics;
 
         List<GridSquareScript> movementtouse = gridScript.movementtiles;
@@ -1340,18 +1340,19 @@ public class AttackTurnScript : MonoBehaviour
 
         List<GridSquareScript> attacktiles = null;
 
-        if (character.enemyStats.personality.ToLower() == "guard")
+        if (character.enemyStats.personality.ToLower() == "guard") // Guard units only consider attacking from their current position
         {
             movementtouse = new List<GridSquareScript>() { character.currentTile[0] };
 
             attacktiles = gridScript.GetAttack(attackerrange, attackermelee, character.currentTile[0], character);
         }
-        else
+        else // Other personalities consider attacking from all possible movement positions
         {
             gridScript.ShowAttack(attackerrange, attackermelee, currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff", false, character);
             attacktiles = gridScript.attacktiles;
         }
 
+        // If the weapon is a staff, consider healing tiles instead of attack tiles
         if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
             attacktiles = gridScript.healingtiles;
@@ -1365,11 +1366,13 @@ public class AttackTurnScript : MonoBehaviour
 
             bool skip = true;
 
-            if (unit == currentCharacter || !attacktiles.Contains(otherchar.currentTile[0]))
+
+            if (unit == currentCharacter || !attacktiles.Contains(otherchar.currentTile[0]) || otherchar.enemyStats.hidden) // Skip self, units not in attack range, and hidden units
             {
                 continue;
             }
 
+            // Determine if this unit is a valid target based on affiliations and weapon type
             if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
             {
                 if (character.affiliation.ToLower() == otherchar.affiliation.ToLower() || (character.affiliation.ToLower() == "other" && !character.attacksfriends && otherchar.affiliation.ToLower() == "playable"))
@@ -1436,7 +1439,7 @@ public class AttackTurnScript : MonoBehaviour
                 foreach (GameObject target in potentialtargets)
                 {
                     float reward = calculateRewardforAttacking(currentCharacter, target);
-                    if (reward > maxreward)
+                    if (reward > maxreward && reward > 0)
                     {
                         maxreward = reward;
                         truetarget = target;
@@ -1569,7 +1572,7 @@ public class AttackTurnScript : MonoBehaviour
 
             foreach (GameObject unit in gridScript.allunitGOs)
             {
-                if (unit == currentCharacter)
+                if (unit == currentCharacter || unit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.hidden)
                 {
                     continue;
                 }

@@ -128,6 +128,7 @@ public class UnitScript : MonoBehaviour
         public int SpriteID;
         public int PlayableSpriteID;
         public int CopyID;
+        public bool hidden; // prevents unit from being attacked
     }
 
     [Serializable]

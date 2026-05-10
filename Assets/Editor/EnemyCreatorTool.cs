@@ -318,7 +318,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("bossiD"));
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("isother"));
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("talkable"));
-
+        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("hidden"));
         EditorGUILayout.LabelField("Monster Stats", EditorStyles.boldLabel);
         SerializedProperty monsterStats = eProp.FindPropertyRelative("monsterStats");
         if (monsterStats != null)

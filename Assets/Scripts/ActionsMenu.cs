@@ -858,7 +858,7 @@ public class ActionsMenu : MonoBehaviour
                 foreach (GridSquareScript tile in GridScript.attacktiles)
                 {
                     GameObject potentialtarget = GridScript.GetUnit(tile);
-                    if (potentialtarget != null && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "enemy" || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)))
+                    if (potentialtarget != null && !potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.hidden && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "enemy" || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)))
                     {
                         targetlist.Add(potentialtarget);
                     }
