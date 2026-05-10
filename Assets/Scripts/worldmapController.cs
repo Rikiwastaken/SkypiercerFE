@@ -72,6 +72,9 @@ public class worldmapController : MonoBehaviour
 
         if (WorldMapManager.Instance.FastTravelMenu.activeSelf)
         {
+
+
+            CC.Move(new Vector3(0f, -gravValue * Time.deltaTime, 0f));
             return;
         }
 
@@ -132,4 +135,17 @@ public class worldmapController : MonoBehaviour
         CC.Move(finalmovement);
 
     }
+
+    public void MoveTo(Vector3 destination)
+    {
+        if (CC == null)
+        {
+            CC = GetComponent<CharacterController>();
+
+        }
+        CC.enabled = false;
+        transform.position = destination;
+        CC.enabled = true;
+    }
+
 }

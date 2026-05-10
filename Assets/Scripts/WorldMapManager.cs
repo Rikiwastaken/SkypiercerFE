@@ -50,7 +50,7 @@ public class WorldMapManager : MonoBehaviour
 
         if (maxchapter == 0)
         {
-            Character.transform.position = StoryPointTrsfrm.GetChild(0).position;
+            Character.GetComponent<worldmapController>().MoveTo(StoryPointTrsfrm.GetChild(0).position);
         }
         else
         {
@@ -58,7 +58,7 @@ public class WorldMapManager : MonoBehaviour
             {
                 if (maxchapter - 1 == child.GetComponent<StoryPointScript>().chapterID)
                 {
-                    Character.transform.position = child.position;
+                    Character.GetComponent<worldmapController>().MoveTo(child.position);
                 }
             }
         }
@@ -244,7 +244,7 @@ public class WorldMapManager : MonoBehaviour
         if (FastTravelMenuIDList[ID] >= 0)
         {
             FastTravelMenu.gameObject.SetActive(false);
-            worldmapController.instance.transform.position = StoryPointTrsfrm.GetChild(FastTravelMenuIDList[ID]).position;
+            worldmapController.instance.MoveTo(StoryPointTrsfrm.GetChild(FastTravelMenuIDList[ID]).position);
         }
 
     }

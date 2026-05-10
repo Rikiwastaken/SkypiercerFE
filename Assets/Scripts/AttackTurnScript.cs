@@ -959,10 +959,12 @@ public class AttackTurnScript : MonoBehaviour
                 combatTextScript = FindAnyObjectByType<CombatTextScript>(FindObjectsInactive.Include);
             }
             combatTextScript.ResetInfo();
-            target.transform.LookAt(Attacker.transform);
-            Attacker.transform.LookAt(target.transform);
-            target.transform.GetChild(1).LookAt(Attacker.transform.GetChild(1));
-            Attacker.transform.GetChild(1).LookAt(target.transform.GetChild(1));
+            Vector3 targetlook = new Vector3(Attacker.transform.position.x, target.transform.position.y, Attacker.transform.position.z);
+            target.transform.LookAt(targetlook);
+            Vector3 attackerlook = new Vector3(target.transform.position.x, Attacker.transform.position.y, target.transform.position.z);
+            Attacker.transform.LookAt(attackerlook);
+            // target.transform.GetChild(1).LookAt(Attacker.transform.GetChild(1));
+            // Attacker.transform.GetChild(1).LookAt(target.transform.GetChild(1));
 
             foreach (ModelInfo modelinfo in Attacker.GetComponent<UnitScript>().ModelList)
             {

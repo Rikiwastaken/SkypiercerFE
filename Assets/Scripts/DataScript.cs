@@ -2260,7 +2260,8 @@ public class DataScript : MonoBehaviour
             currentflags.copyflags.Add(false);
             sizeofflaglist = currentflags.copyflags.Count;
         }
-        currentflags.talkflags[characterCopiedID] = true;
+
+        currentflags.copyflags[characterCopiedID] = true;
     }
 
 
