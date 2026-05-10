@@ -388,10 +388,10 @@ public class ActionsMenu : MonoBehaviour
         {
             return;
         }
-        target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+        target.GetComponent<UnitScript>().ToggleTelekinesis();
         if (target.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
         {
-            target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = false;
+            target.GetComponent<UnitScript>().ToggleTelekinesis(false);
         }
         WeaponChange();
         target.GetComponent<UnitScript>().UpdateWeaponModel();
@@ -427,10 +427,10 @@ public class ActionsMenu : MonoBehaviour
         }
         else
         {
-            target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = !target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated;
+            target.GetComponent<UnitScript>().ToggleTelekinesis();
             if (target.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
             {
-                target.GetComponent<UnitScript>().UnitCharacteristics.telekinesisactivated = false;
+                target.GetComponent<UnitScript>().ToggleTelekinesis(false);
             }
             WeaponChange();
             FindAttackers();

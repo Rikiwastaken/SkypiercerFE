@@ -50,6 +50,7 @@ public class SaveManager : MonoBehaviour
         public bool unlocked;
         public string battalion;
         public int previousequipedweapon;
+        public int previousTelekinesis;
     }
 
     [Serializable]
@@ -130,7 +131,8 @@ public class SaveManager : MonoBehaviour
                 WeaponMasteryList = character.Masteries,
                 unlocked = character.playableStats.unlocked,
                 battalion = character.playableStats.battalion,
-                previousequipedweapon = character.previouslyequipedweaponID
+                previousequipedweapon = character.previouslyequipedweaponID,
+                previousTelekinesis = character.previousTelekinesis,
             };
             returnlist.Add(characterSaveInfo);
         }
@@ -154,6 +156,8 @@ public class SaveManager : MonoBehaviour
                     character.playableStats.unlocked = CharaSave.unlocked;
                     character.playableStats.battalion = CharaSave.battalion;
                     character.previouslyequipedweaponID = CharaSave.previousequipedweapon;
+                    character.previousTelekinesis = CharaSave.previousTelekinesis;
+
                 }
             }
         }

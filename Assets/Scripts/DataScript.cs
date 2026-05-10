@@ -2097,6 +2097,16 @@ public class DataScript : MonoBehaviour
         TempGO.AddComponent<UnitScript>();
         TempGO.GetComponent<UnitScript>().enabled = false;
         TempGO.GetComponent<UnitScript>().UnitCharacteristics = Character;
+
+        if (Character.previousTelekinesis == 1)
+        {
+            TempGO.GetComponent<UnitScript>().ToggleTelekinesis(true);
+        }
+        else if (Character.previousTelekinesis == 2)
+        {
+            TempGO.GetComponent<UnitScript>().ToggleTelekinesis(false);
+        }
+
         foreach (WeaponMastery mastery in Character.Masteries)
         {
             TempGO.GetComponent<UnitScript>().GetNewWeaponFromMastery(mastery, Character);

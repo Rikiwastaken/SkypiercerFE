@@ -47,6 +47,7 @@ public class UnitScript : MonoBehaviour
         public StatusEffects statusEffects;
         public bool motivateusedthisturn;
         public int previouslyequipedweaponID = -1;
+        public int previousTelekinesis; // 0 is undefined, 1 is active, 2 is inactive;
     }
 
     [Serializable]
@@ -793,7 +794,8 @@ public class UnitScript : MonoBehaviour
                 PowerTurns = CharacterToCopy.statusEffects.PowerTurns
             },
             motivateusedthisturn = CharacterToCopy.motivateusedthisturn,
-            previouslyequipedweaponID = CharacterToCopy.previouslyequipedweaponID
+            previouslyequipedweaponID = CharacterToCopy.previouslyequipedweaponID,
+            previousTelekinesis = CharacterToCopy.previousTelekinesis,
         };
 
         return copy;
@@ -1055,6 +1057,39 @@ public class UnitScript : MonoBehaviour
 
     }
 
+    public void ToggleTelekinesis(Character chartouse = null)
+    {
+        if (chartouse == null)
+        {
+            chartouse = UnitCharacteristics;
+        }
+        chartouse.telekinesisactivated = !chartouse.telekinesisactivated;
+        if (chartouse.telekinesisactivated)
+        {
+            chartouse.previousTelekinesis = 1;
+        }
+        else
+        {
+            chartouse.previousTelekinesis = 2;
+        }
+    }
+
+    public void ToggleTelekinesis(bool wantedeffect, Character chartouse = null)
+    {
+        if (chartouse == null)
+        {
+            chartouse = UnitCharacteristics;
+        }
+        chartouse.telekinesisactivated = wantedeffect;
+        if (chartouse.telekinesisactivated)
+        {
+            chartouse.previousTelekinesis = 1;
+        }
+        else
+        {
+            chartouse.previousTelekinesis = 2;
+        }
+    }
     public void ShowAffinityArrow()
     {
         DataScript DS = DataScript.instance;
