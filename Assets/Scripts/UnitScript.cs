@@ -1243,8 +1243,9 @@ public class UnitScript : MonoBehaviour
                 Chartouse.equipmentsIDs.Add(newweaponID);
             }
         }
-        foreach (equipment equip in Chartouse.equipments)
+        for (int i = 0; i < Chartouse.equipments.Count; i++)
         {
+            equipment equip = Chartouse.equipments[i];
             if (equip == null || equip.type == null)
             {
                 continue;
@@ -1253,11 +1254,26 @@ public class UnitScript : MonoBehaviour
             {
                 if (equip.type.ToLower() == DataScript.instance.equipmentList[ID].type.ToLower() && equip.ID != ID)
                 {
-                    Chartouse.equipments[Chartouse.equipments.IndexOf(equip)] = DataScript.instance.equipmentList[ID];
+                    Chartouse.equipments[i] = DataScript.instance.equipmentList[ID];
                     continue;
                 }
             }
         }
+        //foreach (equipment equip in Chartouse.equipments)
+        //{
+        //    if (equip == null || equip.type == null)
+        //    {
+        //        continue;
+        //    }
+        //    foreach (int ID in Chartouse.equipmentsIDs)
+        //    {
+        //        if (equip.type.ToLower() == DataScript.instance.equipmentList[ID].type.ToLower() && equip.ID != ID)
+        //        {
+        //            Chartouse.equipments[Chartouse.equipments.IndexOf(equip)] = DataScript.instance.equipmentList[ID];
+        //            continue;
+        //        }
+        //    }
+        //}
         int IDtoAdd = -1;
         foreach (int ID in Chartouse.equipmentsIDs)
         {
@@ -1282,11 +1298,12 @@ public class UnitScript : MonoBehaviour
         }
         if (IDtoAdd > 0)
         {
-            foreach (equipment equip in Chartouse.equipments)
+            for (int i = 0; i < Chartouse.equipments.Count; i++)
             {
+                equipment equip = Chartouse.equipments[i];
                 if (equip == null || equip.type == null || equip.Name == "")
                 {
-                    Chartouse.equipments[Chartouse.equipments.IndexOf(equip)] = DataScript.instance.equipmentList[IDtoAdd];
+                    Chartouse.equipments[i] = DataScript.instance.equipmentList[IDtoAdd];
                     break;
                 }
             }
