@@ -2055,7 +2055,7 @@ public class AttackTurnScript : MonoBehaviour
                 Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
                 if (charunit.currentHP <= 0)
                 {
-
+                    charunit.experience = 0;
                     if (charunit.enemyStats == null)
                     {
                         if (charunit.currentTile != null)
