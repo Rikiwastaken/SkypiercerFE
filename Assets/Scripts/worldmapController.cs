@@ -11,7 +11,7 @@ public class worldmapController : MonoBehaviour
 
     public float cammovepersec;
 
-    private Rigidbody rb;
+    private CharacterController CC;
 
     public float speed;
 
@@ -28,6 +28,8 @@ public class worldmapController : MonoBehaviour
     public GameObject ShipModel;
     public GameObject HumanModel;
 
+    public float gravValue;
+
     private void Awake()
     {
         instance = this;
@@ -38,13 +40,14 @@ public class worldmapController : MonoBehaviour
     {
         inputManager = InputManager.instance;
         cam = GetComponentInChildren<Camera>();
-        rb = GetComponent<Rigidbody>();
+        CC = GetComponent<CharacterController>();
         playermodel.GetComponent<Animator>().SetBool("WorldMap", true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 finalmovement = Vector3.zero;
         if (isshipping)
         {
             if (!ShipModel.activeSelf)
@@ -54,7 +57,7 @@ public class worldmapController : MonoBehaviour
                 playermodel = ShipModel.transform;
             }
 
-            Waterwheel.Rotate(waterwheelrotationpersecond * Time.deltaTime * rb.linearVelocity.magnitude / speed, 0f, 0f);
+            Waterwheel.Rotate(waterwheelrotationpersecond * Time.deltaTime * CC.velocity.magnitude / speed, 0f, 0f);
 
         }
         else
@@ -74,13 +77,9 @@ public class worldmapController : MonoBehaviour
 
         if (inputManager.movementValue.magnitude != 0)
         {
-            Vector3 movement = new Vector3(inputManager.movementValue.x * speed, 0.0f, inputManager.movementValue.y * speed);
+            Vector3 movement = new Vector3(inputManager.movementValue.x * speed * Time.deltaTime, 0.0f, inputManager.movementValue.y * speed * Time.deltaTime);
 
             movement = Quaternion.Euler(0, cam.transform.eulerAngles.y, 0) * movement;
-
-
-
-            movement.y = rb.linearVelocity.y;
 
             Vector3 newforward = movement.normalized;
 
@@ -90,11 +89,11 @@ public class worldmapController : MonoBehaviour
             {
                 forwardtarget = movement.normalized;
             }
-            rb.linearVelocity = movement;
+            finalmovement += movement;
         }
         else
         {
-            rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, 0.5f);
+            //finalmovement += Vector3.Lerp(CC.velocity, Vector3.zero, 0.5f);
         }
 
         if (Mathf.Abs(playermodel.forward.x - forwardtarget.x) > 1.5f)
@@ -116,7 +115,7 @@ public class worldmapController : MonoBehaviour
 
         if (playermodel.GetComponent<Animator>())
         {
-            if (Mathf.Abs(rb.linearVelocity.x) > 0.1f || Mathf.Abs(rb.linearVelocity.z) > 0.1f)
+            if (Mathf.Abs(CC.velocity.x) > 0.1f || Mathf.Abs(CC.velocity.z) > 0.1f)
             {
                 playermodel.GetComponent<Animator>().SetBool("Walk", true);
             }
@@ -126,6 +125,11 @@ public class worldmapController : MonoBehaviour
             }
         }
 
+        // gravity
+
+        finalmovement += new Vector3(0f, -gravValue * Time.deltaTime, 0f);
+
+        CC.Move(finalmovement);
 
     }
 }
