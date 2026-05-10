@@ -119,6 +119,16 @@ public class BondsScript : MonoBehaviour
             }
 
         }
+
+    }
+
+    private void OnEnable()
+    {
+        ChangeColorIfBondsCanBeIncreased();
+    }
+
+    private void ChangeColorIfBondsCanBeIncreased()
+    {
         if (GetComponent<CampScript>().BaseMenu.gameObject.activeSelf)
         {
             if (DataScript.instance != null)

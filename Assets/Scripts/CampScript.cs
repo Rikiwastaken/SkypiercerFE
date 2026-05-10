@@ -98,7 +98,9 @@ public class CampScript : MonoBehaviour
             }
         }
 
-        if (EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeSelf || !EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.activeSelf)
+        GameObject selectedGO = EventSystem.current.currentSelectedGameObject;
+
+        if (selectedGO != BaseMenu.GetChild(0).gameObject && (selectedGO == null || !selectedGO.activeSelf || !selectedGO.transform.parent.gameObject.activeSelf))
         {
             EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
         }

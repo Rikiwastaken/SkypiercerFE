@@ -56,7 +56,11 @@ public class GameOverScript : MonoBehaviour
             else if (SaveMenu.gameObject.activeSelf)
                 buttonToSelect = SaveMenu.GetChild(0).gameObject;
 
-            EventSystem.current.SetSelectedGameObject(buttonToSelect);
+            if (EventSystem.current.currentSelectedGameObject != buttonToSelect)
+            {
+                EventSystem.current.SetSelectedGameObject(buttonToSelect);
+            }
+
         }
     }
 
