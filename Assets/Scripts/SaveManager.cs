@@ -49,6 +49,7 @@ public class SaveManager : MonoBehaviour
         public List<WeaponMastery> WeaponMasteryList;
         public bool unlocked;
         public string battalion;
+        public int previousequipedweapon;
     }
 
     [Serializable]
@@ -128,7 +129,8 @@ public class SaveManager : MonoBehaviour
                 equipedskills = character.EquipedSkills,
                 WeaponMasteryList = character.Masteries,
                 unlocked = character.playableStats.unlocked,
-                battalion = character.playableStats.battalion
+                battalion = character.playableStats.battalion,
+                previousequipedweapon = character.previouslyequipedweaponID
             };
             returnlist.Add(characterSaveInfo);
         }
@@ -151,6 +153,7 @@ public class SaveManager : MonoBehaviour
                     character.Masteries = CharaSave.WeaponMasteryList;
                     character.playableStats.unlocked = CharaSave.unlocked;
                     character.playableStats.battalion = CharaSave.battalion;
+                    character.previouslyequipedweaponID = CharaSave.previousequipedweapon;
                 }
             }
         }

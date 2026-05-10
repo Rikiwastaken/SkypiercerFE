@@ -2091,6 +2091,8 @@ public class DataScript : MonoBehaviour
 
     public void GenerateEquipmentList(Character Character)
     {
+        int previouslyequipedweapon = Character.previouslyequipedweaponID;
+
         GameObject TempGO = new GameObject();
         TempGO.AddComponent<UnitScript>();
         TempGO.GetComponent<UnitScript>().enabled = false;
@@ -2225,6 +2227,37 @@ public class DataScript : MonoBehaviour
         }
         Character.equipments = newequipmentlist;
         DestroyImmediate(TempGO);
+
+        //if previouslyequipedweapon, then reorder the list so the weapon is first
+        if (previouslyequipedweapon != -1)
+        {
+            equipment previousweaponequiped = null;
+
+
+
+            foreach (equipment equp in Character.equipments)
+            {
+                if (equp.ID == previouslyequipedweapon)
+                {
+                    previousweaponequiped = equp;
+                    break;
+                }
+            }
+            if (previousweaponequiped != null)
+            {
+                List<equipment> newequlist = new List<equipment>() { previousweaponequiped };
+                foreach (equipment equipment in Character.equipments)
+                {
+                    if (equipment != previousweaponequiped)
+                    {
+                        newequlist.Add(equipment);
+                    }
+                }
+                Character.equipments = newequlist;
+            }
+        }
+
+
     }
 
 

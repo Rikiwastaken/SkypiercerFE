@@ -46,6 +46,7 @@ public class UnitScript : MonoBehaviour
         public bool isintercepting;
         public StatusEffects statusEffects;
         public bool motivateusedthisturn;
+        public int previouslyequipedweaponID = -1;
     }
 
     [Serializable]
@@ -484,9 +485,7 @@ public class UnitScript : MonoBehaviour
             CopiedSkillImage.color = Color.clear;
             UnitTypeImage.color = Color.clear;
         }
-
     }
-
     public void InstantiateCharacterModel()
     {
         if (ModelList.Count <= UnitCharacteristics.modelID)
@@ -793,7 +792,8 @@ public class UnitScript : MonoBehaviour
                 AccelerationTurns = CharacterToCopy.statusEffects.AccelerationTurns,
                 PowerTurns = CharacterToCopy.statusEffects.PowerTurns
             },
-            motivateusedthisturn = CharacterToCopy.motivateusedthisturn
+            motivateusedthisturn = CharacterToCopy.motivateusedthisturn,
+            previouslyequipedweaponID = CharacterToCopy.previouslyequipedweaponID
         };
 
         return copy;
@@ -2559,6 +2559,7 @@ public class UnitScript : MonoBehaviour
         {
             UnitCharacteristics.equipmentsIDs.Add(equipment.ID);
         }
+        UnitCharacteristics.previouslyequipedweaponID = UnitCharacteristics.equipmentsIDs[0];
         UpdateWeaponModel();
     }
 
