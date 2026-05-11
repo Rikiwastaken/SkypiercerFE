@@ -24,6 +24,8 @@
     - 1st phase, Raghnall uses a fire spear that inflicts burn when attacking. Lasts until turn 5 or Ragnhall is beaten
     - 2nd phase, After the cutscene, Zack is permanently in Examode, and Raghnall regains his HP. All other units are now "other units" unable to act and only zack is playable
 
+- Dans le menu de selection des units, mettre les unités dans des coulerus différentes en fonction du battallion
+
 ## System 
 
 - Rework Animation for Animation Tree
