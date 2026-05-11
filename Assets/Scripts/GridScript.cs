@@ -445,7 +445,7 @@ public class GridScript : MonoBehaviour
             }
             if (selection.type.ToLower() == "desert")
             {
-                text = "Desert \n-20% HP";
+                text = "Desert \n-10% HP";
             }
             text += "\n Elevation : " + selection.elevation;
             UpdateWeatherImage(selection);
