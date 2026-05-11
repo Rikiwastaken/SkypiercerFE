@@ -70,7 +70,7 @@ public class cameraScript : MonoBehaviour
         previouselevation = transform.position.y;
         GridScript = GridScript.instance;
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
-        //Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
+        Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
         //transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
         turnmanager = TurnManger.instance;
         previousY = transform.position.y;
