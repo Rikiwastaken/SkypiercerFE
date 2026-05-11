@@ -32,6 +32,8 @@
 
 - Show quote when levelling up.
 
+- Show dialogue when dying.
+
 - Make visuals for telekinesis with animations activated.
 
 ## Visuals

@@ -206,12 +206,12 @@ public class UnitDeploymentButton : MonoBehaviour
         if (Character.playableStats.deployunit && !MapInitializer.ForcedCharacters.Contains(Character.ID))
         {
             Character.playableStats.deployunit = false;
-            MapInitializer.InitializePlayers();
+            MapInitializer.DeleteUnit(Character);
         }
         else if (!Character.playableStats.deployunit && numberofcharacterdeployed < MapInitializer.playablepos.Count)
         {
             Character.playableStats.deployunit = true;
-            MapInitializer.InitializePlayers();
+            MapInitializer.AddUnit(Character);
         }
     }
 }

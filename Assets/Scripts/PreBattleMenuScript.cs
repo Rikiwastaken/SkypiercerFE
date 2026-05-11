@@ -102,12 +102,7 @@ public class PreBattleMenuScript : MonoBehaviour
 
     private void SwitchUnits(GameObject unit1, GameObject unit2)
     {
-        Vector2 unit1pos = new Vector2(unit1.GetComponent<UnitScript>().UnitCharacteristics.position.x, unit1.GetComponent<UnitScript>().UnitCharacteristics.position.y);
-        Vector2 unit2pos = new Vector2(unit2.GetComponent<UnitScript>().UnitCharacteristics.position.x, unit2.GetComponent<UnitScript>().UnitCharacteristics.position.y);
-        GridSquareScript temp = GridScript.GetFirstClosestTile(unit1pos);
-        unit1.GetComponent<UnitScript>().MoveTo(temp.GridCoordinates);
-        unit2.GetComponent<UnitScript>().MoveTo(unit1pos);
-        unit1.GetComponent<UnitScript>().MoveTo(unit2pos);
+        MapInitializer.ExchangePlaces(unit1, unit2);
     }
 
     public void ActivatePlacement()

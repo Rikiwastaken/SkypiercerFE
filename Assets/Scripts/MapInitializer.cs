@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,6 +26,8 @@ public class MapInitializer : MonoBehaviour
 
     private int previousid;
 
+    private List<GameObject> playableUnitsDeployed;
+
     private void Awake()
     {
         instance = this;
@@ -34,6 +37,7 @@ public class MapInitializer : MonoBehaviour
     void Start()
     {
         EmptyPlayables();
+
         InitializePlayers(true);
         InitializeNonPlayers();
         InitializeCopyAndTalkID();
@@ -67,19 +71,17 @@ public class MapInitializer : MonoBehaviour
             Characters = GameObject.Find("Characters");
         }
 
-        numberofplayables = playablepos.Count;
-        foreach (Transform potentialplayable in Characters.transform)
+        if (firstinit)
         {
-            if (potentialplayable.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
+            playableUnitsDeployed = new List<GameObject>();
+            foreach (Vector2 position in playablepos)
             {
-                string name = potentialplayable.name;
-                Destroy(potentialplayable.gameObject);
+                playableUnitsDeployed.Add(null);
             }
         }
 
+        numberofplayables = playablepos.Count;
 
-
-        int index = 0;
         bool intestmap = SceneManager.GetActiveScene().name == "TestMap";
 
         foreach (Character playable in DataScript.instance.PlayableCharacterList)
@@ -88,15 +90,7 @@ public class MapInitializer : MonoBehaviour
             {
                 playable.playableStats.deployunit = true;
                 playable.playableStats.unlocked = true;
-                GameObject newcharacter = Instantiate(BaseCharacter);
-                newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
-                newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
-                newcharacter.GetComponent<UnitScript>().calculateStats();
-                newcharacter.transform.parent = Characters.transform;
-                newcharacter.transform.position = new Vector3(playablepos[index].x, 0, playablepos[index].y);
-                newcharacter.GetComponent<UnitScript>().MoveTo(playablepos[index]);
-                newcharacter.name = playable.name;
-                index++;
+                AddUnit(playable);
             }
 
         }
@@ -104,17 +98,9 @@ public class MapInitializer : MonoBehaviour
         foreach (Character playable in DataScript.instance.PlayableCharacterList)
         {
 
-            if (index < playablepos.Count && (playable.playableStats.deployunit || intestmap || (playable.playableStats.unlocked && firstinit)) && !ForcedCharacters.Contains(playable.ID))
+            if (playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)) && !ForcedCharacters.Contains(playable.ID))
             {
-                GameObject newcharacter = Instantiate(BaseCharacter);
-                newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
-                newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
-                newcharacter.GetComponent<UnitScript>().calculateStats();
-                newcharacter.transform.parent = Characters.transform;
-                newcharacter.transform.position = new Vector3(playablepos[index].x, 0, playablepos[index].y);
-                newcharacter.GetComponent<UnitScript>().MoveTo(playablepos[index]);
-                newcharacter.name = playable.name;
-                index++;
+                AddUnit(playable);
             }
             playable.TauntTurns = 0;
             playable.isintercepting = false;
@@ -123,7 +109,79 @@ public class MapInitializer : MonoBehaviour
             playable.currentHP = (int)playable.AjustedStats.HP;
         }
 
+
         GridScript.InitializeGOList();
+    }
+
+    private int GetFirstFreePlayablePos()
+    {
+        for (int i = 0; i < playableUnitsDeployed.Count; i++)
+        {
+            if (playableUnitsDeployed[i] == null)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void PlaceUnit(GameObject unit)
+    {
+        int firstfreeindex = GetFirstFreePlayablePos();
+        if (firstfreeindex != -1)
+        {
+            unit.GetComponent<UnitScript>().MoveTo(playablepos[firstfreeindex], false, true);
+            playableUnitsDeployed[firstfreeindex] = unit;
+        }
+    }
+
+    public void DeleteUnit(Character unit)
+    {
+        GameObject UnitGO = null;
+        foreach (GameObject unitdeployed in playableUnitsDeployed)
+        {
+            if (unitdeployed.GetComponent<UnitScript>().UnitCharacteristics.ID == unit.ID)
+            {
+                UnitGO = unitdeployed;
+                break;
+            }
+        }
+        if (UnitGO != null && playableUnitsDeployed.Contains(UnitGO))
+        {
+            playableUnitsDeployed[playableUnitsDeployed.IndexOf(UnitGO)] = null;
+            Destroy(UnitGO);
+        }
+    }
+
+    public void AddUnit(Character playable)
+    {
+        if (GetFirstFreePlayablePos() != -1)
+        {
+
+            GameObject newcharacter = Instantiate(BaseCharacter);
+            newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
+            newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
+            newcharacter.GetComponent<UnitScript>().calculateStats();
+            newcharacter.transform.parent = Characters.transform;
+            PlaceUnit(newcharacter);
+            newcharacter.name = playable.name;
+        }
+
+    }
+
+    public void ExchangePlaces(GameObject unit1, GameObject unit2)
+    {
+        Vector2 unit1pos = new Vector2(unit1.GetComponent<UnitScript>().UnitCharacteristics.position.x, unit1.GetComponent<UnitScript>().UnitCharacteristics.position.y);
+        Vector2 unit2pos = new Vector2(unit2.GetComponent<UnitScript>().UnitCharacteristics.position.x, unit2.GetComponent<UnitScript>().UnitCharacteristics.position.y);
+        GridSquareScript temp = GridScript.GetFirstClosestTile(unit1pos);
+        unit1.GetComponent<UnitScript>().MoveTo(temp.GridCoordinates);
+        unit2.GetComponent<UnitScript>().MoveTo(unit1pos);
+        unit1.GetComponent<UnitScript>().MoveTo(unit2pos);
+
+        int unit1Index = playableUnitsDeployed.IndexOf(unit1);
+        playableUnitsDeployed[playableUnitsDeployed.IndexOf(unit2)] = unit1;
+        playableUnitsDeployed[unit1Index] = unit2;
+
     }
 
 

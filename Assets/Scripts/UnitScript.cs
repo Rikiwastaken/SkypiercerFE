@@ -1434,12 +1434,12 @@ public class UnitScript : MonoBehaviour
             }
             else
             {
-                transform.position = new Vector3(destination.x, transform.position.y, destination.y);
+                transform.position = new Vector3(destination.x, destTile.transform.position.y, destination.y);
             }
             if (instantaneousmovement)
             {
                 pathtotake = new List<Vector2>();
-                transform.position = new Vector3(destination.x, transform.position.y, destination.y);
+                transform.position = new Vector3(destination.x, destTile.transform.position.y, destination.y);
             }
             UnitCharacteristics.position = destination;
             UpdateTiles(destTile);
