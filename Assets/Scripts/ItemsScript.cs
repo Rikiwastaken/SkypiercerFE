@@ -48,11 +48,13 @@ public class ItemsScript : MonoBehaviour
         {
             if (ItemActionsMenu.activeSelf)
             {
+
                 ItemActionsMenuCancelButton.onClick.Invoke();
 
             }
             else
             {
+
                 ItemMenuCancelButton.onClick.Invoke();
             }
             statstext.SetActive(false);
@@ -158,7 +160,7 @@ public class ItemsScript : MonoBehaviour
         }
         else
         {
-            statstext.transform.parent.gameObject.SetActive(false);
+            statstext.gameObject.SetActive(false);
         }
     }
 
