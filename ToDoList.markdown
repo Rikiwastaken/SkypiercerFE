@@ -26,6 +26,8 @@
 
 - Dans le menu de selection des units, mettre les unités dans des coulerus différentes en fonction du battallion
 
+- peut être faire qu'on puisse mettre "pas de battallion"
+
 ## System 
 
 - Rework Animation for Animation Tree

@@ -30,6 +30,11 @@ public class UnitDeploymentButton : MonoBehaviour
 
     public Color ImageDefaultColor;
 
+    public Color ZackColor;
+    public Color KiraColor;
+    public Color GaleColor;
+    public Color UnSelectedColor;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -73,15 +78,24 @@ public class UnitDeploymentButton : MonoBehaviour
                 {
                     if (Character.playableStats.deployunit)
                     {
-                        Color newcolor = Color.green * 0.5f;
-                        newcolor.a = 1;
-                        ButtonBGImage.color = newcolor;
+                        if (Character.playableStats.battalion.ToLower() == "kira")
+                        {
+                            ButtonBGImage.color = KiraColor;
+                        }
+                        else if (Character.playableStats.battalion.ToLower() == "gale")
+                        {
+                            ButtonBGImage.color = GaleColor;
+                        }
+                        else
+                        {
+                            ButtonBGImage.color = ZackColor;
+                        }
+
+
                     }
                     else
                     {
-                        Color newcolor = Color.blue * 0.5f;
-                        newcolor.a = 1;
-                        ButtonBGImage.color = newcolor;
+                        ButtonBGImage.color = UnSelectedColor;
                     }
                 }
                 if (InputManager.Telekinesisjustpressed && EventSystem.current.currentSelectedGameObject == gameObject && !Character.playableStats.protagonist)
