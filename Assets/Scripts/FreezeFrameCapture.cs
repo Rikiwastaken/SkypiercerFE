@@ -204,6 +204,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
     public void PlayFullAnimation(Character characterWhoLeveledUp, List<int> levelip)
     {
+        ResetUIState();
         TimeSafeguard = Time.time + 15f;
         MusicGO = MusicManager.instance.PlaySFX(LevelUpJingleClip);
         if (fullfreezeframecoroutine != null)
@@ -376,8 +377,8 @@ public class FreezeFrameCapture : MonoBehaviour
 
         left.rectTransform.anchoredPosition = Vector2.zero;
         right.rectTransform.anchoredPosition = Vector2.zero;
-        left.rectTransform.sizeDelta = new Vector2(left.rectTransform.sizeDelta.x / 2, left.rectTransform.sizeDelta.y);
-        right.rectTransform.sizeDelta = new Vector2(right.rectTransform.sizeDelta.x / 2, right.rectTransform.sizeDelta.y);
+        //left.rectTransform.sizeDelta = new Vector2(left.rectTransform.sizeDelta.x / 2, left.rectTransform.sizeDelta.y);
+        //right.rectTransform.sizeDelta = new Vector2(right.rectTransform.sizeDelta.x / 2, right.rectTransform.sizeDelta.y);
 
 
         for (int i = 0; i < 7; i++)
@@ -386,10 +387,37 @@ public class FreezeFrameCapture : MonoBehaviour
             StartCoroutine(MoveStatCoroutine(i, i * timebetweenStats));
         }
         StartCoroutine(MoveContinueCoroutine(9f * timebetweenStats));
-        Splitcoroutine = StartCoroutine(SplitCoroutine());
+        yield return Splitcoroutine = StartCoroutine(SplitCoroutine());
 
-        yield return Splitcoroutine;
 
+        fullfreezeframecoroutine = null;
+    }
+
+    void ResetUIState()
+    {
+        StopAllCoroutines();
+
+        BackgroundImage.SetActive(false);
+        CharacterSprite.SetActive(false);
+
+        CharacterName.gameObject.SetActive(false);
+        CharacterNameBG.gameObject.SetActive(false);
+
+        LvlUpText.gameObject.SetActive(false);
+        LvlUpTextBG.gameObject.SetActive(false);
+
+        StatTextHolder.gameObject.SetActive(false);
+
+        Continuetxt.gameObject.SetActive(false);
+        ContinueBGtxt.gameObject.SetActive(false);
+
+        SkillCoinText.gameObject.SetActive(false);
+
+        continueAvailable = false;
+        isClosing = false;
+
+        CloseCoroutine = null;
+        Splitcoroutine = null;
         fullfreezeframecoroutine = null;
     }
 

@@ -2,13 +2,7 @@
 
 ## Bug Fixes
 
-- Camera starts at wrong place (0,0).
-
-- Les unités ennemis peuvent attaquer Mir et Farron à la première map.
-
 - Le bouton heal disparait
-
-- Encore des merdes avec l'anim de levelup
 
 - montrer les ennemis marche pas
 
@@ -19,6 +13,14 @@
 - les machines ont des arcs
 
 - regler les dialogue skip
+
+- Restrict skill shop uses
+
+## Ideas
+
+- For Chapter 12, have 2 phase to the battle:
+    - 1st phase, Raghnall uses a fire spear that inflicts burn when attacking. Lasts until turn 5 or Ragnhall is beaten
+    - 2nd phase, After the cutscene, Zack is permanently in Examode, and Raghnall regains his HP. All other units are now "other units" unable to act and only zack is playable
 
 ## System 
 
