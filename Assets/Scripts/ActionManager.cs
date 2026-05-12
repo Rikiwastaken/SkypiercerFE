@@ -483,8 +483,7 @@ public class ActionManager : MonoBehaviour
                 }
                 GridScript.selection = besttile;
                 actionsMenu.GetComponent<ActionsMenu>().target = currentcharacter;
-                Debug.Log(currentChar.currentTile[0].GridCoordinates);
-                actionsMenu.GetComponent<ActionsMenu>().AttackCommand(false, defenderunit);
+                actionsMenu.GetComponent<ActionsMenu>().AttackCommand(false);
                 currentpath = null;
             }
 

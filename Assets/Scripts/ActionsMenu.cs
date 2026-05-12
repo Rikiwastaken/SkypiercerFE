@@ -483,7 +483,7 @@ public class ActionsMenu : MonoBehaviour
     /// <summary>
     /// Method that is called when the attack command is selected, it tries to find a weapon to be able to attack an enemy, if no enemy is found it tries other weapons , if still no enemy is found it resets the character equipment to the previous state, it also updates the attack range and targetable enemies based on the current weapon and telekinesis settings
     /// </summary>
-    public void AttackCommand(bool ishealing, GameObject ForceDefender = null)
+    public void AttackCommand(bool ishealing)
     {
         if (target == null)
         {

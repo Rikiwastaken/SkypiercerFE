@@ -279,7 +279,7 @@ public class AttackTurnScript : MonoBehaviour
         //playerattack
         if (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial")
         {
-            if (ActionsMenu.target == null)
+            if (ActionsMenu.target == null || ActionsMenu.target.GetComponent<UnitScript>().UnitCharacteristics.currentHP <= 0)
             {
                 return;
             }
@@ -791,6 +791,7 @@ public class AttackTurnScript : MonoBehaviour
 
     public void ManageAttackWithAnimation(GameObject Attacker)
     {
+
         if (attackanimationhappeningcnt == 0)
         {
             attackanimationhappeningcnt = (int)(TimebeforeAnimationAttack / Time.deltaTime);
@@ -929,7 +930,6 @@ public class AttackTurnScript : MonoBehaviour
 
     public IEnumerator ManageAttackWithoutAnimation(GameObject Attacker)
     {
-
         int safeguard = 0;
         Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
         Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
@@ -1144,6 +1144,7 @@ public class AttackTurnScript : MonoBehaviour
         }
 
         AttackCoroutine = null;
+        DeathCleanup();
     }
 
     private bool checkifattackanimationisplaying(GameObject attacker, GameObject target)
