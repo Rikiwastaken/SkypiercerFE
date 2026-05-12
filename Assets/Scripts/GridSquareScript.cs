@@ -8,6 +8,7 @@ public class GridSquareScript : MonoBehaviour
 {
 
     public SpriteRenderer filledimage;
+    public SpriteRenderer BossFilledImage;
 
     public Vector2 GridCoordinates;
 
@@ -179,6 +180,7 @@ public class GridSquareScript : MonoBehaviour
 
     private void Start()
     {
+        BossFilledImage.color = BossAttackColor;
         actionsmenu = FindAnyObjectByType<ActionsMenu>(FindObjectsInactive.Include);
         SetupBaseElevation();
 
@@ -500,7 +502,15 @@ public class GridSquareScript : MonoBehaviour
         }
 
         GameObject unit = GridScript.GetUnit(this);
+        if (isbossAttackTile)
+        {
+            BossFilledImage.gameObject.SetActive(true);
 
+        }
+        else
+        {
+            BossFilledImage.gameObject.SetActive(false);
+        }
 
         if (unit == null)
         {
@@ -509,14 +519,16 @@ public class GridSquareScript : MonoBehaviour
         Image BossLifebar = unit.GetComponent<UnitScript>().LifebarWhenBossTile;
         Image BossLifeBarBG = unit.GetComponent<UnitScript>().LBBackgroundWhenBossTile;
 
-        if (isbossAttackTile)
+        if (isbossAttackTile && unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "enemy")
         {
+
             BossLifeBarBG.gameObject.SetActive(true);
             int damagetaken = actionsmenu.CalculateDamage(BossScript.instance.gameObject, unit);
             BossLifebar.fillAmount = (float)(((float)unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP - damagetaken) / (float)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP);
         }
         else
         {
+
             BossLifeBarBG.gameObject.SetActive(false);
         }
     }

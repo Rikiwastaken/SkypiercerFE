@@ -1263,10 +1263,6 @@ public class GridScript : MonoBehaviour
                 {
                     Grid[x][y].GetComponent<GridSquareScript>().fillwithNothing();
                 }
-                if (Grid[x][y].GetComponent<GridSquareScript>().isbossAttackTile)
-                {
-                    Grid[x][y].GetComponent<GridSquareScript>().fillwithPurple();
-                }
             }
         }
 
