@@ -152,6 +152,7 @@ public class MainMenuScript : MonoBehaviour
             saveManager.activeSlot = slot;
             sceneLoader.LoadScene("Prologue");
         }
+        DataScript.instance.CalculateMaxSP();
     }
 
     public void LoadPrologue()

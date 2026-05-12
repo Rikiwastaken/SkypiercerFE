@@ -151,7 +151,7 @@ public class DataScript : MonoBehaviour
         CalculateMaxSP();
     }
 
-    private void CalculateMaxSP()
+    public void CalculateMaxSP()
     {
         GameObject USGO = new GameObject();
         USGO.AddComponent<UnitScript>();
