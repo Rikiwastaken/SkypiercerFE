@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeatherManager : MonoBehaviour
 {
@@ -33,17 +34,17 @@ public class WeatherManager : MonoBehaviour
 
     public bool showingweather;
 
-    private InputManager inputmanager;
-
     private int weatherTogglecooldown;
 
     public Transform WeatherGOHolder;
+
+    private InputAction _ShowWeatherAction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gridScript = GetComponent<GridScript>();
-        inputmanager = InputManager.instance;
+        _ShowWeatherAction = InputSystem.actions.FindAction("ShowWeather");
         WeatherGOHolder.transform.position = Vector3.zero;
     }
 
@@ -55,7 +56,7 @@ public class WeatherManager : MonoBehaviour
             fillGroups();
         }
 
-        if (inputmanager.ShowWeatherTilespressed && weatherTogglecooldown <= 0)
+        if (_ShowWeatherAction.IsPressed() && weatherTogglecooldown <= 0)
         {
             ToggleWeatherVisuals();
             weatherTogglecooldown = (int)(0.5f / Time.deltaTime);

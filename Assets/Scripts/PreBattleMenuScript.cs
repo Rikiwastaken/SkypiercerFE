@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class PreBattleMenuScript : MonoBehaviour
 {
@@ -10,9 +11,11 @@ public class PreBattleMenuScript : MonoBehaviour
     private GridScript GridScript;
     private TurnManger TurnManager;
     public bool ChangingUnitPlace;
-    private InputManager InputManager;
     public GameObject selectedunit;
     private MapInitializer MapInitializer;
+
+    private InputAction _CancelAction;
+    private InputAction _ActivateAction;
 
     private void Awake()
     {
@@ -26,10 +29,12 @@ public class PreBattleMenuScript : MonoBehaviour
     void Start()
     {
         InitializeVariables();
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _ActivateAction = InputSystem.actions.FindAction("Validate");
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (TurnManager.currentlyplaying != "")
         {
@@ -37,7 +42,7 @@ public class PreBattleMenuScript : MonoBehaviour
             return;
         }
 
-        if (InputManager.canceljustpressed && ChangingUnitPlace)
+        if (_CancelAction.WasPressedThisFrame() && ChangingUnitPlace)
         {
             ChangingUnitPlace = false;
             transform.GetChild(2).gameObject.SetActive(true);
@@ -76,7 +81,7 @@ public class PreBattleMenuScript : MonoBehaviour
             if (GridScript.GetUnit(GridScript.selection) != null)
             {
                 GameObject gridselection = GridScript.GetUnit(GridScript.selection);
-                if (gridselection.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed)
+                if (gridselection.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && _ActivateAction.WasPressedThisFrame())
                 {
                     if (selectedunit == null)
                     {
@@ -91,7 +96,7 @@ public class PreBattleMenuScript : MonoBehaviour
             }
             else
             {
-                if (selectedunit != null && InputManager.activatejustpressed && MapInitializer.playablepos.Contains(GridScript.selection.GridCoordinates))
+                if (selectedunit != null && _ActivateAction.WasPressedThisFrame() && MapInitializer.playablepos.Contains(GridScript.selection.GridCoordinates))
                 {
                     selectedunit.GetComponent<UnitScript>().MoveTo(GridScript.selection.GridCoordinates);
                 }
@@ -122,7 +127,6 @@ public class PreBattleMenuScript : MonoBehaviour
     {
         GridScript = GridScript.instance;
         TurnManager = FindAnyObjectByType<TurnManger>();
-        InputManager = InputManager.instance;
         MapInitializer = FindAnyObjectByType<MapInitializer>();
     }
 

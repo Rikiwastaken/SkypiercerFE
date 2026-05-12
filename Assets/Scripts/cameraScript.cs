@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
 public class cameraScript : MonoBehaviour
@@ -14,8 +15,6 @@ public class cameraScript : MonoBehaviour
     private GridScript GridScript;
 
     public float camspeed;
-
-    private InputManager InputManager;
 
     private Vector3 pointtolookat;
 
@@ -143,18 +142,16 @@ public class cameraScript : MonoBehaviour
         }
 
 
-
-        InputManager = InputManager.instance;
-
         // Zoom and rotation
 
         if (turnmanager.currentlyplaying == "playable" || turnmanager.currentlyplaying == "tutorial")
         {
-            if (InputManager.movecamjustpressed)
+            Vector2 cammovement = InputSystem.actions.FindAction("MoveCam").ReadValue<Vector2>();
+            if (InputSystem.actions.FindAction("MoveCam").WasPerformedThisFrame())
             {
-                if (InputManager.cammovementValue.x > 0)
+                if (cammovement.x > 0)
                     targetangle -= rotationSpeed;
-                else if (InputManager.cammovementValue.x < 0)
+                else if (cammovement.x < 0)
                     targetangle += rotationSpeed;
 
                 // Keep target angle in [-180, 180)
@@ -169,9 +166,9 @@ public class cameraScript : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, newY, 0f);
 
 
-            if (InputManager.cammovementValue.y != 0f)
+            if (cammovement.y != 0f)
             {
-                previousY += InputManager.cammovementValue.y * -3f * Time.deltaTime;
+                previousY += cammovement.y * -3f * Time.deltaTime;
                 previousY = Mathf.Clamp(previousY, minY, maxY);
             }
 

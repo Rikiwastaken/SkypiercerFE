@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnitScript;
 
@@ -27,8 +28,6 @@ public class TextBubbleScript : MonoBehaviour
     private List<TextBubbleInfo> Dialogue;
 
     public int currentTextBubble;
-
-    private InputManager InputManager;
 
 
     public bool indialogue;
@@ -65,6 +64,10 @@ public class TextBubbleScript : MonoBehaviour
     public float DelayBetweenSkips = 0.25f;
     private float delayBetweenSkipsCounter;
 
+    private InputAction _ActivateAction;
+    private InputAction _CancelAction;
+    private InputAction _StartAction;
+
     void Awake()
     {
         if (charactername != null)
@@ -84,7 +87,9 @@ public class TextBubbleScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InputManager = InputManager.instance;
+        _ActivateAction = InputSystem.actions.FindAction("Validate");
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _StartAction = InputSystem.actions.FindAction("Start");
         gridScript = GridScript.instance;
         cameraScript = FindAnyObjectByType<cameraScript>();
         //DialogueExample();
@@ -144,7 +149,7 @@ public class TextBubbleScript : MonoBehaviour
             }
         }
 
-        if (InputManager.activatejustpressed || InputManager.canceljustpressed)
+        if (_ActivateAction.WasPressedThisFrame() || _CancelAction.WasPressedThisFrame())
         {
             if (Time.time > delayBetweenSkipsCounter)
             {
@@ -179,7 +184,7 @@ public class TextBubbleScript : MonoBehaviour
             timebeforeskippingtonextdialoguecounter = Time.time + timebeforeskippingtonextdialogue;
         }
 
-        if (InputManager.Startpressed)
+        if (_StartAction.IsPressed())
         {
 
             if (timetoskipdialoguecounter == 0)

@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static DataScript;
@@ -20,8 +21,6 @@ public class UnitDeploymentButton : MonoBehaviour
 
     private MapInitializer MapInitializer;
 
-    private InputManager InputManager;
-
     private SkillEditionScript SkillEditionScript;
 
     public GameObject lockimage;
@@ -35,17 +34,19 @@ public class UnitDeploymentButton : MonoBehaviour
     public Color GaleColor;
     public Color UnSelectedColor;
 
+    private InputAction _TelekinesisAction;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         UnitDeploymentScript = GetComponentInParent<UnitDeploymentScript>();
         MapInitializer = FindAnyObjectByType<MapInitializer>();
-        InputManager = InputManager.instance;
         ButtonBGImage = GetComponent<Button>().image;
         ImageDefaultColor = ButtonBGImage.color;
+        _TelekinesisAction = InputSystem.actions.FindAction("TelekinesisToggle");
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (SkillEditionScript == null)
         {
@@ -98,7 +99,7 @@ public class UnitDeploymentButton : MonoBehaviour
                         ButtonBGImage.color = UnSelectedColor;
                     }
                 }
-                if (InputManager.Telekinesisjustpressed && EventSystem.current.currentSelectedGameObject == gameObject && !Character.playableStats.protagonist)
+                if (_TelekinesisAction.WasPressedThisFrame() && EventSystem.current.currentSelectedGameObject == gameObject && !Character.playableStats.protagonist)
                 {
                     ChangeBattallion();
 

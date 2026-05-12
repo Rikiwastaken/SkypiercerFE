@@ -32,8 +32,6 @@ public class TurnManger : MonoBehaviour
 
     public bool waittingforstart;
 
-    private InputManager InputManager;
-
     public PreBattleMenuScript preBattleMenuScript;
 
     private WeatherManager weatherManager;
@@ -67,10 +65,8 @@ public class TurnManger : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-
-        InputManager = InputManager.instance;
 
         if (GetComponent<AttackTurnScript>().attackanimationhappeningcnt > 0 || FSS.gameObject.activeSelf)
         {
@@ -81,11 +77,6 @@ public class TurnManger : MonoBehaviour
         {
             GridScript = GridScript.instance;
         }
-
-        // if (InputManager.Startpressed && waittingforstart && !preBattleMenuScript.gameObject.activeSelf && !textBubbleScript.indialogue && !TutorialWindows.activeSelf)
-        // {
-        //     waittingforstart = false;
-        // }
 
         if (checkedbeginningevents)
         {

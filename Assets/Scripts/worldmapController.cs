@@ -1,9 +1,9 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class worldmapController : MonoBehaviour
 {
     public static worldmapController instance;
-    private InputManager inputManager;
 
     private Camera cam;
 
@@ -30,6 +30,8 @@ public class worldmapController : MonoBehaviour
 
     public float gravValue;
 
+    private InputAction _MoveAction;
+    private InputAction _MoveCamAction;
     private void Awake()
     {
         instance = this;
@@ -38,10 +40,11 @@ public class worldmapController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        inputManager = InputManager.instance;
         cam = GetComponentInChildren<Camera>();
         CC = GetComponent<CharacterController>();
         playermodel.GetComponent<Animator>().SetBool("WorldMap", true);
+        _MoveAction = InputSystem.actions.FindAction("Movement");
+        _MoveCamAction = InputSystem.actions.FindAction("MoveCam");
     }
 
     // Update is called once per frame
@@ -77,10 +80,10 @@ public class worldmapController : MonoBehaviour
             CC.Move(new Vector3(0f, -gravValue * Time.deltaTime, 0f));
             return;
         }
-
-        if (inputManager.movementValue.magnitude != 0)
+        Vector2 moveValue = _MoveAction.ReadValue<Vector2>();
+        if (moveValue.magnitude != 0)
         {
-            Vector3 movement = new Vector3(inputManager.movementValue.x * speed * Time.deltaTime, 0.0f, inputManager.movementValue.y * speed * Time.deltaTime);
+            Vector3 movement = new Vector3(moveValue.x * speed * Time.deltaTime, 0.0f, moveValue.y * speed * Time.deltaTime);
 
             movement = Quaternion.Euler(0, cam.transform.eulerAngles.y, 0) * movement;
 
@@ -110,10 +113,11 @@ public class worldmapController : MonoBehaviour
 
         playermodel.forward = Vector3.Lerp(playermodel.forward, forwardtarget, 0.1f);
 
+        Vector2 CamMoveValue = _MoveCamAction.ReadValue<Vector2>();
 
-        if (inputManager.cammovementValue.x != 0)
+        if (CamMoveValue.x != 0)
         {
-            CamHolder.localRotation = Quaternion.Euler(Vector3.Lerp(CamHolder.localRotation.eulerAngles, CamHolder.localRotation.eulerAngles + new Vector3(0f, inputManager.cammovementValue.x * cammovepersec * Time.deltaTime, 0f), 0.3f));
+            CamHolder.localRotation = Quaternion.Euler(Vector3.Lerp(CamHolder.localRotation.eulerAngles, CamHolder.localRotation.eulerAngles + new Vector3(0f, CamMoveValue.x * cammovepersec * Time.deltaTime, 0f), 0.3f));
         }
 
         if (playermodel.GetComponent<Animator>())

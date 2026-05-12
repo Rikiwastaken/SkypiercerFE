@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnitScript;
 
@@ -18,8 +19,6 @@ public class BattleInfotext : MonoBehaviour
 
     public TextMeshProUGUI MasteryText;
     public List<Transform> MasteryExpBars;
-
-    private InputManager inputManager;
 
     public GameObject ItemAction;
 
@@ -71,10 +70,14 @@ public class BattleInfotext : MonoBehaviour
     private float timefordisappearsrpite;
     public float Timefordisappearsrpite = 1f;
 
+    private InputAction _ShowDetailsAction;
+    private InputAction _CancelAction;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        inputManager = InputManager.instance;
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _ShowDetailsAction = InputSystem.actions.FindAction("ShowDetails");
         GridScript = GridScript.instance;
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         BaseSkillColor = SkillButtonList[0].image.color;
@@ -379,11 +382,11 @@ public class BattleInfotext : MonoBehaviour
     private void ManageSkillDescription()
     {
 
-        if (inputManager.ShowDetailspressed && SkillButtonIDList.Count > 0 && !SkillDescription.transform.parent.gameObject.activeSelf && !ActionsMenu.gameObject.activeSelf && !NeutralMenu.activeSelf)
+        if (_ShowDetailsAction.IsPressed() && SkillButtonIDList.Count > 0 && !SkillDescription.transform.parent.gameObject.activeSelf && !ActionsMenu.gameObject.activeSelf && !NeutralMenu.activeSelf)
         {
             SkillButtonList[0].Select();
         }
-        if (inputManager.cancelpressed)
+        if (_CancelAction.IsPressed())
         {
             eventSystem.SetSelectedGameObject(null);
             Deactivate();

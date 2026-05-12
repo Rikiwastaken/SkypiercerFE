@@ -44,7 +44,7 @@ public class GameOverScript : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         GameObject buttonToSelect = EventSystem.current.currentSelectedGameObject;
         if (buttonToSelect == null)

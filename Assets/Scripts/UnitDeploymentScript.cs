@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnitScript;
@@ -19,8 +20,6 @@ public class UnitDeploymentScript : MonoBehaviour
 
     private DataScript DataScript;
 
-    private InputManager inputmanager;
-
     public List<GameObject> PreBattleMenuItems;
 
     public TextMeshProUGUI BattalionText;
@@ -31,6 +30,8 @@ public class UnitDeploymentScript : MonoBehaviour
 
     public Transform Mastery;
 
+    private InputAction _CancelAction;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -38,7 +39,6 @@ public class UnitDeploymentScript : MonoBehaviour
         DataScript = DataScript.instance;
         MapInitializer = FindAnyObjectByType<MapInitializer>();
         gridscript = GridScript.instance;
-        inputmanager = InputManager.instance;
         numberofunitstodeplay = MapInitializer.playablepos.Count;
         forcedunits = MapInitializer.ForcedCharacters;
 
@@ -51,12 +51,17 @@ public class UnitDeploymentScript : MonoBehaviour
         InitializeButtons();
     }
 
+    private void Start()
+    {
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
+    }
+
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         gridscript.movementbuffercounter = 3;
 
-        if (inputmanager.canceljustpressed)
+        if (_CancelAction.WasPressedThisFrame())
         {
             if (numberofSelectedUnits() > 0)
             {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
@@ -12,15 +13,20 @@ public class SpecialCommandsScript : MonoBehaviour
     public List<GameObject> buttons;
     public List<GameObject> SpecialInteractos;
     public Button ItemMenuCancelButton;
-    private InputManager inputManager;
     private ActionsMenu ActionsMenu;
 
-    private void FixedUpdate()
+    private InputAction _CancelAction;
+
+    private void Start()
+    {
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
+    }
+
+    private void Update()
     {
 
-        inputManager = InputManager.instance;
 
-        if (inputManager.canceljustpressed)
+        if (_CancelAction.WasPressedThisFrame())
         {
             ItemMenuCancelButton.onClick.Invoke();
 

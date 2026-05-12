@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnitScript;
 
@@ -10,8 +11,6 @@ public class ActionManager : MonoBehaviour
     public static ActionManager instance;
 
     private TurnManger TurnManager;
-
-    private InputManager InputManager;
 
     private GridScript GridScript;
 
@@ -40,6 +39,12 @@ public class ActionManager : MonoBehaviour
 
     public int NeutralMenuCD;
 
+    private InputAction _telekinesisaction;
+    private InputAction _ActivateAction;
+    private InputAction _NextWeaponAction;
+    private InputAction _PrevWeaponAction;
+    private InputAction _CancelAction;
+
     private void Awake()
     {
         if (instance == null)
@@ -51,16 +56,19 @@ public class ActionManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        _telekinesisaction = InputSystem.actions.FindAction("TelekinesisToggle");
+        _ActivateAction = InputSystem.actions.FindAction("Validate");
+        _NextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
+        _PrevWeaponAction = InputSystem.actions.FindAction("PreviousWeapon");
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
         TurnManager = GetComponent<TurnManger>();
-        InputManager = InputManager.instance;
         GridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<cameraScript>();
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
 
@@ -75,7 +83,7 @@ public class ActionManager : MonoBehaviour
 
         if (actionsMenu.activeSelf)
         {
-            if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && GameObject.Find("Attackwindow") == null && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && allowtelekinesisChangeFromTutorial())
+            if (_telekinesisaction.WasPressedThisFrame() && !battlecamera.incombat && GameObject.Find("Attackwindow") == null && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && allowtelekinesisChangeFromTutorial())
             {
                 currentcharacter.GetComponent<UnitScript>().ToggleTelekinesis();
                 if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
@@ -118,18 +126,18 @@ public class ActionManager : MonoBehaviour
                 currentcharacter = GridScript.GetSelectedUnitGameObject();
                 if (currentcharacter != null)
                 {
-                    if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && InputManager.activatejustpressed && !preventfromlockingafteraction && frameswherenotlock == 0 && !TextBubbleScript.indialogue)
+                    if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && _ActivateAction.WasPressedThisFrame() && !preventfromlockingafteraction && frameswherenotlock == 0 && !TextBubbleScript.indialogue)
                     {
                         GridScript.lockselection = true;
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
                     }
-                    else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && InputManager.activatejustpressed && (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && NeutralMenuCD == 0 && !TextBubbleScript.indialogue)
+                    else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && _ActivateAction.WasPressedThisFrame() && (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && NeutralMenuCD == 0 && !TextBubbleScript.indialogue)
                     {
                         NeutralMenu.SetActive(true);
                         EventSystem.current.SetSelectedGameObject(NeutralMenu.transform.GetChild(0).gameObject);
                     }
-                    if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && allowtelekinesisChangeFromTutorial())
+                    if (_telekinesisaction.WasPressedThisFrame() && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && allowtelekinesisChangeFromTutorial())
                     {
                         currentcharacter.GetComponent<UnitScript>().ToggleTelekinesis();
                         if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
@@ -143,7 +151,7 @@ public class ActionManager : MonoBehaviour
                 }
                 else
                 {
-                    if (InputManager.activatejustpressed && (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && NeutralMenuCD == 0)
+                    if (_ActivateAction.WasPressedThisFrame() && (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && NeutralMenuCD == 0)
                     {
                         NeutralMenu.SetActive(true);
                         EventSystem.current.SetSelectedGameObject(NeutralMenu.transform.GetChild(0).gameObject);
@@ -155,19 +163,19 @@ public class ActionManager : MonoBehaviour
 
                 if (currentcharacter != null)
                 {
-                    if (InputManager.NextWeaponjustpressed)
+                    if (_NextWeaponAction.WasPressedThisFrame())
                     {
                         currentcharacter.GetComponent<UnitScript>().GetNextWeapon();
                         WeaponChange(currentcharacter);
                         GridScript.ShowMovement();
                     }
-                    if (InputManager.PreviousWeaponjustpressed)
+                    if (_PrevWeaponAction.WasPressedThisFrame())
                     {
                         currentcharacter.GetComponent<UnitScript>().GetPreviousWeapon();
                         WeaponChange(currentcharacter);
                         GridScript.ShowMovement();
                     }
-                    if (InputManager.Telekinesisjustpressed && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && allowtelekinesisChangeFromTutorial())
+                    if (_telekinesisaction.WasPressedThisFrame() && !battlecamera.incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && allowtelekinesisChangeFromTutorial())
                     {
 
                         currentcharacter.GetComponent<UnitScript>().ToggleTelekinesis();
@@ -179,7 +187,7 @@ public class ActionManager : MonoBehaviour
                         currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                         GridScript.ShowMovement();
                     }
-                    if (InputManager.canceljustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                    if (_CancelAction.WasPressedThisFrame() && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                     {
                         if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
                         {
@@ -199,12 +207,12 @@ public class ActionManager : MonoBehaviour
 
                 ManagePath();
 
-                if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates, currentcharacter) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates, currentcharacter) && _ActivateAction.WasPressedThisFrame() && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                 {
 
                     MoveCharacterToSelection();
                 }
-                else if ((GridScript.lockedattacktiles.Contains(GridScript.selection) || GridScript.lockedhealingtiles.Contains(GridScript.selection)) && InputManager.activatejustpressed && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                else if ((GridScript.lockedattacktiles.Contains(GridScript.selection) || GridScript.lockedhealingtiles.Contains(GridScript.selection)) && _ActivateAction.WasPressedThisFrame() && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                 {
                     if (TutorialScript.instance == null || !TutorialScript.instance.enabled)
                     {

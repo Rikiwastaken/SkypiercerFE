@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static DataScript;
 using static UnitScript;
@@ -17,8 +18,6 @@ public class ActionsMenu : MonoBehaviour
     public GameObject ItemsScript;
     public GameObject CommandGO;
     public GameObject SpecialCommandGO;
-
-    private InputManager inputManager;
 
     public TextMeshProUGUI unitAttackText;
     public TextMeshProUGUI targetAttackText;
@@ -68,6 +67,16 @@ public class ActionsMenu : MonoBehaviour
     private bool PreviousActivatedState = false;
 
     private bool isUnithealing;
+
+    private InputAction _telekinesisaction;
+    private InputAction _ActivateAction;
+    private InputAction _NextWeaponAction;
+    private InputAction _PrevWeaponAction;
+    private InputAction _CancelAction;
+    private InputAction _NextTargetAction;
+    private InputAction _PrevTargetAction;
+    private InputAction _MovementAction;
+
     private void OnDisable()
     {
         PreviousActivatedState = false;
@@ -76,6 +85,14 @@ public class ActionsMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _telekinesisaction = InputSystem.actions.FindAction("TelekinesisToggle");
+        _ActivateAction = InputSystem.actions.FindAction("Validate");
+        _NextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
+        _PrevWeaponAction = InputSystem.actions.FindAction("PreviousWeapon");
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _NextTargetAction = InputSystem.actions.FindAction("NextTarget");
+        _PrevTargetAction = InputSystem.actions.FindAction("PreviousTarget");
+        _MovementAction = InputSystem.actions.FindAction("Movement");
         GridScript = GridScript.instance;
         cameraScript = FindAnyObjectByType<cameraScript>();
         attackTurnScript = FindAnyObjectByType<AttackTurnScript>();
@@ -88,7 +105,7 @@ public class ActionsMenu : MonoBehaviour
 
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
         if (PreviousActivatedState != gameObject.activeSelf)
@@ -105,27 +122,24 @@ public class ActionsMenu : MonoBehaviour
         ActionManager.instance.preventfromlockingafteraction = true;
 
 
-        inputManager = InputManager.instance;
-
-
-        if (inputManager.canceljustpressed && !ItemsScript.activeSelf && !CommandGO.activeSelf && !AttackButton.transform.parent.gameObject.activeSelf)
+        if (_CancelAction.WasPressedThisFrame() && !ItemsScript.activeSelf && !CommandGO.activeSelf && !AttackButton.transform.parent.gameObject.activeSelf)
         {
             ActionsCancelButton.onClick.Invoke();
         }
-        else if (inputManager.canceljustpressed && AttackButton.transform.parent.gameObject.activeSelf)
+        else if (_CancelAction.WasPressedThisFrame() && AttackButton.transform.parent.gameObject.activeSelf)
         {
             AttackCancelButton.onClick.Invoke();
         }
 
         if (targetlist != null && targetlist.Count > 0)
         {
-            if (inputManager.Telekinesisjustpressed)
+            if (_telekinesisaction.WasPressedThisFrame())
             {
                 ToggleTelekinesis(targetlist[activetargetid]);
             }
             if (!isUnithealing)
             {
-                if (inputManager.NextWeaponjustpressed)
+                if (_NextWeaponAction.WasPressedThisFrame())
                 {
                     if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
                     {
@@ -134,7 +148,7 @@ public class ActionsMenu : MonoBehaviour
 
 
                 }
-                if (inputManager.PreviousWeaponjustpressed)
+                if (_PrevWeaponAction.WasPressedThisFrame())
                 {
                     if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
                     {
@@ -145,7 +159,7 @@ public class ActionsMenu : MonoBehaviour
             }
 
 
-            if (inputManager.NextTargetjustpressed || (inputManager.movementjustpressed && inputManager.movementValue.x > 0))
+            if (_NextTargetAction.WasPressedThisFrame() || (_MovementAction.WasPerformedThisFrame() && _MovementAction.ReadValue<Vector2>().x > 0))
             {
                 if (activetargetid < targetlist.Count - 1)
                 {
@@ -165,7 +179,7 @@ public class ActionsMenu : MonoBehaviour
                 }
 
             }
-            if (inputManager.PreviousTargetjustpressed || (inputManager.movementjustpressed && inputManager.movementValue.x < 0))
+            if (_PrevTargetAction.WasPressedThisFrame() || (_MovementAction.WasPerformedThisFrame() && _MovementAction.ReadValue<Vector2>().x < 0))
             {
                 if (activetargetid > 0)
                 {

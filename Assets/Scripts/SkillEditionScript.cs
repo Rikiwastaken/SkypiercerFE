@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static DataScript;
 using static UnitScript;
@@ -10,8 +11,6 @@ public class SkillEditionScript : MonoBehaviour
 {
 
     private GridScript gridscript;
-
-    private InputManager inputmanager;
 
     public List<GameObject> PreBattleMenuItems;
 
@@ -43,6 +42,10 @@ public class SkillEditionScript : MonoBehaviour
 
     private List<Character> unlockedplayables;
 
+    private InputAction _CancelAction;
+    private InputAction _NextWeaponAction;
+    private InputAction _PreviousWeaponAction;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -51,25 +54,27 @@ public class SkillEditionScript : MonoBehaviour
             gridscript = GridScript.instance;
         }
 
-        inputmanager = InputManager.instance;
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         InitializeButtons();
     }
 
     private void Start()
     {
+        _PreviousWeaponAction = InputSystem.actions.FindAction("PreviousWeapon");
+        _NextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
         Calculateplayables();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         InitializeInventorySkillList();
 
         if (!inCamp)
         {
             gridscript.movementbuffercounter = 3;
-            if (inputmanager.canceljustpressed)
+            if (_CancelAction.WasPressedThisFrame())
             {
                 if (SkillList.activeSelf)
                 {
@@ -95,7 +100,7 @@ public class SkillEditionScript : MonoBehaviour
         }
         else
         {
-            if (inputmanager.canceljustpressed)
+            if (_CancelAction.WasPressedThisFrame())
             {
                 if (IsBonds)
                 {
@@ -142,7 +147,7 @@ public class SkillEditionScript : MonoBehaviour
         }
 
 
-        if (inputmanager.PreviousWeaponjustpressed)
+        if (_PreviousWeaponAction.WasPressedThisFrame())
         {
             if (SkillList.activeSelf)
             {
@@ -163,7 +168,7 @@ public class SkillEditionScript : MonoBehaviour
 
         }
 
-        if (inputmanager.NextWeaponjustpressed)
+        if (_NextWeaponAction.WasPressedThisFrame())
         {
             if (SkillList.activeSelf)
             {

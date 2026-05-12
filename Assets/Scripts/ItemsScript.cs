@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnitScript;
 
@@ -15,7 +16,6 @@ public class ItemsScript : MonoBehaviour
 
     public Button ItemMenuCancelButton;
     public Button ItemActionsMenuCancelButton;
-    private InputManager inputManager;
     public GameObject ItemActionsMenu;
 
     [Header("Blade Stats")]
@@ -39,12 +39,10 @@ public class ItemsScript : MonoBehaviour
         initialpos = ItemActionsMenu.transform.position;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
-        inputManager = InputManager.instance;
-
-        if (inputManager.canceljustpressed)
+        if (InputSystem.actions.FindAction("Cancel").IsPressed())
         {
             if (ItemActionsMenu.activeSelf)
             {

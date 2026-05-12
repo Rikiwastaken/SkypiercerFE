@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class WorldMapManager : MonoBehaviour
@@ -33,6 +34,13 @@ public class WorldMapManager : MonoBehaviour
 
     private int faststravelmenudelay;
 
+    private InputAction _ActivateAction;
+    private InputAction _MoveAction;
+    private InputAction _CancelAction;
+    private InputAction _TelekinesisAction;
+    private InputAction _ShowDetailsAction;
+    private InputAction _CamAction;
+
     private void Awake()
     {
         if (Instance == null)
@@ -62,6 +70,12 @@ public class WorldMapManager : MonoBehaviour
                 }
             }
         }
+        _ActivateAction = InputSystem.actions.FindAction("Validate");
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _MoveAction = InputSystem.actions.FindAction("Movement");
+        _TelekinesisAction = InputSystem.actions.FindAction("TelekinesisToggle");
+        _ShowDetailsAction = InputSystem.actions.FindAction("ShowDetails");
+        _CamAction = InputSystem.actions.FindAction("MoveCam");
 
     }
 
@@ -97,7 +111,7 @@ public class WorldMapManager : MonoBehaviour
                 ChapterUI.transform.localPosition = new Vector3(maxx, ChapterUI.transform.localPosition.y, ChapterUI.transform.localPosition.z);
             }
 
-            if (InputManager.instance.activatejustpressed)
+            if (_ActivateAction.WasPressedThisFrame())
             {
 
                 string scenename = "";
@@ -131,7 +145,7 @@ public class WorldMapManager : MonoBehaviour
             }
         }
 
-        if (InputManager.instance.Telekinesisjustpressed)
+        if (_TelekinesisAction.WasPressedThisFrame())
         {
             SceneLoader.instance.LoadScene("Camp");
         }
@@ -151,12 +165,14 @@ public class WorldMapManager : MonoBehaviour
 
             if (faststravelmenudelay <= 0)
             {
-                if ((InputManager.instance.movementValue.y > 0f || InputManager.instance.cammovementValue.y > 0f) && EventSystem.current.currentSelectedGameObject == FastTravelMenu.transform.GetChild(0).gameObject)
+                Vector2 MoveValue = _MoveAction.ReadValue<Vector2>();
+                Vector2 CamValue = _CamAction.ReadValue<Vector2>();
+                if ((MoveValue.y > 0f || CamValue.y > 0f) && EventSystem.current.currentSelectedGameObject == FastTravelMenu.transform.GetChild(0).gameObject)
                 {
                     IncreaseList();
                     faststravelmenudelay = (int)(0.1f / Time.deltaTime);
                 }
-                if ((InputManager.instance.movementValue.y < 0f || InputManager.instance.cammovementValue.y < 0f) && EventSystem.current.currentSelectedGameObject == FastTravelMenu.transform.GetChild(FastTravelMenu.transform.childCount - 1).gameObject)
+                if ((MoveValue.y < 0f || CamValue.y < 0f) && EventSystem.current.currentSelectedGameObject == FastTravelMenu.transform.GetChild(FastTravelMenu.transform.childCount - 1).gameObject)
                 {
 
                     DecreaseList();
@@ -164,7 +180,7 @@ public class WorldMapManager : MonoBehaviour
                 }
             }
 
-            if (InputManager.instance.cancelpressed)
+            if (_CancelAction.IsPressed())
             {
                 FastTravelMenu.SetActive(false);
             }
@@ -172,7 +188,7 @@ public class WorldMapManager : MonoBehaviour
         }
         else
         {
-            if (InputManager.instance.ShowDetailspressed)
+            if (_ShowDetailsAction.WasPressedThisFrame())
             {
                 InitializeFastTravelList();
             }

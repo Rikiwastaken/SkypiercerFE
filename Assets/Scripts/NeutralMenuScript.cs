@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
@@ -20,7 +21,7 @@ public class NeutralMenuScript : MonoBehaviour
 
     public int chapterforUnlockingForesight;
 
-    private InputManager InputManager;
+
 
     private TextBubbleScript textBubbleScript;
 
@@ -33,7 +34,7 @@ public class NeutralMenuScript : MonoBehaviour
             SaveManager = FindAnyObjectByType<SaveManager>();
         }
 
-        InputManager = InputManager.instance;
+
 
         if (SceneManager.GetActiveScene().name.Contains("Chapter"))
         {
@@ -58,7 +59,7 @@ public class NeutralMenuScript : MonoBehaviour
 
         ManageSelection();
 
-        if (InputManager.cancelpressed || (textBubbleScript != null && textBubbleScript.indialogue))
+        if (InputSystem.actions.FindAction("Cancel").IsPressed() || (textBubbleScript != null && textBubbleScript.indialogue))
         {
             if (OptionsMenuTransfrom.gameObject.activeSelf)
             {

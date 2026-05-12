@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static DataScript;
 
@@ -13,7 +14,6 @@ public class CommandScript : MonoBehaviour
     public List<GameObject> buttons;
     public List<Skill> CommandList;
     public Button ItemMenuCancelButton;
-    private InputManager inputManager;
     public GameObject ItemActionsMenu;
     public TextMeshProUGUI statstext;
     private ActionsMenu ActionsMenu;
@@ -21,9 +21,7 @@ public class CommandScript : MonoBehaviour
     private void Update()
     {
 
-        inputManager = InputManager.instance;
-
-        if (inputManager.cancelpressed)
+        if (InputSystem.actions.FindAction("Cancel").IsPressed())
         {
             ItemMenuCancelButton.onClick.Invoke();
 

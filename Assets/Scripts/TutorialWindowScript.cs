@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class TutorialWindowScript : MonoBehaviour
@@ -17,6 +18,12 @@ public class TutorialWindowScript : MonoBehaviour
     public float delay;
 
     private bool abletocontinue;
+
+    private InputAction _ActivateAction;
+    private void Start()
+    {
+        _ActivateAction = InputSystem.actions.FindAction("Validate");
+    }
 
     private void Awake()
     {
@@ -36,7 +43,7 @@ public class TutorialWindowScript : MonoBehaviour
         TextGO.GetComponent<TextMeshProUGUI>().text = text;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         if (timecounter < delay / Time.fixedDeltaTime)
@@ -57,7 +64,7 @@ public class TutorialWindowScript : MonoBehaviour
             }
         }
 
-        if (InputManager.instance.activatejustpressed)
+        if (_ActivateAction.IsPressed())
         {
             ContinueButton();
         }

@@ -25,12 +25,12 @@ public class AnimationCombatTextScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if(BackGroundTMP.transform.localScale.x < targetscale)
+        if (BackGroundTMP.transform.localScale.x < targetscale)
         {
             timetotargetscalecounter++;
-            BackGroundTMP.transform.localScale = Vector3.one * (float)timetotargetscalecounter / (float)(timetotargetscale*Time.fixedDeltaTime);
+            BackGroundTMP.transform.localScale = Vector3.one * (float)timetotargetscalecounter / (float)(timetotargetscale * Time.fixedDeltaTime);
         }
         else
         {
@@ -47,7 +47,7 @@ public class AnimationCombatTextScript : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        
+
 
     }
 

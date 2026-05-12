@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using static DataScript;
@@ -78,9 +79,6 @@ public class ForesightScript : MonoBehaviour
 
     public List<int> ButtonIDs;
 
-
-    private InputManager InputManager;
-
     public GameObject neutralmenu;
 
     public MinimapScript MinimapScript;
@@ -97,11 +95,13 @@ public class ForesightScript : MonoBehaviour
     public int remaininguses;
 
     public GameObject RemainingUsesGO;
+    private InputAction _MoveAction;
+    private InputAction _MoveCamAction;
+    private InputAction _CancelAction;
 
     private void OnEnable()
     {
         ButtonInitialization();
-        InputManager = InputManager.instance;
 
     }
 
@@ -109,11 +109,14 @@ public class ForesightScript : MonoBehaviour
     {
         ActionManager = FindAnyObjectByType<ActionManager>(FindObjectsInactive.Include);
         remaininguses += DataScript.instance.PlayableCharacterList[0].level / 3;
+        _MoveAction = InputSystem.actions.FindAction("Movement");
+        _MoveCamAction = InputSystem.actions.FindAction("MoveCam");
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
     }
 
     public Volume PostProcessingVolume;
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         ActionManager.NeutralMenuCD = 5;
@@ -130,18 +133,19 @@ public class ForesightScript : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
             }
-
-            if (currentSelected == transform.GetChild(0).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y > 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y > 0)))
+            Vector2 movement = _MoveAction.ReadValue<Vector2>();
+            Vector2 cammovement = _MoveCamAction.ReadValue<Vector2>();
+            if (currentSelected == transform.GetChild(0).gameObject && ((_MoveAction.WasPressedThisFrame() && movement.y > 0) || (_MoveCamAction.WasPressedThisFrame() && cammovement.y > 0)))
             {
                 ChangeButtonID(-1);
             }
 
-            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y < 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y < 0)))
+            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && ((_MoveAction.WasPressedThisFrame() && movement.y < 0) || (_MoveCamAction.WasPressedThisFrame() && cammovement.y < 0)))
             {
                 ChangeButtonID(1);
             }
 
-            if (currentSelected == transform.GetChild(0).gameObject && (InputManager.movementValue.y > 0 || InputManager.cammovementValue.y > 0))
+            if (currentSelected == transform.GetChild(0).gameObject && (movement.y > 0 || cammovement.y > 0))
             {
                 framesuppressed++;
                 if (framesuppressed > 0.15f / Time.fixedDeltaTime)
@@ -156,7 +160,7 @@ public class ForesightScript : MonoBehaviour
                 framesuppressed = 0;
             }
 
-            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && (InputManager.movementValue.y < 0 || InputManager.cammovementValue.y < 0))
+            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && (movement.y < 0 || cammovement.y < 0))
             {
                 framesdownpressed++;
                 if (framesdownpressed > 0.15f / Time.fixedDeltaTime)
@@ -174,7 +178,7 @@ public class ForesightScript : MonoBehaviour
         }
 
 
-        if (InputManager.canceljustpressed)
+        if (_CancelAction.WasPressedThisFrame())
         {
             if (!ActivatedFromGameOver)
             {

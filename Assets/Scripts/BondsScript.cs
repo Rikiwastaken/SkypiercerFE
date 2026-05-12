@@ -6,6 +6,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static DataScript;
 using static TextBubbleScript;
@@ -64,8 +65,6 @@ public class BondsScript : MonoBehaviour
 
     private List<BondsDialogueClass> PertinentbondsDialogue;
 
-    private InputManager inputmanager;
-
     private TextBubbleScript TextBubbleScript;
 
     public Button BondButton;
@@ -96,7 +95,6 @@ public class BondsScript : MonoBehaviour
 
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
 
-        inputmanager = InputManager.instance;
     }
 
     private void Update()
@@ -105,11 +103,8 @@ public class BondsScript : MonoBehaviour
         {
             cancelcounter--;
         }
-        if (inputmanager == null)
-        {
-            inputmanager = InputManager.instance;
-        }
-        else if (inputmanager.cancelpressed)
+
+        if (InputSystem.actions.FindAction("Cancel").IsPressed())
         {
             if (bondsSubMenu.activeSelf && cancelcounter <= 0)
             {

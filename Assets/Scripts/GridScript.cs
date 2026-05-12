@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnitScript;
 public class GridScript : MonoBehaviour
@@ -18,8 +19,6 @@ public class GridScript : MonoBehaviour
     public GridSquareScript selection;
 
     public GridSquareScript previousselection;
-
-    private InputManager inputManager;
 
     private Vector2 previousmovevalue;
 
@@ -109,7 +108,7 @@ public class GridScript : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         if (SkillEditionScript == null)
@@ -117,11 +116,7 @@ public class GridScript : MonoBehaviour
             SkillEditionScript = FindAnyObjectByType<SkillEditionScript>(FindObjectsInactive.Include);
         }
 
-
-
-        inputManager = InputManager.instance;
-
-        if (inputManager.ShowDangerousTilesjustpressed)
+        if (InputSystem.actions.FindAction("ShowDangerousTiles").WasPressedThisFrame())
         {
             ShowDangerousTiles = !ShowDangerousTiles;
             Recolor();
@@ -136,8 +131,8 @@ public class GridScript : MonoBehaviour
         {
             movementbuffercounter--;
         }
-
-        if (inputManager.movementValue == Vector2.zero)
+        Vector2 movement = InputSystem.actions.FindAction("Movement").ReadValue<Vector2>();
+        if (movement == Vector2.zero)
         {
             movementbuffercounter = 0;
         }
@@ -146,10 +141,10 @@ public class GridScript : MonoBehaviour
         {
 
 
-            if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue)
+            if (movement != Vector2.zero && movement != previousmovevalue)
             {
                 moveCD = (int)(0.1f / Time.deltaTime);
-                previousmovevalue = battlecamera.DetermineDirection(inputManager.movementValue);
+                previousmovevalue = battlecamera.DetermineDirection(movement);
                 MoveSelection(previousmovevalue);
             }
             else
@@ -157,7 +152,7 @@ public class GridScript : MonoBehaviour
                 previousmovevalue = Vector2.zero;
             }
 
-            if ((inputManager.NextWeaponjustpressed || inputManager.PreviousWeaponjustpressed) && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial") && !lockselection)
+            if ((InputSystem.actions.FindAction("NextWeapon").WasPressedThisFrame() || InputSystem.actions.FindAction("PreviousWeapon").WasPressedThisFrame()) && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial") && !lockselection)
             {
                 GameObject GOSelected = GetUnit(selection);
                 if (GOSelected != null)
@@ -196,7 +191,7 @@ public class GridScript : MonoBehaviour
                                 }
 
                             }
-                            if (inputManager.NextWeaponjustpressed)
+                            if (InputSystem.actions.FindAction("NextWeapon").WasPressedThisFrame())
                             {
                                 if (currentunitindex >= listplayable.Count - 1 || currentunitindex == -1)
                                 {
@@ -247,25 +242,13 @@ public class GridScript : MonoBehaviour
 
         }
 
-        //if (inputManager.movementValue != Vector2.zero && inputManager.movementValue != previousmovevalue && moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0)
-        //{
-        //    moveCD = (int)(0.1f / Time.deltaTime);
-        //    previousmovevalue = inputManager.movementValue;
-        //    MoveSelection(previousmovevalue);
-        //}
-        //else
-        //{
-        //    previousmovevalue = Vector2.zero;
-        //}
 
-
-
-        if (previousmovementvalueforbuffer != inputManager.movementValue && previousmovementvalueforbuffer == Vector2.zero)
+        if (previousmovementvalueforbuffer != movement && previousmovementvalueforbuffer == Vector2.zero)
         {
             movementbuffercounter = (int)(movementbuffer / Time.fixedDeltaTime);
         }
 
-        previousmovementvalueforbuffer = battlecamera.DetermineDirection(inputManager.movementValue);
+        previousmovementvalueforbuffer = battlecamera.DetermineDirection(movement);
         UpdateTileText();
         if (lockselection && movementtiles.Count == 0 && lockedmovementtiles.Count == 0 && attacktiles.Count == 0 && lockedattacktiles.Count == 0 && healingtiles.Count == 0 && lockedhealingtiles.Count == 0)
         {

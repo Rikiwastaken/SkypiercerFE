@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class TipsMenuScript : MonoBehaviour
@@ -13,9 +14,6 @@ public class TipsMenuScript : MonoBehaviour
     public List<Button> Buttons;
 
     public List<int> ButtonIDs;
-
-
-    private InputManager InputManager;
 
     private int framesuppressed;
     private int framesdownpressed;
@@ -40,9 +38,20 @@ public class TipsMenuScript : MonoBehaviour
 
     private Color BaseColor;
 
+    private InputAction _MovementAction;
+    private InputAction _MoveCamAction;
+    private InputAction _CancelAction;
+
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        _MovementAction = InputSystem.actions.FindAction("Movement");
+        _MoveCamAction = InputSystem.actions.FindAction("MoveCam");
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
     }
 
     private void OnEnable()
@@ -51,13 +60,13 @@ public class TipsMenuScript : MonoBehaviour
         SelectTipsToUse();
         ButtonInitialization();
 
-        InputManager = InputManager.instance;
-
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
+        Vector2 movementValue = _MovementAction.ReadValue<Vector2>();
+        Vector2 CamMoveValue = _MoveCamAction.ReadValue<Vector2>();
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         if (currentSelected != null)
         {
@@ -67,12 +76,12 @@ public class TipsMenuScript : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
             }
 
-            if (currentSelected == transform.GetChild(0).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y > 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y > 0)) && previousselection == currentSelected)
+            if (currentSelected == transform.GetChild(0).gameObject && ((_MovementAction.WasPressedThisFrame() && movementValue.y > 0) || (_MoveCamAction.WasPressedThisFrame() && CamMoveValue.y > 0)) && previousselection == currentSelected)
             {
                 ChangeButtonID(-1);
             }
 
-            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && ((InputManager.movementjustpressed && InputManager.movementValue.y < 0) || (InputManager.movecamjustpressed && InputManager.cammovementValue.y < 0)) && previousselection == currentSelected)
+            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && ((_MovementAction.WasPressedThisFrame() && movementValue.y < 0) || (_MoveCamAction.WasPressedThisFrame() && CamMoveValue.y < 0)) && previousselection == currentSelected)
             {
                 ChangeButtonID(1);
             }
@@ -93,7 +102,7 @@ public class TipsMenuScript : MonoBehaviour
                 }
             }
 
-            if (currentSelected == transform.GetChild(0).gameObject && (InputManager.movementValue.y > 0 || InputManager.cammovementValue.y > 0))
+            if (currentSelected == transform.GetChild(0).gameObject && (movementValue.y > 0 || CamMoveValue.y > 0))
             {
                 framesuppressed++;
                 if (framesuppressed > 0.15f / Time.fixedDeltaTime)
@@ -108,7 +117,7 @@ public class TipsMenuScript : MonoBehaviour
                 framesuppressed = 0;
             }
 
-            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && (InputManager.movementValue.y < 0 || InputManager.cammovementValue.y < 0))
+            if (currentSelected == transform.GetChild(Buttons.Count - 1).gameObject && (movementValue.y < 0 || CamMoveValue.y < 0))
             {
                 framesdownpressed++;
                 if (framesdownpressed > 0.15f / Time.fixedDeltaTime)
@@ -126,7 +135,7 @@ public class TipsMenuScript : MonoBehaviour
         }
 
 
-        if (InputManager.canceljustpressed)
+        if (_CancelAction.WasPressedThisFrame())
         {
             gameObject.SetActive(false);
             neutralmenu.SetActive(true);

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static DataScript;
 using static UnitScript;
@@ -26,27 +27,32 @@ public class SkillShopScript : MonoBehaviour
 
     private int skillwindowindex;
 
-    private InputManager inputmanager;
-
     private GameObject previousselected;
 
     private int necessarycost;
 
+    private InputAction _CancelAction;
+    private InputAction _NextWeaponAction;
+    private InputAction _PreviousWeaponAction;
+    private InputAction _ActivateAction;
+
     [SerializeField] private float timenecessarytobuyitem;
     private float timeforbuy;
+
+    private void Start()
+    {
+        _PreviousWeaponAction = InputSystem.actions.FindAction("PreviousWeapon");
+        _NextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _ActivateAction = InputSystem.actions.FindAction("Validate");
+    }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (inputmanager == null)
-        {
-            inputmanager = InputManager.instance;
-        }
-
-
         // Close Menu
-        if (inputmanager.cancelpressed)
+        if (_CancelAction.IsPressed())
         {
             gameObject.SetActive(false);
             SkillShopButton.Select();
@@ -57,7 +63,7 @@ public class SkillShopScript : MonoBehaviour
 
 
         // Change Windows
-        if (inputmanager.PreviousWeaponjustpressed)
+        if (_PreviousWeaponAction.WasPressedThisFrame())
         {
             if (skillwindowindex > 0)
             {
@@ -66,7 +72,7 @@ public class SkillShopScript : MonoBehaviour
             }
         }
 
-        if (inputmanager.NextWeaponjustpressed)
+        if (_NextWeaponAction.WasPressedThisFrame())
         {
             if (skillwindowindex * 10 < SkillsToShow.Count - 9)
             {
@@ -90,7 +96,7 @@ public class SkillShopScript : MonoBehaviour
                 UpdateSkillDescriptionText(CurrentSelected.GetComponent<UnitDeploymentButton>());
             }
 
-            if (inputmanager.activatepressed && DataScript.instance.SkillCoins >= necessarycost)
+            if (_ActivateAction.IsPressed() && DataScript.instance.SkillCoins >= necessarycost)
             {
                 float ratio = 1f - (timeforbuy - Time.time) / timenecessarytobuyitem;
                 BuyImage.fillAmount = ratio;
