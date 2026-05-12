@@ -210,8 +210,25 @@ public class BattleInfotext : MonoBehaviour
 
 
                 ManagedSkillVisuals(selectedunitCharacter);
-                ManageSkillDescription();
-                ManageMasteryVisuals(selectedunitCharacter);
+                if (ActionsMenu.gameObject.activeSelf)
+                {
+                    if (Skilltext.transform.parent.gameObject.activeSelf)
+                    {
+                        Skilltext.transform.parent.gameObject.SetActive(false);
+                    }
+                    if (SkillDescription.transform.gameObject.activeSelf)
+                    {
+                        SkillDescription.transform.gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    ManageSkillDescription();
+                    ManageMasteryVisuals(selectedunitCharacter);
+
+
+                }
+
                 ManageStatusAilmentVisuals(selectedunit);
 
                 NameTMP.text = selectedunitCharacter.name;
@@ -391,6 +408,11 @@ public class BattleInfotext : MonoBehaviour
             eventSystem.SetSelectedGameObject(null);
             Deactivate();
         }
+        if (!SkillDescription.transform.gameObject.activeSelf)
+        {
+            SkillDescription.transform.gameObject.SetActive(true);
+        }
+
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         for (int i = 0; i < SkillButtonList.Count; i++)
         {
