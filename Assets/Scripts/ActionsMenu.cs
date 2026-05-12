@@ -2396,7 +2396,7 @@ public class ActionsMenu : MonoBehaviour
     private void DealScytheDamage(GameObject attacker, GameObject target)
     {
         List<GameObject> targetlist = new List<GameObject>();
-        Vector2 position = target.GetComponent<UnitScript>().UnitCharacteristics.position;
+        Vector2 position = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
 
         if (position.x < GridScript.Grid.Count - 1)
         {

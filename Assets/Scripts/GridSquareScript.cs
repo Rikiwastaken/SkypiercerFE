@@ -384,6 +384,23 @@ public class GridSquareScript : MonoBehaviour
             MapInitializer = FindAnyObjectByType<MapInitializer>(FindObjectsInactive.Include);
         }
 
+        if (isbossAttackTile)
+        {
+            if (!BossFilledImage.gameObject.activeSelf)
+            {
+                BossFilledImage.gameObject.SetActive(true);
+            }
+
+
+        }
+        else
+        {
+            if (BossFilledImage.gameObject.activeSelf)
+            {
+                BossFilledImage.gameObject.SetActive(false);
+            }
+
+        }
 
 
         if (cameraScript.incombat)
@@ -502,15 +519,7 @@ public class GridSquareScript : MonoBehaviour
         }
 
         GameObject unit = GridScript.GetUnit(this);
-        if (isbossAttackTile)
-        {
-            BossFilledImage.gameObject.SetActive(true);
 
-        }
-        else
-        {
-            BossFilledImage.gameObject.SetActive(false);
-        }
 
         if (unit == null)
         {

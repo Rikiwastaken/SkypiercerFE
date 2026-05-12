@@ -310,6 +310,10 @@ public class ActionManager : MonoBehaviour
     private void AttackDirectly()
     {
         GameObject defenderunit = GridScript.GetUnit(GridScript.selection);
+        if (defenderunit == null)
+        {
+            return;
+        }
         Character defenderunitChar = defenderunit.GetComponent<UnitScript>().UnitCharacteristics;
 
         Character currentChar = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics;
