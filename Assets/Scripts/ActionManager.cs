@@ -309,17 +309,17 @@ public class ActionManager : MonoBehaviour
 
     private void AttackDirectly()
     {
-        GameObject otherunit = GridScript.GetUnit(GridScript.selection);
-        Character otherunitChar = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
+        GameObject defenderunit = GridScript.GetUnit(GridScript.selection);
+        Character defenderunitChar = defenderunit.GetComponent<UnitScript>().UnitCharacteristics;
 
         Character currentChar = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics;
 
         List<GridSquareScript> potentialmovementtiles = new List<GridSquareScript>();
 
-        bool Ishealing = (otherunitChar.affiliation == "playable" || (otherunitChar.affiliation == "other" && !otherunitChar.attacksfriends));
+        bool Ishealing = (defenderunitChar.affiliation == "playable" || (defenderunitChar.affiliation == "other" && !defenderunitChar.attacksfriends));
         if (Ishealing)
         {
-            if (otherunitChar.currentHP >= otherunitChar.AjustedStats.HP)
+            if (defenderunitChar.currentHP >= defenderunitChar.AjustedStats.HP)
             {
                 return;
             }
@@ -343,7 +343,7 @@ public class ActionManager : MonoBehaviour
                 foreach (GridSquareScript movementtile in GridScript.lockedmovementtiles)
                 {
                     GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, true, currentChar);
-                    if (GridScript.healingtiles.Contains(otherunitChar.currentTile[0]))
+                    if (GridScript.healingtiles.Contains(defenderunitChar.currentTile[0]))
                     {
                         potentialmovementtiles.Add(movementtile);
                     }
@@ -419,7 +419,7 @@ public class ActionManager : MonoBehaviour
             {
                 (int newweaponrange, bool newmelee, string newtype) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
                 GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, false, currentChar);
-                if (GridScript.attacktiles.Contains(otherunitChar.currentTile[0]))
+                if (GridScript.attacktiles.Contains(defenderunitChar.currentTile[0]))
                 {
                     potentialmovementtiles.Add(movementtile);
                 }
@@ -483,7 +483,8 @@ public class ActionManager : MonoBehaviour
                 }
                 GridScript.selection = besttile;
                 actionsMenu.GetComponent<ActionsMenu>().target = currentcharacter;
-                actionsMenu.GetComponent<ActionsMenu>().AttackCommand(false);
+                Debug.Log(currentChar.currentTile[0].GridCoordinates);
+                actionsMenu.GetComponent<ActionsMenu>().AttackCommand(false, defenderunit);
                 currentpath = null;
             }
 
