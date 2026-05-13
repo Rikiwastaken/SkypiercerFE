@@ -32,7 +32,7 @@
         },
         {
             "name": "Psychic",
-            "Descriptions": "Increases telekinesis damage by 15% but decreases physical damage by 20%.",
+            "Descriptions": "Increases telekinesis damage dealt by 15% but decreases physical damage dealt by 20%.",
             "IsCommand": false,
             "Cost": 10,
             "targettype": 0,
@@ -42,7 +42,7 @@
         },
         {
             "name": "Brute",
-            "Descriptions": "Increases physical damage by 15% but decreases telekinesis damage by 20%.",
+            "Descriptions": "Increases physical damage dealt by 15% but decreases telekinesis damage dealt by 20%.",
             "IsCommand": false,
             "Cost": 10,
             "targettype": 0,
@@ -412,7 +412,7 @@
         },
         {
             "name": "Together we ride",
-            "Descriptions": "Increases all stats by 1 for every 2 allies in 2 tiles.",
+            "Descriptions": "Increases all stats by 1 for every 3 allies in 2 tiles.",
             "IsCommand": false,
             "Cost": 10,
             "targettype": 0,

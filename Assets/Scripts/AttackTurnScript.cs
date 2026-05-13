@@ -608,7 +608,6 @@ public class AttackTurnScript : MonoBehaviour
                     newitem.ID = CharTarget.UnitSkill;
                 }
                 CharUser.TemporarySkill = CharTarget.UnitSkill;
-                Target.GetComponent<UnitScript>().AddNumber(0, true, DataScript.instance.SkillList[CharTarget.UnitSkill].name + " copied");
                 User.GetComponent<UnitScript>().AddNumber(0, true, DataScript.instance.SkillList[CharTarget.UnitSkill].name + " copied");
             }
         }

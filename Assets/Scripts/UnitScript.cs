@@ -3119,12 +3119,12 @@ public class UnitScript : MonoBehaviour
                     closepalls++;
                 }
             }
-            statbonuses.Strength += closepalls / 2;
-            statbonuses.Psyche += closepalls / 2;
-            statbonuses.Resistance += closepalls / 2;
-            statbonuses.Defense += closepalls / 2;
-            statbonuses.Speed += 5 * closepalls / 2;
-            statbonuses.Dexterity += closepalls / 2;
+            statbonuses.Strength += closepalls / 3;
+            statbonuses.Psyche += closepalls / 3;
+            statbonuses.Resistance += closepalls / 3;
+            statbonuses.Defense += closepalls / 3;
+            statbonuses.Speed += 5 * closepalls / 3;
+            statbonuses.Dexterity += closepalls / 3;
 
         }
 
