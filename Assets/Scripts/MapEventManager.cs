@@ -742,7 +742,6 @@ public class MapEventManager : MonoBehaviour
             {
                 Debug.Log("unlocking : " + unit.name);
                 unit.playableStats.unlocked = unlock;
-                unit.playableStats.deployunit = unlock;
             }
         }
     }
