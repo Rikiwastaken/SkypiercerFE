@@ -77,6 +77,8 @@ public class ActionsMenu : MonoBehaviour
     private InputAction _PrevTargetAction;
     private InputAction _MovementAction;
 
+    public float expLevelAjustmentFactor = 4f; // The divisor for the level difference adjustment, can be tweaked for balance
+
     private void OnDisable()
     {
         PreviousActivatedState = false;
@@ -2478,40 +2480,40 @@ public class ActionsMenu : MonoBehaviour
         int baseexp = 15;
         if (chartarget.enemyStats != null && chartarget.enemyStats.bossiD > 0)
         {
-            baseexp = 50;
+            baseexp = 30;
         }
 
-        int adjustedexp = (int)(baseexp * (1f + (chartarget.level - charunit.level) / 5f));
+        float adjustedexp = baseexp * (1f + (chartarget.level - charunit.level) / expLevelAjustmentFactor);
 
         if (chartarget.currentHP <= 0)
         {
-            adjustedexp *= 3;
+            adjustedexp *= 2f;
         }
 
         if (usingstaff)
         {
-            adjustedexp = 15;
+            adjustedexp = 15f;
         }
         if (noattack)
         {
-            adjustedexp = 1;
+            adjustedexp = 1f;
         }
 
         if (unit.GetComponent<UnitScript>().GetSkill(57) || unit.GetComponent<UnitScript>().GetSkill(72) || unit.GetComponent<UnitScript>().GetSkill(73)) // Crystal Heart, Guardian Spirit, Hero's Heir
         {
-            adjustedexp = (int)(adjustedexp * 1.1f);
+            adjustedexp = (adjustedexp * 1.1f);
         }
 
         if (adjustedexp < 0)
         {
-            adjustedexp = 1;
+            adjustedexp = 1f;
         }
         if (adjustedexp > 100)
         {
-            adjustedexp = 100;
+            adjustedexp = 100f;
         }
 
-        charunit.experience += adjustedexp;
+        charunit.experience += (int)adjustedexp;
         List<int> levelup = new List<int>();
         if (charunit.experience >= 100)
         {
@@ -2520,7 +2522,7 @@ public class ActionsMenu : MonoBehaviour
 
         unit.GetComponent<UnitScript>().GainCombatMastery();
 
-        return (adjustedexp, levelup);
+        return ((int)adjustedexp, levelup);
     }
 
     public int CalculateDamage(GameObject unit, GameObject target = null)
