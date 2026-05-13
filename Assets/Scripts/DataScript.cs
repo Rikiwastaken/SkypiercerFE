@@ -1924,7 +1924,7 @@ public class DataScript : MonoBehaviour
 
                     break;
                 case 6: // Mir
-                    if (chapter >= 1 && chapter != 2)
+                    if (chapter >= 1 && chapter != 2 && chapter < 11)
                     {
                         character.playableStats.unlocked = true;
                     }

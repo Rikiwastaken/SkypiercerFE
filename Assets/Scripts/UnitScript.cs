@@ -654,7 +654,7 @@ public class UnitScript : MonoBehaviour
         {
             MoveTo(UnitCharacteristics.position);
         }
-        else if (UnitCharacteristics.currentTile.Count > 0)
+        else if (UnitCharacteristics.currentTile.Count > 0 && UnitCharacteristics.currentTile[0] != null)
         {
             if (UnitCharacteristics.currentTile[0].isstairs)
             {

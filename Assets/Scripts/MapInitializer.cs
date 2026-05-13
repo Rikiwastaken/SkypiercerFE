@@ -45,14 +45,36 @@ public class MapInitializer : MonoBehaviour
 
     private void EmptyNotUnlockedPlayables()
     {
+        int numberofdeployed = 0;
         for (int i = 0; i < DataScript.instance.PlayableCharacterList.Count; i++)
         {
-            if (!DataScript.instance.PlayableCharacterList[i].playableStats.unlocked)
+            Character currentchar = DataScript.instance.PlayableCharacterList[i];
+            if (!currentchar.playableStats.unlocked)
             {
-                DataScript.instance.PlayableCharacterList[i].playableStats.deployunit = false;
+                currentchar.playableStats.deployunit = false;
             }
-
+            if (ForcedCharacters.Contains(currentchar.ID))
+            {
+                currentchar.playableStats.deployunit = true;
+            }
+            if (currentchar.playableStats.deployunit)
+            {
+                numberofdeployed++;
+            }
         }
+
+        foreach (Character chara in DataScript.instance.PlayableCharacterList)
+        {
+            if (chara.playableStats.unlocked && !chara.playableStats.deployunit)
+            {
+                if (numberofdeployed < playablepos.Count)
+                {
+                    chara.playableStats.deployunit = true;
+                    numberofdeployed++;
+                }
+            }
+        }
+
     }
 
     public void InitializePlayers(bool firstinit = false)
