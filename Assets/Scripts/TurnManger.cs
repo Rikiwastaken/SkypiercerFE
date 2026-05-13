@@ -249,6 +249,17 @@ public class TurnManger : MonoBehaviour
                 }
             }
 
+            // Photosynthesis
+            if (unit.GetComponent<UnitScript>().GetSkill(94) && unit.GetComponent<UnitScript>().GetWeatherType() == "sun")
+            {
+                unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(unitchar.AjustedStats.HP * 0.25f), (int)unitchar.AjustedStats.HP - unitchar.currentHP), true, "Photosynthesis");
+                unitchar.currentHP += (int)(unitchar.AjustedStats.HP * 0.25f);
+                if (unitchar.currentHP > unitchar.AjustedStats.HP)
+                {
+                    unitchar.currentHP = (int)unitchar.AjustedStats.HP;
+                }
+            }
+
             //Reset Verso movements
             unit.GetComponent<UnitScript>().tilesmoved = 0;
 

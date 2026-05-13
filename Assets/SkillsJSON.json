@@ -889,6 +889,66 @@
             "range": 1,
             "buyable": true,
             "ID": 88
+        },
+        {
+            "name": "Burning Soul",
+            "Descriptions": "Applies burn at the beginning of turn. Increases damage and dodge rate by 15%.",
+            "IsCommand": false,
+            "Cost": 5,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 89
+        },
+        {
+            "name": "LightSpeed",
+            "Descriptions": "Increases dodge rate by 25% and crit rate by 10% if unit is paralysed.",
+            "IsCommand": false,
+            "Cost": 3,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 90
+        },
+        {
+            "name": "All In",
+            "Descriptions": "Grants Power, Acceleration and Regen for 3 turns but reduces HP to 1.",
+            "IsCommand": true,
+            "Cost": 3,
+            "targettype": 3,
+            "range": 0,
+            "buyable": true,
+            "ID": 91
+        },
+        {
+            "name": "Reckless Abandon",
+            "Descriptions": "Increases damage by 10% for each negative status ailment.",
+            "IsCommand": false,
+            "Cost": 5,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 92
+        },
+        {
+            "name": "Contamination",
+            "Descriptions": "When attacking an enemy, transmits all status alteration to them and removes them from the user.",
+            "IsCommand": false,
+            "Cost": 10,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 93
+        },
+        {
+            "name": "Photosynthesis",
+            "Descriptions": "Restores 25% of max HP at the beginning of turn if on a Sunny Tile.",
+            "IsCommand": false,
+            "Cost": 2,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 94
         }
     ]
 }

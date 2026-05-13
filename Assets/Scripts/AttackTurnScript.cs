@@ -759,6 +759,16 @@ public class AttackTurnScript : MonoBehaviour
             foresightScript.CreateAction(3, User, Target);
             Target.GetComponent<UnitScript>().RemoveStatusAilments();
         }
+        else if (commandID == 91) // All In
+        {
+            foresightScript.CreateAction(3, User);
+            int healthlost = CharUser.currentHP - 1;
+            CharUser.currentHP = 1;
+            CharUser.statusEffects.PowerTurns += 3;
+            CharUser.statusEffects.RegenTurns += 3;
+            CharUser.statusEffects.AccelerationTurns += 3;
+            User.GetComponent<UnitScript>().AddNumber(healthlost, false, "All In");
+        }
 
         ActionsMenu.FinalizeAttack();
 

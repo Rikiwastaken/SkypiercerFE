@@ -1027,7 +1027,10 @@ public class UnitScript : MonoBehaviour
         {
             UnitCharacteristics.AjustedStats.Dexterity = 0;
         }
-
+        if (GetSkill(45)) //transparent crossbow
+        {
+            UnitCharacteristics.AjustedStats.HP = 1;
+        }
     }
 
     private void GainMastery(Character character, string weapontounlock = "", bool secundary = false)
@@ -1785,6 +1788,14 @@ public class UnitScript : MonoBehaviour
 
     public void TriggerStatusEffectsBegOfTurn()
     {
+        if (GetSkill(89)) // burning soul
+        {
+            UnitCharacteristics.statusEffects.BurnTurns++;
+        }
+        if (GetSkill(87))// unphasable
+        {
+            RemoveStatusAilments();
+        }
         if (UnitCharacteristics.statusEffects.BurnTurns > 0)
         {
             UnitCharacteristics.currentHP = (int)Mathf.Max(0f, UnitCharacteristics.currentHP - UnitCharacteristics.AjustedStats.HP * 0.1f);
@@ -3144,6 +3155,17 @@ public class UnitScript : MonoBehaviour
             statbonuses.DamageReduction -= 20;
         }
 
+        //TransparentCrossBow
+        if (GetSkill(45))
+        {
+            statbonuses.Strength += 5;
+            statbonuses.Psyche += 5;
+            statbonuses.Resistance += 5;
+            statbonuses.Defense += 5;
+            statbonuses.Speed += 5;
+            statbonuses.Dexterity += 5;
+        }
+
         // Enduring
         if (GetSkill(55))
         {
@@ -3270,6 +3292,49 @@ public class UnitScript : MonoBehaviour
                 statbonuses.Hit += 20;
                 statbonuses.Dodge += 20;
                 statbonuses.Crit += 10;
+            }
+        }
+
+        // Burning Soul
+        if (GetSkill(89))
+        {
+            statbonuses.PhysDamage += 15;
+            statbonuses.TelekDamage += 15;
+            statbonuses.Dodge += 15;
+        }
+
+        //LightSpeed
+        if (GetSkill(90))
+        {
+            if (UnitCharacteristics.statusEffects.ParalyzedTurns > 0)
+            {
+                statbonuses.Dodge += 25;
+                statbonuses.Crit += 10;
+            }
+        }
+
+        //Reckless Abandon
+        if (GetSkill(92))
+        {
+            if (UnitCharacteristics.statusEffects.ParalyzedTurns > 0)
+            {
+                statbonuses.PhysDamage += 10;
+                statbonuses.TelekDamage += 10;
+            }
+            if (UnitCharacteristics.statusEffects.BurnTurns > 0)
+            {
+                statbonuses.PhysDamage += 10;
+                statbonuses.TelekDamage += 10;
+            }
+            if (UnitCharacteristics.statusEffects.WeaknessTurns > 0)
+            {
+                statbonuses.PhysDamage += 10;
+                statbonuses.TelekDamage += 10;
+            }
+            if (UnitCharacteristics.statusEffects.StunTurns > 0)
+            {
+                statbonuses.PhysDamage += 10;
+                statbonuses.TelekDamage += 10;
             }
         }
 

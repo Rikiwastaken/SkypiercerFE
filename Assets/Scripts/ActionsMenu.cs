@@ -1213,6 +1213,11 @@ public class ActionsMenu : MonoBehaviour
         {
             BasicCommandWindow(unit, target);
         }
+        else if (command.ID == 91) // All In
+        {
+            int healthrestored = (int)(-(charunit.currentHP - 1));
+            SelfHealCommandWindow(unit, healthrestored, unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses);
+        }
 
     }
 
@@ -2300,6 +2305,20 @@ public class ActionsMenu : MonoBehaviour
         if (Attacker.GetComponent<UnitScript>().GetSkill(86)) //blazing edge
         {
             charTarget.statusEffects.BurnTurns++;
+        }
+
+        if (Attacker.GetComponent<UnitScript>().GetSkill(93)) //contamination
+        {
+            StatusEffects AtatckerStatus = Attacker.GetComponent<UnitScript>().UnitCharacteristics.statusEffects;
+            StatusEffects TargetStatus = charTarget.statusEffects;
+            TargetStatus.BurnTurns += AtatckerStatus.BurnTurns;
+            TargetStatus.ParalyzedTurns += AtatckerStatus.ParalyzedTurns;
+            TargetStatus.WeaknessTurns += AtatckerStatus.WeaknessTurns;
+            TargetStatus.StunTurns += AtatckerStatus.StunTurns;
+            TargetStatus.PowerTurns += AtatckerStatus.PowerTurns;
+            TargetStatus.RegenTurns += AtatckerStatus.RegenTurns;
+            TargetStatus.AccelerationTurns += AtatckerStatus.AccelerationTurns;
+            Attacker.GetComponent<UnitScript>().RemoveStatusAilments();
         }
 
         if (target.GetComponent<UnitScript>().GetSkill(87)) //unphasable
