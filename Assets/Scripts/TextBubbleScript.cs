@@ -109,6 +109,7 @@ public class TextBubbleScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (ignoreInputThisFrame)
         {
             ignoreInputThisFrame = false;

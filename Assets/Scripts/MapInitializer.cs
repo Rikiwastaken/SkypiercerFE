@@ -36,24 +36,20 @@ public class MapInitializer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        EmptyPlayables();
+        EmptyNotUnlockedPlayables();
 
         InitializePlayers(true);
         InitializeNonPlayers();
         InitializeCopyAndTalkID();
     }
 
-    private void EmptyPlayables()
+    private void EmptyNotUnlockedPlayables()
     {
         for (int i = 0; i < DataScript.instance.PlayableCharacterList.Count; i++)
         {
-            DataScript.instance.PlayableCharacterList[i].playableStats.deployunit = false;
-        }
-        for (int i = 0; i < Mathf.Min(playablepos.Count, DataScript.instance.PlayableCharacterList.Count); i++)
-        {
-            if (DataScript.instance.PlayableCharacterList[i].playableStats.unlocked || SceneManager.GetActiveScene().name == "TestMap")
+            if (!DataScript.instance.PlayableCharacterList[i].playableStats.unlocked)
             {
-                DataScript.instance.PlayableCharacterList[i].playableStats.deployunit = true;
+                DataScript.instance.PlayableCharacterList[i].playableStats.deployunit = false;
             }
 
         }
