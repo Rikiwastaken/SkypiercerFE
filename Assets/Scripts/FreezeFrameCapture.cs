@@ -102,12 +102,9 @@ public class FreezeFrameCapture : MonoBehaviour
         TimeSafeguard = Mathf.Infinity;
         CharacterSpriteBasePos = CharacterSprite.GetComponent<RectTransform>().anchoredPosition;
         BackgroundImageBasePos = BackgroundImage.GetComponent<RectTransform>().anchoredPosition;
-        if (playerInput == null)
-        {
-            playerInput = FindAnyObjectByType<PlayerInput>();
-        }
-        ActivateAction = playerInput.actions["Validate"];
-        CancelAction = playerInput.actions["Cancel"];
+
+        ActivateAction = InputSystem.actions.FindAction("Validate");
+        CancelAction = InputSystem.actions.FindAction("Cancel");
 
     }
 
