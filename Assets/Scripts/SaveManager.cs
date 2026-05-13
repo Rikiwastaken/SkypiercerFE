@@ -297,7 +297,7 @@ public class SaveManager : MonoBehaviour
                 {
                     if (save.MaxChapterReached > 1)
                     {
-                        text += "\nChapter: " + (save.MaxChapterReached - 1) + ", after battle.";
+                        text += "\nChapter: " + (save.MaxChapterReached) + ", after battle.";
                     }
                     else
                     {

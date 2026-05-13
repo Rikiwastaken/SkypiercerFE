@@ -80,11 +80,8 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadScene(string sceneName)
     {
-        int chapternumber = 0;
-        if (sceneName.ToLower().Contains("chapter"))
-        {
-            chapternumber = int.Parse(sceneName.ToLower().Replace("chapter", ""));
-        }
+
+        int chapternumber = SaveManager.instance.maxchapterreached;
         DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
         SceneToToad = sceneName;
         SceneManager.LoadScene("LoadingScene");

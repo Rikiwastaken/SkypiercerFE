@@ -1934,7 +1934,7 @@ public class DataScript : MonoBehaviour
                     }
                     break;
                 case 7: // Ruben
-                    if (chapter >= 4)
+                    if (chapter >= 5)
                     {
                         character.playableStats.unlocked = true;
                     }
