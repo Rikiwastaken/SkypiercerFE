@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class SkillShopScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI BuyText;
     [SerializeField] private Image BuyImage;
     [SerializeField] private TextMeshProUGUI SkillCoinsText;
+    [SerializeField] private TextMeshProUGUI SortText;
     [SerializeField] private Button SkillShopButton;
 
     private List<Button> Buttons;
@@ -35,9 +37,12 @@ public class SkillShopScript : MonoBehaviour
     private InputAction _NextWeaponAction;
     private InputAction _PreviousWeaponAction;
     private InputAction _ActivateAction;
+    private InputAction _TelekinesisInputAction;
 
     [SerializeField] private float timenecessarytobuyitem;
     private float timeforbuy;
+
+    private int CurrentSort;
 
     private void Start()
     {
@@ -45,6 +50,7 @@ public class SkillShopScript : MonoBehaviour
         _NextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
         _CancelAction = InputSystem.actions.FindAction("Cancel");
         _ActivateAction = InputSystem.actions.FindAction("Validate");
+        _TelekinesisInputAction = InputSystem.actions.FindAction("TelekinesisToggle");
     }
 
     // Update is called once per frame
@@ -60,7 +66,22 @@ public class SkillShopScript : MonoBehaviour
             return;
 
         }
+        //Change sort
+        if (_TelekinesisInputAction.WasPressedThisFrame())
+        {
 
+            if (CurrentSort < 7)
+            {
+                CurrentSort++;
+
+            }
+            else
+            {
+                CurrentSort = 0;
+            }
+
+            SortSkills(CurrentSort);
+        }
 
         // Change Windows
         if (_PreviousWeaponAction.WasPressedThisFrame())
@@ -194,17 +215,17 @@ public class SkillShopScript : MonoBehaviour
 
         foreach (Skill skill in DataScript.instance.SkillList)
         {
-            if (skill.buyable && skillIDshown.Contains(skill.ID))
+            if (skill.buyable && (skillIDshown.Contains(skill.ID) || skill.AlwaysPresentInShop))
             {
                 SkillsToShow.Add(skill);
             }
         }
-        InitializeSkillButtons();
-        EventSystem.current.SetSelectedGameObject(Buttons[0].gameObject);
-        InitializeInventorySkillList();
+        CurrentSort = 0;
+        SortSkills(CurrentSort);
+
 
         SkillCoinsText.text = "Skill Coins: " + DataScript.instance.SkillCoins;
-        timeforbuy = Time.time + timenecessarytobuyitem;
+
     }
 
     /// <summary>/ Function to update the description text when selecting a skill, also updates the buy text to show the cost and if the player can afford it
@@ -346,4 +367,154 @@ public class SkillShopScript : MonoBehaviour
 
         }
     }
+
+    private void SortSkills(int type)
+    {
+        switch (type)
+        {
+            case 0: // alphabetically
+                SkillsToShow.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.OrdinalIgnoreCase));
+                SortText.text = "Sort: A...Z";
+                break;
+            case 1: // reverse alphabetically
+                SkillsToShow.Sort((a, b) => string.Compare(b.name, a.name, StringComparison.OrdinalIgnoreCase));
+                SortText.text = "Sort: Z...A";
+                break;
+            case 2: // commands first
+                SkillsToShow.Sort((a, b) =>
+                {
+                    // Commands first
+                    int commandCompare = b.IsCommand.CompareTo(a.IsCommand);
+                    if (commandCompare != 0)
+                        return commandCompare;
+
+                    // Then alphabetical
+                    return string.Compare(a.name, b.name, StringComparison.OrdinalIgnoreCase);
+                });
+                SortText.text = "Sort: Commands First";
+                break;
+            case 3: // commands last
+                SkillsToShow.Sort((a, b) =>
+                {
+                    // Commands last
+                    int commandCompare = a.IsCommand.CompareTo(b.IsCommand);
+                    if (commandCompare != 0)
+                        return commandCompare;
+
+                    // Then alphabetical
+                    return string.Compare(a.name, b.name, StringComparison.OrdinalIgnoreCase);
+                });
+                SortText.text = "Sort: Commands Last";
+                break;
+            case 4: // owned first
+                OrderByOwned();
+                SortText.text = "Sort: Owned First";
+                break;
+            case 5: // owned last
+                OrderByOwned(true);
+                SortText.text = "Sort: Owned Last";
+                break;
+            case 6: //cost ascending
+                SkillsToShow.Sort((a, b) =>
+                {
+                    // Cost ascending
+                    int costCompare = a.Cost.CompareTo(b.Cost);
+                    if (costCompare != 0)
+                        return costCompare;
+                    // Alphabetical
+                    return string.Compare(
+                        a.name,
+                        b.name,
+                        StringComparison.OrdinalIgnoreCase);
+                });
+                SortText.text = "Sort: Cost Asc";
+                break;
+            case 7: //cost descending
+                SkillsToShow.Sort((a, b) =>
+                {
+                    // Cost ascending
+                    int costCompare = b.Cost.CompareTo(a.Cost);
+                    if (costCompare != 0)
+                        return costCompare;
+                    // Alphabetical
+                    return string.Compare(
+                        a.name,
+                        b.name,
+                        StringComparison.OrdinalIgnoreCase);
+                });
+                SortText.text = "Sort: Cost Desc";
+                break;
+        }
+        skillwindowindex = 0;
+        InitializeSkillButtons();
+        EventSystem.current.SetSelectedGameObject(Buttons[0].gameObject);
+        InitializeInventorySkillList();
+
+        timeforbuy = Time.time + timenecessarytobuyitem;
+
+        UpdateSkillDescriptionText(Buttons[0].gameObject.GetComponent<UnitDeploymentButton>());
+    }
+
+    private List<int> GetOwnedSkills()
+    {
+        List<int> ownedskills = new List<int>();
+        foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
+        {
+            if (item.Quantity > 0)
+            {
+                ownedskills.Add(item.ID);
+            }
+        }
+        foreach (Character chara in DataScript.instance.PlayableCharacterList)
+        {
+            if (chara.playableStats.unlocked)
+            {
+                foreach (int SkillID in chara.EquipedSkills)
+                {
+                    if (!ownedskills.Contains(SkillID))
+                    {
+                        ownedskills.Add(SkillID);
+                    }
+                }
+            }
+        }
+        return ownedskills;
+    }
+
+    private void OrderByOwned(bool invertorder = false)
+    {
+        List<Skill> ownedskills = new List<Skill>();
+        List<Skill> notownedskills = new List<Skill>();
+        List<int> ownedskillID = GetOwnedSkills();
+        SkillsToShow.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.OrdinalIgnoreCase));
+        foreach (Skill skill in SkillsToShow)
+        {
+            if (ownedskillID.Contains(skill.ID))
+            {
+                ownedskills.Add(skill);
+            }
+            else
+            {
+                notownedskills.Add(skill);
+            }
+
+        }
+        if (invertorder)
+        {
+            SkillsToShow = notownedskills;
+            foreach (Skill skill in ownedskills)
+            {
+                SkillsToShow.Add(skill);
+            }
+        }
+        else
+        {
+            SkillsToShow = ownedskills;
+            foreach (Skill skill in notownedskills)
+            {
+                SkillsToShow.Add(skill);
+            }
+        }
+    }
+
 }
