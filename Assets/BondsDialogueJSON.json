@@ -1519,8 +1519,98 @@
                     "text": "Probably."
                 }
             ],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 2,
+                    "text": "Good evening, Lyv. What are you doing?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Hi, Elwyn. I am updating my journal. I was just about to be done."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "A journal? Why do you keep one?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "No reason, really. I just like to unwind on paper. Every once in a while, I read it and it reminds me of how far we've come."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I see."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "It helps you put things into perspective. With evrything that happened. It's easy to feel a bit lost. It helps me remember that there is as much good as bad in this world."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "You don't have to feel lost, Lyv. We're not kids anymore, you can tell us when you're feeling down. We can help you out."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Look how much you have grown, Elwyn. Understood. Next time I feel like this, I'll come to you. Thanks."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 4,
+                    "text": "Hi Elwyn, how are you? You seem a bit down."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "It's... It's nothing."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Really?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Well... You know, last time we talked, you told me about your journal. I started one too."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "That's great! I'm glad you found it useful."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Well, that's the thing. I also felt like writing all that happened. It's more like a memoir, I guess."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I see, so what's the problem?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "You told me writing yours helped you put things into perspective, but I just can't seem to do that. I just keep writing and recently it's been one catastrophe after another."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I see. I guess it's normal to feel that way. All we do is fighting and watch our friends get hurt all the time. It's hard to see the good in that. We can't all be happy go lucky all the time, like some idiots I know."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I guess it would be a lot easier."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Maybe so... But listen, I have an idea. Why don't you try writing about the good things that happened? They don't have to be big things, just the little things that made you smile. It can be something as simple as a nice meal or a good joke."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Like when we saw that pluvial slip in the mud and get impaled on his own spear?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Exactly! Anything that made you smile, even for a second. It can be a good memory or something that happened today. Just try to focus on the good things, and I promise you, it will help you put things into perspective."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I guess I can try that. Thanks, Lyv."
+                }
+            ],
             "dialogueLvl4": []
         },
         {
