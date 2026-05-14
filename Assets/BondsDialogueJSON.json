@@ -2045,9 +2045,128 @@
         },
         {
             "BondID": 13,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 4,
+                    "text": "Ruben! It looks like the two of us are taking watch together tonight."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Seems like it. I'd rather be training, to be honest."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "That's so like you. You know that people usually sleep at night, right?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I don't like sleeping. It's a waste of time."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Tell, me Ruben. Why do you train so much. I mean, until recently, you didn't even want to be a fighter."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Do you know what it's like to see your friends run around in panick while you're stricken by fear, unable to do anything but hide in the mud?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Ruben..."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I was so scared that I couldn't even move. I wish I could be more like Zack or Elwyn. They're so brave and strong. The only thing I can do is train."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "You're already just as brave as they are, Ruben."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Right. I'll never be weak again. Never. Whenever I close my eyes, I the amry officials who tried to fight the pluvials..."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Don't worry. I know you can do it. Just remember that you have us to support you."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Thanks, Lyv. I think I'll get a few swings while we watch."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 4,
+                    "text": "Ruben, wake up! Are you alright? Ruben!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "What? Where am I? I must have dozed off..."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "You fainted in the middle of your training. You really need to rest more, Ruben. You look exhausted."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I'm sorry, I just... I don't have time, alright?"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I've had enough, Ruben. I swear to the Hero, if you don't get some rest, I will make you get some rest."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "What? No it's ok, I don't need to..."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Sorak? Come over here please. I need your help with something. And get some rope."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Fine, fine! I'll go to sleep! Just... Please don't tie me up!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Kids, I swear..."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 4,
+                    "text": "Ruben, you look good today!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Yeah, I've been getting plenty of sleep lately. I feel great!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "That's good to hear, Ruben. You look refreshed."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Yeah, I also started training with Zack, and it's been really fun. I feel like I'm getting stronger every day!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "That's great, Ruben. Keep up the good work!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Thanks, for the encouragement and everything, Lyv. I really needed someone to help me out."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Even if we're not in the village anymore, it's still my job to take care of you all."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Thank you for everything, Lyv."
+                }
+            ],
             "dialogueLvl4": []
         },
         {
