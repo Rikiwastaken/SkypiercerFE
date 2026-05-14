@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static SaveManager;
@@ -2376,6 +2377,33 @@ public class DataScript : MonoBehaviour
         Debug.Log("Loaded " + wrapper.SkillList.Count + " skills into the SkillList!");
     }
 
+    [ContextMenu("Save Skills To JSON")]
+    public void SaveSkills()
+    {
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Skill JSON File", "", "json");
+        if (string.IsNullOrEmpty(path))
+            return;
+
+        SkillListWrapper wrapper = new SkillListWrapper() { SkillList = SkillList };
+
+        string json = JsonUtility.ToJson(wrapper, true);
+
+        try
+        {
+            AssetDatabase.StartAssetEditing();
+            File.WriteAllText(path, json);
+            Debug.Log($"Skill Saved : {path}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error when saving options : {e.Message}");
+        }
+        finally
+        {
+            AssetDatabase.StopAssetEditing();
+        }
+    }
+
 
     [ContextMenu("Load Bonds From JSON")]
     public void LoadBonds()
@@ -2442,6 +2470,7 @@ public class DataScript : MonoBehaviour
         }
 
     }
+
 
 #endif
 }

@@ -150,7 +150,7 @@ public class SkillShopScript : MonoBehaviour
 
         foreach (SkillPerMap skillpermap in DataScript.instance.skillsPerMap)
         {
-            if (skillpermap.SkillsOnTheMap == null && skillpermap.SkillsOnTheMap.Count == 0)
+            if (skillpermap.SkillsOnTheMap == null || skillpermap.SkillsOnTheMap.Count == 0 || skillpermap.mapID > SaveManager.instance.maxchapterreached)
             {
                 continue;
             }
@@ -165,9 +165,30 @@ public class SkillShopScript : MonoBehaviour
 
         foreach (Character character in DataScript.instance.PlayableCharacterList)
         {
-            if (character.playableStats.unlocked && !skillIDshown.Contains(character.UnitSkill))
+            if (character.playableStats.unlocked)
             {
-                skillIDshown.Add(character.UnitSkill);
+                if (!skillIDshown.Contains(character.UnitSkill))
+                {
+                    skillIDshown.Add(character.UnitSkill);
+                }
+                foreach (int skillID in character.EquipedSkills)
+                {
+                    if (!skillIDshown.Contains(skillID))
+                    {
+                        skillIDshown.Add(skillID);
+                    }
+                }
+            }
+        }
+
+        foreach (InventoryItem skill in DataScript.instance.PlayerInventory.inventoryItems)
+        {
+            if (skill.Quantity > 0)
+            {
+                if (!skillIDshown.Contains(skill.ID))
+                {
+                    skillIDshown.Add(skill.ID);
+                }
             }
         }
 
