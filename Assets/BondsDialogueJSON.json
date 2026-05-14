@@ -2171,10 +2171,230 @@
         },
         {
             "BondID": 14,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
-            "dialogueLvl4": []
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 2,
+                    "text": "Hi, Ruben. Have you been doing alright?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I'm fine, thanks."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Good to hear. We haven't really talked that much in a while, have we?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Yeah... Ever since you joined Zack's squad, we haven't been able to hang out as much."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Yeah, you're right. He's a handful, that one..."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I have always wondered, Elwyn. Why did you choose to join Zack's squad?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Well, at first, it was because he looked so lonely. He was always the kid who was working in his machines. I was a bit curious when he volunteered to be a Squad Leader."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Really? That's it? I thought there was some kind of deeper reason behind it. Lea even followed you out of sheer loyalty."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Yeah, sorry it your desappointed. I know you're not particularly fond of him, but when you get to know him, he's actually a really nice guy. He's just a bit... Weird."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Yeah, I know, I know. I would have liked to have you in my squad, though. We would have been the best squad."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Well then, good thing we're all in the same squad, now!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "That's not really what I meant, but I guess it works."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 7,
+                    "text": "Hey, Elwyn. Wanna train together?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Sure, that sounds like fun! But, huh, you know I'm not really versed into closed combat, right?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I know, I'm mainly a bow user myself. It's alright!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Okay, let's do it then!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Great! Let's go some dodging drills! I'll shoot some arrows at you and you try to dodge them!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Wait, hold on... Aaaaaagh! That hurts!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "My bad! I thought you would dodge it... Are you ok."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Of course I'm not OK. You just shot me in the knee!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Oh, I'm really sorry! Don't worry, I'll take out the arrow so you can heal yourself."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Waitwaitwait. Ouch! That hurts even more! Why would you do that?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Just... Shut up and heal yourself!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I can't do that!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "What? Really?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "What the hell man? Is this your everyday training routine? Go get Lyv!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Yeah, something like that, except Zack usually dodges the arrows."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Oh, you try to dodge this one, you maniac!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Hold on, hold on !"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 7,
+                    "text": "Hey, Elwyn. Are you ok? You look a bit... Bruised."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Yeah, well last time we trained made me realize that maybe I should try to work on my defensive skills."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Oh really?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Yeah, so I tried training with Zack, but it hasn't been going very well."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I see..."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I don't really know how to get better at dodging and stuff. Usually Zack and Lea shield me."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Maybe it's just not your forte. You can't be good at everything, you know."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Yeah maybe, but depending on others is a pain. I want to be able to take care of myself."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "What? That's stupid! We're fighting as a team right? So we should be able to rely on each other, right?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Yeah, I guess you're right... Hold on, why do you train your dodge-game, then? You're a bowman!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "It's because I'm pretty good at about everything but telekinesis. That's your thing."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "You know you're most friendly irritating guy I know, right?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Thanks, I think?"
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 7,
+                    "text": "Hey, Elwyn. Do you have a minute?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Ruben! Sure, do you need anything?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "No, not really. I just wanted to hang out with you."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Of course! I was just about to get you."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Say, when this is all over, what do you want to do?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I don't know. Maybe return to the village and try to rebuild it? Settle down there?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I'm thinking settling down is pretty good."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "If it comes down to it, would you like to settle down with me?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Yeah, I'd say that's a pretty good idea."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Great! I think we would make a great team!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Yeah, I have been thinking that from the moment I met you, to be honest. I just didn't want to say it out loud because I thought it would be weird."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "It's a bit weird, but it's a good weird. I like it."
+                }
+            ]
         },
         {
             "BondID": 15,
