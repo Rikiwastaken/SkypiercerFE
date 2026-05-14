@@ -53,7 +53,12 @@ public class WorldMapManager : MonoBehaviour
     void Start()
     {
         initialPosition = ChapterUI.transform.localPosition;
-
+        _ActivateAction = InputSystem.actions.FindAction("Validate");
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _MoveAction = InputSystem.actions.FindAction("Movement");
+        _TelekinesisAction = InputSystem.actions.FindAction("TelekinesisToggle");
+        _ShowDetailsAction = InputSystem.actions.FindAction("ShowDetails");
+        _CamAction = InputSystem.actions.FindAction("MoveCam");
         int maxchapter = DataScript.instance.GetComponent<SaveManager>().maxchapterreached;
 
         if (maxchapter == 0)
@@ -70,12 +75,7 @@ public class WorldMapManager : MonoBehaviour
                 }
             }
         }
-        _ActivateAction = InputSystem.actions.FindAction("Validate");
-        _CancelAction = InputSystem.actions.FindAction("Cancel");
-        _MoveAction = InputSystem.actions.FindAction("Movement");
-        _TelekinesisAction = InputSystem.actions.FindAction("TelekinesisToggle");
-        _ShowDetailsAction = InputSystem.actions.FindAction("ShowDetails");
-        _CamAction = InputSystem.actions.FindAction("MoveCam");
+
 
     }
 

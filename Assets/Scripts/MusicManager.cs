@@ -328,7 +328,7 @@ public class MusicManager : MonoBehaviour
 
             ChangeVolume(CampMusic, 0f);
             ChangeVolume(CampMusicintro, 0f);
-            if (worldmapController.instance.isshipping)
+            if (worldmapController.instance.isshippingCounter > 0)
             {
                 ChangeVolume(WorldMapMusic, 0f);
                 ChangeVolume(WorldMapMusicintro, 0f);

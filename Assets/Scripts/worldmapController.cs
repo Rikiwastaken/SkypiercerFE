@@ -1,3 +1,5 @@
+
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,7 +23,7 @@ public class worldmapController : MonoBehaviour
 
     private Vector3 targetcamrotation;
 
-    public bool isshipping;
+    public int isshippingCounter;
     public float waterwheelrotationpersecond;
     public Transform Waterwheel;
 
@@ -37,6 +39,8 @@ public class worldmapController : MonoBehaviour
         instance = this;
     }
 
+    private List<string> collidingtags = new List<string>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -47,31 +51,29 @@ public class worldmapController : MonoBehaviour
         _MoveCamAction = InputSystem.actions.FindAction("MoveCam");
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        string othertag = other.gameObject.tag;
+        if (!collidingtags.Contains(othertag))
+        {
+            collidingtags.Add(othertag);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        string othertag = other.gameObject.tag;
+        if (collidingtags.Contains(othertag))
+        {
+            collidingtags.Remove(othertag);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         Vector3 finalmovement = Vector3.zero;
-        if (isshipping)
-        {
-            if (!ShipModel.activeSelf)
-            {
-                HumanModel.SetActive(false);
-                ShipModel.SetActive(true);
-                playermodel = ShipModel.transform;
-            }
 
-            Waterwheel.Rotate(waterwheelrotationpersecond * Time.deltaTime * CC.velocity.magnitude / speed, 0f, 0f);
-
-        }
-        else
-        {
-            if (ShipModel.activeSelf)
-            {
-                HumanModel.SetActive(true);
-                ShipModel.SetActive(false);
-                playermodel = HumanModel.transform;
-            }
-        }
 
         if (WorldMapManager.Instance.FastTravelMenu.activeSelf)
         {
@@ -138,6 +140,41 @@ public class worldmapController : MonoBehaviour
 
         CC.Move(finalmovement);
 
+    }
+
+    private void LateUpdate()
+    {
+
+        if (collidingtags.Contains("Sea"))
+        {
+            isshippingCounter = 10;
+        }
+        else
+        {
+            isshippingCounter--;
+        }
+
+        if (isshippingCounter > 0)
+        {
+            if (!ShipModel.activeSelf)
+            {
+                HumanModel.SetActive(false);
+                ShipModel.SetActive(true);
+                playermodel = ShipModel.transform;
+            }
+
+            Waterwheel.Rotate(waterwheelrotationpersecond * Time.deltaTime * CC.velocity.magnitude / speed, 0f, 0f);
+
+        }
+        else
+        {
+            if (ShipModel.activeSelf)
+            {
+                HumanModel.SetActive(true);
+                ShipModel.SetActive(false);
+                playermodel = HumanModel.transform;
+            }
+        }
     }
 
     public void MoveTo(Vector3 destination)
