@@ -1757,16 +1757,290 @@
         },
         {
             "BondID": 11,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 4,
+                    "text": "Hello, Sieg. What are you up to?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I'm reading an old book I found in the ruins we visited a while ago. It's preserved impecably!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Oh, really? What is it about?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "It's about the cataclysm. It's some kind of diary from a survivor. I just started it, but we could learn a lot from it, I think."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Don't we already know what happened during the cataclysm?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Well, when it happened, most people still relied on computers and stuff to document things. Most of it was lost, the rest of the archelogists usually try to recover books like this one."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I see. Do you think it could be useful for us?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I don't know yet, but I think it's worth a read. Maybe we can find some useful information in it."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I guess it is always interesting to learn more about the past. Can you tell me more about it when you finish reading it?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Will do!"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 5,
+                    "text": "Lyv, Lyv! I just finished reading that book I found, and I think it's really interesting!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Oh, really? Calm down, and tell me about it."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "It looks like the diary is from a survivor of the ground zero of the cataclysm, where the Beast appeared."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Landfall Village?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Yes, exactly. The diary is from someone who worked at the ruins under the village. At the time it was a research facilty. Of some sort."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "So... What happened? Does it say what caused the Beast to appear?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Saddly, no. The writer was a janitor. He didn't really know anything about what happened down there. He wrote that most of the complex was destroyed in a cavein when the Beast appeared, so it's likely that the most important information was lost. "
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "It's not anything new, then?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Not really, but it's still interesting to read about it from a first hand account!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I guess so. Thanks for sharing it with me, Sieg."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "No problem! It's always nice to share interesting things with friends!"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 4,
+                    "text": "Sieg! What happened? Are you alright?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "It's nothing. I just go a little bit bruised trying to save a hard drive I found earlier."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Why would you do that? Your safety is more important than some old hard drive, you know. Here, let me heal that for you."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Thanks. It feels much better already."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "You're welcome. So, what was on that hard drive? Was it something important?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Who knows? It's not like we have a computer to read it on, but I think it's worth trying to recover the data on it. It might be something useful."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "Do you even know if it still works? I mean, it's been exposed to the elements for a long time."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Nope!"
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "You risked your life for a hard drive that might not even work? That's so reckless!"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Yes, I know. But we've lost so much knowledge about the past, and I just want to recover as much of it as I can. If even the slightest bit of information can be recovered from it, it will be worth it."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "I understand your motivation, but please be more careful in the future. I don't want to lose you."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I will try to be more careful, I promise."
+                },
+                {
+                    "CharacterID": 4,
+                    "text": "You're just saying that to make me feel better. \"Try\" is the keyword, isn't it?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Could be!"
+                }
+            ],
             "dialogueLvl4": []
         },
         {
             "BondID": 12,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 0,
+                    "text": "Hi, Ruben. What are you up to?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Nothing much. Training a bit."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Well, this is awkward. I'll get going, then."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Hold on. I just wanted to say... Sorry."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "For what?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "For snapping at you when we found you. It was uncalled for."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Yeah, you were a bit of a jerk. It's alright."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Thanks. I'll leave you to your training, then."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "To me, you're still a jerk, but I guess that if Elwyn trusts you, then I can give you a chance. See you around."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 7,
+                    "text": "Hey, Zack. Do you have a minute?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Sure, what's up?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I just wanted to thank you for earlier, you really saved my bacon there."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Anytime. You're a member of our crew. We look out for each other."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I know, but I just wanted to say it. I really appreciate it. Maybe... Maybe I acted like a jerk, too."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Well, then let's just call it even. How about we stop being jerks to each other from now on?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Yeah I could go for that."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 0,
+                    "text": "Take that!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "You're a bit clumsy, man."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Damn it, I know. Fighting pluvials is so different from fighting people. It's so much easier..."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "hey, you're the one who asked to train with me, so you should be used to it by now."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I wish. You get stronger every day."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "You're not so bad yourself, Zack. It's just that the way you train is a bit weird."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I guess. I have been making it up as I go along, so it's not surprising that it's a bit unorthodox."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "That's what you get from skipping classes, I guess."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Sorak's classes are so boring, man! Also, I don't want to fight people. I want to fight pluvials!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Me too... I'm relieved that I didn't get to join the army..."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah, me too!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Thanks for saving me, back there, Zack."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "No problem. Anyway, let's get back to training! This time you'll eat dirt!"
+                }
+            ],
             "dialogueLvl4": []
         },
         {
