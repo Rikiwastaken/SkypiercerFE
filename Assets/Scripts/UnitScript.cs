@@ -1645,6 +1645,7 @@ public class UnitScript : MonoBehaviour
         equipment weapon = GetFirstWeapon();
 
         animatortouse.SetBool("Slash", false);
+        animatortouse.SetBool("ShieldBash", false);
         animatortouse.SetBool("Stab", false);
         animatortouse.SetBool("Punch", false);
         animatortouse.SetBool("GreatSword", false);
@@ -1673,7 +1674,7 @@ public class UnitScript : MonoBehaviour
                     animatortouse.SetBool("GreatSword", true);
                     break;
                 case "shield":
-                    animatortouse.SetBool("Punch", true);
+                    animatortouse.SetBool("ShieldBash", false);
                     break;
                 case "bow":
                     animatortouse.SetBool("Bow", true);
