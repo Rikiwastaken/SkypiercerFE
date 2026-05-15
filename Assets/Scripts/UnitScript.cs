@@ -2264,7 +2264,7 @@ public class UnitScript : MonoBehaviour
                     break;
                 case "scythe":
                     GrowthtoApply.PsycheGrowth += bonussize;
-                    GrowthtoApply.DexterityGrowth += bonussize;
+                    GrowthtoApply.HPGrowth += bonussize;
                     GrowthtoApply.SpeedGrowth -= bonussize;
                     break;
                 case "shield":
