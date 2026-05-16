@@ -14,10 +14,12 @@ public class WorldMapManager : MonoBehaviour
 
 
     public List<string> chapternames;
+    public List<string> SideStoryNames;
 
     public GameObject ChapterUI;
     public TextMeshProUGUI chaptertext;
     public TextMeshProUGUI chapterNametext;
+    public TextMeshProUGUI chapterlvl;
 
     private Vector3 initialPosition;
 
@@ -33,6 +35,7 @@ public class WorldMapManager : MonoBehaviour
     public List<int> FastTravelMenuIDList;
 
     private int faststravelmenudelay;
+    public bool selectedsidestory;
 
     private InputAction _ActivateAction;
     private InputAction _MoveAction;
@@ -40,6 +43,12 @@ public class WorldMapManager : MonoBehaviour
     private InputAction _TelekinesisAction;
     private InputAction _ShowDetailsAction;
     private InputAction _CamAction;
+
+    public Transform StoryPoints;
+
+    public Transform SideStoryPoints;
+
+    public float mindistforstorypoints;
 
     private void Awake()
     {
@@ -79,9 +88,11 @@ public class WorldMapManager : MonoBehaviour
 
     }
 
+
     // Update is called once per frame
     void Update()
     {
+        DetectNearestStoryPoint();
         if (selectedchapter >= 0)
         {
 
@@ -91,16 +102,48 @@ public class WorldMapManager : MonoBehaviour
             }
 
             string chaptertxt = "";
-            if (selectedchapter == 0)
+            if (selectedsidestory)
             {
-                chaptertxt = "Prologue : ";
+                chapterNametext.text = "Sidestory " + (selectedchapter + 1) + " : ";
+                int averagelvl = 0;
+
+                foreach (DataScript.SkillPerMap mapinfo in DataScript.instance.skillsPerMap)
+                {
+                    if (mapinfo.SideStoryID == selectedchapter)
+                    {
+                        averagelvl = mapinfo.averagelevel;
+                    }
+                }
+                chapterlvl.text = "Lvl: " + averagelvl;
+                chaptertext.text = SideStoryNames[selectedchapter];
             }
             else
             {
-                chaptertxt = "Chapter " + selectedchapter + " : ";
+                if (selectedchapter == 0)
+                {
+                    chaptertxt = "Prologue : ";
+                }
+                else
+                {
+                    chaptertxt = "Chapter " + selectedchapter + " : ";
+                }
+
+                chapterNametext.text = chaptertxt;
+                int averagelvl = 0;
+
+                foreach (DataScript.SkillPerMap mapinfo in DataScript.instance.skillsPerMap)
+                {
+                    if (mapinfo.mapID == selectedchapter)
+                    {
+                        averagelvl = mapinfo.averagelevel;
+                    }
+                }
+                chapterlvl.text = "Lvl: " + averagelvl;
+                chaptertext.text = chapternames[selectedchapter];
             }
-            chapterNametext.text = chaptertxt;
-            chaptertext.text = chapternames[selectedchapter];
+
+
+
 
             if (ChapterUI.transform.localPosition.x < maxx)
             {
@@ -115,14 +158,22 @@ public class WorldMapManager : MonoBehaviour
             {
 
                 string scenename = "";
-                if (selectedchapter == 0)
+                if (selectedsidestory)
                 {
-                    scenename = "Prologue";
+                    scenename = "SideStory" + (selectedchapter + 1);
                 }
                 else
                 {
-                    scenename = "Chapter" + selectedchapter;
+                    if (selectedchapter == 0)
+                    {
+                        scenename = "Prologue";
+                    }
+                    else
+                    {
+                        scenename = "Chapter" + selectedchapter;
+                    }
                 }
+
 
                 SceneLoader.instance.LoadScene(scenename);
             }
@@ -197,6 +248,42 @@ public class WorldMapManager : MonoBehaviour
 
     }
 
+
+    private void DetectNearestStoryPoint()
+    {
+        Vector3 Characterpos = Character.transform.position;
+        Transform closest = null;
+        float mindist = 99999;
+
+        foreach (Transform child in StoryPoints)
+        {
+            if (Vector3.Distance(child.position, Characterpos) < mindist)
+            {
+                closest = child;
+                mindist = Vector3.Distance(child.position, Characterpos);
+            }
+        }
+
+        foreach (Transform child in SideStoryPoints)
+        {
+            if (Vector3.Distance(child.position, Characterpos) < mindist)
+            {
+                closest = child;
+                mindist = Vector3.Distance(child.position, Characterpos);
+            }
+        }
+
+        if (closest != null && mindist <= mindistforstorypoints)
+        {
+            selectedsidestory = closest.GetComponent<StoryPointScript>().isSideStory;
+            selectedchapter = closest.GetComponent<StoryPointScript>().chapterID;
+        }
+        else
+        {
+            selectedchapter = -1;
+        }
+
+    }
 
     public void InitializeFastTravelList()
     {
