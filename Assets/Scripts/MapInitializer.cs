@@ -14,6 +14,7 @@ public class MapInitializer : MonoBehaviour
     public List<Vector2> playablepos;
     public List<int> ForcedCharacters;
 
+    public bool IsSideStory;
     public int ChapterID;
 
     public GameObject BaseCharacter;

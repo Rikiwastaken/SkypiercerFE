@@ -36,6 +36,8 @@ public class DataScript : MonoBehaviour
     public List<Sprite> EnemySprites;
 
     public List<ChapterFlags> ChapterFlagsList;
+    public List<ChapterFlags> SidestoryFlagList;
+    public List<int> CompletedSideStories;
 
     public int SkillCoins;
 
@@ -1098,33 +1100,68 @@ public class DataScript : MonoBehaviour
     }
 
 
-    public void SaveCharacterTalkedToFlag(int characterTalkID)
+    public void SaveCharacterTalkedToFlag(int characterTalkID, bool IsSideStory)
     {
-        ChapterFlags currentflags = ChapterFlagsList[SaveManager.instance.currentchapter];
-
-        int sizeofflaglist = currentflags.talkflags.Count;
-
-        while (sizeofflaglist <= characterTalkID)
+        if (IsSideStory)
         {
-            currentflags.talkflags.Add(false);
-            sizeofflaglist = currentflags.talkflags.Count;
+            ChapterFlags currentflags = SidestoryFlagList[SaveManager.instance.currentchapter];
+
+            int sizeofflaglist = currentflags.talkflags.Count;
+
+            while (sizeofflaglist <= characterTalkID)
+            {
+                currentflags.talkflags.Add(false);
+                sizeofflaglist = currentflags.talkflags.Count;
+            }
+            currentflags.talkflags[characterTalkID] = true;
         }
-        currentflags.talkflags[characterTalkID] = true;
+        else
+        {
+            ChapterFlags currentflags = ChapterFlagsList[SaveManager.instance.currentchapter];
+
+            int sizeofflaglist = currentflags.talkflags.Count;
+
+            while (sizeofflaglist <= characterTalkID)
+            {
+                currentflags.talkflags.Add(false);
+                sizeofflaglist = currentflags.talkflags.Count;
+            }
+            currentflags.talkflags[characterTalkID] = true;
+        }
+
     }
 
-    public void SaveCopyFlag(int characterCopiedID)
+    public void SaveCopyFlag(int characterCopiedID, bool IsSideStory)
     {
-        ChapterFlags currentflags = ChapterFlagsList[SaveManager.instance.currentchapter];
-
-        int sizeofflaglist = currentflags.copyflags.Count;
-
-        while (sizeofflaglist <= characterCopiedID)
+        if (IsSideStory)
         {
-            currentflags.copyflags.Add(false);
-            sizeofflaglist = currentflags.copyflags.Count;
+            ChapterFlags currentflags = SidestoryFlagList[SaveManager.instance.currentchapter];
+
+            int sizeofflaglist = currentflags.copyflags.Count;
+
+            while (sizeofflaglist <= characterCopiedID)
+            {
+                currentflags.copyflags.Add(false);
+                sizeofflaglist = currentflags.copyflags.Count;
+            }
+
+            currentflags.copyflags[characterCopiedID] = true;
+        }
+        else
+        {
+            ChapterFlags currentflags = ChapterFlagsList[SaveManager.instance.currentchapter];
+
+            int sizeofflaglist = currentflags.copyflags.Count;
+
+            while (sizeofflaglist <= characterCopiedID)
+            {
+                currentflags.copyflags.Add(false);
+                sizeofflaglist = currentflags.copyflags.Count;
+            }
+
+            currentflags.copyflags[characterCopiedID] = true;
         }
 
-        currentflags.copyflags[characterCopiedID] = true;
     }
 
 

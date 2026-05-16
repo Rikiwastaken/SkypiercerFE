@@ -33,8 +33,10 @@ public class SaveManager : MonoBehaviour
         public Inventory PlayerInventory;
         public List<Bonds> BondList;
         public List<ChapterFlags> ChapterFlagsList;
+        public List<ChapterFlags> SideStoryFlagsList;
         public float secondselapsed;
         public bool inCamp;
+        public List<int> completedSideStories;
     }
 
     [Serializable]
@@ -350,7 +352,9 @@ public class SaveManager : MonoBehaviour
             currentchapter = SaveClasses[slot].chapter;
             maxchapterreached = SaveClasses[slot].MaxChapterReached;
             DS.ChapterFlagsList = SaveClasses[slot].ChapterFlagsList;
+            DS.SidestoryFlagList = SaveClasses[slot].SideStoryFlagsList;
             DS.SkillCoins = SaveClasses[slot].SkillCoins;
+            DS.CompletedSideStories = SaveClasses[slot].completedSideStories;
         }
         else if (slot == -1)
         {
@@ -366,6 +370,13 @@ public class SaveManager : MonoBehaviour
                 flag.talkflags = new List<bool>(10);
                 flag.copyflags = new List<bool>(10);
             }
+            DS.SidestoryFlagList = new List<ChapterFlags>(40);
+            foreach (ChapterFlags flag in DS.SidestoryFlagList)
+            {
+                flag.talkflags = new List<bool>(10);
+                flag.copyflags = new List<bool>(10);
+            }
+            DS.CompletedSideStories = new List<int>();
             DS.SkillCoins = 0;
         }
 
@@ -373,7 +384,7 @@ public class SaveManager : MonoBehaviour
 
     public void SaveCurrentSlot(int chapter = 0)
     {
-
+        DataScript DS = DataScript.instance;
         currentchapter = chapter;
         bool inCamp = false;
         bool inworldmap = false;
@@ -392,7 +403,7 @@ public class SaveManager : MonoBehaviour
         {
             scenename = scenename.Replace("Chapter", "");
             currentchapter = int.Parse(scenename) + 1;
-            DataScript.instance.UpdatePlayableUnits();
+            DS.UpdatePlayableUnits();
         }
         if (scenename.Contains("Prologue"))
         {
@@ -408,21 +419,24 @@ public class SaveManager : MonoBehaviour
             inworldmap = true;
         }
 
+
+
         SaveClass save = new SaveClass
         {
             versionID = versionID,
             slot = activeSlot,
             chapter = currentchapter,
-            PlayableCharacterList = CreateCharacterSaveList(DataScript.instance.PlayableCharacterList),
-            PlayerInventory = DataScript.instance.PlayerInventory,
+            PlayableCharacterList = CreateCharacterSaveList(DS.PlayableCharacterList),
+            PlayerInventory = DS.PlayerInventory,
             secondselapsed = secondselapsed,
             inCamp = inCamp,
             inworldmap = inworldmap,
             MaxChapterReached = maxchapterreached,
-            BondList = DataScript.instance.BondsList,
-            ChapterFlagsList = DataScript.instance.ChapterFlagsList,
-            SkillCoins = DataScript.instance.SkillCoins
-
+            BondList = DS.BondsList,
+            ChapterFlagsList = DS.ChapterFlagsList,
+            SideStoryFlagsList = DS.SidestoryFlagList,
+            SkillCoins = DS.SkillCoins,
+            completedSideStories = DS.CompletedSideStories
         };
 
         string json = JsonUtility.ToJson(save, true);

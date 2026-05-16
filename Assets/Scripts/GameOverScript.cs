@@ -93,6 +93,18 @@ public class GameOverScript : MonoBehaviour
 
     public void InitializeSaveButtons()
     {
+        if (MapInitializer.instance.IsSideStory)
+        {
+            int currentSideStoryID = MapInitializer.instance.ChapterID;
+            if (!DataScript.instance.CompletedSideStories.Contains(currentSideStoryID))
+            {
+                DataScript.instance.CompletedSideStories.Add(currentSideStoryID);
+            }
+        }
+        else
+        {
+            saveManager.currentchapter = MapInitializer.instance.ChapterID + 1;
+        }
         if (saveManager == null)
             saveManager = FindAnyObjectByType<SaveManager>();
 
@@ -125,9 +137,20 @@ public class GameOverScript : MonoBehaviour
         if (saveManager == null)
             saveManager = SaveManager.instance;
 
-        int nextsceneindex = FindAnyObjectByType<MapInitializer>().ChapterID;
+        int nextsceneindex = MapInitializer.instance.ChapterID;
+        if (MapInitializer.instance.IsSideStory)
+        {
+            int currentSideStoryID = MapInitializer.instance.ChapterID;
+            if (!DataScript.instance.CompletedSideStories.Contains(currentSideStoryID))
+            {
+                DataScript.instance.CompletedSideStories.Add(currentSideStoryID);
+            }
+        }
+        else
+        {
+            saveManager.currentchapter = nextsceneindex + 1;
+        }
 
-        saveManager.currentchapter = nextsceneindex + 1;
 
         if (saveManager.currentchapter == 1)
         {
