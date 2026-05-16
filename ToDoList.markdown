@@ -12,8 +12,6 @@
 
 - les machines ont des arcs
 
-- regler les dialogue skip
-
 - Restrict skill shop uses
 
 - other units have infinite telekinesis range
@@ -34,7 +32,7 @@
 
 - Do cutscene system (or take a look at cinemachine to do it)
 
-- Do Bonds for Gale and Aurora
+- Do Bonds for Gale and Aurora and Erica
 
 - Show quote when levelling up.
 
@@ -54,8 +52,9 @@
 
 - Do Special Weapon skins (Zack, Gale, Kira, Ragnhall, Kay)
 
-- Chapter 10
-- Chapter 11
+- Chapter 10 battle map
+- Chapter 11 battle map
+- SideStory 1 battle map
 
 ### Sprites
 
