@@ -459,14 +459,26 @@ public class DataScript : MonoBehaviour
     {
         DefaultPlayableCharacterList = new List<Character>();
         DefaultInventory = new Inventory() { inventoryItems = new List<InventoryItem>() };
-        UnitScript unitScript = new UnitScript();
-        foreach (Character character in PlayableCharacterList)
+        GameObject USGO = new GameObject();
+        UnitScript unitScript = USGO.AddComponent<UnitScript>();
+        try
         {
-            DefaultPlayableCharacterList.Add(unitScript.CreateCopy(character));
+            foreach (Character character in PlayableCharacterList)
+            {
+                DefaultPlayableCharacterList.Add(unitScript.CreateCopy(character));
+            }
+            foreach (InventoryItem item in PlayerInventory.inventoryItems)
+            {
+                DefaultInventory.inventoryItems.Add(CopyInventoryItem(item));
+            }
         }
-        foreach (InventoryItem item in PlayerInventory.inventoryItems)
+        catch (Exception ex)
         {
-            DefaultInventory.inventoryItems.Add(CopyInventoryItem(item));
+            Debug.LogError(ex);
+        }
+        finally
+        {
+            DestroyImmediate(USGO);
         }
     }
 

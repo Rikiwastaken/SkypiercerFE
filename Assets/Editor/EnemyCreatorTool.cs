@@ -240,7 +240,6 @@ public class EnemyStatsEditorWindow : EditorWindow
         SerializedProperty monsterStats = eProp.FindPropertyRelative("monsterStats");
         if (monsterStats != null)
         {
-            monsterStats.FindPropertyRelative("size").intValue = 0;
             monsterStats.FindPropertyRelative("ispluvial").boolValue = false;
             monsterStats.FindPropertyRelative("ismachine").boolValue = false;
         }
@@ -397,6 +396,8 @@ public class EnemyStatsEditorWindow : EditorWindow
             playablepositions.Add(playablepos);
         }
 
+        int childindex = 1;
+
         EditorUtility.SetDirty(mapInitializer.gameObject);
 
         for (int i = 0; i < gridGO.childCount; i++)
@@ -408,85 +409,85 @@ public class EnemyStatsEditorWindow : EditorWindow
             switch (tile.elevation)
             {
                 case -4:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.25f, 0f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.25f, 0f);
                     break;
                 case -3:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.35f, 0f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.35f, 0f);
                     break;
                 case -2:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.45f, 0f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.45f, 0f);
                     break;
                 case -1:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.8f, 0.55f, 0f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(0.8f, 0.55f, 0f);
                     break;
                 case 0:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.65f, 0f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(1f, 0.65f, 0f);
                     break;
                 case 1:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.75f, 0.25f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(1f, 0.75f, 0.25f);
                     break;
                 case 2:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.85f, 0.5f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(1f, 0.85f, 0.5f);
                     break;
                 case 3:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.95f, 0.75f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(1f, 0.95f, 0.75f);
                     break;
                 case 4:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = Color.white;
                     break;
             }
 
             if (tile.isstairs)
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(128f / 256f, 0f, 128f / 256f);
+                gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(128f / 256f, 0f, 128f / 256f);
             }
 
             switch (tile.type.ToLower())
             {
                 case "forest":
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = Color.green;
                     break;
                 case "ruins":
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.gray;
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = Color.gray;
                     break;
                 case "fire":
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.magenta;
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = Color.magenta;
                     break;
                 case "water":
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.cyan;
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = Color.cyan;
                     break;
                 case "fortification":
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(0.4f, 0.4f, 0.4f);
                     break;
                 case "fog":
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
                     break;
                 case "medicinalwater":
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5510659f, 0.8608279f, 0.9371068f);
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = new Color(0.5510659f, 0.8608279f, 0.9371068f);
                     break;
                 case "desert":
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+                    gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = Color.yellow;
                     break;
             }
 
             if (enemypositions.Contains(position))
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+                gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = Color.red;
                 enemypositions.Remove(position);
             }
             if (playablepositions.Contains(position))
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.blue;
+                gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = Color.blue;
                 enemypositions.Remove(position);
             }
             if (otherpositions.Contains(position))
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+                gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = Color.yellow;
                 enemypositions.Remove(position);
             }
             if (gridGO.GetChild(i).GetComponent<GridSquareScript>().isobstacle)
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.black;
+                gridGO.GetChild(i).GetChild(childindex).GetComponent<SpriteRenderer>().color = Color.black;
             }
         }
 
@@ -526,59 +527,59 @@ public class EnemyStatsEditorWindow : EditorWindow
             switch (tile.elevation)
             {
                 case -4:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.25f, 0f);
+                    gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.25f, 0f);
                     break;
                 case -3:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.35f, 0f);
+                    gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.35f, 0f);
                     break;
                 case -2:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.45f, 0f);
+                    gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.45f, 0f);
                     break;
                 case -1:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.8f, 0.55f, 0f);
+                    gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = new Color(0.8f, 0.55f, 0f);
                     break;
                 case 0:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.65f, 0f);
+                    gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1f, 0.65f, 0f);
                     break;
                 case 1:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.75f, 0.25f);
+                    gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1f, 0.75f, 0.25f);
                     break;
                 case 2:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.85f, 0.5f);
+                    gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1f, 0.85f, 0.5f);
                     break;
                 case 3:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.95f, 0.75f);
+                    gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1f, 0.95f, 0.75f);
                     break;
                 case 4:
-                    gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+                    gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = Color.white;
                     break;
             }
 
             if (tile.isstairs)
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(128f / 256f, 0f, 128f / 256f);
+                gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = new Color(128f / 256f, 0f, 128f / 256f);
             }
 
 
 
             if (enemypositions.Contains(position))
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+                gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = Color.red;
                 enemypositions.Remove(position);
             }
             if (playablepositions.Contains(position))
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.blue;
+                gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = Color.blue;
                 enemypositions.Remove(position);
             }
             if (otherpositions.Contains(position))
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.yellow;
+                gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = Color.yellow;
                 enemypositions.Remove(position);
             }
             if (gridGO.GetChild(i).GetComponent<GridSquareScript>().isobstacle)
             {
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = Color.black;
+                gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = Color.black;
             }
         }
 
@@ -594,7 +595,7 @@ public class EnemyStatsEditorWindow : EditorWindow
             {
                 Color newcolor = Color.white;
                 newcolor.a = 0f;
-                gridGO.GetChild(i).GetChild(0).GetComponent<SpriteRenderer>().color = newcolor;
+                gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = newcolor;
             }
         }
     }
