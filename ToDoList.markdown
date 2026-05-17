@@ -50,7 +50,7 @@
 
 ### 3D Models
 
-- Do Special Weapon skins (Zack, Ragnhall, Kay)
+- Do Special Weapon skins (Zack, Kay)
 
 - Chapter 10 battle map
 - Chapter 11 battle map
