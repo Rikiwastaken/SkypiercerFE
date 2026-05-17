@@ -14,10 +14,12 @@ public class WeaponPrefabScript : MonoBehaviour
         public GameObject weaponPrefabLvl2;
         public GameObject weaponPrefabLvl3;
         public GameObject weaponPrefabLvl4;
+        public List<GameObject> UniqueWeaponPrefabs;
         public Texture2D WeaponSpriteLvl1;
         public Texture2D WeaponSpriteLvl2;
         public Texture2D WeaponSpriteLvl3;
         public Texture2D WeaponSpriteLvl4;
+        public List<Texture2D> UniqueWeaponTextures;
         public Color WeaponEffectColor;
 
     }
@@ -71,7 +73,7 @@ public class WeaponPrefabScript : MonoBehaviour
 
     }
 
-    public void SwitchWeaponGO(string type, int level, float scale = 0.5f)
+    public void SwitchWeaponGO(string type, string name, int level, float scale = 0.5f)
     {
         if (CurrentlyAppearing.weaponType != null && CurrentlyAppearing.weaponType.ToLower() == type.ToLower() && currentEquipedLevel == level)
         {
@@ -79,30 +81,40 @@ public class WeaponPrefabScript : MonoBehaviour
         }
         GameObject newweapon = currentWeaponGO;
         weaponVisuals weaponVis = WeaponVisualsList[0];
+        int uniqueweaponID = GetUniqueWeaponID(name);
         foreach (weaponVisuals weapon in WeaponVisualsList)
         {
             weaponVis = weapon;
             if (weapon.weaponType == type.ToLower())
             {
-                switch (level)
+
+                if (uniqueweaponID == -1)
                 {
-                    case 1:
-                        newweapon = Instantiate(weapon.weaponPrefabLvl1);
+                    switch (level)
+                    {
+                        case 1:
+                            newweapon = Instantiate(weapon.weaponPrefabLvl1);
 
-                        break;
-                    case 2:
-                        newweapon = Instantiate(weapon.weaponPrefabLvl2);
+                            break;
+                        case 2:
+                            newweapon = Instantiate(weapon.weaponPrefabLvl2);
 
-                        break;
-                    case 3:
-                        newweapon = Instantiate(weapon.weaponPrefabLvl3);
+                            break;
+                        case 3:
+                            newweapon = Instantiate(weapon.weaponPrefabLvl3);
 
-                        break;
-                    case 4:
-                        newweapon = Instantiate(weapon.weaponPrefabLvl4);
+                            break;
+                        case 4:
+                            newweapon = Instantiate(weapon.weaponPrefabLvl4);
 
-                        break;
+                            break;
+                    }
                 }
+                else
+                {
+                    newweapon = Instantiate(weapon.UniqueWeaponPrefabs[uniqueweaponID]);
+                }
+
 
                 newweapon.transform.localScale *= scale;
                 GameObject newparticlesystem = Instantiate(ParticleSystem);
@@ -129,7 +141,7 @@ public class WeaponPrefabScript : MonoBehaviour
         {
             if (newweapon != null)
             {
-                CreateAndSetWeaponMaterial(newweapon, level, weaponVis);
+                CreateAndSetWeaponMaterial(newweapon, level, weaponVis, uniqueweaponID);
                 weaponVis.materials = new List<Material>();
 
                 SetMaterialsToList(weaponVis.materials, newweapon);
@@ -146,23 +158,47 @@ public class WeaponPrefabScript : MonoBehaviour
 
     }
 
-    public void CreateAndSetWeaponMaterial(GameObject GO, int level, weaponVisuals WeaponVis)
+    private int GetUniqueWeaponID(string weaponname)
+    {
+        if (weaponname.ToLower().Contains("reshine"))
+        {
+            return 0;
+        }
+        else if (weaponname.ToLower().Contains("garland"))
+        {
+            return 0;
+        }
+        else if (weaponname.ToLower().Contains("abyssal"))
+        {
+            return 1;
+        }
+
+        return -1;
+    }
+    public void CreateAndSetWeaponMaterial(GameObject GO, int level, weaponVisuals WeaponVis, int uniqueweaponID)
     {
         Material newMaterial = new Material(TemplateMaterial);
-        switch (level)
+        if (uniqueweaponID == -1)
         {
-            case 1:
-                newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl1);
-                break;
-            case 2:
-                newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl2);
-                break;
-            case 3:
-                newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl3);
-                break;
-            case 4:
-                newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl4);
-                break;
+            switch (level)
+            {
+                case 1:
+                    newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl1);
+                    break;
+                case 2:
+                    newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl2);
+                    break;
+                case 3:
+                    newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl3);
+                    break;
+                case 4:
+                    newMaterial.SetTexture("_Texture2D", WeaponVis.WeaponSpriteLvl4);
+                    break;
+            }
+        }
+        else
+        {
+            newMaterial.SetTexture("_Texture2D", WeaponVis.UniqueWeaponTextures[uniqueweaponID]);
         }
         newMaterial.SetColor("_OutlineColor", WeaponVis.WeaponEffectColor);
 

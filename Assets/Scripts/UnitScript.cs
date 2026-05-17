@@ -1871,7 +1871,7 @@ public class UnitScript : MonoBehaviour
             {
                 _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
             }
-            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Grade, scale);
+            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, scale);
             currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO();
             Transform parenttouse = null;
             foreach (ModelInfo modelInfo in ModelList)

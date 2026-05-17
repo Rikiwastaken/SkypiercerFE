@@ -156,10 +156,14 @@ public class MapInitializer : MonoBehaviour
 
     public void DeleteUnit(Character unit)
     {
+        if (unit == null)
+        {
+            return;
+        }
         GameObject UnitGO = null;
         foreach (GameObject unitdeployed in playableUnitsDeployed)
         {
-            if (unitdeployed.GetComponent<UnitScript>().UnitCharacteristics.ID == unit.ID)
+            if (unitdeployed != null && unitdeployed.GetComponent<UnitScript>().UnitCharacteristics.ID == unit.ID)
             {
                 UnitGO = unitdeployed;
                 break;
