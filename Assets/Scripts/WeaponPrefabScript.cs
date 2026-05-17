@@ -160,17 +160,21 @@ public class WeaponPrefabScript : MonoBehaviour
 
     private int GetUniqueWeaponID(string weaponname)
     {
-        if (weaponname.ToLower().Contains("reshine"))
+        if (weaponname.ToLower().Contains("ino"))
         {
             return 0;
+        }
+        else if (weaponname.ToLower().Contains("reshine"))
+        {
+            return 1;
         }
         else if (weaponname.ToLower().Contains("garland"))
         {
-            return 0;
+            return 1;
         }
         else if (weaponname.ToLower().Contains("abyssal"))
         {
-            return 1;
+            return 2;
         }
 
         return -1;

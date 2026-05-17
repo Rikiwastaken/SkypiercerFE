@@ -12,8 +12,6 @@
 
 - les machines ont des arcs
 
-- Restrict skill shop uses
-
 - other units have infinite telekinesis range
 
 ## Ideas
@@ -21,8 +19,6 @@
 - For Chapter 12, have 2 phase to the battle:
     - 1st phase, Raghnall uses a fire spear that inflicts burn when attacking. Lasts until turn 5 or Ragnhall is beaten
     - 2nd phase, After the cutscene, Zack is permanently in Examode, and Raghnall regains his HP. All other units are now "other units" unable to act and only zack is playable
-
-- Dans le menu de selection des units, mettre les unités dans des coulerus différentes en fonction du battallion
 
 - peut être faire qu'on puisse mettre "pas de battallion"
 
@@ -50,7 +46,7 @@
 
 ### 3D Models
 
-- Do Special Weapon skins (Zack, Kay)
+- Do Special Weapon skins ( Kay)
 
 - Chapter 10 battle map
 - Chapter 11 battle map
