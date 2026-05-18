@@ -110,11 +110,7 @@ public class ActionsMenu : MonoBehaviour
     void Update()
     {
 
-        if (PreviousActivatedState != gameObject.activeSelf)
-        {
-            ActivationAchanged();
-            PreviousActivatedState = gameObject.activeSelf;
-        }
+
 
         if (GridScript == null)
         {
@@ -216,6 +212,15 @@ public class ActionsMenu : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        if (PreviousActivatedState != gameObject.activeSelf)
+        {
+            ActivationAchanged();
+            PreviousActivatedState = gameObject.activeSelf;
+        }
+    }
+
     /// <summary>
     /// Method that is called when the action menu is activated or deactivated, it updates the colors of the buttons and text to show which actions are available based on the selected unit and its target, it also checks if the tutorial is active and updates the buttons accordingly, it also updates the camera destination to the target if there are targets available
     /// </summary>
@@ -281,6 +286,29 @@ public class ActionsMenu : MonoBehaviour
 
             transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
         }
+
+        if (CanHeal(target.GetComponent<UnitScript>().UnitCharacteristics))
+        {
+            var colors = transform.GetChild(1).GetComponent<Button>().colors;
+            colors.normalColor = BaseButtonColor;
+            colors.pressedColor = BaseButtonPressedColor;
+            transform.GetChild(1).GetComponent<Image>().color = new Color(1f, 1f, 0f);
+            transform.GetChild(1).GetComponent<Button>().colors = colors;
+
+            transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+        }
+        else
+        {
+            var colors = transform.GetChild(1).GetComponent<Button>().colors;
+            colors.normalColor = Color.gray;
+            colors.pressedColor = Color.gray;
+            transform.GetChild(1).GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            transform.GetChild(1).GetComponent<Button>().colors = colors;
+
+            transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
+
+        }
+
         if (TutorialScript.instance != null && TutorialScript.instance.enabled && !TutorialScript.instance.tutorialisover)
         {
             var colors = transform.GetChild(0).GetComponent<Button>().colors;
@@ -372,6 +400,18 @@ public class ActionsMenu : MonoBehaviour
             NextWeapon(PreviousFoe, initialweapon);
         }
 
+    }
+
+    private bool CanHeal(Character currentchar)
+    {
+        foreach (equipment weapon in currentchar.equipments)
+        {
+            if (weapon != null && weapon.type != null && weapon.type != "" && weapon.type.ToLower() == "staff")
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void PreviousWeapon(GameObject PreviousFoe, equipment initialweapon)

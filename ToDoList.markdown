@@ -2,8 +2,6 @@
 
 ## Bug Fixes
 
-- Le bouton heal disparait
-
 - montrer les ennemis marche pas
 
 - les cutscenes se rejouent après le foresight
