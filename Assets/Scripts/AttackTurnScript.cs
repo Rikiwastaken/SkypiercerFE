@@ -197,83 +197,54 @@ public class AttackTurnScript : MonoBehaviour
         // If the current turn is the enemy's turn and there is a current enemy, move the current enemy and attack 
         else if (TurnManager.currentlyplaying == "enemy")
         {
-            //move camera to enemy
-            Character CharCurrentEnemy = CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics;
-            if (!battlecamera.incombat)
-            {
-                battlecamera.Destination = CharCurrentEnemy.position;
-            }
-
-
-            if (!CharCurrentEnemy.alreadymoved)
-            {
-                if (counterbeforemove > 0)
-                {
-                    counterbeforemove--;
-                }
-                else
-                {
-                    currentenemytarget = null;
-                    GridSquareScript Destination = null;
-
-                    // Calculate Destination
-                    if (CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
-                    {
-                        CurrentEnemy.GetComponent<BossScript>().nextTarget = CalculateDestinationForBoss(CurrentEnemy);
-                        Destination = CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
-                    }
-                    else
-                    {
-                        (Destination, currentenemytarget) = CalculateDestinationForOffensiveUnitsV2(CurrentEnemy);
-                    }
-
-                    // Move Enemy
-                    Vector2 DestinationVector = CharCurrentEnemy.position;
-                    if (Destination != null)
-                    {
-                        DestinationVector = Destination.GridCoordinates;
-                        CurrentEnemy.GetComponent<UnitScript>().MoveTo(DestinationVector);
-                        counterbeforeattack = (int)(delaybeforeAttack / Time.fixedDeltaTime);
-                        CharCurrentEnemy.alreadymoved = true;
-                    }
-                    else
-                    {
-                        CurrentEnemy.GetComponent<UnitScript>().MoveTo(DestinationVector);
-                        counterbeforeattack = 0;
-                        CharCurrentEnemy.alreadymoved = true;
-                    }
-
-                }
-            }
-            // Manage Attack for Enemy
-            else if (CurrentEnemy != null && !CharCurrentEnemy.alreadyplayed)
-            {
-                if (CurrentEnemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
-                {
-                    CurrentEnemy.GetComponent<BossScript>().TriggerBossAttack();
-                    CharCurrentEnemy.alreadyplayed = true;
-                }
-                else if (saveManager.Options.BattleAnimations)
-                {
-                    if (Vector2.Distance(CharCurrentEnemy.currentTile[0].GridCoordinates, new Vector2(CurrentEnemy.transform.position.x, CurrentEnemy.transform.position.z)) <= 1f)
-                    {
-                        ManageAttackWithAnimation(CurrentEnemy);
-                    }
-                }
-                else
-                {
-                    if (AttackCoroutine == null)
-                    {
-                        AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimation(CurrentEnemy));
-                    }
-                }
-
-            }
-            else
+            if (NPCAttackFunction(CurrentEnemy))
             {
                 CurrentEnemy = null;
             }
 
+        }
+
+        // Select the next other unit to move and attack if there is no current other unit selected
+        if (CurrentOther == null && TurnManager.currentlyplaying == "other")
+        {
+            if (delaybeforenxtunit > 0)
+            {
+                delaybeforenxtunit--;
+                return;
+            }
+            foreach (GameObject unit in gridScript.allunitGOs)
+            {
+                if (unit.gameObject != null && unit != null)
+                {
+                    Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+                    if (charunit.affiliation == "other" && !charunit.alreadyplayed && unit.GetComponent<UnitScript>().CheckIfOnActivated())
+                    {
+
+                        if (!determineifActionifTaken(unit))
+                        {
+                            ActionManager.instance.Wait(unit);
+                            continue;
+                        }
+
+                        CurrentOther = unit;
+                        battleInfotextScript.previousOther = unit;
+                        counterbeforemove = (int)(delaybeforeMove / Time.fixedDeltaTime);
+                        gridScript.ShowMovementOfUnit(unit);
+                        break;
+
+                    }
+                }
+
+            }
+        }
+
+        else if (TurnManager.currentlyplaying == "other")
+        {
+
+            if (NPCAttackFunction(CurrentOther))
+            {
+                CurrentOther = null;
+            }
         }
 
         //playerattack
@@ -312,109 +283,91 @@ public class AttackTurnScript : MonoBehaviour
             }
         }
 
-        // Select the next other unit to move and attack if there is no current other unit selected
-        if (CurrentOther == null && TurnManager.currentlyplaying == "other")
-        {
-            if (delaybeforenxtunit > 0)
-            {
-                delaybeforenxtunit--;
-                return;
-            }
-            foreach (GameObject unit in gridScript.allunitGOs)
-            {
-                if (unit.gameObject != null && unit != null)
-                {
-                    Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-                    if (charunit.affiliation == "other" && !charunit.alreadyplayed && unit.GetComponent<UnitScript>().CheckIfOnActivated())
-                    {
 
-                        if (!determineifActionifTaken(unit))
-                        {
-                            charunit.alreadyplayed = true;
-                            charunit.alreadymoved = true;
-                            continue;
-                        }
-
-                        CurrentOther = unit;
-                        battleInfotextScript.previousOther = unit;
-                        counterbeforemove = (int)(delaybeforeMove / Time.fixedDeltaTime);
-                        gridScript.ShowMovementOfUnit(unit);
-                        break;
-
-                    }
-                }
-
-            }
-        }
-
-        else if (TurnManager.currentlyplaying == "other")
-        {
-            //Attack Other
-            Character Charcurrentother = CurrentOther.GetComponent<UnitScript>().UnitCharacteristics;
-            if (!battlecamera.incombat)
-            {
-                battlecamera.Destination = Charcurrentother.position;
-            }
-
-
-            if (!Charcurrentother.alreadymoved)
-            {
-                if (counterbeforemove > 0)
-                {
-                    counterbeforemove--;
-                }
-                else
-                {
-                    currentenemytarget = null;
-                    GridSquareScript Destination = null;
-                    (Destination, currentenemytarget) = CalculateDestinationForOffensiveUnitsV2(CurrentOther);
-
-                    Vector2 DestinationVector = Charcurrentother.position;
-                    if (Destination != null)
-                    {
-                        DestinationVector = Destination.GridCoordinates;
-                        CurrentOther.GetComponent<UnitScript>().MoveTo(DestinationVector);
-                        counterbeforeattack = (int)(delaybeforeAttack / Time.fixedDeltaTime);
-                        Charcurrentother.alreadymoved = true;
-                    }
-                    else
-                    {
-                        CurrentOther.GetComponent<UnitScript>().MoveTo(DestinationVector);
-                        counterbeforeattack = 0;
-                        Charcurrentother.alreadymoved = true;
-                    }
-
-                }
-            }
-            else if (CurrentOther != null && !Charcurrentother.alreadyplayed)
-            {
-                if (saveManager.Options.BattleAnimations)
-                {
-                    if (Vector2.Distance(Charcurrentother.currentTile[0].GridCoordinates, new Vector2(CurrentOther.transform.position.x, CurrentOther.transform.position.z)) <= 1f)
-                    {
-                        ManageAttackWithAnimation(CurrentOther);
-                    }
-
-                }
-                else
-                {
-                    if (AttackCoroutine == null)
-                    {
-                        AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimation(CurrentOther));
-                    }
-                }
-            }
-            else
-            {
-                CurrentOther = null;
-            }
-        }
 
         if (!battlecamera.incombat && triggercleanup)
         {
             DeathCleanup();
 
         }
+    }
+
+    private bool NPCAttackFunction(GameObject AttackerGO)
+    {
+        Character charAttacker = AttackerGO.GetComponent<UnitScript>().UnitCharacteristics;
+        if (!battlecamera.incombat)
+        {
+            battlecamera.Destination = charAttacker.position;
+        }
+
+
+        if (!charAttacker.alreadymoved)
+        {
+            if (counterbeforemove > 0)
+            {
+                counterbeforemove--;
+            }
+            else
+            {
+                currentenemytarget = null;
+                GridSquareScript Destination = null;
+
+                // Calculate Destination
+                if (AttackerGO.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
+                {
+                    AttackerGO.GetComponent<BossScript>().nextTarget = CalculateDestinationForBoss(AttackerGO);
+                    Destination = AttackerGO.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
+                }
+                else
+                {
+                    (Destination, currentenemytarget) = CalculateDestinationForOffensiveUnitsV2(AttackerGO);
+                }
+
+                // Move Enemy
+                Vector2 DestinationVector = charAttacker.position;
+                if (Destination != null)
+                {
+                    DestinationVector = Destination.GridCoordinates;
+                    AttackerGO.GetComponent<UnitScript>().MoveTo(DestinationVector);
+                    counterbeforeattack = (int)(delaybeforeAttack / Time.fixedDeltaTime);
+                    charAttacker.alreadymoved = true;
+                }
+                else
+                {
+                    AttackerGO.GetComponent<UnitScript>().MoveTo(DestinationVector);
+                    counterbeforeattack = 0;
+                    charAttacker.alreadymoved = true;
+                }
+            }
+        }
+        else if (AttackerGO != null && !charAttacker.alreadyplayed)
+        {
+            if (AttackerGO.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
+            {
+                AttackerGO.GetComponent<BossScript>().TriggerBossAttack();
+                charAttacker.alreadyplayed = true;
+            }
+            else if (saveManager.Options.BattleAnimations)
+            {
+                if (Vector2.Distance(charAttacker.currentTile[0].GridCoordinates, new Vector2(AttackerGO.transform.position.x, AttackerGO.transform.position.z)) <= 1f)
+                {
+                    ManageAttackWithAnimation(AttackerGO);
+                }
+            }
+            else
+            {
+                if (AttackCoroutine == null)
+                {
+                    AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimation(AttackerGO));
+                }
+            }
+
+        }
+        else
+        {
+            return true;
+        }
+        return false;
     }
 
     private bool determineifActionifTaken(GameObject unit)

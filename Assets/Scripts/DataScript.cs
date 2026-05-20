@@ -232,7 +232,6 @@ public class DataScript : MonoBehaviour
 
         foreach (SkillPerMap mapinfo in skillsPerMap)
         {
-            Debug.Log(mapinfo.mapID + " compared to " + Chapter);
             if (mapinfo.mapID == Chapter)
             {
                 targetlevel = mapinfo.averagelevel - 1;

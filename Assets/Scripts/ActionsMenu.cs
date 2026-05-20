@@ -287,17 +287,7 @@ public class ActionsMenu : MonoBehaviour
             transform.GetChild(4).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
         }
 
-        if (CanHeal(target.GetComponent<UnitScript>().UnitCharacteristics))
-        {
-            var colors = transform.GetChild(1).GetComponent<Button>().colors;
-            colors.normalColor = BaseButtonColor;
-            colors.pressedColor = BaseButtonPressedColor;
-            transform.GetChild(1).GetComponent<Image>().color = new Color(1f, 1f, 0f);
-            transform.GetChild(1).GetComponent<Button>().colors = colors;
-
-            transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-        }
-        else
+        if (!CanHeal(target.GetComponent<UnitScript>().UnitCharacteristics))
         {
             var colors = transform.GetChild(1).GetComponent<Button>().colors;
             colors.normalColor = Color.gray;
@@ -306,7 +296,10 @@ public class ActionsMenu : MonoBehaviour
             transform.GetChild(1).GetComponent<Button>().colors = colors;
 
             transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
-
+            if (!transform.GetChild(1).gameObject.activeSelf)
+            {
+                transform.GetChild(1).gameObject.SetActive(true);
+            }
         }
 
         if (TutorialScript.instance != null && TutorialScript.instance.enabled && !TutorialScript.instance.tutorialisover)

@@ -10,8 +10,6 @@
 
 - les machines ont des arcs
 
-- other units have infinite telekinesis range
-
 ## Ideas
 
 - For Chapter 12, have 2 phase to the battle:
