@@ -6,10 +6,6 @@
 
 - les cutscenes se rejouent après le foresight
 
-- Griser le bouton heal quand on peut pas soigner
-
-- les machines ont des arcs
-
 ## Ideas
 
 - For Chapter 12, have 2 phase to the battle:

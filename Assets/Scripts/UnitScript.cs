@@ -1873,54 +1873,56 @@ public class UnitScript : MonoBehaviour
             }
             _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, scale);
             currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO();
-            Transform parenttouse = null;
-            foreach (ModelInfo modelInfo in ModelList)
+            if (currentequipmentmodel != null)
             {
-                if (modelInfo.active)
+                Transform parenttouse = null;
+                foreach (ModelInfo modelInfo in ModelList)
                 {
-                    if (currentweapon.type.ToLower() == "bow")
+                    if (modelInfo.active)
                     {
-                        parenttouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().Lefthandbone;
-                    }
-                    else if (UnitCharacteristics.telekinesisactivated)
-                    {
-                        FlyingWeapon = currentequipmentmodel;
-                        currentequipmentmodel.transform.SetParent(animatortouse.transform);
-                    }
-                    else if (currentweapon.type.ToLower() != "machine")
-                    {
-                        parenttouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().handbone;
+                        if (currentweapon.type.ToLower() == "bow")
+                        {
+                            parenttouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().Lefthandbone;
+                        }
+                        else if (UnitCharacteristics.telekinesisactivated)
+                        {
+                            FlyingWeapon = currentequipmentmodel;
+                            currentequipmentmodel.transform.SetParent(animatortouse.transform);
+                        }
+                        else if (currentweapon.type.ToLower() != "machine")
+                        {
+                            parenttouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().handbone;
+                        }
                     }
                 }
-            }
 
 
-            if (UnitCharacteristics.telekinesisactivated && currentweapon.type.ToLower() != "bow")
-            {
-                currentequipmentmodel.transform.localPosition = telekinesisWeaponPos;
-                currentequipmentmodel.transform.localRotation = Quaternion.Euler(telekinesisWeaponRot);
-            }
-            else
-            {
-
-                Vector3 rotationtouse = Vector3.zero;
-                Vector3 positiontouse = Vector3.zero;
-                if (currentweapon.type.ToLower() == "bow")
+                if (UnitCharacteristics.telekinesisactivated && currentweapon.type.ToLower() != "bow")
                 {
-                    rotationtouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().leftweaponrotationajust;
-                    positiontouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().leftweaponpositionajust;
+                    currentequipmentmodel.transform.localPosition = telekinesisWeaponPos;
+                    currentequipmentmodel.transform.localRotation = Quaternion.Euler(telekinesisWeaponRot);
                 }
                 else
                 {
-                    rotationtouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponrotationajust;
-                    positiontouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponpositionajust;
+
+                    Vector3 rotationtouse = Vector3.zero;
+                    Vector3 positiontouse = Vector3.zero;
+                    if (currentweapon.type.ToLower() == "bow")
+                    {
+                        rotationtouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().leftweaponrotationajust;
+                        positiontouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().leftweaponpositionajust;
+                    }
+                    else
+                    {
+                        rotationtouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponrotationajust;
+                        positiontouse = ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponpositionajust;
+                    }
+
+                    _WeaponPrefabScript.PlaceWeapon(currentweapon.type.ToLower(), parenttouse, positiontouse, ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponscameajust, rotationtouse);
                 }
 
-                _WeaponPrefabScript.PlaceWeapon(currentweapon.type.ToLower(), parenttouse, positiontouse, ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponscameajust, rotationtouse);
+                UpdateLayer(currentequipmentmodel);
             }
-
-            UpdateLayer(currentequipmentmodel);
-
         }
 
         UpdateWeaponIcon(GetFirstWeapon(), UnitCharacteristics.telekinesisactivated);

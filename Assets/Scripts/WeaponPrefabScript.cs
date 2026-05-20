@@ -82,60 +82,64 @@ public class WeaponPrefabScript : MonoBehaviour
         GameObject newweapon = currentWeaponGO;
         weaponVisuals weaponVis = WeaponVisualsList[0];
         int uniqueweaponID = GetUniqueWeaponID(name);
-        foreach (weaponVisuals weapon in WeaponVisualsList)
+        if (!name.ToLower().Contains("machine"))
         {
-            weaponVis = weapon;
-            if (weapon.weaponType == type.ToLower())
+            foreach (weaponVisuals weapon in WeaponVisualsList)
             {
-
-                if (uniqueweaponID == -1)
+                weaponVis = weapon;
+                if (weapon.weaponType == type.ToLower())
                 {
-                    switch (level)
+
+                    if (uniqueweaponID == -1)
                     {
-                        case 1:
-                            newweapon = Instantiate(weapon.weaponPrefabLvl1);
+                        switch (level)
+                        {
+                            case 1:
+                                newweapon = Instantiate(weapon.weaponPrefabLvl1);
 
-                            break;
-                        case 2:
-                            newweapon = Instantiate(weapon.weaponPrefabLvl2);
+                                break;
+                            case 2:
+                                newweapon = Instantiate(weapon.weaponPrefabLvl2);
 
-                            break;
-                        case 3:
-                            newweapon = Instantiate(weapon.weaponPrefabLvl3);
+                                break;
+                            case 3:
+                                newweapon = Instantiate(weapon.weaponPrefabLvl3);
 
-                            break;
-                        case 4:
-                            newweapon = Instantiate(weapon.weaponPrefabLvl4);
+                                break;
+                            case 4:
+                                newweapon = Instantiate(weapon.weaponPrefabLvl4);
 
-                            break;
+                                break;
+                        }
                     }
+                    else
+                    {
+                        newweapon = Instantiate(weapon.UniqueWeaponPrefabs[uniqueweaponID]);
+                    }
+
+
+                    newweapon.transform.localScale *= scale;
+                    GameObject newparticlesystem = Instantiate(ParticleSystem);
+                    newparticlesystem.transform.parent = newweapon.transform;
+                    newparticlesystem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0)));
+                    newparticlesystem.transform.localScale = Vector3.one;
+
+                    newparticlesystem.SetActive(true);
+                    break;
                 }
-                else
-                {
-                    newweapon = Instantiate(weapon.UniqueWeaponPrefabs[uniqueweaponID]);
-                }
-
-
-                newweapon.transform.localScale *= scale;
-                GameObject newparticlesystem = Instantiate(ParticleSystem);
-                newparticlesystem.transform.parent = newweapon.transform;
-                newparticlesystem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0)));
-                newparticlesystem.transform.localScale = Vector3.one;
-
-                newparticlesystem.SetActive(true);
-                break;
             }
-        }
-        currentEquipedLevel = level;
-        foreach (weaponVisuals weaponVisuals in WeaponVisualsList)
-        {
-            if (weaponVisuals.weaponType == type)
+            currentEquipedLevel = level;
+            foreach (weaponVisuals weaponVisuals in WeaponVisualsList)
             {
-                CurrentlyAppearing = weaponVisuals;
-                weapontypeequiped = weaponVisuals;
-                break;
+                if (weaponVisuals.weaponType == type)
+                {
+                    CurrentlyAppearing = weaponVisuals;
+                    weapontypeequiped = weaponVisuals;
+                    break;
+                }
             }
         }
+
 
         if (newweapon != currentWeaponGO)
         {
