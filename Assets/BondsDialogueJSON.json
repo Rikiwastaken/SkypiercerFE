@@ -2398,10 +2398,230 @@
         },
         {
             "BondID": 15,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
-            "dialogueLvl4": []
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 9,
+                    "text": "Hey, Ruben. Can I talk to you for a minute?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Kira, what's up?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I was thinking about what happened when you were supposed to be drafted. That shouldn't have happened."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "What are you talking about?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "We were short on troops, but sending only an officer and not a whole escort to pick you up was really... It was dumb of us."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I... What are you trying to say, Kira?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Nevermind. I'll see you later."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "What the hell was that?"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 7,
+                    "text": "Kira! What's up? You want to do some target training together?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Sure, I was about to go practice myself."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "It's always impressive to see you move your weapon around like that."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Thanks. Your bow weilding is not too shabby either, you know."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Yeah, well it's always easier to hit a stationary target than a moving one, it's way harder to shoot Zack."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "What?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "What?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I was just saying that it's harder to shoot Zack than a stationary target, that's all. When we're training I mean."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Oh ok, I thought you were saying something else for a second there."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Anyway, let's get back to it!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Maybe I should try to train with Zack then, he might make for a good target."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 7,
+                    "text": "Kira! Are you on cooking duty tonight?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Yeah, I'll be grilling some meat. It'll be delicious!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Can't wait to try it. Well, I'm off to do some training, I'll be back in a bit!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Wait, Ruben. Do you remember what we talked about a while ago?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "About when I left Landfall Village with the others?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Exactly. I... I was the one who decided to have you guys from Landfall Village drafted."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "What?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I've always been helping Dad with strategic decisions and stuff. We are really short on troops, you know? The war is at a standstill, but should enemies decide to cross the Bridge, I don't know if we would be able to hold them off."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I... Don't know what to say, "
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "With the increase in Pluvial activity, I wanted to keep as much soldiers as possible to guard the city. I should have sent some to escort you. I'm sorry."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I knew there were lots of Pluvials around the city. I... I messed up Ruben. I'm really sorry."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "You know, when Elwyn and Zack told me that the village was destroyed, I thought that maybe I could have done something to save it."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "But deep inside, I know that I was too powerless to do anything. I mean, if it wasn't for you I might be dead right now."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Ruben..."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "This is what war is about, isn't it? Strategists make decisions that affect the lives of soldiers. I know you, Kira. It's alright."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Ruben... You're so brave. I wish I could be as brave as you."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Nah, you're brave enough. It takes guts to make that kind of decisions. Anyway, isn't your meat burning?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Noooooooooo!"
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 7,
+                    "text": "Kira! I've been looking for you. I wanted to talk to you about today's mission."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Sure, what's wrong."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Well, it feels like there was a flaw in you strategy. I know you plan carefully, but the way we held back compared to Zack's squad put us all in danger."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Yeah, I know Zack's a hothead, but I didn't expect him to be that reckless. It threw me off a bit, to be honest."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "How about next time, we try to engage the enemy first? That way Zack'll have to follow our lead."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "That's a good idea. It might be a bit hard to get Zack to follow orders, but I'll try to make it work."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Perfect! I know you can do it, Kira. You're a great strategist, and I'm sure you can make it work."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "That's nice of you to say, Ruben. You know, I really like these little strategic meetings we have."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Well, you know how it is... I just like spending time with you, Kira."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Really? Spending time with me? How so?"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "Well... I... You know..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I'm just teasing you, Ruben. I know what you mean. I like spending time with you too. I would love to spend more time with you, actually."
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "What? Really? I mean... Yeah... Sure!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "You're as red as a tomato, Ruben! I didn't know you were that shy!"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "I... I'm not shy! I just... Don't tease me alright!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Sorry, sorry. Anyway, let's get back to work! We have a lot of planning to do for the next mission!"
+                }
+            ]
         }
     ]
 }

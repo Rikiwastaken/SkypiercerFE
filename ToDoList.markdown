@@ -2,9 +2,9 @@
 
 ## Bug Fixes
 
-- montrer les ennemis marche pas
+- bouton pour montrer les ennemis marche pas
 
-- les cutscenes se rejouent après le foresight
+- les cutscenes se rejouent après le foresight (peut être faire un bool pour que l'event ne soit pas reset avec foresight)
 
 ## Ideas
 
@@ -18,13 +18,13 @@
 
 - Rework Animation for Animation Tree
 
-- Do cutscene system (or take a look at cinemachine to do it)
+- Do cutscene system (def use cinemachine to do it)
 
 - Do Bonds for Gale and Aurora and Erica
 
-- Show quote when levelling up.
+- Show quote when levelling up (one for bad lvl up (1 or 2 stat), one for mid lvl up (3 or 4 stats), one for good lvl up (more then 4 stat))
 
-- Show dialogue when dying.
+- Show dialogue when dying (have one for each battallion leader).
 
 - Make visuals for telekinesis with animations activated.
 
