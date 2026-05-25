@@ -2896,10 +2896,238 @@
         },
         {
             "BondID": 17,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
-            "dialogueLvl4": []
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 9,
+                    "text": "Sieg. Here you are! I have been looking for you."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Miss Kira, Sir, what can I do for you?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I already told you to drop the 'Miss' and 'Sir' stuff. Just call me Kira, alright?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Of course, Miss Kira. What is it about?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Nevermind... Anyway, you never debriefed your mission with me."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Oh yeah, in the Landfall Mountains. So much happened it completely slipped my mind."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Well, why don't you tell me about it now?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Well, the intel you gave me was pretty accurate. There are dozens of underground tunels under the moutains, and there are nearly no Pluvials there."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Interesting, so what happened then? We lost contact with you for a while, so I was a bit worried."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "One of the tunnels led me to the underground complex under Landfall Village."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Oh, and then you lost track of time fidgeting with every single little thing in there, right?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Listen they are priceless artifacts, I had to check them out! I found some really interesting stuff in there, you know. I found some old documents and... Yeah, I guess I got a bit carried away. I'm sorry."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "It's alright, Sieg. I'm just glad you're safe."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Anyway, I got trapped there, with Machines on one side and Pluvials on the other. That's when Zack and his friends found me."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Talk about being in the right place at the right time..."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Yeah... It's so sad, what happened to the village."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": " I wish there was something we could have done to save them."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "All these artifacts and documents..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I was talking about the people, Sieg. The villagers. I wish we could have done something to save them."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Oh... Yeah, them too."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 5,
+                    "text": "Kira! Kira! Look!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "What is it, Sieg?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I found a really doodle in ruins earlier! I think it represents an early version of a Blade Engine!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Wasn't the first one created by the Hero and his companions, back when they were trying to kill the Beast?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "It might be the case. Their journey got them to a lot of different places, so it's possible they went to the ruins at some point. I don't know, but it's really interesting!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Could we learn something from it? At the current time it's really hard to make new Blade Engines..."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I'm not sure, it mainly talks about a preliminary design. I think they weren't even sure it would work at that point."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "It's a shame we don't have more time to explore the ruins. There is so much interesting stuff in there, and we might be able to find something that could help us in the war."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "What, are you actually interested?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Yeah, it's important to learn where we come from."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Finally someone who understands me."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 9,
+                    "text": "Hi Sieg, can I ask you a favor?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Kira! Sure, what do you need?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I was trying to go through some strategy books in order to come up with better tactics."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I'm not sure how much I can help you with that, Kira. I'm not really a strategist, you know."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I was wondering if you had any Old World books about strategy."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Actually, I did read a book like that a while ago."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Really, and do you remember anything?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Well, they fought really differently back then. After all, they didn't have to deal with Pluvials and Machines. And they couldn't weild Blades."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "They must have been really weak compared to us, then..."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Probably, but they relied a lot more on technology to give them weapons to fight with. They had a lot of different types of guns and stuff, so they had to come up with different strategies to use them effectively."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "It's weird, when you think about it. That they had their mighty technology, but they still lost to the Beast and its Pluvials."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I looks almost unreal that such a creature was defeated by a single man. The Hero was really something else."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I wish he was still around. I'm sure he would easily stop the war..."
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 5,
+                    "text": "Hi Kira, I was looking for you."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Sieg! it's nice to see you. Did you find something interesting in the ruins again?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Well, about that... You probably know about the ruins nearby."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Yes! I was thinking it was a shame we could spare some time to explore them."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Well, as a matter of fact, I asked Zack and the others and they are fine with stopping for a while to gather supplies."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "That's great news! I was hoping we could explore the ruins together, Sieg."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I was about to ask you just that. I would love to explore the ruins, just the two of us."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Are you asking me out on a date, Sieg?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Yeah, I am. I like you Kira!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Wow, you're much more straightforward than I expected, Sieg!"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I practiced a little bit, I wanted to make sure I said it right."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I'd love to go on a date with you, Sieg."
+                }
+            ]
         },
         {
             "BondID": 18,
