@@ -2622,6 +2622,291 @@
                     "text": "Sorry, sorry. Anyway, let's get back to work! We have a lot of planning to do for the next mission!"
                 }
             ]
+        },
+        {
+            "BondID": 16,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 9,
+                    "text": "Hey, Gusto. What are you up to?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Oh, nothing much. I just woke up from a nap. Do you need anything?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Ok, so there is something I need to talk to you about."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Of course. Tell me."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I want you to teach me how to cook! Back in the capital, you always cooked for me. Now, when I get cooking duty, I have no idea what to do but grilled meat!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "What's wrong with grilled meat?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "That's beside the point! What if someday we can't find meat?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Then you can just grill vegetables or something."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Hold on... Do you mean that you can just grill anything?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Apart from water, yes you can."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Gusto! You're a genius!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "I'm always happy to help."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 8,
+                    "text": "Hello Kira, do you have a minute?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Is it about yesterday's incident? I'm sorry..."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "It's alright. Anyone can make mistakes. Let's just talk about it."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I didn't know..."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Sooo, I'll try to be clearer. You cannot grill anything. You can only grill food. You can't grill a rock, for example."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "It's just that... When you have very hard meat, you can make it softer by cooking it for a long time. I thought that maybe if I grilled a rock for a long time, it would work."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "I see... But no, that won't work. You have to pick food that is already edible first."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "There wasn't enough meat for all of us, so I improvised."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Yeah but you didn't need to paint it red to make it look like meat, you know. Zack almost ate it!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I promise I won't do it again..."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "You know what? I have an idea. I'll teach you about a new cooking technique. It's called 'stewing'. You put some food in a pot, add water, and cook it for a long time. It makes the food really soft and delicious!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "That sounds amazing! What do you put in a stew?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Well, you can put pretty much anything in a stew."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Anything?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "No, wait!"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 8,
+                    "text": "Hello Kira, do you have anything planned for today?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "No, I'm free, why?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Well, I am cooking dinner tonight. If you want I can show you the ropes?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Sure! What are you cooking?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Well, I am making an old dish called beef strogonoff."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Is it a stew?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Not really, but kind of. It's a dish where you cook beef in a sauce made of sour cream and mushrooms. It's really delicious!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Wow! That sounds amazing! I can't wait to try it!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Ok. I prepped the beef in advance. It's better to make it marinate for a while. We can grill it a bit in advance."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "What? Why do you need to grill it? I thought you were going to stew it?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Hmm, well, I like to grill the beef a bit before putting it in the sauce. It gives it a nice flavor."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "So when a recipe calls for stewing, it's actually better to grill the meat first? Is everything a barbecue in disguise?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "No, not everything is a barbecue in disguise. But grilling does add a nice flavor to the meat, so I like to do it before stewing."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Cooking is so complicated! I thought it was just about putting stuff in a pot and waiting for it to be done!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Wait until I tell you about steaming and frying..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "What's steaming?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "It's when you boil stuff but put what you are cooking in a basket above the water, so it cooks with the steam instead of being boiled. It's really good for vegetables and fish."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "What the hell? I thought everything was either grilled or stewed! This is too much for me!"
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 8,
+                    "text": "Hello Kira, I heard you were on cooking duty tonight. Do you want some help?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "No, Gusto, I got this. I want to try cooking something new tonight!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Something new? What do you have in mind?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "It's a secret. You'll see when it's done!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Are you sure? I mean..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "No! You'll see. You'll be impressed."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Ok I'll come back in a bit then. I want to give you some space to work on your masterpiece!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Thanks, Gusto! See you later!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "There... It's done! Gusto, you want to be the first one to try it?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Hold on... Is that..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "That's Gulash!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "It's... It's my favourite dish..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Yeah, well I wanted to make something special for you, Gusto."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "You went through all the trouble of making Gulash just for me? That's... That's so sweet..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Oh, Gusto, are you crying? I didn't mean to make you cry!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "It's so nice of you..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Don't cry! Tell me how it tastes!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "It's the best thing I have ever eaten. Thank you so much, Kira. I really appreciate it."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "It's a special dish for a special person. I'm really glad you like it, Gusto."
+                }
+            ]
+        },
+        {
+            "BondID": 17,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 18,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
         }
     ]
 }
