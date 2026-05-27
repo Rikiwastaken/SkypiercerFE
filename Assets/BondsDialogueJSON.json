@@ -3131,10 +3131,274 @@
         },
         {
             "BondID": 18,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
-            "dialogueLvl4": []
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 0,
+                    "text": "Kira, I need to talk to you."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Great, Zack, cause I need to talk to you too."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I'm glad to have you with us, but you know it's a bit weird to have two people dishing out orders."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I was thinking the exact same thing! That's why I wanted to tell you I'll be the one in charge now."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Nice, that's cool. Hold on, what?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Yeah. The one who has the most experience in battle should be the one giving orders, right? And that's me."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "How come? You've never even been an apprentice hunter."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I've been training as a soldier even since I've been a kid. I have been concelling my father with strategic decisions and stuff for a long time."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I see... But..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "And from what I've heard, you haven't been the most diligent student."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Ok, so how about we just lead our own squads and mind our own business?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Fine with me."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Deal."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 9,
+                    "text": "Zack, what's that thing in your chest?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Oh, this? It's a crystal."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "That's it?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "What do you mean?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "You have a crystal in your chest and just say 'oh, this?' Like it's nothing?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I don't know, it's just something I have. I don't know what it does or anything. It's just there."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I see... So you just have a crystal in your chest and you don't even know what it does?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Pretty much."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "That's really weird, Zack. You should probably get that checked out by a doctor or something."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I don't think there are any doctors around here who would be able to help me with that."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "So you just keep it there?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah, I guess so. It's not really bothering me or anything. It even acts as a sort of armor, so it's not all bad. It's pretty sturdy! Look..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "You don't need to show me, I get it!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Your turn now. What's this weird thing that sometimes shows up behind your back?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Oh, that? It's my guardian spirit. It protects me from harm and stuff. It's really cool!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I don't know either, ok? He's just there when I need him."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I would be creeped out if I had an old man following me, to be honest. You're kinda weird."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Hey, shut up! You're the one who's half rock!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I am not half rock! I'm half crystal!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Whatever."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I guess we're both pretty weird, huh?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Yeah. You're weirder though."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 9,
+                    "text": "Zack, I've been wondering about something."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Sure, what is it?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "How come we have special blades? I mean, I've always had my Reshine. What about your... Thing?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Well, it's not even a weapon. Initially it was just a tool to tinker with stuff. It's just that I can change its shape to my will, so I can use it as a weapon if I need to."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "But how do you do that?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I don't know. I just can. It was a pain to learn to weild all these different weapon types, but I guess now I can do some pretty cool tricks."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "You're pretty awesome, Zack. I wish I could do that."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Where did that come from? You're pretty awesome too. I'm just good at whacking things and building stuff. You got that whole strategy thing going on."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Well, you could learn if you wanted to. I could teach you if you want."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You know what? I might just take you up on that."
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 9,
+                    "text": "Zack, do you have a minute?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Sure, what's up?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Well, I found something earlier. Look."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Are those... Schematics?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "yeah, I found them in the ruinsof some kind of workshop. I think they are for some kind of machine or something."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "It's for a bike! That's so cool!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I know, right? I thought it was really interesting. I wonder if we could build one. I read about it but I have never seen one before."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "\"we\"? You want to help me build it?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Well, I have been trying to learn how to build stuff in my own free time."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "It would be sweet to do it together!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "We could build two of them! One for you and one for me!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "That would be awesome! We could go everywhere!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Ok, so what do we need?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "There is the list of parts here. We could use some help, let's ask..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "No!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "What is it?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I want to build it with you, just the two of us. I want it to be our project."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Oh... Ok, that sounds nice. Real nice."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Let's do it together."
+                }
+            ]
         }
     ]
 }
