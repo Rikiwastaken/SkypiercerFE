@@ -45,6 +45,9 @@ public class ActionManager : MonoBehaviour
     private InputAction _PrevWeaponAction;
     private InputAction _CancelAction;
 
+    private GameObject previouscurrentcharacter;
+    private BezierCurveManager BezierCurveManager;
+
     private void Awake()
     {
         if (instance == null)
@@ -65,6 +68,7 @@ public class ActionManager : MonoBehaviour
         GridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<cameraScript>();
         TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+        BezierCurveManager = GetComponent<BezierCurveManager>();
     }
 
     // Update is called once per frame
@@ -103,6 +107,21 @@ public class ActionManager : MonoBehaviour
             return;
         }
 
+
+        if (currentcharacter != null && TurnManager.currentlyplaying == "playable" && (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" || currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other"))
+        {
+            if (currentcharacter != previouscurrentcharacter)
+            {
+                CalculateCharacterLines();
+            }
+
+
+        }
+        else
+        {
+            BezierCurveManager.DisableLines();
+        }
+        previouscurrentcharacter = currentcharacter;
         if ((TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && (GameOverScript.instance == null || !GameOverScript.instance.gameObject.activeSelf))
         {
             if (currentcharacter != null)
@@ -111,6 +130,7 @@ public class ActionManager : MonoBehaviour
                 {
                     currentcharacter = null;
                 }
+
             }
 
 
@@ -224,12 +244,81 @@ public class ActionManager : MonoBehaviour
 
 
         }
+
         if (frameswherenotlock > 0)
         {
             frameswherenotlock--;
             GridScript.UnlockSelection();
         }
         preventfromlockingafteraction = false;
+
+
+
+    }
+
+    private void CalculateCharacterLines()
+    {
+
+        GridSquareScript currentcharactertile = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
+
+        // getting enemy units that can attack the selected unit
+        List<Character> enemycharactersthatcanattack = new List<Character>();
+        foreach (GameObject unitGO in GetComponent<GridScript>().allunitGOs)
+        {
+            UnitScript US = unitGO.GetComponent<UnitScript>();
+            Character unit = US.UnitCharacteristics;
+
+            if (unit.affiliation == "enemy")
+            {
+
+                (int range, bool melee) = US.GetRangeAndMele();
+
+                if (Manhattandistance(currentcharactertile.GridCoordinates, unit.currentTile[0].GridCoordinates) > range + unit.movements)
+                {
+                    continue;
+                }
+
+                List<GridSquareScript> movementtiles = new List<GridSquareScript>();
+
+                string tiletype = unit.currentTile[0].type;
+
+                int movements = US.CalculateNumberOfMovements();
+
+                GridScript.SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
+
+
+
+                foreach (GridSquareScript tile in movementtiles)
+                {
+                    List<GridSquareScript> attacktiles = GetComponent<GridScript>().GetAttack(range, melee, tile, unit);
+
+
+
+                    if (attacktiles.Contains(currentcharactertile))
+                    {
+                        Debug.Log("character " + unit.name + " can attack from tile " + tile.GridCoordinates + " with range: " + range);
+                        enemycharactersthatcanattack.Add(unit);
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        // We actually create the lines
+
+        for (int i = 0; i < enemycharactersthatcanattack.Count; i++)
+        {
+            BezierCurveManager.DrawLineBetween2Characters(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics, enemycharactersthatcanattack[i], i);
+        }
+
+
+    }
+
+    private float Manhattandistance(Vector2 a, Vector2 b)
+    {
+        // Manhattan distance (good for 4-directional grids)
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
     private void MoveCharacterToSelection()
@@ -264,15 +353,7 @@ public class ActionManager : MonoBehaviour
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
         if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
         {
-            int movements = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.movements;
-            if (currentcharacter.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using Retreat
-            {
-                movements -= 2;
-            }
-            if (currentcharacter.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
-            {
-                movements += 1;
-            }
+            int movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
             currentcharacter.GetComponent<UnitScript>().tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
         }
         GridScript.UnlockSelection();
@@ -355,15 +436,7 @@ public class ActionManager : MonoBehaviour
 
                 //Then we get the closest tile
 
-                int movements = currentChar.movements;
-                if (currentcharacter.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using Retreat
-                {
-                    movements -= 2;
-                }
-                if (currentcharacter.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
-                {
-                    movements += 1;
-                }
+                int movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
 
                 int shortestdistance = 99;
                 GridSquareScript besttile = null;
@@ -431,15 +504,7 @@ public class ActionManager : MonoBehaviour
 
             //Then we get the closest tile
 
-            int movements = currentChar.movements;
-            if (currentcharacter.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using Retreat
-            {
-                movements -= 2;
-            }
-            if (currentcharacter.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
-            {
-                movements += 1;
-            }
+            int movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
 
             int shortestdistance = 99;
             GridSquareScript besttile = null;

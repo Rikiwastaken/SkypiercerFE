@@ -2152,6 +2152,32 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+    public int CalculateNumberOfMovements()
+    {
+        string tiletype = UnitCharacteristics.currentTile[0].type;
+        int ajustedmovements = UnitCharacteristics.movements;
+        if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
+        {
+            ajustedmovements -= 1;
+        }
+        if (GetSkill(1))//checking if unit is using canto/Retreat
+        {
+            ajustedmovements -= 2;
+        }
+        if (GetSkill(5)) // checking if unit is using Fast Legs
+        {
+            ajustedmovements += 1;
+        }
+        if (UnitCharacteristics.statusEffects != null && UnitCharacteristics.statusEffects.ParalyzedTurns > 0)
+        {
+            ajustedmovements -= 1;
+        }
+        if (UnitCharacteristics.statusEffects != null && UnitCharacteristics.statusEffects.AccelerationTurns > 0)
+        {
+            ajustedmovements += 1;
+        }
+        return ajustedmovements;
+    }
     private void UpdateRendererLayer()
     {
         if (UnitCharacteristics.alreadyplayed)

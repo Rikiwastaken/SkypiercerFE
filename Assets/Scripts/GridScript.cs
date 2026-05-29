@@ -608,28 +608,7 @@ public class GridScript : MonoBehaviour
                 Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
                 if (unit.currentTile.Contains(selection))
                 {
-                    string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
-                    int movements = unit.movements;
-                    if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
-                    {
-                        movements -= 1;
-                    }
-                    if (unitGO.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using canto/Retreat
-                    {
-                        movements -= 2;
-                    }
-                    if (unitGO.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
-                    {
-                        movements += 1;
-                    }
-                    if (unit.statusEffects != null && unit.statusEffects.ParalyzedTurns > 0)
-                    {
-                        movements -= 1;
-                    }
-                    if (unit.statusEffects != null && unit.statusEffects.AccelerationTurns > 0)
-                    {
-                        movements += 1;
-                    }
+                    int movements = unitGO.GetComponent<UnitScript>().CalculateNumberOfMovements();
                     SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                     ShowAttack(range, melee, type.ToLower() == "staff", false, unit);
@@ -670,28 +649,7 @@ public class GridScript : MonoBehaviour
                 Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
                 if (unit.position == Target.GetComponent<UnitScript>().UnitCharacteristics.position && !unit.alreadyplayed)
                 {
-                    string tiletype = GetTile((int)unit.position.x, (int)unit.position.y).type;
-                    int movements = unit.movements;
-                    if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
-                    {
-                        movements -= 1;
-                    }
-                    if (unitGO.GetComponent<UnitScript>().GetSkill(1))//checking if unit is using canto/Retreat
-                    {
-                        movements -= 2;
-                    }
-                    if (unitGO.GetComponent<UnitScript>().GetSkill(5)) // checking if unit is using Fast Legs
-                    {
-                        movements += 1;
-                    }
-                    if (unit.statusEffects != null && unit.statusEffects.ParalyzedTurns > 0)
-                    {
-                        movements -= 1;
-                    }
-                    if (unit.statusEffects != null && unit.statusEffects.AccelerationTurns > 0)
-                    {
-                        movements += 1;
-                    }
+                    int movements = unitGO.GetComponent<UnitScript>().CalculateNumberOfMovements();
                     SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                     ShowAttack(range, melee, type.ToLower() == "staff", false, unit);
@@ -1011,26 +969,18 @@ public class GridScript : MonoBehaviour
                     {
                         for (int y = 1; y <= i - 1; y++)
                         {
+                            if (Mathf.Abs(x) + Mathf.Abs(y) == i)
+                            {
+                                Vector2 vectorforattack = tile.GridCoordinates + new Vector2(x, y);
+                                if (CheckIfPositionIsLegal(vectorforattack))
+                                {
+                                    if (!attacktiles.Contains(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>()))
+                                    {
+                                        attacktiles.Add(Grid[(int)(vectorforattack.x)][(int)(vectorforattack.y)].GetComponent<GridSquareScript>());
+                                    }
+                                }
 
-                            Vector2 vectorforattack = newtile.GridCoordinates + new Vector2(x, y);
-                            if (CheckIfPositionIsLegal(vectorforattack) && !newattacktiles.Contains(GetTile(vectorforattack)))
-                            {
-                                newattacktiles.Add(GetTile(vectorforattack));
-                            }
-                            vectorforattack = newtile.GridCoordinates + new Vector2(x, -y);
-                            if (CheckIfPositionIsLegal(vectorforattack) && !newattacktiles.Contains(GetTile(vectorforattack)))
-                            {
-                                newattacktiles.Add(GetTile(vectorforattack));
-                            }
-                            vectorforattack = newtile.GridCoordinates + new Vector2(-x, y);
-                            if (CheckIfPositionIsLegal(vectorforattack) && !newattacktiles.Contains(GetTile(vectorforattack)))
-                            {
-                                newattacktiles.Add(GetTile(vectorforattack));
-                            }
-                            vectorforattack = newtile.GridCoordinates + new Vector2(-x, -y);
-                            if (CheckIfPositionIsLegal(vectorforattack) && !newattacktiles.Contains(GetTile(vectorforattack)))
-                            {
-                                newattacktiles.Add(GetTile(vectorforattack));
+
                             }
 
 
@@ -1084,6 +1034,7 @@ public class GridScript : MonoBehaviour
         }
         return newattacktiles;
     }
+
 
     public void ShowAttackAfterMovement(int range, bool frapperenmelee, List<GridSquareScript> tiles, bool usingstaff, Character unit)
     {
@@ -1369,7 +1320,7 @@ public class GridScript : MonoBehaviour
         return -1;
     }
 
-    private void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit, Dictionary<GridSquareScript, int> visited)
+    public void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit, Dictionary<GridSquareScript, int> visited)
     {
         GridSquareScript tile = GetTile((int)Coordinates.x, (int)Coordinates.y);
         if (tile == null) return;

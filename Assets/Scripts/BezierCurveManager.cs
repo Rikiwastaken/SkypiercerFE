@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnitScript;
 
 public class BezierCurveManager : MonoBehaviour
 {
@@ -67,71 +68,100 @@ public class BezierCurveManager : MonoBehaviour
             return segments;
         }
     }
-
-    private GameObject previousLine;
-    public float smoothinglength;
+    [Header("Curve Variables")]
+    private List<GameObject> SpawnedLines = new List<GameObject>();
     public int sections;
-    public List<Vector3> points;
+    public float elongationRatio;
+    public Material material;
+    public float middlepointElevation;
+    public Color RendererColor;
+    public float width;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void DrawLineBetween2Characters(Character selectedChar, Character OtherChar, int lineID)
     {
-
+        Vector3 point1 = selectedChar.currentTile[0].transform.position;
+        Vector3 point2 = OtherChar.currentTile[0].transform.position;
+        Vector3 middlepoint = (point1 + point2) / 2f + new Vector3(0, middlepointElevation, 0);
+        List<Vector3> points = new List<Vector3>() { point1, middlepoint, point2 };
+        DrawLine(points, lineID);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DisableLines()
     {
-
+        foreach (GameObject line in SpawnedLines)
+        {
+            if (line.activeSelf)
+            {
+                line.SetActive(false);
+            }
+        }
     }
 
-    public void DrawLine(List<Vector3> points)
+    public void DrawLine(List<Vector3> points, int lineID)
     {
 
         BezierCurve curve = new BezierCurve(points);
         Vector3[] segments = curve.GetSegments(sections);
-        InitializeLineHolder(segments.Length);
-        Debug.Log("got " + segments.Length + " segments");
+        InitializeLineHolder(segments.Length, lineID);
         for (int i = 0; i < segments.Length - 1; i++)
         {
-
-            previousLine.transform.GetChild(i).GetComponent<LineRenderer>().SetPositions(new Vector3[2] { segments[i], segments[i + 1] });
+            Vector3[] newpositions = CalculateRendererPositions(segments[i], segments[i + 1]);
+            SpawnedLines[lineID].transform.GetChild(i).GetComponent<LineRenderer>().SetPositions(newpositions);
         }
-        previousLine.transform.GetChild(segments.Length - 1).GetComponent<LineRenderer>().SetPositions(new Vector3[2] { segments[segments.Length - 1], points[2] });
+        Vector3[] positions = CalculateRendererPositions(segments[segments.Length - 1], points[2]);
+        SpawnedLines[lineID].transform.GetChild(segments.Length - 1).GetComponent<LineRenderer>().SetPositions(positions);
     }
 
-    private void InitializeLineHolder(int numberofsections)
+    private void InitializeLineHolder(int numberofsections, int lineID)
     {
-        if (previousLine == null)
+        if (SpawnedLines == null)
         {
-            previousLine = new GameObject();
-            previousLine.name = "lineHolder";
-
+            SpawnedLines = new List<GameObject>();
         }
-        previousLine.SetActive(true);
+        for (int i = 0; i < SpawnedLines.Count; i++)
+        {
+            if (SpawnedLines[i] == null)
+            {
+                SpawnedLines.RemoveAt(i);
+            }
+        }
+        if (SpawnedLines.Count - 1 < lineID)
+        {
+            GameObject LinetoSpawn = new GameObject();
+            LinetoSpawn.name = "lineHolder" + lineID;
+            SpawnedLines.Add(LinetoSpawn);
+            LinetoSpawn.transform.parent = transform;
+        }
 
-        int numberofchildren = previousLine.transform.childCount;
+        SpawnedLines[lineID].SetActive(true);
+
+        int numberofchildren = SpawnedLines[lineID].transform.childCount;
 
         for (int i = numberofchildren; i < numberofsections; i++)
         {
             GameObject linechild = new GameObject();
             linechild.name = "lineChild" + i;
             linechild.AddComponent<LineRenderer>();
-            linechild.transform.parent = previousLine.transform;
+            linechild.transform.parent = SpawnedLines[lineID].transform;
+            linechild.GetComponent<LineRenderer>().material = material;
+            linechild.GetComponent<LineRenderer>().startColor = RendererColor;
+            linechild.GetComponent<LineRenderer>().endColor = RendererColor;
+            linechild.GetComponent<LineRenderer>().startWidth = width;
+            linechild.GetComponent<LineRenderer>().endWidth = width;
+            linechild.layer = LayerMask.NameToLayer("Players");
         }
 
     }
 
-#if UNITY_EDITOR
-    [ContextMenu("Try to draw curve")]
-    void Testdraw()
+    private Vector3[] CalculateRendererPositions(Vector3 Start, Vector3 End)
     {
-        DrawLine(points);
-        UnityEditor.EditorUtility.SetDirty(previousLine.gameObject);
+        Vector3[] positions = new Vector3[2];
+
+        positions[0] = Start - (End - Start).normalized * elongationRatio;
+        positions[1] = End + (End - Start).normalized * elongationRatio;
+
+
+
+        return positions;
     }
-
-
-
-
-#endif
 }
