@@ -261,7 +261,7 @@ public class ActionManager : MonoBehaviour
 
     private void CalculateCharacterLines(GridSquareScript tiletouse)
     {
-
+        BezierCurveManager.DisableLines();
 
         // getting enemy units that can attack the selected unit
         List<Character> enemycharactersthatcanattack = new List<Character>();

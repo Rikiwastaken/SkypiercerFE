@@ -77,10 +77,14 @@ public class BezierCurveManager : MonoBehaviour
     public Color RendererColor;
     public float width;
 
+
+    [Header("Line Fadein variables")]
+    public float timeforalltoappear;
+
     public void DrawLineBetween2Characters(Character selectedChar, Character OtherChar, int lineID)
     {
-        Vector3 point1 = selectedChar.currentTile[0].transform.position;
-        Vector3 point2 = OtherChar.currentTile[0].transform.position;
+        Vector3 point1 = OtherChar.currentTile[0].transform.position;
+        Vector3 point2 = selectedChar.currentTile[0].transform.position;
         Vector3 middlepoint = (point1 + point2) / 2f + new Vector3(0, middlepointElevation, 0);
         List<Vector3> points = new List<Vector3>() { point1, middlepoint, point2 };
         DrawLine(points, lineID);
@@ -90,8 +94,8 @@ public class BezierCurveManager : MonoBehaviour
 
     public void DrawLineBetween2Tiles(GridSquareScript selectedChar, GridSquareScript OtherChar, int lineID)
     {
-        Vector3 point1 = selectedChar.transform.position;
-        Vector3 point2 = OtherChar.transform.position;
+        Vector3 point1 = OtherChar.transform.position;
+        Vector3 point2 = selectedChar.transform.position;
         Vector3 middlepoint = (point1 + point2) / 2f + new Vector3(0, middlepointElevation, 0);
         List<Vector3> points = new List<Vector3>() { point1, middlepoint, point2 };
         DrawLine(points, lineID);
@@ -110,7 +114,6 @@ public class BezierCurveManager : MonoBehaviour
 
     public void DrawLine(List<Vector3> points, int lineID)
     {
-
         BezierCurve curve = new BezierCurve(points);
         Vector3[] segments = curve.GetSegments(sections);
         InitializeLineHolder(segments.Length, lineID);
@@ -119,8 +122,10 @@ public class BezierCurveManager : MonoBehaviour
             Vector3[] newpositions = CalculateRendererPositions(segments[i], segments[i + 1]);
             SpawnedLines[lineID].transform.GetChild(i).GetComponent<LineRenderer>().SetPositions(newpositions);
         }
+
         Vector3[] positions = CalculateRendererPositions(segments[segments.Length - 1], points[2]);
         SpawnedLines[lineID].transform.GetChild(segments.Length - 1).GetComponent<LineRenderer>().SetPositions(positions);
+        SpawnedLines[lineID].GetComponent<TargettingLineScript>().InitializeLines(timeforalltoappear);
     }
 
     private void InitializeLineHolder(int numberofsections, int lineID)
@@ -141,7 +146,9 @@ public class BezierCurveManager : MonoBehaviour
             GameObject LinetoSpawn = new GameObject();
             LinetoSpawn.name = "lineHolder" + lineID;
             SpawnedLines.Add(LinetoSpawn);
+
             LinetoSpawn.transform.parent = transform;
+            LinetoSpawn.AddComponent<TargettingLineScript>();
         }
 
         SpawnedLines[lineID].SetActive(true);
