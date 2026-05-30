@@ -112,7 +112,7 @@ public class ActionManager : MonoBehaviour
         {
             if (currentcharacter != previouscurrentcharacter)
             {
-                CalculateCharacterLines();
+                CalculateCharacterLines(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0]);
             }
 
 
@@ -151,6 +151,7 @@ public class ActionManager : MonoBehaviour
                         GridScript.lockselection = true;
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
+
                     }
                     else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && _ActivateAction.WasPressedThisFrame() && (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && NeutralMenuCD == 0 && !TextBubbleScript.indialogue)
                     {
@@ -231,12 +232,14 @@ public class ActionManager : MonoBehaviour
                 {
 
                     MoveCharacterToSelection();
+                    CalculateCharacterLines(GridScript.selection);
                 }
                 else if ((GridScript.lockedattacktiles.Contains(GridScript.selection) || GridScript.lockedhealingtiles.Contains(GridScript.selection)) && _ActivateAction.WasPressedThisFrame() && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                 {
                     if (TutorialScript.instance == null || !TutorialScript.instance.enabled)
                     {
                         AttackDirectly();
+                        CalculateCharacterLines(GridScript.selection);
                     }
 
                 }
@@ -256,10 +259,9 @@ public class ActionManager : MonoBehaviour
 
     }
 
-    private void CalculateCharacterLines()
+    private void CalculateCharacterLines(GridSquareScript tiletouse)
     {
 
-        GridSquareScript currentcharactertile = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
 
         // getting enemy units that can attack the selected unit
         List<Character> enemycharactersthatcanattack = new List<Character>();
@@ -273,7 +275,7 @@ public class ActionManager : MonoBehaviour
 
                 (int range, bool melee) = US.GetRangeAndMele();
 
-                if (Manhattandistance(currentcharactertile.GridCoordinates, unit.currentTile[0].GridCoordinates) > range + unit.movements)
+                if (Manhattandistance(tiletouse.GridCoordinates, unit.currentTile[0].GridCoordinates) > range + unit.movements)
                 {
                     continue;
                 }
@@ -294,9 +296,8 @@ public class ActionManager : MonoBehaviour
 
 
 
-                    if (attacktiles.Contains(currentcharactertile))
+                    if (attacktiles.Contains(tiletouse))
                     {
-                        Debug.Log("character " + unit.name + " can attack from tile " + tile.GridCoordinates + " with range: " + range);
                         enemycharactersthatcanattack.Add(unit);
                         break;
                     }
@@ -309,7 +310,7 @@ public class ActionManager : MonoBehaviour
 
         for (int i = 0; i < enemycharactersthatcanattack.Count; i++)
         {
-            BezierCurveManager.DrawLineBetween2Characters(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics, enemycharactersthatcanattack[i], i);
+            BezierCurveManager.DrawLineBetween2Tiles(tiletouse, enemycharactersthatcanattack[i].currentTile[0], i);
         }
 
 

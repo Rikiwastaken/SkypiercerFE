@@ -86,6 +86,17 @@ public class BezierCurveManager : MonoBehaviour
         DrawLine(points, lineID);
     }
 
+
+
+    public void DrawLineBetween2Tiles(GridSquareScript selectedChar, GridSquareScript OtherChar, int lineID)
+    {
+        Vector3 point1 = selectedChar.transform.position;
+        Vector3 point2 = OtherChar.transform.position;
+        Vector3 middlepoint = (point1 + point2) / 2f + new Vector3(0, middlepointElevation, 0);
+        List<Vector3> points = new List<Vector3>() { point1, middlepoint, point2 };
+        DrawLine(points, lineID);
+    }
+
     public void DisableLines()
     {
         foreach (GameObject line in SpawnedLines)
