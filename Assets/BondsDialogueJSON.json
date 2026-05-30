@@ -3399,6 +3399,205 @@
                     "text": "Let's do it together."
                 }
             ]
+        },
+        {
+            "BondID": 19,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 8,
+                    "text": "Hello, Sieg. What are you doing?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Just reading a book. It's about the creation of the bridge."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Really? I've never even thought about how the bridge was built."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Well, when you think about it, without the bridge we wouldn't even be at war."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "I wonder why it was build in the first place."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Well, according to the book. It was the Hero who wanted it build to connect the two nations."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "It backfired pretty badly, huh?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "That's... One way to put it."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "All of this depressing talk is making me hungry. Let us grab a bite."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I'll finish my book while we eat, then."
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 8,
+                    "text": "Sieg, I need your help with something."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Hi, Gusto. What can I do for you?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "You are well versed in books, right?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I would not say I'm well versed, but... I know a bit about Old World books."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "That is great, but what about cooking books?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Cooking books? I am not sure if I have read any of those before."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "I have been looking to expand my repertoire, and I thought it would be a great idea to recreate dishes from the Old World."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "That's a good idea. It's... Culinary archaeology! Let me take a look at my books and see if I can find anything."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "It's ok, it is no pressing matter. I'll get back to you in a while."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "You stay right there! Today, we cook for science!"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 5,
+                    "text": "So, Gusto, any luck today?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "I am sorry, Sieg. After all the trouble you went through to find me this book, I still don't understand."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Are these recipies really that hard to understand?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Well, they use some strange terms. What even is a \"brunoise\" or a \"julienne\"? And even the ingredients are weird. What is a \"foie gras\"? I have never even heard of that before!"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I see... I might be able to help you out with some of that. Foie Gras is actually from an ancient language called French."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "French? That's a weird name for a language. So what is this ingredient?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "It means \"fat liver\". It's a special way of preparing liver that was considered a delicacy in the Old World."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "That sounds... Disgusting! Why would anyone want to eat that?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Well, it's not for everyone, but some people really like it. It's really rich and flavorful, so it's an acquired taste."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "It might be a little bit too difficult to prepare... Let's try some other dishes. What is this \"Escargot\"?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Escargot is snails. You know what? This recipe book sounds a bit weird."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Snails? Who would eat that. I don't even want to know how you prepare that."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Maybe you should just stick to the dishes you know, Gusto. "
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "You're right, Sieg. Instead of trying to make some fancy new dish, I'll just make those I know perfect!"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I can't wait to try it, Gusto!"
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 20,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 21,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 22,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 23,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 24,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 25,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 26,
+            "dialogueLvl1": [],
+            "dialogueLvl2": [],
+            "dialogueLvl3": [],
+            "dialogueLvl4": []
         }
     ]
 }
