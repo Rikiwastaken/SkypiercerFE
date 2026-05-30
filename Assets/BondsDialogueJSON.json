@@ -3413,7 +3413,7 @@
                 },
                 {
                     "CharacterID": 8,
-                    "text": "Really? I've never even thought about how the bridge was built."
+                    "text": "Really? I have never even thought about how the bridge was built."
                 },
                 {
                     "CharacterID": 5,
@@ -3421,15 +3421,15 @@
                 },
                 {
                     "CharacterID": 8,
-                    "text": "I wonder why it was build in the first place."
+                    "text": "I wonder why it was built in the first place."
                 },
                 {
                     "CharacterID": 5,
-                    "text": "Well, according to the book. It was the Hero who wanted it build to connect the two nations."
+                    "text": "Well, according to the book. It was the Hero who wanted it built to connect the two nations."
                 },
                 {
                     "CharacterID": 8,
-                    "text": "It backfired pretty badly, huh?"
+                    "text": "It backfired quite a bit."
                 },
                 {
                     "CharacterID": 5,
@@ -3479,7 +3479,7 @@
                 },
                 {
                     "CharacterID": 8,
-                    "text": "It's ok, it is no pressing matter. I'll get back to you in a while."
+                    "text": "It is ok, it is no pressing matter. I'll get back to you in a while."
                 },
                 {
                     "CharacterID": 5,
@@ -3509,7 +3509,7 @@
                 },
                 {
                     "CharacterID": 8,
-                    "text": "French? That's a weird name for a language. So what is this ingredient?"
+                    "text": "French? That is a strange name for a language. So what is this ingredient?"
                 },
                 {
                     "CharacterID": 5,
@@ -3533,7 +3533,7 @@
                 },
                 {
                     "CharacterID": 8,
-                    "text": "Snails? Who would eat that. I don't even want to know how you prepare that."
+                    "text": "Snails? Thats is leagues worse. I don't even want to know how you prepare that."
                 },
                 {
                     "CharacterID": 5,
@@ -3541,7 +3541,7 @@
                 },
                 {
                     "CharacterID": 8,
-                    "text": "You're right, Sieg. Instead of trying to make some fancy new dish, I'll just make those I know perfect!"
+                    "text": "You are right, Sieg. Instead of trying to make some fancy new dish, I will just perfect the ones I know!"
                 },
                 {
                     "CharacterID": 5,
@@ -3552,9 +3552,156 @@
         },
         {
             "BondID": 20,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
-            "dialogueLvl3": [],
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 0,
+                    "text": "Gusto, are you cooking something? I'm supposed to be on cooking duty tonight, just get some rest, man."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Good evening, Zack! It is alright. I enjoy cooking. I hope you don't mind."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Really? I also like to cook!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Let us do it together, then!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Ok, so what's on the menu?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "You know, I was thinking something simple tonight."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Like... Fried eggs and stuff?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Precisely! You read my mind, there."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Do we have any bread and cheese? We could make some grilled cheese sandwiches to go with the eggs."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Why not. We also have some lard, we could use that to fry the eggs. It will make them taste even more delicious!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I wouldn't dream of making fried eggs without lard! Tonight is gonna be a feast!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Let us make sure of that!"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 8,
+                    "text": "Zack, I am in need of assistance. Would you be willing to lend me a hand?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Sure thing, Gusto. Do you need help with cooking?"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "In a way. The stove broke down again."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I keep fixing this thing, but it keeps breaking down. I don't know what's wrong with it."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Oh, I see. Should I cook on the campfire then?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "No, I'll fix it, don't worry."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "This is a great news! I am happy to have someone as skilled as you around, Zack."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Keep the praise for when I actually fix it, Gusto. Thanks, though. There, that should do it for now."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "It is impressive! You work really fast, Zack. I don't know how you do it. I am in your debt."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Nah, just cook something great and we'll be even."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Of course, Zack."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "We should really buy a new stove next time we get the chance, though."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Yes, that might be a good idea."
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 8,
+                    "text": "Zack! Didn't expect to see you here. Do you want us to cook together?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Nope, not tonight!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "Then, why are you peeling potatoes? I don't understand."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Listen, Gusto. You always cook for us, even when you don't have too. Tonight, you just kick back."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "What? I don't mind cooking, really. I enjoy it. I want to cook for you guys."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Just shut up and grab a glass, Gusto. We're having a barbecue party tonight! For you!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "For me? I don't know what to say, Zack. That's really nice of you!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Don't mention it. I'm glad to have you on the team."
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "What can I do to help?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Man, just stop! You sit back, you shut up and you enjoy the food. That's an order!"
+                },
+                {
+                    "CharacterID": 8,
+                    "text": "I... Ok, I can do that. Thanks, Zack."
+                }
+            ],
             "dialogueLvl4": []
         },
         {
