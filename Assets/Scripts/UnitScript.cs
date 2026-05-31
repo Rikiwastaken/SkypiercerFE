@@ -331,7 +331,6 @@ public class UnitScript : MonoBehaviour
 
     public float delayedUpdateTime;
 
-    public Image AffinityArrow;
 
     [Header("\nEquipment/Type/Copy/Telekinesis Sprites")]
     [Header("Equipment Sprites")]
@@ -627,7 +626,6 @@ public class UnitScript : MonoBehaviour
                 animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow");
             }
 
-            ShowAffinityArrow();
             UpdateRendererLayer();
             Hidedeactivated();
 
@@ -1091,111 +1089,6 @@ public class UnitScript : MonoBehaviour
         else
         {
             chartouse.previousTelekinesis = 2;
-        }
-    }
-    public void ShowAffinityArrow()
-    {
-        DataScript DS = DataScript.instance;
-        if (GridScript.GetUnit(GridScript.selection) == gameObject)
-        {
-
-            List<GameObject> BondedUnitsList = new List<GameObject>();
-            List<int> BondedUnitIDsList = new List<int>();
-
-            foreach (Bonds bond in DS.BondsList)
-            {
-                if (bond.Characters.Contains(UnitCharacteristics.ID) && bond.BondLevel > 0)
-                {
-                    foreach (int ID in bond.Characters)
-                    {
-                        if (ID != UnitCharacteristics.ID && ManhattanDistance(UnitCharacteristics, DS.PlayableCharacterList[ID]) <= 2)
-                        {
-                            BondedUnitIDsList.Add(ID);
-                        }
-                    }
-                }
-            }
-
-            foreach (GameObject unitGO in TurnManger.instance.playableunitGO)
-            {
-                Character character = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-                if (BondedUnitIDsList.Contains(character.ID))
-                {
-                    unitGO.GetComponent<UnitScript>().PointArrowToTarget(UnitCharacteristics);
-                }
-                else
-                {
-                    unitGO.GetComponent<UnitScript>().HideAffinityArrow();
-                }
-            }
-
-        }
-        else if (GridScript.GetUnit(GridScript.selection) == null)
-        {
-            HideAffinityArrow();
-        }
-    }
-
-    public void PointArrowToTarget(Character target)
-    {
-
-        if (!AffinityArrow.gameObject.activeSelf)
-        {
-            AffinityArrow.gameObject.SetActive(true);
-        }
-
-        if (target == null || AffinityArrow == null) return;
-
-        // fixed height above ground for the arrow
-        const float arrowHeight = 1f;
-
-        // Read grid coordinates (you said movement is X and Z in world)
-        Vector3 myGrid = UnitCharacteristics.currentTile[0].GridCoordinates;
-        Vector3 targetGrid = target.currentTile[0].GridCoordinates;
-
-        // Heuristic: prefer Grid.z if it contains meaningful data; otherwise use Grid.y as Z.
-        float myZ = (Mathf.Abs(myGrid.z) > 0.0001f || Mathf.Abs(targetGrid.z) > 0.0001f) ? myGrid.z : myGrid.y;
-        float targetZ = (Mathf.Abs(targetGrid.z) > 0.0001f || Mathf.Abs(myGrid.z) > 0.0001f) ? targetGrid.z : targetGrid.y;
-
-        Vector3 myPos = new Vector3(myGrid.x, arrowHeight, myZ);
-        Vector3 targetPos = new Vector3(targetGrid.x, arrowHeight, targetZ);
-
-        // Put arrow halfway (or change to any rule you want)
-        Vector3 midpoint = (myPos + targetPos) * 0.5f;
-        AffinityArrow.transform.position = midpoint; // Y is fixed by myPos/targetPos
-
-        AffinityArrow.transform.localPosition = new Vector3(AffinityArrow.transform.localPosition.x, AffinityArrow.transform.localPosition.y, 1f);
-
-        // Direction on XZ plane
-        Vector3 dir = targetPos - myPos;
-        dir.y = 0f;
-
-
-        if (dir.sqrMagnitude <= 0.0001f)
-        {
-            // degenerate case: same tile � don't change rotation
-            return;
-        }
-
-        // Compute yaw so the arrow faces the target on X-Z plane.
-        // Angle from Z axis: Atan2(dir.x, dir.z) -> degrees
-        float yaw = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-
-        // Make the arrow flat (so it's seen from above) and rotate only around Y.
-        // Many arrows/quads are created facing +Z. This sets X to 90 so the arrow face is horizontal.
-        // If your arrow already lies flat, use Quaternion.Euler(0, yaw, 0) instead.
-        AffinityArrow.transform.rotation = Quaternion.Euler(90f, yaw, 0f);
-
-
-    }
-
-
-
-    public void HideAffinityArrow()
-    {
-        if (AffinityArrow.gameObject.activeSelf)
-        {
-            AffinityArrow.gameObject.SetActive(false);
         }
     }
     private void LevelupMasteryCheck(WeaponMastery mastery, Character character)

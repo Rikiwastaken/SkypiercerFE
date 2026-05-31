@@ -538,6 +538,7 @@ public class GridScript : MonoBehaviour
             }
         }
         GetComponent<TurnManger>().InitializeUnitLists(allunitGOs);
+        BondVisualsScript.instance.InitializeBondList();
     }
     public void UnlockSelection()
     {

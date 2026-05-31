@@ -45,6 +45,18 @@ public class TargettingLineScript : MonoBehaviour
             }
             yield return null;
         }
+
+        for (int i = 0; i < numberofsections; i++)
+        {
+            if (i < transform.childCount)
+            {
+                if (!transform.GetChild(i).gameObject.activeSelf)
+                {
+                    transform.GetChild(i).gameObject.SetActive(true);
+                }
+            }
+        }
+
         Fadeincoroutine = null;
     }
 
