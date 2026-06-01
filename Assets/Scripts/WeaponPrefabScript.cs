@@ -180,6 +180,10 @@ public class WeaponPrefabScript : MonoBehaviour
         {
             return 2;
         }
+        else if (weaponname.ToLower().Contains("exordium"))
+        {
+            return 3;
+        }
 
         return -1;
     }

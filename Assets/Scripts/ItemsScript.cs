@@ -96,7 +96,7 @@ public class ItemsScript : MonoBehaviour
                                 grade = "A";
                                 break;
                             case (5):
-                                grade = "s";
+                                grade = "S";
                                 break;
                         }
 
@@ -224,7 +224,7 @@ public class ItemsScript : MonoBehaviour
                     grade = "A";
                     break;
                 case (5):
-                    grade = "s";
+                    grade = "S";
                     break;
             }
 
