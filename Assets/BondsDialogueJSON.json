@@ -3815,19 +3815,145 @@
                 },
                 {
                     "CharacterID": 10,
-                    "text": "Well, if that's a problem for you, know that the Kay pirates plunder every side!"
+                    "text": "Well, if that's a problem for you, know that the Kay pirates plunder every side! Especially the Occidensians suckers, though."
                 },
                 {
                     "CharacterID": 9,
-                    "text": "I know that already, Gwenie. I'm the daughter of tje '"
+                    "text": "I know that already, Gwenie. I'm the daughter of the Occidensian leader. Do you know how many lives were lost because of the Kay pirates?"
                 },
                 {
                     "CharacterID": 10,
-                    "text": "Thanks, Kira. I appreciate it."
+                    "text": "You were... Then I..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Sorry. I snapped a bit. It's ok. It's not like you gave the orders or anything, Gwenie."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Huh... Right... I never had anything to do with that. Nothing! Mostly..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "You're awfully red, you know that?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Me? Suspiciously red? That must be a fever, I better go!"
                 }
             ],
-            "dialogueLvl3": [],
-            "dialogueLvl4": []
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 9,
+                    "text": "Gwenie, have you been avoiding me?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "What? Me? Avoiding you? You're the one who's been avoiding me!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Come on, Gwenie. What's wrong?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Nothing! There couldn't be anything wrong! I don't feel guilty about anything, I swear!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Is this about when you were a pirate? I thought you loved being a pirate, Gwenie. Why would you feel guilty about that now?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Fine... It's just that ever since now, I thought we were the good guys, you know? Kay told us we always stole for the greater good. Now I'm not so sure."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I see... Well, now that you're with us, you'll have plenty of chances to atone for your past deeds, Gwenie. I'm sure you'll do great things with us!"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Oh, Kira you're so sweet... I really want to do good things with you guys."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I'm sure you will, Gwenie. I'm sure you will."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I almost fell like I should return the trinket I stole from Zack."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "What?"
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 10,
+                    "text": "Here, Kira, that's for you!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Is that a bandana? It's really pretty! Where did you get it?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I made it for you!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "It's the same as yours! But, what's the occasion?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "This bandana is the symbol of my family. I wanted you to have one too, so I made you one! I hope you like it!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Part of your family..."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Why are you so red, Kira?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I'm so glad you made this for me, Gwenie. It means a lot to me."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Nice! Now when this is all over we can go on adventures together with the rest of the guys!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "The rest of the guys?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Yeah! To us, our family is our pirate crew!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I see... Well... That's fine too..."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "But giving the bandana to someone outside of the family is a really big deal! It means you're ready to be with that person forever! I hope you know that, Kira."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "What? Talking to you is really... tiring. But I'm so glad to be part of your family, Gwenie."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "As of now, we're 4! You, me, Kay and her Husband! It's enough to go on an adventure!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "As long as it's with you."
+                }
+            ]
         },
         {
             "BondID": 22,
