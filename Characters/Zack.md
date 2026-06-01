@@ -42,7 +42,7 @@
 - Zack : well, duh.
 - Elwyn : But it didn't.
 - Zack : What do you mean?
-- Elwyn : It was all Lyv. She vouched for you. The soldier from Renais wanted you to be drafted. He wanted to put some discipline in you.
+- Elwyn : It was all Lyv. She vouched for you. The soldier from Occidens wanted you to be drafted. He wanted to put some discipline in you.
 - Zack : I... I never knew.
 - Elwyn : You don't need to invent clever schemes and to try and solve everything yourself.
   Zack : You're right. I'm sorry.

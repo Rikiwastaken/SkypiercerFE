@@ -356,7 +356,7 @@
                 },
                 {
                     "CharacterID": 2,
-                    "text": "It was all Lyv. She vouched for you. The soldier from Renais wanted you to be drafted. He wanted to put some discipline in you."
+                    "text": "It was all Lyv. She vouched for you. The soldier from Occidens wanted you to be drafted. He wanted to put some discipline in you."
                 },
                 {
                     "CharacterID": 0,
@@ -3706,8 +3706,126 @@
         },
         {
             "BondID": 21,
-            "dialogueLvl1": [],
-            "dialogueLvl2": [],
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 9,
+                    "text": "Gwenie! how are you? Are you doing ok?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Yeah, being with you guys is great! I mean, my sister's ships are way better than yours, but it's still cool!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Your sister's ships? You mean..."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Kay's pirates! She is my sister."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Are you a pirate too, then?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I was. But I prefer hanging out with you all. Being a pirate is hard work, believe me."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "But then, what were you doing with Raghnall's troops?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I felt like seeing the world, you know? I wanted to go on an adventure! So I asked my sister if I could join another group."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "And she put you with these bastards..."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "They are not that bad! When you get to know them, they are actually pretty nice. Kind of like you guys!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I'll take your words for it. They tried to kill us, though."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Not really... I mean, they were just trying to capture you all."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Is that really the orders you got? Why?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "No idea! Anyway, it's time for my shift. I'll see you later, Kira!"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 10,
+                    "text": "Yo ho, a pirate's life for me!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Gwenie, I thought you said you didn't want to be a pirate anymore?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I don't! I just like to sing pirate songs sometimes, you know? It's fun!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Ok, but maybe you could sing something else? Like... A song about the Hero or something?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "The Hero? Who's that?"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "You know, the guy who defeated the Beast and built the bridge and stuff?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Oh, that guy! I know about him. He's pretty cool. I don't know any song about him, though."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Yeah, me neither. Back home, I have a whole books about him and his adventures."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "We must have some of them back in Archades as well."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Hold on, you're Archadian?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Kind of. The lair of the pirates is on an island North of the Archadian continent, so I guess you could say I'm from there."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I see... I didn't know."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Well, if that's a problem for you, know that the Kay pirates plunder every side!"
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I know that already, Gwenie. I'm the daughter of tje '"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Thanks, Kira. I appreciate it."
+                }
+            ],
             "dialogueLvl3": [],
             "dialogueLvl4": []
         },
