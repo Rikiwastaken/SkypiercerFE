@@ -43,7 +43,7 @@ public class BondVisualsScript : MonoBehaviour
 
         if (selectedUnit != null)
         {
-            if (selectedUnit != previousSelectedUnit)
+            if (selectedUnit != previousSelectedUnit && selectedUnit.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
             {
                 ShowAffinityLine(selectedUnit);
             }
@@ -92,7 +92,10 @@ public class BondVisualsScript : MonoBehaviour
 
     public void InitializeBondList()
     {
-
+        if (_datascript == null)
+        {
+            _datascript = DataScript.instance;
+        }
         GridScript GS = GridScript.instance;
 
         List<int> unitpresentinscene = new List<int>();
