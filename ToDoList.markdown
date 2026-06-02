@@ -38,7 +38,7 @@
 
 ### 3D Models
 
-- Do Special Weapon skins ( Kay)
+- Do Special Weapon skins (Kay)
 
 - Chapter 10 battle map
 - Chapter 11 battle map

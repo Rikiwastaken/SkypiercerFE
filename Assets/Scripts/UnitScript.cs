@@ -48,6 +48,7 @@ public class UnitScript : MonoBehaviour
         public bool motivateusedthisturn;
         public int previouslyequipedweaponID = -1;
         public int previousTelekinesis; // 0 is undefined, 1 is active, 2 is inactive;
+        public CharacterDialogues characterDialogues;
     }
 
     [Serializable]
@@ -794,6 +795,17 @@ public class UnitScript : MonoBehaviour
             motivateusedthisturn = CharacterToCopy.motivateusedthisturn,
             previouslyequipedweaponID = CharacterToCopy.previouslyequipedweaponID,
             previousTelekinesis = CharacterToCopy.previousTelekinesis,
+            characterDialogues = new CharacterDialogues
+            {
+                CharacterID = CharacterToCopy.characterDialogues.CharacterID,
+                DeathQuote = CharacterToCopy.characterDialogues.DeathQuote,
+                DeathReaction_Zack = CharacterToCopy.characterDialogues.DeathReaction_Zack,
+                DeathReaction_Kira = CharacterToCopy.characterDialogues.DeathReaction_Kira,
+                DeathReaction_Gale = CharacterToCopy.characterDialogues.DeathReaction_Gale,
+                GoodLvlUp = CharacterToCopy.characterDialogues.GoodLvlUp,
+                MidLvlUp = CharacterToCopy.characterDialogues.MidLvlUp,
+                LowLvlUp = CharacterToCopy.characterDialogues.LowLvlUp
+            }
         };
 
         return copy;

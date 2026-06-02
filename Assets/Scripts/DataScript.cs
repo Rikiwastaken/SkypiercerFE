@@ -114,6 +114,25 @@ public class DataScript : MonoBehaviour
         public List<Skill> SkillList;
     }
 
+    [Serializable]
+    private class CharacterDialogueWrapper
+    {
+        public List<CharacterDialogues> CharacterDialogues;
+    }
+
+    [Serializable]
+    public class CharacterDialogues
+    {
+        public int CharacterID;
+        public string DeathQuote;
+        public string DeathReaction_Zack;
+        public string DeathReaction_Kira;
+        public string DeathReaction_Gale;
+        public string GoodLvlUp;
+        public string MidLvlUp;
+        public string LowLvlUp;
+    }
+
     public int bondincreaseperaction;
     public int maxdistanceforbondincrease;
 
@@ -1259,6 +1278,39 @@ public class DataScript : MonoBehaviour
         }
     }
 
+
+    [ContextMenu("Load Character Qutoes From JSON")]
+    public void LoadCharacterDialogues()
+    {
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Character Quotes JSON File", "", "json");
+        if (string.IsNullOrEmpty(path))
+            return;
+
+        string json = File.ReadAllText(path);
+
+        CharacterDialogueWrapper wrapper = JsonUtility.FromJson<CharacterDialogueWrapper>(json);
+        if (wrapper == null || wrapper.CharacterDialogues == null)
+        {
+            Debug.LogError("JSON file format invalid. Needs { \"CharacterDialogues\": [ ... ] }");
+            return;
+        }
+
+        List<CharacterDialogues> CharaDialogues = wrapper.CharacterDialogues;
+
+        for (int i = 0; i < PlayableCharacterList.Count; i++)
+        {
+            foreach (CharacterDialogues characterDialogue in CharaDialogues)
+            {
+                if (characterDialogue.CharacterID == i)
+                {
+                    PlayableCharacterList[i].characterDialogues = characterDialogue;
+                }
+            }
+        }
+
+        UnityEditor.EditorUtility.SetDirty(this);
+        Debug.Log("Loaded " + wrapper.CharacterDialogues.Count + " Character Dialogues into the list!");
+    }
 
     [ContextMenu("Load Bonds From JSON")]
     public void LoadBonds()

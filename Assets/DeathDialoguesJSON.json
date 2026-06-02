@@ -1,0 +1,164 @@
+{
+    "CharacterDialogues": [
+        {
+            "CharacterID": 0,
+            "DeathQuote": "Damn it... I'm done. You better not mess this up...",
+            "DeathReaction_Zack": "",
+            "DeathReaction_Kira": "",
+            "DeathReaction_Gale": "",
+            "GoodLvlUp": "I'm getting stronger by the second!",
+            "MidLvlUp": "I'm getting better.",
+            "LowLvlUp": "Well, this is embarrassing."
+        },
+        {
+            "CharacterID": 1,
+            "DeathQuote": "It can't end like this... I couldn't protect everyone...",
+            "DeathReaction_Zack": "Fall back, Lea! I'll protect you!",
+            "DeathReaction_Kira": "You've done more than enough, Lea. Save yourself!",
+            "DeathReaction_Gale": "Lea, you strength was impressive. I'll be sure to avenge you!",
+            "GoodLvlUp": "This is the strength I needed to protect everyone!",
+            "MidLvlUp": "I still have a long way to go, but I'm getting there.",
+            "LowLvlUp": "How can I help them that way..."
+        },
+        {
+            "CharacterID": 2,
+            "DeathQuote": "Zack, Lea... I'm sorry...",
+            "DeathReaction_Zack": "Elwyn! We'll take it from here! You can rest now!",
+            "DeathReaction_Kira": "Elwyn, you can't fall!",
+            "DeathReaction_Gale": "You cannot die yet, Elwyn!",
+            "GoodLvlUp": "This is not half bad!",
+            "MidLvlUp": "I can work with that.",
+            "LowLvlUp": "This is pathetic..."
+        },
+        {
+            "CharacterID": 3,
+            "DeathQuote": "Lyv... I wished we could've fought together more...",
+            "DeathReaction_Zack": "You can't die yet, you old man! Get a hold of yourself!",
+            "DeathReaction_Kira": "Sorak, you have to stay alive, go!",
+            "DeathReaction_Gale": "You fought bravely, Sorak. I'll show them what you were made of!",
+            "GoodLvlUp": "I am stronger than ever before.",
+            "MidLvlUp": "I am still getting a bit stronger.",
+            "LowLvlUp": "I am too old for all this..."
+        },
+        {
+            "CharacterID": 4,
+            "DeathQuote": "I... I failed everyone... Sorak...",
+            "DeathReaction_Zack": "Get back, Lyv. We need you!",
+            "DeathReaction_Kira": "Lyv, you can't fall!",
+            "DeathReaction_Gale": "Lyv, we'll help you escape! You've done more than enough.",
+            "GoodLvlUp": "My skills as a healer are getting better!",
+            "MidLvlUp": "I am still improving!",
+            "LowLvlUp": "I hope this is enough to keep everyone alive..."
+        },
+        {
+            "CharacterID": 5,
+            "DeathQuote": "I... I shouldn't have left my library...",
+            "DeathReaction_Zack": "I'll cover you, Sieg! Get back!",
+            "DeathReaction_Kira": "Sieg, go heal your wounds in the back! You still have a lot to do!",
+            "DeathReaction_Gale": "Sieg, stand down! I'll take care of the rest!",
+            "GoodLvlUp": "This will be a huge help!",
+            "MidLvlUp": "Did I just grow stronger?",
+            "LowLvlUp": "What a waste of time..."
+        },
+        {
+            "CharacterID": 6,
+            "DeathQuote": "Well, I've done more than enough. I'll leave the rest to you.",
+            "DeathReaction_Zack": "Where are you going, come back here!",
+            "DeathReaction_Kira": "Sure... Do whatever you want, Sir Mir.",
+            "DeathReaction_Gale": "Yes, let me take care of everything.",
+            "GoodLvlUp": "To think I could get even stronger...",
+            "MidLvlUp": "Not bad.",
+            "LowLvlUp": "It's not like I needed to get any stronger."
+        },
+        {
+            "CharacterID": 7,
+            "DeathQuote": "So this is how it ends...",
+            "DeathReaction_Zack": "Ruben, you have to live!",
+            "DeathReaction_Kira": "Ruben, we need your strength. You have to survive!",
+            "DeathReaction_Gale": "Magnificently fought, Ruben. You can take a break now.",
+            "GoodLvlUp": "This is the strength I have been looking for.",
+            "MidLvlUp": "This is better, but still not good enough.",
+            "LowLvlUp": "I'll have to train harder..."
+        },
+        {
+            "CharacterID": 8,
+            "DeathQuote": "Had I known this was my last meal, I would have savored it more...",
+            "DeathReaction_Zack": "Gusto! Retreat! I'll cover you!",
+            "DeathReaction_Kira": "You have too much to do, Gusto! You can't die here!",
+            "DeathReaction_Gale": "Gusto, your defense was legendary! Fall back.",
+            "GoodLvlUp": "I wonder if this will make me a better cook...",
+            "MidLvlUp": "This is nice!",
+            "LowLvlUp": "I'm too hungry... This sucks."
+        },
+        {
+            "CharacterID": 9,
+            "DeathQuote": "I'm sorry, everyone... I was not worthy of being your leader... Guardian... I hope you can forgive me...",
+            "DeathReaction_Zack": "",
+            "DeathReaction_Kira": "",
+            "DeathReaction_Gale": "",
+            "GoodLvlUp": "Thank you for watching over me... I'm stronger than ever!",
+            "MidLvlUp": "I am growing stronger, thanks to you.",
+            "LowLvlUp": "Have you forsaken me?"
+        },
+        {
+            "CharacterID": 10,
+            "DeathQuote": "I messed up, guys...",
+            "DeathReaction_Zack": "Gwenie, you have so much stuff to do! You can't die here!",
+            "DeathReaction_Kira": "Retreat, Gwenie! you've done more than enough!",
+            "DeathReaction_Gale": "Gwenie, if you die, your sister will never forgive me!",
+            "GoodLvlUp": "This is what adventures are all about!",
+            "MidLvlUp": "This is pretty good!",
+            "LowLvlUp": "I should have stayed with my sister..."
+        },
+        {
+            "CharacterID": 11,
+            "DeathQuote": "I guess I saw this coming...",
+            "DeathReaction_Zack": "Stay alive, Kay! Too many depend on you!",
+            "DeathReaction_Kira": "Kay, you better not die! You have too much to atone for!",
+            "DeathReaction_Gale": "You can't leave me, Kay! I need you!",
+            "GoodLvlUp": "This is the stuff!",
+            "MidLvlUp": "Wow, I'm getting stronger!",
+            "LowLvlUp": "You can't win every time..."
+        },
+        {
+            "CharacterID": 12,
+            "DeathQuote": "I leave the rest to you, kiddos...",
+            "DeathReaction_Zack": "Bob, stop playing dead! Fall back!",
+            "DeathReaction_Kira": "Retreat, General! We'll cover you.",
+            "DeathReaction_Gale": "Bob, you idiot! Just go!",
+            "GoodLvlUp": "To think my strength could grow even more...",
+            "MidLvlUp": "I am the ultimate warrior!",
+            "LowLvlUp": "My strength has finally reached its peak..."
+        },
+        {
+            "CharacterID": 13,
+            "DeathQuote": "I'm sorry, Kay. I failed you...",
+            "DeathReaction_Zack": "",
+            "DeathReaction_Kira": "",
+            "DeathReaction_Gale": "",
+            "GoodLvlUp": "My master trained me well!",
+            "MidLvlUp": "My training is starting to pay off!",
+            "LowLvlUp": "It's not enough..."
+        },
+        {
+            "CharacterID": 14,
+            "DeathQuote": "I thought I was strong enough... I guess not...",
+            "DeathReaction_Zack": "Aurora, Gale needs you! You can't die here!",
+            "DeathReaction_Kira": "Aurora, stay back, we'll cover you!",
+            "DeathReaction_Gale": "You have done well, Aurora. Tend to your wounds.",
+            "GoodLvlUp": "This will be useful to Gale!",
+            "MidLvlUp": "You can always get stronger!",
+            "LowLvlUp": "I'm dragging you down..."
+        },
+        {
+            "CharacterID": 15,
+            "DeathQuote": "This is a good death!",
+            "DeathReaction_Zack": "Not on my watch, Erica! Run!",
+            "DeathReaction_Kira": "You can't die here, Erica! Retreat!",
+            "DeathReaction_Gale": "Erica, your time has yet to come! I will protect you!",
+            "GoodLvlUp": "This will help me kick some butt!",
+            "MidLvlUp": "I'm fired up!",
+            "LowLvlUp": "Bummer..."
+        }
+    ]
+}
