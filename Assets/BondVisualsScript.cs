@@ -87,7 +87,7 @@ public class BondVisualsScript : MonoBehaviour
 
     private int ManhattanDistance(GridSquareScript tile1, GridSquareScript tile2)
     {
-        return (int)(Mathf.Abs(tile1.GridCoordinates.x - tile1.GridCoordinates.x) + Mathf.Abs(tile1.GridCoordinates.y - tile1.GridCoordinates.y));
+        return (int)(Mathf.Abs(tile1.GridCoordinates.x - tile2.GridCoordinates.x) + Mathf.Abs(tile1.GridCoordinates.y - tile2.GridCoordinates.y));
     }
 
     public void InitializeBondList()

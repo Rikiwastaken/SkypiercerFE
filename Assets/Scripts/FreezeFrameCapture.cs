@@ -288,11 +288,11 @@ public class FreezeFrameCapture : MonoBehaviour
             }
         }
 
-        if (numberofbonuses <= 2)
+        if (numberofbonuses <= 1)
         {
             leveluptext = "\"" + characterWhoLeveledUp.characterDialogues.LowLvlUp + "\"";
         }
-        else if (numberofbonuses <= 4)
+        else if (numberofbonuses <= 3)
         {
             leveluptext = "\"" + characterWhoLeveledUp.characterDialogues.MidLvlUp + "\"";
         }
