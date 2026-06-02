@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static DataScript;
+using static TextBubbleScript;
 using static UnitScript;
 public class AttackTurnScript : MonoBehaviour
 {
@@ -80,6 +81,8 @@ public class AttackTurnScript : MonoBehaviour
     private BattleInfotext battleInfotextScript;
 
     public Coroutine AttackCoroutine;
+
+    private TextBubbleScript _TextBubbleScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -2064,6 +2067,7 @@ public class AttackTurnScript : MonoBehaviour
         {
             gridScript.allunitGOs.Remove(unittodelete);
             gridScript.allunits.Remove(unittodelete.GetComponent<UnitScript>().UnitCharacteristics);
+            GenerateDeathDialogue(unittodelete.GetComponent<UnitScript>().UnitCharacteristics);
         }
         GetComponent<TurnManger>().InitializeUnitLists(GetComponent<GridScript>().allunitGOs);
         if (!SaveManager.instance.Options.BattleAnimations)
@@ -2072,6 +2076,49 @@ public class AttackTurnScript : MonoBehaviour
         }
 
         minimapScript.UpdateMinimap();
+    }
+
+    private void GenerateDeathDialogue(Character charawhodied)
+    {
+        List<TextBubbleInfo> DeathDialogue = new List<TextBubbleInfo>();
+
+        TextBubbleInfo characterdeathquote = new TextBubbleInfo();
+        characterdeathquote.text = charawhodied.characterDialogues.DeathQuote;
+        characterdeathquote.characterindex = charawhodied.ID;
+
+        DeathDialogue.Add(characterdeathquote);
+
+        if (!charawhodied.playableStats.protagonist)
+        {
+            TextBubbleInfo Leaderquote = new TextBubbleInfo();
+
+            switch (charawhodied.playableStats.battalion.ToLower())
+            {
+                case ("zack"):
+                    Leaderquote.text = charawhodied.characterDialogues.DeathReaction_Zack;
+                    Leaderquote.characterindex = 0;
+                    DeathDialogue.Add(Leaderquote);
+                    break;
+                case ("kira"):
+                    Leaderquote.text = charawhodied.characterDialogues.DeathReaction_Kira;
+                    Leaderquote.characterindex = 9;
+                    DeathDialogue.Add(Leaderquote);
+                    break;
+                case ("gale"):
+                    Leaderquote.text = charawhodied.characterDialogues.DeathReaction_Gale;
+                    Leaderquote.characterindex = 13;
+                    DeathDialogue.Add(Leaderquote);
+                    break;
+            }
+        }
+
+        if (_TextBubbleScript == null)
+        {
+            _TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+        }
+
+        _TextBubbleScript.InitializeDialogue(DeathDialogue);
+
     }
 
 }
