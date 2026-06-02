@@ -51,6 +51,15 @@ public class FreezeFrameCapture : MonoBehaviour
     public Vector2 TargetLvlUpPosition;
     public Vector2 LvlUpBGOffset;
 
+    [Header("QuoteVariables")]
+    public TextMeshProUGUI QuoteText;
+    public TextMeshProUGUI QuoteTextBG;
+    public float lefttextsizeratioQuote;
+    public float righttextsizeratioQuote;
+    public Vector2 BaseQuotePosition;
+    public Vector2 TargetQuotePosition;
+    public Vector2 QuoteBGOffset;
+
     [Header("StatTextVariables")]
     public List<TextMeshProUGUI> StatTexts;
     public List<TextMeshProUGUI> StatTextBG;
@@ -235,6 +244,11 @@ public class FreezeFrameCapture : MonoBehaviour
         LvlUpTextBG.gameObject.SetActive(true);
         LvlUpTextBG.rectTransform.anchoredPosition = BaseLvlUpPosition;
 
+        QuoteText.gameObject.SetActive(true);
+        QuoteText.rectTransform.anchoredPosition = BaseLvlUpPosition;
+        QuoteTextBG.gameObject.SetActive(true);
+        QuoteTextBG.rectTransform.anchoredPosition = BaseLvlUpPosition;
+
         StatTextHolder.gameObject.SetActive(true);
         StatTextHolder.anchoredPosition = BaseStatPosition;
 
@@ -261,8 +275,34 @@ public class FreezeFrameCapture : MonoBehaviour
         ApplyDistortion(LvlUpText, "Level " + characterWhoLeveledUp.level, lefttextsizeratioLvlUp, righttextsizeratioLvlUp);
         ApplyDistortion(LvlUpTextBG, "Level " + characterWhoLeveledUp.level, lefttextsizeratioLvlUp, righttextsizeratioLvlUp);
 
-        ApplyDistortion(LvlUpText, "Level " + characterWhoLeveledUp.level, lefttextsizeratioLvlUp, righttextsizeratioLvlUp);
-        ApplyDistortion(LvlUpTextBG, "Level " + characterWhoLeveledUp.level, lefttextsizeratioLvlUp, righttextsizeratioLvlUp);
+
+        string leveluptext = "";
+
+        int numberofbonuses = 0;
+
+        foreach (int levelup in levelip)
+        {
+            if (levelup > 0)
+            {
+                numberofbonuses++;
+            }
+        }
+
+        if (numberofbonuses <= 2)
+        {
+            leveluptext = "\"" + characterWhoLeveledUp.characterDialogues.LowLvlUp + "\"";
+        }
+        else if (numberofbonuses <= 4)
+        {
+            leveluptext = "\"" + characterWhoLeveledUp.characterDialogues.MidLvlUp + "\"";
+        }
+        else
+        {
+            leveluptext = "\"" + characterWhoLeveledUp.characterDialogues.GoodLvlUp + "\"";
+        }
+
+        QuoteText.text = leveluptext;
+        QuoteTextBG.text = leveluptext;
 
         ApplyDistortion(Continuetxt, "continue", leftContinueratio, rightContinueratio);
         ApplyDistortion(ContinueBGtxt, "continue", leftContinueratio, rightContinueratio);
@@ -403,6 +443,9 @@ public class FreezeFrameCapture : MonoBehaviour
         LvlUpText.gameObject.SetActive(false);
         LvlUpTextBG.gameObject.SetActive(false);
 
+        QuoteText.gameObject.SetActive(false);
+        QuoteTextBG.gameObject.SetActive(false);
+
         StatTextHolder.gameObject.SetActive(false);
 
         Continuetxt.gameObject.SetActive(false);
@@ -487,6 +530,8 @@ public class FreezeFrameCapture : MonoBehaviour
         StatTextHolder.gameObject.SetActive(false);
         LvlUpText.gameObject.SetActive(false);
         LvlUpTextBG.gameObject.SetActive(false);
+        QuoteText.gameObject.SetActive(false);
+        QuoteTextBG.gameObject.SetActive(false);
 
         Continuetxt.gameObject.SetActive(false);
         ContinueBGtxt.gameObject.SetActive(false);
@@ -649,6 +694,9 @@ public class FreezeFrameCapture : MonoBehaviour
 
             LvlUpText.rectTransform.anchoredPosition = Vector2.Lerp(BaseLvlUpPosition, TargetLvlUpPosition, eased);
             LvlUpTextBG.rectTransform.anchoredPosition = Vector2.Lerp(BaseLvlUpPosition + LvlUpBGOffset, TargetLvlUpPosition + LvlUpBGOffset, eased);
+
+            QuoteText.rectTransform.anchoredPosition = Vector2.Lerp(BaseQuotePosition, TargetQuotePosition, eased);
+            QuoteTextBG.rectTransform.anchoredPosition = Vector2.Lerp(BaseQuotePosition + QuoteBGOffset, TargetQuotePosition + QuoteBGOffset, eased);
 
             SkillCoinText.rectTransform.anchoredPosition = Vector2.Lerp(BaseSkillCoinPosition, TargetSkillCoinPosition, eased);
 
