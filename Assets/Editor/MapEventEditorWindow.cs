@@ -294,6 +294,7 @@ public class MapEventEditorWindow : EditorWindow
         eProp.FindPropertyRelative("triggertype").intValue = 1;
         eProp.FindPropertyRelative("initializationtype").intValue = 1;
         eProp.FindPropertyRelative("triggered").boolValue = false;
+        eProp.FindPropertyRelative("IgnoreEventInForesight").boolValue = false;
         eProp.FindPropertyRelative("triggerEffectType").intValue = 4;
         eProp.FindPropertyRelative("dialoguetoShow").ClearArray();
         eProp.FindPropertyRelative("UnitsToUnlockID").ClearArray();
@@ -435,6 +436,8 @@ public class MapEventEditorWindow : EditorWindow
 
         var effectTypeProp = eProp.FindPropertyRelative("triggerEffectType");
         effectTypeProp.intValue = EditorGUILayout.Popup("Trigger Effect", effectTypeProp.intValue, TriggerEffectTypeLabels);
+
+        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("IgnoreEventInForesight"));
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Unit names (NameUnitList)");

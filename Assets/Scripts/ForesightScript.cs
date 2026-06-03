@@ -36,13 +36,19 @@ public class ForesightScript : MonoBehaviour
         public int skilltoremovefrominventory = -1;
         public int beginningofturn = -1; //0 : player, 1 : enemy, 2 : other
         public int currentturn;
-        public List<bool> PreviousEventStates;
+        public List<EventData> PreviousEventStates;
         public List<Bonds> PreviousBonds;
         public List<ChapterFlags> chapterflags;
         public string FactionCurrentlyPlayingAtTime;
         public int previousSkillCoins;
     }
 
+    [Serializable]
+    public class EventData
+    {
+        public int EventID;
+        public bool Eventstate;
+    }
 
     [Serializable]
     public class TileModification
@@ -380,11 +386,15 @@ public class ForesightScript : MonoBehaviour
         CurrentAction.previousSkillCoins = DataScript.instance.SkillCoins;
 
 
-        List<bool> eventstates = new List<bool>();
+        List<EventData> eventstates = new List<EventData>();
 
         foreach (MapEventManager.EventCondition evnt in MapEventManager.instance.EventsToMonitor)
         {
-            eventstates.Add(evnt.triggered);
+            if (!evnt.IgnoreEventInForesight)
+            {
+                eventstates.Add(new EventData() { EventID = evnt.ID, Eventstate = evnt.triggered });
+            }
+
         }
 
         CurrentAction.PreviousEventStates = eventstates;
@@ -473,9 +483,9 @@ public class ForesightScript : MonoBehaviour
                 CharacterHolder = GameObject.Find("Characters");
             }
 
-            foreach (MapEventManager.EventCondition evnt in MapEventManager.instance.EventsToMonitor)
+            foreach (EventData _EventData in ActionToRevert.PreviousEventStates)
             {
-                evnt.triggered = ActionToRevert.PreviousEventStates[evnt.ID];
+                MapEventManager.instance.EventsToMonitor[_EventData.EventID].triggered = _EventData.Eventstate;
             }
 
             for (int j = 0; j < CharacterHolder.transform.childCount; j++)

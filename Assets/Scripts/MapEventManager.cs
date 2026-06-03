@@ -29,6 +29,7 @@ public class MapEventManager : MonoBehaviour
         public List<int> EventsToWatch;
         public List<GridSquareScript> TilesList;
         public List<SmallerCondition> SmallerConditions;
+        public bool IgnoreEventInForesight; // foresight does not revert the event to how it was, meaning an event triggered will stay triggerered
         public int triggertype;
         /* 1 : one of the allies reached one of the tiles
          * 2 : one of the enemies reached one of the tiles
