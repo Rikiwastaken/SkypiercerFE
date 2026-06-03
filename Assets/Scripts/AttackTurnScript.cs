@@ -1109,7 +1109,9 @@ public class AttackTurnScript : MonoBehaviour
         }
 
         AttackCoroutine = null;
+        ActionsMenu.confirmattack = false;
         DeathCleanup();
+
     }
 
     private bool checkifattackanimationisplaying(GameObject attacker, GameObject target)
@@ -2063,14 +2065,23 @@ public class AttackTurnScript : MonoBehaviour
             }
 
         }
+
+        bool dialoguegenerated = false;
+
         foreach (GameObject unittodelete in objecttodelete)
         {
             gridScript.allunitGOs.Remove(unittodelete);
             gridScript.allunits.Remove(unittodelete.GetComponent<UnitScript>().UnitCharacteristics);
-            GenerateDeathDialogue(unittodelete.GetComponent<UnitScript>().UnitCharacteristics);
+            if (unittodelete.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
+            {
+                dialoguegenerated = true;
+                GenerateDeathDialogue(unittodelete.GetComponent<UnitScript>().UnitCharacteristics);
+
+            }
+
         }
         GetComponent<TurnManger>().InitializeUnitLists(GetComponent<GridScript>().allunitGOs);
-        if (!SaveManager.instance.Options.BattleAnimations)
+        if (!dialoguegenerated && !SaveManager.instance.Options.BattleAnimations)
         {
             MapEventManager.instance.TriggerEventCheck();
         }

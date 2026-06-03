@@ -303,10 +303,17 @@ public class MapEventManager : MonoBehaviour
                 Debug.Log("gameover trigger");
                 //For new trigger foresight cause no true gameover
 
-
-                if (ForesightScript.remaininguses > 0)
+                NeutralMenuScript _NeutralMenuScript = FindAnyObjectByType<NeutralMenuScript>(FindObjectsInactive.Include);
+                string chaptername = SceneManager.GetActiveScene().name;
+                int chapter = 0;
+                if (chaptername.Contains("Chapter"))
                 {
-                    FindAnyObjectByType<NeutralMenuScript>(FindObjectsInactive.Include).OpenForesighMenu(true);
+                    chapter = int.Parse(SceneManager.GetActiveScene().name.Replace("Chapter", ""));
+                }
+
+                if (ForesightScript.remaininguses > 0 && chapter > _NeutralMenuScript.chapterforUnlockingForesight)
+                {
+                    _NeutralMenuScript.OpenForesighMenu(true);
                 }
                 else
                 {
