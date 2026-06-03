@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnitScript;
@@ -24,6 +25,10 @@ public class MinimapScript : MonoBehaviour
     private int showposition;
 
     private GridSquareScript previoustile;
+
+    private Coroutine updatecoroutine;
+
+    private bool launchupdate;
 
     private void Awake()
     {
@@ -65,6 +70,11 @@ public class MinimapScript : MonoBehaviour
             UpdateMinimap();
         }
 
+        if (launchupdate && updatecoroutine == null)
+        {
+            launchupdate = false;
+            updatecoroutine = StartCoroutine(ChangeMinimap());
+        }
 
         if (cameraScript.incombat)
         {
@@ -158,14 +168,14 @@ public class MinimapScript : MonoBehaviour
         UpdateMinimap();
     }
 
-    private void SetTileColor(int x, int y, Color color, float alpha = 1f)
+    private void SetTileColor(Texture2D TextureToPaint, int x, int y, Color color, float alpha = 1f)
     {
         color.a = alpha;
         for (int i = 0; i < 8; i++)
         {
             for (int j = 0; j < 8; j++)
             {
-                minimapTexture.SetPixel(x * 8 + i, y * 8 + j, color);
+                TextureToPaint.SetPixel(x * 8 + i, y * 8 + j, color);
             }
 
         }
@@ -248,74 +258,94 @@ public class MinimapScript : MonoBehaviour
     {
         if (waitforinitialization <= 0)
         {
-            for (int i = 0; i < gridScript.Grid.Count; i++)
-            {
-                for (int j = 0; j < gridScript.Grid[i].Count; j++)
-                {
-                    GridSquareScript tile = gridScript.GetTile(i, j);
-                    SetTileColor(i, j, Color.clear, 0f);
-                    if (gridScript.attacktiles.Contains(tile) || gridScript.lockedattacktiles.Contains(tile))
-                    {
-                        //SetTileColor(i, j, new Color(245f / 255f, 176f / 255f, 66f / 255f)); //orange
-                        SetTileColor(i, j, Color.red);
-                    }
-                    if (gridScript.healingtiles.Contains(tile) || gridScript.lockedhealingtiles.Contains(tile))
-                    {
-                        SetTileColor(i, j, new Color(66f / 255f, 245f / 255f, 170f / 255f));
-                    }
-                    if (gridScript.movementtiles.Contains(tile) || gridScript.lockedmovementtiles.Contains(tile))
-                    {
-                        SetTileColor(i, j, Color.blue);
-                    }
-                    manageContraptionLeverIcon(tile);
-                    manageEndMapIncon(tile);
-                    if (!tile.activated)
-                    {
-                        SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
-                    }
 
-                }
-            }
-            foreach (Character character in gridScript.allunits)
-            {
-                foreach (GridSquareScript tile in character.currentTile)
-                {
-                    if (character.currentTile.Count > 0)
-                    {
-                        if (character.affiliation == "playable")
-                        {
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.blue);
-                            UnitTile(tile);
-                        }
-                        else if (character.affiliation == "enemy")
-                        {
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
-                            UnitTile(tile);
-                        }
-                        else if (character.affiliation == "other")
-                        {
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
-                            UnitTile(tile);
-                        }
-                        if (!tile.activated)
-                        {
-                            SetTileColor((int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
-                        }
-
-                    }
-
-                }
-            }
-
-            manageselectionicon();
-
-            minimapTexture.Apply();
+            launchupdate = true;
         }
 
 
     }
 
-    private void manageEndMapIncon(GridSquareScript tile)
+    private IEnumerator ChangeMinimap()
+    {
+        Texture2D newtexture = new Texture2D(minimapTexture.width, minimapTexture.height, TextureFormat.RGBA32, false);
+        newtexture.filterMode = FilterMode.Point;
+
+        for (int i = 0; i < gridScript.Grid.Count; i++)
+        {
+            for (int j = 0; j < gridScript.Grid[i].Count; j++)
+            {
+                GridSquareScript tile = gridScript.GetTile(i, j);
+                SetTileColor(newtexture, i, j, Color.clear, 0f);
+                if (gridScript.attacktiles.Contains(tile) || gridScript.lockedattacktiles.Contains(tile))
+                {
+                    //SetTileColor(i, j, new Color(245f / 255f, 176f / 255f, 66f / 255f)); //orange
+                    SetTileColor(newtexture, i, j, Color.red);
+                }
+                if (gridScript.healingtiles.Contains(tile) || gridScript.lockedhealingtiles.Contains(tile))
+                {
+                    SetTileColor(newtexture, i, j, new Color(66f / 255f, 245f / 255f, 170f / 255f));
+                }
+                if (gridScript.movementtiles.Contains(tile) || gridScript.lockedmovementtiles.Contains(tile))
+                {
+                    SetTileColor(newtexture, i, j, Color.blue);
+                }
+                manageContraptionLeverIcon(newtexture, tile);
+                manageEndMapIncon(newtexture, tile);
+                if (!tile.activated)
+                {
+                    SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
+                }
+
+            }
+        }
+        foreach (Character character in gridScript.allunits)
+        {
+            foreach (GridSquareScript tile in character.currentTile)
+            {
+                if (character.currentTile.Count > 0)
+                {
+                    if (character.affiliation == "playable")
+                    {
+                        SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.blue);
+                        UnitTile(tile);
+                    }
+                    else if (character.affiliation == "enemy")
+                    {
+                        SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
+                        UnitTile(tile);
+                    }
+                    else if (character.affiliation == "other")
+                    {
+                        SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
+                        UnitTile(tile);
+                    }
+                    if (!tile.activated)
+                    {
+                        SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
+                    }
+
+                }
+
+            }
+        }
+
+        manageselectionicon(newtexture);
+
+        newtexture.Apply();
+        minimapTexture = newtexture;
+        minimapImage.sprite = Sprite.Create(minimapTexture,
+            new Rect(0, 0, minimapTexture.width, minimapTexture.height),
+            new Vector2(0.5f, 0.5f),
+            1, // pixels per unit
+            0,
+            SpriteMeshType.FullRect
+        );
+
+        yield return true;
+        updatecoroutine = null;
+    }
+
+    private void manageEndMapIncon(Texture2D texture, GridSquareScript tile)
     {
         if (tile.isfinishtile) // show selection as a red and yellow ring
         {
@@ -325,62 +355,118 @@ public class MinimapScript : MonoBehaviour
 
             for (int i = 1; i < 7; i++)
             {
-                minimapTexture.SetPixel(selectedx * 8 + i, selectedy * 8 + 1, Color.white);
+                texture.SetPixel(selectedx * 8 + i, selectedy * 8 + 1, Color.white);
             }
             for (int i = 2; i < 6; i++)
             {
-                minimapTexture.SetPixel(selectedx * 8 + i, selectedy * 8 + 2, Color.white);
+                texture.SetPixel(selectedx * 8 + i, selectedy * 8 + 2, Color.white);
             }
             for (int i = 3; i < 7; i++)
             {
-                minimapTexture.SetPixel(selectedx * 8 + 3, selectedy * 8 + i, Color.black);
+                texture.SetPixel(selectedx * 8 + 3, selectedy * 8 + i, Color.black);
             }
             for (int i = 4; i < 7; i++)
             {
-                minimapTexture.SetPixel(selectedx * 8 + 4, selectedy * 8 + i, Color.red);
+                texture.SetPixel(selectedx * 8 + 4, selectedy * 8 + i, Color.red);
             }
-            minimapTexture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 4, Color.red);
-            minimapTexture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 5, Color.red);
-            minimapTexture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 4, Color.red);
+            texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 4, Color.red);
+            texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 5, Color.red);
+            texture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 4, Color.red);
 
 
-            minimapTexture.Apply();
+            texture.Apply();
         }
     }
 
-    private void manageContraptionLeverIcon(GridSquareScript tile)
+    private void manageContraptionLeverIcon(Texture2D texture, GridSquareScript tile)
     {
-        if (tile.Mechanism != null && tile.Mechanism.type == 2 && !tile.Mechanism.isactivated) // show selection as a red and yellow ring
+        if (tile.Mechanism != null)
         {
             int selectedx = (int)tile.GridCoordinates.x;
             int selectedy = (int)tile.GridCoordinates.y;
+            if (tile.Mechanism.isactivated)
+            {
+                if (tile.Mechanism.type == 1)
+                {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            texture.SetPixel(selectedx * 8 + i, selectedy * 8 + j, Color.white);
+                        }
+
+                    }
+                }
+                else if (tile.Mechanism.type == 2)
+                {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            texture.SetPixel(selectedx * 8 + i, selectedy * 8 + j, Color.grey);
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                if (tile.Mechanism.type == 2)
+                {
 
 
-            minimapTexture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 2, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 2, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 2, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 2, Color.yellow);
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            texture.SetPixel(selectedx * 8 + i, selectedy * 8 + j, Color.grey);
+                        }
 
-            minimapTexture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 3, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 3, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 3, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 3, Color.yellow);
-
-            minimapTexture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 4, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 4, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 4, selectedy * 8 + 4, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 4, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 4, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 4, Color.yellow);
-
-            minimapTexture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 5, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 5, Color.yellow);
+                    }
 
 
+                    texture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 2, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 2, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 2, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 2, Color.yellow);
+
+                    texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 3, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 3, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 3, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 3, Color.yellow);
+
+                    texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 4, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 4, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 4, selectedy * 8 + 4, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 4, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 4, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 4, Color.yellow);
+
+                    texture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 5, Color.yellow);
+                    texture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 5, Color.yellow);
 
 
-            minimapTexture.Apply();
+
+
+                    texture.Apply();
+                }
+                else if (tile.Mechanism.type == 1)
+                {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            texture.SetPixel(selectedx * 8 + i, selectedy * 8 + j, Color.grey);
+                        }
+
+                    }
+                }
+            }
+
+
         }
+
+
     }
 
     private void UnitTile(GridSquareScript tile)
@@ -405,37 +491,35 @@ public class MinimapScript : MonoBehaviour
 
     }
 
-    private void manageselectionicon()
+    private void manageselectionicon(Texture2D texture)
     {
-        if (gridScript.selection != null && previoustile != gridScript.selection) // show selection as a red and yellow ring
+        if (gridScript.selection != null) // show selection as a red and yellow ring
         {
             int selectedx = (int)gridScript.selection.GridCoordinates.x;
             int selectedy = (int)gridScript.selection.GridCoordinates.y;
 
-            previoustile = gridScript.selection;
+            texture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 0, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 0, Color.red);
+            texture.SetPixel(selectedx * 8 + 4, selectedy * 8 + 0, Color.red);
+            texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 0, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 1, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 1, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 2, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 2, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 3, Color.red);
+            texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 3, Color.red);
+            texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 4, Color.red);
+            texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 4, Color.red);
+            texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 5, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 5, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 6, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 6, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 7, Color.yellow);
+            texture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 7, Color.red);
+            texture.SetPixel(selectedx * 8 + 4, selectedy * 8 + 7, Color.red);
+            texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 7, Color.yellow);
 
-            minimapTexture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 0, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 0, Color.red);
-            minimapTexture.SetPixel(selectedx * 8 + 4, selectedy * 8 + 0, Color.red);
-            minimapTexture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 0, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 1, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 1, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 2, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 2, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 3, Color.red);
-            minimapTexture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 3, Color.red);
-            minimapTexture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 4, Color.red);
-            minimapTexture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 4, Color.red);
-            minimapTexture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 5, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 5, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 6, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 6, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 7, Color.yellow);
-            minimapTexture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 7, Color.red);
-            minimapTexture.SetPixel(selectedx * 8 + 4, selectedy * 8 + 7, Color.red);
-            minimapTexture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 7, Color.yellow);
-
-            minimapTexture.Apply();
+            texture.Apply();
         }
     }
 
