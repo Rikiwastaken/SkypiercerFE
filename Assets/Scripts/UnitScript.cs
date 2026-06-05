@@ -49,6 +49,16 @@ public class UnitScript : MonoBehaviour
         public int previouslyequipedweaponID = -1;
         public int previousTelekinesis; // 0 is undefined, 1 is active, 2 is inactive;
         public CharacterDialogues characterDialogues;
+        public ExamodeClass ExamodeClass = null;
+    }
+
+    [Serializable]
+    public class ExamodeClass
+    {
+        public Texture ExamodeTexture;
+        public int remaingExamodeTurns;
+        public int ExamodePoints;
+        public Material Basemat;
     }
 
     [Serializable]
@@ -602,6 +612,8 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+
+
     //Update that only happens once every couple of frames to improve performance
     private void DelayedUpdate()
     {
@@ -640,6 +652,108 @@ public class UnitScript : MonoBehaviour
         {
             delayedUpdateCounter--;
         }
+    }
+
+    // manage visuals and stuff for activating examode
+
+    public void ActivateExamode(Character charactertouse = null)
+    {
+        Character character = charactertouse;
+        if (character == null)
+        {
+            character = UnitCharacteristics;
+        }
+
+
+        if (character.playableStats.protagonist && character.ExamodeClass != null && character.ExamodeClass.ExamodePoints >= 100)
+        {
+
+            DataScript _Datascript = DataScript.instance;
+
+            int maxchapterreached = _Datascript.GetComponent<SaveManager>().maxchapterreached;
+
+            switch (character.name)
+            {
+                case ("Zack"):
+                    if (_Datascript.ExamodeUnlockChapter_Zack > maxchapterreached)
+                    {
+                        return;
+                    }
+                    break;
+                case ("Kira"):
+                    if (_Datascript.ExamodeUnlockChapter_Kira > maxchapterreached)
+                    {
+                        return;
+                    }
+                    break;
+                case ("Gale"):
+                    if (_Datascript.ExamodeUnlockChapter_Gale > maxchapterreached)
+                    {
+                        return;
+                    }
+                    break;
+            }
+
+
+            character.ExamodeClass.ExamodePoints = 0;
+
+
+
+            Material examodemat = new Material(_Datascript.ExamodeMaterial);
+            examodemat.SetTexture("_BaseTexture", character.ExamodeClass.ExamodeTexture);
+            if (ActiveModel != null)
+            {
+                character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
+                SetMaterial(ActiveModel, examodemat);
+            }
+
+        }
+
+    }
+
+    public void DisableExamode(Character charactertouse)
+    {
+        Character character = charactertouse;
+        if (character == null)
+        {
+            character = UnitCharacteristics;
+        }
+
+
+        if (character.playableStats.protagonist && character.ExamodeClass != null)
+        {
+            SetMaterial(ActiveModel, character.ExamodeClass.Basemat);
+        }
+
+    }
+
+    private void SetMaterial(GameObject go, Material material)
+    {
+        if (go.GetComponent<Renderer>() != null)
+        {
+            go.GetComponent<Renderer>().material = material;
+        }
+        foreach (Transform child in go.transform)
+        {
+            SetMaterial(child.gameObject, material);
+        }
+    }
+
+    private Material GetMaterial(GameObject go)
+    {
+        if (go.GetComponent<Renderer>() != null)
+        {
+            return go.GetComponent<Renderer>().material;
+        }
+        foreach (Transform child in go.transform)
+        {
+            Material childmat = GetMaterial(child.gameObject);
+            if (childmat != null)
+            {
+                return childmat;
+            }
+        }
+        return null;
     }
 
     //Manage Vertical Position

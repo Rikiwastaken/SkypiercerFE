@@ -12,19 +12,13 @@ public class DataScript : MonoBehaviour
 
     public static DataScript instance;
 
-    public List<equipment> equipmentList;
+    [Space]
+    [Header("Character and inventory variables")]
 
-    public List<equipment> BasicGradeList;
 
     public List<ClassInfo> ClassList;
 
-    public List<Skill> SkillList;
-
     public List<Character> PlayableCharacterList;
-
-    public List<Bonds> BondsList;
-
-    public float manualgamespeed = -1;
 
     public Inventory PlayerInventory;
 
@@ -35,11 +29,16 @@ public class DataScript : MonoBehaviour
 
     public List<Sprite> EnemySprites;
 
+
+    [Space]
+    [Header("Story Advancement Variables")]
+
     public List<ChapterFlags> ChapterFlagsList;
     public List<ChapterFlags> SidestoryFlagList;
     public List<int> CompletedSideStories;
 
-    public int SkillCoins;
+
+
 
 
     [Serializable]
@@ -132,16 +131,39 @@ public class DataScript : MonoBehaviour
         public string MidLvlUp;
         public string LowLvlUp;
     }
+    [Space]
+    [Header("Bond Variables")]
 
+    public List<Bonds> BondsList;
     public int bondincreaseperaction;
     public int maxdistanceforbondincrease;
+    [Space]
+    [Header("Equipment Variables")]
 
+    public List<equipment> equipmentList;
+
+    public List<equipment> BasicGradeList;
     public int MasteryforLevel0;
     public int MasteryforLevel1;
     public int MasteryforLevel2;
     public int MasteryforLevel3;
+    [Space]
+    [Header("Skill Variables")]
 
+    public List<Skill> SkillList;
     public List<SkillPerMap> skillsPerMap;
+    public int SkillCoins;
+    [Space]
+    [Header("Examode Variables")]
+    public Material ExamodeMaterial;
+    public int ExamodeUnlockChapter_Zack;
+    public int ExamodeUnlockChapter_Kira;
+    public int ExamodeUnlockChapter_Gale;
+
+
+    [Space]
+    [Header("System Variables")]
+    public float manualgamespeed = -1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()

@@ -4,8 +4,6 @@
 
 - bouton pour montrer les ennemis marche pas
 
-- les cutscenes se rejouent après le foresight (peut être faire un bool pour que l'event ne soit pas reset avec foresight)
-
 ## Ideas
 
 - For Chapter 12, have 2 phase to the battle:
@@ -16,13 +14,13 @@
 
 ## System 
 
+- Do Examode system
+
 - Rework Animation for Animation Tree
 
 - Do cutscene system (def use cinemachine to do it)
 
 - Do Bonds for Gale and Aurora and Erica
-
-- Show dialogue when dying (have one for each battallion leader).
 
 - Make visuals for telekinesis with animations activated.
 
