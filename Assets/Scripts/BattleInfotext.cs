@@ -58,6 +58,10 @@ public class BattleInfotext : MonoBehaviour
     public TextMeshProUGUI equipedweaponText;
     public Image CharacterSprite;
     public Image ExpBarFilling;
+    public Image ExamodeBar;
+    public GameObject ExamodeGO;
+    public Color ExamodeActivatedColor;
+    public Color ExamodeDeactivatedColor;
 
     [Header("StatusAilment")]
 
@@ -235,7 +239,7 @@ public class BattleInfotext : MonoBehaviour
                 }
 
                 ManageStatusAilmentVisuals(selectedunit);
-
+                ManageExamodeVisuals(selectedunitCharacter);
                 NameTMP.text = selectedunitCharacter.name;
                 ExpAndLevelTMP.text = "Lvl: " + selectedunitCharacter.level + "\nExp: " + selectedunitCharacter.experience;
                 HPTMP.text = "HP: " + selectedunitCharacter.currentHP + "/" + selectedunitCharacter.AjustedStats.HP;
@@ -371,6 +375,59 @@ public class BattleInfotext : MonoBehaviour
             SkillDescription.transform.parent.gameObject.SetActive(false);
         }
     }
+
+    private void ManageExamodeVisuals(Character Charactertouse)
+    {
+        DataScript _Datascript = DataScript.instance;
+        int maxchapterreached = _Datascript.GetComponent<SaveManager>().maxchapterreached;
+        bool skip = false;
+        if (!Charactertouse.playableStats.protagonist)
+        {
+            skip = true;
+        }
+        if (Charactertouse.name.ToLower() == "zack" && _Datascript.ExamodeUnlockChapter_Zack > maxchapterreached)
+        {
+            skip = true;
+        }
+        else if (Charactertouse.name.ToLower() == "kira" && _Datascript.ExamodeUnlockChapter_Kira > maxchapterreached)
+        {
+            skip = true;
+        }
+        else if (Charactertouse.name.ToLower() == "gale" && _Datascript.ExamodeUnlockChapter_Gale > maxchapterreached)
+        {
+            skip = true;
+        }
+        if (skip)
+        {
+            if (ExamodeGO.activeSelf)
+            {
+                ExamodeGO.SetActive(false);
+            }
+        }
+        else
+        {
+            if (!ExamodeGO.activeSelf)
+            {
+                ExamodeGO.SetActive(true);
+            }
+
+            float ratioforbar;
+            Color Colortouse;
+            if (Charactertouse.ExamodeClass.remaingExamodeTurns > 0)
+            {
+                ratioforbar = (float)Charactertouse.ExamodeClass.remaingExamodeTurns / (float)_Datascript.ExamodeMaxTurns;
+                Colortouse = ExamodeActivatedColor;
+            }
+            else
+            {
+                ratioforbar = (float)Charactertouse.ExamodeClass.ExamodePoints / (float)_Datascript.ExamodePointsForActivation;
+                Colortouse = ExamodeDeactivatedColor;
+            }
+            ExamodeBar.fillAmount = ratioforbar;
+            ExamodeBar.color = Colortouse;
+        }
+    }
+
     private void ManageMasteryVisuals(Character unit)
     {
         if (unit.affiliation == "playable")

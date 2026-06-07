@@ -159,6 +159,8 @@ public class DataScript : MonoBehaviour
     public int ExamodeUnlockChapter_Zack;
     public int ExamodeUnlockChapter_Kira;
     public int ExamodeUnlockChapter_Gale;
+    public int ExamodeMaxTurns;
+    public int ExamodePointsForActivation;
 
 
     [Space]

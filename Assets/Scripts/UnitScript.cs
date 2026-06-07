@@ -659,16 +659,17 @@ public class UnitScript : MonoBehaviour
     public void ActivateExamode(Character charactertouse = null)
     {
         Character character = charactertouse;
+        DataScript _Datascript = DataScript.instance;
         if (character == null)
         {
             character = UnitCharacteristics;
         }
 
 
-        if (character.playableStats.protagonist && character.ExamodeClass != null && character.ExamodeClass.ExamodePoints >= 100)
+        if (character.playableStats.protagonist && character.ExamodeClass != null && character.ExamodeClass.ExamodePoints >= _Datascript.ExamodePointsForActivation)
         {
 
-            DataScript _Datascript = DataScript.instance;
+
 
             int maxchapterreached = _Datascript.GetComponent<SaveManager>().maxchapterreached;
 
@@ -706,6 +707,8 @@ public class UnitScript : MonoBehaviour
                 character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
                 SetMaterial(ActiveModel, examodemat);
             }
+
+            character.ExamodeClass.remaingExamodeTurns = _Datascript.ExamodeMaxTurns;
 
         }
 
