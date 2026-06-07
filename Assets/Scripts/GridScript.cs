@@ -48,6 +48,7 @@ public class GridScript : MonoBehaviour
     private Vector2 previousmovementvalueforbuffer;
 
     public TextMeshProUGUI tiletext;
+    public TextMeshProUGUI Elevationtiletext;
     public GameObject TileImageContainer;
     private SkillEditionScript SkillEditionScript;
 
@@ -430,7 +431,7 @@ public class GridScript : MonoBehaviour
             {
                 text = "Desert \n-10% HP";
             }
-            text += "\n Elevation : " + selection.elevation;
+            Elevationtiletext.text = "Elevation : " + selection.elevation;
             UpdateWeatherImage(selection);
         }
         tiletext.text = text;

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static UnitScript;
 
 public class TurnManger : MonoBehaviour
@@ -23,6 +24,7 @@ public class TurnManger : MonoBehaviour
     public List<GameObject> otherunitsGO;
 
     public TextMeshProUGUI turntext;
+    public Image TurnImage;
 
     public GameOverScript GameOverScript;
 
@@ -471,7 +473,8 @@ public class TurnManger : MonoBehaviour
                     numberremaining++;
                 }
             }
-            turntext.text = "Turn " + currentTurn + " : Allies \nRemaining : " + numberremaining;
+            turntext.text = "Turn " + currentTurn + "\nAllies \nRemaining : " + numberremaining;
+            TurnImage.color = Color.blue;
         }
         else if (currentlyplaying == "enemy")
         {
@@ -483,7 +486,8 @@ public class TurnManger : MonoBehaviour
                     numberremaining++;
                 }
             }
-            turntext.text = "Turn " + currentTurn + " : Enemies \nRemaining : " + numberremaining;
+            turntext.text = "Turn " + currentTurn + "\nEnemies \nRemaining : " + numberremaining;
+            TurnImage.color = Color.red;
         }
         else if (currentlyplaying == "other")
         {
@@ -495,11 +499,13 @@ public class TurnManger : MonoBehaviour
                     numberremaining++;
                 }
             }
-            turntext.text = "Turn " + currentTurn + " : Others \nRemaining : " + numberremaining;
+            turntext.text = "Turn " + currentTurn + "\nOthers \nRemaining : " + numberremaining;
+            TurnImage.color = Color.yellow;
         }
         else
         {
             turntext.text = "The battle is about to begin...";
+            TurnImage.color = Color.blue;
         }
     }
 
