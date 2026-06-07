@@ -678,25 +678,13 @@ public class BattleInfotext : MonoBehaviour
     {
         Character UnitChar = Unit.GetComponent<UnitScript>().UnitCharacteristics;
 
-        //     public class StatusEffects
-        // {
-        //     public int BurnTurns;
-        //     public int StunTurns;
-        //     public int ParalyzedTurns;
-        //     public int ConcussionTunrs;
-        //     public int WeaknessTurns;
-        //     public int RegenTurns;
-        //     public int AccelerationTurns;
-        //     public int PowerTurns;
-        // }
-
         int lastactiveID = 0;
 
         if (UnitChar.statusEffects.BurnTurns > 0)
         {
             if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
             {
-                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+                AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
             AilmentIconList[lastactiveID].text = "<sprite=19>";
             AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.BurnTurns + "";
@@ -706,7 +694,7 @@ public class BattleInfotext : MonoBehaviour
         {
             if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
             {
-                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+                AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
             AilmentIconList[lastactiveID].text = "<sprite=20>";
             AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.StunTurns + "";
@@ -716,7 +704,7 @@ public class BattleInfotext : MonoBehaviour
         {
             if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
             {
-                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+                AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
             AilmentIconList[lastactiveID].text = "<sprite=21>";
             AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.ParalyzedTurns + "";
@@ -726,7 +714,7 @@ public class BattleInfotext : MonoBehaviour
         {
             if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
             {
-                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+                AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
             AilmentIconList[lastactiveID].text = "<sprite=22>";
             AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.ConcussionTunrs + "";
@@ -736,7 +724,7 @@ public class BattleInfotext : MonoBehaviour
         {
             if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
             {
-                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+                AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
             AilmentIconList[lastactiveID].text = "<sprite=23>";
             AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.WeaknessTurns + "";
@@ -746,7 +734,7 @@ public class BattleInfotext : MonoBehaviour
         {
             if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
             {
-                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+                AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
             AilmentIconList[lastactiveID].text = "<sprite=24>";
             AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.RegenTurns + "";
@@ -756,7 +744,7 @@ public class BattleInfotext : MonoBehaviour
         {
             if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
             {
-                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+                AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
             AilmentIconList[lastactiveID].text = "<sprite=25>";
             AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.AccelerationTurns + "";
@@ -766,7 +754,7 @@ public class BattleInfotext : MonoBehaviour
         {
             if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
             {
-                AilmentIconList[lastactiveID].gameObject.SetActive(true);
+                AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
             AilmentIconList[lastactiveID].text = "<sprite=26>";
             AilmentDurationLst[lastactiveID].text = UnitChar.statusEffects.PowerTurns + "";
@@ -776,7 +764,7 @@ public class BattleInfotext : MonoBehaviour
         {
             if (AilmentIconList[i].gameObject.activeSelf)
             {
-                AilmentIconList[i].gameObject.SetActive(false);
+                AilmentIconList[i].transform.parent.gameObject.SetActive(false);
             }
             AilmentDurationLst[i].text = "";
         }
