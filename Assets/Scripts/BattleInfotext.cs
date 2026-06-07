@@ -17,8 +17,10 @@ public class BattleInfotext : MonoBehaviour
     private AttackTurnScript attackTurnScript;
     public TextMeshProUGUI Skilltext;
 
-    public TextMeshProUGUI MasteryText;
+    public List<TextMeshProUGUI> MasteryTexts;
+    public List<Image> MasteryImages;
     public List<Transform> MasteryExpBars;
+    public List<Sprite> WeaponClassImages;
 
     public GameObject ItemAction;
 
@@ -46,13 +48,16 @@ public class BattleInfotext : MonoBehaviour
 
     public TextMeshProUGUI NameTMP;
     public TextMeshProUGUI HPTMP;
-    public TextMeshProUGUI StatTMP;
-    public TextMeshProUGUI LevelTMP;
-    public Transform WeaponObject;
-    public Transform WeaponIconsObject;
+    public Image HPLifebar;
+    public TextMeshProUGUI ExpAndLevelTMP;
+    public TextMeshProUGUI StrAndPsyTMP;
+    public TextMeshProUGUI DefAndResTMP;
+    public TextMeshProUGUI SpdAndDexTMP;
+    public TextMeshProUGUI DmgAndMovTMP;
+    public Image EquipedWeaponIco;
+    public TextMeshProUGUI equipedweaponText;
     public Image CharacterSprite;
     public Image ExpBarFilling;
-    public Image BackgroundImage;
 
     [Header("StatusAilment")]
 
@@ -132,9 +137,9 @@ public class BattleInfotext : MonoBehaviour
             {
                 transform.GetChild(0).gameObject.SetActive(false);
             }
-            if (MasteryText.transform.parent.gameObject.activeSelf)
+            if (MasteryTexts[0].transform.parent.gameObject.activeSelf)
             {
-                MasteryText.transform.parent.gameObject.SetActive(false);
+                MasteryTexts[0].transform.parent.gameObject.SetActive(false);
             }
             if (Skilltext.transform.parent.gameObject.activeSelf)
             {
@@ -232,8 +237,9 @@ public class BattleInfotext : MonoBehaviour
                 ManageStatusAilmentVisuals(selectedunit);
 
                 NameTMP.text = selectedunitCharacter.name;
-                LevelTMP.text = "Lvl: " + selectedunitCharacter.level;
+                ExpAndLevelTMP.text = "Lvl: " + selectedunitCharacter.level + "\nExp: " + selectedunitCharacter.experience;
                 HPTMP.text = "HP: " + selectedunitCharacter.currentHP + "/" + selectedunitCharacter.AjustedStats.HP;
+                HPLifebar.fillAmount = (float)selectedunitCharacter.currentHP / (float)selectedunitCharacter.AjustedStats.HP;
                 if (selectedunitCharacter.enemyStats != null && selectedunitCharacter.enemyStats.RemainingLifebars > 0)
                 {
                     HPTMP.text += "( +" + (selectedunitCharacter.enemyStats.RemainingLifebars * selectedunitCharacter.AjustedStats.HP) + ")";
@@ -259,7 +265,7 @@ public class BattleInfotext : MonoBehaviour
                     {
                         ExpBarFilling.transform.parent.gameObject.SetActive(true);
                     }
-                    ExpBarFilling.fillAmount = selectedunitCharacter.experience / 100f;
+                    ExpBarFilling.fillAmount = selectedunitCharacter.experience / 100f * 0.75f;
                 }
                 else
                 {
@@ -270,118 +276,38 @@ public class BattleInfotext : MonoBehaviour
                 }
 
                 AllStatsSkillBonus statsmods = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null);
-                string statstring = "";
 
-                string colorstring = getcolorstring(statsmods.Strength);
+                string strcolorstring = getcolorstring(statsmods.Strength);
+                string psycolorstring = getcolorstring(statsmods.Psyche);
 
-                statstring += colorstring + "Str: " + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength);
+                StrAndPsyTMP.text = "Str: " + strcolorstring + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength) + "</color>\n";
 
-                colorstring = getcolorstring(statsmods.Psyche);
+                StrAndPsyTMP.text += "Psy: " + psycolorstring + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche);
 
-                statstring += colorstring + "\nPsy: " + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche);
+                string defcolorstring = getcolorstring(statsmods.Defense);
+                string rescolorstring = getcolorstring(statsmods.Resistance);
 
-                colorstring = getcolorstring(statsmods.Defense);
-                statstring += colorstring + "\nDef: " + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense);
-                colorstring = getcolorstring(statsmods.Resistance);
-                statstring += colorstring + "\nRes: " + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance);
-                colorstring = getcolorstring(statsmods.Dexterity);
-                statstring += colorstring + "\nDex: " + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity);
-                colorstring = getcolorstring(statsmods.Speed);
-                statstring += colorstring + "\nSpd: " + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed);
+                DefAndResTMP.text = "Def: " + defcolorstring + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense) + "</color>\n";
 
+                DefAndResTMP.text += "Res: " + rescolorstring + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance);
+
+                string dexcolorstring = getcolorstring(statsmods.Dexterity);
+                string spdcolorstring = getcolorstring(statsmods.Speed);
+
+                SpdAndDexTMP.text = "Dex: " + dexcolorstring + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity) + "</color>\n";
+
+                SpdAndDexTMP.text += "Spd: " + spdcolorstring + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed);
 
                 (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(selectedunit, true);
 
-                colorstring = getcolorstring(damagebonus);
+                string dmgcolorstring = getcolorstring(damagebonus);
 
-                statstring += "\nDmg: " + colorstring + BaseDamage + "</color>\nMvt: " + (selectedunitCharacter.movements - 1);
+                DmgAndMovTMP.text = "Dmg: " + dmgcolorstring + BaseDamage + "</color>\nMvt: " + (selectedunitCharacter.movements - 1);
 
-                StatTMP.text = statstring;
+                equipment EquipedWeapon = selectedunit.GetComponent<UnitScript>().GetFirstWeapon();
+                EquipedWeaponIco.sprite = GetWeaponIcons(EquipedWeapon.type);
+                equipedweaponText.text = EquipedWeapon.Currentuses + "/" + EquipedWeapon.Maxuses;
 
-                int currentindex = 0;
-
-
-                foreach (equipment weapon in selectedunitCharacter.equipments)
-                {
-                    if (weapon.Grade == 0)
-                    {
-                        if (selectedunitCharacter.equipments.IndexOf(weapon) < WeaponObject.childCount)
-                        {
-                            WeaponObject.GetChild(selectedunitCharacter.equipments.IndexOf(weapon)).GetComponent<TextMeshProUGUI>().text = "";
-                            WeaponIconsObject.GetChild(selectedunitCharacter.equipments.IndexOf(weapon)).GetComponent<TextMeshProUGUI>().text = "";
-                        }
-
-                        continue;
-                    }
-                    string weaponstring = "";
-                    string gradeletter = "E";
-                    int grade = weapon.Grade;
-                    switch (grade)
-                    {
-                        case 1:
-                            gradeletter = "D";
-                            break;
-                        case 2:
-                            gradeletter = "C";
-                            break;
-                        case 3:
-                            gradeletter = "B";
-                            break;
-                        case 4:
-                            gradeletter = "A";
-                            break;
-                        case 5:
-                            gradeletter = "S";
-                            break;
-                    }
-
-                    if (weapon.Name != "" && weapon.type != null)
-                    {
-                        switch (weapon.type.ToLower())
-                        {
-                            case ("sword"):
-                                weaponstring += "<sprite=0>";
-                                break;
-                            case ("spear"):
-                                weaponstring += "<sprite=1>";
-                                break;
-                            case ("greatsword"):
-                                weaponstring += "<sprite=2>";
-                                break;
-                            case ("bow"):
-                                weaponstring += "<sprite=3>";
-                                break;
-                            case ("scythe"):
-                                weaponstring += "<sprite=4>";
-                                break;
-                            case ("shield"):
-                                weaponstring += "<sprite=6>";
-                                break;
-                            case ("staff"):
-                                weaponstring += "<sprite=7>";
-                                break;
-                            default:
-                                weaponstring += "<sprite=5>";
-                                break;
-                        }
-                        if (currentindex >= WeaponIconsObject.childCount)
-                        {
-                            continue;
-                        }
-                        WeaponIconsObject.GetChild(currentindex).GetComponent<TextMeshProUGUI>().text = weaponstring;
-                        weaponstring = " (" + gradeletter + ") " + weapon.Name;
-
-                        WeaponObject.GetChild(currentindex).GetComponent<TextMeshProUGUI>().text = weaponstring;
-
-                        currentindex++;
-                    }
-                }
-
-                for (int i = currentindex; i < WeaponObject.childCount; i++)
-                {
-                    WeaponObject.GetChild(i).GetComponent<TextMeshProUGUI>().text = "";
-                    WeaponIconsObject.GetChild(i).GetComponent<TextMeshProUGUI>().text = "";
-                }
 
             }
             else
@@ -438,7 +364,7 @@ public class BattleInfotext : MonoBehaviour
 
             Skilltext.transform.parent.gameObject.SetActive(false);
 
-            MasteryText.transform.parent.gameObject.SetActive(false);
+            MasteryTexts[0].transform.parent.gameObject.SetActive(false);
         }
         if (SkillDescription.transform.parent.gameObject.activeSelf)
         {
@@ -449,23 +375,21 @@ public class BattleInfotext : MonoBehaviour
     {
         if (unit.affiliation == "playable")
         {
-            if (MasteryText.transform.parent.gameObject.activeSelf == false)
+            if (MasteryTexts[0].transform.parent.gameObject.activeSelf == false)
             {
-                MasteryText.transform.parent.gameObject.SetActive(true);
+                MasteryTexts[0].transform.parent.gameObject.SetActive(true);
             }
 
         }
         else
         {
-            if (MasteryText.transform.parent.gameObject.activeSelf)
+            if (MasteryTexts[0].transform.parent.gameObject.activeSelf)
             {
-                MasteryText.transform.parent.gameObject.SetActive(false);
+                MasteryTexts[0].transform.parent.gameObject.SetActive(false);
             }
 
             return;
         }
-
-        MasteryText.text = "";
 
         List<WeaponMastery> masteries = unit.Masteries;
         int barID = 0;
@@ -475,79 +399,98 @@ public class BattleInfotext : MonoBehaviour
             {
                 continue;
             }
-
-            if (MasteryExpBars[i].gameObject.activeSelf == false)
+            if (MasteryTexts == null || MasteryTexts.Count <= i || MasteryTexts[i] == null)
             {
-                MasteryExpBars[i].gameObject.SetActive(true);
+                continue;
+            }
+            if (MasteryImages == null || MasteryImages.Count <= i || MasteryImages[i] == null)
+            {
+                continue;
+            }
+
+            if (!MasteryExpBars[i].parent.gameObject.activeSelf)
+            {
+                MasteryExpBars[i].parent.gameObject.SetActive(true);
             }
             DataScript ds = DataScript.instance;
             string masterylevel = "";
+
             switch (masteries[i].Level)
             {
                 case (-1):
                     continue;
                 case (0):
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel0;
+                    MasteryExpBars[barID].GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel0;
                     masterylevel = "X";
                     break;
                 case (1):
                     masterylevel = "D";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel1;
+                    MasteryExpBars[barID].GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel1;
                     break;
                 case (2):
                     masterylevel = "C";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel2;
+                    MasteryExpBars[barID].GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel2;
                     break;
                 case (3):
                     masterylevel = "B";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel3;
+                    MasteryExpBars[barID].GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel3;
                     break;
                 case (4):
                     masterylevel = "A";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = 1f;
+                    MasteryExpBars[barID].GetComponent<Image>().fillAmount = 1f;
                     break;
             }
-            string masteryicontype = "<size=15>";
-            switch (masteries[i].weapontype.ToLower())
-            {
-                case (""):
-                    continue;
-                case ("sword"):
-                    masteryicontype += "<sprite=0>";
-                    break;
-                case ("spear"):
-                    masteryicontype += "<sprite=1>";
-                    break;
-                case ("greatsword"):
-                    masteryicontype += "<sprite=2>";
-                    break;
-                case ("bow"):
-                    masteryicontype += "<sprite=3>";
-                    break;
-                case ("scythe"):
-                    masteryicontype += "<sprite=4>";
-                    break;
-                case ("shield"):
-                    masteryicontype += "<sprite=6>";
-                    break;
-                case ("staff"):
-                    masteryicontype += "<sprite=7>";
-                    break;
-            }
-            masteryicontype += "</size>";
+
+            MasteryImages[i].sprite = GetWeaponIcons(masteries[i].weapontype);
+            MasteryTexts[i].text = masterylevel;
+
+
             barID++;
-            MasteryText.text += masteryicontype + " : " + masterylevel + "\n";
+
         }
         for (int i = barID; i < MasteryExpBars.Count; i++)
         {
-            if (MasteryExpBars[i].gameObject.activeSelf)
+            if (MasteryExpBars[i].parent.gameObject.activeSelf)
             {
-                MasteryExpBars[i].gameObject.SetActive(false);
+                MasteryExpBars[i].parent.gameObject.SetActive(false);
             }
+
 
         }
 
     }
+
+    private Sprite GetWeaponIcons(int weaponclass)
+    {
+
+        return WeaponClassImages[weaponclass];
+    }
+
+    private Sprite GetWeaponIcons(string weapontype)
+    {
+
+        switch (weapontype.ToLower())
+        {
+            case "":
+                return WeaponClassImages[0];
+            case "sword":
+                return WeaponClassImages[1];
+            case "spear":
+                return WeaponClassImages[2];
+            case "greatsword":
+                return WeaponClassImages[3];
+            case "bow":
+                return WeaponClassImages[4];
+            case "scythe":
+                return WeaponClassImages[5];
+            case "shield":
+                return WeaponClassImages[6];
+            case "staff":
+                return WeaponClassImages[7];
+        }
+        return null;
+    }
+
     private void ManagedSkillVisuals(Character unit)
     {
         SkillButtonIDList = new List<int>();
