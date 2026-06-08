@@ -714,8 +714,11 @@ public class UnitScript : MonoBehaviour
 
     }
 
-    public void DisableExamode(Character charactertouse)
+    public void DisableExamode(Character charactertouse = null)
     {
+
+        UnitCharacteristics.ExamodeClass.remaingExamodeTurns = 0;
+
         Character character = charactertouse;
         if (character == null)
         {
@@ -758,6 +761,129 @@ public class UnitScript : MonoBehaviour
         }
         return null;
     }
+
+
+    public void BeginningofTurnTrigger(List<GameObject> charactertoapply)
+    {
+        waittedbonusturns--;
+
+        UnitCharacteristics.TauntTurns--;
+        if (UnitCharacteristics.isintercepting)
+        {
+            UnitCharacteristics.isintercepting = false;
+        }
+
+
+        //Kira Battalion Side Effect
+        if (UnitCharacteristics.playableStats.battalion.ToLower() == "kira")
+        {
+
+            AddNumber(Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * 0.1f), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "Kira's Battalion");
+            UnitCharacteristics.currentHP += (int)(UnitCharacteristics.AjustedStats.HP * 0.1f);
+            //Loyal
+            if (GetSkill(35))
+            {
+                AddNumber(Mathf.Max((int)(UnitCharacteristics.AjustedStats.HP * 0.1f), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "Loyal");
+                UnitCharacteristics.currentHP += (int)(UnitCharacteristics.AjustedStats.HP * 0.1f);
+            }
+            if (UnitCharacteristics.currentHP > UnitCharacteristics.AjustedStats.HP)
+            {
+                UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
+            }
+        }
+
+
+        // Restoring unequiped blade durability
+
+        foreach (equipment weapon in UnitCharacteristics.equipments)
+        {
+            if (weapon != GetFirstWeapon() && weapon.Maxuses != 0)
+            {
+                weapon.Currentuses++;
+                if (GetSkill(7)) // full of beans
+                {
+                    weapon.Currentuses++;
+                }
+                if (weapon.Currentuses > weapon.Maxuses)
+                {
+                    weapon.Currentuses = weapon.Maxuses;
+                }
+            }
+            UpdateWeaponModel();
+        }
+
+        //First aid
+        if (GetSkill(9))
+        {
+            AddNumber(Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * 0.1f), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "First Aid");
+            UnitCharacteristics.currentHP += (int)(UnitCharacteristics.AjustedStats.HP * 0.1f);
+            if (UnitCharacteristics.currentHP > UnitCharacteristics.AjustedStats.HP)
+            {
+                UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
+            }
+        }
+        //Medic
+        if (GetSkill(12))
+        {
+            foreach (GameObject otherunit in charactertoapply)
+            {
+                Character otherunitchar = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
+                if (Mathf.Abs(otherunitchar.position.x - UnitCharacteristics.position.x) <= 1 && Mathf.Abs(otherunitchar.position.y - UnitCharacteristics.position.y) <= 1)
+                {
+                    otherunit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(otherunitchar.AjustedStats.HP * 0.1f), (int)otherunitchar.AjustedStats.HP - otherunitchar.currentHP), true, "Medic");
+                    otherunitchar.currentHP += (int)(otherunitchar.AjustedStats.HP * 0.1f);
+                    if (otherunitchar.currentHP > otherunitchar.AjustedStats.HP)
+                    {
+                        otherunitchar.currentHP = (int)otherunitchar.AjustedStats.HP;
+                    }
+                }
+            }
+        }
+
+        // Machine Sun HP Regen
+        if (UnitCharacteristics.enemyStats.monsterStats.ismachine && GetWeatherType() == "sun")
+        {
+            AddNumber(Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * 0.1f), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "Solar Power");
+            UnitCharacteristics.currentHP += (int)(UnitCharacteristics.AjustedStats.HP * 0.1f);
+            if (UnitCharacteristics.currentHP > UnitCharacteristics.AjustedStats.HP)
+            {
+                UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
+            }
+        }
+
+        // Photosynthesis
+        if (GetSkill(94) && GetWeatherType() == "sun")
+        {
+            AddNumber(Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * 0.25f), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "Photosynthesis");
+            UnitCharacteristics.currentHP += (int)(UnitCharacteristics.AjustedStats.HP * 0.25f);
+            if (UnitCharacteristics.currentHP > UnitCharacteristics.AjustedStats.HP)
+            {
+                UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
+            }
+        }
+
+        //Reset Verso movements
+        tilesmoved = 0;
+
+        //status effects trigger
+        TriggerStatusEffectsBegOfTurn();
+        // Reset Motvate use
+        UnitCharacteristics.motivateusedthisturn = false;
+
+        // Tick down Examode
+        if (UnitCharacteristics.playableStats.protagonist)
+        {
+            if (UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
+            {
+                UnitCharacteristics.ExamodeClass.remaingExamodeTurns--;
+                if (UnitCharacteristics.ExamodeClass.remaingExamodeTurns <= 0)
+                {
+                    DisableExamode();
+                }
+            }
+        }
+    }
+
 
     //Manage Vertical Position
     private void ManagePosition()

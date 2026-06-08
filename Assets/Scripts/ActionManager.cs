@@ -44,9 +44,16 @@ public class ActionManager : MonoBehaviour
     private InputAction _NextWeaponAction;
     private InputAction _PrevWeaponAction;
     private InputAction _CancelAction;
+    private InputAction _ActivateExamode;
 
     private GameObject previouscurrentcharacter;
     private BezierCurveManager BezierCurveManager;
+
+    [Header("Examode Activation Variables")]
+    public float timetoactivateExamode;
+    public Image ExamodeBar;
+    private float timeforExamodeactivation;
+    private bool previousexamodebuttonstate;
 
     private void Awake()
     {
@@ -64,6 +71,7 @@ public class ActionManager : MonoBehaviour
         _NextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
         _PrevWeaponAction = InputSystem.actions.FindAction("PreviousWeapon");
         _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _ActivateExamode = InputSystem.actions.FindAction("ActivateExamode");
         TurnManager = GetComponent<TurnManger>();
         GridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<cameraScript>();
@@ -168,6 +176,7 @@ public class ActionManager : MonoBehaviour
                         currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                         GridScript.ShowMovement();
                     }
+                    ManageExamodeActivation(currentcharacter);
 
                 }
                 else
@@ -255,10 +264,64 @@ public class ActionManager : MonoBehaviour
         }
         preventfromlockingafteraction = false;
 
-
+        previousexamodebuttonstate = _ActivateExamode.IsPressed();
 
     }
 
+    private void ManageExamodeActivation(GameObject unit)
+    {
+        Character chartouse = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        if (!chartouse.playableStats.protagonist)
+        {
+            timeforExamodeactivation = 0;
+            return;
+        }
+        if (chartouse.ExamodeClass.remaingExamodeTurns == 0 && chartouse.ExamodeClass.ExamodePoints < DataScript.instance.ExamodePointsForActivation)
+        {
+            timeforExamodeactivation = 0;
+            return;
+        }
+
+        if (_ActivateExamode.IsPressed())
+        {
+            if (!previousexamodebuttonstate)
+            {
+                timeforExamodeactivation = Time.time + timetoactivateExamode;
+            }
+
+            if (timeforExamodeactivation != 0 && Time.time > timeforExamodeactivation)
+            {
+                if (chartouse.ExamodeClass.remaingExamodeTurns == 0)
+                {
+                    unit.GetComponent<UnitScript>().ActivateExamode();
+                    timeforExamodeactivation = 0;
+                }
+                else
+                {
+                    unit.GetComponent<UnitScript>().DisableExamode();
+                    timeforExamodeactivation = 0;
+                }
+            }
+
+            float fillratio;
+
+            if (timeforExamodeactivation != 0)
+            {
+                fillratio = 1f - (timeforExamodeactivation - Time.time) / timetoactivateExamode;
+            }
+            else
+            {
+                fillratio = 0f;
+            }
+
+
+            ExamodeBar.fillAmount = fillratio;
+        }
+        else
+        {
+            timeforExamodeactivation = 0;
+        }
+    }
     private void CalculateCharacterLines(GridSquareScript tiletouse)
     {
         BezierCurveManager.DisableLines();
