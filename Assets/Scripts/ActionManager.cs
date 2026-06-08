@@ -630,7 +630,7 @@ public class ActionManager : MonoBehaviour
         {
             currentpath = null;
         }
-        else if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile == GridScript.selection && GridScript.selection != previoustile && GridScript.lockedmovementtiles.Contains(GridScript.selection))
+        else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile != GridScript.selection && GridScript.selection != previoustile && GridScript.lockedmovementtiles.Contains(GridScript.selection))
         {
             previoustile = GridScript.selection;
             bool legalposition = true;
