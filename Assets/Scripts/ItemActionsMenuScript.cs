@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static UnitScript;
 
@@ -30,10 +31,10 @@ public class ItemActionsMenuScript : MonoBehaviour
                         character.equipments[i] = character.equipments[i - 1];
                     }
                     character.equipments[0] = selectedequipment;
-                    GameObject UnitGO = GridScript.GetUnit(character.currentTile[0]);
+                    GameObject UnitGO = GridScript.GetUnit(character.currentTile);
                     UnitGO.GetComponent<UnitScript>().UpdateWeaponModel();
                     (int range, bool frapperenmelee, string type) = UnitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    GridScript.ShowAttackAfterMovement(range, frapperenmelee, character.currentTile, type.ToLower() == "staff", character);
+                    GridScript.ShowAttackAfterMovement(range, frapperenmelee, new List<GridSquareScript>() { character.currentTile }, type.ToLower() == "staff", character);
                     GridScript.lockedattacktiles = GridScript.attacktiles;
                     FindAnyObjectByType<ItemsScript>().InitializeButtons();
                     GridScript.Recolor();

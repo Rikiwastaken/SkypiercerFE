@@ -87,9 +87,9 @@ public class BossScript : MonoBehaviour
 
         Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
 
-        Vector2 RagnallPosition = character.currentTile[0].GridCoordinates;
+        Vector2 RagnallPosition = character.currentTile.GridCoordinates;
 
-        Vector2 TargetPosition = targetcharacter.currentTile[0].GridCoordinates;
+        Vector2 TargetPosition = targetcharacter.currentTile.GridCoordinates;
 
         int distance = ManhanttanDistance(RagnallPosition, TargetPosition);
 
@@ -100,7 +100,7 @@ public class BossScript : MonoBehaviour
                 for (int j = 0; j < GridScript.Grid[0].Count; j++)
                 {
                     GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
-                    if (ManhanttanDistance(RagnallPosition, tile.GridCoordinates) <= 2 && tile != character.currentTile[0])
+                    if (ManhanttanDistance(RagnallPosition, tile.GridCoordinates) <= 2 && tile != character.currentTile)
                     {
                         tile.isbossAttackTile = true;
                         tile.BossTileChanged();
@@ -115,7 +115,7 @@ public class BossScript : MonoBehaviour
                 for (int j = 0; j < GridScript.Grid[0].Count; j++)
                 {
                     GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
-                    if (ManhanttanDistance(RagnallPosition, tile.GridCoordinates) <= 4 && ManhanttanDistance(RagnallPosition, tile.GridCoordinates) > 2 && tile != character.currentTile[0])
+                    if (ManhanttanDistance(RagnallPosition, tile.GridCoordinates) <= 4 && ManhanttanDistance(RagnallPosition, tile.GridCoordinates) > 2 && tile != character.currentTile)
                     {
                         tile.isbossAttackTile = true;
                         tile.BossTileChanged();
@@ -181,9 +181,9 @@ public class BossScript : MonoBehaviour
 
         Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
 
-        Vector2 KayPosition = character.currentTile[0].GridCoordinates;
+        Vector2 KayPosition = character.currentTile.GridCoordinates;
 
-        Vector2 TargetPosition = targetcharacter.currentTile[0].GridCoordinates;
+        Vector2 TargetPosition = targetcharacter.currentTile.GridCoordinates;
 
         int distance = ManhanttanDistance(KayPosition, TargetPosition);
 
@@ -196,7 +196,7 @@ public class BossScript : MonoBehaviour
                     GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
                     if (ManhanttanDistance(KayPosition, tile.GridCoordinates) <= 2)
                     {
-                        if (tile != character.currentTile[0])
+                        if (tile != character.currentTile)
                         {
                             tile.isbossAttackTile = true;
                             tile.BossTileChanged();
@@ -221,7 +221,7 @@ public class BossScript : MonoBehaviour
 
                     GridSquareScript tileabove = GridScript.GetTile(tile.GridCoordinates + new Vector2(0, 1));
 
-                    if (tile.GridCoordinates.y < character.currentTile[0].GridCoordinates.y)
+                    if (tile.GridCoordinates.y < character.currentTile.GridCoordinates.y)
                     {
                         if (!(tileabove != null && tileabove.isobstacle))
                         {
@@ -242,9 +242,9 @@ public class BossScript : MonoBehaviour
 
         Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
 
-        Vector2 KayPosition = character.currentTile[0].GridCoordinates;
+        Vector2 KayPosition = character.currentTile.GridCoordinates;
 
-        Vector2 TargetPosition = targetcharacter.currentTile[0].GridCoordinates;
+        Vector2 TargetPosition = targetcharacter.currentTile.GridCoordinates;
 
         int distance = ManhanttanDistance(KayPosition, TargetPosition);
 
@@ -257,7 +257,7 @@ public class BossScript : MonoBehaviour
                     GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
                     if (ManhanttanDistance(KayPosition, tile.GridCoordinates) <= 2)
                     {
-                        if (tile != character.currentTile[0])
+                        if (tile != character.currentTile)
                         {
                             tile.isbossAttackTile = true;
                             tile.BossTileChanged();
@@ -284,7 +284,7 @@ public class BossScript : MonoBehaviour
                         GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
                         if (ManhanttanDistance(TargetPosition, tile.GridCoordinates) <= 2)
                         {
-                            if (tile != character.currentTile[0])
+                            if (tile != character.currentTile)
                             {
                                 tile.isbossAttackTile = true;
                                 tile.BossTileChanged();
@@ -302,7 +302,7 @@ public class BossScript : MonoBehaviour
                         GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
                         if (ManhanttanDistance(TargetPosition, tile.GridCoordinates) == 0 || ManhanttanDistance(TargetPosition, tile.GridCoordinates) == 2 || ManhanttanDistance(TargetPosition, tile.GridCoordinates) == 4)
                         {
-                            if (tile != character.currentTile[0])
+                            if (tile != character.currentTile)
                             {
                                 tile.isbossAttackTile = true;
                                 tile.BossTileChanged();

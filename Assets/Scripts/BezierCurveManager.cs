@@ -83,8 +83,8 @@ public class BezierCurveManager : MonoBehaviour
 
     public void DrawLineBetween2Characters(Character selectedChar, Character OtherChar, int lineID)
     {
-        Vector3 point1 = OtherChar.currentTile[0].transform.position;
-        Vector3 point2 = selectedChar.currentTile[0].transform.position;
+        Vector3 point1 = OtherChar.currentTile.transform.position;
+        Vector3 point2 = selectedChar.currentTile.transform.position;
         Vector3 middlepoint = (point1 + point2) / 2f + new Vector3(0, middlepointElevation, 0);
         List<Vector3> points = new List<Vector3>() { point1, middlepoint, point2 };
         DrawLine(points, lineID);

@@ -124,7 +124,7 @@ public class CharacterCircleVisuals : MonoBehaviour
 
 
             UnitCircles[i].GetComponent<SpriteRenderer>().color = newcolor;
-            UnitCircles[i].transform.position = new Vector3(Char.currentTile[0].GridCoordinates.x, YElevation + Char.currentTile[0].transform.position.y, Char.currentTile[0].GridCoordinates.y);
+            UnitCircles[i].transform.position = new Vector3(Char.currentTile.GridCoordinates.x, YElevation + Char.currentTile.transform.position.y, Char.currentTile.GridCoordinates.y);
             UnitCircles[i].transform.localScale = Vector3.one;
 
 

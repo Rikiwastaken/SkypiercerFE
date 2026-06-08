@@ -309,38 +309,35 @@ public class TurnManger : MonoBehaviour
         foreach (GameObject unit in grouptoapplyto)
         {
             Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-            foreach (GridSquareScript tile in unitchar.currentTile)
+            int hplost = 0;
+            int hpgained = 0;
+            switch (unitchar.currentTile.type.ToLower())
             {
-                int hplost = 0;
-                int hpgained = 0;
-                switch (tile.type.ToLower())
-                {
-                    case "fire":
-                        hplost = (int)(unitchar.AjustedStats.HP / 3);
-                        unitchar.currentHP = (int)(unitchar.currentHP - unitchar.AjustedStats.HP / 3);
-                        unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Fire");
+                case "fire":
+                    hplost = (int)(unitchar.AjustedStats.HP / 3);
+                    unitchar.currentHP = (int)(unitchar.currentHP - unitchar.AjustedStats.HP / 3);
+                    unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Fire");
+                    break;
+                case "desert":
+                    if (unit.GetComponent<UnitScript>().GetSkill(75)) // Dried
+                    {
+                        unit.GetComponent<UnitScript>().AddNumber(0, false, "Dried");
                         break;
-                    case "desert":
-                        if (unit.GetComponent<UnitScript>().GetSkill(75)) // Dried
-                        {
-                            unit.GetComponent<UnitScript>().AddNumber(0, false, "Dried");
-                            break;
-                        }
-                        hplost = unitchar.currentHP - (int)Mathf.Max(0, unitchar.currentHP - unitchar.AjustedStats.HP * 0.1f);
-                        unitchar.currentHP = (int)Mathf.Max(0, unitchar.currentHP - unitchar.AjustedStats.HP * 0.1f);
-                        unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Desert");
-                        break;
-                    case "fortification":
-                        hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
-                        unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
-                        unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Fortification");
-                        break;
-                    case "medicinalwater":
-                        hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 2);
-                        unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 2);
-                        unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Medicinal Water");
-                        break;
-                }
+                    }
+                    hplost = unitchar.currentHP - (int)Mathf.Max(0, unitchar.currentHP - unitchar.AjustedStats.HP * 0.1f);
+                    unitchar.currentHP = (int)Mathf.Max(0, unitchar.currentHP - unitchar.AjustedStats.HP * 0.1f);
+                    unit.GetComponent<UnitScript>().AddNumber(hplost, false, "Desert");
+                    break;
+                case "fortification":
+                    hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
+                    unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 10);
+                    unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Fortification");
+                    break;
+                case "medicinalwater":
+                    hpgained = unitchar.currentHP - (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 2);
+                    unitchar.currentHP = (int)Mathf.Min(unitchar.AjustedStats.HP, unitchar.currentHP + unitchar.AjustedStats.HP / 2);
+                    unit.GetComponent<UnitScript>().AddNumber(hpgained, true, "Medicinal Water");
+                    break;
             }
         }
     }

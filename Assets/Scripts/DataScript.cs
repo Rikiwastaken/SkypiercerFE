@@ -842,7 +842,7 @@ public class DataScript : MonoBehaviour
         foreach (GameObject otherunit in turnManger.playableunitGO)
         {
             Character charother = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
-            if (charother != charunit && charother.currentHP > 0 && ManhattanDistance(charunit.currentTile[0].GridCoordinates, charother.currentTile[0].GridCoordinates) <= 2)
+            if (charother != charunit && charother.currentHP > 0 && ManhattanDistance(charunit.currentTile.GridCoordinates, charother.currentTile.GridCoordinates) <= 2)
             {
                 IncreaseBonds(Unit, otherunit);
             }

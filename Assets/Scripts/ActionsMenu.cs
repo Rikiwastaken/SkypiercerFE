@@ -363,7 +363,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         (int range, bool frapperenmelee, string type) = target.GetComponent<UnitScript>().GetRangeMeleeAndType();
-        GridScript.ShowAttackAfterMovement(range, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics);
+        GridScript.ShowAttackAfterMovement(range, frapperenmelee, new List<GridSquareScript>() { target.GetComponent<UnitScript>().UnitCharacteristics.currentTile }, type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics);
         GridScript.lockedattacktiles = GridScript.attacktiles;
         GridScript.lockedhealingtiles = GridScript.healingtiles;
         GridScript.Recolor();
@@ -570,7 +570,7 @@ public class ActionsMenu : MonoBehaviour
                         frapperenmelee = false;
                     }
 
-                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, target.GetComponent<UnitScript>().UnitCharacteristics.currentTile, weapon.type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics);
+                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, new List<GridSquareScript>() { target.GetComponent<UnitScript>().UnitCharacteristics.currentTile }, weapon.type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics);
                     GridScript.lockedattacktiles = GridScript.attacktiles;
                     GridScript.lockedhealingtiles = GridScript.healingtiles;
                     GridScript.Recolor();
@@ -615,7 +615,7 @@ public class ActionsMenu : MonoBehaviour
             newfrapperenmelee = false;
         }
         Character newchartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        GridScript.ShowAttackAfterMovement(newweapon.Range + newrangebonus, newfrapperenmelee, newchartarget.currentTile, newweapon.type.ToLower() == "staff", newchartarget);
+        GridScript.ShowAttackAfterMovement(newweapon.Range + newrangebonus, newfrapperenmelee, new List<GridSquareScript>() { newchartarget.currentTile }, newweapon.type.ToLower() == "staff", newchartarget);
     }
 
 
@@ -677,7 +677,7 @@ public class ActionsMenu : MonoBehaviour
             if (command.targettype == 0)
             {
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, false, chartarget);
+                GridScript.ShowAttackAfterMovement(command.range, true, new List<GridSquareScript>() { chartarget.currentTile }, false, chartarget);
                 GridScript.lockedattacktiles = GridScript.attacktiles;
 
                 foreach (GridSquareScript tile in GridScript.lockedattacktiles)
@@ -707,7 +707,7 @@ public class ActionsMenu : MonoBehaviour
             else if (command.targettype == 1)
             {
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, true, chartarget);
+                GridScript.ShowAttackAfterMovement(command.range, true, new List<GridSquareScript>() { chartarget.currentTile }, true, chartarget);
                 GridScript.lockedhealingtiles = GridScript.healingtiles;
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
@@ -735,7 +735,7 @@ public class ActionsMenu : MonoBehaviour
             }
             else if (command.targettype == 2)
             {
-                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
+                GridSquareScript positiontile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
                 for (int i = -command.range; i <= command.range; i++)
                 {
                     for (int j = -command.range; j <= command.range; j++)
@@ -781,10 +781,10 @@ public class ActionsMenu : MonoBehaviour
             else if (command.targettype == 4)
             {
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(command.range, true, chartarget.currentTile, false, chartarget);
+                GridScript.ShowAttackAfterMovement(command.range, true, new List<GridSquareScript>() { chartarget.currentTile }, false, chartarget);
                 if (commandID == 81 || commandID == 82) // Hook and Throw
                 {
-                    Vector2 chartargetposition = chartarget.currentTile[0].GridCoordinates;
+                    Vector2 chartargetposition = chartarget.currentTile.GridCoordinates;
                     List<GridSquareScript> newtileslist = new List<GridSquareScript>();
                     foreach (GridSquareScript tile in GridScript.attacktiles)
                     {
@@ -808,8 +808,8 @@ public class ActionsMenu : MonoBehaviour
                             if (ManhattanDistance(chartarget, potentialtarget.GetComponent<UnitScript>().UnitCharacteristics) > 1)
                             {
 
-                                Vector2 chartargetposition = chartarget.currentTile[0].GridCoordinates;
-                                Vector2 potentialtargetposition = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+                                Vector2 chartargetposition = chartarget.currentTile.GridCoordinates;
+                                Vector2 potentialtargetposition = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
 
                                 Vector2 direction = (potentialtargetposition - chartargetposition).normalized;
                                 GridSquareScript potentialblockerTile = GridScript.GetTile(chartargetposition + direction);
@@ -825,8 +825,8 @@ public class ActionsMenu : MonoBehaviour
                             if (ManhattanDistance(chartarget, potentialtarget.GetComponent<UnitScript>().UnitCharacteristics) == 1)
                             {
 
-                                Vector2 chartargetposition = chartarget.currentTile[0].GridCoordinates;
-                                Vector2 potentialtargetposition = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+                                Vector2 chartargetposition = chartarget.currentTile.GridCoordinates;
+                                Vector2 potentialtargetposition = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
 
                                 Vector2 direction = (potentialtargetposition - chartargetposition).normalized;
                                 GridSquareScript potentialblockerTile = GridScript.GetTile(chartargetposition + direction * 3);
@@ -879,7 +879,7 @@ public class ActionsMenu : MonoBehaviour
             {
                 (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
                 Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                GridScript.ShowAttackAfterMovement(range, melee, chartarget.currentTile, true, chartarget);
+                GridScript.ShowAttackAfterMovement(range, melee, new List<GridSquareScript>() { chartarget.currentTile }, true, chartarget);
                 GridScript.lockedhealingtiles = GridScript.healingtiles;
                 foreach (GridSquareScript tile in GridScript.lockedhealingtiles)
                 {
@@ -904,7 +904,7 @@ public class ActionsMenu : MonoBehaviour
             else
             {
                 (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
-                GridScript.ShowAttackAfterMovement(range, melee, new List<GridSquareScript>() { target.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0] }, false, target.GetComponent<UnitScript>().UnitCharacteristics);
+                GridScript.ShowAttackAfterMovement(range, melee, new List<GridSquareScript>() { target.GetComponent<UnitScript>().UnitCharacteristics.currentTile }, false, target.GetComponent<UnitScript>().UnitCharacteristics);
                 foreach (GridSquareScript tile in GridScript.attacktiles)
                 {
                     GameObject potentialtarget = GridScript.GetUnit(tile);
@@ -1187,11 +1187,11 @@ public class ActionsMenu : MonoBehaviour
         }
         else if (command.ID == 52) // Fortify
         {
-            WallTargettingWindow(unit, unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].gameObject, "Fortification");
+            WallTargettingWindow(unit, unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.gameObject, "Fortification");
         }
         else if (command.ID == 53) // Smoke Bomb
         {
-            WallTargettingWindow(unit, unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].gameObject, "Fog");
+            WallTargettingWindow(unit, unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.gameObject, "Fog");
         }
         else if (command.ID == 54) // Chakra
         {
@@ -1790,15 +1790,15 @@ public class ActionsMenu : MonoBehaviour
 
             weapontext.text = weapontxt + " " + weapon.Name + " " + durabilitytouse + "/" + weapon.Maxuses; ;
             nametext.text = character.name;
-            if (character.currentTile[0].type != "")
+            if (character.currentTile.type != "")
             {
-                tiletext.text = character.currentTile[0].type + " ";
+                tiletext.text = character.currentTile.type + " ";
             }
             else
             {
                 tiletext.text = "Ground ";
             }
-            tiletext.text += character.currentTile[0].elevation;
+            tiletext.text += character.currentTile.elevation;
 
             string MainTextstring = "<align=left>" + hptoshow + "<align=center>\n";
             if (ishealing)
@@ -1844,7 +1844,7 @@ public class ActionsMenu : MonoBehaviour
         GridSquareScript tiletouse = position;
         if (tiletouse == null)
         {
-            tiletouse = charunit.currentTile[0];
+            tiletouse = charunit.currentTile;
         }
 
         int Distance = (int)(Mathf.Abs(chartarget.position.x - tiletouse.GridCoordinates.x) + Mathf.Abs(chartarget.position.y - tiletouse.GridCoordinates.y));
@@ -2449,7 +2449,7 @@ public class ActionsMenu : MonoBehaviour
     private void DealScytheDamage(GameObject attacker, GameObject target)
     {
         List<GameObject> targetlist = new List<GameObject>();
-        Vector2 position = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+        Vector2 position = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
 
         if (position.x < GridScript.Grid.Count - 1)
         {
@@ -2608,7 +2608,7 @@ public class ActionsMenu : MonoBehaviour
         {
 
             chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-            targetTile = chartarget.currentTile[0];
+            targetTile = chartarget.currentTile;
 
             TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
 
@@ -2930,8 +2930,8 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
-        GridSquareScript unitTile = charunit.currentTile[0];
-        GridSquareScript targetTile = chartarget.currentTile[0];
+        GridSquareScript unitTile = charunit.currentTile;
+        GridSquareScript targetTile = chartarget.currentTile;
 
         AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
         AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);

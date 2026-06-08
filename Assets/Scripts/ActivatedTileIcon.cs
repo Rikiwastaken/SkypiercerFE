@@ -70,7 +70,7 @@ public class ActivatedTileIcon : MonoBehaviour
 
         if (GridScript.lockselection && ActionManager.instance.currentcharacter != null)
         {
-            LockedSelectedTile = ActionManager.instance.currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
+            LockedSelectedTile = ActionManager.instance.currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
         }
         else
         {
@@ -79,7 +79,7 @@ public class ActivatedTileIcon : MonoBehaviour
 
         if (PreBattleMenuScript.instance != null && PreBattleMenuScript.instance.selectedunit != null)
         {
-            LockedSelectedTile = PreBattleMenuScript.instance.selectedunit.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
+            LockedSelectedTile = PreBattleMenuScript.instance.selectedunit.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
         }
 
         if (LockedSelectedTile == null)

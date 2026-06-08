@@ -300,33 +300,27 @@ public class MinimapScript : MonoBehaviour
         }
         foreach (Character character in gridScript.allunits)
         {
-            foreach (GridSquareScript tile in character.currentTile)
+            GridSquareScript tile = character.currentTile;
+            if (character.affiliation == "playable")
             {
-                if (character.currentTile.Count > 0)
-                {
-                    if (character.affiliation == "playable")
-                    {
-                        SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.blue);
-                        UnitTile(tile);
-                    }
-                    else if (character.affiliation == "enemy")
-                    {
-                        SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
-                        UnitTile(tile);
-                    }
-                    else if (character.affiliation == "other")
-                    {
-                        SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
-                        UnitTile(tile);
-                    }
-                    if (!tile.activated)
-                    {
-                        SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
-                    }
-
-                }
-
+                SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.blue);
+                UnitTile(tile);
             }
+            else if (character.affiliation == "enemy")
+            {
+                SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
+                UnitTile(tile);
+            }
+            else if (character.affiliation == "other")
+            {
+                SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
+                UnitTile(tile);
+            }
+            if (!tile.activated)
+            {
+                SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
+            }
+
         }
 
         manageselectionicon(newtexture);

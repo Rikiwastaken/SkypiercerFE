@@ -28,7 +28,7 @@ public class ForesightScript : MonoBehaviour
         5 Talk
         6 Examined
          */
-        public List<GridSquareScript> previousPosition;
+        public GridSquareScript previousPosition;
         public List<Character> ModifiedCharacters;
         public AttackData AttackData;
         public int commandID;
@@ -506,14 +506,11 @@ public class ForesightScript : MonoBehaviour
                 foreach (GameObject GO in GridScript.instance.allunitGOs)
                 {
 
-                    if (GO != null && GO.GetComponent<UnitScript>() != null && GO.GetComponent<UnitScript>().UnitCharacteristics != null && GO.GetComponent<UnitScript>().UnitCharacteristics.ID == ActionToRevert.Unit.UnitCharacteristics.ID && ActionToRevert.previousPosition != null && ActionToRevert.previousPosition[0] && ActionToRevert.previousPosition[0] != null)
+                    if (GO != null && GO.GetComponent<UnitScript>() != null && GO.GetComponent<UnitScript>().UnitCharacteristics != null && GO.GetComponent<UnitScript>().UnitCharacteristics.ID == ActionToRevert.Unit.UnitCharacteristics.ID && ActionToRevert.previousPosition != null)
                     {
-                        GO.GetComponent<UnitScript>().MoveTo(ActionToRevert.previousPosition[0].GridCoordinates);
+                        GO.GetComponent<UnitScript>().MoveTo(ActionToRevert.previousPosition.GridCoordinates);
                         GO.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = false;
-                        foreach (GridSquareScript tile in GO.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
-                        {
-                            tile.UpdateInsideSprite(true, GO.GetComponent<UnitScript>().UnitCharacteristics);
-                        }
+                        GO.GetComponent<UnitScript>().UnitCharacteristics.currentTile.UpdateInsideSprite(true, GO.GetComponent<UnitScript>().UnitCharacteristics);
                     }
                 }
             }

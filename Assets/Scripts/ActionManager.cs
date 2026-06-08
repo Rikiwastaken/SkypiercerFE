@@ -120,7 +120,7 @@ public class ActionManager : MonoBehaviour
         {
             if (currentcharacter != previouscurrentcharacter)
             {
-                CalculateCharacterLines(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0]);
+                CalculateCharacterLines(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile);
             }
 
 
@@ -338,14 +338,14 @@ public class ActionManager : MonoBehaviour
 
                 (int range, bool melee) = US.GetRangeAndMele();
 
-                if (Manhattandistance(tiletouse.GridCoordinates, unit.currentTile[0].GridCoordinates) > range + unit.movements)
+                if (Manhattandistance(tiletouse.GridCoordinates, unit.currentTile.GridCoordinates) > range + unit.movements)
                 {
                     continue;
                 }
 
                 List<GridSquareScript> movementtiles = new List<GridSquareScript>();
 
-                string tiletype = unit.currentTile[0].type;
+                string tiletype = unit.currentTile.type;
 
                 int movements = US.CalculateNumberOfMovements();
 
@@ -373,7 +373,7 @@ public class ActionManager : MonoBehaviour
 
         for (int i = 0; i < enemycharactersthatcanattack.Count; i++)
         {
-            BezierCurveManager.DrawLineBetween2Tiles(tiletouse, enemycharactersthatcanattack[i].currentTile[0], i);
+            BezierCurveManager.DrawLineBetween2Tiles(tiletouse, enemycharactersthatcanattack[i].currentTile, i);
         }
 
 
@@ -492,7 +492,7 @@ public class ActionManager : MonoBehaviour
                 foreach (GridSquareScript movementtile in GridScript.lockedmovementtiles)
                 {
                     GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, true, currentChar);
-                    if (GridScript.healingtiles.Contains(defenderunitChar.currentTile[0]))
+                    if (GridScript.healingtiles.Contains(defenderunitChar.currentTile))
                     {
                         potentialmovementtiles.Add(movementtile);
                     }
@@ -506,7 +506,7 @@ public class ActionManager : MonoBehaviour
                 GridSquareScript besttile = null;
                 foreach (GridSquareScript potentialtargettile in potentialmovementtiles)
                 {
-                    int pathdistance = GridScript.findshortestpath(currentChar.currentTile[0], potentialtargettile, movements);
+                    int pathdistance = GridScript.findshortestpath(currentChar.currentTile, potentialtargettile, movements);
                     if (pathdistance < shortestdistance)
                     {
                         besttile = potentialtargettile;
@@ -560,7 +560,7 @@ public class ActionManager : MonoBehaviour
             {
                 (int newweaponrange, bool newmelee, string newtype) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
                 GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, false, currentChar);
-                if (GridScript.attacktiles.Contains(defenderunitChar.currentTile[0]))
+                if (GridScript.attacktiles.Contains(defenderunitChar.currentTile))
                 {
                     potentialmovementtiles.Add(movementtile);
                 }
@@ -574,7 +574,7 @@ public class ActionManager : MonoBehaviour
             GridSquareScript besttile = null;
             foreach (GridSquareScript potentialtargettile in potentialmovementtiles)
             {
-                int pathdistance = GridScript.findshortestpath(currentChar.currentTile[0], potentialtargettile, movements);
+                int pathdistance = GridScript.findshortestpath(currentChar.currentTile, potentialtargettile, movements);
                 if (pathdistance < shortestdistance)
                 {
                     besttile = potentialtargettile;
@@ -630,7 +630,7 @@ public class ActionManager : MonoBehaviour
         {
             currentpath = null;
         }
-        else if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(GridScript.selection) && GridScript.selection != previoustile && GridScript.lockedmovementtiles.Contains(GridScript.selection))
+        else if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile == GridScript.selection && GridScript.selection != previoustile && GridScript.lockedmovementtiles.Contains(GridScript.selection))
         {
             previoustile = GridScript.selection;
             bool legalposition = true;
@@ -659,7 +659,7 @@ public class ActionManager : MonoBehaviour
                 }
             }
         }
-        else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(GridScript.selection))
+        else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile == GridScript.selection)
         {
             currentpath = null;
         }

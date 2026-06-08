@@ -38,7 +38,7 @@ public class UnitScript : MonoBehaviour
         public PlayableStats playableStats;
         public EnemyStats enemyStats;
 
-        public List<GridSquareScript> currentTile;
+        public GridSquareScript currentTile;
         public int modelID;
         public List<WeaponMastery> Masteries;
         public float DialoguePitch;
@@ -280,7 +280,7 @@ public class UnitScript : MonoBehaviour
     public BaseStats previousStats;
 
 
-    public List<GridSquareScript> previouspos;
+    public GridSquareScript previouspos;
 
     public bool disableLifebar;
 
@@ -892,27 +892,27 @@ public class UnitScript : MonoBehaviour
         {
             return;
         }
-        if (UnitCharacteristics.currentTile.Count <= 0)
+        if (UnitCharacteristics.currentTile == null)
         {
             MoveTo(UnitCharacteristics.position);
         }
-        else if (UnitCharacteristics.currentTile.Count > 0 && UnitCharacteristics.currentTile[0] != null)
+        else if (UnitCharacteristics.currentTile != null)
         {
-            if (UnitCharacteristics.currentTile[0].isstairs)
+            if (UnitCharacteristics.currentTile.isstairs)
             {
 
                 if (cameraScript.incombat)
                 {
-                    transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile[0].transform.position.y + 1f, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y + 1f, transform.position.z);
                 }
                 else
                 {
-                    transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile[0].transform.position.y + 0.5f, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y + 0.5f, transform.position.z);
                 }
             }
             else
             {
-                transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile[0].transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y, transform.position.z);
             }
 
         }
@@ -1011,7 +1011,7 @@ public class UnitScript : MonoBehaviour
                 CopyID = CharacterToCopy.enemyStats.CopyID,
                 PlayableSpriteID = CharacterToCopy.enemyStats.PlayableSpriteID,
             },
-            currentTile = new List<GridSquareScript>(CharacterToCopy.currentTile),
+            currentTile = CharacterToCopy.currentTile,
             modelID = CharacterToCopy.modelID,
             Masteries = CharacterToCopy.Masteries.Select(m => new WeaponMastery
             {
@@ -1556,20 +1556,14 @@ public class UnitScript : MonoBehaviour
         {
             GridScript = GridScript.instance;
         }
-        List<GridSquareScript> oldtiles = new List<GridSquareScript>();
+        GridSquareScript oldtile = null;
         GridSquareScript destTile = GridScript.GetTile(destination);
         if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile) == gameObject) && !destTile.isobstacle)
         {
-            if (UnitCharacteristics.currentTile != null && UnitCharacteristics.currentTile.Count > 0)
+            if (UnitCharacteristics.currentTile != null)
             {
-                foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
-                {
-                    if (tile != null)
-                    {
-                        oldtiles.Add(tile);
-                    }
+                oldtile = UnitCharacteristics.currentTile;
 
-                }
 
 
                 if (jump)
@@ -1577,9 +1571,9 @@ public class UnitScript : MonoBehaviour
                     pathtotake = new List<Vector2> { destination };
                 }
 
-                else if (UnitCharacteristics.currentTile[0] != null)
+                else if (UnitCharacteristics.currentTile != null)
                 {
-                    pathtotake = GridScript.FindPath(UnitCharacteristics.currentTile[0].GridCoordinates, destination, UnitCharacteristics);
+                    pathtotake = GridScript.FindPath(UnitCharacteristics.currentTile.GridCoordinates, destination, UnitCharacteristics);
                 }
 
             }
@@ -1594,14 +1588,13 @@ public class UnitScript : MonoBehaviour
             }
             UnitCharacteristics.position = destination;
             UpdateTiles(destTile);
-            foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
+            UnitCharacteristics.currentTile.UpdateInsideSprite(true, UnitCharacteristics);
+            if (oldtile != null)
             {
-                tile.UpdateInsideSprite(true, UnitCharacteristics);
+                oldtile.UpdateInsideSprite(false);
             }
-            foreach (GridSquareScript tile in oldtiles)
-            {
-                tile.UpdateInsideSprite(false);
-            }
+
+
         }
         if (MinimapScript == null)
         {
@@ -1614,7 +1607,7 @@ public class UnitScript : MonoBehaviour
 
     public void UpdateTiles(GridSquareScript destination)
     {
-        UnitCharacteristics.currentTile = new List<GridSquareScript> { destination };
+        UnitCharacteristics.currentTile = destination;
         destination.previousEnemyinTileForEvent = gameObject;
         destination.BossTileChanged();
     }
@@ -2136,13 +2129,13 @@ public class UnitScript : MonoBehaviour
     void HealthChangedHandler(int newHealth)
     {
         ManageLifebars();
-        UnitCharacteristics.currentTile[0].BossTileChanged();
+        UnitCharacteristics.currentTile.BossTileChanged();
         animator.SetFloat("HPratio", (float)newHealth / (float)UnitCharacteristics.AjustedStats.HP);
     }
 
     void PlayedChangedHandler(bool newPlayed)
     {
-        if (ActiveModel != null && UnitCharacteristics.currentTile[0].activated)
+        if (ActiveModel != null && UnitCharacteristics.currentTile.activated)
         {
             if (newPlayed)
             {
@@ -2281,28 +2274,12 @@ public class UnitScript : MonoBehaviour
     }
     public bool CheckIfOnActivated()
     {
-        bool isdeactivated = false;
-        foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
-        {
-            if (!tile.activated)
-            {
-                isdeactivated = true;
-                break;
-            }
-        }
-        if (isdeactivated)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return UnitCharacteristics.currentTile.activated;
     }
 
     public int CalculateNumberOfMovements()
     {
-        string tiletype = UnitCharacteristics.currentTile[0].type;
+        string tiletype = UnitCharacteristics.currentTile.type;
         int ajustedmovements = UnitCharacteristics.movements;
         if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
         {
@@ -2803,24 +2780,12 @@ public class UnitScript : MonoBehaviour
 
     public string GetWeatherType()
     {
-        int numberofraintiles = 0;
-        int numberofsuntiles = 0;
-        foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
-        {
-            if (tile.RemainingRainTurns > 0)
-            {
-                numberofraintiles++;
-            }
-            if (tile.RemainingSunTurns > 0)
-            {
-                numberofsuntiles++;
-            }
-        }
-        if (numberofraintiles > numberofsuntiles)
+        GridSquareScript tile = UnitCharacteristics.currentTile;
+        if (tile.RemainingRainTurns > 0)
         {
             return "rain";
         }
-        else if (numberofraintiles < numberofsuntiles)
+        else if (tile.RemainingSunTurns > 0)
         {
             return "sun";
         }
@@ -3353,35 +3318,20 @@ public class UnitScript : MonoBehaviour
         //Amphibian
         if (GetSkill(61))
         {
-            bool onwatertile = false;
-            foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
-            {
-                if (tile.RemainingRainTurns > 0 || tile.type.ToLower() == "water" || tile.type.ToLower() == "medicinalwater")
-                {
-                    onwatertile = true;
-                    break;
-                }
-            }
-            if (onwatertile)
+            GridSquareScript tile = UnitCharacteristics.currentTile;
+            if (tile.RemainingRainTurns > 0 || tile.type.ToLower() == "water" || tile.type.ToLower() == "medicinalwater")
             {
                 statbonuses.Dodge += 15;
                 statbonuses.Hit += 15;
             }
+
         }
 
         //Shut-In
         if (GetSkill(62))
         {
-            bool onsunnytile = false;
-            foreach (GridSquareScript tile in UnitCharacteristics.currentTile)
-            {
-                if (tile.RemainingSunTurns > 0)
-                {
-                    onsunnytile = true;
-                    break;
-                }
-            }
-            if (onsunnytile)
+            GridSquareScript tile = UnitCharacteristics.currentTile;
+            if (tile.RemainingSunTurns > 0)
             {
                 statbonuses.TelekDamage -= 6;
                 statbonuses.PhysDamage -= 6;
@@ -3391,6 +3341,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.TelekDamage += 3;
                 statbonuses.PhysDamage += 3;
             }
+
         }
 
         //Master Hunter
@@ -3596,7 +3547,7 @@ public class UnitScript : MonoBehaviour
     public List<GameObject> GetSpectialInteraction()
     {
         List<GameObject> interactables = new List<GameObject>();
-        GameObject newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(1, 0));
+        GameObject newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile.GridCoordinates + new Vector2(1, 0));
         if (newtile != null)
         {
             GameObject newunit = GridScript.GetUnit(newtile.GetComponent<GridSquareScript>());
@@ -3617,7 +3568,7 @@ public class UnitScript : MonoBehaviour
             }
         }
 
-        newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(-1, 0));
+        newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile.GridCoordinates + new Vector2(-1, 0));
         if (newtile != null)
         {
             GameObject newunit = GridScript.GetUnit(newtile.GetComponent<GridSquareScript>());
@@ -3638,7 +3589,7 @@ public class UnitScript : MonoBehaviour
             }
         }
 
-        newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(0, 1));
+        newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile.GridCoordinates + new Vector2(0, 1));
         if (newtile != null)
         {
             GameObject newunit = GridScript.GetUnit(newtile.GetComponent<GridSquareScript>());
@@ -3659,7 +3610,7 @@ public class UnitScript : MonoBehaviour
             }
         }
 
-        newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile[0].GridCoordinates + new Vector2(0, -1));
+        newtile = GridScript.GetTileGO(UnitCharacteristics.currentTile.GridCoordinates + new Vector2(0, -1));
         if (newtile != null)
         {
             GameObject newunit = GridScript.GetUnit(newtile.GetComponent<GridSquareScript>());
@@ -3683,7 +3634,7 @@ public class UnitScript : MonoBehaviour
         //check if there are any bosses
         foreach (GameObject unit in GridScript.allunitGOs)
         {
-            if (unit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0 && UnitCharacteristics.playableStats.protagonist && UnitCharacteristics.currentTile != null && UnitCharacteristics.currentTile[0] != null && UnitCharacteristics.currentTile[0].isbossAttackTile)
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0 && UnitCharacteristics.playableStats.protagonist && UnitCharacteristics.currentTile != null && UnitCharacteristics.currentTile != null && UnitCharacteristics.currentTile.isbossAttackTile)
             {
                 interactables.Add(unit);
                 break;

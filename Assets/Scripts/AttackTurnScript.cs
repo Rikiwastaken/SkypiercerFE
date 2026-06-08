@@ -265,7 +265,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     if (saveManager.Options.BattleAnimations)
                     {
-                        if (Vector2.Distance(CurrentPlayableChar.currentTile[0].GridCoordinates, new Vector2(CurrentPlayable.transform.position.x, CurrentPlayable.transform.position.z)) <= 1f)
+                        if (Vector2.Distance(CurrentPlayableChar.currentTile.GridCoordinates, new Vector2(CurrentPlayable.transform.position.x, CurrentPlayable.transform.position.z)) <= 1f)
                         {
                             ManageAttackWithAnimation(CurrentPlayable);
                         }
@@ -319,7 +319,7 @@ public class AttackTurnScript : MonoBehaviour
                 if (AttackerGO.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
                 {
                     AttackerGO.GetComponent<BossScript>().nextTarget = CalculateDestinationForBoss(AttackerGO);
-                    Destination = AttackerGO.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0];
+                    Destination = AttackerGO.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
                 }
                 else
                 {
@@ -352,7 +352,7 @@ public class AttackTurnScript : MonoBehaviour
             }
             else if (saveManager.Options.BattleAnimations)
             {
-                if (Vector2.Distance(charAttacker.currentTile[0].GridCoordinates, new Vector2(AttackerGO.transform.position.x, AttackerGO.transform.position.z)) <= 1f)
+                if (Vector2.Distance(charAttacker.currentTile.GridCoordinates, new Vector2(AttackerGO.transform.position.x, AttackerGO.transform.position.z)) <= 1f)
                 {
                     ManageAttackWithAnimation(AttackerGO);
                 }
@@ -519,7 +519,7 @@ public class AttackTurnScript : MonoBehaviour
         else if (commandID == 52) // Fortify
         {
             foresightScript.CreateAction(3, User);
-            GridSquareScript tile = CharUser.currentTile[0];
+            GridSquareScript tile = CharUser.currentTile;
 
 
             tile.type = "Fortification";
@@ -527,7 +527,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 53) // Smoke Bomb
         {
-            GridSquareScript tile = CharUser.currentTile[0];
+            GridSquareScript tile = CharUser.currentTile;
             foresightScript.CreateAction(3, User);
             tile.type = "Fog";
             User.GetComponent<UnitScript>().AddNumber(0, true, "Smoke Bomb");
@@ -574,26 +574,24 @@ public class AttackTurnScript : MonoBehaviour
             if (weathermanager.rainymap)
             {
                 List<GridSquareScript> tilestochange = new List<GridSquareScript>();
-                foreach (GridSquareScript tile in User.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
+                GridSquareScript tile = User.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
+                if (!tilestochange.Contains(tile))
                 {
-                    if (!tilestochange.Contains(tile))
-                    {
-                        tilestochange.Add(tile);
-                    }
-                    List<GridSquareScript> othertiles = new List<GridSquareScript>() { gridScript.GetTile(tile.GridCoordinates + new Vector2(0, 1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(0, -1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(1, 0)), gridScript.GetTile(tile.GridCoordinates + new Vector2(-1, 0)) };
-                    foreach (GridSquareScript addedtile in othertiles)
-                    {
-                        if (!tilestochange.Contains(addedtile))
-                        {
-                            tilestochange.Add(addedtile);
-                        }
-                    }
-
+                    tilestochange.Add(tile);
                 }
-                foreach (GridSquareScript tile in tilestochange)
+                List<GridSquareScript> othertiles = new List<GridSquareScript>() { gridScript.GetTile(tile.GridCoordinates + new Vector2(0, 1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(0, -1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(1, 0)), gridScript.GetTile(tile.GridCoordinates + new Vector2(-1, 0)) };
+                foreach (GridSquareScript addedtile in othertiles)
                 {
-                    tile.RemainingRainTurns = 0;
-                    tile.RemainingSunTurns = 2;
+                    if (!tilestochange.Contains(addedtile))
+                    {
+                        tilestochange.Add(addedtile);
+                    }
+                }
+
+                foreach (GridSquareScript newtilestile in tilestochange)
+                {
+                    newtilestile.RemainingRainTurns = 0;
+                    newtilestile.RemainingSunTurns = 2;
                 }
             }
         }
@@ -604,26 +602,23 @@ public class AttackTurnScript : MonoBehaviour
             if (weathermanager.rainymap)
             {
                 List<GridSquareScript> tilestochange = new List<GridSquareScript>();
-                foreach (GridSquareScript tile in User.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
+                GridSquareScript tile = User.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
+                if (!tilestochange.Contains(tile))
                 {
-                    if (!tilestochange.Contains(tile))
-                    {
-                        tilestochange.Add(tile);
-                    }
-                    List<GridSquareScript> othertiles = new List<GridSquareScript>() { gridScript.GetTile(tile.GridCoordinates + new Vector2(0, 1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(0, -1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(1, 0)), gridScript.GetTile(tile.GridCoordinates + new Vector2(-1, 0)) };
-                    foreach (GridSquareScript addedtile in othertiles)
-                    {
-                        if (!tilestochange.Contains(addedtile))
-                        {
-                            tilestochange.Add(addedtile);
-                        }
-                    }
-
+                    tilestochange.Add(tile);
                 }
-                foreach (GridSquareScript tile in tilestochange)
+                List<GridSquareScript> othertiles = new List<GridSquareScript>() { gridScript.GetTile(tile.GridCoordinates + new Vector2(0, 1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(0, -1)), gridScript.GetTile(tile.GridCoordinates + new Vector2(1, 0)), gridScript.GetTile(tile.GridCoordinates + new Vector2(-1, 0)) };
+                foreach (GridSquareScript addedtile in othertiles)
                 {
-                    tile.RemainingRainTurns = 2;
-                    tile.RemainingSunTurns = 0;
+                    if (!tilestochange.Contains(addedtile))
+                    {
+                        tilestochange.Add(addedtile);
+                    }
+                }
+                foreach (GridSquareScript newtile in tilestochange)
+                {
+                    newtile.RemainingRainTurns = 2;
+                    newtile.RemainingSunTurns = 0;
                 }
             }
         }
@@ -662,8 +657,8 @@ public class AttackTurnScript : MonoBehaviour
 
 
 
-            Vector2 targetposition = Target.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
-            Vector2 Userposition = User.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+            Vector2 targetposition = Target.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
+            Vector2 Userposition = User.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
 
             Vector2 direction = (targetposition - Userposition).normalized;
             Target.GetComponent<UnitScript>().MoveTo(Userposition + direction, true, true);
@@ -675,8 +670,8 @@ public class AttackTurnScript : MonoBehaviour
 
 
 
-            Vector2 targetposition = Target.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
-            Vector2 Userposition = User.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0].GridCoordinates;
+            Vector2 targetposition = Target.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
+            Vector2 Userposition = User.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
 
             Vector2 direction = (targetposition - Userposition).normalized;
 
@@ -1250,7 +1245,7 @@ public class AttackTurnScript : MonoBehaviour
                         continue;
                     }
 
-                    if (gridScript.healingtiles.Contains(otherunit.GetComponent<UnitScript>().UnitCharacteristics.currentTile[0]))
+                    if (gridScript.healingtiles.Contains(otherunit.GetComponent<UnitScript>().UnitCharacteristics.currentTile))
                     {
                         if (unitchar.affiliation.ToLower() == otherunit.GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower() || (unitchar.affiliation.ToLower() == "other" && !unitchar.attacksfriends))
                         {
@@ -1312,9 +1307,9 @@ public class AttackTurnScript : MonoBehaviour
 
         if (character.enemyStats.personality.ToLower() == "guard") // Guard units only consider attacking from their current position
         {
-            movementtouse = new List<GridSquareScript>() { character.currentTile[0] };
+            movementtouse = new List<GridSquareScript>() { character.currentTile };
 
-            attacktiles = gridScript.GetAttack(attackerrange, attackermelee, character.currentTile[0], character);
+            attacktiles = gridScript.GetAttack(attackerrange, attackermelee, character.currentTile, character);
         }
         else // Other personalities consider attacking from all possible movement positions
         {
@@ -1337,7 +1332,7 @@ public class AttackTurnScript : MonoBehaviour
             bool skip = true;
 
 
-            if (unit == currentCharacter || !attacktiles.Contains(otherchar.currentTile[0]) || otherchar.enemyStats.hidden) // Skip self, units not in attack range, and hidden units
+            if (unit == currentCharacter || !attacktiles.Contains(otherchar.currentTile) || otherchar.enemyStats.hidden) // Skip self, units not in attack range, and hidden units
             {
                 continue;
             }
@@ -1422,7 +1417,7 @@ public class AttackTurnScript : MonoBehaviour
                 return (CalculateDestinationIfTargetNotFound(currentCharacter), null);
             }
 
-            List<GridSquareScript> targepositiontiles = truetarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
+            GridSquareScript targepositiontiles = truetarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
 
             (int range, bool melee) = currentCharacter.GetComponent<UnitScript>().GetRangeAndMele();
 
@@ -1432,7 +1427,7 @@ public class AttackTurnScript : MonoBehaviour
             {
                 foreach (GridSquareScript attacktilesFromPosition in gridScript.GetAttack(range, melee, movementtile, character))
                 {
-                    if (targepositiontiles.Contains(attacktilesFromPosition))
+                    if (targepositiontiles == attacktilesFromPosition)
                     {
                         potentialmovementtile.Add(movementtile);
                         continue;
@@ -1443,7 +1438,7 @@ public class AttackTurnScript : MonoBehaviour
 
             List<GridSquareScript> potentialmovementtilesecondFilter = new List<GridSquareScript>();
 
-            Vector2 baseposition = character.currentTile[0].GridCoordinates;
+            Vector2 baseposition = character.currentTile.GridCoordinates;
 
 
             foreach (GridSquareScript tile in potentialmovementtile)
@@ -1468,7 +1463,7 @@ public class AttackTurnScript : MonoBehaviour
 
                 foreach (GridSquareScript tile in potentialmovementtilesecondFilter)
                 {
-                    int distance = ManhattanDistance(tile.GridCoordinates, character.currentTile[0].GridCoordinates);
+                    int distance = ManhattanDistance(tile.GridCoordinates, character.currentTile.GridCoordinates);
                     if (distance < mindistance)
                     {
                         finaltile = tile;
@@ -1482,7 +1477,7 @@ public class AttackTurnScript : MonoBehaviour
 
                 foreach (GridSquareScript tile in potentialmovementtile)
                 {
-                    int distance = ManhattanDistance(tile.GridCoordinates, character.currentTile[0].GridCoordinates);
+                    int distance = ManhattanDistance(tile.GridCoordinates, character.currentTile.GridCoordinates);
                     if (distance < mindistance)
                     {
                         finaltile = tile;
@@ -1523,7 +1518,7 @@ public class AttackTurnScript : MonoBehaviour
         // Guard units don't move
         if (character.enemyStats.personality.ToLower() == "guard")
         {
-            return character.currentTile[0];
+            return character.currentTile;
         }
 
         List<GridSquareScript> movementTiles = gridScript.movementtiles;
@@ -1534,7 +1529,7 @@ public class AttackTurnScript : MonoBehaviour
         foreach (GridSquareScript square in movementTiles)
         {
             // Skip current tile or occupied tiles
-            if (square == character.currentTile[0] || !gridScript.CheckIfFree(square.GridCoordinates, character))
+            if (square == character.currentTile || !gridScript.CheckIfFree(square.GridCoordinates, character))
             {
                 continue;
             }
@@ -1559,7 +1554,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
                 // Distance from this tile to the target
-                int distance = ManhattanDistance(otherChar.currentTile[0].GridCoordinates, square.GridCoordinates);
+                int distance = ManhattanDistance(otherChar.currentTile.GridCoordinates, square.GridCoordinates);
 
                 // Prefer tiles that get closer to targets
                 if (distance < bestDistance)
@@ -1786,35 +1781,35 @@ public class AttackTurnScript : MonoBehaviour
     {
         Character UnitChar = Unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character TargetChar = Target.GetComponent<UnitScript>().UnitCharacteristics;
-        GridSquareScript targettile = UnitChar.currentTile[0];
+        GridSquareScript targettile = UnitChar.currentTile;
         (int range, bool melee) = Unit.GetComponent<UnitScript>().GetRangeAndMele();
 
         int maxdist = 999;
         foreach (GridSquareScript tile in movementtilestouse)
         {
             bool keeptile = false;
-            if (tile == TargetChar.currentTile[0])
+            if (tile == TargetChar.currentTile)
             {
                 continue;
             }
 
-            if (Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile[0].GridCoordinates) == 1)
+            if (Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile.GridCoordinates) == 1)
             {
                 if (melee)
                 {
                     keeptile = true;
                 }
             }
-            else if (Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile[0].GridCoordinates) <= range)
+            else if (Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile.GridCoordinates) <= range)
             {
                 keeptile = true;
             }
 
 
-            if (keeptile && (int)Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile[0].GridCoordinates) < maxdist)
+            if (keeptile && (int)Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile.GridCoordinates) < maxdist)
             {
                 targettile = tile;
-                maxdist = (int)Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile[0].GridCoordinates);
+                maxdist = (int)Vector2.Distance(tile.GridCoordinates, TargetChar.currentTile.GridCoordinates);
             }
         }
 
@@ -1834,7 +1829,7 @@ public class AttackTurnScript : MonoBehaviour
 
         int reward = 0;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        if (charunit.enemyStats.personality.ToLower() == "guard" && position != charunit.currentTile[0])
+        if (charunit.enemyStats.personality.ToLower() == "guard" && position != charunit.currentTile)
         {
             return reward - 9999;
         }
@@ -2033,10 +2028,8 @@ public class AttackTurnScript : MonoBehaviour
                     {
                         if (charunit.currentTile != null)
                         {
-                            foreach (GridSquareScript tile in charunit.currentTile)
-                            {
-                                tile.UpdateInsideSprite(false);
-                            }
+                            charunit.currentTile.UpdateInsideSprite(false);
+
                         }
                         unit.SetActive(false);
                         objecttodelete.Add(unit);
@@ -2051,10 +2044,7 @@ public class AttackTurnScript : MonoBehaviour
                     {
                         if (charunit.currentTile != null)
                         {
-                            foreach (GridSquareScript tile in charunit.currentTile)
-                            {
-                                tile.UpdateInsideSprite(false);
-                            }
+                            charunit.currentTile.UpdateInsideSprite(false);
                         }
                         unit.SetActive(false);
                         objecttodelete.Add(unit);

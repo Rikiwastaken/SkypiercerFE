@@ -325,7 +325,7 @@ public class GridScript : MonoBehaviour
         foreach (GameObject unit in allunitGOs)
         {
             Character UnitChar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-            if (UnitChar.currentTile[0] == null || !UnitChar.currentTile[0].activated)
+            if (UnitChar.currentTile == null || !UnitChar.currentTile.activated)
             {
                 continue;
             }
@@ -608,7 +608,7 @@ public class GridScript : MonoBehaviour
             if (unitGO != null)
             {
                 Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-                if (unit.currentTile.Contains(selection))
+                if (unit.currentTile == selection)
                 {
                     int movements = unitGO.GetComponent<UnitScript>().CalculateNumberOfMovements();
                     SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
@@ -762,12 +762,11 @@ public class GridScript : MonoBehaviour
             {
                 continue;
             }
-            if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Count > 0)
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile != null && unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile == tile)
             {
-                if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(tile))
-                {
-                    return unit;
-                }
+
+                return unit;
+
             }
             else if (unit.GetComponent<UnitScript>().UnitCharacteristics.position == tile.GridCoordinates)
             {
@@ -786,7 +785,7 @@ public class GridScript : MonoBehaviour
         {
             if (!unit.Equals(null) || unit != null)
             {
-                if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.Contains(selection))
+                if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile == selection)
                 {
                     SelectedUnit = unit;
                     break;
@@ -927,16 +926,13 @@ public class GridScript : MonoBehaviour
 
         if (attacker != null)
         {
-            foreach (GridSquareScript tile in attacker.currentTile)
+            if (attacktiles.Contains(attacker.currentTile))
             {
-                if (attacktiles.Contains(tile))
-                {
-                    attacktiles.Remove(tile);
-                }
-                if (healingtiles.Contains(tile))
-                {
-                    healingtiles.Remove(tile);
-                }
+                attacktiles.Remove(attacker.currentTile);
+            }
+            if (healingtiles.Contains(attacker.currentTile))
+            {
+                healingtiles.Remove(attacker.currentTile);
             }
         }
 
@@ -1026,13 +1022,11 @@ public class GridScript : MonoBehaviour
         }
         if (unit != null)
         {
-            foreach (GridSquareScript unittile in unit.currentTile)
+            if (newattacktiles.Contains(unit.currentTile))
             {
-                if (newattacktiles.Contains(unittile))
-                {
-                    newattacktiles.Remove(unittile);
-                }
+                newattacktiles.Remove(unit.currentTile);
             }
+
         }
         return newattacktiles;
     }
@@ -1168,17 +1162,15 @@ public class GridScript : MonoBehaviour
         }
         if (unit != null)
         {
-            foreach (GridSquareScript tile in unit.currentTile)
+            if (attacktiles.Contains(unit.currentTile))
             {
-                if (attacktiles.Contains(tile))
-                {
-                    attacktiles.Remove(tile);
-                }
-                if (healingtiles.Contains(tile))
-                {
-                    healingtiles.Remove(tile);
-                }
+                attacktiles.Remove(unit.currentTile);
             }
+            if (healingtiles.Contains(unit.currentTile))
+            {
+                healingtiles.Remove(unit.currentTile);
+            }
+
         }
         Recolor();
     }
@@ -1391,13 +1383,10 @@ public class GridScript : MonoBehaviour
         }
         foreach (Character unit in allunits)
         {
-            foreach (GridSquareScript tile in unit.currentTile)
+            bool compatibleaffiliation = (selectedunit.affiliation == "playable" && unit.affiliation == "other" && unit.attacksfriends) || (selectedunit.affiliation == "other" && unit.affiliation == "playable" && selectedunit.attacksfriends) || selectedunit.affiliation == "enemy" || unit.affiliation == "enemy";
+            if (unit.currentTile.GridCoordinates == position && compatibleaffiliation && unit.currentHP > 0)
             {
-                bool compatibleaffiliation = (selectedunit.affiliation == "playable" && unit.affiliation == "other" && unit.attacksfriends) || (selectedunit.affiliation == "other" && unit.affiliation == "playable" && selectedunit.attacksfriends) || selectedunit.affiliation == "enemy" || unit.affiliation == "enemy";
-                if (tile.GridCoordinates == position && compatibleaffiliation && unit.currentHP > 0)
-                {
-                    return false;
-                }
+                return false;
             }
         }
 

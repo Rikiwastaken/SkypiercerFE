@@ -674,12 +674,9 @@ public class MapEventManager : MonoBehaviour
 
         foreach (Character c in list)
         {
-            foreach (GridSquareScript tile in c.currentTile)
+            if (tiles.Contains(c.currentTile))
             {
-                if (tiles.Contains(tile))
-                {
-                    return true;
-                }
+                return true;
             }
 
         }
