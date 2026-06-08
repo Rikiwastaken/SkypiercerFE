@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 using static TextBubbleScript;
 using static UnitScript;
 
@@ -13,6 +14,7 @@ public class CutsceneManager : MonoBehaviour
     public PlayableDirector director;
 
     public int CurrentCutscene;
+    public List<Light> lights;
 
     [Serializable]
     public class CutSceneCharacter
@@ -31,11 +33,28 @@ public class CutsceneManager : MonoBehaviour
     [Serializable]
     public class CutScene
     {
+        public TimelineAsset Timeline;
         public List<CutSceneCharacter> Characters; // Characters present in teh cutscene
         public List<DialogueList> DialogueBubblesList; // dialogues in the cutscenes
         public List<AnimSequence> animSequences; // character animations in the cutscene
         public int DialogueIDToplay;
         public int AnimsequenceToplay;
+        [Header("Environment")]
+        public GameObject EnvironmentPrefab;
+        public Vector3 EnvironmentPosition;
+        public Vector3 EnvironmentRotation;
+        public Vector3 EnvironmentScale;
+        public List<LightVariables> LightData;
+    }
+
+    [Serializable]
+    public class LightVariables
+    {
+        public Vector3 Position;
+        public Vector3 Rotation;
+        public float intensity;
+        public Color LightColor;
+        public LightType LightType;
     }
 
     [Serializable]
@@ -63,13 +82,15 @@ public class CutsceneManager : MonoBehaviour
 
     public bool cutscenefinished;
 
+    private GameObject CurrentEnvironment;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _textBubbleScript = TextBubbleScript.Instance;
         DataScript = DataScript.instance;
 
-        InitializeCutscene();
+        InitializeCutscene(0);
         director.Play();
 
     }
@@ -122,12 +143,57 @@ public class CutsceneManager : MonoBehaviour
         Cutscenes[CurrentCutscene].AnimsequenceToplay++;
 
     }
-    public void InitializeCutscene()
+    public void InitializeCutscene(int cutscenetoload)
     {
+        CurrentCutscene = cutscenetoload;
+        director.playableAsset = Cutscenes[CurrentCutscene].Timeline;
+
         CleanSpawnCharacters();
         CreateCharacters();
+        CleanEnvironment();
+        CreateEnvironment();
+        SetupLights();
 
+    }
 
+    private void SetupLights()
+    {
+        int lastLightIDActivated = 0;
+        foreach (LightVariables LightData in Cutscenes[CurrentCutscene].LightData)
+        {
+            lights[lastLightIDActivated].gameObject.SetActive(true);
+
+            Light light = lights[lastLightIDActivated].GetComponent<Light>();
+            light.type = LightData.LightType;
+            light.intensity = LightData.intensity;
+            light.color = LightData.LightColor;
+            light.transform.position = LightData.Position;
+            light.transform.rotation = Quaternion.Euler(LightData.Rotation);
+
+            lastLightIDActivated++;
+        }
+        for (int i = lastLightIDActivated; i < lights.Count; i++)
+        {
+            lights[i].gameObject.SetActive(false);
+        }
+    }
+
+    private void CleanEnvironment()
+    {
+        if (CurrentEnvironment != null)
+        {
+            Destroy(CurrentEnvironment);
+        }
+        CurrentEnvironment = null;
+    }
+
+    private void CreateEnvironment()
+    {
+        CurrentEnvironment = Instantiate(Cutscenes[CurrentCutscene].EnvironmentPrefab);
+        CurrentEnvironment.transform.position = Cutscenes[CurrentCutscene].EnvironmentPosition;
+        CurrentEnvironment.transform.rotation = Quaternion.Euler(Cutscenes[CurrentCutscene].EnvironmentRotation);
+        CurrentEnvironment.transform.localScale = Cutscenes[CurrentCutscene].EnvironmentScale;
+        CurrentEnvironment.transform.parent = transform;
     }
 
     private void CreateCharacters()
