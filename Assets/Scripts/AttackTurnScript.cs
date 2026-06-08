@@ -1303,24 +1303,24 @@ public class AttackTurnScript : MonoBehaviour
         (int attackerrange, bool attackermelee) = currentCharacter.GetComponent<UnitScript>().GetRangeAndMele();
 
 
-        List<GridSquareScript> attacktiles = null;
+        List<GridSquareScript> newattacktiles = null;
 
         if (character.enemyStats.personality.ToLower() == "guard") // Guard units only consider attacking from their current position
         {
             movementtouse = new List<GridSquareScript>() { character.currentTile };
 
-            attacktiles = gridScript.GetAttack(attackerrange, attackermelee, character.currentTile, character);
+            newattacktiles = gridScript.GetAttack(attackerrange, attackermelee, character.currentTile, character);
         }
         else // Other personalities consider attacking from all possible movement positions
         {
             gridScript.ShowAttack(attackerrange, attackermelee, currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff", false, character);
-            attacktiles = gridScript.attacktiles;
+            newattacktiles = gridScript.attacktiles;
         }
 
         // If the weapon is a staff, consider healing tiles instead of attack tiles
         if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
-            attacktiles = gridScript.healingtiles;
+            newattacktiles = gridScript.healingtiles;
         }
 
         List<GameObject> potentialtargets = new List<GameObject>();
@@ -1332,7 +1332,7 @@ public class AttackTurnScript : MonoBehaviour
             bool skip = true;
 
 
-            if (unit == currentCharacter || !attacktiles.Contains(otherchar.currentTile) || otherchar.enemyStats.hidden) // Skip self, units not in attack range, and hidden units
+            if (unit == currentCharacter || !newattacktiles.Contains(otherchar.currentTile) || otherchar.enemyStats.hidden) // Skip self, units not in attack range, and hidden units
             {
                 continue;
             }

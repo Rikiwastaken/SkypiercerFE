@@ -69,7 +69,6 @@ public class ActionsMenu : MonoBehaviour
     private bool isUnithealing;
 
     private InputAction _telekinesisaction;
-    private InputAction _ActivateAction;
     private InputAction _NextWeaponAction;
     private InputAction _PrevWeaponAction;
     private InputAction _CancelAction;
@@ -88,7 +87,6 @@ public class ActionsMenu : MonoBehaviour
     void Start()
     {
         _telekinesisaction = InputSystem.actions.FindAction("TelekinesisToggle");
-        _ActivateAction = InputSystem.actions.FindAction("Validate");
         _NextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
         _PrevWeaponAction = InputSystem.actions.FindAction("PreviousWeapon");
         _CancelAction = InputSystem.actions.FindAction("Cancel");
