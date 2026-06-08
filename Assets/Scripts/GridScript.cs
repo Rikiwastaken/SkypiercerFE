@@ -618,7 +618,6 @@ public class GridScript : MonoBehaviour
 
         }
         Recolor();
-        Debug.Log(attacktiles.Count);
     }
 
 
@@ -674,7 +673,6 @@ public class GridScript : MonoBehaviour
                 gridSquareScript.fillwithblue();
             }
         }
-        Debug.Log(attacktiles.Count);
 
     }
 
@@ -718,7 +716,6 @@ public class GridScript : MonoBehaviour
         {
             gridSquareScript.fillwithblue();
         }
-        Debug.Log(attacktiles.Count);
     }
 
     public Character GetSelectedUnit()
@@ -922,7 +919,6 @@ public class GridScript : MonoBehaviour
                 healingtiles.Remove(attacker.currentTile);
             }
         }
-        Debug.Log(attacktiles.Count);
         Recolor();
     }
 
@@ -1122,7 +1118,6 @@ public class GridScript : MonoBehaviour
             }
 
         }
-        Debug.Log(attacktiles.Count);
         Recolor();
     }
 
