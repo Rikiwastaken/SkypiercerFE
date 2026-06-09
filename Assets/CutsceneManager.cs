@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -11,10 +12,7 @@ public class CutsceneManager : MonoBehaviour
 
     private TextBubbleScript _textBubbleScript;
 
-    public PlayableDirector director;
 
-    public int CurrentCutscene;
-    public List<Light> lights;
 
     [Serializable]
     public class CutSceneCharacter
@@ -70,19 +68,32 @@ public class CutsceneManager : MonoBehaviour
         public List<TextBubbleInfo> Dialogue;
     }
 
+    public PlayableDirector director;
+
+    [Header("Global Parameters")]
+    public int CurrentCutscene;
+    public List<Light> lights;
+    public GameObject CharacterPrefab;
+    public RuntimeAnimatorController AnimatorController;
+
+
+    [Header("Scene Parameters")]
     public List<CutScene> Cutscenes;
 
     private List<GameObject> SpawnedCharacters;
 
-    public GameObject CharacterPrefab;
+
 
     private DataScript DataScript;
 
-    public RuntimeAnimatorController AnimatorController;
+
 
     public bool cutscenefinished;
 
     private GameObject CurrentEnvironment;
+
+    [Header("Debug Tools")]
+    public int CurrentCutsceneToDebug;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -299,8 +310,46 @@ public class CutsceneManager : MonoBehaviour
     [ContextMenu("Create CutSceneCharacters")]
     public void CreateCharactersMenuOption()
     {
+        CurrentCutscene = CurrentCutsceneToDebug;
         CleanSpawnCharacters();
         CreateCharacters();
+    }
+
+    [ContextMenu("Destroy CutSceneCharacters")]
+    public void DestroyCharactersMenuOption()
+    {
+        CleanSpawnCharacters();
+    }
+
+    [ContextMenu("Load Dialogue From JSON")]
+    public void LoadBonds()
+    {
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Bond JSON File", "", "json");
+        if (string.IsNullOrEmpty(path))
+            return;
+
+        string json = File.ReadAllText(path);
+
+        MapEventManager.Dialoguewrapper wrapper = JsonUtility.FromJson<MapEventManager.Dialoguewrapper>(json);
+        if (wrapper == null || wrapper.dialguesToLoad == null)
+        {
+            Debug.LogError("JSON file format invalid. Needs { \"dialguesToLoad\": [ ... ] }");
+            return;
+        }
+
+        List<DialogueList> newdialogue = new List<DialogueList>();
+        foreach (MapEventManager.DialgueToLoad dialgueToLoad in wrapper.dialguesToLoad)
+        {
+
+            TextBubbleInfo textBubbleInfo = new TextBubbleInfo() { text = dialgueToLoad.text, characterindex = dialgueToLoad.characterindex };
+
+
+            newdialogue.Add(new DialogueList() { Dialogue = new List<TextBubbleInfo>() { textBubbleInfo } });
+        }
+        Cutscenes[CurrentCutsceneToDebug].DialogueBubblesList = newdialogue;
+        UnityEditor.EditorUtility.SetDirty(this);
+        Debug.Log("Loaded " + wrapper.dialguesToLoad.Count + " dialogue parts into the Cutscenes number " + CurrentCutsceneToDebug + "!");
+
     }
 
 #endif
