@@ -35,6 +35,7 @@ public class CutsceneManager : MonoBehaviour
         public List<CutSceneCharacter> Characters; // Characters present in teh cutscene
         public List<DialogueList> DialogueBubblesList; // dialogues in the cutscenes
         public List<AnimSequence> animSequences; // character animations in the cutscene
+
         public int DialogueIDToplay;
         public int AnimsequenceToplay;
         [Header("Environment")]
@@ -43,6 +44,8 @@ public class CutsceneManager : MonoBehaviour
         public Vector3 EnvironmentRotation;
         public Vector3 EnvironmentScale;
         public List<LightVariables> LightData;
+        public List<CameraVariables> CameraData;
+
     }
 
     [Serializable]
@@ -53,6 +56,13 @@ public class CutsceneManager : MonoBehaviour
         public float intensity;
         public Color LightColor;
         public LightType LightType;
+    }
+
+    [Serializable]
+    public class CameraVariables
+    {
+        public Vector3 Position;
+        public Vector3 Rotation;
     }
 
     [Serializable]
@@ -75,6 +85,7 @@ public class CutsceneManager : MonoBehaviour
     public List<Light> lights;
     public GameObject CharacterPrefab;
     public RuntimeAnimatorController AnimatorController;
+    public List<Transform> Cameras;
 
 
     [Header("Scene Parameters")]
@@ -164,7 +175,7 @@ public class CutsceneManager : MonoBehaviour
         CleanEnvironment();
         CreateEnvironment();
         SetupLights();
-
+        SetupCameras();
     }
 
     private void SetupLights()
@@ -186,6 +197,21 @@ public class CutsceneManager : MonoBehaviour
         for (int i = lastLightIDActivated; i < lights.Count; i++)
         {
             lights[i].gameObject.SetActive(false);
+        }
+    }
+
+    private void SetupCameras()
+    {
+        int lastID = 0;
+        foreach (CameraVariables CamData in Cutscenes[CurrentCutscene].CameraData)
+        {
+
+            Transform cam = Cameras[lastID];
+
+            cam.position = CamData.Position;
+            cam.rotation = Quaternion.Euler(CamData.Rotation);
+
+            lastID++;
         }
     }
 
@@ -319,6 +345,7 @@ public class CutsceneManager : MonoBehaviour
     public void DestroyCharactersMenuOption()
     {
         CleanSpawnCharacters();
+        UnityEditor.EditorUtility.SetDirty(this);
     }
 
     [ContextMenu("Load Dialogue From JSON")]
