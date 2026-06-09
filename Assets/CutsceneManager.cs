@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -35,9 +36,10 @@ public class CutsceneManager : MonoBehaviour
         public List<CutSceneCharacter> Characters; // Characters present in teh cutscene
         public List<DialogueList> DialogueBubblesList; // dialogues in the cutscenes
         public List<AnimSequence> animSequences; // character animations in the cutscene
-
+        public List<MovementSequence> MovementSequences;
         public int DialogueIDToplay;
         public int AnimsequenceToplay;
+        public int MovementSequenceToPlay;
         [Header("Environment")]
         public GameObject EnvironmentPrefab;
         public Vector3 EnvironmentPosition;
@@ -66,6 +68,15 @@ public class CutsceneManager : MonoBehaviour
     }
 
     [Serializable]
+    public class MovementSequence
+    {
+        public bool look; //if true, the character will look at the "Movement" Vector added to its position instead 
+        public List<int> CharactersToMove;
+        public List<Vector3> Movement;
+        public List<float> TimeToMove;
+    }
+
+    [Serializable]
     public class AnimSequence
     {
         public List<int> CharactersToAnimate;
@@ -75,6 +86,8 @@ public class CutsceneManager : MonoBehaviour
     [Serializable]
     public class DialogueList
     {
+        public int characterTalkingID;
+        public int talkinganimationID = 3;
         public List<TextBubbleInfo> Dialogue;
     }
 
@@ -93,8 +106,6 @@ public class CutsceneManager : MonoBehaviour
 
     private List<GameObject> SpawnedCharacters;
 
-
-
     private DataScript DataScript;
 
 
@@ -102,6 +113,7 @@ public class CutsceneManager : MonoBehaviour
     public bool cutscenefinished;
 
     private GameObject CurrentEnvironment;
+    public List<float> Movementhappenning = new List<float>();
 
     [Header("Debug Tools")]
     public int CurrentCutsceneToDebug;
@@ -112,7 +124,7 @@ public class CutsceneManager : MonoBehaviour
         _textBubbleScript = TextBubbleScript.Instance;
         DataScript = DataScript.instance;
 
-        InitializeCutscene(0);
+        InitializeCutscene(CurrentCutscene);
         director.Play();
 
     }
@@ -127,12 +139,17 @@ public class CutsceneManager : MonoBehaviour
 
                 director.Pause();
             }
-            if (!_textBubbleScript.indialogue && director.state == PlayState.Paused)
+            if (Movementhappenning.Count > 0 && director.state != PlayState.Paused)
+            {
+
+                director.Pause();
+            }
+            if (!_textBubbleScript.indialogue && director.state == PlayState.Paused && Movementhappenning.Count == 0)
             {
                 director.Play();
             }
         }
-
+        UpdateMovementTimeList();
     }
 
     public void CutsceneFinished() // function called by a signal to indicate the cutscene is over
@@ -142,7 +159,13 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlayDialogue()// function called by a signal to play the next dialogue in the cue
     {
+        DialogueList currentdialoguelist = Cutscenes[CurrentCutscene].DialogueBubblesList[Cutscenes[CurrentCutscene].DialogueIDToplay];
+        int sceneCharacterID = currentdialoguelist.characterTalkingID;
+        int animation = currentdialoguelist.talkinganimationID;
+        //PlayAnimation(sceneCharacterID, animation);
+        // kinda doesn't work that well
         _textBubbleScript.InitializeDialogue(Cutscenes[CurrentCutscene].DialogueBubblesList[Cutscenes[CurrentCutscene].DialogueIDToplay].Dialogue);
+
         Cutscenes[CurrentCutscene].DialogueIDToplay++;
     }
 
@@ -165,11 +188,49 @@ public class CutsceneManager : MonoBehaviour
         Cutscenes[CurrentCutscene].AnimsequenceToplay++;
 
     }
+
+    public void PlayMovementSequence() // function called by a signal to play the next group of movement in the cue
+    {
+        if (Cutscenes.Count < CurrentCutscene || Cutscenes[CurrentCutscene].animSequences.Count < Cutscenes[CurrentCutscene].AnimsequenceToplay)
+        {
+            return;
+        }
+        MovementSequence currentsequence = Cutscenes[CurrentCutscene].MovementSequences[Cutscenes[CurrentCutscene].MovementSequenceToPlay];
+
+        for (int i = 0; i < currentsequence.CharactersToMove.Count; i++)
+        {
+            if (currentsequence.Movement.Count > i)
+            {
+                PlayMovement(currentsequence.CharactersToMove[i], currentsequence.Movement[i], currentsequence.TimeToMove[i], currentsequence.look);
+            }
+        }
+
+        Cutscenes[CurrentCutscene].MovementSequenceToPlay++;
+
+    }
     public void InitializeCutscene(int cutscenetoload)
     {
         CurrentCutscene = cutscenetoload;
         director.playableAsset = Cutscenes[CurrentCutscene].Timeline;
 
+        Setup();
+    }
+
+    private void UpdateMovementTimeList()
+    {
+        List<float> newtimelist = new List<float>();
+        foreach (float time in Movementhappenning)
+        {
+            if (Time.time < time)
+            {
+                newtimelist.Add(time);
+            }
+        }
+        Movementhappenning = newtimelist;
+    }
+
+    private void Setup()
+    {
         CleanSpawnCharacters();
         CreateCharacters();
         CleanEnvironment();
@@ -293,6 +354,50 @@ public class CutsceneManager : MonoBehaviour
     private void PlayAnimation(int characterID, int AnimationID)
     {
         GetCharacterFromID(characterID).Animator.SetInteger("AnimationToPlay", AnimationID);
+        switch (AnimationID)
+        {
+            case 3:
+                GetCharacterFromID(characterID).Animator.SetTrigger("Talking");
+                break;
+            case 4:
+                GetCharacterFromID(characterID).Animator.SetTrigger("Talking");
+                break;
+            case 5:
+                GetCharacterFromID(characterID).Animator.SetTrigger("Talking");
+                break;
+        }
+    }
+    private void PlayMovement(int characterID, Vector3 Movement, float TimeToMove, bool islooking)
+    {
+        StartCoroutine(MovementCoroutine(characterID, Movement, TimeToMove, islooking));
+        Movementhappenning.Add(Time.time + TimeToMove);
+    }
+
+    private IEnumerator MovementCoroutine(int characterID, Vector3 Movement, float TimeToMove, bool islooking)
+    {
+        CutSceneCharacter Character = GetCharacterFromID(characterID);
+        Vector3 basepos = Character.Animator.transform.position;
+        Vector3 direction = Character.Animator.transform.position + Movement - Character.Animator.transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        Quaternion baserotation = Character.Animator.transform.rotation;
+        float timeelapsed = 0f;
+        while (timeelapsed < TimeToMove)
+        {
+            timeelapsed += Time.deltaTime;
+            float ratio = timeelapsed / TimeToMove;
+            if (islooking)
+            {
+                Character.Animator.transform.rotation = Quaternion.Lerp(baserotation, targetRotation, ratio);
+            }
+            else
+            {
+                Character.Animator.transform.position = Vector3.Lerp(basepos, basepos + Movement, ratio);
+                Character.Animator.transform.LookAt(Character.Animator.transform.position + Movement);
+            }
+
+            yield return null;
+        }
+
     }
 
     private CutSceneCharacter GetCharacterFromID(int ID)
@@ -333,12 +438,11 @@ public class CutsceneManager : MonoBehaviour
 
 #if UNITY_EDITOR
 
-    [ContextMenu("Create CutSceneCharacters")]
+    [ContextMenu("Create CutScene Characters and map")]
     public void CreateCharactersMenuOption()
     {
         CurrentCutscene = CurrentCutsceneToDebug;
-        CleanSpawnCharacters();
-        CreateCharacters();
+        Setup();
     }
 
     [ContextMenu("Destroy CutSceneCharacters")]
