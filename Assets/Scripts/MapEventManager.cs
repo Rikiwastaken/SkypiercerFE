@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static TextBubbleScript;
@@ -11,6 +13,9 @@ public class MapEventManager : MonoBehaviour
 {
 
     public static MapEventManager instance;
+    public TutorialWindowScript TutorialwindowScript;
+
+    public ForesightScript ForesightScript;
 
     [System.Serializable]
     private class Wrapper<T>
@@ -128,11 +133,22 @@ public class MapEventManager : MonoBehaviour
         public Vector2Int WindowDimensions;
         public string text;
     }
+    [Serializable]
+    public class Dialoguewrapper
+    {
+        public List<DialgueToLoad> dialguesToLoad;
+    }
+    [Serializable]
+    public class DialgueToLoad
+    {
+        public string text;
+        public int characterindex = -1;
+    }
 
     public List<EventCondition> EventsToMonitor;
 
 
-
+    private GameObject grid;
     private GridScript GridScript;
     private TurnManger turnManger;
 
@@ -141,13 +157,15 @@ public class MapEventManager : MonoBehaviour
 
     private bool eventinitialized;
 
+    [Header("Debugging Tools")]
+
     public int ManualEventTrigger = -1;
 
-    private GameObject grid;
+    public int EventToSaveToJson;
 
-    public TutorialWindowScript TutorialwindowScript;
 
-    public ForesightScript ForesightScript;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -810,4 +828,44 @@ public class MapEventManager : MonoBehaviour
 
         }
     }
+
+#if UNITY_EDITOR
+
+
+
+    [ContextMenu("Save Conv To JSON")]
+    public void SaveConv()
+    {
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Skill JSON File", "", "json");
+        if (string.IsNullOrEmpty(path))
+            return;
+
+        List<DialgueToLoad> dialgouestoSave = new List<DialgueToLoad>();
+
+        foreach (TextBubbleInfo dialoguepart in EventsToMonitor[EventToSaveToJson].dialoguetoShow)
+        {
+            dialgouestoSave.Add(new DialgueToLoad() { characterindex = dialoguepart.characterindex, text = dialoguepart.text });
+        }
+
+        Dialoguewrapper wrapper = new Dialoguewrapper() { dialguesToLoad = dialgouestoSave };
+
+        string json = JsonUtility.ToJson(wrapper, true);
+
+        try
+        {
+            AssetDatabase.StartAssetEditing();
+            File.WriteAllText(path, json);
+            Debug.Log($"Discussion Saved : {path}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error when saving options : {e.Message}");
+        }
+        finally
+        {
+            AssetDatabase.StopAssetEditing();
+        }
+    }
+#endif
+
 }

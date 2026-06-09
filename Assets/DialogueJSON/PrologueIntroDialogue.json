@@ -1,0 +1,48 @@
+{
+    "dialguesToLoad": [
+        {
+            "text": "Are you sure he's here?",
+            "characterindex": 2
+        },
+        {
+            "text": "Yeah. I saw it in a dream. Granpa wandered in here with a man in a red coat.",
+            "characterindex": 0
+        },
+        {
+            "text": "You saw it in a dream? Lea, do you believe this?",
+            "characterindex": 2
+        },
+        {
+            "text": "It doesn't hurt to check. ",
+            "characterindex": 1
+        },
+        {
+            "text": "See! She believes me! You're a pal, Lea.",
+            "characterindex": 0
+        },
+        {
+            "text": "Yeah, well, gear up. I see Pluvials.",
+            "characterindex": 1
+        },
+        {
+            "text": "Right. Let's deal with them quickly. I haven't fought in a while.",
+            "characterindex": 0
+        },
+        {
+            "text": "It wouldn't be the case if you actually attended training sessions.",
+            "characterindex": 1
+        },
+        {
+            "text": " Give me a break... ",
+            "characterindex": 0
+        },
+        {
+            "text": "Be careful, one of them is coming this way.",
+            "characterindex": 2
+        },
+        {
+            "text": "Ok, here I go. Watch me take him down !",
+            "characterindex": 0
+        }
+    ]
+}
