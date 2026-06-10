@@ -12,7 +12,7 @@ public class CutsceneManager : MonoBehaviour
 {
 
     private TextBubbleScript _textBubbleScript;
-
+    private SceneLoader _sceneLoader;
 
 
     [Serializable]
@@ -47,6 +47,8 @@ public class CutsceneManager : MonoBehaviour
         public Vector3 EnvironmentScale;
         public List<LightVariables> LightData;
         public List<CameraVariables> CameraData;
+        public int CutSceneToPlayAfterThisOne = -1; // load this cutscene after the cutscene is over
+        public string SceneToLoad; // If CutSceneToPlayAfterThisOne is -1, will load this scene instead.
 
     }
 
@@ -99,6 +101,10 @@ public class CutsceneManager : MonoBehaviour
     public GameObject CharacterPrefab;
     public RuntimeAnimatorController AnimatorController;
     public List<Transform> Cameras;
+    public UnityEngine.UI.Image FadeToBlackImage;
+    public float BaseFadeImageX;
+    public float FadeTime;
+    private Coroutine FadeToBlacKCoroutine;
 
 
     [Header("Scene Parameters")]
@@ -118,43 +124,69 @@ public class CutsceneManager : MonoBehaviour
     [Header("Debug Tools")]
     public int CurrentCutsceneToDebug;
 
+    private bool paused;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _textBubbleScript = TextBubbleScript.Instance;
         DataScript = DataScript.instance;
+        _sceneLoader = SceneLoader.instance;
 
-        InitializeCutscene(CurrentCutscene);
-        director.Play();
+        PlayCutsceneWithFade(CurrentCutscene);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (FadeToBlacKCoroutine != null)
+        {
+            return;
+        }
         if (!cutscenefinished)
         {
             if (_textBubbleScript.indialogue && director.state != PlayState.Paused)
             {
-
+                paused = true;
                 director.Pause();
             }
             if (Movementhappenning.Count > 0 && director.state != PlayState.Paused)
             {
-
+                paused = true;
                 director.Pause();
             }
-            if (!_textBubbleScript.indialogue && director.state == PlayState.Paused && Movementhappenning.Count == 0)
+            if (!_textBubbleScript.indialogue && director.state == PlayState.Paused && Movementhappenning.Count == 0 && paused)
             {
+                paused = false;
                 director.Play();
             }
+            if (director.time >= director.duration)
+            {
+                cutscenefinished = true;
+            }
+            UpdateMovementTimeList();
         }
-        UpdateMovementTimeList();
+        else
+        {
+            LoadNextEvent(Cutscenes[CurrentCutscene]);
+        }
+
     }
 
-    public void CutsceneFinished() // function called by a signal to indicate the cutscene is over
+
+    private void LoadNextEvent(CutScene _CutScene) // load either another dialogue or a scene
     {
-        cutscenefinished = true;
+
+        if (_CutScene.CutSceneToPlayAfterThisOne != -1)
+        {
+            StartCoroutine(DoubleFadeToLoadNewCutscene(_CutScene.CutSceneToPlayAfterThisOne));
+        }
+        else if (_CutScene.SceneToLoad != "")
+        {
+            LoadChapterAfterCutscene(_CutScene.SceneToLoad);
+        }
     }
 
     public void PlayDialogue()// function called by a signal to play the next dialogue in the cue
@@ -210,6 +242,8 @@ public class CutsceneManager : MonoBehaviour
     }
     public void InitializeCutscene(int cutscenetoload)
     {
+        cutscenefinished = false;
+        paused = false;
         CurrentCutscene = cutscenetoload;
         director.playableAsset = Cutscenes[CurrentCutscene].Timeline;
 
@@ -349,6 +383,76 @@ public class CutsceneManager : MonoBehaviour
             newcharacter.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
             ID++;
         }
+    }
+
+    private IEnumerator FadeCoroutine(bool ToBlack, int Cutscenetostart = -1, string chapterToLoad = "")
+    {
+        if (ToBlack)
+        {
+            FadeToBlackImage.rectTransform.localPosition = new Vector2(-BaseFadeImageX, 0);
+
+            float timeelapsed = 0f;
+            while (timeelapsed < FadeTime)
+            {
+                timeelapsed += Time.deltaTime;
+                float ratio = timeelapsed / FadeTime;
+                FadeToBlackImage.rectTransform.localPosition = Vector2.Lerp(new Vector2(-BaseFadeImageX, 0), Vector2.zero, ratio);
+                yield return null;
+            }
+            if (chapterToLoad != "")
+            {
+                _sceneLoader.LoadScene(chapterToLoad);
+            }
+
+        }
+        else
+        {
+            FadeToBlackImage.rectTransform.localPosition = new Vector2(0, 0);
+            bool firstframeplayed = false;
+            if (Cutscenetostart != -1)
+            {
+                InitializeCutscene(Cutscenetostart);
+                director.Play();
+            }
+
+            float timeelapsed = 0f;
+            while (timeelapsed < FadeTime)
+            {
+                if (!firstframeplayed && timeelapsed != 0f)
+                {
+                    firstframeplayed = true;
+                    director.Pause();
+                }
+
+                timeelapsed += Time.deltaTime;
+                float ratio = timeelapsed / FadeTime;
+                FadeToBlackImage.rectTransform.localPosition = Vector2.Lerp(Vector2.zero, new Vector2(BaseFadeImageX, 0), ratio);
+                yield return null;
+            }
+            director.Play();
+        }
+        FadeToBlacKCoroutine = null;
+    }
+
+    private IEnumerator DoubleFadeToLoadNewCutscene(int CutsceneID)
+    {
+        FadeToBlacKCoroutine = StartCoroutine(FadeCoroutine(true));
+        while (FadeToBlacKCoroutine != null)
+        {
+            yield return true;
+        }
+        FadeToBlacKCoroutine = StartCoroutine(FadeCoroutine(false, CutsceneID));
+    }
+
+    private void PlayCutsceneWithFade(int CutsceneID)
+    {
+
+        FadeToBlacKCoroutine = StartCoroutine(FadeCoroutine(false, CutsceneID));
+    }
+
+    private void LoadChapterAfterCutscene(string chapter)
+    {
+        FadeToBlacKCoroutine = StartCoroutine(FadeCoroutine(true, -1, chapter));
     }
 
     private void PlayAnimation(int characterID, int AnimationID)
