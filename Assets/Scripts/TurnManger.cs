@@ -92,7 +92,10 @@ public class TurnManger : MonoBehaviour
             return;
 
         }
-
+        if (SceneManager.GetActiveScene().name == "CutsceneScene")
+        {
+            return;
+        }
 
         if (!textBubbleScript.indialogue && !preBattleMenuScript.gameObject.activeSelf && currentlyplaying == "" && !TutorialWindows.activeSelf)
         {

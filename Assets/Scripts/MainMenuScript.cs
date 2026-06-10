@@ -158,7 +158,7 @@ public class MainMenuScript : MonoBehaviour
     public void LoadPrologue()
     {
         saveManager.ApplySave(-1);
-        sceneLoader.LoadScene("Prologue");
+        sceneLoader.LoadScene("CutsceneScene", 1);
     }
 
     public void ResetSave()

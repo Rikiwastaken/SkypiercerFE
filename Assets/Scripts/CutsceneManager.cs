@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 using UnityEngine.Timeline;
 using static TextBubbleScript;
 using static UnitScript;
@@ -133,10 +134,30 @@ public class CutsceneManager : MonoBehaviour
     {
         _textBubbleScript = TextBubbleScript.Instance;
         DataScript = DataScript.instance;
+        if (DataScript == null)
+        {
+            SceneManager.LoadScene("FirstScene");
+        }
         _sceneLoader = SceneLoader.instance;
         _combbatSceneLoader = DataScript.GetComponent<CombatSceneLoader>();
 
-        PlayCutsceneWithFade(CurrentCutscene);
+        if (DataScript == null)
+        {
+            SceneManager.LoadScene("FirstScene");
+        }
+
+        if (_sceneLoader.Cutscenetoplay != -1)
+        {
+            CurrentCutscene = _sceneLoader.Cutscenetoplay;
+            _sceneLoader.Cutscenetoplay = -1;
+        }
+
+
+        if (CurrentCutscene != -1)
+        {
+            PlayCutsceneWithFade(CurrentCutscene);
+        }
+
 
     }
 
@@ -181,6 +202,10 @@ public class CutsceneManager : MonoBehaviour
     private void LoadNextEvent(CutScene _CutScene) // load either another dialogue or a scene
     {
 
+        CleanEnvironment();
+        CleanSpawnCharacters();
+
+        CurrentCutscene = -1;
         if (_CutScene.CutSceneToPlayAfterThisOne != -1)
         {
             StartCoroutine(DoubleFadeToLoadNewCutscene(_CutScene.CutSceneToPlayAfterThisOne));

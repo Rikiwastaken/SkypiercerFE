@@ -16,6 +16,8 @@ public class SceneLoader : MonoBehaviour
 
     public Image LoadingImage;
 
+    public int Cutscenetoplay;
+
     private void Awake()
     {
         if (instance == null)
@@ -39,10 +41,14 @@ public class SceneLoader : MonoBehaviour
                     chapternumber = int.Parse(SceneToLoad.ToLower().Replace("chapter", ""));
                 }
                 DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
-                GetComponent<CombatSceneLoader>().combatLoaded = false;
-                GetComponent<CombatSceneLoader>().MainSceneName = SceneToLoad;
-                GetComponent<CombatSceneLoader>().LoadCombatScene();
-                GetComponent<CombatSceneLoader>().LoadCutsceneScene();
+                if (SceneToLoad != "CutsceneScene")
+                {
+                    GetComponent<CombatSceneLoader>().combatLoaded = false;
+                    GetComponent<CombatSceneLoader>().MainSceneName = SceneToLoad;
+                    GetComponent<CombatSceneLoader>().LoadCombatScene();
+                    GetComponent<CombatSceneLoader>().LoadCutsceneScene();
+                }
+
 
                 SceneToLoad = "";
                 LoadingImage.gameObject.SetActive(true);
@@ -55,7 +61,7 @@ public class SceneLoader : MonoBehaviour
         }
         else
         {
-            if (framestoloading > 5 && GetComponent<CombatSceneLoader>().CutsceneSceneLoaded && GetComponent<CombatSceneLoader>().combatLoaded)
+            if (framestoloading > 5)
             {
                 framestoloading--;
             }
@@ -79,12 +85,13 @@ public class SceneLoader : MonoBehaviour
             }
         }
     }
-    public void LoadScene(string sceneName)
+    public void LoadScene(string sceneName, int cutscene = -1)
     {
 
         int chapternumber = SaveManager.instance.maxchapterreached;
         DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
         SceneToLoad = sceneName;
+        Cutscenetoplay = cutscene;
         SceneManager.LoadScene("LoadingScene");
     }
 }
