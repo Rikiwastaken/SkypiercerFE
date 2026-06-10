@@ -631,7 +631,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         isinEndOfCombat = false;
         if (FindAnyObjectByType<CombatSceneLoader>() != null)
         {
-            FindAnyObjectByType<CombatSceneLoader>().ActivateMainScene();
+            FindAnyObjectByType<CombatSceneLoader>().ActivateMainSceneFromCombatScene();
         }
     }
 

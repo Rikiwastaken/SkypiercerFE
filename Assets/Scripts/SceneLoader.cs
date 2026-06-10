@@ -8,7 +8,7 @@ public class SceneLoader : MonoBehaviour
 
     public static SceneLoader instance;
 
-    private string SceneToToad;
+    private string SceneToLoad;
     public GameObject loadingCanvas;
     private int framestoloading;
     private bool fondu;
@@ -29,21 +29,22 @@ public class SceneLoader : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "LoadingScene")
         {
-            if (SceneToToad != "")
+            if (SceneToLoad != "")
             {
                 framestoloading = 5;
-                SceneManager.LoadScene(SceneToToad);
+                SceneManager.LoadScene(SceneToLoad);
                 int chapternumber = 0;
-                if (SceneToToad.ToLower().Contains("chapter"))
+                if (SceneToLoad.ToLower().Contains("chapter"))
                 {
-                    chapternumber = int.Parse(SceneToToad.ToLower().Replace("chapter", ""));
+                    chapternumber = int.Parse(SceneToLoad.ToLower().Replace("chapter", ""));
                 }
                 DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
                 GetComponent<CombatSceneLoader>().combatLoaded = false;
-                GetComponent<CombatSceneLoader>().MainSceneName = SceneToToad;
+                GetComponent<CombatSceneLoader>().MainSceneName = SceneToLoad;
                 GetComponent<CombatSceneLoader>().LoadCombatScene();
+                GetComponent<CombatSceneLoader>().LoadCutsceneScene();
 
-                SceneToToad = "";
+                SceneToLoad = "";
                 LoadingImage.gameObject.SetActive(true);
                 Color newcolor = LoadingImage.color;
                 newcolor.a = 1;
@@ -54,7 +55,7 @@ public class SceneLoader : MonoBehaviour
         }
         else
         {
-            if (framestoloading > 5)
+            if (framestoloading > 5 && GetComponent<CombatSceneLoader>().CutsceneSceneLoaded && GetComponent<CombatSceneLoader>().combatLoaded)
             {
                 framestoloading--;
             }
@@ -83,7 +84,7 @@ public class SceneLoader : MonoBehaviour
 
         int chapternumber = SaveManager.instance.maxchapterreached;
         DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
-        SceneToToad = sceneName;
+        SceneToLoad = sceneName;
         SceneManager.LoadScene("LoadingScene");
     }
 }

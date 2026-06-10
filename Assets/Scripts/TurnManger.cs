@@ -82,6 +82,10 @@ public class TurnManger : MonoBehaviour
 
         if (checkedbeginningevents)
         {
+            if (!DataScript.instance.GetComponent<CombatSceneLoader>().CutsceneSceneLoaded || !DataScript.instance.GetComponent<CombatSceneLoader>().combatLoaded)
+            {
+                return;
+            }
             checkedbeginningevents = false;
 
             MapEventManager.instance.TriggerEventCheck();

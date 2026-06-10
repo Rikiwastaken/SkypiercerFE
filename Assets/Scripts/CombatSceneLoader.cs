@@ -9,14 +9,17 @@ public class CombatSceneLoader : MonoBehaviour
     [Header("Scene Names")]
     public string MainSceneName;
     public string CombatSceneName;
+    public string CutScenesceneName;
 
     [Header("Fade Settings")]
     public CanvasGroup fadeCanvasGroup; // full screen black overlay
     public float fadeDuration = 1f;
 
     private Scene combatScene;
+    private Scene CutsceneScene;
     private Scene mainScene;
     public bool combatLoaded = false;
+    public bool CutsceneSceneLoaded = false;
 
     private void Awake()
     {
@@ -29,6 +32,14 @@ public class CombatSceneLoader : MonoBehaviour
         Debug.Log("combat scene loaded : " + combatLoaded);
         if (!combatLoaded)
             StartCoroutine(LoadCombatSceneRoutine());
+    }
+
+    // Preload Cutscene Scene
+    public void LoadCutsceneScene()
+    {
+        Debug.Log("Cutscene scene loaded : " + CutsceneSceneLoaded);
+        if (!CutsceneSceneLoaded)
+            StartCoroutine(LoadCutsceneSceneSceneRoutine());
     }
 
     private IEnumerator LoadCombatSceneRoutine()
@@ -50,6 +61,26 @@ public class CombatSceneLoader : MonoBehaviour
 
         combatLoaded = true;
         Debug.Log("Combat scene preloaded and hidden.");
+    }
+
+    private IEnumerator LoadCutsceneSceneSceneRoutine()
+    {
+        // Cache main scene reference
+        mainScene = SceneManager.GetActiveScene();
+
+        // Load combat scene additively
+        var asyncLoad = SceneManager.LoadSceneAsync(CutScenesceneName, LoadSceneMode.Additive);
+        asyncLoad.allowSceneActivation = true;
+
+        yield return new WaitUntil(() => asyncLoad.isDone);
+
+        CutsceneScene = SceneManager.GetSceneByName(CutScenesceneName);
+        //FindAnyObjectByType<CombatSceneManagerV2>().LoadEnvironment(MainSceneName, combatScene);
+        // Hide combat scene root objects
+        SetSceneVisible(CutsceneScene, false);
+
+        CutsceneSceneLoaded = true;
+        Debug.Log("Cutscene scene preloaded and hidden.");
     }
 
     // Activate combat scene
@@ -77,56 +108,35 @@ public class CombatSceneLoader : MonoBehaviour
                 }
             }));
     }
-    /*
-    public void ActivateCombatScene(
-        Character attacker,
-        Character defender,
-        equipment attackerWeapon,
-        equipment defenderWeapon,
-        Character doubleAttacker,
-        bool tripleHit,
-        bool healing,
-        int attackerDodged,
-        bool defenderAttacks,
-        int defenderDodged,
-        bool attackerDied,
-        bool defenderDied,
-        int expgained,
-        List<int> levelupbonuses,
-        Character attackerbeforecombat,
-        Character defenderbeforecombat,
-        int attackerdamage,
-        int defenderdamage,
-        int attackercrits,
-        int defendercrits)
+
+    // Activate Cutscene scene
+    public void ActivateCutSceneScene(int Cutscenetoload)
     {
-        if (!combatLoaded)
+        if (!CutsceneSceneLoaded)
         {
-            Debug.LogWarning("Combat scene not loaded yet! Call LoadCombatScene() first.");
+            Debug.LogWarning("Cutscene scene not loaded yet! Call LoadCutsceneScene() first.");
             return;
         }
 
         mainScene = SceneManager.GetSceneByName(MainSceneName);
 
-        MusicManager.instance.inCombatBool = true;
 
         StartCoroutine(SwitchSceneRoutine(
             fromScene: mainScene,
-            toScene: combatScene,
+            toScene: CutsceneScene,
             onSceneActivated: () =>
             {
-                var combatManager = FindAnyObjectByType<CombaSceneManager>();
-                if (combatManager != null)
+                var Cutscenemanager = FindAnyObjectByType<CutsceneManager>();
+                if (Cutscenemanager != null)
                 {
-                    combatManager.SetupScene(attacker, defender, attackerWeapon, defenderWeapon,
-                        doubleAttacker, tripleHit, healing, attackerDodged, defenderAttacks,
-                        defenderDodged, attackerDied, defenderDied, expgained, levelupbonuses, attackerbeforecombat, defenderbeforecombat, attackerdamage, defenderdamage, attackercrits, defendercrits);
+                    Cutscenemanager.PlayCutsceneWithFade(Cutscenetoload);
                 }
             }));
     }
-    */
-    // Return to Main Scene
-    public void ActivateMainScene()
+
+
+    // Return to Main Scene from combat scene
+    public void ActivateMainSceneFromCombatScene()
     {
         if (!combatLoaded)
         {
@@ -140,6 +150,28 @@ public class CombatSceneLoader : MonoBehaviour
             fromScene: combatScene,
             toScene: mainScene,
             onSceneActivated: null));
+    }
+
+    // Return to Main Scene from Cutscene scene
+    public void ActivateMainSceneFromCutsceneScene()
+    {
+        if (!CutsceneSceneLoaded)
+        {
+            Debug.LogWarning("Scenes not fully initialized.");
+            return;
+        }
+
+        StartCoroutine(SwitchSceneRoutine(
+            fromScene: CutsceneScene,
+            toScene: mainScene,
+            onSceneActivated: () =>
+            {
+                var EventManager = FindAnyObjectByType<MapEventManager>();
+                if (EventManager != null)
+                {
+                    EventManager.TriggerEventCheck();
+                }
+            }));
     }
 
     // Scene Switch

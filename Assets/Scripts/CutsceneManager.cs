@@ -13,6 +13,7 @@ public class CutsceneManager : MonoBehaviour
 
     private TextBubbleScript _textBubbleScript;
     private SceneLoader _sceneLoader;
+    private CombatSceneLoader _combbatSceneLoader;
 
 
     [Serializable]
@@ -133,6 +134,7 @@ public class CutsceneManager : MonoBehaviour
         _textBubbleScript = TextBubbleScript.Instance;
         DataScript = DataScript.instance;
         _sceneLoader = SceneLoader.instance;
+        _combbatSceneLoader = DataScript.GetComponent<CombatSceneLoader>();
 
         PlayCutsceneWithFade(CurrentCutscene);
 
@@ -186,6 +188,10 @@ public class CutsceneManager : MonoBehaviour
         else if (_CutScene.SceneToLoad != "")
         {
             LoadChapterAfterCutscene(_CutScene.SceneToLoad);
+        }
+        else
+        {
+            _combbatSceneLoader.ActivateMainSceneFromCutsceneScene();
         }
     }
 
@@ -339,7 +345,6 @@ public class CutsceneManager : MonoBehaviour
         // create GameObject for each character and assign it their materials and positions
         foreach (CutSceneCharacter CurrentCharacter in Cutscenes[CurrentCutscene].Characters)
         {
-            Debug.Log("instantiating character with ID: " + CurrentCharacter.characterID);
             GameObject newcharacter = Instantiate(CharacterPrefab, transform);
             if (CurrentCharacter.characterID != -1 && DataScript != null)
             {
@@ -444,7 +449,7 @@ public class CutsceneManager : MonoBehaviour
         FadeToBlacKCoroutine = StartCoroutine(FadeCoroutine(false, CutsceneID));
     }
 
-    private void PlayCutsceneWithFade(int CutsceneID)
+    public void PlayCutsceneWithFade(int CutsceneID)
     {
 
         FadeToBlacKCoroutine = StartCoroutine(FadeCoroutine(false, CutsceneID));

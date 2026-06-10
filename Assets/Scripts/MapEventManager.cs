@@ -65,6 +65,7 @@ public class MapEventManager : MonoBehaviour
          * 5 : Show Tutorial Window
          * 6 : Spawn Units
          * 7 : Change Units From Enemy To Other
+         * 8 : ShowCutscene
          */
         public List<TextBubbleInfo> dialoguetoShow;
         public List<int> UnitsToUnlockID;
@@ -75,6 +76,7 @@ public class MapEventManager : MonoBehaviour
         public UnitPlacement UnitPlacement;
         public TutorialWindow TutorialWindow;
         public List<EnemyStats> CharactersToSpawn;
+        public int CutsceneID = -1;
     }
 
     [Serializable]
@@ -164,8 +166,6 @@ public class MapEventManager : MonoBehaviour
     public int EventToSaveToJson;
 
 
-
-
     private void Awake()
     {
         if (instance == null)
@@ -236,6 +236,7 @@ public class MapEventManager : MonoBehaviour
 
     public void ApplyTilesModification(TileModification TileMod)
     {
+
         initializeEventList(TileMod);
         switch (TileMod.modiftype)
         {
@@ -367,6 +368,15 @@ public class MapEventManager : MonoBehaviour
                 ChangeEnemiesToOther(Event);
                 TriggerEventCheck(currentturn);
                 break;
+            case 8:
+                Debug.Log("Show Cutscene Trigger");
+                if (Event.CutsceneID == -1)
+                {
+                    Debug.LogError("No Cutscene ID");
+                    return;
+                }
+                DataScript.instance.GetComponent<CombatSceneLoader>().ActivateCutSceneScene(Event.CutsceneID);
+                break;
         }
 
     }
@@ -430,7 +440,7 @@ public class MapEventManager : MonoBehaviour
 
     public void TriggerEventCheck(int beginningofTurn = -1)
     {
-        if (SceneManager.GetActiveScene().name == "BattleScene" || TextBubbleScript.indialogue)
+        if (SceneManager.GetActiveScene().name == "CutsceneScene" || SceneManager.GetActiveScene().name == "BattleScene" || TextBubbleScript.indialogue)
         {
             return;
         }

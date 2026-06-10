@@ -64,7 +64,8 @@ public class MapEventEditorWindow : EditorWindow
         "4 : Show Dialogue",
         "5 : Show Tutorial Window",
         "6 : Spawn Units",
-        "7 : Change Units affiliation"
+        "7 : Change Units affiliation",
+        "8 : Play Cutscene"
     };
 
     private static readonly string[] PersonalityOptions = new string[]
@@ -301,6 +302,7 @@ public class MapEventEditorWindow : EditorWindow
         eProp.FindPropertyRelative("UnitsToLockID").ClearArray();
         eProp.FindPropertyRelative("turnswheretotrigger").ClearArray();
         eProp.FindPropertyRelative("skillsToAdd")?.ClearArray();
+        eProp.FindPropertyRelative("CutsceneID").intValue = -1;
 
         // Initialize CharactersToSpawn (EnemyStats list)
         SerializedProperty charsToSpawnProp = eProp.FindPropertyRelative("CharactersToSpawn");
@@ -458,6 +460,7 @@ public class MapEventEditorWindow : EditorWindow
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("dialoguetoShow"), true);
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("tileModification"), true);
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("UnitPlacement"), true);
+        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("CutsceneID"), true);
 
         // --- CharactersToSpawn (EnemyStats) ---
         EditorGUILayout.Space();
