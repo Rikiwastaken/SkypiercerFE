@@ -1,0 +1,64 @@
+{
+    "dialguesToLoad": [
+        {
+            "text": "We finally got them all...",
+            "characterindex": 0
+        },
+        {
+            "text": "Look. Someone is coming.",
+            "characterindex": 1
+        },
+        {
+            "text": "You really dealt with that monster. Well done.",
+            "characterindex": 6
+        },
+        {
+            "text": "Who are you ? What did you do to granpa ?",
+            "characterindex": 0
+        },
+        {
+            "text": "Calm down, Zack. He is an old friend of mine.",
+            "characterindex": 16
+        },
+        {
+            "text": "Granpa ! Are you alright ? Why did you come here without taking anyone with you ?",
+            "characterindex": 0
+        },
+        {
+            "text": "Oh, don't you worry. With Mir here with me I was never in any danger.",
+            "characterindex": 16
+        },
+        {
+            "text": "Zack, look at his medal.",
+            "characterindex": 2
+        },
+        {
+            "text": "What ? You're a master hunter ? No way...",
+            "characterindex": 0
+        },
+        {
+            "text": "Yes, that is right. I-",
+            "characterindex": 6
+        },
+        {
+            "text": "Hold on, something is not right...",
+            "characterindex": 0
+        },
+        {
+            "text": "Are you seeing anything ?",
+            "characterindex": 6
+        },
+        {
+            "text": "My chest feels weird... No ! The village ! The village is under attack !",
+            "characterindex": 0
+        },
+        {
+            "text": "The Archadians ? So far inland ?",
+            "characterindex": 1
+        },
+        {
+            "text": "It's not possible. It must be something else. Let's go.",
+            "characterindex": 6
+        }
+    ]
+}

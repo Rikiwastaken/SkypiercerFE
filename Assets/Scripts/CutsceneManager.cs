@@ -74,7 +74,7 @@ public class CutsceneManager : MonoBehaviour
     [Serializable]
     public class MovementSequence
     {
-        public bool look; //if true, the character will look at the "Movement" Vector added to its position instead 
+        public int MovementType; //0 : move, 1: look at pos+movment, 2: unsheathe Blade, 3: Sheate Blade
         public List<int> CharactersToMove;
         public List<Vector3> Movement;
         public List<float> TimeToMove;
@@ -202,9 +202,6 @@ public class CutsceneManager : MonoBehaviour
     private void LoadNextEvent(CutScene _CutScene) // load either another dialogue or a scene
     {
 
-        CleanEnvironment();
-        CleanSpawnCharacters();
-
         CurrentCutscene = -1;
         if (_CutScene.CutSceneToPlayAfterThisOne != -1)
         {
@@ -264,7 +261,7 @@ public class CutsceneManager : MonoBehaviour
         {
             if (currentsequence.Movement.Count > i)
             {
-                PlayMovement(currentsequence.CharactersToMove[i], currentsequence.Movement[i], currentsequence.TimeToMove[i], currentsequence.look);
+                PlayMovement(currentsequence.CharactersToMove[i], currentsequence.Movement[i], currentsequence.TimeToMove[i], currentsequence.MovementType);
             }
         }
 
@@ -383,16 +380,23 @@ public class CutsceneManager : MonoBehaviour
                 if (CurrentCharacter.EnemyStats.monsterStats.ispluvial)
                 {
                     Character.modelID = UnityEngine.Random.Range(3, newcharacter.GetComponent<UnitScript>().ModelList.Count);
+                    Character.name = "pluvial " + ID; ;
                 }
                 else
                 {
                     Character.modelID = CurrentCharacter.EnemyStats.modelID;
                 }
                 Character.enemyStats = CurrentCharacter.EnemyStats;
-                Character.name = CurrentCharacter.EnemyStats.Name;
+                if (CurrentCharacter.EnemyStats.Name != "")
+                {
+                    Character.name = CurrentCharacter.EnemyStats.Name;
+                }
+
                 Character.equipmentsIDs = CurrentCharacter.EnemyStats.equipments;
             }
+
             newcharacter.name = newcharacter.GetComponent<UnitScript>().UnitCharacteristics.name;
+
             newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
             newcharacter.GetComponent<UnitScript>().enabled = false;
             CurrentCharacter.CharacterGO = newcharacter;
@@ -406,6 +410,11 @@ public class CutsceneManager : MonoBehaviour
             CurrentCharacter.Animator.transform.position = CurrentCharacter.BasePosition;
             CurrentCharacter.Animator.transform.rotation = Quaternion.Euler(CurrentCharacter.BaseRotation);
             CurrentCharacter.Animator.runtimeAnimatorController = AnimatorController;
+            if (DataScript.instance != null)
+            {
+                DataScript.instance.GenerateEquipmentList(newcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+            }
+
             PlayAnimation(ID, CurrentCharacter.startanimation);
 
 
@@ -501,13 +510,26 @@ public class CutsceneManager : MonoBehaviour
                 break;
         }
     }
-    private void PlayMovement(int characterID, Vector3 Movement, float TimeToMove, bool islooking)
+    private void PlayMovement(int characterID, Vector3 Movement, float TimeToMove, int movementtype)
     {
-        StartCoroutine(MovementCoroutine(characterID, Movement, TimeToMove, islooking));
-        Movementhappenning.Add(Time.time + TimeToMove);
+
+        Debug.Log("playing movement for character " + characterID + " of type " + movementtype);
+
+        if (movementtype == 0 || movementtype == 1)
+        {
+            StartCoroutine(MovementCoroutine(characterID, Movement, TimeToMove, movementtype));
+            Movementhappenning.Add(Time.time + TimeToMove);
+        }
+        else if (movementtype == 2)
+        {
+            Debug.Log("updating the weapon model of " + GetCharacterFromID(characterID).CharacterGO);
+            GetCharacterFromID(characterID).CharacterGO.GetComponent<UnitScript>().UpdateWeaponModel();
+
+        }
+
     }
 
-    private IEnumerator MovementCoroutine(int characterID, Vector3 Movement, float TimeToMove, bool islooking)
+    private IEnumerator MovementCoroutine(int characterID, Vector3 Movement, float TimeToMove, int movementtype)
     {
         CutSceneCharacter Character = GetCharacterFromID(characterID);
         Vector3 basepos = Character.Animator.transform.position;
@@ -519,15 +541,16 @@ public class CutsceneManager : MonoBehaviour
         {
             timeelapsed += Time.deltaTime;
             float ratio = timeelapsed / TimeToMove;
-            if (islooking)
-            {
-                Character.Animator.transform.rotation = Quaternion.Lerp(baserotation, targetRotation, ratio);
-            }
-            else
+            if (movementtype == 0)
             {
                 Character.Animator.transform.position = Vector3.Lerp(basepos, basepos + Movement, ratio);
                 Character.Animator.transform.LookAt(Character.Animator.transform.position + Movement);
             }
+            else if (movementtype == 1)
+            {
+                Character.Animator.transform.rotation = Quaternion.Lerp(baserotation, targetRotation, ratio);
+            }
+
 
             yield return null;
         }
