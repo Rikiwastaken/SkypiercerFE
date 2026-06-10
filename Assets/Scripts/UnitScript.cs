@@ -1815,7 +1815,7 @@ public class UnitScript : MonoBehaviour
                     animatortouse.SetBool("GreatSword", true);
                     break;
                 case "shield":
-                    animatortouse.SetBool("ShieldBash", false);
+                    animatortouse.SetBool("ShieldBash", true);
                     break;
                 case "bow":
                     animatortouse.SetBool("Bow", true);
