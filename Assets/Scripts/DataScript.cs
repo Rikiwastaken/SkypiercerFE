@@ -982,103 +982,12 @@ public class DataScript : MonoBehaviour
         {
             if (equipmentID >= 0 && equipmentID < equipmentList.Count)
             {
-                equipment newequipment = new equipment();
+
                 equipment equipmenttocopy = equipmentList[equipmentID];
-                newequipment.Name = equipmenttocopy.Name;
-                newequipment.BaseDamage = equipmenttocopy.BaseDamage;
-                newequipment.BaseHit = equipmenttocopy.BaseHit;
-                newequipment.BaseCrit = equipmenttocopy.BaseCrit;
-                newequipment.Range = equipmenttocopy.Range;
-                newequipment.type = equipmenttocopy.type;
-                newequipment.Currentuses = equipmenttocopy.Currentuses;
-                newequipment.Maxuses = equipmenttocopy.Maxuses;
-                newequipment.ID = equipmenttocopy.ID;
-                newequipment.Grade = equipmenttocopy.Grade;
-                newequipment.equipmentmodel = equipmenttocopy.equipmentmodel;
+                equipment newequipment = GenerateEquipementCopy(equipmenttocopy, Character);
                 newequipmentlist.Add(newequipment);
 
-                if (Character.name == "Zack")
-                {
-                    switch (newequipment.type.ToLower())
-                    {
-                        case "sword":
-                            newequipment.Name = "Swino";
-                            break;
-                        case "spear":
-                            newequipment.Name = "Spino";
-                            break;
-                        case "greatsword":
-                            newequipment.Name = "Grino";
-                            break;
-                        case "bow":
-                            newequipment.Name = "Bino";
-                            break;
-                        case "scythe":
-                            newequipment.Name = "Scino";
-                            break;
-                        case "shield":
-                            newequipment.Name = "Shino";
-                            break;
-                        case "staff":
-                            newequipment.Name = "Stino";
-                            break;
-                    }
-                    switch (newequipment.Grade)
-                    {
-                        case 2:
-                            newequipment.Name += "+";
-                            break;
-                        case 3:
-                            newequipment.Name += "Ex";
-                            break;
-                        case 4:
-                            newequipment.Name += "Ult";
-                            break;
-                        case 5:
-                            newequipment.Name += "Final";
-                            break;
-                    }
-                }
 
-                if (Character.name == "Kira")
-                {
-                    if (newequipment.type.ToLower() == "sword")
-                    {
-                        newequipment.Name = "Reshine";
-                        switch (newequipment.Grade)
-                        {
-                            case 3:
-                                newequipment.Name += "II";
-                                break;
-                            case 4:
-                                newequipment.Name += "III";
-                                break;
-                            case 5:
-                                newequipment.Name += "IV";
-                                break;
-                        }
-                    }
-                }
-
-                if (Character.name == "Gale")
-                {
-                    if (newequipment.type.ToLower() == "greatsword")
-                    {
-                        newequipment.Name = "Abyssal";
-                        switch (newequipment.Grade)
-                        {
-                            case 3:
-                                newequipment.Name += " 2";
-                                break;
-                            case 4:
-                                newequipment.Name += " 3";
-                                break;
-                            case 5:
-                                newequipment.Name += " 4";
-                                break;
-                        }
-                    }
-                }
 
                 foreach (WeaponMastery mastery in Character.Masteries)
                 {
@@ -1134,7 +1043,105 @@ public class DataScript : MonoBehaviour
 
     }
 
+    public equipment GenerateEquipementCopy(equipment equipmenttocopy, Character character)
+    {
+        equipment newequipment = new equipment();
+        newequipment.Name = equipmenttocopy.Name;
+        newequipment.BaseDamage = equipmenttocopy.BaseDamage;
+        newequipment.BaseHit = equipmenttocopy.BaseHit;
+        newequipment.BaseCrit = equipmenttocopy.BaseCrit;
+        newequipment.Range = equipmenttocopy.Range;
+        newequipment.type = equipmenttocopy.type;
+        newequipment.Currentuses = equipmenttocopy.Currentuses;
+        newequipment.Maxuses = equipmenttocopy.Maxuses;
+        newequipment.ID = equipmenttocopy.ID;
+        newequipment.Grade = equipmenttocopy.Grade;
+        newequipment.equipmentmodel = equipmenttocopy.equipmentmodel;
 
+        if (character.name == "Zack")
+        {
+            switch (newequipment.type.ToLower())
+            {
+                case "sword":
+                    newequipment.Name = "Swino";
+                    break;
+                case "spear":
+                    newequipment.Name = "Spino";
+                    break;
+                case "greatsword":
+                    newequipment.Name = "Grino";
+                    break;
+                case "bow":
+                    newequipment.Name = "Bino";
+                    break;
+                case "scythe":
+                    newequipment.Name = "Scino";
+                    break;
+                case "shield":
+                    newequipment.Name = "Shino";
+                    break;
+                case "staff":
+                    newequipment.Name = "Stino";
+                    break;
+            }
+            switch (newequipment.Grade)
+            {
+                case 2:
+                    newequipment.Name += "+";
+                    break;
+                case 3:
+                    newequipment.Name += "Ex";
+                    break;
+                case 4:
+                    newequipment.Name += "Ult";
+                    break;
+                case 5:
+                    newequipment.Name += "Final";
+                    break;
+            }
+        }
+
+        if (character.name == "Kira")
+        {
+            if (newequipment.type.ToLower() == "sword")
+            {
+                newequipment.Name = "Reshine";
+                switch (newequipment.Grade)
+                {
+                    case 3:
+                        newequipment.Name += "II";
+                        break;
+                    case 4:
+                        newequipment.Name += "III";
+                        break;
+                    case 5:
+                        newequipment.Name += "IV";
+                        break;
+                }
+            }
+        }
+
+        if (character.name == "Gale")
+        {
+            if (newequipment.type.ToLower() == "greatsword")
+            {
+                newequipment.Name = "Abyssal";
+                switch (newequipment.Grade)
+                {
+                    case 3:
+                        newequipment.Name += " 2";
+                        break;
+                    case 4:
+                        newequipment.Name += " 3";
+                        break;
+                    case 5:
+                        newequipment.Name += " 4";
+                        break;
+                }
+            }
+        }
+        return newequipment;
+    }
 
     int ManhattanDistance(Vector2 point1, Vector2 point2)
     {

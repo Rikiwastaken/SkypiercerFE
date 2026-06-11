@@ -381,6 +381,7 @@ public class UnitScript : MonoBehaviour
     public List<ModelInfo> ModelList;
     private WeaponPrefabScript _WeaponPrefabScript;
 
+    private List<equipment> oldequipment;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -673,42 +674,118 @@ public class UnitScript : MonoBehaviour
 
             int maxchapterreached = _Datascript.GetComponent<SaveManager>().maxchapterreached;
 
-            switch (character.name)
+            Debug.Log("character : " + character.name.ToLower());
+
+            switch (character.name.ToLower())
             {
-                case ("Zack"):
-                    if (_Datascript.ExamodeUnlockChapter_Zack > maxchapterreached)
+                case ("zack"):
+
+                    if (_Datascript.ExamodeUnlockChapter_Zack < maxchapterreached)
                     {
+                        character.ExamodeClass.ExamodePoints = 0;
+
+
+
+                        Material examodemat = new Material(_Datascript.ExamodeMaterial);
+                        examodemat.SetTexture("_BaseTexture", character.ExamodeClass.ExamodeTexture);
+                        if (ActiveModel != null)
+                        {
+                            character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
+                            SetMaterial(ActiveModel, examodemat);
+                        }
+
+                        character.ExamodeClass.remaingExamodeTurns = _Datascript.ExamodeMaxTurns;
+
+
+
+
+
+                        oldequipment = new List<equipment>();
+                        foreach (equipment equ in character.equipments)
+                        {
+                            oldequipment.Add(equ);
+                        }
+
+                        List<equipment> newequipment = new List<equipment>();
+                        foreach (equipment oldequ in oldequipment)
+                        {
+                            foreach (equipment equipment in _Datascript.equipmentList)
+                            {
+                                if (equipment.type == oldequ.type && equipment.Grade == oldequ.Grade + 1)
+                                {
+
+                                    equipment newequ = _Datascript.GenerateEquipementCopy(equipment, character);
+                                    Debug.Log("equipment : " + newequ.Name + " lvl " + newequ.Grade);
+                                    newequipment.Add(newequ);
+                                    break;
+                                }
+                            }
+                        }
+                        character.equipments = newequipment;
+
+                        List<int> newequID = new List<int>();
+
+                        foreach (equipment equ in newequipment)
+                        {
+                            newequID.Add(equ.ID);
+                        }
+                        character.equipmentsIDs = newequID;
                         return;
                     }
                     break;
-                case ("Kira"):
-                    if (_Datascript.ExamodeUnlockChapter_Kira > maxchapterreached)
+                case ("kira"):
+                    if (_Datascript.ExamodeUnlockChapter_Kira < maxchapterreached)
                     {
+
+
+                        character.ExamodeClass.ExamodePoints = 0;
+
+
+
+                        Material examodemat = new Material(_Datascript.ExamodeMaterial);
+                        examodemat.SetTexture("_BaseTexture", character.ExamodeClass.ExamodeTexture);
+                        if (ActiveModel != null)
+                        {
+                            character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
+                            SetMaterial(ActiveModel, examodemat);
+                        }
+
+                        character.ExamodeClass.remaingExamodeTurns = _Datascript.ExamodeMaxTurns;
+
+
+
                         return;
                     }
                     break;
-                case ("Gale"):
-                    if (_Datascript.ExamodeUnlockChapter_Gale > maxchapterreached)
+                case ("gale"):
+                    if (_Datascript.ExamodeUnlockChapter_Gale < maxchapterreached)
                     {
+
+
+                        character.ExamodeClass.ExamodePoints = 0;
+
+
+
+                        Material examodemat = new Material(_Datascript.ExamodeMaterial);
+                        examodemat.SetTexture("_BaseTexture", character.ExamodeClass.ExamodeTexture);
+                        if (ActiveModel != null)
+                        {
+                            character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
+                            SetMaterial(ActiveModel, examodemat);
+                        }
+
+                        character.ExamodeClass.remaingExamodeTurns = _Datascript.ExamodeMaxTurns;
+
+
+
+
                         return;
                     }
                     break;
             }
 
 
-            character.ExamodeClass.ExamodePoints = 0;
 
-
-
-            Material examodemat = new Material(_Datascript.ExamodeMaterial);
-            examodemat.SetTexture("_BaseTexture", character.ExamodeClass.ExamodeTexture);
-            if (ActiveModel != null)
-            {
-                character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
-                SetMaterial(ActiveModel, examodemat);
-            }
-
-            character.ExamodeClass.remaingExamodeTurns = _Datascript.ExamodeMaxTurns;
 
         }
 
@@ -725,12 +802,29 @@ public class UnitScript : MonoBehaviour
             character = UnitCharacteristics;
         }
 
-
+        // revert to old model
         if (character.playableStats.protagonist && character.ExamodeClass != null)
         {
             SetMaterial(ActiveModel, character.ExamodeClass.Basemat);
         }
 
+        if (character.name.ToLower() == "zack")
+        {
+            character.equipments = oldequipment;
+            List<int> equipmentIDs = new List<int>();
+            foreach (equipment equipment in character.equipments)
+            {
+                equipmentIDs.Add(equipment.ID);
+            }
+            character.equipmentsIDs = equipmentIDs;
+        }
+
+
+        // check weapon masteries in case it was overwritten
+        foreach (WeaponMastery mastery in character.Masteries)
+        {
+            GetNewWeaponFromMastery(mastery, character);
+        }
     }
 
     private void SetMaterial(GameObject go, Material material)
@@ -1348,6 +1442,7 @@ public class UnitScript : MonoBehaviour
     }
     private void LevelupMasteryCheck(WeaponMastery mastery, Character character)
     {
+
         bool levelup = false;
         switch (mastery.Level)
         {
@@ -1382,6 +1477,10 @@ public class UnitScript : MonoBehaviour
             mastery.Level++;
             mastery.Exp = 0;
 
+        }
+        if (character.playableStats.protagonist && character.ExamodeClass.remaingExamodeTurns > 0)
+        {
+            return;
         }
         GetNewWeaponFromMastery(mastery, character);
     }
