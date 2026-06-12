@@ -193,6 +193,10 @@ public class WeaponPrefabScript : MonoBehaviour
         {
             return 4;
         }
+        else if (weaponname.ToLower().Contains("incendium"))
+        {
+            return 2;
+        }
 
         return -1;
     }
