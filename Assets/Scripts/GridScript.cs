@@ -104,7 +104,7 @@ public class GridScript : MonoBehaviour
         lockedattacktiles = new List<GridSquareScript>();
         lockedhealingtiles = new List<GridSquareScript>();
         InitializeGOList();
-        textBubble = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+        textBubble = GetComponent<ActionManager>().TextBubbleScript;
         battlecamera = FindAnyObjectByType<cameraScript>();
 
     }
@@ -759,7 +759,6 @@ public class GridScript : MonoBehaviour
             }
             if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile != null && unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile == tile)
             {
-
                 return unit;
 
             }
@@ -1359,6 +1358,10 @@ public class GridScript : MonoBehaviour
 
         foreach (GridSquareScript tile in tilelist)
         {
+            if (tile == null)
+            {
+                continue;
+            }
             if ((int)tile.GridCoordinates.x == (int)position.x && (int)tile.GridCoordinates.y == (int)position.y && (GetUnit(tile) == null || GetUnit(tile) == currentunit))
             {
                 return true;

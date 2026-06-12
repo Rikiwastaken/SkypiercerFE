@@ -66,6 +66,7 @@ public class MapEventManager : MonoBehaviour
          * 6 : Spawn Units
          * 7 : Change Units From Enemy To Other
          * 8 : ShowCutscene
+         * 9 : Activate Special Phase Script
          */
         public List<TextBubbleInfo> dialoguetoShow;
         public List<int> UnitsToUnlockID;
@@ -180,7 +181,7 @@ public class MapEventManager : MonoBehaviour
         GridScript = GetComponent<GridScript>();
         grid = GameObject.Find("Grid");
         turnManger = GetComponent<TurnManger>();
-        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+        TextBubbleScript = GetComponent<ActionManager>().TextBubbleScript;
     }
 
     private void FixedUpdate()
@@ -376,6 +377,11 @@ public class MapEventManager : MonoBehaviour
                     return;
                 }
                 DataScript.instance.GetComponent<CombatSceneLoader>().ActivateCutSceneScene(Event.CutsceneID);
+                break;
+            case 9:
+                Debug.Log("Special Phase Trigger");
+                GetComponent<SpecialPhaseScript>().TriggerSpecialPhase();
+                TriggerEventCheck(currentturn);
                 break;
         }
 
@@ -598,6 +604,10 @@ public class MapEventManager : MonoBehaviour
 
     private bool CheckSmallerConditionsAreChecked(List<SmallerCondition> smallerConditions)
     {
+        if (smallerConditions == null)
+        {
+            return true;
+        }
         foreach (SmallerCondition condition in smallerConditions)
         {
             GameObject unit1 = null;

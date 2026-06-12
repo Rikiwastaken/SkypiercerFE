@@ -52,9 +52,14 @@ public class SkillEditionScript : MonoBehaviour
         if (!inCamp)
         {
             gridscript = GridScript.instance;
+            TextBubbleScript = gridscript.GetComponent<ActionManager>().TextBubbleScript;
+        }
+        else
+        {
+            TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         }
 
-        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+
         InitializeButtons();
     }
 

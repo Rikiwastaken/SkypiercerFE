@@ -62,7 +62,6 @@ public class TurnManger : MonoBehaviour
     {
         weatherManager = GetComponent<WeatherManager>();
         minimapScript = FindAnyObjectByType<MinimapScript>();
-        textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         FSS = GetComponent<GridScript>().ForesightMenu.GetComponent<ForesightScript>();
     }
 

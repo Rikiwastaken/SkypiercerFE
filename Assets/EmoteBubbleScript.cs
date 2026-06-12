@@ -32,7 +32,7 @@ public class EmoteBubbleScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cam == null)
+        if (cam == null || !cam.gameObject.activeSelf)
         {
             cam = FindAnyObjectByType<Camera>();
         }

@@ -50,7 +50,7 @@ public class NeutralMenuScript : MonoBehaviour
             ForeSightButtonText.text = "Locked";
         }
 
-        textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+        textBubbleScript = TurnManager.GetComponent<ActionManager>().TextBubbleScript;
 
     }
 

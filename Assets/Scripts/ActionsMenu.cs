@@ -2507,7 +2507,7 @@ public class ActionsMenu : MonoBehaviour
 
                 //Cleaver
                 int truedamage = damage / 4;
-                if (attacker.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "serrated")
+                if (attacker.GetComponent<UnitScript>().GetFirstWeapon().Modifier != null && attacker.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "serrated")
                 {
                     truedamage += damage / 4;
                 }
@@ -2860,17 +2860,17 @@ public class ActionsMenu : MonoBehaviour
         if (unitfirstweapon.type.ToLower() == "sword")
         {
             int increaseamount = 2;
-            if (unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() == "quick")
+            if (unitfirstweapon.Modifier != null && unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() == "quick")
             {
                 increaseamount = 3;
             }
             unitstatbonus.Speed += unitfirstweapon.Grade * increaseamount;
             unitstatbonus.Dexterity += unitfirstweapon.Grade * increaseamount;
         }
-        if (targetfirstweapon.type.ToLower() == "sword")
+        if (targetfirstweapon != null && targetfirstweapon.type.ToLower() == "sword")
         {
             int increaseamount = 2;
-            if (unitfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "quick")
+            if (targetfirstweapon.Modifier != null && targetfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "quick")
             {
                 increaseamount = 3;
             }
@@ -2880,11 +2880,11 @@ public class ActionsMenu : MonoBehaviour
 
         if (unitfirstweapon.type.ToLower() == "greatsword")
         {
-            if (unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() == "heavyweight")
+            if (unitfirstweapon.Modifier != null && unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() == "heavyweight")
             {
                 unitstatbonus.Speed -= unitfirstweapon.Grade * 2;
             }
-            else if (unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() != "lightweight")
+            else if (unitfirstweapon.Modifier != null && unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() != "lightweight")
             {
                 unitstatbonus.Speed -= unitfirstweapon.Grade;
             }
@@ -2892,11 +2892,11 @@ public class ActionsMenu : MonoBehaviour
         }
         if (targetfirstweapon.type.ToLower() == "greatsword")
         {
-            if (unitfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "heavyweight")
+            if (targetfirstweapon.Modifier != null && targetfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "heavyweight")
             {
                 targetstatbonus.Speed -= targetfirstweapon.Grade * 2;
             }
-            else if (unitfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() != "lightweight")
+            else if (targetfirstweapon.Modifier != null && targetfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() != "lightweight")
             {
                 targetstatbonus.Speed -= targetfirstweapon.Grade;
             }
@@ -2904,7 +2904,7 @@ public class ActionsMenu : MonoBehaviour
 
         if (targetfirstweapon.type.ToLower() == "spear")
         {
-            if (unitfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "precise")
+            if (targetfirstweapon.Modifier != null && targetfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "precise")
             {
                 unitstatbonus.Dexterity -= targetfirstweapon.Grade * 3;
             }
@@ -2916,7 +2916,7 @@ public class ActionsMenu : MonoBehaviour
         }
         if (unitfirstweapon.type.ToLower() == "spear")
         {
-            if (unitfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "precise")
+            if (unitfirstweapon.Modifier != null && unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() == "precise")
             {
                 targetstatbonus.Dexterity -= unitfirstweapon.Grade * 3;
             }

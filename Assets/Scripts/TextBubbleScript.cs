@@ -293,8 +293,11 @@ public class TextBubbleScript : MonoBehaviour
             charTimer = 0f;
             isPrinting = true;
             sentence.maxVisibleCharacters = 0;
+            if (gameObject.activeSelf)
+            {
+                FixTMPVisibility();
+            }
 
-            FixTMPVisibility();
 
             if (musicManager == null)
             {

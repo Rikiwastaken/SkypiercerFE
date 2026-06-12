@@ -29,6 +29,7 @@ public class MapInitializer : MonoBehaviour
 
     private List<GameObject> playableUnitsDeployed;
 
+    public BossScript currentboss;
     private void Awake()
     {
         instance = this;
@@ -215,6 +216,7 @@ public class MapInitializer : MonoBehaviour
         int index = 0;
         foreach (EnemyStats enemyStats in EnemyList)
         {
+            Debug.Log("creating : " + enemyStats.Name);
             InitializeNonPlayable(enemyStats, index);
             index++;
         }
@@ -289,6 +291,11 @@ public class MapInitializer : MonoBehaviour
             Character.modelID = enemyStats.modelID;
         }
 
+        if (enemyStats.bossiD > 0)
+        {
+            currentboss = newcharacter.GetComponent<BossScript>();
+        }
+
         newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
         Character.name = enemyStats.Name;
         if (enemyStats.Skills.Count > 0)
@@ -348,7 +355,6 @@ public class MapInitializer : MonoBehaviour
 
         if (enemyStats.isother)
         {
-            Character.affiliation = "other";
             Character.affiliation = "other";
         }
         else

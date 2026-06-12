@@ -392,8 +392,9 @@ public class UnitScript : MonoBehaviour
             InstantiateCharacterModel();
         }
 
-        if (UnitCharacteristics.name.ToLower() == "zack")
+        if (UnitCharacteristics.name.ToLower() == "zack" && UnitCharacteristics.ExamodeClass != null)
         {
+
             UnitCharacteristics.ExamodeClass.ExamodeMat = new Material(DataScript.instance.ExamodeMaterial);
             UnitCharacteristics.ExamodeClass.ExamodeMat.SetTexture("_BaseTexture", UnitCharacteristics.ExamodeClass.ExamodeTexture);
         }
@@ -663,7 +664,7 @@ public class UnitScript : MonoBehaviour
 
     // manage visuals and stuff for activating examode
 
-    public void ActivateExamode(Character charactertouse = null)
+    public void ActivateExamode(bool forceactivation = false, Character charactertouse = null)
     {
         Character character = charactertouse;
         DataScript _Datascript = DataScript.instance;
@@ -673,14 +674,13 @@ public class UnitScript : MonoBehaviour
         }
 
 
-        if (character.playableStats.protagonist && character.ExamodeClass != null && character.ExamodeClass.ExamodePoints >= _Datascript.ExamodePointsForActivation)
+        if (forceactivation || (character.playableStats.protagonist && character.ExamodeClass != null && character.ExamodeClass.ExamodePoints >= _Datascript.ExamodePointsForActivation))
         {
 
 
 
             int maxchapterreached = _Datascript.GetComponent<SaveManager>().maxchapterreached;
 
-            Debug.Log("character : " + character.name.ToLower());
 
             switch (character.name.ToLower())
             {
@@ -717,7 +717,6 @@ public class UnitScript : MonoBehaviour
                                 {
 
                                     equipment newequ = _Datascript.GenerateEquipementCopy(equipment, character);
-                                    Debug.Log("equipment : " + newequ.Name + " lvl " + newequ.Grade);
                                     newequipment.Add(newequ);
                                     break;
                                 }
@@ -2906,6 +2905,7 @@ public class UnitScript : MonoBehaviour
     public string GetWeatherType()
     {
         GridSquareScript tile = UnitCharacteristics.currentTile;
+        Debug.Log(UnitCharacteristics.name);
         if (tile.RemainingRainTurns > 0)
         {
             return "rain";

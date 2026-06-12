@@ -97,9 +97,6 @@ public class GridSquareScript : MonoBehaviour
     public Sprite gridsquareinsideWithoutUnit;
     public Sprite gridsquareinsideWithUnit;
     public Sprite gridsquareinsideWithUnitBigEnemies;
-
-    private TextBubbleScript textBubbleScript;
-
     public SpriteRenderer WeatherColorSprite;
 
     public Sprite gridsquareFilling;
@@ -158,7 +155,7 @@ public class GridSquareScript : MonoBehaviour
     void Awake()
     {
         InitializePosition();
-        textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+
         if (rainparticle != null && rainparticle.gameObject.activeSelf)
         {
             rainparticle.gameObject.SetActive(false);
@@ -532,7 +529,7 @@ public class GridSquareScript : MonoBehaviour
         {
 
             BossLifeBarBG.gameObject.SetActive(true);
-            int damagetaken = actionsmenu.CalculateDamage(BossScript.instance.gameObject, unit);
+            int damagetaken = actionsmenu.CalculateDamage(MapInitializer.currentboss.gameObject, unit);
             BossLifebar.fillAmount = (float)(((float)unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP - damagetaken) / (float)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP);
         }
         else

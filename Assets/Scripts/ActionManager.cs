@@ -28,7 +28,7 @@ public class ActionManager : MonoBehaviour
 
     public bool preventfromlockingafteraction;
 
-    private TextBubbleScript TextBubbleScript;
+    public TextBubbleScript TextBubbleScript;
 
     public List<GridSquareScript> currentpath;
     private GridSquareScript previoustile;
@@ -75,7 +75,6 @@ public class ActionManager : MonoBehaviour
         TurnManager = GetComponent<TurnManger>();
         GridScript = GetComponent<GridScript>();
         battlecamera = FindAnyObjectByType<cameraScript>();
-        TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         BezierCurveManager = GetComponent<BezierCurveManager>();
     }
 

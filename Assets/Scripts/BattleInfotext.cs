@@ -31,7 +31,7 @@ public class BattleInfotext : MonoBehaviour
 
     public bool indescription;
 
-    private TextBubbleScript textBubbleScript;
+    public TextBubbleScript textBubbleScript;
 
     public GameObject NeutralMenu;
 
@@ -88,7 +88,6 @@ public class BattleInfotext : MonoBehaviour
         _CancelAction = InputSystem.actions.FindAction("Cancel");
         _ShowDetailsAction = InputSystem.actions.FindAction("ShowDetails");
         GridScript = GridScript.instance;
-        textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
         BaseSkillColor = SkillButtonList[0].image.color;
         attackTurnScript = FindAnyObjectByType<AttackTurnScript>(FindObjectsInactive.Include);
     }

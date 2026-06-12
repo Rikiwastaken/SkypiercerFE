@@ -2115,7 +2115,7 @@ public class AttackTurnScript : MonoBehaviour
 
         if (_TextBubbleScript == null)
         {
-            _TextBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+            _TextBubbleScript = GetComponent<ActionManager>().TextBubbleScript;
         }
 
         _TextBubbleScript.InitializeDialogue(DeathDialogue);
