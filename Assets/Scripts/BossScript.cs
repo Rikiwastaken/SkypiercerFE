@@ -69,7 +69,7 @@ public class BossScript : MonoBehaviour
         switch (GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD)
         {
             case 1:
-                DetermineNextAttackTilesRagnall(nextTarget);
+                DetermineNextAttackTilesRagnallFirstEncounter(nextTarget);
                 break;
             case 2:
                 DetermineNextAttackTilesKayFirstEncounter(nextTarget);
@@ -77,11 +77,14 @@ public class BossScript : MonoBehaviour
             case 3:
                 DetermineNextAttackTilesKaySecondEncounter(nextTarget);
                 break;
+            case 4:
+                DetermineNextAttackTilesRagnallSecondEncounter(nextTarget);
+                break;
         }
     }
 
 
-    public void DetermineNextAttackTilesRagnall(GameObject target)
+    public void DetermineNextAttackTilesRagnallFirstEncounter(GameObject target)
     {
         Character character = GetComponent<UnitScript>().UnitCharacteristics;
 
@@ -171,6 +174,93 @@ public class BossScript : MonoBehaviour
                     }
                 }
             }
+        }
+
+    }
+
+    public void DetermineNextAttackTilesRagnallSecondEncounter(GameObject target)
+    {
+        Character character = GetComponent<UnitScript>().UnitCharacteristics;
+
+        Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
+
+        Vector2 RagnallPosition = character.currentTile.GridCoordinates;
+
+        Vector2 TargetPosition = targetcharacter.currentTile.GridCoordinates;
+
+        int distance = ManhanttanDistance(RagnallPosition, TargetPosition);
+
+        if (distance <= 2)
+        {
+            for (int i = 0; i < GridScript.Grid.Count; i++)
+            {
+                for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                {
+                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+                    if (ManhanttanDistance(RagnallPosition, tile.GridCoordinates) <= 2 && tile != character.currentTile)
+                    {
+                        tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
+                    }
+                }
+            }
+        }
+        else if (distance <= 4)
+        {
+            for (int i = 0; i < GridScript.Grid.Count; i++)
+            {
+                for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                {
+                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+
+                    if (targetcharacter.currentTile == tile || ManhanttanDistance(TargetPosition, tile.GridCoordinates) == 2 || ManhanttanDistance(TargetPosition, tile.GridCoordinates) == 3)
+                    {
+                        tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
+                    }
+                }
+            }
+        }
+        else
+        {
+
+            /*
+             * oooCooo
+             * ooxxxoo
+             * oxxxxxo
+             * oxxxxxo
+             */
+            for (int i = 0; i < GridScript.Grid.Count; i++)
+            {
+                for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                {
+                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+                    if (tile.GridCoordinates.y >= RagnallPosition.y)
+                    {
+                        continue;
+
+                    }
+
+                    if (tile.GridCoordinates.y == RagnallPosition.y - 1 && Mathf.Abs(RagnallPosition.x - tile.GridCoordinates.x) <= 1)
+                    {
+                        tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
+                    }
+                    else if (tile.GridCoordinates.y <= RagnallPosition.y - 2 && Mathf.Abs(RagnallPosition.x - tile.GridCoordinates.x) <= 2)
+                    {
+                        GridSquareScript tileabove = GridScript.GetTile(tile.GridCoordinates + new Vector2(0, 1));
+                        if (tileabove != null && tileabove.isobstacle) // ignore tiles below a wall
+                        {
+                            continue;
+                        }
+                        tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
+                        continue;
+                    }
+
+                }
+            }
+
         }
 
     }
