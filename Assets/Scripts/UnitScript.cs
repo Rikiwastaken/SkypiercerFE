@@ -732,7 +732,11 @@ public class UnitScript : MonoBehaviour
                             newequID.Add(equ.ID);
                         }
                         character.equipmentsIDs = newequID;
+
+                        UpdateWeaponModel();
+
                         return;
+
                     }
                     break;
                 case ("kira"):
@@ -2100,8 +2104,14 @@ public class UnitScript : MonoBehaviour
     }
 
 
-    public void UpdateWeaponModel(Animator otheranimator = null, float scale = 0.5f)
+    public void UpdateWeaponModel(Animator otheranimator = null, float scale = 0.5f, Character User = null)
     {
+
+        Character Charactertouse = User;
+        if (Charactertouse == null)
+        {
+            Charactertouse = UnitCharacteristics;
+        }
 
         Animator animatortouse = otheranimator;
         if (otheranimator != null)
@@ -2127,7 +2137,7 @@ public class UnitScript : MonoBehaviour
             {
                 _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
             }
-            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, scale);
+            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, scale, Charactertouse);
             currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO();
             if (currentequipmentmodel != null)
             {

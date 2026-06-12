@@ -73,7 +73,7 @@ public class WeaponPrefabScript : MonoBehaviour
 
     }
 
-    public void SwitchWeaponGO(string type, string name, int level, float scale = 0.5f)
+    public void SwitchWeaponGO(string type, string name, int level, float scale = 0.5f, UnitScript.Character User = null)
     {
         if (CurrentlyAppearing.weaponType != null && CurrentlyAppearing.weaponType.ToLower() == type.ToLower() && currentEquipedLevel == level)
         {
@@ -81,7 +81,7 @@ public class WeaponPrefabScript : MonoBehaviour
         }
         GameObject newweapon = currentWeaponGO;
         weaponVisuals weaponVis = WeaponVisualsList[0];
-        int uniqueweaponID = GetUniqueWeaponID(name);
+        int uniqueweaponID = GetUniqueWeaponID(name, User);
         if (!name.ToLower().Contains("machine"))
         {
             foreach (weaponVisuals weapon in WeaponVisualsList)
@@ -162,27 +162,36 @@ public class WeaponPrefabScript : MonoBehaviour
 
     }
 
-    private int GetUniqueWeaponID(string weaponname)
+    private int GetUniqueWeaponID(string weaponname, UnitScript.Character user)
     {
         if (weaponname.ToLower().Contains("ino"))
         {
-            return 0;
+            Debug.Log(user);
+            if (user != null && user.name.ToLower() == "zack" && user.ExamodeClass.remaingExamodeTurns > 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+
         }
         else if (weaponname.ToLower().Contains("reshine"))
         {
-            return 1;
+            return 2;
         }
         else if (weaponname.ToLower().Contains("garland"))
         {
-            return 1;
+            return 2;
         }
         else if (weaponname.ToLower().Contains("abyssal"))
         {
-            return 2;
+            return 3;
         }
         else if (weaponname.ToLower().Contains("exordium"))
         {
-            return 3;
+            return 4;
         }
 
         return -1;
