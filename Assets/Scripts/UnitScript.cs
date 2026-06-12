@@ -59,6 +59,7 @@ public class UnitScript : MonoBehaviour
         public int remaingExamodeTurns;
         public int ExamodePoints;
         public Material Basemat;
+        public Material ExamodeMat;
     }
 
     [Serializable]
@@ -391,6 +392,11 @@ public class UnitScript : MonoBehaviour
             InstantiateCharacterModel();
         }
 
+        if (UnitCharacteristics.name.ToLower() == "zack")
+        {
+            UnitCharacteristics.ExamodeClass.ExamodeMat = new Material(DataScript.instance.ExamodeMaterial);
+            UnitCharacteristics.ExamodeClass.ExamodeMat.SetTexture("_BaseTexture", UnitCharacteristics.ExamodeClass.ExamodeTexture);
+        }
 
         _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
         CanvasTransform = transform.GetChild(0);
@@ -684,14 +690,10 @@ public class UnitScript : MonoBehaviour
                     {
                         character.ExamodeClass.ExamodePoints = 0;
 
-
-
-                        Material examodemat = new Material(_Datascript.ExamodeMaterial);
-                        examodemat.SetTexture("_BaseTexture", character.ExamodeClass.ExamodeTexture);
                         if (ActiveModel != null)
                         {
                             character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
-                            SetMaterial(ActiveModel, examodemat);
+                            SetMaterial(ActiveModel, character.ExamodeClass.ExamodeMat);
                         }
 
                         character.ExamodeClass.remaingExamodeTurns = _Datascript.ExamodeMaxTurns;
@@ -831,7 +833,12 @@ public class UnitScript : MonoBehaviour
     {
         if (go.GetComponent<Renderer>() != null)
         {
-            go.GetComponent<Renderer>().material = material;
+            List<Material> materialstoset = new List<Material>();
+            foreach (Material mat in go.GetComponent<Renderer>().materials)
+            {
+                materialstoset.Add(material);
+            }
+            go.GetComponent<Renderer>().SetMaterials(materialstoset);
         }
         foreach (Transform child in go.transform)
         {
@@ -860,6 +867,19 @@ public class UnitScript : MonoBehaviour
     public void BeginningofTurnTrigger(List<GameObject> charactertoapply)
     {
         waittedbonusturns--;
+
+        // Tick down Examode
+        if (UnitCharacteristics.playableStats.protagonist)
+        {
+            if (UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
+            {
+                UnitCharacteristics.ExamodeClass.remaingExamodeTurns--;
+                if (UnitCharacteristics.ExamodeClass.remaingExamodeTurns <= 0)
+                {
+                    DisableExamode();
+                }
+            }
+        }
 
         UnitCharacteristics.TauntTurns--;
         if (UnitCharacteristics.isintercepting)
@@ -964,18 +984,7 @@ public class UnitScript : MonoBehaviour
         // Reset Motvate use
         UnitCharacteristics.motivateusedthisturn = false;
 
-        // Tick down Examode
-        if (UnitCharacteristics.playableStats.protagonist)
-        {
-            if (UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
-            {
-                UnitCharacteristics.ExamodeClass.remaingExamodeTurns--;
-                if (UnitCharacteristics.ExamodeClass.remaingExamodeTurns <= 0)
-                {
-                    DisableExamode();
-                }
-            }
-        }
+
     }
 
 
@@ -2078,6 +2087,13 @@ public class UnitScript : MonoBehaviour
         {
             UnitCharacteristics.statusEffects.PowerTurns--;
         }
+
+
+        if (UnitCharacteristics.name.ToLower() == "zack" && UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0 && UnitCharacteristics.currentHP <= 0)
+        {
+            UnitCharacteristics.currentHP = 1;
+        }
+
 
         // add logic for visuals
 

@@ -29,6 +29,7 @@ public class CutsceneManager : MonoBehaviour
         public Animator Animator; // Animator to use for animations during cutscenes
         public UnitScript.EnemyStats EnemyStats; // to use if character is an enemy 
         public int startanimation = 1; //plays this animation with this ID at start
+        public GameObject EmojiBubble; // emojibubble if character shows an emotion
     }
 
     [Serializable]
@@ -53,6 +54,7 @@ public class CutsceneManager : MonoBehaviour
         public string SceneToLoad; // If CutSceneToPlayAfterThisOne is -1, will load this scene instead.
 
     }
+
 
     [Serializable]
     public class LightVariables
@@ -93,6 +95,7 @@ public class CutsceneManager : MonoBehaviour
         public int characterTalkingID;
         public int talkinganimationID = 3;
         public List<TextBubbleInfo> Dialogue;
+        public int EmojiToShow = -1;
     }
 
     public PlayableDirector director;
@@ -107,6 +110,7 @@ public class CutsceneManager : MonoBehaviour
     public float BaseFadeImageX;
     public float FadeTime;
     private Coroutine FadeToBlacKCoroutine;
+    public GameObject EmojiBubble;
 
 
     [Header("Scene Parameters")]
@@ -224,6 +228,12 @@ public class CutsceneManager : MonoBehaviour
         int animation = currentdialoguelist.talkinganimationID;
         //PlayAnimation(sceneCharacterID, animation);
         // kinda doesn't work that well
+        if (currentdialoguelist.EmojiToShow != -1)
+        {
+            GetCharacterFromID(sceneCharacterID).EmojiBubble.GetComponent<EmoteBubbleScript>().Initialize(currentdialoguelist.EmojiToShow);
+        }
+
+
         _textBubbleScript.InitializeDialogue(Cutscenes[CurrentCutscene].DialogueBubblesList[Cutscenes[CurrentCutscene].DialogueIDToplay].Dialogue);
 
         Cutscenes[CurrentCutscene].DialogueIDToplay++;
@@ -417,6 +427,10 @@ public class CutsceneManager : MonoBehaviour
 
             PlayAnimation(ID, CurrentCharacter.startanimation);
 
+            GameObject newemojibubble = Instantiate(EmojiBubble);
+            newemojibubble.transform.parent = CurrentCharacter.Animator.transform;
+            CurrentCharacter.EmojiBubble = newemojibubble;
+            newemojibubble.SetActive(false);
 
             // deactivate useless objects
             newcharacter.GetComponentInChildren<Canvas>().gameObject.SetActive(false);

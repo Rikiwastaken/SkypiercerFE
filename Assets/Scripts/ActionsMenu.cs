@@ -2318,6 +2318,12 @@ public class ActionsMenu : MonoBehaviour
             unyieldingactive = true;
         }
 
+        if (charTarget.currentHP <= 0 && charTarget.name.ToLower() == "zack" && charTarget.ExamodeClass.remaingExamodeTurns > 0)  //zack examode
+        {
+            charTarget.currentHP = 1;
+            target.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
+            unyieldingactive = true;
+        }
 
         if (Attacker.GetComponent<UnitScript>().GetSkill(83)) //born to burn
         {
