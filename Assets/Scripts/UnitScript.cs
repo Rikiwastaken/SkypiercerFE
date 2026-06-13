@@ -2287,6 +2287,44 @@ public class UnitScript : MonoBehaviour
             }
         }
     }
+
+    public void IncreaseExamodeGauge(Character character = null)
+    {
+        Character ChartoUse = character;
+        if (ChartoUse == null)
+        {
+            ChartoUse = UnitCharacteristics;
+        }
+
+        DataScript _DataScript = DataScript.instance;
+
+        GameObject protag = GridScript.GetUnit(ChartoUse.playableStats.battalion.ToLower());
+
+        if (protag != null)
+        {
+            Character protagchar = protag.GetComponent<UnitScript>().UnitCharacteristics;
+
+            if (protagchar.affiliation == "playable" && protagchar.ExamodeClass != null && protagchar.ExamodeClass.remaingExamodeTurns <= 0)
+            {
+                float multiplier = 1f;
+                if (ChartoUse.playableStats.protagonist)
+                {
+                    multiplier = _DataScript.ProtagExamodeGainMultiplier;
+                }
+
+                protagchar.ExamodeClass.ExamodePoints += (int)(multiplier * _DataScript.ExamodeGainedPeraction);
+                if (protagchar.ExamodeClass.ExamodePoints > 100)
+                {
+                    protagchar.ExamodeClass.ExamodePoints = 100;
+                }
+            }
+
+
+
+        }
+
+    }
+
     public void RetreatTrigger() // Effect of Retreat or Verso
     {
         AttackTurnScript.DeathCleanup();

@@ -544,7 +544,6 @@ public class BattleInfotext : MonoBehaviour
             case "staff":
                 return WeaponClassImages[7];
         }
-        return null;
     }
 
     private void ManagedSkillVisuals(Character unit)

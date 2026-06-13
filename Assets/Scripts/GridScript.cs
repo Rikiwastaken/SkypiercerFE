@@ -770,6 +770,23 @@ public class GridScript : MonoBehaviour
         return null;
     }
 
+    public GameObject GetUnit(string name)
+    {
+        foreach (GameObject unit in allunitGOs)
+        {
+            if (unit.Equals(null) || unit == null)
+            {
+                continue;
+            }
+            if (unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == name.ToLower())
+            {
+                return unit;
+
+            }
+        }
+        return null;
+    }
+
     public GameObject GetSelectedUnitGameObject()
     {
         GameObject SelectedUnit = null;

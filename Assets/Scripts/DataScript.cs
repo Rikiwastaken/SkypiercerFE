@@ -161,6 +161,8 @@ public class DataScript : MonoBehaviour
     public int ExamodeUnlockChapter_Gale;
     public int ExamodeMaxTurns;
     public int ExamodePointsForActivation;
+    public int ExamodeGainedPeraction;
+    public float ProtagExamodeGainMultiplier;
 
 
     [Space]

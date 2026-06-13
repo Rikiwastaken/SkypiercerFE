@@ -1135,7 +1135,11 @@ public class AttackTurnScript : MonoBehaviour
         if (charunit1.affiliation == "playable")
         {
             DataScript.instance.SpreadBonds(unit1);
+            unit1.GetComponent<UnitScript>().IncreaseExamodeGauge();
         }
+
+
+
 
         if (unit2 != null)
         {
@@ -1148,6 +1152,7 @@ public class AttackTurnScript : MonoBehaviour
             if (charunit2.affiliation == "playable")
             {
                 DataScript.instance.SpreadBonds(unit2);
+                unit1.GetComponent<UnitScript>().IncreaseExamodeGauge();
             }
 
             if (unit1.GetComponent<UnitScript>().GetSkill(15)) // Sore Loser

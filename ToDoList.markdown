@@ -6,19 +6,11 @@
 
 ## Ideas
 
-- For Chapter 12, have 2 phase to the battle:
-    - 1st phase, Raghnall uses a fire spear that inflicts burn when attacking. Lasts until turn 5 or Ragnhall is beaten
-    - 2nd phase, After the cutscene, Zack is permanently in Examode, and Raghnall regains his HP. All other units are now "other units" unable to act and only zack is playable
-
 - peut être faire qu'on puisse mettre "pas de battallion"
 
 ## System 
 
-- Do Examode system
-
 - Rework Animation for Animation Tree
-
-- Do cutscene system (def use cinemachine to do it)
 
 - Do Bonds for Gale and Aurora and Erica
 
