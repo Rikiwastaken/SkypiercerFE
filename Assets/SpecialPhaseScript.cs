@@ -4,6 +4,11 @@ using static MapEventManager;
 
 public class SpecialPhaseScript : MonoBehaviour
 {
+
+    public CharacterCircleVisuals _CharacterCircleVisuals;
+    public ForesightScript _ForesightScript;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -52,7 +57,7 @@ public class SpecialPhaseScript : MonoBehaviour
                     {
                         continue;
                     }
-
+                    unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile.UpdateInsideSprite(false);
                     unit.SetActive(false);
 
                 }
@@ -91,6 +96,11 @@ public class SpecialPhaseScript : MonoBehaviour
 
                 Zack.GetComponent<UnitScript>().MoveTo(raghnallCharacter.currentTile.GridCoordinates + new Vector2(0, -2), false, true);
 
+                _CharacterCircleVisuals.UpdateFilling();
+
+                // Then we remove previous Foresight Events
+
+                _ForesightScript.actions.Clear();
 
                 break;
         }

@@ -280,6 +280,10 @@ public class ActionManager : MonoBehaviour
             timeforExamodeactivation = 0;
             return;
         }
+        if (unit.GetComponent<UnitScript>().lockExamode)
+        {
+            return;
+        }
 
         if (_ActivateExamode.IsPressed())
         {

@@ -428,7 +428,7 @@ public class CutsceneManager : MonoBehaviour
             PlayAnimation(ID, CurrentCharacter.startanimation);
 
             GameObject newemojibubble = Instantiate(EmojiBubble);
-            newemojibubble.transform.parent = CurrentCharacter.Animator.transform;
+            newemojibubble.transform.SetParent(CurrentCharacter.Animator.transform);
             CurrentCharacter.EmojiBubble = newemojibubble;
             newemojibubble.SetActive(false);
 

@@ -30,7 +30,7 @@ public class CharacterCircleVisuals : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        allunitGOsList = GridScript.allunitGOs;
+
 
         if (delaycounter > 0)
         {
@@ -80,7 +80,7 @@ public class CharacterCircleVisuals : MonoBehaviour
 
     public void UpdateFilling()
     {
-
+        allunitGOsList = GridScript.allunitGOs;
         InitializeUnitCircles();
 
 

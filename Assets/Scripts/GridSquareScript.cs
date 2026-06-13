@@ -96,7 +96,6 @@ public class GridSquareScript : MonoBehaviour
 
     public Sprite gridsquareinsideWithoutUnit;
     public Sprite gridsquareinsideWithUnit;
-    public Sprite gridsquareinsideWithUnitBigEnemies;
     public SpriteRenderer WeatherColorSprite;
 
     public Sprite gridsquareFilling;

@@ -383,6 +383,7 @@ public class UnitScript : MonoBehaviour
     private WeaponPrefabScript _WeaponPrefabScript;
 
     private List<equipment> oldequipment;
+    public bool lockExamode;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -673,6 +674,10 @@ public class UnitScript : MonoBehaviour
             character = UnitCharacteristics;
         }
 
+        if (forceactivation)
+        {
+            lockExamode = true;
+        }
 
         if (forceactivation || (character.playableStats.protagonist && character.ExamodeClass != null && character.ExamodeClass.ExamodePoints >= _Datascript.ExamodePointsForActivation))
         {
@@ -2261,6 +2266,10 @@ public class UnitScript : MonoBehaviour
     {
         if (ActiveModel != null && UnitCharacteristics.currentTile.activated)
         {
+            if (UnitCharacteristics.ExamodeClass != null && UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
+            {
+                return;
+            }
             if (newPlayed)
             {
                 if (ActiveModel.GetComponentInChildren<Renderer>().material.GetColor("_BaseColor") != Color.grey)
