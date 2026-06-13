@@ -166,7 +166,7 @@ public class WeaponPrefabScript : MonoBehaviour
     {
         if (weaponname.ToLower().Contains("ino"))
         {
-            if (user != null && user.name.ToLower() == "zack" && user.ExamodeClass.remaingExamodeTurns > 0)
+            if (user != null && user.name.ToLower() == "zack" && user.ExamodeClass != null && user.ExamodeClass.remaingExamodeTurns > 0)
             {
                 return 1;
             }
