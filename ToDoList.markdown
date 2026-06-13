@@ -36,9 +36,8 @@
 
 - Do Special Weapon skins (Kay)
 
-- Chapter 10 battle map
-- Chapter 11 battle map
 - SideStory 1 battle map
+- Chapter 12 map and combat map
 
 ### Sprites
 

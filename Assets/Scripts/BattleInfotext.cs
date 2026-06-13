@@ -527,7 +527,7 @@ public class BattleInfotext : MonoBehaviour
 
         switch (weapontype.ToLower())
         {
-            case "":
+            default:
                 return WeaponClassImages[0];
             case "sword":
                 return WeaponClassImages[1];
