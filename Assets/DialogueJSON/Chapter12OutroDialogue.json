@@ -1,0 +1,32 @@
+{
+    "dialguesToLoad": [
+        {
+            "text": "So, you awakened, didn't you... You're better than expected. Time to make my exit.",
+            "characterindex": 17
+        },
+        {
+            "text": "You... You stay here...",
+            "characterindex": 0
+        },
+        {
+            "text": "Look at you, you're barely standing now.",
+            "characterindex": 17
+        },
+        {
+            "text": "Damn... You...",
+            "characterindex": 0
+        },
+        {
+            "text": "Heh. He fainted.",
+            "characterindex": 17
+        },
+        {
+            "text": "Raghnall... What are you doing...",
+            "characterindex": 13
+        },
+        {
+            "text": "I'll leave him in your care, Gale.",
+            "characterindex": 17
+        }
+    ]
+}

@@ -69,12 +69,12 @@ public class MapEventManager : MonoBehaviour
          * 9 : Activate Special Phase Script
          */
         public List<TextBubbleInfo> dialoguetoShow;
-        public List<int> UnitsToUnlockID;
-        public List<int> UnitsToLockID;
+        public List<int> UnitsToUnlockID = new List<int>();
+        public List<int> UnitsToLockID = new List<int>();
         public List<SkillsToAdd> skillsToAdd;
         public List<int> turnswheretotrigger;
         public TileModification tileModification;
-        public UnitPlacement UnitPlacement;
+        public UnitPlacement UnitPlacement = new UnitPlacement();
         public TutorialWindow TutorialWindow;
         public List<EnemyStats> CharactersToSpawn;
         public int CutsceneID = -1;
@@ -271,6 +271,10 @@ public class MapEventManager : MonoBehaviour
     public void ManageUnitPlacement(UnitPlacement unitPlacement)
     {
         List<GameObject> movedunits = new List<GameObject>();
+        if (unitPlacement == null || unitPlacement.UnitToPlaceManually == null)
+        {
+            return;
+        }
         foreach (string unitname in unitPlacement.UnitToPlaceManually)
         {
 
@@ -778,6 +782,10 @@ public class MapEventManager : MonoBehaviour
 
     private void UnitAddTrigger(List<int> UnitsToUnlockID, bool unlock)
     {
+        if (UnitsToUnlockID == null)
+        {
+            return;
+        }
         List<Character> units = DataScript.instance.PlayableCharacterList;
         foreach (Character unit in units)
         {
@@ -796,7 +804,7 @@ public class MapEventManager : MonoBehaviour
 
         DataScript DS = DataScript.instance;
 
-        if (DS != null)
+        if (DS != null && SkillsToAdd != null)
         {
             foreach (SkillsToAdd skill in SkillsToAdd)
             {

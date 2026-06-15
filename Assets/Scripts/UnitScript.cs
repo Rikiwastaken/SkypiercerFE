@@ -3678,21 +3678,45 @@ public class UnitScript : MonoBehaviour
             statbonuses.Dodge += bondbonus.Dodge;
         }
 
+        // Examode Stat Bonuses
+        AllStatsSkillBonus examodeskillbonus = new AllStatsSkillBonus();
 
-        statbonuses.FixedDamageBonus += battalionskillbonus.FixedDamageBonus;
-        statbonuses.FixedDamageReduction += battalionskillbonus.FixedDamageReduction;
-        statbonuses.PhysDamage += battalionskillbonus.PhysDamage;
-        statbonuses.TelekDamage += battalionskillbonus.TelekDamage;
-        statbonuses.Hit += battalionskillbonus.Hit;
-        statbonuses.Crit += battalionskillbonus.Crit;
-        statbonuses.Dodge += battalionskillbonus.Dodge;
-        statbonuses.DamageReduction += battalionskillbonus.DamageReduction;
-        statbonuses.Strength += battalionskillbonus.Strength;
-        statbonuses.Psyche += battalionskillbonus.Psyche;
-        statbonuses.Resistance += battalionskillbonus.Resistance;
-        statbonuses.Defense += battalionskillbonus.Defense;
-        statbonuses.Speed += battalionskillbonus.Speed;
-        statbonuses.Dexterity += battalionskillbonus.Dexterity;
+        GameObject BattaillonLeaderGo = GridScript.GetUnit(UnitCharacteristics.playableStats.battalion);
+
+        if (BattaillonLeaderGo != null && BattaillonLeaderGo.GetComponent<UnitScript>().UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
+        {
+
+            float statmult = DataScript.instance.examodestatmultiplier;
+
+            examodeskillbonus.Strength = (int)(statbonuses.Strength * statmult);
+            examodeskillbonus.Psyche = (int)(statbonuses.Psyche * statmult);
+            examodeskillbonus.Resistance = (int)(statbonuses.Resistance * statmult);
+            examodeskillbonus.Defense = (int)(statbonuses.Defense * statmult);
+            examodeskillbonus.Speed = (int)(statbonuses.Speed * statmult);
+            examodeskillbonus.Dexterity = (int)(statbonuses.Dexterity * statmult);
+
+            if (UnitCharacteristics.name.ToLower() == "zack")
+            {
+                examodeskillbonus.Hit += 30;
+            }
+
+        }
+
+
+        statbonuses.FixedDamageBonus += battalionskillbonus.FixedDamageBonus + examodeskillbonus.FixedDamageBonus;
+        statbonuses.FixedDamageReduction += battalionskillbonus.FixedDamageReduction + examodeskillbonus.FixedDamageReduction;
+        statbonuses.PhysDamage += battalionskillbonus.PhysDamage + examodeskillbonus.PhysDamage;
+        statbonuses.TelekDamage += battalionskillbonus.TelekDamage + examodeskillbonus.TelekDamage;
+        statbonuses.Hit += battalionskillbonus.Hit + examodeskillbonus.Hit;
+        statbonuses.Crit += battalionskillbonus.Crit + examodeskillbonus.Crit;
+        statbonuses.Dodge += battalionskillbonus.Dodge + examodeskillbonus.Dodge;
+        statbonuses.DamageReduction += battalionskillbonus.DamageReduction + examodeskillbonus.DamageReduction;
+        statbonuses.Strength += battalionskillbonus.Strength + examodeskillbonus.Strength;
+        statbonuses.Psyche += battalionskillbonus.Psyche + examodeskillbonus.Psyche;
+        statbonuses.Resistance += battalionskillbonus.Resistance + examodeskillbonus.Resistance;
+        statbonuses.Defense += battalionskillbonus.Defense + examodeskillbonus.Defense;
+        statbonuses.Speed += battalionskillbonus.Speed + examodeskillbonus.Speed;
+        statbonuses.Dexterity += battalionskillbonus.Dexterity + examodeskillbonus.Dexterity;
 
         // Status Effect Bonus/Malus
 

@@ -27,13 +27,23 @@ public class SpecialPhaseScript : MonoBehaviour
         {
             case 12:
 
-                //First, create a new event which is the victory condition. All other events are removed.
+                //First, create a new event which is the victory condition and an event which plays the outrop cutscene. All other events are removed.
+
+
+                EventCondition OutroEvent = new EventCondition();
+                OutroEvent.triggertype = 4;
+                OutroEvent.triggerEffectType = 8;
+                OutroEvent.CutsceneID = 6;
+                OutroEvent.ID = 0;
+
 
                 EventCondition victoryEvent = new EventCondition();
-                victoryEvent.triggertype = 4;
+                victoryEvent.triggertype = 8;
                 victoryEvent.triggerEffectType = 1;
+                victoryEvent.ID = 1;
+                victoryEvent.EventsToWatch = new List<int>() { 0 };
 
-                GetComponent<MapEventManager>().EventsToMonitor = new List<EventCondition>() { victoryEvent };
+                GetComponent<MapEventManager>().EventsToMonitor = new List<EventCondition>() { OutroEvent, victoryEvent };
 
 
                 // Then, we remove all characters that are not zack and raghnall and we activate zack's examode.
@@ -89,7 +99,7 @@ public class SpecialPhaseScript : MonoBehaviour
 
                 // then we set the victory event's unit to ragnhall;
 
-                victoryEvent.UnitList = new List<UnitScript.Character> { raghnallCharacter };
+                OutroEvent.UnitList = new List<UnitScript.Character> { raghnallCharacter };
 
 
                 // then we place zack close to Raghnall

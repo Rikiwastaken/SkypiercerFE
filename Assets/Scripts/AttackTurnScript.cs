@@ -119,7 +119,7 @@ public class AttackTurnScript : MonoBehaviour
         }
 
         // If Combat Animation is over, reset the lifebars of the attacker and target, trigger the end of fight attack animation if the attacker is still alive, reset all selections on the grid, trigger the end of fight event, and reset variables related to the end of fight and combat animation
-        if (triggerEndOfFightWithAnimations && previousattacker != null && AttackCoroutine == null)
+        if (triggerEndOfFightWithAnimations && previousattacker != null && AttackCoroutine == null && !combatsceneloader.isCombatSceneActive())
         {
             triggerEndOfFightWithAnimations = false;
             previousattacker.GetComponent<UnitScript>().disableLifebar = false;

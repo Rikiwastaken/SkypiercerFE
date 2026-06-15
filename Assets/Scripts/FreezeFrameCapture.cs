@@ -112,9 +112,16 @@ public class FreezeFrameCapture : MonoBehaviour
         CharacterSpriteBasePos = CharacterSprite.GetComponent<RectTransform>().anchoredPosition;
         BackgroundImageBasePos = BackgroundImage.GetComponent<RectTransform>().anchoredPosition;
 
-        ActivateAction = InputSystem.actions.FindAction("Validate");
-        CancelAction = InputSystem.actions.FindAction("Cancel");
+        InitializeControls();
 
+    }
+
+    private void InitializeControls()
+    {
+        ActivateAction = InputSystem.actions.FindAction("Validate");
+        ActivateAction.Enable();
+        CancelAction = InputSystem.actions.FindAction("Cancel");
+        CancelAction.Enable();
     }
 
     private void Update()
@@ -210,6 +217,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
     public void PlayFullAnimation(Character characterWhoLeveledUp, List<int> levelip)
     {
+        InitializeControls();
         ResetUIState();
         TimeSafeguard = Time.time + 15f;
         MusicGO = MusicManager.instance.PlaySFX(LevelUpJingleClip);

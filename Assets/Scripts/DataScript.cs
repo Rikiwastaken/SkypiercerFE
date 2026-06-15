@@ -163,6 +163,7 @@ public class DataScript : MonoBehaviour
     public int ExamodePointsForActivation;
     public int ExamodeGainedPeraction;
     public float ProtagExamodeGainMultiplier;
+    public float examodestatmultiplier;
 
 
     [Space]

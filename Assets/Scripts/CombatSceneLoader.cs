@@ -42,6 +42,11 @@ public class CombatSceneLoader : MonoBehaviour
             StartCoroutine(LoadCutsceneSceneSceneRoutine());
     }
 
+    public bool isCombatSceneActive()
+    {
+        return SceneManager.GetActiveScene() == combatScene;
+    }
+
     private IEnumerator LoadCombatSceneRoutine()
     {
         // Cache main scene reference
