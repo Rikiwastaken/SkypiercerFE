@@ -27,7 +27,6 @@
 - Do Special Weapon skins (Kay)
 
 - SideStory 1 battle map
-- Chapter 12 map and combat map
 
 ### Sprites
 
