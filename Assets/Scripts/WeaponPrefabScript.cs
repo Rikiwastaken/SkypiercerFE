@@ -73,7 +73,7 @@ public class WeaponPrefabScript : MonoBehaviour
 
     }
 
-    public void SwitchWeaponGO(string type, string name, int level, float scale = 0.5f, UnitScript.Character User = null)
+    public void SwitchWeaponGO(string type, string name, int level, float scale = 0.5f, UnitScript.Character User = null, bool switchinstantly = false)
     {
         if (CurrentlyAppearing.weaponType != null && CurrentlyAppearing.weaponType.ToLower() == type.ToLower() && currentEquipedLevel == level)
         {
@@ -156,7 +156,7 @@ public class WeaponPrefabScript : MonoBehaviour
             }
 
             currentWeaponGO = newweapon;
-            EquipWeaponVisuals();
+            EquipWeaponVisuals(switchinstantly);
         }
 
 
@@ -251,20 +251,23 @@ public class WeaponPrefabScript : MonoBehaviour
         return currentWeaponGO;
     }
 
-    public void EquipWeaponVisuals()
+    public void EquipWeaponVisuals(bool appearinstantly)
     {
         if (currentWeaponGO != null)
         {
+            if (appearinstantly)
+            {
+                SetDissolve(weapontypeequiped, 1, currentWeaponGO);
+            }
+            else
+            {
+                SetDissolve(weapontypeequiped, 0, currentWeaponGO);
 
-            SetDissolve(weapontypeequiped, 0, currentWeaponGO);
+
+                AppearCoroutine = StartCoroutine(MakeWeaponAppear());
+            }
 
 
-            //if (AppearCoroutine != null)
-            //{
-            //    StopCoroutine(AppearCoroutine);
-            //}
-
-            AppearCoroutine = StartCoroutine(MakeWeaponAppear());
         }
     }
     // this coroutine is used to make the weapon appear, it lerps the dissolve value from 1 to 0, if during the process the weapon to appear is not the same as the currently appearing weapon, it will stop lerping and just set the dissolve value to 0

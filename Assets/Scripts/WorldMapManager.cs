@@ -176,7 +176,7 @@ public class WorldMapManager : MonoBehaviour
 
                 if (!selectedsidestory && selectedchapter == 12)
                 {
-                    SceneLoader.instance.LoadScene("CutsceneScene", 12);
+                    SceneLoader.instance.LoadScene("CutsceneScene", 2);
                 }
                 else
                 {

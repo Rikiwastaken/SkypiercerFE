@@ -1,0 +1,112 @@
+{
+    "dialguesToLoad": [
+        {
+            "text": "Where am I? What's going on?",
+            "characterindex": 0
+        },
+        {
+            "text": "We are inside your mind.",
+            "characterindex": -1
+        },
+        {
+            "text": "Mir! What are you doing here?",
+            "characterindex": 0
+        },
+        {
+            "text": "I am not Mir. I am the Icosahedron.",
+            "characterindex": -1
+        },
+        {
+            "text": "What? Why do you look like him then?",
+            "characterindex": 0
+        },
+        {
+            "text": "That's not important right now.",
+            "characterindex": -1
+        },
+        {
+            "text": "OK, you're weird.",
+            "characterindex": 0
+        },
+        {
+            "text": "Have some respect! I am the Icosahedron.",
+            "characterindex": -1
+        },
+        {
+            "text": "That name is way too long. I'll just call you Ico.",
+            "characterindex": 0
+        },
+        {
+            "text": "This kid... Whatever you want...",
+            "characterindex": 18
+        },
+        {
+            "text": "Anyway. What am I doing here? I have some butt to kick.",
+            "characterindex": 0
+        },
+        {
+            "text": "Really? It looked like your butt was the one getting kicked.",
+            "characterindex": 18
+        },
+        {
+            "text": "No, that... Yeah, you're right. Raghnall is so much stronger than us.",
+            "characterindex": 0
+        },
+        {
+            "text": "You're wrong, Zack. I can help you beat him.",
+            "characterindex": 18
+        },
+        {
+            "text": "Really? Let's go then!",
+            "characterindex": 0
+        },
+        {
+            "text": "What?",
+            "characterindex": 18
+        },
+        {
+            "text": "Just do your thing we have no time to waste.",
+            "characterindex": 0
+        },
+        {
+            "text": "Don't worry about that. We are out of time.",
+            "characterindex": 18
+        },
+        {
+            "text": " I know that's what I've been saying.",
+            "characterindex": 0
+        },
+        {
+            "text": "I meant that literally. I'm the source of your visions. I have some power on Time.",
+            "characterindex": 18
+        },
+        {
+            "text": "Hold on... I started getting visions before I found the crystal.",
+            "characterindex": 0
+        },
+        {
+            "text": "That is because the crystal you found under Landfall Village and the one in your chest are two parts of a whole.",
+            "characterindex": 18
+        },
+        {
+            "text": "I knew it felt familiar.",
+            "characterindex": 0
+        },
+        {
+            "text": "This crystal contains tremendous power. If you combine the crystal with the one in your chest, you will gain incredible power.",
+            "characterindex": 18
+        },
+        {
+            "text": "Cool let's do it.",
+            "characterindex": 0
+        },
+        {
+            "text": "You'll gain power, but be careful. It will only be temporary. If you combine the crystal with the one in your chest, you will gain incredible power.",
+            "characterindex": 18
+        },
+        {
+            "text": "As long as it's enough to beat his ass, I'm good.",
+            "characterindex": 0
+        }
+    ]
+}

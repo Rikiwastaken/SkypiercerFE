@@ -1,0 +1,20 @@
+{
+    "dialguesToLoad": [
+        {
+            "text": "What? Did he...",
+            "characterindex": 17
+        },
+        {
+            "text": "Time for round two.",
+            "characterindex": 0
+        },
+        {
+            "text": "Zack... What's going on?",
+            "characterindex": 9
+        },
+        {
+            "text": "Don't worry. I got this. Let's fight fire with fire.",
+            "characterindex": 0
+        }
+    ]
+}

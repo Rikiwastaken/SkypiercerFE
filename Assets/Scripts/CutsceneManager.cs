@@ -30,6 +30,8 @@ public class CutsceneManager : MonoBehaviour
         public UnitScript.EnemyStats EnemyStats; // to use if character is an enemy 
         public int startanimation = 1; //plays this animation with this ID at start
         public GameObject EmojiBubble; // emojibubble if character shows an emotion
+        public bool StartWithBlade; // Start with blade summoned
+        public bool Examode; // Start with examode
     }
 
     [Serializable]
@@ -200,7 +202,7 @@ public class CutsceneManager : MonoBehaviour
             }
             UpdateMovementTimeList();
         }
-        else
+        else if (CurrentCutscene != -1)
         {
             LoadNextEvent(Cutscenes[CurrentCutscene]);
         }
@@ -210,7 +212,7 @@ public class CutsceneManager : MonoBehaviour
 
     private void LoadNextEvent(CutScene _CutScene) // load either another dialogue or a scene
     {
-
+        cutscenefinished = false;
         CurrentCutscene = -1;
         if (_CutScene.CutSceneToPlayAfterThisOne != -1)
         {
@@ -439,6 +441,27 @@ public class CutsceneManager : MonoBehaviour
 
             // deactivate useless objects
             newcharacter.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+
+            if (CurrentCharacter.Examode)
+            {
+                Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
+                if (Character.name.ToLower() == "zack" && Character.ExamodeClass != null)
+                {
+
+                    Character.ExamodeClass.ExamodeMat = new Material(DataScript.instance.ExamodeMaterial);
+                    Character.ExamodeClass.ExamodeMat.SetTexture("_BaseTexture", Character.ExamodeClass.ExamodeTexture);
+                }
+                newcharacter.GetComponent<UnitScript>().ActivateExamode(true);
+
+            }
+
+            if (CurrentCharacter.StartWithBlade)
+            {
+                newcharacter.GetComponent<UnitScript>().UpdateWeaponModel(true);
+            }
+
+
+
             ID++;
         }
     }
@@ -470,7 +493,10 @@ public class CutsceneManager : MonoBehaviour
             if (Cutscenetostart != -1)
             {
                 InitializeCutscene(Cutscenetostart);
+                cutscenefinished = false;
+                director.time = 0f;
                 director.Play();
+
             }
 
             float timeelapsed = 0f;

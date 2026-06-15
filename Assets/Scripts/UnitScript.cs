@@ -682,16 +682,26 @@ public class UnitScript : MonoBehaviour
         if (forceactivation || (character.playableStats.protagonist && character.ExamodeClass != null && character.ExamodeClass.ExamodePoints >= _Datascript.ExamodePointsForActivation))
         {
 
+            int maxchapterreached = 0;
+            if (!forceactivation)
+            {
+                maxchapterreached = _Datascript.GetComponent<SaveManager>().maxchapterreached;
+            }
+            else
+            {
+                if (character.ExamodeClass == null)
+                {
+                    character.ExamodeClass = new ExamodeClass();
+                }
+            }
 
-
-            int maxchapterreached = _Datascript.GetComponent<SaveManager>().maxchapterreached;
 
 
             switch (character.name.ToLower())
             {
                 case ("zack"):
 
-                    if (_Datascript.ExamodeUnlockChapter_Zack < maxchapterreached)
+                    if (forceactivation || _Datascript.ExamodeUnlockChapter_Zack < maxchapterreached)
                     {
                         character.ExamodeClass.ExamodePoints = 0;
 
@@ -1084,6 +1094,7 @@ public class UnitScript : MonoBehaviour
             equipmentsIDs = new List<int>(CharacterToCopy.equipmentsIDs),
             equipments = CharacterToCopy.equipments,
             UnitSkill = CharacterToCopy.UnitSkill,
+            SecondUnitSkill = CharacterToCopy.SecondUnitSkill,
             EquipedSkills = new List<int>(CharacterToCopy.EquipedSkills),
             attacksfriends = CharacterToCopy.attacksfriends,
             playableStats = new PlayableStats
@@ -1159,6 +1170,14 @@ public class UnitScript : MonoBehaviour
                 GoodLvlUp = CharacterToCopy.characterDialogues.GoodLvlUp,
                 MidLvlUp = CharacterToCopy.characterDialogues.MidLvlUp,
                 LowLvlUp = CharacterToCopy.characterDialogues.LowLvlUp
+            },
+            ExamodeClass = new ExamodeClass
+            {
+                ExamodeTexture = CharacterToCopy.ExamodeClass.ExamodeTexture,
+                remaingExamodeTurns = CharacterToCopy.ExamodeClass.remaingExamodeTurns,
+                ExamodePoints = CharacterToCopy.ExamodeClass.ExamodePoints,
+                Basemat = CharacterToCopy.ExamodeClass.Basemat,
+                ExamodeMat = CharacterToCopy.ExamodeClass.ExamodeMat
             }
         };
 
@@ -2107,8 +2126,17 @@ public class UnitScript : MonoBehaviour
 
     }
 
+    public void UpdateWeaponModel(float scale, bool spawninstantly)
+    {
+        UpdateWeaponModel(null, scale, null, spawninstantly);
+    }
 
-    public void UpdateWeaponModel(Animator otheranimator = null, float scale = 0.5f, Character User = null)
+    public void UpdateWeaponModel(bool spawninstantly)
+    {
+        UpdateWeaponModel(null, 0.5f, null, spawninstantly);
+    }
+
+    public void UpdateWeaponModel(Animator otheranimator = null, float scale = 0.5f, Character User = null, bool spawninstantly = false)
     {
 
         Character Charactertouse = User;
@@ -2141,7 +2169,7 @@ public class UnitScript : MonoBehaviour
             {
                 _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
             }
-            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, scale, Charactertouse);
+            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, scale, Charactertouse, spawninstantly);
             currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO();
             if (currentequipmentmodel != null)
             {

@@ -1,0 +1,48 @@
+{
+    "dialguesToLoad": [
+        {
+            "text": "I'm sorry, guys... I can't fight anymore...",
+            "characterindex": 9
+        },
+        {
+            "text": "Kira! Damn it...",
+            "characterindex": 0
+        },
+        {
+            "text": "Is this all you've got? I thought you would kill me.",
+            "characterindex": 17
+        },
+        {
+            "text": "How... How can he be so strong.",
+            "characterindex": 0
+        },
+        {
+            "text": "Leave, Zack. You can't fall here... I'll hold him off.",
+            "characterindex": 13
+        },
+        {
+            "text": "No... No! I won't leave anyone behind!",
+            "characterindex": 0
+        },
+        {
+            "text": "Hold me...",
+            "characterindex": -1
+        },
+        {
+            "text": "What?",
+            "characterindex": 0
+        },
+        {
+            "text": "Take me in your hand.",
+            "characterindex": -1
+        },
+        {
+            "text": "Who is that?",
+            "characterindex": 0
+        },
+        {
+            "text": "The damned crystal! Now take me, if you want to live!",
+            "characterindex": -1
+        }
+    ]
+}

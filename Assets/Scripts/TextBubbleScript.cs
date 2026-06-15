@@ -87,12 +87,20 @@ public class TextBubbleScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _ActivateAction = InputSystem.actions.FindAction("Validate");
-        _CancelAction = InputSystem.actions.FindAction("Cancel");
-        _StartAction = InputSystem.actions.FindAction("Start");
+        InitializeAndEnableControls();
         gridScript = GridScript.instance;
         cameraScript = FindAnyObjectByType<cameraScript>();
         //DialogueExample();
+    }
+
+    private void InitializeAndEnableControls()
+    {
+        _ActivateAction = InputSystem.actions.FindAction("Validate");
+        _ActivateAction.Enable();
+        _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _CancelAction.Enable();
+        _StartAction = InputSystem.actions.FindAction("Start");
+        _StartAction.Enable();
     }
 
     private void DialogueExample()
@@ -221,6 +229,7 @@ public class TextBubbleScript : MonoBehaviour
 
     private void GoToNextPage()
     {
+        characterportrait.color = new Color(0, 0, 0, 0);
         currentTextBubble++;
         delayBetweenSkipsCounter = Time.time + DelayBetweenSkips;
         timebeforeskippingtonextdialoguecounter = Time.time + timebeforeskippingtonextdialogue;
@@ -251,6 +260,7 @@ public class TextBubbleScript : MonoBehaviour
             {
                 charactername.text = character.name;
                 characterportrait.sprite = DataScript.instance.DialogueSpriteList[character.ID];
+                characterportrait.color = new Color(1, 1, 1, 1);
                 if (character.DialoguePitch != 0)
                 {
                     currentcharacterpitch = character.DialoguePitch;
@@ -260,6 +270,7 @@ public class TextBubbleScript : MonoBehaviour
             {
                 if (info.Portrait != null)
                 {
+                    characterportrait.color = new Color(1, 1, 1, 1);
                     characterportrait.sprite = info.Portrait;
                 }
                 currentcharacterpitch = info.voicepitch;
@@ -328,6 +339,7 @@ public class TextBubbleScript : MonoBehaviour
 
     public void InitializeDialogue(List<TextBubbleInfo> dialogue)
     {
+        InitializeAndEnableControls();
         gameObject.SetActive(true);
         ignoreInputThisFrame = true;
         currentTextBubble = -1;

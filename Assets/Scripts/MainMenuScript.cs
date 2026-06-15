@@ -101,7 +101,7 @@ public class MainMenuScript : MonoBehaviour
 
         if (Chapter == 12)
         {
-            sceneLoader.LoadScene("CutsceneScene", 12);
+            sceneLoader.LoadScene("CutsceneScene", 2);
         }
         else
         {
