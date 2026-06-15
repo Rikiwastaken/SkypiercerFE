@@ -46,6 +46,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         public Vector3 position;
         public Vector3 rotation;
         public List<int> ChapterInWhichToUse;
+        public bool isSideStory;
     }
 
     [Serializable]
@@ -905,11 +906,18 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
     private IEnumerator LoadEnvironmentAsync(string ChapterToLoad, Scene SceneToLoadin)
     {
+        bool IsSideStory = false;
         int Chapter = -1;
         if (ChapterToLoad.Contains("Chapter"))
         {
             ChapterToLoad = ChapterToLoad.Replace("Chapter", "");
             Chapter = int.Parse(ChapterToLoad);
+        }
+        else if (ChapterToLoad.Contains("SideStory"))
+        {
+            ChapterToLoad = ChapterToLoad.Replace("SideStory", "");
+            Chapter = int.Parse(ChapterToLoad);
+            IsSideStory = true;
         }
         if (ChapterToLoad.Contains("Prologue"))
         {
@@ -924,7 +932,8 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
         foreach (CombatEnvirnoment env in EnvirnomentList)
         {
-            if (env.ChapterInWhichToUse.Contains(Chapter))
+
+            if (env.ChapterInWhichToUse.Contains(Chapter) && env.isSideStory == IsSideStory)
             {
                 if (currentenv == null)
                 {
