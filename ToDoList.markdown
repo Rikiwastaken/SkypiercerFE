@@ -12,8 +12,6 @@
 
 - Rework Animation for Animation Tree
 
-- Do Bonds for Gale and Aurora and Erica
-
 - Make visuals for telekinesis with animations activated.
 
 ## Visuals

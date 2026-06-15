@@ -311,6 +311,222 @@
             "BondLevel": 0,
             "BondDialogueSeen": 0,
             "MaxLevel": 2
+        },
+        {
+            "ID": 26,
+            "Name": "Gale-Kira",
+            "Characters": [
+                13,
+                9
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 27,
+            "Name": "Gale-Zack",
+            "Characters": [
+                13,
+                0
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 28,
+            "Name": "Gale-Gwenie",
+            "Characters": [
+                13,
+                10
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 29,
+            "Name": "Gale-Aurora",
+            "Characters": [
+                13,
+                14
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 30,
+            "Name": "Gale-Sorak",
+            "Characters": [
+                13,
+                3
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 31,
+            "Name": "Aurora-Gusto",
+            "Characters": [
+                14,
+                8
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 32,
+            "Name": "Aurora-Kira",
+            "Characters": [
+                14,
+                9
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 33,
+            "Name": "Aurora-Zack",
+            "Characters": [
+                14,
+                0
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 34,
+            "Name": "Aurora-Gwenie",
+            "Characters": [
+                14,
+                10
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 35,
+            "Name": "Erica-Lea",
+            "Characters": [
+                15,
+                1
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 36,
+            "Name": "Erica-Elwyn",
+            "Characters": [
+                15,
+                2
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 37,
+            "Name": "Erica-Sorak",
+            "Characters": [
+                15,
+                3
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 38,
+            "Name": "Erica-Lyv",
+            "Characters": [
+                15,
+                4
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 2
+        },
+        {
+            "ID": 39,
+            "Name": "Erica-Ruben",
+            "Characters": [
+                15,
+                7
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 41,
+            "Name": "Erica-Kira",
+            "Characters": [
+                15,
+                9
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 42,
+            "Name": "Erica-Gwenie",
+            "Characters": [
+                15,
+                10
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 43,
+            "Name": "Erica-Zack",
+            "Characters": [
+                15,
+                0
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 44,
+            "Name": "Erica-Gale",
+            "Characters": [
+                15,
+                13
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
         }
     ]
 }
