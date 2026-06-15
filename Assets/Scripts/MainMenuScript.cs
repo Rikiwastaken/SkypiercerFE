@@ -98,7 +98,15 @@ public class MainMenuScript : MonoBehaviour
         DataScript.instance.SetupCharactersForChapter(Chapter);
 
 
-        sceneLoader.LoadScene("Chapter" + Chapter);
+
+        if (Chapter == 12)
+        {
+            sceneLoader.LoadScene("CutsceneScene", 12);
+        }
+        else
+        {
+            sceneLoader.LoadScene("Chapter" + Chapter);
+        }
     }
 
     public void OnCancel()

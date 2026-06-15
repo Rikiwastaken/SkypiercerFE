@@ -174,8 +174,14 @@ public class WorldMapManager : MonoBehaviour
                     }
                 }
 
-
-                SceneLoader.instance.LoadScene(scenename);
+                if (!selectedsidestory && selectedchapter == 12)
+                {
+                    SceneLoader.instance.LoadScene("CutsceneScene", 12);
+                }
+                else
+                {
+                    SceneLoader.instance.LoadScene(scenename);
+                }
             }
 
         }

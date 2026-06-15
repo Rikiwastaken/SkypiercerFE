@@ -35,6 +35,7 @@ public class CutsceneManager : MonoBehaviour
     [Serializable]
     public class CutScene
     {
+        public string Name;
         public TimelineAsset Timeline;
         public List<CutSceneCharacter> Characters; // Characters present in teh cutscene
         public List<DialogueList> DialogueBubblesList; // dialogues in the cutscenes
@@ -132,29 +133,33 @@ public class CutsceneManager : MonoBehaviour
 
     private bool paused;
 
+    public bool testing;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _textBubbleScript = TextBubbleScript.Instance;
         DataScript = DataScript.instance;
-        if (DataScript == null)
+        if (DataScript == null && !testing)
         {
             SceneManager.LoadScene("FirstScene");
         }
+
+
         _sceneLoader = SceneLoader.instance;
-        _combbatSceneLoader = DataScript.GetComponent<CombatSceneLoader>();
-
-        if (DataScript == null)
+        if (DataScript != null && !testing)
         {
-            SceneManager.LoadScene("FirstScene");
+            _combbatSceneLoader = DataScript.GetComponent<CombatSceneLoader>();
+            if (_sceneLoader.Cutscenetoplay != -1)
+            {
+                CurrentCutscene = _sceneLoader.Cutscenetoplay;
+                _sceneLoader.Cutscenetoplay = -1;
+            }
         }
 
-        if (_sceneLoader.Cutscenetoplay != -1)
-        {
-            CurrentCutscene = _sceneLoader.Cutscenetoplay;
-            _sceneLoader.Cutscenetoplay = -1;
-        }
+
+
 
 
         if (CurrentCutscene != -1)

@@ -1,0 +1,40 @@
+{
+    "dialguesToLoad": [
+        {
+            "text": "What the hell happened here? Did you do this, Gale?",
+            "characterindex": 0
+        },
+        {
+            "text": "No. When we arrived the camp was fine.",
+            "characterindex": 13
+        },
+        {
+            "text": "Here you are, Zack Farron. I was looking for you, but I got a little sidetracked, though.",
+            "characterindex": 17
+        },
+        {
+            "text": "Raghnall... What is he doing here?",
+            "characterindex": 13
+        },
+        {
+            "text": "You again! What do you want?",
+            "characterindex": 0
+        },
+        {
+            "text": "You escaped me last time, but now Mir isn't here to save you.",
+            "characterindex": 17
+        },
+        {
+            "text": "One thing is for sure. You are not leaving here alive!",
+            "characterindex": 0
+        },
+        {
+            "text": "Kay, you're still hurt. Stay back.",
+            "characterindex": 13
+        },
+        {
+            "text": "Got it. I'll leave to you, love.",
+            "characterindex": 11
+        }
+    ]
+}
