@@ -43,7 +43,9 @@ public class CutsceneManager : MonoBehaviour
         public List<DialogueList> DialogueBubblesList; // dialogues in the cutscenes
         public List<AnimSequence> animSequences; // character animations in the cutscene
         public List<MovementSequence> MovementSequences;
+        public List<int> MusicIDs; // List of musics to play in the cutscene
         public int DialogueIDToplay;
+        public int musicToPlay;
         public int AnimsequenceToplay;
         public int MovementSequenceToPlay;
         [Header("Environment")]
@@ -55,6 +57,7 @@ public class CutsceneManager : MonoBehaviour
         public List<CameraVariables> CameraData;
         public int CutSceneToPlayAfterThisOne = -1; // load this cutscene after the cutscene is over
         public string SceneToLoad; // If CutSceneToPlayAfterThisOne is -1, will load this scene instead.
+
 
     }
 
@@ -114,6 +117,7 @@ public class CutsceneManager : MonoBehaviour
     public float FadeTime;
     private Coroutine FadeToBlacKCoroutine;
     public GameObject EmojiBubble;
+    private MusicManager _MusicManager;
 
 
     [Header("Scene Parameters")]
@@ -263,6 +267,24 @@ public class CutsceneManager : MonoBehaviour
         }
 
         Cutscenes[CurrentCutscene].AnimsequenceToplay++;
+
+    }
+
+    public void PlayMusic() // function called by a signal to play the next music in the cue
+    {
+        if (Cutscenes.Count < CurrentCutscene || Cutscenes[CurrentCutscene].MusicIDs.Count < Cutscenes[CurrentCutscene].musicToPlay)
+        {
+            return;
+        }
+        int musicID = Cutscenes[CurrentCutscene].MusicIDs[Cutscenes[CurrentCutscene].musicToPlay];
+
+        if (_MusicManager == null)
+        {
+            _MusicManager = MusicManager.instance;
+        }
+        _MusicManager.SetCutSceneMusic(musicID);
+
+        Cutscenes[CurrentCutscene].musicToPlay++;
 
     }
 
@@ -558,7 +580,6 @@ public class CutsceneManager : MonoBehaviour
     private void PlayMovement(int characterID, Vector3 Movement, float TimeToMove, int movementtype)
     {
 
-        Debug.Log("playing movement for character " + characterID + " of type " + movementtype);
 
         if (movementtype == 0 || movementtype == 1)
         {
@@ -567,7 +588,6 @@ public class CutsceneManager : MonoBehaviour
         }
         else if (movementtype == 2)
         {
-            Debug.Log("updating the weapon model of " + GetCharacterFromID(characterID).CharacterGO);
             GetCharacterFromID(characterID).CharacterGO.GetComponent<UnitScript>().UpdateWeaponModel();
 
         }

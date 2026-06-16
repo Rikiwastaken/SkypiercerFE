@@ -34,6 +34,9 @@ public class MusicManager : MonoBehaviour
     private AudioSource currentDialogueAudioSource;
     private AudioSource currentDialogueAudioSourceIntro;
 
+    public AudioSource CutSceneMusic;
+    public AudioSource CutSceneMusicintro;
+
     public int CurrentDialogueMusic;
 
     private bool lowerdialogue;
@@ -102,7 +105,7 @@ public class MusicManager : MonoBehaviour
         {
             instance = this;
         }
-        SceneManager.sceneLoaded += OnSceneLoad;
+        SceneManager.activeSceneChanged += OnSceneLoad;
     }
 
     private void Start()
@@ -123,9 +126,9 @@ public class MusicManager : MonoBehaviour
         mixer.SetFloat("SEVol", Mathf.Log10(SaveManager.Options.SEVolume) * 20f);
     }
 
-    void OnSceneLoad(Scene scene, LoadSceneMode mode)
+    void OnSceneLoad(Scene activescene, Scene nextscene)
     {
-        if (scene.name == "BattleScene")
+        if (nextscene.name == "BattleScene")
         {
             return;
         }
@@ -134,21 +137,25 @@ public class MusicManager : MonoBehaviour
             currentDialogueAudioSource.volume = 0f;
             currentDialogueAudioSourceIntro.volume = 0f;
         }
-        if (scene.name == "Camp")
+        if (nextscene.name == "Camp")
         {
             PlayMusic(1);
         }
-        else if (scene.name == "WorldMap")
+        else if (nextscene.name == "WorldMap")
         {
             PlayMusic(6);
         }
-        else if (scene.name == "MainMenu")
+        else if (nextscene.name == "MainMenu")
         {
             PlayMusic(8, maxvolume);
         }
 
 
-        currentscene = scene.name;
+        currentscene = nextscene.name;
+        if (nextscene.name == "CutsceneScene")
+        {
+            return;
+        }
         MusicManager.instance.InitializeMusics(currentscene);
     }
 
@@ -177,6 +184,7 @@ public class MusicManager : MonoBehaviour
         CampMusic.Stop();
         WorldMapMusic.Stop();
         ShipMusic.Stop();
+        CutSceneMusic.Stop();
 
         if (Chapter != -1)
         {
@@ -261,6 +269,17 @@ public class MusicManager : MonoBehaviour
             {
                 PrepFinished = false;
             }
+        }
+
+        if (currentscene != "CutsceneScene")
+        {
+            ChangeVolume(CutSceneMusic, 0f);
+            ChangeVolume(CutSceneMusicintro, 0f);
+
+        }
+        else
+        {
+            return;
         }
 
         if (PrepFinished && !incombat.isPlaying)
@@ -359,6 +378,8 @@ public class MusicManager : MonoBehaviour
             ChangeVolume(CampMusicintro, 0f);
         }
 
+
+
         if (textBubbleScript != null && textBubbleScript.indialogue)
         {
             if (lowermap)
@@ -415,7 +436,11 @@ public class MusicManager : MonoBehaviour
     {
         if (currentMusicType == type)
         {
-            return;
+            if (type != 9)
+            {
+                return;
+            }
+
         }
 
 
@@ -436,6 +461,7 @@ public class MusicManager : MonoBehaviour
     }
     private void PlayMusicWithIntro(int TypeID, float startvolume)
     {
+
         AudioSource Main = null;
         AudioSource intro = null;
 
@@ -494,6 +520,13 @@ public class MusicManager : MonoBehaviour
                 Main = MainMenuMusic;
                 intro = MainMenuMusicintro;
                 break;
+            case (9):  //CutScene
+                lowerdialogue = true;
+                lowermap = true;
+                Main = CutSceneMusic;
+                intro = CutSceneMusicintro;
+                break;
+
 
         }
         Main.volume = startvolume;
@@ -543,6 +576,15 @@ public class MusicManager : MonoBehaviour
         {
             CurrentDialogueMusic = -1;
         }
+    }
+
+    public void SetCutSceneMusic(int musicID = 0)
+    {
+
+        CutSceneMusic.clip = DialogueMusicsWithIntro[musicID].Music;
+        CutSceneMusicintro.clip = DialogueMusicsWithIntro[musicID].Intro;
+
+        PlayMusic(9, maxvolume);
     }
 
     private void ChangeVolume(AudioSource source, float targetvolume)
