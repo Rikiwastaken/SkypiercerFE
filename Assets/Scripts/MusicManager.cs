@@ -77,6 +77,7 @@ public class MusicManager : MonoBehaviour
         public AudioClip PrepMusic;
         public AudioClip PrepMusicIntro;
         public List<int> Chapters;
+        public bool useforSideStory;
     }
 
     public List<MapBattleMusic> MusicList;
@@ -153,11 +154,18 @@ public class MusicManager : MonoBehaviour
 
     public void InitializeMusics(string ChapterToLoad)
     {
+        bool isSideStory = false;
         int Chapter = -1;
         if (ChapterToLoad.Contains("Chapter"))
         {
             ChapterToLoad = ChapterToLoad.Replace("Chapter", "");
             Chapter = int.Parse(ChapterToLoad);
+        }
+        if (ChapterToLoad.Contains("SideStory"))
+        {
+            ChapterToLoad = ChapterToLoad.Replace("SideStory", "");
+            Chapter = int.Parse(ChapterToLoad);
+            isSideStory = true;
         }
         if (ChapterToLoad.Contains("Prologue") || ChapterToLoad.Contains("TestMap"))
         {
@@ -175,7 +183,7 @@ public class MusicManager : MonoBehaviour
 
             foreach (MapBattleMusic MusicClass in MusicList)
             {
-                if (MusicClass.Chapters.Contains(Chapter))
+                if (MusicClass.Chapters.Contains(Chapter) && MusicClass.useforSideStory == isSideStory)
                 {
                     incombat.clip = MusicClass.BattleMusic;
                     incombatintro.clip = MusicClass.BattleMusicIntro;
@@ -195,7 +203,7 @@ public class MusicManager : MonoBehaviour
     private void Update()
     {
         string currentscenename = SceneManager.GetActiveScene().name;
-        if (currentscenename.Contains("Chapter") || currentscenename.Contains("Prologue") || currentscenename.Contains("TestMap"))
+        if (currentscenename.Contains("SideStory") || currentscenename.Contains("Chapter") || currentscenename.Contains("Prologue") || currentscenename.Contains("TestMap"))
         {
             if (cameraScript == null)
             {
