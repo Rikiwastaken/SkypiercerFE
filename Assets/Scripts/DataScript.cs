@@ -1374,6 +1374,8 @@ public class DataScript : MonoBehaviour
 
         skillsPerMap = new List<SkillPerMap>();
 
+        Scene currentscene = SceneManager.GetActiveScene();
+
         foreach (string guid in sceneGUIDs)
         {
             float averagelevel = 0f; ;
