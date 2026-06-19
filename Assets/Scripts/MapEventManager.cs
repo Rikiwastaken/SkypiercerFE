@@ -894,6 +894,24 @@ public class MapEventManager : MonoBehaviour
             AssetDatabase.StopAssetEditing();
         }
     }
+
+    [ContextMenu("Recalculate Event ID")]
+    public void RecalculateID()
+    {
+        if (EventsToMonitor != null && EventsToMonitor.Count > 0)
+        {
+            for (int i = 0; i < EventsToMonitor.Count; i++)
+            {
+                EventsToMonitor[i].ID = i;
+            }
+            Debug.Log("Event ID recalculated successfuly");
+        }
+        else
+        {
+            Debug.LogError("No Event list or Empty Eventlist");
+        }
+    }
+
 #endif
 
 }

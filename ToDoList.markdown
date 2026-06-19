@@ -10,13 +10,17 @@
 
 ## System 
 
+
+
 - Rework Animation for Animation Tree
 
 - Make visuals for telekinesis with animations activated.
 
-- Add music to cutscenes and chapter 11/12
+- Make visuals for Boss Attacks
 
 ## Visuals
+
+- Redo the world map
 
 - Make camera move a little bit more in battle (avoid fixed angles)
 
