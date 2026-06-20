@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MossOnStone
+  m_Name: RustOnMetal
   m_Shader: {fileID: -6465566751694194690, guid: 228d70073978f614dafdb4643b24c23a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -20,7 +20,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: 
+  m_LockedProperties: _Smoothness
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -40,15 +40,15 @@ Material:
     m_Floats:
     - _Alpha: 1
     - _AlphaClipThreshold: 0.5
-    - _AngleOffset: 2
-    - _CellDensity: 5
-    - _Metallic: 0
+    - _AngleOffset: -21.2
+    - _CellDensity: 3.8
+    - _Metallic: 0.58
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0
+    - _Smoothness: 0.23
     m_Colors:
-    - _BaseColor: {r: 0.5408803, g: 0.5408803, b: 0.5408803, a: 0}
-    - _MossColor: {r: 0, g: 0.47798723, b: 0.005183519, a: 0}
+    - _BaseColor: {r: 0.28930807, g: 0.28930807, b: 0.28930807, a: 0}
+    - _MossColor: {r: 0.22012573, g: 0.071064845, b: 0.043609787, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &5747515270659529689

@@ -38,6 +38,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 1
+    - _AlphaClipThreshold: 0.5
     - _AngleOffset: 17.7
     - _CellDensity: 11.89
     - _Metallic: 0
