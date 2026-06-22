@@ -720,7 +720,11 @@ public class AttackTurnScript : MonoBehaviour
             CharUser.statusEffects.AccelerationTurns += 3;
             User.GetComponent<UnitScript>().AddNumber(healthlost, false, "All In");
         }
-
+        else if (commandID == 96) // Power Transfer
+        {
+            User.GetComponent<UnitScript>().IncreaseExamodeGauge(20);
+            User.GetComponent<UnitScript>().AddNumber(0, true, "Power Transfer");
+        }
         ActionsMenu.FinalizeAttack();
 
     }

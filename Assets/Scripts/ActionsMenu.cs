@@ -767,6 +767,10 @@ public class ActionsMenu : MonoBehaviour
             else if (command.targettype == 3)
             {
                 targetlist.Add(target.gameObject);
+                if (commandID == 96) //Power Transfer
+                {
+                    targetlist = new List<GameObject>() { target.GetComponent<UnitScript>().GetBattallionLeader() };
+                }
                 activetargetid = 0;
                 initializeSkillWindow(target, targetlist[activetargetid], command);
                 for (int i = 0; i < transform.childCount; i++)
@@ -1248,7 +1252,11 @@ public class ActionsMenu : MonoBehaviour
             int healthrestored = (int)(-(charunit.currentHP - 1));
             SelfHealCommandWindow(unit, healthrestored, unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses);
         }
-
+        else if (command.ID == 96) // Power Transfer
+        {
+            target = unit.GetComponent<UnitScript>().GetBattallionLeader();
+            BasicCommandWindow(unit, target);
+        }
     }
 
 
@@ -1937,7 +1945,7 @@ public class ActionsMenu : MonoBehaviour
 
                     if (charunit.currentHP <= 0)
                     {
-                        target.GetComponent<UnitScript>().unitkilled++;
+                        target.GetComponent<UnitScript>().IncreaseUnitsKilled();
                     }
 
                     return (numberofhits, numberofcritials, finaldamage, 0, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
@@ -2204,11 +2212,11 @@ public class ActionsMenu : MonoBehaviour
 
             if (chartarget.currentHP <= 0)
             {
-                unit.GetComponent<UnitScript>().unitkilled++;
+                unit.GetComponent<UnitScript>().IncreaseUnitsKilled();
             }
             if (charunit.currentHP <= 0)
             {
-                target.GetComponent<UnitScript>().unitkilled++;
+                target.GetComponent<UnitScript>().IncreaseUnitsKilled();
             }
 
             return (numberofhits, numberofcritials, finaldamage, exp, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);

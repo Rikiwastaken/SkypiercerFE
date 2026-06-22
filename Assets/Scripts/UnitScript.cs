@@ -44,6 +44,7 @@ public class UnitScript : MonoBehaviour
         public float DialoguePitch;
         public int TauntTurns;
         public bool isintercepting;
+        public int totalenemieskilled;
         public StatusEffects statusEffects;
         public bool motivateusedthisturn;
         public int previouslyequipedweaponID = -1;
@@ -1178,7 +1179,8 @@ public class UnitScript : MonoBehaviour
                 ExamodePoints = CharacterToCopy.ExamodeClass.ExamodePoints,
                 Basemat = CharacterToCopy.ExamodeClass.Basemat,
                 ExamodeMat = CharacterToCopy.ExamodeClass.ExamodeMat
-            }
+            },
+            totalenemieskilled = CharacterToCopy.totalenemieskilled,
         };
 
         return copy;
@@ -2316,7 +2318,21 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    public void IncreaseExamodeGauge(Character character = null)
+    public GameObject GetBattallionLeader(Character unit)
+    {
+        if (unit == null)
+        {
+            return null;
+        }
+        return GridScript.GetUnit(unit.playableStats.battalion.ToLower());
+    }
+
+    public GameObject GetBattallionLeader()
+    {
+        return GetBattallionLeader(UnitCharacteristics);
+    }
+
+    public void IncreaseExamodeGauge(Character character, int forcedamount)
     {
         Character ChartoUse = character;
         if (ChartoUse == null)
@@ -2326,7 +2342,7 @@ public class UnitScript : MonoBehaviour
 
         DataScript _DataScript = DataScript.instance;
 
-        GameObject protag = GridScript.GetUnit(ChartoUse.playableStats.battalion.ToLower());
+        GameObject protag = GetBattallionLeader(ChartoUse);
 
         if (protag != null)
         {
@@ -2334,23 +2350,46 @@ public class UnitScript : MonoBehaviour
 
             if (protagchar.affiliation == "playable" && protagchar.ExamodeClass != null && protagchar.ExamodeClass.remaingExamodeTurns <= 0)
             {
-                float multiplier = 1f;
-                if (ChartoUse.playableStats.protagonist)
+                if (forcedamount > 0)
                 {
-                    multiplier = _DataScript.ProtagExamodeGainMultiplier;
+                    protagchar.ExamodeClass.ExamodePoints += forcedamount;
+                }
+                else
+                {
+                    float multiplier = 1f;
+                    if (ChartoUse.playableStats.protagonist)
+                    {
+                        multiplier = _DataScript.ProtagExamodeGainMultiplier;
+                    }
+
+                    protagchar.ExamodeClass.ExamodePoints += (int)(multiplier * _DataScript.ExamodeGainedPeraction);
+                    if (protagchar.ExamodeClass.ExamodePoints > 100)
+                    {
+                        protagchar.ExamodeClass.ExamodePoints = 100;
+                    }
                 }
 
-                protagchar.ExamodeClass.ExamodePoints += (int)(multiplier * _DataScript.ExamodeGainedPeraction);
-                if (protagchar.ExamodeClass.ExamodePoints > 100)
-                {
-                    protagchar.ExamodeClass.ExamodePoints = 100;
-                }
             }
 
 
 
         }
 
+    }
+
+    public void IncreaseExamodeGauge(int forcedamount)
+    {
+        IncreaseExamodeGauge(null, forcedamount);
+    }
+
+    public void IncreaseExamodeGauge(Character character)
+    {
+        IncreaseExamodeGauge(character, 0);
+    }
+
+    public void IncreaseExamodeGauge()
+    {
+        IncreaseExamodeGauge(UnitCharacteristics, 0);
     }
 
     public void RetreatTrigger() // Effect of Retreat or Verso
@@ -3746,6 +3785,22 @@ public class UnitScript : MonoBehaviour
     private int ManhattanDistance(Character unit, Character otherunit)
     {
         return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
+    }
+
+    public void IncreaseUnitsKilled(GameObject unit)
+    {
+
+        unit.GetComponent<UnitScript>().UnitCharacteristics.totalenemieskilled++;
+
+
+        unit.GetComponent<UnitScript>().unitkilled++;
+
+
+    }
+
+    public void IncreaseUnitsKilled()
+    {
+        IncreaseUnitsKilled(gameObject);
     }
 
     public List<Skill> GetCommands()

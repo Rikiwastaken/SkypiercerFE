@@ -292,7 +292,7 @@
         },
         {
             "name": "Killing Spree",
-            "Descriptions": "Increases all stats by 1 for each enemy killed.",
+            "Descriptions": "Increases all stats by 1 for each enemy killed in the current chapter",
             "IsCommand": false,
             "Cost": 15,
             "targettype": 0,
@@ -949,6 +949,26 @@
             "range": 0,
             "buyable": true,
             "ID": 94
+        },
+        {
+            "name": "Killer",
+            "Descriptions": "Increases damage dealt by 1% every 10 enemies killed up to 30%.",
+            "IsCommand": false,
+            "Cost": 15,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 95
+        },
+        {
+            "name": "Power Transfer",
+            "Descriptions": "Charges Battalion Leader's Examode gauge by 20%.",
+            "IsCommand": true,
+            "Cost": 10,
+            "targettype": 3,
+            "range": 0,
+            "buyable": true,
+            "ID": 96
         }
     ]
 }
