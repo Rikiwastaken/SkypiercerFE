@@ -1,5 +1,5 @@
 {
-    "dialguesToLoad": [
+    "dialoguesToLoad": [
         {
             "text": "Here you are! You must be Zack Farron, right? Your lieutenants told me what happened.",
             "characterindex": -1

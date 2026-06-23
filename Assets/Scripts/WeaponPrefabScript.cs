@@ -73,6 +73,16 @@ public class WeaponPrefabScript : MonoBehaviour
 
     }
 
+    public void MakeWeaponDisappear()
+    {
+        if (currentWeaponGO != null)
+        {
+            weaponstovanish.Add(currentWeaponGO);
+            currentWeaponGO = null;
+        }
+
+    }
+
     public void SwitchWeaponGO(string type, string name, int level, float scale = 0.5f, UnitScript.Character User = null, bool switchinstantly = false)
     {
         if (CurrentlyAppearing.weaponType != null && CurrentlyAppearing.weaponType.ToLower() == type.ToLower() && currentEquipedLevel == level)

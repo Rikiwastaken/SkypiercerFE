@@ -1,60 +1,74 @@
 {
-    "dialguesToLoad": [
+    "dialoguesToLoad": [
         {
             "text": "It looks like it's finally over...",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 0
         },
         {
             "text": "I think I prefer our methods of hunting...",
-            "characterindex": 9
+            "characterindex": 9,
+            "dialogueID": 0
         },
         {
             "text": "This is faster. I like this method.",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 0
         },
         {
             "text": "Hold on, guys! Aren't we forgetting something?",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 0
         },
         {
             "text": "What?",
-            "characterindex": 9
+            "characterindex": 9,
+            "dialogueID": 0
         },
         {
             "text": "Why are we helping the freaking Archadian army ? I mean, they literally threw us in jail yesterday!",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 0
         },
         {
             "text": "We have no choice.",
-            "characterindex": 9
+            "characterindex": 9,
+            "dialogueID": 0
         },
         {
             "text": "Without them, we'd be much worse. If we secure their help, we'll have supplies.",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 0
         },
         {
             "text": "Maybe we should have triggered the crystal in their base.",
-            "characterindex": 9
+            "characterindex": 9,
+            "dialogueID": 0
         },
         {
             "text": "They would have been taken by surprise. That would have resulted in many deaths.",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 0
         },
         {
             "text": "Yeah, well you can call that retribution for all the Occidens soldier they must have killed.",
-            "characterindex": 9
+            "characterindex": 9,
+            "dialogueID": 0
         },
         {
             "text": "You think your side is innocent? ",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 0
         },
         {
             "text": "Guys. That's not what we're here for.",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 0
         },
         {
             "text": "You are right, Zack. This is going nowhere. Let's return to the commander.",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 0
         }
     ]
 }

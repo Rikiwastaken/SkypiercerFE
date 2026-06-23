@@ -1,5 +1,5 @@
 {
-    "dialguesToLoad": [
+    "dialoguesToLoad": [
         {
             "text": "Where am I? What's going on?",
             "characterindex": 0

@@ -605,6 +605,11 @@ public class CutsceneManager : MonoBehaviour
             GetCharacterFromID(characterID).CharacterGO.GetComponent<UnitScript>().UpdateWeaponModel();
 
         }
+        else if (movementtype == 3)
+        {
+            GetCharacterFromID(characterID).CharacterGO.GetComponent<UnitScript>().MakeWaponDisappear();
+
+        }
 
     }
 
@@ -705,7 +710,7 @@ public class CutsceneManager : MonoBehaviour
             return;
 
         string json = File.ReadAllText(path);
-        Debug.Log(json);
+
         DialogueImporterWrapperClass wrapper = JsonUtility.FromJson<DialogueImporterWrapperClass>(json);
         if (wrapper == null || wrapper.dialoguesToLoad == null)
         {
@@ -717,7 +722,7 @@ public class CutsceneManager : MonoBehaviour
 
 
 
-        List<List<TextBubbleInfo>> dialogues = new List<List<TextBubbleInfo>>();
+        List<List<TextBubbleInfo>> dialogues = new List<List<TextBubbleInfo>>() { new List<TextBubbleInfo>() };
 
         foreach (DialogueImporterClass dialgueToLoad in wrapper.dialoguesToLoad)
         {
@@ -731,6 +736,7 @@ public class CutsceneManager : MonoBehaviour
 
         foreach (List<TextBubbleInfo> dialogue in dialogues)
         {
+            Debug.Log(dialogue);
             if (dialogue == null || dialogue.Count == 0)
             {
                 continue;

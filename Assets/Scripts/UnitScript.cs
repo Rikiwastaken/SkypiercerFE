@@ -2135,6 +2135,11 @@ public class UnitScript : MonoBehaviour
 
     }
 
+    public void MakeWaponDisappear()
+    {
+        _WeaponPrefabScript.MakeWeaponDisappear();
+    }
+
     public void UpdateWeaponModel(float scale, bool spawninstantly)
     {
         UpdateWeaponModel(null, scale, null, spawninstantly);
