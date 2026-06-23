@@ -294,11 +294,12 @@ public class ActionsMenu : MonoBehaviour
             transform.GetChild(1).GetComponent<Button>().colors = colors;
 
             transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().color = BaseTextColor;
-            if (!transform.GetChild(1).gameObject.activeSelf)
-            {
-                transform.GetChild(1).gameObject.SetActive(true);
-            }
+            //if (!transform.GetChild(1).gameObject.activeSelf)
+            //{
+            //    transform.GetChild(1).gameObject.SetActive(true);
+            //}
         }
+
 
         if (TutorialScript.instance != null && TutorialScript.instance.enabled && !TutorialScript.instance.tutorialisover)
         {

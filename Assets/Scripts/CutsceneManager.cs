@@ -467,7 +467,7 @@ public class CutsceneManager : MonoBehaviour
             if (CurrentCharacter.Examode)
             {
                 Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
-                if (Character.name.ToLower() == "zack" && Character.ExamodeClass != null)
+                if (Character.name.ToLower() == "zack" && Character.ExamodeClass != null && DataScript.instance != null)
                 {
 
                     Character.ExamodeClass.ExamodeMat = new Material(DataScript.instance.ExamodeMaterial);

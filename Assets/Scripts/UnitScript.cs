@@ -670,6 +670,13 @@ public class UnitScript : MonoBehaviour
     {
         Character character = charactertouse;
         DataScript _Datascript = DataScript.instance;
+
+        if (_Datascript == null)
+        {
+            Debug.LogWarning("Datascript not found, abandonning examode");
+            return;
+        }
+
         if (character == null)
         {
             character = UnitCharacteristics;
