@@ -1,60 +1,69 @@
 {
-    "dialguesToLoad": [
+    "dialoguesToLoad": [
         {
             "text": "What are we doing in these ruins ?",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 0
         },
         {
             "text": "They are easy to defend.",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 0
         },
         {
             "text": "Against what, though? They asked us to kill pluvials but I don't see any.",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 0
         },
         {
             "text": "That's how Archadian hunters work. You see...",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 0
         },
         {
             "text": "What? You're Archadian?!",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 0
         },
         {
             "text": "Of course. Why else would I be here.",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 0
         },
         {
             "text": "That... Was to be expected. However, if Sir Mir trust you, then I'm good.",
-            "characterindex": 9
+            "characterindex": 9,
+            "dialogueID": 0
         },
         {
-            "text": "Perfect. As I was saying, we'll be using this.",
-            "characterindex": 13
+            "text": "Perfect. As I was saying, we'll be using a crystal. There should be one around.",
+            "characterindex": 13,
+            "dialogueID": 0
         },
         {
             "text": "What's that? It looks like the crystals in the caves near Landfall Village.",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 1
         },
         {
             "text": "This is a Crystal Remnant. Hit it with a blade and the pluvials from all around will come running.",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 1
         },
         {
             "text": "What? That seems exceedingly dangerous, no?",
-            "characterindex": 9
+            "characterindex": 9,
+            "dialogueID": 2
         },
         {
             "text": "But it's efficient. Let's do it.",
-            "characterindex": 0
-        },
-        {
-            "text": "Yes, That is what I was told. Truth is, Captain, the pluvials in the neighboring plains are becoming a threat.",
-            "characterindex": 9
+            "characterindex": 0,
+            "dialogueID": 2
         },
         {
             "text": "Right.",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 2
         }
     ]
 }

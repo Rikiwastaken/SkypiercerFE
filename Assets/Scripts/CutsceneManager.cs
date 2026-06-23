@@ -141,6 +141,20 @@ public class CutsceneManager : MonoBehaviour
 
     public bool testing;
 
+    [Serializable]
+    public class DialogueImporterWrapperClass
+    {
+        public List<DialogueImporterClass> dialoguesToLoad;
+    }
+
+    [Serializable]
+    public class DialogueImporterClass
+    {
+        public string text;
+        public int characterindex = -1;
+        public int dialogueID;
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -239,7 +253,7 @@ public class CutsceneManager : MonoBehaviour
         int animation = currentdialoguelist.talkinganimationID;
         //PlayAnimation(sceneCharacterID, animation);
         // kinda doesn't work that well
-        if (currentdialoguelist.EmojiToShow != -1)
+        if (currentdialoguelist.EmojiToShow != -1 && sceneCharacterID != -1)
         {
             GetCharacterFromID(sceneCharacterID).EmojiBubble.GetComponent<EmoteBubbleScript>().Initialize(currentdialoguelist.EmojiToShow);
         }
@@ -674,34 +688,74 @@ public class CutsceneManager : MonoBehaviour
         UnityEditor.EditorUtility.SetDirty(this);
     }
 
+    [ContextMenu("Save Camera Positions")]
+    public void SaveCamPositions()
+    {
+        Cutscenes[CurrentCutsceneToDebug].CameraData[0] = new CameraVariables() { Position = Cameras[0].position, Rotation = Cameras[0].rotation.eulerAngles };
+        Cutscenes[CurrentCutsceneToDebug].CameraData[1] = new CameraVariables() { Position = Cameras[1].position, Rotation = Cameras[1].rotation.eulerAngles };
+        Cutscenes[CurrentCutsceneToDebug].CameraData[2] = new CameraVariables() { Position = Cameras[2].position, Rotation = Cameras[2].rotation.eulerAngles };
+        UnityEditor.EditorUtility.SetDirty(this);
+    }
+
     [ContextMenu("Load Dialogue From JSON")]
-    public void LoadBonds()
+    public void LoadDialogues()
     {
         string path = UnityEditor.EditorUtility.OpenFilePanel("Select Bond JSON File", "", "json");
         if (string.IsNullOrEmpty(path))
             return;
 
         string json = File.ReadAllText(path);
-
-        MapEventManager.Dialoguewrapper wrapper = JsonUtility.FromJson<MapEventManager.Dialoguewrapper>(json);
-        if (wrapper == null || wrapper.dialguesToLoad == null)
+        Debug.Log(json);
+        DialogueImporterWrapperClass wrapper = JsonUtility.FromJson<DialogueImporterWrapperClass>(json);
+        if (wrapper == null || wrapper.dialoguesToLoad == null)
         {
-            Debug.LogError("JSON file format invalid. Needs { \"dialguesToLoad\": [ ... ] }");
+            Debug.LogError("JSON file format invalid. Needs { \"dialoguesToLoad\": [ ... ] }");
             return;
         }
 
         List<DialogueList> newdialogue = new List<DialogueList>();
-        foreach (MapEventManager.DialgueToLoad dialgueToLoad in wrapper.dialguesToLoad)
+
+
+
+        List<List<TextBubbleInfo>> dialogues = new List<List<TextBubbleInfo>>();
+
+        foreach (DialogueImporterClass dialgueToLoad in wrapper.dialoguesToLoad)
         {
+            if (dialogues.Count <= dialgueToLoad.dialogueID)
+            {
+                dialogues.Add(new List<TextBubbleInfo>());
+            }
+            dialogues[dialgueToLoad.dialogueID].Add(new TextBubbleInfo() { text = dialgueToLoad.text, characterindex = dialgueToLoad.characterindex });
 
-            TextBubbleInfo textBubbleInfo = new TextBubbleInfo() { text = dialgueToLoad.text, characterindex = dialgueToLoad.characterindex };
-
-
-            newdialogue.Add(new DialogueList() { Dialogue = new List<TextBubbleInfo>() { textBubbleInfo } });
         }
+
+        foreach (List<TextBubbleInfo> dialogue in dialogues)
+        {
+            if (dialogue == null || dialogue.Count == 0)
+            {
+                continue;
+            }
+
+            int charactertalking = -1;
+            int characterID = dialogue[0].characterindex;
+            if (characterID > -1)
+            {
+                foreach (CutSceneCharacter character in Cutscenes[CurrentCutsceneToDebug].Characters)
+                {
+                    if (character.characterID == characterID)
+                    {
+                        charactertalking = character.ID;
+                    }
+                }
+            }
+
+            newdialogue.Add(new DialogueList() { Dialogue = dialogue, characterTalkingID = charactertalking });
+        }
+
+
         Cutscenes[CurrentCutsceneToDebug].DialogueBubblesList = newdialogue;
         UnityEditor.EditorUtility.SetDirty(this);
-        Debug.Log("Loaded " + wrapper.dialguesToLoad.Count + " dialogue parts into the Cutscenes number " + CurrentCutsceneToDebug + "!");
+        Debug.Log("Loaded " + wrapper.dialoguesToLoad.Count + " dialogue parts into the Cutscenes number " + CurrentCutsceneToDebug + "!");
 
     }
 
