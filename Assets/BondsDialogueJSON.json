@@ -4057,21 +4057,121 @@
             "dialogueLvl1": [
                 {
                     "CharacterID": 10,
-                    "text": "bond 1 between Gwenie and Lea, with Gwenie talking"
+                    "text": "You! Come here! I need to talk to you!"
                 },
                 {
                     "CharacterID": 1,
-                    "text": "bond 1 between Lea and Gwenie, with Lea talking"
+                    "text": "What? You're Gwenie, right? How can I help you?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "You look strong! Become my First Mate!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "First Mate? What are you talking about?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Come on! It'll be fun! We can go on adventures together!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I don't think so, Gwenie... I mean, aren't we kind of in an adventurous situation right now?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Holy heck, you're right! So that means..."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "If you don't have anything else to say, I'l just-"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "That means you are already my First Mate!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "You know we're not a pirate crew, right? I mean, you're not even the captain..."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Who cares about that? Anyway, what's your name already?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Lea. My name is Lea."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "That's too long, I'll just call you First Mate!"
                 }
             ],
             "dialogueLvl2": [
                 {
                     "CharacterID": 10,
-                    "text": "bond 2 between Gwenie and Lea, with Gwenie talking"
+                    "text": "First Mate! Look what I found, a treasure map!"
                 },
                 {
                     "CharacterID": 1,
-                    "text": "bond 2 between Lea and Gwenie, with Lea talking"
+                    "text": "Oh, really? Shouldn't you give this to Zack or maybe Sieg? I can't read them..."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Take a look! I think it leads to a treasure!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Hold on, did you draw it yourself?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "No, that would be the most embarrassing thing ever! Only an idiot would do that. Here, take it."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Are you sure it looks a bit fragile..."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Watch it! It's a delicate map! Here, catch."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Hold on, what are you doing? It's coming apart! Why did you throw it."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "First Mate! What have you done!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "You threw it at me! I didn't do anything! What is it make off? Is it... Tree bark?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I took me several minutes to make it... You'll pay for this!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I'm sorry."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "That's it! You're fired."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Fired?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "You are not my First Mate, anymore!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Ah... OK."
                 }
             ],
             "dialogueLvl3": [
