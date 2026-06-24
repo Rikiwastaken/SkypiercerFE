@@ -53,6 +53,7 @@ public class SaveManager : MonoBehaviour
         public string battalion;
         public int previousequipedweapon;
         public int previousTelekinesis;
+        public int numberofUnitKilled;
     }
 
     [Serializable]
@@ -135,6 +136,7 @@ public class SaveManager : MonoBehaviour
                 battalion = character.playableStats.battalion,
                 previousequipedweapon = character.previouslyequipedweaponID,
                 previousTelekinesis = character.previousTelekinesis,
+                numberofUnitKilled = character.totalenemieskilled,
             };
             returnlist.Add(characterSaveInfo);
         }
@@ -159,7 +161,7 @@ public class SaveManager : MonoBehaviour
                     character.playableStats.battalion = CharaSave.battalion;
                     character.previouslyequipedweaponID = CharaSave.previousequipedweapon;
                     character.previousTelekinesis = CharaSave.previousTelekinesis;
-
+                    character.totalenemieskilled = CharaSave.numberofUnitKilled;
                 }
             }
         }
