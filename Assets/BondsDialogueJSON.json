@@ -3959,22 +3959,94 @@
             "BondID": 22,
             "dialogueLvl1": [
                 {
+                    "CharacterID": 0,
+                    "text": "Hi, Gwenie. Listen, I have been looking for my bolts and nuts box, have you seen it?"
+                },
+                {
                     "CharacterID": 10,
-                    "text": "bond 1 between Gwenie and Zack, with Gwenie talking"
+                    "text": "What? Why would I have your box filled with sparkly treasures?"
                 },
                 {
                     "CharacterID": 0,
-                    "text": "bond 1 between Zack and Gwenie, with Zack talking"
+                    "text": "My box filled with... Hold on, do you actually have it?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I wouldn't have it, I would never search your bag!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Tell, me how would you know it was in my bag if you never searched it?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "That would mean I looked through your stuff and I most certainly didn't do that! I would never do that!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Right... And hypothetically, if you did look through my stuff, and taken my box, where would you have put it?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Hmmmm... I guess that if that were the case, I would have hidden it in one of then cooking pots..."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I see... I guess I will have to check all the cooking pots then. Thanks for the tip, Gwenie."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "No problem, Zack. I hope you find your box! I would feel guilty for whoever took it, if I had taken it, which I didn't!"
                 }
             ],
             "dialogueLvl2": [
                 {
+                    "CharacterID": 0,
+                    "text": "Ok, Gwenie. We really need to talk... I'm of cooking duty tonight."
+                },
+                {
                     "CharacterID": 10,
-                    "text": "bond 2 between Gwenie and Zack, with Gwenie talking"
+                    "text": "Oh, really? Then I guess you might..."
                 },
                 {
                     "CharacterID": 0,
-                    "text": "bond 2 between Zack and Gwenie, with Zack talking"
+                    "text": "Well, I think I found your stash... I mean, I found your stash."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "What? How do you know it's mine? As if I'd steal from you repeatedly! I would never do that!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Ok. You know what? I'll be understanding. You lived as a pirate for a while, so I guess you have a bit of a thieving nature."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Not really... I don't steal from most people."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "That's the thing! All this stuff is mine! Why do you steal only from me? What did I ever do to you?!"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I'm sorry... You do have a pretty pickpocket-y looking face, though... I guess I just couldn't resist it."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "What does that even mean?! Listen, I'll talk to Kira about this. I don't want to be around someone who steals from me."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "No! Not Kira! I promise I won't do it again."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Take my next watch shift and you got a deal."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Deal!"
                 }
             ],
             "dialogueLvl3": [],
