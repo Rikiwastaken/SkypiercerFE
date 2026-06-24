@@ -4177,21 +4177,89 @@
             "dialogueLvl3": [
                 {
                     "CharacterID": 10,
-                    "text": "bond 3 between Gwenie and Lea, with Gwenie talking"
+                    "text": "Lea, First Mate! I need your help!"
                 },
                 {
                     "CharacterID": 1,
-                    "text": "bond 3 between Lea and Gwenie, with Lea talking"
+                    "text": "Hello, Gwenie. Didn't you fire me a while ago?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Who cares about that? Anyway, I'm of cooking duty tonight, and I have no idea how to do any of it!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I'm not the best cook, either... Maybe you should ask Zack or Gusto for help?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Zack ? Heck no!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Hummm, ok. Let's think about eat... What do you usually eat?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Well, on ships we mostly eat cured meat and hardtack. But I don't think we have those here."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "What provisions do we have?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I don't know? Some meat, maybe?"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "Then maybe you can just grill it? I don't know..."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Grill it? You are a genius, First Mate! I officially appoint you as my First Mate again!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "That's... Nice, I suppose?"
                 }
             ],
             "dialogueLvl4": [
                 {
                     "CharacterID": 10,
-                    "text": "bond 4 between Gwenie and Lea, with Gwenie talking"
+                    "text": "I've been thinking, First Mate. Now that we are a pirate crew, we just go and find treasures, right?"
                 },
                 {
                     "CharacterID": 1,
-                    "text": "bond 4 between Lea and Gwenie, with Lea talking"
+                    "text": "Gwenie, do you want to leave Zack and the others behind?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Well, they can come too! Some of them, at least. Definitely not Zack, though."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I'm sorry. I can't leave them."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "But I thought... I thought you were my mate..."
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "I can't leave them, just yet. When all this is over, we can go on an adventure together, I promise."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "That's also cool!"
+                },
+                {
+                    "CharacterID": 1,
+                    "text": "We'll go find your treasures. You'll be the captain and I'll be your first mate."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I can't wait! We'll be the best pirate crew ever!"
                 }
             ]
         },
