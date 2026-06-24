@@ -444,11 +444,14 @@ public class BondsScript : MonoBehaviour
     private List<SimplifiedDialogues> TurnDialogueListIntoSimplifiedList(List<TextBubbleInfo> list)
     {
         List<SimplifiedDialogues> newlist = new List<SimplifiedDialogues>();
-
-        foreach (TextBubbleInfo txt in list)
+        if (list != null)
         {
-            newlist.Add(new SimplifiedDialogues() { CharacterID = txt.characterindex, text = txt.text });
+            foreach (TextBubbleInfo txt in list)
+            {
+                newlist.Add(new SimplifiedDialogues() { CharacterID = txt.characterindex, text = txt.text });
+            }
         }
+
         return newlist;
     }
 
@@ -465,7 +468,7 @@ public class BondsScript : MonoBehaviour
         foreach (BondsDialogueClass bond in AllbondsDialogue)
         {
 
-            if (bond.dialogueLvl1 != null && bond.dialogueLvl1.Count > 2)
+            if (bond.dialogueLvl1 != null && bond.dialogueLvl1.Count > 2 || bond.dialogueLvl2 != null && bond.dialogueLvl2.Count > 2 || bond.dialogueLvl3 != null && bond.dialogueLvl3.Count > 2)
             {
                 allbondsclass.AllBondDialogueToLoadClass.Add(new BondsDialogueToLoadClass() { BondID = bond.BondID, dialogueLvl1 = TurnDialogueListIntoSimplifiedList(bond.dialogueLvl1), dialogueLvl2 = TurnDialogueListIntoSimplifiedList(bond.dialogueLvl2), dialogueLvl3 = TurnDialogueListIntoSimplifiedList(bond.dialogueLvl3), dialogueLvl4 = TurnDialogueListIntoSimplifiedList(bond.dialogueLvl4) });
             }
