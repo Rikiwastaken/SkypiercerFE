@@ -79,6 +79,8 @@ public class BondsScript : MonoBehaviour
         }
     }
 
+    public DataScript debugdatascript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -377,13 +379,21 @@ public class BondsScript : MonoBehaviour
             return;
         }
 
+        AllbondsDialogue = new List<BondsDialogueClass>();
+
+        foreach (DataScript.Bonds bond in debugdatascript.BondsList)
+        {
+            AllbondsDialogue.Add(new BondsDialogueClass() { Bond = bond, BondID = bond.ID });
+        }
+
+
         foreach (BondsDialogueToLoadClass bonddialogue in wrapper.AllBondDialogueToLoadClass)
         {
             foreach (BondsDialogueClass bond in AllbondsDialogue)
             {
                 if (bonddialogue.BondID == bond.BondID)
                 {
-                    if (bonddialogue.dialogueLvl1.Count() > 0)
+                    if (bonddialogue.dialogueLvl1.Count() > 1)
                     {
                         List<TextBubbleInfo> newdialogue1list = new List<TextBubbleInfo>();
                         for (int i = 0; i < bonddialogue.dialogueLvl1.Count; i++)
@@ -393,7 +403,7 @@ public class BondsScript : MonoBehaviour
                         bond.dialogueLvl1 = newdialogue1list;
                     }
 
-                    if (bonddialogue.dialogueLvl2.Count() > 0)
+                    if (bonddialogue.dialogueLvl2.Count() > 1)
                     {
                         List<TextBubbleInfo> newdialogue2list = new List<TextBubbleInfo>();
                         for (int i = 0; i < bonddialogue.dialogueLvl2.Count; i++)
@@ -403,7 +413,7 @@ public class BondsScript : MonoBehaviour
                         bond.dialogueLvl2 = newdialogue2list;
                     }
 
-                    if (bonddialogue.dialogueLvl3.Count() > 0)
+                    if (bonddialogue.dialogueLvl3.Count() > 1)
                     {
                         List<TextBubbleInfo> newdialogue3list = new List<TextBubbleInfo>();
                         for (int i = 0; i < bonddialogue.dialogueLvl3.Count; i++)
@@ -413,7 +423,7 @@ public class BondsScript : MonoBehaviour
                         bond.dialogueLvl3 = newdialogue3list;
                     }
 
-                    if (bonddialogue.dialogueLvl4.Count() > 0)
+                    if (bonddialogue.dialogueLvl4.Count() > 1)
                     {
                         List<TextBubbleInfo> newdialogue4list = new List<TextBubbleInfo>();
                         for (int i = 0; i < bonddialogue.dialogueLvl4.Count; i++)
@@ -427,6 +437,97 @@ public class BondsScript : MonoBehaviour
             }
         }
         EditorUtility.SetDirty(this);
+
+        Debug.Log("bonds loaded");
+    }
+
+    private List<SimplifiedDialogues> TurnDialogueListIntoSimplifiedList(List<TextBubbleInfo> list)
+    {
+        List<SimplifiedDialogues> newlist = new List<SimplifiedDialogues>();
+
+        foreach (TextBubbleInfo txt in list)
+        {
+            newlist.Add(new SimplifiedDialogues() { CharacterID = txt.characterindex, text = txt.text });
+        }
+        return newlist;
+    }
+
+    [ContextMenu("Create Bonds Dialogues JSON")]
+    public void CreateBondsJSON()
+    {
+        string path = EditorUtility.OpenFilePanel("Select Bond JSON File", "", "json");
+        if (string.IsNullOrEmpty(path))
+            return;
+
+
+        AllBondsDialogueToLoadClass allbondsclass = new AllBondsDialogueToLoadClass() { AllBondDialogueToLoadClass = new List<BondsDialogueToLoadClass>() };
+
+        foreach (BondsDialogueClass bond in AllbondsDialogue)
+        {
+
+            if (bond.dialogueLvl1 != null && bond.dialogueLvl1.Count > 2)
+            {
+                allbondsclass.AllBondDialogueToLoadClass.Add(new BondsDialogueToLoadClass() { BondID = bond.BondID, dialogueLvl1 = TurnDialogueListIntoSimplifiedList(bond.dialogueLvl1), dialogueLvl2 = TurnDialogueListIntoSimplifiedList(bond.dialogueLvl2), dialogueLvl3 = TurnDialogueListIntoSimplifiedList(bond.dialogueLvl3), dialogueLvl4 = TurnDialogueListIntoSimplifiedList(bond.dialogueLvl4) });
+            }
+        }
+
+        foreach (Bonds bond in debugdatascript.BondsList)
+        {
+            bool bondexists = false;
+            foreach (BondsDialogueToLoadClass donebond in allbondsclass.AllBondDialogueToLoadClass)
+            {
+                if (donebond.BondID == bond.ID)
+                {
+                    bondexists = true;
+                    break;
+                }
+            }
+            if (!bondexists)
+            {
+                BondsDialogueToLoadClass newbondtoadd = new BondsDialogueToLoadClass();
+                newbondtoadd.BondID = bond.ID;
+                UnitScript.Character firstcharacter = debugdatascript.PlayableCharacterList[bond.Characters[0]];
+                UnitScript.Character secondcharacter = debugdatascript.PlayableCharacterList[bond.Characters[1]];
+                newbondtoadd.dialogueLvl1 = new List<SimplifiedDialogues>() { new SimplifiedDialogues() { CharacterID = bond.Characters[0], text = "bond 1 between " + firstcharacter.name + " and " + secondcharacter.name + ", with " + firstcharacter.name + " talking" }, new SimplifiedDialogues() { CharacterID = bond.Characters[1], text = "bond 1 between " + secondcharacter.name + " and " + firstcharacter.name + ", with " + secondcharacter.name + " talking" } };
+                newbondtoadd.dialogueLvl2 = new List<SimplifiedDialogues>();
+                newbondtoadd.dialogueLvl3 = new List<SimplifiedDialogues>();
+                newbondtoadd.dialogueLvl4 = new List<SimplifiedDialogues>();
+                if (bond.MaxLevel > 1)
+                {
+                    newbondtoadd.dialogueLvl2.Add(new SimplifiedDialogues() { CharacterID = bond.Characters[0], text = "bond 2 between " + firstcharacter.name + " and " + secondcharacter.name + ", with " + firstcharacter.name + " talking" });
+                    newbondtoadd.dialogueLvl2.Add(new SimplifiedDialogues() { CharacterID = bond.Characters[1], text = "bond 2 between " + secondcharacter.name + " and " + firstcharacter.name + ", with " + secondcharacter.name + " talking" });
+                }
+                if (bond.MaxLevel > 2)
+                {
+                    newbondtoadd.dialogueLvl3.Add(new SimplifiedDialogues() { CharacterID = bond.Characters[0], text = "bond 3 between " + firstcharacter.name + " and " + secondcharacter.name + ", with " + firstcharacter.name + " talking" });
+                    newbondtoadd.dialogueLvl3.Add(new SimplifiedDialogues() { CharacterID = bond.Characters[1], text = "bond 3 between " + secondcharacter.name + " and " + firstcharacter.name + ", with " + secondcharacter.name + " talking" });
+                }
+                if (bond.MaxLevel > 3)
+                {
+                    newbondtoadd.dialogueLvl4.Add(new SimplifiedDialogues() { CharacterID = bond.Characters[0], text = "bond 4 between " + firstcharacter.name + " and " + secondcharacter.name + ", with " + firstcharacter.name + " talking" });
+                    newbondtoadd.dialogueLvl4.Add(new SimplifiedDialogues() { CharacterID = bond.Characters[1], text = "bond 4 between " + secondcharacter.name + " and " + firstcharacter.name + ", with " + secondcharacter.name + " talking" });
+                }
+                allbondsclass.AllBondDialogueToLoadClass.Add(newbondtoadd);
+            }
+        }
+
+        string json = JsonUtility.ToJson(allbondsclass, true);
+
+        try
+        {
+            AssetDatabase.StartAssetEditing();
+            File.WriteAllText(path, json);
+            Debug.Log($"Skill Saved : {path}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error when saving options : {e.Message}");
+        }
+        finally
+        {
+            AssetDatabase.StopAssetEditing();
+        }
+
     }
 
 #endif
