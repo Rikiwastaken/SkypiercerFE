@@ -3031,7 +3031,6 @@ public class UnitScript : MonoBehaviour
     public string GetWeatherType()
     {
         GridSquareScript tile = UnitCharacteristics.currentTile;
-        Debug.Log(UnitCharacteristics.name);
         if (tile.RemainingRainTurns > 0)
         {
             return "rain";

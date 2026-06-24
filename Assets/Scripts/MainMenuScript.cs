@@ -90,6 +90,7 @@ public class MainMenuScript : MonoBehaviour
     public void LoadTestMap()
     {
         saveManager.ApplySave(-1);
+        DataScript.instance.SetupCharactersForChapter(99);
         sceneLoader.LoadScene("TestMap");
     }
 

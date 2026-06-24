@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -59,6 +60,19 @@ public class CombatSceneManagerV2 : MonoBehaviour
         public Vector3 CameraRotation;
     }
 
+    [Serializable]
+    public class CamPositionWithMixing
+    {
+        public Vector3 CamHolderPosition;
+        public Vector3 CamHolderRotation;
+        public Transform parent;
+        public Vector3 Camera0Position;
+        public Vector3 Camera0Rotation;
+        public Vector3 Camera1Position;
+        public Vector3 Camera1Rotation;
+        public float mixingduration;
+    }
+
 
     [Serializable]
     public class InfoText
@@ -106,6 +120,15 @@ public class CombatSceneManagerV2 : MonoBehaviour
     public CamPosition CamPositionEnemyRunning;
     public CamPosition AttackerVictoryCam;
     public CamPosition EnemyVictoryCam;
+
+    [Header("Camera Positions With Mixing")]
+
+    public CamPositionWithMixing InitialMixingCameraPosition;
+    public CamPositionWithMixing MixingCamePositionAttackerRunning;
+    public CamPositionWithMixing MixingCamPositionEnemyRunning;
+    public CamPositionWithMixing AttackerVictoryMixingCam;
+    public CamPositionWithMixing EnemyVictoryMixingCam;
+    private Coroutine _MixingCoroutine;
 
     [Header("Scene Unwinding Variables")]
     //PreBattle
@@ -252,11 +275,17 @@ public class CombatSceneManagerV2 : MonoBehaviour
         ExpBarHolder.GetComponent<RectTransform>().localPosition = ExpBarBasePos;
 
         // Set Camera Position
+        /*
         CameraHolder.parent = InitialCameraPosition.parent;
         CameraHolder.transform.localPosition = InitialCameraPosition.CamHolderPosition;
         CameraHolder.transform.localRotation = Quaternion.Euler(InitialCameraPosition.CamHolderRotation);
-        Camera.transform.localPosition = InitialCameraPosition.CameraPosition;
-        Camera.transform.localRotation = Quaternion.Euler(InitialCameraPosition.CameraRotation);
+        CameraHolder.GetChild(0).transform.localPosition = InitialCameraPosition.CameraPosition;
+        CameraHolder.GetChild(0).transform.localRotation = Quaternion.Euler(InitialCameraPosition.CameraRotation);
+        */
+
+        CameraHolder.parent = null;
+        _MixingCoroutine = StartCoroutine(MoveCameraWithMixing(InitialMixingCameraPosition));
+
 
         //Start the battle
         StartCoroutine(BeforeBattleStarts());
@@ -273,16 +302,16 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
         StartCoroutine(ShowText(AttackerName, timetoshownames));
 
-        yield return new WaitForSeconds(timelookingatattacker);
+        //yield return new WaitForSeconds(timelookingatattacker);
 
         // Move Camera to back of character to show enemy
 
         StartCoroutine(ShowText(DefenderName, timetoshownames));
 
-        yield return StartCoroutine(MoveCamera(CamPositionToSeeEnemy, timetolookatdefender));
+        //yield return StartCoroutine(MoveCamera(CamPositionToSeeEnemy, timetolookatdefender));
 
         StartCoroutine(ShowText(AttackerDescription, timetoshownames));
-        StartCoroutine(ShowText(DefenderDescription, timetoshownames));
+        yield return StartCoroutine(ShowText(DefenderDescription, timetoshownames));
 
         isinBeforeBattleStarts = false;
         StartCoroutine(AttackerTurn());
@@ -299,8 +328,8 @@ public class CombatSceneManagerV2 : MonoBehaviour
         bool isranged = DetermineIfRanged(AttackerInfo);
         if (!isranged)
         {
-            CamPositionEnemyRunning.parent = AttackerInfo.Animator.transform;
-            yield return MoveCamera(CamePositionAttackerRunning, 0.1f);
+            CameraHolder.parent = AttackerInfo.Animator.transform;
+            //yield return MoveCamera(CamePositionAttackerRunning, 2, true);
 
             Vector3 startPos = AttackerInfo.Animator.transform.position;
             Vector3 defenderPos = DefenderInfo.Animator.transform.position;
@@ -408,7 +437,11 @@ public class CombatSceneManagerV2 : MonoBehaviour
             if (!isranged)
             {
                 CamPositionEnemyRunning.parent = DefenderInfo.Animator.transform;
-                yield return MoveCamera(CamPositionEnemyRunning, 0.25f);
+                MixingCamPositionEnemyRunning.parent = DefenderInfo.Animator.transform;
+                //yield return MoveCamera(CamPositionEnemyRunning, 0.25f);
+
+                yield return MoveCameraWithMixing(MixingCamPositionEnemyRunning, 0f);
+
                 Vector3 startPos = DefenderInfo.Animator.transform.position;
                 Vector3 defenderPos = AttackerInfo.Animator.transform.position;
 
@@ -544,7 +577,6 @@ public class CombatSceneManagerV2 : MonoBehaviour
                 int attackerHPBeforeDamage = attacker.currentHP;
                 int healing = (int)Math.Min(attacker.character.AjustedStats.HP - attacker.currentHP, (int)(truedamage * 0.1f));
                 attacker.currentHP += healing;
-                Debug.Log(attacker.currentHP);
                 StartCoroutine(ChangeLifeBar(AttackerName.LifeBar, attackerHPBeforeDamage, attacker.currentHP, (int)attacker.character.AjustedStats.HP, timeforLifebar));
                 GameObject compassiontextobject = Instantiate(TextObjectPrefab);
                 compassiontextobject.GetComponent<CombatNumberPopup>().InitializeTMP("" + healing, AttackerGO.transform.position, false, true);
@@ -630,6 +662,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         Debug.Log("ClosingScene");
         EventSystem.SetActive(false);
         isinEndOfCombat = false;
+        CameraHolder.transform.parent = null;
         if (FindAnyObjectByType<CombatSceneLoader>() != null)
         {
             FindAnyObjectByType<CombatSceneLoader>().ActivateMainSceneFromCombatScene();
@@ -806,10 +839,26 @@ public class CombatSceneManagerV2 : MonoBehaviour
         return false;
     }
 
-    IEnumerator MoveCamera(CamPosition newposition, float timetomovecam, bool instantaneous = false)
+    IEnumerator MoveCamera(CamPosition newposition, float timetomovecam, bool instantaneous = false, float timeformixing = 0f)
     {
+
+        //reset cam
         CameraHolder.SetParent(newposition.parent, true);
         float elapsed = 0f;
+
+        if (timeformixing == 0f)
+        {
+            timeformixing = timetomovecam * 3f;
+        }
+
+
+        if (_MixingCoroutine != null)
+        {
+            StopCoroutine(_MixingCoroutine);
+        }
+
+        CameraHolder.GetComponent<CinemachineMixingCamera>().Weight0 = 1;
+        CameraHolder.GetComponent<CinemachineMixingCamera>().Weight1 = 0;
 
         // Store starting transforms
         Vector3 startHolderPos = CameraHolder.localPosition;
@@ -825,17 +874,21 @@ public class CombatSceneManagerV2 : MonoBehaviour
         Vector3 targetCamPos = newposition.CameraPosition;
         Quaternion targetCamRot = Quaternion.Euler(newposition.CameraRotation);
 
+        //_MixingCoroutine = StartCoroutine(MixingCoroutine(timeformixing));
+
+
         if (instantaneous)
         {
             // Snap exactly to final values (avoids floating precision issues)
             CameraHolder.localPosition = targetHolderPos;
             CameraHolder.localRotation = targetHolderRot;
 
-            Camera.localPosition = targetCamPos;
-            Camera.localRotation = targetCamRot;
+            CameraHolder.GetChild(0).localPosition = targetCamPos;
+            CameraHolder.GetChild(0).localRotation = targetCamRot;
         }
         else
         {
+
             while (elapsed < timetomovecam)
             {
                 elapsed += Time.deltaTime;
@@ -850,9 +903,10 @@ public class CombatSceneManagerV2 : MonoBehaviour
                 CameraHolder.localRotation = Quaternion.Slerp(startHolderRot, targetHolderRot, time);
 
                 // Move camera
-                Camera.localPosition = Vector3.Lerp(startCamPos, targetCamPos, time);
+                CameraHolder.GetChild(0).localPosition = Vector3.Lerp(startCamPos, targetCamPos, time);
 
-                Camera.localRotation = Quaternion.Slerp(startCamRot, targetCamRot, time);
+
+                CameraHolder.GetChild(0).localRotation = Quaternion.Slerp(startCamRot, targetCamRot, time);
 
                 yield return null;
             }
@@ -861,13 +915,132 @@ public class CombatSceneManagerV2 : MonoBehaviour
             CameraHolder.localPosition = targetHolderPos;
             CameraHolder.localRotation = targetHolderRot;
 
-            Camera.localPosition = targetCamPos;
-            Camera.localRotation = targetCamRot;
+            CameraHolder.GetChild(0).localPosition = targetCamPos;
+            CameraHolder.GetChild(0).localRotation = targetCamRot;
         }
 
 
 
     }
+
+    IEnumerator MoveCameraWithMixing(CamPositionWithMixing newposition, float timeforsetup = 0f)
+    {
+
+        //reset cam
+        CameraHolder.SetParent(newposition.parent, true);
+        float elapsed = 0f;
+
+        CameraHolder.GetComponent<CinemachineMixingCamera>().Weight0 = 1;
+        CameraHolder.GetComponent<CinemachineMixingCamera>().Weight1 = 0;
+
+
+        if (_MixingCoroutine != null)
+        {
+            StopCoroutine(_MixingCoroutine);
+        }
+
+
+        if (timeforsetup > 0f)
+        {
+
+            // Store starting transforms
+            CameraHolder.localPosition = newposition.CamHolderPosition; ;
+            CameraHolder.localRotation = Quaternion.Euler(newposition.CamHolderRotation);
+
+            Vector3 startCamPos = Camera.position;
+            Quaternion startCamRot = Camera.rotation;
+
+            // Target transforms
+
+            Vector3 targetCamPos = newposition.CamHolderPosition + newposition.Camera0Position;
+            Quaternion targetCamRot = Quaternion.Euler(newposition.CamHolderRotation + newposition.Camera0Rotation);
+
+            while (elapsed < timeforsetup)
+            {
+                elapsed += Time.deltaTime;
+                float time = elapsed / timeforsetup;
+
+                // Smooth interpolation (ease in/out)
+                time = Mathf.SmoothStep(0f, 1f, time);
+
+                // Move camera
+                CameraHolder.GetChild(0).position = Vector3.Lerp(startCamPos, targetCamPos, time);
+
+
+                CameraHolder.GetChild(0).rotation = Quaternion.Slerp(startCamRot, targetCamRot, time);
+
+                yield return null;
+            }
+
+            // Snap exactly to final values (avoids floating precision issues)
+
+            CameraHolder.GetChild(0).localPosition = targetCamPos;
+            CameraHolder.GetChild(0).localRotation = targetCamRot;
+
+        }
+        else
+        {
+            CameraHolder.localPosition = newposition.CamHolderPosition;
+            CameraHolder.localRotation = Quaternion.Euler(newposition.CamHolderRotation);
+
+            Vector3 targetCam0Pos = newposition.Camera0Position;
+            Quaternion targetCam0Rot = Quaternion.Euler(newposition.Camera0Rotation);
+
+            CameraHolder.GetChild(0).localPosition = targetCam0Pos;
+            CameraHolder.GetChild(0).localRotation = targetCam0Rot;
+        }
+
+        Vector3 targetCam1Pos = newposition.Camera1Position;
+        Quaternion targetCam1Rot = Quaternion.Euler(newposition.Camera1Rotation);
+
+
+        CameraHolder.GetChild(1).localPosition = targetCam1Pos;
+        CameraHolder.GetChild(1).localRotation = targetCam1Rot;
+
+
+        _MixingCoroutine = StartCoroutine(MixingCoroutine(newposition.mixingduration));
+        while (elapsed < newposition.mixingduration)
+        {
+            elapsed += Time.deltaTime;
+            float time = elapsed / newposition.mixingduration;
+
+            // Smooth interpolation (ease in/out)
+            time = Mathf.SmoothStep(0f, 1f, time);
+
+
+
+            yield return null;
+        }
+
+
+
+    }
+
+
+    private IEnumerator MixingCoroutine(float timeformixing)
+    {
+
+        float elapsed = 0f;
+
+        while (elapsed < timeformixing)
+        {
+            elapsed += Time.deltaTime;
+            float time = elapsed / timeformixing;
+
+            // Smooth interpolation (ease in/out)
+            time = Mathf.SmoothStep(0f, 1f, time);
+
+            // ChangeMixing
+            CameraHolder.GetComponent<CinemachineMixingCamera>().Weight1 = Mathf.Lerp(0, 1, time);
+            CameraHolder.GetComponent<CinemachineMixingCamera>().Weight0 = Mathf.Lerp(1, 0, time);
+
+
+            yield return null;
+        }
+        _MixingCoroutine = null;
+    }
+
+
 
     private bool DetermineIfHealing()
     {
