@@ -18,6 +18,8 @@
 
 - Make visuals for Boss Attacks
 
+- Make visual for telekinesis (shader with outline ?)
+
 ## Visuals
 
 - Redo the world map
@@ -40,10 +42,6 @@
 - All
 
 #### Icons
-
-- No Weapon
-
-- Telekinesis
 
 - Status Alterations
 
