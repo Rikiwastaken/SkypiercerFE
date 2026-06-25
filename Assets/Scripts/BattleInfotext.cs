@@ -345,7 +345,7 @@ public class BattleInfotext : MonoBehaviour
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         for (int i = 0; i < SkillButtonList.Count; i++)
         {
-            if (SkillButtonList[i].gameObject == currentSelected)
+            if (SkillButtonList[i].gameObject == currentSelected && SkillButtonIDList[i] != -1)
             {
                 SkillDescription.text = DataScript.instance.SkillList[SkillButtonIDList[i]].Descriptions;
                 if (!SkillDescription.transform.parent.gameObject.activeSelf)

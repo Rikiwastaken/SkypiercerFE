@@ -7,6 +7,8 @@
 - Parfois les animations de combat affichent pas de contre attaque alors qu'il y en a une
 - Minimap qui se mets pas à jour
 - Parfois pas de visuel d'armes
+- fenetre de vision de skills fait encore nimp
+- Ennemis attendent pas que la death quote ça soit fini avant de passer à la suite.
 
 ## Ideas
 
@@ -14,6 +16,7 @@
 - Chaptre 2, faire un truc quand les portes finales sont ouvertes
 - Montrer la case de fin
 - pour le choix des chapitres, faire un scroller et affichage de la map et de son nom
+- Faire en sorte que tu puisses voir les conditions de victoires tout le temps (dans le enu neutre surement)
 
 ## System 
 
