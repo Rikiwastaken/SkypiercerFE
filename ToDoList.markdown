@@ -9,14 +9,21 @@
 - Parfois pas de visuel d'armes
 - fenetre de vision de skills fait encore nimp
 - Ennemis attendent pas que la death quote ça soit fini avant de passer à la suite.
+- QUand on choisist les unités, les stats sont affichés avec des flottants.
+- Les masteries affichées sont pas les bonnes.
+- Quand on équipe les skills et qu'on choisit un autre perso ça retourne pas à la page 1
+- Dans l'interface, certaines text box sont trop petites
+- Les armes focused commencent avec trop de durabilité
 
 ## Ideas
 
 - peut être faire qu'on puisse mettre "pas de battallion"
 - Chaptre 2, faire un truc quand les portes finales sont ouvertes
-- Montrer la case de fin
+- Montrer la case de fin en surligné
 - pour le choix des chapitres, faire un scroller et affichage de la map et de son nom
 - Faire en sorte que tu puisses voir les conditions de victoires tout le temps (dans le enu neutre surement)
+- Gérer ptet l'inclinaison de la camera.
+- Mettre l'effet GUARDIEN à Kira (ptet son 2ème skill ?!) 15% de chance de surviv
 
 ## System 
 
