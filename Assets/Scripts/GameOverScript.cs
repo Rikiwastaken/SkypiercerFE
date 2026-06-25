@@ -93,6 +93,11 @@ public class GameOverScript : MonoBehaviour
 
     public void InitializeSaveButtons()
     {
+        if (saveManager == null)
+        {
+            saveManager = FindAnyObjectByType<SaveManager>(FindObjectsInactive.Include);
+        }
+
         if (MapInitializer.instance.IsSideStory)
         {
             int currentSideStoryID = MapInitializer.instance.ChapterID;
@@ -105,8 +110,7 @@ public class GameOverScript : MonoBehaviour
         {
             saveManager.currentchapter = MapInitializer.instance.ChapterID + 1;
         }
-        if (saveManager == null)
-            saveManager = FindAnyObjectByType<SaveManager>();
+
 
         List<Button> buttons = new List<Button>();
         for (int i = 0; i < SaveMenu.childCount - 1; i++)

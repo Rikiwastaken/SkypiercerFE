@@ -3,10 +3,17 @@
 ## Bug Fixes
 
 - bouton pour montrer les ennemis marche pas
+- TU peux pas sélectionner le baton quand tu es sur le point d'attaquer
+- Parfois les animations de combat affichent pas de contre attaque alors qu'il y en a une
+- Minimap qui se mets pas à jour
+- Parfois pas de visuel d'armes
 
 ## Ideas
 
 - peut être faire qu'on puisse mettre "pas de battallion"
+- Chaptre 2, faire un truc quand les portes finales sont ouvertes
+- Montrer la case de fin
+- pour le choix des chapitres, faire un scroller et affichage de la map et de son nom
 
 ## System 
 
