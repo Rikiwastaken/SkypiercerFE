@@ -3,7 +3,6 @@
 ## Bug Fixes
 
 - bouton pour montrer les ennemis marche pas
-- TU peux pas sélectionner le baton quand tu es sur le point d'attaquer
 - Parfois les animations de combat affichent pas de contre attaque alors qu'il y en a une
 - Minimap qui se mets pas à jour
 - Parfois pas de visuel d'armes

@@ -131,28 +131,29 @@ public class ActionsMenu : MonoBehaviour
         {
             if (_telekinesisaction.WasPressedThisFrame())
             {
-                ToggleTelekinesis(targetlist[activetargetid]);
+                ToggleTelekinesis(targetlist[activetargetid], isUnithealing);
             }
             if (!isUnithealing)
             {
                 if (_NextWeaponAction.WasPressedThisFrame())
                 {
-                    if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
-                    {
-                        NextWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
-                    }
-
+                    //if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
+                    //{
+                    //    NextWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
+                    //}
+                    NextWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon(), isUnithealing);
 
                 }
                 if (_PrevWeaponAction.WasPressedThisFrame())
                 {
-                    if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
-                    {
-                        PreviousWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
-                    }
-
+                    //if (!(targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation && target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff"))
+                    //{
+                    //    PreviousWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon());
+                    //}
+                    PreviousWeapon(targetlist[activetargetid], target.GetComponent<UnitScript>().GetFirstWeapon(), isUnithealing);
                 }
             }
+
 
 
             if (_NextTargetAction.WasPressedThisFrame() || (_MovementAction.WasPerformedThisFrame() && _MovementAction.ReadValue<Vector2>().x > 0))
@@ -199,7 +200,7 @@ public class ActionsMenu : MonoBehaviour
                 if (activetargetid < targetlist.Count)
                 {
                     cameraScript.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
-                    CheckCorrectInfo(target, targetlist[activetargetid]);
+                    CheckCorrectInfo(target, targetlist[activetargetid], isUnithealing);
                 }
                 else
                 {
@@ -339,14 +340,14 @@ public class ActionsMenu : MonoBehaviour
         }
     }
 
-    private void CheckCorrectInfo(GameObject unit, GameObject enemy)
+    private void CheckCorrectInfo(GameObject unit, GameObject enemy, bool ishealing)
     {
         string unitweaponname = unit.GetComponent<UnitScript>().GetFirstWeapon().Name;
         string enemyweaponname = enemy.GetComponent<UnitScript>().GetFirstWeapon().Name;
 
         if (!unitAttackText.text.Contains(unitweaponname) || !targetAttackText.text.Contains(enemyweaponname))
         {
-            if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+            if (ishealing)
             {
                 initializeHealingWindows(target, targetlist[activetargetid]);
             }
@@ -357,23 +358,23 @@ public class ActionsMenu : MonoBehaviour
         }
     }
 
-    private void WeaponChange()
+    private void WeaponChange(bool ishealing)
     {
 
 
         (int range, bool frapperenmelee, string type) = target.GetComponent<UnitScript>().GetRangeMeleeAndType();
-        GridScript.ShowAttackAfterMovement(range, frapperenmelee, new List<GridSquareScript>() { target.GetComponent<UnitScript>().UnitCharacteristics.currentTile }, type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics);
+        GridScript.ShowAttackAfterMovement(range, frapperenmelee, new List<GridSquareScript>() { target.GetComponent<UnitScript>().UnitCharacteristics.currentTile }, ishealing, target.GetComponent<UnitScript>().UnitCharacteristics);
         GridScript.lockedattacktiles = GridScript.attacktiles;
         GridScript.lockedhealingtiles = GridScript.healingtiles;
         GridScript.Recolor();
 
     }
 
-    private void NextWeapon(GameObject PreviousFoe, equipment initialweapon)
+    private void NextWeapon(GameObject PreviousFoe, equipment initialweapon, bool ishealing)
     {
 
         target.GetComponent<UnitScript>().GetNextWeapon();
-        WeaponChange();
+        WeaponChange(ishealing);
         bool enemytargettable = false;
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
         {
@@ -389,7 +390,7 @@ public class ActionsMenu : MonoBehaviour
         }
         else
         {
-            NextWeapon(PreviousFoe, initialweapon);
+            NextWeapon(PreviousFoe, initialweapon, ishealing);
         }
 
     }
@@ -406,10 +407,10 @@ public class ActionsMenu : MonoBehaviour
         return false;
     }
 
-    private void PreviousWeapon(GameObject PreviousFoe, equipment initialweapon)
+    private void PreviousWeapon(GameObject PreviousFoe, equipment initialweapon, bool ishealing)
     {
         target.GetComponent<UnitScript>().GetPreviousWeapon();
-        WeaponChange();
+        WeaponChange(ishealing);
         bool enemytargettable = false;
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
         {
@@ -425,12 +426,12 @@ public class ActionsMenu : MonoBehaviour
         }
         else
         {
-            PreviousWeapon(PreviousFoe, initialweapon);
+            PreviousWeapon(PreviousFoe, initialweapon, ishealing);
         }
 
     }
 
-    private void ToggleTelekinesis(GameObject PreviousFoe)
+    private void ToggleTelekinesis(GameObject PreviousFoe, bool ishealing)
     {
         if (!allowtelekinesisChangeFromTutorial())
         {
@@ -441,7 +442,7 @@ public class ActionsMenu : MonoBehaviour
         {
             target.GetComponent<UnitScript>().ToggleTelekinesis(false);
         }
-        WeaponChange();
+        WeaponChange(ishealing);
         target.GetComponent<UnitScript>().UpdateWeaponModel();
         bool enemytargettable = false;
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
@@ -458,7 +459,7 @@ public class ActionsMenu : MonoBehaviour
         }
         else
         {
-            NextWeapon(PreviousFoe, target.GetComponent<UnitScript>().UnitCharacteristics.equipments[0]);
+            NextWeapon(PreviousFoe, target.GetComponent<UnitScript>().UnitCharacteristics.equipments[0], ishealing);
         }
         enemytargettable = false;
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
@@ -480,7 +481,7 @@ public class ActionsMenu : MonoBehaviour
             {
                 target.GetComponent<UnitScript>().ToggleTelekinesis(false);
             }
-            WeaponChange();
+            WeaponChange(ishealing);
             FindAttackers();
         }
     }
