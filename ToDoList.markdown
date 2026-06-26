@@ -7,7 +7,6 @@
 - Minimap qui se mets pas à jour
 - Parfois pas de visuel d'armes
 - fenetre de vision de skills fait encore nimp
-- Les masteries affichées sont pas les bonnes.
 - Quand on équipe les skills et qu'on choisit un autre perso ça retourne pas à la page 1
 - Dans l'interface, certaines text box sont trop petites
 - Les armes focused commencent avec trop de durabilité

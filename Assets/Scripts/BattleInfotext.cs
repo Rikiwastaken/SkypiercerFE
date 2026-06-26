@@ -11,6 +11,7 @@ public class BattleInfotext : MonoBehaviour
 
     private GridScript GridScript;
     private GameObject selectedunit;
+    private GameObject previousselected;
 
     private cameraScript battlecamera;
     private TurnManger turnManger;
@@ -147,6 +148,7 @@ public class BattleInfotext : MonoBehaviour
             if (Skilltext.transform.parent.gameObject.activeSelf)
             {
                 Skilltext.transform.parent.gameObject.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(null);
             }
             return;
         }
@@ -213,29 +215,33 @@ public class BattleInfotext : MonoBehaviour
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
 
             }
+
+
+
+
             if (selectedunit != null && selectedunitCharacter != null)
             {
-
-
-                ManagedSkillVisuals(selectedunitCharacter);
-                if (ActionsMenu.gameObject.activeSelf)
+                if (previousselected != selectedunit)
                 {
-                    if (Skilltext.transform.parent.gameObject.activeSelf)
+                    previousselected = selectedunit;
+                    ResetSkillWindow();
+                    ManagedSkillVisuals(selectedunitCharacter);
+
+                    if (ActionsMenu.gameObject.activeSelf)
                     {
-                        Skilltext.transform.parent.gameObject.SetActive(false);
+
                     }
-                    if (SkillDescription.transform.gameObject.activeSelf)
+                    else
                     {
-                        SkillDescription.transform.gameObject.SetActive(false);
+
+
+
+
                     }
                 }
-                else
-                {
-                    ManageSkillDescription();
-                    ManageMasteryVisuals(selectedunitCharacter);
 
-
-                }
+                ManageSkillDescription();
+                ManageMasteryVisuals(selectedunitCharacter);
 
                 ManageStatusAilmentVisuals(selectedunit);
                 ManageExamodeVisuals(selectedunitCharacter);
@@ -310,8 +316,6 @@ public class BattleInfotext : MonoBehaviour
                 equipment EquipedWeapon = selectedunit.GetComponent<UnitScript>().GetFirstWeapon();
                 EquipedWeaponIco.sprite = GetWeaponIcons(EquipedWeapon.type);
                 equipedweaponText.text = EquipedWeapon.Currentuses + "/" + EquipedWeapon.Maxuses;
-
-
             }
             else
             {
@@ -325,12 +329,32 @@ public class BattleInfotext : MonoBehaviour
         }
     }
 
+    public void ResetSkillWindow()
+    {
+        GameObject currentselected = EventSystem.current.currentSelectedGameObject;
+        if (currentselected != null && currentselected.transform.parent == SkillDescription.transform.parent)
+        {
+            EventSystem.current.SetSelectedGameObject(SkillButtonList[0].gameObject);
+        }
+        else
+        {
+            SkillDescription.transform.parent.gameObject.SetActive(false);
+        }
+    }
+
     private void ManageSkillDescription()
     {
-
+        if (!_ShowDetailsAction.enabled)
+        {
+            _ShowDetailsAction.Enable();
+        }
         if (_ShowDetailsAction.IsPressed() && SkillButtonIDList.Count > 0 && !SkillDescription.transform.parent.gameObject.activeSelf && !ActionsMenu.gameObject.activeSelf && !NeutralMenu.activeSelf)
         {
             SkillButtonList[0].Select();
+        }
+        if (!_CancelAction.enabled)
+        {
+            _CancelAction.Enable();
         }
         if (_CancelAction.IsPressed())
         {
@@ -364,7 +388,6 @@ public class BattleInfotext : MonoBehaviour
     {
         if (!Skilltext.transform.parent.gameObject.activeSelf)
         {
-
             Skilltext.transform.parent.gameObject.SetActive(false);
 
             MasteryTexts[0].transform.parent.gameObject.SetActive(false);
@@ -497,8 +520,8 @@ public class BattleInfotext : MonoBehaviour
                     break;
             }
 
-            MasteryImages[i].sprite = GetWeaponIcons(masteries[i].weapontype);
-            MasteryTexts[i].text = masterylevel;
+            MasteryImages[barID].sprite = GetWeaponIcons(masteries[i].weapontype);
+            MasteryTexts[barID].text = masterylevel;
 
 
             barID++;
@@ -618,6 +641,11 @@ public class BattleInfotext : MonoBehaviour
                 }
             }
 
+        }
+
+        for (int i = SkillButtonIDList.Count; i < SkillButtonList.Count; i++)
+        {
+            SkillButtonIDList.Add(-1);
         }
 
         int tempskillused = 0;
