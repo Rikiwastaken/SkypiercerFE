@@ -118,6 +118,16 @@ public class AttackTurnScript : MonoBehaviour
             return;
         }
 
+        // ignore update if dialogue happening
+        if (_TextBubbleScript == null)
+        {
+            _TextBubbleScript = GetComponent<ActionManager>().TextBubbleScript;
+        }
+        if (_TextBubbleScript.indialogue)
+        {
+            return;
+        }
+
         // If Combat Animation is over, reset the lifebars of the attacker and target, trigger the end of fight attack animation if the attacker is still alive, reset all selections on the grid, trigger the end of fight event, and reset variables related to the end of fight and combat animation
         if (triggerEndOfFightWithAnimations && previousattacker != null && AttackCoroutine == null && !combatsceneloader.isCombatSceneActive())
         {
@@ -2122,10 +2132,7 @@ public class AttackTurnScript : MonoBehaviour
             }
         }
 
-        if (_TextBubbleScript == null)
-        {
-            _TextBubbleScript = GetComponent<ActionManager>().TextBubbleScript;
-        }
+
 
         _TextBubbleScript.InitializeDialogue(DeathDialogue);
 
