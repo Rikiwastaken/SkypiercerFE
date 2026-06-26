@@ -104,12 +104,12 @@ public class UnitDeploymentScript : MonoBehaviour
             unitdescriptiontxt += "Level : " + currentchar.level + "\n";
             unitdescriptiontxt += "Exp : " + currentchar.experience + " / 100\n\n";
 
-            unitdescriptiontxt += "Strength : " + currentchar.stats.Strength + "\n";
-            unitdescriptiontxt += "Psyche : " + currentchar.stats.Psyche + "\n";
-            unitdescriptiontxt += "Defense : " + currentchar.stats.Defense + "\n";
-            unitdescriptiontxt += "Resistance : " + currentchar.stats.Resistance + "\n";
-            unitdescriptiontxt += "Dexterity : " + currentchar.stats.Dexterity + "\n";
-            unitdescriptiontxt += "Speed : " + currentchar.stats.Speed + "\n\n";
+            unitdescriptiontxt += "Strength : " + currentchar.AjustedStats.Strength + "\n";
+            unitdescriptiontxt += "Psyche : " + currentchar.AjustedStats.Psyche + "\n";
+            unitdescriptiontxt += "Defense : " + currentchar.AjustedStats.Defense + "\n";
+            unitdescriptiontxt += "Resistance : " + currentchar.AjustedStats.Resistance + "\n";
+            unitdescriptiontxt += "Dexterity : " + currentchar.AjustedStats.Dexterity + "\n";
+            unitdescriptiontxt += "Speed : " + currentchar.AjustedStats.Speed + "\n\n";
 
             string grade = "";
             if (currentchar.equipmentsIDs.Count > 0)
