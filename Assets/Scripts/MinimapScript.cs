@@ -335,8 +335,9 @@ public class MinimapScript : MonoBehaviour
             SpriteMeshType.FullRect
         );
 
-        yield return true;
+
         updatecoroutine = null;
+        yield return true;
     }
 
     private void manageEndMapIncon(Texture2D texture, GridSquareScript tile)

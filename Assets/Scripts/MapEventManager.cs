@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -166,6 +167,8 @@ public class MapEventManager : MonoBehaviour
 
     public int EventToSaveToJson;
 
+    public TextMeshProUGUI ConditionsText;
+    public int conditionseventID = -1;
 
     private void Awake()
     {
@@ -182,6 +185,7 @@ public class MapEventManager : MonoBehaviour
         grid = GameObject.Find("Grid");
         turnManger = GetComponent<TurnManger>();
         TextBubbleScript = GetComponent<ActionManager>().TextBubbleScript;
+        SetConditions();
     }
 
     private void FixedUpdate()
@@ -195,6 +199,21 @@ public class MapEventManager : MonoBehaviour
         {
             ManuallyTriggerEvent(ManualEventTrigger, -1);
         }
+    }
+
+
+    private void SetConditions()
+    {
+        string conditionText = "";
+        foreach (EventCondition condition in EventsToMonitor)
+        {
+            if (condition.ID == conditionseventID)
+            {
+                conditionText = condition.TutorialWindow.text;
+                break;
+            }
+        }
+        ConditionsText.text = conditionText;
     }
 
     public void ManuallyTriggerEvent(int ID, int currentturn)
