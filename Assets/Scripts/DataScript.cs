@@ -687,6 +687,7 @@ public class DataScript : MonoBehaviour
             case ("focused"):
                 equipment.BaseDamage *= 2;
                 equipment.Maxuses /= 2;
+                equipment.Currentuses = equipment.Maxuses;
                 break;
             case ("ranged"):
                 equipment.BaseDamage /= 2;

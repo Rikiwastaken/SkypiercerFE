@@ -8,7 +8,6 @@
 - Parfois pas de visuel d'armes
 - fenetre de vision de skills fait encore nimp
 - Dans l'interface, certaines text box sont trop petites
-- Les armes focused commencent avec trop de durabilité
 
 ## Ideas
 
