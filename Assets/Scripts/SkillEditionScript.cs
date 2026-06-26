@@ -519,9 +519,10 @@ public class SkillEditionScript : MonoBehaviour
                 }
                 else
                 {
-                    SkillList.SetActive(true);
-                    InitializeSkillButtons();
                     skillwindowindex = 0;
+                    InitializeSkillButtons();
+                    SkillList.SetActive(true);
+
                 }
             }
         }
