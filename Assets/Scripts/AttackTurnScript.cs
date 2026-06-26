@@ -394,6 +394,34 @@ public class AttackTurnScript : MonoBehaviour
         }
 
 
+        // start by calculating min dist to every other unit
+
+        int distanceformovement = 10;
+
+        int mindistance = 99;
+
+        foreach (Character otherunit in gridScript.allunits)
+        {
+            if (otherunit.affiliation.ToLower() != charunit.affiliation.ToLower())
+            {
+                int distance = ManhattanDistance(otherunit, charunit);
+                if (distance < mindistance)
+                {
+                    mindistance = distance;
+                    if (mindistance < distanceformovement)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (mindistance >= distanceformovement)
+        {
+            return false;
+        }
+
+
         Vector2 originalpos = charunit.position;
         gridScript.ShowMovementOfUnit(unit);
 
