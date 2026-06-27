@@ -12,7 +12,6 @@
 - c'est possible de soigner les ennemis en sélectionnant attaquer avec le bâton
 - possible blocage si on essaye de déplacer les ennemis avant le combat.
 - Problème avec le bond de Lyv et Sorak.
-- Ruben est absent de base dans sa mission.
 - En affichant les météo, le logo peut apparaître en dehors de la zone concernée.
 
 ## Ideas
