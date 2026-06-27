@@ -866,7 +866,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
 
-                (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist, bool oneforallactiveattacker, bool unyieldingactiveattacker, bool compassionusedattacker, bool invigoratingusedattacker) = ActionsMenu.ApplyDamage(Attacker, target, false);
+                (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist, bool oneforallactiveattacker, bool unyieldingactiveattacker, bool compassionusedattacker, bool invigoratingusedattacker) = ActionsMenu.ApplyDamage(Attacker, target, false, ishealing);
 
 
 
@@ -889,7 +889,7 @@ public class AttackTurnScript : MonoBehaviour
                     doesdefenderattacks = true;
                     if (Chartarget.currentHP > 0)
                     {
-                        (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender) = ActionsMenu.ApplyDamage(Attacker, target, true);
+                        (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender) = ActionsMenu.ApplyDamage(Attacker, target, true, false);
                     }
                 }
 
@@ -1025,7 +1025,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
             // apply damage
-            (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist, bool oneforallactiveattacker, bool unyieldingactiveattacker, bool compassionusedattacker, bool invigoratingusedattacker) = ActionsMenu.ApplyDamage(Attacker, target, false);
+            (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist, bool oneforallactiveattacker, bool unyieldingactiveattacker, bool compassionusedattacker, bool invigoratingusedattacker) = ActionsMenu.ApplyDamage(Attacker, target, false, ishealing);
 
             combatTextScript.UpdateInfo(attackerdamage, attackerhits, attackercrits, CharAttacker, Chartarget, ishealing);
 
@@ -1078,7 +1078,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
 
                 // deal damage
-                (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender) = ActionsMenu.ApplyDamage(Attacker, target, true);
+                (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender) = ActionsMenu.ApplyDamage(Attacker, target, true, false);
                 combatTextScript.UpdateInfo(defenderdamage, defenderhits, defendercrits, Chartarget, CharAttacker, false);
 
             }

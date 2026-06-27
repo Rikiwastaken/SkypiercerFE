@@ -103,7 +103,7 @@ public class ActionManager : MonoBehaviour
                 }
                 currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
                 (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, false, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
             }
             return;
         }
@@ -433,7 +433,7 @@ public class ActionManager : MonoBehaviour
         else
         {
             (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-            GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+            GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, false, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
             GridScript.LockcurrentSelection();
             if (!GridScript.actionsMenu.activeSelf)
             {
@@ -530,7 +530,7 @@ public class ActionManager : MonoBehaviour
                     }
                     GridScript.UnlockSelection();
                     (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                    GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentChar);
+                    GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, true, currentChar);
                     GridScript.LockcurrentSelection();
                     if (!GridScript.actionsMenu.activeSelf)
                     {

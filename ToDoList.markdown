@@ -8,8 +8,6 @@
 - fenetre de vision de skills fait encore nimp confirmation ça le fait toujours
 - En dialogue le neutral menu s'active parfois tous seul.
 - Menu Bonds reste en vert après avoir vu tous les bonds.
-- lignes d'affinité entre Sorak et Lyv pose problème.
-- c'est possible de soigner les ennemis en sélectionnant attaquer avec le bâton
 - possible blocage si on essaye de déplacer les ennemis avant le combat.
 - Problème avec le bond de Lyv et Sorak.
 - En affichant les météo, le logo peut apparaître en dehors de la zone concernée.

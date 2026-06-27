@@ -583,7 +583,7 @@ public class ActionsMenu : MonoBehaviour
                         frapperenmelee = false;
                     }
 
-                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, new List<GridSquareScript>() { target.GetComponent<UnitScript>().UnitCharacteristics.currentTile }, weapon.type.ToLower() == "staff", target.GetComponent<UnitScript>().UnitCharacteristics);
+                    GridScript.ShowAttackAfterMovement(weapon.Range + rangebonus, frapperenmelee, new List<GridSquareScript>() { target.GetComponent<UnitScript>().UnitCharacteristics.currentTile }, false, target.GetComponent<UnitScript>().UnitCharacteristics);
                     GridScript.lockedattacktiles = GridScript.attacktiles;
                     GridScript.lockedhealingtiles = GridScript.healingtiles;
                     GridScript.Recolor();
@@ -628,7 +628,7 @@ public class ActionsMenu : MonoBehaviour
             newfrapperenmelee = false;
         }
         Character newchartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        GridScript.ShowAttackAfterMovement(newweapon.Range + newrangebonus, newfrapperenmelee, new List<GridSquareScript>() { newchartarget.currentTile }, newweapon.type.ToLower() == "staff", newchartarget);
+        GridScript.ShowAttackAfterMovement(newweapon.Range + newrangebonus, newfrapperenmelee, new List<GridSquareScript>() { newchartarget.currentTile }, false, newchartarget);
     }
 
 
@@ -1886,7 +1886,7 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
-    public (int, int, int, int, List<int>, List<int>, List<int>, bool, bool, bool, bool) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked, bool isbossdamage = false, bool AttackIntercepted = false, bool IsIntercepter = false)
+    public (int, int, int, int, List<int>, List<int>, List<int>, bool, bool, bool, bool) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked, bool ishealing, bool isbossdamage = false, bool AttackIntercepted = false, bool IsIntercepter = false)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
@@ -1900,7 +1900,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         int exp = 1;
-        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() != "staff")
+        if (ishealing)
         {
             (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
 
@@ -2236,7 +2236,7 @@ public class ActionsMenu : MonoBehaviour
 
             return (numberofhits, numberofcritials, finaldamage, exp, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
         }
-        //using a staff
+        //healing
         else
         {
             bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77); //Spite, Caelum General
