@@ -118,6 +118,19 @@ public class ActionsMenu : MonoBehaviour
         ActionManager.instance.preventfromlockingafteraction = true;
 
 
+
+        // guarantees attack button is selected when it hsould
+        if (AttackButton.gameObject.activeSelf && AttackButton.transform.parent.gameObject.activeSelf)
+        {
+            GameObject selectedGO = EventSystem.current.currentSelectedGameObject;
+            if (selectedGO == null || (selectedGO != AttackButton.gameObject && selectedGO != AttackCancelButton.gameObject))
+            {
+                EventSystem.current.SetSelectedGameObject(AttackButton.gameObject);
+            }
+
+        }
+
+
         if (_CancelAction.WasPressedThisFrame() && !ItemsScript.activeSelf && !CommandGO.activeSelf && !AttackButton.transform.parent.gameObject.activeSelf)
         {
             ActionsCancelButton.onClick.Invoke();
