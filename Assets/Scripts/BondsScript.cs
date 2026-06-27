@@ -110,6 +110,7 @@ public class BondsScript : MonoBehaviour
         {
             if (bondsSubMenu.activeSelf && cancelcounter <= 0)
             {
+                ChangeColorIfBondsCanBeIncreased();
                 cancelcounter = (int)(0.5f / Time.deltaTime);
                 bondsSubMenu.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(BondsMenu.transform.GetChild(0).gameObject);
