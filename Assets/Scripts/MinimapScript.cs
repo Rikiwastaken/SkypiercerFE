@@ -26,7 +26,7 @@ public class MinimapScript : MonoBehaviour
 
     private GridSquareScript previoustile;
 
-    private Coroutine updatecoroutine;
+    private bool updatingcoroutine;
 
     private bool launchupdate;
 
@@ -70,10 +70,13 @@ public class MinimapScript : MonoBehaviour
             UpdateMinimap();
         }
 
-        if (launchupdate && updatecoroutine == null)
+
+
+        if (launchupdate && !updatingcoroutine)
         {
+
             launchupdate = false;
-            updatecoroutine = StartCoroutine(ChangeMinimap());
+            StartCoroutine(ChangeMinimap());
         }
 
         if (cameraScript.incombat)
@@ -258,7 +261,6 @@ public class MinimapScript : MonoBehaviour
     {
         if (waitforinitialization <= 0)
         {
-
             launchupdate = true;
         }
 
@@ -267,6 +269,7 @@ public class MinimapScript : MonoBehaviour
 
     private IEnumerator ChangeMinimap()
     {
+        updatingcoroutine = true;
         Texture2D newtexture = new Texture2D(minimapTexture.width, minimapTexture.height, TextureFormat.RGBA32, false);
         newtexture.filterMode = FilterMode.Point;
 
@@ -335,8 +338,7 @@ public class MinimapScript : MonoBehaviour
             SpriteMeshType.FullRect
         );
 
-
-        updatecoroutine = null;
+        updatingcoroutine = false;
         yield return true;
     }
 

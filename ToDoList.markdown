@@ -4,17 +4,16 @@
 
 - bouton pour montrer les ennemis marche pas
 - Parfois les animations de combat affichent pas de contre attaque alors qu'il y en a une
-- Minimap qui se mets pas à jour
 - Parfois pas de visuel d'armes
 - fenetre de vision de skills fait encore nimp confirmation ça le fait toujours
-- le bouton de confirmation d'attaque est pas surligné de base
 - En dialogue le neutral menu s'active parfois tous seul.
-- Lyv a pas la bonne sprite dans le chapitre 2
 - Menu Bonds reste en vert après avoir vu tous les bonds.
 - lignes d'affinité entre Sorak et Lyv pose problème.
 - c'est possible de soigner les ennemis en sélectionnant attaquer avec le bâton
 - possible blocage si on essaye de déplacer les ennemis avant le combat.
 - Problème avec le bond de Lyv et Sorak.
+- Ruben est absent de base dans sa mission.
+- En affichant les météo, le logo peut apparaître en dehors de la zone concernée.
 
 ## Ideas
 
