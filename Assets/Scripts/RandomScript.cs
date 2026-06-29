@@ -74,6 +74,7 @@ public class RandomScript : MonoBehaviour
         {
             HitValues.Add(CalculateAValue());
             CritValues.Add(CalculateAValue());
+            personalityValues.Add(CalculateAValue());
             if (UnitCharacter.affiliation == "playable")
             {
                 if (i < numberofLevelValues)
@@ -89,11 +90,6 @@ public class RandomScript : MonoBehaviour
                     levelValues.Add(newlevelvalues);
                 }
             }
-            else
-            {
-                personalityValues.Add(CalculateAValue());
-            }
-
         }
     }
 

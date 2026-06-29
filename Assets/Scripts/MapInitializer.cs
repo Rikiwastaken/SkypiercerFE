@@ -216,7 +216,6 @@ public class MapInitializer : MonoBehaviour
         int index = 0;
         foreach (EnemyStats enemyStats in EnemyList)
         {
-            Debug.Log("creating : " + enemyStats.Name);
             InitializeNonPlayable(enemyStats, index);
             index++;
         }

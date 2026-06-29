@@ -721,7 +721,7 @@
             "ID": 71
         },
         {
-            "name": "Guardian Spirit",
+            "name": "Occidens Strategist",
             "Descriptions": "Increases all stat growth and exp gained by 10% (exclusive to Kira).",
             "IsCommand": false,
             "Cost": 0,
@@ -969,6 +969,16 @@
             "range": 0,
             "buyable": true,
             "ID": 96
+        },
+        {
+            "name": "Guardian Spirit",
+            "Descriptions": "15% to survive a lethal attack with 1 HP. (Exclusive to Kira)",
+            "IsCommand": false,
+            "Cost": 0,
+            "targettype": 0,
+            "range": 0,
+            "buyable": false,
+            "ID": 97
         }
     ]
 }

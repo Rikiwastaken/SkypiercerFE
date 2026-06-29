@@ -115,6 +115,18 @@ public class BattleInfotext : MonoBehaviour
 
         }
 
+        // skill description safeguard
+        GameObject EventSelectedGO = EventSystem.current.currentSelectedGameObject;
+        if (EventSelectedGO != null)
+        {
+            Button selectedbutton = EventSelectedGO.GetComponent<Button>();
+            if (selectedbutton != null && SkillButtonList.Contains(selectedbutton) && _CancelAction.IsPressed())
+            {
+                SkillDescription.gameObject.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(null);
+            }
+        }
+
         if (GridScript.GetSelectedUnitGameObject() != null)
         {
             selectedunit = GridScript.GetSelectedUnitGameObject();
@@ -226,18 +238,6 @@ public class BattleInfotext : MonoBehaviour
                     previousselected = selectedunit;
                     ResetSkillWindow();
                     ManagedSkillVisuals(selectedunitCharacter);
-
-                    if (ActionsMenu.gameObject.activeSelf)
-                    {
-
-                    }
-                    else
-                    {
-
-
-
-
-                    }
                 }
 
                 ManageSkillDescription();
@@ -578,7 +578,7 @@ public class BattleInfotext : MonoBehaviour
 
         if (unit.UnitSkill != 0)
         {
-            usedindex++;
+
             if (!SkillButtonList[0].gameObject.activeSelf)
             {
                 SkillButtonList[0].gameObject.SetActive(true);
@@ -588,10 +588,10 @@ public class BattleInfotext : MonoBehaviour
             SkillButtonList[0].image.color = BaseSkillColor;
             SkillButtonList[0].GetComponentInChildren<TextMeshProUGUI>().text = unitskill.name;
             SkillButtonIDList.Add(unitskill.ID);
-
+            usedindex++;
         }
 
-        if (unit.SecondUnitSkill != 0)
+        if (unit.SecondUnitSkill != 0 && unit.SecondSkillUnlocked)
         {
             if (!SkillButtonList[usedindex].gameObject.activeSelf)
             {
@@ -667,7 +667,7 @@ public class BattleInfotext : MonoBehaviour
 
 
 
-        if (unit.UnitSkill != 0 || unit.SecondUnitSkill != 0 || unit.EquipedSkills.Count > 0)
+        if (unit.UnitSkill != 0 || (unit.SecondUnitSkill != 0 && unit.SecondSkillUnlocked) || unit.EquipedSkills.Count > 0)
         {
             if (!Skilltext.transform.parent.gameObject.activeSelf)
             {

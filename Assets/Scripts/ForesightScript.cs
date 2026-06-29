@@ -72,6 +72,9 @@ public class ForesightScript : MonoBehaviour
         public int previousdefendercritindex;
         public int previousattackerlvlupindex;
         public int previousdefenderlvlupindex;
+        public int previousattackerpersonalityindex;
+        public int previousdefenderpersonalityindex;
+
         public int attackersurvivorstats = -1;
         public int AttackerTauntStacks = -1;
         public int defendersurvivorstats = -1;
@@ -412,6 +415,7 @@ public class ForesightScript : MonoBehaviour
             CurrentAction.AttackData.previousattackerhitindex = User.GetComponent<RandomScript>().hitvaluesindex;
             CurrentAction.AttackData.previousattackercritindex = User.GetComponent<RandomScript>().CritValuesindex;
             CurrentAction.AttackData.previousattackerlvlupindex = User.GetComponent<RandomScript>().levelvaluesindex;
+            CurrentAction.AttackData.previousattackerpersonalityindex = User.GetComponent<RandomScript>().personalityvaluesindex;
         }
         if (target != null)
         {
@@ -420,6 +424,7 @@ public class ForesightScript : MonoBehaviour
             CurrentAction.AttackData.previousdefenderhitindex = target.GetComponent<RandomScript>().hitvaluesindex;
             CurrentAction.AttackData.previousdefendercritindex = target.GetComponent<RandomScript>().CritValuesindex;
             CurrentAction.AttackData.previousdefenderlvlupindex = target.GetComponent<RandomScript>().levelvaluesindex;
+            CurrentAction.AttackData.previousattackerpersonalityindex = User.GetComponent<RandomScript>().personalityvaluesindex;
         }
         CurrentAction.actiontype = type;
         CurrentAction.ModifiedTiles = new List<TileModification>();
@@ -603,9 +608,11 @@ public class ForesightScript : MonoBehaviour
                 action.Unit.GetComponent<RandomScript>().hitvaluesindex = action.AttackData.previousattackerhitindex;
                 action.Unit.GetComponent<RandomScript>().CritValuesindex = action.AttackData.previousattackercritindex;
                 action.Unit.GetComponent<RandomScript>().levelvaluesindex = action.AttackData.previousattackerlvlupindex;
+                action.Unit.GetComponent<RandomScript>().personalityvaluesindex = action.AttackData.previousattackerpersonalityindex;
                 action.AttackData.defender.GetComponent<RandomScript>().hitvaluesindex = action.AttackData.previousdefenderhitindex;
                 action.AttackData.defender.GetComponent<RandomScript>().CritValuesindex = action.AttackData.previousdefendercritindex;
                 action.AttackData.defender.GetComponent<RandomScript>().levelvaluesindex = action.AttackData.previousdefenderlvlupindex;
+                action.AttackData.defender.GetComponent<RandomScript>().personalityvaluesindex = action.AttackData.previousdefenderpersonalityindex;
                 break;
             case 1:
 
@@ -617,11 +624,13 @@ public class ForesightScript : MonoBehaviour
                 action.Unit.GetComponent<RandomScript>().hitvaluesindex = action.AttackData.previousattackerhitindex;
                 action.Unit.GetComponent<RandomScript>().CritValuesindex = action.AttackData.previousattackercritindex;
                 action.Unit.GetComponent<RandomScript>().levelvaluesindex = action.AttackData.previousattackerlvlupindex;
+                action.Unit.GetComponent<RandomScript>().personalityvaluesindex = action.AttackData.previousattackerpersonalityindex;
                 if (action.AttackData.defender != null)
                 {
                     action.AttackData.defender.GetComponent<RandomScript>().hitvaluesindex = action.AttackData.previousdefenderhitindex;
                     action.AttackData.defender.GetComponent<RandomScript>().CritValuesindex = action.AttackData.previousdefendercritindex;
                     action.AttackData.defender.GetComponent<RandomScript>().levelvaluesindex = action.AttackData.previousdefenderlvlupindex;
+                    action.AttackData.defender.GetComponent<RandomScript>().personalityvaluesindex = action.AttackData.previousdefenderpersonalityindex;
                 }
                 break;
         }

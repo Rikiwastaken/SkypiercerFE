@@ -49,7 +49,7 @@ public class Chapter11PrisonnerPlacement : MonoBehaviour
             }
 
             enemyStats.monsterStats = new MonsterStats();
-            if (charactertospawn.SecondUnitSkill > 0)
+            if (charactertospawn.SecondUnitSkill > 0 && charactertospawn.SecondSkillUnlocked)
             {
                 enemyStats.Skills.Add(charactertospawn.SecondUnitSkill);
             }

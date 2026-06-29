@@ -1900,7 +1900,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         int exp = 1;
-        if (ishealing)
+        if (!ishealing)
         {
             (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target);
 
@@ -1923,6 +1923,7 @@ public class ActionsMenu : MonoBehaviour
             if (isbossdamage)
             {
                 int totaldamage = 0;
+
                 if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
                 {
                     numberofhits++;
@@ -2051,6 +2052,7 @@ public class ActionsMenu : MonoBehaviour
                 int damagetoaddtolist = -1;
                 int crittoaddtolist = 0;
                 //calculating hit for first attack
+
                 if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
                 {
                     numberofhits++;
@@ -2327,7 +2329,15 @@ public class ActionsMenu : MonoBehaviour
                 allforonetransfertarget.currentHP = 1;
                 allforonetransfertargetGO.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
             }
-
+            if (allforonetransfertarget.currentHP <= 0 && allforonetransfertargetGO.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
+            {
+                int randomvalue = allforonetransfertargetGO.GetComponent<RandomScript>().GetPersonalityValue();
+                if (randomvalue <= 15)
+                {
+                    allforonetransfertarget.currentHP = 1;
+                    allforonetransfertargetGO.GetComponent<UnitScript>().AddNumber(0, true, "Guardian Spirit");
+                }
+            }
         }
         else
         {
@@ -2340,13 +2350,24 @@ public class ActionsMenu : MonoBehaviour
             target.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
             unyieldingactive = true;
         }
-
-        if (charTarget.currentHP <= 0 && charTarget.name.ToLower() == "zack" && charTarget.ExamodeClass.remaingExamodeTurns > 0)  //zack examode
+        else if (charTarget.currentHP <= 0 && charTarget.name.ToLower() == "zack" && charTarget.ExamodeClass.remaingExamodeTurns > 0)  //zack examode
         {
             charTarget.currentHP = 1;
             target.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
             unyieldingactive = true;
         }
+        else if (charTarget.currentHP <= 0 && target.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
+        {
+            int randomvalue = target.GetComponent<RandomScript>().GetPersonalityValue();
+            if (randomvalue <= 15)
+            {
+                charTarget.currentHP = 1;
+                target.GetComponent<UnitScript>().AddNumber(0, true, "Guardian Spirit");
+                unyieldingactive = true;
+            }
+        }
+
+
 
         if (Attacker.GetComponent<UnitScript>().GetSkill(83)) //born to burn
         {
@@ -2547,6 +2568,15 @@ public class ActionsMenu : MonoBehaviour
             {
                 Chartarget.currentHP = 1;
                 potentialtarget.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
+            }
+            else if (Chartarget.currentHP <= 0 && target.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
+            {
+                int randomvalue = target.GetComponent<RandomScript>().GetPersonalityValue();
+                if (randomvalue <= 15)
+                {
+                    Chartarget.currentHP = 1;
+                    target.GetComponent<UnitScript>().AddNumber(0, true, "Guardian Spirit");
+                }
             }
 
         }

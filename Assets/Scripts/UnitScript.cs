@@ -32,6 +32,7 @@ public class UnitScript : MonoBehaviour
         public int UnitSkill;
         public int SecondUnitSkill;
         public int TemporarySkill;
+        public bool SecondSkillUnlocked;
         public List<int> EquipedSkills;
         public bool attacksfriends;
 
@@ -1154,6 +1155,7 @@ public class UnitScript : MonoBehaviour
             TauntTurns = CharacterToCopy.TauntTurns,
             isintercepting = CharacterToCopy.isintercepting,
             TemporarySkill = CharacterToCopy.TemporarySkill,
+            SecondSkillUnlocked = CharacterToCopy.SecondSkillUnlocked,
             statusEffects = new StatusEffects
             {
                 BurnTurns = CharacterToCopy.statusEffects.BurnTurns,
@@ -2459,7 +2461,7 @@ public class UnitScript : MonoBehaviour
 
     public bool GetSkill(int SkillID)
     {
-        if (UnitCharacteristics.EquipedSkills.Contains(SkillID) || UnitCharacteristics.UnitSkill == SkillID || UnitCharacteristics.TemporarySkill == SkillID || UnitCharacteristics.SecondUnitSkill == SkillID)
+        if (UnitCharacteristics.EquipedSkills.Contains(SkillID) || UnitCharacteristics.UnitSkill == SkillID || UnitCharacteristics.TemporarySkill == SkillID || (UnitCharacteristics.SecondUnitSkill == SkillID && UnitCharacteristics.SecondSkillUnlocked))
         {
             return true;
         }
