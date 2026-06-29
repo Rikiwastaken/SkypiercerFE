@@ -452,7 +452,7 @@
         },
         {
             "name": "Transparent Crossbow",
-            "Descriptions": "Unit's max HP is 1. Increases all stats by 5.",
+            "Descriptions": "Increases damage dealt by 25% and Speed by 5 but halves max HP.",
             "IsCommand": false,
             "Cost": 5,
             "targettype": 0,

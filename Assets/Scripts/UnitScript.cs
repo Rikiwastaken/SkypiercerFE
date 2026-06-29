@@ -1423,7 +1423,7 @@ public class UnitScript : MonoBehaviour
         }
         if (GetSkill(45)) //transparent crossbow
         {
-            UnitCharacteristics.AjustedStats.HP = 1;
+            UnitCharacteristics.AjustedStats.HP = (int)(UnitCharacteristics.stats.HP / 2);
         }
     }
 
@@ -2467,6 +2467,39 @@ public class UnitScript : MonoBehaviour
         }
         return false;
     }
+
+    // unlocks second skill and add copy to inventory if it is already equiped;
+    public void UnlockSecondSkill(Character Charactertouse)
+    {
+        if (Charactertouse.EquipedSkills.Contains(Charactertouse.SecondUnitSkill))
+        {
+            bool skillfoundininventory = false;
+
+            foreach (InventoryItem Item in DataScript.instance.PlayerInventory.inventoryItems)
+            {
+                if (Item.ID == Charactertouse.SecondUnitSkill)
+                {
+                    Item.Quantity += 1;
+                    skillfoundininventory = true;
+                    break;
+                }
+            }
+            if (!skillfoundininventory)
+            {
+                DataScript.instance.PlayerInventory.inventoryItems.Add(new InventoryItem() { ID = Charactertouse.SecondUnitSkill, Quantity = 1 });
+            }
+            Charactertouse.EquipedSkills.Remove(Charactertouse.SecondUnitSkill);
+        }
+
+        Charactertouse.SecondSkillUnlocked = true;
+
+    }
+
+    public void UnlockSecondSkill()
+    {
+        UnlockSecondSkill(UnitCharacteristics);
+    }
+
     private void LevelSetup()
     {
         if (UnitCharacteristics.affiliation != "playable")
@@ -3552,12 +3585,9 @@ public class UnitScript : MonoBehaviour
         //TransparentCrossBow
         if (GetSkill(45))
         {
-            statbonuses.Strength += 5;
-            statbonuses.Psyche += 5;
-            statbonuses.Resistance += 5;
-            statbonuses.Defense += 5;
             statbonuses.Speed += 5;
-            statbonuses.Dexterity += 5;
+            statbonuses.PhysDamage += 25;
+            statbonuses.TelekDamage += 25;
         }
 
         // Enduring

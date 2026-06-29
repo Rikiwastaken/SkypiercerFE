@@ -759,12 +759,20 @@ public class DataScript : MonoBehaviour
 
     public void CharacterUnlockingSafeguard(int chapter)
     {
+        GameObject TempGO = new GameObject();
+        UnitScript TempUS = TempGO.AddComponent<UnitScript>();
+
         foreach (Character character in PlayableCharacterList)
         {
+
             switch (character.ID)
             {
                 case 0: //Zack
                     character.playableStats.unlocked = true;
+                    if (chapter >= 13)
+                    {
+                        TempUS.UnlockSecondSkill(character);
+                    }
                     break;
                 case 1: //Lea
                     character.playableStats.unlocked = true;
@@ -826,10 +834,25 @@ public class DataScript : MonoBehaviour
                     }
 
                     break;
-
-
+                case 13: // Gale
+                    if (chapter >= 12)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    break;
+                case 14: // Aurora
+                    if (chapter >= 12)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    break;
             }
+
         }
+
+        DestroyImmediate(TempGO);
+
+
     }
 
     public void SpreadBonds(GameObject Unit)
