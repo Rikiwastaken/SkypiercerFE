@@ -283,6 +283,8 @@ public class WorldMapManager : MonoBehaviour
             }
         }
 
+        Debug.Log("closest = " + closest.name + " distance: " + mindist);
+
         if (closest != null && mindist <= mindistforstorypoints)
         {
             selectedsidestory = closest.GetComponent<StoryPointScript>().isSideStory;

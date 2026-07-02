@@ -59,6 +59,7 @@ public class GridSquareScript : MonoBehaviour
     public ParticleSystem rainparticle;
     public ParticleSystem sunparticle;
     public GameObject FireParticles;
+    public GameObject BeaconObject;
 
     [Serializable]
     public class MechanismClass
@@ -188,7 +189,13 @@ public class GridSquareScript : MonoBehaviour
         // Initial check (in case some levers start activated)
         CheckAllTriggers(null);
 
+        if (isfinishtile)
+        {
+            BeaconObject.SetActive(true);
+        }
 
+        OnTileChanged += BossTileChanged;
+        OnEnemyChanged += BossTileChanged;
 
         if (Mechanism == null || Mechanism.type != 1)
         {
@@ -208,8 +215,6 @@ public class GridSquareScript : MonoBehaviour
         }
 
 
-        OnTileChanged += BossTileChanged;
-        OnEnemyChanged += BossTileChanged;
 
     }
 

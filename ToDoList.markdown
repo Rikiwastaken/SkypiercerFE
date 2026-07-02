@@ -15,10 +15,9 @@
 
 - peut être faire qu'on puisse mettre "pas de battallion"
 - Chaptre 2, faire un truc quand les portes finales sont ouvertes
-- Montrer la case de fin en surligné
 - pour le choix des chapitres, faire un scroller et affichage de la map et de son nom
 - Gérer ptet l'inclinaison de la camera.
-- Mettre l'effet GUARDIEN à Kira (ptet son 2ème skill ?!) 15% de chance de surviv
+- Faire les visuels de l'effet gardien de Kira
 
 ## System 
 
