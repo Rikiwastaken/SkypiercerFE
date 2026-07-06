@@ -3,9 +3,7 @@
 ## Bug Fixes
 
 - bouton pour montrer les ennemis marche pas
-- Parfois les animations de combat affichent pas de contre attaque alors qu'il y en a une
 - Parfois pas de visuel d'armes
-- fenetre de vision de skills fait encore nimp confirmation ça le fait toujours
 - En dialogue le neutral menu s'active parfois tous seul.
 - possible blocage si on essaye de déplacer les ennemis avant le combat.
 - Problème avec le bond de Lyv et Sorak.

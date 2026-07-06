@@ -83,6 +83,8 @@ public class BattleInfotext : MonoBehaviour
     private InputAction _ShowDetailsAction;
     private InputAction _CancelAction;
 
+    private bool showingdescription;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -91,12 +93,6 @@ public class BattleInfotext : MonoBehaviour
         GridScript = GridScript.instance;
         BaseSkillColor = SkillButtonList[0].image.color;
         attackTurnScript = FindAnyObjectByType<AttackTurnScript>(FindObjectsInactive.Include);
-    }
-
-
-    private void OnDisable()
-    {
-        SkillDescription.transform.parent.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -113,18 +109,6 @@ public class BattleInfotext : MonoBehaviour
             framesbeforeactivation = 5;
 
 
-        }
-
-        // skill description safeguard
-        GameObject EventSelectedGO = EventSystem.current.currentSelectedGameObject;
-        if (EventSelectedGO != null)
-        {
-            Button selectedbutton = EventSelectedGO.GetComponent<Button>();
-            if (selectedbutton != null && SkillButtonList.Contains(selectedbutton) && _CancelAction.IsPressed())
-            {
-                SkillDescription.gameObject.SetActive(false);
-                EventSystem.current.SetSelectedGameObject(null);
-            }
         }
 
         if (GridScript.GetSelectedUnitGameObject() != null)
@@ -156,11 +140,6 @@ public class BattleInfotext : MonoBehaviour
             if (MasteryTexts[0].transform.parent.gameObject.activeSelf)
             {
                 MasteryTexts[0].transform.parent.gameObject.SetActive(false);
-            }
-            if (Skilltext.transform.parent.gameObject.activeSelf)
-            {
-                Skilltext.transform.parent.gameObject.SetActive(false);
-                EventSystem.current.SetSelectedGameObject(null);
             }
             return;
         }
@@ -236,7 +215,7 @@ public class BattleInfotext : MonoBehaviour
                 if (previousselected != selectedunit)
                 {
                     previousselected = selectedunit;
-                    ResetSkillWindow();
+                    ResetSkillWindow(selectedunit);
                     ManagedSkillVisuals(selectedunitCharacter);
                 }
 
@@ -329,17 +308,11 @@ public class BattleInfotext : MonoBehaviour
         }
     }
 
-    public void ResetSkillWindow()
+    public void ResetSkillWindow(GameObject currentselected)
     {
-        GameObject currentselected = EventSystem.current.currentSelectedGameObject;
-        if (currentselected != null && currentselected.transform.parent == SkillDescription.transform.parent)
-        {
-            EventSystem.current.SetSelectedGameObject(SkillButtonList[0].gameObject);
-        }
-        else
-        {
-            SkillDescription.transform.parent.gameObject.SetActive(false);
-        }
+        SkillDescription.transform.parent.gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        showingdescription = false;
     }
 
     private void ManageSkillDescription()
@@ -348,54 +321,74 @@ public class BattleInfotext : MonoBehaviour
         {
             _ShowDetailsAction.Enable();
         }
-        if (_ShowDetailsAction.IsPressed() && SkillButtonIDList.Count > 0 && !SkillDescription.transform.parent.gameObject.activeSelf && !ActionsMenu.gameObject.activeSelf && !NeutralMenu.activeSelf)
+        if (_ShowDetailsAction.WasPressedThisFrame() && !showingdescription && !ActionsMenu.gameObject.activeSelf && !NeutralMenu.activeSelf)
         {
             SkillButtonList[0].Select();
+            showingdescription = true;
         }
         if (!_CancelAction.enabled)
         {
             _CancelAction.Enable();
+
         }
-        if (_CancelAction.IsPressed())
+        if (_CancelAction.WasPressedThisFrame())
         {
             eventSystem.SetSelectedGameObject(null);
             Deactivate();
-        }
-        if (!SkillDescription.transform.gameObject.activeSelf)
-        {
-            SkillDescription.transform.gameObject.SetActive(true);
+            return;
         }
 
-        GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
-        for (int i = 0; i < SkillButtonList.Count; i++)
+
+        if (showingdescription)
         {
-            if (SkillButtonList[i].gameObject == currentSelected && SkillButtonIDList[i] != -1)
+            if (!SkillDescription.transform.parent.gameObject.activeSelf)
             {
-                SkillDescription.text = DataScript.instance.SkillList[SkillButtonIDList[i]].Descriptions;
-                if (!SkillDescription.transform.parent.gameObject.activeSelf)
-                {
-                    SkillDescription.transform.parent.gameObject.SetActive(true);
-                }
-
-                GridScript.movementbuffercounter = 5;
-                return;
+                SkillDescription.transform.parent.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            if (SkillDescription.transform.parent.gameObject.activeSelf)
+            {
+                SkillDescription.transform.parent.gameObject.SetActive(false);
             }
         }
 
+
+        GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
+
+
+        if (currentSelected != null && currentSelected.GetComponent<Button>() && SkillButtonList.Contains(currentSelected.GetComponent<Button>()) && showingdescription)
+        {
+
+
+            for (int i = 0; i < SkillButtonList.Count; i++)
+            {
+                if (SkillButtonList[i].gameObject == currentSelected && SkillButtonIDList[i] != -1)
+                {
+                    SkillDescription.text = DataScript.instance.SkillList[SkillButtonIDList[i]].Descriptions;
+
+                    GridScript.movementbuffercounter = 5;
+                    return;
+                }
+            }
+
+        }
     }
 
     private void Deactivate()
     {
+        if (SkillDescription.transform.parent.gameObject.activeSelf)
+        {
+            SkillDescription.transform.parent.gameObject.SetActive(false);
+        }
         if (!Skilltext.transform.parent.gameObject.activeSelf)
         {
             Skilltext.transform.parent.gameObject.SetActive(false);
 
             MasteryTexts[0].transform.parent.gameObject.SetActive(false);
         }
-        if (SkillDescription.transform.parent.gameObject.activeSelf)
-        {
-            SkillDescription.transform.parent.gameObject.SetActive(false);
-        }
+        showingdescription = false;
     }
 
     private void ManageExamodeVisuals(Character Charactertouse)
@@ -679,7 +672,7 @@ public class BattleInfotext : MonoBehaviour
             if (Skilltext.transform.parent.gameObject.activeSelf)
             {
                 Skilltext.transform.parent.gameObject.SetActive(false);
-                SkillDescription.transform.gameObject.SetActive(false);
+                SkillDescription.transform.parent.gameObject.SetActive(false);
             }
 
         }
