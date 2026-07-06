@@ -30,6 +30,11 @@ public class MapInitializer : MonoBehaviour
     private List<GameObject> playableUnitsDeployed;
 
     public BossScript currentboss;
+
+    public Vector2 PlayableStartLookDirection;
+    public Vector2 EnemyStartLookDirection;
+    public Vector2 OtherStartLookDirection;
+
     private void Awake()
     {
         instance = this;

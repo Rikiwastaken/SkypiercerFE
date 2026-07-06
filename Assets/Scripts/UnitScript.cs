@@ -507,6 +507,28 @@ public class UnitScript : MonoBehaviour
             CopiedSkillImage.color = Color.clear;
             UnitTypeImage.color = Color.clear;
         }
+
+
+        // initial rotation
+        Vector2 looktarget = Vector2.zero;
+        if (UnitCharacteristics != null)
+        {
+            switch (UnitCharacteristics.affiliation.ToLower())
+            {
+                case ("playable"):
+                    looktarget = MapInitializer.instance.PlayableStartLookDirection;
+                    break;
+                case ("enemy"):
+                    looktarget = MapInitializer.instance.EnemyStartLookDirection;
+                    break;
+                case ("other"):
+                    looktarget = MapInitializer.instance.OtherStartLookDirection;
+                    break;
+
+            }
+        }
+        transform.LookAt(transform.position + new Vector3(looktarget.x, 0, looktarget.y));
+
     }
     public void InstantiateCharacterModel()
     {
