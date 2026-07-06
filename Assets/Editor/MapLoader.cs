@@ -332,6 +332,14 @@ public class MapLoader : EditorWindow
         }
     }
 
+    private bool SameColor(Color a, Color b, float eps = 0.005f)
+    {
+        return Mathf.Abs(a.r - b.r) < eps &&
+               Mathf.Abs(a.g - b.g) < eps &&
+               Mathf.Abs(a.b - b.b) < eps &&
+               Mathf.Abs(a.a - b.a) < eps;
+    }
+
     private void ManageMechanism(GameObject Tile, int x, int y)
     {
         if (MechanismMap == null)
@@ -340,59 +348,62 @@ public class MapLoader : EditorWindow
         }
         if (x != 0)
         {
-            Color pixelColor = MechanismMap.GetPixel(x, y);
 
-            if (pixelColor.Equals(colors.LeverColor))
+            Color truepixelColor = MechanismMap.GetPixel(x, y);
+
+            Color pixelColor = ApproximateColor(truepixelColor);
+
+            if (SameColor(pixelColor, colors.LeverColor))
             {
                 MechanismClass Mechanism = new MechanismClass();
                 Mechanism.type = 2;
                 Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
             }
-            else if (pixelColor.Equals(colors.DoorColor))
+            else if (SameColor(pixelColor, colors.DoorColor))
             {
                 MechanismClass Mechanism = new MechanismClass();
                 Mechanism.type = 1;
                 Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
             }
-            else if (pixelColor.Equals(colors.TeleporterColor))
+            else if (SameColor(pixelColor, colors.TeleporterColor))
             {
                 MechanismClass Mechanism = new MechanismClass();
                 Mechanism.type = 3;
                 Tile.GetComponent<GridSquareScript>().Mechanism = Mechanism;
             }
-            else if (pixelColor.Equals(colors.StairsColor))
+            if (SameColor(pixelColor, colors.StairsColor))
             {
                 Tile.GetComponent<GridSquareScript>().isstairs = true;
             }
-            else if (pixelColor.Equals(colors.ForestColor))
+            if (SameColor(pixelColor, colors.ForestColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Forest";
             }
-            else if (pixelColor.Equals(colors.RuinsColor))
+            else if (SameColor(pixelColor, colors.RuinsColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Ruins";
             }
-            else if (pixelColor.Equals(colors.FireColor))
+            else if (SameColor(pixelColor, colors.FireColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Fire";
             }
-            else if (pixelColor.Equals(colors.WaterColor))
+            else if (SameColor(pixelColor, colors.WaterColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Water";
             }
-            else if (pixelColor.Equals(colors.FortificationColor))
+            else if (SameColor(pixelColor, colors.FortificationColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Fortification";
             }
-            else if (pixelColor.Equals(colors.FogColor))
+            else if (SameColor(pixelColor, colors.FogColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Fog";
             }
-            else if (pixelColor.Equals(colors.MedicinalWaterColor))
+            else if (SameColor(pixelColor, colors.MedicinalWaterColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "MedicinalWater";
             }
-            else if (pixelColor.Equals(colors.DesertColor))
+            else if (SameColor(pixelColor, colors.DesertColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Desert";
             }
@@ -400,44 +411,49 @@ public class MapLoader : EditorWindow
         else
         {
             Color pixelColor = MechanismMap.GetPixel(x + 1, y);
-            if (pixelColor.Equals(colors.StairsColor))
+            if (SameColor(pixelColor, colors.StairsColor))
             {
                 Tile.GetComponent<GridSquareScript>().isstairs = true;
             }
-            else if (pixelColor.Equals(colors.ForestColor))
+            else if (SameColor(pixelColor, colors.ForestColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Forest";
             }
-            else if (pixelColor.Equals(colors.RuinsColor))
+            else if (SameColor(pixelColor, colors.RuinsColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Ruins";
             }
-            else if (pixelColor.Equals(colors.FireColor))
+            else if (SameColor(pixelColor, colors.FireColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Fire";
             }
-            else if (pixelColor.Equals(colors.WaterColor))
+            else if (SameColor(pixelColor, colors.WaterColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Water";
             }
-            else if (pixelColor.Equals(colors.FortificationColor))
+            else if (SameColor(pixelColor, colors.FortificationColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Fortification";
             }
-            else if (pixelColor.Equals(colors.FogColor))
+            else if (SameColor(pixelColor, colors.FogColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Fog";
             }
-            else if (pixelColor.Equals(colors.MedicinalWaterColor))
+            else if (SameColor(pixelColor, colors.MedicinalWaterColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "MedicinalWater";
             }
-            else if (pixelColor.Equals(colors.DesertColor))
+            else if (SameColor(pixelColor, colors.DesertColor))
             {
                 Tile.GetComponent<GridSquareScript>().type = "Desert";
             }
 
         }
+    }
+
+    private Color ApproximateColor(Color color)
+    {
+        return new Color((float)System.Math.Round(color.r, 2), (float)System.Math.Round(color.g, 2), (float)System.Math.Round(color.b, 2));
     }
 
     private void ManageRain(GameObject Tile, int x, int y)
@@ -455,11 +471,11 @@ public class MapLoader : EditorWindow
         {
             Color pixelColor = RainmMap.GetPixel(x, y);
 
-            if (pixelColor.Equals(RainColor))
+            if (SameColor(pixelColor, RainColor))
             {
                 Tile.GetComponent<GridSquareScript>().RemainingRainTurns = 2;
             }
-            else if (pixelColor.Equals(SunColor))
+            else if (SameColor(pixelColor, SunColor))
             {
                 Tile.GetComponent<GridSquareScript>().RemainingSunTurns = 2;
             }
@@ -467,11 +483,11 @@ public class MapLoader : EditorWindow
         else
         {
             Color pixelColor = RainmMap.GetPixel(x + 1, y);
-            if (pixelColor.Equals(RainColor))
+            if (SameColor(pixelColor, RainColor))
             {
                 Tile.GetComponent<GridSquareScript>().RemainingRainTurns = 2;
             }
-            else if (pixelColor.Equals(SunColor))
+            else if (SameColor(pixelColor, SunColor))
             {
                 Tile.GetComponent<GridSquareScript>().RemainingSunTurns = 2;
             }
@@ -499,39 +515,39 @@ public class MapLoader : EditorWindow
         }
 
 
-        if (pixelColor.Equals(colors.Elevation0))
+        if (SameColor(pixelColor, colors.Elevation0))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 0;
         }
-        else if (pixelColor.Equals(colors.Elevation1))
+        else if (SameColor(pixelColor, colors.Elevation1))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 1;
         }
-        else if (pixelColor.Equals(colors.Elevation2))
+        else if (SameColor(pixelColor, colors.Elevation2))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 2;
         }
-        else if (pixelColor.Equals(colors.Elevation3))
+        else if (SameColor(pixelColor, colors.Elevation3))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 3;
         }
-        else if (pixelColor.Equals(colors.Elevation4))
+        else if (SameColor(pixelColor, colors.Elevation4))
         {
             Tile.GetComponent<GridSquareScript>().elevation = 4;
         }
-        else if (pixelColor.Equals(colors.ElevationNeg1))
+        else if (SameColor(pixelColor, colors.ElevationNeg1))
         {
             Tile.GetComponent<GridSquareScript>().elevation = -1;
         }
-        else if (pixelColor.Equals(colors.ElevationNeg2))
+        else if (SameColor(pixelColor, colors.ElevationNeg2))
         {
             Tile.GetComponent<GridSquareScript>().elevation = -2;
         }
-        else if (pixelColor.Equals(colors.ElevationNeg3))
+        else if (SameColor(pixelColor, colors.ElevationNeg3))
         {
             Tile.GetComponent<GridSquareScript>().elevation = -3;
         }
-        else if (pixelColor.Equals(colors.ElevationNeg4))
+        else if (SameColor(pixelColor, colors.ElevationNeg4))
         {
             Tile.GetComponent<GridSquareScript>().elevation = -4;
         }
@@ -543,18 +559,18 @@ public class MapLoader : EditorWindow
 
         AllColors NewColor = new AllColors();
 
-        NewColor.wall = ObstacleMap.GetPixel(0, 0);
+        NewColor.wall = ApproximateColor(ObstacleMap.GetPixel(0, 0));
         if (ElevationMap != null)
         {
-            NewColor.Elevation0 = ElevationMap.GetPixel(0, 4);
-            NewColor.Elevation1 = ElevationMap.GetPixel(0, 5);
-            NewColor.Elevation2 = ElevationMap.GetPixel(0, 6);
-            NewColor.Elevation3 = ElevationMap.GetPixel(0, 7);
-            NewColor.Elevation4 = ElevationMap.GetPixel(0, 8);
-            NewColor.ElevationNeg1 = ElevationMap.GetPixel(0, 3);
-            NewColor.ElevationNeg2 = ElevationMap.GetPixel(0, 2);
-            NewColor.ElevationNeg3 = ElevationMap.GetPixel(0, 1);
-            NewColor.ElevationNeg4 = ElevationMap.GetPixel(0, 0);
+            NewColor.Elevation0 = ApproximateColor(ElevationMap.GetPixel(0, 4));
+            NewColor.Elevation1 = ApproximateColor(ElevationMap.GetPixel(0, 5));
+            NewColor.Elevation2 = ApproximateColor(ElevationMap.GetPixel(0, 6));
+            NewColor.Elevation3 = ApproximateColor(ElevationMap.GetPixel(0, 7));
+            NewColor.Elevation4 = ApproximateColor(ElevationMap.GetPixel(0, 8));
+            NewColor.ElevationNeg1 = ApproximateColor(ElevationMap.GetPixel(0, 3));
+            NewColor.ElevationNeg2 = ApproximateColor(ElevationMap.GetPixel(0, 2));
+            NewColor.ElevationNeg3 = ApproximateColor(ElevationMap.GetPixel(0, 1));
+            NewColor.ElevationNeg4 = ApproximateColor(ElevationMap.GetPixel(0, 0));
         }
 
         NewColor.LeverColor = Color.white;
@@ -572,24 +588,24 @@ public class MapLoader : EditorWindow
 
         if (MechanismMap != null)
         {
-            NewColor.LeverColor = MechanismMap.GetPixel(0, 1);
-            NewColor.DoorColor = MechanismMap.GetPixel(0, 2);
-            NewColor.StairsColor = MechanismMap.GetPixel(0, 3);
-            NewColor.ForestColor = MechanismMap.GetPixel(0, 4);
-            NewColor.RuinsColor = MechanismMap.GetPixel(0, 5);
-            NewColor.FireColor = MechanismMap.GetPixel(0, 6);
-            NewColor.WaterColor = MechanismMap.GetPixel(0, 7);
-            NewColor.FortificationColor = MechanismMap.GetPixel(0, 8);
-            NewColor.FogColor = MechanismMap.GetPixel(0, 9);
-            NewColor.MedicinalWaterColor = MechanismMap.GetPixel(0, 10);
-            NewColor.DesertColor = MechanismMap.GetPixel(0, 11);
-            NewColor.TeleporterColor = MechanismMap.GetPixel(0, 12);
+            NewColor.LeverColor = ApproximateColor(MechanismMap.GetPixel(0, 1));
+            NewColor.DoorColor = ApproximateColor(MechanismMap.GetPixel(0, 2));
+            NewColor.StairsColor = ApproximateColor(MechanismMap.GetPixel(0, 3));
+            NewColor.ForestColor = ApproximateColor(MechanismMap.GetPixel(0, 4));
+            NewColor.RuinsColor = ApproximateColor(MechanismMap.GetPixel(0, 5));
+            NewColor.FireColor = ApproximateColor(MechanismMap.GetPixel(0, 6));
+            NewColor.WaterColor = ApproximateColor(MechanismMap.GetPixel(0, 7));
+            NewColor.FortificationColor = ApproximateColor(MechanismMap.GetPixel(0, 8));
+            NewColor.FogColor = ApproximateColor(MechanismMap.GetPixel(0, 9));
+            NewColor.MedicinalWaterColor = ApproximateColor(MechanismMap.GetPixel(0, 10));
+            NewColor.DesertColor = ApproximateColor(MechanismMap.GetPixel(0, 11));
+            NewColor.TeleporterColor = ApproximateColor(MechanismMap.GetPixel(0, 12));
         }
 
         if (UnitMap != null)
         {
-            NewColor.UnitColor = UnitMap.GetPixel(0, 0);
-            NewColor.FinishTileColor = UnitMap.GetPixel(0, 1);
+            NewColor.UnitColor = ApproximateColor(UnitMap.GetPixel(0, 0));
+            NewColor.FinishTileColor = ApproximateColor(UnitMap.GetPixel(0, 1));
         }
 
         colors = NewColor;

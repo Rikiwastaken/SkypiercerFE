@@ -365,7 +365,7 @@ public class GridScript : MonoBehaviour
                     case (1):
                         if (selection.Mechanism.isactivated)
                         {
-                            text += "Open Door\nNo effect";
+                            text += "Opened Door\nNo effect";
                         }
                         else
                         {
@@ -383,14 +383,6 @@ public class GridScript : MonoBehaviour
                         }
                         break;
                 }
-            }
-            else if (selection.isobstacle)
-            {
-                text += "Wall\nNo effect";
-            }
-            else if (selection.isstairs)
-            {
-                text += "Stairs\nNo elevation penalty";
             }
             else
             {
@@ -428,6 +420,15 @@ public class GridScript : MonoBehaviour
             if (selection.type.ToLower() == "desert")
             {
                 text = "Desert \n-10% HP";
+            }
+
+            if (selection.isobstacle)
+            {
+                text = "Wall\nNo effect";
+            }
+            else if (selection.isstairs)
+            {
+                text = "Stairs\nNo elevation penalty";
             }
             Elevationtiletext.text = "Elevation : " + selection.elevation;
             UpdateWeatherImage(selection);
