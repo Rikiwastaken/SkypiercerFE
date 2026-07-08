@@ -71,6 +71,7 @@ public class UnitScript : MonoBehaviour
         public int Exp;
         public int Level;
         public string Modifier;
+        public int maxlevel;
     }
 
     [Serializable]
@@ -1171,7 +1172,8 @@ public class UnitScript : MonoBehaviour
                 Modifier = m.Modifier,
                 weapontype = m.weapontype,
                 Exp = m.Exp,
-                Level = m.Level
+                Level = m.Level,
+                maxlevel = m.maxlevel
             }).ToList(),
             DialoguePitch = CharacterToCopy.DialoguePitch,
             TauntTurns = CharacterToCopy.TauntTurns,
@@ -1451,7 +1453,7 @@ public class UnitScript : MonoBehaviour
 
     private void GainMastery(Character character, string weapontounlock = "", bool secundary = false)
     {
-        int maxlevel = 4;
+
         List<WeaponMastery> masteries = character.Masteries;
         if (weapontounlock == "")
         {
@@ -1460,6 +1462,11 @@ public class UnitScript : MonoBehaviour
 
         foreach (WeaponMastery mastery in masteries)
         {
+            int maxlevel = mastery.maxlevel;
+            if (maxlevel == 0)
+            {
+                maxlevel = 4;
+            }
             if (mastery.weapontype.ToLower() == weapontounlock)
             {
                 if (mastery.Level > 0 && mastery.Level <= maxlevel || (mastery.Level == 0 && secundary))
@@ -1513,6 +1520,11 @@ public class UnitScript : MonoBehaviour
     {
 
         bool levelup = false;
+        int masterymaxlevel = 4;
+        if (mastery.maxlevel != 0)
+        {
+            masterymaxlevel = mastery.maxlevel;
+        }
         switch (mastery.Level)
         {
             case 0:
@@ -1541,7 +1553,7 @@ public class UnitScript : MonoBehaviour
                 break;
         }
 
-        if (levelup)
+        if (levelup && mastery.Level < mastery.maxlevel)
         {
             mastery.Level++;
             mastery.Exp = 0;
