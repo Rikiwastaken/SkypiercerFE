@@ -4808,7 +4808,7 @@
             ]
         },
         {
-            "BondID": 41,
+            "BondID": 40,
             "dialogueLvl1": [
                 {
                     "CharacterID": 15,
@@ -4842,7 +4842,7 @@
             "dialogueLvl4": []
         },
         {
-            "BondID": 42,
+            "BondID": 41,
             "dialogueLvl1": [
                 {
                     "CharacterID": 15,
@@ -4876,7 +4876,7 @@
             "dialogueLvl4": []
         },
         {
-            "BondID": 43,
+            "BondID": 42,
             "dialogueLvl1": [
                 {
                     "CharacterID": 15,
@@ -4919,7 +4919,7 @@
             ]
         },
         {
-            "BondID": 44,
+            "BondID": 43,
             "dialogueLvl1": [
                 {
                     "CharacterID": 15,
@@ -4948,6 +4948,142 @@
                 {
                     "CharacterID": 13,
                     "text": "bond 3 between Gale and Erica, with Gale talking"
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 44,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 1 between Bob and Ruben, with Bob talking"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "bond 1 between Ruben and Bob, with Ruben talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 2 between Bob and Ruben, with Bob talking"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "bond 2 between Ruben and Bob, with Ruben talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 3 between Bob and Ruben, with Bob talking"
+                },
+                {
+                    "CharacterID": 7,
+                    "text": "bond 3 between Ruben and Bob, with Ruben talking"
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 45,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 1 between Bob and Zack, with Bob talking"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "bond 1 between Zack and Bob, with Zack talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 2 between Bob and Zack, with Bob talking"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "bond 2 between Zack and Bob, with Zack talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 3 between Bob and Zack, with Bob talking"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "bond 3 between Zack and Bob, with Zack talking"
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 46,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 1 between Bob and Gale, with Bob talking"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "bond 1 between Gale and Bob, with Gale talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 2 between Bob and Gale, with Bob talking"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "bond 2 between Gale and Bob, with Gale talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 3 between Bob and Gale, with Bob talking"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "bond 3 between Gale and Bob, with Gale talking"
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 47,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 1 between Bob and Elwyn, with Bob talking"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "bond 1 between Elwyn and Bob, with Elwyn talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 2 between Bob and Elwyn, with Bob talking"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "bond 2 between Elwyn and Bob, with Elwyn talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 3 between Bob and Elwyn, with Bob talking"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "bond 3 between Elwyn and Bob, with Elwyn talking"
                 }
             ],
             "dialogueLvl4": []

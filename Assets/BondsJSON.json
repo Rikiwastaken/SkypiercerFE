@@ -481,7 +481,7 @@
             "MaxLevel": 4
         },
         {
-            "ID": 41,
+            "ID": 40,
             "Name": "Erica-Kira",
             "Characters": [
                 15,
@@ -493,7 +493,7 @@
             "MaxLevel": 3
         },
         {
-            "ID": 42,
+            "ID": 41,
             "Name": "Erica-Gwenie",
             "Characters": [
                 15,
@@ -505,7 +505,7 @@
             "MaxLevel": 3
         },
         {
-            "ID": 43,
+            "ID": 42,
             "Name": "Erica-Zack",
             "Characters": [
                 15,
@@ -517,11 +517,59 @@
             "MaxLevel": 4
         },
         {
-            "ID": 44,
+            "ID": 43,
             "Name": "Erica-Gale",
             "Characters": [
                 15,
                 13
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 44,
+            "Name": "Bob-Ruben",
+            "Characters": [
+                12,
+                7
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 45,
+            "Name": "Bob-Zack",
+            "Characters": [
+                12,
+                0
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 46,
+            "Name": "Bob-Gale",
+            "Characters": [
+                12,
+                13
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 47,
+            "Name": "Bob-Elwyn",
+            "Characters": [
+                12,
+                2
             ],
             "BondPoints": 0,
             "BondLevel": 0,

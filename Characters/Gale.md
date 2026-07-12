@@ -5,8 +5,6 @@
 [[Kay]]
 
 [[Bob]]
-[[Jackson]]
-[[Johnson]]
 [[Gwenie]]
 
 [[Sorak]]
