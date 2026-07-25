@@ -19,6 +19,8 @@ public class MainMenuScript : MonoBehaviour
 
     public Transform Waterwheel;
 
+
+
     public float waterwheelrotationpersecond;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -70,7 +72,7 @@ public class MainMenuScript : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(ManuallyLoadChapterMenu.GetChild(0).gameObject);
             }
-            else if (currentSelected.transform.parent != ManuallyLoadChapterMenu)
+            else if (currentSelected.transform.parent != ManuallyLoadChapterMenu && currentSelected.transform.parent.parent != ManuallyLoadChapterMenu)
             {
                 EventSystem.current.SetSelectedGameObject(ManuallyLoadChapterMenu.GetChild(0).gameObject);
             }
@@ -94,25 +96,7 @@ public class MainMenuScript : MonoBehaviour
         sceneLoader.LoadScene("TestMap");
     }
 
-    public void ManuallyLoadChapter(int Chapter)
-    {
-        DataScript.instance.SetupCharactersForChapter(Chapter);
 
-        switch (Chapter)
-        {
-            case (12):
-                sceneLoader.LoadScene("CutsceneScene", 2);
-                break;
-            case (13):
-                sceneLoader.LoadScene("CutsceneScene", 7);
-                break;
-            default:
-                sceneLoader.LoadScene("Chapter" + Chapter);
-                break;
-        }
-
-
-    }
 
     public void OnCancel()
     {
