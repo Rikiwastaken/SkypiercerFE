@@ -13,7 +13,6 @@
 
 - peut être faire qu'on puisse mettre "pas de battallion"
 - Chaptre 2, faire un truc quand les portes finales sont ouvertes
-- pour le choix des chapitres, faire un scroller et affichage de la map et de son nom
 - Gérer ptet l'inclinaison de la camera.
 - Faire les visuels de l'effet gardien de Kira
 
