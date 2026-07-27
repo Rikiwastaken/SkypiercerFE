@@ -1,0 +1,160 @@
+{
+    "dialoguesToLoad": [
+        {
+            "text": "Crossing this place if gonna take days...",
+            "characterindex": 0
+        },
+        {
+            "text": "The Everwind Plains make up most of the Archadian territory.",
+            "characterindex": 13
+        },
+        {
+            "text": "Where are we going, already?",
+            "characterindex": 0
+        },
+        {
+            "text": "When Kay got captured, her belongings were seized. It was sent to the junkyard.",
+            "characterindex": 13
+        },
+        {
+            "text": "The Junkyard?",
+            "characterindex": 9
+        },
+        {
+            "text": "It is where all the Old World technology found in Archades is sent.",
+            "characterindex": 13
+        },
+        {
+            "text": "Why not destroy it if you are so afraid?",
+            "characterindex": 9
+        },
+        {
+            "text": "The king... He is a coward. He fears technology as if it was haunted. He thinks destroying it might create another cataclysm, so he just casts it away.",
+            "characterindex": 13
+        },
+        {
+            "text": "That's dumb as heck... Anyway, where is this Junkyard ?",
+            "characterindex": 0
+        },
+        {
+            "text": "East of Archades City.",
+            "characterindex": 13
+        },
+        {
+            "text": "So at the Eastern end of the continent...",
+            "characterindex": 9
+        },
+        {
+            "text": "When do we take a break? I'm sta-",
+            "characterindex": 0
+        },
+        {
+            "text": "Hold it right there!",
+            "characterindex": 12
+        },
+        {
+            "text": "You again...",
+            "characterindex": 0
+        },
+        {
+            "text": "I am Bob, Vice Commander of the Archadian army!",
+            "characterindex": 12
+        },
+        {
+            "text": "We know...",
+            "characterindex": 0
+        },
+        {
+            "text": "Be silent when Sir Bob talks!",
+            "characterindex": -1
+        },
+        {
+            "text": "Yeah, be silent!",
+            "characterindex": -1
+        },
+        {
+            "text": "You may have fooled that brute Flokoff, but I know what you are.",
+            "characterindex": 12
+        },
+        {
+            "text": "Ok, I admit it, we are...",
+            "characterindex": 0
+        },
+        {
+            "text": "You are Caelum spies!",
+            "characterindex": 12
+        },
+        {
+            "text": "Hold on, what?",
+            "characterindex": 0
+        },
+        {
+            "text": "You tried infiltrating our ranks using old hunter medals, but alas for you I was there.",
+            "characterindex": 12
+        },
+        {
+            "text": "He saved us all doing so.",
+            "characterindex": -1
+        },
+        {
+            "text": "Sir Bob is so awesome.",
+            "characterindex": -1
+        },
+        {
+            "text": "And precisely when you got thrown in jail, reinforcement from Caelum arrive and free you.",
+            "characterindex": 12
+        },
+        {
+            "text": "That's... Not really what happened.",
+            "characterindex": 0
+        },
+        {
+            "text": "And now, you march to the capital, ready to take the king's head?",
+            "characterindex": 12
+        },
+        {
+            "text": "Not at all, we...",
+            "characterindex": 13
+        },
+        {
+            "text": "And you, Gale Magnus, who could have guessed that you would betray your Kingdom...",
+            "characterindex": 12
+        },
+        {
+            "text": "How about you let us explain?",
+            "characterindex": 0
+        },
+        {
+            "text": "Brothers, to arms! ",
+            "characterindex": 12
+        },
+        {
+            "text": "To arms!",
+            "characterindex": -1
+        },
+        {
+            "text": "Yeah, to arms!",
+            "characterindex": -1
+        },
+        {
+            "text": "Do you guys hear that?",
+            "characterindex": 9
+        },
+        {
+            "text": "What are you talking about?",
+            "characterindex": 0
+        },
+        {
+            "text": "The forest, there! Let's run!",
+            "characterindex": 9
+        },
+        {
+            "text": "What?",
+            "characterindex": 13
+        },
+        {
+            "text": "Guys, follow her!",
+            "characterindex": 0
+        }
+    ]
+}

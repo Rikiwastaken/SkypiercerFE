@@ -111,7 +111,7 @@ public class SpecialPhaseScript : MonoBehaviour
                 // Then we remove previous Foresight Events
 
                 _ForesightScript.actions.Clear();
-
+                GetComponent<MapEventManager>().EventsToMonitor[1].TutorialWindow.text = "Victory\nBeat Raghnall.";
                 break;
         }
     }
