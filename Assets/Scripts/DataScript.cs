@@ -653,6 +653,8 @@ public class DataScript : MonoBehaviour
                     break;
                 case ("dagger"):
                     equipmenttoSetup.BaseCrit = equipemnttoappy.BaseCrit + 3 * equipmenttoSetup.Grade;
+                    equipmenttoSetup.BaseDamage = equipemnttoappy.BaseDamage - 1 * equipmenttoSetup.Grade;
+                    equipmenttoSetup.BaseHit = equipemnttoappy.BaseHit + 5 * equipmenttoSetup.Grade;
                     break;
             }
 
