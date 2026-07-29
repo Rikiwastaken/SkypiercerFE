@@ -1985,97 +1985,17 @@ public class ActionsMenu : MonoBehaviour
                 {
                     if (tripleattack)
                     {
-                        int tripleatkdamagetoaddtolist = -1;
-                        int tripleatkcrittoaddtolist = 0;
-                        //calculating hit for third attack
-                        if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
-                        {
 
-                            numberofhits++;
-
-
-
-                            // calculating critical
-                            if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
-                            {
-                                numberofcritials++;
-                                totaldamage += unitdamage * 3;
-                                tripleatkdamagetoaddtolist = unitdamage * 3;
-                                tripleatkcrittoaddtolist = 1;
-                            }
-                            else
-                            {
-                                totaldamage += unitdamage;
-                                tripleatkdamagetoaddtolist = unitdamage;
-                            }
-
-
-
-                            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
-                            {
-                                DealScytheDamage(unit, target);
-                            }
-                        }
-                        Damagelist.Add(tripleatkdamagetoaddtolist);
-                        Critlist.Add(tripleatkcrittoaddtolist);
+                        (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(unit, target, numberofhits, unithitrate, unitcrit, unitdamage, numberofcritials, totaldamage, Damagelist, Critlist);
 
 
                     }
-                    int doubleatkdamagetoaddtolist = -1;
-                    int doubleatkcrittoaddtolist = 0;
-                    //calculating hit for second attack
-                    if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
-                    {
-                        numberofhits++;
-                        // calculating critical
-                        if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
-                        {
-                            numberofcritials++;
-                            totaldamage += unitdamage * 3;
-                            doubleatkdamagetoaddtolist = unitdamage * 3;
-                            doubleatkcrittoaddtolist = 1;
-                        }
-                        else
-                        {
-                            totaldamage += unitdamage;
-                            doubleatkdamagetoaddtolist = unitdamage;
-                        }
-                        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
-                        {
-                            DealScytheDamage(unit, target);
-                        }
-                    }
-                    Damagelist.Add(doubleatkdamagetoaddtolist);
-                    Critlist.Add(doubleatkcrittoaddtolist);
+
+                    (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(unit, target, numberofhits, unithitrate, unitcrit, unitdamage, numberofcritials, totaldamage, Damagelist, Critlist);
 
                 }
-                int damagetoaddtolist = -1;
-                int crittoaddtolist = 0;
-                //calculating hit for first attack
 
-                if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
-                {
-                    numberofhits++;
-                    // calculating critical
-                    if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
-                    {
-                        numberofcritials++;
-                        totaldamage += unitdamage * 3;
-                        damagetoaddtolist = unitdamage * 3;
-                        crittoaddtolist = 1;
-                    }
-                    else
-                    {
-                        totaldamage += unitdamage;
-                        damagetoaddtolist = unitdamage;
-                    }
-                    if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
-                    {
-                        DealScytheDamage(unit, target);
-                    }
-                }
-                Damagelist.Add(damagetoaddtolist);
-                Critlist.Add(crittoaddtolist);
+                (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(unit, target, numberofhits, unithitrate, unitcrit, unitdamage, numberofcritials, totaldamage, Damagelist, Critlist);
 
                 (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage);
 
@@ -2121,92 +2041,18 @@ public class ActionsMenu : MonoBehaviour
                     {
                         if (tripleattack)
                         {
-                            int tripleatkdamagetoaddtolist = -1;
-                            int tripleatkcrittoaddtolist = 0;
-                            //calculating hit for third attack
-                            if (target.GetComponent<RandomScript>().GetHitValue() < targethitrate)
-                            {
-                                numberofhits++;
-                                // calculating critical
-                                if (target.GetComponent<RandomScript>().GetCritValue() < targetcrit)
-                                {
-                                    numberofcritials++;
-                                    totaldamage += targetdamage * 3;
-                                    tripleatkdamagetoaddtolist = targetdamage * 3;
-                                    tripleatkcrittoaddtolist = 1;
-                                }
-                                else
-                                {
-                                    totaldamage += targetdamage;
-                                    tripleatkdamagetoaddtolist = targetdamage;
-                                }
-                                if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
-                                {
-                                    DealScytheDamage(target, unit);
-                                }
-                            }
-                            Damagelist.Add(tripleatkdamagetoaddtolist);
-                            Critlist.Add(tripleatkcrittoaddtolist);
-                        }
-                        //calculating hit for second attack
-                        if (target.GetComponent<RandomScript>().GetHitValue() < targethitrate)
-                        {
-                            numberofhits++;
 
-                            int doubleatkdamagetoaddtolist = -1;
-                            int doubleatkcrittoaddtolist = 0;
+                            (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, numberofcritials, totaldamage, Damagelist, Critlist);
 
-                            // calculating critical
-                            if (target.GetComponent<RandomScript>().GetCritValue() < targetcrit)
-                            {
-                                numberofcritials++;
-                                totaldamage += targetdamage * 3;
-                                doubleatkcrittoaddtolist = targetdamage * 3;
-                                doubleatkdamagetoaddtolist = 1;
-                            }
-                            else
-                            {
-                                totaldamage += targetdamage;
-                                doubleatkcrittoaddtolist = targetdamage;
-                            }
-                            if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
-                            {
-                                DealScytheDamage(target, unit);
-                            }
-                            Damagelist.Add(doubleatkdamagetoaddtolist);
-                            Critlist.Add(doubleatkcrittoaddtolist);
+
                         }
+
+                        (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, numberofcritials, totaldamage, Damagelist, Critlist);
 
                     }
-                    else
-                    {
-                        //calculating hit for first attack
-                        if (target.GetComponent<RandomScript>().GetHitValue() < targethitrate)
-                        {
-                            int damagetoaddtolist = -1;
-                            int crittoaddtolist = 0;
-                            numberofhits++;
-                            // calculating critical
-                            if (target.GetComponent<RandomScript>().GetCritValue() < targetcrit)
-                            {
-                                numberofcritials++;
-                                totaldamage += targetdamage * 3;
-                                damagetoaddtolist = targetdamage * 3;
-                                crittoaddtolist = 1;
-                            }
-                            else
-                            {
-                                totaldamage += targetdamage;
-                                damagetoaddtolist = targetdamage;
-                            }
-                            if (target.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
-                            {
-                                DealScytheDamage(target, unit);
-                            }
-                            Damagelist.Add(damagetoaddtolist);
-                            Critlist.Add(crittoaddtolist);
-                        }
-                    }
+
+                    (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, numberofcritials, totaldamage, Damagelist, Critlist);
+
                     (allforoneactive, unyieldingactivated) = AffectDamage(target, unit, totaldamage);
                     (compassionused, invigoratingused) = OnDamageEffect(target, targetdamage, false);
                     finaldamage = targetdamage;
@@ -2274,6 +2120,56 @@ public class ActionsMenu : MonoBehaviour
             return (numberofhits, numberofcritials, finaldamage, exp, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
         }
 
+    }
+
+    private (int, int, int) CalculateIfAttackHit(GameObject unit, GameObject target, int numberofhits, int unithitrate, int unitcrit, int unitdamage, int numberofcritials, int totaldamage, List<int> Damagelist, List<int> Critlist)
+    {
+        if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
+        {
+
+            numberofhits++;
+
+            int damagetoaddtolist = -1;
+            int crittoaddtolist = 0;
+
+            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "dagger")
+            {
+                int personnalityvalue = unit.GetComponent<RandomScript>().GetPersonalityValue();
+                if (personnalityvalue <= 50)
+                {
+                    unitdamage = (int)((float)(unitdamage) * 1.5f);
+                }
+                else
+                {
+                    unitdamage = (int)((float)(unitdamage) * 0.5f);
+                }
+            }
+
+            // calculating critical
+            if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
+            {
+                numberofcritials++;
+                totaldamage += unitdamage * 3;
+                damagetoaddtolist = unitdamage * 3;
+                crittoaddtolist = 1;
+            }
+            else
+            {
+                totaldamage += unitdamage;
+                damagetoaddtolist = unitdamage;
+            }
+
+
+
+            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+            {
+                DealScytheDamage(unit, target);
+            }
+
+            Damagelist.Add(damagetoaddtolist);
+            Critlist.Add(crittoaddtolist);
+        }
+        return (numberofhits, numberofcritials, totaldamage);
     }
 
     private (bool, bool) AffectDamage(GameObject Attacker, GameObject target, int damage)// oneforall active, unyieldingactive
@@ -2978,7 +2874,6 @@ public class ActionsMenu : MonoBehaviour
                 targetstatbonus.Dexterity -= unitfirstweapon.Grade * 2;
             }
         }
-
 
         return (unitstatbonus, targetstatbonus);
     }

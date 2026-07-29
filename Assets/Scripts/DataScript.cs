@@ -651,6 +651,9 @@ public class DataScript : MonoBehaviour
                 case ("shield"):
                     equipmenttoSetup.BaseDamage = equipemnttoappy.BaseDamage - 1 * equipmenttoSetup.Grade;
                     break;
+                case ("dagger"):
+                    equipmenttoSetup.BaseCrit = equipemnttoappy.BaseCrit + 3 * equipmenttoSetup.Grade;
+                    break;
             }
 
             equipmenttoSetup.equipmentmodel.localrotation = Vector3.zero;

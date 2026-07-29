@@ -2717,7 +2717,7 @@ public class UnitScript : MonoBehaviour
             {
                 case "sword":
                     GrowthtoApply.SpeedGrowth += bonussize;
-                    GrowthtoApply.DexterityGrowth += bonussize;
+                    GrowthtoApply.StrengthGrowth += bonussize;
                     GrowthtoApply.HPGrowth -= bonussize;
                     break;
                 case "spear":
@@ -2749,6 +2749,11 @@ public class UnitScript : MonoBehaviour
                     GrowthtoApply.PsycheGrowth += bonussize;
                     GrowthtoApply.ResistanceGrowth += bonussize;
                     GrowthtoApply.StrengthGrowth -= bonussize;
+                    break;
+                case "dagger":
+                    GrowthtoApply.SpeedGrowth += bonussize;
+                    GrowthtoApply.DexterityGrowth += bonussize;
+                    GrowthtoApply.PsycheGrowth -= bonussize;
                     break;
             }
         }
