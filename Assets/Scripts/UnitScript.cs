@@ -357,6 +357,7 @@ public class UnitScript : MonoBehaviour
     public Sprite ScytheSprite;
     public Sprite ShieldSprite;
     public Sprite StaffSprite;
+    public Sprite DaggerSprite;
     public Image WeaponImage;
 
     [Header("Copy Sprites")]
@@ -2317,6 +2318,9 @@ public class UnitScript : MonoBehaviour
                 break;
             case ("staff"):
                 WeaponImage.sprite = StaffSprite;
+                break;
+            case ("dagger"):
+                WeaponImage.sprite = DaggerSprite;
                 break;
             default:
                 WeaponImage.sprite = BareHandSprite;

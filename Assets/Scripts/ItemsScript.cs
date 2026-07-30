@@ -108,33 +108,7 @@ public class ItemsScript : MonoBehaviour
 
                         string typeicon = "";
 
-                        switch (equ.type.ToLower())
-                        {
-                            case ("sword"):
-                                typeicon += "<sprite=0>";
-                                break;
-                            case ("spear"):
-                                typeicon += "<sprite=1>";
-                                break;
-                            case ("greatsword"):
-                                typeicon += "<sprite=2>";
-                                break;
-                            case ("bow"):
-                                typeicon += "<sprite=3>";
-                                break;
-                            case ("scythe"):
-                                typeicon += "<sprite=4>";
-                                break;
-                            case ("shield"):
-                                typeicon += "<sprite=6>";
-                                break;
-                            case ("staff"):
-                                typeicon += "<sprite=7>";
-                                break;
-                            default:
-                                typeicon += "<sprite=5>";
-                                break;
-                        }
+                        typeicon = DataScript.instance.GetWeaponSpriteString(equ.type.ToLower());
 
                         BladeName.text = equ.Name;
                         BladeType.text = typeicon;
@@ -236,33 +210,7 @@ public class ItemsScript : MonoBehaviour
 
             string typeicon = "";
 
-            switch (equ.type.ToLower())
-            {
-                case ("sword"):
-                    typeicon += "<sprite=0>";
-                    break;
-                case ("spear"):
-                    typeicon += "<sprite=1>";
-                    break;
-                case ("greatsword"):
-                    typeicon += "<sprite=2>";
-                    break;
-                case ("bow"):
-                    typeicon += "<sprite=3>";
-                    break;
-                case ("scythe"):
-                    typeicon += "<sprite=4>";
-                    break;
-                case ("shield"):
-                    typeicon += "<sprite=6>";
-                    break;
-                case ("staff"):
-                    typeicon += "<sprite=7>";
-                    break;
-                default:
-                    typeicon += "<sprite=5>";
-                    break;
-            }
+            typeicon = DataScript.instance.GetWeaponSpriteString(equ.type.ToLower());
 
             BladeName.text = equ.Name;
             BladeType.text = typeicon;
@@ -327,6 +275,9 @@ public class ItemsScript : MonoBehaviour
                                 break;
                             case ("staff"):
                                 spriteID = 7;
+                                break;
+                            case ("dagger"):
+                                spriteID = 27;
                                 break;
 
 

@@ -559,6 +559,8 @@ public class BattleInfotext : MonoBehaviour
                 return WeaponClassImages[6];
             case "staff":
                 return WeaponClassImages[7];
+            case "dagger":
+                return WeaponClassImages[8];
         }
     }
 

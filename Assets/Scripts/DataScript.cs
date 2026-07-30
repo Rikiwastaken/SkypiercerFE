@@ -200,6 +200,7 @@ public class DataScript : MonoBehaviour
         SetupEquipment();
         SetupClasses();
         SetupInventory();
+        SetupMasteries();
         SetupDefaultCharacterList();
         CalculateMaxSP();
     }
@@ -226,6 +227,34 @@ public class DataScript : MonoBehaviour
             PlayableCharacterList[i].playableStats.ID = i;
         }
     }
+
+    private void SetupMasteries()
+    {
+        List<string> weapontypestring = new List<string>() { "sword", "spear", "greatsword", "bow", "scythe", "shield", "staff", "dagger" };
+
+        foreach (Character character in PlayableCharacterList)
+        {
+            List<bool> masteriespresent = new List<bool>();
+            foreach (string weapontype in weapontypestring)
+            {
+                masteriespresent.Add(false);
+            }
+            for (int i = 0; i < character.Masteries.Count; i++)
+            {
+                int typeID = weapontypestring.IndexOf(character.Masteries[i].weapontype);
+                masteriespresent[typeID] = true;
+            }
+            for (int i = 0; i < masteriespresent.Count; i++)
+            {
+                if (!masteriespresent[i])
+                {
+                    character.Masteries.Add(new WeaponMastery() { weapontype = weapontypestring[i] });
+                }
+            }
+        }
+
+    }
+
     private void SetupInventory()
     {
         PlayerInventory = new Inventory();
@@ -1115,6 +1144,9 @@ public class DataScript : MonoBehaviour
                 case "staff":
                     newequipment.Name = "Stino";
                     break;
+                case "dagger":
+                    newequipment.Name = "Dino";
+                    break;
             }
             switch (newequipment.Grade)
             {
@@ -1243,6 +1275,35 @@ public class DataScript : MonoBehaviour
             currentflags.copyflags[characterCopiedID] = true;
         }
 
+    }
+
+    public string GetWeaponSpriteString(string weapontype)
+    {
+        switch (weapontype.ToLower())
+        {
+            case ("sword"):
+                return "<sprite=0>";
+            case ("spear"):
+                return "<sprite=1>";
+
+            case ("greatsword"):
+                return "<sprite=2>";
+
+            case ("bow"):
+                return "<sprite=3>";
+
+            case ("scythe"):
+                return "<sprite=4>";
+
+            case ("shield"):
+                return "<sprite=6>";
+            case ("staff"):
+                return "<sprite=7>";
+            case ("dagger"):
+                return "<sprite=27>";
+            default:
+                return "<sprite=5>";
+        }
     }
 
 

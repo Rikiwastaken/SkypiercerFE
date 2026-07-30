@@ -1333,33 +1333,7 @@ public class ActionsMenu : MonoBehaviour
 
         equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
 
-        switch (unitweapon.type.ToLower())
-        {
-            case ("sword"):
-                unitweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                unitweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                unitweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                unitweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                unitweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                unitweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                unitweapontxt += "<sprite=7>";
-                break;
-            default:
-                unitweapontxt += "<sprite=5>";
-                break;
-        }
+        unitweapontxt = DataScript.instance.GetWeaponSpriteString(unitweapon.type.ToLower());
 
         string colorstring = " ";
         if (newbladeuse > unitweapon.Currentuses)
@@ -1397,33 +1371,7 @@ public class ActionsMenu : MonoBehaviour
 
         equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
 
-        switch (unitweapon.type.ToLower())
-        {
-            case ("sword"):
-                unitweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                unitweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                unitweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                unitweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                unitweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                unitweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                unitweapontxt += "<sprite=7>";
-                break;
-            default:
-                unitweapontxt += "<sprite=5>";
-                break;
-        }
+        unitweapontxt = DataScript.instance.GetWeaponSpriteString(unitweapon.type.ToLower());
 
 
 
@@ -1456,33 +1404,7 @@ public class ActionsMenu : MonoBehaviour
 
         equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
 
-        switch (unitweapon.type.ToLower())
-        {
-            case ("sword"):
-                unitweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                unitweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                unitweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                unitweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                unitweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                unitweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                unitweapontxt += "<sprite=7>";
-                break;
-            default:
-                unitweapontxt += "<sprite=5>";
-                break;
-        }
+        unitweapontxt = DataScript.instance.GetWeaponSpriteString(unitweapon.type.ToLower());
 
 
 
@@ -1512,33 +1434,9 @@ public class ActionsMenu : MonoBehaviour
 
         equipment targetweapon = target.GetComponent<UnitScript>().GetFirstWeapon();
 
-        switch (targetweapon.type.ToLower())
-        {
-            case ("sword"):
-                targetweapontxt += "<sprite=0>";
-                break;
-            case ("spear"):
-                targetweapontxt += "<sprite=1>";
-                break;
-            case ("greatsword"):
-                targetweapontxt += "<sprite=2>";
-                break;
-            case ("bow"):
-                targetweapontxt += "<sprite=3>";
-                break;
-            case ("scythe"):
-                targetweapontxt += "<sprite=4>";
-                break;
-            case ("shield"):
-                targetweapontxt += "<sprite=6>";
-                break;
-            case ("staff"):
-                targetweapontxt += "<sprite=7>";
-                break;
-            default:
-                targetweapontxt += "<sprite=5>";
-                break;
-        }
+        targetweapontxt = DataScript.instance.GetWeaponSpriteString(targetweapon.type.ToLower());
+
+
 
 
         if (targetweapon.Currentuses < targetweapon.Maxuses)
@@ -1763,33 +1661,9 @@ public class ActionsMenu : MonoBehaviour
 
             equipment weapon = GOToUse.GetComponent<UnitScript>().GetFirstWeapon();
 
-            switch (weapon.type.ToLower())
-            {
-                case ("sword"):
-                    weapontxt += "<sprite=0>";
-                    break;
-                case ("spear"):
-                    weapontxt += "<sprite=1>";
-                    break;
-                case ("greatsword"):
-                    weapontxt += "<sprite=2>";
-                    break;
-                case ("bow"):
-                    weapontxt += "<sprite=3>";
-                    break;
-                case ("scythe"):
-                    weapontxt += "<sprite=4>";
-                    break;
-                case ("shield"):
-                    weapontxt += "<sprite=6>";
-                    break;
-                case ("staff"):
-                    weapontxt += "<sprite=7>";
-                    break;
-                default:
-                    weapontxt += "<sprite=5>";
-                    break;
-            }
+            weapontxt = DataScript.instance.GetWeaponSpriteString(weapon.type.ToLower());
+
+
 
             if (character.telekinesisactivated && !TelekinesisGOToUse.activeSelf)
             {
