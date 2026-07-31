@@ -2108,49 +2108,17 @@ public class ActionsMenu : MonoBehaviour
             int transfertargethp = allforonetransfertarget.currentHP;
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage / 2;
             allforonetransfertarget.currentHP -= damage / 2;
+            SurvivalSkillsCheck(allforonetransfertargetGO, transfertargethp);
 
-            if (allforonetransfertarget.currentHP <= 0 && transfertargethp >= allforonetransfertarget.AjustedStats.HP && allforonetransfertargetGO.GetComponent<UnitScript>().GetSkill(44))  //unyielding
-            {
-                allforonetransfertarget.currentHP = 1;
-                allforonetransfertargetGO.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
-            }
-            if (allforonetransfertarget.currentHP <= 0 && allforonetransfertargetGO.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
-            {
-                int randomvalue = allforonetransfertargetGO.GetComponent<RandomScript>().GetPersonalityValue();
-                if (randomvalue <= 15)
-                {
-                    allforonetransfertarget.currentHP = 1;
-                    allforonetransfertargetGO.GetComponent<UnitScript>().AddNumber(0, true, "Guardian Spirit");
-                }
-            }
         }
         else
         {
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage;
         }
 
-        if (charTarget.currentHP <= 0 && basehp >= charTarget.AjustedStats.HP && target.GetComponent<UnitScript>().GetSkill(44))  //unyielding
-        {
-            charTarget.currentHP = 1;
-            target.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
-            unyieldingactive = true;
-        }
-        else if (charTarget.currentHP <= 0 && charTarget.name.ToLower() == "zack" && charTarget.ExamodeClass.remaingExamodeTurns > 0)  //zack examode
-        {
-            charTarget.currentHP = 1;
-            target.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
-            unyieldingactive = true;
-        }
-        else if (charTarget.currentHP <= 0 && target.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
-        {
-            int randomvalue = target.GetComponent<RandomScript>().GetPersonalityValue();
-            if (randomvalue <= 15)
-            {
-                charTarget.currentHP = 1;
-                target.GetComponent<UnitScript>().AddNumber(0, true, "Guardian Spirit");
-                unyieldingactive = true;
-            }
-        }
+
+        unyieldingactive = SurvivalSkillsCheck(target, basehp);
+
 
 
 
@@ -2192,6 +2160,55 @@ public class ActionsMenu : MonoBehaviour
         }
 
         return (oneforallactive, unyieldingactive);
+    }
+
+    private bool SurvivalSkillsCheck(GameObject unitGO, int previousHP)
+    {
+        Character unitChar = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
+        if (unitChar.currentHP <= 0)
+        {
+            if (previousHP >= unitChar.AjustedStats.HP && unitGO.GetComponent<UnitScript>().GetSkill(44))  //unyielding
+            {
+                unitChar.currentHP = 1;
+                unitGO.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
+                return true;
+            }
+            if (unitChar.name.ToLower() == "zack" && unitChar.ExamodeClass.remaingExamodeTurns > 0)  //zack examode
+            {
+                unitChar.currentHP = 1;
+                target.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
+                return true;
+            }
+            if (unitGO.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
+            {
+                int randomvalue = unitGO.GetComponent<RandomScript>().GetPersonalityValue();
+                if (randomvalue <= 15)
+                {
+                    unitChar.currentHP = 1;
+                    unitGO.GetComponent<UnitScript>().AddNumber(0, true, "Guardian Spirit");
+                    return true;
+                }
+            }
+            if (unitChar.playableStats.battalion != null && unitChar.playableStats.battalion.ToLower() == "kira")
+            {
+                GameObject Leader = unitGO.GetComponent<UnitScript>().GetBattallionLeader();
+                if (Leader != null && Leader.GetComponent<UnitScript>().UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
+                {
+                    int randomvalue = unitGO.GetComponent<RandomScript>().GetPersonalityValue();
+                    if (randomvalue <= 50)
+                    {
+                        unitChar.currentHP = 1;
+                        unitGO.GetComponent<UnitScript>().AddNumber(0, true, "Kira's Intervention");
+                        return true;
+                    }
+                }
+
+            }
+        }
+
+
+
+        return false;
     }
 
     private (bool, bool) OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing) // compassion, invigorating, 
@@ -2349,20 +2366,7 @@ public class ActionsMenu : MonoBehaviour
                 Chartarget.currentHP -= truedamage;
             }
 
-            if (Chartarget.currentHP <= 0 && baseHP >= Chartarget.AjustedStats.HP && potentialtarget.GetComponent<UnitScript>().GetSkill(44))  //unyielding
-            {
-                Chartarget.currentHP = 1;
-                potentialtarget.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
-            }
-            else if (Chartarget.currentHP <= 0 && target.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
-            {
-                int randomvalue = target.GetComponent<RandomScript>().GetPersonalityValue();
-                if (randomvalue <= 15)
-                {
-                    Chartarget.currentHP = 1;
-                    target.GetComponent<UnitScript>().AddNumber(0, true, "Guardian Spirit");
-                }
-            }
+            SurvivalSkillsCheck(potentialtarget, baseHP);
 
         }
     }

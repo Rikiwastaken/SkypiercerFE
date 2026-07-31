@@ -3277,9 +3277,20 @@ public class UnitScript : MonoBehaviour
                     statbonuses.Crit += 5;
                 }
             }
+
+
         }
 
-
+        // Kira's Examode bonus
+        if (UnitCharacteristics.playableStats.battalion.ToLower() == "kira")
+        {
+            GameObject leader = GetBattallionLeader();
+            if (leader != null && leader.GetComponent<UnitScript>().UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
+            {
+                statbonuses.TelekDamage += 20;
+                statbonuses.PhysDamage += 20;
+            }
+        }
 
         return statbonuses;
     }
