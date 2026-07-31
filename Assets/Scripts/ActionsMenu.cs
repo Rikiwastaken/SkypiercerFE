@@ -2006,16 +2006,31 @@ public class ActionsMenu : MonoBehaviour
             int damagetoaddtolist = -1;
             int crittoaddtolist = 0;
 
-            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "dagger")
+            equipment weapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
+
+            if (weapon.type.ToLower() == "dagger")
             {
                 int personnalityvalue = unit.GetComponent<RandomScript>().GetPersonalityValue();
+                float variation = 0.5f;
+                if (weapon.Modifier != null && weapon.Modifier.ToLower() == "tricky")
+                {
+                    variation = 0.75f;
+                }
                 if (personnalityvalue <= 50)
                 {
-                    unitdamage = (int)((float)(unitdamage) * 1.5f);
+                    unitdamage = (int)((float)(unitdamage) * (1f + variation));
+                    if (weapon.Modifier != null && weapon.Modifier.ToLower() == "deadly")
+                    {
+                        unitcrit += 10;
+                    }
                 }
                 else
                 {
-                    unitdamage = (int)((float)(unitdamage) * 0.5f);
+                    unitdamage = (int)((float)(unitdamage) * (1f - variation));
+                    if (weapon.Modifier != null && weapon.Modifier.ToLower() == "deadly")
+                    {
+                        unitcrit -= 10;
+                    }
                 }
             }
 
@@ -2035,7 +2050,7 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-            if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "scythe")
+            if (weapon.type.ToLower() == "scythe")
             {
                 DealScytheDamage(unit, target);
             }
@@ -2516,14 +2531,25 @@ public class ActionsMenu : MonoBehaviour
         }
         if (target != null && TargetSkillBonus != null)
         {
-            finaldamagefloat = finaldamagefloat / (1f + (float)TargetSkillBonus.DamageReduction / 100f);
+            finaldamagefloat = finaldamagefloat * Mathf.Max(0f, (1f - (float)TargetSkillBonus.DamageReduction / 100f));
         }
 
+        // staff deal reduced damage
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
             finaldamagefloat = finaldamagefloat / 2f;
         }
 
+        // dagger modifier deal more damage if enemy has all their HP
+        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "dagger" && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier != null && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "hidden")
+        {
+            if (target != null && chartarget.currentHP >= (int)chartarget.AjustedStats.HP)
+            {
+                finaldamagefloat = finaldamagefloat * 1.5f;
+            }
+        }
+
+        // enemies take more dmg when in fire
         if (target != null && targetTile != null && targetTile.type == "Fire")
         {
             finaldamagefloat = finaldamagefloat * 1.1f;
