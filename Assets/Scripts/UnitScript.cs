@@ -3791,6 +3791,17 @@ public class UnitScript : MonoBehaviour
             }
         }
 
+
+        //Windborne Dagger
+
+
+        equipment weapon = GetFirstWeapon();
+        if (weapon != null && weapon.type != null && weapon.type == "dagger" && weapon.Modifier != null && weapon.Modifier.ToLower() == "windborne")
+        {
+            statbonuses.Dodge += weapon.Grade * 5;
+        }
+
+
         // Battalion Bonuses
         AllStatsSkillBonus battalionskillbonus = GetBattalionCombatBonus();
 
