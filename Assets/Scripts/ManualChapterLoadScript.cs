@@ -101,6 +101,9 @@ public class ManulChapterLoadScript : MonoBehaviour
             case (13):
                 sceneLoader.LoadScene("CutsceneScene", 7);
                 break;
+            case (14):
+                sceneLoader.LoadScene("CutsceneScene", 10);
+                break;
             default:
                 sceneLoader.LoadScene("Chapter" + Chapter);
                 break;

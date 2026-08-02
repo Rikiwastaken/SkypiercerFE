@@ -182,6 +182,10 @@ public class WorldMapManager : MonoBehaviour
                 {
                     SceneLoader.instance.LoadScene("CutsceneScene", 7); //load cutscene 7
                 }
+                else if (!selectedsidestory && selectedchapter == 14)
+                {
+                    SceneLoader.instance.LoadScene("CutsceneScene", 10); //load cutscene 10
+                }
                 else
                 {
                     SceneLoader.instance.LoadScene(scenename);
