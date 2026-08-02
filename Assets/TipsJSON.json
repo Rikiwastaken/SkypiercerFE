@@ -1,0 +1,109 @@
+{
+    "tipList": [
+        {
+            "name": "Movement & attack",
+            "description": "During the ally phase, you can move an ally but placing the cursor on them and pressing A (K on Keyboard)\n\nOnce selected, tiles will light up in blue, red or green.\n- Blue tiles are the movement tiles, where the unit can go.\n- Red tiles are the attack tiles, where the unit can attack.\n- Green tiles are the healing tiles, where the unit can heal.\n\nBy selecting a movement tile, the unit will walk to that tile and a new menu will appear to do an action.\n\nATTACK allows the unit to attack or heal, BLADES allows the unit to switch blades, COMMAND and SPECIAL are actions that will be detailed in another tip, and WAIT ends the turn of the unit.",
+            "chapterWhereUnlocks": 0
+        },
+        {
+            "name": "Telekinesis",
+            "description": "You can toggle <size=25><sprite=12></size> telekinesis by pressing Y on Controller or O on Keyboard.\n\nWhen <size=25><sprite=12></size> telekinesis is activated, the attack range is increased by 1 but damage is reduced by 25%.\n\nWhen it is activated, damage depends on Psyche and Resistance instead of Attack and Defense.\n",
+            "chapterWhereUnlocks": 0
+        },
+        {
+            "name": "Blades (1/2)",
+            "description": "Blades are the summoned weapons Hunters use to fight pluvials. The blade are sorted into 7 types. Each type gives different bonus in combat and when leveling up.\n\n<size=25><sprite=0></size> Swords increase the speed and dexterity of their wielder by 2 per weapon grade.\n  Growth modification : +10% spd, +10% dex, -10% HP\n\n<size=25><sprite=1> </size> Spears decrease the enemy's dexterity by 2 per weapon grade..\n  Growth modification : +10% str, +10% psy, -10% res\n\n<size=25><sprite=2></size> Greatswords decrease the enemy's defense and resistance by 1 per weapon grade while decreasing the wielder's speed by 1 per weapon grade.\n  Growth modification : +10% str, +10% def, -10% spd",
+            "chapterWhereUnlocks": 0
+        },
+        {
+            "name": "Blades (2/2)",
+            "description": "<size=25><sprite=3></size> Bows are the only physical blade by the same maximum range as a telekinesis attack (2 tiles). When used with telekinesis, they can hit a target up to 3 tiles away. However, it cannot attack in melee range (1 tile).\n  Growth modification : +10% str, +10% dex, -10% def\n  \n<size=25><sprite=4></size> Scythes deal bonus damage to each enemy adjacent to the initial target equal to 25% of the damage they would have taken had they been attacked directly.\n  Growth modification : +10% psy, +10% HP, -10% spd\n\n<size=25><sprite=6></size> Shields increase the wielder's defense by 1 per weapon grade.\n  Growth modification : +10% hp, +10% def, -10% psy\n\n<size=25><sprite=7></size> Staffs can heal allies (using always psyche) but their damage is reduced by 50% and they cannot initiate combat.\n  Growth modification : +10% psy, +10% res, -10% str",
+            "chapterWhereUnlocks": 0
+        },
+        {
+            "name": "Blades Modifiers (1/3)",
+            "description": "All blade used by playable characters can have unique modifiers which change their behaviors.\n\n  Basic : No special effect\n\n  Sharp (all Blades) : Increases crit rate by 2% per grade but reduce hit rate by 5% per grade.\n\n  Handy (all Blades) : Reduces crit rate by 2% per grade but increase hit rate by 5% per grade.\n\n  Raw (all Blades) : Increase damage by 1 per grade but reduces crit rate by 2% per grade.",
+            "chapterWhereUnlocks": 3
+        },
+        {
+            "name": "Blades Modifiers (2/3)",
+            "description": "All blade used by playable characters can have unique modifiers which change their behaviors.\n\n  Quick (swords) : Increases the speed and dexterity bonus by 1 per grade.\n\n  Precise (spears) : Increases dexterity reduction by 1 per grade.\n\n  Lightweight (greatsword) : No longer lowers speed.\n\n  Heavyweight (greatsword) : Increases the enemy's defense and resistance reduction by 1 per grade and the wielder's speed reduction by 1 per grade.",
+            "chapterWhereUnlocks": 3
+        },
+        {
+            "name": "Blades Modifiers (3/3)",
+            "description": "All blade used by playable characters can have unique modifiers which change their behaviors.\n\n  Farsight (bows) : Increases range by one but reduces hit rate by 20%.\n\n  Serrated (scythe) : Increases secondary damage by 25%.\n\n  Spiked (shield) : Increases damage dealt by half the defense of the user.\n\n  Focused (staff) : Doubles base healing and halves durability.\n\n  Ranged (staff) : halves base healing and increase range by 3.",
+            "chapterWhereUnlocks": 3
+        },
+        {
+            "name": "Leveling up",
+            "description": "When an ally unit reaches 100 experience points, their level increase and their experience goes back to 0.\n\nWhen an unit levels up, their stats can increase.\n\nThe increase is determined by their growth in each stats. A random value is picked for each stat. If this value is lower than the growth for said stat, the stat will increase by one point.\n\nGrowths can be modified by weapons and skills.",
+            "chapterWhereUnlocks": 0
+        },
+        {
+            "name": "Fixed Growth mode",
+            "description": "Picking fixed growth mode in the options changes the way ally units level up.\n\nInstead of picking a random value for deciding if a stat is increased, the stat is directly increased by the value (i.e. 40% growth will increase the stat by 0.4).\n\nThe true stat of the characters is the stat rounded down (1.4 will be considered as 1).\n\nWith 40% growth, the stat will increase truly after 3 levels.\n\nEnemies and other units use Fixed Growth by default.",
+            "chapterWhereUnlocks": 0
+        },
+        {
+            "name": "Pluvials",
+            "description": "Pluvials <size=25><sprite=10></size> are monsters created by the Beast's power.\n\nThese reanimated corpses can use blades and skills.\n\nThey get stronger under Rainy Weather and weaker under Sunny weather.\n\nThey are usually found in caves where yellow crystals appear, and outside when it starts to rain.",
+            "chapterWhereUnlocks": 0
+        },
+        {
+            "name": "Other Units",
+            "description": "Some units are displayed in Yellow. These units are neither allies nor enemies.\n\nThey will sometimes be friendly units who need to be protected, but they can also be a third faction enemy to both allies and enemies.",
+            "chapterWhereUnlocks": 1
+        },
+        {
+            "name": "Foresight",
+            "description": "Zack's Foresight can sometimes make him aware of the near future. \n\nThis feature allows you to turn back time to a specific part of the current battle.\n\nThe number of time this feature can be used increases with Zack's level and some story events.\n\nForesight can be accessed through the neutral menu.",
+            "chapterWhereUnlocks": 1
+        },
+        {
+            "name": "Machines",
+            "description": "Machines <size=25><sprite=11></size> are an enemy type which can usually be found in old world ruins.\n\nThese contraptions cannot use blades nor telekinesis, but the strong materials used to make them also give their weapon unlimited durability.\n\nWhen they are under Sunny weather, the solar energy repairs them a bit every turn. This effect only triggers outside and never during Cloudy or Rainy weather.",
+            "chapterWhereUnlocks": 1
+        },
+        {
+            "name": "Bonds",
+            "description": "Some characters can form Bonds together. When these characters fight together enough time, they can have a Bond Conversation at Camp.\n\nIf two characters with a high enough bond fight next to each other, they gain a bonus in hit rate, dodge rate and critical rate.",
+            "chapterWhereUnlocks": 2
+        },
+        {
+            "name": "Skills",
+            "description": "Skills are special upgrades than can be equipped to characters. They can give passive bonuses or access to an active Command.\n\nEach character has an innate skill that cannot be removed and 4 slots for additional skills.\n\nAdditional skills require Skill Points to equip. These Skill Points are obtained when levelling up.",
+            "chapterWhereUnlocks": 3
+        },
+        {
+            "name": "Copying Skills",
+            "description": "The Copy Skill gives the user access to the Copy Command.\n\nEnemies with a unique skill can be targeted by this command to obtain said skill. These enemies have a <size=25><sprite=8></size>  icon near their health bar.\n\nAny skilled copied is temporary granted to the unit who cast the command until the end of the fight. A copied skill is show in a green box under the unit's other skills.\n\nEach enemy can be copied only once. After copying the icon will change to <size=25><sprite=9></size> . If an enemy dies, their skill is lost.",
+            "chapterWhereUnlocks": 3
+        },
+        {
+            "name": "Elevation",
+            "description": "Each tile has a different elevation, which can influence the way battles unfold and movement.\n\nAttacking an enemy at a higher elevation reduces dodge rate and hit rate, and the enemy gets a bonus in dodge rate and hit rate.\n\nMoving to a higher tile also cost more movement points than moving to a lower or same elevation.\n\nStair tiles do not have any bonus or penalty in terms of movement or combat.",
+            "chapterWhereUnlocks": 3
+        },
+        {
+            "name": "Special Tiles",
+            "description": "Some tiles can have special effects that can be positive or negative :\n\n - Forest : Increases Dodge Rate by 20%.\n - Ruins : Increases Dodge Rate by 10% and Hit Rate by 10%.\n - Fog : Increases Dodge Rate by 20% and reduces Hit Rate by 20%.\n - Fire : Reduces movement points by 1. Increases damage taken by 10% and lowers HP by 33% each turn.\n - Water : Reduces movement points by 1 and Dodge Rate by 20%.\n - Fortification : Increases Dodge Rate by 5%, Hit rate by 15% and restores 10% HP each turn.\n - Medicinal Water : Restores 50% HP each turn.\n - Desert : Lowers HP by 10% each turn.",
+            "chapterWhereUnlocks": 4
+        },
+        {
+            "name": "Weather",
+            "description": "The influence of the Beast can sometimes unleash a blighted rain.\n\nThe rain <size=25><sprite=14></size> lasts for 2 turns and is always followed by sun <size=25><sprite=15></size>, which also lasts two turns before turning cloudy <size=25><sprite=13></size>.\n\nA cloudy <size=25><sprite=13></size> tile has a random chance to become rainy <size=25><sprite=14></size>, which is higher if a neighboring tile is already rainy <size=25><sprite=14></size>.\n\nUnder the rain <size=25><sprite=14></size>, pluvials <size=25><sprite=10></size> get stronger. However, they also get weaker under the sun <size=25><sprite=15></size>.\n\nMachines <size=25><sprite=11></size> use solar power to repair themselves under the sun <size=25><sprite=15></size>.",
+            "chapterWhereUnlocks": 4
+        },
+        {
+            "name": "Battalions",
+            "description": "Now that Kira's part of the team, you can change any unit's battalion in the deployment menu and assign them to either Kira or Zack's battalion.\n\nEach unit in Zack's battalion increases Zack's Hit and Crit rate by 1% and increases their own by 5%.\n\nEach unit in Kira's battalion increases Kira's Psyche by 20% of the unit's Psyche and the unit recovers 10% of their HP at the beginning of each turn.",
+            "chapterWhereUnlocks": 6
+        },
+        {
+            "name": "Boss encounters",
+            "description": "Some particularly strong enemies such as Raghnall can unleash devastating map-wide attacks. These attacks are delayed and indicated with violet tiles.\n\nBattalion Commanders such as Kira or Zack can use the Special Command Intercept to protect their allies from the attack, reducing but 90% the damage taken by allies and by 50% the damage taken by the commander.",
+            "chapterWhereUnlocks": 7
+        }
+    ]
+}

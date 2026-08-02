@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -28,6 +30,12 @@ public class TipsMenuScript : MonoBehaviour
         public string name;
         public string description;
         public int chapterWhereUnlocks;
+    }
+
+    [Serializable]
+    public class TipClassForLoading
+    {
+        public List<Tip> tipList;
     }
 
     public List<Tip> Tips;
@@ -236,4 +244,58 @@ public class TipsMenuScript : MonoBehaviour
 
         UpdateButtonVisuals();
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("Load Tips From JSON")]
+    private void LoadTips()
+    {
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Bond JSON File", "", "json");
+        if (string.IsNullOrEmpty(path))
+            return;
+
+        string json = File.ReadAllText(path);
+
+        TipClassForLoading wrapper = JsonUtility.FromJson<TipClassForLoading>(json);
+        if (wrapper == null || wrapper.tipList == null)
+        {
+            Debug.LogError("JSON file format invalid. Needs { \"tipList\": [ ... ] }");
+            return;
+        }
+
+        Tips = wrapper.tipList;
+        UnityEditor.EditorUtility.SetDirty(this);
+        Debug.Log("Loaded " + wrapper.tipList.Count + " tips into the Tips!");
+    }
+
+
+    [ContextMenu("Save Tips To JSON")]
+    public void SaveTips()
+    {
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Tip JSON File", "", "json");
+        if (string.IsNullOrEmpty(path))
+            return;
+
+        TipClassForLoading wrapper = new TipClassForLoading() { tipList = Tips };
+
+        string json = JsonUtility.ToJson(wrapper, true);
+
+        try
+        {
+            AssetDatabase.StartAssetEditing();
+            File.WriteAllText(path, json);
+            Debug.Log($"Tips Saved : {path}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error when saving tips : {e.Message}");
+        }
+        finally
+        {
+            AssetDatabase.StopAssetEditing();
+        }
+    }
+
+
+#endif
 }
+

@@ -1973,6 +1973,7 @@ public class UnitScript : MonoBehaviour
         animatortouse.SetBool("GreatSword", false);
         animatortouse.SetBool("Heal", false);
         animatortouse.SetBool("Bow", false);
+        animatortouse.SetBool("KnifeStab", false);
         animatortouse.SetBool("victory", false);
 
         if (UnitCharacteristics.telekinesisactivated && weapon.type.ToLower() != "bow")
@@ -2011,6 +2012,11 @@ public class UnitScript : MonoBehaviour
                         animatortouse.SetBool("Stab", true);
                     }
                     break;
+                case "dagger":
+                    {
+                        animatortouse.SetBool("KnifeStab", true);
+                        break;
+                    }
                 case "none":
                     animatortouse.SetBool("Punch", true);
                     break;
