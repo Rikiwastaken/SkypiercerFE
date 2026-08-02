@@ -399,7 +399,7 @@ public class GridScript : MonoBehaviour
             }
             if (selection.type.ToLower() == "fire")
             {
-                text = "Fire \n-1 mvt\n-10% Def/Res\n-33% HP";
+                text = "Fire \n-1 mvt\n+10% Dmg taken\n-10% HP";
             }
             if (selection.type.ToLower() == "water")
             {

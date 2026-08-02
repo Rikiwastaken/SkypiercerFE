@@ -3293,8 +3293,8 @@ public class UnitScript : MonoBehaviour
             GameObject leader = GetBattallionLeader();
             if (leader != null && leader.GetComponent<UnitScript>().UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
             {
-                statbonuses.TelekDamage += 20;
-                statbonuses.PhysDamage += 20;
+                statbonuses.TelekDamage += 10;
+                statbonuses.PhysDamage += 10;
             }
         }
 

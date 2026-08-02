@@ -18,8 +18,6 @@
 
 ## System 
 
-- Rework tips (pass through a JSON for easy modification)
-
 - Rework Animation for Animation Tree
 
 - Make visuals for telekinesis with animations activated.
