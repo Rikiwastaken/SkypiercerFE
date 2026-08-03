@@ -41,7 +41,9 @@ public class CutsceneManager : MonoBehaviour
         public TimelineAsset Timeline;
         public List<CutSceneCharacter> Characters; // Characters present in teh cutscene
         public List<DialogueList> DialogueBubblesList; // dialogues in the cutscenes
+        [Header("\nAnimations:\n0 : NA 1: Idle1, 2: Idle2, 3: Talking, 4: Talking2\n5: Yelling, 6: Walk, 7: SlowRun, 8: Walking\n9: Laying, 10: Damaged Stance, 11: Collapse")]
         public List<AnimSequence> animSequences; // character animations in the cutscene
+        [Header("\nMovement:\n0 : move, 1: look at pos+movment, 2: unsheathe Blade, 3: Sheate Blade\n")]
         public List<MovementSequence> MovementSequences;
         public List<int> MusicIDs; // List of musics to play in the cutscene
         public int DialogueIDToplay;
