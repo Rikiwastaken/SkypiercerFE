@@ -3309,6 +3309,8 @@ public class UnitScript : MonoBehaviour
 
         List<Bonds> pertinentbonds = new List<Bonds>();
 
+
+
         foreach (Bonds bond in DataScript.instance.BondsList)
         {
             if (bond.Characters.Contains(UnitCharacteristics.ID))
@@ -3352,6 +3354,8 @@ public class UnitScript : MonoBehaviour
     public AllStatsSkillBonus GetStatSkillBonus(GameObject enemy)
     {
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
+
+        equipment weapon = GetFirstWeapon();
 
         //Despair
         if (GetSkill(2))
@@ -3449,7 +3453,7 @@ public class UnitScript : MonoBehaviour
         {
             if (enemy != null)
             {
-                if (GetFirstWeapon().type.ToLower() == enemy.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower())
+                if (weapon.type.ToLower() == enemy.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower())
                 {
                     statbonuses.FixedDamageBonus += 5;
                 }
@@ -3724,7 +3728,7 @@ public class UnitScript : MonoBehaviour
         //Violent Misuse
         if (GetSkill(68))
         {
-            statbonuses.FixedDamageBonus += GetFirstWeapon().BaseDamage / 2;
+            statbonuses.FixedDamageBonus += weapon.BaseDamage / 2;
         }
 
         //Eye of Shining Justice
@@ -3808,11 +3812,133 @@ public class UnitScript : MonoBehaviour
             }
         }
 
+        //Sword Mastery
+        if (GetSkill(98))
+        {
+            if (weapon != null && weapon.type != null && weapon.type.ToLower() == "sword")
+            {
+                statbonuses.PhysDamage += 20;
+                statbonuses.TelekDamage += 20;
+                statbonuses.Speed += 5;
+            }
+            else
+            {
+                statbonuses.PhysDamage -= 15;
+                statbonuses.TelekDamage -= 15;
+            }
+        }
+
+        //Greatsword Mastery
+        if (GetSkill(99))
+        {
+            if (weapon != null && weapon.type != null && weapon.type.ToLower() == "greatsword")
+            {
+                statbonuses.PhysDamage += 25;
+                statbonuses.TelekDamage += 25;
+            }
+            else
+            {
+                statbonuses.PhysDamage -= 15;
+                statbonuses.TelekDamage -= 15;
+            }
+        }
+
+        //Spear Mastery
+        if (GetSkill(100))
+        {
+            if (weapon != null && weapon.type != null && weapon.type.ToLower() == "spear")
+            {
+                statbonuses.PhysDamage += 20;
+                statbonuses.TelekDamage += 20;
+                statbonuses.Dexterity += 10;
+            }
+            else
+            {
+                statbonuses.PhysDamage -= 15;
+                statbonuses.TelekDamage -= 15;
+            }
+        }
+
+        //Shield Mastery
+        if (GetSkill(101))
+        {
+            if (weapon != null && weapon.type != null && weapon.type.ToLower() == "shield")
+            {
+                statbonuses.PhysDamage += 15;
+                statbonuses.TelekDamage += 15;
+                statbonuses.DamageReduction += 15;
+            }
+            else
+            {
+                statbonuses.PhysDamage -= 15;
+                statbonuses.TelekDamage -= 15;
+            }
+        }
+
+        //Staff Mastery
+        if (GetSkill(102))
+        {
+            if (weapon != null && weapon.type != null && weapon.type.ToLower() == "staff")
+            {
+                statbonuses.PhysDamage += 50;
+                statbonuses.TelekDamage += 50;
+            }
+            else
+            {
+                statbonuses.PhysDamage -= 15;
+                statbonuses.TelekDamage -= 15;
+            }
+        }
+
+        //Scythe Mastery
+        if (GetSkill(103))
+        {
+            if (weapon != null && weapon.type != null && weapon.type.ToLower() == "scythe")
+            {
+                statbonuses.PhysDamage += 30;
+                statbonuses.TelekDamage += 30;
+            }
+            else
+            {
+                statbonuses.PhysDamage -= 25;
+                statbonuses.TelekDamage -= 25;
+            }
+        }
+
+        //Bow Mastery
+        if (GetSkill(104))
+        {
+            if (weapon != null && weapon.type != null && weapon.type.ToLower() == "bow")
+            {
+                statbonuses.PhysDamage += 20;
+                statbonuses.TelekDamage += 20;
+                statbonuses.Dodge += 20;
+            }
+            else
+            {
+                statbonuses.PhysDamage -= 15;
+                statbonuses.TelekDamage -= 15;
+            }
+        }
+
+        //Dagger Mastery
+        if (GetSkill(105))
+        {
+            if (weapon != null && weapon.type != null && weapon.type.ToLower() == "dagger")
+            {
+                statbonuses.PhysDamage += 20;
+                statbonuses.TelekDamage += 20;
+                statbonuses.Crit += 10;
+            }
+            else
+            {
+                statbonuses.PhysDamage -= 15;
+                statbonuses.TelekDamage -= 15;
+            }
+        }
+
 
         //Windborne Dagger
-
-
-        equipment weapon = GetFirstWeapon();
         if (weapon != null && weapon.type != null && weapon.type == "dagger" && weapon.Modifier != null && weapon.Modifier.ToLower() == "windborne")
         {
             statbonuses.Dodge += weapon.Grade * 5;

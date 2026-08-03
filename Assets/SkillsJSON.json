@@ -979,6 +979,86 @@
             "range": 0,
             "buyable": false,
             "ID": 97
+        },
+        {
+            "name": "Sword Mastery",
+            "Descriptions": "Increases damage by 20% and speed by 5 when wielding a Sword but reduces other blade damage by 15%.",
+            "IsCommand": false,
+            "Cost": 15,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 98
+        },
+        {
+            "name": "Greatsword Mastery",
+            "Descriptions": "Increases damage by 25% when wielding a Greatsword but reduces other blade damage by 15%.",
+            "IsCommand": false,
+            "Cost": 15,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 99
+        },
+        {
+            "name": "Spear Mastery",
+            "Descriptions": "Increases damage by 20% and dexterity by 10 when wielding a Spear but reduces other blade damage by 15%.",
+            "IsCommand": false,
+            "Cost": 15,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 100
+        },
+        {
+            "name": "Shield Mastery",
+            "Descriptions": "Increases damage and damage reduction by 15% when wielding a Shield but reduces other blade damage by 15%.",
+            "IsCommand": false,
+            "Cost": 15,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 101
+        },
+        {
+            "name": "Staff Mastery",
+            "Descriptions": "Increases damage by 50% when wielding a Staff but reduces other blade damage by 15%.",
+            "IsCommand": false,
+            "Cost": 15,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 102
+        },
+        {
+            "name": "Scythe Mastery",
+            "Descriptions": "Increases damage by 30% when wielding a Scythe but reduces other blade damage by 25%.",
+            "IsCommand": false,
+            "Cost": 15,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 103
+        },
+        {
+            "name": "Bow Mastery",
+            "Descriptions": "Increases damage and dodge rate by 20% when wielding a Bow but reduces other blade damage by 15%.",
+            "IsCommand": false,
+            "Cost": 15,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 104
+        },
+        {
+            "name": "Dagger Mastery",
+            "Descriptions": "Increases damage by 20% and critical rate by 10% when wielding a Dagger but reduces other blade damage by 15%.",
+            "IsCommand": false,
+            "Cost": 15,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "ID": 105
         }
     ]
 }
