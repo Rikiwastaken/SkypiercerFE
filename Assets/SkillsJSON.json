@@ -8,6 +8,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": false,
+            "AlwaysPresentInShop": false,
             "ID": 0
         },
         {
@@ -18,6 +19,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 1
         },
         {
@@ -28,6 +30,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 2
         },
         {
@@ -38,6 +41,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 3
         },
         {
@@ -48,6 +52,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 4
         },
         {
@@ -58,6 +63,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 5
         },
         {
@@ -68,6 +74,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 6
         },
         {
@@ -78,6 +85,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 7
         },
         {
@@ -88,6 +96,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 8
         },
         {
@@ -98,6 +107,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 9
         },
         {
@@ -108,6 +118,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 10
         },
         {
@@ -118,6 +129,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 11
         },
         {
@@ -128,6 +140,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 12
         },
         {
@@ -138,6 +151,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 13
         },
         {
@@ -148,6 +162,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 14
         },
         {
@@ -158,6 +173,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 15
         },
         {
@@ -168,6 +184,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 16
         },
         {
@@ -178,6 +195,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 17
         },
         {
@@ -188,6 +206,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 18
         },
         {
@@ -198,6 +217,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 19
         },
         {
@@ -208,6 +228,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 20
         },
         {
@@ -218,6 +239,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 21
         },
         {
@@ -228,6 +250,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 22
         },
         {
@@ -238,6 +261,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 23
         },
         {
@@ -248,6 +272,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 24
         },
         {
@@ -258,6 +283,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": true,
             "ID": 25
         },
         {
@@ -268,6 +294,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 26
         },
         {
@@ -278,6 +305,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 27
         },
         {
@@ -288,6 +316,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 28
         },
         {
@@ -298,6 +327,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 29
         },
         {
@@ -308,6 +338,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 30
         },
         {
@@ -318,6 +349,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 31
         },
         {
@@ -328,6 +360,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 32
         },
         {
@@ -338,6 +371,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 33
         },
         {
@@ -348,6 +382,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 34
         },
         {
@@ -358,6 +393,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 35
         },
         {
@@ -368,6 +404,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 36
         },
         {
@@ -378,6 +415,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 37
         },
         {
@@ -388,6 +426,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 38
         },
         {
@@ -398,6 +437,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 39
         },
         {
@@ -408,6 +448,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 40
         },
         {
@@ -418,6 +459,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 41
         },
         {
@@ -428,6 +470,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 42
         },
         {
@@ -438,6 +481,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 43
         },
         {
@@ -448,6 +492,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 44
         },
         {
@@ -458,6 +503,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 45
         },
         {
@@ -468,6 +514,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 46
         },
         {
@@ -478,6 +525,7 @@
             "targettype": 1,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 47
         },
         {
@@ -488,6 +536,7 @@
             "targettype": 1,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 48
         },
         {
@@ -498,6 +547,7 @@
             "targettype": 1,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": true,
             "ID": 49
         },
         {
@@ -508,6 +558,7 @@
             "targettype": 1,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 50
         },
         {
@@ -518,6 +569,7 @@
             "targettype": 2,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 51
         },
         {
@@ -528,6 +580,7 @@
             "targettype": 3,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 52
         },
         {
@@ -538,6 +591,7 @@
             "targettype": 3,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 53
         },
         {
@@ -548,6 +602,7 @@
             "targettype": 3,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 54
         },
         {
@@ -558,6 +613,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 55
         },
         {
@@ -568,6 +624,7 @@
             "targettype": 0,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": true,
             "ID": 56
         },
         {
@@ -578,6 +635,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": false,
+            "AlwaysPresentInShop": false,
             "ID": 57
         },
         {
@@ -588,6 +646,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": true,
             "ID": 58
         },
         {
@@ -598,6 +657,7 @@
             "targettype": 3,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 59
         },
         {
@@ -608,6 +668,7 @@
             "targettype": 3,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 60
         },
         {
@@ -618,6 +679,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 61
         },
         {
@@ -628,6 +690,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 62
         },
         {
@@ -638,6 +701,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": false,
+            "AlwaysPresentInShop": false,
             "ID": 63
         },
         {
@@ -648,6 +712,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 64
         },
         {
@@ -658,6 +723,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 65
         },
         {
@@ -668,6 +734,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 66
         },
         {
@@ -678,6 +745,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 67
         },
         {
@@ -688,6 +756,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 68
         },
         {
@@ -698,6 +767,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 69
         },
         {
@@ -708,6 +778,7 @@
             "targettype": 3,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 70
         },
         {
@@ -718,6 +789,7 @@
             "targettype": 3,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 71
         },
         {
@@ -728,6 +800,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": false,
+            "AlwaysPresentInShop": false,
             "ID": 72
         },
         {
@@ -738,6 +811,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": false,
+            "AlwaysPresentInShop": false,
             "ID": 73
         },
         {
@@ -748,6 +822,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": false,
+            "AlwaysPresentInShop": false,
             "ID": 74
         },
         {
@@ -758,6 +833,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": false,
+            "AlwaysPresentInShop": false,
             "ID": 75
         },
         {
@@ -768,6 +844,7 @@
             "targettype": 3,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 76
         },
         {
@@ -778,6 +855,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": false,
+            "AlwaysPresentInShop": false,
             "ID": 77
         },
         {
@@ -788,6 +866,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 78
         },
         {
@@ -798,6 +877,7 @@
             "targettype": 0,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 79
         },
         {
@@ -808,6 +888,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 80
         },
         {
@@ -818,6 +899,7 @@
             "targettype": 4,
             "range": 3,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 81
         },
         {
@@ -828,6 +910,7 @@
             "targettype": 4,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 82
         },
         {
@@ -838,6 +921,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 83
         },
         {
@@ -848,6 +932,7 @@
             "targettype": 3,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 84
         },
         {
@@ -858,6 +943,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 85
         },
         {
@@ -868,6 +954,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 86
         },
         {
@@ -878,6 +965,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 87
         },
         {
@@ -888,6 +976,7 @@
             "targettype": 1,
             "range": 1,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 88
         },
         {
@@ -898,6 +987,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 89
         },
         {
@@ -908,6 +998,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 90
         },
         {
@@ -918,6 +1009,7 @@
             "targettype": 3,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 91
         },
         {
@@ -928,6 +1020,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 92
         },
         {
@@ -938,6 +1031,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 93
         },
         {
@@ -948,6 +1042,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 94
         },
         {
@@ -958,6 +1053,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 95
         },
         {
@@ -968,6 +1064,7 @@
             "targettype": 3,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 96
         },
         {
@@ -978,6 +1075,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": false,
+            "AlwaysPresentInShop": false,
             "ID": 97
         },
         {
@@ -988,6 +1086,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 98
         },
         {
@@ -998,6 +1097,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 99
         },
         {
@@ -1008,6 +1108,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 100
         },
         {
@@ -1018,6 +1119,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 101
         },
         {
@@ -1028,6 +1130,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 102
         },
         {
@@ -1038,6 +1141,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 103
         },
         {
@@ -1048,6 +1152,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 104
         },
         {
@@ -1058,6 +1163,7 @@
             "targettype": 0,
             "range": 0,
             "buyable": true,
+            "AlwaysPresentInShop": false,
             "ID": 105
         }
     ]

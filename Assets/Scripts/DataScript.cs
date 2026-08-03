@@ -1355,7 +1355,7 @@ public class DataScript : MonoBehaviour
         UnityEditor.EditorUtility.SetDirty(this);
     }
     [ContextMenu("Load Skills From JSON")]
-    public void LoadSkills()
+    private void LoadSkills()
     {
         string path = UnityEditor.EditorUtility.OpenFilePanel("Select Skill JSON File", "", "json");
         if (string.IsNullOrEmpty(path))
@@ -1376,7 +1376,7 @@ public class DataScript : MonoBehaviour
     }
 
     [ContextMenu("Save Skills To JSON")]
-    public void SaveSkills()
+    private void SaveSkills()
     {
         string path = UnityEditor.EditorUtility.OpenFilePanel("Select Skill JSON File", "", "json");
         if (string.IsNullOrEmpty(path))
@@ -1404,7 +1404,7 @@ public class DataScript : MonoBehaviour
 
 
     [ContextMenu("Load Character Qutoes From JSON")]
-    public void LoadCharacterDialogues()
+    private void LoadCharacterDialogues()
     {
         string path = UnityEditor.EditorUtility.OpenFilePanel("Select Character Quotes JSON File", "", "json");
         if (string.IsNullOrEmpty(path))
@@ -1437,7 +1437,7 @@ public class DataScript : MonoBehaviour
     }
 
     [ContextMenu("Load Bonds From JSON")]
-    public void LoadBonds()
+    private void LoadBonds()
     {
         string path = UnityEditor.EditorUtility.OpenFilePanel("Select Bond JSON File", "", "json");
         if (string.IsNullOrEmpty(path))
@@ -1458,7 +1458,7 @@ public class DataScript : MonoBehaviour
     }
 
     [ContextMenu("Load Skill Per Map")]
-    public void LoadSkillPerMap()
+    private void LoadSkillPerMap()
     {
         string[] sceneGUIDs = UnityEditor.AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes/Maps" });
 
@@ -1512,9 +1512,16 @@ public class DataScript : MonoBehaviour
             int numberofenemies = 0;
             foreach (EnemyStats enemy in target.EnemyList)
             {
-                if (enemy.Skills.Count > 0 && enemy.Skills[0] > 0)
+                if ((enemy.Skills.Count > 0 && enemy.Skills[0] > 0) || (enemy.Skills.Count > 1 && enemy.Skills[1] > 0))
                 {
-                    skillspresent.Add(enemy.Skills[0]);
+                    foreach (int skillIDs in enemy.Skills)
+                    {
+                        if (skillIDs > 0)
+                        {
+                            skillspresent.Add(skillIDs);
+                        }
+                    }
+
                 }
                 if (!enemy.isother)
                 {
@@ -1528,6 +1535,30 @@ public class DataScript : MonoBehaviour
 
         }
         UnityEditor.EditorUtility.SetDirty(this);
+    }
+
+    [ContextMenu("Check which Skill are not accessible")]
+    private void CheckAccessibleSkills()
+    {
+        List<int> presentskills = new List<int>();
+        foreach (SkillPerMap skillpermap in skillsPerMap)
+        {
+            foreach (int skillinmap in skillpermap.SkillsOnTheMap)
+            {
+                if (!presentskills.Contains(skillinmap))
+                {
+                    presentskills.Add(skillinmap);
+                }
+            }
+        }
+
+        foreach (Skill skill in SkillList)
+        {
+            if (!presentskills.Contains(skill.ID) && !skill.AlwaysPresentInShop && skill.buyable)
+            {
+                Debug.Log("Skill " + skill.ID + ": " + skill.name + " cannot be found in game");
+            }
+        }
     }
 
 
