@@ -27,7 +27,7 @@ public class CustomPolygonTool : EditorWindow
     private int percentagetomakesummit;
     private int maxheight;
 
-    [MenuItem("Tools/Create Custom Polygon")]
+    //[MenuItem("Tools/Create Custom Polygon")]
     public static void ShowWindow() => GetWindow<CustomPolygonTool>("Polygon Tool");
 
 
@@ -61,13 +61,13 @@ public class CustomPolygonTool : EditorWindow
     {
         InstantiateGrid();
         zones = new List<List<GridSquareScript>>();
-        for(int x = 0;x<Grid.Count;x++)
+        for (int x = 0; x < Grid.Count; x++)
         {
             for (int y = 0; y < Grid.Count; y++)
             {
                 bool foundlist = false;
                 GridSquareScript tiletocheck = Grid[x][y];
-                if(tiletocheck.isobstacle)
+                if (tiletocheck.isobstacle)
                 {
                     foreach (List<GridSquareScript> zone in zones)
                     {
@@ -94,7 +94,7 @@ public class CustomPolygonTool : EditorWindow
                         zones.Add(newzone);
                     }
                 }
-                
+
             }
         }
 
@@ -144,10 +144,10 @@ public class CustomPolygonTool : EditorWindow
                 GameObject newtileGO = Instantiate(tile.gameObject);
                 DestroyImmediate(newtileGO.GetComponent<GridSquareScript>());
                 newtileGO.AddComponent<GridSquareScript>();
-                
+
                 GridSquareScript newtile = newtileGO.GetComponent<GridSquareScript>();
                 newtile.GridCoordinates = tile.GridCoordinates;
-                newtile.elevation = Random.Range(0,maxheight);
+                newtile.elevation = Random.Range(0, maxheight);
                 onlyinside.Add(newtile);
                 whattodelete.Add(newtileGO);
             }
@@ -170,7 +170,7 @@ public class CustomPolygonTool : EditorWindow
 
         List<Vector2> edges = GetOuterEdgesOfSquares(onlyoutside, 1);
 
-        Debug.Log("onlyinside : "+onlyinside.Count);
+        Debug.Log("onlyinside : " + onlyinside.Count);
 
         List<List<GridSquareScript>> elevationList = new List<List<GridSquareScript>>() { onlyoutside };
 
@@ -189,7 +189,7 @@ public class CustomPolygonTool : EditorWindow
 
         foreach (int elevation in uniqueElevations)
         {
-            if(elevation == 0)
+            if (elevation == 0)
             {
                 continue;
             }
@@ -237,11 +237,11 @@ public class CustomPolygonTool : EditorWindow
                 {
                     newCrownSet.Add(tile);
                 }
-                    
+
             }
 
             if (newCrownSet.Count > 0)
-            { 
+            {
                 List<Vector2> hulllist = new List<Vector2>();
                 foreach (GridSquareScript tile in newCrownSet.ToList())
                 {
@@ -266,7 +266,7 @@ public class CustomPolygonTool : EditorWindow
                 Debug.Log("elevation : " + elevation + ", " + newHull.Count + " were added");
                 elevationList.Add(newHull);
             }
-            
+
         }
 
         // --- build final points list from elevationList (tiles -> Vector3 positions) ---
@@ -283,7 +283,7 @@ public class CustomPolygonTool : EditorWindow
 
         points = finalPoints;
         CreateLayeredMesh();
-        foreach(GameObject GO in whattodelete)
+        foreach (GameObject GO in whattodelete)
         {
             DestroyImmediate(GO);
         }
@@ -483,9 +483,9 @@ public class CustomPolygonTool : EditorWindow
         }
 
         // Récupère l'enveloppe convexe
-        return  GetConvexHull(allCorners);
+        return GetConvexHull(allCorners);
 
-        
+
     }
 
 

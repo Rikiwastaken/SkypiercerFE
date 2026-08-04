@@ -80,7 +80,7 @@ public class MapEventEditorWindow : EditorWindow
         "Hunter : Looks for enemies regardless of HP and distance"
     };
 
-    [MenuItem("Tools/Map Event Editor")]
+    [MenuItem("Tools/Map Edition/Map Event Editor")]
     public static void ShowWindow()
     {
         var w = GetWindow<MapEventEditorWindow>("Map Event Editor");

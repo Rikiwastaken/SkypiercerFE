@@ -37,7 +37,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         "Hunter : Looks for enemies regardless of HP and distance"
     };
 
-    [MenuItem("Tools/Enemy Stats Editor")]
+    [MenuItem("Tools/Map Edition/Enemy Stats Editor")]
     public static void ShowWindow()
     {
         var w = GetWindow<EnemyStatsEditorWindow>("Enemy Stats Editor");
@@ -371,7 +371,7 @@ public class EnemyStatsEditorWindow : EditorWindow
     }
 
 
-    [MenuItem("Tools/Show Positions")]
+    [MenuItem("Tools/Map Edition/Show Positions")]
     public static void ShowCharacter()
     {
         Transform gridGO = GameObject.Find("Grid").transform;
@@ -493,7 +493,7 @@ public class EnemyStatsEditorWindow : EditorWindow
 
     }
 
-    [MenuItem("Tools/Show Elevation")]
+    [MenuItem("Tools/Map Edition/Show Elevation")]
     public static void ShowElevation()
     {
         Transform gridGO = GameObject.Find("Grid").transform;
@@ -585,7 +585,7 @@ public class EnemyStatsEditorWindow : EditorWindow
 
     }
 
-    [MenuItem("Tools/Hide Characters Positions")]
+    [MenuItem("Tools/Map Edition/Hide Characters Positions")]
     public static void HideCharacter()
     {
         if (GameObject.Find("Grid"))

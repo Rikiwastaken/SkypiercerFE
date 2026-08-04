@@ -51,7 +51,7 @@ public class MapLoader : EditorWindow
 
     private AllColors colors;
 
-    [MenuItem("Tools/Map Creator")]
+    [MenuItem("Tools/Map Edition/Map Creator")]
     public static void ShowWindow()
     {
         var w = GetWindow<MapLoader>("Map Editor");
