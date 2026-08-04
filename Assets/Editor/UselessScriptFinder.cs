@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class UselessScriptFinder : EditorWindow
 {
     private string SceneFolder = "Assets/Scenes";
+
+    private string ResultJSON = "";
 
     [MenuItem("Tools/Find Unused Scripts")]
     public static void ShowWindow()
@@ -17,6 +20,13 @@ public class UselessScriptFinder : EditorWindow
         window.maxSize = new Vector2(300, 300);
 
     }
+
+    [Serializable]
+    private class ResultWrapper
+    {
+        public List<ScriptInfo> scriptInfos;
+    }
+
 
     [Serializable]
     public class ScriptInfo
@@ -89,6 +99,9 @@ public class UselessScriptFinder : EditorWindow
         EditorGUILayout.LabelField("Scripts Folder", GUILayout.Width(90));
         SceneFolder = EditorGUILayout.TextField(SceneFolder);
         EditorGUILayout.Space();
+
+
+
         if (GUILayout.Button("Browse", GUILayout.Width(70)))
         {
             string folder = EditorUtility.OpenFolderPanel("Select Scene Folder", Application.dataPath, "");
@@ -110,22 +123,85 @@ public class UselessScriptFinder : EditorWindow
             }
         }
         EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+
+        EditorGUILayout.LabelField("Result JSON", GUILayout.Width(90));
+        ResultJSON = EditorGUILayout.TextField(ResultJSON);
+
+
+        if (GUILayout.Button("Browse", GUILayout.Width(70)))
+        {
+            string JSON = EditorUtility.OpenFilePanel("Select JSON", Application.dataPath, "json");
+
+            if (!string.IsNullOrEmpty(JSON))
+            {
+                // Convert absolute path to project-relative path
+                if (JSON.StartsWith(Application.dataPath))
+                {
+                    ResultJSON = "Assets" + JSON.Substring(Application.dataPath.Length);
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog(
+                        "Invalid file",
+                        "Please select a file inside this Unity project.",
+                        "OK");
+                }
+            }
+        }
+
+        EditorGUILayout.Space();
+
+        EditorGUILayout.EndHorizontal();
+
         EditorGUILayout.Space();
 
 
         if (GUILayout.Button("Find Useless Scripts"))
         {
             List<ScriptInfo> scriptinfo = FindUnusedScripts();
+            List<ScriptInfo> finalresult = new List<ScriptInfo>();
             foreach (ScriptInfo script in scriptinfo)
             {
                 if (script.sceneswhereused == null || script.sceneswhereused.Count == 0)
                 {
+                    finalresult.Add(script);
                     Debug.Log("Script " + script.name + " is never used anywhere. It has the following path:\n" + script.path);
                 }
             }
+
+            SaveResults(finalresult);
         }
 
 
+    }
+
+    private void SaveResults(List<ScriptInfo> scriptinfo)
+    {
+        if (ResultJSON == "")
+        {
+            return;
+        }
+
+        ResultWrapper wrapper = new ResultWrapper() { scriptInfos = scriptinfo };
+
+        string json = JsonUtility.ToJson(wrapper, true);
+
+        try
+        {
+            AssetDatabase.StartAssetEditing();
+            File.WriteAllText(ResultJSON, json);
+            Debug.Log($"Result Saved : {ResultJSON}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error when saving options : {e.Message}");
+        }
+        finally
+        {
+            AssetDatabase.StopAssetEditing();
+        }
     }
 }
 #endif
