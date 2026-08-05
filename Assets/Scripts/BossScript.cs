@@ -89,6 +89,7 @@ public class BossScript : MonoBehaviour
         Character character = GetComponent<UnitScript>().UnitCharacteristics;
 
         Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
+        Debug.Log("target: " + targetcharacter.name);
 
         Vector2 RagnallPosition = character.currentTile.GridCoordinates;
 
@@ -123,6 +124,34 @@ public class BossScript : MonoBehaviour
                         tile.isbossAttackTile = true;
                         tile.BossTileChanged();
                     }
+                }
+            }
+        }
+        else if (distance <= 7)
+        {
+            for (int i = 0; i < GridScript.Grid.Count; i++)
+            {
+                for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                {
+                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+                    if (ManhanttanDistance(RagnallPosition, tile.GridCoordinates) <= 9)
+                    {
+                        Vector2 attackDir = (TargetPosition - RagnallPosition).normalized;
+                        Vector2 tileDir = (tile.GridCoordinates - RagnallPosition).normalized;
+
+                        float angle = Vector2.Angle(attackDir, tileDir);
+
+                        if (angle <= 45f)
+                        {
+                            tile.isbossAttackTile = true;
+                            tile.BossTileChanged();
+                        }
+                    }
+
+
+
+
+
                 }
             }
         }

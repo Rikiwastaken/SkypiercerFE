@@ -12,7 +12,6 @@
 ## Ideas
 
 - peut être faire qu'on puisse mettre "pas de battallion"
-- Chaptre 2, faire un truc quand les portes finales sont ouvertes
 - Gérer ptet l'inclinaison de la camera.
 - Faire les visuels de l'effet gardien de Kira
 
@@ -50,6 +49,8 @@
 #### Icons
 
 - Status Alterations
+
+- Dagger
 
 ## Text
 

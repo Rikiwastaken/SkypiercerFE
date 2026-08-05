@@ -30,6 +30,11 @@ public class UnitDeploymentScript : MonoBehaviour
 
     public Transform Mastery;
 
+    public List<TextMeshProUGUI> MasteryTexts;
+    public List<Image> MasteryImages;
+    public List<Transform> MasteryExpBars;
+    public List<Sprite> WeaponClassImages;
+
     private InputAction _CancelAction;
 
 
@@ -193,66 +198,120 @@ public class UnitDeploymentScript : MonoBehaviour
 
     private void ManageMasteryVisuals(Character unit)
     {
-        TextMeshProUGUI MasteryText = Mastery.GetComponentInChildren<TextMeshProUGUI>();
         if (unit.affiliation == "playable")
         {
-            MasteryText.transform.parent.gameObject.SetActive(true);
+            if (MasteryTexts[0].transform.parent.gameObject.activeSelf == false)
+            {
+                MasteryTexts[0].transform.parent.gameObject.SetActive(true);
+            }
+
         }
         else
         {
-            MasteryText.transform.parent.gameObject.SetActive(false);
+            if (MasteryTexts[0].transform.parent.gameObject.activeSelf)
+            {
+                MasteryTexts[0].transform.parent.gameObject.SetActive(false);
+            }
+
             return;
         }
-
-        List<Transform> MasteryExpBars = new List<Transform>();
-        for (int i = 2; i < Mastery.childCount; i++)
-        {
-            MasteryExpBars.Add(Mastery.GetChild(i).transform);
-        }
-
-        MasteryText.text = "";
 
         List<WeaponMastery> masteries = unit.Masteries;
         int barID = 0;
         for (int i = 0; i < masteries.Count; i++)
         {
-            MasteryExpBars[i].gameObject.SetActive(true);
-            string masterylevel = "";
+            if (MasteryExpBars == null || MasteryExpBars.Count <= i || MasteryExpBars[i] == null)
+            {
+                continue;
+            }
+            if (MasteryTexts == null || MasteryTexts.Count <= i || MasteryTexts[i] == null)
+            {
+                continue;
+            }
+            if (MasteryImages == null || MasteryImages.Count <= i || MasteryImages[i] == null)
+            {
+                continue;
+            }
+
+            if (!MasteryExpBars[i].parent.gameObject.activeSelf)
+            {
+                MasteryExpBars[i].parent.gameObject.SetActive(true);
+            }
             DataScript ds = DataScript.instance;
+            string masterylevel = "";
+
             switch (masteries[i].Level)
             {
                 case (-1):
                     continue;
                 case (0):
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel0;
+                    MasteryExpBars[barID].GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel0;
                     masterylevel = "X";
                     break;
                 case (1):
                     masterylevel = "D";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel1;
+                    MasteryExpBars[barID].GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel1;
                     break;
                 case (2):
                     masterylevel = "C";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel2;
+                    MasteryExpBars[barID].GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel2;
                     break;
                 case (3):
                     masterylevel = "B";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel3;
+                    MasteryExpBars[barID].GetComponent<Image>().fillAmount = (float)masteries[i].Exp / ds.MasteryforLevel3;
                     break;
                 case (4):
                     masterylevel = "A";
-                    MasteryExpBars[barID].GetChild(0).GetComponent<Image>().fillAmount = 1f;
+                    MasteryExpBars[barID].GetComponent<Image>().fillAmount = 1f;
                     break;
             }
+
+            MasteryImages[barID].sprite = GetWeaponIcons(masteries[i].weapontype);
+            MasteryTexts[barID].text = masterylevel;
+
+
             barID++;
-            MasteryText.text += masteries[i].weapontype[0] + (masteries[i].weapontype[1] + " : " + masterylevel + "\n");
+
         }
         for (int i = barID; i < MasteryExpBars.Count; i++)
         {
-            MasteryExpBars[i].gameObject.SetActive(false);
+            if (MasteryExpBars[i].parent.gameObject.activeSelf)
+            {
+                MasteryExpBars[i].parent.gameObject.SetActive(false);
+            }
+
+
         }
 
     }
+
+    private Sprite GetWeaponIcons(string weapontype)
+    {
+
+        switch (weapontype.ToLower())
+        {
+            default:
+                return WeaponClassImages[0];
+            case "sword":
+                return WeaponClassImages[1];
+            case "spear":
+                return WeaponClassImages[2];
+            case "greatsword":
+                return WeaponClassImages[3];
+            case "bow":
+                return WeaponClassImages[4];
+            case "scythe":
+                return WeaponClassImages[5];
+            case "shield":
+                return WeaponClassImages[6];
+            case "staff":
+                return WeaponClassImages[7];
+            case "dagger":
+                return WeaponClassImages[8];
+        }
+    }
+
+
     private void InitializeButtons()
     {
         OrderUnits();
@@ -262,7 +321,6 @@ public class UnitDeploymentScript : MonoBehaviour
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = characterstoshow[i];
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i;
-            Debug.Log(characterstoshow[i].name);
             if (forcedunits.Contains(characterstoshow[i].ID))
             {
 
