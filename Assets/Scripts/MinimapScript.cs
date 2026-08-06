@@ -20,6 +20,7 @@ public class MinimapScript : MonoBehaviour
 
     private int waitforinitialization = 5;
 
+    public int tileprocessedperframe;
     private int updatedelay;
 
     private int showposition;
@@ -106,7 +107,6 @@ public class MinimapScript : MonoBehaviour
             }
 
             minimapTexture.SetPixels(pixels);
-            minimapTexture.Apply();
 
             minimapImage.sprite = Sprite.Create(minimapTexture,
                 new Rect(0, 0, minimapTexture.width, minimapTexture.height),
@@ -191,7 +191,6 @@ public class MinimapScript : MonoBehaviour
         color.a = alpha;
         minimapBackgroundTexture.SetPixel(x, y, color);
 
-        minimapBackgroundTexture.Apply();
     }
 
     public void FirstInitializationMinimapBG()
@@ -273,10 +272,14 @@ public class MinimapScript : MonoBehaviour
         Texture2D newtexture = new Texture2D(minimapTexture.width, minimapTexture.height, TextureFormat.RGBA32, false);
         newtexture.filterMode = FilterMode.Point;
 
+        int processed = 0;
+
         for (int i = 0; i < gridScript.Grid.Count; i++)
         {
             for (int j = 0; j < gridScript.Grid[i].Count; j++)
             {
+
+
                 GridSquareScript tile = gridScript.GetTile(i, j);
                 SetTileColor(newtexture, i, j, Color.clear, 0f);
                 if (gridScript.attacktiles.Contains(tile) || gridScript.lockedattacktiles.Contains(tile))
@@ -297,6 +300,12 @@ public class MinimapScript : MonoBehaviour
                 if (!tile.activated)
                 {
                     SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
+                }
+                processed++;
+                if (processed > tileprocessedperframe)
+                {
+                    yield return null;
+                    processed = 0;
                 }
 
             }
@@ -325,6 +334,8 @@ public class MinimapScript : MonoBehaviour
             }
 
         }
+
+        yield return null;
 
         manageselectionicon(newtexture);
 
@@ -371,7 +382,7 @@ public class MinimapScript : MonoBehaviour
             texture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 4, Color.red);
 
 
-            texture.Apply();
+
         }
     }
 
@@ -443,9 +454,6 @@ public class MinimapScript : MonoBehaviour
                     texture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 5, Color.yellow);
 
 
-
-
-                    texture.Apply();
                 }
                 else if (tile.Mechanism.type == 1)
                 {
@@ -484,8 +492,6 @@ public class MinimapScript : MonoBehaviour
         }
 
 
-        minimapTexture.Apply();
-
     }
 
     private void manageselectionicon(Texture2D texture)
@@ -516,7 +522,6 @@ public class MinimapScript : MonoBehaviour
             texture.SetPixel(selectedx * 8 + 4, selectedy * 8 + 7, Color.red);
             texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 7, Color.yellow);
 
-            texture.Apply();
         }
     }
 
