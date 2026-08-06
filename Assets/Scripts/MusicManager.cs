@@ -56,8 +56,6 @@ public class MusicManager : MonoBehaviour
 
     public AudioMixer mixer;
 
-    private cameraScript cameraScript;
-
     private TurnManger TurnManager;
 
     private SaveManager SaveManager;
@@ -97,6 +95,7 @@ public class MusicManager : MonoBehaviour
 
     private TextBubbleScript textBubbleScript;
 
+    private ActionsMenu actionsMenu;
 
     private int currentMusicType = -1;
     private void Awake()
@@ -110,6 +109,7 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
+        actionsMenu = ActionsMenu.instance;
         beforecombatmusicvol = BeforeCombat.volume;
         SaveManager = FindAnyObjectByType<SaveManager>();
 
@@ -213,10 +213,7 @@ public class MusicManager : MonoBehaviour
         string currentscenename = SceneManager.GetActiveScene().name;
         if (currentscenename.Contains("SideStory") || currentscenename.Contains("Chapter") || currentscenename.Contains("Prologue") || currentscenename.Contains("TestMap"))
         {
-            if (cameraScript == null)
-            {
-                cameraScript = FindAnyObjectByType<cameraScript>();
-            }
+
 
             if (TurnManager == null)
             {
@@ -311,7 +308,7 @@ public class MusicManager : MonoBehaviour
                 }
 
             }
-            else if (!lowermap && ((cameraScript != null && cameraScript.incombat) || inCombatBool))
+            else if (!lowermap && (actionsMenu.incombat || inCombatBool))
             {
                 ChangeVolume(incombat, maxvolume);
                 ChangeVolume(incombatintro, maxvolume);

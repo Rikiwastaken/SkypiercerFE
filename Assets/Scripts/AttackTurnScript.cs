@@ -17,10 +17,10 @@ public class AttackTurnScript : MonoBehaviour
 
     private GridScript gridScript;
 
-    private cameraScript battlecamera;
-
     public ActionsMenu ActionsMenu;
     public PhaseTextScript phaseTextScript;
+
+    private cameraScriptV2 camScriptV2;
 
     [Header("combat timing variables")]
 
@@ -90,10 +90,10 @@ public class AttackTurnScript : MonoBehaviour
         minimapScript = FindAnyObjectByType<MinimapScript>();
         TurnManager = GetComponent<TurnManger>();
         gridScript = GetComponent<GridScript>();
-        battlecamera = FindAnyObjectByType<cameraScript>();
         saveManager = FindAnyObjectByType<SaveManager>();
         combatsceneloader = FindAnyObjectByType<CombatSceneLoader>();
         battleInfotextScript = FindAnyObjectByType<BattleInfotext>(FindObjectsInactive.Include);
+        camScriptV2 = cameraScriptV2.instance;
     }
 
     // Update is called once per frame
@@ -298,7 +298,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
 
-        if (!battlecamera.incombat && triggercleanup)
+        if (!ActionsMenu.incombat && triggercleanup)
         {
             DeathCleanup();
 
@@ -308,9 +308,9 @@ public class AttackTurnScript : MonoBehaviour
     private bool NPCAttackFunction(GameObject AttackerGO)
     {
         Character charAttacker = AttackerGO.GetComponent<UnitScript>().UnitCharacteristics;
-        if (!battlecamera.incombat)
+        if (!ActionsMenu.incombat)
         {
-            battlecamera.Destination = charAttacker.position;
+            camScriptV2.Destination = charAttacker.position;
         }
 
 
@@ -975,7 +975,8 @@ public class AttackTurnScript : MonoBehaviour
                     Attacker.transform.GetChild(1).localRotation = Quaternion.Euler(0, 90, 0);
                 }
             }
-            battlecamera.Destination = battlecamera.GoToFightCamera(Attacker, target);
+            combatTextScript.SetupCombat(Attacker, target);
+            ActionsMenu.incombat = true;
             yield return new WaitForSeconds(delaybeforeAttack);
 
 
@@ -1135,7 +1136,7 @@ public class AttackTurnScript : MonoBehaviour
             }
             waittingforexp = false;
             expdistributed = false;
-            cameraScript.instance.incombat = false;
+            ActionsMenu.incombat = false;
             EndOfCombatTrigger(Attacker, target);
 
             CharAttacker.alreadyplayed = true;

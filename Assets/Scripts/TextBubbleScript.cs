@@ -47,7 +47,7 @@ public class TextBubbleScript : MonoBehaviour
 
     private GridScript gridScript;
 
-    private cameraScript cameraScript;
+    private cameraScriptV2 cameraScript;
 
     public Image Imagetoshow;
     private float currentcharacterpitch;
@@ -89,7 +89,7 @@ public class TextBubbleScript : MonoBehaviour
     {
         InitializeAndEnableControls();
         gridScript = GridScript.instance;
-        cameraScript = FindAnyObjectByType<cameraScript>();
+        cameraScript = FindAnyObjectByType<cameraScriptV2>();
         //DialogueExample();
     }
 

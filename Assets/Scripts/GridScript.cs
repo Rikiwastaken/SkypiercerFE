@@ -54,7 +54,7 @@ public class GridScript : MonoBehaviour
 
     private TextBubbleScript textBubble;
 
-    private cameraScript battlecamera;
+    private cameraScriptV2 cameraScript;
     public GameObject NeutralMenu;
 
     public GameObject ForesightMenu;
@@ -94,7 +94,7 @@ public class GridScript : MonoBehaviour
         {
             SceneManager.LoadScene("FirstScene");
         }
-
+        ActionsMenu.instance = actionsMenu.GetComponent<ActionsMenu>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -105,7 +105,7 @@ public class GridScript : MonoBehaviour
         lockedhealingtiles = new List<GridSquareScript>();
         InitializeGOList();
         textBubble = GetComponent<ActionManager>().TextBubbleScript;
-        battlecamera = FindAnyObjectByType<cameraScript>();
+        cameraScript = cameraScriptV2.instance;
 
     }
 
@@ -145,7 +145,7 @@ public class GridScript : MonoBehaviour
             if (movement != Vector2.zero && movement != previousmovevalue)
             {
                 moveCD = (int)(0.1f / Time.deltaTime);
-                previousmovevalue = battlecamera.DetermineDirection(movement);
+                previousmovevalue = cameraScript.DetermineDirection(movement);
                 MoveSelection(previousmovevalue);
             }
             else
@@ -249,7 +249,7 @@ public class GridScript : MonoBehaviour
             movementbuffercounter = (int)(movementbuffer / Time.fixedDeltaTime);
         }
 
-        previousmovementvalueforbuffer = battlecamera.DetermineDirection(movement);
+        previousmovementvalueforbuffer = cameraScript.DetermineDirection(movement);
         UpdateTileText();
         if (lockselection && movementtiles.Count == 0 && lockedmovementtiles.Count == 0 && attacktiles.Count == 0 && lockedattacktiles.Count == 0 && healingtiles.Count == 0 && lockedhealingtiles.Count == 0)
         {
@@ -460,7 +460,6 @@ public class GridScript : MonoBehaviour
         if (selection == null)
         {
             selection = GetTile(GetComponent<MapInitializer>().playablepos[0]);
-            battlecamera.transform.position = new Vector3(selection.GridCoordinates.x, battlecamera.transform.position.y, selection.GridCoordinates.y);
         }
         else
         {

@@ -12,7 +12,6 @@
 ## Ideas
 
 - peut être faire qu'on puisse mettre "pas de battallion"
-- Gérer ptet l'inclinaison de la camera.
 - Faire les visuels de l'effet gardien de Kira
 
 ## System 

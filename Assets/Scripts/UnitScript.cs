@@ -239,8 +239,6 @@ public class UnitScript : MonoBehaviour
 
     public float movespeed;
 
-    private cameraScript cameraScript;
-
     private Animator animator;
 
     private Transform armature;
@@ -251,6 +249,7 @@ public class UnitScript : MonoBehaviour
     public GameObject currentequipmentmodel;
 
     private AttackTurnScript AttackTurnScript;
+    private ActionsMenu actionsMenu;
 
     public int unitkilled;
 
@@ -392,6 +391,7 @@ public class UnitScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        actionsMenu = ActionsMenu.instance;
         if (ActiveModel == null)
         {
             InstantiateCharacterModel();
@@ -589,10 +589,6 @@ public class UnitScript : MonoBehaviour
 
         ManageLifeBarRotation();
 
-        if (cameraScript == null)
-        {
-            cameraScript = cameraScript.instance;
-        }
 
 
 
@@ -620,17 +616,13 @@ public class UnitScript : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (cameraScript == null)
-        {
-            cameraScript = cameraScript.instance;
-        }
 
         ManagePosition();
         ManageMovement();
         ManageFlyingWeaponPosition();
         if (animator != null && armature != null)
         {
-            if (!isinattackanimation() && !cameraScript.incombat)
+            if (!isinattackanimation() && !actionsMenu.incombat)
             {
                 if (Vector3.Distance(armature.localPosition, initialpos) > 0.1f)
                 {
@@ -1055,7 +1047,7 @@ public class UnitScript : MonoBehaviour
             if (UnitCharacteristics.currentTile.isstairs)
             {
 
-                if (cameraScript.incombat)
+                if (actionsMenu.incombat)
                 {
                     transform.position = new Vector3(transform.position.x, UnitCharacteristics.currentTile.transform.position.y + 1f, transform.position.z);
                 }
@@ -2048,7 +2040,7 @@ public class UnitScript : MonoBehaviour
 
     private void ManageDamagenumber()
     {
-        if (damagestoshow.Count > 0 && !cameraScript.incombat)
+        if (damagestoshow.Count > 0 && !actionsMenu.incombat)
         {
             if (!DmgText.enabled)
             {

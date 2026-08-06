@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
-public class cameraScript : MonoBehaviour
+public class cameraScriptR : MonoBehaviour
 {
 
-    public static cameraScript instance;
+    public static cameraScriptR instance;
 
     public Vector2 Destination;
     private GridSquareScript destTile;

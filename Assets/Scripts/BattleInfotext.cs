@@ -13,7 +13,6 @@ public class BattleInfotext : MonoBehaviour
     private GameObject selectedunit;
     private GameObject previousselected;
 
-    private cameraScript battlecamera;
     private TurnManger turnManger;
     private AttackTurnScript attackTurnScript;
     public TextMeshProUGUI Skilltext;
@@ -144,10 +143,7 @@ public class BattleInfotext : MonoBehaviour
             return;
         }
 
-        if (battlecamera == null)
-        {
-            battlecamera = FindAnyObjectByType<cameraScript>();
-        }
+
 
         if (eventSystem == null)
         {
@@ -166,7 +162,7 @@ public class BattleInfotext : MonoBehaviour
 
 
 
-        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || battlecamera.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && GridScript.GetComponent<TurnManger>().currentlyplaying != "playable" && GridScript.GetComponent<TurnManger>().currentlyplaying != "tutorial"))
+        if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || ActionsMenu.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && GridScript.GetComponent<TurnManger>().currentlyplaying != "playable" && GridScript.GetComponent<TurnManger>().currentlyplaying != "tutorial"))
         {
 
             if (!(PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) && !(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf))

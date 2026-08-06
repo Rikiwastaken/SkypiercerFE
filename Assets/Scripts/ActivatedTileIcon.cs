@@ -8,7 +8,7 @@ public class ActivatedTileIcon : MonoBehaviour
     public int rotationperframe;
 
     public GridScript GridScript;
-    public cameraScript cameraScript;
+    public ActionsMenu _ActionsMenu;
 
     private GridSquareScript SelectedTile;
     private GridSquareScript LockedSelectedTile;
@@ -21,7 +21,7 @@ public class ActivatedTileIcon : MonoBehaviour
     void Start()
     {
         GridScript = FindAnyObjectByType<GridScript>();
-        cameraScript = FindAnyObjectByType<cameraScript>();
+        _ActionsMenu = ActionsMenu.instance;
         baseYSelected = SelectedImage.transform.position.y;
         baseYLocked = LockedSelectedImage.transform.position.y;
     }
@@ -45,7 +45,7 @@ public class ActivatedTileIcon : MonoBehaviour
             }
 
 
-            if (!cameraScript.incombat)
+            if (!_ActionsMenu.incombat)
             {
                 if (!SelectedImage.activeSelf)
                 {
@@ -97,7 +97,7 @@ public class ActivatedTileIcon : MonoBehaviour
             }
 
 
-            if (!cameraScript.incombat)
+            if (!_ActionsMenu.incombat)
             {
                 if (!LockedSelectedImage.activeSelf)
                 {

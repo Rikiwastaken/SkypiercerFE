@@ -9,6 +9,8 @@ using static UnitScript;
 public class ActionsMenu : MonoBehaviour
 {
 
+    public static ActionsMenu instance;
+
     public GameObject target;
 
     public Button ActionsCancelButton;
@@ -43,9 +45,9 @@ public class ActionsMenu : MonoBehaviour
 
     public List<GameObject> targetlist;
 
+    public bool incombat;
 
-
-    private cameraScript cameraScript;
+    private cameraScriptV2 cameraScriptV2;
 
     public int activetargetid;
 
@@ -83,6 +85,11 @@ public class ActionsMenu : MonoBehaviour
         PreviousActivatedState = false;
     }
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -94,7 +101,7 @@ public class ActionsMenu : MonoBehaviour
         _PrevTargetAction = InputSystem.actions.FindAction("PreviousTarget");
         _MovementAction = InputSystem.actions.FindAction("Movement");
         GridScript = GridScript.instance;
-        cameraScript = FindAnyObjectByType<cameraScript>();
+        cameraScriptV2 = cameraScriptV2.instance;
         attackTurnScript = FindAnyObjectByType<AttackTurnScript>();
         BaseButtonColor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
         BaseButtonPressedColor = transform.GetChild(0).GetComponent<Button>().colors.pressedColor;
@@ -212,12 +219,12 @@ public class ActionsMenu : MonoBehaviour
             {
                 if (activetargetid < targetlist.Count)
                 {
-                    cameraScript.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
+                    cameraScriptV2.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
                     CheckCorrectInfo(target, targetlist[activetargetid], isUnithealing);
                 }
                 else
                 {
-                    cameraScript.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.position;
+                    cameraScriptV2.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.position;
                 }
 
             }
@@ -651,7 +658,7 @@ public class ActionsMenu : MonoBehaviour
         GridScript.Recolor();
         confirmattack = false;
         ActionManager.instance.currentcharacter = null;
-        FindAnyObjectByType<cameraScript>().incombat = false;
+        incombat = false;
         ActionManager.instance.preventfromlockingafteraction = true;
         oldtarget.GetComponent<UnitScript>().RetreatTrigger(); // Canto/Retreat (move again after action)
     }

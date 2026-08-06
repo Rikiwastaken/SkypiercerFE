@@ -166,7 +166,7 @@ public class InputManager : MonoBehaviour
         if (!activatepressed)
             activatepressedonce = false;
 
-        if (cameraScript.instance != null && cameraScript.instance.incombat)
+        if (ActionsMenu.instance != null && ActionsMenu.instance.incombat)
         {
             activatepressed = false;
             activatejustpressed = false;
@@ -377,11 +377,11 @@ public class InputManager : MonoBehaviour
         movementValue.y = Mathf.Abs(movementValue.y) >= 0.5f ? Mathf.Sign(movementValue.y) : 0f;
     }
 
-    void OnResetcam(InputValue value)
-    {
-        cameraScript cameraScript = FindAnyObjectByType<cameraScript>();
-        cameraScript?.ResetRotation();
-    }
+    //void OnResetcam(InputValue value)
+    //{
+    //    cameraScript cameraScript = FindAnyObjectByType<cameraScript>();
+    //    cameraScript?.ResetRotation();
+    //}
 
     void OnMoveCam(InputValue value)
     {

@@ -44,8 +44,6 @@ public class GridSquareScript : MonoBehaviour
 
     public bool isstairs;
 
-    private cameraScript cameraScript;
-
     public bool activated;
 
     public int RemainingRainTurns;
@@ -371,10 +369,7 @@ public class GridSquareScript : MonoBehaviour
         {
             GridScript = GridScript.instance;
         }
-        if (cameraScript == null)
-        {
-            cameraScript = FindAnyObjectByType<cameraScript>(FindObjectsInactive.Include);
-        }
+
         if (TurnManger == null)
         {
             TurnManger = FindAnyObjectByType<TurnManger>(FindObjectsInactive.Include);
@@ -404,7 +399,7 @@ public class GridSquareScript : MonoBehaviour
         }
 
 
-        if (cameraScript.incombat)
+        if (actionsmenu.incombat)
         {
             //SelectRoundFilling.GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f,0f);
         }
@@ -489,7 +484,7 @@ public class GridSquareScript : MonoBehaviour
         }
         //manageElevation();
         //UpdateFilling();
-        previouslyincombat = cameraScript.incombat;
+        previouslyincombat = actionsmenu.incombat;
     }
 
     private void LateUpdate()
@@ -603,7 +598,7 @@ public class GridSquareScript : MonoBehaviour
         }
 
         //made on purpose so that it's never active
-        if (cameraScript.incombat && !cameraScript.incombat)
+        if (actionsmenu.incombat && !actionsmenu.incombat)
         {
             float targetelevation = 0;
             if (isstairs)

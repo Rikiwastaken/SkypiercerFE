@@ -16,7 +16,7 @@ public class MinimapScript : MonoBehaviour
 
     private GridScript gridScript;
 
-    private cameraScript cameraScript;
+    private ActionsMenu _ActionsMenu;
 
     private int waitforinitialization = 5;
 
@@ -41,7 +41,7 @@ public class MinimapScript : MonoBehaviour
     private void Start()
     {
         gridScript = GridScript.instance;
-        cameraScript = FindAnyObjectByType<cameraScript>();
+        _ActionsMenu = ActionsMenu.instance;
     }
 
     private void Update()
@@ -79,7 +79,7 @@ public class MinimapScript : MonoBehaviour
             StartCoroutine(ChangeMinimap());
         }
 
-        if (cameraScript.incombat)
+        if (_ActionsMenu.incombat)
         {
             minimapImage.enabled = false;
         }
