@@ -1228,12 +1228,38 @@ public class AttackTurnScript : MonoBehaviour
                 }
             }
 
+
+
+            TwistOfFateTrigger(unit1, unit2);
+            TwistOfFateTrigger(unit2, unit1);
+
             unit2.GetComponent<UnitScript>().UpdateWeaponModel();
 
         }
 
 
 
+    }
+
+    private void TwistOfFateTrigger(GameObject unit1, GameObject unit2)
+    {
+        Character charunit1 = unit1.GetComponent<UnitScript>().UnitCharacteristics;
+        Character charunit2 = unit2.GetComponent<UnitScript>().UnitCharacteristics;
+        if (charunit1.currentHP > 0 && charunit2.currentHP > 0)
+        {
+            if (unit1.GetComponent<UnitScript>().GetSkill(112) && charunit1.currentHP < charunit2.currentHP) //Twist of Fate
+            {
+                int luckstat = (int)charunit1.AjustedStats.Luck + unit1.GetComponent<UnitScript>().GetStatSkillBonus(unit2).Luck;
+                if (unit1.GetComponent<RandomScript>().GetPersonalityValue() <= luckstat + unit1.GetComponent<UnitScript>().GetTriggerLuckModificator())
+                {
+                    int unit1previousHP = charunit1.currentHP;
+                    charunit1.currentHP = charunit2.currentHP;
+                    charunit2.currentHP = unit1previousHP;
+                    unit1.GetComponent<UnitScript>().AddNumber(charunit1.currentHP, true, "Twist of Fate");
+                    unit2.GetComponent<UnitScript>().AddNumber(charunit2.currentHP, false, "Twist of Fate");
+                }
+            }
+        }
     }
 
     private List<string> Whotoattack(string affiliation, bool attackfriend)

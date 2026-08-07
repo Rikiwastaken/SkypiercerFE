@@ -1165,6 +1165,83 @@
             "buyable": true,
             "AlwaysPresentInShop": false,
             "ID": 105
+        },
+        {
+            "name": "Ace in the sleeve",
+            "Descriptions": "Increases Luck's effects on random rolls by 50%.",
+            "IsCommand": false,
+            "Cost": 3,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 106
+        },
+        {
+            "name": "Fortunate Star",
+            "Descriptions": "Triples the odds of a Lucky Trigger happening at the beginning of turn.",
+            "IsCommand": false,
+            "Cost": 5,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 107
+        },
+        {
+            "name": "Rigged Fight",
+            "Descriptions": "Adds Luck% chance to reduce damage taken by half.",
+            "IsCommand": false,
+            "Cost": 7,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 108
+        },
+        {
+            "name": "Risky Bet",
+            "Descriptions": "Increases Crit Chance by Luck/2 but non-critical attacks no longer do damage.",
+            "IsCommand": false,
+            "Cost": 7,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 109
+        },
+        {
+            "name": "Protected by luck",
+            "Descriptions": "Reduces the chance of being hit by a critical hit by 2*Luck%.",
+            "IsCommand": false,
+            "Cost": 7,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 110
+        },
+        {
+            "name": "Fortune's favor",
+            "Descriptions": "Increases experience gained by Luck*2.",
+            "IsCommand": false,
+            "Cost": 10,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 111
+        },
+        {
+            "name": "Twist of Fate",
+            "Descriptions": "Grants a Luck% chance to swap the attacker’s and target’s HP after combat if enemy's is higher.",
+            "IsCommand": false,
+            "Cost": 5,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 112
         }
     ]
 }

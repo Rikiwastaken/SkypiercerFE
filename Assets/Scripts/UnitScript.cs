@@ -201,6 +201,7 @@ public class UnitScript : MonoBehaviour
         public int Luck;
         public int Hit;
         public int Crit;
+        public int CritAvoid;
         public int PhysDamage;
         public int TelekDamage;
         public int DamageReduction;
@@ -1022,11 +1023,49 @@ public class UnitScript : MonoBehaviour
             }
         }
 
+
+
         //Reset Verso movements
         tilesmoved = 0;
 
         //status effects trigger
         TriggerStatusEffectsBegOfTurn();
+
+
+        // Lucky Triggers
+
+        int requiredTrigger = GetTriggerLuckModificator();
+
+        if (GetComponent<RandomScript>().GetPersonalityValue() < GetTriggerLuckModificator())
+        {
+            int PersonnalityValueForEffect = GetComponent<RandomScript>().GetPersonalityValue();
+
+            if (PersonnalityValueForEffect < 25 && UnitCharacteristics.statusEffects.AccelerationTurns <= 0)
+            {
+                UnitCharacteristics.statusEffects.AccelerationTurns = 2;
+                AddNumber(2, true, "Lucky Acceleration");
+            }
+            else if (PersonnalityValueForEffect < 50 && UnitCharacteristics.statusEffects.PowerTurns <= 0)
+            {
+                UnitCharacteristics.statusEffects.PowerTurns = 2;
+                AddNumber(2, true, "Lucky Power");
+            }
+            else if (PersonnalityValueForEffect < 75 && UnitCharacteristics.statusEffects.RegenTurns <= 0)
+            {
+                UnitCharacteristics.statusEffects.RegenTurns = 2;
+                AddNumber(2, true, "Lucky Regen");
+            }
+            else if (UnitCharacteristics.currentHP < UnitCharacteristics.AjustedStats.HP)
+            {
+                int amounthealed = Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * 0.1f), (int)(UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP));
+                UnitCharacteristics.currentHP += amounthealed;
+                AddNumber(amounthealed, true, "Lucky Heal");
+            }
+
+        }
+
+
+
         // Reset Motvate use
         UnitCharacteristics.motivateusedthisturn = false;
 
@@ -3989,6 +4028,9 @@ public class UnitScript : MonoBehaviour
         }
 
 
+
+
+
         //Windborne Dagger
         if (weapon != null && weapon.type != null && weapon.type == "dagger" && weapon.Modifier != null && weapon.Modifier.ToLower() == "windborne")
         {
@@ -4072,6 +4114,27 @@ public class UnitScript : MonoBehaviour
             statbonuses.Dexterity += 5;
             statbonuses.Speed += 5;
             statbonuses.Luck += 5;
+        }
+
+        //Rigged Fight
+        if (GetSkill(108))
+        {
+            if (GetComponent<RandomScript>().GetPersonalityValue() <= UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck + GetTriggerLuckModificator())
+            {
+                statbonuses.DamageReduction += 50;
+            }
+        }
+
+        //Risky Bet
+        if (GetSkill(109))
+        {
+            statbonuses.Crit += (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) / 2;
+        }
+
+        //Protected by luck
+        if (GetSkill(110))
+        {
+            statbonuses.CritAvoid += (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) * 2;
         }
 
         return statbonuses;
@@ -4291,6 +4354,10 @@ public class UnitScript : MonoBehaviour
     public int GetHitLuckModificator(Character Chartouse)
     {
         float HitmodPerLuck = 0.5f;
+        if (GetSkill(106))
+        {
+            HitmodPerLuck *= 1.5f;
+        }
         return (int)(HitmodPerLuck * Chartouse.AjustedStats.Luck);
     }
 
@@ -4302,6 +4369,10 @@ public class UnitScript : MonoBehaviour
     public int GetTriggerLuckModificator(Character Chartouse)
     {
         float HitmodPerLuck = 0.5f;
+        if (GetSkill(106))
+        {
+            HitmodPerLuck *= 1.5f;
+        }
         return (int)(HitmodPerLuck * Chartouse.AjustedStats.Luck);
     }
 
@@ -4313,12 +4384,35 @@ public class UnitScript : MonoBehaviour
     public int GetCritLuckModificator(Character Chartouse)
     {
         float HitmodPerLuck = 0.25f;
+        if (GetSkill(106))
+        {
+            HitmodPerLuck *= 1.5f;
+        }
         return (int)(HitmodPerLuck * Chartouse.AjustedStats.Luck);
     }
 
     public int GetCritLuckModificator()
     {
         return GetHitLuckModificator(UnitCharacteristics);
+    }
+
+    public int GetLuckyTriggerLuckModificator(Character Chartouse)
+    {
+        float HitmodPerLuck = 0.34f;
+        if (GetSkill(106))
+        {
+            HitmodPerLuck *= 1.5f;
+        }
+        if (GetSkill(107))
+        {
+            HitmodPerLuck *= 3f;
+        }
+        return (int)(HitmodPerLuck * Chartouse.AjustedStats.Luck);
+    }
+
+    public int GetLuckyTriggerLuckModificator()
+    {
+        return GetLuckyTriggerLuckModificator(UnitCharacteristics);
     }
 
 }

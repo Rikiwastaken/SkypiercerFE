@@ -2051,6 +2051,11 @@ public class ActionsMenu : MonoBehaviour
                 damagetoaddtolist = unitdamage * 3;
                 crittoaddtolist = 1;
             }
+            else if (unit.GetComponent<UnitScript>().GetSkill(109)) //Risky Bet
+            {
+                totaldamage += 0;
+                damagetoaddtolist = 0;
+            }
             else
             {
                 totaldamage += unitdamage;
@@ -2410,6 +2415,12 @@ public class ActionsMenu : MonoBehaviour
         if (unit.GetComponent<UnitScript>().GetSkill(57) || unit.GetComponent<UnitScript>().GetSkill(72) || unit.GetComponent<UnitScript>().GetSkill(73)) // Crystal Heart, Guardian Spirit, Hero's Heir
         {
             adjustedexp = (adjustedexp * 1.1f);
+        }
+
+        if (unit.GetComponent<UnitScript>().GetSkill(111)) //Fortune's favor
+        {
+            int luckstat = (int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Luck + unit.GetComponent<UnitScript>().GetStatSkillBonus(unit).Luck;
+            adjustedexp = (adjustedexp * (1f + (luckstat * 2f / 100f)));
         }
 
         if (adjustedexp < 0)
@@ -2918,7 +2929,7 @@ public class ActionsMenu : MonoBehaviour
         int TargetLuckMod = target.GetComponent<UnitScript>().GetCritLuckModificator();
 
 
-        int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f + UnitSkillBonus.Crit + UnitLuckMod - TargetLuckMod);
+        int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f + UnitSkillBonus.Crit + UnitLuckMod - TargetLuckMod - TargetSkillBonus.CritAvoid);
 
         if (finalcritrate < 0)
         {
