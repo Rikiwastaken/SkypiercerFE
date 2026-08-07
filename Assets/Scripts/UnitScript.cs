@@ -184,6 +184,7 @@ public class UnitScript : MonoBehaviour
         public float Resistance;
         public float Speed;
         public float Dexterity;
+        public float Luck;
     }
 
 
@@ -197,6 +198,7 @@ public class UnitScript : MonoBehaviour
         public int Speed;
         public int Dexterity;
         public int Dodge;
+        public int Luck;
         public int Hit;
         public int Crit;
         public int PhysDamage;
@@ -216,6 +218,7 @@ public class UnitScript : MonoBehaviour
         public int ResistanceGrowth;
         public int SpeedGrowth;
         public int DexterityGrowth;
+        public int LuckGrowth;
     }
 
     [Serializable]
@@ -1085,7 +1088,8 @@ public class UnitScript : MonoBehaviour
                 Defense = CharacterToCopy.stats.Defense,
                 Resistance = CharacterToCopy.stats.Resistance,
                 Speed = CharacterToCopy.stats.Speed,
-                Dexterity = CharacterToCopy.stats.Dexterity
+                Dexterity = CharacterToCopy.stats.Dexterity,
+                Luck = CharacterToCopy.stats.Luck,
             },
             AjustedStats = new BaseStats
             {
@@ -1095,7 +1099,8 @@ public class UnitScript : MonoBehaviour
                 Defense = CharacterToCopy.AjustedStats.Defense,
                 Resistance = CharacterToCopy.AjustedStats.Resistance,
                 Speed = CharacterToCopy.AjustedStats.Speed,
-                Dexterity = CharacterToCopy.AjustedStats.Dexterity
+                Dexterity = CharacterToCopy.AjustedStats.Dexterity,
+                Luck = CharacterToCopy.AjustedStats.Luck,
             },
             level = CharacterToCopy.level,
             experience = CharacterToCopy.experience,
@@ -1108,7 +1113,8 @@ public class UnitScript : MonoBehaviour
                 DefenseGrowth = CharacterToCopy.growth.DefenseGrowth,
                 ResistanceGrowth = CharacterToCopy.growth.ResistanceGrowth,
                 SpeedGrowth = CharacterToCopy.growth.SpeedGrowth,
-                DexterityGrowth = CharacterToCopy.growth.DexterityGrowth
+                DexterityGrowth = CharacterToCopy.growth.DexterityGrowth,
+                LuckGrowth = CharacterToCopy.growth.LuckGrowth,
             },
             currentHP = CharacterToCopy.currentHP,
             movements = CharacterToCopy.movements,
@@ -1398,6 +1404,7 @@ public class UnitScript : MonoBehaviour
             UnitCharacteristics.AjustedStats.Resistance = (int)UnitCharacteristics.stats.Resistance / 2;
             UnitCharacteristics.AjustedStats.Speed = (int)UnitCharacteristics.stats.Speed / 2;
             UnitCharacteristics.AjustedStats.Dexterity = (int)UnitCharacteristics.stats.Dexterity / 2;
+            UnitCharacteristics.AjustedStats.Luck = (int)UnitCharacteristics.stats.Luck / 2;
         }
         else
         {
@@ -1408,6 +1415,7 @@ public class UnitScript : MonoBehaviour
             UnitCharacteristics.AjustedStats.Resistance = (int)UnitCharacteristics.stats.Resistance;
             UnitCharacteristics.AjustedStats.Speed = (int)UnitCharacteristics.stats.Speed;
             UnitCharacteristics.AjustedStats.Dexterity = (int)UnitCharacteristics.stats.Dexterity;
+            UnitCharacteristics.AjustedStats.Luck = (int)UnitCharacteristics.stats.Luck;
         }
 
         if (UnitCharacteristics.AjustedStats.HP < 0)
@@ -1437,6 +1445,10 @@ public class UnitScript : MonoBehaviour
         if (UnitCharacteristics.AjustedStats.Dexterity < 0)
         {
             UnitCharacteristics.AjustedStats.Dexterity = 0;
+        }
+        if (UnitCharacteristics.AjustedStats.Luck < 0)
+        {
+            UnitCharacteristics.AjustedStats.Luck = 0;
         }
         if (GetSkill(45)) //transparent crossbow
         {
@@ -1925,6 +1937,7 @@ public class UnitScript : MonoBehaviour
         return false;
     }
 
+    // Sets up Animator variables to play the animation corresponding to the weapon and number of attacks
     public void PlayAttackAnimation(bool doubleattack = false, bool tripleattack = false, bool healing = false, Animator otheranimator = null)
     {
 
@@ -2553,6 +2566,7 @@ public class UnitScript : MonoBehaviour
                 UnitCharacteristics.stats.Resistance = classtoapply.BaseStats.Resistance;
                 UnitCharacteristics.stats.Speed = classtoapply.BaseStats.Speed;
                 UnitCharacteristics.stats.Dexterity = classtoapply.BaseStats.Dexterity;
+                UnitCharacteristics.stats.Luck = classtoapply.BaseStats.Luck;
                 UnitCharacteristics.growth.HPGrowth = classtoapply.StatGrowth.HPGrowth;
                 UnitCharacteristics.growth.StrengthGrowth = classtoapply.StatGrowth.StrengthGrowth;
                 UnitCharacteristics.growth.PsycheGrowth = classtoapply.StatGrowth.PsycheGrowth;
@@ -2560,6 +2574,7 @@ public class UnitScript : MonoBehaviour
                 UnitCharacteristics.growth.ResistanceGrowth = classtoapply.StatGrowth.ResistanceGrowth;
                 UnitCharacteristics.growth.SpeedGrowth = classtoapply.StatGrowth.SpeedGrowth;
                 UnitCharacteristics.growth.DexterityGrowth = classtoapply.StatGrowth.DexterityGrowth;
+                UnitCharacteristics.growth.LuckGrowth = classtoapply.StatGrowth.LuckGrowth;
                 UnitCharacteristics.movements = classtoapply.movements;
                 fixedgrowth = true;
                 int numberoflevelups = UnitCharacteristics.enemyStats.desiredlevel - UnitCharacteristics.level;
@@ -2661,7 +2676,7 @@ public class UnitScript : MonoBehaviour
     }
 
 
-    public StatGrowth GetGrowthModifications()
+    public StatGrowth GetGrowthModifications(int luckstat)
     {
         StatGrowth GrowthtoApply = new StatGrowth();
         GrowthtoApply.HPGrowth = UnitCharacteristics.growth.HPGrowth;
@@ -2671,6 +2686,7 @@ public class UnitScript : MonoBehaviour
         GrowthtoApply.ResistanceGrowth = UnitCharacteristics.growth.ResistanceGrowth;
         GrowthtoApply.SpeedGrowth = UnitCharacteristics.growth.SpeedGrowth;
         GrowthtoApply.DexterityGrowth = UnitCharacteristics.growth.DexterityGrowth;
+        GrowthtoApply.LuckGrowth = UnitCharacteristics.growth.LuckGrowth;
 
         //Genius
         if (GetSkill(10))
@@ -2683,6 +2699,7 @@ public class UnitScript : MonoBehaviour
             GrowthtoApply.ResistanceGrowth += geniusgrowthboost;
             GrowthtoApply.SpeedGrowth += geniusgrowthboost;
             GrowthtoApply.DexterityGrowth += geniusgrowthboost;
+            GrowthtoApply.LuckGrowth += geniusgrowthboost;
         }
         //Crystal Heart, Guardian Spirit, Hero's Heir
         if (GetSkill(57) || GetSkill(72) || GetSkill(73))
@@ -2695,13 +2712,14 @@ public class UnitScript : MonoBehaviour
             GrowthtoApply.ResistanceGrowth += cystalheartgrowthboost;
             GrowthtoApply.SpeedGrowth += cystalheartgrowthboost;
             GrowthtoApply.DexterityGrowth += cystalheartgrowthboost;
+            GrowthtoApply.LuckGrowth += cystalheartgrowthboost;
         }
 
         //JackOfAllTrades
         if (GetSkill(25))
         {
-            int average = GrowthtoApply.HPGrowth + GrowthtoApply.PsycheGrowth + GrowthtoApply.StrengthGrowth + GrowthtoApply.DefenseGrowth + GrowthtoApply.ResistanceGrowth + GrowthtoApply.SpeedGrowth + GrowthtoApply.DexterityGrowth;
-            average = average / 7;
+            int average = GrowthtoApply.HPGrowth + GrowthtoApply.PsycheGrowth + GrowthtoApply.StrengthGrowth + GrowthtoApply.DefenseGrowth + GrowthtoApply.ResistanceGrowth + GrowthtoApply.SpeedGrowth + GrowthtoApply.DexterityGrowth + GrowthtoApply.LuckGrowth;
+            average = average / 8;
 
             GrowthtoApply.HPGrowth = average;
             GrowthtoApply.PsycheGrowth = average;
@@ -2710,7 +2728,21 @@ public class UnitScript : MonoBehaviour
             GrowthtoApply.ResistanceGrowth = average;
             GrowthtoApply.SpeedGrowth = average;
             GrowthtoApply.DexterityGrowth = average;
+            GrowthtoApply.LuckGrowth = average;
         }
+
+        // Luck Growth Increase
+        float growthPerLuckPoint = 0.25f;
+        int GrowthBonus = (int)(growthPerLuckPoint * luckstat);
+
+        GrowthtoApply.HPGrowth += GrowthBonus;
+        GrowthtoApply.PsycheGrowth += GrowthBonus;
+        GrowthtoApply.StrengthGrowth += GrowthBonus;
+        GrowthtoApply.DefenseGrowth += GrowthBonus;
+        GrowthtoApply.ResistanceGrowth += GrowthBonus;
+        GrowthtoApply.SpeedGrowth += GrowthBonus;
+        GrowthtoApply.DexterityGrowth += GrowthBonus;
+        GrowthtoApply.LuckGrowth += GrowthBonus;
 
         int bonussize = 20;
         if (GetFirstWeapon() != null && GetFirstWeapon().type != null)
@@ -2787,11 +2819,11 @@ public class UnitScript : MonoBehaviour
             DataScript.instance.SkillCoins++;
         }
 
-        BaseStats statsbeforelevelup = new BaseStats() { HP = UnitCharacteristics.stats.HP, Strength = UnitCharacteristics.stats.Strength, Psyche = UnitCharacteristics.stats.Psyche, Defense = UnitCharacteristics.stats.Defense, Resistance = UnitCharacteristics.stats.Resistance, Speed = UnitCharacteristics.stats.Speed, Dexterity = UnitCharacteristics.stats.Dexterity };
+        BaseStats statsbeforelevelup = new BaseStats() { HP = UnitCharacteristics.stats.HP, Strength = UnitCharacteristics.stats.Strength, Psyche = UnitCharacteristics.stats.Psyche, Defense = UnitCharacteristics.stats.Defense, Resistance = UnitCharacteristics.stats.Resistance, Speed = UnitCharacteristics.stats.Speed, Dexterity = UnitCharacteristics.stats.Dexterity, Luck = UnitCharacteristics.stats.Luck };
         previousStats = statsbeforelevelup;
 
         List<int> lvlupresult = new List<int>();
-        StatGrowth GrowthtoApply = GetGrowthModifications();
+        StatGrowth GrowthtoApply = GetGrowthModifications((int)UnitCharacteristics.AjustedStats.Luck);
 
 
 
@@ -2924,6 +2956,23 @@ public class UnitScript : MonoBehaviour
                 lvlupresult.Add(0);
             }
 
+            float oldLuck = UnitCharacteristics.stats.Luck;
+
+            UnitCharacteristics.stats.Luck += (GrowthtoApply.LuckGrowth / 100f);
+
+            if ((int)oldLuck < (int)(UnitCharacteristics.stats.Luck))
+            {
+                lvlupresult.Add(1);
+            }
+            else if ((int)oldLuck > (int)(UnitCharacteristics.stats.Luck))
+            {
+                lvlupresult.Add(-1);
+            }
+            else
+            {
+                lvlupresult.Add(0);
+            }
+
         }
         else
         {
@@ -2959,6 +3008,10 @@ public class UnitScript : MonoBehaviour
             float Dexteritygain = GetLevelUpStatsChange(GrowthtoApply.DexterityGrowth, levelValues.DexterityRandomValue);
             UnitCharacteristics.stats.Dexterity += Dexteritygain;
             lvlupresult.Add((int)Dexteritygain);
+
+            float Luckgain = GetLevelUpStatsChange(GrowthtoApply.LuckGrowth, levelValues.LuckRandomValue);
+            UnitCharacteristics.stats.Luck += Luckgain;
+            lvlupresult.Add((int)Luckgain);
         }
 
         string levelupstring = UnitCharacteristics.name + "  levelup : ";
@@ -3429,6 +3482,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.Defense += 7;
                 statbonuses.Speed += 7;
                 statbonuses.Dexterity += 7;
+                statbonuses.Luck += 7;
             }
         }
         //In Great Shape
@@ -3491,6 +3545,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.Defense += (int)(UnitCharacteristics.AjustedStats.Defense * 0.25f);
                 statbonuses.Speed += (int)(UnitCharacteristics.AjustedStats.Speed * 0.25f);
                 statbonuses.Dexterity += (int)(UnitCharacteristics.AjustedStats.Dexterity * 0.25f);
+                statbonuses.Luck += (int)(UnitCharacteristics.AjustedStats.Luck * 0.25f);
             }
         }
         // Solitary
@@ -3542,6 +3597,7 @@ public class UnitScript : MonoBehaviour
             statbonuses.Defense += 1 * unitkilled;
             statbonuses.Speed += 1 * unitkilled;
             statbonuses.Dexterity += 1 * unitkilled;
+            statbonuses.Luck += 1 * unitkilled;
         }
 
         //Survivor
@@ -3553,6 +3609,7 @@ public class UnitScript : MonoBehaviour
             statbonuses.Defense += (SurvivorStacks / 3);
             statbonuses.Speed += (SurvivorStacks / 3);
             statbonuses.Dexterity += (SurvivorStacks / 3);
+            statbonuses.Luck += (SurvivorStacks / 3);
         }
         //Bravery
         if (GetSkill(36))
@@ -3569,6 +3626,7 @@ public class UnitScript : MonoBehaviour
                     statbonuses.Defense += difference / 2;
                     statbonuses.Speed += difference / 2;
                     statbonuses.Dexterity += difference / 2;
+                    statbonuses.Luck += difference / 2;
                 }
             }
 
@@ -3619,6 +3677,7 @@ public class UnitScript : MonoBehaviour
             statbonuses.Defense += closepalls / 3;
             statbonuses.Speed += 5 * closepalls / 3;
             statbonuses.Dexterity += closepalls / 3;
+            statbonuses.Luck += closepalls / 3;
 
         }
 
@@ -3965,6 +4024,7 @@ public class UnitScript : MonoBehaviour
             examodeskillbonus.Defense = (int)(statbonuses.Defense * statmult);
             examodeskillbonus.Speed = (int)(statbonuses.Speed * statmult);
             examodeskillbonus.Dexterity = (int)(statbonuses.Dexterity * statmult);
+            examodeskillbonus.Luck = (int)(statbonuses.Luck * statmult);
 
             if (UnitCharacteristics.name.ToLower() == "zack")
             {
@@ -3988,6 +4048,7 @@ public class UnitScript : MonoBehaviour
         statbonuses.Defense += battalionskillbonus.Defense + examodeskillbonus.Defense;
         statbonuses.Speed += battalionskillbonus.Speed + examodeskillbonus.Speed;
         statbonuses.Dexterity += battalionskillbonus.Dexterity + examodeskillbonus.Dexterity;
+        statbonuses.Luck += battalionskillbonus.Luck + examodeskillbonus.Luck;
 
         // Status Effect Bonus/Malus
 
@@ -3999,6 +4060,7 @@ public class UnitScript : MonoBehaviour
             statbonuses.Resistance -= 5;
             statbonuses.Dexterity -= 5;
             statbonuses.Speed -= 5;
+            statbonuses.Luck -= 5;
         }
 
         if (UnitCharacteristics.statusEffects.PowerTurns > 0)
@@ -4009,6 +4071,7 @@ public class UnitScript : MonoBehaviour
             statbonuses.Resistance += 5;
             statbonuses.Dexterity += 5;
             statbonuses.Speed += 5;
+            statbonuses.Luck += 5;
         }
 
         return statbonuses;
@@ -4223,6 +4286,39 @@ public class UnitScript : MonoBehaviour
 
         // add logic to reset visuals.
 
+    }
+
+    public int GetHitLuckModificator(Character Chartouse)
+    {
+        float HitmodPerLuck = 0.5f;
+        return (int)(HitmodPerLuck * Chartouse.AjustedStats.Luck);
+    }
+
+    public int GetHitLuckModificator()
+    {
+        return GetHitLuckModificator(UnitCharacteristics);
+    }
+
+    public int GetTriggerLuckModificator(Character Chartouse)
+    {
+        float HitmodPerLuck = 0.5f;
+        return (int)(HitmodPerLuck * Chartouse.AjustedStats.Luck);
+    }
+
+    public int GetTriggerLuckModificator()
+    {
+        return GetTriggerLuckModificator(UnitCharacteristics);
+    }
+
+    public int GetCritLuckModificator(Character Chartouse)
+    {
+        float HitmodPerLuck = 0.25f;
+        return (int)(HitmodPerLuck * Chartouse.AjustedStats.Luck);
+    }
+
+    public int GetCritLuckModificator()
+    {
+        return GetHitLuckModificator(UnitCharacteristics);
     }
 
 }

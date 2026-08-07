@@ -253,6 +253,7 @@ public class MinimapScript : MonoBehaviour
 
                 }
             }
+            minimapBackgroundTexture.Apply();
         }
     }
 

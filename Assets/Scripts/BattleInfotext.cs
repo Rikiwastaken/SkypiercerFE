@@ -53,7 +53,8 @@ public class BattleInfotext : MonoBehaviour
     public TextMeshProUGUI StrAndPsyTMP;
     public TextMeshProUGUI DefAndResTMP;
     public TextMeshProUGUI SpdAndDexTMP;
-    public TextMeshProUGUI DmgAndMovTMP;
+    public TextMeshProUGUI LuckAndMovTMP;
+    public TextMeshProUGUI DmgTMP;
     public Image EquipedWeaponIco;
     public TextMeshProUGUI equipedweaponText;
     public Image CharacterSprite;
@@ -278,15 +279,23 @@ public class BattleInfotext : MonoBehaviour
                 string dexcolorstring = getcolorstring(statsmods.Dexterity);
                 string spdcolorstring = getcolorstring(statsmods.Speed);
 
+
+
                 SpdAndDexTMP.text = "Dex: " + dexcolorstring + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity) + "</color>\n";
 
                 SpdAndDexTMP.text += "Spd: " + spdcolorstring + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed);
+
+
+                string luckcolorstring = getcolorstring(statsmods.Luck);
+
+                LuckAndMovTMP.text = "Lck: " + luckcolorstring + (selectedunitCharacter.AjustedStats.Luck + statsmods.Luck) + "</color>\n";
+                LuckAndMovTMP.text += "Mvt: " + (selectedunitCharacter.movements - 1);
 
                 (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(selectedunit, true);
 
                 string dmgcolorstring = getcolorstring(damagebonus);
 
-                DmgAndMovTMP.text = "Dmg: " + dmgcolorstring + BaseDamage + "</color>\nMvt: " + (selectedunitCharacter.movements - 1);
+                DmgTMP.text = "" + dmgcolorstring + BaseDamage;
 
                 equipment EquipedWeapon = selectedunit.GetComponent<UnitScript>().GetFirstWeapon();
                 EquipedWeaponIco.sprite = GetWeaponIcons(EquipedWeapon.type);

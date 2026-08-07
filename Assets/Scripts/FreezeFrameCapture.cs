@@ -417,6 +417,20 @@ public class FreezeFrameCapture : MonoBehaviour
             statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
             statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
             StatTextBG[6].text = statincreaseBG;
+            if (levelip[7] == 0)
+            {
+                StatIncreaseTxt = "Lck : " + characterWhoLeveledUp.AjustedStats.Luck + " <sprite=16> " + characterWhoLeveledUp.AjustedStats.Luck;
+            }
+            else
+            {
+                StatIncreaseTxt = "Lck : " + (characterWhoLeveledUp.AjustedStats.Luck - levelip[7]) + " <sprite=17> <color=yellow>" + characterWhoLeveledUp.AjustedStats.Luck;
+            }
+            StatTexts[7].text = StatIncreaseTxt;
+            statincreaseBG = StatIncreaseTxt;
+            statincreaseBG = statincreaseBG.Replace("<sprite=17>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<sprite=16>", "<sprite=18>");
+            statincreaseBG = statincreaseBG.Replace("<color=yellow>", "");
+            StatTextBG[7].text = statincreaseBG;
         }
 
 
@@ -426,7 +440,7 @@ public class FreezeFrameCapture : MonoBehaviour
         //right.rectTransform.sizeDelta = new Vector2(right.rectTransform.sizeDelta.x / 2, right.rectTransform.sizeDelta.y);
 
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i <= 7; i++)
         {
             StatTexts[i].rectTransform.anchoredPosition = BaseStatPosition + OffsetPerIndex * i;
             StartCoroutine(MoveStatCoroutine(i, i * timebetweenStats));
@@ -530,7 +544,7 @@ public class FreezeFrameCapture : MonoBehaviour
         CharacterSprite.SetActive(false);
         CharacterName.gameObject.SetActive(false);
         CharacterNameBG.gameObject.SetActive(false);
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i <= 7; i++)
         {
             StatTexts[i].rectTransform.anchoredPosition = BaseStatPosition + OffsetPerIndex * i;
             StatTextBG[i].rectTransform.anchoredPosition = BaseStatPosition + OffsetPerIndex * i + BGOffSet;

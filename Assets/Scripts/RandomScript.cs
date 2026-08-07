@@ -36,6 +36,7 @@ public class RandomScript : MonoBehaviour
         public int ResistanceRandomValue;
         public int SpeedRandomValue;
         public int DexterityRandomValue;
+        public int LuckRandomValue;
     }
 
     public List<RandomLevelValues> LevelValues;
@@ -87,6 +88,7 @@ public class RandomScript : MonoBehaviour
                     newlevelvalues.ResistanceRandomValue = CalculateAValue();
                     newlevelvalues.SpeedRandomValue = CalculateAValue();
                     newlevelvalues.DexterityRandomValue = CalculateAValue();
+                    newlevelvalues.LuckRandomValue = CalculateAValue();
                     levelValues.Add(newlevelvalues);
                 }
             }

@@ -2015,6 +2015,8 @@ public class ActionsMenu : MonoBehaviour
 
             equipment weapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
 
+            int LuckMod = unit.GetComponent<UnitScript>().GetTriggerLuckModificator();
+
             if (weapon.type.ToLower() == "dagger")
             {
                 int personnalityvalue = unit.GetComponent<RandomScript>().GetPersonalityValue();
@@ -2023,7 +2025,7 @@ public class ActionsMenu : MonoBehaviour
                 {
                     variation = 0.75f;
                 }
-                if (personnalityvalue <= 50)
+                if (personnalityvalue <= 50 + LuckMod)
                 {
                     unitdamage = (int)((float)(unitdamage) * (1f + variation));
                     if (weapon.Modifier != null && weapon.Modifier.ToLower() == "deadly")
@@ -2188,8 +2190,9 @@ public class ActionsMenu : MonoBehaviour
             }
             if (unitGO.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
             {
+                int LuckMod = unitGO.GetComponent<UnitScript>().GetTriggerLuckModificator();
                 int randomvalue = unitGO.GetComponent<RandomScript>().GetPersonalityValue();
-                if (randomvalue <= 15)
+                if (randomvalue <= 15 + LuckMod)
                 {
                     unitChar.currentHP = 1;
                     unitGO.GetComponent<UnitScript>().AddNumber(0, true, "Guardian Spirit");
@@ -2201,8 +2204,9 @@ public class ActionsMenu : MonoBehaviour
                 GameObject Leader = unitGO.GetComponent<UnitScript>().GetBattallionLeader();
                 if (Leader != null && Leader.GetComponent<UnitScript>().UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
                 {
+                    int LuckMod = unitGO.GetComponent<UnitScript>().GetTriggerLuckModificator();
                     int randomvalue = unitGO.GetComponent<RandomScript>().GetPersonalityValue();
-                    if (randomvalue <= 50)
+                    if (randomvalue <= 50 + LuckMod)
                     {
                         unitChar.currentHP = 1;
                         unitGO.GetComponent<UnitScript>().AddNumber(0, true, "Kira's Intervention");
@@ -2813,8 +2817,11 @@ public class ActionsMenu : MonoBehaviour
 
         int spdtarget = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed + (int)targetweaponstatbonus.Dexterity;
 
+        int UnitLuckMod = unit.GetComponent<UnitScript>().GetHitLuckModificator();
 
-        int finalhitrate = (int)(hitrateweapon + (dexunit - spdtarget) * 0.2f) + tilebonus + UnitSkillBonus.Hit - TargetSkillBonus.Dodge;
+        int TargetLuckMod = target.GetComponent<UnitScript>().GetHitLuckModificator();
+
+        int finalhitrate = (int)(hitrateweapon + (dexunit - spdtarget) * 0.2f) + tilebonus + UnitSkillBonus.Hit + UnitLuckMod - TargetSkillBonus.Dodge - TargetLuckMod;
 
         if (finalhitrate < 0)
         {
@@ -2906,8 +2913,12 @@ public class ActionsMenu : MonoBehaviour
 
         int spdtarget = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed + (int)targetweaponstatbonus.Speed;
 
+        int UnitLuckMod = unit.GetComponent<UnitScript>().GetCritLuckModificator();
 
-        int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f + UnitSkillBonus.Crit);
+        int TargetLuckMod = target.GetComponent<UnitScript>().GetCritLuckModificator();
+
+
+        int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f + UnitSkillBonus.Crit + UnitLuckMod - TargetLuckMod);
 
         if (finalcritrate < 0)
         {
