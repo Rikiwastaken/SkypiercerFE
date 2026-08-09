@@ -27,6 +27,8 @@ public class UnitDeploymentButton : MonoBehaviour
 
     private Image ButtonBGImage;
 
+    public Image AnnexImage;
+
     public Color ImageDefaultColor;
 
     public Color ZackColor;

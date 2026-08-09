@@ -37,6 +37,7 @@ public class SaveManager : MonoBehaviour
         public float secondselapsed;
         public bool inCamp;
         public List<int> completedSideStories;
+        public List<int> SkillsAlreadySeenInShop;
     }
 
     [Serializable]
@@ -357,6 +358,7 @@ public class SaveManager : MonoBehaviour
             DS.SidestoryFlagList = SaveClasses[slot].SideStoryFlagsList;
             DS.SkillCoins = SaveClasses[slot].SkillCoins;
             DS.CompletedSideStories = SaveClasses[slot].completedSideStories;
+            DS.SkillsAlreadySeenInShop = SaveClasses[slot].SkillsAlreadySeenInShop;
         }
         else if (slot == -1)
         {
@@ -380,6 +382,7 @@ public class SaveManager : MonoBehaviour
             }
             DS.CompletedSideStories = new List<int>();
             DS.SkillCoins = 0;
+            DS.SkillsAlreadySeenInShop = new List<int>();
         }
 
     }
@@ -438,7 +441,8 @@ public class SaveManager : MonoBehaviour
             ChapterFlagsList = DS.ChapterFlagsList,
             SideStoryFlagsList = DS.SidestoryFlagList,
             SkillCoins = DS.SkillCoins,
-            completedSideStories = DS.CompletedSideStories
+            completedSideStories = DS.CompletedSideStories,
+            SkillsAlreadySeenInShop = DS.SkillsAlreadySeenInShop
         };
 
         string json = JsonUtility.ToJson(save, true);

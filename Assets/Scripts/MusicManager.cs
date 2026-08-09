@@ -109,7 +109,6 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
-        actionsMenu = ActionsMenu.instance;
         beforecombatmusicvol = BeforeCombat.volume;
         SaveManager = FindAnyObjectByType<SaveManager>();
 
@@ -210,6 +209,12 @@ public class MusicManager : MonoBehaviour
 
     private void Update()
     {
+
+        if (actionsMenu == null)
+        {
+            actionsMenu = ActionsMenu.instance;
+        }
+
         string currentscenename = SceneManager.GetActiveScene().name;
         if (currentscenename.Contains("SideStory") || currentscenename.Contains("Chapter") || currentscenename.Contains("Prologue") || currentscenename.Contains("TestMap"))
         {

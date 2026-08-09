@@ -35,6 +35,7 @@ public class DataScript : MonoBehaviour
 
     public List<ChapterFlags> ChapterFlagsList;
     public List<ChapterFlags> SidestoryFlagList;
+    public List<int> SkillsAlreadySeenInShop;
     public List<int> CompletedSideStories;
 
 

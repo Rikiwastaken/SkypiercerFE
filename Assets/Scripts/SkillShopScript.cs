@@ -70,7 +70,7 @@ public class SkillShopScript : MonoBehaviour
         if (_TelekinesisInputAction.WasPressedThisFrame())
         {
 
-            if (CurrentSort < 7)
+            if (CurrentSort < 8)
             {
                 CurrentSort++;
 
@@ -116,7 +116,7 @@ public class SkillShopScript : MonoBehaviour
                 InitializeInventoryText(CurrentSelected.GetComponent<UnitDeploymentButton>());
                 UpdateSkillDescriptionText(CurrentSelected.GetComponent<UnitDeploymentButton>());
             }
-
+            MarkAsSeen(CurrentSelected.GetComponent<UnitDeploymentButton>());
             if (_ActivateAction.IsPressed() && DataScript.instance.SkillCoins >= necessarycost)
             {
                 float ratio = 1f - (timeforbuy - Time.time) / timenecessarytobuyitem;
@@ -272,6 +272,24 @@ public class SkillShopScript : MonoBehaviour
         }
     }
 
+    /// <summary>/ Function to update the Save Class to save the fact that the skill is no longer new.
+    /// </summary>
+    private void MarkAsSeen(UnitDeploymentButton SkillButton)
+    {
+        if (SkillButton.Item != null)
+        {
+            int SkillID = SkillButton.Item.ID;
+            if (SkillID > 0 && SkillButton.AnnexImage.gameObject.activeSelf)
+            {
+                if (!DataScript.instance.SkillsAlreadySeenInShop.Contains(SkillID))
+                {
+                    DataScript.instance.SkillsAlreadySeenInShop.Add(SkillID);
+                }
+                SkillButton.AnnexImage.gameObject.SetActive(false);
+            }
+        }
+    }
+
     /// <summary>
     /// Function to update the inventory text when selecting a skill, shows how many of that skill the player has in their inventory
     /// </summary>
@@ -324,8 +342,24 @@ public class SkillShopScript : MonoBehaviour
         {
             Buttons[i].GetComponent<UnitDeploymentButton>().Item = null;
         }
-
-
+        List<int> skillsalreadyseen = DataScript.instance.SkillsAlreadySeenInShop;
+        foreach (Transform child in ButtonHolder)
+        {
+            if (child.GetComponent<UnitDeploymentButton>().Item == null || skillsalreadyseen.Contains(child.GetComponent<UnitDeploymentButton>().Item.ID))
+            {
+                if (child.GetComponent<UnitDeploymentButton>().AnnexImage.gameObject.activeSelf)
+                {
+                    child.GetComponent<UnitDeploymentButton>().AnnexImage.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                if (!child.GetComponent<UnitDeploymentButton>().AnnexImage.gameObject.activeSelf)
+                {
+                    child.GetComponent<UnitDeploymentButton>().AnnexImage.gameObject.SetActive(true);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -372,15 +406,19 @@ public class SkillShopScript : MonoBehaviour
     {
         switch (type)
         {
-            case 0: // alphabetically
+            case 0: //Sort by New
+                OrderByNew();
+                SortText.text = "Sort: New Skills First";
+                break;
+            case 1: // alphabetically
                 SkillsToShow.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.OrdinalIgnoreCase));
                 SortText.text = "Sort: A...Z";
                 break;
-            case 1: // reverse alphabetically
+            case 2: // reverse alphabetically
                 SkillsToShow.Sort((a, b) => string.Compare(b.name, a.name, StringComparison.OrdinalIgnoreCase));
                 SortText.text = "Sort: Z...A";
                 break;
-            case 2: // commands first
+            case 3: // commands first
                 SkillsToShow.Sort((a, b) =>
                 {
                     // Commands first
@@ -393,7 +431,7 @@ public class SkillShopScript : MonoBehaviour
                 });
                 SortText.text = "Sort: Commands First";
                 break;
-            case 3: // commands last
+            case 4: // commands last
                 SkillsToShow.Sort((a, b) =>
                 {
                     // Commands last
@@ -406,15 +444,15 @@ public class SkillShopScript : MonoBehaviour
                 });
                 SortText.text = "Sort: Commands Last";
                 break;
-            case 4: // owned first
+            case 5: // owned first
                 OrderByOwned();
                 SortText.text = "Sort: Owned First";
                 break;
-            case 5: // owned last
+            case 6: // owned last
                 OrderByOwned(true);
                 SortText.text = "Sort: Owned Last";
                 break;
-            case 6: //cost ascending
+            case 7: //cost ascending
                 SkillsToShow.Sort((a, b) =>
                 {
                     // Cost ascending
@@ -429,7 +467,7 @@ public class SkillShopScript : MonoBehaviour
                 });
                 SortText.text = "Sort: Cost Asc";
                 break;
-            case 7: //cost descending
+            case 8: //cost descending
                 SkillsToShow.Sort((a, b) =>
                 {
                     // Cost ascending
@@ -444,6 +482,7 @@ public class SkillShopScript : MonoBehaviour
                 });
                 SortText.text = "Sort: Cost Desc";
                 break;
+
         }
         skillwindowindex = 0;
         InitializeSkillButtons();
@@ -514,6 +553,31 @@ public class SkillShopScript : MonoBehaviour
             {
                 SkillsToShow.Add(skill);
             }
+        }
+    }
+
+    private void OrderByNew()
+    {
+        List<Skill> newskills = new List<Skill>();
+        List<Skill> oldskills = new List<Skill>();
+        List<int> skillseen = DataScript.instance.SkillsAlreadySeenInShop;
+        SkillsToShow.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.OrdinalIgnoreCase));
+        foreach (Skill skill in SkillsToShow)
+        {
+            if (!skillseen.Contains(skill.ID))
+            {
+                newskills.Add(skill);
+            }
+            else
+            {
+                oldskills.Add(skill);
+            }
+
+        }
+        SkillsToShow = newskills;
+        foreach (Skill skill in oldskills)
+        {
+            SkillsToShow.Add(skill);
         }
     }
 
