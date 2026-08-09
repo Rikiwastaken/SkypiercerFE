@@ -989,7 +989,7 @@ public class UnitScript : MonoBehaviour
             foreach (GameObject otherunit in charactertoapply)
             {
                 Character otherunitchar = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
-                if (Mathf.Abs(otherunitchar.position.x - UnitCharacteristics.position.x) <= 1 && Mathf.Abs(otherunitchar.position.y - UnitCharacteristics.position.y) <= 1)
+                if (otherunitchar.currentHP < (int)otherunitchar.AjustedStats.HP && Mathf.Abs(otherunitchar.position.x - UnitCharacteristics.position.x) <= 1 && Mathf.Abs(otherunitchar.position.y - UnitCharacteristics.position.y) <= 1)
                 {
                     otherunit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(otherunitchar.AjustedStats.HP * 0.1f), (int)otherunitchar.AjustedStats.HP - otherunitchar.currentHP), true, "Medic");
                     otherunitchar.currentHP += (int)(otherunitchar.AjustedStats.HP * 0.1f);
