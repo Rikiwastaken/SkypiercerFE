@@ -1253,8 +1253,8 @@ public class AttackTurnScript : MonoBehaviour
                 if (unit1.GetComponent<RandomScript>().GetPersonalityValue() <= luckstat + unit1.GetComponent<UnitScript>().GetTriggerLuckModificator())
                 {
                     int unit1previousHP = charunit1.currentHP;
-                    charunit1.currentHP = charunit2.currentHP;
-                    charunit2.currentHP = unit1previousHP;
+                    charunit1.currentHP = Mathf.Min(charunit2.currentHP, (int)charunit1.AjustedStats.HP);
+                    charunit2.currentHP = Mathf.Min(unit1previousHP, (int)charunit2.AjustedStats.HP); ;
                     unit1.GetComponent<UnitScript>().AddNumber(charunit1.currentHP, true, "Twist of Fate");
                     unit2.GetComponent<UnitScript>().AddNumber(charunit2.currentHP, false, "Twist of Fate");
                 }
