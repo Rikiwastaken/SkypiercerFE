@@ -31,9 +31,7 @@ public class WorldMapManager : MonoBehaviour
 
     public Transform StoryPointTrsfrm;
 
-    public GameObject FastTravelMenu;
-    public Transform FastTravelMenuButtons;
-    public List<int> FastTravelMenuIDList;
+
 
     private int faststravelmenudelay;
     public bool selectedsidestory;
@@ -51,12 +49,16 @@ public class WorldMapManager : MonoBehaviour
 
     public float mindistforstorypoints;
 
-
+    [Header("Fast Travel")]
+    public GameObject FastTravelMenu;
+    public Transform FastTravelMenuButtons;
+    public List<int> FastTravelMenuIDList;
     private bool MainMissionsSelected = true;
     public GameObject MainMissionBG;
     public GameObject SideMissionBG;
     public Transform SideStoryTransform;
     private List<int> accessibleSideStories;
+    public List<GameObject> ButtonNewImages;
 
     private void Awake()
     {
@@ -384,6 +386,14 @@ public class WorldMapManager : MonoBehaviour
 
             }
 
+            foreach (GameObject Image in ButtonNewImages)
+            {
+                if (Image.activeSelf)
+                {
+                    Image.SetActive(false);
+                }
+            }
+
             FastTravelMenuButtons.GetChild(0).GetComponent<Button>().Select();
         }
         else
@@ -395,13 +405,34 @@ public class WorldMapManager : MonoBehaviour
 
                 if (i < accessibleSideStories.Count)
                 {
+                    int SideStoryID = accessibleSideStories[i];
+
                     FastTravelMenuIDList.Add(accessibleSideStories[i]);
-                    FastTravelMenuButtons.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = SideStoryNames[accessibleSideStories[i]];
+                    FastTravelMenuButtons.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = SideStoryNames[SideStoryID];
+                    if (!DataScript.instance.CompletedSideStories.Contains(SideStoryID))
+                    {
+                        if (!ButtonNewImages[i].activeSelf)
+                        {
+                            ButtonNewImages[i].SetActive(true);
+                        }
+
+                    }
+                    else
+                    {
+                        if (ButtonNewImages[i].activeSelf)
+                        {
+                            ButtonNewImages[i].SetActive(false);
+                        }
+                    }
                 }
                 else
                 {
                     FastTravelMenuIDList.Add(-1);
                     FastTravelMenuButtons.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = "";
+                    if (ButtonNewImages[i].activeSelf)
+                    {
+                        ButtonNewImages[i].SetActive(false);
+                    }
                 }
 
             }
