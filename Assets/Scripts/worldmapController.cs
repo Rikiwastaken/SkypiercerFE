@@ -26,6 +26,7 @@ public class worldmapController : MonoBehaviour
     public int isshippingCounter;
     public float waterwheelrotationpersecond;
     public Transform Waterwheel;
+    public int minchapterforship;
 
     public GameObject ShipModel;
     public GameObject HumanModel;
@@ -34,12 +35,13 @@ public class worldmapController : MonoBehaviour
 
     private InputAction _MoveAction;
     private InputAction _MoveCamAction;
+    public GameObject WaterBlocker;
     private void Awake()
     {
         instance = this;
     }
 
-    private List<string> collidingtags = new List<string>();
+    public List<string> collidingtags = new List<string>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,6 +51,10 @@ public class worldmapController : MonoBehaviour
         playermodel.GetComponent<Animator>().SetBool("WorldMap", true);
         _MoveAction = InputSystem.actions.FindAction("Movement");
         _MoveCamAction = InputSystem.actions.FindAction("MoveCam");
+        if (DataScript.instance != null && DataScript.instance.GetComponent<SaveManager>().maxchapterreached >= minchapterforship)
+        {
+            WaterBlocker.SetActive(false);
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -145,13 +151,16 @@ public class worldmapController : MonoBehaviour
     private void LateUpdate()
     {
 
-        if (collidingtags.Contains("Sea"))
+        if (!collidingtags.Contains("Ground"))
         {
-            isshippingCounter = 10;
+            if (DataScript.instance != null && DataScript.instance.GetComponent<SaveManager>().maxchapterreached >= minchapterforship)
+            {
+                isshippingCounter++;
+            }
         }
         else
         {
-            isshippingCounter--;
+            isshippingCounter = -(int)(0.5f / Time.deltaTime);
         }
 
         if (isshippingCounter > 0)
