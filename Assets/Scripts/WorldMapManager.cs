@@ -32,6 +32,7 @@ public class WorldMapManager : MonoBehaviour
     public Transform StoryPointTrsfrm;
 
     public GameObject FastTravelMenu;
+    public Transform FastTravelMenuButtons;
     public List<int> FastTravelMenuIDList;
 
     private int faststravelmenudelay;
@@ -49,6 +50,13 @@ public class WorldMapManager : MonoBehaviour
     public Transform SideStoryPoints;
 
     public float mindistforstorypoints;
+
+
+    private bool MainMissionsSelected = true;
+    public GameObject MainMissionBG;
+    public GameObject SideMissionBG;
+    public Transform SideStoryTransform;
+    private List<int> accessibleSideStories;
 
     private void Awake()
     {
@@ -84,7 +92,7 @@ public class WorldMapManager : MonoBehaviour
                 }
             }
         }
-
+        CalculateAccessibleSidestories();
 
     }
 
@@ -223,21 +231,38 @@ public class WorldMapManager : MonoBehaviour
         if (FastTravelMenu.activeSelf)
         {
 
+            Vector2 MoveValue = _MoveAction.ReadValue<Vector2>();
+            Vector2 CamValue = _CamAction.ReadValue<Vector2>();
+
+
             if (EventSystem.current.currentSelectedGameObject == null)
             {
-                EventSystem.current.SetSelectedGameObject(FastTravelMenu.transform.GetChild(0).gameObject);
+                EventSystem.current.SetSelectedGameObject(FastTravelMenuButtons.GetChild(0).gameObject);
             }
+
+
+            if ((MoveValue.x > 0 || CamValue.x > 0) && MainMissionsSelected)
+            {
+                MainMissionsSelected = false;
+                InitializeFastTravelList();
+            }
+            else if ((MoveValue.x < 0 || CamValue.x < 0) && !MainMissionsSelected)
+            {
+                MainMissionsSelected = true;
+                InitializeFastTravelList();
+            }
+
+
 
             if (faststravelmenudelay <= 0)
             {
-                Vector2 MoveValue = _MoveAction.ReadValue<Vector2>();
-                Vector2 CamValue = _CamAction.ReadValue<Vector2>();
-                if ((MoveValue.y > 0f || CamValue.y > 0f) && EventSystem.current.currentSelectedGameObject == FastTravelMenu.transform.GetChild(0).gameObject)
+
+                if ((MoveValue.y > 0f || CamValue.y > 0f) && EventSystem.current.currentSelectedGameObject == FastTravelMenuButtons.GetChild(0).gameObject)
                 {
                     IncreaseList();
                     faststravelmenudelay = (int)(0.1f / Time.deltaTime);
                 }
-                if ((MoveValue.y < 0f || CamValue.y < 0f) && EventSystem.current.currentSelectedGameObject == FastTravelMenu.transform.GetChild(FastTravelMenu.transform.childCount - 1).gameObject)
+                if ((MoveValue.y < 0f || CamValue.y < 0f) && EventSystem.current.currentSelectedGameObject == FastTravelMenuButtons.GetChild(FastTravelMenu.transform.childCount - 1).gameObject)
                 {
 
                     DecreaseList();
@@ -248,6 +273,29 @@ public class WorldMapManager : MonoBehaviour
             if (_CancelAction.IsPressed())
             {
                 FastTravelMenu.SetActive(false);
+            }
+
+            if (MainMissionsSelected)
+            {
+                if (!MainMissionBG.activeSelf)
+                {
+                    MainMissionBG.SetActive(true);
+                }
+                if (SideMissionBG.activeSelf)
+                {
+                    SideMissionBG.SetActive(false);
+                }
+            }
+            else
+            {
+                if (MainMissionBG.activeSelf)
+                {
+                    MainMissionBG.SetActive(false);
+                }
+                if (!SideMissionBG.activeSelf)
+                {
+                    SideMissionBG.SetActive(true);
+                }
             }
 
         }
@@ -262,6 +310,19 @@ public class WorldMapManager : MonoBehaviour
 
     }
 
+
+    private void CalculateAccessibleSidestories()
+    {
+        int maxchapterreached = DataScript.instance.GetComponent<SaveManager>().maxchapterreached;
+        accessibleSideStories = new List<int>();
+        foreach (Transform child in SideStoryTransform.transform)
+        {
+            if (child.GetComponent<StoryPointScript>().minchapterforSideStory <= maxchapterreached)
+            {
+                accessibleSideStories.Add(child.GetComponent<StoryPointScript>().chapterID);
+            }
+        }
+    }
 
     private void DetectNearestStoryPoint()
     {
@@ -287,8 +348,6 @@ public class WorldMapManager : MonoBehaviour
             }
         }
 
-        Debug.Log("closest = " + closest.name + " distance: " + mindist);
-
         if (closest != null && mindist <= mindistforstorypoints)
         {
             selectedsidestory = closest.GetComponent<StoryPointScript>().isSideStory;
@@ -305,30 +364,57 @@ public class WorldMapManager : MonoBehaviour
     {
 
         FastTravelMenu.SetActive(true);
-
-        FastTravelMenuIDList = new List<int>();
-
-        for (int i = 0; i < FastTravelMenu.transform.childCount; i++)
+        int maxchapterreached = DataScript.instance.GetComponent<SaveManager>().maxchapterreached;
+        if (MainMissionsSelected)
         {
-            if (i <= DataScript.instance.GetComponent<SaveManager>().maxchapterreached)
+            FastTravelMenuIDList = new List<int>();
+
+            for (int i = 0; i < FastTravelMenuButtons.childCount; i++)
             {
-                FastTravelMenuIDList.Add(i);
-                FastTravelMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = chapternames[i];
-            }
-            else
-            {
-                FastTravelMenuIDList.Add(-1);
-                FastTravelMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = "";
+                if (i <= maxchapterreached)
+                {
+                    FastTravelMenuIDList.Add(i);
+                    FastTravelMenuButtons.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = chapternames[i];
+                }
+                else
+                {
+                    FastTravelMenuIDList.Add(-1);
+                    FastTravelMenuButtons.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = "";
+                }
+
             }
 
+            FastTravelMenuButtons.GetChild(0).GetComponent<Button>().Select();
+        }
+        else
+        {
+            FastTravelMenuIDList = new List<int>();
+
+            for (int i = 0; i < FastTravelMenuButtons.childCount; i++)
+            {
+
+                if (i < accessibleSideStories.Count)
+                {
+                    FastTravelMenuIDList.Add(accessibleSideStories[i]);
+                    FastTravelMenuButtons.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = SideStoryNames[accessibleSideStories[i]];
+                }
+                else
+                {
+                    FastTravelMenuIDList.Add(-1);
+                    FastTravelMenuButtons.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = "";
+                }
+
+            }
+
+            FastTravelMenuButtons.GetChild(0).GetComponent<Button>().Select();
         }
 
-        FastTravelMenu.transform.GetChild(0).GetComponent<Button>().Select();
 
     }
 
     private void IncreaseList()
     {
+
         if (FastTravelMenuIDList[0] > 0)
         {
             for (int i = 0; i < FastTravelMenuIDList.Count; i++)
@@ -336,10 +422,13 @@ public class WorldMapManager : MonoBehaviour
                 if (FastTravelMenuIDList[i] > 0)
                 {
                     FastTravelMenuIDList[i]--;
-                    FastTravelMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = chapternames[FastTravelMenuIDList[i]];
+                    FastTravelMenuButtons.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = chapternames[FastTravelMenuIDList[i]];
                 }
             }
         }
+
+
+
     }
 
     private void DecreaseList()
@@ -352,7 +441,7 @@ public class WorldMapManager : MonoBehaviour
                 if (FastTravelMenuIDList[i] >= 0)
                 {
                     FastTravelMenuIDList[i]++;
-                    FastTravelMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = chapternames[FastTravelMenuIDList[i]];
+                    FastTravelMenuButtons.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = chapternames[FastTravelMenuIDList[i]];
                 }
             }
         }
@@ -363,7 +452,15 @@ public class WorldMapManager : MonoBehaviour
         if (FastTravelMenuIDList[ID] >= 0)
         {
             FastTravelMenu.gameObject.SetActive(false);
-            worldmapController.instance.MoveTo(StoryPointTrsfrm.GetChild(FastTravelMenuIDList[ID]).position);
+            if (MainMissionsSelected)
+            {
+                worldmapController.instance.MoveTo(StoryPointTrsfrm.GetChild(FastTravelMenuIDList[ID]).position);
+            }
+            else
+            {
+                worldmapController.instance.MoveTo(SideStoryTransform.GetChild(FastTravelMenuIDList[ID]).position);
+            }
+
         }
 
     }

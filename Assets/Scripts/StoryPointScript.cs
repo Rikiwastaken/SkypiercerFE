@@ -43,7 +43,6 @@ public class StoryPointScript : MonoBehaviour
 
     public void ChangeMaterial(GameObject GO, Material material)
     {
-        Debug.Log("object name " + GO.name);
         if (GO.GetComponent<Renderer>())
         {
             GO.GetComponent<Renderer>().material = material;

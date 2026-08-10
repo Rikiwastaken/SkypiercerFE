@@ -232,12 +232,14 @@ public class MapInitializer : MonoBehaviour
         int talkindex = 0;
         int copyindex = 0;
 
-        if (DataScript.instance.ChapterFlagsList.Count <= ChapterID)
+        List<SaveManager.ChapterFlags> flaglist = DataScript.instance.ChapterFlagsList;
+
+        if (flaglist.Count <= ChapterID)
         {
             SaveManager.ChapterFlags newcurrentflags = new SaveManager.ChapterFlags();
             newcurrentflags.talkflags = new List<bool>();
             newcurrentflags.copyflags = new List<bool>();
-            DataScript.instance.ChapterFlagsList.Add(newcurrentflags);
+            flaglist.Add(newcurrentflags);
         }
 
         SaveManager.ChapterFlags currentflags = DataScript.instance.ChapterFlagsList[ChapterID];
@@ -253,18 +255,28 @@ public class MapInitializer : MonoBehaviour
                 {
                     Char.enemyStats.CopyID = copyindex;
                     copyindex++;
+                    if (currentflags.copyflags != null && currentflags.copyflags.Count > copyindex && currentflags.copyflags[copyindex])
+                    {
+                        CharGO.GetComponent<UnitScript>().copied = true;
+
+                    }
+                    else
+                    {
+                        currentflags.copyflags.Add(false);
+                    }
                 }
 
-                if (currentflags.copyflags != null && currentflags.copyflags.Count > copyindex && currentflags.copyflags[copyindex])
-                {
-                    CharGO.GetComponent<UnitScript>().copied = true;
-                }
+
 
 
                 if (Char.enemyStats.talkable)
                 {
                     Char.enemyStats.talkID = talkindex;
                     talkindex++;
+                    if (!(currentflags.talkflags != null && currentflags.talkflags.Count > talkindex && currentflags.talkflags[talkindex]))
+                    {
+                        currentflags.talkflags.Add(false);
+                    }
                 }
             }
         }
