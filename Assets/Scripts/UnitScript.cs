@@ -4137,6 +4137,16 @@ public class UnitScript : MonoBehaviour
             statbonuses.CritAvoid += (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) * 2;
         }
 
+        //Lucky Strike
+        if (GetSkill(113))
+        {
+            int Luck = (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck);
+            if (GetComponent<RandomScript>().GetPersonalityValue() <= Luck * 2 + GetTriggerLuckModificator())
+            {
+                statbonuses.FixedDamageBonus += Luck / 2;
+            }
+        }
+
         return statbonuses;
     }
 

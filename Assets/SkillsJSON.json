@@ -1242,6 +1242,17 @@
             "buyable": true,
             "AlwaysPresentInShop": false,
             "ID": 112
+        },
+        {
+            "name": "Lucky Strike",
+            "Descriptions": "Adds a Luck*2% chance to increase Damage dealt by Luck/2.",
+            "IsCommand": false,
+            "Cost": 5,
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 113
         }
     ]
 }

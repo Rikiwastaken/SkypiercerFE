@@ -575,6 +575,66 @@
             "BondLevel": 0,
             "BondDialogueSeen": 0,
             "MaxLevel": 3
+        },
+        {
+            "ID": 49,
+            "Name": "Lucy-Zack",
+            "Characters": [
+                22,
+                0
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 49,
+            "Name": "Lucy-Gusto",
+            "Characters": [
+                22,
+                8
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 50,
+            "Name": "Lucy-Gale",
+            "Characters": [
+                22,
+                13
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 50,
+            "Name": "Lucy-Bob",
+            "Characters": [
+                22,
+                12
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 50,
+            "Name": "Lucy-Aurora",
+            "Characters": [
+                22,
+                14
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
         }
     ]
 }
