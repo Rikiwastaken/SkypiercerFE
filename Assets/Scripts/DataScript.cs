@@ -832,7 +832,10 @@ public class DataScript : MonoBehaviour
                     {
                         character.playableStats.unlocked = true;
                     }
-
+                    if (CompletedSideStories != null && CompletedSideStories.Contains(1))
+                    {
+                        TempUS.UnlockSecondSkill(character);
+                    }
                     break;
                 case 6: // Mir
                     if (chapter >= 1 && chapter != 2 && chapter < 11)
@@ -877,6 +880,18 @@ public class DataScript : MonoBehaviour
                     break;
                 case 14: // Aurora
                     if (chapter >= 12)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    break;
+                case 15: // Erica
+                    if (CompletedSideStories != null && CompletedSideStories.Contains(0))
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    break;
+                case 22: // Lucy
+                    if (CompletedSideStories != null && CompletedSideStories.Contains(2))
                     {
                         character.playableStats.unlocked = true;
                     }

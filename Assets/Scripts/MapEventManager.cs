@@ -68,6 +68,7 @@ public class MapEventManager : MonoBehaviour
          * 7 : Change Units From Enemy To Other
          * 8 : ShowCutscene
          * 9 : Activate Special Phase Script
+         * 10 : Unlock Second Skill
          */
         public List<TextBubbleInfo> dialoguetoShow;
         public List<int> UnitsToUnlockID = new List<int>();
@@ -404,6 +405,11 @@ public class MapEventManager : MonoBehaviour
             case 9:
                 Debug.Log("Special Phase Trigger");
                 GetComponent<SpecialPhaseScript>().TriggerSpecialPhase();
+                TriggerEventCheck(currentturn);
+                break;
+            case 10:
+                Debug.Log("Unlock Secondary Skill Trigger");
+                UnlockSecondSkill(Event);
                 TriggerEventCheck(currentturn);
                 break;
         }
@@ -873,6 +879,16 @@ public class MapEventManager : MonoBehaviour
             }
             GridScript.InitializeGOList();
 
+        }
+    }
+
+    private void UnlockSecondSkill(EventCondition e)
+    {
+        GameObject TempGo = new GameObject();
+        UnitScript TempUS = TempGo.AddComponent<UnitScript>();
+        foreach (Character character in e.UnitList)
+        {
+            TempUS.UnlockSecondSkill(character);
         }
     }
 

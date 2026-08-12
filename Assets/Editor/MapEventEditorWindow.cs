@@ -66,7 +66,8 @@ public class MapEventEditorWindow : EditorWindow
         "6 : Spawn Units",
         "7 : Change Units affiliation",
         "8 : Play Cutscene",
-        "9 : Activate Special Phase Script"
+        "9 : Activate Special Phase Script",
+        "10 : Unlock Second Skill"
     };
 
     private static readonly string[] PersonalityOptions = new string[]

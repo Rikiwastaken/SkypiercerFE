@@ -117,7 +117,7 @@
             "Cost": 20,
             "targettype": 0,
             "range": 0,
-            "buyable": true,
+            "buyable": false,
             "AlwaysPresentInShop": false,
             "ID": 10
         },
