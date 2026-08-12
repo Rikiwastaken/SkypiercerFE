@@ -1562,6 +1562,32 @@ public class DataScript : MonoBehaviour
         }
     }
 
+    [ContextMenu("Show which skill become accessible for each map")]
+    private void ShowSkillAccessibility()
+    {
+        List<int> SkillsAlreadyunlocked = new List<int>();
+        foreach (SkillPerMap skillpermap in skillsPerMap)
+        {
+            List<int> skillsonthismap = new List<int>();
+            foreach (int skillinmap in skillpermap.SkillsOnTheMap)
+            {
+                Skill skill = SkillList[skillinmap];
+                if (!SkillsAlreadyunlocked.Contains(skillinmap) && !skill.AlwaysPresentInShop && skill.buyable)
+                {
+                    SkillsAlreadyunlocked.Add(skillinmap);
+                    skillsonthismap.Add(skillinmap);
+                }
+            }
+            string mapstring = "Map: " + skillpermap.SceneName + "\n\nSkills unlocked (" + skillsonthismap.Count + "):\n";
+            foreach (int SkillID in skillsonthismap)
+            {
+                string name = SkillList[SkillID].name;
+                mapstring += "Skill " + SkillID + ": " + name + "\n";
+            }
+            Debug.Log(mapstring);
+        }
+    }
+
 
 #endif
 }

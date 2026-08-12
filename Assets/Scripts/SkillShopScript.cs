@@ -171,7 +171,15 @@ public class SkillShopScript : MonoBehaviour
 
         foreach (SkillPerMap skillpermap in DataScript.instance.skillsPerMap)
         {
-            if (skillpermap.SkillsOnTheMap == null || skillpermap.SkillsOnTheMap.Count == 0 || skillpermap.mapID > SaveManager.instance.maxchapterreached)
+            if (skillpermap.SkillsOnTheMap == null || skillpermap.SkillsOnTheMap.Count == 0)
+            {
+                continue;
+            }
+            if (skillpermap.mapID != -1 && skillpermap.mapID > SaveManager.instance.maxchapterreached)
+            {
+                continue;
+            }
+            if (skillpermap.SideStoryID != -1 && !DataScript.instance.CompletedSideStories.Contains(skillpermap.SideStoryID))
             {
                 continue;
             }
