@@ -341,6 +341,7 @@ public class UnitScript : MonoBehaviour
 
 
     public Image Lifebar;
+    public Transform LifebarCanvas;
     public Image LBBackground;
     public Image LifebarWhenBossTile;
     public Image LBBackgroundWhenBossTile;
@@ -936,7 +937,7 @@ public class UnitScript : MonoBehaviour
 
 
         //Kira Battalion Side Effect
-        if (UnitCharacteristics.playableStats.battalion.ToLower() == "kira")
+        if (UnitCharacteristics.playableStats.battalion.ToLower() == "kira" && UnitCharacteristics.currentHP < (int)UnitCharacteristics.AjustedStats.HP)
         {
 
             AddNumber(Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * 0.1f), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "Kira's Battalion");
@@ -1371,10 +1372,7 @@ public class UnitScript : MonoBehaviour
 
     private void ManageLifeBarRotation()
     {
-        if (CanvasTransform.rotation != Quaternion.Euler(90f, 0f, 0f))
-        {
-            CanvasTransform.rotation = Quaternion.Euler(90f, 0f, 0f);
-        }
+        LifebarCanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
     }
     public void ManageLifebars()
     {
