@@ -871,6 +871,14 @@ public class ActionsMenu : MonoBehaviour
                                 }
                             }
                         }
+                        else if (commandID == 114) // Study
+                        {
+                            Character charpotentialTarget = potentialtarget.GetComponent<UnitScript>().UnitCharacteristics;
+                            if (charpotentialTarget.UnitSkill > 0 || (charpotentialTarget.SecondUnitSkill > 0 && charpotentialTarget.SecondSkillUnlocked) || charpotentialTarget.EquipedSkills.Count > 0)
+                            {
+                                targetlist.Add(potentialtarget);
+                            }
+                        }
                         else
                         {
                             targetlist.Add(potentialtarget);
@@ -1277,6 +1285,10 @@ public class ActionsMenu : MonoBehaviour
         else if (command.ID == 96) // Power Transfer
         {
             target = unit.GetComponent<UnitScript>().GetBattallionLeader();
+            BasicCommandWindow(unit, target);
+        }
+        else if (command.ID == 114) // Study    
+        {
             BasicCommandWindow(unit, target);
         }
     }

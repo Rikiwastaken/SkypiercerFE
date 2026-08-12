@@ -1253,6 +1253,17 @@
             "buyable": true,
             "AlwaysPresentInShop": false,
             "ID": 113
+        },
+        {
+            "name": "Study",
+            "Descriptions": "Grants a copy of an unit's Skill until the end of the battle.",
+            "IsCommand": true,
+            "Cost": 5,
+            "targettype": 4,
+            "range": 1,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 114
         }
     ]
 }

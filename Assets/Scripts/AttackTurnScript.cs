@@ -763,6 +763,28 @@ public class AttackTurnScript : MonoBehaviour
             User.GetComponent<UnitScript>().IncreaseExamodeGauge(20);
             User.GetComponent<UnitScript>().AddNumber(0, true, "Power Transfer");
         }
+        else if (commandID == 114) // Study
+        {
+            foresightScript.CreateAction(3, User, Target);
+
+            int skilltoStudy = 0;
+
+            if (CharTarget.UnitSkill > 0)
+            {
+                skilltoStudy = CharTarget.UnitSkill;
+            }
+            else if (CharTarget.SecondUnitSkill > 0 && CharTarget.SecondSkillUnlocked)
+            {
+                skilltoStudy = CharTarget.SecondUnitSkill;
+            }
+            else if (CharTarget.EquipedSkills.Count > 0)
+            {
+                skilltoStudy = CharTarget.EquipedSkills[0];
+            }
+
+            CharUser.TemporarySkill = skilltoStudy;
+            User.GetComponent<UnitScript>().AddNumber(0, true, "Study");
+        }
         ActionsMenu.FinalizeAttack();
 
     }
