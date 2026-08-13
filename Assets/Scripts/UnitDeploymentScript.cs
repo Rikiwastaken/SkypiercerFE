@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -37,6 +38,19 @@ public class UnitDeploymentScript : MonoBehaviour
 
     private InputAction _CancelAction;
 
+    private List<Character> DeployableUnitList;
+
+    public TextMeshProUGUI SortTMP;
+
+    private int skillwindowindex;
+
+    public List<GameObject> topbuttons;
+    public List<GameObject> bottombuttons;
+
+    private InputAction _TelekinesisInputAction;
+
+    private int CurrentSort = 0;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -52,13 +66,15 @@ public class UnitDeploymentScript : MonoBehaviour
         {
             Debug.Log($"{i}");
         }
-
-        InitializeButtons();
+        OrderUnits();
+        List<Character> characterstoshow = InitializeCharactersToShow();
+        InitializeButtons(characterstoshow, true);
     }
 
     private void Start()
     {
         _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _TelekinesisInputAction = InputSystem.actions.FindAction("TelekinesisToggle");
     }
 
     // Update is called once per frame
@@ -80,6 +96,23 @@ public class UnitDeploymentScript : MonoBehaviour
             }
         }
 
+
+        //Change sort
+        if (_TelekinesisInputAction.WasPressedThisFrame())
+        {
+
+            if (CurrentSort < 5)
+            {
+                CurrentSort++;
+
+            }
+            else
+            {
+                CurrentSort = 0;
+            }
+
+            SortUnits(CurrentSort);
+        }
 
 
         GameObject currentselected = EventSystem.current.currentSelectedGameObject;
@@ -170,28 +203,27 @@ public class UnitDeploymentScript : MonoBehaviour
         List<Character> characterstoshow = new List<Character>();
         if (SceneManager.GetActiveScene().name == "TestMap")
         {
-            foreach (Character character in DataScript.PlayableCharacterList)
+            foreach (Character character in DeployableUnitList)
+            {
+                character.playableStats.unlocked = true;
+            }
+        }
+
+        foreach (Character character in DeployableUnitList)
+        {
+            Debug.Log(character.ID);
+            if (forcedunits.Contains(character.ID))
+            {
+                Debug.Log("forced character added: " + character.name);
+                characterstoshow.Add(character);
+                character.playableStats.unlocked = true;
+            }
+            else if (character.playableStats.unlocked)
             {
                 characterstoshow.Add(character);
             }
         }
-        else
-        {
-            foreach (Character character in DataScript.PlayableCharacterList)
-            {
-                Debug.Log(character.ID);
-                if (forcedunits.Contains(character.ID))
-                {
-                    Debug.Log("forced character added: " + character.name);
-                    characterstoshow.Add(character);
-                    character.playableStats.unlocked = true;
-                }
-                else if (character.playableStats.unlocked)
-                {
-                    characterstoshow.Add(character);
-                }
-            }
-        }
+
 
         return characterstoshow;
     }
@@ -312,36 +344,42 @@ public class UnitDeploymentScript : MonoBehaviour
     }
 
 
-    private void InitializeButtons()
+    private void InitializeButtons(List<Character> characterstoshow, bool firstactivation = false)
     {
-        OrderUnits();
-        List<Character> characterstoshow = InitializeCharactersToShow();
+
 
         for (int i = 0; i < Mathf.Min(characterstoshow.Count, 20); i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = characterstoshow[i];
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i;
-            if (forcedunits.Contains(characterstoshow[i].ID))
+            if (firstactivation)
             {
+                if (forcedunits.Contains(characterstoshow[i].ID))
+                {
 
-                transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit = true;
+                    transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit = true;
+                }
+                else
+                {
+                    transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit = false;
+                }
             }
-            else
-            {
-                transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit = false;
-            }
+
         }
-
-        int remainingcharacterstoplace = numberofunitstodeplay - forcedunits.Count;
-
-        for (int i = 0; i < Mathf.Min(characterstoshow.Count, 20); i++)
+        if (firstactivation)
         {
-            if (remainingcharacterstoplace > 0 && !transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit)
+            int remainingcharacterstoplace = numberofunitstodeplay - forcedunits.Count;
+
+            for (int i = 0; i < Mathf.Min(characterstoshow.Count, 20); i++)
             {
-                transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit = true;
-                remainingcharacterstoplace--;
+                if (remainingcharacterstoplace > 0 && !transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit)
+                {
+                    transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character.playableStats.deployunit = true;
+                    remainingcharacterstoplace--;
+                }
             }
         }
+
 
 
         for (int i = characterstoshow.Count; i < Mathf.Min(characterstoshow.Count, 20); i++)
@@ -353,15 +391,9 @@ public class UnitDeploymentScript : MonoBehaviour
 
     private int numberofSelectedUnits()
     {
-        bool intestmap = SceneManager.GetActiveScene().name == "TestMap";
         int numberofunits = 0;
-        foreach (Character character in DataScript.PlayableCharacterList)
+        foreach (Character character in DeployableUnitList)
         {
-            if (intestmap)
-            {
-                numberofunits++;
-                continue;
-            }
             if (character.playableStats.deployunit && character.playableStats.unlocked)
             {
                 numberofunits++;
@@ -391,7 +423,85 @@ public class UnitDeploymentScript : MonoBehaviour
                 newcharacterlist.Add(character);
             }
         }
-        DataScript.PlayableCharacterList = newcharacterlist;
+        DeployableUnitList = newcharacterlist;
     }
+
+
+    private void SortUnits(int type)
+    {
+        switch (type)
+        {
+            case 0: // alphabetically
+                DeployableUnitList.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.OrdinalIgnoreCase));
+                SortTMP.text = "Sort: A...Z";
+                break;
+            case 1: // reverse alphabetically
+                DeployableUnitList.Sort((a, b) => string.Compare(b.name, a.name, StringComparison.OrdinalIgnoreCase));
+                SortTMP.text = "Sort: Z...A";
+                break;
+            case 2: // Forced first
+                DeployableUnitList.Sort((a, b) =>
+                {
+                    // Forced first
+                    int commandCompare = forcedunits.Contains(b.ID).CompareTo(forcedunits.Contains(a.ID));
+                    if (commandCompare != 0)
+                        return commandCompare;
+
+                    // Then alphabetical
+                    return string.Compare(a.name, b.name, StringComparison.OrdinalIgnoreCase);
+                });
+                SortTMP.text = "Sort: Forced Units First";
+                break;
+            case 3: //Zack's battalion
+                OrderByBattalion("zack");
+                SortTMP.text = "Sort: Zack's Battallion First";
+                break;
+            case 4: //Kira's Battallio
+                OrderByBattalion("kira");
+                SortTMP.text = "Sort: Kira's Battallion First";
+                break;
+            case 5: // Gale's Battallion
+                OrderByBattalion("gale");
+                SortTMP.text = "Sort: Gale's Battallion First";
+                break;
+
+        }
+        skillwindowindex = 0;
+        InitializeButtons(InitializeCharactersToShow());
+        EventSystem.current.SetSelectedGameObject(topbuttons[0]);
+    }
+
+    private void OrderByBattalion(string battalion)
+    {
+
+        //First order alphabettically
+        DeployableUnitList.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.OrdinalIgnoreCase));
+
+
+        // Then get all units of battallion
+        List<Character> OrderedCharacterList = new List<Character>();
+        List<Character> characternotfrombattallion = new List<Character>();
+        foreach (Character unit in DeployableUnitList)
+        {
+            if (unit.playableStats.battalion.ToLower() == battalion.ToLower())
+            {
+                OrderedCharacterList.Add(unit);
+            }
+            else
+            {
+                characternotfrombattallion.Add(unit);
+            }
+        }
+
+        // Then add all remaining units
+        foreach (Character unit in characternotfrombattallion)
+        {
+            OrderedCharacterList.Add(unit);
+        }
+
+        DeployableUnitList = OrderedCharacterList;
+    }
+
+
 
 }

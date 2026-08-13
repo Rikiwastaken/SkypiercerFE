@@ -36,7 +36,7 @@ public class UnitDeploymentButton : MonoBehaviour
     public Color GaleColor;
     public Color UnSelectedColor;
 
-    private InputAction _TelekinesisAction;
+    private InputAction _DetailsPressed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,7 +45,7 @@ public class UnitDeploymentButton : MonoBehaviour
         MapInitializer = FindAnyObjectByType<MapInitializer>();
         ButtonBGImage = GetComponent<Button>().image;
         ImageDefaultColor = ButtonBGImage.color;
-        _TelekinesisAction = InputSystem.actions.FindAction("TelekinesisToggle");
+        _DetailsPressed = InputSystem.actions.FindAction("ShowDetails");
     }
 
     private void Update()
@@ -101,7 +101,7 @@ public class UnitDeploymentButton : MonoBehaviour
                         ButtonBGImage.color = UnSelectedColor;
                     }
                 }
-                if (_TelekinesisAction.WasPressedThisFrame() && EventSystem.current.currentSelectedGameObject == gameObject && !Character.playableStats.protagonist)
+                if (_DetailsPressed.WasPressedThisFrame() && EventSystem.current.currentSelectedGameObject == gameObject && !Character.playableStats.protagonist)
                 {
                     ChangeBattallion();
 
