@@ -528,7 +528,7 @@ public class GridSquareScript : MonoBehaviour
         {
 
             BossLifeBarBG.gameObject.SetActive(true);
-            int damagetaken = actionsmenu.CalculateDamage(MapInitializer.currentboss.gameObject, unit);
+            int damagetaken = actionsmenu.CalculateDamage(MapInitializer.currentboss.gameObject, false, unit);
             BossLifebar.fillAmount = (float)(((float)unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP - damagetaken) / (float)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP);
         }
         else

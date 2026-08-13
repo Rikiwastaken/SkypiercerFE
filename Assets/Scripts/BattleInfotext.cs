@@ -260,7 +260,7 @@ public class BattleInfotext : MonoBehaviour
                     }
                 }
 
-                AllStatsSkillBonus statsmods = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null);
+                AllStatsSkillBonus statsmods = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null, false);
 
                 string strcolorstring = getcolorstring(statsmods.Strength);
                 string psycolorstring = getcolorstring(statsmods.Psyche);
@@ -291,7 +291,7 @@ public class BattleInfotext : MonoBehaviour
                 LuckAndMovTMP.text = "Lck: " + luckcolorstring + (selectedunitCharacter.AjustedStats.Luck + statsmods.Luck) + "</color>\n";
                 LuckAndMovTMP.text += "Mvt: " + (selectedunitCharacter.movements - 1);
 
-                (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(selectedunit, true);
+                (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(selectedunit, true, null, false);
 
                 string dmgcolorstring = getcolorstring(damagebonus);
 

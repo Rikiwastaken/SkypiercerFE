@@ -211,10 +211,8 @@ public class UnitDeploymentScript : MonoBehaviour
 
         foreach (Character character in DeployableUnitList)
         {
-            Debug.Log(character.ID);
             if (forcedunits.Contains(character.ID))
             {
-                Debug.Log("forced character added: " + character.name);
                 characterstoshow.Add(character);
                 character.playableStats.unlocked = true;
             }

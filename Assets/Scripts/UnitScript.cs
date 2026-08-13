@@ -3433,7 +3433,7 @@ public class UnitScript : MonoBehaviour
 
         return statbonuses;
     }
-    public AllStatsSkillBonus GetStatSkillBonus(GameObject enemy)
+    public AllStatsSkillBonus GetStatSkillBonus(GameObject enemy, bool incombat)
     {
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
 
@@ -4114,15 +4114,6 @@ public class UnitScript : MonoBehaviour
             statbonuses.Luck += 5;
         }
 
-        //Rigged Fight
-        if (GetSkill(108))
-        {
-            if (GetComponent<RandomScript>().GetPersonalityValue() <= UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck + GetTriggerLuckModificator())
-            {
-                statbonuses.DamageReduction += 50;
-            }
-        }
-
         //Risky Bet
         if (GetSkill(109))
         {
@@ -4135,15 +4126,33 @@ public class UnitScript : MonoBehaviour
             statbonuses.CritAvoid += (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) * 2;
         }
 
-        //Lucky Strike
-        if (GetSkill(113))
+        if (incombat)
         {
-            int Luck = (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck);
-            if (GetComponent<RandomScript>().GetPersonalityValue() <= Luck * 2 + GetTriggerLuckModificator())
+            //Rigged Fight
+            if (GetSkill(108))
             {
-                statbonuses.FixedDamageBonus += Luck / 2;
+                if (GetComponent<RandomScript>().GetPersonalityValue() <= UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck + GetTriggerLuckModificator())
+                {
+                    statbonuses.DamageReduction += 50;
+                }
+            }
+
+            //Lucky Strike
+            if (GetSkill(113))
+            {
+                int Luck = (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck);
+                if (GetComponent<RandomScript>().GetPersonalityValue() <= Luck * 2 + GetTriggerLuckModificator())
+                {
+                    statbonuses.FixedDamageBonus += Luck / 2;
+                }
             }
         }
+
+
+
+
+
+
 
         return statbonuses;
     }

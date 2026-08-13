@@ -867,24 +867,24 @@ public class AttackTurnScript : MonoBehaviour
                     foresightScript.CreateAction(0, Attacker, target);
                 }
 
-                int attackerhit = ActionsMenu.CalculateHit(Attacker, target);
-                int defenderhit = ActionsMenu.CalculateHit(target, Attacker);
+                int attackerhit = ActionsMenu.CalculateHit(Attacker, target, false);
+                int defenderhit = ActionsMenu.CalculateHit(target, Attacker, false);
 
                 int attackerdmg = 0;
                 int attackercrit = 0;
 
                 if (ishealing)
                 {
-                    attackerdmg = ActionsMenu.CalculateHealing(Attacker);
+                    attackerdmg = ActionsMenu.CalculateHealing(Attacker, false);
                 }
                 else
                 {
-                    attackerdmg = ActionsMenu.CalculateDamage(Attacker, target);
-                    attackercrit = ActionsMenu.CalculateCrit(Attacker, target);
+                    attackerdmg = ActionsMenu.CalculateDamage(Attacker, false, target);
+                    attackercrit = ActionsMenu.CalculateCrit(Attacker, target, false);
                 }
 
-                int defenderdmg = ActionsMenu.CalculateDamage(target, Attacker);
-                int defendercrit = ActionsMenu.CalculateCrit(target, Attacker);
+                int defenderdmg = ActionsMenu.CalculateDamage(target, false, Attacker);
+                int defendercrit = ActionsMenu.CalculateCrit(target, Attacker, false);
 
 
 
@@ -1271,7 +1271,7 @@ public class AttackTurnScript : MonoBehaviour
         {
             if (unit1.GetComponent<UnitScript>().GetSkill(112) && charunit1.currentHP < charunit2.currentHP) //Twist of Fate
             {
-                int luckstat = (int)charunit1.AjustedStats.Luck + unit1.GetComponent<UnitScript>().GetStatSkillBonus(unit2).Luck;
+                int luckstat = (int)charunit1.AjustedStats.Luck + unit1.GetComponent<UnitScript>().GetStatSkillBonus(unit2, true).Luck;
                 if (unit1.GetComponent<RandomScript>().GetPersonalityValue() <= luckstat + unit1.GetComponent<UnitScript>().GetTriggerLuckModificator())
                 {
                     int unit1previousHP = charunit1.currentHP;
@@ -1830,10 +1830,10 @@ public class AttackTurnScript : MonoBehaviour
                 NoCounterFactor = 0f;
             }
 
-            int rawdamage = ActionsMenu.CalculateDamage(attacker, target);
-            int rawdamagetaken = ActionsMenu.CalculateDamage(target, attacker);
-            int hitrate = ActionsMenu.CalculateHit(attacker, target);
-            int dodgerate = 100 - ActionsMenu.CalculateHit(target, attacker);
+            int rawdamage = ActionsMenu.CalculateDamage(attacker, false, target);
+            int rawdamagetaken = ActionsMenu.CalculateDamage(target, false, attacker);
+            int hitrate = ActionsMenu.CalculateHit(attacker, target, false);
+            int dodgerate = 100 - ActionsMenu.CalculateHit(target, attacker, false);
 
             bool inrange = ActionsMenu.CheckifInRange(attacker, target, tiletouse);
 
@@ -1950,10 +1950,10 @@ public class AttackTurnScript : MonoBehaviour
                 if (affiliationtoattack.Contains(charotherunit.affiliation.ToLower()) && charotherunit.position == tile.GridCoordinates)
                 {
                     //that means that an enemy unit is in the zone
-                    int rawdamage = ActionsMenu.CalculateDamage(unit, otherunit);
-                    int rawdamagetaken = ActionsMenu.CalculateDamage(otherunit, unit);
-                    int hitrate = ActionsMenu.CalculateHit(unit, otherunit);
-                    int dodgerate = 100 - ActionsMenu.CalculateHit(otherunit, unit);
+                    int rawdamage = ActionsMenu.CalculateDamage(unit, false, otherunit);
+                    int rawdamagetaken = ActionsMenu.CalculateDamage(otherunit, false, unit);
+                    int hitrate = ActionsMenu.CalculateHit(unit, otherunit, false);
+                    int dodgerate = 100 - ActionsMenu.CalculateHit(otherunit, unit, false);
 
                     bool inrange = ActionsMenu.CheckifInRange(unit, otherunit);
                     if (!inrange)

@@ -83,7 +83,7 @@ public class CombatTextScript : MonoBehaviour
         string defenderText = defender.name + "\n";
         if (newattacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
-            int healing = ActionsMenu.CalculateHealing(newattacker);
+            int healing = ActionsMenu.CalculateHealing(newattacker, false);
             attackerText += "healing: " + healing + "  hit: 100%  crit: NA";
             defenderText += "dmg: NA  hit: NA  crit: NA";
         }
@@ -92,9 +92,9 @@ public class CombatTextScript : MonoBehaviour
             (GameObject doubler, bool istriple) = ActionsMenu.CalculatedoubleAttack(newattacker, newdefender);
 
 
-            int damagedealtattacker = ActionsMenu.CalculateDamage(newattacker, newdefender);
-            int hitrateattacker = ActionsMenu.CalculateHit(newattacker, newdefender);
-            int critrateattacker = ActionsMenu.CalculateCrit(newattacker, newdefender);
+            int damagedealtattacker = ActionsMenu.CalculateDamage(newattacker, false, newdefender);
+            int hitrateattacker = ActionsMenu.CalculateHit(newattacker, newdefender, false);
+            int critrateattacker = ActionsMenu.CalculateCrit(newattacker, newdefender, false);
 
             attackerText += "dmg: " + damagedealtattacker;
             if (doubler == newattacker)
@@ -112,9 +112,9 @@ public class CombatTextScript : MonoBehaviour
             attackerText += "  hit: " + hitrateattacker + "%  crit: " + critrateattacker + "%";
 
 
-            int damagedealtDefender = ActionsMenu.CalculateDamage(newdefender, newattacker);
-            int hitrateDefender = ActionsMenu.CalculateHit(newdefender, newattacker);
-            int critrateDefender = ActionsMenu.CalculateCrit(newdefender, newattacker);
+            int damagedealtDefender = ActionsMenu.CalculateDamage(newdefender, false, newattacker);
+            int hitrateDefender = ActionsMenu.CalculateHit(newdefender, newattacker, false);
+            int critrateDefender = ActionsMenu.CalculateCrit(newdefender, newattacker, false);
 
             defenderText += "dmg: " + damagedealtDefender;
             if (doubler == newdefender)

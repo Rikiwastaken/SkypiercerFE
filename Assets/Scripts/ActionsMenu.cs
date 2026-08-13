@@ -1032,8 +1032,8 @@ public class ActionsMenu : MonoBehaviour
 
 
         string damageunittxt = "";
-        int FinalUnitdmg = CalculateDamage(unit, target);
-        int FinalTargetdmg = CalculateDamage(target, unit);
+        int FinalUnitdmg = CalculateDamage(unit, false, target);
+        int FinalTargetdmg = CalculateDamage(target, false, unit);
 
         if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
         {
@@ -1073,17 +1073,17 @@ public class ActionsMenu : MonoBehaviour
         {
             if (tripleattack)
             {
-                damageunittxt += CalculateDamage(unit, target) + " x 3";
+                damageunittxt += CalculateDamage(unit, false, target) + " x 3";
             }
             else
             {
-                damageunittxt += CalculateDamage(unit, target) + " x 2";
+                damageunittxt += CalculateDamage(unit, false, target) + " x 2";
             }
 
         }
         else
         {
-            damageunittxt += CalculateDamage(unit, target);
+            damageunittxt += CalculateDamage(unit, false, target);
         }
 
         string UnitText = "<align=left>" + (int)Mathf.Max(charunit.currentHP - FinalTargetdmg, 0f) + "<align=center>\n";
@@ -1091,10 +1091,10 @@ public class ActionsMenu : MonoBehaviour
         UnitText += damageunittxt;
 
 
-        UnitText += "Hit : " + CalculateHit(unit, target) + " %\n";
-        UnitText += "Crit : " + CalculateCrit(unit, target) + " %\n";
+        UnitText += "Hit : " + CalculateHit(unit, target, false) + " %\n";
+        UnitText += "Crit : " + CalculateCrit(unit, target, false) + " %\n";
 
-        SetupCombatHUD(unit, true, true, (int)Mathf.Max(charunit.currentHP - FinalTargetdmg, 0f), false, damageunittxt, CalculateHit(unit, target) + "%", CalculateCrit(unit, target) + "%");
+        SetupCombatHUD(unit, true, true, (int)Mathf.Max(charunit.currentHP - FinalTargetdmg, 0f), false, damageunittxt, CalculateHit(unit, target, false) + "%", CalculateCrit(unit, target, false) + "%");
 
         if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
         {
@@ -1103,19 +1103,19 @@ public class ActionsMenu : MonoBehaviour
             {
                 if (tripleattack)
                 {
-                    TargetDmgText += CalculateDamage(target, unit) + " x 3";
+                    TargetDmgText += CalculateDamage(target, false, unit) + " x 3";
                 }
                 else
                 {
-                    TargetDmgText += CalculateDamage(target, unit) + " x 2";
+                    TargetDmgText += CalculateDamage(target, false, unit) + " x 2";
                 }
 
             }
             else
             {
-                TargetDmgText += CalculateDamage(target, unit);
+                TargetDmgText += CalculateDamage(target, false, unit);
             }
-            SetupCombatHUD(target, false, true, (int)Mathf.Max(chartarget.currentHP - FinalUnitdmg, 0f), false, TargetDmgText, CalculateHit(target, unit) + "%", CalculateCrit(target, unit) + "%");
+            SetupCombatHUD(target, false, true, (int)Mathf.Max(chartarget.currentHP - FinalUnitdmg, 0f), false, TargetDmgText, CalculateHit(target, unit, false) + "%", CalculateCrit(target, unit, false) + "%");
         }
         else
         {
@@ -1127,19 +1127,19 @@ public class ActionsMenu : MonoBehaviour
         {
             if (tripleattack)
             {
-                TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target) * 3) / (float)chartarget.AjustedStats.HP;
+                TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, false, target) * 3) / (float)chartarget.AjustedStats.HP;
                 TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
             }
             else
             {
-                TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target) * 2) / (float)chartarget.AjustedStats.HP;
+                TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, false, target) * 2) / (float)chartarget.AjustedStats.HP;
                 TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
             }
 
         }
         else
         {
-            TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, target)) / (float)chartarget.AjustedStats.HP;
+            TargetGreenLifebar.fillAmount = (float)(chartarget.currentHP - CalculateDamage(unit, false, target)) / (float)chartarget.AjustedStats.HP;
             TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
         }
 
@@ -1149,19 +1149,19 @@ public class ActionsMenu : MonoBehaviour
             {
                 if (tripleattack)
                 {
-                    UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, unit) * 3) / (float)charunit.AjustedStats.HP;
+                    UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, false, unit) * 3) / (float)charunit.AjustedStats.HP;
                     UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
                 }
                 else
                 {
-                    UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, unit) * 2) / (float)charunit.AjustedStats.HP;
+                    UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, false, unit) * 2) / (float)charunit.AjustedStats.HP;
                     UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
                 }
             }
 
             else
             {
-                UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, unit)) / (float)charunit.AjustedStats.HP;
+                UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - CalculateDamage(target, false, unit)) / (float)charunit.AjustedStats.HP;
                 UnitOrangeLifeBar.fillAmount = (float)(charunit.currentHP) / (float)charunit.AjustedStats.HP;
             }
         }
@@ -1178,14 +1178,14 @@ public class ActionsMenu : MonoBehaviour
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.gameObject.SetActive(true);
 
-        int FinalHealingdmg = CalculateHealing(unit);
+        int FinalHealingdmg = CalculateHealing(unit, false);
 
 
         SetupCombatHUD(unit, true, true, (int)Mathf.Max(charunit.currentHP, 0f), false, FinalHealingdmg + "", "100%", "-", true);
 
         SetupCombatHUD(target, false, true, (int)Mathf.Min(Mathf.Max(chartarget.currentHP + FinalHealingdmg, 0f), chartarget.AjustedStats.HP));
 
-        TargetGreenLifebar.fillAmount = Mathf.Min((float)(chartarget.currentHP + CalculateHealing(unit)) / (float)chartarget.AjustedStats.HP, 1f);
+        TargetGreenLifebar.fillAmount = Mathf.Min((float)(chartarget.currentHP + CalculateHealing(unit, false)) / (float)chartarget.AjustedStats.HP, 1f);
         TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
 
         UnitGreenLifebar.fillAmount = (float)(charunit.currentHP - 0) / (float)charunit.AjustedStats.HP;
@@ -1799,13 +1799,13 @@ public class ActionsMenu : MonoBehaviour
 
             bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77);//spite, Caelum General
 
-            int unithitrate = CalculateHit(unit, target);
+            int unithitrate = CalculateHit(unit, target, true);
 
 
-            int unitdamage = CalculateDamage(unit, target);
+            int unitdamage = CalculateDamage(unit, true, target);
 
 
-            int unitcrit = CalculateCrit(unit, target);
+            int unitcrit = CalculateCrit(unit, target, true);
 
             int numberofhits = 0;
             int numberofcritials = 0;
@@ -1865,11 +1865,11 @@ public class ActionsMenu : MonoBehaviour
             }
 
 
-            int targethitrate = CalculateHit(target, unit);
+            int targethitrate = CalculateHit(target, unit, true);
 
-            int targetdamage = CalculateDamage(target, unit);
+            int targetdamage = CalculateDamage(target, true, unit);
 
-            int targetcrit = CalculateCrit(target, unit);
+            int targetcrit = CalculateCrit(target, unit, true);
 
             if (!unitalreadyattacked)
             {
@@ -1981,7 +1981,7 @@ public class ActionsMenu : MonoBehaviour
         else
         {
             bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77); //Spite, Caelum General
-            int unitdamage = (int)Mathf.Min(CalculateHealing(unit), chartarget.AjustedStats.HP - chartarget.currentHP);
+            int unitdamage = (int)Mathf.Min(CalculateHealing(unit, true), chartarget.AjustedStats.HP - chartarget.currentHP);
             int numberofhits = 1;
             int numberofcritials = 0;
 
@@ -2377,7 +2377,7 @@ public class ActionsMenu : MonoBehaviour
 
             if (Chartarget.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
             {
-                int damage = CalculateDamage(attacker, potentialtarget);
+                int damage = CalculateDamage(attacker, true, potentialtarget);
 
                 //Cleaver
                 int truedamage = damage / 4;
@@ -2431,7 +2431,7 @@ public class ActionsMenu : MonoBehaviour
 
         if (unit.GetComponent<UnitScript>().GetSkill(111)) //Fortune's favor
         {
-            int luckstat = (int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Luck + unit.GetComponent<UnitScript>().GetStatSkillBonus(unit).Luck;
+            int luckstat = (int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Luck + unit.GetComponent<UnitScript>().GetStatSkillBonus(unit, true).Luck;
             adjustedexp = (adjustedexp * (1f + (luckstat * 2f / 100f)));
         }
 
@@ -2456,17 +2456,17 @@ public class ActionsMenu : MonoBehaviour
         return ((int)adjustedexp, levelup);
     }
 
-    public int CalculateDamage(GameObject unit, GameObject target = null)
+    public int CalculateDamage(GameObject unit, bool incombat, GameObject target = null)
     {
 
-        (int damage, int bonus) = CalculateDamage(unit, false, target);
+        (int damage, int bonus) = CalculateDamage(unit, false, target, incombat);
 
         return damage;
 
     }
 
 
-    public (int, int) CalculateDamage(GameObject unit, bool returnbonuses, GameObject target = null)
+    public (int, int) CalculateDamage(GameObject unit, bool returnbonuses, GameObject target = null, bool incombat = true)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = null;
@@ -2475,7 +2475,7 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target, incombat);
         AllStatsSkillBonus TargetSkillBonus = null;
 
         float baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
@@ -2490,7 +2490,7 @@ public class ActionsMenu : MonoBehaviour
             chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
             targetTile = chartarget.currentTile;
 
-            TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
+            TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit, incombat);
 
             if (target.GetComponent<UnitScript>().GetSkill(69)) // Redirection
             {
@@ -2618,12 +2618,12 @@ public class ActionsMenu : MonoBehaviour
         return (finaldamage, (int)damagebonus);
     }
 
-    public int CalculateHealing(GameObject unit)
+    public int CalculateHealing(GameObject unit, bool incombat)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
         int baseweapondamage = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseDamage;
-        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target, incombat);
         int basestatdamage = (int)charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
 
 
@@ -2696,8 +2696,8 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
-        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
-        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target, true);
+        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit, true);
 
         BaseStats unitweaponstatbonus;
         BaseStats targetweaponstatbonus;
@@ -2815,7 +2815,7 @@ public class ActionsMenu : MonoBehaviour
 
         return (unitstatbonus, targetstatbonus);
     }
-    public int CalculateHit(GameObject unit, GameObject target)
+    public int CalculateHit(GameObject unit, GameObject target, bool incombat)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
@@ -2823,8 +2823,8 @@ public class ActionsMenu : MonoBehaviour
         GridSquareScript unitTile = charunit.currentTile;
         GridSquareScript targetTile = chartarget.currentTile;
 
-        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
-        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target, incombat);
+        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit, incombat);
 
         int hitrateweapon = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseHit;
 
@@ -2917,13 +2917,13 @@ public class ActionsMenu : MonoBehaviour
         return tilebonus;
     }
 
-    public int CalculateCrit(GameObject unit, GameObject target)
+    public int CalculateCrit(GameObject unit, GameObject target, bool incombat)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
-        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target);
-        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit);
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target, incombat);
+        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit, incombat);
 
         int critweapon = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseCrit;
 
