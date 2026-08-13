@@ -858,6 +858,10 @@ public class DataScript : MonoBehaviour
                     {
                         character.playableStats.unlocked = true;
                     }
+                    if (CompletedSideStories != null && CompletedSideStories.Contains(2))
+                    {
+                        TempUS.UnlockSecondSkill(character);
+                    }
                     break;
                 case 9: // Kira
                     if (chapter >= 6)
