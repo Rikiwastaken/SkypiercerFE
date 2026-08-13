@@ -38,19 +38,22 @@ public class UnitDeploymentScript : MonoBehaviour
 
     private InputAction _CancelAction;
 
-    private List<Character> DeployableUnitList;
+    public List<Character> DeployableUnitList;
 
     public TextMeshProUGUI SortTMP;
 
-    private int skillwindowindex;
+    public int windowindex = 0;
 
     public List<GameObject> topbuttons;
     public List<GameObject> bottombuttons;
 
     private InputAction _TelekinesisInputAction;
+    private InputAction _MovementAction;
+    private InputAction _CamAction;
 
     private int CurrentSort = 0;
 
+    private GameObject previousSelected;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -61,20 +64,19 @@ public class UnitDeploymentScript : MonoBehaviour
         numberofunitstodeplay = MapInitializer.playablepos.Count;
         forcedunits = MapInitializer.ForcedCharacters;
 
-        Debug.Log("forced units :");
-        foreach (int i in forcedunits)
-        {
-            Debug.Log($"{i}");
-        }
-        OrderUnits();
-        List<Character> characterstoshow = InitializeCharactersToShow();
-        InitializeButtons(characterstoshow, true);
+
+        InitializeCharactersToShow();
+        InitializeButtons(DeployableUnitList, true);
     }
 
     private void Start()
     {
         _CancelAction = InputSystem.actions.FindAction("Cancel");
         _TelekinesisInputAction = InputSystem.actions.FindAction("TelekinesisToggle");
+        _MovementAction = InputSystem.actions.FindAction("Movement");
+        _MovementAction.Enable();
+        _CamAction = InputSystem.actions.FindAction("MoveCam");
+        _CamAction.Enable();
     }
 
     // Update is called once per frame
@@ -114,8 +116,24 @@ public class UnitDeploymentScript : MonoBehaviour
             SortUnits(CurrentSort);
         }
 
-
         GameObject currentselected = EventSystem.current.currentSelectedGameObject;
+
+        if (_MovementAction.WasPerformedThisFrame())
+        {
+            Vector2 movementvalue = _MovementAction.ReadValue<Vector2>();
+            ChangeCurrentID(currentselected, movementvalue.y);
+            InitializeButtons(DeployableUnitList);
+
+        }
+        else if (_CamAction.WasPerformedThisFrame())
+        {
+            Vector2 movementvalue = _CamAction.ReadValue<Vector2>();
+            ChangeCurrentID(currentselected, movementvalue.y);
+            InitializeButtons(DeployableUnitList);
+
+        }
+
+
         bool buttonselected = false;
         if (currentselected != null)
         {
@@ -133,84 +151,133 @@ public class UnitDeploymentScript : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(transform.GetChild(0).gameObject);
         }
         Character currentchar = EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>().Character;
-        if (currentchar.name != "")
+        if (currentselected != previousSelected)
         {
-            ManageMasteryVisuals(currentchar);
-            string unitbattallion = currentchar.playableStats.battalion;
-            BattalionText.text = "Battallion :\n" + unitbattallion + "\n Change with : ";
-            string unitdescriptiontxt = currentchar.name + "\n";
-            unitdescriptiontxt += "Level : " + currentchar.level + "\n";
-            unitdescriptiontxt += "Exp : " + currentchar.experience + " / 100\n\n";
-
-            unitdescriptiontxt += "Strength : " + currentchar.AjustedStats.Strength + "\n";
-            unitdescriptiontxt += "Psyche : " + currentchar.AjustedStats.Psyche + "\n";
-            unitdescriptiontxt += "Defense : " + currentchar.AjustedStats.Defense + "\n";
-            unitdescriptiontxt += "Resistance : " + currentchar.AjustedStats.Resistance + "\n";
-            unitdescriptiontxt += "Dexterity : " + currentchar.AjustedStats.Dexterity + "\n";
-            unitdescriptiontxt += "Speed : " + currentchar.AjustedStats.Speed + "\n\n";
-
-            string grade = "";
-            if (currentchar.equipmentsIDs.Count > 0)
+            if (currentchar != null && currentchar.name != "")
             {
-                switch (DataScript.equipmentList[currentchar.equipmentsIDs[0]].Grade)
-                {
-                    case 0:
-                        grade = "E";
-                        break;
-                    case 1:
-                        grade = "D";
-                        break;
-                    case 2:
-                        grade = "C";
-                        break;
-                    case 3:
-                        grade = "B";
-                        break;
-                    case 4:
-                        grade = "A";
-                        break;
-                    case 5:
-                        grade = "S";
-                        break;
+                ManageMasteryVisuals(currentchar);
+                string unitbattallion = currentchar.playableStats.battalion;
+                BattalionText.text = "Battallion :\n" + unitbattallion + "\n Change with : ";
+                string unitdescriptiontxt = currentchar.name + "\n";
+                unitdescriptiontxt += "Level : " + currentchar.level + "\n";
+                unitdescriptiontxt += "Exp : " + currentchar.experience + " / 100\n\n";
 
+
+
+                unitdescriptiontxt += "Strength : " + (int)currentchar.stats.Strength + "\n";
+                unitdescriptiontxt += "Psyche : " + (int)currentchar.stats.Psyche + "\n";
+                unitdescriptiontxt += "Defense : " + (int)currentchar.stats.Defense + "\n";
+                unitdescriptiontxt += "Resistance : " + (int)currentchar.stats.Resistance + "\n";
+                unitdescriptiontxt += "Dexterity : " + (int)currentchar.stats.Dexterity + "\n";
+                unitdescriptiontxt += "Speed : " + (int)currentchar.stats.Speed + "\n\n";
+
+                /*
+                string grade = "";
+                if (currentchar.equipmentsIDs.Count > 0)
+                {
+                    switch (DataScript.equipmentList[currentchar.equipmentsIDs[0]].Grade)
+                    {
+                        case 0:
+                            grade = "E";
+                            break;
+                        case 1:
+                            grade = "D";
+                            break;
+                        case 2:
+                            grade = "C";
+                            break;
+                        case 3:
+                            grade = "B";
+                            break;
+                        case 4:
+                            grade = "A";
+                            break;
+                        case 5:
+                            grade = "S";
+                            break;
+
+                    }
+                    unitdescriptiontxt += "Weapon : " + DataScript.equipmentList[currentchar.equipmentsIDs[0]].Name + " (" + DataScript.equipmentList[currentchar.equipmentsIDs[0]].type + " " + grade + ")";
                 }
-                unitdescriptiontxt += "Weapon : " + DataScript.equipmentList[currentchar.equipmentsIDs[0]].Name + " (" + DataScript.equipmentList[currentchar.equipmentsIDs[0]].type + " " + grade + ")";
+                else
+                {
+                    grade = "E";
+                    unitdescriptiontxt += "Weapon : " + DataScript.equipmentList[0].Name + " (" + DataScript.equipmentList[0].type + " " + grade + ")";
+                }
+                */
+                UnitDescription.text = unitdescriptiontxt;
             }
             else
             {
-                grade = "E";
-                unitdescriptiontxt += "Weapon : " + DataScript.equipmentList[0].Name + " (" + DataScript.equipmentList[0].type + " " + grade + ")";
+                BattalionText.text = "";
+                UnitDescription.text = "";
             }
-            UnitDescription.text = unitdescriptiontxt;
         }
-        else
-        {
-            BattalionText.text = "";
-            UnitDescription.text = "";
-        }
+
 
 
 
         UnitsDeployedText.text = "Units deployed :\r\n" + numberofSelectedUnits() + " / " + numberofunitstodeplay;
 
-
+        previousSelected = currentselected;
     }
 
 
+    private void ChangeCurrentID(GameObject currentselected, float YMovementValue)
+    {
 
-    private List<Character> InitializeCharactersToShow()
+        if (previousSelected != currentselected)
+        {
+            return;
+        }
+        if (YMovementValue < 0 && bottombuttons.Contains(currentselected))
+        {
+            if (DeployableUnitList.Count > 20 + windowindex * 2)
+            {
+                windowindex++;
+            }
+        }
+        else if (YMovementValue > 0 && topbuttons.Contains(currentselected))
+        {
+            if (windowindex > 0)
+            {
+                windowindex--;
+            }
+        }
+    }
+
+
+    private void InitializeCharactersToShow()
     {
         List<Character> characterstoshow = new List<Character>();
         if (SceneManager.GetActiveScene().name == "TestMap")
         {
-            foreach (Character character in DeployableUnitList)
+            foreach (Character character in DataScript.instance.PlayableCharacterList)
             {
                 character.playableStats.unlocked = true;
             }
         }
 
-        foreach (Character character in DeployableUnitList)
+
+        // place units which were deployed previously first
+
+        foreach (Character character in DataScript.instance.PlayableCharacterList)
         {
+            if (character.playableStats.deployunit)
+            {
+                character.playableStats.deployunit = false;
+                characterstoshow.Add(character);
+            }
+
+        }
+
+        // add all remaining units
+        foreach (Character character in DataScript.instance.PlayableCharacterList)
+        {
+            if (characterstoshow.Contains(character))
+            {
+                continue;
+            }
             if (forcedunits.Contains(character.ID))
             {
                 characterstoshow.Add(character);
@@ -223,7 +290,7 @@ public class UnitDeploymentScript : MonoBehaviour
         }
 
 
-        return characterstoshow;
+        DeployableUnitList = characterstoshow;
     }
 
     private void ManageMasteryVisuals(Character unit)
@@ -346,9 +413,9 @@ public class UnitDeploymentScript : MonoBehaviour
     {
 
 
-        for (int i = 0; i < Mathf.Min(characterstoshow.Count, 20); i++)
+        for (int i = 0; i < Mathf.Min(characterstoshow.Count - windowindex * 2, 20); i++)
         {
-            transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = characterstoshow[i];
+            transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = characterstoshow[i + windowindex * 2];
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i;
             if (firstactivation)
             {
@@ -378,9 +445,7 @@ public class UnitDeploymentScript : MonoBehaviour
             }
         }
 
-
-
-        for (int i = characterstoshow.Count; i < Mathf.Min(characterstoshow.Count, 20); i++)
+        for (int i = characterstoshow.Count - windowindex * 2; i < Mathf.Min(characterstoshow.Count, 20); i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = null;
         }
@@ -399,29 +464,6 @@ public class UnitDeploymentScript : MonoBehaviour
 
         }
         return numberofunits;
-    }
-
-    private void OrderUnits()
-    {
-        bool intestmap = SceneManager.GetActiveScene().name == "TestMap";
-        List<Character> newcharacterlist = new List<Character>();
-        foreach (Character character in DataScript.PlayableCharacterList)
-        {
-            if (character.playableStats.deployunit && (character.playableStats.unlocked || intestmap))
-            {
-                newcharacterlist.Add(character);
-                character.playableStats.deployunit = false;
-            }
-
-        }
-        foreach (Character character in DataScript.PlayableCharacterList)
-        {
-            if (!newcharacterlist.Contains(character))
-            {
-                newcharacterlist.Add(character);
-            }
-        }
-        DeployableUnitList = newcharacterlist;
     }
 
 
@@ -464,8 +506,8 @@ public class UnitDeploymentScript : MonoBehaviour
                 break;
 
         }
-        skillwindowindex = 0;
-        InitializeButtons(InitializeCharactersToShow());
+        windowindex = 0;
+        InitializeButtons(DeployableUnitList);
         EventSystem.current.SetSelectedGameObject(topbuttons[0]);
     }
 
