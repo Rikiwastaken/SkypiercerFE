@@ -392,6 +392,9 @@ public class UnitScript : MonoBehaviour
 
     private List<equipment> oldequipment;
     public bool lockExamode;
+    public float growthPerLuckPoint = 0.25f;
+    public int geniusgrowthboost = 25;
+    public int cystalheartgrowthboost = 10;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -2728,7 +2731,7 @@ public class UnitScript : MonoBehaviour
         //Genius
         if (GetSkill(10))
         {
-            int geniusgrowthboost = 25;
+
             GrowthtoApply.HPGrowth += geniusgrowthboost;
             GrowthtoApply.PsycheGrowth += geniusgrowthboost;
             GrowthtoApply.StrengthGrowth += geniusgrowthboost;
@@ -2741,7 +2744,7 @@ public class UnitScript : MonoBehaviour
         //Crystal Heart, Guardian Spirit, Hero's Heir
         if (GetSkill(57) || GetSkill(72) || GetSkill(73))
         {
-            int cystalheartgrowthboost = 10;
+
             GrowthtoApply.HPGrowth += cystalheartgrowthboost;
             GrowthtoApply.PsycheGrowth += cystalheartgrowthboost;
             GrowthtoApply.StrengthGrowth += cystalheartgrowthboost;
@@ -2769,7 +2772,7 @@ public class UnitScript : MonoBehaviour
         }
 
         // Luck Growth Increase
-        float growthPerLuckPoint = 0.25f;
+
         int GrowthBonus = (int)(growthPerLuckPoint * luckstat);
 
         GrowthtoApply.HPGrowth += GrowthBonus;
@@ -2781,56 +2784,73 @@ public class UnitScript : MonoBehaviour
         GrowthtoApply.DexterityGrowth += GrowthBonus;
         GrowthtoApply.LuckGrowth += GrowthBonus;
 
-        int bonussize = 20;
+
         if (GetFirstWeapon() != null && GetFirstWeapon().type != null)
         {
-            switch (GetFirstWeapon().type.ToLower())
-            {
-                case "sword":
-                    GrowthtoApply.SpeedGrowth += bonussize;
-                    GrowthtoApply.StrengthGrowth += bonussize;
-                    GrowthtoApply.HPGrowth -= bonussize;
-                    break;
-                case "spear":
-                    GrowthtoApply.StrengthGrowth += bonussize;
-                    GrowthtoApply.PsycheGrowth += bonussize;
-                    GrowthtoApply.ResistanceGrowth -= bonussize;
-                    break;
-                case "greatsword":
-                    GrowthtoApply.StrengthGrowth += bonussize;
-                    GrowthtoApply.DefenseGrowth += bonussize;
-                    GrowthtoApply.SpeedGrowth -= bonussize;
-                    break;
-                case "bow":
-                    GrowthtoApply.StrengthGrowth += bonussize;
-                    GrowthtoApply.DexterityGrowth += bonussize;
-                    GrowthtoApply.DefenseGrowth -= bonussize;
-                    break;
-                case "scythe":
-                    GrowthtoApply.PsycheGrowth += bonussize;
-                    GrowthtoApply.HPGrowth += bonussize;
-                    GrowthtoApply.SpeedGrowth -= bonussize;
-                    break;
-                case "shield":
-                    GrowthtoApply.HPGrowth += bonussize;
-                    GrowthtoApply.DefenseGrowth += bonussize;
-                    GrowthtoApply.PsycheGrowth -= bonussize;
-                    break;
-                case "staff":
-                    GrowthtoApply.PsycheGrowth += bonussize;
-                    GrowthtoApply.ResistanceGrowth += bonussize;
-                    GrowthtoApply.StrengthGrowth -= bonussize;
-                    break;
-                case "dagger":
-                    GrowthtoApply.SpeedGrowth += bonussize;
-                    GrowthtoApply.DexterityGrowth += bonussize;
-                    GrowthtoApply.PsycheGrowth -= bonussize;
-                    break;
-            }
+            StatGrowth growthbonus = CalculateGrowthBonusByBlade(GetFirstWeapon().type);
+            GrowthtoApply.HPGrowth += growthbonus.HPGrowth;
+            GrowthtoApply.StrengthGrowth += growthbonus.StrengthGrowth;
+            GrowthtoApply.PsycheGrowth += growthbonus.PsycheGrowth;
+            GrowthtoApply.DefenseGrowth += growthbonus.DefenseGrowth;
+            GrowthtoApply.ResistanceGrowth += growthbonus.ResistanceGrowth;
+            GrowthtoApply.SpeedGrowth += growthbonus.SpeedGrowth;
+            GrowthtoApply.DexterityGrowth += growthbonus.DexterityGrowth;
+            GrowthtoApply.LuckGrowth += growthbonus.LuckGrowth;
+
         }
 
 
         return GrowthtoApply;
+    }
+
+    public StatGrowth CalculateGrowthBonusByBlade(string BladeType)
+    {
+        int bonussize = 20;
+        StatGrowth growthbonus = new StatGrowth();
+        switch (BladeType.ToLower())
+        {
+            case "sword":
+                growthbonus.SpeedGrowth += bonussize;
+                growthbonus.StrengthGrowth += bonussize;
+                growthbonus.HPGrowth -= bonussize;
+                break;
+            case "spear":
+                growthbonus.StrengthGrowth += bonussize;
+                growthbonus.PsycheGrowth += bonussize;
+                growthbonus.ResistanceGrowth -= bonussize;
+                break;
+            case "greatsword":
+                growthbonus.StrengthGrowth += bonussize;
+                growthbonus.DefenseGrowth += bonussize;
+                growthbonus.SpeedGrowth -= bonussize;
+                break;
+            case "bow":
+                growthbonus.StrengthGrowth += bonussize;
+                growthbonus.DexterityGrowth += bonussize;
+                growthbonus.DefenseGrowth -= bonussize;
+                break;
+            case "scythe":
+                growthbonus.PsycheGrowth += bonussize;
+                growthbonus.HPGrowth += bonussize;
+                growthbonus.SpeedGrowth -= bonussize;
+                break;
+            case "shield":
+                growthbonus.HPGrowth += bonussize;
+                growthbonus.DefenseGrowth += bonussize;
+                growthbonus.PsycheGrowth -= bonussize;
+                break;
+            case "staff":
+                growthbonus.PsycheGrowth += bonussize;
+                growthbonus.ResistanceGrowth += bonussize;
+                growthbonus.StrengthGrowth -= bonussize;
+                break;
+            case "dagger":
+                growthbonus.SpeedGrowth += bonussize;
+                growthbonus.DexterityGrowth += bonussize;
+                growthbonus.PsycheGrowth -= bonussize;
+                break;
+        }
+        return growthbonus;
     }
 
     public void CalculateSkillPoints(Character Character = null)
