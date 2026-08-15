@@ -4,60 +4,39 @@
 
 Linework Lite is a free Unity package that allows you to render high-quality outlines and fill effects.
 
-For higher quality outlines, edge detection and surface fill effects, check out [the complete version of Linework](https://assetstore.unity.com/packages/vfx/shaders/linework-294140). The complete version als includes:
+For the full documentation that is always up to date: see [https://linework.ameye.dev/free-outline/](https://linework.ameye.dev/free-outline/).
 
-- **Soft Outline:** Renders outlines by generating a silhouette of an object and applying a dilation/blur effect, resulting in smooth, soft-edged contours around objects.
-- **Wide Outline:** Renders an outline by generating a signed distance field (SDF) for each object and then sampling it. This creates consistent outlines that smoothly follows the shape of an object.
-- **Edge Detection:** Renders outlines by detecting edges and discontinuities within the scene, such as differences in *depth*, *normal vector*, *color*, or *custom input buffers*. This process creates a consistent outline effect that is applied uniformly across the entire scene, making it suitable for both external and internal object boundaries.
-- **Surface Fill:** Renders fills by rendering an object with a fill material.
+## Getting Started
 
-[Documentation](https://linework.ameye.dev) • [Asset Store](https://assetstore.unity.com/packages/vfx/shaders/free-outline-326925) • [Discord](https://discord.gg/cFfQGzQdPn)
+### Installation
 
-## License
+After installing/importing the asset into Unity, you can check for compatibility issues between Linework and your project by opening the compatibility check window (*Window* > *Linework Lite* > *Compatibility*). Click on the *Check Compatibility* button and see if all checkmarks are green (pass) or white (informational). If not, you can click on any of them to see an explanation.
 
-The source code included with this asset can be freely modified to suit your needs. However, please adhere to the following restrictions:
+If the result is showing only green checkmarks or white messages, you are good to go! If not, see the [Troubleshooting and Known Limitations](https://linework.ameye.dev/known-limitations/) section or contact me if you have additional questions.
 
-- Do **not** upload the source code to any public repository (e.g., GitHub). You may omit the files or keep the repository private.
-- Do **not** use any part of this source code in new or existing publications on the Asset Store.
-- Do **not** resell the source code or the compiled version of it, either in full or in part. You can include the compiled version of the source code as an integrated component of your game.
+### Adding outlines
 
-Redistribution of Linework is **not** allowed. If you obtained a copy through other channels than the Asset Store, please respect my work of developing/maintaining Linework by purchasing a legitimate copy from the Asset Store.
+Outlines in Linework Lite are rendered using renderer features. Renderer features are the way to add render effects in projects using the Universal Render Pipeline. To add an outline, open the *Universal Renderer Data* asset of your project, click on *Add Renderer Feature*, and select the *Free Outline* renderer feature.
 
-[Asset Store](https://assetstore.unity.com/packages/vfx/shaders/free-outline-326925)
+The outline renderer feature stores its settings in a separate object that you can create somewhere in your Assets folder, by right-clicking and selecting *Create > Linework Lite > Free Outline Settings*.
 
-## Quick Start
+Drag the created settings into the object slot of the *Free Outline* renderer feature. You can now click the *Open* button to open the settings. By default, a newly created settings object will have a single outline added to it that is applied to the whole scene. If not, you can click the *Add Outline* button to add a new outline and select which rendering layer it should target.
 
-After importing the asset into Unity, you will be greeted by the support window. In the *Configure* tab, click on the *Detect* button. This will verify that everything is set up correctly in your project. If the support window does not open, you can open it by clicking *Window > Linework > About and Support*.
+### Rendering Layers
 
-If the result is showing only green checkmarks, you are good to go! If not, see the [Troubleshooting and Known Limitations](https://linework.ameye.dev/known-limitations/) section.
+Linework Lite outlines work using [Rendering Layers](https://linework.ameye.dev/outline-layers/) to control which objects should receive an outline. Read the linked documentation for more information.
 
-To get started, open the *Universal Renderer Data* asset, click on *Add Renderer Feature* and select the outline/fill effect that you would like to add. Each outline effect stores its settings in a separate object that you can create somewhere in your Assets folder, by right-clicking and selecting *Create > Linework > Outline Settings*.
+### Updating the package
 
-Drag the created settings into the object slot of the renderer feature. You can now click the *Open* button to open the settings.
+To update Linework, see [https://docs.unity3d.com/Manual/upm-ui-update2.html](https://docs.unity3d.com/Manual/upm-ui-update2.html).
 
-By default, the outline should be applied to the whole scene.
 
-Depending on which outline/fill effect you are using, you can find more detailed information about the different configuration options in the [Documentation](https://linework.ameye.dev).
+### Removing the package
 
-## Features
-
-Linework Lite contains a single renderer feature to render outlines.
-
-- **Free Outline:** Renders outlines by rendering an extruded version of an object behind the original object.
-
-For higher quality outlines, edge detection and surface fill effects, check out [the complete version of Linework](https://assetstore.unity.com/packages/vfx/shaders/linework-294140). The complete version als includes:
-
-- **Soft Outline:** Renders outlines by generating a silhouette of an object and applying a dilation/blur effect, resulting in smooth, soft-edged contours around objects.
-- **Wide Outline:** Renders an outline by generating a signed distance field (SDF) for each object and then sampling it. This creates consistent outlines that smoothly follows the shape of an object.
-- **Edge Detection:** Renders outlines by detecting edges and discontinuities within the scene, such as differences in *depth*, *normal vector*, *color*, or *custom input buffers*. This process creates a consistent outline effect that is applied uniformly across the entire scene, making it suitable for both external and internal object boundaries.
-- **Surface Fill:** Renders fills by rendering an object with a fill material.
-
-Each effect has an extensive range of settings such as which objects the outline is applied to, the visuals of the outline and the behavior of the outline.
-
-## Compatibility
-
-Linework Lite is compatible with **Unity 6** and the **Universal Render Pipeline**. Other combinations are not supported.
+To remove Linework, see [https://docs.unity3d.com/Manual/upm-ui-remove.html](https://docs.unity3d.com/Manual/upm-ui-remove.html).
 
 ## Contact
 
-[Discord](https://discord.gg/cFfQGzQdPn) • [@alexanderameye](https://twitter.com/alexanderameye) • [https://ameye.dev](https://ameye.dev)
+Need any help?
+
+[Discord](https://discord.gg/cFfQGzQdPn) • [https://ameye.dev](https://ameye.dev)

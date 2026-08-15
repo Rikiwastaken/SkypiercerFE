@@ -420,6 +420,26 @@ public class UnitScript : MonoBehaviour
             CanvasTransform.gameObject.SetActive(false);
             return;
         }
+        else
+        {
+            if (ActiveModel != null)
+            {
+                if (UnitCharacteristics.affiliation.ToLower() == "playable")
+                {
+                    gameObject.layer = LayerMask.NameToLayer("Players");
+
+                }
+                else if (UnitCharacteristics.affiliation.ToLower() == "other")
+                {
+                    gameObject.layer = LayerMask.NameToLayer("Others");
+                }
+                else
+                {
+                    gameObject.layer = LayerMask.NameToLayer("Enemies");
+                }
+                UpdateLayer(ActiveModel);
+            }
+        }
 
 
 
@@ -674,7 +694,7 @@ public class UnitScript : MonoBehaviour
                 animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow");
             }
 
-            UpdateRendererLayer();
+            //UpdateRendererLayer();
             Hidedeactivated();
 
             if (trylvlup)
@@ -2271,7 +2291,7 @@ public class UnitScript : MonoBehaviour
             {
                 _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
             }
-            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, scale, Charactertouse, spawninstantly);
+            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, ActiveModel.layer, scale, Charactertouse, spawninstantly);
             currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO();
             if (currentequipmentmodel != null)
             {
