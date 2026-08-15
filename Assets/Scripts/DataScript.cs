@@ -1423,7 +1423,7 @@ public class DataScript : MonoBehaviour
     }
 
 
-    [ContextMenu("Load Character Qutoes From JSON")]
+    [ContextMenu("Load Character Quotes From JSON")]
     private void LoadCharacterDialogues()
     {
         string path = UnityEditor.EditorUtility.OpenFilePanel("Select Character Quotes JSON File", "", "json");

@@ -37,7 +37,7 @@
             "DeathReaction_Kira": "Sorak, you have to stay alive, go!",
             "DeathReaction_Gale": "You fought bravely, Sorak. I'll show them what you were made of!",
             "GoodLvlUp": "I am stronger than ever before.",
-            "MidLvlUp": "I am still getting a bit stronger.",
+            "MidLvlUp": "Progress.",
             "LowLvlUp": "I am too old for all this..."
         },
         {
@@ -88,7 +88,7 @@
             "DeathReaction_Gale": "Gusto, your defense was legendary! Fall back.",
             "GoodLvlUp": "I wonder if this will make me a better cook...",
             "MidLvlUp": "This is nice!",
-            "LowLvlUp": "I'm too hungry... This sucks."
+            "LowLvlUp": "I'm too hungry for this."
         },
         {
             "CharacterID": 9,
@@ -122,13 +122,13 @@
         },
         {
             "CharacterID": 12,
-            "DeathQuote": "I leave the rest to you, kiddos...",
+            "DeathQuote": "I leave the rest to you, pupils...",
             "DeathReaction_Zack": "Bob, stop playing dead! Fall back!",
-            "DeathReaction_Kira": "Retreat, General! We'll cover you.",
+            "DeathReaction_Kira": "What kind of General are you? Just go, we'll cover you.",
             "DeathReaction_Gale": "Bob, you idiot! Just go!",
-            "GoodLvlUp": "To think my strength could grow even more...",
+            "GoodLvlUp": "To think I could grow even more...",
             "MidLvlUp": "I am the ultimate warrior!",
-            "LowLvlUp": "My strength has finally reached its peak..."
+            "LowLvlUp": "My power has finally reached its peak..."
         },
         {
             "CharacterID": 13,
@@ -152,13 +152,23 @@
         },
         {
             "CharacterID": 15,
-            "DeathQuote": "This is a good death!",
+            "DeathQuote": "This is a good death, I guess...",
             "DeathReaction_Zack": "Not on my watch, Erica! Run!",
             "DeathReaction_Kira": "You can't die here, Erica! Retreat!",
             "DeathReaction_Gale": "Erica, your time has yet to come! I will protect you!",
             "GoodLvlUp": "This will help me kick some butt!",
             "MidLvlUp": "I'm fired up!",
             "LowLvlUp": "Bummer..."
+        },
+        {
+            "CharacterID": 22,
+            "DeathQuote": "It looks like my luck finally ran out...",
+            "DeathReaction_Zack": "Lucy, we can't afford to lose you! Get behind us!",
+            "DeathReaction_Kira": "Leave the frontlines, Lucy. You've done enough.",
+            "DeathReaction_Gale": "Your time has yet to come, Lucy. I will cover your escape!",
+            "GoodLvlUp": "Lucky!",
+            "MidLvlUp": "Wow, all that?",
+            "LowLvlUp": "Well that's unfortunate...!"
         }
     ]
 }
