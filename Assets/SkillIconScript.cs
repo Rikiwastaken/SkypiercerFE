@@ -34,7 +34,7 @@ public class SkillIconScript : MonoBehaviour
         MainLogo.sprite = Logos[info.MainLogoID];
     }
 
-    public void DisableIcon(ImageIconInfo info)
+    public void DisableIcon()
     {
         Color emptycolor = Color.white;
         emptycolor.a = 0;

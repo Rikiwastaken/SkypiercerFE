@@ -76,7 +76,9 @@ public class BattleInfotext : MonoBehaviour
     private List<int> SkillButtonIDList = new List<int>();
     public TextMeshProUGUI SkillDescription;
     private Color BaseSkillColor;
-    private List<SkillIconScript> SkillIconScriptList = new List<SkillIconScript>();
+    public List<SkillIconScript> SkillIconScriptList;
+    public List<GameObject> SkillBars;
+    public List<TextMeshProUGUI> SkillNames;
 
     private float timefordisappearsrpite;
     public float Timefordisappearsrpite = 1f;
@@ -92,13 +94,8 @@ public class BattleInfotext : MonoBehaviour
         _CancelAction = InputSystem.actions.FindAction("Cancel");
         _ShowDetailsAction = InputSystem.actions.FindAction("ShowDetails");
         GridScript = GridScript.instance;
-        BaseSkillColor = SkillButtonList[0].image.color;
+        BaseSkillColor = SkillButtonList[0].GetComponent<Image>().color;
         attackTurnScript = FindAnyObjectByType<AttackTurnScript>(FindObjectsInactive.Include);
-        SkillIconScriptList = new List<SkillIconScript>();
-        foreach (Button button in SkillButtonList)
-        {
-            SkillIconScriptList.Add(button.GetComponentInChildren<SkillIconScript>());
-        }
     }
 
     // Update is called once per frame
@@ -135,6 +132,7 @@ public class BattleInfotext : MonoBehaviour
             {
                 transform.GetChild(0).gameObject.SetActive(true);
             }
+
         }
         else
         {
@@ -146,6 +144,10 @@ public class BattleInfotext : MonoBehaviour
             if (MasteryTexts[0].transform.parent.gameObject.activeSelf)
             {
                 MasteryTexts[0].transform.parent.gameObject.SetActive(false);
+            }
+            if (Skilltext.transform.parent.gameObject.activeSelf)
+            {
+                Skilltext.transform.parent.gameObject.SetActive(false);
             }
             return;
         }
@@ -590,9 +592,19 @@ public class BattleInfotext : MonoBehaviour
                 SkillButtonList[0].gameObject.SetActive(true);
             }
 
+            if (!SkillBars[0].gameObject.activeSelf)
+            {
+                SkillBars[0].gameObject.SetActive(true);
+            }
+
+            if (!SkillNames[0].gameObject.activeSelf)
+            {
+                SkillNames[0].gameObject.SetActive(true);
+            }
+
             DataScript.Skill unitskill = GetSkill(unit.UnitSkill);
-            SkillButtonList[0].image.color = BaseSkillColor;
-            SkillButtonList[0].GetComponentInChildren<TextMeshProUGUI>().text = unitskill.name;
+            SkillButtonList[0].GetComponent<Image>().color = BaseSkillColor;
+            SkillNames[0].text = unitskill.name;
             SkillIconScriptList[0].InitializeIcon(unitskill.SkillIconInfo);
             SkillButtonIDList.Add(unitskill.ID);
             usedindex++;
@@ -605,9 +617,19 @@ public class BattleInfotext : MonoBehaviour
                 SkillButtonList[usedindex].gameObject.SetActive(true);
             }
 
+            if (!SkillBars[usedindex].gameObject.activeSelf)
+            {
+                SkillBars[usedindex].gameObject.SetActive(true);
+            }
+
+            if (!SkillNames[usedindex].gameObject.activeSelf)
+            {
+                SkillNames[usedindex].gameObject.SetActive(true);
+            }
+
             DataScript.Skill unitskill = GetSkill(unit.SecondUnitSkill);
-            SkillButtonList[usedindex].image.color = BaseSkillColor;
-            SkillButtonList[usedindex].GetComponentInChildren<TextMeshProUGUI>().text = unitskill.name;
+            SkillButtonList[usedindex].GetComponent<Image>().color = BaseSkillColor;
+            SkillNames[usedindex].text = unitskill.name;
             SkillIconScriptList[usedindex].InitializeIcon(unitskill.SkillIconInfo);
             SkillButtonIDList.Add(unitskill.ID);
             usedindex++;
@@ -615,15 +637,25 @@ public class BattleInfotext : MonoBehaviour
 
         for (int i = 0; i < Mathf.Min(unit.EquipedSkills.Count, 5); i++)
         {
-            SkillButtonList[i].image.color = BaseSkillColor;
+            SkillButtonList[i].GetComponent<Image>().color = BaseSkillColor;
             if (!SkillButtonList[i + usedindex].gameObject.activeSelf)
             {
                 SkillButtonList[i + usedindex].gameObject.SetActive(true);
             }
 
+            if (!SkillBars[i + usedindex].gameObject.activeSelf)
+            {
+                SkillBars[i + usedindex].gameObject.SetActive(true);
+            }
+
+            if (!SkillNames[i + usedindex].gameObject.activeSelf)
+            {
+                SkillNames[i + usedindex].gameObject.SetActive(true);
+            }
+
             DataScript.Skill equipedskill = GetSkill(unit.EquipedSkills[i]);
 
-            SkillButtonList[i + usedindex].GetComponentInChildren<TextMeshProUGUI>().text = equipedskill.name;
+            SkillNames[i + usedindex].text = equipedskill.name;
             SkillIconScriptList[i + usedindex].InitializeIcon(equipedskill.SkillIconInfo);
             SkillButtonIDList.Add(equipedskill.ID);
         }
@@ -632,14 +664,25 @@ public class BattleInfotext : MonoBehaviour
         {
             if (i == Mathf.Min(unit.EquipedSkills.Count, 5) && unit.TemporarySkill != 0)
             {
-                SkillButtonList[i + usedindex].image.color = TemporarySkillColor;
+                SkillButtonList[i + usedindex].GetComponent<Image>().color = TemporarySkillColor;
                 if (!SkillButtonList[i + usedindex].gameObject.activeSelf)
                 {
                     SkillButtonList[i + usedindex].gameObject.SetActive(true);
                 }
+
+                if (!SkillBars[i + usedindex].gameObject.activeSelf)
+                {
+                    SkillBars[i + usedindex].gameObject.SetActive(true);
+                }
+
+                if (!SkillNames[i + usedindex].gameObject.activeSelf)
+                {
+                    SkillNames[i + usedindex].gameObject.SetActive(true);
+                }
+
                 DataScript.Skill tempskill = GetSkill(unit.TemporarySkill);
 
-                SkillButtonList[i + usedindex].GetComponentInChildren<TextMeshProUGUI>().text = tempskill.name;
+                SkillNames[i + usedindex].text = tempskill.name;
                 SkillIconScriptList[i + usedindex].InitializeIcon(tempskill.SkillIconInfo);
                 SkillButtonIDList.Add(tempskill.ID);
             }
@@ -649,6 +692,18 @@ public class BattleInfotext : MonoBehaviour
                 {
                     SkillButtonList[i + usedindex].gameObject.SetActive(false);
                 }
+
+                if (SkillBars[i + usedindex].gameObject.activeSelf)
+                {
+                    SkillBars[i + usedindex].gameObject.SetActive(false);
+                }
+
+                if (SkillNames[i + usedindex].gameObject.activeSelf)
+                {
+                    SkillNames[i + usedindex].gameObject.SetActive(false);
+                }
+
+                SkillIconScriptList[i + usedindex].DisableIcon();
             }
 
         }
@@ -670,6 +725,12 @@ public class BattleInfotext : MonoBehaviour
             {
                 SkillButtonList[i].gameObject.SetActive(false);
             }
+
+            if (SkillBars[i].gameObject.activeSelf)
+            {
+                SkillBars[i].gameObject.SetActive(false);
+            }
+            SkillIconScriptList[i].DisableIcon();
 
         }
 
