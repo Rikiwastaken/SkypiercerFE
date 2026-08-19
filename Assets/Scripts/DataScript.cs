@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static SaveManager;
+using static SkillIconScript;
 using static UnitScript;
 
 public class DataScript : MonoBehaviour
@@ -106,6 +107,7 @@ public class DataScript : MonoBehaviour
         public bool buyable;
         public bool AlwaysPresentInShop;
         public int ID;
+        public ImageIconInfo SkillIconInfo;
     }
 
     [Serializable]
@@ -1605,6 +1607,48 @@ public class DataScript : MonoBehaviour
             }
             Debug.Log(mapstring);
         }
+    }
+
+    [ContextMenu("Check if Skill icons are redondant")]
+    private void CheckSkillIcons()
+    {
+        List<List<Skill>> redondantskills = new List<List<Skill>>();
+        List<Skill> SkillSeen = new List<Skill>();
+        foreach (Skill skill in SkillList)
+        {
+            for (int i = 0; i < SkillSeen.Count; i++)
+            {
+                Skill skilltocompare = SkillSeen[i];
+                if (CompareSkillIcons(skill, skilltocompare))
+                {
+                    redondantskills.Add(new List<Skill> { skill, skilltocompare });
+                }
+            }
+            SkillSeen.Add(skill);
+        }
+        Debug.Log("Found " + redondantskills.Count + " couples of redondant skills");
+        foreach (List<Skill> skills in redondantskills)
+        {
+            Debug.Log("Skill " + skills[0].ID + ", " + skills[0].name + " is redondant with Skill " + skills[1].ID + ", " + skills[1].name);
+        }
+    }
+
+    //Return true if the same, false either way
+    private bool CompareSkillIcons(Skill FirstSkill, Skill SecondSkill)
+    {
+        if (FirstSkill.SkillIconInfo.InnerCircleColorID != SecondSkill.SkillIconInfo.InnerCircleColorID)
+        {
+            return false;
+        }
+        if (FirstSkill.SkillIconInfo.OuterCircleColorID != SecondSkill.SkillIconInfo.OuterCircleColorID)
+        {
+            return false;
+        }
+        if (FirstSkill.SkillIconInfo.MainLogoID != SecondSkill.SkillIconInfo.MainLogoID)
+        {
+            return false;
+        }
+        return true;
     }
 
 

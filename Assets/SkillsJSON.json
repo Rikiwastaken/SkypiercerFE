@@ -9,7 +9,12 @@
             "range": 0,
             "buyable": false,
             "AlwaysPresentInShop": false,
-            "ID": 0
+            "ID": 0,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Retreat",
@@ -20,7 +25,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 1
+            "ID": 1,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 3,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 14
+            }
         },
         {
             "name": "Despair",
@@ -31,7 +41,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 2
+            "ID": 2,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 4,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Psychic",
@@ -42,7 +57,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 3
+            "ID": 3,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 1,
+                "MainLogoID": 15
+            }
         },
         {
             "name": "Brute",
@@ -53,7 +73,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 4
+            "ID": 4,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 14
+            }
         },
         {
             "name": "Fast Legs",
@@ -64,7 +89,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 5
+            "ID": 5,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 3,
+                "InnerCircleColorID": 8,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Inspired",
@@ -75,7 +105,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 6
+            "ID": 6,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Full of beans",
@@ -86,7 +121,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 7
+            "ID": 7,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 8,
+                "MainLogoID": 1
+            }
         },
         {
             "name": "Inexhaustible",
@@ -97,7 +137,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 8
+            "ID": 8,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 1
+            }
         },
         {
             "name": "First aid",
@@ -108,7 +153,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 9
+            "ID": 9,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 2,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 14
+            }
         },
         {
             "name": "Genius",
@@ -119,7 +169,12 @@
             "range": 0,
             "buyable": false,
             "AlwaysPresentInShop": false,
-            "ID": 10
+            "ID": 10,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 8,
+                "MainLogoID": 16
+            }
         },
         {
             "name": "Fast Learner",
@@ -130,7 +185,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 11
+            "ID": 11,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 8,
+                "MainLogoID": 1
+            }
         },
         {
             "name": "Medic",
@@ -141,7 +201,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 12
+            "ID": 12,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 2,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Fast and Deadly",
@@ -152,7 +217,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 13
+            "ID": 13,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 7
+            }
         },
         {
             "name": "Invigorating",
@@ -163,7 +233,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 14
+            "ID": 14,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 14
+            }
         },
         {
             "name": "Sore Loser",
@@ -174,7 +249,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 15
+            "ID": 15,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 12
+            }
         },
         {
             "name": "Sniper",
@@ -185,7 +265,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 16
+            "ID": 16,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 4
+            }
         },
         {
             "name": "Tempest",
@@ -196,7 +281,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 17
+            "ID": 17,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 1,
+                "MainLogoID": 8
+            }
         },
         {
             "name": "Nimble",
@@ -207,7 +297,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 18
+            "ID": 18,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 4,
+                "MainLogoID": 7
+            }
         },
         {
             "name": "Lucky Seven",
@@ -218,7 +313,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 19
+            "ID": 19,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 7
+            }
         },
         {
             "name": "Patient",
@@ -229,7 +329,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 20
+            "ID": 20,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 2,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 16
+            }
         },
         {
             "name": "In Great Shape",
@@ -240,7 +345,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 21
+            "ID": 21,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 4,
+                "MainLogoID": 5
+            }
         },
         {
             "name": "Competitive",
@@ -251,7 +361,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 22
+            "ID": 22,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 6,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Giant Crusher",
@@ -262,7 +377,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 23
+            "ID": 23,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 6,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 2
+            }
         },
         {
             "name": "Last Stand",
@@ -273,7 +393,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 24
+            "ID": 24,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 6,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 12
+            }
         },
         {
             "name": "Jack Of All Trades",
@@ -284,7 +409,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": true,
-            "ID": 25
+            "ID": 25,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 8,
+                "MainLogoID": 12
+            }
         },
         {
             "name": "Solitary",
@@ -295,7 +425,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 26
+            "ID": 26,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Cleaver",
@@ -306,7 +441,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 27
+            "ID": 27,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 4
+            }
         },
         {
             "name": "Revenge",
@@ -317,7 +457,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 28
+            "ID": 28,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 2,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 1
+            }
         },
         {
             "name": "Killing Spree",
@@ -328,7 +473,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 29
+            "ID": 29,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 7
+            }
         },
         {
             "name": "Compassion",
@@ -339,7 +489,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 30
+            "ID": 30,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 2,
+                "InnerCircleColorID": 1,
+                "MainLogoID": 6
+            }
         },
         {
             "name": "Verso",
@@ -350,7 +505,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 31
+            "ID": 31,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 3,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Survivor",
@@ -361,7 +521,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 32
+            "ID": 32,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 5
+            }
         },
         {
             "name": "Focus",
@@ -372,7 +537,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 33
+            "ID": 33,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 3,
+                "InnerCircleColorID": 1,
+                "MainLogoID": 13
+            }
         },
         {
             "name": "Rebound",
@@ -383,7 +553,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 34
+            "ID": 34,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 2,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 6
+            }
         },
         {
             "name": "Loyal",
@@ -394,7 +569,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 35
+            "ID": 35,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 3,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Bravery",
@@ -405,7 +585,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 36
+            "ID": 36,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 14
+            }
         },
         {
             "name": "Noble Fight",
@@ -416,7 +601,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 37
+            "ID": 37,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Spite",
@@ -427,7 +617,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 38
+            "ID": 38,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 4
+            }
         },
         {
             "name": "Thousand Needles",
@@ -438,7 +633,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 39
+            "ID": 39,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 7
+            }
         },
         {
             "name": "One for All",
@@ -449,7 +649,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 40
+            "ID": 40,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Together we ride",
@@ -460,7 +665,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 41
+            "ID": 41,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Readiness",
@@ -471,7 +681,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 42
+            "ID": 42,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 3,
+                "InnerCircleColorID": 1,
+                "MainLogoID": 1
+            }
         },
         {
             "name": "Recklessness",
@@ -482,7 +697,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 43
+            "ID": 43,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Unyielding",
@@ -493,7 +713,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 44
+            "ID": 44,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 5
+            }
         },
         {
             "name": "Transparent Crossbow",
@@ -504,7 +729,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 45
+            "ID": 45,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 3
+            }
         },
         {
             "name": "Warming Up",
@@ -515,7 +745,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 46
+            "ID": 46,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 3,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Transfuse",
@@ -526,7 +761,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 47
+            "ID": 47,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 5
+            }
         },
         {
             "name": "Motivate",
@@ -537,7 +777,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 48
+            "ID": 48,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 1,
+                "MainLogoID": 14
+            }
         },
         {
             "name": "Swap",
@@ -548,7 +793,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": true,
-            "ID": 49
+            "ID": 49,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Reinvigorate",
@@ -559,7 +809,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 50
+            "ID": 50,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Jump",
@@ -570,7 +825,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 51
+            "ID": 51,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 15
+            }
         },
         {
             "name": "Fortify",
@@ -581,7 +841,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 52
+            "ID": 52,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 4,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Smoke Bomb",
@@ -592,7 +857,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 53
+            "ID": 53,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Chakra",
@@ -603,7 +873,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 54
+            "ID": 54,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 14
+            }
         },
         {
             "name": "Enduring",
@@ -614,7 +889,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 55
+            "ID": 55,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 2
+            }
         },
         {
             "name": "Copy",
@@ -625,7 +905,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": true,
-            "ID": 56
+            "ID": 56,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 8,
+                "MainLogoID": 16
+            }
         },
         {
             "name": "Crystal Heart",
@@ -636,7 +921,12 @@
             "range": 0,
             "buyable": false,
             "AlwaysPresentInShop": false,
-            "ID": 57
+            "ID": 57,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 8,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Weakness",
@@ -647,7 +937,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": true,
-            "ID": 58
+            "ID": 58,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 8,
+                "MainLogoID": 25
+            }
         },
         {
             "name": "Sundance",
@@ -658,7 +953,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 59
+            "ID": 59,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 5,
+                "MainLogoID": 9
+            }
         },
         {
             "name": "Raindance",
@@ -669,7 +969,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 60
+            "ID": 60,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 5,
+                "MainLogoID": 8
+            }
         },
         {
             "name": "Amphibian",
@@ -680,7 +985,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 61
+            "ID": 61,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 4,
+                "MainLogoID": 8
+            }
         },
         {
             "name": "Shut-in",
@@ -691,7 +1001,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 62
+            "ID": 62,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 9
+            }
         },
         {
             "name": "Master Hunter",
@@ -702,7 +1017,12 @@
             "range": 0,
             "buyable": false,
             "AlwaysPresentInShop": false,
-            "ID": 63
+            "ID": 63,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 14
+            }
         },
         {
             "name": "Showdown",
@@ -713,7 +1033,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 64
+            "ID": 64,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 1,
+                "MainLogoID": 3
+            }
         },
         {
             "name": "Fair Play",
@@ -724,7 +1049,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 65
+            "ID": 65,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 3
+            }
         },
         {
             "name": "Friendly",
@@ -735,7 +1065,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 66
+            "ID": 66,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 6,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 17
+            }
         },
         {
             "name": "Friends are power",
@@ -746,7 +1081,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 67
+            "ID": 67,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 17
+            }
         },
         {
             "name": "Violent Misuse",
@@ -757,7 +1097,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 68
+            "ID": 68,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 4
+            }
         },
         {
             "name": "Redirection",
@@ -768,7 +1113,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 69
+            "ID": 69,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 1,
+                "MainLogoID": 15
+            }
         },
         {
             "name": "Blade Conversion",
@@ -779,7 +1129,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 70
+            "ID": 70,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Blade Sacrifice",
@@ -790,7 +1145,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 71
+            "ID": 71,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Occidens Strategist",
@@ -801,7 +1161,12 @@
             "range": 0,
             "buyable": false,
             "AlwaysPresentInShop": false,
-            "ID": 72
+            "ID": 72,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 8,
+                "MainLogoID": 15
+            }
         },
         {
             "name": "Hero's Heir",
@@ -812,7 +1177,12 @@
             "range": 0,
             "buyable": false,
             "AlwaysPresentInShop": false,
-            "ID": 73
+            "ID": 73,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 8,
+                "MainLogoID": 3
+            }
         },
         {
             "name": "Eye of Shining Justice",
@@ -823,7 +1193,12 @@
             "range": 0,
             "buyable": false,
             "AlwaysPresentInShop": false,
-            "ID": 74
+            "ID": 74,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 3
+            }
         },
         {
             "name": "Dried",
@@ -834,7 +1209,12 @@
             "range": 0,
             "buyable": false,
             "AlwaysPresentInShop": false,
-            "ID": 75
+            "ID": 75,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 5,
+                "InnerCircleColorID": 5,
+                "MainLogoID": 12
+            }
         },
         {
             "name": "Taunt",
@@ -845,7 +1225,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 76
+            "ID": 76,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 4,
+                "MainLogoID": 5
+            }
         },
         {
             "name": "Caelum General",
@@ -856,10 +1241,15 @@
             "range": 0,
             "buyable": false,
             "AlwaysPresentInShop": false,
-            "ID": 77
+            "ID": 77,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 6,
+                "InnerCircleColorID": 4,
+                "MainLogoID": 7
+            }
         },
         {
-            "name": "Overly Caustious",
+            "name": "Overly Cautious",
             "Descriptions": "Increases dodge rate by 20% but reduces crit chance by 30%.",
             "IsCommand": false,
             "Cost": 5,
@@ -867,7 +1257,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 78
+            "ID": 78,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 4,
+                "MainLogoID": 3
+            }
         },
         {
             "name": "Break",
@@ -878,7 +1273,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 79
+            "ID": 79,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 5
+            }
         },
         {
             "name": "Brawl Master",
@@ -889,7 +1289,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 80
+            "ID": 80,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 14
+            }
         },
         {
             "name": "Hook",
@@ -900,7 +1305,12 @@
             "range": 3,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 81
+            "ID": 81,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 13
+            }
         },
         {
             "name": "Throw",
@@ -911,7 +1321,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 82
+            "ID": 82,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 14
+            }
         },
         {
             "name": "Born to burn",
@@ -922,7 +1337,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 83
+            "ID": 83,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 19
+            }
         },
         {
             "name": "Reverse Blade Technique",
@@ -933,7 +1353,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 84
+            "ID": 84,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 24
+            }
         },
         {
             "name": "Lightning Edge",
@@ -944,7 +1369,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 85
+            "ID": 85,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 21
+            }
         },
         {
             "name": "Blazing Edge",
@@ -955,7 +1385,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 86
+            "ID": 86,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 19
+            }
         },
         {
             "name": "Unphasable",
@@ -966,7 +1401,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 87
+            "ID": 87,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 2,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 17
+            }
         },
         {
             "name": "Cure",
@@ -977,7 +1417,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 88
+            "ID": 88,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 17
+            }
         },
         {
             "name": "Burning Soul",
@@ -988,7 +1433,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 89
+            "ID": 89,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 4,
+                "MainLogoID": 19
+            }
         },
         {
             "name": "LightSpeed",
@@ -999,7 +1449,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 90
+            "ID": 90,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 4,
+                "MainLogoID": 21
+            }
         },
         {
             "name": "All In",
@@ -1010,7 +1465,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 91
+            "ID": 91,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 22
+            }
         },
         {
             "name": "Reckless Abandon",
@@ -1021,7 +1481,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 92
+            "ID": 92,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 12
+            }
         },
         {
             "name": "Contamination",
@@ -1032,7 +1497,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 93
+            "ID": 93,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 6,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Photosynthesis",
@@ -1043,7 +1513,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 94
+            "ID": 94,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 2,
+                "InnerCircleColorID": 3,
+                "MainLogoID": 9
+            }
         },
         {
             "name": "Killer",
@@ -1054,7 +1529,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 95
+            "ID": 95,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 7
+            }
         },
         {
             "name": "Power Transfer",
@@ -1065,7 +1545,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 96
+            "ID": 96,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 22
+            }
         },
         {
             "name": "Guardian Spirit",
@@ -1076,7 +1561,12 @@
             "range": 0,
             "buyable": false,
             "AlwaysPresentInShop": false,
-            "ID": 97
+            "ID": 97,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 15
+            }
         },
         {
             "name": "Sword Mastery",
@@ -1087,7 +1577,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 98
+            "ID": 98,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Greatsword Mastery",
@@ -1098,7 +1593,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 99
+            "ID": 99,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 2
+            }
         },
         {
             "name": "Spear Mastery",
@@ -1109,7 +1609,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 100
+            "ID": 100,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 1
+            }
         },
         {
             "name": "Shield Mastery",
@@ -1120,7 +1625,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 101
+            "ID": 101,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 5
+            }
         },
         {
             "name": "Staff Mastery",
@@ -1131,7 +1641,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 102
+            "ID": 102,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 6
+            }
         },
         {
             "name": "Scythe Mastery",
@@ -1142,7 +1657,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 103
+            "ID": 103,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 4
+            }
         },
         {
             "name": "Bow Mastery",
@@ -1153,7 +1673,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 104
+            "ID": 104,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 3
+            }
         },
         {
             "name": "Dagger Mastery",
@@ -1164,7 +1689,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 105
+            "ID": 105,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 7
+            }
         },
         {
             "name": "Ace in the sleeve",
@@ -1175,7 +1705,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 106
+            "ID": 106,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 15
+            }
         },
         {
             "name": "Fortunate Star",
@@ -1186,7 +1721,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 107
+            "ID": 107,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 9
+            }
         },
         {
             "name": "Rigged Fight",
@@ -1197,7 +1737,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 108
+            "ID": 108,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 5
+            }
         },
         {
             "name": "Risky Bet",
@@ -1208,7 +1753,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 109
+            "ID": 109,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 7
+            }
         },
         {
             "name": "Protected by luck",
@@ -1219,7 +1769,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 110
+            "ID": 110,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 1,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 17
+            }
         },
         {
             "name": "Fortune's favor",
@@ -1230,7 +1785,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 111
+            "ID": 111,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 8,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 9
+            }
         },
         {
             "name": "Twist of Fate",
@@ -1241,7 +1801,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 112
+            "ID": 112,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 11
+            }
         },
         {
             "name": "Lucky Strike",
@@ -1252,7 +1817,12 @@
             "range": 0,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 113
+            "ID": 113,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 0,
+                "InnerCircleColorID": 9,
+                "MainLogoID": 0
+            }
         },
         {
             "name": "Study",
@@ -1263,7 +1833,12 @@
             "range": 1,
             "buyable": true,
             "AlwaysPresentInShop": false,
-            "ID": 114
+            "ID": 114,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 4,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 16
+            }
         }
     ]
 }

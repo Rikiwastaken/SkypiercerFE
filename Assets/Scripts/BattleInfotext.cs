@@ -76,6 +76,7 @@ public class BattleInfotext : MonoBehaviour
     private List<int> SkillButtonIDList = new List<int>();
     public TextMeshProUGUI SkillDescription;
     private Color BaseSkillColor;
+    private List<SkillIconScript> SkillIconScriptList = new List<SkillIconScript>();
 
     private float timefordisappearsrpite;
     public float Timefordisappearsrpite = 1f;
@@ -93,6 +94,11 @@ public class BattleInfotext : MonoBehaviour
         GridScript = GridScript.instance;
         BaseSkillColor = SkillButtonList[0].image.color;
         attackTurnScript = FindAnyObjectByType<AttackTurnScript>(FindObjectsInactive.Include);
+        SkillIconScriptList = new List<SkillIconScript>();
+        foreach (Button button in SkillButtonList)
+        {
+            SkillIconScriptList.Add(button.GetComponentInChildren<SkillIconScript>());
+        }
     }
 
     // Update is called once per frame
@@ -587,6 +593,7 @@ public class BattleInfotext : MonoBehaviour
             DataScript.Skill unitskill = GetSkill(unit.UnitSkill);
             SkillButtonList[0].image.color = BaseSkillColor;
             SkillButtonList[0].GetComponentInChildren<TextMeshProUGUI>().text = unitskill.name;
+            SkillIconScriptList[0].InitializeIcon(unitskill.SkillIconInfo);
             SkillButtonIDList.Add(unitskill.ID);
             usedindex++;
         }
@@ -601,6 +608,7 @@ public class BattleInfotext : MonoBehaviour
             DataScript.Skill unitskill = GetSkill(unit.SecondUnitSkill);
             SkillButtonList[usedindex].image.color = BaseSkillColor;
             SkillButtonList[usedindex].GetComponentInChildren<TextMeshProUGUI>().text = unitskill.name;
+            SkillIconScriptList[usedindex].InitializeIcon(unitskill.SkillIconInfo);
             SkillButtonIDList.Add(unitskill.ID);
             usedindex++;
         }
@@ -616,6 +624,7 @@ public class BattleInfotext : MonoBehaviour
             DataScript.Skill equipedskill = GetSkill(unit.EquipedSkills[i]);
 
             SkillButtonList[i + usedindex].GetComponentInChildren<TextMeshProUGUI>().text = equipedskill.name;
+            SkillIconScriptList[i + usedindex].InitializeIcon(equipedskill.SkillIconInfo);
             SkillButtonIDList.Add(equipedskill.ID);
         }
 
@@ -631,6 +640,7 @@ public class BattleInfotext : MonoBehaviour
                 DataScript.Skill tempskill = GetSkill(unit.TemporarySkill);
 
                 SkillButtonList[i + usedindex].GetComponentInChildren<TextMeshProUGUI>().text = tempskill.name;
+                SkillIconScriptList[i + usedindex].InitializeIcon(tempskill.SkillIconInfo);
                 SkillButtonIDList.Add(tempskill.ID);
             }
             else

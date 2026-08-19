@@ -16,6 +16,8 @@
 
 ## System 
 
+- Do cutscene for chapter 15->16.
+
 - Rework Animation for Animation Tree
 
 - Make visuals for telekinesis with animations activated.
