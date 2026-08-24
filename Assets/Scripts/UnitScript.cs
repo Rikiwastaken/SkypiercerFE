@@ -3335,18 +3335,22 @@ public class UnitScript : MonoBehaviour
         //Gale Side effect
         List<GameObject> allunitsGO = TurnManger.instance.playableunitGO;
         List<Character> allunits = TurnManger.instance.playableunit;
+
         foreach (GameObject characterGO in allunitsGO)
         {
             Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
-            if (ManhattanDistance(UnitCharacteristics, character) == 1 && character.playableStats.battalion.ToLower() == "gale" && character.affiliation == UnitCharacteristics.affiliation)
+            if (ManhattanDistance(UnitCharacteristics, character) == 1)
             {
-                statbonuses.FixedDamageReduction += (int)character.AjustedStats.Defense / 5;
-                statbonuses.FixedDamageBonus += (int)character.AjustedStats.Strength / 5;
-                //Loyal
-                if (characterGO.GetComponent<UnitScript>().GetSkill(35))
+                if (character.playableStats.battalion.ToLower() == "gale" && character.affiliation == UnitCharacteristics.affiliation)
                 {
                     statbonuses.FixedDamageReduction += (int)character.AjustedStats.Defense / 5;
                     statbonuses.FixedDamageBonus += (int)character.AjustedStats.Strength / 5;
+                    //Loyal
+                    if (characterGO.GetComponent<UnitScript>().GetSkill(35))
+                    {
+                        statbonuses.FixedDamageReduction += (int)character.AjustedStats.Defense / 5;
+                        statbonuses.FixedDamageBonus += (int)character.AjustedStats.Strength / 5;
+                    }
                 }
             }
         }
@@ -3476,6 +3480,40 @@ public class UnitScript : MonoBehaviour
     public AllStatsSkillBonus GetStatSkillBonus(GameObject enemy, bool incombat)
     {
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
+
+        List<List<GameObject>> UnitsGORankedByRange = new List<List<GameObject>>() { new List<GameObject>(), new List<GameObject>(), new List<GameObject>(), new List<GameObject>() };
+        List<GameObject> allunitsGO = TurnManger.instance.playableunitGO;
+        List<Character> allunits = TurnManger.instance.playableunit;
+
+        foreach (GameObject characterGO in allunitsGO)
+        {
+            Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
+            if (ManhattanDistance(UnitCharacteristics, character) <= 1 && character != UnitCharacteristics)
+            {
+                UnitsGORankedByRange[0].Add(characterGO);
+
+
+            }
+            if (ManhattanDistance(UnitCharacteristics, character) <= 2 && character != UnitCharacteristics)
+            {
+                UnitsGORankedByRange[1].Add(characterGO);
+
+            }
+            if (ManhattanDistance(UnitCharacteristics, character) <= 3 && character != UnitCharacteristics)
+            {
+                UnitsGORankedByRange[2].Add(characterGO);
+
+
+            }
+            if (ManhattanDistance(UnitCharacteristics, character) <= 4 && character != UnitCharacteristics)
+            {
+                UnitsGORankedByRange[3].Add(characterGO);
+
+
+            }
+
+        }
+
 
         equipment weapon = GetFirstWeapon();
 
@@ -3643,11 +3681,14 @@ public class UnitScript : MonoBehaviour
             }
 
             bool toofar = true;
-            foreach (Character otherunitchar in activelist)
+
+            foreach (GameObject unit in UnitsGORankedByRange[2]) // List 3 (with ID 2) is all units at less than 3 range
             {
-                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= 3 && otherunitchar != UnitCharacteristics)
+                Character otherunitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+                if (otherunitchar != UnitCharacteristics && UnitCharacteristics.affiliation == otherunitchar.affiliation)
                 {
-                    toofar = false; break;
+                    toofar = false;
+                    break;
                 }
             }
             if (toofar)
@@ -3726,24 +3767,14 @@ public class UnitScript : MonoBehaviour
         // Together we ride
         if (GetSkill(41))
         {
-            List<Character> activelist = null;
-            if (UnitCharacteristics.affiliation == "playable")
-            {
-                activelist = TurnManger.instance.playableunit;
-            }
-            else if (UnitCharacteristics.affiliation == "enemy")
-            {
-                activelist = TurnManger.instance.enemyunit;
-            }
-            else
-            {
-                activelist = TurnManger.instance.otherunits;
-            }
+
 
             int closepalls = 0;
-            foreach (Character otherunitchar in activelist)
+
+            foreach (GameObject unit in UnitsGORankedByRange[1]) // List 2 (with ID 1) is all units at less than 3 range
             {
-                if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= 2 && otherunitchar != UnitCharacteristics)
+                Character otherunitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+                if (otherunitchar != UnitCharacteristics && UnitCharacteristics.affiliation == otherunitchar.affiliation)
                 {
                     closepalls++;
                 }
@@ -4065,6 +4096,67 @@ public class UnitScript : MonoBehaviour
             }
         }
 
+
+        //Aura Skills
+        foreach (GameObject unit in UnitsGORankedByRange[1]) // List 2 (with ID 1) is all units at less than 2 range
+        {
+
+
+
+            Character otherunitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+
+
+            bool IsFriendUnit = true;
+            if (UnitCharacteristics.affiliation == "playable")
+            {
+                if (otherunitchar.affiliation == "enemy" || (otherunitchar.affiliation == "other" && otherunitchar.attacksfriends))
+                {
+                    IsFriendUnit = false;
+                }
+            }
+            else if (UnitCharacteristics.affiliation == "other")
+            {
+                if (otherunitchar.affiliation == "enemy" || (otherunitchar.affiliation == "playable" && UnitCharacteristics.attacksfriends))
+                {
+                    IsFriendUnit = false;
+                }
+            }
+            else if (UnitCharacteristics.affiliation == "enemy")
+            {
+                if (otherunitchar.affiliation == "playable" || (otherunitchar.affiliation == "other" && !otherunitchar.attacksfriends))
+                {
+                    IsFriendUnit = false;
+                }
+            }
+
+            //Intimidating Aura
+            if (unit.GetComponent<UnitScript>().GetSkill(115) && !IsFriendUnit)
+            {
+                statbonuses.FixedDamageBonus -= 5;
+            }
+
+            //Terrifying Aura
+            if (unit.GetComponent<UnitScript>().GetSkill(116) && !IsFriendUnit)
+            {
+                statbonuses.Hit -= 15;
+                statbonuses.Dodge -= 15;
+                statbonuses.Crit -= 15;
+            }
+
+            //Heroic Aura
+            if (unit.GetComponent<UnitScript>().GetSkill(117) && IsFriendUnit)
+            {
+                statbonuses.Hit += 20;
+                statbonuses.Dodge += 20;
+            }
+
+            //Empowering Aura
+            if (unit.GetComponent<UnitScript>().GetSkill(118) && IsFriendUnit)
+            {
+                statbonuses.FixedDamageBonus += 5;
+            }
+        }
 
 
 
