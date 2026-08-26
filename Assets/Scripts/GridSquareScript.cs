@@ -54,8 +54,8 @@ public class GridSquareScript : MonoBehaviour
 
     public string VisualType;
 
-    public ParticleSystem rainparticle;
-    public ParticleSystem sunparticle;
+    public GameObject rainparticle;
+    public GameObject sunparticle;
     public GameObject FireParticles;
     public GameObject BeaconObject;
 
@@ -154,13 +154,13 @@ public class GridSquareScript : MonoBehaviour
     {
         InitializePosition();
 
-        if (rainparticle != null && rainparticle.gameObject.activeSelf)
+        if (rainparticle != null && rainparticle.activeSelf)
         {
-            rainparticle.gameObject.SetActive(false);
+            rainparticle.SetActive(false);
         }
-        if (sunparticle != null && sunparticle.gameObject.activeSelf)
+        if (sunparticle != null && sunparticle.activeSelf)
         {
-            sunparticle.gameObject.SetActive(false);
+            sunparticle.SetActive(false);
         }
         if (type.ToLower() == "water" || type.ToLower() == "ruins" || type.ToLower() == "fortification" || type.ToLower() == "forest")
         {
@@ -422,34 +422,34 @@ public class GridSquareScript : MonoBehaviour
 
             if (RemainingRainTurns > 0)
             {
-                if (!rainparticle.gameObject.activeSelf)
+                if (!rainparticle.activeSelf)
                 {
-                    rainparticle.gameObject.SetActive(true);
+                    rainparticle.SetActive(true);
                 }
 
             }
             else
             {
-                if (rainparticle.gameObject.activeSelf)
+                if (rainparticle.activeSelf)
                 {
-                    rainparticle.gameObject.SetActive(false);
+                    rainparticle.SetActive(false);
                 }
 
             }
 
             if (RemainingSunTurns > 0)
             {
-                if (!GridScript.GetComponent<WeatherManager>().alwayssunny && !sunparticle.gameObject.activeSelf)
+                if (!GridScript.GetComponent<WeatherManager>().alwayssunny && !sunparticle.activeSelf)
                 {
-                    sunparticle.gameObject.SetActive(true);
+                    sunparticle.SetActive(true);
                 }
 
             }
             else
             {
-                if (sunparticle.gameObject.activeSelf)
+                if (sunparticle.activeSelf)
                 {
-                    sunparticle.gameObject.SetActive(false);
+                    sunparticle.SetActive(false);
                 }
 
             }

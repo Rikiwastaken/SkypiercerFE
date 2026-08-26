@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dad8d767d3377d646a82627aac93a204
+guid: 36ec222ea74c51641b63504e7cb689f5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,18 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ForestGround
-    second: {fileID: 2100000, guid: 5be5068aad440bd4dadad713f1c8b352, type: 2}
+      name: BaseMudGround
+    second: {fileID: 2100000, guid: 6440a4fabadf0b2418799a6034f7c41e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: NormalGround
-    second: {fileID: 2100000, guid: 1da29c6f14bc72446a92a803e006949e, type: 2}
+      name: BaseRockGround
+    second: {fileID: 2100000, guid: bf42bdb9d825432479cf33e82eb6026e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: RefliefMat
-    second: {fileID: 2100000, guid: ce561afcb141fc7498398e7142ef8f88, type: 2}
+      name: GrassGreen
+    second: {fileID: 2100000, guid: 38efa2495a27ae64cb42617019e33b32, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

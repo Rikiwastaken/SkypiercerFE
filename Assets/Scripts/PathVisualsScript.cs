@@ -58,11 +58,11 @@ public class PathVisualsScript : MonoBehaviour
                 GameObject newpiece = new GameObject();
                 newpiece.transform.parent = PathPiecesHolder;
                 newpiece.AddComponent<SpriteRenderer>();
-                newpiece.layer = LayerMask.NameToLayer("Grid");
+                newpiece.layer = LayerMask.NameToLayer("Default");
                 GameObject newpiecechild = new GameObject();
                 newpiecechild.transform.parent = newpiece.transform;
                 newpiecechild.AddComponent<SpriteRenderer>();
-                newpiecechild.layer = LayerMask.NameToLayer("Grid");
+                newpiecechild.layer = LayerMask.NameToLayer("Default");
                 PathGOList.Add(newpiece);
                 PathGOListLength = PathGOList.Count;
             }

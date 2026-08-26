@@ -628,8 +628,12 @@ public class AttackTurnScript : MonoBehaviour
 
                 foreach (GridSquareScript newtilestile in tilestochange)
                 {
-                    newtilestile.RemainingRainTurns = 0;
-                    newtilestile.RemainingSunTurns = 2;
+                    if (newtilestile != null)
+                    {
+                        newtilestile.RemainingRainTurns = 0;
+                        newtilestile.RemainingSunTurns = 2;
+                    }
+
                 }
             }
         }

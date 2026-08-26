@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: ForestGrass
+    second: {fileID: 2100000, guid: 5be5068aad440bd4dadad713f1c8b352, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Glass
     second: {fileID: 2100000, guid: 61462efe4a410cf4394122b2215f6099, type: 2}
   - first:

@@ -66,7 +66,7 @@ public class CharacterCircleVisuals : MonoBehaviour
                 newcircle.transform.localRotation = Quaternion.identity;
                 newcircle.AddComponent<SpriteRenderer>();
                 newcircle.GetComponent<SpriteRenderer>().sprite = CircleSprite;
-                newcircle.layer = LayerMask.NameToLayer("Grid");
+                newcircle.layer = LayerMask.NameToLayer("Default");
 
 
 
