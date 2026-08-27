@@ -9,6 +9,21 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: BurntWood
     second: {fileID: 2100000, guid: 7bfcc1d09943c4e4caea6808b42f552a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GroundMaterial
+    second: {fileID: 2100000, guid: 1cef938def0b527469f8ef0720c534dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LighterStone
+    second: {fileID: 2100000, guid: b747383878001c94dbaf7aa522f19c05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone
+    second: {fileID: 2100000, guid: 57affabf9cc8f1443a25f2ff280d83a8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

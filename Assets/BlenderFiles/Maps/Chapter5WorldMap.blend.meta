@@ -3,7 +3,22 @@ guid: 4aaf3072e7817484c9da2e2e333bc410
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkGrass
+    second: {fileID: 2100000, guid: 19daeccbc664d8141990dd03570ee008, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GreenGrass
+    second: {fileID: 2100000, guid: f9a94780aa94b7c4985400ab0bedcdbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PathMat
+    second: {fileID: 2100000, guid: 7566f004765b64046b3b33e2c3513c6e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

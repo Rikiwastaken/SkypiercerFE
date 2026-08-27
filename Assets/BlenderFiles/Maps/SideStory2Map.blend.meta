@@ -3,7 +3,22 @@ guid: 1d540f82ad5f96549a8ee065670906ba
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GrassMat
+    second: {fileID: 2100000, guid: f9a94780aa94b7c4985400ab0bedcdbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RockMat
+    second: {fileID: 2100000, guid: b747383878001c94dbaf7aa522f19c05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RockyGround
+    second: {fileID: 2100000, guid: 7566f004765b64046b3b33e2c3513c6e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

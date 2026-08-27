@@ -7,6 +7,21 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: DarkGrass
+    second: {fileID: 2100000, guid: e64c3036389ea2c45b7120379f426518, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dirt
+    second: {fileID: -6126091556477775235, guid: f8125c79c3d8ea64783fd95a78f7b776, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass
+    second: {fileID: 2100000, guid: 2f4f17c51d0df0b4f8b1c94b6cc9a7c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: StoneMat
     second: {fileID: 2100000, guid: 992220d25015dac41a16a601f6c34fc0, type: 2}
   - first:

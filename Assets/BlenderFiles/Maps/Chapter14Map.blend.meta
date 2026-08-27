@@ -8,12 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ForestMat
-    second: {fileID: 2100000, guid: 5be5068aad440bd4dadad713f1c8b352, type: 2}
+    second: {fileID: 2100000, guid: e64c3036389ea2c45b7120379f426518, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Goudron
     second: {fileID: 2100000, guid: 6072663deee10634bb592a333ff38847, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GrassMat
+    second: {fileID: 2100000, guid: f9a94780aa94b7c4985400ab0bedcdbb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
