@@ -12,8 +12,6 @@ public class SkillEditionScript : MonoBehaviour
 
     private GridScript gridscript;
 
-    public List<GameObject> PreBattleMenuItems;
-
     public TextMeshProUGUI BattalionText;
 
     public TextMeshProUGUI UnitsDeployedText;
@@ -492,11 +490,14 @@ public class SkillEditionScript : MonoBehaviour
     {
         for (int i = 0; i < Mathf.Min(InventorySkillList.Count - 10 * (skillwindowindex), 10); i++)
         {
-            SkillList.transform.GetChild(i).GetComponent<UnitDeploymentButton>().Item = InventorySkillList[i + 10 * (skillwindowindex)];
+            InventoryItem item = InventorySkillList[i + 10 * (skillwindowindex)];
+            SkillList.transform.GetChild(i).GetComponent<UnitDeploymentButton>().Item = item;
+            SkillList.transform.GetChild(i).GetComponentInChildren<SkillIconScript>().InitializeIcon(DataScript.instance.SkillList[item.ID].SkillIconInfo);
         }
         for (int i = Mathf.Min(InventorySkillList.Count - 10 * (skillwindowindex), 10); i < 10; i++)
         {
             SkillList.transform.GetChild(i).GetComponent<UnitDeploymentButton>().Item = null;
+            SkillList.transform.GetChild(i).GetComponentInChildren<SkillIconScript>().DisableIcon();
         }
 
         EventSystem.current.SetSelectedGameObject(SkillList.transform.GetChild(0).gameObject);

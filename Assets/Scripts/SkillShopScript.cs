@@ -22,6 +22,7 @@ public class SkillShopScript : MonoBehaviour
     [SerializeField] private Button SkillShopButton;
 
     private List<Button> Buttons;
+    private List<SkillIconScript> SkillIconList = new List<SkillIconScript>();
 
     private List<InventoryItem> InventorySkillList;
 
@@ -331,6 +332,7 @@ public class SkillShopScript : MonoBehaviour
         foreach (Transform child in ButtonHolder)
         {
             Buttons.Add(child.GetComponent<Button>());
+            SkillIconList.Add(child.GetComponentInChildren<SkillIconScript>());
         }
         for (int i = 0; i < Mathf.Min(SkillsToShow.Count - 10 * (skillwindowindex), 10); i++)
         {
@@ -343,12 +345,13 @@ public class SkillShopScript : MonoBehaviour
                 }
             }
 
-
             Buttons[i].GetComponent<UnitDeploymentButton>().Item = item;
+            SkillIconList[i].InitializeIcon(DataScript.instance.SkillList[item.ID].SkillIconInfo);
         }
         for (int i = Mathf.Min(SkillsToShow.Count - 10 * (skillwindowindex), 10); i < 10; i++)
         {
             Buttons[i].GetComponent<UnitDeploymentButton>().Item = null;
+            SkillIconList[i].DisableIcon();
         }
         List<int> skillsalreadyseen = DataScript.instance.SkillsAlreadySeenInShop;
         foreach (Transform child in ButtonHolder)
