@@ -3,7 +3,12 @@ guid: fad14da3560e5db41beb8962b493b1e7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AnchorMat
+    second: {fileID: -4973734387028869240, guid: 1977dde9f08844647be2d3095b314ad8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
