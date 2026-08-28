@@ -19,6 +19,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: PathMat
     second: {fileID: 2100000, guid: 7566f004765b64046b3b33e2c3513c6e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rust
+    second: {fileID: 2100000, guid: a2d4fa273dec15543b8d808e6540fbbf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodMat
+    second: {fileID: 2100000, guid: d1308064540b76a488431b360cee6b89, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -1,39 +1,9 @@
 fileFormatVersion: 2
-guid: 8fb576d96cfe9174287e00d10f2f4021
+guid: 487222d9288dfae4d95303990ad87773
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: DarkerGrey
-    second: {fileID: 2100000, guid: bf42bdb9d825432479cf33e82eb6026e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Darkgreen
-    second: {fileID: 2100000, guid: f9a94780aa94b7c4985400ab0bedcdbb, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Rust
-    second: {fileID: 2100000, guid: a2d4fa273dec15543b8d808e6540fbbf, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: StoneGrey
-    second: {fileID: 2100000, guid: 992220d25015dac41a16a601f6c34fc0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WoodLight
-    second: {fileID: 2100000, guid: ca5f9003d85586d4d96ea25bf9f6bb44, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WoodVeryLight
-    second: {fileID: 2100000, guid: d1308064540b76a488431b360cee6b89, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
