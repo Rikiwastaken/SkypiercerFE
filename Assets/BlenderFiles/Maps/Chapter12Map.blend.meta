@@ -22,6 +22,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: RoofMat
+    second: {fileID: 2100000, guid: aaeb19242acd726419288a3797a2472c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Stone
     second: {fileID: 2100000, guid: 57affabf9cc8f1443a25f2ff280d83a8, type: 2}
   materials:
