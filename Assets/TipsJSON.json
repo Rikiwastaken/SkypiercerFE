@@ -12,17 +12,17 @@
         },
         {
             "name": "Blades (1/3)",
-            "description": "Blades are the summoned weapons Hunters use to fight pluvials. The blade are sorted into 8 types. Each type gives different bonus in combat and when leveling up.\n\n<size=25><sprite=0></size> Swords increase the speed and dexterity of their wielder by 2 per weapon grade.\n  Growth modification : +10% str, +10% spd, -10% HP\n\n<size=25><sprite=1> </size> Spears decrease the enemy's dexterity by 2 per weapon grade..\n  Growth modification : +10% str, +10% psy, -10% res\n\n<size=25><sprite=2></size> Greatswords decrease the enemy's defense and resistance by 1 per weapon grade while decreasing the wielder's speed by 1 per weapon grade.\n  Growth modification : +10% str, +10% def, -10% spd",
+            "description": "Blades are the summoned weapons Hunters use to fight pluvials. The blade are sorted into 8 types. Each type gives different bonus in combat and when leveling up.\n\n<size=25><sprite=0></size> Swords increase the speed and dexterity of their wielder by 2 per weapon grade.\n  Growth modification : +20% str, +20% spd, -20% HP\n\n<size=25><sprite=1> </size> Spears decrease the enemy's dexterity by 2 per weapon grade..\n  Growth modification : +20% str, +20% psy, -20% res\n\n<size=25><sprite=2></size> Greatswords decrease the enemy's defense and resistance by 1 per weapon grade while decreasing the wielder's speed by 1 per weapon grade.\n  Growth modification : +20% str, +20% def, -20% spd",
             "chapterWhereUnlocks": 0
         },
         {
             "name": "Blades (2/3)",
-            "description": "<size=25><sprite=3></size> Bows are the only physical blade by the same maximum range as a telekinesis attack (2 tiles). When used with telekinesis, they can hit a target up to 3 tiles away. However, it cannot attack in melee range (1 tile).\n  Growth modification : +10% str, +10% dex, -10% def\n  \n<size=25><sprite=4></size> Scythes deal bonus damage to each enemy adjacent to the initial target equal to 25% of the damage they would have taken had they been attacked directly.\n  Growth modification : +10% psy, +10% HP, -10% spd\n\n<size=25><sprite=6></size> Shields increase the wielder's defense by 1 per weapon grade.\n  Growth modification : +10% hp, +10% def, -10% psy",
+            "description": "<size=25><sprite=3></size> Bows are the only physical blade by the same maximum range as a telekinesis attack (2 tiles). When used with telekinesis, they can hit a target up to 3 tiles away. However, it cannot attack in melee range (1 tile).\n  Growth modification : +20% str, +20% dex, -20% def\n  \n<size=25><sprite=4></size> Scythes deal bonus damage to each enemy adjacent to the initial target equal to 25% of the damage they would have taken had they been attacked directly.\n  Growth modification : +20% psy, +20% HP, -20% spd\n\n<size=25><sprite=6></size> Shields increase the wielder's defense by 1 per weapon grade.\n  Growth modification : +20% hp, +20% def, -20% psy",
             "chapterWhereUnlocks": 0
         },
         {
             "name": "Blades (3/3)",
-            "description": "<size=25><sprite=7></size> Staves can heal allies (using always psyche) but their base damage is reduced by 50% during combat.\n  Growth modification : +10% psy, +10% res, -10% str\n\n<size=25><sprite=27></size> Daggers have variation in their damage, dealing randomly either 50% or 150% damage.\n  Growth modification : +10% spd, +10% dex, -10% str",
+            "description": "<size=25><sprite=7></size> Staves can heal allies (using always psyche) but their base damage is reduced by 50% during combat.\n  Growth modification : +20% psy, +20% res, -20% str\n\n<size=25><sprite=27></size> Daggers have variation in their damage, dealing randomly either 50% or 150% damage.\n  Growth modification : +20% spd, +20% dex, -20% str",
             "chapterWhereUnlocks": 0
         },
         {
