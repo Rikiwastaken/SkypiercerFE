@@ -4,9 +4,6 @@
 
 - bouton pour montrer les ennemis marche pas
 - Parfois pas de visuel d'armes
-- En dialogue le neutral menu s'active parfois tous seul.
-- possible blocage si on essaye de déplacer les ennemis avant le combat.
-- Problème avec le bond de Lyv et Sorak.
 - En affichant les météo, le logo peut apparaître en dehors de la zone concernée.
 - Add safeguard to disable map when finishing map.
 - disable movement during combat
@@ -22,7 +19,6 @@
 - Bouger la camera sur la cible quand on choisit une cible d'attaque.
 - Bloquer la camera dans les menus
 - Enlever le bouton vert des bonds quand tu les regardes tous.
-- Mettre la possibilité de train les masteries si une unité à un niveau plus élevé, même si elle est unlocked.
 - Mettre un cercle pour montrer les effets de skills qui ont un rayon.
 
 ## System 

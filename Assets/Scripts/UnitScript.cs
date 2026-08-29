@@ -1534,13 +1534,34 @@ public class UnitScript : MonoBehaviour
             }
             if (mastery.weapontype.ToLower() == weapontounlock)
             {
-                if (mastery.Level > 0 && mastery.Level <= maxlevel || (mastery.Level == 0 && secundary))
+
+                int masteryearned = 1;
+                if (GetSkill(11))
                 {
-                    if (GetSkill(11))
+                    masteryearned += 1;
+                }
+                if (secundary)
+                {
+                    if (mastery.Level == 0)
                     {
-                        mastery.Exp += 1;
+                        mastery.Exp += masteryearned;
                     }
-                    mastery.Exp += 1;
+                    else
+                    {
+                        foreach (WeaponMastery unitMastery in UnitCharacteristics.Masteries)
+                        {
+                            if (unitMastery.weapontype.ToLower() == weapontounlock && unitMastery.Level > mastery.Level)
+                            {
+                                mastery.Exp += masteryearned;
+                            }
+                        }
+                    }
+
+                }
+                else if (mastery.Level > 0 && mastery.Level <= maxlevel)
+                {
+
+                    mastery.Exp += masteryearned;
                 }
             }
             LevelupMasteryCheck(mastery, character);
