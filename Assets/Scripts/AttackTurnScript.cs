@@ -1011,7 +1011,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
             (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
-            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && CharAttacker.attacksfriends));
+            bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && !CharAttacker.attacksfriends));
             if (ishealing)
             {
                 foresightScript.CreateAction(1, Attacker, target);
