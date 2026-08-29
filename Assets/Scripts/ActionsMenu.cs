@@ -1505,8 +1505,17 @@ public class ActionsMenu : MonoBehaviour
         }
         else if (Walltarget.isobstacle)
         {
-            TargetNameTMP.text = "Wall";
-            TargetText += "Wall\n";
+            if (Walltarget.IsPit)
+            {
+                TargetNameTMP.text = "Pit";
+                TargetText += "Pit\n";
+            }
+            else
+            {
+                TargetNameTMP.text = "Wall";
+                TargetText += "Wall\n";
+            }
+
         }
         else
         {

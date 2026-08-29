@@ -24,6 +24,7 @@ public class MapLoader : EditorWindow
     public class AllColors
     {
         public Color wall;
+        public Color pit;
         public Color Elevation0;
         public Color Elevation1;
         public Color Elevation2;
@@ -206,8 +207,18 @@ public class MapLoader : EditorWindow
 
                 if (newtile.GetComponent<GridSquareScript>().isobstacle)
                 {
-                    tilename = "wall";
+                    if (newtile.GetComponent<GridSquareScript>().IsPit)
+                    {
+                        tilename = "Pit";
+                    }
+                    else
+
+                    {
+                        tilename = "wall";
+                    }
+
                 }
+
                 else if (newtile.GetComponent<GridSquareScript>().isfinishtile)
                 {
                     tilename = "Finish";
@@ -274,13 +285,17 @@ public class MapLoader : EditorWindow
 
 
 
-        if (pixelColor.Equals(colors.wall))
+        if (pixelColor.Equals(colors.wall) || pixelColor.Equals(colors.pit))
         {
             Tile.GetComponent<GridSquareScript>().isobstacle = true;
         }
         else
         {
             Tile.GetComponent<GridSquareScript>().isobstacle = false;
+        }
+        if (pixelColor.Equals(colors.pit))
+        {
+            Tile.GetComponent<GridSquareScript>().IsPit = true;
         }
     }
 
@@ -559,7 +574,13 @@ public class MapLoader : EditorWindow
 
         AllColors NewColor = new AllColors();
 
-        NewColor.wall = ApproximateColor(ObstacleMap.GetPixel(0, 0));
+        Color wallcolor = ApproximateColor(ObstacleMap.GetPixel(0, 0));
+        NewColor.wall = wallcolor;
+        if (wallcolor.g < 0.5f)
+        {
+            NewColor.pit = wallcolor;
+        }
+
         if (ElevationMap != null)
         {
             NewColor.Elevation0 = ApproximateColor(ElevationMap.GetPixel(0, 4));

@@ -10,6 +10,7 @@ public class GridSquareScript : MonoBehaviour
     public SpriteRenderer filledimage;
     public SpriteRenderer BossFilledImage;
 
+
     public Vector2 GridCoordinates;
 
     private GridScript GridScript;
@@ -43,6 +44,7 @@ public class GridSquareScript : MonoBehaviour
     public string type;
 
     public bool isstairs;
+    public bool IsPit;
 
     public bool activated;
 
