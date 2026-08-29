@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class cameraScriptV2 : MonoBehaviour
@@ -90,6 +91,13 @@ public class cameraScriptV2 : MonoBehaviour
 
         if (_TurnManger.currentlyplaying == "playable" || _TurnManger.currentlyplaying == "tutorial")
         {
+
+            GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
+            if (currentSelected == null || currentSelected.activeSelf)
+            {
+                return;
+            }
+
             if (!_CameraAction.enabled)
             {
                 _CameraAction.Enable();
