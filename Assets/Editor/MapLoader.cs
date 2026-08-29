@@ -169,6 +169,7 @@ public class MapLoader : EditorWindow
             Debug.LogError("GridObject is not empty.");
             return;
         }
+        InitializeColors();
         for (int y = 0; y < ObstacleMap.height; y++)
         {
             for (int x = 0; x < ObstacleMap.width; x++)
@@ -185,7 +186,7 @@ public class MapLoader : EditorWindow
                 GameObject newtile = (GameObject)newtileObject;
                 newtile.transform.position = position;
 
-                InitializeColors();
+
 
                 ManageActivation(newtile, x, y);
                 ManageObstable(newtile, x, y);
@@ -284,8 +285,7 @@ public class MapLoader : EditorWindow
         }
 
 
-
-        if (pixelColor.Equals(colors.wall) || pixelColor.Equals(colors.pit))
+        if (SameColor(pixelColor, colors.wall, 0.1f) || SameColor(pixelColor, colors.pit, 0.1f))
         {
             Tile.GetComponent<GridSquareScript>().isobstacle = true;
         }
@@ -293,7 +293,7 @@ public class MapLoader : EditorWindow
         {
             Tile.GetComponent<GridSquareScript>().isobstacle = false;
         }
-        if (pixelColor.Equals(colors.pit))
+        if (SameColor(pixelColor, colors.pit, 0.1f))
         {
             Tile.GetComponent<GridSquareScript>().IsPit = true;
         }
