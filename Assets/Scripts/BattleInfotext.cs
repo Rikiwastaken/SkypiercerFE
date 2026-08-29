@@ -730,6 +730,11 @@ public class BattleInfotext : MonoBehaviour
             {
                 SkillBars[i].gameObject.SetActive(false);
             }
+
+            if (SkillNames[i + usedindex].gameObject.activeSelf)
+            {
+                SkillNames[i + usedindex].gameObject.SetActive(false);
+            }
             SkillIconScriptList[i].DisableIcon();
 
         }
