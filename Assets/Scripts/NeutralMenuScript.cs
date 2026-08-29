@@ -59,7 +59,7 @@ public class NeutralMenuScript : MonoBehaviour
 
         ManageSelection();
 
-        if (InputSystem.actions.FindAction("Cancel").IsPressed() || (textBubbleScript != null && textBubbleScript.indialogue))
+        if (InputSystem.actions.FindAction("Cancel").WasPerformedThisFrame() || (textBubbleScript != null && textBubbleScript.indialogue))
         {
             if (OptionsMenuTransfrom.gameObject.activeSelf)
             {

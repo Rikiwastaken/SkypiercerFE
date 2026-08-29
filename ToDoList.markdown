@@ -9,6 +9,7 @@
 - Problème avec le bond de Lyv et Sorak.
 - En affichant les météo, le logo peut apparaître en dehors de la zone concernée.
 - Add safeguard to disable map when finishing map.
+- Add option to return to world map from pre-battle and neutral
 
 ## Ideas
 
