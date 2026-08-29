@@ -1104,7 +1104,7 @@ public class UnitScript : MonoBehaviour
         {
             return;
         }
-        if (UnitCharacteristics.currentTile == null)
+        if (UnitCharacteristics.currentTile == null && UnitCharacteristics.position != null)
         {
             MoveTo(UnitCharacteristics.position);
         }
@@ -1803,7 +1803,7 @@ public class UnitScript : MonoBehaviour
         }
         GridSquareScript oldtile = null;
         GridSquareScript destTile = GridScript.GetTile(destination);
-        if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile) == gameObject) && !destTile.isobstacle)
+        if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile) == gameObject) && (destTile != null && !destTile.isobstacle))
         {
             if (UnitCharacteristics.currentTile != null)
             {
@@ -2411,7 +2411,10 @@ public class UnitScript : MonoBehaviour
     void HealthChangedHandler(int newHealth)
     {
         ManageLifebars();
-        UnitCharacteristics.currentTile.BossTileChanged();
+        if (UnitCharacteristics.currentTile != null)
+        {
+            UnitCharacteristics.currentTile.BossTileChanged();
+        }
         animator.SetFloat("HPratio", (float)newHealth / (float)UnitCharacteristics.AjustedStats.HP);
     }
 

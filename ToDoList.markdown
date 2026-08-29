@@ -8,6 +8,7 @@
 - possible blocage si on essaye de déplacer les ennemis avant le combat.
 - Problème avec le bond de Lyv et Sorak.
 - En affichant les météo, le logo peut apparaître en dehors de la zone concernée.
+- Add safeguard to disable map when finishing map.
 
 ## Ideas
 

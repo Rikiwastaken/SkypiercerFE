@@ -751,6 +751,10 @@ public class GridScript : MonoBehaviour
 
     public GameObject GetUnit(GridSquareScript tile)
     {
+        if (tile == null)
+        {
+            return null;
+        }
         foreach (GameObject unit in allunitGOs)
         {
             if (unit.Equals(null) || unit == null)

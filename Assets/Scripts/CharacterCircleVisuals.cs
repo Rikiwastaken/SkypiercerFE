@@ -93,7 +93,14 @@ public class CharacterCircleVisuals : MonoBehaviour
                 continue;
             }
 
+
+
             Character Char = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+            if (Char.currentTile == null)
+            {
+                continue;
+            }
 
             Color newcolor = new Color();
 
