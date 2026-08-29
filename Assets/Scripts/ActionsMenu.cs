@@ -1826,7 +1826,7 @@ public class ActionsMenu : MonoBehaviour
             {
                 int totaldamage = 0;
 
-                if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
+                if (unit.GetComponent<RandomScript>().GetHitValue(unithitrate) < unithitrate)
                 {
                     numberofhits++;
 
@@ -2026,7 +2026,7 @@ public class ActionsMenu : MonoBehaviour
 
     private (int, int, int) CalculateIfAttackHit(GameObject unit, GameObject target, int numberofhits, int unithitrate, int unitcrit, int unitdamage, int numberofcritials, int totaldamage, List<int> Damagelist, List<int> Critlist)
     {
-        if (unit.GetComponent<RandomScript>().GetHitValue() < unithitrate)
+        if (unit.GetComponent<RandomScript>().GetHitValue(unithitrate) < unithitrate)
         {
 
             numberofhits++;
@@ -2040,7 +2040,7 @@ public class ActionsMenu : MonoBehaviour
 
             if (weapon.type.ToLower() == "dagger")
             {
-                int personnalityvalue = unit.GetComponent<RandomScript>().GetPersonalityValue();
+                int personnalityvalue = unit.GetComponent<RandomScript>().GetPersonalityValue(0);
                 float variation = 0.5f;
                 if (weapon.Modifier != null && weapon.Modifier.ToLower() == "tricky")
                 {
@@ -2065,7 +2065,7 @@ public class ActionsMenu : MonoBehaviour
             }
 
             // calculating critical
-            if (unit.GetComponent<RandomScript>().GetCritValue() < unitcrit)
+            if (unit.GetComponent<RandomScript>().GetCritValue(unitcrit) < unitcrit)
             {
                 numberofcritials++;
                 totaldamage += unitdamage * 3;
@@ -2217,7 +2217,7 @@ public class ActionsMenu : MonoBehaviour
             if (unitGO.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
             {
                 int LuckMod = unitGO.GetComponent<UnitScript>().GetTriggerLuckModificator();
-                int randomvalue = unitGO.GetComponent<RandomScript>().GetPersonalityValue();
+                int randomvalue = unitGO.GetComponent<RandomScript>().GetPersonalityValue(15 + LuckMod);
                 if (randomvalue <= 15 + LuckMod)
                 {
                     unitChar.currentHP = 1;
@@ -2231,7 +2231,7 @@ public class ActionsMenu : MonoBehaviour
                 if (Leader != null && Leader.GetComponent<UnitScript>().UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
                 {
                     int LuckMod = unitGO.GetComponent<UnitScript>().GetTriggerLuckModificator();
-                    int randomvalue = unitGO.GetComponent<RandomScript>().GetPersonalityValue();
+                    int randomvalue = unitGO.GetComponent<RandomScript>().GetPersonalityValue(50 + LuckMod);
                     if (randomvalue <= 50 + LuckMod)
                     {
                         unitChar.currentHP = 1;

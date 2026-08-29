@@ -10,6 +10,8 @@
 - En affichant les météo, le logo peut apparaître en dehors de la zone concernée.
 - Add safeguard to disable map when finishing map.
 - disable movement during combat
+- La fenêtre de contre attaque montre des dégats même quand parfois les ennemis ne peuvent pas attaquer.
+- Les persos débloquent pas les blades quand ils le devraient
 
 ## Ideas
 
@@ -20,6 +22,8 @@
 - Bouger la camera sur la cible quand on choisit une cible d'attaque.
 - Bloquer la camera dans les menus
 - Enlever le bouton vert des bonds quand tu les regardes tous.
+- Mettre la possibilité de train les masteries si une unité à un niveau plus élevé, même si elle est unlocked.
+- Mettre un cercle pour montrer les effets de skills qui ont un rayon.
 
 ## System 
 

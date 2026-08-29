@@ -393,7 +393,7 @@ public class BossScript : MonoBehaviour
         }
         else
         {
-            int personnalityValue = GetComponent<RandomScript>().GetPersonalityValue();
+            int personnalityValue = GetComponent<RandomScript>().GetPersonalityValue(50);
             if (personnalityValue <= 50)
             {
                 for (int i = 0; i < GridScript.Grid.Count; i++)

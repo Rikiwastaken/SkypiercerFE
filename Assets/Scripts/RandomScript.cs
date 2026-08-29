@@ -8,15 +8,15 @@ public class RandomScript : MonoBehaviour
 
     [Header("Random Values")]
 
-    public List<int> HitValues;
+    public List<List<int>> HitValues;
 
     public int hitvaluesindex;
 
-    public List<int> CritValues;
+    public List<List<int>> CritValues;
 
     public int CritValuesindex;
 
-    public List<int> personalityValues;
+    public List<List<int>> personalityValues;
 
     public int personalityvaluesindex;
 
@@ -29,14 +29,14 @@ public class RandomScript : MonoBehaviour
     [Serializable]
     public class RandomLevelValues
     {
-        public int HPRandomValue;
-        public int StrengthRandomValue;
-        public int PsycheRandomValue;
-        public int DefenseRandomValue;
-        public int ResistanceRandomValue;
-        public int SpeedRandomValue;
-        public int DexterityRandomValue;
-        public int LuckRandomValue;
+        public List<int> HPRandomValue;
+        public List<int> StrengthRandomValue;
+        public List<int> PsycheRandomValue;
+        public List<int> DefenseRandomValue;
+        public List<int> ResistanceRandomValue;
+        public List<int> SpeedRandomValue;
+        public List<int> DexterityRandomValue;
+        public List<int> LuckRandomValue;
     }
 
     public List<RandomLevelValues> LevelValues;
@@ -67,9 +67,9 @@ public class RandomScript : MonoBehaviour
         initialized = true;
         UnitCharacter = GetComponent<UnitScript>().UnitCharacteristics;
 
-        HitValues = new List<int>();
-        CritValues = new List<int>();
-        personalityValues = new List<int>();
+        HitValues = new List<List<int>>();
+        CritValues = new List<List<int>>();
+        personalityValues = new List<List<int>>();
         levelValues = new List<RandomLevelValues> { };
         for (int i = 0; i < numberofRandomValues; i++)
         {
@@ -95,35 +95,59 @@ public class RandomScript : MonoBehaviour
         }
     }
 
-    public int GetHitValue()
+    public int GetHitValue(int target)
     {
         if (hitvaluesindex >= HitValues.Count)
         {
             hitvaluesindex = 0;
         }
-        int value = HitValues[hitvaluesindex];
+        int value = 0;
+        if (target > 50)
+        {
+            value = HitValues[hitvaluesindex][0];
+        }
+        else
+        {
+            value = HitValues[hitvaluesindex][1];
+        }
         hitvaluesindex++;
         return value;
     }
 
-    public int GetCritValue()
+    public int GetCritValue(int target)
     {
         if (CritValuesindex >= CritValues.Count)
         {
             CritValuesindex = 0;
         }
-        int value = CritValues[CritValuesindex];
+        int value = 0;
+        if (target > 50)
+        {
+            value = CritValues[CritValuesindex][0];
+        }
+        else
+        {
+            value = CritValues[CritValuesindex][1];
+        }
         CritValuesindex++;
         return value;
     }
 
-    public int GetPersonalityValue()
+    public int GetPersonalityValue(int target)
     {
         if (personalityvaluesindex >= personalityValues.Count)
         {
             personalityvaluesindex = 0;
         }
-        int value = personalityValues[personalityvaluesindex];
+        int value = 0;
+        if (target > 50)
+        {
+            value = personalityValues[personalityvaluesindex][0];
+        }
+        else
+        {
+            value = personalityValues[personalityvaluesindex][1];
+        }
         personalityvaluesindex++;
         return value;
     }
@@ -139,15 +163,16 @@ public class RandomScript : MonoBehaviour
         return randomLevelValues;
     }
 
-    private int CalculateAValue()
+    private List<int> CalculateAValue()
     {
         if (use2RN)
         {
-            return (UnityEngine.Random.Range(1, 101) + UnityEngine.Random.Range(1, 101)) / 2;
+            return new List<int> { (UnityEngine.Random.Range(1, 101) + UnityEngine.Random.Range(1, 101)) / 2, UnityEngine.Random.Range(1, 101) };
         }
         else
         {
-            return UnityEngine.Random.Range(1, 101);
+            int value = UnityEngine.Random.Range(1, 101);
+            return new List<int> { value, value };
         }
     }
 

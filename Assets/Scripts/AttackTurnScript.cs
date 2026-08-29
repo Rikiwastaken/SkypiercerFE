@@ -1276,7 +1276,8 @@ public class AttackTurnScript : MonoBehaviour
             if (unit1.GetComponent<UnitScript>().GetSkill(112) && charunit1.currentHP < charunit2.currentHP) //Twist of Fate
             {
                 int luckstat = (int)charunit1.AjustedStats.Luck + unit1.GetComponent<UnitScript>().GetStatSkillBonus(unit2, true).Luck;
-                if (unit1.GetComponent<RandomScript>().GetPersonalityValue() <= luckstat + unit1.GetComponent<UnitScript>().GetTriggerLuckModificator())
+                int targetvalue = luckstat + unit1.GetComponent<UnitScript>().GetTriggerLuckModificator();
+                if (unit1.GetComponent<RandomScript>().GetPersonalityValue(targetvalue) <= targetvalue)
                 {
                     int unit1previousHP = charunit1.currentHP;
                     charunit1.currentHP = Mathf.Min(charunit2.currentHP, (int)charunit1.AjustedStats.HP);
@@ -1380,7 +1381,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
 
             }
-            if (unit.GetComponent<RandomScript>().GetPersonalityValue() < 20)
+            if (unit.GetComponent<RandomScript>().GetPersonalityValue(20) < 20)
             {
                 unit.GetComponent<UnitScript>().GetNextWeapon();
             }
@@ -1486,7 +1487,7 @@ public class AttackTurnScript : MonoBehaviour
             {
                 if (potentialtargets.Count > 1)
                 {
-                    float randomvalue = (float)currentCharacter.GetComponent<RandomScript>().GetPersonalityValue() / 100f;
+                    float randomvalue = (float)currentCharacter.GetComponent<RandomScript>().GetPersonalityValue(0) / 100f;
 
                     int rankinlist = (int)Mathf.Max(0, (randomvalue * potentialtargets.Count - 1));
 
@@ -1591,7 +1592,7 @@ public class AttackTurnScript : MonoBehaviour
         else
         {
 
-            int personalityvalue = currentCharacter.GetComponent<RandomScript>().GetPersonalityValue();
+            int personalityvalue = currentCharacter.GetComponent<RandomScript>().GetPersonalityValue(0);
 
 
 
@@ -2059,7 +2060,7 @@ public class AttackTurnScript : MonoBehaviour
 
             if (charunit.enemyStats.personality.ToLower() == "deviant" || (charunit.enemyStats.personality.ToLower() == "coward" && charunit.currentHP <= charunit.AjustedStats.HP * 0.33f))
             {
-                int value = (int)(((float)unit.GetComponent<RandomScript>().GetPersonalityValue() / 100f) * 60f) - 30;
+                int value = (int)(((float)unit.GetComponent<RandomScript>().GetPersonalityValue(0) / 100f) * 60f) - 30;
                 reward += value;
             }
 

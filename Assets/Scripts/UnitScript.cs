@@ -1060,9 +1060,9 @@ public class UnitScript : MonoBehaviour
 
         int requiredTrigger = GetTriggerLuckModificator();
 
-        if (GetComponent<RandomScript>().GetPersonalityValue() < GetTriggerLuckModificator())
+        if (GetComponent<RandomScript>().GetPersonalityValue(requiredTrigger) < requiredTrigger)
         {
-            int PersonnalityValueForEffect = GetComponent<RandomScript>().GetPersonalityValue();
+            int PersonnalityValueForEffect = GetComponent<RandomScript>().GetPersonalityValue(0);
 
             if (PersonnalityValueForEffect < 25 && UnitCharacteristics.statusEffects.AccelerationTurns <= 0)
             {
@@ -3060,36 +3060,36 @@ public class UnitScript : MonoBehaviour
             RandomScript.RandomLevelValues levelValues = GetComponent<RandomScript>().GetLevelUpRandomValues();
 
 
-            float HPgain = GetLevelUpStatsChange(GrowthtoApply.HPGrowth, levelValues.HPRandomValue);
+            float HPgain = GetLevelUpStatsChange(GrowthtoApply.HPGrowth, levelValues.HPRandomValue[0]);
             UnitCharacteristics.stats.HP += HPgain;
             lvlupresult.Add((int)HPgain);
 
-            float Strengthgain = GetLevelUpStatsChange(GrowthtoApply.StrengthGrowth, levelValues.StrengthRandomValue);
+            float Strengthgain = GetLevelUpStatsChange(GrowthtoApply.StrengthGrowth, levelValues.StrengthRandomValue[0]);
             UnitCharacteristics.stats.Strength += Strengthgain;
             lvlupresult.Add((int)Strengthgain);
 
-            float Psychegain = GetLevelUpStatsChange(GrowthtoApply.PsycheGrowth, levelValues.PsycheRandomValue);
+            float Psychegain = GetLevelUpStatsChange(GrowthtoApply.PsycheGrowth, levelValues.PsycheRandomValue[0]);
             UnitCharacteristics.stats.Psyche += Psychegain;
             lvlupresult.Add((int)Psychegain);
 
-            float Defensegain = GetLevelUpStatsChange(GrowthtoApply.DefenseGrowth, levelValues.DefenseRandomValue);
+            float Defensegain = GetLevelUpStatsChange(GrowthtoApply.DefenseGrowth, levelValues.DefenseRandomValue[0]);
             UnitCharacteristics.stats.Defense += Defensegain;
             lvlupresult.Add((int)Defensegain);
 
-            float Resistancegain = GetLevelUpStatsChange(GrowthtoApply.ResistanceGrowth, levelValues.ResistanceRandomValue);
+            float Resistancegain = GetLevelUpStatsChange(GrowthtoApply.ResistanceGrowth, levelValues.ResistanceRandomValue[0]);
             UnitCharacteristics.stats.Resistance += Resistancegain;
             lvlupresult.Add((int)Resistancegain);
 
-            float Speedgain = GetLevelUpStatsChange(GrowthtoApply.SpeedGrowth, levelValues.SpeedRandomValue);
+            float Speedgain = GetLevelUpStatsChange(GrowthtoApply.SpeedGrowth, levelValues.SpeedRandomValue[0]);
             UnitCharacteristics.stats.Speed += Speedgain;
             lvlupresult.Add((int)Speedgain);
 
 
-            float Dexteritygain = GetLevelUpStatsChange(GrowthtoApply.DexterityGrowth, levelValues.DexterityRandomValue);
+            float Dexteritygain = GetLevelUpStatsChange(GrowthtoApply.DexterityGrowth, levelValues.DexterityRandomValue[0]);
             UnitCharacteristics.stats.Dexterity += Dexteritygain;
             lvlupresult.Add((int)Dexteritygain);
 
-            float Luckgain = GetLevelUpStatsChange(GrowthtoApply.LuckGrowth, levelValues.LuckRandomValue);
+            float Luckgain = GetLevelUpStatsChange(GrowthtoApply.LuckGrowth, levelValues.LuckRandomValue[0]);
             UnitCharacteristics.stats.Luck += Luckgain;
             lvlupresult.Add((int)Luckgain);
         }
@@ -4266,7 +4266,8 @@ public class UnitScript : MonoBehaviour
             //Rigged Fight
             if (GetSkill(108))
             {
-                if (GetComponent<RandomScript>().GetPersonalityValue() <= UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck + GetTriggerLuckModificator())
+                int targetvalue = (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck + GetTriggerLuckModificator());
+                if (GetComponent<RandomScript>().GetPersonalityValue(targetvalue) <= targetvalue)
                 {
                     statbonuses.DamageReduction += 50;
                 }
@@ -4276,7 +4277,8 @@ public class UnitScript : MonoBehaviour
             if (GetSkill(113))
             {
                 int Luck = (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck);
-                if (GetComponent<RandomScript>().GetPersonalityValue() <= Luck * 2 + GetTriggerLuckModificator())
+                int targetvalue = Luck * 2 + GetTriggerLuckModificator();
+                if (GetComponent<RandomScript>().GetPersonalityValue(targetvalue) <= targetvalue)
                 {
                     statbonuses.FixedDamageBonus += Luck / 2;
                 }
