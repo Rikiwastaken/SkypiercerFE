@@ -17,7 +17,6 @@
 - Faure que tu puisses changer d'arme pendant le menu.
 - Faire musique de joueur, musique d'ennemi et musique d'autre
 - Bouger la camera sur la cible quand on choisit une cible d'attaque.
-- Bloquer la camera dans les menus
 - Enlever le bouton vert des bonds quand tu les regardes tous.
 - Mettre un cercle pour montrer les effets de skills qui ont un rayon.
 
