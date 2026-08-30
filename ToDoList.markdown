@@ -6,7 +6,6 @@
 - Parfois pas de visuel d'armes
 - En affichant les météo, le logo peut apparaître en dehors de la zone concernée.
 - Add safeguard to disable map when finishing map.
-- disable movement during combat
 - La fenêtre de contre attaque montre des dégats même quand parfois les ennemis ne peuvent pas attaquer.
 - Les persos débloquent pas les blades quand ils le devraient
 

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnitScript;
@@ -137,8 +138,16 @@ public class GridScript : MonoBehaviour
         {
             movementbuffercounter = 0;
         }
+        bool currentselectedstate = false;
+        GameObject CurrentSelected = EventSystem.current.currentSelectedGameObject;
+        if (CurrentSelected != null)
+        {
+            currentselectedstate = checkIfCurrentSelectedIsActive(CurrentSelected.transform);
+        }
 
-        if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !NeutralMenu.activeSelf && !ForesightMenu.activeSelf && !TutorialWindowMenu.activeSelf && !(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf))
+
+        //if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !NeutralMenu.activeSelf && !ForesightMenu.activeSelf && !TutorialWindowMenu.activeSelf && !(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf))
+        if (moveCD <= 0 && (CurrentSelected == null || !currentselectedstate) && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !actionsMenu.GetComponent<ActionsMenu>().incombat)
         {
 
 
@@ -1599,6 +1608,25 @@ public class GridScript : MonoBehaviour
         }
         path.Reverse();
         return path;
+    }
+
+    private bool checkIfCurrentSelectedIsActive(Transform current)
+    {
+        if (current == null)
+        {
+            return true;
+        }
+        else
+        {
+            if (current.gameObject.activeSelf)
+            {
+                return checkIfCurrentSelectedIsActive(current.parent);
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
 }
