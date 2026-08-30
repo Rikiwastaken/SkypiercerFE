@@ -575,10 +575,15 @@ public class MapLoader : EditorWindow
         AllColors NewColor = new AllColors();
 
         Color wallcolor = ApproximateColor(ObstacleMap.GetPixel(0, 0));
+        Color pitcolor = ApproximateColor(ObstacleMap.GetPixel(0, 1));
         NewColor.wall = wallcolor;
-        if (wallcolor.g < 0.5f)
+        if (pitcolor.g > 0.5f || pitcolor == wallcolor)
         {
-            NewColor.pit = wallcolor;
+            NewColor.pit = Color.blue;
+        }
+        else
+        {
+            NewColor.pit = pitcolor;
         }
 
         if (ElevationMap != null)
