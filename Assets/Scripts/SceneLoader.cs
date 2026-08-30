@@ -92,7 +92,6 @@ public class SceneLoader : MonoBehaviour
         DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
         SceneToLoad = sceneName;
         Cutscenetoplay = cutscene;
-        SaveManager.instance.currentchapter = chapternumber;
         SceneManager.LoadScene("LoadingScene");
     }
 }
