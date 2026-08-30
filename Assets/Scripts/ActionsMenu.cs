@@ -149,6 +149,9 @@ public class ActionsMenu : MonoBehaviour
 
         if (targetlist != null && targetlist.Count > 0)
         {
+
+            cameraScriptV2.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
+
             if (_telekinesisaction.WasPressedThisFrame())
             {
                 ToggleTelekinesis(targetlist[activetargetid], isUnithealing);

@@ -65,7 +65,7 @@ public class cameraScriptV2 : MonoBehaviour
     private void Update()
     {
 
-        if (_TurnManger.currentlyplaying == "playable" || _TurnManger.currentlyplaying == "tutorial" || (PreBattleMenu.activeSelf && PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace))
+        if ((_TurnManger.currentlyplaying == "playable" || _TurnManger.currentlyplaying == "tutorial" || (PreBattleMenu.activeSelf && PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace)) && !ActionsMenu.instance.gameObject.activeSelf)
         {
             Destination = new Vector2(_GridScript.selection.transform.position.x, _GridScript.selection.transform.position.z);
         }
