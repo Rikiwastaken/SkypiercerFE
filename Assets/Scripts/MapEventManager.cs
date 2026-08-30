@@ -170,6 +170,7 @@ public class MapEventManager : MonoBehaviour
 
     public TextMeshProUGUI ConditionsText;
     public int conditionseventID = -1;
+    public int VictoryEvent = -1;
 
     private void Awake()
     {
@@ -337,6 +338,10 @@ public class MapEventManager : MonoBehaviour
         UnitAddTrigger(Event.UnitsToUnlockID, true);
         UnitAddTrigger(Event.UnitsToLockID, false);
         AddSkillToInventory(Event.skillsToAdd);
+        if (VictoryEvent != -1 && Event.ID == VictoryEvent)
+        {
+            GridScript.instance.GetComponent<AttackTurnScript>().mapwascompleted = true;
+        }
         switch (Event.triggerEffectType)
         {
             case 1:

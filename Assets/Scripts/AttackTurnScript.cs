@@ -84,6 +84,8 @@ public class AttackTurnScript : MonoBehaviour
 
     private TextBubbleScript _TextBubbleScript;
 
+    public bool mapwascompleted;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -99,6 +101,11 @@ public class AttackTurnScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // bool that activates when map objectives has been achieved;
+        if (mapwascompleted)
+        {
+            return;
+        }
 
         if (triggerEndOfFightWithAnimations)
         {
