@@ -90,7 +90,7 @@ public class ManulChapterLoadScript : MonoBehaviour
     {
 
         int Chapter = Slot + currentTopButtonID;
-
+        SaveManager.instance.currentchapter = Chapter;
         DataScript.instance.SetupCharactersForChapter(Chapter);
 
         switch (Chapter)

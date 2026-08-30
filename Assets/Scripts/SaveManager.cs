@@ -345,20 +345,9 @@ public class SaveManager : MonoBehaviour
 
             //apply save to datascript
 
-            ApplyCharacterSaves(DS.PlayableCharacterList, SaveClasses[slot].PlayableCharacterList);
+            ApplySaveFromSaveClass(SaveClasses[slot]);
 
 
-
-            DS.PlayerInventory = SaveClasses[slot].PlayerInventory;
-            DS.BondsList = SaveClasses[slot].BondList;
-            secondselapsed = SaveClasses[slot].secondselapsed;
-            currentchapter = SaveClasses[slot].chapter;
-            maxchapterreached = SaveClasses[slot].MaxChapterReached;
-            DS.ChapterFlagsList = SaveClasses[slot].ChapterFlagsList;
-            DS.SidestoryFlagList = SaveClasses[slot].SideStoryFlagsList;
-            DS.SkillCoins = SaveClasses[slot].SkillCoins;
-            DS.CompletedSideStories = SaveClasses[slot].completedSideStories;
-            DS.SkillsAlreadySeenInShop = SaveClasses[slot].SkillsAlreadySeenInShop;
         }
         else if (slot == -1)
         {
@@ -385,6 +374,25 @@ public class SaveManager : MonoBehaviour
             DS.SkillsAlreadySeenInShop = new List<int>();
         }
 
+    }
+
+    public void ApplySaveFromSaveClass(SaveClass Save)
+    {
+        DataScript DS = DataScript.instance;
+        ApplyCharacterSaves(DS.PlayableCharacterList, Save.PlayableCharacterList);
+
+
+
+        DS.PlayerInventory = Save.PlayerInventory;
+        DS.BondsList = Save.BondList;
+        secondselapsed = Save.secondselapsed;
+        currentchapter = Save.chapter;
+        maxchapterreached = Save.MaxChapterReached;
+        DS.ChapterFlagsList = Save.ChapterFlagsList;
+        DS.SidestoryFlagList = Save.SideStoryFlagsList;
+        DS.SkillCoins = Save.SkillCoins;
+        DS.CompletedSideStories = Save.completedSideStories;
+        DS.SkillsAlreadySeenInShop = Save.SkillsAlreadySeenInShop;
     }
 
     public void SaveCurrentSlot(int chapter = 0)
@@ -426,24 +434,7 @@ public class SaveManager : MonoBehaviour
 
 
 
-        SaveClass save = new SaveClass
-        {
-            versionID = versionID,
-            slot = activeSlot,
-            chapter = currentchapter,
-            PlayableCharacterList = CreateCharacterSaveList(DS.PlayableCharacterList),
-            PlayerInventory = DS.PlayerInventory,
-            secondselapsed = secondselapsed,
-            inCamp = inCamp,
-            inworldmap = inworldmap,
-            MaxChapterReached = maxchapterreached,
-            BondList = DS.BondsList,
-            ChapterFlagsList = DS.ChapterFlagsList,
-            SideStoryFlagsList = DS.SidestoryFlagList,
-            SkillCoins = DS.SkillCoins,
-            completedSideStories = DS.CompletedSideStories,
-            SkillsAlreadySeenInShop = DS.SkillsAlreadySeenInShop
-        };
+        SaveClass save = GenerateSaveClassFromGameState(inCamp, inworldmap);
 
         string json = JsonUtility.ToJson(save, true);
 
@@ -466,5 +457,30 @@ public class SaveManager : MonoBehaviour
         {
             Debug.LogError($"Erreur lors de la sauvegarde : {e.Message}");
         }
+    }
+
+    public SaveClass GenerateSaveClassFromGameState(bool inCamp, bool inworldmap)
+    {
+        DataScript DS = DataScript.instance;
+        SaveClass save = new SaveClass
+        {
+            versionID = versionID,
+            slot = activeSlot,
+            chapter = currentchapter,
+            PlayableCharacterList = CreateCharacterSaveList(DS.PlayableCharacterList),
+            PlayerInventory = DS.PlayerInventory,
+            secondselapsed = secondselapsed,
+            inCamp = inCamp,
+            inworldmap = inworldmap,
+            MaxChapterReached = maxchapterreached,
+            BondList = DS.BondsList,
+            ChapterFlagsList = DS.ChapterFlagsList,
+            SideStoryFlagsList = DS.SidestoryFlagList,
+            SkillCoins = DS.SkillCoins,
+            completedSideStories = DS.CompletedSideStories,
+            SkillsAlreadySeenInShop = DS.SkillsAlreadySeenInShop
+        };
+
+        return save;
     }
 }

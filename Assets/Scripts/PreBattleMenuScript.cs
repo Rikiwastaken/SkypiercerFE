@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using static SaveManager;
 
 public class PreBattleMenuScript : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class PreBattleMenuScript : MonoBehaviour
 
     private InputAction _CancelAction;
     private InputAction _ActivateAction;
+
+
+    private SaveClass SaveBeforeBattle;
 
     private void Awake()
     {
@@ -121,6 +125,14 @@ public class PreBattleMenuScript : MonoBehaviour
         TurnManager.waittingforstart = false;
         gameObject.SetActive(false);
         GridScript.InitializeGOList();
+
+        SaveBeforeBattle = SaveManager.instance.GenerateSaveClassFromGameState(false, false);
+    }
+
+    public void ReturnToCamp()
+    {
+        SaveManager.instance.ApplySaveFromSaveClass(SaveBeforeBattle);
+        SceneLoader.instance.LoadScene("Camp");
     }
 
     private void InitializeVariables()
