@@ -8,10 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
 {
-    public AudioSource incombat;
-    public AudioSource incombatintro;
-    public AudioSource outcombat;
-    public AudioSource outcombatintro;
+    public AudioSource PlayableAudioSource;
+    public AudioSource PlayableAudioSourceIntro;
+    public AudioSource EnemyAudioSource;
+    public AudioSource EnemyAudioSourceIntro;
+    public AudioSource OtherAudioSource;
+    public AudioSource OtherAudioSourceIntro;
     public AudioSource BeforeCombat;
     public AudioSource BeforeCombatintro;
 
@@ -40,7 +42,7 @@ public class MusicManager : MonoBehaviour
     public int CurrentDialogueMusic;
 
     private bool lowerdialogue;
-    public bool lowermap;
+    private bool lowermap;
 
     [Serializable]
     public class Audios
@@ -81,7 +83,20 @@ public class MusicManager : MonoBehaviour
         public bool useforSideStory;
     }
 
+    [Serializable]
+    public class MapMusic
+    {
+        public int PlayableMusicID;
+        public int EnemyMusicID;
+        public int OtherrMusicID;
+        public int PrepMusicID;
+        public List<int> Chapters;
+        public bool useforSideStory;
+    }
+
     public List<MapBattleMusic> MusicList;
+
+    public List<MapMusic> MusicPerMap;
 
     private bool PlayPrepMusic;
 
@@ -98,6 +113,8 @@ public class MusicManager : MonoBehaviour
     private ActionsMenu actionsMenu;
 
     private int currentMusicType = -1;
+
+    string previousFaction;
     private void Awake()
     {
         if (instance == null)
@@ -118,94 +135,6 @@ public class MusicManager : MonoBehaviour
             BeforeCombat.volume = beforecombatmusicvol;
         }
     }
-
-    public void ChangeVolume()
-    {
-        mixer.SetFloat("MusicVol", Mathf.Log10(SaveManager.Options.musicvolume) * 20f);
-        mixer.SetFloat("SEVol", Mathf.Log10(SaveManager.Options.SEVolume) * 20f);
-    }
-
-    void OnSceneLoad(Scene activescene, Scene nextscene)
-    {
-        if (nextscene.name == "BattleScene")
-        {
-            return;
-        }
-        if (currentDialogueAudioSource != null)
-        {
-            currentDialogueAudioSource.volume = 0f;
-            currentDialogueAudioSourceIntro.volume = 0f;
-        }
-        if (nextscene.name == "Camp")
-        {
-            PlayMusic(1);
-        }
-        else if (nextscene.name == "WorldMap")
-        {
-            PlayMusic(6);
-        }
-        else if (nextscene.name == "MainMenu")
-        {
-            PlayMusic(8, maxvolume);
-        }
-
-
-        currentscene = nextscene.name;
-        if (nextscene.name == "CutsceneScene")
-        {
-            return;
-        }
-        MusicManager.instance.InitializeMusics(currentscene);
-    }
-
-    public void InitializeMusics(string ChapterToLoad)
-    {
-        bool isSideStory = false;
-        int Chapter = -1;
-        if (ChapterToLoad.Contains("Chapter"))
-        {
-            ChapterToLoad = ChapterToLoad.Replace("Chapter", "");
-            Chapter = int.Parse(ChapterToLoad);
-        }
-        if (ChapterToLoad.Contains("SideStory"))
-        {
-            ChapterToLoad = ChapterToLoad.Replace("SideStory", "");
-            Chapter = int.Parse(ChapterToLoad);
-            isSideStory = true;
-        }
-        if (ChapterToLoad.Contains("Prologue") || ChapterToLoad.Contains("TestMap"))
-        {
-            Chapter = 0;
-        }
-        incombat.Stop();
-        outcombat.Stop();
-        BeforeCombat.Stop();
-        CampMusic.Stop();
-        WorldMapMusic.Stop();
-        ShipMusic.Stop();
-        CutSceneMusic.Stop();
-
-        if (Chapter != -1)
-        {
-
-            foreach (MapBattleMusic MusicClass in MusicList)
-            {
-                if (MusicClass.Chapters.Contains(Chapter) && MusicClass.useforSideStory == isSideStory)
-                {
-                    incombat.clip = MusicClass.BattleMusic;
-                    incombatintro.clip = MusicClass.BattleMusicIntro;
-                    outcombat.clip = MusicClass.MapMusic;
-                    outcombatintro.clip = MusicClass.MapMusicIntro;
-                    BeforeCombat.clip = MusicClass.PrepMusic;
-                    BeforeCombatintro.clip = MusicClass.PrepMusicIntro;
-                    break;
-                }
-            }
-            PlayPrepMusic = true;
-        }
-    }
-
-
 
     private void Update()
     {
@@ -263,7 +192,7 @@ public class MusicManager : MonoBehaviour
 
         if (TurnManager != null)
         {
-            if (TurnManager.currentlyplaying != "" && !incombat.isPlaying)
+            if (TurnManager.currentlyplaying != "" && !PlayableAudioSource.isPlaying)
             {
                 PrepFinished = true;
             }
@@ -284,54 +213,10 @@ public class MusicManager : MonoBehaviour
             return;
         }
 
-        if (PrepFinished && !incombat.isPlaying)
+        if (PrepFinished && !PlayableAudioSource.isPlaying)
         {
             BeforeCombat.Stop();
             PlayMusic(2, maxvolume);
-            incombat.volume = 0f;
-        }
-
-        if (incombat.isPlaying && !(GameOverScript != null && GameOverScript.gameObject.activeSelf))
-        {
-            if (FreezeFrameCapture.instance != null && FreezeFrameCapture.instance.ShowingLevelUp)
-            {
-                if (incombat.volume > 0)
-                {
-                    ChangeVolume(incombat, 0.1f);
-                    ChangeVolume(incombatintro, 0.1f);
-
-                    ChangeVolume(outcombat, 0f);
-                    ChangeVolume(outcombatintro, 0f);
-                }
-                else
-                {
-                    ChangeVolume(incombat, 0f);
-                    ChangeVolume(incombatintro, 0f);
-
-                    ChangeVolume(outcombat, 0.1f);
-                    ChangeVolume(outcombatintro, 0.1f);
-                }
-
-            }
-            else if (!lowermap && (actionsMenu.incombat || inCombatBool))
-            {
-                ChangeVolume(incombat, maxvolume);
-                ChangeVolume(incombatintro, maxvolume);
-
-                ChangeVolume(outcombat, 0f);
-                ChangeVolume(outcombatintro, 0f);
-
-
-            }
-            else
-            {
-                ChangeVolume(outcombat, maxvolume);
-                ChangeVolume(outcombatintro, maxvolume);
-
-                ChangeVolume(incombat, 0f);
-                ChangeVolume(incombatintro, 0f);
-            }
-
         }
 
         if (currentscene == "Camp")
@@ -373,11 +258,15 @@ public class MusicManager : MonoBehaviour
             }
 
         }
-
         else
         {
             ChangeVolume(CampMusic, 0f);
             ChangeVolume(CampMusicintro, 0f);
+            if (TurnManager != null)
+            {
+                ManageMusicTurnRotation();
+            }
+
         }
 
 
@@ -386,24 +275,20 @@ public class MusicManager : MonoBehaviour
         {
             if (lowermap)
             {
-                ChangeVolume(outcombat, 0f);
-                ChangeVolume(outcombatintro, 0f);
+                ChangeVolume(PlayableAudioSource, 0f);
+                ChangeVolume(PlayableAudioSourceIntro, 0f);
 
-                ChangeVolume(incombat, 0f);
-                ChangeVolume(incombatintro, 0f);
+                ChangeVolume(EnemyAudioSource, 0f);
+                ChangeVolume(EnemyAudioSourceIntro, 0f);
+
+                ChangeVolume(OtherAudioSource, 0f);
+                ChangeVolume(OtherAudioSourceIntro, 0f);
             }
             if (currentDialogueAudioSource != null && (currentDialogueAudioSource.isPlaying || currentDialogueAudioSourceIntro.isPlaying) && currentDialogueAudioSource.volume > 0 && CurrentDialogueMusic != -1)
             {
                 ChangeVolume(CampMusic, 0f);
                 ChangeVolume(CampMusicintro, 0f);
-                if (outcombat.volume > 0)
-                {
-                    outcombat.volume -= Time.fixedDeltaTime * 2;
-                }
-                if (incombat.volume > 0)
-                {
-                    incombat.volume -= Time.fixedDeltaTime * 2;
-                }
+
                 if (BeforeCombat.volume > 0)
                 {
                     BeforeCombat.volume -= Time.fixedDeltaTime * 2;
@@ -432,6 +317,93 @@ public class MusicManager : MonoBehaviour
             }
         }
 
+    }
+
+
+    public void ChangeVolume()
+    {
+        mixer.SetFloat("MusicVol", Mathf.Log10(SaveManager.Options.musicvolume) * 20f);
+        mixer.SetFloat("SEVol", Mathf.Log10(SaveManager.Options.SEVolume) * 20f);
+    }
+
+    void OnSceneLoad(Scene activescene, Scene nextscene)
+    {
+        if (nextscene.name == "BattleScene")
+        {
+            return;
+        }
+        if (currentDialogueAudioSource != null)
+        {
+            currentDialogueAudioSource.volume = 0f;
+            currentDialogueAudioSourceIntro.volume = 0f;
+        }
+        if (nextscene.name == "Camp")
+        {
+            PlayMusic(1);
+        }
+        else if (nextscene.name == "WorldMap")
+        {
+            PlayMusic(6);
+        }
+        else if (nextscene.name == "MainMenu")
+        {
+            PlayMusic(8, maxvolume);
+        }
+
+
+        currentscene = nextscene.name;
+        if (nextscene.name == "CutsceneScene")
+        {
+            return;
+        }
+        InitializeMusics(currentscene);
+    }
+
+    public void InitializeMusics(string ChapterToLoad)
+    {
+        bool isSideStory = false;
+        int Chapter = -1;
+        if (ChapterToLoad.Contains("Chapter"))
+        {
+            ChapterToLoad = ChapterToLoad.Replace("Chapter", "");
+            Chapter = int.Parse(ChapterToLoad);
+        }
+        if (ChapterToLoad.Contains("SideStory"))
+        {
+            ChapterToLoad = ChapterToLoad.Replace("SideStory", "");
+            Chapter = int.Parse(ChapterToLoad);
+            isSideStory = true;
+        }
+        if (ChapterToLoad.Contains("Prologue") || ChapterToLoad.Contains("TestMap"))
+        {
+            Chapter = 0;
+        }
+        BeforeCombat.Stop();
+        CampMusic.Stop();
+        WorldMapMusic.Stop();
+        ShipMusic.Stop();
+        CutSceneMusic.Stop();
+
+        if (Chapter != -1)
+        {
+
+            foreach (MapMusic MusicClass in MusicPerMap)
+            {
+                if (MusicClass.Chapters.Contains(Chapter) && MusicClass.useforSideStory == isSideStory)
+                {
+                    PlayableAudioSource.clip = DialogueMusicsWithIntro[MusicClass.PlayableMusicID].Music;
+                    PlayableAudioSourceIntro.clip = DialogueMusicsWithIntro[MusicClass.PlayableMusicID].Intro;
+                    EnemyAudioSource.clip = DialogueMusicsWithIntro[MusicClass.EnemyMusicID].Music;
+                    EnemyAudioSourceIntro.clip = DialogueMusicsWithIntro[MusicClass.EnemyMusicID].Intro;
+                    OtherAudioSource.clip = DialogueMusicsWithIntro[MusicClass.OtherrMusicID].Music;
+                    OtherAudioSourceIntro.clip = DialogueMusicsWithIntro[MusicClass.OtherrMusicID].Intro;
+                    BeforeCombat.clip = DialogueMusicsWithIntro[MusicClass.PrepMusicID].Music;
+                    BeforeCombatintro.clip = DialogueMusicsWithIntro[MusicClass.PrepMusicID].Intro;
+                    break;
+                }
+            }
+            PlayPrepMusic = true;
+        }
     }
 
     void PlayMusic(int type, float startvolume = 0f)
@@ -478,23 +450,21 @@ public class MusicManager : MonoBehaviour
                 lowerdialogue = true;
                 lowermap = true;
                 break;
-            case (2): //OutCombat
-                Main = outcombat;
-                intro = outcombatintro;
+            case (2): //PlayableTurn
+                Main = PlayableAudioSource;
+                intro = PlayableAudioSourceIntro;
                 lowerdialogue = true;
                 lowermap = false;
                 break;
-            case (3): //InCombat
-                Main = incombat;
-                intro = incombatintro;
+            case (3): //EnemyTurn
+                Main = EnemyAudioSource;
+                intro = EnemyAudioSourceIntro;
                 lowerdialogue = true;
                 lowermap = false;
                 break;
             case (4): //BeforeComabt
                 Main = BeforeCombat;
                 intro = BeforeCombatintro;
-                incombat.Stop();
-                outcombat.Stop();
                 lowerdialogue = true;
                 lowermap = true;
                 break;
@@ -528,6 +498,11 @@ public class MusicManager : MonoBehaviour
                 Main = CutSceneMusic;
                 intro = CutSceneMusicintro;
                 break;
+            case (10): //otherTurn
+                Main = OtherAudioSource;
+                intro = OtherAudioSourceIntro;
+                break;
+
 
 
         }
@@ -580,6 +555,79 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    public void ManageMusicTurnRotation()
+    {
+
+
+        switch (TurnManager.currentlyplaying.ToLower())
+        {
+            case ("playable"):
+                if (PlayableAudioSource.isPlaying)
+                {
+                    ChangeVolume(PlayableAudioSource, 1f);
+                    ChangeVolume(PlayableAudioSourceIntro, 1f);
+                }
+                else
+                {
+                    PlayMusicWithIntro(2, 1f);
+                }
+                ChangeVolume(EnemyAudioSource, 0f);
+                ChangeVolume(EnemyAudioSourceIntro, 0f);
+                ChangeVolume(OtherAudioSource, 0f);
+                ChangeVolume(OtherAudioSourceIntro, 0f);
+                break;
+            case ("enemy"):
+                if (EnemyAudioSource.isPlaying)
+                {
+                    ChangeVolume(EnemyAudioSource, 1f);
+                    ChangeVolume(EnemyAudioSourceIntro, 1f);
+                }
+                else
+                {
+                    PlayMusicWithIntro(3, 1f);
+                }
+                ChangeVolume(PlayableAudioSource, 0f);
+                ChangeVolume(PlayableAudioSourceIntro, 0f);
+                ChangeVolume(OtherAudioSource, 0f);
+                ChangeVolume(OtherAudioSourceIntro, 0f);
+                break;
+            case ("other"):
+                if (OtherAudioSource.isPlaying)
+                {
+                    ChangeVolume(OtherAudioSource, 1f);
+                    ChangeVolume(OtherAudioSourceIntro, 1f);
+                }
+                else
+                {
+                    PlayMusicWithIntro(10, 1f);
+                }
+                ChangeVolume(PlayableAudioSource, 0f);
+                ChangeVolume(PlayableAudioSourceIntro, 0f);
+                ChangeVolume(EnemyAudioSource, 0f);
+                ChangeVolume(EnemyAudioSourceIntro, 0f);
+                break;
+            default:
+                if (PlayableAudioSource.isPlaying)
+                {
+                    PlayableAudioSource.Stop();
+                    PlayableAudioSourceIntro.Stop();
+                }
+                if (EnemyAudioSource.isPlaying)
+                {
+                    EnemyAudioSource.Stop();
+                    EnemyAudioSourceIntro.Stop();
+                }
+                if (OtherAudioSource.isPlaying)
+                {
+                    OtherAudioSource.Stop();
+                    OtherAudioSourceIntro.Stop();
+                }
+
+
+                break;
+        }
+
+    }
     public void SetCutSceneMusic(int musicID = 0)
     {
 
@@ -651,10 +699,12 @@ public class MusicManager : MonoBehaviour
 
     private void StopAllMusic()
     {
-        incombat.Stop();
-        incombatintro.Stop();
-        outcombat.Stop();
-        outcombatintro.Stop();
+        PlayableAudioSource.Stop();
+        PlayableAudioSourceIntro.Stop();
+        EnemyAudioSource.Stop();
+        EnemyAudioSourceIntro.Stop();
+        OtherAudioSource.Stop();
+        OtherAudioSourceIntro.Stop();
         CampMusic.Stop();
         CampMusicintro.Stop();
         WorldMapMusic.Stop();

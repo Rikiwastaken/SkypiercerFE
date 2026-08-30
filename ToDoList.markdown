@@ -12,7 +12,6 @@
 
 - peut être faire qu'on puisse mettre "pas de battallion"
 - Faire les visuels de l'effet gardien de Kira
-- Faire musique de joueur, musique d'ennemi et musique d'autre
 - Enlever le bouton vert des bonds quand tu les regardes tous.
 - Mettre un cercle pour montrer les effets de skills qui ont un rayon.
 
