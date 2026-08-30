@@ -1574,6 +1574,18 @@ public class DataScript : MonoBehaviour
             }
         }
 
+        foreach (Character unit in PlayableCharacterList)
+        {
+            foreach (int equipedskill in unit.EquipedSkills)
+            {
+                if (!presentskills.Contains(equipedskill))
+                {
+
+                    presentskills.Add(equipedskill);
+                }
+            }
+        }
+
         foreach (Skill skill in SkillList)
         {
             if (!presentskills.Contains(skill.ID) && !skill.AlwaysPresentInShop && skill.buyable)

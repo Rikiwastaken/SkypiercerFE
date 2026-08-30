@@ -33,8 +33,6 @@
 
 - Make camera move a little bit more in battle (avoid fixed angles)
 
-- Rework grass, jpegs are fine (ground beneath need texture tho)
-
 - Make animations use root motions (in combat scene manager move animaotr transform instead of parent GO)
 
 ### 3D Models
@@ -51,8 +49,6 @@
 #### Icons
 
 - Status Alterations
-
-- Dagger
 
 ## Text
 
