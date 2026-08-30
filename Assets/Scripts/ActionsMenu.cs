@@ -232,6 +232,18 @@ public class ActionsMenu : MonoBehaviour
 
             }
         }
+        else if (target != null && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation.ToLower() == "playable")
+        {
+            if (_NextWeaponAction.WasPressedThisFrame())
+            {
+                target.GetComponent<UnitScript>().GetNextWeapon();
+
+            }
+            if (_PrevWeaponAction.WasPressedThisFrame())
+            {
+                target.GetComponent<UnitScript>().GetPreviousWeapon();
+            }
+        }
     }
 
     private void LateUpdate()
