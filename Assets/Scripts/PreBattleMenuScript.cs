@@ -129,9 +129,13 @@ public class PreBattleMenuScript : MonoBehaviour
         SaveBeforeBattle = SaveManager.instance.GenerateSaveClassFromGameState(false, false);
     }
 
-    public void ReturnToCamp()
+    public void ReturnToCamp(bool ApplySave)
     {
-        SaveManager.instance.ApplySaveFromSaveClass(SaveBeforeBattle);
+        if (ApplySave)
+        {
+            SaveManager.instance.ApplySaveFromSaveClass(SaveBeforeBattle);
+        }
+
         SceneLoader.instance.LoadScene("Camp");
     }
 

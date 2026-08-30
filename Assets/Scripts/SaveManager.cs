@@ -38,6 +38,7 @@ public class SaveManager : MonoBehaviour
         public bool inCamp;
         public List<int> completedSideStories;
         public List<int> SkillsAlreadySeenInShop;
+        public List<bool> CampDialoguesSeen;
     }
 
     [Serializable]
@@ -84,6 +85,9 @@ public class SaveManager : MonoBehaviour
     public SaveClass DefaultSave;
 
     public OptionsClass Options;
+
+
+    public List<bool> CampDialoguesSeen = new List<bool>();
 
     private void Awake()
     {
@@ -372,6 +376,7 @@ public class SaveManager : MonoBehaviour
             DS.CompletedSideStories = new List<int>();
             DS.SkillCoins = 0;
             DS.SkillsAlreadySeenInShop = new List<int>();
+            CampDialoguesSeen = new List<bool>(30);
         }
 
     }
@@ -393,6 +398,7 @@ public class SaveManager : MonoBehaviour
         DS.SkillCoins = Save.SkillCoins;
         DS.CompletedSideStories = Save.completedSideStories;
         DS.SkillsAlreadySeenInShop = Save.SkillsAlreadySeenInShop;
+        CampDialoguesSeen = Save.CampDialoguesSeen;
     }
 
     public void SaveCurrentSlot(int chapter = 0)
@@ -478,7 +484,8 @@ public class SaveManager : MonoBehaviour
             SideStoryFlagsList = DS.SidestoryFlagList,
             SkillCoins = DS.SkillCoins,
             completedSideStories = DS.CompletedSideStories,
-            SkillsAlreadySeenInShop = DS.SkillsAlreadySeenInShop
+            SkillsAlreadySeenInShop = DS.SkillsAlreadySeenInShop,
+            CampDialoguesSeen = CampDialoguesSeen
         };
 
         return save;

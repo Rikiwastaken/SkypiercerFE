@@ -57,13 +57,29 @@ public class CampScript : MonoBehaviour
 
         textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
 
+        int index = 0;
         foreach (StartDialogue startdialogue in StartDialogueList)
         {
             if (startdialogue.Chapter == SaveManager.instance.currentchapter)
             {
-                textBubbleScript.InitializeDialogue(startdialogue.Dialogue);
+                if (saveManager.CampDialoguesSeen.Count < index)
+                {
+                    int count = saveManager.CampDialoguesSeen.Count;
+                    for (int i = count; i <= index; i++)
+                    {
+                        saveManager.CampDialoguesSeen.Add(false);
+                    }
+                }
+                if (!saveManager.CampDialoguesSeen[index])
+                {
+                    textBubbleScript.InitializeDialogue(startdialogue.Dialogue);
+                    saveManager.CampDialoguesSeen[index] = true;
+                }
+
+
                 break;
             }
+            index++;
         }
 
         List<Button> buttons = new List<Button>();
