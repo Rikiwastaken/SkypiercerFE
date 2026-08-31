@@ -64,6 +64,7 @@ public class GridSquareScript : MonoBehaviour
     [Serializable]
     public class MechanismClass
     {
+        [Header("1: door, 2: lever, 3: teleporter")]
         public int type; // 1 : door, 2 : lever, 3 : teleporter;
         public bool isactivated;
         public List<GridSquareScript> Triggers;

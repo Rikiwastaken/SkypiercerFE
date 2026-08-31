@@ -17,7 +17,7 @@
 
 ## System 
 
-- Do cutscene for chapter 15->16.
+- Do cutscene for chapter 16.
 
 - Rework Animation for Animation Tree
 
