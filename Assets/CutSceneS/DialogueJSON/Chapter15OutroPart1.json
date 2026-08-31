@@ -1,0 +1,32 @@
+{
+    "dialoguesToLoad": [
+        {
+            "text": "Ok, we're officially lost.",
+            "characterindex": 0
+        },
+        {
+            "text": "Mmmh what a mysterious forest...",
+            "characterindex": 12
+        },
+        {
+            "text": "It's strange, I feel like we're being watched.",
+            "characterindex": 13
+        },
+        {
+            "text": "Really?! Kira? Is that you?",
+            "characterindex": 0
+        },
+        {
+            "text": "Up here!",
+            "characterindex": 9
+        },
+        {
+            "text": "What the heck? It's a whole village on top of the trees!",
+            "characterindex": 0
+        },
+        {
+            "text": "We'll get you up.",
+            "characterindex": 9
+        }
+    ]
+}

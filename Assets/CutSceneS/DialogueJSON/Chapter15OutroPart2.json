@@ -1,0 +1,76 @@
+{
+    "dialoguesToLoad": [
+        {
+            "text": "Are you two alright? What's he doing here?",
+            "characterindex": 9
+        },
+        {
+            "text": "The foll-",
+            "characterindex": 12
+        },
+        {
+            "text": "It's a long story. Well, actually no, but no one cares anyway. What's up?",
+            "characterindex": 0
+        },
+        {
+            "text": "Everyone's safe. They're all here with me.",
+            "characterindex": 9
+        },
+        {
+            "text": "So, why did everyone but us disappear?",
+            "characterindex": 13
+        },
+        {
+            "text": "Actually, we were rescued from the Archadian army.",
+            "characterindex": 9
+        },
+        {
+            "text": "Cool, you know why they forgot the two of us?",
+            "characterindex": 0
+        },
+        {
+            "text": "You mean the three of us.",
+            "characterindex": 12
+        },
+        {
+            "text": "Because we didn't trust you.",
+            "characterindex": 23
+        },
+        {
+            "text": "Zack, this is Joel. He is the leader of this village.",
+            "characterindex": 9
+        },
+        {
+            "text": "So you abracadbra a dozen people and then you just leave us here with the pluvials?",
+            "characterindex": 0
+        },
+        {
+            "text": "One of you smells of the Beast, and the other smells of blood. Oh, and the third is a Archadian general. You don't belong here.",
+            "characterindex": 23
+        },
+        {
+            "text": "It's OK. If they are not welcome, we'll leave.",
+            "characterindex": 9
+        },
+        {
+            "text": "You don't have to...",
+            "characterindex": 23
+        },
+        {
+            "text": "Just give us some supplies, like you promised, and we'll be on our way.",
+            "characterindex": 9
+        },
+        {
+            "text": "Kira... As you wish. You can still stay the night, if you want to.",
+            "characterindex": 23
+        },
+        {
+            "text": "We'll do that.",
+            "characterindex": 9
+        },
+        {
+            "text": "For Hero's sake, finally! Some time to nap!",
+            "characterindex": 9
+        }
+    ]
+}
