@@ -17,6 +17,8 @@
 
 ## System 
 
+
+- Do dialogues for sidestory 4.
 - Do cutscene for chapter 16.
 
 - Rework Animation for Animation Tree
