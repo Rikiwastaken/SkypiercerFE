@@ -367,7 +367,7 @@ public class GridScript : MonoBehaviour
 
         if (selection != null)
         {
-            if (selection.Mechanism != null && selection.Mechanism.type != 0)
+            if (selection.Mechanism != null && selection.Mechanism.type == 1 || selection.Mechanism.type == 2)
             {
                 switch (selection.Mechanism.type)
                 {

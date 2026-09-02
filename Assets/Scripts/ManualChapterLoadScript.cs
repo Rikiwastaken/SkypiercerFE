@@ -93,6 +93,7 @@ public class ManulChapterLoadScript : MonoBehaviour
         SaveManager.instance.currentchapter = Chapter;
         DataScript.instance.SetupCharactersForChapter(Chapter);
 
+        // For some chapters with a cutscene at the beginning, instead of loading the chapter Scene, we load the Cutscene Scene, which will load the chapter cutscne.
         switch (Chapter)
         {
             case (12):
@@ -103,6 +104,9 @@ public class ManulChapterLoadScript : MonoBehaviour
                 break;
             case (14):
                 sceneLoader.LoadScene("CutsceneScene", 10);
+                break;
+            case (16):
+                sceneLoader.LoadScene("CutsceneScene", 13);
                 break;
             default:
                 sceneLoader.LoadScene("Chapter" + Chapter);

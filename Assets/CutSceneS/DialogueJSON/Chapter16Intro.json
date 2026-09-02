@@ -1,0 +1,28 @@
+{
+    "dialoguesToLoad": [
+        {
+            "text": "Stop! What the heck are you doing?",
+            "characterindex": 0
+        },
+        {
+            "text": "Who are you guys? What did you do to my lieutenants?",
+            "characterindex": 12
+        },
+        {
+            "text": "Aren't they your troops?",
+            "characterindex": 0
+        },
+        {
+            "text": "Damn it, they're back. Let's go. Take those two.",
+            "characterindex": -1
+        },
+        {
+            "text": "They are...",
+            "characterindex": 13
+        },
+        {
+            "text": "Let's follow them!",
+            "characterindex": 9
+        }
+    ]
+}
