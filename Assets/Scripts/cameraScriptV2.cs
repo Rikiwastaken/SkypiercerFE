@@ -93,7 +93,7 @@ public class cameraScriptV2 : MonoBehaviour
         {
 
             GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
-            if (currentSelected == null || currentSelected.activeSelf)
+            if (currentSelected != null && currentSelected.activeInHierarchy)
             {
                 return;
             }
