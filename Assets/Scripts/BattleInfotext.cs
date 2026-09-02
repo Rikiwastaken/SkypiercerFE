@@ -54,6 +54,14 @@ public class BattleInfotext : MonoBehaviour
     public TextMeshProUGUI DefAndResTMP;
     public TextMeshProUGUI SpdAndDexTMP;
     public TextMeshProUGUI LuckAndMovTMP;
+    public TextMeshProUGUI StrArrowTMP;
+    public TextMeshProUGUI PsyArrowTMP;
+    public TextMeshProUGUI DefArrowTMP;
+    public TextMeshProUGUI ResArrowTMP;
+    public TextMeshProUGUI SpdArrowTMP;
+    public TextMeshProUGUI DexArrowTMP;
+    public TextMeshProUGUI LuckArrowTMP;
+    public TextMeshProUGUI HPArrowTMP;
     public TextMeshProUGUI DmgTMP;
     public Image EquipedWeaponIco;
     public TextMeshProUGUI equipedweaponText;
@@ -270,6 +278,13 @@ public class BattleInfotext : MonoBehaviour
 
                 AllStatsSkillBonus statsmods = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null, false);
 
+
+
+                bool isplayable = selectedunitCharacter.affiliation.ToLower() == "playable";
+
+
+                ManageGrowthArrow(isplayable);
+
                 string strcolorstring = getcolorstring(statsmods.Strength);
                 string psycolorstring = getcolorstring(statsmods.Psyche);
 
@@ -321,6 +336,39 @@ public class BattleInfotext : MonoBehaviour
         }
     }
 
+    public void ManageGrowthArrow(bool isplayable)
+    {
+        StatGrowth BladeGrowth = new StatGrowth();
+        if (selectedunit.GetComponent<UnitScript>().GetFirstWeapon() != null)
+        {
+            BladeGrowth = selectedunit.GetComponent<UnitScript>().CalculateGrowthBonusByBlade(selectedunit.GetComponent<UnitScript>().GetFirstWeapon().type);
+        }
+        StrArrowTMP.text = GetGrowthArrow(BladeGrowth.StrengthGrowth, isplayable);
+        PsyArrowTMP.text = GetGrowthArrow(BladeGrowth.PsycheGrowth, isplayable);
+        DefArrowTMP.text = GetGrowthArrow(BladeGrowth.DefenseGrowth, isplayable);
+        ResArrowTMP.text = GetGrowthArrow(BladeGrowth.ResistanceGrowth, isplayable);
+        SpdArrowTMP.text = GetGrowthArrow(BladeGrowth.SpeedGrowth, isplayable);
+        DexArrowTMP.text = GetGrowthArrow(BladeGrowth.DexterityGrowth, isplayable);
+        LuckArrowTMP.text = GetGrowthArrow(BladeGrowth.LuckGrowth, isplayable);
+        HPArrowTMP.text = GetGrowthArrow(BladeGrowth.HPGrowth, isplayable);
+    }
+    public string GetGrowthArrow(int growth, bool isplayable)
+    {
+        string arrow = "";
+        if (!isplayable)
+        {
+            return arrow;
+        }
+        if (growth > 0)
+        {
+            arrow = "<sprite=28>";
+        }
+        else if (growth < 0)
+        {
+            arrow = "<sprite=29>";
+        }
+        return arrow;
+    }
     public void ResetSkillWindow(GameObject currentselected)
     {
         SkillDescription.transform.parent.gameObject.SetActive(false);

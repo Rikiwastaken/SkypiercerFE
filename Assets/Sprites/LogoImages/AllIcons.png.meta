@@ -712,6 +712,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: AllIcons_28
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47fe2f3a2bedd16469c4a7e3e26194aa
+      internalID: 836793606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AllIcons_29
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 0
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f950151889b47e046a2e71d7cb24ae4c
+      internalID: -2021131351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -747,6 +791,8 @@ TextureImporter:
       AllIcons_25: -2071504705
       AllIcons_26: -1690474605
       AllIcons_27: 62752162
+      AllIcons_28: 836793606
+      AllIcons_29: -2021131351
       AllIcons_3: 292585417
       AllIcons_4: 1183342994
       AllIcons_5: -128759721

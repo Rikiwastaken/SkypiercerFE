@@ -10,9 +10,9 @@ Telekinesis system as a magic alternative usable by every character, scaling wit
 
 Blade system with multiple weapon types, grades, durability, mastery progression, and modifiers.
 
-Battalions & Examodes: protagonists lead units for shared bonuses and temporary power surges. (examode not implemented yet.)
+Battalions & Examodes: protagonists lead units for shared bonuses and temporary power surges.
 
-Skill system with passive and active abilities, limited by skill points allowing high customization fo characters.
+Skill system with more than 110 passive and active abilities, limited by skill points allowing high customization fo characters.
 
 Bond mechanics rewarding unit positioning and narrative interactions.
 
