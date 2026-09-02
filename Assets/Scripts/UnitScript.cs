@@ -560,7 +560,7 @@ public class UnitScript : MonoBehaviour
         transform.LookAt(transform.position + new Vector3(looktarget.x, 0, looktarget.y));
 
     }
-    public void InstantiateCharacterModel()
+    public void InstantiateCharacterModel(string layername = null)
     {
         if (ModelList.Count <= UnitCharacteristics.modelID)
         {
@@ -589,7 +589,7 @@ public class UnitScript : MonoBehaviour
         armature = animator.transform;
         initialpos = armature.localPosition;
         initialforward = armature.forward;
-        UpdateLayer(ActiveModel);
+        UpdateLayer(ActiveModel, layername);
         ActiveModel.SetActive(true);
         animator.speed = UnityEngine.Random.Range(0.9f, 1.1f);
     }
@@ -2370,18 +2370,24 @@ public class UnitScript : MonoBehaviour
 
     }
 
-    private void UpdateLayer(GameObject obj)
+    private void UpdateLayer(GameObject obj, string layername = null)
     {
+        LayerMask layer = gameObject.layer;
+        if (layername != null)
+        {
+            layer = LayerMask.NameToLayer(layername);
+        }
+
         if (obj == null)
         {
             return;
         }
-        obj.layer = gameObject.layer;
+        obj.layer = layer;
         if (obj.transform.childCount > 0)
         {
             for (int i = 0; i < obj.transform.childCount; i++)
             {
-                UpdateLayer(obj.transform.GetChild(i).gameObject);
+                UpdateLayer(obj.transform.GetChild(i).gameObject, layername);
             }
         }
     }

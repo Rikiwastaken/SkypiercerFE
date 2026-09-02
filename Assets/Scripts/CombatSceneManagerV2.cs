@@ -239,12 +239,12 @@ public class CombatSceneManagerV2 : MonoBehaviour
         // Giving GameObjects their Character and load their models and get the animators
 
         AttackerGO.GetComponent<UnitScript>().UnitCharacteristics = attacker;
-        AttackerGO.GetComponent<UnitScript>().InstantiateCharacterModel();
+        AttackerGO.GetComponent<UnitScript>().InstantiateCharacterModel("Default");
         AttackerInfo.Animator = AttackerGO.GetComponent<UnitScript>().GetAnimator();
 
 
         DefenderGO.GetComponent<UnitScript>().UnitCharacteristics = defender;
-        DefenderGO.GetComponent<UnitScript>().InstantiateCharacterModel();
+        DefenderGO.GetComponent<UnitScript>().InstantiateCharacterModel("Default");
         DefenderInfo.Animator = DefenderGO.GetComponent<UnitScript>().GetAnimator();
 
 

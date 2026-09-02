@@ -452,7 +452,7 @@ public class CutsceneManager : MonoBehaviour
 
             newcharacter.name = newcharacter.GetComponent<UnitScript>().UnitCharacteristics.name;
 
-            newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
+            newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel("Default");
             newcharacter.GetComponent<UnitScript>().enabled = false;
             CurrentCharacter.CharacterGO = newcharacter;
             CurrentCharacter.Animator = newcharacter.GetComponentInChildren<Animator>();
