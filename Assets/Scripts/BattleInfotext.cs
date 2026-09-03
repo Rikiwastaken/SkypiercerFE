@@ -456,24 +456,11 @@ public class BattleInfotext : MonoBehaviour
     {
         DataScript _Datascript = DataScript.instance;
         int maxchapterreached = _Datascript.GetComponent<SaveManager>().maxchapterreached;
-        bool skip = false;
-        if (!Charactertouse.playableStats.protagonist)
-        {
-            skip = true;
-        }
-        if (Charactertouse.name.ToLower() == "zack" && _Datascript.ExamodeUnlockChapter_Zack > maxchapterreached)
-        {
-            skip = true;
-        }
-        else if (Charactertouse.name.ToLower() == "kira" && _Datascript.ExamodeUnlockChapter_Kira > maxchapterreached)
-        {
-            skip = true;
-        }
-        else if (Charactertouse.name.ToLower() == "gale" && _Datascript.ExamodeUnlockChapter_Gale > maxchapterreached)
-        {
-            skip = true;
-        }
-        if (skip)
+
+
+        bool examodeUnlocked = _Datascript.CheckIfExamodeIsUnlocked(Charactertouse);
+
+        if (!examodeUnlocked)
         {
             if (ExamodeGO.activeSelf)
             {

@@ -62,6 +62,7 @@ public class UnitScript : MonoBehaviour
         public int ExamodePoints;
         public Material Basemat;
         public Material ExamodeMat;
+        public bool UnlockedinSideStory;
     }
 
     [Serializable]
@@ -748,14 +749,16 @@ public class UnitScript : MonoBehaviour
                 }
             }
 
+            bool ExamodeUnlocked = _Datascript.CheckIfExamodeIsUnlocked(character);
 
-
-            switch (character.name.ToLower())
+            Material examodemat = null;
+            if (forceactivation || ExamodeUnlocked)
             {
-                case ("zack"):
+                switch (character.name.ToLower())
+                {
+                    case ("zack"):
 
-                    if (forceactivation || _Datascript.ExamodeUnlockChapter_Zack < maxchapterreached)
-                    {
+
                         character.ExamodeClass.ExamodePoints = 0;
 
                         if (ActiveModel != null)
@@ -803,19 +806,14 @@ public class UnitScript : MonoBehaviour
                         UpdateWeaponModel();
 
                         return;
-
-                    }
-                    break;
-                case ("kira"):
-                    if (_Datascript.ExamodeUnlockChapter_Kira < maxchapterreached)
-                    {
+                    case ("kira"):
 
 
                         character.ExamodeClass.ExamodePoints = 0;
 
 
 
-                        Material examodemat = new Material(_Datascript.ExamodeMaterial);
+                        examodemat = new Material(_Datascript.ExamodeMaterial);
                         examodemat.SetTexture("_BaseTexture", character.ExamodeClass.ExamodeTexture);
                         if (ActiveModel != null)
                         {
@@ -828,18 +826,16 @@ public class UnitScript : MonoBehaviour
 
 
                         return;
-                    }
-                    break;
-                case ("gale"):
-                    if (_Datascript.ExamodeUnlockChapter_Gale < maxchapterreached)
-                    {
-
-
-                        character.ExamodeClass.ExamodePoints = 0;
+                    case ("gale"):
+                        if (_Datascript.ExamodeUnlockChapter_Gale < maxchapterreached)
 
 
 
-                        Material examodemat = new Material(_Datascript.ExamodeMaterial);
+                            character.ExamodeClass.ExamodePoints = 0;
+
+
+
+                        examodemat = new Material(_Datascript.ExamodeMaterial);
                         examodemat.SetTexture("_BaseTexture", character.ExamodeClass.ExamodeTexture);
                         if (ActiveModel != null)
                         {
@@ -853,15 +849,9 @@ public class UnitScript : MonoBehaviour
 
 
                         return;
-                    }
-                    break;
+                }
             }
-
-
-
-
         }
-
     }
 
     public void DisableExamode(Character charactertouse = null)

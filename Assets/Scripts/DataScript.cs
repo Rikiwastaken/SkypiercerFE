@@ -1328,6 +1328,27 @@ public class DataScript : MonoBehaviour
         }
     }
 
+    public bool CheckIfExamodeIsUnlocked(Character Charactertouse)
+    {
+        SaveManager SM = SaveManager.instance;
+        if (!Charactertouse.playableStats.protagonist)
+        {
+            return false;
+        }
+        if (Charactertouse.name.ToLower() == "zack" && ExamodeUnlockChapter_Zack > SM.maxchapterreached)
+        {
+            return true;
+        }
+        else if (Charactertouse.name.ToLower() == "kira" && CompletedSideStories != null && CompletedSideStories.Contains(ExamodeUnlockChapter_Kira))
+        {
+            return true;
+        }
+        else if (Charactertouse.name.ToLower() == "gale" && ExamodeUnlockChapter_Gale > SM.maxchapterreached)
+        {
+            return true;
+        }
+        return false;
+    }
 
 #if UNITY_EDITOR
     [ContextMenu("Calculate IDs and fillout out classes")]
