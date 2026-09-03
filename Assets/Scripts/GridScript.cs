@@ -280,6 +280,36 @@ public class GridScript : MonoBehaviour
 
         }
     }
+    // recalculate elevation so that the base elevation is 1 and then it goes upward
+    public void RecalculateElevation()
+    {
+        int minElevation = 1;
+        foreach (List<GameObject> line in Grid)
+        {
+            foreach (GameObject tile in line)
+            {
+                if (tile.GetComponent<GridSquareScript>().elevation < minElevation)
+                {
+                    minElevation = tile.GetComponent<GridSquareScript>().elevation;
+                }
+            }
+        }
+
+        int valuetoadd = 1 - minElevation;
+        foreach (List<GameObject> line in Grid)
+        {
+            foreach (GameObject tile in line)
+            {
+                tile.GetComponent<GridSquareScript>().elevation += valuetoadd;
+                tile.GetComponent<GridSquareScript>().InitializePosition();
+
+            }
+        }
+        if (MapModel != null)
+        {
+            MapModel.transform.position += new Vector3(0, valuetoadd, 0);
+        }
+    }
 
     public void InstantiateGrid()
     {
@@ -321,6 +351,7 @@ public class GridScript : MonoBehaviour
             }
         }
         GridDimensions = new Vector2(Grid.Count, Grid[0].Count);
+        RecalculateElevation();
         selection = GetTile(GetComponent<MapInitializer>().playablepos[0]);
 
     }

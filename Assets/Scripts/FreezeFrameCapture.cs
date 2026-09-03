@@ -569,7 +569,7 @@ public class FreezeFrameCapture : MonoBehaviour
         }
         isClosing = false;
         CloseCoroutine = null;
-
+        TimeSafeguard = 0;
     }
 
     IEnumerator LowerMusic(GameObject musicGO)

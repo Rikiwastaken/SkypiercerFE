@@ -155,7 +155,7 @@ public class GridSquareScript : MonoBehaviour
 
     void Awake()
     {
-        InitializePosition();
+
 
         if (rainparticle != null && rainparticle.activeSelf)
         {
@@ -180,7 +180,6 @@ public class GridSquareScript : MonoBehaviour
     {
         BossFilledImage.color = BossAttackColor;
         actionsmenu = FindAnyObjectByType<ActionsMenu>(FindObjectsInactive.Include);
-        SetupBaseElevation();
 
         if (Mechanism.type == 1)
         {
@@ -221,13 +220,14 @@ public class GridSquareScript : MonoBehaviour
 
     public void InitializePosition()
     {
-        transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
+        transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y + elevation), Mathf.Round(transform.position.z));
         GridCoordinates = new Vector2((int)transform.position.x, (int)transform.position.z);
         for (int i = 0; i < transform.childCount; i++)
         {
             initialpos.Add(transform.GetChild(i).localPosition);
         }
         ManageActivation();
+        SetupBaseElevation();
     }
 
     private void Update()

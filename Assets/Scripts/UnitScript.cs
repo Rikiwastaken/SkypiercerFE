@@ -15,18 +15,18 @@ public class UnitScript : MonoBehaviour
 
         public string name;
         public int ID;
+        [Header("Stats and Levels")]
         public BaseStats stats;
         public BaseStats AjustedStats;
         public int level;
         public int experience;
-        public string affiliation; // playable, enemy, other
         public StatGrowth growth;
-        public int currentHP;
         public int movements;
-        public Vector2 position;
-        public bool alreadyplayed;
-        public bool alreadymoved;
-        public bool telekinesisactivated;
+
+
+
+
+        [Header("\n Equipment and Skills")]
         public List<int> equipmentsIDs;
         public List<equipment> equipments;
         public int UnitSkill;
@@ -34,24 +34,37 @@ public class UnitScript : MonoBehaviour
         public int TemporarySkill;
         public bool SecondSkillUnlocked;
         public List<int> EquipedSkills;
-        public bool attacksfriends;
 
+        [Header("\nUnit type and behavior")]
+        public string affiliation; // playable, enemy, other
+        public bool attacksfriends;
         public PlayableStats playableStats;
         public EnemyStats enemyStats;
 
-        public GridSquareScript currentTile;
+        [Header("\nCharacter info")]
+
         public int modelID;
         public List<WeaponMastery> Masteries;
         public float DialoguePitch;
+
+        public int totalenemieskilled;
+
+        public CharacterDialogues characterDialogues;
+        public ExamodeClass ExamodeClass = null;
+
+        [Header("\nMap related variables")]
+        public int currentHP;
+        public Vector2 position;
+        public bool alreadyplayed;
+        public bool alreadymoved;
+        public bool telekinesisactivated;
+        public GridSquareScript currentTile;
         public int TauntTurns;
         public bool isintercepting;
-        public int totalenemieskilled;
         public StatusEffects statusEffects;
         public bool motivateusedthisturn;
         public int previouslyequipedweaponID = -1;
         public int previousTelekinesis; // 0 is undefined, 1 is active, 2 is inactive;
-        public CharacterDialogues characterDialogues;
-        public ExamodeClass ExamodeClass = null;
     }
 
     [Serializable]
@@ -234,27 +247,23 @@ public class UnitScript : MonoBehaviour
         public Sprite Image;
     }
 
+    // Script References
+    private AttackTurnScript AttackTurnScript;
+    private ActionsMenu actionsMenu;
+    private GridScript GridScript;
+    private MinimapScript MinimapScript;
+
+
     public Character UnitCharacteristics;
 
 
+    [Header("\nLocal Map Variables")]
 
-    public bool fixedgrowth;
 
-    public equipment Fists;
 
-    public float movespeed;
 
-    private Animator animator;
 
-    private Transform armature;
 
-    private Vector3 initialpos;
-    private Vector3 initialforward;
-
-    public GameObject currentequipmentmodel;
-
-    private AttackTurnScript AttackTurnScript;
-    private ActionsMenu actionsMenu;
 
     public int unitkilled;
 
@@ -263,51 +272,65 @@ public class UnitScript : MonoBehaviour
     public int SurvivorStacks;
 
 
-    public TextMeshProUGUI DmgText;
-    public TextMeshProUGUI DmgEffectNameText;
-    public Image AffinityImage;
+
     public int waittedbonusturns;
 
-    private List<NumberToShow> damagestoshow = new List<NumberToShow>();
 
-    public float timeforshowingnumbers;
 
     public bool copied;
 
-    private GridScript GridScript;
+
 
     private List<Vector2> pathtotake = new List<Vector2>();
 
-    private float canvaselevation;
-    private MinimapScript MinimapScript;
 
 
 
-    public Vector3 rotationadjust;
 
-    public BaseStats previousStats;
-
-
-    public GridSquareScript previouspos;
-
-    public bool disableLifebar;
 
 
     [Header("Flying Weapon")]
     public GameObject FlyingWeapon;
 
-    public Vector3 telekinesisWeaponPos;
-    public Vector3 telekinesisWeaponRot;
-    private bool flyingweaponmovingup;
-    public float flyingmovingspeed;
-    public float maxmovementrangevertical;
 
-    private List<float> Randomnumbers;
-    private int Randomnumbersindex;
 
-    private MeshRenderer[] childrenmeshrender;
 
+
+    [Header("\nEquipment/Type/Copy/Telekinesis Sprites")]
+    [Header("Equipment Sprites")]
+    public Sprite BareHandSprite;
+    public Sprite SwordSprite;
+    public Sprite SpearSprite;
+    public Sprite GreatSwordSprite;
+    public Sprite BowSprite;
+    public Sprite ScytheSprite;
+    public Sprite ShieldSprite;
+    public Sprite StaffSprite;
+    public Sprite DaggerSprite;
+    public Image WeaponImage;
+
+    [Header("\nCopy Sprites")]
+    public Sprite SkillNotCopiedSprite;
+    public Sprite SkillCopiedSprite;
+    public Image CopiedSkillImage;
+
+    [Header("\nType Sprites")]
+    public Sprite PluvialSprite;
+    public Sprite MachineSprite;
+    public Image UnitTypeImage;
+
+    [Header("\nTelekinesis Sprites")]
+    public Sprite TelekinesisSprite;
+    public Image TelekinesisImage;
+
+    [Header("\nUI variables")]
     private Transform CanvasTransform;
+    public TextMeshProUGUI DmgText;
+    public TextMeshProUGUI DmgEffectNameText;
+    public Image AffinityImage;
+    private List<NumberToShow> damagestoshow = new List<NumberToShow>();
+
+    public float timeforshowingnumbers;
 
     private event Action<int> OnHealthChanged;
     private int previousHPForEvent;
@@ -324,7 +347,7 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    private Color InitialCharacterColor;
+
     private event Action<bool> OnPlayedChanged;
     private bool previousalreadyplayedforevent;
     private bool PlayedEvent
@@ -348,55 +371,47 @@ public class UnitScript : MonoBehaviour
     public Image LifebarWhenBossTile;
     public Image LBBackgroundWhenBossTile;
 
-    private int delayedUpdateCounter;
 
-    public float delayedUpdateTime;
-
-
-    [Header("\nEquipment/Type/Copy/Telekinesis Sprites")]
-    [Header("Equipment Sprites")]
-    public Sprite BareHandSprite;
-    public Sprite SwordSprite;
-    public Sprite SpearSprite;
-    public Sprite GreatSwordSprite;
-    public Sprite BowSprite;
-    public Sprite ScytheSprite;
-    public Sprite ShieldSprite;
-    public Sprite StaffSprite;
-    public Sprite DaggerSprite;
-    public Image WeaponImage;
-
-    [Header("Copy Sprites")]
-    public Sprite SkillNotCopiedSprite;
-    public Sprite SkillCopiedSprite;
-    public Image CopiedSkillImage;
-
-    [Header("Type Sprites")]
-    public Sprite PluvialSprite;
-    public Sprite MachineSprite;
-    public Image UnitTypeImage;
-
-    [Header("Type Sprites")]
-    public Sprite TelekinesisSprite;
-    public Image TelekinesisImage;
-
-    [Header("Tools")]
-    public bool trylvlup;
-    public bool forcemoveTO;
-    public Vector2 forcemovetonewpos;
-
-
-    [Header("3D Model Variables")]
+    [Header("\n\n3D Model Variables")]
     public GameObject ActiveModel;
     public Material PluvialMat;
     public List<ModelInfo> ModelList;
     private WeaponPrefabScript _WeaponPrefabScript;
-
     private List<equipment> oldequipment;
+    private Color InitialCharacterColor;
+    private Animator animator;
+
+    private Transform armature;
+
+    private Vector3 initialpos;
+    private Vector3 initialforward;
+
+    public GameObject currentequipmentmodel;
+
+    [Header("\n\nTools")]
+    public bool trylvlup;
+    public bool forcemoveTO;
+    public Vector2 forcemovetonewpos;
     public bool lockExamode;
+
+    [Header("\n\nGlobal System Variables")]
+    public bool fixedgrowth;
+    public equipment Fists;
     public float growthPerLuckPoint = 0.25f;
     public int geniusgrowthboost = 25;
     public int cystalheartgrowthboost = 10;
+    public float movespeed;
+    private int delayedUpdateCounter;
+
+    public float delayedUpdateTime;
+    public Vector3 rotationadjust;
+
+    public BaseStats previousStats;
+
+
+    public GridSquareScript previouspos;
+
+    public bool disableLifebar;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -446,7 +461,6 @@ public class UnitScript : MonoBehaviour
 
 
         MinimapScript = MinimapScript.instance;
-        canvaselevation = CanvasTransform.localPosition.y;
         GridScript = GridScript.instance;
         AttackTurnScript = FindAnyObjectByType<AttackTurnScript>();
 
@@ -488,14 +502,6 @@ public class UnitScript : MonoBehaviour
         }
 
 
-        Randomnumbers = new List<float>();
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                Randomnumbers.Add((float)UnityEngine.Random.Range(0.9f, 1.1f));
-            }
-        }
-
 
         if (animator.GetBool("Ismachine") != UnitCharacteristics.enemyStats.monsterStats.ismachine)
         {
@@ -505,7 +511,6 @@ public class UnitScript : MonoBehaviour
         {
             animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
         }
-        ResetChildRenderers();
         OnHealthChanged += HealthChangedHandler;
         OnPlayedChanged += PlayedChangedHandler;
 
@@ -608,11 +613,6 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    public void ResetChildRenderers()
-    {
-        childrenmeshrender = GetComponentsInChildren<MeshRenderer>();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -649,7 +649,6 @@ public class UnitScript : MonoBehaviour
 
         ManagePosition();
         ManageMovement();
-        ManageFlyingWeaponPosition();
         if (animator != null && armature != null)
         {
             if (!isinattackanimation() && !actionsMenu.incombat)
@@ -1339,71 +1338,17 @@ public class UnitScript : MonoBehaviour
     }
 
 
-    public void ManageFlyingWeaponPosition()
-    {
-        if (FlyingWeapon != null)
-        {
-            if (Randomnumbers == null || Randomnumbers.Count == 0)
-            {
-                Randomnumbers = new List<float>();
-                {
-                    for (int i = 0; i < 100; i++)
-                    {
-                        Randomnumbers.Add((float)UnityEngine.Random.Range(0.9f, 1.1f));
-                    }
-                }
-            }
-            if (Randomnumbersindex >= Randomnumbers.Count)
-            {
-                Randomnumbersindex = 0;
-            }
-            float RandomY = Randomnumbers[Randomnumbersindex];
-            Randomnumbersindex++;
-
-
-            if (flyingweaponmovingup)
-            {
-                FlyingWeapon.transform.localPosition += new Vector3(0f, flyingmovingspeed * RandomY * Time.deltaTime, 0f);
-
-                if (FlyingWeapon.transform.localPosition.y >= telekinesisWeaponPos.y + maxmovementrangevertical)
-                {
-
-                    flyingweaponmovingup = false;
-                }
-            }
-            else
-            {
-                FlyingWeapon.transform.localPosition -= new Vector3(0f, flyingmovingspeed * RandomY * Time.deltaTime, 0f);
-                if (FlyingWeapon.transform.localPosition.y <= telekinesisWeaponPos.y - maxmovementrangevertical)
-                {
-
-                    flyingweaponmovingup = true;
-                }
-            }
-
-        }
-    }
-
+    // Makes sur UI on the ground is always oriented the same way for the camera
     private void ManageCanvasesRotation()
     {
         LifebarCanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
         UICanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
     }
+
+
+    // Disables the lifebar when we don't want to see it and manages to fill/empty it and to change its color if the unit has several healthbars.
     public void ManageLifebars()
     {
-
-        //if (cameraScript.incombat || disableLifebar)
-        //{
-        //    if (Lifebar.gameObject.activeSelf)
-        //    {
-        //        Lifebar.gameObject.SetActive(false);
-        //        LifebarBehind.gameObject.SetActive(false);
-        //    }
-        //}
-        //else
-        //{
-
-        //}
         if (disableLifebar)
         {
             if (Lifebar.gameObject.activeSelf)
@@ -1443,6 +1388,8 @@ public class UnitScript : MonoBehaviour
 
     }
 
+
+    // Rounds raw stats into integers and add skill based stat recalculation
     public void calculateStats()
     {
         if (GetSkill(58)) //weakness
@@ -1506,6 +1453,24 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+    // Gain mastery and gives mastery to nearby unit
+    public void GainCombatMastery()
+    {
+
+        foreach (Character ally in GridScript.allunits)
+        {
+            if (ally.affiliation == "playable" && ManhattanDistance(UnitCharacteristics, ally) <= 2 && ally != UnitCharacteristics)
+            {
+                GainMastery(ally, "", true);
+            }
+        }
+
+        GainMastery(UnitCharacteristics, GetFirstWeapon().type.ToLower());
+
+
+    }
+
+    // Increase mastery of weapon and call the function to check for level ups
     private void GainMastery(Character character, string weapontounlock = "", bool secundary = false)
     {
 
@@ -1559,39 +1524,7 @@ public class UnitScript : MonoBehaviour
 
     }
 
-    public void ToggleTelekinesis(Character chartouse = null)
-    {
-        if (chartouse == null)
-        {
-            chartouse = UnitCharacteristics;
-        }
-        chartouse.telekinesisactivated = !chartouse.telekinesisactivated;
-        if (chartouse.telekinesisactivated)
-        {
-            chartouse.previousTelekinesis = 1;
-        }
-        else
-        {
-            chartouse.previousTelekinesis = 2;
-        }
-    }
-
-    public void ToggleTelekinesis(bool wantedeffect, Character chartouse = null)
-    {
-        if (chartouse == null)
-        {
-            chartouse = UnitCharacteristics;
-        }
-        chartouse.telekinesisactivated = wantedeffect;
-        if (chartouse.telekinesisactivated)
-        {
-            chartouse.previousTelekinesis = 1;
-        }
-        else
-        {
-            chartouse.previousTelekinesis = 2;
-        }
-    }
+    // checks if mastery can be leveled up
     private void LevelupMasteryCheck(WeaponMastery mastery, Character character)
     {
 
@@ -1642,6 +1575,8 @@ public class UnitScript : MonoBehaviour
         GetNewWeaponFromMastery(mastery, character);
     }
 
+
+    // Replaces Weapon with new weapon if mastery has increased level
     public void GetNewWeaponFromMastery(WeaponMastery mastery, Character character = null)
     {
         Character Chartouse = UnitCharacteristics;
@@ -1655,6 +1590,7 @@ public class UnitScript : MonoBehaviour
         }
         int oldweaponID = 0;
         int newweaponID = 0;
+        // Get equiped weapon for current Mastery
         foreach (int ID in Chartouse.equipmentsIDs)
         {
             if (DataScript.instance.GetWeaponFromID(ID).type.ToLower() == mastery.weapontype.ToLower())
@@ -1663,6 +1599,8 @@ public class UnitScript : MonoBehaviour
                 break;
             }
         }
+
+        // get weaponID for the mastery weapon adapted to level
         foreach (equipment weapon in DataScript.instance.equipmentList)
         {
             if (weapon.type.ToLower() == mastery.weapontype.ToLower() && weapon.Grade == mastery.Level)
@@ -1671,6 +1609,8 @@ public class UnitScript : MonoBehaviour
                 break;
             }
         }
+
+        // if weapons are different, we exchange weapon IDs to replace the old weapon ID with the new one
         if (oldweaponID != newweaponID)
         {
 
@@ -1685,6 +1625,7 @@ public class UnitScript : MonoBehaviour
                 Chartouse.equipmentsIDs.Add(newweaponID);
             }
         }
+        // Replaces the equiped weapon with a copy of the target weapon
         for (int i = 0; i < Chartouse.equipments.Count; i++)
         {
             equipment equip = Chartouse.equipments[i];
@@ -1694,28 +1635,15 @@ public class UnitScript : MonoBehaviour
             }
             foreach (int ID in Chartouse.equipmentsIDs)
             {
-                if (equip.type.ToLower() == DataScript.instance.equipmentList[ID].type.ToLower() && equip.ID != ID)
+                equipment targetequipment = DataScript.instance.equipmentList[ID];
+                if (equip.type.ToLower() == targetequipment.type.ToLower() && equip.ID != ID)
                 {
-                    Chartouse.equipments[i] = DataScript.instance.equipmentList[ID];
+                    Chartouse.equipments[i] = DataScript.instance.GenerateEquipementCopy(targetequipment, character);
                     continue;
                 }
             }
         }
-        //foreach (equipment equip in Chartouse.equipments)
-        //{
-        //    if (equip == null || equip.type == null)
-        //    {
-        //        continue;
-        //    }
-        //    foreach (int ID in Chartouse.equipmentsIDs)
-        //    {
-        //        if (equip.type.ToLower() == DataScript.instance.equipmentList[ID].type.ToLower() && equip.ID != ID)
-        //        {
-        //            Chartouse.equipments[Chartouse.equipments.IndexOf(equip)] = DataScript.instance.equipmentList[ID];
-        //            continue;
-        //        }
-        //    }
-        //}
+        // check if equipment ID is present in equiped ID
         int IDtoAdd = -1;
         foreach (int ID in Chartouse.equipmentsIDs)
         {
@@ -1738,6 +1666,7 @@ public class UnitScript : MonoBehaviour
 
             }
         }
+        // if equipment was absent we add it to the equiped weapons
         if (IDtoAdd > 0)
         {
             for (int i = 0; i < Chartouse.equipments.Count; i++)
@@ -1745,7 +1674,7 @@ public class UnitScript : MonoBehaviour
                 equipment equip = Chartouse.equipments[i];
                 if (equip == null || equip.type == null || equip.Name == "")
                 {
-                    Chartouse.equipments[i] = DataScript.instance.equipmentList[IDtoAdd];
+                    Chartouse.equipments[i] = DataScript.instance.GenerateEquipementCopy(DataScript.instance.equipmentList[IDtoAdd], character);
                     break;
                 }
             }
@@ -1755,6 +1684,7 @@ public class UnitScript : MonoBehaviour
         CheckWeaponsMod(Chartouse);
     }
 
+    // Applies modifier from mastery to weapons
     private void CheckWeaponsMod(Character chartouse = null)
     {
         Character character = chartouse;
@@ -1787,21 +1717,44 @@ public class UnitScript : MonoBehaviour
 
     }
 
-    public void GainCombatMastery()
+    public void ToggleTelekinesis(Character chartouse = null)
     {
-
-        foreach (Character ally in GridScript.allunits)
+        if (chartouse == null)
         {
-            if (ally.affiliation == "playable" && ManhattanDistance(UnitCharacteristics, ally) <= 2 && ally != UnitCharacteristics)
-            {
-                GainMastery(ally, "", true);
-            }
+            chartouse = UnitCharacteristics;
         }
-
-        GainMastery(UnitCharacteristics, GetFirstWeapon().type.ToLower());
-
-
+        chartouse.telekinesisactivated = !chartouse.telekinesisactivated;
+        if (chartouse.telekinesisactivated)
+        {
+            chartouse.previousTelekinesis = 1;
+        }
+        else
+        {
+            chartouse.previousTelekinesis = 2;
+        }
     }
+
+
+
+    public void ToggleTelekinesis(bool wantedeffect, Character chartouse = null)
+    {
+        if (chartouse == null)
+        {
+            chartouse = UnitCharacteristics;
+        }
+        chartouse.telekinesisactivated = wantedeffect;
+        if (chartouse.telekinesisactivated)
+        {
+            chartouse.previousTelekinesis = 1;
+        }
+        else
+        {
+            chartouse.previousTelekinesis = 2;
+        }
+    }
+
+
+    // changes position of unit and calculates the path that the unit needs to take to go there
     public void MoveTo(Vector2 destination, bool jump = false, bool instantaneousmovement = false)
     {
         if (UnitCharacteristics.currentTile != null)
@@ -1814,7 +1767,7 @@ public class UnitScript : MonoBehaviour
         }
         GridSquareScript oldtile = null;
         GridSquareScript destTile = GridScript.GetTile(destination);
-        if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile) == gameObject) && (destTile != null && !destTile.isobstacle))
+        if ((GridScript.GetUnit(destTile) == null || GridScript.GetUnit(destTile) == gameObject) && (destTile != null && !destTile.isobstacle)) // Destination is valid
         {
             if (UnitCharacteristics.currentTile != null)
             {
@@ -1868,6 +1821,7 @@ public class UnitScript : MonoBehaviour
         destination.BossTileChanged();
     }
 
+    // Checks if unit is performing an attack animation
     public bool isinattackanimation(Animator otheranimator = null)
     {
         Animator animatortouse = null;
@@ -2111,6 +2065,7 @@ public class UnitScript : MonoBehaviour
         return;
     }
 
+    // Adds a numbre to the character HUD, usually for skill effects, battallion effects and Bond Increase
     public void AddNumber(int amount, bool ishealing, string effectname, bool isbond = false)
     {
         NumberToShow newnumber = new NumberToShow();
@@ -2330,8 +2285,7 @@ public class UnitScript : MonoBehaviour
 
                 if (UnitCharacteristics.telekinesisactivated && currentweapon.type.ToLower() != "bow")
                 {
-                    currentequipmentmodel.transform.localPosition = telekinesisWeaponPos;
-                    currentequipmentmodel.transform.localRotation = Quaternion.Euler(telekinesisWeaponRot);
+
                 }
                 else
                 {
@@ -2360,6 +2314,7 @@ public class UnitScript : MonoBehaviour
 
     }
 
+    // For each object if hierarchy under the chosen GO, changes the LayerMask to the layer passed as parameter. If parameter is null, the layer of the GO is applied instead.
     private void UpdateLayer(GameObject obj, string layername = null)
     {
         LayerMask layer = gameObject.layer;
@@ -2629,6 +2584,8 @@ public class UnitScript : MonoBehaviour
         UnlockSecondSkill(UnitCharacteristics);
     }
 
+
+    // Gets base stats and growth from the enemy class if it has one, calculates level ups until unit is at target level.
     private void LevelSetup()
     {
         if (UnitCharacteristics.affiliation != "playable")
@@ -2693,6 +2650,7 @@ public class UnitScript : MonoBehaviour
         return UnitCharacteristics.currentTile.activated;
     }
 
+    // Calculate tile, status effect and skill ajustments to movements
     public int CalculateNumberOfMovements()
     {
         string tiletype = UnitCharacteristics.currentTile.type;
@@ -2719,42 +2677,8 @@ public class UnitScript : MonoBehaviour
         }
         return ajustedmovements;
     }
-    private void UpdateRendererLayer()
-    {
-        if (UnitCharacteristics.alreadyplayed)
-        {
-            foreach (MeshRenderer Renderer in childrenmeshrender)
-            {
-                //Renderer.renderingLayerMask = 0;
-            }
 
-        }
-        else
-        {
-            foreach (MeshRenderer Renderer in childrenmeshrender)
-            {
-                if (Renderer != null)
-                {
-                    switch (UnitCharacteristics.affiliation)
-                    {
-                        case "playable":
-                            Renderer.renderingLayerMask = 1;
-                            break;
-                        case "enemy":
-                            Renderer.renderingLayerMask = 2;
-                            break;
-                        case "other":
-                            Renderer.renderingLayerMask = 3;
-                            break;
-
-                    }
-                }
-
-            }
-        }
-
-    }
-
+    // Get Effects that alters characters growth in order to calculate level ups
 
     public StatGrowth GetGrowthModifications(int luckstat)
     {
@@ -2843,6 +2767,7 @@ public class UnitScript : MonoBehaviour
         return GrowthtoApply;
     }
 
+    // Get Blade Growth Modification according to equiped blade
     public StatGrowth CalculateGrowthBonusByBlade(string BladeType)
     {
         int bonussize = 20;
@@ -2893,6 +2818,7 @@ public class UnitScript : MonoBehaviour
         return growthbonus;
     }
 
+    // Calculates Characters's max skill points according to their level.
     public void CalculateSkillPoints(Character Character = null)
     {
         if (Character == null)
@@ -2907,6 +2833,7 @@ public class UnitScript : MonoBehaviour
 
     }
 
+    // if units has enough Exp, get growth and determine the stat changes. Returns a list containing stats changes after the level up.
     public List<int> LevelUp()
     {
 
@@ -2933,7 +2860,7 @@ public class UnitScript : MonoBehaviour
 
         CalculateSkillPoints();
 
-        if (fixedgrowth)
+        if (fixedgrowth) // Fixed growth adds growth/100 directly to the stats. The true stat value used in combat is the Integer. 
         {
             float oldHP = UnitCharacteristics.stats.HP;
             UnitCharacteristics.stats.HP += (GrowthtoApply.HPGrowth / 100f);
@@ -3071,42 +2998,42 @@ public class UnitScript : MonoBehaviour
             }
 
         }
-        else
+        else // non fixed level up is a random draw between 0 and 100, non ponderated. If the value is below the growth, the stat increases.
         {
 
             RandomScript.RandomLevelValues levelValues = GetComponent<RandomScript>().GetLevelUpRandomValues();
 
 
-            float HPgain = GetLevelUpStatsChange(GrowthtoApply.HPGrowth, levelValues.HPRandomValue[0]);
+            float HPgain = GetLevelUpStatsChange(GrowthtoApply.HPGrowth, levelValues.HPRandomValue);
             UnitCharacteristics.stats.HP += HPgain;
             lvlupresult.Add((int)HPgain);
 
-            float Strengthgain = GetLevelUpStatsChange(GrowthtoApply.StrengthGrowth, levelValues.StrengthRandomValue[0]);
+            float Strengthgain = GetLevelUpStatsChange(GrowthtoApply.StrengthGrowth, levelValues.StrengthRandomValue);
             UnitCharacteristics.stats.Strength += Strengthgain;
             lvlupresult.Add((int)Strengthgain);
 
-            float Psychegain = GetLevelUpStatsChange(GrowthtoApply.PsycheGrowth, levelValues.PsycheRandomValue[0]);
+            float Psychegain = GetLevelUpStatsChange(GrowthtoApply.PsycheGrowth, levelValues.PsycheRandomValue);
             UnitCharacteristics.stats.Psyche += Psychegain;
             lvlupresult.Add((int)Psychegain);
 
-            float Defensegain = GetLevelUpStatsChange(GrowthtoApply.DefenseGrowth, levelValues.DefenseRandomValue[0]);
+            float Defensegain = GetLevelUpStatsChange(GrowthtoApply.DefenseGrowth, levelValues.DefenseRandomValue);
             UnitCharacteristics.stats.Defense += Defensegain;
             lvlupresult.Add((int)Defensegain);
 
-            float Resistancegain = GetLevelUpStatsChange(GrowthtoApply.ResistanceGrowth, levelValues.ResistanceRandomValue[0]);
+            float Resistancegain = GetLevelUpStatsChange(GrowthtoApply.ResistanceGrowth, levelValues.ResistanceRandomValue);
             UnitCharacteristics.stats.Resistance += Resistancegain;
             lvlupresult.Add((int)Resistancegain);
 
-            float Speedgain = GetLevelUpStatsChange(GrowthtoApply.SpeedGrowth, levelValues.SpeedRandomValue[0]);
+            float Speedgain = GetLevelUpStatsChange(GrowthtoApply.SpeedGrowth, levelValues.SpeedRandomValue);
             UnitCharacteristics.stats.Speed += Speedgain;
             lvlupresult.Add((int)Speedgain);
 
 
-            float Dexteritygain = GetLevelUpStatsChange(GrowthtoApply.DexterityGrowth, levelValues.DexterityRandomValue[0]);
+            float Dexteritygain = GetLevelUpStatsChange(GrowthtoApply.DexterityGrowth, levelValues.DexterityRandomValue);
             UnitCharacteristics.stats.Dexterity += Dexteritygain;
             lvlupresult.Add((int)Dexteritygain);
 
-            float Luckgain = GetLevelUpStatsChange(GrowthtoApply.LuckGrowth, levelValues.LuckRandomValue[0]);
+            float Luckgain = GetLevelUpStatsChange(GrowthtoApply.LuckGrowth, levelValues.LuckRandomValue);
             UnitCharacteristics.stats.Luck += Luckgain;
             lvlupresult.Add((int)Luckgain);
         }
@@ -3137,23 +3064,23 @@ public class UnitScript : MonoBehaviour
         return lvlupresult;
     }
 
-    public float GetLevelUpStatsChange(float growth, int randomvalue)
+    public float GetLevelUpStatsChange(float growth, List<List<int>> randomvalues, int Index = 0)
     {
         float gain = 0f;
         if (growth > 100)
         {
-            gain = 1 + GetLevelUpStatsChange(growth - 100f, randomvalue);
+            gain = 1 + GetLevelUpStatsChange(growth - 100f, randomvalues, Index + 1);
         }
         else if (growth < 0)
         {
-            if (randomvalue <= Mathf.Abs(growth))
+            if (randomvalues[Index][0] <= Mathf.Abs(growth))
             {
                 gain--;
             }
         }
         else
         {
-            if (randomvalue <= growth)
+            if (randomvalues[Index][0] <= growth)
             {
                 gain++;
             }
