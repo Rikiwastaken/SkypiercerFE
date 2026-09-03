@@ -1394,6 +1394,14 @@ public class DataScript : MonoBehaviour
                 masteries.Add(staffmastery);
                 character.Masteries = masteries;
             }
+
+            foreach (WeaponMastery mastery in character.Masteries)
+            {
+                if (mastery.Level != -1 && mastery.maxlevel == 0)
+                {
+                    mastery.maxlevel = 4;
+                }
+            }
         }
         UnityEditor.EditorUtility.SetDirty(this);
     }

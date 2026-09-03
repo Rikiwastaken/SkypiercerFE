@@ -967,7 +967,6 @@ public class AttackTurnScript : MonoBehaviour
 
     public IEnumerator ManageAttackWithoutAnimation(GameObject Attacker)
     {
-        Debug.Log("starting the coroutine");
         int safeguard = 0;
         Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
         Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
