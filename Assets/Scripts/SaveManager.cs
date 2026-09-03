@@ -56,6 +56,7 @@ public class SaveManager : MonoBehaviour
         public int previousequipedweapon;
         public int previousTelekinesis;
         public int numberofUnitKilled;
+        public bool secondskillUnlocked;
     }
 
     [Serializable]
@@ -142,6 +143,7 @@ public class SaveManager : MonoBehaviour
                 previousequipedweapon = character.previouslyequipedweaponID,
                 previousTelekinesis = character.previousTelekinesis,
                 numberofUnitKilled = character.totalenemieskilled,
+                secondskillUnlocked = character.SecondSkillUnlocked,
             };
             returnlist.Add(characterSaveInfo);
         }
@@ -167,6 +169,7 @@ public class SaveManager : MonoBehaviour
                     character.previouslyequipedweaponID = CharaSave.previousequipedweapon;
                     character.previousTelekinesis = CharaSave.previousTelekinesis;
                     character.totalenemieskilled = CharaSave.numberofUnitKilled;
+                    character.SecondSkillUnlocked = CharaSave.secondskillUnlocked;
                 }
             }
         }
