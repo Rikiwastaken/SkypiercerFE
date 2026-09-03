@@ -5,7 +5,6 @@
 - bouton pour montrer les ennemis marche pas
 - Parfois pas de visuel d'armes
 - En affichant les météo, le logo peut apparaître en dehors de la zone concernée.
-- La fenêtre de contre attaque montre des dégats même quand parfois les ennemis ne peuvent pas attaquer.
 
 ## Ideas
 

@@ -84,8 +84,8 @@ public class CombatTextScript : MonoBehaviour
         if (newattacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
             int healing = ActionsMenu.CalculateHealing(newattacker, false);
-            attackerText += "healing: " + healing + "  hit: 100%  crit: NA";
-            defenderText += "dmg: NA  hit: NA  crit: NA";
+            attackerText += "healing: " + healing + "  hit: 100%  crit: -";
+            defenderText += "dmg: -  hit: -  crit: -";
         }
         else
         {
@@ -110,26 +110,33 @@ public class CombatTextScript : MonoBehaviour
 
             }
             attackerText += "  hit: " + hitrateattacker + "%  crit: " + critrateattacker + "%";
-
-
-            int damagedealtDefender = ActionsMenu.CalculateDamage(newdefender, false, newattacker);
-            int hitrateDefender = ActionsMenu.CalculateHit(newdefender, newattacker, false);
-            int critrateDefender = ActionsMenu.CalculateCrit(newdefender, newattacker, false);
-
-            defenderText += "dmg: " + damagedealtDefender;
-            if (doubler == newdefender)
+            if (ActionsMenu.instance.CheckifInRange(newattacker, newdefender) || newdefender.GetComponent<UnitScript>().GetSkill(38) || newdefender.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
             {
-                if (istriple)
-                {
-                    defenderText += "x3";
-                }
-                else
-                {
-                    defenderText += "x2";
-                }
+                int damagedealtDefender = ActionsMenu.CalculateDamage(newdefender, false, newattacker);
+                int hitrateDefender = ActionsMenu.CalculateHit(newdefender, newattacker, false);
+                int critrateDefender = ActionsMenu.CalculateCrit(newdefender, newattacker, false);
 
+                defenderText += "dmg: " + damagedealtDefender;
+                if (doubler == newdefender)
+                {
+                    if (istriple)
+                    {
+                        defenderText += "x3";
+                    }
+                    else
+                    {
+                        defenderText += "x2";
+                    }
+
+                }
+                defenderText += "  hit: " + hitrateDefender + "%  crit: " + critrateDefender + "%";
             }
-            defenderText += "  hit: " + hitrateDefender + "%  crit: " + critrateDefender + "%";
+            else
+            {
+                defenderText += "dmg: -  hit: -  crit: -";
+            }
+
+
 
         }
 
