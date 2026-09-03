@@ -343,6 +343,7 @@ public class UnitScript : MonoBehaviour
 
     public Image Lifebar;
     public Transform LifebarCanvas;
+    public Transform UICanvas;
     public Image LBBackground;
     public Image LifebarWhenBossTile;
     public Image LBBackgroundWhenBossTile;
@@ -616,7 +617,7 @@ public class UnitScript : MonoBehaviour
     void Update()
     {
 
-        ManageLifeBarRotation();
+        ManageCanvasesRotation();
 
 
 
@@ -1383,14 +1384,13 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    private void ManageLifeBarRotation()
+    private void ManageCanvasesRotation()
     {
         LifebarCanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
+        UICanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
     }
     public void ManageLifebars()
     {
-
-        ManageLifeBarRotation();
 
         //if (cameraScript.incombat || disableLifebar)
         //{

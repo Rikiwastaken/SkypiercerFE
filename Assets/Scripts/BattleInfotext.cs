@@ -11,7 +11,7 @@ public class BattleInfotext : MonoBehaviour
 
     private GridScript GridScript;
     private GameObject selectedunit;
-    private GameObject previousselected;
+
 
     private TurnManger turnManger;
     private AttackTurnScript attackTurnScript;
@@ -96,6 +96,11 @@ public class BattleInfotext : MonoBehaviour
 
     private bool showingdescription;
 
+    // Status Comparison
+    private Character previousSelectedCharacter;
+    private equipment previousCharacterWeapon;
+    private GameObject previousselectedGO;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -178,7 +183,8 @@ public class BattleInfotext : MonoBehaviour
         }
 
 
-
+        Character selectedunitCharacter = null;
+        equipment characterweapon = null;
         if ((GridScript.GetSelectedUnitGameObject() == null && GridScript.lockedmovementtiles.Count == 0) || ActionsMenu.incombat || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (!PreBattleMenu.activeSelf && GridScript.GetComponent<TurnManger>().currentlyplaying != "playable" && GridScript.GetComponent<TurnManger>().currentlyplaying != "tutorial"))
         {
 
@@ -190,7 +196,7 @@ public class BattleInfotext : MonoBehaviour
         }
         else
         {
-            Character selectedunitCharacter = null;
+
             if (turnManger.currentlyplaying == "playable" || turnManger.currentlyplaying == "tutorial")
             {
                 selectedunitCharacter = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
@@ -225,104 +231,115 @@ public class BattleInfotext : MonoBehaviour
 
             if (selectedunit != null && selectedunitCharacter != null)
             {
-                if (previousselected != selectedunit)
+                if (previousselectedGO != selectedunit)
                 {
-                    previousselected = selectedunit;
+                    previousselectedGO = selectedunit;
                     ResetSkillWindow(selectedunit);
                     ManagedSkillVisuals(selectedunitCharacter);
                 }
 
+                characterweapon = selectedunit.GetComponent<UnitScript>().GetFirstWeapon();
+
                 ManageSkillDescription();
-                ManageMasteryVisuals(selectedunitCharacter);
-
-                ManageStatusAilmentVisuals(selectedunit);
                 ManageExamodeVisuals(selectedunitCharacter);
-                NameTMP.text = selectedunitCharacter.name;
-                ExpAndLevelTMP.text = "Lvl: " + selectedunitCharacter.level + "\nExp: " + selectedunitCharacter.experience;
-                HPTMP.text = "HP: " + selectedunitCharacter.currentHP + "/" + selectedunitCharacter.AjustedStats.HP;
-                HPLifebar.fillAmount = (float)selectedunitCharacter.currentHP / (float)selectedunitCharacter.AjustedStats.HP;
-                if (selectedunitCharacter.enemyStats != null && selectedunitCharacter.enemyStats.RemainingLifebars > 0)
-                {
-                    HPTMP.text += "( +" + (selectedunitCharacter.enemyStats.RemainingLifebars * selectedunitCharacter.AjustedStats.HP) + ")";
-                }
 
-                Sprite spriteToUse = null;
-                if (selectedunitCharacter.affiliation.ToLower() == "playable")
+                if (previousselectedGO == selectedunit && previousSelectedCharacter == selectedunitCharacter && previousCharacterWeapon == characterweapon)
                 {
-                    spriteToUse = DataScript.instance.DialogueSpriteList[selectedunitCharacter.ID];
-                }
-                else if (selectedunitCharacter.enemyStats.PlayableSpriteID > 0)
-                {
-                    spriteToUse = DataScript.instance.DialogueSpriteList[selectedunitCharacter.enemyStats.PlayableSpriteID];
+                    //we do nothing, character is same as before, nothing changed
                 }
                 else
                 {
-                    spriteToUse = DataScript.instance.EnemySprites[selectedunitCharacter.enemyStats.SpriteID];
-                }
-                CharacterSprite.sprite = spriteToUse;
-                if (selectedunitCharacter.affiliation.ToLower() == "playable")
-                {
-                    if (!ExpBarFilling.transform.parent.gameObject.activeSelf)
+                    ManageMasteryVisuals(selectedunitCharacter);
+
+                    ManageStatusAilmentVisuals(selectedunit);
+
+                    NameTMP.text = selectedunitCharacter.name;
+                    ExpAndLevelTMP.text = "Lvl: " + selectedunitCharacter.level + "\nExp: " + selectedunitCharacter.experience;
+                    HPTMP.text = "HP: " + selectedunitCharacter.currentHP + "/" + selectedunitCharacter.AjustedStats.HP;
+                    HPLifebar.fillAmount = (float)selectedunitCharacter.currentHP / (float)selectedunitCharacter.AjustedStats.HP;
+                    if (selectedunitCharacter.enemyStats != null && selectedunitCharacter.enemyStats.RemainingLifebars > 0)
                     {
-                        ExpBarFilling.transform.parent.gameObject.SetActive(true);
+                        HPTMP.text += "( +" + (selectedunitCharacter.enemyStats.RemainingLifebars * selectedunitCharacter.AjustedStats.HP) + ")";
                     }
-                    ExpBarFilling.fillAmount = selectedunitCharacter.experience / 100f * 0.75f;
-                }
-                else
-                {
-                    if (ExpBarFilling.transform.parent.gameObject.activeSelf)
+
+                    Sprite spriteToUse = null;
+                    if (selectedunitCharacter.affiliation.ToLower() == "playable")
                     {
-                        ExpBarFilling.transform.parent.gameObject.SetActive(false);
+                        spriteToUse = DataScript.instance.DialogueSpriteList[selectedunitCharacter.ID];
                     }
+                    else if (selectedunitCharacter.enemyStats.PlayableSpriteID > 0)
+                    {
+                        spriteToUse = DataScript.instance.DialogueSpriteList[selectedunitCharacter.enemyStats.PlayableSpriteID];
+                    }
+                    else
+                    {
+                        spriteToUse = DataScript.instance.EnemySprites[selectedunitCharacter.enemyStats.SpriteID];
+                    }
+                    CharacterSprite.sprite = spriteToUse;
+                    if (selectedunitCharacter.affiliation.ToLower() == "playable")
+                    {
+                        if (!ExpBarFilling.transform.parent.gameObject.activeSelf)
+                        {
+                            ExpBarFilling.transform.parent.gameObject.SetActive(true);
+                        }
+                        ExpBarFilling.fillAmount = selectedunitCharacter.experience / 100f * 0.75f;
+                    }
+                    else
+                    {
+                        if (ExpBarFilling.transform.parent.gameObject.activeSelf)
+                        {
+                            ExpBarFilling.transform.parent.gameObject.SetActive(false);
+                        }
+                    }
+
+                    AllStatsSkillBonus statsmods = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null, false);
+
+
+
+                    bool isplayable = selectedunitCharacter.affiliation.ToLower() == "playable";
+
+
+                    ManageGrowthArrow(isplayable);
+
+                    string strcolorstring = getcolorstring(statsmods.Strength);
+                    string psycolorstring = getcolorstring(statsmods.Psyche);
+
+                    StrAndPsyTMP.text = "Str: " + strcolorstring + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength) + "</color>\n";
+
+                    StrAndPsyTMP.text += "Psy: " + psycolorstring + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche);
+
+                    string defcolorstring = getcolorstring(statsmods.Defense);
+                    string rescolorstring = getcolorstring(statsmods.Resistance);
+
+                    DefAndResTMP.text = "Def: " + defcolorstring + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense) + "</color>\n";
+
+                    DefAndResTMP.text += "Res: " + rescolorstring + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance);
+
+                    string dexcolorstring = getcolorstring(statsmods.Dexterity);
+                    string spdcolorstring = getcolorstring(statsmods.Speed);
+
+
+
+                    SpdAndDexTMP.text = "Dex: " + dexcolorstring + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity) + "</color>\n";
+
+                    SpdAndDexTMP.text += "Spd: " + spdcolorstring + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed);
+
+
+                    string luckcolorstring = getcolorstring(statsmods.Luck);
+
+                    LuckAndMovTMP.text = "Lck: " + luckcolorstring + (selectedunitCharacter.AjustedStats.Luck + statsmods.Luck) + "</color>\n";
+                    LuckAndMovTMP.text += "Mvt: " + (selectedunitCharacter.movements - 1);
+
+                    (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(selectedunit, true, null, false);
+
+                    string dmgcolorstring = getcolorstring(damagebonus);
+
+                    DmgTMP.text = "" + dmgcolorstring + BaseDamage;
+
+                    equipment EquipedWeapon = selectedunit.GetComponent<UnitScript>().GetFirstWeapon();
+                    EquipedWeaponIco.sprite = GetWeaponIcons(EquipedWeapon.type);
+                    equipedweaponText.text = EquipedWeapon.Currentuses + "/" + EquipedWeapon.Maxuses;
                 }
-
-                AllStatsSkillBonus statsmods = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null, false);
-
-
-
-                bool isplayable = selectedunitCharacter.affiliation.ToLower() == "playable";
-
-
-                ManageGrowthArrow(isplayable);
-
-                string strcolorstring = getcolorstring(statsmods.Strength);
-                string psycolorstring = getcolorstring(statsmods.Psyche);
-
-                StrAndPsyTMP.text = "Str: " + strcolorstring + (selectedunitCharacter.AjustedStats.Strength + statsmods.Strength) + "</color>\n";
-
-                StrAndPsyTMP.text += "Psy: " + psycolorstring + (selectedunitCharacter.AjustedStats.Psyche + statsmods.Psyche);
-
-                string defcolorstring = getcolorstring(statsmods.Defense);
-                string rescolorstring = getcolorstring(statsmods.Resistance);
-
-                DefAndResTMP.text = "Def: " + defcolorstring + (selectedunitCharacter.AjustedStats.Defense + statsmods.Defense) + "</color>\n";
-
-                DefAndResTMP.text += "Res: " + rescolorstring + (selectedunitCharacter.AjustedStats.Resistance + statsmods.Resistance);
-
-                string dexcolorstring = getcolorstring(statsmods.Dexterity);
-                string spdcolorstring = getcolorstring(statsmods.Speed);
-
-
-
-                SpdAndDexTMP.text = "Dex: " + dexcolorstring + (selectedunitCharacter.AjustedStats.Dexterity + statsmods.Dexterity) + "</color>\n";
-
-                SpdAndDexTMP.text += "Spd: " + spdcolorstring + (selectedunitCharacter.AjustedStats.Speed + statsmods.Speed);
-
-
-                string luckcolorstring = getcolorstring(statsmods.Luck);
-
-                LuckAndMovTMP.text = "Lck: " + luckcolorstring + (selectedunitCharacter.AjustedStats.Luck + statsmods.Luck) + "</color>\n";
-                LuckAndMovTMP.text += "Mvt: " + (selectedunitCharacter.movements - 1);
-
-                (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(selectedunit, true, null, false);
-
-                string dmgcolorstring = getcolorstring(damagebonus);
-
-                DmgTMP.text = "" + dmgcolorstring + BaseDamage;
-
-                equipment EquipedWeapon = selectedunit.GetComponent<UnitScript>().GetFirstWeapon();
-                EquipedWeaponIco.sprite = GetWeaponIcons(EquipedWeapon.type);
-                equipedweaponText.text = EquipedWeapon.Currentuses + "/" + EquipedWeapon.Maxuses;
             }
             else
             {
@@ -334,6 +351,11 @@ public class BattleInfotext : MonoBehaviour
             }
 
         }
+
+
+        previousselectedGO = selectedunit;
+        previousSelectedCharacter = selectedunitCharacter;
+        previousCharacterWeapon = characterweapon;
     }
 
     public void ManageGrowthArrow(bool isplayable)
