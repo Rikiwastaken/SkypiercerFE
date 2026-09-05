@@ -53,6 +53,7 @@ public class PreBattleMenuScript : MonoBehaviour
             transform.GetChild(3).gameObject.SetActive(true);
             transform.GetChild(4).gameObject.SetActive(true);
             transform.GetChild(5).gameObject.SetActive(true);
+            transform.GetChild(6).gameObject.SetActive(true);
         }
 
         if (ReplaceUnitButton.activeSelf)
