@@ -94,7 +94,7 @@ public class BezierCurveManager : MonoBehaviour
 
     public void DrawLineBetween2Tiles(GridSquareScript selectedChar, GridSquareScript OtherChar, int lineID)
     {
-        if (selectedChar == null || OtherChar.transform == null || OtherChar == null || selectedChar.transform == null)
+        if (selectedChar == null || OtherChar == null || OtherChar.transform == null || selectedChar.transform == null)
         {
             return;
         }

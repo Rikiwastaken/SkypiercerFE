@@ -2350,9 +2350,16 @@ public class ActionsMenu : MonoBehaviour
 
     private void DealScytheDamage(GameObject attacker, GameObject target)
     {
+        if (GridScript == null)
+        {
+            GridScript = GridScript.instance;
+        }
+        if (GridScript.Grid == null || GridScript.Grid.Count == 0 || GridScript.Grid[0].Count == 0)
+        {
+            return;
+        }
         List<GameObject> targetlist = new List<GameObject>();
         Vector2 position = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
-
         if (position.x < GridScript.Grid.Count - 1)
         {
             GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x + 1), (int)position.y));

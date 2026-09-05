@@ -11,7 +11,7 @@ public class GridSquareScript : MonoBehaviour
     public SpriteRenderer BossFilledImage;
 
 
-    public Vector2 GridCoordinates;
+    public Vector2 GridCoordinates = new Vector2(0, 0);
 
     private GridScript GridScript;
 
