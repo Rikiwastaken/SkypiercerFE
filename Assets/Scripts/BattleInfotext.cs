@@ -404,7 +404,16 @@ public class BattleInfotext : MonoBehaviour
         {
             _ShowDetailsAction.Enable();
         }
-        if (_ShowDetailsAction.WasPressedThisFrame() && !showingdescription && !ActionsMenu.gameObject.activeSelf && !NeutralMenu.activeSelf)
+
+        bool IsInAMenu = false;
+
+
+
+        GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
+
+        IsInAMenu = (currentSelected != null && currentSelected.activeInHierarchy);
+
+        if (_ShowDetailsAction.WasPressedThisFrame() && !showingdescription && !ActionsMenu.gameObject.activeSelf && !NeutralMenu.activeSelf && !IsInAMenu)
         {
             SkillButtonList[0].Select();
             showingdescription = true;
@@ -437,8 +446,6 @@ public class BattleInfotext : MonoBehaviour
             }
         }
 
-
-        GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
 
 
         if (currentSelected != null && currentSelected.GetComponent<Button>() && SkillButtonList.Contains(currentSelected.GetComponent<Button>()) && showingdescription)
