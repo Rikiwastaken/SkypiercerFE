@@ -106,14 +106,15 @@ public class WorldMapManager : MonoBehaviour
         if (selectedchapter >= 0)
         {
 
-            if (!ChapterUI.activeSelf)
-            {
-                ChapterUI.SetActive(true);
-            }
+
 
             string chaptertxt = "";
             if (selectedsidestory)
             {
+                if (!ChapterUI.activeSelf)
+                {
+                    ChapterUI.SetActive(true);
+                }
                 chapterNametext.text = "Sidestory " + (selectedchapter + 1) + " : ";
                 int averagelvl = 0;
 
@@ -127,8 +128,12 @@ public class WorldMapManager : MonoBehaviour
                 chapterlvl.text = "Lvl: " + averagelvl;
                 chaptertext.text = SideStoryNames[selectedchapter];
             }
-            else
+            else if (selectedchapter <= SaveManager.instance.maxchapterreached)
             {
+                if (!ChapterUI.activeSelf)
+                {
+                    ChapterUI.SetActive(true);
+                }
                 if (selectedchapter == 0)
                 {
                     chaptertxt = "Prologue : ";
@@ -152,63 +157,66 @@ public class WorldMapManager : MonoBehaviour
                 chaptertext.text = chapternames[selectedchapter];
             }
 
-
-
-
-            if (ChapterUI.transform.localPosition.x < maxx)
+            if (ChapterUI.activeSelf)
             {
-                ChapterUI.transform.localPosition += new Vector3(displacementpersecond * Time.deltaTime, 0f, 0f);
-            }
-            else
-            {
-                ChapterUI.transform.localPosition = new Vector3(maxx, ChapterUI.transform.localPosition.y, ChapterUI.transform.localPosition.z);
-            }
-
-            if (_ActivateAction.WasPressedThisFrame())
-            {
-
-                string scenename = "";
-                if (selectedsidestory)
+                if (ChapterUI.transform.localPosition.x < maxx)
                 {
-                    scenename = "SideStory" + (selectedchapter + 1);
+                    ChapterUI.transform.localPosition += new Vector3(displacementpersecond * Time.deltaTime, 0f, 0f);
                 }
                 else
                 {
-                    if (selectedchapter == 0)
+                    ChapterUI.transform.localPosition = new Vector3(maxx, ChapterUI.transform.localPosition.y, ChapterUI.transform.localPosition.z);
+                }
+
+                if (_ActivateAction.WasPressedThisFrame())
+                {
+
+                    string scenename = "";
+                    if (selectedsidestory)
                     {
-                        scenename = "Prologue";
+                        scenename = "SideStory" + (selectedchapter + 1);
                     }
                     else
                     {
-                        scenename = "Chapter" + selectedchapter;
+                        if (selectedchapter == 0)
+                        {
+                            scenename = "Prologue";
+                        }
+                        else
+                        {
+                            scenename = "Chapter" + selectedchapter;
+                        }
+                    }
+
+                    if (!selectedsidestory && selectedchapter == 12)
+                    {
+                        SceneLoader.instance.LoadScene("CutsceneScene", 2); //load cutscene 2
+                    }
+                    else if (!selectedsidestory && selectedchapter == 13)
+                    {
+                        SceneLoader.instance.LoadScene("CutsceneScene", 7); //load cutscene 7
+                    }
+                    else if (!selectedsidestory && selectedchapter == 14)
+                    {
+                        SceneLoader.instance.LoadScene("CutsceneScene", 10); //load cutscene 10
+                    }
+                    else if (!selectedsidestory && selectedchapter == 15)
+                    {
+                        SceneLoader.instance.LoadScene("CutsceneScene", 11); //load cutscene 11
+                    }
+                    else if (!selectedsidestory && selectedchapter == 16)
+                    {
+                        SceneLoader.instance.LoadScene("CutsceneScene", 13); //load cutscene 13
+                    }
+                    else
+                    {
+                        SceneLoader.instance.LoadScene(scenename);
                     }
                 }
-
-                if (!selectedsidestory && selectedchapter == 12)
-                {
-                    SceneLoader.instance.LoadScene("CutsceneScene", 2); //load cutscene 2
-                }
-                else if (!selectedsidestory && selectedchapter == 13)
-                {
-                    SceneLoader.instance.LoadScene("CutsceneScene", 7); //load cutscene 7
-                }
-                else if (!selectedsidestory && selectedchapter == 14)
-                {
-                    SceneLoader.instance.LoadScene("CutsceneScene", 10); //load cutscene 10
-                }
-                else if (!selectedsidestory && selectedchapter == 15)
-                {
-                    SceneLoader.instance.LoadScene("CutsceneScene", 11); //load cutscene 11
-                }
-                else if (!selectedsidestory && selectedchapter == 16)
-                {
-                    SceneLoader.instance.LoadScene("CutsceneScene", 13); //load cutscene 13
-                }
-                else
-                {
-                    SceneLoader.instance.LoadScene(scenename);
-                }
             }
+
+
+
 
         }
         else
