@@ -15,6 +15,8 @@
 
 ## System 
 
+- Fix Minimap (use icons ?)
+
 - Reword Battle Animation Mode.
 
 - Rework Animation for Animation Tree
