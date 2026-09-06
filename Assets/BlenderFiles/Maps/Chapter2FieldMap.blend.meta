@@ -3,7 +3,17 @@ guid: 8ff6c4185dcbdb049be3a2db812ebff4
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BrokenWallMat
+    second: {fileID: 2100000, guid: d9a95648e82caa7459f1106df0da4af2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallMat
+    second: {fileID: 2100000, guid: 57affabf9cc8f1443a25f2ff280d83a8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
