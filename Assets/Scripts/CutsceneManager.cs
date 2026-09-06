@@ -372,7 +372,7 @@ public class CutsceneManager : MonoBehaviour
 
             lastLightIDActivated++;
         }
-        for (int i = lastLightIDActivated; i < lights.Count; i++)
+        for (int i = lastLightIDActivated - 1; i < lights.Count; i++)
         {
             lights[i].gameObject.SetActive(false);
         }
