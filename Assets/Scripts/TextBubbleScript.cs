@@ -68,6 +68,8 @@ public class TextBubbleScript : MonoBehaviour
     private InputAction _CancelAction;
     private InputAction _StartAction;
 
+    public GameObject NeutralMenu;
+
     void Awake()
     {
         if (charactername != null)
@@ -133,9 +135,17 @@ public class TextBubbleScript : MonoBehaviour
             return;
         }
         if (musicManager == null)
+        {
             musicManager = MusicManager.instance;
+        }
+
 
         indialogue = true;
+
+        if (NeutralMenu.activeSelf)
+        {
+            NeutralMenu.SetActive(false);
+        }
 
         //if (isPrinting && charIndex < texttodisplay.Length)
         int totalChars = sentence.textInfo.characterCount;
