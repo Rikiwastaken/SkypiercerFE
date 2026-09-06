@@ -1,0 +1,48 @@
+{
+    "dialoguesToLoad": [
+        {
+            "text": "Ok, this city is pretty sick. It's enormous! They built it on top of this weird castle... Occidens looks shabby next to this.",
+            "characterindex": 0
+        },
+        {
+            "text": "Well, we do spend a lot of resources on maintaining it in pristine condition.",
+            "characterindex": 13
+        },
+        {
+            "text": "it's a bit weird though... They're so adamant on not using Old world tech and yet they have an elevator...",
+            "characterindex": 0
+        },
+        {
+            "text": "What's an elevator? Oh, you mean the Riser? Yes, it is an old device created by the mighty engineer Olphus using the Hero's drafts.",
+            "characterindex": 12
+        },
+        {
+            "text": "Sooo, THIS is fine for you guys?",
+            "characterindex": 0
+        },
+        {
+            "text": "Of course, this is Archades engineering. It has nothing to do with the devilish Old World devices.",
+            "characterindex": 12
+        },
+        {
+            "text": "You have no clue how any of this works, do you? This is exactly the same.",
+            "characterindex": 0
+        },
+        {
+            "text": "Why are you so surprised, pupil? I might start thinking that you're all really from Occidens, you know.",
+            "characterindex": 12
+        },
+        {
+            "text": "Now, if that were the case why would we be here?",
+            "characterindex": 9
+        },
+        {
+            "text": "Help! The Throne Room!",
+            "characterindex": -1
+        },
+        {
+            "text": "The king might be in danger! Let's go!",
+            "characterindex": 12
+        }
+    ]
+}

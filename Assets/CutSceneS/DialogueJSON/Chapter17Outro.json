@@ -1,0 +1,116 @@
+{
+    "dialoguesToLoad": [
+        {
+            "text": "This made me break a sweat... Thanks for the assist! I mean... I thank you for your service to the crown.",
+            "characterindex": 24
+        },
+        {
+            "text": "It is fine, Renovatio. You're amongst friends.",
+            "characterindex": 13
+        },
+        {
+            "text": "Really? Talking all princely talk is exhausting... Who are your friends, Gale?",
+            "characterindex": 24
+        },
+        {
+            "text": "I'm Zack Farron, this is Kira Albarn. And who are you?",
+            "characterindex": 0
+        },
+        {
+            "text": "This is Prince Renovatio, heir to the crown of Archades.",
+            "characterindex": 12
+        },
+        {
+            "text": "Albarn, is that right?",
+            "characterindex": 24
+        },
+        {
+            "text": "So what?",
+            "characterindex": 9
+        },
+        {
+            "text": "Anyway, it's not Prince Renovatio anymore. Father passed away earlier today.",
+            "characterindex": 24
+        },
+        {
+            "text": "Really?! So... You are finally king, Reno!",
+            "characterindex": 12
+        },
+        {
+            "text": "Yes, finally.",
+            "characterindex": 24
+        },
+        {
+            "text": "Hold on, your king just died and that's your reaction? What's wrong with you guys?",
+            "characterindex": 0
+        },
+        {
+            "text": "It's... Complicated.",
+            "characterindex": 24
+        },
+        {
+            "text": "The previous king was a mad coward. He has been doing everything in his power to crush Occidens.",
+            "characterindex": 13
+        },
+        {
+            "text": "Father was way too afraid of the old world machines you guys fancy so much.",
+            "characterindex": 24
+        },
+        {
+            "text": "About that, Renovatio, we need your authorization to access the Junkyard. ",
+            "characterindex": 13
+        },
+        {
+            "text": "The junkyard? Are you looking for something?",
+            "characterindex": 24
+        },
+        {
+            "text": "Yeah, something that was stolen from a friend of ours and then the army stole it from the thieves, it's complicated.",
+            "characterindex": 0
+        },
+        {
+            "text": "I see, then you have my blessing. After all, you just saved the King.",
+            "characterindex": 24
+        },
+        {
+            "text": "We did, yeah. I hope we won't come to regret it.",
+            "characterindex": 9
+        },
+        {
+            "text": "Kira Albarn... Your tongue is as sharp as your eyes. I like that.",
+            "characterindex": 24
+        },
+        {
+            "text": "That's not going to get you anywhere.",
+            "characterindex": 9
+        },
+        {
+            "text": "You never know...",
+            "characterindex": 24
+        },
+        {
+            "text": "Right...",
+            "characterindex": 0
+        },
+        {
+            "text": "Your Majesty, perhaps now is not the best time to flirt.",
+            "characterindex": 12
+        },
+        {
+            "text": "Right. My apologies. You know I can't help it...",
+            "characterindex": 24
+        },
+        {
+            "text": "Then let us leave it at that.",
+            "characterindex": 13
+        },
+        {
+            "text": "Right. I have a lot on my plate, with this war and everything. ",
+            "characterindex": 24
+        },
+        {
+            "text": "We'll take our leave, then. See you!",
+            "characterindex": 0
+        }
+    ]
+}
