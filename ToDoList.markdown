@@ -15,7 +15,7 @@
 
 ## System 
 
-- Fix Minimap (use icons ?)
+- Look at chapter 2 map
 
 - Reword Battle Animation Mode.
 

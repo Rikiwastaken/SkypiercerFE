@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnitScript;
@@ -20,16 +20,27 @@ public class MinimapScript : MonoBehaviour
 
     private int waitforinitialization = 5;
 
-    public int tileprocessedperframe;
     private int updatedelay;
 
     private int showposition;
 
     private GridSquareScript previoustile;
 
-    private bool updatingcoroutine;
-
     private bool launchupdate;
+
+    private List<GameObject> PlayableCharacterPins = new List<GameObject>();
+    private List<GameObject> EnemyCharacterPins = new List<GameObject>();
+    private List<GameObject> OtherCharacterPins = new List<GameObject>();
+    private List<GameObject> ContraptionPins = new List<GameObject>();
+
+    private GameObject SelectedTileIcon;
+
+    public Sprite flagpoleSprite;
+    public Sprite LockedDoorSprite;
+    public Sprite InterruptorSprite;
+    public Sprite CurrentPositionSprite;
+
+    public GameObject CharacterPinPrefab;
 
     private void Awake()
     {
@@ -73,11 +84,11 @@ public class MinimapScript : MonoBehaviour
 
 
 
-        if (launchupdate && !updatingcoroutine)
+        if (launchupdate)
         {
 
             launchupdate = false;
-            StartCoroutine(ChangeMinimap());
+            ChangeMinimap();
         }
 
         if (_ActionsMenu.incombat)
@@ -97,10 +108,10 @@ public class MinimapScript : MonoBehaviour
         {
             int gridHeight = gridScript.Grid[0].Count;
             int gridWidth = gridScript.Grid.Count;
-            minimapTexture = new Texture2D(gridWidth * 8, gridHeight * 8, TextureFormat.RGBA32, false);
+            minimapTexture = new Texture2D(gridWidth, gridHeight, TextureFormat.RGBA32, false);
             minimapTexture.filterMode = FilterMode.Point;
 
-            Color[] pixels = new Color[gridWidth * 8 * gridHeight * 8];
+            Color[] pixels = new Color[gridWidth * gridHeight];
             for (int i = 0; i < pixels.Length; i++)
             {
                 pixels[i] = Color.clear;
@@ -171,28 +182,6 @@ public class MinimapScript : MonoBehaviour
         UpdateMinimap();
     }
 
-    private void SetTileColor(Texture2D TextureToPaint, int x, int y, Color color, float alpha = 1f)
-    {
-        color.a = alpha;
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 8; j++)
-            {
-                TextureToPaint.SetPixel(x * 8 + i, y * 8 + j, color);
-            }
-
-        }
-
-
-    }
-
-    private void SetBGTileColor(int x, int y, Color color, float alpha = 0.75f)
-    {
-        color.a = alpha;
-        minimapBackgroundTexture.SetPixel(x, y, color);
-
-    }
-
     public void FirstInitializationMinimapBG()
     {
         if (waitforinitialization <= 0)
@@ -202,9 +191,9 @@ public class MinimapScript : MonoBehaviour
                 for (int j = 0; j < gridScript.Grid[i].Count; j++)
                 {
                     GridSquareScript tile = gridScript.GetTile(i, j);
-                    if ((tile.Mechanism != null && tile.Mechanism.type != 0))
+                    if ((tile.Mechanism != null && (tile.Mechanism.type == 1 || tile.Mechanism.type == 2)))
                     {
-                        continue;
+                        SetBGTileColor(i, j, Color.white);
                     }
                     if (tile.activated)
                     {
@@ -249,7 +238,7 @@ public class MinimapScript : MonoBehaviour
                                 break;
                         }
                     }
-
+                    PlaceEndTilePins(tile);
 
                 }
             }
@@ -257,8 +246,157 @@ public class MinimapScript : MonoBehaviour
         }
     }
 
+    public Vector2 GridToMinimapPosition(Vector2 gridCoordinates)
+    {
+        float cellSize = 8f;
+
+        return new Vector2((gridCoordinates.x + 0.5f) * cellSize, (gridCoordinates.y + 0.5f) * cellSize);
+    }
+
+    private void SetTileColor(Texture2D TextureToPaint, int x, int y, Color color, float alpha = 1f)
+    {
+        color.a = alpha;
+        TextureToPaint.SetPixel(x, y, color);
+
+
+    }
+
+    private void SetBGTileColor(int x, int y, Color color, float alpha = 0.75f)
+    {
+        color.a = alpha;
+        minimapBackgroundTexture.SetPixel(x, y, color);
+
+    }
+
+    public void PlaceCharacterPins()
+    {
+        int playablePinsIndex = 0;
+        int EnemyPinsIndex = 0;
+        int OtherPinsIndex = 0;
+        foreach (Character character in gridScript.allunits)
+        {
+            if (character == null || character.currentTile == null)
+            {
+                continue;
+            }
+
+            Vector2 coordinates = character.currentTile.GridCoordinates;
+
+            if (character.affiliation.ToLower() == "playable")
+            {
+                UpdateCharacterPin(0, coordinates, playablePinsIndex);
+                playablePinsIndex++;
+            }
+            else if (character.affiliation.ToLower() == "enemy")
+            {
+                UpdateCharacterPin(1, coordinates, EnemyPinsIndex);
+                EnemyPinsIndex++;
+            }
+            else if (character.affiliation.ToLower() == "other")
+            {
+                UpdateCharacterPin(2, coordinates, OtherPinsIndex);
+                OtherPinsIndex++;
+            }
+        }
+        DisableUselessPins(PlayableCharacterPins, playablePinsIndex);
+        DisableUselessPins(EnemyCharacterPins, EnemyPinsIndex);
+        DisableUselessPins(OtherCharacterPins, OtherPinsIndex);
+
+    }
+
+    public void PlaceEndTilePins(GridSquareScript currentTile)
+    {
+        if (currentTile == null || !currentTile.activated)
+        {
+            return;
+        }
+        if (currentTile.isfinishtile)
+        {
+            GameObject newPin = Instantiate(CharacterPinPrefab);
+            newPin.name = "End Pin";
+            newPin.transform.SetParent(transform.parent);
+
+
+            RectTransform iconRect = newPin.GetComponent<RectTransform>();
+
+            iconRect.anchorMin = new Vector2(0, 0);
+            iconRect.anchorMax = new Vector2(0, 0);
+            iconRect.pivot = new Vector2(0.5f, 0.5f);
+
+            iconRect.anchoredPosition = GridToMinimapPosition(currentTile.GridCoordinates);
+
+            Color targetcolor = new Color(1f, 1f, 1f, 1f);
+
+            iconRect.transform.GetChild(0).GetComponent<Image>().color = targetcolor;
+            iconRect.transform.GetChild(0).GetComponent<Image>().sprite = flagpoleSprite;
+        }
+
+    }
+
+    private void UpdateCharacterPin(int type, Vector2 gridPosition, int currentindex) // type is 0 for playable, 1 for enemy, 2 for other
+    {
+        List<GameObject> CurrentPinList = new List<GameObject>();
+        string name = "";
+        Color targetColor = Color.white;
+        switch (type)
+        {
+            case 0:
+                CurrentPinList = PlayableCharacterPins;
+                name = "Playable Pin " + currentindex;
+                targetColor = Color.blue;
+                break;
+            case 1:
+                CurrentPinList = EnemyCharacterPins;
+                name = "Enemy Pin " + currentindex;
+                targetColor = Color.red;
+                break;
+            case 2:
+                CurrentPinList = OtherCharacterPins;
+                name = "Other Pin " + currentindex;
+                targetColor = Color.yellow;
+                break;
+        }
+        if (CurrentPinList.Count <= currentindex)
+        {
+            GameObject newPin = Instantiate(CharacterPinPrefab);
+            newPin.name = name;
+            newPin.transform.SetParent(transform.parent);
+            CurrentPinList.Add(newPin);
+        }
+
+        if (!CurrentPinList[currentindex].activeSelf)
+        {
+            CurrentPinList[currentindex].SetActive(true);
+        }
+
+        RectTransform iconRect = CurrentPinList[currentindex].GetComponent<RectTransform>();
+
+        iconRect.anchorMin = new Vector2(0, 0);
+        iconRect.anchorMax = new Vector2(0, 0);
+        iconRect.pivot = new Vector2(0.5f, 0.5f);
+
+        iconRect.anchoredPosition = GridToMinimapPosition(gridPosition);
+
+        if (CurrentPinList[currentindex].transform.GetChild(0).GetComponent<Image>().color != targetColor)
+        {
+            CurrentPinList[currentindex].transform.GetChild(0).GetComponent<Image>().color = targetColor;
+        }
+    }
+
+    private void DisableUselessPins(List<GameObject> pinlist, int currentindex)
+    {
+        for (int i = currentindex; i < pinlist.Count; i++)
+        {
+            if (pinlist[i].activeSelf)
+            {
+                pinlist[i].SetActive(false);
+            }
+        }
+    }
+
     public void UpdateMinimap()
     {
+
         if (waitforinitialization <= 0)
         {
             launchupdate = true;
@@ -267,14 +405,9 @@ public class MinimapScript : MonoBehaviour
 
     }
 
-    private IEnumerator ChangeMinimap()
+    private void ChangeMinimap()
     {
-        updatingcoroutine = true;
-        Texture2D newtexture = new Texture2D(minimapTexture.width, minimapTexture.height, TextureFormat.RGBA32, false);
-        newtexture.filterMode = FilterMode.Point;
-
-        int processed = 0;
-
+        int currentContraptionIndex = 0;
         for (int i = 0; i < gridScript.Grid.Count; i++)
         {
             for (int j = 0; j < gridScript.Grid[i].Count; j++)
@@ -282,247 +415,148 @@ public class MinimapScript : MonoBehaviour
 
 
                 GridSquareScript tile = gridScript.GetTile(i, j);
-                SetTileColor(newtexture, i, j, Color.clear, 0f);
+
+                if (tile != null && tile.activated && tile.Mechanism != null && (tile.Mechanism.type == 1 || tile.Mechanism.type == 2))
+                {
+                    manageContraptionIcon(tile, currentContraptionIndex);
+                    currentContraptionIndex++;
+                }
+
+
+
+                SetTileColor(minimapTexture, i, j, Color.clear, 0f);
                 if (gridScript.attacktiles.Contains(tile) || gridScript.lockedattacktiles.Contains(tile))
                 {
                     //SetTileColor(i, j, new Color(245f / 255f, 176f / 255f, 66f / 255f)); //orange
-                    SetTileColor(newtexture, i, j, Color.red);
+                    SetTileColor(minimapTexture, i, j, Color.red);
                 }
                 if (gridScript.healingtiles.Contains(tile) || gridScript.lockedhealingtiles.Contains(tile))
                 {
-                    SetTileColor(newtexture, i, j, new Color(66f / 255f, 245f / 255f, 170f / 255f));
+                    SetTileColor(minimapTexture, i, j, new Color(66f / 255f, 245f / 255f, 170f / 255f));
                 }
                 if (gridScript.movementtiles.Contains(tile) || gridScript.lockedmovementtiles.Contains(tile))
                 {
-                    SetTileColor(newtexture, i, j, Color.blue);
+                    SetTileColor(minimapTexture, i, j, Color.blue);
                 }
-                manageContraptionLeverIcon(newtexture, tile);
-                manageEndMapIncon(newtexture, tile);
                 if (!tile.activated)
                 {
-                    SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
+                    SetTileColor(minimapTexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
                 }
-                processed++;
-                if (processed > tileprocessedperframe)
-                {
-                    yield return null;
-                    processed = 0;
-                }
+
 
             }
         }
-        foreach (Character character in gridScript.allunits)
-        {
-            GridSquareScript tile = character.currentTile;
-            if (character.affiliation == "playable")
-            {
-                SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.blue);
-                UnitTile(tile);
-            }
-            else if (character.affiliation == "enemy")
-            {
-                SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.red);
-                UnitTile(tile);
-            }
-            else if (character.affiliation == "other")
-            {
-                SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow);
-                UnitTile(tile);
-            }
-            if (!tile.activated)
-            {
-                SetTileColor(newtexture, (int)tile.GridCoordinates.x, (int)tile.GridCoordinates.y, Color.yellow, 0f);
-            }
 
-        }
+        DisableUselessContraptionPins(currentContraptionIndex);
+        PlaceCharacterPins();
+        manageselectionicon();
 
-        yield return null;
-
-        manageselectionicon(newtexture);
-
-        newtexture.Apply();
-        minimapTexture = newtexture;
-        minimapImage.sprite = Sprite.Create(minimapTexture,
-            new Rect(0, 0, minimapTexture.width, minimapTexture.height),
-            new Vector2(0.5f, 0.5f),
-            1, // pixels per unit
-            0,
-            SpriteMeshType.FullRect
-        );
-
-        updatingcoroutine = false;
-        yield return true;
+        minimapTexture.Apply();
     }
 
-    private void manageEndMapIncon(Texture2D texture, GridSquareScript tile)
+    private void manageContraptionIcon(GridSquareScript tile, int currentContraptionIndex)
     {
-        if (tile.isfinishtile) // show selection as a red and yellow ring
+        if (ContraptionPins.Count <= currentContraptionIndex)
         {
-            int selectedx = (int)tile.GridCoordinates.x;
-            int selectedy = (int)tile.GridCoordinates.y;
-
-
-            for (int i = 1; i < 7; i++)
-            {
-                texture.SetPixel(selectedx * 8 + i, selectedy * 8 + 1, Color.white);
-            }
-            for (int i = 2; i < 6; i++)
-            {
-                texture.SetPixel(selectedx * 8 + i, selectedy * 8 + 2, Color.white);
-            }
-            for (int i = 3; i < 7; i++)
-            {
-                texture.SetPixel(selectedx * 8 + 3, selectedy * 8 + i, Color.black);
-            }
-            for (int i = 4; i < 7; i++)
-            {
-                texture.SetPixel(selectedx * 8 + 4, selectedy * 8 + i, Color.red);
-            }
-            texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 4, Color.red);
-            texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 5, Color.red);
-            texture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 4, Color.red);
-
-
-
+            GameObject newPin = Instantiate(CharacterPinPrefab);
+            newPin.name = "Contraption Pin " + currentContraptionIndex;
+            newPin.transform.SetParent(transform.parent);
+            ContraptionPins.Add(newPin);
         }
+
+        if (tile.Mechanism.isactivated)
+        {
+            if (tile.Mechanism.type == 1)
+            {
+                if (ContraptionPins[currentContraptionIndex].activeSelf)
+                {
+                    ContraptionPins[currentContraptionIndex].SetActive(false);
+                }
+            }
+            else if (tile.Mechanism.type == 2)
+            {
+                if (!ContraptionPins[currentContraptionIndex].activeSelf)
+                {
+                    ContraptionPins[currentContraptionIndex].SetActive(true);
+                }
+                ContraptionPins[currentContraptionIndex].GetComponent<Image>().color = Color.green;
+                ContraptionPins[currentContraptionIndex].transform.GetChild(0).GetComponent<Image>().color = Color.white;
+                ContraptionPins[currentContraptionIndex].transform.GetChild(0).GetComponent<Image>().sprite = InterruptorSprite;
+            }
+        }
+        else
+        {
+            if (tile.Mechanism.type == 1)
+            {
+                if (!ContraptionPins[currentContraptionIndex].activeSelf)
+                {
+                    ContraptionPins[currentContraptionIndex].SetActive(true);
+                }
+                ContraptionPins[currentContraptionIndex].GetComponent<Image>().color = Color.white;
+                ContraptionPins[currentContraptionIndex].transform.GetChild(0).GetComponent<Image>().color = Color.white;
+                ContraptionPins[currentContraptionIndex].transform.GetChild(0).GetComponent<Image>().sprite = LockedDoorSprite;
+            }
+            else if (tile.Mechanism.type == 2)
+            {
+                if (!ContraptionPins[currentContraptionIndex].activeSelf)
+                {
+                    ContraptionPins[currentContraptionIndex].SetActive(true);
+                }
+                ContraptionPins[currentContraptionIndex].GetComponent<Image>().color = Color.red;
+                ContraptionPins[currentContraptionIndex].transform.GetChild(0).GetComponent<Image>().color = Color.white;
+                ContraptionPins[currentContraptionIndex].transform.GetChild(0).GetComponent<Image>().sprite = InterruptorSprite;
+            }
+        }
+
+
+        RectTransform iconRect = ContraptionPins[currentContraptionIndex].GetComponent<RectTransform>();
+
+        iconRect.anchorMin = new Vector2(0, 0);
+        iconRect.anchorMax = new Vector2(0, 0);
+        iconRect.pivot = new Vector2(0.5f, 0.5f);
+
+        iconRect.anchoredPosition = GridToMinimapPosition(tile.GridCoordinates);
     }
 
-    private void manageContraptionLeverIcon(Texture2D texture, GridSquareScript tile)
+    private void DisableUselessContraptionPins(int lastcontraptionID)
     {
-        if (tile.Mechanism != null)
+        for (int i = lastcontraptionID; i < ContraptionPins.Count; i++)
         {
-            int selectedx = (int)tile.GridCoordinates.x;
-            int selectedy = (int)tile.GridCoordinates.y;
-            if (tile.Mechanism.isactivated)
+            if (ContraptionPins[i].activeSelf)
             {
-                if (tile.Mechanism.type == 1)
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        for (int j = 0; j < 8; j++)
-                        {
-                            texture.SetPixel(selectedx * 8 + i, selectedy * 8 + j, Color.white);
-                        }
-
-                    }
-                }
-                else if (tile.Mechanism.type == 2)
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        for (int j = 0; j < 8; j++)
-                        {
-                            texture.SetPixel(selectedx * 8 + i, selectedy * 8 + j, Color.grey);
-                        }
-
-                    }
-                }
+                ContraptionPins[i].SetActive(false);
             }
-            else
-            {
-                if (tile.Mechanism.type == 2)
-                {
-
-
-                    for (int i = 0; i < 8; i++)
-                    {
-                        for (int j = 0; j < 8; j++)
-                        {
-                            texture.SetPixel(selectedx * 8 + i, selectedy * 8 + j, Color.grey);
-                        }
-
-                    }
-
-
-                    texture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 2, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 2, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 2, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 2, Color.yellow);
-
-                    texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 3, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 3, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 3, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 3, Color.yellow);
-
-                    texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 4, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 4, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 4, selectedy * 8 + 4, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 4, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 4, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 4, Color.yellow);
-
-                    texture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 5, Color.yellow);
-                    texture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 5, Color.yellow);
-
-
-                }
-                else if (tile.Mechanism.type == 1)
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        for (int j = 0; j < 8; j++)
-                        {
-                            texture.SetPixel(selectedx * 8 + i, selectedy * 8 + j, Color.grey);
-                        }
-
-                    }
-                }
-            }
-
-
         }
-
-
     }
 
-    private void UnitTile(GridSquareScript tile)
-    {
 
-        int selectedx = (int)tile.GridCoordinates.x;
-        int selectedy = (int)tile.GridCoordinates.y;
-
-        for (int i = 0; i < 8; i++)
-        {
-            minimapTexture.SetPixel(selectedx * 8 + i, selectedy * 8, Color.black);
-            minimapTexture.SetPixel(selectedx * 8 + i, selectedy * 8 + 7, Color.black);
-        }
-        for (int i = 1; i < 7; i++)
-        {
-            minimapTexture.SetPixel(selectedx * 8, selectedy * 8 + i, Color.black);
-            minimapTexture.SetPixel(selectedx * 8 + 7, selectedy * 8 + i, Color.black);
-        }
-
-
-    }
-
-    private void manageselectionicon(Texture2D texture)
+    private void manageselectionicon()
     {
         if (gridScript.selection != null) // show selection as a red and yellow ring
         {
-            int selectedx = (int)gridScript.selection.GridCoordinates.x;
-            int selectedy = (int)gridScript.selection.GridCoordinates.y;
+            Vector2 targetpos = gridScript.selection.GridCoordinates;
 
-            texture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 0, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 0, Color.red);
-            texture.SetPixel(selectedx * 8 + 4, selectedy * 8 + 0, Color.red);
-            texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 0, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 1, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 1, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 2, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 2, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 3, Color.red);
-            texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 3, Color.red);
-            texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 4, Color.red);
-            texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 4, Color.red);
-            texture.SetPixel(selectedx * 8 + 0, selectedy * 8 + 5, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 7, selectedy * 8 + 5, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 1, selectedy * 8 + 6, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 6, selectedy * 8 + 6, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 2, selectedy * 8 + 7, Color.yellow);
-            texture.SetPixel(selectedx * 8 + 3, selectedy * 8 + 7, Color.red);
-            texture.SetPixel(selectedx * 8 + 4, selectedy * 8 + 7, Color.red);
-            texture.SetPixel(selectedx * 8 + 5, selectedy * 8 + 7, Color.yellow);
+            if (SelectedTileIcon == null)
+            {
+                SelectedTileIcon = new GameObject();
+                SelectedTileIcon.name = "Selected Tile icon";
+                RectTransform rect = SelectedTileIcon.AddComponent<RectTransform>();
+                SelectedTileIcon.AddComponent<Image>();
+                SelectedTileIcon.GetComponent<Image>().color = Color.white;
+                SelectedTileIcon.GetComponent<Image>().sprite = CurrentPositionSprite;
 
+                rect.rect.Set(0, 0, 150, 150);
+                rect.localScale = Vector2.one * 0.06f;
+                rect.SetParent(transform.parent);
+            }
+
+            RectTransform iconRect = SelectedTileIcon.GetComponent<RectTransform>();
+
+            iconRect.anchorMin = new Vector2(0, 0);
+            iconRect.anchorMax = new Vector2(0, 0);
+            iconRect.pivot = new Vector2(0.5f, 0.5f);
+
+            iconRect.anchoredPosition = GridToMinimapPosition(targetpos);
         }
     }
 
