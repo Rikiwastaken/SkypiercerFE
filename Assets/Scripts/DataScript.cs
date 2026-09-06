@@ -329,6 +329,10 @@ public class DataScript : MonoBehaviour
             {
                 targetmastery = 2;
             }
+            if (Chapter > 16)
+            {
+                targetmastery = 3;
+            }
 
             foreach (Character unit in PlayableCharacterList)
             {
@@ -336,7 +340,7 @@ public class DataScript : MonoBehaviour
                 {
                     int baselevel = unit.level;
                     US.UnitCharacteristics = unit;
-                    for (int i = 0; i < targetlevel - baselevel; i++)
+                    for (int i = 0; i <= targetlevel - baselevel; i++)
                     {
                         US.LevelUp();
                     }
