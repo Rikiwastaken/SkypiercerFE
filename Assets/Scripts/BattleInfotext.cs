@@ -154,10 +154,14 @@ public class BattleInfotext : MonoBehaviour
             {
                 transform.GetChild(0).gameObject.SetActive(false);
             }
-            if (MasteryTexts[0].transform.parent.gameObject.activeSelf)
+            foreach (TextMeshProUGUI masteryTxt in MasteryTexts)
             {
-                MasteryTexts[0].transform.parent.gameObject.SetActive(false);
+                if (masteryTxt.transform.parent.gameObject.activeSelf)
+                {
+                    masteryTxt.transform.parent.gameObject.SetActive(false);
+                }
             }
+
             if (Skilltext.transform.parent.gameObject.activeSelf)
             {
                 Skilltext.transform.parent.gameObject.SetActive(false);
@@ -476,7 +480,13 @@ public class BattleInfotext : MonoBehaviour
         {
             Skilltext.transform.parent.gameObject.SetActive(false);
 
-            MasteryTexts[0].transform.parent.gameObject.SetActive(false);
+            foreach (TextMeshProUGUI masteryTxt in MasteryTexts)
+            {
+                if (masteryTxt.transform.parent.gameObject.activeSelf)
+                {
+                    masteryTxt.transform.parent.gameObject.SetActive(false);
+                }
+            }
         }
         showingdescription = false;
     }
@@ -532,9 +542,12 @@ public class BattleInfotext : MonoBehaviour
         }
         else
         {
-            if (MasteryTexts[0].transform.parent.gameObject.activeSelf)
+            foreach (TextMeshProUGUI masteryTxt in MasteryTexts)
             {
-                MasteryTexts[0].transform.parent.gameObject.SetActive(false);
+                if (masteryTxt.transform.parent.gameObject.activeSelf)
+                {
+                    masteryTxt.transform.parent.gameObject.SetActive(false);
+                }
             }
 
             return;
