@@ -116,8 +116,6 @@ public class MusicManager : MonoBehaviour
 
     private int currentMusicType = -1;
 
-    string previousFaction;
-
     public float timebeforemusicplays;
     private void Awake()
     {
@@ -143,10 +141,7 @@ public class MusicManager : MonoBehaviour
     private void Update()
     {
 
-        if (actionsMenu == null)
-        {
-            actionsMenu = ActionsMenu.instance;
-        }
+
 
         string currentscenename = SceneManager.GetActiveScene().name;
         if (currentscenename.Contains("SideStory") || currentscenename.Contains("Chapter") || currentscenename.Contains("Prologue") || currentscenename.Contains("TestMap"))
@@ -166,6 +161,10 @@ public class MusicManager : MonoBehaviour
             if (textBubbleScript == null)
             {
                 textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
+            }
+            if (actionsMenu == null)
+            {
+                actionsMenu = ActionsMenu.instance;
             }
         }
 
@@ -378,6 +377,7 @@ public class MusicManager : MonoBehaviour
 
     public void InitializeMusics(string ChapterToLoad)
     {
+        Debug.Log("did this play");
         bool isSideStory = false;
         int Chapter = -1;
         if (ChapterToLoad.Contains("Chapter"))
