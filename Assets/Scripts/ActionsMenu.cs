@@ -80,6 +80,8 @@ public class ActionsMenu : MonoBehaviour
 
     public float expLevelAjustmentFactor = 4f; // The divisor for the level difference adjustment, can be tweaked for balance
 
+    public GameObject TextNumberPopup;
+
     private void OnDisable()
     {
         PreviousActivatedState = false;
@@ -1873,7 +1875,7 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-                    (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage);
+                    (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage, false);
 
                     (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false);
                     finaldamage = unitdamage;
@@ -1918,7 +1920,7 @@ public class ActionsMenu : MonoBehaviour
 
                 (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(unit, target, numberofhits, unithitrate, unitcrit, unitdamage, numberofcritials, totaldamage, Damagelist, Critlist);
 
-                (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage);
+                (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage, numberofcritials != 0);
 
                 (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false);
                 finaldamage = unitdamage;
@@ -1974,7 +1976,7 @@ public class ActionsMenu : MonoBehaviour
 
                     (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, numberofcritials, totaldamage, Damagelist, Critlist);
 
-                    (allforoneactive, unyieldingactivated) = AffectDamage(target, unit, totaldamage);
+                    (allforoneactive, unyieldingactivated) = AffectDamage(target, unit, totaldamage, numberofcritials != 0);
                     (compassionused, invigoratingused) = OnDamageEffect(target, targetdamage, false);
                     finaldamage = targetdamage;
                 }
@@ -2022,6 +2024,7 @@ public class ActionsMenu : MonoBehaviour
                     unitdamage = (int)chartarget.AjustedStats.HP - chartarget.currentHP;
                 }
                 chartarget.currentHP += unitdamage;
+                SpawnTextPopup(unitdamage + "", true, false, target);
                 Damagelist.Add(unitdamage);
                 Critlist.Add(0);
                 (compassionused, invigoratingused) = OnDamageEffect(unit, unitdamage, true);
@@ -2115,7 +2118,7 @@ public class ActionsMenu : MonoBehaviour
         return (numberofhits, numberofcritials, totaldamage);
     }
 
-    private (bool, bool) AffectDamage(GameObject Attacker, GameObject target, int damage)// oneforall active, unyieldingactive
+    private (bool, bool) AffectDamage(GameObject Attacker, GameObject target, int damage, bool iscrit)// oneforall active, unyieldingactive
     {
 
         bool oneforallactive = false;
@@ -2161,13 +2164,17 @@ public class ActionsMenu : MonoBehaviour
             oneforallactive = true;
             int transfertargethp = allforonetransfertarget.currentHP;
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage / 2;
+            SpawnTextPopup(damage / 2 + "", false, iscrit, target);
             allforonetransfertarget.currentHP -= damage / 2;
+            SpawnTextPopup(damage / 2 + "", false, iscrit, target);
             SurvivalSkillsCheck(allforonetransfertargetGO, transfertargethp);
 
         }
         else
         {
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage;
+            SpawnTextPopup(damage + "", false, iscrit, target);
+
         }
 
 
@@ -2181,17 +2188,20 @@ public class ActionsMenu : MonoBehaviour
             if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.BurnTurns > 0)
             {
                 charTarget.statusEffects.BurnTurns++;
+                SpawnTextPopup("burn", false, false, target);
             }
         }
 
         if (Attacker.GetComponent<UnitScript>().GetSkill(85)) //lightning edge
         {
             charTarget.statusEffects.ParalyzedTurns++;
+            SpawnTextPopup("paralyzed", false, false, target);
         }
 
         if (Attacker.GetComponent<UnitScript>().GetSkill(86)) //blazing edge
         {
             charTarget.statusEffects.BurnTurns++;
+            SpawnTextPopup("burn", false, false, target);
         }
 
         if (Attacker.GetComponent<UnitScript>().GetSkill(93)) //contamination
@@ -2199,23 +2209,63 @@ public class ActionsMenu : MonoBehaviour
             StatusEffects AtatckerStatus = Attacker.GetComponent<UnitScript>().UnitCharacteristics.statusEffects;
             StatusEffects TargetStatus = charTarget.statusEffects;
             TargetStatus.BurnTurns += AtatckerStatus.BurnTurns;
+            if (TargetStatus.BurnTurns > 0)
+            {
+                SpawnTextPopup("burn", false, false, target);
+            }
             TargetStatus.ParalyzedTurns += AtatckerStatus.ParalyzedTurns;
+            if (TargetStatus.ParalyzedTurns > 0)
+            {
+                SpawnTextPopup("paralyzed", false, false, target);
+            }
             TargetStatus.WeaknessTurns += AtatckerStatus.WeaknessTurns;
+            if (TargetStatus.WeaknessTurns > 0)
+            {
+                SpawnTextPopup("weakness", false, false, target);
+            }
             TargetStatus.StunTurns += AtatckerStatus.StunTurns;
+            if (TargetStatus.StunTurns > 0)
+            {
+                SpawnTextPopup("stun", false, false, target);
+            }
             TargetStatus.PowerTurns += AtatckerStatus.PowerTurns;
+            if (TargetStatus.PowerTurns > 0)
+            {
+                SpawnTextPopup("power", true, false, target);
+            }
             TargetStatus.RegenTurns += AtatckerStatus.RegenTurns;
+            if (TargetStatus.RegenTurns > 0)
+            {
+                SpawnTextPopup("regen", true, false, target);
+            }
             TargetStatus.AccelerationTurns += AtatckerStatus.AccelerationTurns;
+            if (TargetStatus.AccelerationTurns > 0)
+            {
+                SpawnTextPopup("acceleration", true, false, target);
+            }
             Attacker.GetComponent<UnitScript>().RemoveStatusAilments();
+            SpawnTextPopup("cleanse", true, false, Attacker);
         }
 
         if (target.GetComponent<UnitScript>().GetSkill(87)) //unphasable
         {
             target.GetComponent<UnitScript>().RemoveStatusAilments();
+            SpawnTextPopup("cleanse", true, false, target);
         }
 
         return (oneforallactive, unyieldingactive);
     }
 
+    public void SpawnTextPopup(string damage, bool ishealing, bool iscritical, GameObject Character)
+    {
+        GameObject Textnumber = Instantiate(TextNumberPopup);
+        Vector2 gridcoords = Character.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
+        float characterelevation = Character.GetComponent<UnitScript>().UnitCharacteristics.currentTile.elevation;
+        Vector3 wheretospawn = new Vector3(gridcoords.x, characterelevation + 1f, gridcoords.y);
+        Debug.Log(wheretospawn);
+        Textnumber.GetComponent<CombatNumberPopup>().InitializeTMP(damage, wheretospawn, iscritical, ishealing);
+        Debug.Log(Textnumber.transform.position);
+    }
     private bool SurvivalSkillsCheck(GameObject unitGO, int previousHP)
     {
         Character unitChar = unitGO.GetComponent<UnitScript>().UnitCharacteristics;

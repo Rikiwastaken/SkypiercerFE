@@ -47,7 +47,7 @@ public class CombatNumberPopup : MonoBehaviour
 
             float ratio = elapsedTime / durationofText;
 
-            transform.position = Vector2.Lerp(BasePos, BasePos + offset, ratio);
+            transform.position = Vector3.Lerp(BasePos, BasePos + offset, ratio);
 
             yield return null; // wait for next frame
         }
@@ -56,7 +56,7 @@ public class CombatNumberPopup : MonoBehaviour
     public void InitializeTMP(string text, Vector3 positionwheretospawn, bool iscritical, bool ishealing)
     {
         Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        transform.position = positionwheretospawn + offset + new Vector3(Random.Range(-randomoffset, randomoffset), 0, Random.Range(-randomoffset, randomoffset));
+        transform.position = positionwheretospawn + new Vector3(Random.Range(-randomoffset, randomoffset), 0, Random.Range(-randomoffset, randomoffset));
         BasePos = transform.position;
 
         TMPUGUI.text = text;
