@@ -115,7 +115,11 @@ public class ActionsMenu : MonoBehaviour
     void Update()
     {
 
-
+        if (attackTurnScript != null && attackTurnScript.mapwascompleted)
+        {
+            incombat = false;
+            return;
+        }
 
         if (GridScript == null)
         {

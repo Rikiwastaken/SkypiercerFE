@@ -91,6 +91,13 @@ public class TurnManger : MonoBehaviour
             return;
 
         }
+
+        if (GetComponent<AttackTurnScript>().mapwascompleted)
+        {
+            currentlyplaying = "completed";
+            return;
+        }
+
         if (SceneManager.GetActiveScene().name == "CutsceneScene")
         {
             return;
