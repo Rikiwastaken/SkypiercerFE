@@ -60,16 +60,17 @@ public class CampScript : MonoBehaviour
         int index = 0;
         foreach (StartDialogue startdialogue in StartDialogueList)
         {
+            if (saveManager.CampDialoguesSeen.Count <= index)
+            {
+                int count = saveManager.CampDialoguesSeen.Count;
+                for (int i = count; i <= index; i++)
+                {
+                    saveManager.CampDialoguesSeen.Add(false);
+                }
+            }
             if (startdialogue.Chapter == SaveManager.instance.currentchapter)
             {
-                if (saveManager.CampDialoguesSeen.Count < index)
-                {
-                    int count = saveManager.CampDialoguesSeen.Count;
-                    for (int i = count; i <= index; i++)
-                    {
-                        saveManager.CampDialoguesSeen.Add(false);
-                    }
-                }
+
                 if (!saveManager.CampDialoguesSeen[index])
                 {
                     textBubbleScript.InitializeDialogue(startdialogue.Dialogue);

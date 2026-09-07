@@ -39,6 +39,8 @@ public class MusicManager : MonoBehaviour
     public AudioSource CutSceneMusic;
     public AudioSource CutSceneMusicintro;
 
+    public AudioSource LevelUpAS;
+
     public int CurrentDialogueMusic;
 
     private bool lowerdialogue;
@@ -115,6 +117,8 @@ public class MusicManager : MonoBehaviour
     private int currentMusicType = -1;
 
     string previousFaction;
+
+    public float timebeforemusicplays;
     private void Awake()
     {
         if (instance == null)
@@ -262,7 +266,16 @@ public class MusicManager : MonoBehaviour
         {
             ChangeVolume(CampMusic, 0f);
             ChangeVolume(CampMusicintro, 0f);
-            if (TurnManager != null)
+            if (LevelUpAS.isPlaying)
+            {
+                ChangeVolume(PlayableAudioSource, 0f);
+                ChangeVolume(PlayableAudioSourceIntro, 0f);
+                ChangeVolume(EnemyAudioSource, 0f);
+                ChangeVolume(EnemyAudioSourceIntro, 0f);
+                ChangeVolume(OtherAudioSource, 0f);
+                ChangeVolume(OtherAudioSourceIntro, 0f);
+            }
+            else if (TurnManager != null)
             {
                 ManageMusicTurnRotation();
             }
@@ -319,6 +332,10 @@ public class MusicManager : MonoBehaviour
 
     }
 
+    public void PlayLevelUpJingle()
+    {
+        LevelUpAS.Play();
+    }
 
     public void ChangeVolume()
     {
@@ -402,7 +419,11 @@ public class MusicManager : MonoBehaviour
                     break;
                 }
             }
-            PlayPrepMusic = true;
+            if (Chapter != 0)
+            {
+                PlayPrepMusic = true;
+            }
+
         }
     }
 
@@ -509,18 +530,18 @@ public class MusicManager : MonoBehaviour
         Main.volume = startvolume;
         if (intro.clip == null)
         {
-            Main.PlayScheduled(AudioSettings.dspTime);
+            Main.PlayScheduled(AudioSettings.dspTime + timebeforemusicplays);
         }
         else
         {
             intro.volume = startvolume;
 
-            intro.PlayScheduled(AudioSettings.dspTime);
+            intro.PlayScheduled(AudioSettings.dspTime + timebeforemusicplays);
 
             double introduration = (double)intro.clip.samples / intro.clip.frequency;
 
 
-            Main.PlayScheduled(AudioSettings.dspTime + introduration);
+            Main.PlayScheduled(AudioSettings.dspTime + introduration + timebeforemusicplays);
         }
 
 
@@ -562,6 +583,21 @@ public class MusicManager : MonoBehaviour
         switch (TurnManager.currentlyplaying.ToLower())
         {
             case ("playable"):
+                if (PlayableAudioSource.isPlaying)
+                {
+                    ChangeVolume(PlayableAudioSource, 1f);
+                    ChangeVolume(PlayableAudioSourceIntro, 1f);
+                }
+                else
+                {
+                    PlayMusicWithIntro(2, 1f);
+                }
+                ChangeVolume(EnemyAudioSource, 0f);
+                ChangeVolume(EnemyAudioSourceIntro, 0f);
+                ChangeVolume(OtherAudioSource, 0f);
+                ChangeVolume(OtherAudioSourceIntro, 0f);
+                break;
+            case ("tutorial"): // tutorial is just playable phase
                 if (PlayableAudioSource.isPlaying)
                 {
                     ChangeVolume(PlayableAudioSource, 1f);

@@ -28,10 +28,7 @@ public class FreezeFrameCapture : MonoBehaviour
     public RectTransform Canvas;
 
     public bool playsplit;
-    private GameObject MusicGO;
     public bool ShowingLevelUp;
-
-    public AudioClip LevelUpJingleClip;
 
     [Header("NameTextVariables")]
     public TextMeshProUGUI CharacterName;
@@ -220,7 +217,7 @@ public class FreezeFrameCapture : MonoBehaviour
         InitializeControls();
         ResetUIState();
         TimeSafeguard = Time.time + 15f;
-        MusicGO = MusicManager.instance.PlaySFX(LevelUpJingleClip);
+        MusicManager.instance.PlayLevelUpJingle();
         if (fullfreezeframecoroutine != null)
         {
             StopCoroutine(fullfreezeframecoroutine);
@@ -532,12 +529,6 @@ public class FreezeFrameCapture : MonoBehaviour
             yield return null;
         }
 
-
-        if (MusicGO != null)
-        {
-            StartCoroutine(LowerMusic(MusicGO));
-        }
-
         ShowingLevelUp = false;
         continueAvailable = false;
         BackgroundImage.SetActive(false);
@@ -572,31 +563,6 @@ public class FreezeFrameCapture : MonoBehaviour
         TimeSafeguard = 0;
     }
 
-    IEnumerator LowerMusic(GameObject musicGO)
-    {
-        float t = 0f;
-        float basevol = musicGO.GetComponent<AudioSource>().volume;
-
-
-
-        while (t < 1f)
-        {
-            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher m�me si Time.timeScale = 0
-
-            float eased = EaseOutCubic(t);
-            if (musicGO != null)
-            {
-                musicGO.GetComponent<AudioSource>().volume = eased * basevol;
-            }
-
-
-            yield return null;
-        }
-        if (musicGO != null)
-        {
-            Destroy(musicGO);
-        }
-    }
 
     void SetupRectTransforms(Texture2D tex)
     {
