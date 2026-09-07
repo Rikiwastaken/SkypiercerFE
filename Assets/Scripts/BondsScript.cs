@@ -125,36 +125,34 @@ public class BondsScript : MonoBehaviour
         ChangeColorIfBondsCanBeIncreased();
     }
 
-    private void ChangeColorIfBondsCanBeIncreased()
+    public void ChangeColorIfBondsCanBeIncreased()
     {
-        if (GetComponent<CampScript>().BaseMenu.gameObject.activeSelf)
+        if (DataScript.instance != null)
         {
-            if (DataScript.instance != null)
+            bool anybondcanincrease = false;
+            foreach (Bonds bond in DataScript.instance.BondsList)
             {
-                bool anybondcanincrease = false;
-                foreach (Bonds bond in DataScript.instance.BondsList)
+                if (CheckIfBondCanIncrease(bond))
                 {
-                    if (CheckIfBondCanIncrease(bond))
-                    {
-                        anybondcanincrease = true;
-                        break;
-                    }
-                }
-
-                if (anybondcanincrease)
-                {
-                    var colors = BondButton.colors;
-                    colors.normalColor = Color.green;
-                    BondButton.colors = colors;
-                }
-                else
-                {
-                    var colors = BondButton.colors;
-                    colors.normalColor = Color.white;
-                    BondButton.colors = colors;
+                    Debug.Log(bond.Name + " can increase");
+                    anybondcanincrease = true;
+                    break;
                 }
             }
 
+            if (anybondcanincrease)
+            {
+                var colors = BondButton.colors;
+                colors.normalColor = Color.green;
+                BondButton.colors = colors;
+            }
+            else
+            {
+                Debug.Log("no bond can increase");
+                var colors = BondButton.colors;
+                colors.normalColor = Color.white;
+                BondButton.colors = colors;
+            }
         }
     }
 
@@ -360,6 +358,7 @@ public class BondsScript : MonoBehaviour
                     EventSystem.current.SetSelectedGameObject(BondsMenu.transform.GetChild(0).gameObject);
                 }
             }
+            ChangeColorIfBondsCanBeIncreased();
         }
     }
 #if UNITY_EDITOR

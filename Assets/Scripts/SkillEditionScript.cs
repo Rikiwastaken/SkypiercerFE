@@ -43,6 +43,7 @@ public class SkillEditionScript : MonoBehaviour
     private InputAction _CancelAction;
     private InputAction _NextWeaponAction;
     private InputAction _PreviousWeaponAction;
+    public BondsScript BondsScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -116,6 +117,7 @@ public class SkillEditionScript : MonoBehaviour
                         CampMenu.SetActive(true);
                         gameObject.SetActive(false);
                         EventSystem.current.SetSelectedGameObject(CampMenu.transform.GetChild(1).gameObject);
+                        BondsScript.ChangeColorIfBondsCanBeIncreased();
                     }
                 }
                 else
