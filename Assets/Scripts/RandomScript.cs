@@ -97,6 +97,23 @@ public class RandomScript : MonoBehaviour
 
     public int GetHitValue(int target)
     {
+#if UNITY_EDITOR
+
+        if (DataScript.instance == null)
+        {
+            int randomvalue = 0;
+            if (target > 50)
+            {
+                randomvalue = (UnityEngine.Random.Range(1, 101) + UnityEngine.Random.Range(1, 101)) / 2;
+            }
+            else
+            {
+                randomvalue = UnityEngine.Random.Range(1, 101);
+            }
+            return randomvalue;
+        }
+
+#endif
         if (hitvaluesindex >= HitValues.Count)
         {
             hitvaluesindex = 0;
@@ -116,6 +133,23 @@ public class RandomScript : MonoBehaviour
 
     public int GetCritValue(int target)
     {
+#if UNITY_EDITOR
+
+        if (DataScript.instance == null)
+        {
+            int randomvalue = 0;
+            if (target > 50)
+            {
+                randomvalue = (UnityEngine.Random.Range(1, 101) + UnityEngine.Random.Range(1, 101)) / 2;
+            }
+            else
+            {
+                randomvalue = UnityEngine.Random.Range(1, 101);
+            }
+            return randomvalue;
+        }
+
+#endif
         if (CritValuesindex >= CritValues.Count)
         {
             CritValuesindex = 0;
@@ -135,6 +169,23 @@ public class RandomScript : MonoBehaviour
 
     public int GetPersonalityValue(int target)
     {
+#if UNITY_EDITOR
+
+        if (DataScript.instance == null)
+        {
+            int randomvalue = 0;
+            if (target > 50)
+            {
+                randomvalue = (UnityEngine.Random.Range(1, 101) + UnityEngine.Random.Range(1, 101)) / 2;
+            }
+            else
+            {
+                randomvalue = UnityEngine.Random.Range(1, 101);
+            }
+            return randomvalue;
+        }
+
+#endif
         if (personalityvaluesindex >= personalityValues.Count)
         {
             personalityvaluesindex = 0;

@@ -950,7 +950,7 @@ public class UnitScript : MonoBehaviour
 
 
         //Kira Battalion Side Effect
-        if (UnitCharacteristics.playableStats.battalion.ToLower() == "kira" && UnitCharacteristics.currentHP < (int)UnitCharacteristics.AjustedStats.HP)
+        if (UnitCharacteristics.playableStats.battalion != null && UnitCharacteristics.playableStats.battalion.ToLower() == "kira" && UnitCharacteristics.currentHP < (int)UnitCharacteristics.AjustedStats.HP)
         {
 
             AddNumber(Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * 0.1f), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "Kira's Battalion");
@@ -1456,7 +1456,10 @@ public class UnitScript : MonoBehaviour
     // Gain mastery and gives mastery to nearby unit
     public void GainCombatMastery()
     {
-
+        if (DataScript.instance == null)
+        {
+            return;
+        }
         foreach (Character ally in GridScript.allunits)
         {
             if (ally.affiliation == "playable" && ManhattanDistance(UnitCharacteristics, ally) <= 2 && ally != UnitCharacteristics)
@@ -2226,7 +2229,10 @@ public class UnitScript : MonoBehaviour
 
     public void UpdateWeaponModel(Animator otheranimator = null, float scale = 0.5f, Character User = null, bool spawninstantly = false)
     {
-
+        if (DataScript.instance == null)
+        {
+            return;
+        }
         Character Charactertouse = User;
         if (Charactertouse == null)
         {
@@ -3155,7 +3161,7 @@ public class UnitScript : MonoBehaviour
 
     }
 
-    private void SynchroniseWeaponIDs()
+    public void SynchroniseWeaponIDs()
     {
         UnitCharacteristics.equipmentsIDs = new List<int>();
         foreach (equipment equipment in UnitCharacteristics.equipments)
@@ -3184,6 +3190,10 @@ public class UnitScript : MonoBehaviour
     public string GetWeatherType()
     {
         GridSquareScript tile = UnitCharacteristics.currentTile;
+        if (tile == null)
+        {
+            return "";
+        }
         if (tile.RemainingRainTurns > 0)
         {
             return "rain";
@@ -3280,8 +3290,14 @@ public class UnitScript : MonoBehaviour
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
 
         //Gale Side effect
-        List<GameObject> allunitsGO = TurnManger.instance.playableunitGO;
-        List<Character> allunits = TurnManger.instance.playableunit;
+        List<GameObject> allunitsGO = new List<GameObject>();
+        List<Character> allunits = new List<Character>();
+
+        if (TurnManger.instance != null)
+        {
+            allunitsGO = TurnManger.instance.playableunitGO;
+            allunits = TurnManger.instance.playableunit;
+        }
 
         foreach (GameObject characterGO in allunitsGO)
         {
@@ -3345,7 +3361,7 @@ public class UnitScript : MonoBehaviour
         else
         {
             //Zack Side Effect
-            if (UnitCharacteristics.playableStats.battalion.ToLower() == "zack")
+            if (UnitCharacteristics.playableStats.battalion != null && UnitCharacteristics.playableStats.battalion.ToLower() == "zack")
             {
                 statbonuses.Hit += 5;
                 statbonuses.Crit += 5;
@@ -3361,7 +3377,7 @@ public class UnitScript : MonoBehaviour
         }
 
         // Kira's Examode bonus
-        if (UnitCharacteristics.playableStats.battalion.ToLower() == "kira")
+        if (UnitCharacteristics.playableStats.battalion != null && UnitCharacteristics.playableStats.battalion.ToLower() == "kira")
         {
             GameObject leader = GetBattallionLeader();
             if (leader != null && leader.GetComponent<UnitScript>().UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
@@ -3379,6 +3395,11 @@ public class UnitScript : MonoBehaviour
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
 
         TurnManger TM = TurnManger.instance;
+
+        if (TM == null)
+        {
+            return statbonuses;
+        }
 
         List<Bonds> pertinentbonds = new List<Bonds>();
 
@@ -3429,8 +3450,15 @@ public class UnitScript : MonoBehaviour
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
 
         List<List<GameObject>> UnitsGORankedByRange = new List<List<GameObject>>() { new List<GameObject>(), new List<GameObject>(), new List<GameObject>(), new List<GameObject>() };
-        List<GameObject> allunitsGO = TurnManger.instance.playableunitGO;
-        List<Character> allunits = TurnManger.instance.playableunit;
+        List<GameObject> allunitsGO = new List<GameObject>();
+        List<Character> allunits = new List<Character>();
+        if (TurnManger.instance != null)
+        {
+            allunitsGO = TurnManger.instance.playableunitGO;
+            allunits = TurnManger.instance.playableunit;
+        }
+
+
 
         foreach (GameObject characterGO in allunitsGO)
         {
@@ -3488,19 +3516,23 @@ public class UnitScript : MonoBehaviour
         //Inspired
         if (GetSkill(6))
         {
-            List<Character> activelist = null;
-            if (UnitCharacteristics.affiliation == "playable")
+            List<Character> activelist = new List<Character>(); ;
+            if (TurnManger.instance != null)
             {
-                activelist = TurnManger.instance.playableunit;
+                if (UnitCharacteristics.affiliation == "playable")
+                {
+                    activelist = TurnManger.instance.playableunit;
+                }
+                else if (UnitCharacteristics.affiliation == "enemy")
+                {
+                    activelist = TurnManger.instance.enemyunit;
+                }
+                else
+                {
+                    activelist = TurnManger.instance.otherunits;
+                }
             }
-            else if (UnitCharacteristics.affiliation == "enemy")
-            {
-                activelist = TurnManger.instance.enemyunit;
-            }
-            else
-            {
-                activelist = TurnManger.instance.otherunits;
-            }
+
 
             foreach (Character otherunitchar in activelist)
             {
@@ -3585,19 +3617,24 @@ public class UnitScript : MonoBehaviour
         //Last Stand
         if (GetSkill(24))
         {
-            List<GameObject> activelist = null;
-            if (UnitCharacteristics.affiliation == "playable")
+            List<GameObject> activelist = new List<GameObject>();
+            if (TurnManger.instance != null)
             {
-                activelist = TurnManger.instance.playableunitGO;
+                if (UnitCharacteristics.affiliation == "playable")
+                {
+                    activelist = TurnManger.instance.playableunitGO;
+                }
+                else if (UnitCharacteristics.affiliation == "enemy")
+                {
+                    activelist = TurnManger.instance.enemyunitGO;
+                }
+                else
+                {
+                    activelist = TurnManger.instance.otherunitsGO;
+                }
+
             }
-            else if (UnitCharacteristics.affiliation == "enemy")
-            {
-                activelist = TurnManger.instance.enemyunitGO;
-            }
-            else
-            {
-                activelist = TurnManger.instance.otherunitsGO;
-            }
+
 
             if (activelist.Count == 1)
             {
@@ -3613,19 +3650,23 @@ public class UnitScript : MonoBehaviour
         // Solitary
         if (GetSkill(26))
         {
-            List<Character> activelist = null;
-            if (UnitCharacteristics.affiliation == "playable")
+            List<Character> activelist = new List<Character>();
+            if (TurnManger.instance != null)
             {
-                activelist = TurnManger.instance.playableunit;
+                if (UnitCharacteristics.affiliation == "playable")
+                {
+                    activelist = TurnManger.instance.playableunit;
+                }
+                else if (UnitCharacteristics.affiliation == "enemy")
+                {
+                    activelist = TurnManger.instance.enemyunit;
+                }
+                else
+                {
+                    activelist = TurnManger.instance.otherunits;
+                }
             }
-            else if (UnitCharacteristics.affiliation == "enemy")
-            {
-                activelist = TurnManger.instance.enemyunit;
-            }
-            else
-            {
-                activelist = TurnManger.instance.otherunits;
-            }
+
 
             bool toofar = true;
 
@@ -3771,11 +3812,15 @@ public class UnitScript : MonoBehaviour
         if (GetSkill(61))
         {
             GridSquareScript tile = UnitCharacteristics.currentTile;
-            if (tile.RemainingRainTurns > 0 || tile.type.ToLower() == "water" || tile.type.ToLower() == "medicinalwater")
+            if (tile != null)
             {
-                statbonuses.Dodge += 15;
-                statbonuses.Hit += 15;
+                if (tile.RemainingRainTurns > 0 || tile.type.ToLower() == "water" || tile.type.ToLower() == "medicinalwater")
+                {
+                    statbonuses.Dodge += 15;
+                    statbonuses.Hit += 15;
+                }
             }
+
 
         }
 
@@ -3783,16 +3828,20 @@ public class UnitScript : MonoBehaviour
         if (GetSkill(62))
         {
             GridSquareScript tile = UnitCharacteristics.currentTile;
-            if (tile.RemainingSunTurns > 0)
+            if (tile != null)
             {
-                statbonuses.TelekDamage -= 6;
-                statbonuses.PhysDamage -= 6;
+                if (tile.RemainingSunTurns > 0)
+                {
+                    statbonuses.TelekDamage -= 6;
+                    statbonuses.PhysDamage -= 6;
+                }
+                else
+                {
+                    statbonuses.TelekDamage += 3;
+                    statbonuses.PhysDamage += 3;
+                }
             }
-            else
-            {
-                statbonuses.TelekDamage += 3;
-                statbonuses.PhysDamage += 3;
-            }
+
 
         }
 
@@ -4130,7 +4179,11 @@ public class UnitScript : MonoBehaviour
         // Examode Stat Bonuses
         AllStatsSkillBonus examodeskillbonus = new AllStatsSkillBonus();
 
-        GameObject BattaillonLeaderGo = GridScript.GetUnit(UnitCharacteristics.playableStats.battalion);
+        GameObject BattaillonLeaderGo = null;
+        if (GridScript != null)
+        {
+            BattaillonLeaderGo = GridScript.GetUnit(UnitCharacteristics.playableStats.battalion);
+        }
 
         if (BattaillonLeaderGo != null && BattaillonLeaderGo.GetComponent<UnitScript>().UnitCharacteristics.ExamodeClass.remaingExamodeTurns > 0)
         {

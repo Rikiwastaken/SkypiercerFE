@@ -1789,7 +1789,12 @@ public class ActionsMenu : MonoBehaviour
         {
             tiletouse = charunit.currentTile;
         }
-
+#if UNITY_EDITOR
+        if (DataScript.instance == null) // for fight simulator use, inaccessible during gameplay
+        {
+            return true;
+        }
+#endif
         int Distance = (int)(Mathf.Abs(chartarget.position.x - tiletouse.GridCoordinates.x) + Mathf.Abs(chartarget.position.y - tiletouse.GridCoordinates.y));
         (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
         if (Distance <= 1)
@@ -2257,6 +2262,10 @@ public class ActionsMenu : MonoBehaviour
 
     public void SpawnTextPopup(string damage, bool ishealing, bool iscritical, GameObject Character)
     {
+        if (DataScript.instance == null)
+        {
+            return;
+        }
         GameObject Textnumber = Instantiate(TextNumberPopup);
         Vector2 gridcoords = Character.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
         float characterelevation = Character.GetComponent<UnitScript>().UnitCharacteristics.currentTile.elevation;
@@ -2401,6 +2410,10 @@ public class ActionsMenu : MonoBehaviour
 
     private void DealScytheDamage(GameObject attacker, GameObject target)
     {
+        if (DataScript.instance == null)
+        {
+            return;
+        }
         if (GridScript == null)
         {
             GridScript = GridScript.instance;
@@ -2482,6 +2495,10 @@ public class ActionsMenu : MonoBehaviour
     }
     public (int, List<int>) AwardExp(GameObject unit, GameObject target, bool usingstaff = false, bool noattack = false)
     {
+        if (DataScript.instance == null)
+        {
+            return (0, new List<int>());
+        }
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         int baseexp = 15;
@@ -2630,7 +2647,7 @@ public class ActionsMenu : MonoBehaviour
         if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "greatsword")
         {
             basestatdef = basestatdef - unit.GetComponent<UnitScript>().GetFirstWeapon().Grade;
-            if (unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "heavyweight")
+            if (unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier != null && unit.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "heavyweight")
             {
                 basestatdef -= unit.GetComponent<UnitScript>().GetFirstWeapon().Grade;
             }
@@ -2943,6 +2960,12 @@ public class ActionsMenu : MonoBehaviour
 
     private int GetTileBonus(GridSquareScript unitTile, GridSquareScript targetTile)
     {
+
+        if (unitTile == null || targetTile == null)
+        {
+            return 0;
+        }
+
         int tilebonus = 0;
 
         string unittype = unitTile.type;
