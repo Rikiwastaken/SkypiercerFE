@@ -112,6 +112,10 @@ public class ActionManager : MonoBehaviour
         }
 
 
+        bool inamenu = false;
+        GameObject currentlySelectedGO = EventSystem.current.currentSelectedGameObject;
+        inamenu = (currentlySelectedGO != null && currentlySelectedGO.activeInHierarchy);
+
         if (currentcharacter != null && TurnManager.currentlyplaying == "playable" && (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" || currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other"))
         {
             if (currentcharacter != previouscurrentcharacter)
@@ -150,7 +154,7 @@ public class ActionManager : MonoBehaviour
                 currentcharacter = GridScript.GetSelectedUnitGameObject();
                 if (currentcharacter != null)
                 {
-                    if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && _ActivateAction.WasPressedThisFrame() && !preventfromlockingafteraction && frameswherenotlock == 0 && !TextBubbleScript.indialogue)
+                    if (!inamenu && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && _ActivateAction.WasPressedThisFrame() && !preventfromlockingafteraction && frameswherenotlock == 0 && !TextBubbleScript.indialogue)
                     {
                         GridScript.lockselection = true;
                         GridScript.LockcurrentSelection();
@@ -232,22 +236,25 @@ public class ActionManager : MonoBehaviour
                 }
 
                 ManagePath();
-
-                if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates, currentcharacter) && _ActivateAction.WasPressedThisFrame() && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                if (!inamenu)
                 {
-
-                    MoveCharacterToSelection();
-                    CalculateCharacterLines(GridScript.selection);
-                }
-                else if ((GridScript.lockedattacktiles.Contains(GridScript.selection) || GridScript.lockedhealingtiles.Contains(GridScript.selection)) && _ActivateAction.WasPressedThisFrame() && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
-                {
-                    if (TutorialScript.instance == null || !TutorialScript.instance.enabled)
+                    if (GridScript.checkifvalidpos(GridScript.lockedmovementtiles, GridScript.selection.GridCoordinates, currentcharacter) && _ActivateAction.WasPressedThisFrame() && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
                     {
-                        AttackDirectly();
+
+                        MoveCharacterToSelection();
                         CalculateCharacterLines(GridScript.selection);
                     }
+                    else if ((GridScript.lockedattacktiles.Contains(GridScript.selection) || GridScript.lockedhealingtiles.Contains(GridScript.selection)) && _ActivateAction.WasPressedThisFrame() && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                    {
+                        if (TutorialScript.instance == null || !TutorialScript.instance.enabled)
+                        {
+                            AttackDirectly();
+                            CalculateCharacterLines(GridScript.selection);
+                        }
 
+                    }
                 }
+
             }
 
 

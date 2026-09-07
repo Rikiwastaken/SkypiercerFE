@@ -87,6 +87,7 @@ public class BattleInfotext : MonoBehaviour
     public List<SkillIconScript> SkillIconScriptList;
     public List<GameObject> SkillBars;
     public List<TextMeshProUGUI> SkillNames;
+    public GameObject SkillGO;
 
     private float timefordisappearsrpite;
     public float Timefordisappearsrpite = 1f;
@@ -663,7 +664,10 @@ public class BattleInfotext : MonoBehaviour
 
         if (unit.UnitSkill != 0)
         {
-
+            if (!SkillGO.activeSelf)
+            {
+                SkillGO.SetActive(true);
+            }
             if (!SkillButtonList[0].gameObject.activeSelf)
             {
                 SkillButtonList[0].gameObject.SetActive(true);
@@ -689,6 +693,10 @@ public class BattleInfotext : MonoBehaviour
 
         if (unit.SecondUnitSkill != 0 && unit.SecondSkillUnlocked)
         {
+            if (!SkillGO.activeSelf)
+            {
+                SkillGO.SetActive(true);
+            }
             if (!SkillButtonList[usedindex].gameObject.activeSelf)
             {
                 SkillButtonList[usedindex].gameObject.SetActive(true);
@@ -714,6 +722,10 @@ public class BattleInfotext : MonoBehaviour
 
         for (int i = 0; i < Mathf.Min(unit.EquipedSkills.Count, 5); i++)
         {
+            if (!SkillGO.activeSelf)
+            {
+                SkillGO.SetActive(true);
+            }
             SkillButtonList[i].GetComponent<Image>().color = BaseSkillColor;
             if (!SkillButtonList[i + usedindex].gameObject.activeSelf)
             {
