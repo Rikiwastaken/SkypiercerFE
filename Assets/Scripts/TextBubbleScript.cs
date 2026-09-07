@@ -142,7 +142,7 @@ public class TextBubbleScript : MonoBehaviour
 
         indialogue = true;
 
-        if (NeutralMenu.activeSelf)
+        if (NeutralMenu != null && NeutralMenu.activeSelf)
         {
             NeutralMenu.SetActive(false);
         }
