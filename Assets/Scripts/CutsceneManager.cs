@@ -738,7 +738,6 @@ public class CutsceneManager : MonoBehaviour
 
         foreach (List<TextBubbleInfo> dialogue in dialogues)
         {
-            Debug.Log(dialogue);
             if (dialogue == null || dialogue.Count == 0)
             {
                 continue;

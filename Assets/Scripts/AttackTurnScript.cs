@@ -996,12 +996,23 @@ public class AttackTurnScript : MonoBehaviour
                 combatTextScript = FindAnyObjectByType<CombatTextScript>(FindObjectsInactive.Include);
             }
             combatTextScript.ResetInfo();
-            Vector3 targetlook = new Vector3(Attacker.transform.position.x, target.transform.position.y, Attacker.transform.position.z);
-            target.transform.LookAt(targetlook);
-            Vector3 attackerlook = new Vector3(target.transform.position.x, Attacker.transform.position.y, target.transform.position.z);
-            Attacker.transform.LookAt(attackerlook);
-            // target.transform.GetChild(1).LookAt(Attacker.transform.GetChild(1));
-            // Attacker.transform.GetChild(1).LookAt(target.transform.GetChild(1));
+
+
+
+            //Vector3 targetlook = new Vector3(Attacker.transform.position.x, target.transform.position.y, Attacker.transform.position.z);
+            //target.transform.LookAt(targetlook);
+            //Vector3 attackerlook = new Vector3(target.transform.position.x, Attacker.transform.position.y, target.transform.position.z);
+            //Attacker.transform.LookAt(attackerlook);
+            //target.transform.GetChild(1).LookAt(Attacker.transform.GetChild(1));
+            //Attacker.transform.GetChild(1).LookAt(target.transform.GetChild(1));
+            float timer = 0;
+            while (Attacker.GetComponent<UnitScript>().pathtotake != null && Attacker.GetComponent<UnitScript>().pathtotake.Count > 0 && timer < 10f)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            yield return null;
+            MakeCharacterLookAtEachOther(Attacker, target);
 
             foreach (ModelInfo modelinfo in Attacker.GetComponent<UnitScript>().ModelList)
             {
@@ -1185,6 +1196,18 @@ public class AttackTurnScript : MonoBehaviour
         ActionsMenu.confirmattack = false;
         DeathCleanup();
 
+    }
+
+    private void MakeCharacterLookAtEachOther(GameObject Character1, GameObject Character2)
+    {
+        Transform model1 = Character1.transform;
+        Transform model2 = Character2.transform;
+        Vector3 Model2LookPoint = model1.transform.position;
+        Model2LookPoint.y = model1.position.y;
+        Vector3 Model1LookPoint = model2.transform.position;
+        Model1LookPoint.y = model2.position.y;
+        model1.LookAt(Model1LookPoint);
+        model2.LookAt(Model2LookPoint);
     }
 
     private bool checkifattackanimationisplaying(GameObject attacker, GameObject target)

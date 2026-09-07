@@ -839,7 +839,6 @@ public class ActionsMenu : MonoBehaviour
                         }
                     }
                     GridScript.attacktiles = newtileslist;
-                    Debug.Log(GridScript.attacktiles.Count);
                 }
                 GridScript.lockedattacktiles = GridScript.attacktiles;
 
@@ -2262,9 +2261,7 @@ public class ActionsMenu : MonoBehaviour
         Vector2 gridcoords = Character.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
         float characterelevation = Character.GetComponent<UnitScript>().UnitCharacteristics.currentTile.elevation;
         Vector3 wheretospawn = new Vector3(gridcoords.x, characterelevation + 1f, gridcoords.y);
-        Debug.Log(wheretospawn);
         Textnumber.GetComponent<CombatNumberPopup>().InitializeTMP(damage, wheretospawn, iscritical, ishealing);
-        Debug.Log(Textnumber.transform.position);
     }
     private bool SurvivalSkillsCheck(GameObject unitGO, int previousHP)
     {

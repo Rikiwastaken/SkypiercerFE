@@ -89,7 +89,6 @@ public class BossScript : MonoBehaviour
         Character character = GetComponent<UnitScript>().UnitCharacteristics;
 
         Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
-        Debug.Log("target: " + targetcharacter.name);
 
         Vector2 RagnallPosition = character.currentTile.GridCoordinates;
 

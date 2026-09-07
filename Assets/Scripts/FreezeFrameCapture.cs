@@ -153,7 +153,6 @@ public class FreezeFrameCapture : MonoBehaviour
         {
             if (!isClosing && ShowingLevelUp && CancelAction.IsPressed())
             {
-                Debug.Log("closing");
                 if (fullfreezeframecoroutine != null)
                 {
                     StopCoroutine(fullfreezeframecoroutine);
@@ -169,7 +168,6 @@ public class FreezeFrameCapture : MonoBehaviour
             }
             else if (continueAvailable && ActivateAction.triggered)
             {
-                Debug.Log("closing");
                 if (fullfreezeframecoroutine != null)
                 {
                     StopCoroutine(fullfreezeframecoroutine);
@@ -196,7 +194,6 @@ public class FreezeFrameCapture : MonoBehaviour
     {
         if (CloseCoroutine == null && TimeSafeguard != 0 && Time.time > TimeSafeguard)
         {
-            Debug.Log("closing");
             if (fullfreezeframecoroutine != null)
             {
                 StopCoroutine(fullfreezeframecoroutine);

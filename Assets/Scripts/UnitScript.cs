@@ -281,7 +281,7 @@ public class UnitScript : MonoBehaviour
 
 
 
-    private List<Vector2> pathtotake = new List<Vector2>();
+    public List<Vector2> pathtotake = new List<Vector2>();
 
 
 
