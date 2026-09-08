@@ -816,13 +816,17 @@ public class GridScript : MonoBehaviour
 
     public GameObject GetUnit(string name)
     {
+        if (name == null)
+        {
+            return null;
+        }
         foreach (GameObject unit in allunitGOs)
         {
-            if (unit.Equals(null) || unit == null)
+            if (unit == null || unit.Equals(null))
             {
                 continue;
             }
-            if (unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == name.ToLower())
+            if (unit.GetComponent<UnitScript>() && unit.GetComponent<UnitScript>().UnitCharacteristics.name.ToLower() == name.ToLower())
             {
                 return unit;
 

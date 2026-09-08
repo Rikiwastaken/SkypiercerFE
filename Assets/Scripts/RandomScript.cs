@@ -7,21 +7,21 @@ public class RandomScript : MonoBehaviour
 {
 
     [Header("Random Values")]
-
+    [SerializeField]
     public List<List<int>> HitValues;
-
+    [SerializeField]
     public int hitvaluesindex;
-
+    [SerializeField]
     public List<List<int>> CritValues;
-
+    [SerializeField]
     public int CritValuesindex;
-
+    [SerializeField]
     public List<List<int>> personalityValues;
-
+    [SerializeField]
     public int personalityvaluesindex;
-
+    [SerializeField]
     public List<RandomLevelValues> levelValues;
-
+    [SerializeField]
     public int levelvaluesindex;
 
 
@@ -38,9 +38,9 @@ public class RandomScript : MonoBehaviour
         public List<List<int>> DexterityRandomValue;
         public List<List<int>> LuckRandomValue;
     }
-
+    [SerializeField]
     public List<RandomLevelValues> LevelValues;
-
+    [SerializeField]
     private bool initialized;
 
     private Character UnitCharacter;
@@ -128,6 +128,7 @@ public class RandomScript : MonoBehaviour
             value = HitValues[hitvaluesindex][1];
         }
         hitvaluesindex++;
+        Debug.Log(value);
         return value;
     }
 

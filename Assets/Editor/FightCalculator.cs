@@ -733,7 +733,7 @@ public class FightCalculator : EditorWindow
         SkillNames = new List<string>();
         foreach (Skill skill in DS.SkillList)
         {
-            SkillNames.Add(skill.name);
+            SkillNames.Add(skill.ID + " " + skill.name);
         }
     }
 

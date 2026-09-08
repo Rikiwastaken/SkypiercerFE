@@ -2428,6 +2428,14 @@ public class UnitScript : MonoBehaviour
         {
             return null;
         }
+        if (unit.playableStats == null || unit.playableStats.battalion == null)
+        {
+            return null;
+        }
+        if (GridScript == null)
+        {
+            return null;
+        }
         return GridScript.GetUnit(unit.playableStats.battalion.ToLower());
     }
 
