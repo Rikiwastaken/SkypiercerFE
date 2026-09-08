@@ -2427,7 +2427,7 @@ public class ActionsMenu : MonoBehaviour
         if (position.x < GridScript.Grid.Count - 1)
         {
             GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x + 1), (int)position.y));
-            if (newunit != null)
+            if (newunit != null && newunit != target)
             {
                 targetlist.Add(newunit);
             }
@@ -2437,7 +2437,7 @@ public class ActionsMenu : MonoBehaviour
         if (position.x > 0)
         {
             GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)(position.x - 1), (int)position.y));
-            if (newunit != null)
+            if (newunit != null && newunit != target)
             {
                 targetlist.Add(newunit);
             }
@@ -2446,7 +2446,7 @@ public class ActionsMenu : MonoBehaviour
         if (position.y < GridScript.Grid[0].Count - 1)
         {
             GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)position.x, (int)(position.y + 1)));
-            if (newunit != null)
+            if (newunit != null && newunit != target)
             {
                 targetlist.Add(newunit);
             }
@@ -2456,7 +2456,7 @@ public class ActionsMenu : MonoBehaviour
         if (position.y > 0)
         {
             GameObject newunit = GridScript.GetUnit(GridScript.GetTile((int)position.x, (int)(position.y - 1)));
-            if (newunit != null)
+            if (newunit != null && newunit != target)
             {
                 targetlist.Add(newunit);
             }
@@ -2483,6 +2483,7 @@ public class ActionsMenu : MonoBehaviour
                 potentialtarget.GetComponent<UnitScript>().AddNumber(truedamage, false, "Scythe");
                 if (attacker.GetComponent<UnitScript>().GetSkill(27))
                 {
+                    Debug.Log("Cleaver activated");
                     truedamage += damage / 4;
                     potentialtarget.GetComponent<UnitScript>().AddNumber(damage / 4, false, "Cleaver");
                 }

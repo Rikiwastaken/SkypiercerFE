@@ -33,8 +33,11 @@ public class FightCalculator : EditorWindow
         "Dagger"
     };
 
+    // Classes
     private List<int> BaseEnemyClasses = new List<int>() { 0, 1, 2, 3, 5, 6, 7, 8, 12, 13, 15, 18, 24 };
     private List<int> AdvancedEnemyClasses = new List<int>() { 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37 };
+    private List<int> ClassesThatForceTelekinesis = new List<int>() { 1, 6, 27, 31 };
+    private List<int> ClassesThatMayHaveTelekinesis = new List<int>() { 13, 35 };
 
     [Serializable]
     public class CurrentStatCalculation
@@ -321,6 +324,16 @@ public class FightCalculator : EditorWindow
                 float averagehitsgiven = 0;
                 float averagehitstaken = 0;
                 float averagecrits = 0;
+                List<int> victoryPerClass = new List<int>();
+                foreach (ClassInfo classinfo in DS.ClassList)
+                {
+                    victoryPerClass.Add(0);
+                }
+                List<int> victoryPerSkill = new List<int>();
+                foreach (Skill skill in DS.SkillList)
+                {
+                    victoryPerSkill.Add(0);
+                }
                 foreach (BattleSimulationClass simulation in Results)
                 {
                     if (simulation.result > 0)
@@ -331,6 +344,7 @@ public class FightCalculator : EditorWindow
                             numberofvictoriesWithTelek++;
                             totalMatchesAgainstTelek++;
                         }
+
                     }
                     else if (simulation.result < 0)
                     {
@@ -339,6 +353,14 @@ public class FightCalculator : EditorWindow
                         {
                             numberofdefeatsWithTelek++;
                             totalMatchesAgainstTelek++;
+                        }
+                        victoryPerClass[simulation.EnemyClassID]++;
+                        foreach (int skillID in simulation.EquipedSkills)
+                        {
+                            if (skillID != 0)
+                            {
+                                victoryPerSkill[skillID]++;
+                            }
                         }
                     }
                     else
@@ -361,17 +383,39 @@ public class FightCalculator : EditorWindow
                 averagecrits /= (float)Results.Count;
 
 
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.BeginVertical();
                 EditorGUILayout.LabelField("Result after " + Results.Count + " simulations (" + totalMatchesAgainstTelek + " against telekinesis)");
                 EditorGUILayout.Space();
+
                 EditorGUILayout.LabelField("Victories: " + numberofvictories + " (" + numberofvictoriesWithTelek + " against telekinesis)");
                 EditorGUILayout.LabelField("Defeats: " + numberofdefeats + " (" + numberofdefeatsWithTelek + " against telekinesis)");
                 EditorGUILayout.LabelField("Draws: " + numberofDraws + " (" + numberofDraws + " against telekinesis)");
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Average Match Length: " + averagematchlength + " turns.");
                 EditorGUILayout.LabelField("Average Hits Per Match: " + averagehitsgiven);
-                EditorGUILayout.LabelField("Average Hits Taken Per Match: " + averagematchlength);
-                EditorGUILayout.LabelField("Average Crits Per Match" + averagematchlength);
+                EditorGUILayout.LabelField("Average Hits Taken Per Match: " + averagehitstaken);
+                EditorGUILayout.LabelField("Average Crits Per Match: " + averagecrits);
+                EditorGUILayout.EndVertical();
 
+
+                EditorGUILayout.BeginVertical();
+                EditorGUILayout.Space();
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField(("Win Rate: " + (int)(((float)numberofvictories / (float)Results.Count) * 100f)) + "%.");
+                EditorGUILayout.LabelField(("Win Rate (Physical only): " + (int)(((float)(numberofvictories - numberofvictoriesWithTelek) / (float)(Results.Count - totalMatchesAgainstTelek)) * 100f)) + "%.");
+                EditorGUILayout.LabelField(("Win Rate (Telekinesis only): " + (int)(((float)(numberofvictoriesWithTelek) / (float)(totalMatchesAgainstTelek)) * 100f)) + "%.");
+                EditorGUILayout.Space();
+
+                //best skills
+                (List<int> firstbestskill, List<int> secondbestskill, List<int> thirdbestskill) = GetThreeBestIDsFromList(victoryPerSkill);
+                EditorGUILayout.LabelField("Best Enemy Skills: " + firstbestskill[0] + " " + DS.SkillList[firstbestskill[0]].name + " (" + firstbestskill[1] + "), " + secondbestskill[0] + " " + DS.SkillList[secondbestskill[0]].name + " (" + secondbestskill[1] + "), " + thirdbestskill[0] + " " + DS.SkillList[thirdbestskill[0]].name + " (" + thirdbestskill[1] + ")");
+                (List<int> firstbestclass, List<int> secondbestclass, List<int> thirdbestclass) = GetThreeBestIDsFromList(victoryPerClass);
+                EditorGUILayout.LabelField("Best Enemy Classes: " + firstbestclass[0] + " " + DS.ClassList[firstbestclass[0]].name + " (" + firstbestclass[1] + "), " + secondbestclass[0] + " " + DS.ClassList[secondbestclass[0]].name + " (" + secondbestclass[1] + "), " + thirdbestclass[0] + " " + DS.ClassList[thirdbestclass[0]].name + " (" + thirdbestclass[1] + ")");
+
+
+                EditorGUILayout.EndVertical();
+                EditorGUILayout.EndHorizontal();
             }
 
             EditorGUILayout.EndVertical();
@@ -388,7 +432,35 @@ public class FightCalculator : EditorWindow
 
     }
 
+    private (List<int>, List<int>, List<int>) GetThreeBestIDsFromList(List<int> list)
+    {
+        List<int> best = new List<int> { -1, int.MinValue };
+        List<int> second = new List<int> { -1, int.MinValue };
+        List<int> third = new List<int> { -1, int.MinValue };
 
+        for (int id = 0; id < list.Count; id++)
+        {
+            int value = list[id];
+
+            if (value > best[1])
+            {
+                third = second;
+                second = best;
+                best = new List<int> { id, value };
+            }
+            else if (value > second[1])
+            {
+                third = second;
+                second = new List<int> { id, value };
+            }
+            else if (value > third[1])
+            {
+                third = new List<int> { id, value };
+            }
+        }
+
+        return (best, second, third);
+    }
 
     private void LaunchSimulations()
     {
@@ -422,7 +494,6 @@ public class FightCalculator : EditorWindow
             Results.Add(simulationClass);
             simulationClass.EnemyClassID = EnemyClassestouse[UnityEngine.Random.Range(0, EnemyClassestouse.Count)];
             simulationClass.EnemyWeaponID = UnityEngine.Random.Range(0, WeaponClasses.Count);
-            simulationClass.usingtelekinesis = UnityEngine.Random.Range(0, 10) < 5;
             simulationClass.currentlevel = currentStatCalculation.currentlevel;
             Character newChar = new Character();
 
@@ -439,7 +510,23 @@ public class FightCalculator : EditorWindow
             newChar.AjustedStats = new BaseStats();
             newChar.level = 1;
 
-            newChar.telekinesisactivated = simulationClass.usingtelekinesis;
+            if (ClassesThatForceTelekinesis.Contains(simulationClass.EnemyClassID))
+            {
+                newChar.telekinesisactivated = true;
+                simulationClass.usingtelekinesis = true;
+            }
+            else if (ClassesThatMayHaveTelekinesis.Contains(simulationClass.EnemyClassID))
+            {
+                bool telekinesisactivated = UnityEngine.Random.Range(0, 10) < 5;
+                newChar.telekinesisactivated = telekinesisactivated;
+                simulationClass.usingtelekinesis = telekinesisactivated;
+            }
+            else
+            {
+                newChar.telekinesisactivated = false;
+                simulationClass.usingtelekinesis = false;
+            }
+
 
             newChar.growth = DS.ClassList[simulationClass.EnemyClassID].StatGrowth;
 
@@ -474,12 +561,14 @@ public class FightCalculator : EditorWindow
             newChar.equipments = new List<equipment>() { DS.GenerateEquipementCopy(DS.equipmentList[weaponID], newChar) };
             newChar.EquipedSkills = new List<int>();
 
+
             int numberofskills = UnityEngine.Random.Range(0, 5);
 
             for (int j = 0; j < numberofskills; j++)
             {
                 newChar.EquipedSkills.Add(GetRandomSkill());
             }
+            simulationClass.EquipedSkills = newChar.EquipedSkills;
             simulationClass.enemyusingtelekinesis = newChar.telekinesisactivated;
             BattleBetweenTwoCharacters(simulationClass);
         }
@@ -491,6 +580,15 @@ public class FightCalculator : EditorWindow
     {
         US.calculateStats();
         USForEnemy.calculateStats();
+        US.unitkilled = 0;
+        US.SurvivorStacks = 0;
+        US.numberoftimeswaitted = 0;
+        US.waittedbonusturns = 0;
+        USForEnemy.SurvivorStacks = 0;
+        USForEnemy.unitkilled = 0;
+        USForEnemy.numberoftimeswaitted = 0;
+        USForEnemy.waittedbonusturns = 0;
+
         if (currentStatCalculation.StartWithSpecificNumberOfHP > 0)
         {
             US.UnitCharacteristics.currentHP = (int)Mathf.Min((int)US.UnitCharacteristics.AjustedStats.HP, currentStatCalculation.StartWithSpecificNumberOfHP);
@@ -504,16 +602,37 @@ public class FightCalculator : EditorWindow
 
         int NumberOfTurns = 0;
         bool EnemyAttacks = UnityEngine.Random.Range(0, 10) < 5;
+
+        int playableTurnBeginningOfTurnCD = 0;
+        int enemyTurnBeginningOfTurnCD = 0;
+
         while (NumberOfTurns < 50 && US.UnitCharacteristics.currentHP > 0 && USForEnemy.UnitCharacteristics.currentHP > 0)
         {
 
             if (EnemyAttacks)
             {
-                USForEnemy.BeginningofTurnTrigger(new List<GameObject>() { USForEnemy.gameObject });
+                if (enemyTurnBeginningOfTurnCD > 0)
+                {
+                    enemyTurnBeginningOfTurnCD--;
+                }
+                else
+                {
+                    USForEnemy.BeginningofTurnTrigger(new List<GameObject>() { USForEnemy.gameObject });
+                    enemyTurnBeginningOfTurnCD = 1;
+                }
             }
             else
             {
-                US.BeginningofTurnTrigger(new List<GameObject>() { US.gameObject });
+                if (playableTurnBeginningOfTurnCD > 0)
+                {
+                    playableTurnBeginningOfTurnCD--;
+                }
+                else
+                {
+                    US.BeginningofTurnTrigger(new List<GameObject>() { US.gameObject });
+                    playableTurnBeginningOfTurnCD = 1;
+                }
+
             }
             (int numberofhits, int numberofcritials, int finaldamage, int exp, List<int> levelup, List<int> Damagelist, List<int> Critlist, bool allforoneactive, bool unyieldingactivated, bool compassionused, bool invigoratingused) = AM.ApplyDamage(US.gameObject, USForEnemy.gameObject, EnemyAttacks, false);
             if (!EnemyAttacks)
@@ -527,11 +646,23 @@ public class FightCalculator : EditorWindow
                     }
                 }
                 Simulation.NumberOfPlayerCrits += numberofcrits;
-                Simulation.NumberOfPlayerHits += numberofhits;
+                foreach (int attack in Damagelist)
+                {
+                    if (attack > 0)
+                    {
+                        Simulation.NumberOfPlayerHits++;
+                    }
+                }
             }
             else
             {
-                Simulation.numberOfPlayerHitTaken += numberofhits;
+                foreach (int attack in Damagelist)
+                {
+                    if (attack > 0)
+                    {
+                        Simulation.numberOfPlayerHitTaken++;
+                    }
+                }
             }
             EnemyAttacks = !EnemyAttacks;
             NumberOfTurns++;
