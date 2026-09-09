@@ -226,7 +226,8 @@ public class MusicManager : MonoBehaviour
         {
             if (!CampMusic.isPlaying && !CampMusicintro.isPlaying)
             {
-                PlayMusic(1, 0f);
+                PlayMusic(1, 1f, true);
+
             }
 
             ChangeVolume(CampMusic, maxvolume);
@@ -427,7 +428,7 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    void PlayMusic(int type, float startvolume = 0f)
+    void PlayMusic(int type, float startvolume = 0f, bool ignoreStartOfset = false)
     {
         if (currentMusicType == type)
         {
@@ -444,17 +445,17 @@ public class MusicManager : MonoBehaviour
 
         if (type == 2 || type == 3)
         {
-            PlayMusicWithIntro(2, startvolume);
-            PlayMusicWithIntro(3, startvolume);
+            PlayMusicWithIntro(2, startvolume, ignoreStartOfset);
+            PlayMusicWithIntro(3, startvolume, ignoreStartOfset);
         }
         else
         {
-            PlayMusicWithIntro(type, startvolume);
+            PlayMusicWithIntro(type, startvolume, ignoreStartOfset);
         }
 
 
     }
-    private void PlayMusicWithIntro(int TypeID, float startvolume)
+    private void PlayMusicWithIntro(int TypeID, float startvolume, bool ignorestartoffset = false)
     {
 
         AudioSource Main = null;
@@ -528,20 +529,27 @@ public class MusicManager : MonoBehaviour
 
         }
         Main.volume = startvolume;
+
+        float startofset = timebeforemusicplays;
+        if (ignorestartoffset)
+        {
+            startofset = 0f;
+        }
+
         if (intro.clip == null)
         {
-            Main.PlayScheduled(AudioSettings.dspTime + timebeforemusicplays);
+            Main.PlayScheduled(AudioSettings.dspTime + startofset);
         }
         else
         {
             intro.volume = startvolume;
 
-            intro.PlayScheduled(AudioSettings.dspTime + timebeforemusicplays);
+            intro.PlayScheduled(AudioSettings.dspTime + startofset);
 
             double introduration = (double)intro.clip.samples / intro.clip.frequency;
 
 
-            Main.PlayScheduled(AudioSettings.dspTime + introduration + timebeforemusicplays);
+            Main.PlayScheduled(AudioSettings.dspTime + introduration + startofset);
         }
 
 
@@ -735,6 +743,7 @@ public class MusicManager : MonoBehaviour
 
     private void StopAllMusic()
     {
+        Debug.Log("stoping all music");
         PlayableAudioSource.Stop();
         PlayableAudioSourceIntro.Stop();
         EnemyAudioSource.Stop();

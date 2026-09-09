@@ -102,7 +102,7 @@ public class CampScript : MonoBehaviour
     private void Update()
     {
 
-        if (textBubbleScript.indialogue && BaseMenu.gameObject.activeSelf)
+        if (textBubbleScript.indialogue && BaseMenu.gameObject.activeSelf && textBubbleScript.gameObject.activeInHierarchy)
         {
             BaseMenu.gameObject.SetActive(false);
         }

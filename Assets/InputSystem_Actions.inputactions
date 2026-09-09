@@ -978,17 +978,6 @@
                 },
                 {
                     "name": "",
-                    "id": "46825093-3898-4217-9501-410c836577c2",
-                    "path": "*/{Submit}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
-                    "action": "Submit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4714bfd7-22af-4994-bc61-b34ea40b1730",
                     "path": "<Keyboard>/space",
                     "interactions": "",
