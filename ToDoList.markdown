@@ -15,6 +15,8 @@
 
 ## System 
 
+-  Do several different camp environment
+
 - Reword Battle Animation Mode.
 
 - Rework Animation for Animation Tree

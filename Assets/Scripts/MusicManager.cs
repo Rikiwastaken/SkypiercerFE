@@ -226,7 +226,7 @@ public class MusicManager : MonoBehaviour
         {
             if (!CampMusic.isPlaying && !CampMusicintro.isPlaying)
             {
-                PlayMusic(1, 1f, true);
+                PlayMusic(1, 0f, true);
 
             }
 
@@ -430,14 +430,14 @@ public class MusicManager : MonoBehaviour
 
     void PlayMusic(int type, float startvolume = 0f, bool ignoreStartOfset = false)
     {
-        if (currentMusicType == type)
-        {
-            if (type != 9)
-            {
-                return;
-            }
+        //if (currentMusicType == type)
+        //{
+        //    if (type != 9)
+        //    {
+        //        return;
+        //    }
 
-        }
+        //}
 
 
         StopAllMusic();
