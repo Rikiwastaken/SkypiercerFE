@@ -324,6 +324,8 @@ public class FightCalculator : EditorWindow
                 float averagehitsgiven = 0;
                 float averagehitstaken = 0;
                 float averagecrits = 0;
+                int VictoriesAfter1Turn = 0;
+                int DefeatsAfter1Turn = 0;
                 List<int> victoryPerClass = new List<int>();
                 foreach (ClassInfo classinfo in DS.ClassList)
                 {
@@ -344,6 +346,10 @@ public class FightCalculator : EditorWindow
                             numberofvictoriesWithTelek++;
                             totalMatchesAgainstTelek++;
                         }
+                        if (simulation.numberOfTurns == 1)
+                        {
+                            VictoriesAfter1Turn++;
+                        }
 
                     }
                     else if (simulation.result < 0)
@@ -361,6 +367,10 @@ public class FightCalculator : EditorWindow
                             {
                                 victoryPerSkill[skillID]++;
                             }
+                        }
+                        if (simulation.numberOfTurns == 1)
+                        {
+                            DefeatsAfter1Turn++;
                         }
                     }
                     else
@@ -388,8 +398,8 @@ public class FightCalculator : EditorWindow
                 EditorGUILayout.LabelField("Result after " + Results.Count + " simulations (" + totalMatchesAgainstTelek + " against telekinesis)");
                 EditorGUILayout.Space();
 
-                EditorGUILayout.LabelField("Victories: " + numberofvictories + " (" + numberofvictoriesWithTelek + " against telekinesis)");
-                EditorGUILayout.LabelField("Defeats: " + numberofdefeats + " (" + numberofdefeatsWithTelek + " against telekinesis)");
+                EditorGUILayout.LabelField("Victories: " + numberofvictories + " (" + numberofvictoriesWithTelek + " against telekinesis) (" + VictoriesAfter1Turn + " Victories in 1 Turn)");
+                EditorGUILayout.LabelField("Defeats: " + numberofdefeats + " (" + numberofdefeatsWithTelek + " against telekinesis) (" + DefeatsAfter1Turn + " defeats in 1 Turn)");
                 EditorGUILayout.LabelField("Draws: " + numberofDraws + " (" + numberofDraws + " against telekinesis)");
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Average Match Length: " + averagematchlength + " turns.");

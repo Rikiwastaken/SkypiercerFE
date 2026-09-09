@@ -2136,19 +2136,24 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-        List<GameObject> activelist = null;
-        if (charTarget.affiliation == "playable")
+        List<GameObject> activelist = new List<GameObject>();
+        TurnManger TM = TurnManger.instance;
+        if (TM != null)
         {
-            activelist = FindAnyObjectByType<TurnManger>().playableunitGO;
+            if (charTarget.affiliation == "playable")
+            {
+                activelist = TM.playableunitGO;
+            }
+            else if (charTarget.affiliation == "enemy")
+            {
+                activelist = TM.enemyunitGO;
+            }
+            else
+            {
+                activelist = TM.otherunitsGO;
+            }
         }
-        else if (charTarget.affiliation == "enemy")
-        {
-            activelist = FindAnyObjectByType<TurnManger>().enemyunitGO;
-        }
-        else
-        {
-            activelist = FindAnyObjectByType<TurnManger>().otherunitsGO;
-        }
+
 
         //One for All
         Character allforonetransfertarget = null;
