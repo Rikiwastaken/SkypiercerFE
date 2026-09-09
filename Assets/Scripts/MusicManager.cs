@@ -240,8 +240,8 @@ public class MusicManager : MonoBehaviour
         {
             if (!WorldMapMusic.isPlaying && !WorldMapMusicintro.isPlaying)
             {
-                PlayMusic(6, 0f);
-                PlayMusic(7, 0f);
+                PlayMusic(6, 0f, true);
+                PlayMusicWithIntro(7, 0f, true);
             }
 
             ChangeVolume(CampMusic, 0f);

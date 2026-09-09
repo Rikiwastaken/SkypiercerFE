@@ -40,8 +40,9 @@ public class CampScript : MonoBehaviour
     public GameObject CharacterPrefab;
     public RuntimeAnimatorController CampCharacterController;
 
-    private TextBubbleScript textBubbleScript;
+    public TextBubbleScript textBubbleScript;
 
+    private bool waitAFrameBeforeCutscene;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,33 +56,7 @@ public class CampScript : MonoBehaviour
         }
         EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
 
-        textBubbleScript = FindAnyObjectByType<TextBubbleScript>(FindObjectsInactive.Include);
 
-        int index = 0;
-        foreach (StartDialogue startdialogue in StartDialogueList)
-        {
-            if (saveManager.CampDialoguesSeen.Count <= index)
-            {
-                int count = saveManager.CampDialoguesSeen.Count;
-                for (int i = count; i <= index; i++)
-                {
-                    saveManager.CampDialoguesSeen.Add(false);
-                }
-            }
-            if (startdialogue.Chapter == SaveManager.instance.currentchapter)
-            {
-
-                if (!saveManager.CampDialoguesSeen[index])
-                {
-                    textBubbleScript.InitializeDialogue(startdialogue.Dialogue);
-                    saveManager.CampDialoguesSeen[index] = true;
-                }
-
-
-                break;
-            }
-            index++;
-        }
 
         List<Button> buttons = new List<Button>();
         for (int i = 0; i < SaveButtonList.childCount - 1; i++)
@@ -101,6 +76,12 @@ public class CampScript : MonoBehaviour
 
     private void Update()
     {
+
+        if (!waitAFrameBeforeCutscene)
+        {
+            PlayStartDialogue();
+            waitAFrameBeforeCutscene = true;
+        }
 
         if (textBubbleScript.indialogue && BaseMenu.gameObject.activeSelf && textBubbleScript.gameObject.activeInHierarchy)
         {
@@ -135,7 +116,34 @@ public class CampScript : MonoBehaviour
 
     }
 
+    private void PlayStartDialogue()
+    {
+        int index = 0;
+        foreach (StartDialogue startdialogue in StartDialogueList)
+        {
+            if (saveManager.CampDialoguesSeen.Count <= index)
+            {
+                int count = saveManager.CampDialoguesSeen.Count;
+                for (int i = count; i <= index; i++)
+                {
+                    saveManager.CampDialoguesSeen.Add(false);
+                }
+            }
+            if (startdialogue.Chapter == SaveManager.instance.currentchapter)
+            {
 
+                if (!saveManager.CampDialoguesSeen[index])
+                {
+                    textBubbleScript.InitializeDialogue(startdialogue.Dialogue);
+                    saveManager.CampDialoguesSeen[index] = true;
+                }
+
+
+                break;
+            }
+            index++;
+        }
+    }
 
     private void InitializeCharacters()
     {
