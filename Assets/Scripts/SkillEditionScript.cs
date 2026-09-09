@@ -32,6 +32,8 @@ public class SkillEditionScript : MonoBehaviour
 
     public List<GameObject> PreBattleMenu;
 
+    public List<GameObject> BondNewImages;
+
     public bool inCamp;
     public bool IsBonds;
     public GameObject CampMenu;
@@ -413,30 +415,7 @@ public class SkillEditionScript : MonoBehaviour
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = ListToUse[i + 10 * (characterwindowindex)];
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i + 10 * (characterwindowindex);
 
-            if (IsBonds)
-            {
-                foreach (Bonds bond in DataScript.instance.BondsList)
-                {
-                    if (BondsScript.instance.CheckIfBondCanIncrease(bond))
-                    {
-                        foreach (int ID in bond.Characters)
-                        {
-                            if (ID == ListToUse[i + 10 * (characterwindowindex)].ID)
-                            {
-                                var colors = transform.GetChild(i).GetComponent<Button>().colors;
-                                colors.normalColor = Color.green;
-                                transform.GetChild(i).GetComponent<Button>().colors = colors;
-                            }
-                            else
-                            {
-                                var colors = transform.GetChild(i).GetComponent<Button>().colors;
-                                colors.normalColor = Color.white;
-                                transform.GetChild(i).GetComponent<Button>().colors = colors;
-                            }
-                        }
-                    }
-                }
-            }
+
 
         }
         for (int i = Mathf.Min(ListToUse.Count - 10 * (characterwindowindex), 10); i < 10; i++)
@@ -455,9 +434,14 @@ public class SkillEditionScript : MonoBehaviour
             {
                 continue;
             }
-            var colors = transform.GetChild(i).GetComponent<Button>().colors;
-            colors.normalColor = Color.white;
-            transform.GetChild(i).GetComponent<Button>().colors = colors;
+            if (BondNewImages.Count > i)
+            {
+                if (BondNewImages[i].activeSelf)
+                {
+                    BondNewImages[i].SetActive(false);
+                }
+            }
+
 
         }
         for (int i = 0; i < transform.childCount; i++)
@@ -476,9 +460,13 @@ public class SkillEditionScript : MonoBehaviour
                         {
                             if (ID == transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID)
                             {
-                                var colors = transform.GetChild(i).GetComponent<Button>().colors;
-                                colors.normalColor = Color.green;
-                                transform.GetChild(i).GetComponent<Button>().colors = colors;
+                                if (BondNewImages.Count > i)
+                                {
+                                    if (!BondNewImages[i].activeSelf)
+                                    {
+                                        BondNewImages[i].SetActive(true);
+                                    }
+                                }
                             }
                         }
                     }

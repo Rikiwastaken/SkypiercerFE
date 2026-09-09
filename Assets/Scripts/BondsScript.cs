@@ -60,6 +60,7 @@ public class BondsScript : MonoBehaviour
 
     public Transform BondsMenu;
     public GameObject bondsSubMenu;
+    public List<GameObject> BondSubMenuNewImages;
 
     private List<int> SubMenuCharactersID;
 
@@ -68,6 +69,7 @@ public class BondsScript : MonoBehaviour
     private TextBubbleScript TextBubbleScript;
 
     public Button BondButton;
+    public GameObject BondButtonNewImageGO;
 
     private int cancelcounter;
 
@@ -134,7 +136,6 @@ public class BondsScript : MonoBehaviour
             {
                 if (CheckIfBondCanIncrease(bond))
                 {
-                    Debug.Log(bond.Name + " can increase");
                     anybondcanincrease = true;
                     break;
                 }
@@ -142,16 +143,23 @@ public class BondsScript : MonoBehaviour
 
             if (anybondcanincrease)
             {
-                var colors = BondButton.colors;
-                colors.normalColor = Color.green;
-                BondButton.colors = colors;
+                if (!BondButtonNewImageGO.activeSelf)
+                {
+                    BondButtonNewImageGO.SetActive(true);
+                }
+                //var colors = BondButton.colors;
+                //colors.normalColor = Color.green;
+                //BondButton.colors = colors;
             }
             else
             {
-                Debug.Log("no bond can increase");
-                var colors = BondButton.colors;
-                colors.normalColor = Color.white;
-                BondButton.colors = colors;
+                if (BondButtonNewImageGO.activeSelf)
+                {
+                    BondButtonNewImageGO.SetActive(false);
+                }
+                //var colors = BondButton.colors;
+                //colors.normalColor = Color.white;
+                //BondButton.colors = colors;
             }
         }
     }
@@ -217,17 +225,17 @@ public class BondsScript : MonoBehaviour
 
             if (CheckIfBondCanIncrease(PertinentbondsDialogue[i].Bond))
             {
-                var colors = bondsSubMenu.transform.GetChild(i).GetComponent<Button>().colors;
-                colors.normalColor = Color.blue;
-                bondsSubMenu.transform.GetChild(i).GetComponent<Button>().colors = colors;
-                bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+                if (!BondSubMenuNewImages[i].activeSelf)
+                {
+                    BondSubMenuNewImages[i].SetActive(true);
+                }
             }
             else
             {
-                var colors = bondsSubMenu.transform.GetChild(i).GetComponent<Button>().colors;
-                colors.normalColor = Color.white;
-                bondsSubMenu.transform.GetChild(i).GetComponent<Button>().colors = colors;
-                bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+                if (BondSubMenuNewImages[i].activeSelf)
+                {
+                    BondSubMenuNewImages[i].SetActive(false);
+                }
                 switch (PertinentbondsDialogue[i].Bond.BondLevel)
                 {
                     case 0:
@@ -251,6 +259,10 @@ public class BondsScript : MonoBehaviour
         {
 
             bondsSubMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = "None";
+            if (BondSubMenuNewImages[i].activeSelf)
+            {
+                BondSubMenuNewImages[i].SetActive(false);
+            }
 
         }
 

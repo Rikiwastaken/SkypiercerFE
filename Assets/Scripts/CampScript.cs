@@ -104,6 +104,7 @@ public class CampScript : MonoBehaviour
 
         if (textBubbleScript.indialogue && BaseMenu.gameObject.activeSelf && textBubbleScript.gameObject.activeInHierarchy)
         {
+            Debug.Log("disabling menu");
             BaseMenu.gameObject.SetActive(false);
         }
 

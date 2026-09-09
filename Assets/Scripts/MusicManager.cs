@@ -743,7 +743,6 @@ public class MusicManager : MonoBehaviour
 
     private void StopAllMusic()
     {
-        Debug.Log("stoping all music");
         PlayableAudioSource.Stop();
         PlayableAudioSourceIntro.Stop();
         EnemyAudioSource.Stop();

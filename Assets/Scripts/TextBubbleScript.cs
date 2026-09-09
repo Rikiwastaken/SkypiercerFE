@@ -69,6 +69,7 @@ public class TextBubbleScript : MonoBehaviour
     private InputAction _StartAction;
 
     public GameObject NeutralMenu;
+    public GameObject CampMenu;
 
     void Awake()
     {
