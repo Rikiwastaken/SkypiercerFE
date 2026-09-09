@@ -2041,9 +2041,13 @@ public class ActionsMenu : MonoBehaviour
                 numberofhits = 0;
                 finaldamage = 0;
             }
-            if (charunit.currentHP > 0 && chartarget.affiliation == "playable" && charunit.affiliation == "playable")
+            if (charunit.currentHP > 0 && (chartarget.affiliation == "playable" || (chartarget.affiliation == "other" && !chartarget.attacksfriends)) && charunit.affiliation == "playable")
             {
                 (exp, levelup) = AwardExp(unit, target, true);
+            }
+            if (chartarget.affiliation == "other" && charunit.affiliation == "playable")
+            {
+                exp = 0;
             }
             return (numberofhits, numberofcritials, finaldamage, exp, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
         }
