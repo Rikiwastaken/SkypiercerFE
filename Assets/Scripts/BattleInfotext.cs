@@ -357,6 +357,12 @@ public class BattleInfotext : MonoBehaviour
 
         }
 
+        GameObject SelectedGO = EventSystem.current.currentSelectedGameObject;
+
+        if (SelectedGO != null && SelectedGO.transform.parent == SkillButtonList[0].transform.parent && SelectedGO.activeInHierarchy && !SkillDescription.gameObject.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
 
         previousselectedGO = selectedunit;
         previousSelectedCharacter = selectedunitCharacter;
@@ -405,6 +411,19 @@ public class BattleInfotext : MonoBehaviour
 
     private void ManageSkillDescription()
     {
+
+        if (!_CancelAction.enabled)
+        {
+            _CancelAction.Enable();
+
+        }
+        if (_CancelAction.WasPressedThisFrame())
+        {
+            eventSystem.SetSelectedGameObject(null);
+            Deactivate();
+            return;
+        }
+
         if (!_ShowDetailsAction.enabled)
         {
             _ShowDetailsAction.Enable();
@@ -423,17 +442,7 @@ public class BattleInfotext : MonoBehaviour
             SkillButtonList[0].Select();
             showingdescription = true;
         }
-        if (!_CancelAction.enabled)
-        {
-            _CancelAction.Enable();
 
-        }
-        if (_CancelAction.WasPressedThisFrame())
-        {
-            eventSystem.SetSelectedGameObject(null);
-            Deactivate();
-            return;
-        }
 
 
         if (showingdescription)

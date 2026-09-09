@@ -915,11 +915,11 @@ public class FightCalculator : EditorWindow
 
             if (GO.GetComponent<UnitScript>() != null)
             {
-                if (GO.name.ToLower().Contains("variant"))
+                if (GO.name.ToLower().Contains("variant1"))
                 {
                     USForEnemy = GO.GetComponent<UnitScript>();
                 }
-                else
+                else if (GO.name.ToLower().Contains("variant2"))
                 {
                     US = GO.GetComponent<UnitScript>();
                 }
