@@ -97,19 +97,22 @@ public class GameOverScript : MonoBehaviour
         {
             saveManager = FindAnyObjectByType<SaveManager>(FindObjectsInactive.Include);
         }
-
-        if (MapInitializer.instance.IsSideStory)
+        if (MapInitializer.instance != null)
         {
-            int currentSideStoryID = MapInitializer.instance.ChapterID;
-            if (!DataScript.instance.CompletedSideStories.Contains(currentSideStoryID))
+            if (MapInitializer.instance.IsSideStory)
             {
-                DataScript.instance.CompletedSideStories.Add(currentSideStoryID);
+                int currentSideStoryID = MapInitializer.instance.ChapterID;
+                if (!DataScript.instance.CompletedSideStories.Contains(currentSideStoryID))
+                {
+                    DataScript.instance.CompletedSideStories.Add(currentSideStoryID);
+                }
+            }
+            else
+            {
+                saveManager.currentchapter = MapInitializer.instance.ChapterID + 1;
             }
         }
-        else
-        {
-            saveManager.currentchapter = MapInitializer.instance.ChapterID + 1;
-        }
+
 
 
         List<Button> buttons = new List<Button>();
