@@ -48,6 +48,7 @@ public class SkillEditionScript : MonoBehaviour
     public BondsScript BondsScript;
 
     public int previousselectedbutton;
+    private Color basebuttoncolor;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -72,6 +73,7 @@ public class SkillEditionScript : MonoBehaviour
         _NextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
         _CancelAction = InputSystem.actions.FindAction("Cancel");
         Calculateplayables();
+        basebuttoncolor = transform.GetChild(0).GetComponent<Button>().colors.normalColor;
     }
 
     // Update is called once per frame
@@ -84,6 +86,7 @@ public class SkillEditionScript : MonoBehaviour
             gridscript.movementbuffercounter = 3;
             if (_CancelAction.WasPressedThisFrame())
             {
+                ChangeColorOfButton(previousselectedbutton, basebuttoncolor);
                 if (SkillList.activeSelf)
                 {
                     SkillList.SetActive(false);
@@ -110,6 +113,7 @@ public class SkillEditionScript : MonoBehaviour
         {
             if (_CancelAction.WasPressedThisFrame())
             {
+                ChangeColorOfButton(previousselectedbutton, basebuttoncolor);
                 if (!IsBonds)
                 {
                     if (SkillList.activeSelf)
@@ -497,6 +501,7 @@ public class SkillEditionScript : MonoBehaviour
                 }
                 else
                 {
+                    ChangeColorOfButton(ButtonID, Color.red);
                     skillwindowindex = 0;
                     InitializeSkillButtons();
                     SkillList.SetActive(true);
@@ -504,6 +509,14 @@ public class SkillEditionScript : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    private void ChangeColorOfButton(int ButtonID, Color newcolor)
+    {
+        ColorBlock colors = transform.GetChild(ButtonID).GetComponent<Button>().colors;
+        colors.normalColor = newcolor;
+        transform.GetChild(ButtonID).GetComponent<Button>().colors = colors;
     }
 
     public void EquipUnequipSkill(int childID)
