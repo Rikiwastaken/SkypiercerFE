@@ -72,7 +72,6 @@ public class BondsScript : MonoBehaviour
     public GameObject BondButtonNewImageGO;
 
     private int cancelcounter;
-    public int previousSelectedUnitButtonID = 0;
 
     private void Awake()
     {
@@ -118,7 +117,7 @@ public class BondsScript : MonoBehaviour
                 cancelcounter = (int)(0.5f / Time.deltaTime);
                 bondsSubMenu.SetActive(false);
 
-                EventSystem.current.SetSelectedGameObject(BondsMenu.transform.GetChild(previousSelectedUnitButtonID).gameObject);
+                EventSystem.current.SetSelectedGameObject(BondsMenu.transform.GetChild(BondsMenu.GetComponent<SkillEditionScript>().previousselectedbutton).gameObject);
             }
             else if (BondsMenu.gameObject.activeSelf)
             {

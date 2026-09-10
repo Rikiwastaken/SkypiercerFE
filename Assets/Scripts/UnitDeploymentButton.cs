@@ -72,7 +72,7 @@ public class UnitDeploymentButton : MonoBehaviour
                     lockimage.SetActive(false);
                 }
 
-                if (Character.playableStats.battalion.ToLower() != "zack" && Character.playableStats.battalion.ToLower() != "kira" && Character.playableStats.battalion.ToLower() != "gale")
+                if (Character.playableStats.battalion == null || (Character.playableStats.battalion.ToLower() != "zack" && Character.playableStats.battalion.ToLower() != "kira" && Character.playableStats.battalion.ToLower() != "gale"))
                 {
                     Character.playableStats.battalion = "Zack";
                 }
