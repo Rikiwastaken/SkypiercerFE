@@ -137,10 +137,10 @@ public class SkillEditionScript : MonoBehaviour
 
 
 
-        PageNumberText.text = (characterwindowindex + 1) + "/" + (unlockedplayables.Count / 10 + 1);
+        PageNumberText.text = (characterwindowindex + 1) + "/" + Mathf.Max(1, (unlockedplayables.Count / 10));
         if (SkillPageNumberText.gameObject.activeSelf)
         {
-            SkillPageNumberText.text = (skillwindowindex + 1) + "/" + (InventorySkillList.Count / 10 + 1);
+            SkillPageNumberText.text = (skillwindowindex + 1) + "/" + Mathf.Max(1, (InventorySkillList.Count / 10));
         }
 
 
@@ -169,7 +169,7 @@ public class SkillEditionScript : MonoBehaviour
         {
             if (SkillList.activeSelf)
             {
-                if (skillwindowindex * 10 < InventorySkillList.Count - 9)
+                if (skillwindowindex * 10 < InventorySkillList.Count - 10)
                 {
                     skillwindowindex++;
                     InitializeSkillButtons();
@@ -177,7 +177,7 @@ public class SkillEditionScript : MonoBehaviour
             }
             else
             {
-                if (characterwindowindex * 10 < unlockedplayables.Count - 9)
+                if (characterwindowindex * 10 < unlockedplayables.Count - 10)
                 {
                     characterwindowindex++;
                     InitializeButtons();
