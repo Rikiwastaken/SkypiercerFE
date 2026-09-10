@@ -2209,6 +2209,11 @@ public class AttackTurnScript : MonoBehaviour
             MapEventManager.instance.TriggerEventCheck();
         }
 
+        if (BattleInfotext.instance != null)
+        {
+            BattleInfotext.instance.ResetPreviousSelectedGO();
+        }
+
         minimapScript.UpdateMinimap();
     }
 

@@ -9,6 +9,9 @@ using static UnitScript;
 public class BattleInfotext : MonoBehaviour
 {
 
+    public static BattleInfotext instance;
+
+
     private GridScript GridScript;
     private GameObject selectedunit;
 
@@ -101,6 +104,14 @@ public class BattleInfotext : MonoBehaviour
     private Character previousSelectedCharacter;
     private equipment previousCharacterWeapon;
     private GameObject previousselectedGO;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -367,6 +378,13 @@ public class BattleInfotext : MonoBehaviour
         previousselectedGO = selectedunit;
         previousSelectedCharacter = selectedunitCharacter;
         previousCharacterWeapon = characterweapon;
+    }
+
+    public void ResetPreviousSelectedGO()
+    {
+        previousselectedGO = null;
+        previousSelectedCharacter = null;
+        previousCharacterWeapon = null;
     }
 
     public void ManageGrowthArrow(bool isplayable)
