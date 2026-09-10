@@ -67,6 +67,7 @@ public class BattleInfotext : MonoBehaviour
     public TextMeshProUGUI HPArrowTMP;
     public TextMeshProUGUI DmgTMP;
     public Image EquipedWeaponIco;
+    public TextMeshProUGUI EquipedWeaponGradeTxt;
     public TextMeshProUGUI equipedweaponText;
     public Image CharacterSprite;
     public Image ExpBarFilling;
@@ -354,6 +355,29 @@ public class BattleInfotext : MonoBehaviour
 
                     equipment EquipedWeapon = selectedunit.GetComponent<UnitScript>().GetFirstWeapon();
                     EquipedWeaponIco.sprite = GetWeaponIcons(EquipedWeapon.type);
+                    string grade = "";
+                    switch (EquipedWeapon.Grade)
+                    {
+                        case (0):
+                            grade = "E";
+                            break;
+                        case (1):
+                            grade = "D";
+                            break;
+                        case (2):
+                            grade = "C";
+                            break;
+                        case (3):
+                            grade = "B";
+                            break;
+                        case (4):
+                            grade = "A";
+                            break;
+                        case (5):
+                            grade = "S";
+                            break;
+                    }
+                    EquipedWeaponGradeTxt.text = grade;
                     equipedweaponText.text = EquipedWeapon.Currentuses + "/" + EquipedWeapon.Maxuses;
                 }
             }
