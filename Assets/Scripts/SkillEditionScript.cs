@@ -47,6 +47,7 @@ public class SkillEditionScript : MonoBehaviour
     private InputAction _PreviousWeaponAction;
     public BondsScript BondsScript;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -108,21 +109,7 @@ public class SkillEditionScript : MonoBehaviour
         {
             if (_CancelAction.WasPressedThisFrame())
             {
-                if (IsBonds)
-                {
-                    if (!BondsScript.instance.bondsSubMenu.activeSelf)
-                    {
-                        if (SkillList.activeSelf)
-                        {
-                            SkillList.SetActive(false);
-                        }
-                        CampMenu.SetActive(true);
-                        gameObject.SetActive(false);
-                        EventSystem.current.SetSelectedGameObject(CampMenu.transform.GetChild(1).gameObject);
-                        BondsScript.ChangeColorIfBondsCanBeIncreased();
-                    }
-                }
-                else
+                if (!IsBonds)
                 {
                     if (SkillList.activeSelf)
                     {
@@ -135,8 +122,6 @@ public class SkillEditionScript : MonoBehaviour
                         gameObject.SetActive(false);
                         EventSystem.current.SetSelectedGameObject(CampMenu.transform.GetChild(0).gameObject);
                     }
-
-
                 }
 
                 return;
@@ -506,6 +491,7 @@ public class SkillEditionScript : MonoBehaviour
                 selectedcharacter = transform.GetChild(ButtonID).GetComponent<UnitDeploymentButton>().Character;
                 if (IsBonds)
                 {
+                    BondsScript.instance.previousSelectedUnitButtonID = ButtonID;
                     BondsScript.instance.LoadCharacterBonds(selectedcharacter);
                 }
                 else

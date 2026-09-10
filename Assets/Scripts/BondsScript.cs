@@ -72,6 +72,7 @@ public class BondsScript : MonoBehaviour
     public GameObject BondButtonNewImageGO;
 
     private int cancelcounter;
+    public int previousSelectedUnitButtonID = 0;
 
     private void Awake()
     {
@@ -108,14 +109,24 @@ public class BondsScript : MonoBehaviour
             cancelcounter--;
         }
 
-        if (InputSystem.actions.FindAction("Cancel").IsPressed())
+        if (InputSystem.actions.FindAction("Cancel").IsPressed() && cancelcounter <= 0)
         {
-            if (bondsSubMenu.activeSelf && cancelcounter <= 0)
+
+            if (bondsSubMenu.activeSelf)
             {
                 ChangeColorIfBondsCanBeIncreased();
                 cancelcounter = (int)(0.5f / Time.deltaTime);
                 bondsSubMenu.SetActive(false);
-                EventSystem.current.SetSelectedGameObject(BondsMenu.transform.GetChild(0).gameObject);
+
+                EventSystem.current.SetSelectedGameObject(BondsMenu.transform.GetChild(previousSelectedUnitButtonID).gameObject);
+            }
+            else if (BondsMenu.gameObject.activeSelf)
+            {
+                ChangeColorIfBondsCanBeIncreased();
+                cancelcounter = (int)(0.5f / Time.deltaTime);
+                BondsMenu.gameObject.SetActive(false);
+                GetComponent<CampScript>().BaseMenu.gameObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(GetComponent<CampScript>().BaseMenu.GetChild(0).gameObject);
             }
 
         }
