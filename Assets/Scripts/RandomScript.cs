@@ -128,7 +128,6 @@ public class RandomScript : MonoBehaviour
             value = HitValues[hitvaluesindex][1];
         }
         hitvaluesindex++;
-        Debug.Log(value);
         return value;
     }
 

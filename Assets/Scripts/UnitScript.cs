@@ -1672,16 +1672,21 @@ public class UnitScript : MonoBehaviour
         // if equipment was absent we add it to the equiped weapons
         if (IDtoAdd > 0)
         {
+            bool equipmentAdded = false;
             for (int i = 0; i < Chartouse.equipments.Count; i++)
             {
                 equipment equip = Chartouse.equipments[i];
                 if (equip == null || equip.type == null || equip.Name == "")
                 {
                     Chartouse.equipments[i] = DataScript.instance.GenerateEquipementCopy(DataScript.instance.equipmentList[IDtoAdd], character);
+                    equipmentAdded = true;
                     break;
                 }
             }
-
+            if (!equipmentAdded)
+            {
+                Chartouse.equipments.Add(DataScript.instance.GenerateEquipementCopy(DataScript.instance.equipmentList[IDtoAdd], character));
+            }
         }
 
         CheckWeaponsMod(Chartouse);
