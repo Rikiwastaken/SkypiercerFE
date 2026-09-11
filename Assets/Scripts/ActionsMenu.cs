@@ -474,6 +474,7 @@ public class ActionsMenu : MonoBehaviour
 
     private void ToggleTelekinesis(GameObject PreviousFoe, bool ishealing)
     {
+        Debug.Log("toggeling telekinesis");
         if (!allowtelekinesisChangeFromTutorial())
         {
             return;
@@ -486,9 +487,10 @@ public class ActionsMenu : MonoBehaviour
         WeaponChange(ishealing);
         target.GetComponent<UnitScript>().UpdateWeaponModel();
         bool enemytargettable = false;
+        GridSquareScript PreviousFoeTile = PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
         {
-            if ((int)tile.GridCoordinates.x == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.x && (int)tile.GridCoordinates.y == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.y)
+            if (PreviousFoeTile == tile) ;
             {
                 enemytargettable = true;
                 break;
@@ -496,16 +498,21 @@ public class ActionsMenu : MonoBehaviour
         }
         if (enemytargettable)
         {
+
             FindAttackers();
+            return;
         }
         else
         {
             NextWeapon(PreviousFoe, target.GetComponent<UnitScript>().UnitCharacteristics.equipments[0], ishealing);
         }
         enemytargettable = false;
+
+        Debug.Log(GridScript.lockedattacktiles);
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
         {
-            if ((int)tile.GridCoordinates.x == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.x && (int)tile.GridCoordinates.y == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.y)
+
+            if (PreviousFoeTile == tile)
             {
                 enemytargettable = true;
                 break;
@@ -513,10 +520,12 @@ public class ActionsMenu : MonoBehaviour
         }
         if (enemytargettable)
         {
+
             FindAttackers();
         }
         else
         {
+
             target.GetComponent<UnitScript>().ToggleTelekinesis();
             if (target.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
             {
