@@ -315,7 +315,7 @@ public class MusicManager : MonoBehaviour
                 ChangeVolume(OtherAudioSource, 0f);
                 ChangeVolume(OtherAudioSourceIntro, 0f);
             }
-            if (currentDialogueAudioSource != null && (currentDialogueAudioSource.isPlaying || currentDialogueAudioSourceIntro.isPlaying) && currentDialogueAudioSource.volume > 0 && CurrentDialogueMusic != -1)
+            if (currentDialogueAudioSource != null && (currentDialogueAudioSource.isPlaying || currentDialogueAudioSourceIntro.isPlaying) && (currentDialogueAudioSource.volume > 0 || currentDialogueAudioSourceIntro.volume > 0) && CurrentDialogueMusic != -1)
             {
                 ChangeVolume(CampMusic, 0f);
                 ChangeVolume(CampMusicintro, 0f);

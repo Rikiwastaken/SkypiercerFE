@@ -474,7 +474,6 @@ public class ActionsMenu : MonoBehaviour
 
     private void ToggleTelekinesis(GameObject PreviousFoe, bool ishealing)
     {
-        Debug.Log("toggeling telekinesis");
         if (!allowtelekinesisChangeFromTutorial())
         {
             return;
@@ -490,7 +489,7 @@ public class ActionsMenu : MonoBehaviour
         GridSquareScript PreviousFoeTile = PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
         {
-            if (PreviousFoeTile == tile) ;
+            if (PreviousFoeTile == tile)
             {
                 enemytargettable = true;
                 break;
