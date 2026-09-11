@@ -2179,7 +2179,7 @@ public class ActionsMenu : MonoBehaviour
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage / 2;
             SpawnTextPopup(damage / 2 + "", false, iscrit, target);
             allforonetransfertarget.currentHP -= damage / 2;
-            SpawnTextPopup(damage / 2 + "", false, iscrit, target);
+            SpawnTextPopup(damage / 2 + "", false, iscrit, allforonetransfertargetGO);
             SurvivalSkillsCheck(allforonetransfertargetGO, transfertargethp);
 
         }

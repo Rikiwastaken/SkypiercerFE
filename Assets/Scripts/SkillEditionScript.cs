@@ -140,7 +140,7 @@ public class SkillEditionScript : MonoBehaviour
         PageNumberText.text = (characterwindowindex + 1) + "/" + Mathf.Max(1, (unlockedplayables.Count / 10));
         if (SkillPageNumberText.gameObject.activeSelf)
         {
-            SkillPageNumberText.text = (skillwindowindex + 1) + "/" + Mathf.Max(1, (InventorySkillList.Count / 10));
+            SkillPageNumberText.text = (skillwindowindex + 1) + "/" + Mathf.Max(1, ((InventorySkillList.Count / 10) + 1));
         }
 
 
