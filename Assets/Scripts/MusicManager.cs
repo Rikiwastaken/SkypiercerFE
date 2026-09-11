@@ -43,8 +43,8 @@ public class MusicManager : MonoBehaviour
 
     public int CurrentDialogueMusic;
 
-    private bool lowerdialogue;
-    private bool lowermap;
+    public bool lowerdialogue;
+    public bool lowermap;
 
     [Serializable]
     public class Audios
@@ -168,6 +168,22 @@ public class MusicManager : MonoBehaviour
             }
         }
 
+        if ((DialogueAudioSource.isPlaying || DialogueAudioSource2.isPlaying) && (textBubbleScript == null || TextBubbleScript.Instance == null || textBubbleScript.indialogue == false))
+        {
+            ChangeVolume(DialogueAudioSource, 0f);
+            ChangeVolume(DialogueAudioSourceIntro, 0f);
+            ChangeVolume(DialogueAudioSource2, 0f);
+            ChangeVolume(DialogueAudioSource2Intro, 0f);
+
+            if (DialogueAudioSource.volume <= 0.001f)
+            {
+                DialogueAudioSource.Stop();
+            }
+            if (DialogueAudioSource2.volume <= 0.001f)
+            {
+                DialogueAudioSource2.Stop();
+            }
+        }
 
         if (SceneLoader.instance.LoadingImage.gameObject.activeSelf)
         {
@@ -213,6 +229,8 @@ public class MusicManager : MonoBehaviour
         }
         else
         {
+            ChangeVolume(CutSceneMusic, 1f);
+            ChangeVolume(CutSceneMusicintro, 1f);
             return;
         }
 
@@ -535,21 +553,23 @@ public class MusicManager : MonoBehaviour
         {
             startofset = 0f;
         }
-
+        double dsptime = AudioSettings.dspTime;
         if (intro.clip == null)
         {
-            Main.PlayScheduled(AudioSettings.dspTime + startofset);
+            Main.PlayScheduled(dsptime + startofset);
         }
         else
         {
             intro.volume = startvolume;
 
-            intro.PlayScheduled(AudioSettings.dspTime + startofset);
+
+
+            intro.PlayScheduled(dsptime + startofset);
 
             double introduration = (double)intro.clip.samples / intro.clip.frequency;
 
 
-            Main.PlayScheduled(AudioSettings.dspTime + introduration + startofset);
+            Main.PlayScheduled(dsptime + introduration + startofset);
         }
 
 

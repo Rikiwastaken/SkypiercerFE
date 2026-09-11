@@ -1203,9 +1203,9 @@ public class AttackTurnScript : MonoBehaviour
         Transform model1 = Character1.transform;
         Transform model2 = Character2.transform;
         Vector3 Model2LookPoint = model1.transform.position;
-        Model2LookPoint.y = model1.position.y;
+        Model2LookPoint.y = model2.position.y;
         Vector3 Model1LookPoint = model2.transform.position;
-        Model1LookPoint.y = model2.position.y;
+        Model1LookPoint.y = model1.position.y;
         model1.LookAt(Model1LookPoint);
         model2.LookAt(Model2LookPoint);
     }
