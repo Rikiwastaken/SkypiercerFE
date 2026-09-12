@@ -10,10 +10,11 @@
 
 - peut être faire qu'on puisse mettre "pas de battallion"
 - Faire les visuels de l'effet gardien de Kira
-- Enlever le bouton vert des bonds quand tu les regardes tous.
 - Mettre un cercle pour montrer les effets de skills qui ont un rayon. (marche pas trop)
 
 ## System 
+
+- Redo skill choses menus
 
 -  Do several different camp environment
 

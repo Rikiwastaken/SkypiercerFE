@@ -28,6 +28,7 @@ public class DisplayInput : MonoBehaviour
     public float stickmovement;
 
     private InputManager InputManager;
+    public bool ActivateInput;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,6 +36,10 @@ public class DisplayInput : MonoBehaviour
         InputManager = InputManager.instance;
         LeftStickBasepos = LeftStick.transform.localPosition;
         RightStickBasepos = RightStick.transform.localPosition;
+        if (!ActivateInput)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame

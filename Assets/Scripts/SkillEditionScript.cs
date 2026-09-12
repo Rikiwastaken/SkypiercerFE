@@ -26,9 +26,15 @@ public class SkillEditionScript : MonoBehaviour
     public TextMeshProUGUI SkillPageNumberText;
     private List<InventoryItem> InventorySkillList;
 
+    public TextMeshProUGUI UnitSkillText;
     public TextMeshProUGUI EquipedSkillText;
     public TextMeshProUGUI SkillDescriptionText;
     public TextMeshProUGUI SkillPointsText;
+    public GameObject FirstUnitSKillIcon;
+    public GameObject SecondUnitSKillIcon;
+    public List<GameObject> EquipedSkillsIcons;
+    public GameObject CurrentDescribedSkillIcon;
+
 
     public List<GameObject> PreBattleMenu;
 
@@ -210,9 +216,10 @@ public class SkillEditionScript : MonoBehaviour
         {
             if (SkillList.activeSelf)
             {
+                int remainingskillpoints = UpdateSkillPointText();
                 UpdateEquipedSkillText();
-                UpdateSkillPointText();
-                UpdateSkillDescriptionText(EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>());
+
+                UpdateSkillDescriptionText(EventSystem.current.currentSelectedGameObject.GetComponent<UnitDeploymentButton>(), remainingskillpoints);
             }
             else
             {
@@ -242,19 +249,54 @@ public class SkillEditionScript : MonoBehaviour
     }
     private void UpdateEquipedSkillText()
     {
-        string equipedskills = "";
+
+
+
+
 
         Character unitchar = selectedcharacter;
 
+        string UnitSkillTexts = selectedcharacter.name + "'s Skills:\n";
+
         if (unitchar.UnitSkill != 0)
         {
-            equipedskills = "Unit Skill :\n" + DataScript.instance.SkillList[unitchar.UnitSkill].name + "\n";
+            Skill FirstSkill = DataScript.instance.SkillList[unitchar.UnitSkill];
+            UnitSkillTexts += FirstSkill.name + "\n";
+            if (!FirstUnitSKillIcon.activeSelf)
+            {
+                FirstUnitSKillIcon.SetActive(true);
+            }
+            FirstUnitSKillIcon.GetComponent<SkillIconScript>().InitializeIcon(FirstSkill.SkillIconInfo);
         }
         else
         {
-            equipedskills = "Unit Skill :\nNone\n";
+            UnitSkillTexts += "None\n";
+            if (FirstUnitSKillIcon.activeSelf)
+            {
+                FirstUnitSKillIcon.SetActive(false);
+            }
         }
 
+        if (unitchar.SecondSkillUnlocked && unitchar.SecondUnitSkill != 0)
+        {
+            Skill SecondSkill = DataScript.instance.SkillList[unitchar.SecondUnitSkill];
+            UnitSkillTexts += SecondSkill.name;
+            if (!SecondUnitSKillIcon.activeSelf)
+            {
+                SecondUnitSKillIcon.SetActive(true);
+            }
+            SecondUnitSKillIcon.GetComponent<SkillIconScript>().InitializeIcon(SecondSkill.SkillIconInfo);
+        }
+        else
+        {
+            UnitSkillTexts += "Locked";
+            if (SecondUnitSKillIcon.activeSelf)
+            {
+                SecondUnitSKillIcon.SetActive(false);
+            }
+        }
+
+        string equipedskills = "";
         int nbrofequipedskills = 0;
 
         for (int i = 0; i < Mathf.Min(unitchar.EquipedSkills.Count, 4); i++)
@@ -265,19 +307,32 @@ public class SkillEditionScript : MonoBehaviour
             }
         }
 
-        equipedskills += "Equ Skills " + nbrofequipedskills + "/4 :\n";
+        equipedskills += "Equiped Skills " + nbrofequipedskills + "/4 :\n";
 
-        for (int i = 0; i < Mathf.Min(unitchar.EquipedSkills.Count, 4); i++)
+        for (int i = 0; i < 4; i++)
         {
-            if (unitchar.EquipedSkills[i] != 0)
+            if (unitchar.EquipedSkills != null && unitchar.EquipedSkills.Count > i && unitchar.EquipedSkills[i] != 0)
             {
-                equipedskills += DataScript.instance.SkillList[unitchar.EquipedSkills[i]].name + "\n";
+                Skill equipedskill = DataScript.instance.SkillList[unitchar.EquipedSkills[i]];
+                equipedskills += equipedskill.name + "\n";
+                if (!EquipedSkillsIcons[i].activeSelf)
+                {
+                    EquipedSkillsIcons[i].SetActive(true);
+                }
+                EquipedSkillsIcons[i].GetComponent<SkillIconScript>().InitializeIcon(equipedskill.SkillIconInfo);
+            }
+            else
+            {
+                if (EquipedSkillsIcons[i].activeSelf)
+                {
+                    EquipedSkillsIcons[i].SetActive(false);
+                }
             }
         }
-
+        UnitSkillText.text = UnitSkillTexts;
         EquipedSkillText.text = equipedskills;
     }
-    private void UpdateSkillDescriptionText(UnitDeploymentButton SkillButton)
+    private void UpdateSkillDescriptionText(UnitDeploymentButton SkillButton, int remainingSkillPoints)
     {
         if (SkillButton.Item != null)
         {
@@ -285,27 +340,43 @@ public class SkillEditionScript : MonoBehaviour
             if (SkillID > 0)
             {
                 Skill skill = DataScript.instance.SkillList[SkillID];
+                string DescriptionText = "<align=center>" + skill.name + "\n";
+                string Color = "";
+                if (remainingSkillPoints < skill.Cost)
+                {
+                    Color = "<color=red>";
+                }
 
-                SkillDescriptionText.text = "Cost : " + skill.Cost + "\n";
+                DescriptionText += "<align=left>Cost: " + Color + skill.Cost + "</color>\n";
                 if (skill.IsCommand)
                 {
-                    SkillDescriptionText.text += "Type : Command\n";
+                    DescriptionText += "Type : Command\n";
                 }
                 else
                 {
-                    SkillDescriptionText.text += "Type : Skill\n";
+                    DescriptionText += "Type : Skill\n";
                 }
-                SkillDescriptionText.text += skill.Descriptions;
+                DescriptionText += "<align=left>Effect: " + skill.Descriptions;
+                SkillDescriptionText.text = DescriptionText;
+                if (!CurrentDescribedSkillIcon.activeSelf)
+                {
+                    CurrentDescribedSkillIcon.SetActive(true);
+                }
+                CurrentDescribedSkillIcon.GetComponent<SkillIconScript>().InitializeIcon(skill.SkillIconInfo);
             }
             else
             {
-                SkillDescriptionText.text = "None";
+                SkillDescriptionText.text = "";
+                if (CurrentDescribedSkillIcon.activeSelf)
+                {
+                    CurrentDescribedSkillIcon.SetActive(false);
+                }
             }
 
         }
     }
 
-    private void UpdateSkillPointText()
+    private int UpdateSkillPointText()
     {
 
         Character unitchar = selectedcharacter;
@@ -321,6 +392,7 @@ public class SkillEditionScript : MonoBehaviour
         }
 
         SkillPointsText.text = "Skill Pts : " + equipedskillpoitns + "/" + unitchar.playableStats.MaxSkillpoints;
+        return unitchar.playableStats.MaxSkillpoints - equipedskillpoitns;
     }
 
     private void InitializeInventorySkillList()
