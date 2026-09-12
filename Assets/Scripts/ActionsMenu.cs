@@ -2170,7 +2170,7 @@ public class ActionsMenu : MonoBehaviour
         {
             Character charOthertarget = othertarget.GetComponent<UnitScript>().UnitCharacteristics;
 
-            if (othertarget.GetComponent<UnitScript>().GetSkill(40) && ManhattanDistance(charTarget, charOthertarget) <= 3)
+            if (othertarget.GetComponent<UnitScript>().GetSkill(40) && ManhattanDistance(charTarget, charOthertarget) <= 2)
             {
                 allforonetransfertarget = charOthertarget;
                 allforonetransfertargetGO = othertarget;

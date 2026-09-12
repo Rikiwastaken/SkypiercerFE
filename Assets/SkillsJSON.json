@@ -642,7 +642,7 @@
         },
         {
             "name": "One for All",
-            "Descriptions": "50% of damage taken by allies within 3 tiles is transferred to this unit.",
+            "Descriptions": "50% of damage taken by allies within 2 tiles is transferred to this unit.",
             "IsCommand": false,
             "Cost": 10,
             "targettype": 0,

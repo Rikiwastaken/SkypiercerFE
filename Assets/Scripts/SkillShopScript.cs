@@ -305,6 +305,7 @@ public class SkillShopScript : MonoBehaviour
     /// <param name="SkillButton"></param>
     private void InitializeInventoryText(UnitDeploymentButton SkillButton)
     {
+        int numberequiped = 0;
         int numberheld = 0;
         if (SkillButton.Item != null)
         {
@@ -317,10 +318,23 @@ public class SkillShopScript : MonoBehaviour
                     numberheld = skillheld.Quantity;
                     break;
                 }
+                foreach (Character playablechar in DataScript.instance.PlayableCharacterList)
+                {
+                    if (playablechar.playableStats.unlocked)
+                    {
+                        foreach (int EquipedSkillID in playablechar.EquipedSkills)
+                        {
+                            if (EquipedSkillID == SkillID)
+                            {
+                                numberequiped++;
+                            }
+                        }
+                    }
+                }
             }
 
         }
-        InventoryText.text = "In Inventory : " + numberheld;
+        InventoryText.text = "Inventory : " + numberheld + " | Equipped : " + numberequiped;
     }
 
     /// <summary>
