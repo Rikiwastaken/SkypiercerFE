@@ -1227,11 +1227,7 @@ public class AttackTurnScript : MonoBehaviour
         }
 
         Character charunit1 = unit1.GetComponent<UnitScript>().UnitCharacteristics;
-        if (unit1.GetComponent<UnitScript>().GetSkill(32)) // Survivor
-        {
-            unit1.GetComponent<UnitScript>().SurvivorStacks++;
-            unit1.GetComponent<UnitScript>().AddNumber(unit1.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
-        }
+
 
         if (charunit1.affiliation == "playable")
         {
@@ -1245,10 +1241,22 @@ public class AttackTurnScript : MonoBehaviour
         if (unit2 != null)
         {
             Character charunit2 = unit2.GetComponent<UnitScript>().UnitCharacteristics;
+            if (unit1.GetComponent<UnitScript>().GetSkill(32)) // Survivor
+            {
+                if (charunit1.affiliation == "enemy" || charunit2.affiliation == "enemy" && charunit1.affiliation != charunit2.affiliation)
+                {
+                    unit1.GetComponent<UnitScript>().SurvivorStacks++;
+                    unit1.GetComponent<UnitScript>().AddNumber(unit1.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
+                }
+            }
             if (unit2.GetComponent<UnitScript>().GetSkill(32)) // Survivor
             {
-                unit2.GetComponent<UnitScript>().SurvivorStacks++;
-                unit2.GetComponent<UnitScript>().AddNumber(unit2.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
+                if (charunit1.affiliation == "enemy" || charunit2.affiliation == "enemy" && charunit1.affiliation != charunit2.affiliation)
+                {
+                    unit2.GetComponent<UnitScript>().SurvivorStacks++;
+                    unit2.GetComponent<UnitScript>().AddNumber(unit2.GetComponent<UnitScript>().SurvivorStacks, true, "Survivor");
+                }
+
             }
             if (charunit2.affiliation == "playable")
             {
