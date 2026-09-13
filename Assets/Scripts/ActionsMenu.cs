@@ -3046,7 +3046,7 @@ public class ActionsMenu : MonoBehaviour
 
         int spdunit = (int)charunit.AjustedStats.Speed + UnitSkillBonus.Speed + (int)unitweaponstatbonus.Speed;
 
-        return (int)(spdunit * 0.2f) + tileDodogeBonus + UnitSkillBonus.Dodge + UnitLuckMod + ElevationDifferenceDodgeBonus;
+        return (int)(spdunit * 0.4f) + tileDodogeBonus + UnitSkillBonus.Dodge + UnitLuckMod + ElevationDifferenceDodgeBonus;
     }
 
     public int CalculateBaseHitUnit(GameObject unit, GameObject target, bool incombat = false)
@@ -3075,7 +3075,7 @@ public class ActionsMenu : MonoBehaviour
 
         int dexunit = (int)charunit.AjustedStats.Dexterity + UnitSkillBonus.Dexterity + (int)unitweaponstatbonus.Dexterity;
 
-        return (int)(hitrateweapon + dexunit * 0.2f) + tileHitbonus + UnitSkillBonus.Hit + UnitLuckMod;
+        return (int)(hitrateweapon + dexunit * 0.3f) + tileHitbonus + UnitSkillBonus.Hit + UnitLuckMod;
     }
 
 
