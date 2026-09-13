@@ -490,7 +490,7 @@ public class ForesightScript : MonoBehaviour
 
             foreach (EventData _EventData in ActionToRevert.PreviousEventStates)
             {
-                MapEventManager.instance.EventsToMonitor[_EventData.EventID].triggered = _EventData.Eventstate; // error here on chapter 6
+                MapEventManager.instance.EventsToMonitor[_EventData.EventID].triggered = _EventData.Eventstate;
             }
 
             for (int j = 0; j < CharacterHolder.transform.childCount; j++)
