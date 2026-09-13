@@ -28,6 +28,8 @@ public class ActionsMenu : MonoBehaviour
     public TextMeshProUGUI UnitWeapon;
     public TextMeshProUGUI TargetWeapon;
     public TextMeshProUGUI UnitNameTMP;
+    public TextMeshProUGUI UnitHPTMP;
+    public TextMeshProUGUI TargetHPTMP;
     public TextMeshProUGUI TargetNameTMP;
     public GameObject UnitTelekinesis;
     public GameObject TargetTelekinesis;
@@ -1637,6 +1639,7 @@ public class ActionsMenu : MonoBehaviour
             TextMeshProUGUI nametext = null;
             TextMeshProUGUI tiletext = null;
             TextMeshProUGUI MainText = null;
+            TextMeshProUGUI HPText = null;
             if (isUnit)
             {
                 unitSprite.sprite = EmptySprite;
@@ -1645,6 +1648,7 @@ public class ActionsMenu : MonoBehaviour
                 nametext = UnitNameTMP;
                 tiletext = UnitTileTMP;
                 MainText = unitAttackText;
+                HPText = UnitHPTMP;
             }
             else
             {
@@ -1654,12 +1658,13 @@ public class ActionsMenu : MonoBehaviour
                 nametext = TargetNameTMP;
                 tiletext = TargetTileTMP;
                 MainText = targetAttackText;
+                HPText = TargetHPTMP;
             }
             weapontext.text = "";
             nametext.text = "";
             tiletext.text = "";
             MainText.text = "";
-
+            HPText.text = "";
 
             return;
         }
@@ -1692,6 +1697,7 @@ public class ActionsMenu : MonoBehaviour
             TextMeshProUGUI nametext = null;
             TextMeshProUGUI tiletext = null;
             TextMeshProUGUI MainText = null;
+            TextMeshProUGUI HPText = null;
 
             if (isUnit)
             {
@@ -1701,6 +1707,7 @@ public class ActionsMenu : MonoBehaviour
                 nametext = UnitNameTMP;
                 tiletext = UnitTileTMP;
                 MainText = unitAttackText;
+                HPText = UnitHPTMP;
             }
             else
             {
@@ -1710,6 +1717,7 @@ public class ActionsMenu : MonoBehaviour
                 nametext = TargetNameTMP;
                 tiletext = TargetTileTMP;
                 MainText = targetAttackText;
+                HPText = TargetHPTMP;
             }
 
 
@@ -1751,7 +1759,9 @@ public class ActionsMenu : MonoBehaviour
             }
             tiletext.text += character.currentTile.elevation;
 
-            string MainTextstring = "<align=left>" + hptoshow + "<align=center>\n";
+            HPText.text = character.currentHP + " > " + hptoshow;
+
+            string MainTextstring = "";
             if (ishealing)
             {
                 MainTextstring += "Healing : " + dmgorhealing + "\n";
