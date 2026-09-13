@@ -1339,7 +1339,7 @@ public class DataScript : MonoBehaviour
         {
             return false;
         }
-        if (Charactertouse.name.ToLower() == "zack" && ExamodeUnlockChapter_Zack > SM.maxchapterreached)
+        if (Charactertouse.name.ToLower() == "zack" && ExamodeUnlockChapter_Zack < SM.maxchapterreached)
         {
             return true;
         }
@@ -1347,7 +1347,7 @@ public class DataScript : MonoBehaviour
         {
             return true;
         }
-        else if (Charactertouse.name.ToLower() == "gale" && ExamodeUnlockChapter_Gale > SM.maxchapterreached)
+        else if (Charactertouse.name.ToLower() == "gale" && ExamodeUnlockChapter_Gale < SM.maxchapterreached)
         {
             return true;
         }

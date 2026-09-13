@@ -3376,13 +3376,13 @@ public class UnitScript : MonoBehaviour
             //Zack Side Effect
             if (UnitCharacteristics.playableStats.battalion != null && UnitCharacteristics.playableStats.battalion.ToLower() == "zack")
             {
-                statbonuses.Hit += 5;
-                statbonuses.Crit += 5;
+                statbonuses.Hit += 7;
+                statbonuses.Crit += 3;
                 //Loyal
                 if (GetSkill(35))
                 {
-                    statbonuses.Hit += 5;
-                    statbonuses.Crit += 5;
+                    statbonuses.Hit += 7;
+                    statbonuses.Crit += 3;
                 }
             }
 
