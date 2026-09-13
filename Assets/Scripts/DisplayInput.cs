@@ -38,7 +38,7 @@ public class DisplayInput : MonoBehaviour
         RightStickBasepos = RightStick.transform.localPosition;
         if (!ActivateInput)
         {
-            gameObject.SetActive(false);
+            DeactivateTextAndImages(transform);
         }
     }
 
@@ -157,6 +157,22 @@ public class DisplayInput : MonoBehaviour
             DeactivateButton(DPadLeft);
         }
 
+    }
+
+    private void DeactivateTextAndImages(Transform _Transform)
+    {
+        if (_Transform.GetComponent<TextMeshProUGUI>())
+        {
+            _Transform.GetComponent<TextMeshProUGUI>().enabled = false;
+        }
+        if (_Transform.GetComponent<Image>())
+        {
+            _Transform.GetComponent<Image>().enabled = false;
+        }
+        foreach (Transform child in _Transform)
+        {
+            DeactivateTextAndImages(child);
+        }
     }
 
     private void ActivateButton(GameObject button)

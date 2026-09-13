@@ -14,8 +14,6 @@
 
 ## System 
 
-- Redo skill choses menus
-
 -  Do several different camp environment
 
 - Reword Battle Animation Mode.
