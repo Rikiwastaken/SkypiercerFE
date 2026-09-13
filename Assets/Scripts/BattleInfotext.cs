@@ -931,7 +931,7 @@ public class BattleInfotext : MonoBehaviour
 
         if (UnitChar.statusEffects.BurnTurns > 0)
         {
-            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            if (!AilmentIconList[lastactiveID].gameObject.activeInHierarchy)
             {
                 AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
@@ -941,7 +941,7 @@ public class BattleInfotext : MonoBehaviour
         }
         if (UnitChar.statusEffects.StunTurns > 0)
         {
-            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            if (!AilmentIconList[lastactiveID].gameObject.activeInHierarchy)
             {
                 AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
@@ -951,7 +951,7 @@ public class BattleInfotext : MonoBehaviour
         }
         if (UnitChar.statusEffects.ParalyzedTurns > 0)
         {
-            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            if (!AilmentIconList[lastactiveID].gameObject.activeInHierarchy)
             {
                 AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
@@ -961,7 +961,7 @@ public class BattleInfotext : MonoBehaviour
         }
         if (UnitChar.statusEffects.ConcussionTunrs > 0)
         {
-            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            if (!AilmentIconList[lastactiveID].gameObject.activeInHierarchy)
             {
                 AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
@@ -971,7 +971,7 @@ public class BattleInfotext : MonoBehaviour
         }
         if (UnitChar.statusEffects.WeaknessTurns > 0)
         {
-            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            if (!AilmentIconList[lastactiveID].gameObject.activeInHierarchy)
             {
                 AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
@@ -981,7 +981,7 @@ public class BattleInfotext : MonoBehaviour
         }
         if (UnitChar.statusEffects.RegenTurns > 0)
         {
-            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            if (!AilmentIconList[lastactiveID].gameObject.activeInHierarchy)
             {
                 AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
@@ -991,7 +991,7 @@ public class BattleInfotext : MonoBehaviour
         }
         if (UnitChar.statusEffects.AccelerationTurns > 0)
         {
-            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            if (!AilmentIconList[lastactiveID].gameObject.activeInHierarchy)
             {
                 AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
@@ -1001,7 +1001,7 @@ public class BattleInfotext : MonoBehaviour
         }
         if (UnitChar.statusEffects.PowerTurns > 0)
         {
-            if (!AilmentIconList[lastactiveID].gameObject.activeSelf)
+            if (!AilmentIconList[lastactiveID].gameObject.activeInHierarchy)
             {
                 AilmentIconList[lastactiveID].transform.parent.gameObject.SetActive(true);
             }
@@ -1011,7 +1011,7 @@ public class BattleInfotext : MonoBehaviour
         }
         for (int i = lastactiveID; i < AilmentIconList.Count; i++)
         {
-            if (AilmentIconList[i].gameObject.activeSelf)
+            if (AilmentIconList[i].gameObject.activeInHierarchy)
             {
                 AilmentIconList[i].transform.parent.gameObject.SetActive(false);
             }
