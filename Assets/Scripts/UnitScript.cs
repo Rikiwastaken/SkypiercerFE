@@ -2156,10 +2156,7 @@ public class UnitScript : MonoBehaviour
 
     public void TriggerStatusEffectsBegOfTurn()
     {
-        if (GetSkill(89)) // burning soul
-        {
-            UnitCharacteristics.statusEffects.BurnTurns++;
-        }
+
         if (GetSkill(87))// unphasable
         {
             RemoveStatusAilments();
@@ -2168,6 +2165,10 @@ public class UnitScript : MonoBehaviour
         {
             UnitCharacteristics.currentHP = (int)Mathf.Max(0f, UnitCharacteristics.currentHP - UnitCharacteristics.AjustedStats.HP * 0.1f);
             UnitCharacteristics.statusEffects.BurnTurns--;
+        }
+        if (GetSkill(89)) // burning soul
+        {
+            UnitCharacteristics.statusEffects.BurnTurns++;
         }
         if (UnitCharacteristics.statusEffects.StunTurns > 0)
         {

@@ -315,7 +315,7 @@ public class TextBubbleScript : MonoBehaviour
             charTimer = 0f;
             isPrinting = true;
             sentence.maxVisibleCharacters = 0;
-            if (gameObject.activeSelf)
+            if (gameObject.activeInHierarchy && gameObject.activeSelf)
             {
                 FixTMPVisibility();
             }

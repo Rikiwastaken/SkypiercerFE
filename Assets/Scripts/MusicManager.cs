@@ -367,23 +367,28 @@ public class MusicManager : MonoBehaviour
         {
             return;
         }
+
+        if (nextscene.name == "Camp")
+        {
+            ResetAll();
+            PlayMusic(1);
+        }
+        else if (nextscene.name == "WorldMap")
+        {
+            ResetAll();
+            PlayMusic(6);
+        }
+        else if (nextscene.name == "MainMenu")
+        {
+            ResetAll();
+            PlayMusic(8, maxvolume);
+        }
         if (currentDialogueAudioSource != null)
         {
             currentDialogueAudioSource.volume = 0f;
             currentDialogueAudioSourceIntro.volume = 0f;
         }
-        if (nextscene.name == "Camp")
-        {
-            PlayMusic(1);
-        }
-        else if (nextscene.name == "WorldMap")
-        {
-            PlayMusic(6);
-        }
-        else if (nextscene.name == "MainMenu")
-        {
-            PlayMusic(8, maxvolume);
-        }
+
 
 
         currentscene = nextscene.name;
@@ -446,6 +451,11 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    private void ResetAll()
+    {
+        StopAllCoroutines();
+        StopAllMusic();
+    }
     void PlayMusic(int type, float startvolume = 0f, bool ignoreStartOfset = false)
     {
         //if (currentMusicType == type)

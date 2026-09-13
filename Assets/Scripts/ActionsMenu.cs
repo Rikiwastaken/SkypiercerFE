@@ -2195,16 +2195,35 @@ public class ActionsMenu : MonoBehaviour
             oneforallactive = true;
             int transfertargethp = allforonetransfertarget.currentHP;
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage / 2;
-            SpawnTextPopup(damage / 2 + "", false, iscrit, target);
             allforonetransfertarget.currentHP -= damage / 2;
-            SpawnTextPopup(damage / 2 + "", false, iscrit, allforonetransfertargetGO);
+            if (damage == 0)
+            {
+                SpawnTextPopup("miss", false, iscrit, target);
+
+                SpawnTextPopup("miss", false, iscrit, allforonetransfertargetGO);
+            }
+            else
+            {
+                SpawnTextPopup(damage / 2 + "", false, iscrit, target);
+
+                SpawnTextPopup(damage / 2 + "", false, iscrit, allforonetransfertargetGO);
+            }
+
             SurvivalSkillsCheck(allforonetransfertargetGO, transfertargethp);
 
         }
         else
         {
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage;
-            SpawnTextPopup(damage + "", false, iscrit, target);
+            if (damage == 0)
+            {
+                SpawnTextPopup("miss", false, iscrit, target);
+            }
+            else
+            {
+                SpawnTextPopup(damage + "", false, iscrit, target);
+            }
+
 
         }
 
