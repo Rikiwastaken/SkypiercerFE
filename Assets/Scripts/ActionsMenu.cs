@@ -2888,7 +2888,11 @@ public class ActionsMenu : MonoBehaviour
         BaseStats targetstatbonus = new BaseStats();
 
         equipment unitfirstweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
-        equipment targetfirstweapon = target.GetComponent<UnitScript>().GetFirstWeapon();
+        equipment targetfirstweapon = null;
+        if (target != null)
+        {
+            targetfirstweapon = target.GetComponent<UnitScript>().GetFirstWeapon();
+        }
 
         if (unitfirstweapon.type.ToLower() == "sword")
         {
@@ -2923,7 +2927,7 @@ public class ActionsMenu : MonoBehaviour
             }
 
         }
-        if (targetfirstweapon.type.ToLower() == "greatsword")
+        if (targetfirstweapon != null && targetfirstweapon.type.ToLower() == "greatsword")
         {
             if (targetfirstweapon.Modifier != null && targetfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "heavyweight")
             {
@@ -2935,7 +2939,7 @@ public class ActionsMenu : MonoBehaviour
             }
         }
 
-        if (targetfirstweapon.type.ToLower() == "spear")
+        if (targetfirstweapon != null && targetfirstweapon.type.ToLower() == "spear")
         {
             if (targetfirstweapon.Modifier != null && targetfirstweapon.Modifier != "" && targetfirstweapon.Modifier.ToLower() == "precise")
             {
@@ -2961,6 +2965,7 @@ public class ActionsMenu : MonoBehaviour
 
         return (unitstatbonus, targetstatbonus);
     }
+    /*
     public int CalculateHit(GameObject unit, GameObject target, bool incombat)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
@@ -2990,7 +2995,7 @@ public class ActionsMenu : MonoBehaviour
 
         int TargetLuckMod = target.GetComponent<UnitScript>().GetHitLuckModificator();
 
-        int finalhitrate = (int)(hitrateweapon + (dexunit - spdtarget) * 0.2f) + tilebonus + UnitSkillBonus.Hit + UnitLuckMod - TargetSkillBonus.Dodge - TargetLuckMod;
+        int finalhitrate = (int)(hitrateweapon + (dexunit - spdtarget) * 0.2f) - tilebonus + UnitSkillBonus.Hit + UnitLuckMod - TargetSkillBonus.Dodge - TargetLuckMod;
 
         if (finalhitrate < 0)
         {
@@ -3004,11 +3009,81 @@ public class ActionsMenu : MonoBehaviour
         return finalhitrate;
 
     }
+    */
 
-    private int GetTileBonus(GridSquareScript unitTile, GridSquareScript targetTile)
+    public int CalculateHit(GameObject unit, GameObject target, bool incombat)
+    {
+        int HitRate = CalculateBaseHitUnit(unit, target, incombat);
+        int DodgeRate = CalculateBaseDodgeUnit(unit, target, incombat);
+
+        return HitRate - DodgeRate;
+
+    }
+    public int CalculateBaseDodgeUnit(GameObject unit, GameObject target, bool incombat = false)
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+
+        GridSquareScript unitTile = charunit.currentTile;
+
+        GridSquareScript targetTile = null;
+
+        if (target != null)
+        {
+            targetTile = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
+        }
+
+        int UnitLuckMod = unit.GetComponent<UnitScript>().GetHitLuckModificator();
+
+        int tileDodogeBonus = GetTileDodgeBonus(unitTile);
+        BaseStats unitweaponstatbonus;
+        BaseStats targetweaponstatbonus;
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(null, incombat);
+
+        int ElevationDifferenceDodgeBonus = GetTileElevationDifferenceDodgeBonus(unitTile, targetTile);
+
+        (unitweaponstatbonus, targetweaponstatbonus) = GetWeaponStatBonus(unit, target);
+
+        int spdunit = (int)charunit.AjustedStats.Speed + UnitSkillBonus.Speed + (int)unitweaponstatbonus.Speed;
+
+        return (int)(spdunit * 0.2f) + tileDodogeBonus + UnitSkillBonus.Dodge + UnitLuckMod + ElevationDifferenceDodgeBonus;
+    }
+
+    public int CalculateBaseHitUnit(GameObject unit, GameObject target, bool incombat = false)
+    {
+        Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
+
+
+        GridSquareScript unitTile = charunit.currentTile;
+
+
+
+        int UnitLuckMod = unit.GetComponent<UnitScript>().GetHitLuckModificator();
+
+
+
+
+        int hitrateweapon = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseHit;
+        int tileHitbonus = GetTileHitBonus(unitTile);
+        BaseStats unitweaponstatbonus;
+        BaseStats targetweaponstatbonus;
+        AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target, incombat);
+
+
+
+        (unitweaponstatbonus, targetweaponstatbonus) = GetWeaponStatBonus(unit, target);
+
+        int dexunit = (int)charunit.AjustedStats.Dexterity + UnitSkillBonus.Dexterity + (int)unitweaponstatbonus.Dexterity;
+
+        return (int)(hitrateweapon + dexunit * 0.2f) + tileHitbonus + UnitSkillBonus.Hit + UnitLuckMod;
+    }
+
+
+
+    private int GetTileDodgeBonus(GridSquareScript unitTile)
     {
 
-        if (unitTile == null || targetTile == null)
+        if (unitTile == null)
         {
             return 0;
         }
@@ -3016,7 +3091,7 @@ public class ActionsMenu : MonoBehaviour
         int tilebonus = 0;
 
         string unittype = unitTile.type;
-        string targettype = unitTile.type;
+
 
         if (unittype.ToLower() == "forest")
         {
@@ -3039,43 +3114,70 @@ public class ActionsMenu : MonoBehaviour
             tilebonus += 20;
         }
 
-        if (targettype.ToLower() == "ruins")
+        return tilebonus;
+    }
+
+    private int GetTileHitBonus(GridSquareScript unitTile)
+    {
+
+        if (unitTile == null)
         {
-            tilebonus -= 10;
-        }
-        else if (targettype.ToLower() == "fortification")
-        {
-            tilebonus -= 15;
-        }
-        else if (targettype.ToLower() == "fog")
-        {
-            tilebonus -= 20;
+            return 0;
         }
 
-        if (!targetTile.isstairs && !unitTile.isstairs)
-        {
-            if (targetTile.elevation > unitTile.elevation)
-            {
-                tilebonus -= 40 * (targetTile.elevation - unitTile.elevation);
-            }
-            else if (targetTile.elevation < unitTile.elevation)
-            {
-                tilebonus += 40 * (unitTile.elevation - targetTile.elevation);
-            }
-        }
+        int tilebonus = 0;
 
+        string unittype = unitTile.type;
+
+        if (unittype.ToLower() == "ruins")
+        {
+            tilebonus += 10;
+        }
+        else if (unittype.ToLower() == "fortification")
+        {
+            tilebonus += 15;
+        }
+        else if (unittype.ToLower() == "fog")
+        {
+            tilebonus += 20;
+        }
 
 
         return tilebonus;
     }
 
+    private int GetTileElevationDifferenceDodgeBonus(GridSquareScript unitTile, GridSquareScript targetTile)
+    {
+
+        if (unitTile == null || targetTile == null)
+        {
+            return 0;
+        }
+
+        int tilebonus = 0;
+
+        if (!targetTile.isstairs && !unitTile.isstairs)
+        {
+            if (targetTile.elevation < unitTile.elevation)
+            {
+                tilebonus += 40 * (unitTile.elevation - targetTile.elevation);
+            }
+        }
+
+        return tilebonus;
+    }
+
+
+
     public int CalculateCrit(GameObject unit, GameObject target, bool incombat)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+        Character chartarget = null;
 
         AllStatsSkillBonus UnitSkillBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(target, incombat);
-        AllStatsSkillBonus TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit, incombat);
+        AllStatsSkillBonus TargetSkillBonus = new AllStatsSkillBonus();
+
+
 
         int critweapon = unit.GetComponent<UnitScript>().GetFirstWeapon().BaseCrit;
 
@@ -3086,12 +3188,22 @@ public class ActionsMenu : MonoBehaviour
 
         int dexunit = (int)charunit.AjustedStats.Dexterity + UnitSkillBonus.Dexterity + (int)unitweaponstatbonus.Dexterity;
 
-        int spdtarget = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed + (int)targetweaponstatbonus.Speed;
+        int spdtarget = 0;
+
+
 
         int UnitLuckMod = unit.GetComponent<UnitScript>().GetCritLuckModificator();
 
-        int TargetLuckMod = target.GetComponent<UnitScript>().GetCritLuckModificator();
+        int TargetLuckMod = 0;
 
+
+        if (target != null)
+        {
+            chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
+            TargetSkillBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(unit, incombat);
+            spdtarget = (int)chartarget.AjustedStats.Speed + TargetSkillBonus.Speed + (int)targetweaponstatbonus.Speed;
+            TargetLuckMod = target.GetComponent<UnitScript>().GetCritLuckModificator();
+        }
 
         int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f + UnitSkillBonus.Crit + UnitLuckMod - TargetLuckMod - TargetSkillBonus.CritAvoid);
 

@@ -57,6 +57,7 @@ public class BattleInfotext : MonoBehaviour
     public TextMeshProUGUI DefAndResTMP;
     public TextMeshProUGUI SpdAndDexTMP;
     public TextMeshProUGUI LuckAndMovTMP;
+    public TextMeshProUGUI HitCritAndDodgeTMP;
     public TextMeshProUGUI StrArrowTMP;
     public TextMeshProUGUI PsyArrowTMP;
     public TextMeshProUGUI DefArrowTMP;
@@ -352,6 +353,12 @@ public class BattleInfotext : MonoBehaviour
                     string dmgcolorstring = getcolorstring(damagebonus);
 
                     DmgTMP.text = "" + dmgcolorstring + BaseDamage;
+
+                    int HitRate = ActionsMenu.CalculateBaseHitUnit(selectedunit, null);
+                    int CritRate = ActionsMenu.CalculateCrit(selectedunit, null, false);
+                    int DodgeRate = ActionsMenu.CalculateBaseDodgeUnit(selectedunit, null);
+
+                    HitCritAndDodgeTMP.text = "Hit: " + HitRate + "\nCrit: " + CritRate + "\nDge: " + DodgeRate;
 
                     equipment EquipedWeapon = selectedunit.GetComponent<UnitScript>().GetFirstWeapon();
                     EquipedWeaponIco.sprite = GetWeaponIcons(EquipedWeapon.type);
