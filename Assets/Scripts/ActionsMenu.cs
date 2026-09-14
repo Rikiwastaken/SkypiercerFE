@@ -2673,7 +2673,8 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-        if (unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower() == "reshine")
+
+        if (unit.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("reshine"))
         {
             basestatdamage = charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
             if (target != null)
