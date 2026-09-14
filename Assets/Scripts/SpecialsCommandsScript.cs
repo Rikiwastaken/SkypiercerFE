@@ -92,6 +92,15 @@ public class SpecialCommandsScript : MonoBehaviour
             if (SpecialInteractos[i].GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
             {
                 target.GetComponent<UnitScript>().UnitCharacteristics.isintercepting = true;
+                foreach (List<GameObject> row in GridScript.instance.Grid)
+                {
+                    foreach (GameObject tileGo in row)
+                    {
+                        GridSquareScript tile = tileGo.GetComponent<GridSquareScript>();
+                        tile.BossTileChanged(tile.isbossAttackTile);
+                    }
+
+                }
             }
             else
             {

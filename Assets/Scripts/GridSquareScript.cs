@@ -527,11 +527,33 @@ public class GridSquareScript : MonoBehaviour
         Image BossLifebar = unit.GetComponent<UnitScript>().LifebarWhenBossTile;
         Image BossLifeBarBG = unit.GetComponent<UnitScript>().LBBackgroundWhenBossTile;
 
+        GameObject Intercepter = null;
+        foreach (GameObject unitGO in GridScript.allunitGOs)
+        {
+            if (unitGO.GetComponent<UnitScript>().UnitCharacteristics.isintercepting)
+            {
+                Intercepter = unitGO;
+                break;
+            }
+        }
+
         if (isbossAttackTile && unit.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "enemy")
         {
 
             BossLifeBarBG.gameObject.SetActive(true);
+
             int damagetaken = actionsmenu.CalculateDamage(MapInitializer.currentboss.gameObject, false, unit);
+            if (Intercepter != null)
+            {
+                if (Intercepter == unit)
+                {
+                    damagetaken = (int)(damagetaken * actionsmenu.DamageReductionForIntercepter);
+                }
+                else
+                {
+                    damagetaken = (int)(damagetaken * actionsmenu.DamageReductionWhenIntercepted);
+                }
+            }
             BossLifebar.fillAmount = (float)(((float)unit.GetComponent<UnitScript>().UnitCharacteristics.currentHP - damagetaken) / (float)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP);
         }
         else
@@ -540,17 +562,14 @@ public class GridSquareScript : MonoBehaviour
             BossLifeBarBG.gameObject.SetActive(false);
         }
     }
-
     public void BossTileChanged(GameObject newunit)
     {
         BossTileChanged(isbossAttackTile);
-
     }
 
     public void BossTileChanged()
     {
         BossTileChanged(isbossAttackTile);
-
     }
 
     private void manageVisuals()

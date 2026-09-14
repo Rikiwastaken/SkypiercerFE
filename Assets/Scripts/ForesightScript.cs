@@ -473,7 +473,7 @@ public class ForesightScript : MonoBehaviour
         for (int i = actionLength - 1; i > ID; i--)
         {
             Action ActionToRevert = actions[i];
-
+            // Global variables and flags
 
             TurnManger.instance.currentlyplaying = ActionToRevert.FactionCurrentlyPlayingAtTime;
             DataScript.instance.ChapterFlagsList = ActionToRevert.chapterflags;
@@ -487,12 +487,13 @@ public class ForesightScript : MonoBehaviour
             {
                 CharacterHolder = GameObject.Find("Characters");
             }
-
+            // Event states
             foreach (EventData _EventData in ActionToRevert.PreviousEventStates)
             {
                 MapEventManager.instance.EventsToMonitor[_EventData.EventID].triggered = _EventData.Eventstate;
             }
 
+            // Rever characters
             for (int j = 0; j < CharacterHolder.transform.childCount; j++)
             {
                 GameObject GO = CharacterHolder.transform.GetChild(j).gameObject;
@@ -506,6 +507,9 @@ public class ForesightScript : MonoBehaviour
                 }
             }
             UpdateCharacterLists();
+
+            // Specific character movements
+
             if (ActionToRevert.Unit != null && ActionToRevert.Unit.UnitCharacteristics != null)
             {
                 foreach (GameObject GO in GridScript.instance.allunitGOs)
@@ -519,6 +523,8 @@ public class ForesightScript : MonoBehaviour
                     }
                 }
             }
+
+            // Reverts relative to some actions
 
             switch (ActionToRevert.actiontype)
             {
@@ -579,6 +585,9 @@ public class ForesightScript : MonoBehaviour
                     }
                     break;
             }
+
+            // Revert tile changes
+
             foreach (TileModification tileModification in ActionToRevert.ModifiedTiles)
             {
                 tileModification.tile.type = tileModification.type;
@@ -592,6 +601,19 @@ public class ForesightScript : MonoBehaviour
                 tileModification.tile.isbossAttackTile = tileModification.isbosstile;
             }
             GridScript.instance.InitializeGOList();
+
+            // Recalculate Boss HP Bars for units
+
+            foreach (List<GameObject> row in GridScript.instance.Grid)
+            {
+                foreach (GameObject tileGo in row)
+                {
+                    GridSquareScript tile = tileGo.GetComponent<GridSquareScript>();
+                    tile.BossTileChanged(tile.isbossAttackTile);
+                }
+
+            }
+            // Reset Rolls for keeping same random
             RevertRolls(ActionToRevert);
             actions.Remove(ActionToRevert);
         }
