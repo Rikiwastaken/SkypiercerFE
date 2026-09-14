@@ -44,6 +44,8 @@ public class CampScript : MonoBehaviour
 
     private bool waitAFrameBeforeCutscene;
 
+    public Transform MainCanvas;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -105,7 +107,26 @@ public class CampScript : MonoBehaviour
         }
 
 
+
         previousindialogue = textBubbleScript.indialogue;
+
+        bool anythingisactivated = false;
+        foreach (Transform child in MainCanvas)
+        {
+            if (child.gameObject.activeSelf)
+            {
+                anythingisactivated = true;
+                break;
+            }
+        }
+        if (!anythingisactivated)
+        {
+            if (!BaseMenu.gameObject.activeSelf)
+            {
+                BaseMenu.gameObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
+            }
+        }
     }
 
     public void LoadNextChapter()

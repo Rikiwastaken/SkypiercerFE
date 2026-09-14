@@ -3016,7 +3016,17 @@ public class ActionsMenu : MonoBehaviour
         int HitRate = CalculateBaseHitUnit(unit, target, incombat);
         int DodgeRate = CalculateBaseDodgeUnit(unit, target, incombat);
 
-        return HitRate - DodgeRate;
+        int finalhit = (HitRate - DodgeRate);
+        if (finalhit < 0)
+        {
+            finalhit = 0;
+        }
+        if (finalhit > 100)
+        {
+            finalhit = 100;
+        }
+
+        return finalhit;
 
     }
     public int CalculateBaseDodgeUnit(GameObject unit, GameObject target, bool incombat = false)
@@ -3158,9 +3168,9 @@ public class ActionsMenu : MonoBehaviour
 
         if (!targetTile.isstairs && !unitTile.isstairs)
         {
-            if (targetTile.elevation < unitTile.elevation)
+            if (targetTile.elevation != unitTile.elevation)
             {
-                tilebonus += 40 * (unitTile.elevation - targetTile.elevation);
+                tilebonus -= 40 * (unitTile.elevation - targetTile.elevation);
             }
         }
 
@@ -3205,7 +3215,7 @@ public class ActionsMenu : MonoBehaviour
             TargetLuckMod = target.GetComponent<UnitScript>().GetCritLuckModificator();
         }
 
-        int finalcritrate = (int)(critweapon + dexunit / 15f - spdtarget / 20f + UnitSkillBonus.Crit + UnitLuckMod - TargetLuckMod - TargetSkillBonus.CritAvoid);
+        int finalcritrate = (int)(critweapon + dexunit / 2f - spdtarget / 7f + UnitSkillBonus.Crit + UnitLuckMod - TargetLuckMod - TargetSkillBonus.CritAvoid);
 
         if (finalcritrate < 0)
         {
