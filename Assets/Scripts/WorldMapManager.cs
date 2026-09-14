@@ -36,6 +36,8 @@ public class WorldMapManager : MonoBehaviour
     private int faststravelmenudelay;
     public bool selectedsidestory;
 
+    private float TimeSinceChapterWasSelected;
+
     private InputAction _ActivateAction;
     private InputAction _MoveAction;
     private InputAction _CancelAction;
@@ -106,7 +108,7 @@ public class WorldMapManager : MonoBehaviour
         if (selectedchapter >= 0)
         {
 
-
+            TimeSinceChapterWasSelected += Time.deltaTime;
 
             string chaptertxt = "";
             if (selectedsidestory)
@@ -168,7 +170,7 @@ public class WorldMapManager : MonoBehaviour
                     ChapterUI.transform.localPosition = new Vector3(maxx, ChapterUI.transform.localPosition.y, ChapterUI.transform.localPosition.z);
                 }
 
-                if (_ActivateAction.WasPressedThisFrame())
+                if (_ActivateAction.WasPressedThisFrame() && TimeSinceChapterWasSelected > 0.5f)
                 {
 
                     string scenename = "";
@@ -222,7 +224,7 @@ public class WorldMapManager : MonoBehaviour
         }
         else
         {
-
+            TimeSinceChapterWasSelected = 0f;
             if (ChapterUI.transform.localPosition.x > initialPosition.x)
             {
                 ChapterUI.transform.localPosition -= new Vector3(displacementpersecond * Time.deltaTime * 3f, 0f, 0f);
@@ -258,7 +260,7 @@ public class WorldMapManager : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(FastTravelMenuButtons.GetChild(0).gameObject);
             }
-
+            TimeSinceChapterWasSelected = 0f;
 
             if ((MoveValue.x > 0 || CamValue.x > 0) && MainMissionsSelected)
             {
