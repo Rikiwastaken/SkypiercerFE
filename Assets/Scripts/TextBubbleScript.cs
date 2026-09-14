@@ -346,6 +346,7 @@ public class TextBubbleScript : MonoBehaviour
         {
             MapEventManager.instance.TriggerEventCheck();
         }
+
     }
 
     public void InitializeDialogue(List<TextBubbleInfo> dialogue)
@@ -424,5 +425,9 @@ public class TextBubbleScript : MonoBehaviour
 
         Dialogue = null;
         currentTextBubble = -1;
+        if (MusicManager.instance != null)
+        {
+            MusicManager.instance.StopDialogueMusic();
+        }
     }
 }

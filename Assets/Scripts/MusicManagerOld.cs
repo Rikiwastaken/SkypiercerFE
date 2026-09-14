@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 
-public class MusicManager : MonoBehaviour
+public class MusicManagerOld : MonoBehaviour
 {
     public AudioSource PlayableAudioSource;
     public AudioSource PlayableAudioSourceIntro;
@@ -66,7 +66,7 @@ public class MusicManager : MonoBehaviour
 
     private float beforecombatmusicvol;
 
-    public static MusicManager instance;
+    public static MusicManagerOld instance;
 
     public GameObject GeneratedSoundHolder;
 
@@ -242,14 +242,10 @@ public class MusicManager : MonoBehaviour
 
         if (currentscene == "Camp")
         {
-            // FIX: previously checked "!CampMusic.isPlaying && !CampMusicintro.isPlaying" every frame.
-            // AudioSource.isPlaying can read false for a scheduled clip until its dspTime is actually
-            // reached, so this was re-triggering PlayMusic(1, ...) (which calls StopAllMusic()) over
-            // and over, cancelling Camp music before it ever really started - and cancelling dialogue
-            // music playing alongside it. Tracking the currently-requested music type is reliable.
-            if (currentMusicType != 1)
+            if (!CampMusic.isPlaying && !CampMusicintro.isPlaying)
             {
                 PlayMusic(1, 0f, true);
+
             }
 
             ChangeVolume(CampMusic, maxvolume);
@@ -260,8 +256,7 @@ public class MusicManager : MonoBehaviour
         }
         else if (currentscene == "WorldMap")
         {
-            // FIX: same reasoning as the Camp block above - avoid retriggering off isPlaying.
-            if (currentMusicType != 6)
+            if (!WorldMapMusic.isPlaying && !WorldMapMusicintro.isPlaying)
             {
                 PlayMusic(6, 0f, true);
                 PlayMusicWithIntro(7, 0f, true);
@@ -373,28 +368,6 @@ public class MusicManager : MonoBehaviour
             return;
         }
 
-        if (currentDialogueAudioSource != null)
-        {
-            currentDialogueAudioSource.volume = 0f;
-            currentDialogueAudioSourceIntro.volume = 0f;
-        }
-
-        currentscene = nextscene.name;
-        if (nextscene.name == "CutsceneScene")
-        {
-            return;
-        }
-
-        // FIX (root cause of "no music in Camp/WorldMap"): InitializeMusics() unconditionally
-        // Stop()s CampMusic/WorldMapMusic/ShipMusic/BeforeCombat/CutSceneMusic. It used to run
-        // AFTER the block below had already started Camp/WorldMap music, so that music was killed
-        // the instant it was scheduled. This was only ever "working" because the Update() watchdog
-        // polled AudioSource.isPlaying and blindly restarted whatever it found stopped - a timing
-        // accident, not a real fix, and it's what silently papered over this bug before. Running
-        // InitializeMusics() first, then starting the scene's music, removes the need for that
-        // accident entirely.
-        InitializeMusics(currentscene);
-
         if (nextscene.name == "Camp")
         {
             ResetAll();
@@ -404,18 +377,26 @@ public class MusicManager : MonoBehaviour
         {
             ResetAll();
             PlayMusic(6);
-            // FIX: Ship music used to only ever get scheduled by the Update() watchdog the first
-            // time it saw WorldMap/Ship not playing. Now that the watchdog is gated on
-            // currentMusicType (see Update()) instead of isPlaying, that first trigger would never
-            // happen once PlayMusic(6) above already sets currentMusicType to 6. Scheduling it here
-            // keeps behavior identical to before without depending on watchdog timing.
-            PlayMusicWithIntro(7, 0f, true);
         }
         else if (nextscene.name == "MainMenu")
         {
             ResetAll();
             PlayMusic(8, maxvolume);
         }
+        if (currentDialogueAudioSource != null)
+        {
+            currentDialogueAudioSource.volume = 0f;
+            currentDialogueAudioSourceIntro.volume = 0f;
+        }
+
+
+
+        currentscene = nextscene.name;
+        if (nextscene.name == "CutsceneScene")
+        {
+            return;
+        }
+        InitializeMusics(currentscene);
     }
 
     public void StopDialogueMusic()
@@ -426,10 +407,6 @@ public class MusicManager : MonoBehaviour
         DialogueAudioSource2.Stop();
         DialogueAudioSourceIntro.Stop();
         DialogueAudioSource2Intro.Stop();
-        // FIX: this was never reset, so if the next dialogue reused the same musictoplay ID,
-        // SetDialogueMusic's "musicID != CurrentDialogueMusic" guard would skip re-triggering it
-        // even though the actual audio sources above were just stopped and nulled out.
-        CurrentDialogueMusic = -1;
     }
 
     public void InitializeMusics(string ChapterToLoad)
@@ -500,18 +477,9 @@ public class MusicManager : MonoBehaviour
 
         //}
 
-        // FIX: dialogue music (type 5) used to fall through to StopAllMusic() below just like every
-        // other type. That meant starting a dialogue line hard-stopped Camp/WorldMap/Playable/Enemy/
-        // Other/Ship/MainMenu music instead of just ducking it (which Update() already does via
-        // ChangeVolume fades). It also overwrote currentMusicType with 5, so the very next frame the
-        // Camp/WorldMap watchdogs above thought the scene music wasn't playing and restarted it from
-        // scratch - which is why Camp music never came back after a dialogue line. Dialogue is a layer
-        // on top of whatever scene music is active, so it should not touch either of those.
-        if (type != 5)
-        {
-            StopAllMusic();
-            currentMusicType = type;
-        }
+
+        StopAllMusic();
+        currentMusicType = type;
 
         if (type == 2 || type == 3)
         {
@@ -648,11 +616,7 @@ public class MusicManager : MonoBehaviour
             currentDialogueAudioSourceIntro.clip = DialogueMusicsWithIntro[CurrentDialogueMusic].Intro;
             currentDialogueAudioSource.volume = maxvolume;
             currentDialogueAudioSourceIntro.volume = maxvolume;
-            // FIX: was PlayMusic(5, maxvolume) with ignoreStartOfset left as false, which meant the
-            // dialogue clip was scheduled to start "timebeforemusicplays" seconds in the future -
-            // an audible silent gap every time dialogue music kicked in. Camp/WorldMap already pass
-            // ignoreStartOfset: true for the same reason; dialogue should too.
-            PlayMusic(5, maxvolume, true);
+            PlayMusic(5, maxvolume);
         }
         else if (musicID == -1)
         {
