@@ -2676,7 +2676,7 @@ public class ActionsMenu : MonoBehaviour
             basestatdamage = charunit.AjustedStats.Psyche + UnitSkillBonus.Psyche;
             if (target != null)
             {
-                basestatdef = Mathf.Min(chartarget.AjustedStats.Defense + TargetSkillBonus.Defense, charunit.AjustedStats.Resistance + TargetSkillBonus.Resistance);
+                basestatdef = Mathf.Min(chartarget.AjustedStats.Defense + TargetSkillBonus.Defense, chartarget.AjustedStats.Resistance + TargetSkillBonus.Resistance);
             }
         }
 
