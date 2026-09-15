@@ -3015,7 +3015,7 @@ public class ActionsMenu : MonoBehaviour
     public int CalculateHit(GameObject unit, GameObject target, bool incombat)
     {
         int HitRate = CalculateBaseHitUnit(unit, target, incombat);
-        int DodgeRate = CalculateBaseDodgeUnit(unit, target, incombat);
+        int DodgeRate = CalculateBaseDodgeUnit(target, unit, incombat);
 
         int finalhit = (HitRate - DodgeRate);
         if (finalhit < 0)
