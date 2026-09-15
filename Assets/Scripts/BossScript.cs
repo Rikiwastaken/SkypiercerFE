@@ -62,7 +62,13 @@ public class BossScript : MonoBehaviour
 
         foreach (GameObject unit in unitsinthezone)
         {
-            ActionsMenu.ApplyDamage(gameObject, unit, true, false, true, intercepted, intercepter == unit);
+
+            if (unit != gameObject)
+            {
+                ActionsMenu.ApplyDamage(gameObject, unit, true, false, true, intercepted, intercepter == unit);
+
+            }
+
         }
 
 

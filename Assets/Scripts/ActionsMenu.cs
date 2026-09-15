@@ -1904,16 +1904,13 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-                    if (charunit.currentHP <= 0)
+                    if (chartarget.currentHP <= 0)
                     {
-                        target.GetComponent<UnitScript>().IncreaseUnitsKilled();
+                        unit.GetComponent<UnitScript>().IncreaseUnitsKilled();
                     }
-
-                    return (numberofhits, numberofcritials, finaldamage, 0, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
-
                 }
 
-
+                return (numberofhits, numberofcritials, finaldamage, 0, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
             }
 
 
