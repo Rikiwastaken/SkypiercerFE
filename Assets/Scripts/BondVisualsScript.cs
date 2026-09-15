@@ -60,7 +60,9 @@ public class BondVisualsScript : MonoBehaviour
     {
         curveManager.DisableLines();
         int CharacterID = UnitGO.GetComponent<UnitScript>().UnitCharacteristics.ID;
-        GridSquareScript CharacterTile = _datascript.PlayableCharacterList[CharacterID].currentTile;
+
+
+        GridSquareScript CharacterTile = UnitGO.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
 
         List<int> charactersbonded = new List<int>();
         foreach (BondPerCharacter bondInfo in bondPerCharacterList)
@@ -75,8 +77,16 @@ public class BondVisualsScript : MonoBehaviour
         int lineID = 0;
         foreach (int BondedcharacterID in charactersbonded)
         {
-            GridSquareScript BondedCharacterTile = _datascript.PlayableCharacterList[BondedcharacterID].currentTile;
-            if (ManhattanDistance(CharacterTile, BondedCharacterTile) <= 2)
+            GridSquareScript BondedCharacterTile = null;
+            foreach (GameObject OtherUnitGO in _GridScript.allunitGOs)
+            {
+                if (OtherUnitGO.GetComponent<UnitScript>().UnitCharacteristics.ID == BondedcharacterID)
+                {
+                    BondedCharacterTile = OtherUnitGO.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
+                    break;
+                }
+            }
+            if (BondedCharacterTile != null && ManhattanDistance(CharacterTile, BondedCharacterTile) <= 2)
             {
                 curveManager.DrawLineBetween2Tiles(CharacterTile, BondedCharacterTile, lineID);
                 lineID++;
