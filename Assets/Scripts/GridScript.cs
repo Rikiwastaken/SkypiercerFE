@@ -174,7 +174,7 @@ public class GridScript : MonoBehaviour
                             Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
                             if (character.affiliation == "playable" && character.alreadyplayed == false)
                             {
-                                selection = GetTile(character.position);
+                                selection = character.currentTile;
                                 break;
                             }
                         }
@@ -205,28 +205,28 @@ public class GridScript : MonoBehaviour
                             {
                                 if (currentunitindex >= listplayable.Count - 1 || currentunitindex == -1)
                                 {
-                                    selection = GetTile(listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                    selection = listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.currentTile;
 
                                 }
                                 else
                                 {
-                                    selection = GetTile(listplayable[currentunitindex + 1].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                    selection = listplayable[currentunitindex + 1].GetComponent<UnitScript>().UnitCharacteristics.currentTile;
                                 }
                             }
                             else
                             {
                                 if (currentunitindex == -1)
                                 {
-                                    selection = GetTile(listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                    selection = listplayable[0].GetComponent<UnitScript>().UnitCharacteristics.currentTile;
 
                                 }
                                 else if (currentunitindex > 0)
                                 {
-                                    selection = GetTile(listplayable[currentunitindex - 1].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                    selection = listplayable[currentunitindex - 1].GetComponent<UnitScript>().UnitCharacteristics.currentTile;
                                 }
                                 else
                                 {
-                                    selection = GetTile(listplayable[listplayable.Count - 1].GetComponent<UnitScript>().UnitCharacteristics.position);
+                                    selection = listplayable[listplayable.Count - 1].GetComponent<UnitScript>().UnitCharacteristics.currentTile;
                                 }
                             }
 
@@ -241,7 +241,7 @@ public class GridScript : MonoBehaviour
                         Character character = characterGO.GetComponent<UnitScript>().UnitCharacteristics;
                         if (character.affiliation == "playable" && character.alreadyplayed == false)
                         {
-                            selection = GetTile(character.position);
+                            selection = character.currentTile;
                             break;
                         }
                     }
@@ -649,7 +649,7 @@ public class GridScript : MonoBehaviour
                 if (unit.currentTile == selection)
                 {
                     int movements = unitGO.GetComponent<UnitScript>().CalculateNumberOfMovements();
-                    SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
+                    SpreadMovements(unit.currentTile.GridCoordinates, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                     ShowAttack(range, melee, type.ToLower() == "staff", false, unit);
                 }
@@ -686,10 +686,10 @@ public class GridScript : MonoBehaviour
             if (unitGO != null)
             {
                 Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-                if (unit.position == Target.GetComponent<UnitScript>().UnitCharacteristics.position && !unit.alreadyplayed)
+                if (unit.currentTile.GridCoordinates == Target.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates && !unit.alreadyplayed)
                 {
                     int movements = unitGO.GetComponent<UnitScript>().CalculateNumberOfMovements();
-                    SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
+                    SpreadMovements(unit.currentTile.GridCoordinates, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                     ShowAttack(range, melee, type.ToLower() == "staff", false, unit);
 
@@ -736,14 +736,14 @@ public class GridScript : MonoBehaviour
         movementtiles = new List<GridSquareScript>();
         attacktiles = new List<GridSquareScript>();
         Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-        string tiletype = GetTile((int)unitchar.position.x, (int)unitchar.position.y).type;
+        string tiletype = unitchar.currentTile.type;
         int movements = remainingmovements;
         if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
         {
             movements -= 1;
         }
 
-        SpreadMovements(unitchar.position, movements, movementtiles, unit, new Dictionary<GridSquareScript, int>());
+        SpreadMovements(unitchar.currentTile.GridCoordinates, movements, movementtiles, unit, new Dictionary<GridSquareScript, int>());
         if (!lockselection)
         {
             foreach (GridSquareScript gridSquareScript in movementtiles)
@@ -765,7 +765,7 @@ public class GridScript : MonoBehaviour
 
         foreach (Character unit in allunits)
         {
-            if (unit.position == selection.GridCoordinates)
+            if (unit.currentTile == selection)
             {
                 SelectedUnit = unit;
                 break;
@@ -805,10 +805,6 @@ public class GridScript : MonoBehaviour
             {
                 return unit;
 
-            }
-            else if (unit.GetComponent<UnitScript>().UnitCharacteristics.position == tile.GridCoordinates)
-            {
-                return unit;
             }
         }
         return null;

@@ -54,7 +54,6 @@ public class UnitScript : MonoBehaviour
 
         [Header("\nMap related variables")]
         public int currentHP;
-        public Vector2 position;
         public bool alreadyplayed;
         public bool alreadymoved;
         public bool telekinesisactivated;
@@ -474,7 +473,6 @@ public class UnitScript : MonoBehaviour
         UnitCharacteristics.alreadyplayed = false;
         Fists = DataScript.instance.equipmentList[0];
         transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
-        UnitCharacteristics.position = new Vector2((int)transform.position.x, (int)transform.position.z);
         if (UnitCharacteristics.equipments == null)
         {
             UnitCharacteristics.equipments = new List<equipment>();
@@ -1003,7 +1001,7 @@ public class UnitScript : MonoBehaviour
             foreach (GameObject otherunit in charactertoapply)
             {
                 Character otherunitchar = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
-                if (otherunitchar.currentHP < (int)otherunitchar.AjustedStats.HP && Mathf.Abs(otherunitchar.position.x - UnitCharacteristics.position.x) <= 1 && Mathf.Abs(otherunitchar.position.y - UnitCharacteristics.position.y) <= 1)
+                if (otherunitchar.currentHP < (int)otherunitchar.AjustedStats.HP && Mathf.Abs(otherunitchar.currentTile.GridCoordinates.x - UnitCharacteristics.currentTile.GridCoordinates.x) <= 1 && Mathf.Abs(otherunitchar.currentTile.GridCoordinates.y - UnitCharacteristics.currentTile.GridCoordinates.y) <= 1)
                 {
                     otherunit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(otherunitchar.AjustedStats.HP * 0.1f), (int)otherunitchar.AjustedStats.HP - otherunitchar.currentHP), true, "Medic");
                     otherunitchar.currentHP += (int)(otherunitchar.AjustedStats.HP * 0.1f);
@@ -1094,11 +1092,7 @@ public class UnitScript : MonoBehaviour
         {
             return;
         }
-        if (UnitCharacteristics.currentTile == null && UnitCharacteristics.position != null)
-        {
-            MoveTo(UnitCharacteristics.position);
-        }
-        else if (UnitCharacteristics.currentTile != null)
+        if (UnitCharacteristics.currentTile != null)
         {
             if (UnitCharacteristics.currentTile.isstairs)
             {
@@ -1171,7 +1165,6 @@ public class UnitScript : MonoBehaviour
             },
             currentHP = CharacterToCopy.currentHP,
             movements = CharacterToCopy.movements,
-            position = CharacterToCopy.position,
             alreadyplayed = CharacterToCopy.alreadyplayed,
             alreadymoved = CharacterToCopy.alreadymoved,
             telekinesisactivated = CharacterToCopy.telekinesisactivated,
@@ -1310,7 +1303,7 @@ public class UnitScript : MonoBehaviour
         else
         {
             Vector2 destination = new Vector2();
-            destination = UnitCharacteristics.position;
+            destination = UnitCharacteristics.currentTile.GridCoordinates;
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) > 0.1f)
             {
                 if (animator.GetBool("Walk") != true)
@@ -1803,7 +1796,6 @@ public class UnitScript : MonoBehaviour
                 pathtotake = new List<Vector2>();
                 transform.position = new Vector3(destination.x, destTile.transform.position.y, destination.y);
             }
-            UnitCharacteristics.position = destination;
             UpdateTiles(destTile);
             UnitCharacteristics.currentTile.UpdateInsideSprite(true, UnitCharacteristics);
             if (oldtile != null)
@@ -2521,7 +2513,7 @@ public class UnitScript : MonoBehaviour
 
             GridScript gridScript = GridScript.instance;
             gridScript.InitializeGOList();
-            gridScript.selection = gridScript.GetTile(UnitCharacteristics.position);
+            gridScript.selection = UnitCharacteristics.currentTile;
             gridScript.ShowMovement();
 
             gridScript.lockedmovementtiles = gridScript.movementtiles;
@@ -2548,7 +2540,7 @@ public class UnitScript : MonoBehaviour
                 UnitCharacteristics.alreadymoved = false;
                 GridScript gridScript = GridScript.instance;
                 gridScript.InitializeGOList();
-                gridScript.selection = gridScript.GetTile(UnitCharacteristics.position);
+                gridScript.selection = UnitCharacteristics.currentTile;
                 gridScript.ShowLimitedMovementOfUnit(gameObject, remainingMovements);
 
                 gridScript.lockedmovementtiles = gridScript.movementtiles;
@@ -4307,7 +4299,7 @@ public class UnitScript : MonoBehaviour
 
     private int ManhattanDistance(Character unit, Character otherunit)
     {
-        return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
+        return (int)(Mathf.Abs(unit.currentTile.GridCoordinates.x - otherunit.currentTile.GridCoordinates.x) + Mathf.Abs(unit.currentTile.GridCoordinates.y - otherunit.currentTile.GridCoordinates.y));
     }
 
     public void IncreaseUnitsKilled(GameObject unit)

@@ -230,12 +230,12 @@ public class ActionsMenu : MonoBehaviour
             {
                 if (activetargetid < targetlist.Count)
                 {
-                    cameraScriptV2.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.position;
+                    cameraScriptV2.Destination = targetlist[activetargetid].GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
                     CheckCorrectInfo(target, targetlist[activetargetid], isUnithealing);
                 }
                 else
                 {
-                    cameraScriptV2.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.position;
+                    cameraScriptV2.Destination = target.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
                 }
 
             }
@@ -421,7 +421,7 @@ public class ActionsMenu : MonoBehaviour
         bool enemytargettable = false;
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
         {
-            if ((int)tile.GridCoordinates.x == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.x && (int)tile.GridCoordinates.y == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.y)
+            if (tile == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
             {
                 enemytargettable = true;
                 break;
@@ -457,7 +457,7 @@ public class ActionsMenu : MonoBehaviour
         bool enemytargettable = false;
         foreach (GridSquareScript tile in GridScript.lockedattacktiles)
         {
-            if ((int)tile.GridCoordinates.x == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.x && (int)tile.GridCoordinates.y == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.position.y)
+            if (tile == PreviousFoe.GetComponent<UnitScript>().UnitCharacteristics.currentTile)
             {
                 enemytargettable = true;
                 break;
@@ -1813,7 +1813,7 @@ public class ActionsMenu : MonoBehaviour
             return true;
         }
 #endif
-        int Distance = (int)(Mathf.Abs(chartarget.position.x - tiletouse.GridCoordinates.x) + Mathf.Abs(chartarget.position.y - tiletouse.GridCoordinates.y));
+        int Distance = (int)(Mathf.Abs(chartarget.currentTile.GridCoordinates.x - tiletouse.GridCoordinates.x) + Mathf.Abs(chartarget.currentTile.GridCoordinates.y - tiletouse.GridCoordinates.y));
         (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
         if (Distance <= 1)
         {
@@ -3229,7 +3229,7 @@ public class ActionsMenu : MonoBehaviour
 
     private int ManhattanDistance(Character unit, Character otherunit)
     {
-        return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
+        return (int)(Mathf.Abs(unit.currentTile.GridCoordinates.x - otherunit.currentTile.GridCoordinates.x) + Mathf.Abs(unit.currentTile.GridCoordinates.y - otherunit.currentTile.GridCoordinates.y));
     }
 
     public void BladeMenuButton()

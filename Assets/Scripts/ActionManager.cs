@@ -356,7 +356,7 @@ public class ActionManager : MonoBehaviour
 
                 int movements = US.CalculateNumberOfMovements();
 
-                GridScript.SpreadMovements(unit.position, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
+                GridScript.SpreadMovements(unit.currentTile.GridCoordinates, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
 
 
 
@@ -419,7 +419,7 @@ public class ActionManager : MonoBehaviour
             }
         }
         currentpath = null;
-        previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position;
+        previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
         currentcharacter.GetComponent<UnitScript>().MoveTo(GridScript.selection.GridCoordinates);
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
         if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
@@ -525,7 +525,7 @@ public class ActionManager : MonoBehaviour
 
                 if (besttile != null)
                 {
-                    previouscoordinates = currentChar.position;
+                    previouscoordinates = currentChar.currentTile.GridCoordinates;
                     currentcharacter.GetComponent<UnitScript>().MoveTo(besttile.GridCoordinates);
                     currentChar.alreadymoved = true;
                     if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
@@ -593,7 +593,7 @@ public class ActionManager : MonoBehaviour
 
             if (besttile != null)
             {
-                previouscoordinates = currentChar.position;
+                previouscoordinates = currentChar.currentTile.GridCoordinates;
                 currentcharacter.GetComponent<UnitScript>().MoveTo(besttile.GridCoordinates);
                 currentChar.alreadymoved = true;
                 if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
@@ -658,7 +658,7 @@ public class ActionManager : MonoBehaviour
             if (legalposition)
             {
                 List<Vector2> path = new List<Vector2>();
-                path = GridScript.FindPath(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.position, GridScript.selection.GridCoordinates, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+                path = GridScript.FindPath(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates, GridScript.selection.GridCoordinates, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
                 currentpath = new List<GridSquareScript>();
                 foreach (Vector2 coord in path)
                 {

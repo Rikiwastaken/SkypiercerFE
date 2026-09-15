@@ -324,7 +324,7 @@ public class AttackTurnScript : MonoBehaviour
         Character charAttacker = AttackerGO.GetComponent<UnitScript>().UnitCharacteristics;
         if (!ActionsMenu.incombat)
         {
-            camScriptV2.Destination = charAttacker.position;
+            camScriptV2.Destination = charAttacker.currentTile.GridCoordinates;
         }
 
 
@@ -360,7 +360,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
 
                 // Move Enemy
-                Vector2 DestinationVector = charAttacker.position;
+                Vector2 DestinationVector = charAttacker.currentTile.GridCoordinates;
                 if (Destination != null)
                 {
                     DestinationVector = Destination.GridCoordinates;
@@ -447,7 +447,7 @@ public class AttackTurnScript : MonoBehaviour
         }
 
 
-        Vector2 originalpos = charunit.position;
+        Vector2 originalpos = charunit.currentTile.GridCoordinates;
         gridScript.ShowMovementOfUnit(unit);
 
         GridSquareScript Destination = null;
@@ -542,8 +542,8 @@ public class AttackTurnScript : MonoBehaviour
         else if (commandID == 49) //Swap
         {
             foresightScript.CreateAction(3, User, Target);
-            Vector2 previoususerpos = CharUser.position;
-            User.GetComponent<UnitScript>().MoveTo(CharTarget.position);
+            Vector2 previoususerpos = CharUser.currentTile.GridCoordinates;
+            User.GetComponent<UnitScript>().MoveTo(CharTarget.currentTile.GridCoordinates);
             Target.GetComponent<UnitScript>().MoveTo(previoususerpos);
             Target.GetComponent<UnitScript>().AddNumber(0, true, "Swap");
             User.GetComponent<UnitScript>().AddNumber(0, true, "Swap");
@@ -564,7 +564,7 @@ public class AttackTurnScript : MonoBehaviour
         {
             foresightScript.CreateAction(3, User);
             GridSquareScript targettile = Target.GetComponent<GridSquareScript>();
-            Vector2 coorddiff = targettile.GridCoordinates - gridScript.GetTile(CharUser.position).GridCoordinates;
+            Vector2 coorddiff = targettile.GridCoordinates - CharUser.currentTile.GridCoordinates;
 
             int normalizedx = 0;
             int normalizedy = 0;
@@ -1983,7 +1983,7 @@ public class AttackTurnScript : MonoBehaviour
 
     private int ManhattanDistance(Character unit, Character otherunit)
     {
-        return (int)(Mathf.Abs(unit.position.x - otherunit.position.x) + Mathf.Abs(unit.position.y - otherunit.position.y));
+        return (int)(Mathf.Abs(unit.currentTile.GridCoordinates.x - otherunit.currentTile.GridCoordinates.x) + Mathf.Abs(unit.currentTile.GridCoordinates.y - otherunit.currentTile.GridCoordinates.y));
     }
 
     private int ManhattanDistance(Vector2 unit, Vector2 otherunit)
