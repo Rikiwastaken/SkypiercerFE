@@ -99,7 +99,6 @@ public class SpecialCommandsScript : MonoBehaviour
                         GridSquareScript tile = tileGo.GetComponent<GridSquareScript>();
                         tile.BossTileChanged(tile.isbossAttackTile);
                     }
-
                 }
             }
             else

@@ -312,7 +312,15 @@ public class ForesightScript : MonoBehaviour
                             text += " used " + DataScript.instance.SkillList[currentaction.commandID].name + ".";
                             break;
                         case 5:
-                            text += " talked with " + currentaction.AttackData.defender.UnitCharacteristics.name + ".";
+                            if (currentaction.AttackData.defender.UnitCharacteristics.enemyStats.bossiD > 0)
+                            {
+                                text += " intercepted " + currentaction.AttackData.defender.UnitCharacteristics.name + ".";
+                            }
+                            else
+                            {
+                                text += " talked with " + currentaction.AttackData.defender.UnitCharacteristics.name + ".";
+                            }
+
                             break;
                         case 6:
                             text += " examined a device.";
