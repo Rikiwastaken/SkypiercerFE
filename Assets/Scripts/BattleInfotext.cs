@@ -159,6 +159,10 @@ public class BattleInfotext : MonoBehaviour
             {
                 transform.GetChild(0).gameObject.SetActive(true);
             }
+            if (!Skilltext.transform.parent.gameObject.activeSelf)
+            {
+                Skilltext.transform.parent.gameObject.SetActive(true);
+            }
 
         }
         else
@@ -548,6 +552,8 @@ public class BattleInfotext : MonoBehaviour
             }
         }
         showingdescription = false;
+        previousselectedGO = null;
+        previousSelectedCharacter = null;
     }
 
     private void ManageExamodeVisuals(Character Charactertouse)
