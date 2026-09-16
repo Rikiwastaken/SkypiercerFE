@@ -86,6 +86,9 @@ public class BossScript : MonoBehaviour
             case 4:
                 DetermineNextAttackTilesRagnallSecondEncounter(nextTarget);
                 break;
+            case 5:
+                DetermineNextAttackTilesChapter16(nextTarget);
+                break;
         }
     }
 
@@ -433,6 +436,89 @@ public class BossScript : MonoBehaviour
                             }
                         }
                     }
+                }
+            }
+        }
+
+    }
+
+    public void DetermineNextAttackTilesChapter16(GameObject target)
+    {
+        Character character = GetComponent<UnitScript>().UnitCharacteristics;
+
+        Character targetcharacter = target.GetComponent<UnitScript>().UnitCharacteristics;
+
+        Vector2 BossPosition = character.currentTile.GridCoordinates;
+
+        Vector2 TargetPosition = targetcharacter.currentTile.GridCoordinates;
+
+        int distance = ManhanttanDistance(BossPosition, TargetPosition);
+
+        int personnalityValue = GetComponent<RandomScript>().GetPersonalityValue(0);
+
+        if (personnalityValue < 33)
+        {
+
+            //xx0xx
+            //x0x0x
+            //0x0x0
+            //x0x0x
+            //xx0xx
+
+            // an one bigger circle
+
+            GridSquareScript TargetTile = targetcharacter.currentTile;
+            TargetTile.isbossAttackTile = true;
+            TargetTile.BossTileChanged();
+            for (int i = 0; i < GridScript.Grid.Count; i++)
+            {
+                for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                {
+                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+                    if (ManhanttanDistance(TargetTile.GridCoordinates, tile.GridCoordinates) == 2 || ManhanttanDistance(TargetTile.GridCoordinates, tile.GridCoordinates) == 4)
+                    {
+                        tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
+                    }
+
+                }
+            }
+        }
+
+
+        else if (personnalityValue < 66)
+        {
+            GridSquareScript TargetTile = targetcharacter.currentTile;
+            for (int i = 0; i < GridScript.Grid.Count; i = i + 2)
+            {
+                for (int j = 1; j < GridScript.Grid[0].Count; j = j + 2)
+                {
+                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+                    if (ManhanttanDistance(TargetTile.GridCoordinates, tile.GridCoordinates) <= 4)
+                    {
+                        tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
+                    }
+
+                }
+            }
+        }
+        else
+        {
+            GridSquareScript TargetTile = targetcharacter.currentTile;
+            TargetTile.isbossAttackTile = true;
+            TargetTile.BossTileChanged();
+            for (int i = 0; i < GridScript.Grid.Count; i++)
+            {
+                for (int j = 0; j < GridScript.Grid[0].Count; j++)
+                {
+                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
+                    if (ManhanttanDistance(TargetTile.GridCoordinates, tile.GridCoordinates) <= 2 || ManhanttanDistance(TargetTile.GridCoordinates, tile.GridCoordinates) == 5)
+                    {
+                        tile.isbossAttackTile = true;
+                        tile.BossTileChanged();
+                    }
+
                 }
             }
         }

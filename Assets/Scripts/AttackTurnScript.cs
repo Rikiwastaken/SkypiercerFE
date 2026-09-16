@@ -1822,6 +1822,22 @@ public class AttackTurnScript : MonoBehaviour
 
         }
 
+        if (MapInitializer.instance.ChapterID == 16 && !MapInitializer.instance.IsSideStory) // The boss in this chapter can only target Bob and Gale
+        {
+
+            GameObject BobGO = gridScript.GetUnit("Bob");
+            GameObject GaleGO = gridScript.GetUnit("Gale");
+            potentialtargets = new List<GameObject>();
+            if (BobGO != null)
+            {
+                potentialtargets.Add(BobGO);
+            }
+            if (GaleGO != null)
+            {
+                potentialtargets.Add(GaleGO);
+            }
+        }
+
         GameObject truetarget = null;
 
         float maxreward = 0;
