@@ -81,7 +81,25 @@ public class CombatTextScript : MonoBehaviour
 
         string attackerText = attacker.name + "\n";
         string defenderText = defender.name + "\n";
+        bool ishealing = false;
         if (newattacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+        {
+            string attackeraffiliation = attacker.affiliation.ToLower();
+            string defenderaffiliation = defender.affiliation.ToLower();
+            if (attackeraffiliation == defenderaffiliation)
+            {
+                ishealing = true;
+            }
+            else if (attackeraffiliation == "playable" && defenderaffiliation == "other" && !defender.attacksfriends)
+            {
+                ishealing = true;
+            }
+            else if (attackeraffiliation == "other" && defenderaffiliation == "playable" && !attacker.attacksfriends)
+            {
+                ishealing = true;
+            }
+        }
+        if (ishealing)
         {
             int healing = ActionsMenu.CalculateHealing(newattacker, false);
             attackerText += "healing: " + healing + "  hit: 100%  crit: -";
