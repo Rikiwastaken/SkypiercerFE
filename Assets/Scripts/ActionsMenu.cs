@@ -2717,7 +2717,7 @@ public class ActionsMenu : MonoBehaviour
         }
 
         // staff deal reduced damage
-        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+        if (unit.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && !unit.GetComponent<UnitScript>().GetSkill(119)) // I'm a healer, but...
         {
             finaldamagefloat = finaldamagefloat / 2f;
         }
