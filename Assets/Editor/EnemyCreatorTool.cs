@@ -512,12 +512,17 @@ public class EnemyStatsEditorWindow : EditorWindow
         MapInitializer mapInitializer = FindAnyObjectByType<MapInitializer>();
         List<Vector2> enemypositions = new List<Vector2>();
         List<Vector2> otherpositions = new List<Vector2>();
+        List<Vector2> breakablepositions = new List<Vector2>();
         List<Vector2> playablepositions = new List<Vector2>();
         foreach (var character in mapInitializer.EnemyList)
         {
             if (character.isother)
             {
                 otherpositions.Add(character.startpos);
+            }
+            else if (character.isBreakable)
+            {
+                breakablepositions.Add(character.startpos);
             }
             else
             {
@@ -582,12 +587,17 @@ public class EnemyStatsEditorWindow : EditorWindow
             if (playablepositions.Contains(position))
             {
                 gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = Color.blue;
-                enemypositions.Remove(position);
+                playablepositions.Remove(position);
             }
             if (otherpositions.Contains(position))
             {
                 gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = Color.yellow;
-                enemypositions.Remove(position);
+                otherpositions.Remove(position);
+            }
+            if (breakablepositions.Contains(position))
+            {
+                gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = Color.magenta;
+                breakablepositions.Remove(position);
             }
             if (gridGO.GetChild(i).GetComponent<GridSquareScript>().isobstacle)
             {
