@@ -395,9 +395,9 @@ public class AttackTurnScript : MonoBehaviour
             }
             else
             {
-                Character CharAttacker = CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics;
+
                 GameObject target = null;
-                if (CharAttacker.affiliation != "playable")
+                if (charAttacker.affiliation != "playable")
                 {
                     target = currentenemytarget;
                 }

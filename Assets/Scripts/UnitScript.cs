@@ -451,7 +451,7 @@ public class UnitScript : MonoBehaviour
                     gameObject.layer = LayerMask.NameToLayer("Others");
                     UpdateLayer(ActiveModel);
                 }
-                else if (UnitCharacteristics.affiliation.ToLower() == "other")
+                else if (UnitCharacteristics.affiliation.ToLower() == "enemy")
                 {
                     gameObject.layer = LayerMask.NameToLayer("Enemies");
                     UpdateLayer(ActiveModel);
