@@ -137,6 +137,10 @@ public class CampScript : MonoBehaviour
 
     }
 
+    public void ReturnToMainMenu()
+    {
+        SceneLoader.instance.LoadScene("MainMenu");
+    }
     private void PlayStartDialogue()
     {
         int index = 0;
