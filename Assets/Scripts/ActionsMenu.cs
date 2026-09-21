@@ -970,7 +970,7 @@ public class ActionsMenu : MonoBehaviour
                 foreach (GridSquareScript tile in GridScript.attacktiles)
                 {
                     GameObject potentialtarget = GridScript.GetUnit(tile);
-                    if (potentialtarget != null && !potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.hidden && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "enemy" || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)))
+                    if (potentialtarget != null && !potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.hidden && (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "enemy" || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "breakable") || (potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && potentialtarget.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends)))
                     {
                         targetlist.Add(potentialtarget);
                     }
@@ -2232,26 +2232,26 @@ public class ActionsMenu : MonoBehaviour
 
         if (Attacker.GetComponent<UnitScript>().GetSkill(83)) //born to burn
         {
-            if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.BurnTurns > 0)
+            if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.BurnTurns > 0 && charTarget.affiliation != "breakable")
             {
                 charTarget.statusEffects.BurnTurns++;
                 SpawnTextPopup("burn", false, false, target);
             }
         }
 
-        if (Attacker.GetComponent<UnitScript>().GetSkill(85)) //lightning edge
+        if (Attacker.GetComponent<UnitScript>().GetSkill(85) && charTarget.affiliation != "breakable") //lightning edge
         {
             charTarget.statusEffects.ParalyzedTurns++;
             SpawnTextPopup("paralyzed", false, false, target);
         }
 
-        if (Attacker.GetComponent<UnitScript>().GetSkill(86)) //blazing edge
+        if (Attacker.GetComponent<UnitScript>().GetSkill(86) && charTarget.affiliation != "breakable") //blazing edge
         {
             charTarget.statusEffects.BurnTurns++;
             SpawnTextPopup("burn", false, false, target);
         }
 
-        if (Attacker.GetComponent<UnitScript>().GetSkill(93)) //contamination
+        if (Attacker.GetComponent<UnitScript>().GetSkill(93) && charTarget.affiliation != "breakable") //contamination
         {
             StatusEffects AtatckerStatus = Attacker.GetComponent<UnitScript>().UnitCharacteristics.statusEffects;
             StatusEffects TargetStatus = charTarget.statusEffects;
@@ -2553,19 +2553,35 @@ public class ActionsMenu : MonoBehaviour
 
         float adjustedexp = baseexp * (1f + (chartarget.level - charunit.level) / expLevelAjustmentFactor);
 
-        if (chartarget.currentHP <= 0)
+        if (chartarget.affiliation == "breakable")
         {
-            adjustedexp *= 2f;
+            adjustedexp = 5f;
+            if (chartarget.currentHP <= 0)
+            {
+                adjustedexp *= 2f;
+            }
+        }
+        else
+        {
+            if (usingstaff)
+            {
+                adjustedexp = 15f;
+            }
+            if (noattack)
+            {
+                adjustedexp = 1f;
+            }
+            if (chartarget.currentHP <= 0)
+            {
+                adjustedexp *= 2f;
+            }
         }
 
-        if (usingstaff)
-        {
-            adjustedexp = 15f;
-        }
-        if (noattack)
-        {
-            adjustedexp = 1f;
-        }
+
+
+
+
+
 
         if (unit.GetComponent<UnitScript>().GetSkill(57) || unit.GetComponent<UnitScript>().GetSkill(72) || unit.GetComponent<UnitScript>().GetSkill(73)) // Crystal Heart, Guardian Spirit, Hero's Heir
         {

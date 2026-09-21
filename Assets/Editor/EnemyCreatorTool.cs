@@ -230,6 +230,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         eProp.FindPropertyRelative("startpos").vector2Value = Vector2.zero;
         eProp.FindPropertyRelative("bossiD").intValue = 0;
         eProp.FindPropertyRelative("isother").boolValue = false;
+        eProp.FindPropertyRelative("isBreakable").boolValue = false;
         eProp.FindPropertyRelative("talkable").boolValue = false;
         eProp.FindPropertyRelative("RemainingLifebars").intValue = 0;
         eProp.FindPropertyRelative("modelID").intValue = 0;
@@ -316,6 +317,7 @@ public class EnemyStatsEditorWindow : EditorWindow
 
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("bossiD"));
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("isother"));
+        EditorGUILayout.PropertyField(eProp.FindPropertyRelative("isBreakable"));
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("talkable"));
         EditorGUILayout.PropertyField(eProp.FindPropertyRelative("hidden"));
         EditorGUILayout.LabelField("Monster Stats", EditorStyles.boldLabel);

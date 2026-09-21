@@ -149,6 +149,7 @@ public class UnitScript : MonoBehaviour
         public String Name;
         public int bossiD;
         public bool isother;
+        public bool isBreakable;
         public MonsterStats monsterStats;
         public int RemainingLifebars;
         public int modelID;
@@ -323,7 +324,6 @@ public class UnitScript : MonoBehaviour
     public Image TelekinesisImage;
 
     [Header("\nUI variables")]
-    private Transform CanvasTransform;
     public TextMeshProUGUI DmgText;
     public TextMeshProUGUI DmgEffectNameText;
     public Image AffinityImage;
@@ -375,6 +375,7 @@ public class UnitScript : MonoBehaviour
     public GameObject ActiveModel;
     public Material PluvialMat;
     public List<ModelInfo> ModelList;
+    public List<GameObject> BreakableModelList;
     private WeaponPrefabScript _WeaponPrefabScript;
     private List<equipment> oldequipment;
     private Color InitialCharacterColor;
@@ -429,11 +430,10 @@ public class UnitScript : MonoBehaviour
         }
 
         _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
-        CanvasTransform = transform.GetChild(0);
         if (SceneManager.GetActiveScene().name == "BattleScene")
         {
             this.enabled = false;
-            CanvasTransform.gameObject.SetActive(false);
+            UICanvas.gameObject.SetActive(false);
             return;
         }
         else
@@ -443,17 +443,24 @@ public class UnitScript : MonoBehaviour
                 if (UnitCharacteristics.affiliation.ToLower() == "playable")
                 {
                     gameObject.layer = LayerMask.NameToLayer("Players");
+                    UpdateLayer(ActiveModel);
 
                 }
                 else if (UnitCharacteristics.affiliation.ToLower() == "other")
                 {
                     gameObject.layer = LayerMask.NameToLayer("Others");
+                    UpdateLayer(ActiveModel);
                 }
-                else
+                else if (UnitCharacteristics.affiliation.ToLower() == "other")
                 {
                     gameObject.layer = LayerMask.NameToLayer("Enemies");
+                    UpdateLayer(ActiveModel);
                 }
-                UpdateLayer(ActiveModel);
+                else
+
+                {
+                    UpdateLayer(ActiveModel, "Default");
+                }
             }
         }
 
@@ -491,24 +498,19 @@ public class UnitScript : MonoBehaviour
         UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
         UpdateWeaponModel();
 
-        foreach (ModelInfo modelInfo in ModelList)
+
+        if (animator != null)
         {
-            if (modelInfo.active)
+            if (animator.GetBool("Ismachine") != UnitCharacteristics.enemyStats.monsterStats.ismachine)
             {
-                modelInfo.wholeModel.SetActive(true); ;
+                animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
+            }
+            if (animator.GetBool("Ispluvial") != UnitCharacteristics.enemyStats.monsterStats.ispluvial)
+            {
+                animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
             }
         }
 
-
-
-        if (animator.GetBool("Ismachine") != UnitCharacteristics.enemyStats.monsterStats.ismachine)
-        {
-            animator.SetBool("Ismachine", UnitCharacteristics.enemyStats.monsterStats.ismachine);
-        }
-        if (animator.GetBool("Ispluvial") != UnitCharacteristics.enemyStats.monsterStats.ispluvial)
-        {
-            animator.SetBool("Ispluvial", UnitCharacteristics.enemyStats.monsterStats.ispluvial);
-        }
         OnHealthChanged += HealthChangedHandler;
         OnPlayedChanged += PlayedChangedHandler;
 
@@ -567,36 +569,59 @@ public class UnitScript : MonoBehaviour
     }
     public void InstantiateCharacterModel(string layername = null)
     {
-        if (ModelList.Count <= UnitCharacteristics.modelID)
+
+        if (UnitCharacteristics.affiliation == "breakable")
         {
-            return;
-        }
-        if (ActiveModel != null)
-        {
-            Destroy(ActiveModel);
-        }
-        ActiveModel = Instantiate(ModelList[UnitCharacteristics.modelID].wholeModel);
-        ActiveModel.transform.SetParent(transform);
-        ActiveModel.transform.SetLocalPositionAndRotation(ActiveModel.GetComponent<Unit3DModelInfoScript>().positionadjust, Quaternion.Euler(ActiveModel.GetComponent<Unit3DModelInfoScript>().rotationadjust));
-        ActiveModel.transform.localScale = ActiveModel.GetComponent<Unit3DModelInfoScript>().scaleadjust;
-        if (ActiveModel.GetComponent<Animator>())
-        {
-            animator = ActiveModel.GetComponent<Animator>();
+            if (BreakableModelList.Count <= UnitCharacteristics.modelID)
+            {
+                return;
+            }
+            if (ActiveModel != null)
+            {
+                Destroy(ActiveModel);
+            }
+            ActiveModel = Instantiate(BreakableModelList[UnitCharacteristics.modelID]);
+            ActiveModel.transform.SetParent(transform);
+            animator = null;
+            armature = null;
+            UpdateLayer(ActiveModel, "Default");
+            ActiveModel.SetActive(true);
         }
         else
         {
-            animator = ActiveModel.GetComponentInChildren<Animator>();
+            if (ModelList.Count <= UnitCharacteristics.modelID)
+            {
+                return;
+            }
+            if (ActiveModel != null)
+            {
+                Destroy(ActiveModel);
+            }
+            ActiveModel = Instantiate(ModelList[UnitCharacteristics.modelID].wholeModel);
+            ActiveModel.transform.SetParent(transform);
+            ActiveModel.transform.SetLocalPositionAndRotation(ActiveModel.GetComponent<Unit3DModelInfoScript>().positionadjust, Quaternion.Euler(ActiveModel.GetComponent<Unit3DModelInfoScript>().rotationadjust));
+            ActiveModel.transform.localScale = ActiveModel.GetComponent<Unit3DModelInfoScript>().scaleadjust;
+            if (ActiveModel.GetComponent<Animator>())
+            {
+                animator = ActiveModel.GetComponent<Animator>();
+            }
+            else
+            {
+                animator = ActiveModel.GetComponentInChildren<Animator>();
+            }
+            if (UnitCharacteristics.enemyStats.monsterStats.ispluvial)
+            {
+                UpdateMaterial(ActiveModel, PluvialMat);
+            }
+            armature = animator.transform;
+            initialpos = armature.localPosition;
+            initialforward = armature.forward;
+            UpdateLayer(ActiveModel, layername);
+            ActiveModel.SetActive(true);
+            animator.speed = UnityEngine.Random.Range(0.9f, 1.1f);
         }
-        if (UnitCharacteristics.enemyStats.monsterStats.ispluvial)
-        {
-            UpdateMaterial(ActiveModel, PluvialMat);
-        }
-        armature = animator.transform;
-        initialpos = armature.localPosition;
-        initialforward = armature.forward;
-        UpdateLayer(ActiveModel, layername);
-        ActiveModel.SetActive(true);
-        animator.speed = UnityEngine.Random.Range(0.9f, 1.1f);
+
+
     }
 
     private void UpdateMaterial(GameObject go, Material material)
@@ -688,13 +713,13 @@ public class UnitScript : MonoBehaviour
                 CopiedSkillImage.sprite = SkillNotCopiedSprite;
             }
 
-            if (animator.GetBool("UsingTelekinesis") != UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow")
+            if (animator != null && animator.GetBool("UsingTelekinesis") != UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow")
             {
                 animator.SetBool("UsingTelekinesis", UnitCharacteristics.telekinesisactivated && GetFirstWeapon().type.ToLower() != "bow");
             }
 
             //UpdateRendererLayer();
-            Hidedeactivated();
+            //Hidedeactivated();
 
             if (trylvlup)
             {
@@ -1048,7 +1073,7 @@ public class UnitScript : MonoBehaviour
 
         int requiredTrigger = GetTriggerLuckModificator();
 
-        if (GetComponent<RandomScript>().GetPersonalityValue(requiredTrigger) < requiredTrigger)
+        if (GetComponent<RandomScript>().GetPersonalityValue(requiredTrigger) < requiredTrigger && UnitCharacteristics.affiliation != "breakable")
         {
             int PersonnalityValueForEffect = GetComponent<RandomScript>().GetPersonalityValue(0);
 
@@ -1272,7 +1297,11 @@ public class UnitScript : MonoBehaviour
         {
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), pathtotake[0]) > 0.1f)
             {
-                animator.SetBool("Walk", true);
+                if (animator != null)
+                {
+                    animator.SetBool("Walk", true);
+                }
+
                 Vector2 direction = (pathtotake[0] - new Vector2(transform.position.x, transform.position.z)).normalized;
                 transform.position += new Vector3(direction.x, 0f, direction.y) * movespeed * Time.deltaTime;
                 switch (direction.x)
@@ -1306,7 +1335,7 @@ public class UnitScript : MonoBehaviour
             destination = UnitCharacteristics.currentTile.GridCoordinates;
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) > 0.1f)
             {
-                if (animator.GetBool("Walk") != true)
+                if (animator != null && animator.GetBool("Walk") != true)
                 {
                     animator.SetBool("Walk", true);
                 }
@@ -1317,7 +1346,7 @@ public class UnitScript : MonoBehaviour
             if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), destination) <= 0.1f)
             {
                 transform.position = new Vector3(destination.x, transform.position.y, destination.y);
-                if (animator.gameObject.activeSelf)
+                if (animator != null && animator.gameObject.activeSelf)
                 {
                     animator.SetBool("Walk", false);
                 }
@@ -1331,11 +1360,39 @@ public class UnitScript : MonoBehaviour
     }
 
 
-    // Makes sur UI on the ground is always oriented the same way for the camera
+    // Makes sur UI on the ground is always oriented the same way for the camera and disable it the character is actually a breakable object
     private void ManageCanvasesRotation()
     {
-        LifebarCanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
-        UICanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
+        if (UnitCharacteristics.affiliation == "breakable")
+        {
+            if (UICanvas.gameObject.activeSelf)
+            {
+                UICanvas.gameObject.gameObject.SetActive(false);
+            }
+
+            if (UnitCharacteristics.currentHP < (int)UnitCharacteristics.AjustedStats.HP)
+            {
+                if (!LifebarCanvas.gameObject.activeSelf)
+                {
+                    LifebarCanvas.gameObject.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                if (LifebarCanvas.gameObject.activeSelf)
+                {
+                    LifebarCanvas.gameObject.gameObject.SetActive(false);
+                }
+            }
+
+
+        }
+        else
+        {
+            LifebarCanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
+            UICanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
+        }
+
     }
 
 
@@ -1976,6 +2033,10 @@ public class UnitScript : MonoBehaviour
 
             animatortouse = animator;
         }
+        if (animatortouse == null)
+        {
+            return;
+        }
 
         if (tripleattack)
         {
@@ -2248,6 +2309,11 @@ public class UnitScript : MonoBehaviour
             animatortouse = animator;
         }
 
+        if (animatortouse == null)
+        {
+            return;
+        }
+
         if (currentequipmentmodel != null)
         {
             currentequipmentmodel = null;
@@ -2391,7 +2457,11 @@ public class UnitScript : MonoBehaviour
         {
             UnitCharacteristics.currentTile.BossTileChanged();
         }
-        animator.SetFloat("HPratio", (float)newHealth / (float)UnitCharacteristics.AjustedStats.HP);
+        if (animator != null)
+        {
+            animator.SetFloat("HPratio", (float)newHealth / (float)UnitCharacteristics.AjustedStats.HP);
+        }
+
     }
 
     void PlayedChangedHandler(bool newPlayed)
@@ -2604,8 +2674,35 @@ public class UnitScript : MonoBehaviour
         {
 
             UnitCharacteristics.telekinesisactivated = UnitCharacteristics.enemyStats.usetelekinesis;
+            if (UnitCharacteristics.affiliation == "breakable")
+            {
+                ClassInfo classtoapply = DataScript.instance.BreakableCharacterClass;
+                UnitCharacteristics.stats.HP = classtoapply.BaseStats.HP;
+                UnitCharacteristics.stats.Strength = classtoapply.BaseStats.Strength;
+                UnitCharacteristics.stats.Psyche = classtoapply.BaseStats.Psyche;
+                UnitCharacteristics.stats.Defense = classtoapply.BaseStats.Defense;
+                UnitCharacteristics.stats.Resistance = classtoapply.BaseStats.Resistance;
+                UnitCharacteristics.stats.Speed = classtoapply.BaseStats.Speed;
+                UnitCharacteristics.stats.Dexterity = classtoapply.BaseStats.Dexterity;
+                UnitCharacteristics.stats.Luck = classtoapply.BaseStats.Luck;
+                UnitCharacteristics.growth.HPGrowth = classtoapply.StatGrowth.HPGrowth;
+                UnitCharacteristics.growth.StrengthGrowth = classtoapply.StatGrowth.StrengthGrowth;
+                UnitCharacteristics.growth.PsycheGrowth = classtoapply.StatGrowth.PsycheGrowth;
+                UnitCharacteristics.growth.DefenseGrowth = classtoapply.StatGrowth.DefenseGrowth;
+                UnitCharacteristics.growth.ResistanceGrowth = classtoapply.StatGrowth.ResistanceGrowth;
+                UnitCharacteristics.growth.SpeedGrowth = classtoapply.StatGrowth.SpeedGrowth;
+                UnitCharacteristics.growth.DexterityGrowth = classtoapply.StatGrowth.DexterityGrowth;
+                UnitCharacteristics.growth.LuckGrowth = classtoapply.StatGrowth.LuckGrowth;
+                UnitCharacteristics.movements = classtoapply.movements;
+                fixedgrowth = true;
+                int numberoflevelups = UnitCharacteristics.enemyStats.desiredlevel - UnitCharacteristics.level;
 
-            if (UnitCharacteristics.enemyStats.classID != -1)
+                for (int i = 0; i < numberoflevelups; i++)
+                {
+                    List<int> statsgained = LevelUp();
+                }
+            }
+            else if (UnitCharacteristics.enemyStats.classID != -1)
             {
                 ClassInfo classtoapply = DataScript.instance.ClassList[UnitCharacteristics.enemyStats.classID];
                 UnitCharacteristics.stats.HP = classtoapply.BaseStats.HP;
@@ -2630,13 +2727,7 @@ public class UnitScript : MonoBehaviour
 
                 for (int i = 0; i < numberoflevelups; i++)
                 {
-
                     List<int> statsgained = LevelUp();
-                    string statsgainedstr = "";
-                    foreach (int level in statsgained)
-                    {
-                        statsgainedstr += level.ToString() + " , ";
-                    }
                 }
             }
 
@@ -2646,17 +2737,23 @@ public class UnitScript : MonoBehaviour
 
     }
 
+    /*
     private void Hidedeactivated()
     {
         bool checkifonactivated = CheckIfOnActivated();
         if (CanvasTransform.gameObject.activeSelf != checkifonactivated)
         {
-            animator.transform.gameObject.SetActive(CheckIfOnActivated());
+            if (animator != null)
+            {
+                animator.transform.gameObject.SetActive(CheckIfOnActivated());
+            }
+
             CanvasTransform.gameObject.SetActive(CheckIfOnActivated());
         }
 
 
     }
+    */
     public bool CheckIfOnActivated()
     {
         return UnitCharacteristics.currentTile.activated;

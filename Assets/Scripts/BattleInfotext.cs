@@ -76,6 +76,7 @@ public class BattleInfotext : MonoBehaviour
     public GameObject ExamodeGO;
     public Color ExamodeActivatedColor;
     public Color ExamodeDeactivatedColor;
+    public Sprite EmptySprite;
 
     [Header("StatusAilment")]
 
@@ -390,6 +391,16 @@ public class BattleInfotext : MonoBehaviour
                     }
                     EquipedWeaponGradeTxt.text = grade;
                     equipedweaponText.text = EquipedWeapon.Currentuses + "/" + EquipedWeapon.Maxuses;
+
+
+                    if (selectedunitCharacter.affiliation == "breakable")
+                    {
+                        CharacterSprite.sprite = EmptySprite;
+                        EquipedWeaponGradeTxt.text = "";
+                        equipedweaponText.text = "";
+                        EquipedWeaponIco.sprite = EmptySprite;
+                        LuckAndMovTMP.text = "Lck: 0\nMvt: 0";
+                    }
                 }
             }
             else

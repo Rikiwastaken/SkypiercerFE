@@ -449,7 +449,7 @@ public class TurnManger : MonoBehaviour
                 enemyunitGO.Add(character);
                 enemyunit.Add(character.GetComponent<UnitScript>().UnitCharacteristics);
             }
-            else
+            else if (character.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other")
             {
                 otherunitsGO.Add(character);
                 otherunits.Add(character.GetComponent<UnitScript>().UnitCharacteristics);

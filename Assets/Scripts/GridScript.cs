@@ -1323,11 +1323,17 @@ public class GridScript : MonoBehaviour
     public void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit, Dictionary<GridSquareScript, int> visited)
     {
         GridSquareScript tile = GetTile((int)Coordinates.x, (int)Coordinates.y);
-        if (tile == null) return;
+        if (tile == null)
+        {
+            return;
+        }
+
 
         // already visited with equal or more moves left -> no need to continue
         if (visited.ContainsKey(tile) && visited[tile] >= remainingMovements)
+        {
             return;
+        }
 
         // record the best remaining moves we've seen for this tile
         visited[tile] = remainingMovements;
@@ -1335,25 +1341,31 @@ public class GridScript : MonoBehaviour
         // adjust cost for terrain
         string tiletype = tile.type.ToLower();
         if (tiletype == "fire" || tiletype == "water")
+        {
             remainingMovements -= 1;
+        }
 
         if (!tilestolight.Contains(tile))
+        {
             tilestolight.Add(tile);
+        }
 
-        if (remainingMovements <= 0) return;
+        if (remainingMovements <= 0)
+        {
+            return;
+        }
 
         // neighbor directions
-        Vector2[] dirs = {
-        new Vector2(-1, 0), new Vector2(1, 0),
-        new Vector2(0, -1), new Vector2(0, 1)
-    };
+        Vector2[] dirs = { new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1) };
 
         foreach (var dir in dirs)
         {
             Vector2 newpos = Coordinates + dir;
 
             if (newpos.x < 0 || newpos.x >= Grid.Count || newpos.y < 0 || newpos.y >= Grid[0].Count)
+            {
                 continue;
+            }
 
             if (CheckIfFree(newpos, selectedunit.GetComponent<UnitScript>().UnitCharacteristics))
             {
@@ -1389,7 +1401,7 @@ public class GridScript : MonoBehaviour
         }
         foreach (Character unit in allunits)
         {
-            bool compatibleaffiliation = (selectedunit.affiliation == "playable" && unit.affiliation == "other" && unit.attacksfriends) || (selectedunit.affiliation == "other" && unit.affiliation == "playable" && selectedunit.attacksfriends) || selectedunit.affiliation == "enemy" || unit.affiliation == "enemy";
+            bool compatibleaffiliation = unit.affiliation == "breakable" || (selectedunit.affiliation == "playable" && unit.affiliation == "other" && unit.attacksfriends) || (selectedunit.affiliation == "other" && unit.affiliation == "playable" && selectedunit.attacksfriends) || selectedunit.affiliation == "enemy" || unit.affiliation == "enemy";
             if (unit.currentTile.GridCoordinates == position && compatibleaffiliation && unit.currentHP > 0)
             {
                 return false;

@@ -32,6 +32,7 @@ public class MinimapScript : MonoBehaviour
     private List<GameObject> EnemyCharacterPins = new List<GameObject>();
     private List<GameObject> OtherCharacterPins = new List<GameObject>();
     private List<GameObject> ContraptionPins = new List<GameObject>();
+    private List<GameObject> BreakablePins = new List<GameObject>();
 
     private GameObject SelectedTileIcon;
 
@@ -39,6 +40,7 @@ public class MinimapScript : MonoBehaviour
     public Sprite LockedDoorSprite;
     public Sprite InterruptorSprite;
     public Sprite CurrentPositionSprite;
+    public Sprite BreakableSprite;
 
     public GameObject CharacterPinPrefab;
 
@@ -240,8 +242,10 @@ public class MinimapScript : MonoBehaviour
                     }
                     PlaceEndTilePins(tile);
 
+
                 }
             }
+
             minimapBackgroundTexture.Apply();
         }
     }
@@ -301,7 +305,6 @@ public class MinimapScript : MonoBehaviour
         DisableUselessPins(PlayableCharacterPins, playablePinsIndex);
         DisableUselessPins(EnemyCharacterPins, EnemyPinsIndex);
         DisableUselessPins(OtherCharacterPins, OtherPinsIndex);
-
     }
 
     public void PlaceEndTilePins(GridSquareScript currentTile)
@@ -330,6 +333,59 @@ public class MinimapScript : MonoBehaviour
             iconRect.transform.GetChild(0).GetComponent<Image>().color = targetcolor;
             iconRect.transform.GetChild(0).GetComponent<Image>().sprite = flagpoleSprite;
         }
+
+    }
+
+    public void PlacebreakableTilePins()
+    {
+        int CurrentBreakableIndex = 0;
+        foreach (Character character in gridScript.allunits)
+        {
+            if (character == null || character.currentTile == null)
+            {
+                continue;
+            }
+
+            Vector2 coordinates = character.currentTile.GridCoordinates;
+
+            if (character.affiliation.ToLower() == "breakable")
+            {
+                if (CurrentBreakableIndex >= BreakablePins.Count)
+                {
+                    GameObject newPin = Instantiate(CharacterPinPrefab);
+                    newPin.name = "Breakable Pin " + CurrentBreakableIndex;
+                    newPin.transform.SetParent(transform.parent);
+
+
+                    RectTransform iconRect = newPin.GetComponent<RectTransform>();
+
+                    iconRect.anchorMin = new Vector2(0, 0);
+                    iconRect.anchorMax = new Vector2(0, 0);
+                    iconRect.pivot = new Vector2(0.5f, 0.5f);
+
+                    iconRect.anchoredPosition = GridToMinimapPosition(character.currentTile.GridCoordinates);
+
+                    Color targetcolor = new Color(1f, 1f, 1f, 1f);
+
+                    iconRect.transform.GetChild(0).GetComponent<Image>().color = targetcolor;
+                    iconRect.transform.GetChild(0).GetComponent<Image>().sprite = BreakableSprite;
+                    BreakablePins.Add(newPin);
+                }
+                else
+                {
+                    RectTransform iconRect = BreakablePins[CurrentBreakableIndex].GetComponent<RectTransform>();
+
+                    iconRect.anchorMin = new Vector2(0, 0);
+                    iconRect.anchorMax = new Vector2(0, 0);
+                    iconRect.pivot = new Vector2(0.5f, 0.5f);
+
+                    iconRect.anchoredPosition = GridToMinimapPosition(character.currentTile.GridCoordinates);
+                }
+                CurrentBreakableIndex++;
+            }
+
+        }
+        DisableUselessPins(BreakablePins, CurrentBreakableIndex);
 
     }
 
@@ -450,7 +506,7 @@ public class MinimapScript : MonoBehaviour
         DisableUselessContraptionPins(currentContraptionIndex);
         PlaceCharacterPins();
         manageselectionicon();
-
+        PlacebreakableTilePins();
         minimapTexture.Apply();
     }
 

@@ -287,7 +287,17 @@ public class AttackTurnScript : MonoBehaviour
             {
                 if (ActionsMenu.CommandUsedID == 0)
                 {
-                    if (saveManager.Options.BattleAnimations)
+                    Character CharAttacker = CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics;
+                    GameObject target = null;
+                    if (CharAttacker.affiliation != "playable")
+                    {
+                        target = currentenemytarget;
+                    }
+                    else
+                    {
+                        target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
+                    }
+                    if (saveManager.Options.BattleAnimations && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "breakable")
                     {
                         if (Vector2.Distance(CurrentPlayableChar.currentTile.GridCoordinates, new Vector2(CurrentPlayable.transform.position.x, CurrentPlayable.transform.position.z)) <= 1f)
                         {
@@ -383,18 +393,31 @@ public class AttackTurnScript : MonoBehaviour
                 AttackerGO.GetComponent<BossScript>().TriggerBossAttack();
                 charAttacker.alreadyplayed = true;
             }
-            else if (saveManager.Options.BattleAnimations)
-            {
-                if (Vector2.Distance(charAttacker.currentTile.GridCoordinates, new Vector2(AttackerGO.transform.position.x, AttackerGO.transform.position.z)) <= 1f)
-                {
-                    ManageAttackWithAnimation(AttackerGO);
-                }
-            }
             else
             {
-                if (AttackCoroutine == null)
+                Character CharAttacker = CurrentPlayable.GetComponent<UnitScript>().UnitCharacteristics;
+                GameObject target = null;
+                if (CharAttacker.affiliation != "playable")
                 {
-                    AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimation(AttackerGO));
+                    target = currentenemytarget;
+                }
+                else
+                {
+                    target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
+                }
+                if (saveManager.Options.BattleAnimations && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "breakable")
+                {
+                    if (Vector2.Distance(charAttacker.currentTile.GridCoordinates, new Vector2(AttackerGO.transform.position.x, AttackerGO.transform.position.z)) <= 1f)
+                    {
+                        ManageAttackWithAnimation(AttackerGO);
+                    }
+                }
+                else
+                {
+                    if (AttackCoroutine == null)
+                    {
+                        AttackCoroutine = StartCoroutine(ManageAttackWithoutAnimation(AttackerGO));
+                    }
                 }
             }
 

@@ -320,6 +320,7 @@ public class MapInitializer : MonoBehaviour
             newcharacter.GetComponent<UnitScript>().UnitCharacteristics = newcharacter.GetComponent<UnitScript>().CreateCopy(chartouse);
         }
         Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
+
         Character.level = 0;
         Character.UnitSkill = 0;
         Character.SecondSkillUnlocked = false;
@@ -328,6 +329,18 @@ public class MapInitializer : MonoBehaviour
         Character.equipmentsIDs = new List<int>();
         Character.playableStats = new PlayableStats();
         Character.enemyStats = enemyStats;
+        if (enemyStats.isother)
+        {
+            Character.affiliation = "other";
+        }
+        else if (enemyStats.isBreakable)
+        {
+            Character.affiliation = "breakable";
+        }
+        else
+        {
+            Character.affiliation = "enemy";
+        }
         // in the cae of pluvials, randomly take a model.
         if (enemyStats.monsterStats.ispluvial)
         {
@@ -400,14 +413,7 @@ public class MapInitializer : MonoBehaviour
             newcharacter.name = enemyStats.Name + " spawned";
         }
 
-        if (enemyStats.isother)
-        {
-            Character.affiliation = "other";
-        }
-        else
-        {
-            Character.affiliation = "enemy";
-        }
+
 
         if (Character.name.ToLower().Contains("kira"))
         {

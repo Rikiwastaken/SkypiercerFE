@@ -20,6 +20,7 @@ public class DataScript : MonoBehaviour
     public List<ClassInfo> ClassList;
 
     public List<Character> PlayableCharacterList;
+    public ClassInfo BreakableCharacterClass;
 
     public Inventory PlayerInventory;
 
