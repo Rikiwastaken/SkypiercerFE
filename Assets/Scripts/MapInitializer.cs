@@ -259,13 +259,21 @@ public class MapInitializer : MonoBehaviour
 
         List<SaveManager.ChapterFlags> flaglist = DataScript.instance.ChapterFlagsList;
 
-        if (flaglist.Count <= ChapterID)
+        int safegard = 0;
+        while (flaglist.Count <= ChapterID && safegard < 20)
         {
             SaveManager.ChapterFlags newcurrentflags = new SaveManager.ChapterFlags();
             newcurrentflags.talkflags = new List<bool>();
             newcurrentflags.copyflags = new List<bool>();
             flaglist.Add(newcurrentflags);
+            safegard++;
+            if (safegard == 20)
+            {
+                Debug.LogError("Reached Safeguard in adding new items to flaglist");
+            }
         }
+
+        DataScript.instance.ChapterFlagsList = flaglist;
 
         SaveManager.ChapterFlags currentflags = DataScript.instance.ChapterFlagsList[ChapterID];
 

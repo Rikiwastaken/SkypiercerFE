@@ -297,7 +297,7 @@ public class AttackTurnScript : MonoBehaviour
                     {
                         target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
                     }
-                    if (saveManager.Options.BattleAnimations && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "breakable")
+                    if (saveManager.Options.BattleAnimations || (target != null && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "breakable"))
                     {
                         if (Vector2.Distance(CurrentPlayableChar.currentTile.GridCoordinates, new Vector2(CurrentPlayable.transform.position.x, CurrentPlayable.transform.position.z)) <= 1f)
                         {
@@ -405,7 +405,7 @@ public class AttackTurnScript : MonoBehaviour
                 {
                     target = ActionsMenu.targetlist[ActionsMenu.activetargetid];
                 }
-                if (saveManager.Options.BattleAnimations && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "breakable")
+                if (saveManager.Options.BattleAnimations || (target != null && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "breakable"))
                 {
                     if (Vector2.Distance(charAttacker.currentTile.GridCoordinates, new Vector2(AttackerGO.transform.position.x, AttackerGO.transform.position.z)) <= 1f)
                     {

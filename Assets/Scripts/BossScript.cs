@@ -340,23 +340,30 @@ public class BossScript : MonoBehaviour
         }
         else
         {
+            int radius = 2;
             for (int i = 0; i < GridScript.Grid.Count; i++)
             {
                 for (int j = 0; j < GridScript.Grid[0].Count; j++)
                 {
-                    GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
 
-                    GridSquareScript tileabove = GridScript.GetTile(tile.GridCoordinates + new Vector2(0, 1));
-
-                    if (tile.GridCoordinates.y < character.currentTile.GridCoordinates.y)
+                    if (Mathf.Abs(i - (int)TargetPosition.x) <= radius && Mathf.Abs(j - (int)TargetPosition.y) <= radius)
                     {
-                        if (!(tileabove != null && tileabove.isobstacle))
-                        {
-                            tile.isbossAttackTile = true;
-                            tile.BossTileChanged();
-                        }
+                        GridSquareScript tile = GridScript.Grid[i][j].GetComponent<GridSquareScript>();
 
+                        GridSquareScript tileabove = GridScript.GetTile(tile.GridCoordinates + new Vector2(0, 1));
+
+                        if (tile.GridCoordinates.y < character.currentTile.GridCoordinates.y)
+                        {
+                            if (!(tileabove != null && tileabove.isobstacle))
+                            {
+                                tile.isbossAttackTile = true;
+                                tile.BossTileChanged();
+                            }
+
+                        }
                     }
+
+
                 }
             }
         }
