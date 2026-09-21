@@ -278,12 +278,12 @@ public class WorldMapManager : MonoBehaviour
             if (faststravelmenudelay <= 0)
             {
 
-                if ((MoveValue.y > 0f || CamValue.y > 0f) && EventSystem.current.currentSelectedGameObject == FastTravelMenuButtons.GetChild(0).gameObject)
+                if ((MoveValue.y > 0f || CamValue.y > 0f) && (_MoveAction.WasPerformedThisFrame() || _CamAction.WasPerformedThisFrame()) && EventSystem.current.currentSelectedGameObject == FastTravelMenuButtons.GetChild(0).gameObject)
                 {
                     IncreaseList();
                     faststravelmenudelay = (int)(0.1f / Time.deltaTime);
                 }
-                if ((MoveValue.y < 0f || CamValue.y < 0f) && EventSystem.current.currentSelectedGameObject == FastTravelMenuButtons.GetChild(FastTravelMenu.transform.childCount - 1).gameObject)
+                if ((MoveValue.y < 0f || CamValue.y < 0f) && (_MoveAction.WasPerformedThisFrame() || _CamAction.WasPerformedThisFrame()) && EventSystem.current.currentSelectedGameObject == FastTravelMenuButtons.GetChild(FastTravelMenuButtons.transform.childCount - 1).gameObject)
                 {
 
                     DecreaseList();
