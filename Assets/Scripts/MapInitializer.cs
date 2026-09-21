@@ -109,6 +109,18 @@ public class MapInitializer : MonoBehaviour
 
         bool intestmap = SceneManager.GetActiveScene().name == "TestMap";
 
+        // we reinitialize the characters
+        foreach (Character playable in DataScript.instance.PlayableCharacterList)
+        {
+            playable.playableStats.deployunit = false;
+            playable.TauntTurns = 0;
+            playable.isintercepting = false;
+            playable.TemporarySkill = 0;
+            playable.statusEffects = new StatusEffects() { BurnTurns = 0, ConcussionTunrs = 0, WeaknessTurns = 0, RegenTurns = 0, AccelerationTurns = 0, PowerTurns = 0, ParalyzedTurns = 0, StunTurns = 0 };
+            playable.currentHP = (int)playable.AjustedStats.HP;
+
+        }
+        // first, the forced characters
         foreach (Character playable in DataScript.instance.PlayableCharacterList)
         {
             if (ForcedCharacters.Contains(playable.ID))
@@ -119,23 +131,36 @@ public class MapInitializer : MonoBehaviour
             }
 
         }
-
+        // then the characters that were deployed last map
+        SaveManager SM = SaveManager.instance;
         foreach (Character playable in DataScript.instance.PlayableCharacterList)
         {
+            if (SM.PreviouslyDeployed.Contains(playable.ID) && !playable.playableStats.deployunit && playable.playableStats.unlocked)
+            {
+                playable.playableStats.deployunit = true;
+            }
 
             if (playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)) && !ForcedCharacters.Contains(playable.ID))
             {
                 AddUnit(playable);
             }
-            playable.TauntTurns = 0;
-            playable.isintercepting = false;
-            playable.TemporarySkill = 0;
-            playable.statusEffects = new StatusEffects() { BurnTurns = 0, ConcussionTunrs = 0, WeaknessTurns = 0, RegenTurns = 0, AccelerationTurns = 0, PowerTurns = 0, ParalyzedTurns = 0, StunTurns = 0 };
-            playable.currentHP = (int)playable.AjustedStats.HP;
+
         }
 
+        // then we fill the remaining spots with random characters
+        foreach (Character playable in DataScript.instance.PlayableCharacterList)
+        {
+            if (!playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)))
+            {
+                playable.playableStats.deployunit = true;
+                AddUnit(playable);
+            }
+
+        }
 
         GridScript.InitializeGOList();
+
+
     }
 
     private int GetFirstFreePlayablePos()

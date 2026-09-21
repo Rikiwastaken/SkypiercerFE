@@ -85,13 +85,12 @@ public class CampScript : MonoBehaviour
             waitAFrameBeforeCutscene = true;
         }
 
-        if (textBubbleScript.indialogue && BaseMenu.gameObject.activeSelf && textBubbleScript.gameObject.activeInHierarchy)
+        if (textBubbleScript.indialogue && BaseMenu.gameObject.activeSelf)
         {
-            Debug.Log("disabling menu");
             BaseMenu.gameObject.SetActive(false);
         }
 
-        if (previousindialogue && !textBubbleScript.indialogue)
+        if (!textBubbleScript.indialogue && !BaseMenu.gameObject.activeSelf)
         {
             if (!BaseMenu.gameObject.activeSelf)
             {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -126,7 +127,17 @@ public class PreBattleMenuScript : MonoBehaviour
         TurnManager.waittingforstart = false;
         gameObject.SetActive(false);
         GridScript.InitializeGOList();
+        List<int> newpreviouslydeployed = new List<int>();
+        foreach (GameObject playableGO in GridScript.allunitGOs)
+        {
+            UnitScript.Character playable = playableGO.GetComponent<UnitScript>().UnitCharacteristics;
+            if (playable.affiliation.ToLower() == "playable")
+            {
+                newpreviouslydeployed.Add(playable.ID);
+            }
 
+        }
+        SaveManager.instance.PreviouslyDeployed = newpreviouslydeployed;
         SaveBeforeBattle = SaveManager.instance.GenerateSaveClassFromGameState(false, false);
     }
 
