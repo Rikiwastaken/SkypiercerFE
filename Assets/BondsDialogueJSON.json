@@ -4268,31 +4268,167 @@
             "dialogueLvl1": [
                 {
                     "CharacterID": 10,
-                    "text": "bond 1 between Gwenie and Elwyn, with Gwenie talking"
+                    "text": "Hi Elwyn!"
                 },
                 {
                     "CharacterID": 2,
-                    "text": "bond 1 between Elwyn and Gwenie, with Elwyn talking"
+                    "text": "Don't surprise me like that! You made me spill my drink!"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "It was just water... No big deal, right?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Ouch, it's hot!"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "What? You drink hot water? That's weird!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "it's tea!"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Tea ?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "You... Don't know what tea is?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "The only reason we boil water is to make it safe to drink... Why would you do that with drinkable water... And it's green?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "It's because of the leaves... It gives flavor to the water."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I love soup! Give me some!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I don't have a lot left, but here."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "AAAAH! I burnt my tongue!"
                 }
             ],
             "dialogueLvl2": [
                 {
                     "CharacterID": 10,
-                    "text": "bond 2 between Gwenie and Elwyn, with Gwenie talking"
+                    "text": "Look, Elwyn! Here is something we drink on our ships!"
                 },
                 {
                     "CharacterID": 2,
-                    "text": "bond 2 between Elwyn and Gwenie, with Elwyn talking"
+                    "text": "What is it? It looks like...."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Just taste it!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Wow, it's so strong! I can feel it burning my throat!"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "It's rum!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "I can taste that..."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "This is Kay's special batch! She does it herself!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "It's... Really good... I think?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "You want another glass?"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "No thanks! Gotta go!"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "They never want another glass..."
                 }
             ],
             "dialogueLvl3": [
                 {
                     "CharacterID": 10,
-                    "text": "bond 3 between Gwenie and Elwyn, with Gwenie talking"
+                    "text": "Elwyn! Elwyn! I found a new drink!"
                 },
                 {
                     "CharacterID": 2,
-                    "text": "bond 3 between Elwyn and Gwenie, with Elwyn talking"
+                    "text": "What a coincidence! I also have something I want you to taste."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Cool! I go first! This is... Bitter..."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "It's coffee. Zack drinks it all the time. He bought a whole bag of it back in the capital."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "It's weird... Again with your tasty hot water... Here, have some of this!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "A strong alcohol again ?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Yes. It's whiskey!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Mmmmmh, this gives me a weird idea."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Me too... We could..."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Mix them together?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Yes! We'll call this Gwenie Water!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "As a matter of facts, it's called an 'Irish Coffee'."
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "Zack! You startled me! I thought you were asleep!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I never sleep when people are stealing my beloved stash... You'll both pay for this!"
+                },
+                {
+                    "CharacterID": 2,
+                    "text": "What do you mean, both?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Teehee!"
                 }
             ],
             "dialogueLvl4": []
@@ -4301,22 +4437,90 @@
             "BondID": 25,
             "dialogueLvl1": [
                 {
+                    "CharacterID": 5,
+                    "text": "Gwenie, where did you find this?"
+                },
+                {
                     "CharacterID": 10,
-                    "text": "bond 1 between Gwenie and Sieg, with Gwenie talking"
+                    "text": "My pocket mirror? I found it in a locker, half buried in a ruin we visited earlier."
                 },
                 {
                     "CharacterID": 5,
-                    "text": "bond 1 between Sieg and Gwenie, with Sieg talking"
+                    "text": "Would you mind, parting with it?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Never! It's mine! I found it fair and square!"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Gwenie, this is not a mirror, it's a Smartphone! It's a priceless relic of the Old World!"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Don't care! If you want it, you'll have to trade me something for it!"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "But, I don't have anything you'd want..."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I know! Give me your funny glass!"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "My magnifying glass? But... I need it!"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Then no cool mirror for you!"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "Be brave, Sieg. It's a sacrifice for science!"
                 }
             ],
             "dialogueLvl2": [
                 {
                     "CharacterID": 10,
-                    "text": "bond 2 between Gwenie and Sieg, with Gwenie talking"
+                    "text": "What are you reading, Sieg?"
                 },
                 {
                     "CharacterID": 5,
-                    "text": "bond 2 between Sieg and Gwenie, with Sieg talking"
+                    "text": "Kira lent me this book retelling how the great platform atop the capital was built."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "That sounds boring. Is it any good?"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "It's fascinating! A real page turner!"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Ok course you turn the pages, Sieg. It's a book!"
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "What?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "I thought libraries were your thing... I never thought I would have to explain this to you..."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "I know what a book is! Do you read sometimes?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Nope. I use them to start fires when I can't find dry wood."
+                },
+                {
+                    "CharacterID": 5,
+                    "text": "You WHAT?!"
                 }
             ],
             "dialogueLvl3": [],
@@ -4327,31 +4531,179 @@
             "dialogueLvl1": [
                 {
                     "CharacterID": 13,
-                    "text": "bond 1 between Gale and Kira, with Gale talking"
+                    "text": "So, you real are Kira Albarn, the strategist."
                 },
                 {
                     "CharacterID": 9,
-                    "text": "bond 1 between Kira and Gale, with Kira talking"
+                    "text": "Gale. What do you want?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I didn't mean to upset you. I was only surprised to see you here. You've made quite a name for yourself, especially in Archades."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Really? "
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Some people think you've been a determining factor in the war."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "You're well known too, Gale Magnus, the Hero's heir. They say that you used to be a particularly deadly assassin..."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "That is behind me. I won't deny that when I was younger, I strayed from the path of righteousness."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Are you any different, now? What changed?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "That is a story for another time."
                 }
             ],
             "dialogueLvl2": [
                 {
+                    "CharacterID": 9,
+                    "text": "Gale. What do you think of Zack?"
+                },
+                {
                     "CharacterID": 13,
-                    "text": "bond 2 between Gale and Kira, with Gale talking"
+                    "text": "Kira. Good evening. Why asking so suddenly?"
                 },
                 {
                     "CharacterID": 9,
-                    "text": "bond 2 between Kira and Gale, with Kira talking"
+                    "text": "Just answer the question."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "He is a good lad. A bit careless, and way too carefree. Nonetheless, he is a good man. I trust him."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Ever since his clash with Raghnall... Ever since he awoke his new powers, he feels different."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "He now has a unique aura. That much is true. The only other person who has the same is..."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Mir."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Yes. I saw Sir Mir's blade one time. It was truly a sight to behold, but at the same time it was terrifying."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Terrifying... Zack isn't like that... But the way he fights when in that form... It's like he has no disregard for his own life. He fights like a man possessed."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Then it is our responsibility to help him control that power."
                 }
             ],
             "dialogueLvl3": [
                 {
                     "CharacterID": 13,
-                    "text": "bond 3 between Gale and Kira, with Gale talking"
+                    "text": "Kira, do you have a moment?"
                 },
                 {
                     "CharacterID": 9,
-                    "text": "bond 3 between Kira and Gale, with Kira talking"
+                    "text": "Sure, what can I do for you?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I feel like it might be important, with what happened and what might happen. I want you to listen to my story."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Sure, Gale, but why me?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I trust you. I trust Zack too, but he wouldn't understand."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "Understood."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Like many, I am a war orphan. In my youngest years, I was taken in by the King of Archades. However, this was merely a facade, as I was to be part of the Duskhand."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I would study the day, next to the king's two children, but at night, I was trained in the ways of the killer."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "The worst of it, was that I found it normal. I was killing for the kingdom, protecting the ones who gave me a roof."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "What happened then?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Sir Mir happened. He stormed to the hideout, one day. This was the first time I had seen him, and I thought he was the Beast itself."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "But why? Was he a Duskhand too?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Suite the opposite. The last target that we... That I assassinated was someone close to him. He was seeking revenge. He slaughtered every single person who would stand against him."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "In a few minutes, the ground was covered in blood. The only reason I was still standing was because I was too afraid to face him. But in an act of despair, I charged at him."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "You attacked Mir?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Yes. He knocked me out in a single hit. When I came to, the end of his blade was on my neck. He was trembling, but not with rage, not anymore, I think."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "But then, he close his eyes and dispelled his blade. When he opened them again, he was smiling. He told me that I had potential, and that I should use it for good. Then he left."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "What did you do?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I followed him. I wanted to learn from him, and I did. I learned how to fight, how to protect, and how to be a man of honor."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "That lasted for a few years, and then he asked me to stay here, in Archades and to protect the people."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "With every hunter being drafted and killed in the war, the pluvials were a threat, so Aurora and me decided to hunt a many of them as we could."
+                },
+                {
+                    "CharacterID": 9,
+                    "text": "I see... That's how you earned your nickname..."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Yes. I am not a hero, but if people think of me as one, then I will do my best to live up to that name."
                 }
             ],
             "dialogueLvl4": []
