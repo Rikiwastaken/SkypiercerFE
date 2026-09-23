@@ -3664,8 +3664,8 @@ public class UnitScript : MonoBehaviour
         {
             List<int> Skillvalues = dataScript.SkillList[2].SkillValues;
             float HPpercentagethreshold = Skillvalues[0] / 100f;
-            int dodgevalue = Skillvalues[1];
-            int critvalue = Skillvalues[2];
+            int dodgevalue = Skillvalues[2];
+            int critvalue = Skillvalues[1];
             float multiplier = GetSkillLevelMultiplier(2);
             if (UnitCharacteristics.currentHP <= (float)UnitCharacteristics.AjustedStats.HP * HPpercentagethreshold)
             {

@@ -534,11 +534,14 @@ public class BattleInfotext : MonoBehaviour
             {
                 if (SkillButtonList[i].gameObject == currentSelected && SkillButtonIDList[i] != -1)
                 {
-                    string texttouse = DataScript.instance.SkillList[SkillButtonIDList[i]].Descriptions;
+                    DataScript.Skill currentSkill = DataScript.instance.SkillList[SkillButtonIDList[i]];
+                    List<int> Skillvalues = currentSkill.SkillValues;
+                    float multiplier = selectedunit.GetComponent<UnitScript>().GetSkillLevelMultiplier(currentSkill.ID);
+                    string texttouse = currentSkill.Descriptions;
                     // Replace placeholders with actual values
-                    for (int j = 0; j < DataScript.instance.SkillList[SkillButtonIDList[i]].SkillValues.Count; j++)
+                    for (int j = 0; j < currentSkill.SkillValues.Count; j++)
                     {
-                        texttouse = texttouse.Replace("@" + j, DataScript.instance.SkillList[SkillButtonIDList[i]].SkillValues[j].ToString());
+                        texttouse = texttouse.Replace("@" + j, ((int)(currentSkill.SkillValues[j] * multiplier)).ToString());
                     }
                     SkillDescription.text = texttouse;
 
@@ -766,7 +769,7 @@ public class BattleInfotext : MonoBehaviour
 
             DataScript.Skill unitskill = GetSkill(unit.UnitSkill);
             SkillButtonList[0].GetComponent<Image>().color = BaseSkillColor;
-            SkillNames[0].text = unitskill.name;
+            SkillNames[0].text = GetSkillName(unitskill.ID, unit);
             SkillIconScriptList[0].InitializeIcon(unitskill.SkillIconInfo);
             SkillButtonIDList.Add(unitskill.ID);
             usedindex++;
@@ -793,11 +796,11 @@ public class BattleInfotext : MonoBehaviour
                 SkillNames[usedindex].gameObject.SetActive(true);
             }
 
-            DataScript.Skill unitskill = GetSkill(unit.SecondUnitSkill);
+            DataScript.Skill SecondSkill = GetSkill(unit.SecondUnitSkill);
             SkillButtonList[usedindex].GetComponent<Image>().color = BaseSkillColor;
-            SkillNames[usedindex].text = unitskill.name;
-            SkillIconScriptList[usedindex].InitializeIcon(unitskill.SkillIconInfo);
-            SkillButtonIDList.Add(unitskill.ID);
+            SkillNames[usedindex].text = GetSkillName(SecondSkill.ID, unit);
+            SkillIconScriptList[usedindex].InitializeIcon(SecondSkill.SkillIconInfo);
+            SkillButtonIDList.Add(SecondSkill.ID);
             usedindex++;
         }
 
@@ -825,7 +828,7 @@ public class BattleInfotext : MonoBehaviour
 
             DataScript.Skill equipedskill = GetSkill(unit.EquipedSkills[i]);
 
-            SkillNames[i + usedindex].text = equipedskill.name;
+            SkillNames[i + usedindex].text = GetSkillName(equipedskill.ID, unit);
             SkillIconScriptList[i + usedindex].InitializeIcon(equipedskill.SkillIconInfo);
             SkillButtonIDList.Add(equipedskill.ID);
         }
@@ -852,7 +855,7 @@ public class BattleInfotext : MonoBehaviour
 
                 DataScript.Skill tempskill = GetSkill(unit.TemporarySkill);
 
-                SkillNames[i + usedindex].text = tempskill.name;
+                SkillNames[i + usedindex].text = GetSkillName(tempskill.ID, unit);
                 SkillIconScriptList[i + usedindex].InitializeIcon(tempskill.SkillIconInfo);
                 SkillButtonIDList.Add(tempskill.ID);
             }
@@ -931,6 +934,51 @@ public class BattleInfotext : MonoBehaviour
         }
     }
 
+    private string GetSkillName(int SkillID, Character character)
+    {
+        string Skillname = DataScript.instance.SkillList[SkillID].name;
+
+        if (character.affiliation == "playable")
+        {
+            if (character.UnitSkill == SkillID)
+            {
+                switch (character.UnitSkillLevel)
+                {
+                    case 2:
+                        Skillname += " II";
+                        break;
+                    case 3:
+                        Skillname += " III";
+                        break;
+                    case 4:
+                        Skillname += " IV";
+                        break;
+                    case 5:
+                        Skillname += " V";
+                        break;
+                }
+            }
+            else if (character.SecondUnitSkill == SkillID)
+            {
+                switch (character.SecondSkillLevel)
+                {
+                    case 2:
+                        Skillname += " II";
+                        break;
+                    case 3:
+                        Skillname += " III";
+                        break;
+                    case 4:
+                        Skillname += " IV";
+                        break;
+                    case 5:
+                        Skillname += " V";
+                        break;
+                }
+            }
+        }
+        return Skillname;
+    }
     private DataScript.Skill GetSkill(int skillID)
     {
         DataScript.Skill unitskill = null;

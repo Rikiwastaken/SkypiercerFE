@@ -47,7 +47,7 @@
             "Cost": 5,
             "SkillValues": [
                 33,
-                40,
+                10,
                 20
             ],
             "targettype": 0,
@@ -60,9 +60,9 @@
                 "InnerCircleColorID": 4,
                 "MainLogoID": 0
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Psychic",
@@ -83,9 +83,9 @@
                 "InnerCircleColorID": 1,
                 "MainLogoID": 15
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.2222222089767457,
+            "level3Multiplier": 1.4444444179534913,
+            "level4Multiplier": 1.6666666269302369
         },
         {
             "name": "Brute",
@@ -106,9 +106,9 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 14
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.2222219705581666,
+            "level3Multiplier": 1.444443941116333,
+            "level4Multiplier": 1.6666669845581055
         },
         {
             "name": "Fast Legs",
@@ -128,9 +128,9 @@
                 "InnerCircleColorID": 8,
                 "MainLogoID": 0
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 2.0,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 3.0
         },
         {
             "name": "Inspired",
@@ -151,9 +151,9 @@
                 "InnerCircleColorID": 3,
                 "MainLogoID": 11
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 3.0
         },
         {
             "name": "Full of beans",
@@ -213,9 +213,9 @@
                 "InnerCircleColorID": 2,
                 "MainLogoID": 14
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 2.5
         },
         {
             "name": "Genius",
@@ -233,8 +233,8 @@
                 "InnerCircleColorID": 8,
                 "MainLogoID": 16
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
+            "level2Multiplier": 1.0499999523162842,
+            "level3Multiplier": 10.0,
             "level4Multiplier": 0.0
         },
         {
@@ -275,9 +275,9 @@
                 "InnerCircleColorID": 2,
                 "MainLogoID": 11
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333332538604737,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Fast and Deadly",
@@ -297,9 +297,9 @@
                 "InnerCircleColorID": 3,
                 "MainLogoID": 7
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 0.8999999761581421,
+            "level3Multiplier": 0.8500000238418579,
+            "level4Multiplier": 0.75
         },
         {
             "name": "Invigorating",
@@ -319,9 +319,9 @@
                 "InnerCircleColorID": 2,
                 "MainLogoID": 14
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333333730697632,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Sore Loser",
@@ -402,9 +402,9 @@
                 "InnerCircleColorID": 4,
                 "MainLogoID": 7
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Lucky Seven",
@@ -444,9 +444,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 16
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 3.0
         },
         {
             "name": "In Great Shape",
@@ -466,9 +466,9 @@
                 "InnerCircleColorID": 4,
                 "MainLogoID": 5
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.399999976158142,
+            "level3Multiplier": 1.7999999523162842,
+            "level4Multiplier": 2.5
         },
         {
             "name": "Competitive",
@@ -488,9 +488,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 0
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.25,
+            "level3Multiplier": 1.5,
+            "level4Multiplier": 1.75
         },
         {
             "name": "Giant Crusher",
@@ -511,9 +511,9 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 2
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 2.0,
+            "level3Multiplier": 3.5,
+            "level4Multiplier": 5.0
         },
         {
             "name": "Last Stand",
@@ -533,9 +533,9 @@
                 "InnerCircleColorID": 9,
                 "MainLogoID": 12
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333332538604737,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Jack Of All Trades",
@@ -559,12 +559,11 @@
         },
         {
             "name": "Solitary",
-            "Descriptions": "Increases damage dealt by @0 if there is no other ally units in @1 tiles range.",
+            "Descriptions": "Increases damage dealt by @0 if there is no other ally units in 3 tiles range.",
             "IsCommand": false,
             "Cost": 5,
             "SkillValues": [
-                5,
-                3
+                5
             ],
             "targettype": 0,
             "range": 0,
@@ -576,9 +575,9 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 11
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333332538604737,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Cleaver",
@@ -598,9 +597,9 @@
                 "InnerCircleColorID": 3,
                 "MainLogoID": 4
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.0800000429153443,
+            "level3Multiplier": 1.149999976158142,
+            "level4Multiplier": 1.25
         },
         {
             "name": "Revenge",
@@ -640,9 +639,9 @@
                 "InnerCircleColorID": 6,
                 "MainLogoID": 7
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Compassion",
@@ -703,9 +702,9 @@
                 "InnerCircleColorID": 3,
                 "MainLogoID": 5
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.0499999523162842,
+            "level3Multiplier": 1.149999976158142,
+            "level4Multiplier": 1.25
         },
         {
             "name": "Focus",
@@ -725,9 +724,9 @@
                 "InnerCircleColorID": 1,
                 "MainLogoID": 13
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 3.0
         },
         {
             "name": "Rebound",
@@ -747,9 +746,9 @@
                 "InnerCircleColorID": 3,
                 "MainLogoID": 6
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.100000023841858,
+            "level3Multiplier": 1.1666666269302369,
+            "level4Multiplier": 1.25
         },
         {
             "name": "Loyal",
@@ -790,9 +789,9 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 14
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Noble Fight",
@@ -812,9 +811,9 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 0
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 3.0
         },
         {
             "name": "Spite",
@@ -838,7 +837,7 @@
         },
         {
             "name": "Thousand Needles",
-            "Descriptions": "Always attacks @0 times, but reduces damage by @1%.",
+            "Descriptions": "Always attacks 3 times, but reduces damage by @1%.",
             "IsCommand": false,
             "Cost": 15,
             "SkillValues": [
@@ -855,18 +854,17 @@
                 "InnerCircleColorID": 9,
                 "MainLogoID": 7
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 0.8999999761581421,
+            "level3Multiplier": 0.824999988079071,
+            "level4Multiplier": 0.75
         },
         {
             "name": "One for All",
-            "Descriptions": "@0% of damage taken by allies within @1 tiles is transferred to this unit.",
+            "Descriptions": "@0% of damage taken by allies within 2 tiles is transferred to this unit.",
             "IsCommand": false,
             "Cost": 10,
             "SkillValues": [
-                50,
-                2
+                50
             ],
             "targettype": 0,
             "range": 0,
@@ -878,19 +876,18 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 11
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.25,
+            "level3Multiplier": 1.5,
+            "level4Multiplier": 1.75
         },
         {
             "name": "Together we ride",
-            "Descriptions": "Increases all stats by @0 for every @1 allies in @2 tiles.",
+            "Descriptions": "Increases all stats by @0 for every @1 allies in 2 tiles.",
             "IsCommand": false,
             "Cost": 10,
             "SkillValues": [
                 1,
-                3,
-                2
+                3
             ],
             "targettype": 0,
             "range": 0,
@@ -902,9 +899,9 @@
                 "InnerCircleColorID": 3,
                 "MainLogoID": 11
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333330154418946,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Readiness",
@@ -925,9 +922,9 @@
                 "InnerCircleColorID": 1,
                 "MainLogoID": 1
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333332538604737,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Recklessness",
@@ -947,9 +944,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 0
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.25,
+            "level3Multiplier": 1.5,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Unyielding",
@@ -990,9 +987,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 3
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.0,
+            "level3Multiplier": 1.25,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Warming Up",
@@ -1172,9 +1169,9 @@
                 "InnerCircleColorID": 2,
                 "MainLogoID": 14
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333333730697632,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Enduring",
@@ -1194,9 +1191,9 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 2
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.25,
+            "level3Multiplier": 1.5,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Copy",
@@ -1258,18 +1255,16 @@
                 "InnerCircleColorID": 8,
                 "MainLogoID": 25
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333333730697632,
+            "level3Multiplier": 1.666666030883789,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Sundance",
-            "Descriptions": "Turns the weather of the tiles at @0 distance to Sunny (only available outside).",
+            "Descriptions": "Turns the weather of the tiles at 2 distance to Sunny (only available outside).",
             "IsCommand": true,
             "Cost": 5,
-            "SkillValues": [
-                1
-            ],
+            "SkillValues": [],
             "targettype": 3,
             "range": 1,
             "buyable": true,
@@ -1286,12 +1281,10 @@
         },
         {
             "name": "Raindance",
-            "Descriptions": "Turns the weather of the tiles at @0 distance to Rainy (only available outside).",
+            "Descriptions": "Turns the weather of the tiles at 2 distance to Rainy (only available outside).",
             "IsCommand": true,
             "Cost": 5,
-            "SkillValues": [
-                1
-            ],
+            "SkillValues": [],
             "targettype": 3,
             "range": 1,
             "buyable": true,
@@ -1324,9 +1317,9 @@
                 "InnerCircleColorID": 4,
                 "MainLogoID": 8
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 2.5
         },
         {
             "name": "Shut-in",
@@ -1347,9 +1340,9 @@
                 "InnerCircleColorID": 2,
                 "MainLogoID": 9
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 2.5
         },
         {
             "name": "Master Hunter",
@@ -1370,9 +1363,9 @@
                 "InnerCircleColorID": 9,
                 "MainLogoID": 14
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.0,
+            "level3Multiplier": 1.0,
+            "level4Multiplier": 1.0
         },
         {
             "name": "Showdown",
@@ -1392,9 +1385,9 @@
                 "InnerCircleColorID": 1,
                 "MainLogoID": 3
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Fair Play",
@@ -1414,9 +1407,9 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 3
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 3.0
         },
         {
             "name": "Friendly",
@@ -1476,9 +1469,9 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 4
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333332538604737,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Redirection",
@@ -1518,9 +1511,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 0
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333332538604737,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Blade Sacrifice",
@@ -1540,9 +1533,9 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 0
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 0.800000011920929,
+            "level3Multiplier": 0.6000000238418579,
+            "level4Multiplier": 0.4000000059604645
         },
         {
             "name": "Occidens Strategist",
@@ -1562,9 +1555,9 @@
                 "InnerCircleColorID": 8,
                 "MainLogoID": 15
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 2.5
         },
         {
             "name": "Hero's Heir",
@@ -1584,9 +1577,9 @@
                 "InnerCircleColorID": 8,
                 "MainLogoID": 3
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 2.5
         },
         {
             "name": "Eye of Shining Justice",
@@ -1669,9 +1662,9 @@
                 "InnerCircleColorID": 4,
                 "MainLogoID": 7
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.0,
+            "level3Multiplier": 1.0,
+            "level4Multiplier": 1.0
         },
         {
             "name": "Overly Cautious",
@@ -1692,9 +1685,9 @@
                 "InnerCircleColorID": 4,
                 "MainLogoID": 3
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333332538604737,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Break",
@@ -1735,9 +1728,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 14
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333333730697632,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Hook",
@@ -1798,9 +1791,9 @@
                 "InnerCircleColorID": 6,
                 "MainLogoID": 19
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Reverse Blade Technique",
@@ -1838,9 +1831,9 @@
                 "InnerCircleColorID": 6,
                 "MainLogoID": 21
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 2.0,
+            "level3Multiplier": 3.0,
+            "level4Multiplier": 4.0
         },
         {
             "name": "Blazing Edge",
@@ -1858,9 +1851,9 @@
                 "InnerCircleColorID": 6,
                 "MainLogoID": 19
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 2.0,
+            "level3Multiplier": 3.0,
+            "level4Multiplier": 4.0
         },
         {
             "name": "Unphasable",
@@ -1920,9 +1913,9 @@
                 "InnerCircleColorID": 4,
                 "MainLogoID": 19
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333330154418946,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "LightSpeed",
@@ -1943,9 +1936,9 @@
                 "InnerCircleColorID": 4,
                 "MainLogoID": 21
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666669845581055,
+            "level3Multiplier": 1.3333330154418946,
+            "level4Multiplier": 1.5
         },
         {
             "name": "All In",
@@ -1985,9 +1978,9 @@
                 "InnerCircleColorID": 6,
                 "MainLogoID": 12
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333332538604737,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Contamination",
@@ -2027,9 +2020,9 @@
                 "InnerCircleColorID": 3,
                 "MainLogoID": 9
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333332538604737,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Killer",
@@ -2050,9 +2043,9 @@
                 "InnerCircleColorID": 0,
                 "MainLogoID": 7
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.2222222089767457,
+            "level3Multiplier": 1.4444444179534913,
+            "level4Multiplier": 1.6666666269302369
         },
         {
             "name": "Power Transfer",
@@ -2072,9 +2065,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 22
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333333730697632,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Guardian Spirit",
@@ -2094,9 +2087,9 @@
                 "InnerCircleColorID": 2,
                 "MainLogoID": 15
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333332538604737,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Sword Mastery",
@@ -2117,9 +2110,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 0
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Greatsword Mastery",
@@ -2139,9 +2132,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 2
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Spear Mastery",
@@ -2162,9 +2155,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 1
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Shield Mastery",
@@ -2184,9 +2177,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 5
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333332538604737,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Staff Mastery",
@@ -2206,9 +2199,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 6
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Scythe Mastery",
@@ -2228,9 +2221,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 4
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333333730697632,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Bow Mastery",
@@ -2250,9 +2243,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 3
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333332538604737,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Dagger Mastery",
@@ -2273,9 +2266,9 @@
                 "InnerCircleColorID": 7,
                 "MainLogoID": 7
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333330154418946,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Ace in the sleeve",
@@ -2295,9 +2288,9 @@
                 "InnerCircleColorID": 9,
                 "MainLogoID": 15
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.0666667222976685,
+            "level3Multiplier": 1.1333329677581788,
+            "level4Multiplier": 1.25
         },
         {
             "name": "Fortunate Star",
@@ -2337,9 +2330,9 @@
                 "InnerCircleColorID": 9,
                 "MainLogoID": 5
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.066666603088379,
+            "level3Multiplier": 1.1333333253860474,
+            "level4Multiplier": 1.25
         },
         {
             "name": "Risky Bet",
@@ -2359,9 +2352,9 @@
                 "InnerCircleColorID": 9,
                 "MainLogoID": 7
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333330154418946,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Protected by luck",
@@ -2381,9 +2374,9 @@
                 "InnerCircleColorID": 9,
                 "MainLogoID": 17
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.3333330154418946,
+            "level3Multiplier": 1.6666666269302369,
+            "level4Multiplier": 2.0
         },
         {
             "name": "Fortune's favor",
@@ -2403,9 +2396,9 @@
                 "InnerCircleColorID": 9,
                 "MainLogoID": 9
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333332538604737,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Twist of Fate",
@@ -2446,9 +2439,9 @@
                 "InnerCircleColorID": 9,
                 "MainLogoID": 0
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.149999976158142,
+            "level3Multiplier": 1.2999999523162842,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Study",
@@ -2472,12 +2465,11 @@
         },
         {
             "name": "Intimidating Aura",
-            "Descriptions": "Lowers enemy damage by @0 in a @1 tiles radius.",
+            "Descriptions": "Lowers enemy damage by @0 in a 2 tiles radius.",
             "IsCommand": false,
             "Cost": 10,
             "SkillValues": [
-                5,
-                2
+                5
             ],
             "targettype": 0,
             "range": 0,
@@ -2489,18 +2481,17 @@
                 "InnerCircleColorID": 6,
                 "MainLogoID": 11
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.166666030883789,
+            "level3Multiplier": 1.3333330154418946,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Terrifying Aura",
-            "Descriptions": "Lowers enemy Hit, Dodge and Crit by @0 in a @1 tiles radius.",
+            "Descriptions": "Lowers enemy Hit, Dodge and Crit by @0 in a 2 tiles radius.",
             "IsCommand": false,
             "Cost": 10,
             "SkillValues": [
-                15,
-                2
+                15
             ],
             "targettype": 0,
             "range": 0,
@@ -2512,18 +2503,17 @@
                 "InnerCircleColorID": 4,
                 "MainLogoID": 11
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333332538604737,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Heroic Aura",
-            "Descriptions": "Increases ally Hit and Dodge by @0 in a @1 tiles radius.",
+            "Descriptions": "Increases ally Hit and Dodge by @0 in a 2 tiles radius.",
             "IsCommand": false,
             "Cost": 10,
             "SkillValues": [
-                20,
-                2
+                20
             ],
             "targettype": 0,
             "range": 0,
@@ -2535,18 +2525,17 @@
                 "InnerCircleColorID": 4,
                 "MainLogoID": 11
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333332538604737,
+            "level4Multiplier": 1.5
         },
         {
             "name": "Empowering Aura",
-            "Descriptions": "Increases ally damage by @0 in a @1 tiles radius.",
+            "Descriptions": "Increases ally damage by @0 in a 2 tiles radius.",
             "IsCommand": false,
             "Cost": 10,
             "SkillValues": [
-                5,
-                2
+                5
             ],
             "targettype": 0,
             "range": 0,
@@ -2558,9 +2547,9 @@
                 "InnerCircleColorID": 1,
                 "MainLogoID": 11
             },
-            "level2Multiplier": 0.0,
-            "level3Multiplier": 0.0,
-            "level4Multiplier": 0.0
+            "level2Multiplier": 1.1666666269302369,
+            "level3Multiplier": 1.3333330154418946,
+            "level4Multiplier": 1.5
         },
         {
             "name": "I'm a healer, but...",
