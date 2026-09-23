@@ -34,6 +34,8 @@ public class UnitScript : MonoBehaviour
         public int TemporarySkill;
         public bool SecondSkillUnlocked;
         public List<int> EquipedSkills;
+        public int UnitSkillLevel;
+        public int SecondSkillLevel;
 
         [Header("\nUnit type and behavior")]
         public string affiliation; // playable, enemy, other
@@ -398,7 +400,7 @@ public class UnitScript : MonoBehaviour
     public bool fixedgrowth;
     public equipment Fists;
     public float growthPerLuckPoint = 0.25f;
-    public int geniusgrowthboost = 25;
+    public int geniusgrowthboost = 15;
     public int cystalheartgrowthboost = 10;
     public float movespeed;
     private int delayedUpdateCounter;
@@ -457,7 +459,6 @@ public class UnitScript : MonoBehaviour
                     UpdateLayer(ActiveModel);
                 }
                 else
-
                 {
                     UpdateLayer(ActiveModel, "Default");
                 }
@@ -2670,6 +2671,14 @@ public class UnitScript : MonoBehaviour
     // Gets base stats and growth from the enemy class if it has one, calculates level ups until unit is at target level.
     private void LevelSetup()
     {
+        if (UnitCharacteristics.UnitSkillLevel < 1)
+        {
+            UnitCharacteristics.UnitSkillLevel = 1;
+        }
+        if (UnitCharacteristics.SecondSkillLevel < 1)
+        {
+            UnitCharacteristics.SecondSkillLevel = 1;
+        }
         if (UnitCharacteristics.affiliation != "playable")
         {
 
@@ -3170,9 +3179,42 @@ public class UnitScript : MonoBehaviour
         }
 
         calculateStats();
+        LevelUpSkill();
         return lvlupresult;
     }
 
+    // Upgrades skill level if character level is high enough (only for playables)
+    private void LevelUpSkill()
+    {
+        if (UnitCharacteristics.affiliation == "playable")
+        {
+            if (UnitCharacteristics.level < 10)
+            {
+                UnitCharacteristics.UnitSkillLevel = 1;
+                UnitCharacteristics.SecondSkillLevel = 1;
+            }
+            else if (UnitCharacteristics.level < 20)
+            {
+                UnitCharacteristics.UnitSkillLevel = 2;
+                UnitCharacteristics.SecondSkillLevel = 2;
+            }
+            else if (UnitCharacteristics.level < 30)
+            {
+                UnitCharacteristics.UnitSkillLevel = 3;
+                UnitCharacteristics.SecondSkillLevel = 3;
+            }
+            else
+            {
+                UnitCharacteristics.UnitSkillLevel = 4;
+                UnitCharacteristics.SecondSkillLevel = 4;
+            }
+        }
+        else
+        {
+            UnitCharacteristics.UnitSkillLevel = 1;
+            UnitCharacteristics.SecondSkillLevel = 1;
+        }
+    }
     public float GetLevelUpStatsChange(float growth, List<List<int>> randomvalues, int Index = 0)
     {
         float gain = 0f;
@@ -3561,7 +3603,7 @@ public class UnitScript : MonoBehaviour
             allunits = TurnManger.instance.playableunit;
         }
 
-
+        DataScript dataScript = DataScript.instance;
 
         foreach (GameObject characterGO in allunitsGO)
         {
@@ -3598,23 +3640,33 @@ public class UnitScript : MonoBehaviour
         //Despair
         if (GetSkill(2))
         {
-            if (UnitCharacteristics.currentHP <= (float)UnitCharacteristics.AjustedStats.HP * 0.33f)
+            List<int> Skillvalues = dataScript.SkillList[2].SkillValues;
+            float HPpercentagethreshold = Skillvalues[0] / 100f;
+            int dodgevalue = Skillvalues[1];
+            int critvalue = Skillvalues[2];
+            if (UnitCharacteristics.currentHP <= (float)UnitCharacteristics.AjustedStats.HP * HPpercentagethreshold)
             {
-                statbonuses.Crit += 20;
-                statbonuses.Dodge += 40;
+                statbonuses.Crit += critvalue;
+                statbonuses.Dodge += dodgevalue;
             }
         }
         //Psychic
         if (GetSkill(3))
         {
-            statbonuses.TelekDamage += 15;
-            statbonuses.PhysDamage -= 20;
+            List<int> Skillvalues = dataScript.SkillList[3].SkillValues;
+            int DamageBonus = Skillvalues[0];
+            int DamageMalus = Skillvalues[1];
+            statbonuses.TelekDamage += DamageBonus;
+            statbonuses.PhysDamage -= DamageMalus;
         }
         //Brute
         if (GetSkill(4))
         {
-            statbonuses.TelekDamage += 20;
-            statbonuses.PhysDamage -= 15;
+            List<int> Skillvalues = dataScript.SkillList[4].SkillValues;
+            int DamageBonus = Skillvalues[0];
+            int DamageMalus = Skillvalues[1];
+            statbonuses.PhysDamage += DamageBonus;
+            statbonuses.TelekDamage -= DamageMalus;
         }
         //Inspired
         if (GetSkill(6))
@@ -3911,6 +3963,15 @@ public class UnitScript : MonoBehaviour
             statbonuses.PhysDamage += ((int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP) / 2;
         }
 
+        // Crystal Heart
+        if (GetSkill(57))
+        {
+            List<int> Skillvalues = dataScript.SkillList[57].SkillValues;
+            int dodgebonus = Skillvalues[0];
+            int SkillLevel = getskilllevel(57);
+            statbonuses.Dodge += (int)(dodgebonus);
+        }
+
         //Amphibian
         if (GetSkill(61))
         {
@@ -3987,6 +4048,27 @@ public class UnitScript : MonoBehaviour
         if (GetSkill(68))
         {
             statbonuses.FixedDamageBonus += weapon.BaseDamage / 2;
+        }
+
+        //Occidens Strategist
+        if (GetSkill(72))
+        {
+            List<int> Skillvalues = dataScript.SkillList[72].SkillValues;
+            int hitbonus = Skillvalues[0];
+            int SkillLevel = getskilllevel(72);
+            statbonuses.Hit += (int)(hitbonus);
+        }
+
+
+        //Hero's Heir
+        if (GetSkill(73))
+        {
+
+            List<int> Skillvalues = dataScript.SkillList[73].SkillValues;
+            int damagebonus = Skillvalues[0];
+            int SkillLevel = getskilllevel(73);
+            statbonuses.TelekDamage += (int)(damagebonus);
+            statbonuses.PhysDamage += (int)(damagebonus);
         }
 
         //Eye of Shining Justice
@@ -4394,6 +4476,27 @@ public class UnitScript : MonoBehaviour
         return statbonuses;
     }
 
+    private int getskilllevel(int SkillID, Character Character = null)
+    {
+        Character Chartouse = Character;
+        if (Chartouse == null)
+        {
+            Chartouse = UnitCharacteristics;
+        }
+        if (Chartouse.affiliation == "playable")
+        {
+            if (SkillID == Chartouse.UnitSkill)
+            {
+                return Chartouse.UnitSkillLevel;
+            }
+            else if (SkillID == Chartouse.SecondUnitSkill)
+            {
+                return Chartouse.SecondSkillLevel;
+            }
+        }
+
+        return 1;
+    }
     private int ManhattanDistance(Character unit, Character otherunit)
     {
         return (int)(Mathf.Abs(unit.currentTile.GridCoordinates.x - otherunit.currentTile.GridCoordinates.x) + Mathf.Abs(unit.currentTile.GridCoordinates.y - otherunit.currentTile.GridCoordinates.y));

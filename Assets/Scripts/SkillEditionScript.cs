@@ -356,7 +356,13 @@ public class SkillEditionScript : MonoBehaviour
                 {
                     DescriptionText += "Type : Skill\n";
                 }
-                DescriptionText += "<align=left>Effect: " + skill.Descriptions;
+                string texttouse = skill.Descriptions;
+                // Replace placeholders with actual values
+                for (int j = 0; j < skill.SkillValues.Count; j++)
+                {
+                    texttouse = texttouse.Replace("@" + j, skill.SkillValues[j].ToString());
+                }
+                DescriptionText += "<align=left>Effect: " + texttouse;
                 SkillDescriptionText.text = DescriptionText;
                 if (!CurrentDescribedSkillIcon.activeSelf)
                 {

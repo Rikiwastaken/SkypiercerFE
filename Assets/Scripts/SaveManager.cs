@@ -58,6 +58,8 @@ public class SaveManager : MonoBehaviour
         public int previousTelekinesis;
         public int numberofUnitKilled;
         public bool secondskillUnlocked;
+        public int UnitSkillLevel;
+        public int SecondSkillLevel;
     }
 
     [Serializable]
@@ -146,6 +148,8 @@ public class SaveManager : MonoBehaviour
                 previousTelekinesis = character.previousTelekinesis,
                 numberofUnitKilled = character.totalenemieskilled,
                 secondskillUnlocked = character.SecondSkillUnlocked,
+                UnitSkillLevel = character.UnitSkillLevel,
+                SecondSkillLevel = character.SecondSkillLevel,
             };
             returnlist.Add(characterSaveInfo);
         }
@@ -172,6 +176,8 @@ public class SaveManager : MonoBehaviour
                     character.previousTelekinesis = CharaSave.previousTelekinesis;
                     character.totalenemieskilled = CharaSave.numberofUnitKilled;
                     character.SecondSkillUnlocked = CharaSave.secondskillUnlocked;
+                    character.UnitSkillLevel = CharaSave.UnitSkillLevel;
+                    character.SecondSkillLevel = CharaSave.SecondSkillLevel;
                 }
             }
         }

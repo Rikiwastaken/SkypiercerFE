@@ -103,12 +103,16 @@ public class DataScript : MonoBehaviour
         public string Descriptions;
         public bool IsCommand;
         public int Cost;
+        public List<int> SkillValues;
         public int targettype; // 0 enemies, 1 allies, 2 walls, 3 self
         public int range;
         public bool buyable;
         public bool AlwaysPresentInShop;
         public int ID;
         public ImageIconInfo SkillIconInfo;
+        public float level2Multiplier;
+        public float level3Multiplier;
+        public float level4Multiplier;
     }
 
     [Serializable]

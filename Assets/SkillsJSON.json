@@ -5,6 +5,7 @@
             "Descriptions": "No skill",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -14,13 +15,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Retreat",
             "Descriptions": "Allows the user to move again after attacking but reduces movement by 2.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -30,13 +35,21 @@
                 "OuterCircleColorID": 3,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 14
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Despair",
-            "Descriptions": "If the unit's HP is below 33%, increase crit rate by 20% and dodge rate by 40%.",
+            "Descriptions": "If the unit's HP is below @0%, increase crit rate by @1% and dodge rate by @2%.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                33,
+                40,
+                20
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -46,13 +59,20 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Psychic",
-            "Descriptions": "Increases telekinesis damage dealt by 15% but decreases physical damage dealt by 20%.",
+            "Descriptions": "Increases telekinesis damage dealt by @0% but decreases physical damage dealt by @1%.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                15,
+                20
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -62,13 +82,20 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 1,
                 "MainLogoID": 15
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Brute",
-            "Descriptions": "Increases physical damage dealt by 15% but decreases telekinesis damage dealt by 20%.",
+            "Descriptions": "Increases physical damage dealt by @0% but decreases telekinesis damage dealt by @1%.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                15,
+                20
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -78,13 +105,19 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 14
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Fast Legs",
             "Descriptions": "Adds one movement.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                1
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -94,13 +127,20 @@
                 "OuterCircleColorID": 3,
                 "InnerCircleColorID": 8,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Inspired",
-            "Descriptions": "Increases damage dealt by 3 and decreases damage taken by 3 when in movement range of the battalion commander.",
+            "Descriptions": "Increases damage dealt by @0 and decreases damage taken by @1 when in movement range of the battalion commander.",
             "IsCommand": false,
             "Cost": 2,
+            "SkillValues": [
+                3,
+                3
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -110,13 +150,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Full of beans",
             "Descriptions": "Restores blade durability twice as fast.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -126,13 +170,17 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 8,
                 "MainLogoID": 1
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Inexhaustible",
             "Descriptions": "Blade durability never goes down.",
             "IsCommand": false,
             "Cost": 20,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -142,13 +190,19 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 1
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "First aid",
-            "Descriptions": "Recovers 10% of max HP at the start of the turn.",
+            "Descriptions": "Recovers @0% of max HP at the start of the turn.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -158,13 +212,17 @@
                 "OuterCircleColorID": 2,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 14
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Genius",
             "Descriptions": "Increases all stat growth by 25%.",
             "IsCommand": false,
             "Cost": 20,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -174,13 +232,17 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 8,
                 "MainLogoID": 16
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Fast Learner",
             "Descriptions": "Doubles mastery gains.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -190,13 +252,19 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 8,
                 "MainLogoID": 1
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Medic",
-            "Descriptions": "Heals each adjacent friendly unit 10% of their max HP at beginning of turn.",
+            "Descriptions": "Heals each adjacent friendly unit @0% of their max HP at beginning of turn.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -206,13 +274,19 @@
                 "OuterCircleColorID": 2,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Fast and Deadly",
-            "Descriptions": "Increases critical chance by Speed/2.",
+            "Descriptions": "Increases critical chance by Speed/@0.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -222,13 +296,19 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 7
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Invigorating",
-            "Descriptions": "Heals the attacker of 10% of damage dealt.",
+            "Descriptions": "Heals the attacker of @0% of damage dealt.",
             "IsCommand": false,
             "Cost": 7,
+            "SkillValues": [
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -238,13 +318,17 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 14
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Sore Loser",
             "Descriptions": "If the unit has less health than the enemy after combat, sets the enemy's health points to the unit's.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -254,13 +338,17 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 12
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Sniper",
             "Descriptions": "Unit always has 100% hit rate.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -270,13 +358,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 4
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Tempest",
             "Descriptions": "Doubles Biorhythm effects.",
             "IsCommand": false,
             "Cost": 999,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -286,13 +378,20 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 1,
                 "MainLogoID": 8
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Nimble",
-            "Descriptions": "Increases dodge rate by 20% and damage taken by 30%.",
+            "Descriptions": "Increases dodge rate by @0% and damage taken by @1%.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                20,
+                30
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -302,13 +401,17 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 7
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Lucky Seven",
             "Descriptions": "Increases all stats by 7 when last digit of HP is 7.",
             "IsCommand": false,
             "Cost": 7,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -318,13 +421,19 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 7
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Patient",
-            "Descriptions": "Restores twice the durability and 10% of max HP when waiting.",
+            "Descriptions": "Restores twice the durability and @0% of max HP when waiting.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -334,13 +443,19 @@
                 "OuterCircleColorID": 2,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 16
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "In Great Shape",
-            "Descriptions": "Increases hit rate and dodge rate by 10% when at max Health.",
+            "Descriptions": "Increases hit rate and dodge rate by @0% when at max Health.",
             "IsCommand": false,
             "Cost": 2,
+            "SkillValues": [
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -350,13 +465,19 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 5
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Competitive",
-            "Descriptions": "Increases damage dealt by 5 when facing enemy with same blade type.",
+            "Descriptions": "Increases damage dealt by @0 when facing enemy with same blade type.",
             "IsCommand": false,
             "Cost": 3,
+            "SkillValues": [
+                5
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -366,13 +487,20 @@
                 "OuterCircleColorID": 6,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Giant Crusher",
-            "Descriptions": "Increases damage dealt to bosses by 10% and decrease damage taken from bosses by 10%",
+            "Descriptions": "Increases damage dealt to bosses by @0% and decrease damage taken from bosses by @1%",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                10,
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -382,13 +510,19 @@
                 "OuterCircleColorID": 6,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 2
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Last Stand",
-            "Descriptions": "If the Unit is the last one alive, increases all stats by 25%.",
+            "Descriptions": "If the Unit is the last one alive, increases all stats by @0%.",
             "IsCommand": false,
             "Cost": 2,
+            "SkillValues": [
+                25
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -398,13 +532,17 @@
                 "OuterCircleColorID": 6,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 12
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Jack Of All Trades",
             "Descriptions": "All growths are averaged.",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -414,13 +552,20 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 8,
                 "MainLogoID": 12
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Solitary",
-            "Descriptions": "Increases damage dealt by 5 if there is no other ally units in 3 tiles range.",
+            "Descriptions": "Increases damage dealt by @0 if there is no other ally units in @1 tiles range.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                5,
+                3
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -430,13 +575,19 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Cleaver",
-            "Descriptions": "Doubles Scythe secondary damage.",
+            "Descriptions": "Multiplies Scythe Secundary damage by @0.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -446,13 +597,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 4
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Revenge",
             "Descriptions": "Missing health is added to damage.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -462,13 +617,19 @@
                 "OuterCircleColorID": 2,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 1
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Killing Spree",
-            "Descriptions": "Increases all stats by 1 for each enemy killed in the current chapter",
+            "Descriptions": "Increases all stats by @0 for each enemy killed in the current chapter",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                1
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -478,13 +639,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 7
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Compassion",
             "Descriptions": "When healing an ally, recovers the same amount of HP.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -494,13 +659,17 @@
                 "OuterCircleColorID": 2,
                 "InnerCircleColorID": 1,
                 "MainLogoID": 6
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Verso",
             "Descriptions": "Allows to use remaining movements after action.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -510,13 +679,20 @@
                 "OuterCircleColorID": 3,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Survivor",
-            "Descriptions": "Increases all stats by 1 every 3 battles survived.",
+            "Descriptions": "Increases all stats by @0 every @1 battles survived.",
             "IsCommand": false,
             "Cost": 20,
+            "SkillValues": [
+                1,
+                3
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -526,13 +702,19 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 5
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Focus",
-            "Descriptions": "Increases Telekinesis range by 1.",
+            "Descriptions": "Increases Telekinesis range by @0.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                1
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -542,13 +724,19 @@
                 "OuterCircleColorID": 3,
                 "InnerCircleColorID": 1,
                 "MainLogoID": 13
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Rebound",
-            "Descriptions": "When healing, also heals other allies 25% of the amount.",
+            "Descriptions": "When healing, also heals other allies @0% of the amount.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                25
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -558,13 +746,17 @@
                 "OuterCircleColorID": 2,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 6
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Loyal",
             "Descriptions": "Doubles Commander bonus.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -574,13 +766,20 @@
                 "OuterCircleColorID": 3,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Bravery",
-            "Descriptions": "If enemy level is higher, increases all stats by 1 per 2 levels.",
+            "Descriptions": "If enemy level is higher, increases all stats by @0 per @1 levels.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                1,
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -590,13 +789,19 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 14
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Noble Fight",
-            "Descriptions": "Lowers unit and enemy dodge rate by 30%.",
+            "Descriptions": "Lowers unit and enemy dodge rate by @0%.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                30
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -606,13 +811,17 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Spite",
             "Descriptions": "Always counterattacks.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -622,13 +831,20 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 4
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Thousand Needles",
-            "Descriptions": "Always attacks 3 times, but reduces damage by 50%.",
+            "Descriptions": "Always attacks @0 times, but reduces damage by @1%.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                3,
+                50
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -638,13 +854,20 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 7
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "One for All",
-            "Descriptions": "50% of damage taken by allies within 2 tiles is transferred to this unit.",
+            "Descriptions": "@0% of damage taken by allies within @1 tiles is transferred to this unit.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                50,
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -654,13 +877,21 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Together we ride",
-            "Descriptions": "Increases all stats by 1 for every 3 allies in 2 tiles.",
+            "Descriptions": "Increases all stats by @0 for every @1 allies in @2 tiles.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                1,
+                3,
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -670,13 +901,20 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Readiness",
-            "Descriptions": "Increases damage by 5% each time unit waits, up to 30%.",
+            "Descriptions": "Increases damage by @0% each time unit waits, up to @1%.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                5,
+                30
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -686,13 +924,19 @@
                 "OuterCircleColorID": 3,
                 "InnerCircleColorID": 1,
                 "MainLogoID": 1
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Recklessness",
-            "Descriptions": "Increases damage dealt and taken by 20%.",
+            "Descriptions": "Increases damage dealt and taken by @0%.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                20
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -702,13 +946,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Unyielding",
             "Descriptions": "If at max HP when combat starts, HP cannot go below 1.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -718,13 +966,20 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 5
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Transparent Crossbow",
-            "Descriptions": "Increases damage dealt by 25% and Speed by 5 but halves max HP.",
+            "Descriptions": "Increases damage dealt by @0% and Speed by @1 but halves max HP.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                15,
+                5
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -734,13 +989,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 3
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Warming Up",
             "Descriptions": "If unit waits, gains 1 movement for 1 turn.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -750,13 +1009,17 @@
                 "OuterCircleColorID": 3,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Transfuse",
             "Descriptions": "Exchanges HP % with an ally",
             "IsCommand": true,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 1,
             "range": 1,
             "buyable": true,
@@ -766,13 +1029,17 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 5
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Motivate",
             "Descriptions": "Allows an ally to act again.",
             "IsCommand": true,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 1,
             "range": 1,
             "buyable": true,
@@ -782,13 +1049,17 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 1,
                 "MainLogoID": 14
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Swap",
             "Descriptions": "Exchanges place with an ally.",
             "IsCommand": true,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 1,
             "range": 1,
             "buyable": true,
@@ -798,13 +1069,17 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Reinvigorate",
             "Descriptions": "Restores durability of all blades of an ally by 1.",
             "IsCommand": true,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 1,
             "range": 1,
             "buyable": true,
@@ -814,13 +1089,17 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Jump",
             "Descriptions": "Moves on the other side of a small wall.",
             "IsCommand": true,
             "Cost": 20,
+            "SkillValues": [],
             "targettype": 2,
             "range": 1,
             "buyable": true,
@@ -830,13 +1109,17 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 15
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Fortify",
             "Descriptions": "Changes tile to Fortification Tile.",
             "IsCommand": true,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 3,
             "range": 0,
             "buyable": true,
@@ -846,13 +1129,17 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Smoke Bomb",
             "Descriptions": "Changes tile to Fog Tile.",
             "IsCommand": true,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 3,
             "range": 0,
             "buyable": true,
@@ -862,13 +1149,19 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Chakra",
-            "Descriptions": "Restores 25% of missing HP and removes status ailment.",
+            "Descriptions": "Restores @0% of missing HP and removes status ailment.",
             "IsCommand": true,
             "Cost": 5,
+            "SkillValues": [
+                25
+            ],
             "targettype": 3,
             "range": 0,
             "buyable": true,
@@ -878,13 +1171,19 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 14
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Enduring",
-            "Descriptions": "Adds half of missing HP to damage.",
+            "Descriptions": "Adds @0% of missing HP to damage.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                50
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -894,13 +1193,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 2
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Copy",
             "Descriptions": "Permanently adds enemy skill to inventory. The user gets a temporary copy of the skill.",
             "IsCommand": true,
             "Cost": 3,
+            "SkillValues": [],
             "targettype": 0,
             "range": 1,
             "buyable": true,
@@ -910,13 +1213,19 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 8,
                 "MainLogoID": 16
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Crystal Heart",
-            "Descriptions": "Increases all growth and exp by 10% (exclusive to Zack).",
+            "Descriptions": "Increases growth, exp by 10% and dodge rate by @0% (exclusive to Zack).",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -926,13 +1235,19 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 8,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 1.5,
+            "level3Multiplier": 2.0,
+            "level4Multiplier": 2.5
         },
         {
             "name": "Weakness",
-            "Descriptions": "Lowers all stats by 50%.",
+            "Descriptions": "Lowers all stats by @0%.",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [
+                50
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -942,13 +1257,19 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 8,
                 "MainLogoID": 25
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Sundance",
-            "Descriptions": "Turns the weather of the tiles at 1 distance to Sunny (only available outside).",
+            "Descriptions": "Turns the weather of the tiles at @0 distance to Sunny (only available outside).",
             "IsCommand": true,
             "Cost": 5,
+            "SkillValues": [
+                1
+            ],
             "targettype": 3,
             "range": 1,
             "buyable": true,
@@ -958,13 +1279,19 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 5,
                 "MainLogoID": 9
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Raindance",
-            "Descriptions": "Turns the weather of the tiles at 1 distance to Rainy (only available outside).",
+            "Descriptions": "Turns the weather of the tiles at @0 distance to Rainy (only available outside).",
             "IsCommand": true,
             "Cost": 5,
+            "SkillValues": [
+                1
+            ],
             "targettype": 3,
             "range": 1,
             "buyable": true,
@@ -974,13 +1301,19 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 5,
                 "MainLogoID": 8
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Amphibian",
-            "Descriptions": "Increases Dodge rate and hit rate by 15% when on a Water or Rainy Tile.",
+            "Descriptions": "Increases Dodge rate and hit rate by @0% when on a Water or Rainy Tile.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                15
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -990,13 +1323,20 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 8
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Shut-in",
-            "Descriptions": "Increases damage by 3 when not on a Sunny Tile but reduces it by 6 otherwise.",
+            "Descriptions": "Increases damage by @0 when not on a Sunny Tile but reduces it by @1 otherwise.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                3,
+                6
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1006,13 +1346,20 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 9
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Master Hunter",
-            "Descriptions": "Increases hit rate by 80% and damage by 3 if not wielding any blade (exclusive to Mir).",
+            "Descriptions": "Increases hit rate by @0% and damage by @1 if not wielding any blade (exclusive to Mir).",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [
+                80,
+                3
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -1022,13 +1369,19 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 14
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Showdown",
-            "Descriptions": "Increases attacker and defender critical rate by 25%.",
+            "Descriptions": "Increases attacker and defender critical rate by @0%.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                25
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1038,13 +1391,19 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 1,
                 "MainLogoID": 3
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Fair Play",
-            "Descriptions": "Decreases attacker and defender critical rate by 25%.",
+            "Descriptions": "Decreases attacker and defender critical rate by @0%.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                25
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1054,13 +1413,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 3
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Friendly",
             "Descriptions": "Creates Bonds faster.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1070,13 +1433,17 @@
                 "OuterCircleColorID": 6,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 17
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Friends are power",
             "Descriptions": "Doubles Bonds effects.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1086,13 +1453,19 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 17
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Violent Misuse",
-            "Descriptions": "Increases weapon damage by 50% and doubles durability use.",
+            "Descriptions": "Increases weapon damage by @0% and doubles durability use.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                50
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1102,13 +1475,17 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 4
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Redirection",
             "Descriptions": "Physical dmg is calculated with Resistance and Telekinesis dmg with Defense.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1118,13 +1495,19 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 1,
                 "MainLogoID": 15
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Blade Conversion",
-            "Descriptions": "Lowers Blade durability to zero to regain 50% max HP.",
+            "Descriptions": "Lowers Blade durability to zero to regain @0% max HP.",
             "IsCommand": true,
             "Cost": 10,
+            "SkillValues": [
+                50
+            ],
             "targettype": 3,
             "range": 0,
             "buyable": true,
@@ -1134,13 +1517,19 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Blade Sacrifice",
-            "Descriptions": "Sacrifices 50% of max HP to fully replenish durability of equipped blade.",
+            "Descriptions": "Sacrifices @0% of max HP to fully replenish durability of equipped blade.",
             "IsCommand": true,
             "Cost": 10,
+            "SkillValues": [
+                50
+            ],
             "targettype": 3,
             "range": 0,
             "buyable": true,
@@ -1150,13 +1539,19 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Occidens Strategist",
-            "Descriptions": "Increases all stat growth and exp gained by 10% (exclusive to Kira).",
+            "Descriptions": "Increases all stat growth, exp gained by 10% and hit rate by @0% (exclusive to Kira).",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -1166,13 +1561,19 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 8,
                 "MainLogoID": 15
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Hero's Heir",
-            "Descriptions": "Increases all stat growth and exp gained by 10% (exclusive to Gale).",
+            "Descriptions": "Increases all stat growth, exp gained by 10% and damage by @0% (exclusive to Gale).",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [
+                5
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -1182,13 +1583,20 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 8,
                 "MainLogoID": 3
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Eye of Shining Justice",
-            "Descriptions": "Increases Damage by 100, reduces damage taken by 100. (for Debug use).",
+            "Descriptions": "Increases Damage by @0, reduces damage taken by @1. (for Debug use).",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [
+                100,
+                100
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -1198,13 +1606,17 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 3
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Dried",
             "Descriptions": "Negates the effects of the Desert.",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -1214,13 +1626,17 @@
                 "OuterCircleColorID": 5,
                 "InnerCircleColorID": 5,
                 "MainLogoID": 12
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Taunt",
             "Descriptions": "Forces enemies to target this unit until the next turn.",
             "IsCommand": true,
             "Cost": 15,
+            "SkillValues": [],
             "targettype": 3,
             "range": 0,
             "buyable": true,
@@ -1230,13 +1646,17 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 5
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Caelum General",
             "Descriptions": "Reduce damage taken by 50% and always counterattacks.",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -1246,13 +1666,20 @@
                 "OuterCircleColorID": 6,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 7
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Overly Cautious",
-            "Descriptions": "Increases dodge rate by 20% but reduces crit chance by 30%.",
+            "Descriptions": "Increases dodge rate by @0% but reduces crit chance by @1%.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                20,
+                30
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1262,13 +1689,17 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 3
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Break",
             "Descriptions": "Deals durability damage proportional to strength.",
             "IsCommand": true,
             "Cost": 7,
+            "SkillValues": [],
             "targettype": 0,
             "range": 1,
             "buyable": true,
@@ -1278,13 +1709,20 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 5
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Brawl Master",
-            "Descriptions": "Increases hit rate by Dexterity*5 and physical damage by Strength/4 if not wielding any blade.",
+            "Descriptions": "Increases hit rate by Dexterity*@0 and physical damage by Strength/@1 if not wielding any blade.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                5,
+                4
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1294,13 +1732,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 14
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Hook",
             "Descriptions": "Drags a character up to 3 tiles away next to the user if their resistance is lower than the user's psyche.",
             "IsCommand": true,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 4,
             "range": 3,
             "buyable": true,
@@ -1310,13 +1752,17 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 13
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Throw",
             "Descriptions": "Throws a character next to the user up to 3 tiles away if their defense is lower than the user's strength.",
             "IsCommand": true,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 4,
             "range": 1,
             "buyable": true,
@@ -1326,13 +1772,20 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 14
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Born to burn",
-            "Descriptions": "Increases hit and dodge rate by 20% and Crit rate by 10%. Allows attacks to burn enemies. Only works when character is burning.",
+            "Descriptions": "Increases hit and dodge rate by @0% and Crit rate by @1%. Allows attacks to burn enemies. Only works when character is burning.",
             "IsCommand": false,
             "Cost": 3,
+            "SkillValues": [
+                20,
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1342,13 +1795,17 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 19
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Reverse Blade Technique",
             "Descriptions": "Restores all HP and blade durability but stuns the user.",
             "IsCommand": true,
             "Cost": 3,
+            "SkillValues": [],
             "targettype": 3,
             "range": 0,
             "buyable": true,
@@ -1358,13 +1815,17 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 24
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Lightning Edge",
             "Descriptions": "Attacks inflict paralyze.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1374,13 +1835,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 21
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Blazing Edge",
             "Descriptions": "Attacks inflict burn.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1390,13 +1855,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 19
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Unphasable",
             "Descriptions": "Prevents status ailment.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1406,13 +1875,17 @@
                 "OuterCircleColorID": 2,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 17
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Cure",
             "Descriptions": "Removes Status ailments from target.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 1,
             "range": 1,
             "buyable": true,
@@ -1422,13 +1895,17 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 17
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Burning Soul",
             "Descriptions": "Applies burn at the beginning of turn. Increases damage and dodge rate by 15%.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1438,13 +1915,20 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 19
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "LightSpeed",
-            "Descriptions": "Increases dodge rate by 25% and crit rate by 10% if unit is paralysed.",
+            "Descriptions": "Increases dodge rate by @0% and crit rate by @1% if unit is paralysed.",
             "IsCommand": false,
             "Cost": 3,
+            "SkillValues": [
+                25,
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1454,13 +1938,17 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 21
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "All In",
             "Descriptions": "Grants Power, Acceleration and Regen for 3 turns but reduces HP to 1.",
             "IsCommand": true,
             "Cost": 3,
+            "SkillValues": [],
             "targettype": 3,
             "range": 0,
             "buyable": true,
@@ -1470,13 +1958,19 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 22
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Reckless Abandon",
-            "Descriptions": "Increases damage by 10% for each negative status ailment.",
+            "Descriptions": "Increases damage by @0% for each negative status ailment.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1486,13 +1980,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 12
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Contamination",
             "Descriptions": "When attacking an enemy, transmits all status alteration to them and removes them from the user.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1502,13 +2000,19 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Photosynthesis",
-            "Descriptions": "Restores 25% of max HP at the beginning of turn if on a Sunny Tile.",
+            "Descriptions": "Restores @0% of max HP at the beginning of turn if on a Sunny Tile.",
             "IsCommand": false,
             "Cost": 2,
+            "SkillValues": [
+                25
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1518,13 +2022,20 @@
                 "OuterCircleColorID": 2,
                 "InnerCircleColorID": 3,
                 "MainLogoID": 9
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Killer",
-            "Descriptions": "Increases damage dealt by 1% every 10 enemies killed up to 30%.",
+            "Descriptions": "Increases damage dealt by @0% every @1 enemies killed up to 30%.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                1,
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1534,13 +2045,19 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 0,
                 "MainLogoID": 7
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Power Transfer",
-            "Descriptions": "Charges Battalion Leader's Examode gauge by 20%.",
+            "Descriptions": "Charges Battalion Leader's Examode gauge by @0%.",
             "IsCommand": true,
             "Cost": 10,
+            "SkillValues": [
+                20
+            ],
             "targettype": 3,
             "range": 0,
             "buyable": true,
@@ -1550,13 +2067,19 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 22
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Guardian Spirit",
-            "Descriptions": "15% to survive a lethal attack with 1 HP. (Exclusive to Kira)",
+            "Descriptions": "@0% to survive a lethal attack with 1 HP. (Exclusive to Kira)",
             "IsCommand": false,
             "Cost": 0,
+            "SkillValues": [
+                15
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -1566,13 +2089,20 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 15
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Sword Mastery",
-            "Descriptions": "Increases damage by 20% and speed by 5 when wielding a Sword but reduces other blade damage by 15%.",
+            "Descriptions": "Increases damage by @0% and speed by @1 when wielding a Sword but reduces other blade damage by 15%.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                20,
+                5
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1582,13 +2112,19 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Greatsword Mastery",
-            "Descriptions": "Increases damage by 25% when wielding a Greatsword but reduces other blade damage by 15%.",
+            "Descriptions": "Increases damage by @0% when wielding a Greatsword but reduces other blade damage by 15%.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                25
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1598,13 +2134,20 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 2
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Spear Mastery",
-            "Descriptions": "Increases damage by 20% and dexterity by 10 when wielding a Spear but reduces other blade damage by 15%.",
+            "Descriptions": "Increases damage by @0% and dexterity by @1 when wielding a Spear but reduces other blade damage by 15%.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                20,
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1614,13 +2157,19 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 1
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Shield Mastery",
-            "Descriptions": "Increases damage and damage reduction by 15% when wielding a Shield but reduces other blade damage by 15%.",
+            "Descriptions": "Increases damage and damage reduction by @0% when wielding a Shield but reduces other blade damage by 15%.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                15
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1630,13 +2179,19 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 5
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Staff Mastery",
-            "Descriptions": "Increases damage by 50% when wielding a Staff but reduces other blade damage by 15%.",
+            "Descriptions": "Increases damage by @0% when wielding a Staff but reduces other blade damage by 15%.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                50
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1646,13 +2201,19 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 6
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Scythe Mastery",
-            "Descriptions": "Increases damage by 30% when wielding a Scythe but reduces other blade damage by 25%.",
+            "Descriptions": "Increases damage by @0% when wielding a Scythe but reduces other blade damage by 25%.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                30
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1662,13 +2223,19 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 4
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Bow Mastery",
-            "Descriptions": "Increases damage and dodge rate by 20% when wielding a Bow but reduces other blade damage by 15%.",
+            "Descriptions": "Increases damage and dodge rate by @0% when wielding a Bow but reduces other blade damage by 15%.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                20
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1678,13 +2245,20 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 3
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Dagger Mastery",
-            "Descriptions": "Increases damage by 20% and critical rate by 10% when wielding a Dagger but reduces other blade damage by 15%.",
+            "Descriptions": "Increases damage by @0% and critical rate by @1% when wielding a Dagger but reduces other blade damage by 15%.",
             "IsCommand": false,
             "Cost": 15,
+            "SkillValues": [
+                20,
+                10
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1694,13 +2268,19 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 7
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Ace in the sleeve",
-            "Descriptions": "Increases Luck's effects on random rolls by 50%.",
+            "Descriptions": "Increases Luck's effects on random rolls by @0%.",
             "IsCommand": false,
             "Cost": 3,
+            "SkillValues": [
+                50
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1710,13 +2290,17 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 15
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Fortunate Star",
             "Descriptions": "Triples the odds of a Lucky Trigger happening at the beginning of turn.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1726,13 +2310,19 @@
                 "OuterCircleColorID": 7,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 9
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Rigged Fight",
-            "Descriptions": "Adds Luck% chance to reduce damage taken by half.",
+            "Descriptions": "Adds Luck% chance to reduce damage taken by @0%.",
             "IsCommand": false,
             "Cost": 7,
+            "SkillValues": [
+                50
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1742,13 +2332,19 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 5
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Risky Bet",
-            "Descriptions": "Increases Crit Chance by Luck/2 but non-critical attacks no longer do damage.",
+            "Descriptions": "Increases Crit Chance by Luck/@0 but non-critical attacks no longer do damage.",
             "IsCommand": false,
             "Cost": 7,
+            "SkillValues": [
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1758,13 +2354,19 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 7
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Protected by luck",
-            "Descriptions": "Reduces the chance of being hit by a critical hit by 2*Luck%.",
+            "Descriptions": "Reduces the chance of being hit by a critical hit by @0*Luck%.",
             "IsCommand": false,
             "Cost": 7,
+            "SkillValues": [
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1774,13 +2376,19 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 17
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Fortune's favor",
-            "Descriptions": "Increases experience gained by Luck*2.",
+            "Descriptions": "Increases experience gained by Luck*@0.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1790,13 +2398,17 @@
                 "OuterCircleColorID": 8,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 9
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Twist of Fate",
             "Descriptions": "Grants a Luck% chance to swap the attacker’s and target’s HP after combat if enemy's is higher.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1806,13 +2418,20 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Lucky Strike",
-            "Descriptions": "Adds a Luck*2% chance to increase Damage dealt by Luck/2.",
+            "Descriptions": "Adds a Luck*@0% chance to increase Damage dealt by Luck/@1.",
             "IsCommand": false,
             "Cost": 5,
+            "SkillValues": [
+                2,
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1822,13 +2441,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 9,
                 "MainLogoID": 0
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Study",
             "Descriptions": "Grants a copy of an unit's Skill until the end of the battle.",
             "IsCommand": true,
             "Cost": 5,
+            "SkillValues": [],
             "targettype": 4,
             "range": 1,
             "buyable": true,
@@ -1838,13 +2461,20 @@
                 "OuterCircleColorID": 4,
                 "InnerCircleColorID": 7,
                 "MainLogoID": 16
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Intimidating Aura",
-            "Descriptions": "Lowers enemy damage by 5 in a 2 tiles radius.",
+            "Descriptions": "Lowers enemy damage by @0 in a @1 tiles radius.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                5,
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1854,13 +2484,20 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 6,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Terrifying Aura",
-            "Descriptions": "Lowers enemy Hit, Dodge and Crit by 15 in a 2 tiles radius.",
+            "Descriptions": "Lowers enemy Hit, Dodge and Crit by @0 in a @1 tiles radius.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                15,
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1870,13 +2507,20 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Heroic Aura",
-            "Descriptions": "Increases ally Hit and Dodge by 20 in a 2 tiles radius.",
+            "Descriptions": "Increases ally Hit and Dodge by @0 in a @1 tiles radius.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                20,
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1886,13 +2530,20 @@
                 "OuterCircleColorID": 1,
                 "InnerCircleColorID": 4,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "Empowering Aura",
-            "Descriptions": "Increases ally damage by 5 in a 2 tiles radius.",
+            "Descriptions": "Increases ally damage by @0 in a @1 tiles radius.",
             "IsCommand": false,
             "Cost": 10,
+            "SkillValues": [
+                5,
+                2
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1902,13 +2553,17 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 1,
                 "MainLogoID": 11
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         },
         {
             "name": "I'm a healer, but...",
             "Descriptions": "Removes the damage reduction when attacking with staves.",
             "IsCommand": false,
             "Cost": 3,
+            "SkillValues": [],
             "targettype": 0,
             "range": 0,
             "buyable": true,
@@ -1918,7 +2573,10 @@
                 "OuterCircleColorID": 0,
                 "InnerCircleColorID": 2,
                 "MainLogoID": 6
-            }
+            },
+            "level2Multiplier": 0.0,
+            "level3Multiplier": 0.0,
+            "level4Multiplier": 0.0
         }
     ]
 }

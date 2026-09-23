@@ -257,7 +257,13 @@ public class SkillShopScript : MonoBehaviour
                 {
                     DescriptionText.text += "Type : Skill\n";
                 }
-                DescriptionText.text += skill.Descriptions;
+                string texttouse = skill.Descriptions;
+                // Replace placeholders with actual values
+                for (int j = 0; j < skill.SkillValues.Count; j++)
+                {
+                    texttouse = texttouse.Replace("@" + j, skill.SkillValues[j].ToString());
+                }
+                DescriptionText.text += texttouse;
                 necessarycost = skill.Cost;
 
                 if (DataScript.instance.SkillCoins < necessarycost)

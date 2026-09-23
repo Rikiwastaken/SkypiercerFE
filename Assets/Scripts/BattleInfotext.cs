@@ -534,7 +534,13 @@ public class BattleInfotext : MonoBehaviour
             {
                 if (SkillButtonList[i].gameObject == currentSelected && SkillButtonIDList[i] != -1)
                 {
-                    SkillDescription.text = DataScript.instance.SkillList[SkillButtonIDList[i]].Descriptions;
+                    string texttouse = DataScript.instance.SkillList[SkillButtonIDList[i]].Descriptions;
+                    // Replace placeholders with actual values
+                    for (int j = 0; j < DataScript.instance.SkillList[SkillButtonIDList[i]].SkillValues.Count; j++)
+                    {
+                        texttouse = texttouse.Replace("@" + j, DataScript.instance.SkillList[SkillButtonIDList[i]].SkillValues[j].ToString());
+                    }
+                    SkillDescription.text = texttouse;
 
                     GridScript.movementbuffercounter = 5;
                     return;
