@@ -725,9 +725,12 @@ public class ActionManager : MonoBehaviour
         //patient
         if (Unittouse.GetComponent<UnitScript>().GetSkill(20))
         {
+            List<int> Skillvalues = DataScript.instance.SkillList[20].SkillValues;
+            float multiplier = Unittouse.GetComponent<UnitScript>().GetSkillLevelMultiplier(20);
+            float HealingRatio = (Skillvalues[0] / 100f * multiplier);
             Character currentcharacterchar = Unittouse.GetComponent<UnitScript>().UnitCharacteristics;
-            Unittouse.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(currentcharacterchar.AjustedStats.HP * 0.1f), (int)currentcharacterchar.AjustedStats.HP - currentcharacterchar.currentHP), true, "Patient");
-            currentcharacterchar.currentHP += (int)(currentcharacterchar.AjustedStats.HP * 0.1f);
+            Unittouse.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(currentcharacterchar.AjustedStats.HP * HealingRatio), (int)currentcharacterchar.AjustedStats.HP - currentcharacterchar.currentHP), true, "Patient");
+            currentcharacterchar.currentHP += (int)(currentcharacterchar.AjustedStats.HP * HealingRatio);
             if (currentcharacterchar.currentHP > currentcharacterchar.AjustedStats.HP)
             {
                 currentcharacterchar.currentHP = (int)currentcharacterchar.AjustedStats.HP;

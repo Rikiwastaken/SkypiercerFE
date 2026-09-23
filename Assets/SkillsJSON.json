@@ -1653,10 +1653,12 @@
         },
         {
             "name": "Caelum General",
-            "Descriptions": "Reduce damage taken by 50% and always counterattacks.",
+            "Descriptions": "Reduce damage taken by @0% and always counterattacks.",
             "IsCommand": false,
             "Cost": 0,
-            "SkillValues": [],
+            "SkillValues": [
+                50
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": false,
@@ -1902,10 +1904,12 @@
         },
         {
             "name": "Burning Soul",
-            "Descriptions": "Applies burn at the beginning of turn. Increases damage and dodge rate by 15%.",
+            "Descriptions": "Applies burn at the beginning of turn. Increases damage and dodge rate by @0%.",
             "IsCommand": false,
             "Cost": 5,
-            "SkillValues": [],
+            "SkillValues": [
+                15
+            ],
             "targettype": 0,
             "range": 0,
             "buyable": true,

@@ -613,7 +613,10 @@ public class ActionsMenu : MonoBehaviour
                         rangebonus = 1;
                         if (target.GetComponent<UnitScript>().GetSkill(33))
                         {
-                            rangebonus += 1;
+                            List<int> Skillvalues = DataScript.instance.SkillList[33].SkillValues;
+                            float multiplier = target.GetComponent<UnitScript>().GetSkillLevelMultiplier(33);
+                            int RangeBonus = (int)(Skillvalues[0] * multiplier);
+                            rangebonus += RangeBonus;
                         }
                     }
                     if (weapon.type.ToLower() == "bow")
@@ -658,7 +661,10 @@ public class ActionsMenu : MonoBehaviour
             newrangebonus = 1;
             if (target.GetComponent<UnitScript>().GetSkill(33))
             {
-                newrangebonus += 1;
+                List<int> Skillvalues = DataScript.instance.SkillList[33].SkillValues;
+                float multiplier = target.GetComponent<UnitScript>().GetSkillLevelMultiplier(33);
+                int RangeBonus = (int)(Skillvalues[0] * multiplier);
+                newrangebonus += RangeBonus;
             }
         }
         if (newweapon.type.ToLower() == "bow")
@@ -1257,7 +1263,10 @@ public class ActionsMenu : MonoBehaviour
         }
         else if (command.ID == 54) // Chakra
         {
-            int healthrestored = (int)((charunit.AjustedStats.HP - charunit.currentHP) * 0.25f);
+            List<int> Skillvalues = DataScript.instance.SkillList[54].SkillValues;
+            float multiplier = unit.GetComponent<UnitScript>().GetSkillLevelMultiplier(54);
+            float HealRatio = (Skillvalues[0] / 100f * multiplier);
+            int healthrestored = (int)((charunit.AjustedStats.HP - charunit.currentHP) * HealRatio);
             SelfHealCommandWindow(unit, healthrestored, unit.GetComponent<UnitScript>().GetFirstWeapon().Currentuses);
         }
         else if (command.ID == 56) // Copy
@@ -1410,8 +1419,10 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.gameObject.SetActive(true);
-
-        int healthrestored = (int)Mathf.Min((charunit.AjustedStats.HP - charunit.currentHP), charunit.AjustedStats.HP * 0.5f);
+        List<int> Skillvalues = DataScript.instance.SkillList[70].SkillValues;
+        float multiplier = unit.GetComponent<UnitScript>().GetSkillLevelMultiplier(70);
+        float Ratio = (Skillvalues[0] / 100f * multiplier);
+        int healthrestored = (int)Mathf.Min((charunit.AjustedStats.HP - charunit.currentHP), charunit.AjustedStats.HP * Ratio);
 
         SetupCombatHUD(unit, true, true, (int)Mathf.Min(Mathf.Max(charunit.currentHP + healthrestored, 0f), charunit.AjustedStats.HP), false, healthrestored + "", "-", "-", true);
         SetupCombatHUD(target, false, true, 0, true);
@@ -1440,8 +1451,10 @@ public class ActionsMenu : MonoBehaviour
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         unitAttackText.transform.parent.gameObject.SetActive(true);
-
-        int healthlost = (int)Mathf.Min(charunit.currentHP - 1, charunit.AjustedStats.HP * 0.5f);
+        List<int> Skillvalues = DataScript.instance.SkillList[71].SkillValues;
+        float multiplier = unit.GetComponent<UnitScript>().GetSkillLevelMultiplier(71);
+        float Ratio = (Skillvalues[0] / 100f * multiplier);
+        int healthlost = (int)Mathf.Min(charunit.currentHP - 1, charunit.AjustedStats.HP * Ratio);
 
 
         SetupCombatHUD(unit, true, true, (int)Mathf.Min(Mathf.Max(charunit.currentHP - healthlost, 0f), charunit.AjustedStats.HP), false, healthlost + "");
@@ -2189,10 +2202,13 @@ public class ActionsMenu : MonoBehaviour
 
         if (allforonetransfertarget != null)
         {
+            List<int> Skillvalues = DataScript.instance.SkillList[40].SkillValues;
+            float multiplier = allforonetransfertargetGO.GetComponent<UnitScript>().GetSkillLevelMultiplier(40);
+            float DmgMultiplier = (int)(Skillvalues[0] * multiplier);
             oneforallactive = true;
             int transfertargethp = allforonetransfertarget.currentHP;
-            target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= damage / 2;
-            allforonetransfertarget.currentHP -= damage / 2;
+            target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= (int)(damage * (1f - DmgMultiplier));
+            allforonetransfertarget.currentHP -= (int)(damage * DmgMultiplier);
             if (damage == 0)
             {
                 SpawnTextPopup("miss", false, iscrit, target);
@@ -2201,9 +2217,9 @@ public class ActionsMenu : MonoBehaviour
             }
             else
             {
-                SpawnTextPopup(damage / 2 + "", false, iscrit, target);
+                SpawnTextPopup((int)(damage * (1f - DmgMultiplier)) + "", false, iscrit, target);
 
-                SpawnTextPopup(damage / 2 + "", false, iscrit, allforonetransfertargetGO);
+                SpawnTextPopup((int)(damage * DmgMultiplier) + "", false, iscrit, allforonetransfertargetGO);
             }
 
             SurvivalSkillsCheck(allforonetransfertargetGO, transfertargethp);
@@ -2334,9 +2350,12 @@ public class ActionsMenu : MonoBehaviour
             }
             if (unitGO.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
             {
+                List<int> Skillvalues = DataScript.instance.SkillList[97].SkillValues;
+                float multiplier = unitGO.GetComponent<UnitScript>().GetSkillLevelMultiplier(97);
+                int Target = (int)(Skillvalues[0] * multiplier);
                 int LuckMod = unitGO.GetComponent<UnitScript>().GetTriggerLuckModificator();
-                int randomvalue = unitGO.GetComponent<RandomScript>().GetPersonalityValue(15 + LuckMod);
-                if (randomvalue <= 15 + LuckMod)
+                int randomvalue = unitGO.GetComponent<RandomScript>().GetPersonalityValue(Target + LuckMod);
+                if (randomvalue <= Target + LuckMod)
                 {
                     unitChar.currentHP = 1;
                     unitGO.GetComponent<UnitScript>().AddNumber(0, true, "Guardian Spirit");
@@ -2385,6 +2404,9 @@ public class ActionsMenu : MonoBehaviour
             }
             if (Attacker.GetComponent<UnitScript>().GetSkill(34)) // Rebound
             {
+                List<int> Skillvalues = DataScript.instance.SkillList[34].SkillValues;
+                float multiplier = Attacker.GetComponent<UnitScript>().GetSkillLevelMultiplier(34);
+                float HealingRatio = (Skillvalues[0] / 100f * multiplier);
                 List<GameObject> list = new List<GameObject>();
                 if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable")
                 {
@@ -2403,8 +2425,8 @@ public class ActionsMenu : MonoBehaviour
                 {
                     Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
-                    unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)unitchar.AjustedStats.HP - unitchar.currentHP, (int)(DamageDealt * 0.25f)), true, "Rebound");
-                    unitchar.currentHP += (int)(DamageDealt * 0.25f);
+                    unit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)unitchar.AjustedStats.HP - unitchar.currentHP, (int)(DamageDealt * HealingRatio)), true, "Rebound");
+                    unitchar.currentHP += (int)(DamageDealt * HealingRatio);
                     if (unitchar.currentHP > unitchar.AjustedStats.HP)
                     {
                         unitchar.currentHP = (int)unitchar.AjustedStats.HP;
@@ -2417,9 +2439,12 @@ public class ActionsMenu : MonoBehaviour
             if (Attacker.GetComponent<UnitScript>().GetSkill(14)) // Invigorating
             {
                 invigoratingused = true;
+                List<int> Skillvalues = DataScript.instance.SkillList[14].SkillValues;
+                float multiplier = Attacker.GetComponent<UnitScript>().GetSkillLevelMultiplier(14);
+                float HealingRatio = (Skillvalues[0] / 100f * multiplier);
                 Character AttackerChar = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
-                Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)AttackerChar.AjustedStats.HP - AttackerChar.currentHP, (DamageDealt / 10)), true, "Invigorating");
-                AttackerChar.currentHP += (DamageDealt / 10);
+                Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)AttackerChar.AjustedStats.HP - AttackerChar.currentHP, (int)(DamageDealt * HealingRatio)), true, "Invigorating");
+                AttackerChar.currentHP += (int)(DamageDealt * HealingRatio);
                 if (AttackerChar.currentHP > AttackerChar.AjustedStats.HP)
                 {
                     AttackerChar.currentHP = (int)AttackerChar.AjustedStats.HP;
@@ -2518,18 +2543,24 @@ public class ActionsMenu : MonoBehaviour
                 int damage = CalculateDamage(attacker, true, potentialtarget);
 
                 //Cleaver
-                int truedamage = damage / 4;
+
+
+                float multiplier = 0.25f;
+
                 if (attacker.GetComponent<UnitScript>().GetFirstWeapon().Modifier != null && attacker.GetComponent<UnitScript>().GetFirstWeapon().Modifier.ToLower() == "serrated")
                 {
-                    truedamage += damage / 4;
+                    multiplier *= 2f;
                 }
-                potentialtarget.GetComponent<UnitScript>().AddNumber(truedamage, false, "Scythe");
+
                 if (attacker.GetComponent<UnitScript>().GetSkill(27))
                 {
-                    Debug.Log("Cleaver activated");
-                    truedamage += damage / 4;
-                    potentialtarget.GetComponent<UnitScript>().AddNumber(damage / 4, false, "Cleaver");
+                    List<int> Skillvalues = DataScript.instance.SkillList[27].SkillValues;
+                    float Skillmultiplier = attacker.GetComponent<UnitScript>().GetSkillLevelMultiplier(27);
+                    float MultiplierSkillBonus = (Skillvalues[0] * Skillmultiplier);
+                    multiplier *= MultiplierSkillBonus;
                 }
+                int truedamage = (int)(damage * multiplier);
+                potentialtarget.GetComponent<UnitScript>().AddNumber(truedamage, false, "Scythe");
                 Chartarget.currentHP -= truedamage;
             }
 
@@ -2590,8 +2621,11 @@ public class ActionsMenu : MonoBehaviour
 
         if (unit.GetComponent<UnitScript>().GetSkill(111)) //Fortune's favor
         {
+            List<int> Skillvalues = DataScript.instance.SkillList[111].SkillValues;
+            float multiplier = unit.GetComponent<UnitScript>().GetSkillLevelMultiplier(111);
+            float ExpMultiplier = (Skillvalues[0] * multiplier);
             int luckstat = (int)unit.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Luck + unit.GetComponent<UnitScript>().GetStatSkillBonus(unit, true).Luck;
-            adjustedexp = (adjustedexp * (1f + (luckstat * 2f / 100f)));
+            adjustedexp = (adjustedexp * (1f + (luckstat * ExpMultiplier / 100f)));
         }
 
         if (adjustedexp < 0)

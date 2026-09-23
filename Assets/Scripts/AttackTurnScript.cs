@@ -625,7 +625,10 @@ public class AttackTurnScript : MonoBehaviour
         else if (commandID == 54) // Chakra
         {
             foresightScript.CreateAction(3, User);
-            int healthrestored = (int)((CharUser.AjustedStats.HP - CharUser.currentHP) * 0.25f);
+            List<int> Skillvalues = DataScript.instance.SkillList[54].SkillValues;
+            float multiplier = User.GetComponent<UnitScript>().GetSkillLevelMultiplier(54);
+            float HealRatio = (Skillvalues[0] / 100f * multiplier);
+            int healthrestored = (int)((CharUser.AjustedStats.HP - CharUser.currentHP) * HealRatio);
             CharUser.currentHP += healthrestored;
             User.GetComponent<UnitScript>().RemoveStatusAilments();
             User.GetComponent<UnitScript>().AddNumber(healthrestored, true, "Chakra");
@@ -719,7 +722,10 @@ public class AttackTurnScript : MonoBehaviour
         else if (commandID == 70) // Blade Conversion
         {
             foresightScript.CreateAction(3, User);
-            int healthrestored = (int)Mathf.Min((CharUser.AjustedStats.HP - CharUser.currentHP), CharUser.AjustedStats.HP * 0.5f);
+            List<int> Skillvalues = DataScript.instance.SkillList[70].SkillValues;
+            float multiplier = User.GetComponent<UnitScript>().GetSkillLevelMultiplier(70);
+            float Ratio = (Skillvalues[0] / 100f * multiplier);
+            int healthrestored = (int)Mathf.Min((CharUser.AjustedStats.HP - CharUser.currentHP), CharUser.AjustedStats.HP * Ratio);
             CharUser.currentHP += healthrestored;
             User.GetComponent<UnitScript>().GetFirstWeapon().Currentuses = 0;
             User.GetComponent<UnitScript>().AddNumber(healthrestored, true, "Blade Conversion");
@@ -727,7 +733,10 @@ public class AttackTurnScript : MonoBehaviour
         else if (commandID == 71) // Blade Sacrifice
         {
             foresightScript.CreateAction(3, User);
-            int healthlost = (int)Mathf.Min(CharUser.currentHP - 1, CharUser.AjustedStats.HP * 0.5f);
+            List<int> Skillvalues = DataScript.instance.SkillList[71].SkillValues;
+            float multiplier = User.GetComponent<UnitScript>().GetSkillLevelMultiplier(71);
+            float Ratio = (Skillvalues[0] / 100f * multiplier);
+            int healthlost = (int)Mathf.Min(CharUser.currentHP - 1, CharUser.AjustedStats.HP * Ratio);
             CharUser.currentHP -= healthlost;
             User.GetComponent<UnitScript>().GetFirstWeapon().Currentuses = 0;
             User.GetComponent<UnitScript>().AddNumber(healthlost, false, "Blade Sacrifice");
@@ -816,7 +825,10 @@ public class AttackTurnScript : MonoBehaviour
         }
         else if (commandID == 96) // Power Transfer
         {
-            User.GetComponent<UnitScript>().IncreaseExamodeGauge(20);
+            List<int> Skillvalues = DataScript.instance.SkillList[95].SkillValues;
+            float multiplier = User.GetComponent<UnitScript>().GetSkillLevelMultiplier(96);
+            int ExamodeGain = (int)(Skillvalues[0] * multiplier);
+            User.GetComponent<UnitScript>().IncreaseExamodeGauge(ExamodeGain);
             User.GetComponent<UnitScript>().AddNumber(0, true, "Power Transfer");
         }
         else if (commandID == 114) // Study

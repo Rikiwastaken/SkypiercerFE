@@ -1014,8 +1014,11 @@ public class UnitScript : MonoBehaviour
         //First aid
         if (GetSkill(9))
         {
-            AddNumber(Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * 0.1f), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "First Aid");
-            UnitCharacteristics.currentHP += (int)(UnitCharacteristics.AjustedStats.HP * 0.1f);
+            List<int> Skillvalues = DataScript.instance.SkillList[9].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(9);
+            float HealingRatio = (Skillvalues[0] / 100f * multiplier);
+            AddNumber(Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * HealingRatio), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "First Aid");
+            UnitCharacteristics.currentHP += (int)(UnitCharacteristics.AjustedStats.HP * HealingRatio);
             if (UnitCharacteristics.currentHP > UnitCharacteristics.AjustedStats.HP)
             {
                 UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
@@ -1024,13 +1027,16 @@ public class UnitScript : MonoBehaviour
         //Medic
         if (GetSkill(12))
         {
+            List<int> Skillvalues = DataScript.instance.SkillList[12].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(12);
+            float HealingRatio = (Skillvalues[0] / 100f * multiplier);
             foreach (GameObject otherunit in charactertoapply)
             {
                 Character otherunitchar = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
                 if (otherunitchar.currentHP < (int)otherunitchar.AjustedStats.HP && Mathf.Abs(otherunitchar.currentTile.GridCoordinates.x - UnitCharacteristics.currentTile.GridCoordinates.x) <= 1 && Mathf.Abs(otherunitchar.currentTile.GridCoordinates.y - UnitCharacteristics.currentTile.GridCoordinates.y) <= 1)
                 {
-                    otherunit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(otherunitchar.AjustedStats.HP * 0.1f), (int)otherunitchar.AjustedStats.HP - otherunitchar.currentHP), true, "Medic");
-                    otherunitchar.currentHP += (int)(otherunitchar.AjustedStats.HP * 0.1f);
+                    otherunit.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(otherunitchar.AjustedStats.HP * HealingRatio), (int)otherunitchar.AjustedStats.HP - otherunitchar.currentHP), true, "Medic");
+                    otherunitchar.currentHP += (int)(otherunitchar.AjustedStats.HP * HealingRatio);
                     if (otherunitchar.currentHP > otherunitchar.AjustedStats.HP)
                     {
                         otherunitchar.currentHP = (int)otherunitchar.AjustedStats.HP;
@@ -1053,8 +1059,11 @@ public class UnitScript : MonoBehaviour
         // Photosynthesis
         if (GetSkill(94) && GetWeatherType() == "sun")
         {
-            AddNumber(Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * 0.25f), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "Photosynthesis");
-            UnitCharacteristics.currentHP += (int)(UnitCharacteristics.AjustedStats.HP * 0.25f);
+            List<int> Skillvalues = DataScript.instance.SkillList[94].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(94);
+            float Ratio = (Skillvalues[0] / 100f * multiplier);
+            AddNumber(Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * Ratio), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP), true, "Photosynthesis");
+            UnitCharacteristics.currentHP += (int)(UnitCharacteristics.AjustedStats.HP * Ratio);
             if (UnitCharacteristics.currentHP > UnitCharacteristics.AjustedStats.HP)
             {
                 UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
@@ -1445,14 +1454,17 @@ public class UnitScript : MonoBehaviour
     {
         if (GetSkill(58)) //weakness
         {
+            List<int> Skillvalues = DataScript.instance.SkillList[58].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(58);
+            float ratio = (Skillvalues[0] / 100f * multiplier);
             UnitCharacteristics.AjustedStats.HP = (int)UnitCharacteristics.stats.HP;
-            UnitCharacteristics.AjustedStats.Strength = (int)UnitCharacteristics.stats.Strength / 2;
-            UnitCharacteristics.AjustedStats.Psyche = (int)UnitCharacteristics.stats.Psyche / 2;
-            UnitCharacteristics.AjustedStats.Defense = (int)UnitCharacteristics.stats.Defense / 2;
-            UnitCharacteristics.AjustedStats.Resistance = (int)UnitCharacteristics.stats.Resistance / 2;
-            UnitCharacteristics.AjustedStats.Speed = (int)UnitCharacteristics.stats.Speed / 2;
-            UnitCharacteristics.AjustedStats.Dexterity = (int)UnitCharacteristics.stats.Dexterity / 2;
-            UnitCharacteristics.AjustedStats.Luck = (int)UnitCharacteristics.stats.Luck / 2;
+            UnitCharacteristics.AjustedStats.Strength = (int)(UnitCharacteristics.stats.Strength * ratio);
+            UnitCharacteristics.AjustedStats.Psyche = (int)(UnitCharacteristics.stats.Psyche * ratio);
+            UnitCharacteristics.AjustedStats.Defense = (int)(UnitCharacteristics.stats.Defense * ratio);
+            UnitCharacteristics.AjustedStats.Resistance = (int)(UnitCharacteristics.stats.Resistance * ratio);
+            UnitCharacteristics.AjustedStats.Speed = (int)(UnitCharacteristics.stats.Speed * ratio);
+            UnitCharacteristics.AjustedStats.Dexterity = (int)(UnitCharacteristics.stats.Dexterity * ratio);
+            UnitCharacteristics.AjustedStats.Luck = (int)(UnitCharacteristics.stats.Luck * ratio);
         }
         else
         {
@@ -2599,7 +2611,10 @@ public class UnitScript : MonoBehaviour
             int remainingMovements = UnitCharacteristics.movements - tilesmoved;
             if (GetSkill(5)) // checking if unit is using Fast Legs
             {
-                remainingMovements += 1;
+                List<int> Skillvalues = DataScript.instance.SkillList[4].SkillValues;
+                int BaseBonus = Skillvalues[0];
+                float multiplier = GetSkillLevelMultiplier(5);
+                remainingMovements += (int)(BaseBonus * multiplier);
             }
 
             if (remainingMovements <= 0)
@@ -2783,7 +2798,11 @@ public class UnitScript : MonoBehaviour
         }
         if (GetSkill(5)) // checking if unit is using Fast Legs
         {
-            ajustedmovements += 1;
+            List<int> Skillvalues = DataScript.instance.SkillList[4].SkillValues;
+            int BaseBonus = Skillvalues[0];
+            float multiplier = GetSkillLevelMultiplier(5);
+            ajustedmovements += (int)(BaseBonus * multiplier);
+
         }
         if (UnitCharacteristics.statusEffects != null && UnitCharacteristics.statusEffects.ParalyzedTurns > 0)
         {
@@ -3423,7 +3442,10 @@ public class UnitScript : MonoBehaviour
             range += 1;
             if (GetSkill(33)) //focus
             {
-                range += 1;
+                List<int> Skillvalues = DataScript.instance.SkillList[33].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(33);
+                int RangeBonus = (int)(Skillvalues[0] * multiplier);
+                range += RangeBonus;
             }
         }
         return (range, melee);
@@ -3644,10 +3666,11 @@ public class UnitScript : MonoBehaviour
             float HPpercentagethreshold = Skillvalues[0] / 100f;
             int dodgevalue = Skillvalues[1];
             int critvalue = Skillvalues[2];
+            float multiplier = GetSkillLevelMultiplier(2);
             if (UnitCharacteristics.currentHP <= (float)UnitCharacteristics.AjustedStats.HP * HPpercentagethreshold)
             {
-                statbonuses.Crit += critvalue;
-                statbonuses.Dodge += dodgevalue;
+                statbonuses.Crit += (int)(critvalue * multiplier);
+                statbonuses.Dodge += (int)(dodgevalue * multiplier);
             }
         }
         //Psychic
@@ -3656,8 +3679,9 @@ public class UnitScript : MonoBehaviour
             List<int> Skillvalues = dataScript.SkillList[3].SkillValues;
             int DamageBonus = Skillvalues[0];
             int DamageMalus = Skillvalues[1];
-            statbonuses.TelekDamage += DamageBonus;
-            statbonuses.PhysDamage -= DamageMalus;
+            float multiplier = GetSkillLevelMultiplier(3);
+            statbonuses.TelekDamage += (int)(DamageBonus * multiplier);
+            statbonuses.PhysDamage -= (int)(DamageMalus * multiplier);
         }
         //Brute
         if (GetSkill(4))
@@ -3665,8 +3689,9 @@ public class UnitScript : MonoBehaviour
             List<int> Skillvalues = dataScript.SkillList[4].SkillValues;
             int DamageBonus = Skillvalues[0];
             int DamageMalus = Skillvalues[1];
-            statbonuses.PhysDamage += DamageBonus;
-            statbonuses.TelekDamage -= DamageMalus;
+            float multiplier = GetSkillLevelMultiplier(4);
+            statbonuses.PhysDamage += (int)(DamageBonus * multiplier);
+            statbonuses.TelekDamage -= (int)(DamageMalus * multiplier);
         }
         //Inspired
         if (GetSkill(6))
@@ -3687,7 +3712,10 @@ public class UnitScript : MonoBehaviour
                     activelist = TurnManger.instance.otherunits;
                 }
             }
-
+            List<int> Skillvalues = dataScript.SkillList[6].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(6);
+            int DamageBonus = Skillvalues[0];
+            int DamageReduction = Skillvalues[1];
 
             foreach (Character otherunitchar in activelist)
             {
@@ -3698,8 +3726,8 @@ public class UnitScript : MonoBehaviour
                 int movement = otherunitchar.movements;
                 if (ManhattanDistance(UnitCharacteristics, otherunitchar) <= movement && otherunitchar.playableStats.battalion == UnitCharacteristics.playableStats.battalion && otherunitchar.playableStats.protagonist)
                 {
-                    statbonuses.FixedDamageBonus += 3;
-                    statbonuses.FixedDamageReduction += 3;
+                    statbonuses.FixedDamageBonus += (int)(DamageBonus * multiplier);
+                    statbonuses.FixedDamageReduction += (int)(DamageReduction * multiplier);
                     break;
                 }
             }
@@ -3707,7 +3735,10 @@ public class UnitScript : MonoBehaviour
         //FastAndDeadly
         if (GetSkill(13))
         {
-            statbonuses.Crit += (int)UnitCharacteristics.AjustedStats.Speed / 2;
+            List<int> Skillvalues = dataScript.SkillList[13].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(13);
+            int SpeedDivider = Skillvalues[0];
+            statbonuses.Crit += (int)(UnitCharacteristics.AjustedStats.Speed / (SpeedDivider * multiplier));
         }
         //Sniper
         if (GetSkill(16))
@@ -3717,8 +3748,12 @@ public class UnitScript : MonoBehaviour
         //Nimble
         if (GetSkill(18))
         {
-            statbonuses.Dodge += 20;
-            statbonuses.DamageReduction -= 30;
+            List<int> Skillvalues = dataScript.SkillList[18].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(18);
+            int DodgeBonus = Skillvalues[0];
+            int DamageReductionMalus = Skillvalues[1];
+            statbonuses.Dodge += (int)(DodgeBonus * multiplier);
+            statbonuses.DamageReduction -= (int)(DamageReductionMalus * multiplier);
         }
         //LuckySeven
         if (GetSkill(19))
@@ -3739,8 +3774,11 @@ public class UnitScript : MonoBehaviour
         {
             if (UnitCharacteristics.currentHP >= UnitCharacteristics.AjustedStats.HP)
             {
-                statbonuses.Hit += 10;
-                statbonuses.Dodge += 10;
+                List<int> Skillvalues = dataScript.SkillList[21].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(21);
+                int Bonus = (int)(Skillvalues[0] * multiplier);
+                statbonuses.Hit += Bonus;
+                statbonuses.Dodge += Bonus;
             }
         }
         // Competitive
@@ -3750,7 +3788,10 @@ public class UnitScript : MonoBehaviour
             {
                 if (weapon.type.ToLower() == enemy.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower())
                 {
-                    statbonuses.FixedDamageBonus += 5;
+                    List<int> Skillvalues = dataScript.SkillList[22].SkillValues;
+                    float multiplier = GetSkillLevelMultiplier(22);
+                    int Bonus = (int)(Skillvalues[0] * multiplier);
+                    statbonuses.FixedDamageBonus += Bonus;
                 }
             }
 
@@ -3762,9 +3803,13 @@ public class UnitScript : MonoBehaviour
             {
                 if (enemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats != null && enemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
                 {
-                    statbonuses.PhysDamage += 1;
-                    statbonuses.TelekDamage += 10;
-                    statbonuses.DamageReduction += 10;
+                    List<int> Skillvalues = dataScript.SkillList[23].SkillValues;
+                    float multiplier = GetSkillLevelMultiplier(23);
+                    int DamageBonus = (int)(Skillvalues[0] * multiplier);
+                    int DamageReductionBonus = (int)(Skillvalues[1] * multiplier);
+                    statbonuses.PhysDamage += DamageBonus;
+                    statbonuses.TelekDamage += DamageBonus;
+                    statbonuses.DamageReduction += DamageReductionBonus;
                 }
             }
 
@@ -3793,13 +3838,16 @@ public class UnitScript : MonoBehaviour
 
             if (activelist.Count == 1)
             {
-                statbonuses.Strength += (int)(UnitCharacteristics.AjustedStats.Strength * 0.25f);
-                statbonuses.Psyche += (int)(UnitCharacteristics.AjustedStats.Psyche * 0.25f);
-                statbonuses.Resistance += (int)(UnitCharacteristics.AjustedStats.Resistance * 0.25f);
-                statbonuses.Defense += (int)(UnitCharacteristics.AjustedStats.Defense * 0.25f);
-                statbonuses.Speed += (int)(UnitCharacteristics.AjustedStats.Speed * 0.25f);
-                statbonuses.Dexterity += (int)(UnitCharacteristics.AjustedStats.Dexterity * 0.25f);
-                statbonuses.Luck += (int)(UnitCharacteristics.AjustedStats.Luck * 0.25f);
+                List<int> Skillvalues = dataScript.SkillList[24].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(24);
+                float StatMult = (Skillvalues[0] / 100f * multiplier);
+                statbonuses.Strength += (int)(UnitCharacteristics.AjustedStats.Strength * StatMult);
+                statbonuses.Psyche += (int)(UnitCharacteristics.AjustedStats.Psyche * StatMult);
+                statbonuses.Resistance += (int)(UnitCharacteristics.AjustedStats.Resistance * StatMult);
+                statbonuses.Defense += (int)(UnitCharacteristics.AjustedStats.Defense * StatMult);
+                statbonuses.Speed += (int)(UnitCharacteristics.AjustedStats.Speed * StatMult);
+                statbonuses.Dexterity += (int)(UnitCharacteristics.AjustedStats.Dexterity * StatMult);
+                statbonuses.Luck += (int)(UnitCharacteristics.AjustedStats.Luck * StatMult);
             }
         }
         // Solitary
@@ -3836,7 +3884,10 @@ public class UnitScript : MonoBehaviour
             }
             if (toofar)
             {
-                statbonuses.FixedDamageBonus += 5;
+                List<int> Skillvalues = dataScript.SkillList[26].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(26);
+                int DmgBonus = (int)(Skillvalues[0] * multiplier);
+                statbonuses.FixedDamageBonus += DmgBonus;
             }
         }
 
@@ -3852,42 +3903,57 @@ public class UnitScript : MonoBehaviour
         //KillingSpree
         if (GetSkill(29))
         {
-            statbonuses.Strength += 1 * unitkilled;
-            statbonuses.Psyche += 1 * unitkilled;
-            statbonuses.Resistance += 1 * unitkilled;
-            statbonuses.Defense += 1 * unitkilled;
-            statbonuses.Speed += 1 * unitkilled;
-            statbonuses.Dexterity += 1 * unitkilled;
-            statbonuses.Luck += 1 * unitkilled;
+            List<int> Skillvalues = dataScript.SkillList[29].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(29);
+            float Bonus = (Skillvalues[0] * multiplier);
+            statbonuses.Strength += (int)(Bonus * unitkilled);
+            statbonuses.Psyche += (int)(Bonus * unitkilled);
+            statbonuses.Resistance += (int)(Bonus * unitkilled);
+            statbonuses.Defense += (int)(Bonus * unitkilled);
+            statbonuses.Speed += (int)(Bonus * unitkilled);
+            statbonuses.Dexterity += (int)(Bonus * unitkilled);
+            statbonuses.Luck += (int)(Bonus * unitkilled);
         }
 
         //Survivor
         if (GetSkill(32))
         {
-            statbonuses.Strength += (SurvivorStacks / 3);
-            statbonuses.Psyche += (SurvivorStacks / 3);
-            statbonuses.Resistance += (SurvivorStacks / 3);
-            statbonuses.Defense += (SurvivorStacks / 3);
-            statbonuses.Speed += (SurvivorStacks / 3);
-            statbonuses.Dexterity += (SurvivorStacks / 3);
-            statbonuses.Luck += (SurvivorStacks / 3);
+            List<int> Skillvalues = dataScript.SkillList[32].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(32);
+            float Bonus = (Skillvalues[0] * multiplier);
+            float BattlesNeeded = (Skillvalues[1] / multiplier);
+            int totalstatbonus = (int)(Bonus * (SurvivorStacks / BattlesNeeded));
+            statbonuses.Strength += totalstatbonus;
+            statbonuses.Psyche += totalstatbonus;
+            statbonuses.Resistance += totalstatbonus;
+            statbonuses.Defense += totalstatbonus;
+            statbonuses.Speed += totalstatbonus;
+            statbonuses.Dexterity += totalstatbonus;
+            statbonuses.Luck += totalstatbonus;
         }
         //Bravery
         if (GetSkill(36))
         {
             if (enemy != null)
             {
+
+                List<int> Skillvalues = dataScript.SkillList[36].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(36);
+
+
+
                 int difference = enemy.GetComponent<UnitScript>().UnitCharacteristics.level - UnitCharacteristics.level;
 
                 if (difference > 0)
                 {
-                    statbonuses.Strength += difference / 2;
-                    statbonuses.Psyche += difference / 2;
-                    statbonuses.Resistance += difference / 2;
-                    statbonuses.Defense += difference / 2;
-                    statbonuses.Speed += difference / 2;
-                    statbonuses.Dexterity += difference / 2;
-                    statbonuses.Luck += difference / 2;
+                    int TotalBonus = (int)((Skillvalues[0] * multiplier) * difference / (Skillvalues[0] * multiplier));
+                    statbonuses.Strength += TotalBonus;
+                    statbonuses.Psyche += TotalBonus;
+                    statbonuses.Resistance += TotalBonus;
+                    statbonuses.Defense += TotalBonus;
+                    statbonuses.Speed += TotalBonus;
+                    statbonuses.Dexterity += TotalBonus;
+                    statbonuses.Luck += TotalBonus;
                 }
             }
 
@@ -3897,14 +3963,20 @@ public class UnitScript : MonoBehaviour
         //Noble Fight
         if (GetSkill(37))
         {
-            statbonuses.Hit += 30;
-            statbonuses.Dodge -= 30;
+            List<int> Skillvalues = dataScript.SkillList[37].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(37);
+            int Bonus = (int)(Skillvalues[0] * multiplier);
+            statbonuses.Hit += Bonus;
+            statbonuses.Dodge -= Bonus;
         }
         //Thousand Needles
         if (GetSkill(39))
         {
-            statbonuses.PhysDamage -= 50;
-            statbonuses.TelekDamage -= 50;
+            List<int> Skillvalues = dataScript.SkillList[39].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(39);
+            int Malus = (int)(Skillvalues[1] * multiplier);
+            statbonuses.PhysDamage -= Malus;
+            statbonuses.TelekDamage -= Malus;
         }
 
         // Together we ride
@@ -3922,20 +3994,29 @@ public class UnitScript : MonoBehaviour
                     closepalls++;
                 }
             }
-            statbonuses.Strength += closepalls / 3;
-            statbonuses.Psyche += closepalls / 3;
-            statbonuses.Resistance += closepalls / 3;
-            statbonuses.Defense += closepalls / 3;
-            statbonuses.Speed += 5 * closepalls / 3;
-            statbonuses.Dexterity += closepalls / 3;
-            statbonuses.Luck += closepalls / 3;
+
+            List<int> Skillvalues = dataScript.SkillList[41].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(41);
+            int Bonus = (int)(Skillvalues[0] * multiplier * closepalls / 3f);
+
+            statbonuses.Strength += Bonus;
+            statbonuses.Psyche += Bonus;
+            statbonuses.Resistance += Bonus;
+            statbonuses.Defense += Bonus;
+            statbonuses.Speed += Bonus;
+            statbonuses.Dexterity += Bonus;
+            statbonuses.Luck += Bonus;
 
         }
 
         // Readiness
         if (GetSkill(42))
         {
-            int dmgbonus = (int)Mathf.Min(numberoftimeswaitted * 5, 30);
+            List<int> Skillvalues = dataScript.SkillList[42].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(42);
+            int bonus = (int)(Skillvalues[0] * 5f);
+            int limit = (int)(Skillvalues[1] * multiplier);
+            int dmgbonus = (int)Mathf.Min(bonus, limit);
             statbonuses.TelekDamage += dmgbonus;
             statbonuses.PhysDamage += dmgbonus;
         }
@@ -3943,24 +4024,35 @@ public class UnitScript : MonoBehaviour
         // Recklessness
         if (GetSkill(43))
         {
-            statbonuses.TelekDamage += 20;
-            statbonuses.PhysDamage += 20;
-            statbonuses.DamageReduction -= 20;
+            List<int> Skillvalues = dataScript.SkillList[43].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(43);
+            int bonus = (int)(Skillvalues[0] * multiplier);
+            statbonuses.TelekDamage += bonus;
+            statbonuses.PhysDamage += bonus;
+            statbonuses.DamageReduction -= bonus;
         }
 
         //TransparentCrossBow
         if (GetSkill(45))
         {
-            statbonuses.Speed += 5;
-            statbonuses.PhysDamage += 25;
-            statbonuses.TelekDamage += 25;
+            List<int> Skillvalues = dataScript.SkillList[45].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(45);
+            int DmgBonus = (int)(Skillvalues[0] * multiplier);
+            int SpeedBonus = (int)(Skillvalues[1] * multiplier);
+            statbonuses.Speed += SpeedBonus;
+            statbonuses.PhysDamage += DmgBonus;
+            statbonuses.TelekDamage += DmgBonus;
         }
 
         // Enduring
         if (GetSkill(55))
         {
-            statbonuses.TelekDamage += ((int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP) / 2;
-            statbonuses.PhysDamage += ((int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP) / 2;
+            List<int> Skillvalues = dataScript.SkillList[55].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(55);
+            float Ratio = (Skillvalues[0] / 100f * multiplier);
+            int dmgbonus = (int)((UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP) * Ratio);
+            statbonuses.TelekDamage += dmgbonus;
+            statbonuses.PhysDamage += dmgbonus;
         }
 
         // Crystal Heart
@@ -3968,8 +4060,8 @@ public class UnitScript : MonoBehaviour
         {
             List<int> Skillvalues = dataScript.SkillList[57].SkillValues;
             int dodgebonus = Skillvalues[0];
-            int SkillLevel = getskilllevel(57);
-            statbonuses.Dodge += (int)(dodgebonus);
+            float multiplier = GetSkillLevelMultiplier(57);
+            statbonuses.Dodge += (int)(dodgebonus * multiplier);
         }
 
         //Amphibian
@@ -3980,8 +4072,10 @@ public class UnitScript : MonoBehaviour
             {
                 if (tile.RemainingRainTurns > 0 || tile.type.ToLower() == "water" || tile.type.ToLower() == "medicinalwater")
                 {
-                    statbonuses.Dodge += 15;
-                    statbonuses.Hit += 15;
+                    List<int> Skillvalues = dataScript.SkillList[61].SkillValues;
+                    float multiplier = GetSkillLevelMultiplier(61);
+                    statbonuses.Dodge += (int)(Skillvalues[0] * multiplier);
+                    statbonuses.Hit += (int)(Skillvalues[0] * multiplier);
                 }
             }
 
@@ -3994,15 +4088,19 @@ public class UnitScript : MonoBehaviour
             GridSquareScript tile = UnitCharacteristics.currentTile;
             if (tile != null)
             {
+                List<int> Skillvalues = dataScript.SkillList[62].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(62);
+                int bonus = (int)(Skillvalues[0] * multiplier);
+                int malus = (int)(Skillvalues[1] * multiplier);
                 if (tile.RemainingSunTurns > 0)
                 {
-                    statbonuses.TelekDamage -= 6;
-                    statbonuses.PhysDamage -= 6;
+                    statbonuses.TelekDamage -= malus;
+                    statbonuses.PhysDamage -= malus;
                 }
                 else
                 {
-                    statbonuses.TelekDamage += 3;
-                    statbonuses.PhysDamage += 3;
+                    statbonuses.TelekDamage += bonus;
+                    statbonuses.PhysDamage += bonus;
                 }
             }
 
@@ -4012,42 +4110,58 @@ public class UnitScript : MonoBehaviour
         //Master Hunter
         if (GetSkill(63))
         {
+
             if (GetFirstWeapon() == Fists)
             {
-                statbonuses.Hit += 80;
-                statbonuses.TelekDamage += 3;
-                statbonuses.PhysDamage += 3;
+                List<int> Skillvalues = dataScript.SkillList[63].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(63);
+                int Hitbonus = (int)(Skillvalues[0] * multiplier);
+                int DmgBonus = (int)(Skillvalues[1] * multiplier);
+                statbonuses.Hit += Hitbonus;
+                statbonuses.TelekDamage += DmgBonus;
+                statbonuses.PhysDamage += DmgBonus;
             }
         }
 
         //Showdown (this unit)
         if (GetSkill(64))
         {
-            statbonuses.Crit += 25;
+            List<int> Skillvalues = dataScript.SkillList[64].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(64);
+            statbonuses.Crit += (int)(Skillvalues[0] * multiplier);
         }
 
         //Showdown (enemy unit)
         if (enemy != null && enemy.GetComponent<UnitScript>().GetSkill(64))
         {
-            statbonuses.Crit += 25;
+            List<int> Skillvalues = dataScript.SkillList[64].SkillValues;
+            float multiplier = enemy.GetComponent<UnitScript>().GetSkillLevelMultiplier(64);
+            statbonuses.Crit += (int)(Skillvalues[0] * multiplier);
         }
 
         //Fair Play (this unit)
         if (GetSkill(65))
         {
-            statbonuses.Crit -= 25;
+            List<int> Skillvalues = dataScript.SkillList[65].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(65);
+            statbonuses.Crit -= (int)(Skillvalues[0] * multiplier);
         }
 
         //Fair Play (enemy unit)
         if (enemy != null && enemy.GetComponent<UnitScript>().GetSkill(65))
         {
-            statbonuses.Crit -= 25;
+            List<int> Skillvalues = dataScript.SkillList[65].SkillValues;
+            float multiplier = enemy.GetComponent<UnitScript>().GetSkillLevelMultiplier(65);
+            statbonuses.Crit -= (int)(Skillvalues[0] * multiplier);
         }
 
         //Violent Misuse
         if (GetSkill(68))
         {
-            statbonuses.FixedDamageBonus += weapon.BaseDamage / 2;
+            List<int> Skillvalues = dataScript.SkillList[68].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(68);
+            float ratio = (Skillvalues[0] / 100f * multiplier);
+            statbonuses.FixedDamageBonus += (int)(weapon.BaseDamage * ratio);
         }
 
         //Occidens Strategist
@@ -4055,8 +4169,8 @@ public class UnitScript : MonoBehaviour
         {
             List<int> Skillvalues = dataScript.SkillList[72].SkillValues;
             int hitbonus = Skillvalues[0];
-            int SkillLevel = getskilllevel(72);
-            statbonuses.Hit += (int)(hitbonus);
+            float multiplier = GetSkillLevelMultiplier(72);
+            statbonuses.Hit += (int)(hitbonus * multiplier);
         }
 
 
@@ -4066,36 +4180,57 @@ public class UnitScript : MonoBehaviour
 
             List<int> Skillvalues = dataScript.SkillList[73].SkillValues;
             int damagebonus = Skillvalues[0];
-            int SkillLevel = getskilllevel(73);
-            statbonuses.TelekDamage += (int)(damagebonus);
-            statbonuses.PhysDamage += (int)(damagebonus);
+            float multiplier = GetSkillLevelMultiplier(73);
+            statbonuses.TelekDamage += (int)(damagebonus * multiplier);
+            statbonuses.PhysDamage += (int)(damagebonus * multiplier);
         }
 
         //Eye of Shining Justice
         if (GetSkill(74))
         {
-            statbonuses.FixedDamageBonus += 100;
-            statbonuses.FixedDamageReduction += 100;
+            List<int> Skillvalues = dataScript.SkillList[74].SkillValues;
+
+            float multiplier = GetSkillLevelMultiplier(74);
+            int damagebonus = (int)(Skillvalues[0] * multiplier);
+            int damagereduction = (int)(Skillvalues[1] * multiplier);
+            statbonuses.FixedDamageBonus += damagebonus;
+            statbonuses.FixedDamageReduction += damagereduction;
         }
 
         //Caelum General
         if (GetSkill(77))
         {
-            statbonuses.DamageReduction += 50;
+            List<int> Skillvalues = dataScript.SkillList[77].SkillValues;
+
+            float multiplier = GetSkillLevelMultiplier(77);
+            int damageReductionbonus = (int)(Skillvalues[0] * multiplier);
+            statbonuses.DamageReduction += damageReductionbonus;
         }
 
         //Overly Cautious
         if (GetSkill(78))
         {
-            statbonuses.Crit -= 30;
-            statbonuses.Dodge += 20;
+            List<int> Skillvalues = dataScript.SkillList[78].SkillValues;
+            int DodgeBonus = Skillvalues[0];
+            int CritReduction = Skillvalues[1];
+
+            float multiplier = GetSkillLevelMultiplier(78);
+
+            statbonuses.Crit -= (int)(CritReduction * multiplier);
+            statbonuses.Dodge += (int)(DodgeBonus * multiplier);
         }
 
         //Brawl Master
         if (GetSkill(80))
         {
-            statbonuses.Hit += (int)(UnitCharacteristics.AjustedStats.Dexterity + statbonuses.Dexterity) * 5;
-            statbonuses.PhysDamage += (int)(UnitCharacteristics.AjustedStats.Strength + statbonuses.Strength) / 4;
+            List<int> Skillvalues = dataScript.SkillList[80].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(80);
+
+            float HitBonus = (Skillvalues[0] * multiplier);
+            float PhysDamageBonus = (Skillvalues[1] / multiplier);
+
+            statbonuses.Hit += (int)(UnitCharacteristics.AjustedStats.Dexterity + statbonuses.Dexterity * HitBonus);
+            statbonuses.PhysDamage += (int)(UnitCharacteristics.AjustedStats.Strength + statbonuses.Strength / PhysDamageBonus);
         }
 
         //Born to burn
@@ -4103,18 +4238,27 @@ public class UnitScript : MonoBehaviour
         {
             if (UnitCharacteristics.statusEffects.BurnTurns > 0)
             {
-                statbonuses.Hit += 20;
-                statbonuses.Dodge += 20;
-                statbonuses.Crit += 10;
+                List<int> Skillvalues = dataScript.SkillList[83].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(83);
+
+                int HitDodgeBonus = (int)(Skillvalues[0] * multiplier);
+                int CritBonus = (int)(Skillvalues[1] * multiplier);
+
+                statbonuses.Hit += HitDodgeBonus;
+                statbonuses.Dodge += HitDodgeBonus;
+                statbonuses.Crit += CritBonus;
             }
         }
 
         // Burning Soul
         if (GetSkill(89))
         {
-            statbonuses.PhysDamage += 15;
-            statbonuses.TelekDamage += 15;
-            statbonuses.Dodge += 15;
+            List<int> Skillvalues = dataScript.SkillList[89].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(89);
+            int bonus = (int)(Skillvalues[0] * multiplier);
+            statbonuses.PhysDamage += bonus;
+            statbonuses.TelekDamage += bonus;
+            statbonuses.Dodge += bonus;
         }
 
         //LightSpeed
@@ -4122,34 +4266,54 @@ public class UnitScript : MonoBehaviour
         {
             if (UnitCharacteristics.statusEffects.ParalyzedTurns > 0)
             {
-                statbonuses.Dodge += 25;
-                statbonuses.Crit += 10;
+                List<int> Skillvalues = dataScript.SkillList[90].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(90);
+                int DodgeBonus = (int)(Skillvalues[0] * multiplier);
+                int CritBonus = (int)(Skillvalues[1] * multiplier);
+                statbonuses.Dodge += DodgeBonus;
+                statbonuses.Crit += CritBonus;
             }
         }
 
         //Reckless Abandon
         if (GetSkill(92))
         {
+            List<int> Skillvalues = dataScript.SkillList[92].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(92);
+            int Bonus = (int)(Skillvalues[0] * multiplier);
             if (UnitCharacteristics.statusEffects.ParalyzedTurns > 0)
             {
-                statbonuses.PhysDamage += 10;
-                statbonuses.TelekDamage += 10;
+                statbonuses.PhysDamage += Bonus;
+                statbonuses.TelekDamage += Bonus;
             }
             if (UnitCharacteristics.statusEffects.BurnTurns > 0)
             {
-                statbonuses.PhysDamage += 10;
-                statbonuses.TelekDamage += 10;
+                statbonuses.PhysDamage += Bonus;
+                statbonuses.TelekDamage += Bonus;
             }
             if (UnitCharacteristics.statusEffects.WeaknessTurns > 0)
             {
-                statbonuses.PhysDamage += 10;
-                statbonuses.TelekDamage += 10;
+                statbonuses.PhysDamage += Bonus;
+                statbonuses.TelekDamage += Bonus;
             }
             if (UnitCharacteristics.statusEffects.StunTurns > 0)
             {
-                statbonuses.PhysDamage += 10;
-                statbonuses.TelekDamage += 10;
+                statbonuses.PhysDamage += Bonus;
+                statbonuses.TelekDamage += Bonus;
             }
+        }
+
+        //Killer
+        if (GetSkill(95))
+        {
+            List<int> Skillvalues = dataScript.SkillList[95].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(95);
+            int BonusByUnit = (int)(Skillvalues[0] * UnitCharacteristics.totalenemieskilled);
+
+            int Realbonus = Mathf.Min(BonusByUnit, (int)(Skillvalues[1] * multiplier));
+
+            statbonuses.PhysDamage += Realbonus;
+            statbonuses.TelekDamage += Realbonus;
         }
 
         //Sword Mastery
@@ -4157,9 +4321,13 @@ public class UnitScript : MonoBehaviour
         {
             if (weapon != null && weapon.type != null && weapon.type.ToLower() == "sword")
             {
-                statbonuses.PhysDamage += 20;
-                statbonuses.TelekDamage += 20;
-                statbonuses.Speed += 5;
+                List<int> Skillvalues = dataScript.SkillList[98].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(98);
+                int DamageBonus = (int)(Skillvalues[0] * multiplier);
+                int SpeedBonus = (int)(Skillvalues[1] * multiplier);
+                statbonuses.PhysDamage += DamageBonus;
+                statbonuses.TelekDamage += DamageBonus;
+                statbonuses.Speed += SpeedBonus;
             }
             else
             {
@@ -4173,8 +4341,11 @@ public class UnitScript : MonoBehaviour
         {
             if (weapon != null && weapon.type != null && weapon.type.ToLower() == "greatsword")
             {
-                statbonuses.PhysDamage += 25;
-                statbonuses.TelekDamage += 25;
+                List<int> Skillvalues = dataScript.SkillList[99].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(99);
+                int DamageBonus = (int)(Skillvalues[0] * multiplier);
+                statbonuses.PhysDamage += DamageBonus;
+                statbonuses.TelekDamage += DamageBonus;
             }
             else
             {
@@ -4188,9 +4359,13 @@ public class UnitScript : MonoBehaviour
         {
             if (weapon != null && weapon.type != null && weapon.type.ToLower() == "spear")
             {
-                statbonuses.PhysDamage += 20;
-                statbonuses.TelekDamage += 20;
-                statbonuses.Dexterity += 10;
+                List<int> Skillvalues = dataScript.SkillList[100].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(100);
+                int DamageBonus = (int)(Skillvalues[0] * multiplier);
+                int DexBonus = (int)(Skillvalues[1] * multiplier);
+                statbonuses.PhysDamage += DamageBonus;
+                statbonuses.TelekDamage += DamageBonus;
+                statbonuses.Dexterity += DexBonus;
             }
             else
             {
@@ -4204,9 +4379,13 @@ public class UnitScript : MonoBehaviour
         {
             if (weapon != null && weapon.type != null && weapon.type.ToLower() == "shield")
             {
-                statbonuses.PhysDamage += 15;
-                statbonuses.TelekDamage += 15;
-                statbonuses.DamageReduction += 15;
+                List<int> Skillvalues = dataScript.SkillList[101].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(101);
+                int DamageBonus = (int)(Skillvalues[0] * multiplier);
+                int DamageReductionBonus = (int)(Skillvalues[0] * multiplier);
+                statbonuses.PhysDamage += DamageBonus;
+                statbonuses.TelekDamage += DamageBonus;
+                statbonuses.DamageReduction += DamageReductionBonus;
             }
             else
             {
@@ -4220,8 +4399,12 @@ public class UnitScript : MonoBehaviour
         {
             if (weapon != null && weapon.type != null && weapon.type.ToLower() == "staff")
             {
-                statbonuses.PhysDamage += 50;
-                statbonuses.TelekDamage += 50;
+                List<int> Skillvalues = dataScript.SkillList[102].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(102);
+                int DamageBonus = (int)(Skillvalues[0] * multiplier);
+
+                statbonuses.PhysDamage += DamageBonus;
+                statbonuses.TelekDamage += DamageBonus;
             }
             else
             {
@@ -4235,8 +4418,11 @@ public class UnitScript : MonoBehaviour
         {
             if (weapon != null && weapon.type != null && weapon.type.ToLower() == "scythe")
             {
-                statbonuses.PhysDamage += 30;
-                statbonuses.TelekDamage += 30;
+                List<int> Skillvalues = dataScript.SkillList[103].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(103);
+                int DamageBonus = (int)(Skillvalues[0] * multiplier);
+                statbonuses.PhysDamage += DamageBonus;
+                statbonuses.TelekDamage += DamageBonus;
             }
             else
             {
@@ -4250,9 +4436,12 @@ public class UnitScript : MonoBehaviour
         {
             if (weapon != null && weapon.type != null && weapon.type.ToLower() == "bow")
             {
-                statbonuses.PhysDamage += 20;
-                statbonuses.TelekDamage += 20;
-                statbonuses.Dodge += 20;
+                List<int> Skillvalues = dataScript.SkillList[104].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(104);
+                int DamageBonus = (int)(Skillvalues[0] * multiplier);
+                statbonuses.PhysDamage += DamageBonus;
+                statbonuses.TelekDamage += DamageBonus;
+                statbonuses.Dodge += DamageBonus;
             }
             else
             {
@@ -4266,9 +4455,13 @@ public class UnitScript : MonoBehaviour
         {
             if (weapon != null && weapon.type != null && weapon.type.ToLower() == "dagger")
             {
-                statbonuses.PhysDamage += 20;
-                statbonuses.TelekDamage += 20;
-                statbonuses.Crit += 10;
+                List<int> Skillvalues = dataScript.SkillList[105].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(105);
+                int DamageBonus = (int)(Skillvalues[0] * multiplier);
+                int CritBonus = (int)(Skillvalues[1] * multiplier);
+                statbonuses.PhysDamage += DamageBonus;
+                statbonuses.TelekDamage += DamageBonus;
+                statbonuses.Crit += CritBonus;
             }
             else
             {
@@ -4314,28 +4507,40 @@ public class UnitScript : MonoBehaviour
             //Intimidating Aura
             if (unit.GetComponent<UnitScript>().GetSkill(115) && !IsFriendUnit)
             {
-                statbonuses.FixedDamageBonus -= 5;
+                List<int> Skillvalues = dataScript.SkillList[115].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(115);
+                int DamageReduction = (int)(Skillvalues[0] * multiplier);
+                statbonuses.FixedDamageBonus -= DamageReduction;
             }
 
             //Terrifying Aura
             if (unit.GetComponent<UnitScript>().GetSkill(116) && !IsFriendUnit)
             {
-                statbonuses.Hit -= 15;
-                statbonuses.Dodge -= 15;
-                statbonuses.Crit -= 15;
+                List<int> Skillvalues = dataScript.SkillList[116].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(116);
+                int Malus = (int)(Skillvalues[0] * multiplier);
+                statbonuses.Hit -= Malus;
+                statbonuses.Dodge -= Malus;
+                statbonuses.Crit -= Malus;
             }
 
             //Heroic Aura
             if (unit.GetComponent<UnitScript>().GetSkill(117) && IsFriendUnit)
             {
-                statbonuses.Hit += 20;
-                statbonuses.Dodge += 20;
+                List<int> Skillvalues = dataScript.SkillList[117].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(117);
+                int Bonus = (int)(Skillvalues[0] * multiplier);
+                statbonuses.Hit += Bonus;
+                statbonuses.Dodge += Bonus;
             }
 
             //Empowering Aura
             if (unit.GetComponent<UnitScript>().GetSkill(118) && IsFriendUnit)
             {
-                statbonuses.FixedDamageBonus += 5;
+                List<int> Skillvalues = dataScript.SkillList[118].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(118);
+                int Bonus = (int)(Skillvalues[0] * multiplier);
+                statbonuses.FixedDamageBonus += Bonus;
             }
         }
 
@@ -4434,13 +4639,19 @@ public class UnitScript : MonoBehaviour
         //Risky Bet
         if (GetSkill(109))
         {
-            statbonuses.Crit += (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) / 2;
+            List<int> Skillvalues = dataScript.SkillList[109].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(109);
+            float Divider = (Skillvalues[0] / 100f * multiplier);
+            statbonuses.Crit += (int)((UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) / Divider);
         }
 
         //Protected by luck
         if (GetSkill(110))
         {
-            statbonuses.CritAvoid += (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) * 2;
+            List<int> Skillvalues = dataScript.SkillList[110].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(110);
+            float AvoidMultiplier = (Skillvalues[0] / 100f * multiplier);
+            statbonuses.CritAvoid += (int)((UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) * AvoidMultiplier);
         }
 
         if (incombat)
@@ -4448,21 +4659,29 @@ public class UnitScript : MonoBehaviour
             //Rigged Fight
             if (GetSkill(108))
             {
+
                 int targetvalue = (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck + GetTriggerLuckModificator());
                 if (GetComponent<RandomScript>().GetPersonalityValue(targetvalue) <= targetvalue)
                 {
-                    statbonuses.DamageReduction += 50;
+                    List<int> Skillvalues = dataScript.SkillList[108].SkillValues;
+                    float multiplier = GetSkillLevelMultiplier(108);
+                    int DamageReductionBonus = (int)(Skillvalues[0] * multiplier);
+                    statbonuses.DamageReduction += DamageReductionBonus;
                 }
             }
 
             //Lucky Strike
             if (GetSkill(113))
             {
+                List<int> Skillvalues = dataScript.SkillList[113].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(113);
+                float TriggerMultiplier = (Skillvalues[0] * multiplier);
+                float DamageMultiplier = (Skillvalues[1] / multiplier);
                 int Luck = (int)(UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck);
-                int targetvalue = Luck * 2 + GetTriggerLuckModificator();
+                int targetvalue = (int)(Luck * TriggerMultiplier + GetTriggerLuckModificator());
                 if (GetComponent<RandomScript>().GetPersonalityValue(targetvalue) <= targetvalue)
                 {
-                    statbonuses.FixedDamageBonus += Luck / 2;
+                    statbonuses.FixedDamageBonus += (int)(Luck / DamageMultiplier);
                 }
             }
         }
@@ -4476,8 +4695,9 @@ public class UnitScript : MonoBehaviour
         return statbonuses;
     }
 
-    private int getskilllevel(int SkillID, Character Character = null)
+    public float GetSkillLevelMultiplier(int SkillID, Character Character = null)
     {
+        float multiplier = 1.0f;
         Character Chartouse = Character;
         if (Chartouse == null)
         {
@@ -4485,18 +4705,41 @@ public class UnitScript : MonoBehaviour
         }
         if (Chartouse.affiliation == "playable")
         {
+            int SkillLevel = 1;
             if (SkillID == Chartouse.UnitSkill)
             {
-                return Chartouse.UnitSkillLevel;
+                SkillLevel = Chartouse.UnitSkillLevel;
             }
             else if (SkillID == Chartouse.SecondUnitSkill)
             {
-                return Chartouse.SecondSkillLevel;
+                SkillLevel = Chartouse.SecondSkillLevel;
             }
+            Skill skill = DataScript.instance.SkillList[SkillID];
+            switch (SkillLevel)
+            {
+                case 2:
+                    multiplier = skill.level2Multiplier;
+                    break;
+                case 3:
+                    multiplier = skill.level3Multiplier;
+                    break;
+                case 4:
+                    multiplier = skill.level4Multiplier;
+                    break;
+            }
+            if (multiplier == 0.0f)
+            {
+                multiplier = 1.0f;
+            }
+
         }
 
-        return 1;
+
+
+
+        return multiplier;
     }
+
     private int ManhattanDistance(Character unit, Character otherunit)
     {
         return (int)(Mathf.Abs(unit.currentTile.GridCoordinates.x - otherunit.currentTile.GridCoordinates.x) + Mathf.Abs(unit.currentTile.GridCoordinates.y - otherunit.currentTile.GridCoordinates.y));
@@ -4713,7 +4956,10 @@ public class UnitScript : MonoBehaviour
         float HitmodPerLuck = 0.5f;
         if (GetSkill(106))
         {
-            HitmodPerLuck *= 1.5f;
+            List<int> Skillvalues = DataScript.instance.SkillList[106].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(106);
+            float LuckModBonus = 1f + (Skillvalues[0] / 100f * multiplier);
+            HitmodPerLuck *= LuckModBonus;
         }
         return (int)(HitmodPerLuck * Chartouse.AjustedStats.Luck);
     }
@@ -4728,7 +4974,10 @@ public class UnitScript : MonoBehaviour
         float HitmodPerLuck = 0.5f;
         if (GetSkill(106))
         {
-            HitmodPerLuck *= 1.5f;
+            List<int> Skillvalues = DataScript.instance.SkillList[106].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(106);
+            float LuckModBonus = 1f + (Skillvalues[0] / 100f * multiplier);
+            HitmodPerLuck *= LuckModBonus;
         }
         return (int)(HitmodPerLuck * Chartouse.AjustedStats.Luck);
     }
@@ -4743,7 +4992,10 @@ public class UnitScript : MonoBehaviour
         float HitmodPerLuck = 0.25f;
         if (GetSkill(106))
         {
-            HitmodPerLuck *= 1.5f;
+            List<int> Skillvalues = DataScript.instance.SkillList[106].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(106);
+            float LuckModBonus = 1f + (Skillvalues[0] / 100f * multiplier);
+            HitmodPerLuck *= LuckModBonus;
         }
         return (int)(HitmodPerLuck * Chartouse.AjustedStats.Luck);
     }
@@ -4758,7 +5010,10 @@ public class UnitScript : MonoBehaviour
         float HitmodPerLuck = 0.34f;
         if (GetSkill(106))
         {
-            HitmodPerLuck *= 1.5f;
+            List<int> Skillvalues = DataScript.instance.SkillList[106].SkillValues;
+            float multiplier = GetSkillLevelMultiplier(106);
+            float LuckModBonus = 1f + (Skillvalues[0] / 100f * multiplier);
+            HitmodPerLuck *= LuckModBonus;
         }
         if (GetSkill(107))
         {
