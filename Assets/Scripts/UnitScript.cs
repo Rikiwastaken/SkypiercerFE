@@ -1633,6 +1633,21 @@ public class UnitScript : MonoBehaviour
             mastery.Level++;
             mastery.Exp = 0;
 
+            // Show mastery level up txt;
+
+            string text = "";
+            if (mastery.Level == 1)
+            {
+                text = UnitCharacteristics.name + " can now used " + mastery.weapontype + " mastery weapons.";
+            }
+            else
+            {
+                text = UnitCharacteristics.name + "'s " + mastery.weapontype + " mastery increased to level " + mastery.Level;
+            }
+
+
+            MapEventManager.instance.TutorialwindowScript.InitializeWindow(new Vector2(300, 150), text);
+
         }
         if (character.playableStats.protagonist && character.ExamodeClass.remaingExamodeTurns > 0)
         {
@@ -3199,6 +3214,9 @@ public class UnitScript : MonoBehaviour
 
         calculateStats();
         LevelUpSkill();
+
+
+
         return lvlupresult;
     }
 
@@ -3212,15 +3230,46 @@ public class UnitScript : MonoBehaviour
                 UnitCharacteristics.UnitSkillLevel = 1;
                 UnitCharacteristics.SecondSkillLevel = 1;
             }
+            else if (UnitCharacteristics.level == 10)
+            {
+                UnitCharacteristics.UnitSkillLevel = 2;
+                UnitCharacteristics.SecondSkillLevel = 2;
+                // Show mastery level up txt;
+
+                string text = UnitCharacteristics.name + "'s skills evolved to level " + 2;
+
+                MapEventManager.instance.TutorialwindowScript.InitializeWindow(new Vector2(300, 150), text);
+
+            }
             else if (UnitCharacteristics.level < 20)
             {
                 UnitCharacteristics.UnitSkillLevel = 2;
                 UnitCharacteristics.SecondSkillLevel = 2;
             }
+            else if (UnitCharacteristics.level == 20)
+            {
+                UnitCharacteristics.UnitSkillLevel = 3;
+                UnitCharacteristics.SecondSkillLevel = 3;
+                // Show mastery level up txt;
+
+                string text = UnitCharacteristics.name + "'s skills evolved to level " + 3;
+
+                MapEventManager.instance.TutorialwindowScript.InitializeWindow(new Vector2(300, 150), text);
+            }
             else if (UnitCharacteristics.level < 30)
             {
                 UnitCharacteristics.UnitSkillLevel = 3;
                 UnitCharacteristics.SecondSkillLevel = 3;
+            }
+            else if (UnitCharacteristics.level == 30)
+            {
+                UnitCharacteristics.UnitSkillLevel = 4;
+                UnitCharacteristics.SecondSkillLevel = 4;
+                // Show mastery level up txt;
+
+                string text = UnitCharacteristics.name + "'s skills evolved to level " + 4;
+
+                MapEventManager.instance.TutorialwindowScript.InitializeWindow(new Vector2(300, 150), text);
             }
             else
             {
