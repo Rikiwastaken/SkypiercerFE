@@ -481,7 +481,7 @@ public class SkillEditionScript : MonoBehaviour
         for (int i = 0; i < Mathf.Min(ListToUse.Count - 10 * (characterwindowindex), 10); i++)
         {
             transform.GetChild(i).GetComponent<UnitDeploymentButton>().Character = ListToUse[i + 10 * (characterwindowindex)];
-            transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = i + 10 * (characterwindowindex);
+            transform.GetChild(i).GetComponent<UnitDeploymentButton>().CharacterID = ListToUse[i + 10 * (characterwindowindex)].ID;
 
 
 
