@@ -1803,13 +1803,18 @@ public class UnitScript : MonoBehaviour
 
     }
 
-    public void ToggleTelekinesis(Character chartouse = null)
+    public void ToggleTelekinesis(GameObject charGOtouse = null)
     {
-        if (chartouse == null)
+        if (charGOtouse == null)
         {
-            chartouse = UnitCharacteristics;
+            charGOtouse = gameObject;
         }
+        Character chartouse = charGOtouse.GetComponent<UnitScript>().UnitCharacteristics;
         chartouse.telekinesisactivated = !chartouse.telekinesisactivated;
+        if (charGOtouse.GetComponent<UnitScript>().GetFirstWeapon() == null || charGOtouse.GetComponent<UnitScript>().GetFirstWeapon().Grade == 0)
+        {
+            chartouse.telekinesisactivated = false;
+        }
         if (chartouse.telekinesisactivated)
         {
             chartouse.previousTelekinesis = 1;
@@ -1822,13 +1827,18 @@ public class UnitScript : MonoBehaviour
 
 
 
-    public void ToggleTelekinesis(bool wantedeffect, Character chartouse = null)
+    public void ToggleTelekinesis(bool wantedeffect, GameObject charGOtouse = null)
     {
-        if (chartouse == null)
+        if (charGOtouse == null)
         {
-            chartouse = UnitCharacteristics;
+            charGOtouse = gameObject;
         }
+        Character chartouse = charGOtouse.GetComponent<UnitScript>().UnitCharacteristics;
         chartouse.telekinesisactivated = wantedeffect;
+        if (charGOtouse.GetComponent<UnitScript>().GetFirstWeapon() == null || charGOtouse.GetComponent<UnitScript>().GetFirstWeapon().Grade == 0)
+        {
+            chartouse.telekinesisactivated = false;
+        }
         if (chartouse.telekinesisactivated)
         {
             chartouse.previousTelekinesis = 1;
@@ -2265,7 +2275,7 @@ public class UnitScript : MonoBehaviour
         {
             UnitCharacteristics.statusEffects.ConcussionTunrs--;
             UnitCharacteristics.telekinesisactivated = false;
-            if (UnitCharacteristics.statusEffects.ConcussionTunrs == 0 && UnitCharacteristics.affiliation.ToLower() != "playable" && UnitCharacteristics.enemyStats != null && UnitCharacteristics.enemyStats.usetelekinesis)
+            if (UnitCharacteristics.statusEffects.ConcussionTunrs == 0 && UnitCharacteristics.affiliation.ToLower() != "playable" && UnitCharacteristics.enemyStats != null && UnitCharacteristics.enemyStats.usetelekinesis && GetFirstWeapon().Grade > 0)
             {
                 UnitCharacteristics.telekinesisactivated = true;
             }
