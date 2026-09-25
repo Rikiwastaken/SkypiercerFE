@@ -125,7 +125,6 @@ public class CombatSceneLoader : MonoBehaviour
 
         mainScene = SceneManager.GetSceneByName(MainSceneName);
 
-
         StartCoroutine(SwitchSceneRoutine(
             fromScene: mainScene,
             toScene: CutsceneScene,
@@ -184,11 +183,47 @@ public class CombatSceneLoader : MonoBehaviour
     {
         yield return Fade(1); // fade out
 
+
+        // Validate FROM scene
+        if (!fromScene.IsValid() || !fromScene.isLoaded)
+        {
+            Debug.LogError(
+                $"FROM scene is invalid or unloaded! " +
+                $"Name: {fromScene.name}, " +
+                $"Valid: {fromScene.IsValid()}, " +
+                $"Loaded: {fromScene.isLoaded}"
+            );
+
+            yield break;
+        }
+
+        // Validate TO scene
+        if (!toScene.IsValid() || !toScene.isLoaded)
+        {
+            Debug.LogError(
+                $"TO scene is invalid or unloaded! " +
+                $"Name: {toScene.name}, " +
+                $"Valid: {toScene.IsValid()}, " +
+                $"Loaded: {toScene.isLoaded}"
+            );
+
+            yield break;
+        }
+
         // Always get fresh roots (important!)
         SetSceneVisible(fromScene, false);
         SetSceneVisible(toScene, true);
 
-        SceneManager.SetActiveScene(toScene);
+        bool success = SceneManager.SetActiveScene(toScene);
+
+        if (!success)
+        {
+            Debug.LogError(
+                $"SetActiveScene failed for '{toScene.name}'"
+            );
+
+            yield break;
+        }
 
         onSceneActivated?.Invoke();
 
@@ -197,8 +232,17 @@ public class CombatSceneLoader : MonoBehaviour
         // triggers the end of figth function
         if (toScene.name != "BattleScene")
         {
-            GridScript.instance.GetComponent<AttackTurnScript>().triggerEndOfFightWithAnimations = true;
+            if (GridScript.instance != null)
+            {
+                AttackTurnScript attackTurn = GridScript.instance.GetComponent<AttackTurnScript>();
+
+                if (attackTurn != null)
+                {
+                    attackTurn.triggerEndOfFightWithAnimations = true;
+                }
+            }
         }
+
 
     }
 

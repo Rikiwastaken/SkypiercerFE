@@ -8,19 +8,6 @@ public class SpecialPhaseScript : MonoBehaviour
     public CharacterCircleVisuals _CharacterCircleVisuals;
     public ForesightScript _ForesightScript;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void TriggerSpecialPhase()
     {
         switch (GetComponent<MapInitializer>().ChapterID)
@@ -42,6 +29,8 @@ public class SpecialPhaseScript : MonoBehaviour
                 victoryEvent.triggerEffectType = 1;
                 victoryEvent.ID = 1;
                 victoryEvent.EventsToWatch = new List<int>() { 0 };
+                victoryEvent.TutorialWindow = new TutorialWindow();
+                victoryEvent.TutorialWindow.WindowDimensions = new Vector2Int(400, 200);
 
                 GetComponent<MapEventManager>().EventsToMonitor = new List<EventCondition>() { OutroEvent, victoryEvent };
 

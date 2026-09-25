@@ -3249,8 +3249,11 @@ public class UnitScript : MonoBehaviour
                 // Show mastery level up txt;
 
                 string text = UnitCharacteristics.name + "'s skills evolved to level " + 2;
+                if (GridScript != null)
+                {
+                    MapEventManager.instance.TutorialwindowScript.InitializeWindow(new Vector2(300, 150), text);
+                }
 
-                MapEventManager.instance.TutorialwindowScript.InitializeWindow(new Vector2(300, 150), text);
 
             }
             else if (UnitCharacteristics.level < 20)

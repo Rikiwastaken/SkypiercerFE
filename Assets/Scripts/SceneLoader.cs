@@ -44,6 +44,7 @@ public class SceneLoader : MonoBehaviour
                 if (SceneToLoad != "CutsceneScene")
                 {
                     GetComponent<CombatSceneLoader>().combatLoaded = false;
+                    GetComponent<CombatSceneLoader>().CutsceneSceneLoaded = false;
                     GetComponent<CombatSceneLoader>().MainSceneName = SceneToLoad;
                     GetComponent<CombatSceneLoader>().LoadCombatScene();
                     GetComponent<CombatSceneLoader>().LoadCutsceneScene();
