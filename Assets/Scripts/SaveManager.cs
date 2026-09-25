@@ -78,6 +78,7 @@ public class SaveManager : MonoBehaviour
         public bool Fullscreen;
         public bool BattleAnimations;
         public bool FixedGrowth;
+        public int ResolutionID = 7;
     }
 
     public int numberofslots;
@@ -94,6 +95,8 @@ public class SaveManager : MonoBehaviour
     public List<bool> CampDialoguesSeen = new List<bool>();
     public List<int> PreviouslyDeployed = new List<int>();
 
+    public List<Vector2> Resolutions = new List<Vector2>();
+
     private void Awake()
     {
         if (instance == null)
@@ -105,6 +108,11 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
         LoadOptions();
+        if (Options.BattleAnimations)
+        {
+            Options.BattleAnimations = false;
+        }
+        SaveOptions();
         DefaultSave.slot = -1;
         DefaultSave.versionID = versionID;
         DefaultSave.chapter = 0;
@@ -244,6 +252,8 @@ public class SaveManager : MonoBehaviour
             if (json != null)
             {
                 Options = JsonUtility.FromJson<OptionsClass>(json);
+
+                Screen.SetResolution((int)Resolutions[Options.ResolutionID].x, (int)Resolutions[Options.ResolutionID].y, Options.Fullscreen);
                 Screen.fullScreen = Options.Fullscreen;
             }
         }
@@ -256,6 +266,9 @@ public class SaveManager : MonoBehaviour
             Options.Fullscreen = Screen.fullScreen;
             Options.BattleAnimations = true;
             Options.FixedGrowth = false;
+            Options.ResolutionID = 7;
+            Screen.SetResolution((int)Resolutions[Options.ResolutionID].x, (int)Resolutions[Options.ResolutionID].y, Options.Fullscreen);
+            Screen.fullScreen = Options.Fullscreen;
         }
     }
 
@@ -289,8 +302,10 @@ public class SaveManager : MonoBehaviour
             MusicManager.instance.ChangeVolume();
 
         }
-
+        Screen.SetResolution((int)Resolutions[Options.ResolutionID].x, (int)Resolutions[Options.ResolutionID].y, Options.Fullscreen);
+        Screen.fullScreen = Options.Fullscreen;
     }
+
 
     public void InitializeSaveButtons(List<Button> buttons)
     {

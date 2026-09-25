@@ -14,6 +14,10 @@ public class OptionsMenuScript : MonoBehaviour
     public Button SELess;
     public Button SEMore;
 
+    public Button ResMain;
+    public Button ResLess;
+    public Button ResMore;
+
     public TextMeshProUGUI fullscreentext;
 
     public TextMeshProUGUI BattleAnimations;
@@ -24,6 +28,8 @@ public class OptionsMenuScript : MonoBehaviour
 
     public TextMeshProUGUI musictext;
     public TextMeshProUGUI SEtext;
+
+    public TextMeshProUGUI ResText;
 
     public ButtonSoundScript ButtonSoundScript;
 
@@ -38,14 +44,15 @@ public class OptionsMenuScript : MonoBehaviour
         {
             fullscreentext.text = "Fullscreen : Off";
         }
-        if (SaveManager.Options.BattleAnimations)
-        {
-            BattleAnimations.text = "Battle Animations : On";
-        }
-        else
-        {
-            BattleAnimations.text = "Battle Animations : Off";
-        }
+        //if (SaveManager.Options.BattleAnimations)
+        //{
+        //    BattleAnimations.text = "Battle Animations : On";
+        //}
+        //else
+        //{
+        //    BattleAnimations.text = "Battle Animations : Off";
+        //}
+        BattleAnimations.text = "Battle Animations : Locked";
         if (SaveManager.Options.FixedGrowth)
         {
             FixedGrowth.text = "Fixed Growth : On";
@@ -56,6 +63,7 @@ public class OptionsMenuScript : MonoBehaviour
         }
         musictext.text = "Music : " + (int)(SaveManager.Options.musicvolume * 100);
         SEtext.text = "Sound : " + (int)(SaveManager.Options.SEVolume * 100);
+        ResText.text = "Resolution : " + (int)(SaveManager.Resolutions[SaveManager.Options.ResolutionID].x) + "x" + (int)(SaveManager.Resolutions[SaveManager.Options.ResolutionID].y);
     }
 
     // Update is called once per frame
@@ -64,6 +72,7 @@ public class OptionsMenuScript : MonoBehaviour
         GameObject currentSelected = EventSystem.current.currentSelectedGameObject;
         ManageMusicVol(currentSelected);
         ManageSEVol(currentSelected);
+        ManageResolution(currentSelected);
     }
 
     private void ManageMusicVol(GameObject selected)
@@ -122,6 +131,33 @@ public class OptionsMenuScript : MonoBehaviour
         SEtext.text = "Sound : " + (int)(SaveManager.Options.SEVolume * 100);
     }
 
+    private void ManageResolution(GameObject selected)
+    {
+        if (selected == ResLess.gameObject)
+        {
+
+            EventSystem.current.SetSelectedGameObject(ResMain.gameObject);
+            SaveManager.Options.ResolutionID--;
+            if (SaveManager.Options.ResolutionID < 0)
+            {
+                SaveManager.Options.ResolutionID = 0;
+            }
+            SaveManager.SaveOptions();
+        }
+        if (selected == ResMore.gameObject)
+        {
+
+            EventSystem.current.SetSelectedGameObject(ResMain.gameObject);
+            SaveManager.Options.ResolutionID++;
+            if (SaveManager.Options.ResolutionID >= SaveManager.Resolutions.Count)
+            {
+                SaveManager.Options.ResolutionID = SaveManager.Resolutions.Count - 1;
+            }
+            SaveManager.SaveOptions();
+        }
+        ResText.text = "Resolution : " + (int)(SaveManager.Resolutions[SaveManager.Options.ResolutionID].x) + "x" + (int)(SaveManager.Resolutions[SaveManager.Options.ResolutionID].y);
+    }
+
 
     public void ToggleFullscreen()
     {
@@ -140,7 +176,7 @@ public class OptionsMenuScript : MonoBehaviour
 
     public void TogglebattleAnimations()
     {
-        SaveManager.Options.BattleAnimations = !SaveManager.Options.BattleAnimations;
+        SaveManager.Options.BattleAnimations = false;
         SaveManager.SaveOptions();
         if (SaveManager.Options.BattleAnimations)
         {
@@ -148,7 +184,7 @@ public class OptionsMenuScript : MonoBehaviour
         }
         else
         {
-            BattleAnimations.text = "Battle Animations : Off";
+            BattleAnimations.text = "Battle Animations : Locked";
         }
     }
 
