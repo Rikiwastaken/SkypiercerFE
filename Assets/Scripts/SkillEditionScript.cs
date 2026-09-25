@@ -131,7 +131,7 @@ public class SkillEditionScript : MonoBehaviour
                     {
                         CampMenu.SetActive(true);
                         gameObject.SetActive(false);
-                        EventSystem.current.SetSelectedGameObject(CampMenu.transform.GetChild(0).gameObject);
+                        EventSystem.current.SetSelectedGameObject(CampMenu.transform.GetChild(2).gameObject);
                     }
                 }
 

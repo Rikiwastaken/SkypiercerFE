@@ -2920,19 +2920,19 @@ public class ActionsMenu : MonoBehaviour
             return (target, true);
         }
 
-        if (SpeedDiff >= 15)
+        if (SpeedDiff >= 20)
         {
             return (unit, true);
         }
-        else if (SpeedDiff >= 5)
+        else if (SpeedDiff >= 7)
         {
             return (unit, false);
         }
-        if (SpeedDiff <= -15)
+        if (SpeedDiff <= -20)
         {
             return (target, true);
         }
-        else if (SpeedDiff <= -5)
+        else if (SpeedDiff <= -7)
         {
             return (target, false);
         }

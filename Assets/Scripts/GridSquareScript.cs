@@ -530,7 +530,7 @@ public class GridSquareScript : MonoBehaviour
         GameObject Intercepter = null;
         foreach (GameObject unitGO in GridScript.allunitGOs)
         {
-            if (unitGO.GetComponent<UnitScript>().UnitCharacteristics.isintercepting)
+            if (unitGO != null && unitGO.GetComponent<UnitScript>().UnitCharacteristics.isintercepting)
             {
                 Intercepter = unitGO;
                 break;
