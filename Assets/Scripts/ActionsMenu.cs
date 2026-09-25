@@ -2538,7 +2538,10 @@ public class ActionsMenu : MonoBehaviour
 
             int baseHP = Chartarget.currentHP;
 
-            if (Chartarget.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
+            if (Chartarget.affiliation == attacker.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
+            {
+                continue;
+            }
             {
                 int damage = CalculateDamage(attacker, true, potentialtarget);
 

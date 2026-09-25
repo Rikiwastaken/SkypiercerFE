@@ -1386,6 +1386,8 @@ public class UnitScript : MonoBehaviour
                 {
                     LifebarCanvas.gameObject.gameObject.SetActive(true);
                 }
+                LifebarCanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
+                UICanvas.transform.rotation = Quaternion.Euler(new Vector3(90, cameraScriptV2.instance.transform.rotation.eulerAngles.y, 0));
             }
             else
             {
