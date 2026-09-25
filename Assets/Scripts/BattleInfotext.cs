@@ -542,6 +542,7 @@ public class BattleInfotext : MonoBehaviour
                     for (int j = 0; j < currentSkill.SkillValues.Count; j++)
                     {
                         texttouse = texttouse.Replace("@" + j, ((int)(currentSkill.SkillValues[j] * multiplier)).ToString());
+                        texttouse = texttouse.Replace("#" + j, ((int)(currentSkill.SkillValues[j] / multiplier)).ToString());
                     }
                     SkillDescription.text = texttouse;
 

@@ -4690,7 +4690,7 @@ public class UnitScript : MonoBehaviour
         {
             List<int> Skillvalues = dataScript.SkillList[109].SkillValues;
             float multiplier = GetSkillLevelMultiplier(109);
-            float Divider = (Skillvalues[0] / 100f * multiplier);
+            float Divider = ((Skillvalues[0] / 100f) / multiplier);
             statbonuses.Crit += (int)((UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) / Divider);
         }
 

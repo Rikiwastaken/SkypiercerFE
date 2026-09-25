@@ -685,7 +685,7 @@
         },
         {
             "name": "Survivor",
-            "Descriptions": "Increases all stats by @0 every @1 battles survived.",
+            "Descriptions": "Increases all stats by @0 every #1 battles survived.",
             "IsCommand": false,
             "Cost": 20,
             "SkillValues": [
@@ -1711,7 +1711,7 @@
         },
         {
             "name": "Brawl Master",
-            "Descriptions": "Increases hit rate by Dexterity*@0 and physical damage by Strength/@1 if not wielding any blade.",
+            "Descriptions": "Increases hit rate by Dexterity*@0 and physical damage by Strength/#1 if not wielding any blade.",
             "IsCommand": false,
             "Cost": 10,
             "SkillValues": [
@@ -2336,7 +2336,7 @@
         },
         {
             "name": "Risky Bet",
-            "Descriptions": "Increases Crit Chance by Luck/@0 but non-critical attacks no longer do damage.",
+            "Descriptions": "Increases Crit Chance by Luck/#0 but non-critical attacks no longer do damage.",
             "IsCommand": false,
             "Cost": 7,
             "SkillValues": [
@@ -2422,7 +2422,7 @@
         },
         {
             "name": "Lucky Strike",
-            "Descriptions": "Adds a Luck*@0% chance to increase Damage dealt by Luck/@1.",
+            "Descriptions": "Adds a Luck*@0% chance to increase Damage dealt by Luck/#1.",
             "IsCommand": false,
             "Cost": 5,
             "SkillValues": [
