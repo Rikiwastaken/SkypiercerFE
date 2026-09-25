@@ -626,6 +626,10 @@ public class ForesightScript : MonoBehaviour
             actions.Remove(ActionToRevert);
         }
         MinimapScript.UpdateMinimap();
+        foreach (GameObject unitGO in GridScript.instance.allunitGOs)
+        {
+            unitGO.GetComponent<UnitScript>().ManageLifebars();
+        }
     }
 
 
