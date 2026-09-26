@@ -454,6 +454,8 @@ public class CutsceneManager : MonoBehaviour
 
             newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel("Default");
             newcharacter.GetComponent<UnitScript>().enabled = false;
+            newcharacter.GetComponent<UnitScript>().UICanvas.gameObject.SetActive(false);
+            newcharacter.GetComponent<UnitScript>().LifebarCanvas.gameObject.SetActive(false);
             CurrentCharacter.CharacterGO = newcharacter;
             CurrentCharacter.Animator = newcharacter.GetComponentInChildren<Animator>();
             CurrentCharacter.ID = ID;
