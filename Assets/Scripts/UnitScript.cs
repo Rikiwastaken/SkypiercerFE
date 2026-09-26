@@ -4937,7 +4937,21 @@ public class UnitScript : MonoBehaviour
         {
             if (unit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0 && UnitCharacteristics.playableStats.protagonist && UnitCharacteristics.currentTile != null && UnitCharacteristics.currentTile != null && UnitCharacteristics.currentTile.isbossAttackTile)
             {
-                interactables.Add(unit);
+                bool AlreadyIntercepted = false;
+                // if boss in found, check if the boss was already intercepted.
+                foreach (GameObject PotentialIntercepter in GridScript.allunitGOs)
+                {
+                    if (PotentialIntercepter.GetComponent<UnitScript>().UnitCharacteristics.isintercepting)
+                    {
+                        AlreadyIntercepted = true;
+                        break; ;
+                    }
+                }
+                if (!AlreadyIntercepted)
+                {
+                    interactables.Add(unit);
+                }
+
                 break;
             }
         }
