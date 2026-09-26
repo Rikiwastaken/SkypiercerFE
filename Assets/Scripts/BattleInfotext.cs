@@ -181,6 +181,14 @@ public class BattleInfotext : MonoBehaviour
                 }
             }
 
+            foreach (TextMeshProUGUI StatusTxt in AilmentIconList)
+            {
+                if (StatusTxt.transform.parent.gameObject.activeSelf)
+                {
+                    StatusTxt.transform.parent.gameObject.SetActive(false);
+                }
+            }
+
             if (Skilltext.transform.parent.gameObject.activeSelf)
             {
                 Skilltext.transform.parent.gameObject.SetActive(false);
