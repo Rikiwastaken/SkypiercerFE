@@ -51,6 +51,7 @@ public class MusicManager : MonoBehaviour
     {
         public AudioClip Intro;
         public AudioClip Music;
+        public string note;
     }
     public List<Audios> DialogueMusicsWithIntro;
 
@@ -71,6 +72,11 @@ public class MusicManager : MonoBehaviour
     public GameObject GeneratedSoundHolder;
 
     public List<AudioClip> VoiceSFXList;
+
+    public List<Audios> PlayableMusics;
+    public List<Audios> EnemyMusics;
+    public List<Audios> OtherMusics;
+    public List<Audios> PrepMusics;
 
     [Serializable]
     public class MapBattleMusic
@@ -465,14 +471,14 @@ public class MusicManager : MonoBehaviour
             {
                 if (MusicClass.Chapters.Contains(Chapter) && MusicClass.useforSideStory == isSideStory)
                 {
-                    PlayableAudioSource.clip = DialogueMusicsWithIntro[MusicClass.PlayableMusicID].Music;
-                    PlayableAudioSourceIntro.clip = DialogueMusicsWithIntro[MusicClass.PlayableMusicID].Intro;
-                    EnemyAudioSource.clip = DialogueMusicsWithIntro[MusicClass.EnemyMusicID].Music;
-                    EnemyAudioSourceIntro.clip = DialogueMusicsWithIntro[MusicClass.EnemyMusicID].Intro;
-                    OtherAudioSource.clip = DialogueMusicsWithIntro[MusicClass.OtherrMusicID].Music;
-                    OtherAudioSourceIntro.clip = DialogueMusicsWithIntro[MusicClass.OtherrMusicID].Intro;
-                    BeforeCombat.clip = DialogueMusicsWithIntro[MusicClass.PrepMusicID].Music;
-                    BeforeCombatintro.clip = DialogueMusicsWithIntro[MusicClass.PrepMusicID].Intro;
+                    PlayableAudioSource.clip = PlayableMusics[MusicClass.PlayableMusicID].Music;
+                    PlayableAudioSourceIntro.clip = PlayableMusics[MusicClass.PlayableMusicID].Intro;
+                    EnemyAudioSource.clip = EnemyMusics[MusicClass.EnemyMusicID].Music;
+                    EnemyAudioSourceIntro.clip = EnemyMusics[MusicClass.EnemyMusicID].Intro;
+                    OtherAudioSource.clip = OtherMusics[MusicClass.OtherrMusicID].Music;
+                    OtherAudioSourceIntro.clip = OtherMusics[MusicClass.OtherrMusicID].Intro;
+                    BeforeCombat.clip = PrepMusics[MusicClass.PrepMusicID].Music;
+                    BeforeCombatintro.clip = PrepMusics[MusicClass.PrepMusicID].Intro;
                     break;
                 }
             }
