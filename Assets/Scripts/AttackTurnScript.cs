@@ -1536,7 +1536,7 @@ public class AttackTurnScript : MonoBehaviour
             // Determine if this unit is a valid target based on affiliations and weapon type
             if (currentCharacter.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
             {
-                if (character.affiliation.ToLower() == otherchar.affiliation.ToLower() || (character.affiliation.ToLower() == "other" && !character.attacksfriends && otherchar.affiliation.ToLower() == "playable"))
+                if (otherchar.currentHP < (int)otherchar.AjustedStats.HP && (character.affiliation.ToLower() == otherchar.affiliation.ToLower() || (character.affiliation.ToLower() == "other" && !character.attacksfriends && otherchar.affiliation.ToLower() == "playable")))
                 {
                     skip = false;
                 }
