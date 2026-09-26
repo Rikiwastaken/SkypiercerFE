@@ -2617,9 +2617,28 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-        if (unit.GetComponent<UnitScript>().GetSkill(57) || unit.GetComponent<UnitScript>().GetSkill(72) || unit.GetComponent<UnitScript>().GetSkill(73)) // Crystal Heart, Guardian Spirit, Hero's Heir
+        if (unit.GetComponent<UnitScript>().GetSkill(57)) // Crystal Heart
         {
-            adjustedexp = (adjustedexp * 1.1f);
+            List<int> Skillvalues = DataScript.instance.SkillList[57].SkillValues;
+            float multiplier = unit.GetComponent<UnitScript>().GetSkillLevelMultiplier(57);
+            float ExpMultiplier = (Skillvalues[1] * multiplier);
+            adjustedexp = (adjustedexp * (1f + (ExpMultiplier / 100f)));
+        }
+
+        if (unit.GetComponent<UnitScript>().GetSkill(72)) // Guardian Spirit
+        {
+            List<int> Skillvalues = DataScript.instance.SkillList[72].SkillValues;
+            float multiplier = unit.GetComponent<UnitScript>().GetSkillLevelMultiplier(72);
+            float ExpMultiplier = (Skillvalues[1] * multiplier);
+            adjustedexp = (adjustedexp * (1f + (ExpMultiplier / 100f)));
+        }
+
+        if (unit.GetComponent<UnitScript>().GetSkill(73)) // Hero's Heir
+        {
+            List<int> Skillvalues = DataScript.instance.SkillList[73].SkillValues;
+            float multiplier = unit.GetComponent<UnitScript>().GetSkillLevelMultiplier(73);
+            float ExpMultiplier = (Skillvalues[1] * multiplier);
+            adjustedexp = (adjustedexp * (1f + (ExpMultiplier / 100f)));
         }
 
         if (unit.GetComponent<UnitScript>().GetSkill(111)) //Fortune's favor

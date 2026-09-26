@@ -1217,11 +1217,12 @@
         },
         {
             "name": "Crystal Heart",
-            "Descriptions": "Increases growth, exp by 10% and dodge rate by @0% (exclusive to Zack).",
+            "Descriptions": "Increases growth, exp by @1% and dodge rate by @0% (exclusive to Zack).",
             "IsCommand": false,
             "Cost": 0,
             "SkillValues": [
-                10
+                10,
+                5
             ],
             "targettype": 0,
             "range": 0,
@@ -1539,11 +1540,12 @@
         },
         {
             "name": "Occidens Strategist",
-            "Descriptions": "Increases all stat growth, exp gained by 10% and hit rate by @0% (exclusive to Kira).",
+            "Descriptions": "Increases all stat growth, exp gained by @1% and hit rate by @0% (exclusive to Kira).",
             "IsCommand": false,
             "Cost": 0,
             "SkillValues": [
-                10
+                10,
+                5
             ],
             "targettype": 0,
             "range": 0,
@@ -1561,10 +1563,11 @@
         },
         {
             "name": "Hero's Heir",
-            "Descriptions": "Increases all stat growth, exp gained by 10% and damage by @0% (exclusive to Gale).",
+            "Descriptions": "Increases all stat growth, exp gained by @1% and damage by @0% (exclusive to Gale).",
             "IsCommand": false,
             "Cost": 0,
             "SkillValues": [
+                5,
                 5
             ],
             "targettype": 0,

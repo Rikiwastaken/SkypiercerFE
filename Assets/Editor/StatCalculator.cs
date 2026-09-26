@@ -366,7 +366,7 @@ public class StatCalculator : EditorWindow
 
             if (currentStatCalculation.IsProtag)
             {
-                luckboost += US.cystalheartgrowthboost;
+                luckboost += US.GetProtagGrowthBonus(US.UnitCharacteristics.UnitSkill);
             }
 
             if (currentStatCalculation.usingGenius)
@@ -416,7 +416,7 @@ public class StatCalculator : EditorWindow
 
         if (currentStatCalculation.IsProtag)
         {
-            globalbonus += US.cystalheartgrowthboost;
+            globalbonus += US.GetProtagGrowthBonus(US.UnitCharacteristics.UnitSkill);
         }
 
         if (currentStatCalculation.usingGenius)

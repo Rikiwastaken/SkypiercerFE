@@ -401,7 +401,6 @@ public class UnitScript : MonoBehaviour
     public equipment Fists;
     public float growthPerLuckPoint = 0.25f;
     public int geniusgrowthboost = 15;
-    public int cystalheartgrowthboost = 10;
     public float movespeed;
     private int delayedUpdateCounter;
 
@@ -2872,7 +2871,21 @@ public class UnitScript : MonoBehaviour
         //Crystal Heart, Guardian Spirit, Hero's Heir
         if (GetSkill(57) || GetSkill(72) || GetSkill(73))
         {
+            int skillid = 0;
+            if (GetSkill(57))
+            {
+                skillid = 57;
+            }
+            else if (GetSkill(72))
+            {
+                skillid = 72;
+            }
+            else if (GetSkill(73))
+            {
+                skillid = 73;
+            }
 
+            int cystalheartgrowthboost = GetProtagGrowthBonus(skillid);
             GrowthtoApply.HPGrowth += cystalheartgrowthboost;
             GrowthtoApply.PsycheGrowth += cystalheartgrowthboost;
             GrowthtoApply.StrengthGrowth += cystalheartgrowthboost;
@@ -2929,6 +2942,14 @@ public class UnitScript : MonoBehaviour
 
 
         return GrowthtoApply;
+    }
+
+    public int GetProtagGrowthBonus(int skillid)
+    {
+        List<int> Skillvalues = DataScript.instance.SkillList[skillid].SkillValues;
+        float multiplier = GetSkillLevelMultiplier(skillid);
+        int cystalheartgrowthboost = (int)(Skillvalues[1] * multiplier);
+        return cystalheartgrowthboost;
     }
 
     // Get Blade Growth Modification according to equiped blade

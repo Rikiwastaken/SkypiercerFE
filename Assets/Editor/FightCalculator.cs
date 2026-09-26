@@ -774,7 +774,7 @@ public class FightCalculator : EditorWindow
 
             if (US.GetSkill(57) || US.GetSkill(72) || US.GetSkill(73))
             {
-                luckboost += US.cystalheartgrowthboost;
+                luckboost += US.GetProtagGrowthBonus(US.UnitCharacteristics.UnitSkill);
             }
 
             if (US.GetSkill(10))
@@ -825,7 +825,7 @@ public class FightCalculator : EditorWindow
 
         if (US.GetSkill(57) || US.GetSkill(72) || US.GetSkill(73))
         {
-            globalbonus += US.cystalheartgrowthboost;
+            globalbonus += US.GetProtagGrowthBonus(US.UnitCharacteristics.UnitSkill);
         }
 
         if (US.GetSkill(10))
