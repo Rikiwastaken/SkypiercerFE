@@ -35,6 +35,8 @@ public class MapInitializer : MonoBehaviour
     public Vector2 EnemyStartLookDirection;
     public Vector2 OtherStartLookDirection;
 
+    public UnitDeploymentScript _unitdeploymentscript;
+
     private void Awake()
     {
         instance = this;
@@ -43,11 +45,13 @@ public class MapInitializer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        EmptyNotUnlockedPlayables();
+        //EmptyNotUnlockedPlayables();
 
         InitializePlayers(true);
         InitializeNonPlayers();
         InitializeCopyAndTalkID();
+        _unitdeploymentscript.InitializeCharactersToShow();
+        _unitdeploymentscript.InitializeButtons();
     }
 
     private void EmptyNotUnlockedPlayables()
@@ -107,6 +111,8 @@ public class MapInitializer : MonoBehaviour
 
         numberofplayables = playablepos.Count;
 
+        int currentlydeployed = 0;
+
         bool intestmap = SceneManager.GetActiveScene().name == "TestMap";
 
         // we reinitialize the characters
@@ -127,6 +133,7 @@ public class MapInitializer : MonoBehaviour
             {
                 playable.playableStats.deployunit = true;
                 playable.playableStats.unlocked = true;
+                currentlydeployed++;
                 AddUnit(playable);
             }
 
@@ -135,23 +142,26 @@ public class MapInitializer : MonoBehaviour
         SaveManager SM = SaveManager.instance;
         foreach (Character playable in DataScript.instance.PlayableCharacterList)
         {
-            if (SM.PreviouslyDeployed.Contains(playable.ID) && !playable.playableStats.deployunit && playable.playableStats.unlocked && !playable.PermaDied)
+            if (SM.PreviouslyDeployed.Contains(playable.ID) && !playable.playableStats.deployunit && playable.playableStats.unlocked && !playable.PermaDied && currentlydeployed < numberofplayables)
             {
+                currentlydeployed++;
                 playable.playableStats.deployunit = true;
-            }
-
-            if (playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)) && !ForcedCharacters.Contains(playable.ID) && !playable.PermaDied)
-            {
                 AddUnit(playable);
             }
+
+            //if (playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)) && !ForcedCharacters.Contains(playable.ID) && !playable.PermaDied)
+            //{
+            //    AddUnit(playable);
+            //}
 
         }
 
         // then we fill the remaining spots with random characters
         foreach (Character playable in DataScript.instance.PlayableCharacterList)
         {
-            if (!playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)) && !playable.PermaDied)
+            if (!playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)) && !playable.PermaDied && currentlydeployed < numberofplayables)
             {
+                currentlydeployed++;
                 playable.playableStats.deployunit = true;
                 AddUnit(playable);
             }
@@ -222,7 +232,7 @@ public class MapInitializer : MonoBehaviour
 
         if (GetFirstFreePlayablePos() != -1)
         {
-
+            Debug.Log("deploying " + playable.name);
             GameObject newcharacter = Instantiate(BaseCharacter);
             newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
             newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();
