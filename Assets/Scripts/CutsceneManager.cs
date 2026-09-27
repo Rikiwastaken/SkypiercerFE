@@ -713,7 +713,7 @@ public class CutsceneManager : MonoBehaviour
     [ContextMenu("Load Dialogue From JSON")]
     public void LoadDialogues()
     {
-        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Bond JSON File", "", "json");
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Save JSON File", "", "json");
         if (string.IsNullOrEmpty(path))
             return;
 
@@ -771,6 +771,5 @@ public class CutsceneManager : MonoBehaviour
         Debug.Log("Loaded " + wrapper.dialoguesToLoad.Count + " dialogue parts into the Cutscenes number " + CurrentCutsceneToDebug + "!");
 
     }
-
 #endif
 }
