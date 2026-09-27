@@ -2053,6 +2053,10 @@ public class AttackTurnScript : MonoBehaviour
                 Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
                 if (charunit.currentHP <= 0)
                 {
+                    if (DataScript.instance != null && charunit.affiliation == "playable")
+                    {
+                        charunit.PermaDied = true;
+                    }
                     charunit.experience = 0;
                     if (charunit.enemyStats == null)
                     {

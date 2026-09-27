@@ -45,6 +45,7 @@ public class UnitScript : MonoBehaviour
 
         [Header("\nCharacter info")]
 
+        public bool PermaDied;
         public int modelID;
         public List<WeaponMastery> Masteries;
         public float DialoguePitch;
@@ -1208,6 +1209,7 @@ public class UnitScript : MonoBehaviour
             SecondUnitSkill = CharacterToCopy.SecondUnitSkill,
             EquipedSkills = new List<int>(CharacterToCopy.EquipedSkills),
             attacksfriends = CharacterToCopy.attacksfriends,
+            PermaDied = CharacterToCopy.PermaDied,
             playableStats = new PlayableStats
             {
                 MaxSkillpoints = CharacterToCopy.playableStats.MaxSkillpoints,
@@ -3024,7 +3026,7 @@ public class UnitScript : MonoBehaviour
 
         if (UnitCharacteristics.affiliation == "playable")
         {
-            fixedgrowth = SaveManager.instance.Options.FixedGrowth;
+            fixedgrowth = DataScript.instance.FixedGrowth;
             DataScript.instance.SkillCoins++;
         }
 

@@ -22,8 +22,6 @@ public class OptionsMenuScript : MonoBehaviour
 
     public TextMeshProUGUI BattleAnimations;
 
-    public TextMeshProUGUI FixedGrowth;
-
     private SaveManager SaveManager;
 
     public TextMeshProUGUI musictext;
@@ -53,14 +51,7 @@ public class OptionsMenuScript : MonoBehaviour
         //    BattleAnimations.text = "Battle Animations : Off";
         //}
         BattleAnimations.text = "Battle Animations : Locked";
-        if (SaveManager.Options.FixedGrowth)
-        {
-            FixedGrowth.text = "Fixed Growth : On";
-        }
-        else
-        {
-            FixedGrowth.text = "Fixed Growth : Off";
-        }
+
         musictext.text = "Music : " + (int)(SaveManager.Options.musicvolume * 100);
         SEtext.text = "Sound : " + (int)(SaveManager.Options.SEVolume * 100);
         ResText.text = "Resolution : " + (int)(SaveManager.Resolutions[SaveManager.Options.ResolutionID].x) + "x" + (int)(SaveManager.Resolutions[SaveManager.Options.ResolutionID].y);
@@ -188,17 +179,5 @@ public class OptionsMenuScript : MonoBehaviour
         }
     }
 
-    public void ToggleFixedGrowth()
-    {
-        SaveManager.Options.FixedGrowth = !SaveManager.Options.FixedGrowth;
-        SaveManager.SaveOptions();
-        if (SaveManager.Options.FixedGrowth)
-        {
-            FixedGrowth.text = "Fixed Growth : On";
-        }
-        else
-        {
-            FixedGrowth.text = "Fixed Growth : Off";
-        }
-    }
+
 }

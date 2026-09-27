@@ -96,7 +96,15 @@ public class MainMenuScript : MonoBehaviour
         sceneLoader.LoadScene("TestMap");
     }
 
+    public void SetDeathType(bool permadeath)
+    {
+        DataScript.instance.Permadeath = permadeath;
+    }
 
+    public void SetGrowthType(bool fixedgrowth)
+    {
+        DataScript.instance.FixedGrowth = fixedgrowth;
+    }
 
     public void OnCancel()
     {

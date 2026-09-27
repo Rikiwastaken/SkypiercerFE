@@ -188,7 +188,7 @@ public class BondsScript : MonoBehaviour
 
                 foreach (Character character in DataScript.instance.PlayableCharacterList)
                 {
-                    if (bond.Bond.Characters.Contains(character.ID) && !character.playableStats.unlocked)
+                    if (bond.Bond.Characters.Contains(character.ID) && !character.playableStats.unlocked && !character.PermaDied)
                     {
                         skipcharacter = true;
                         continue;

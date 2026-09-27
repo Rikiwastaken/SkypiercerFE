@@ -195,7 +195,7 @@ public class SkillShopScript : MonoBehaviour
 
         foreach (Character character in DataScript.instance.PlayableCharacterList)
         {
-            if (character.playableStats.unlocked)
+            if (character.playableStats.unlocked && !character.PermaDied)
             {
                 if (!skillIDshown.Contains(character.UnitSkill))
                 {
@@ -327,7 +327,7 @@ public class SkillShopScript : MonoBehaviour
                 }
                 foreach (Character playablechar in DataScript.instance.PlayableCharacterList)
                 {
-                    if (playablechar.playableStats.unlocked)
+                    if (playablechar.playableStats.unlocked && !playablechar.PermaDied)
                     {
                         foreach (int EquipedSkillID in playablechar.EquipedSkills)
                         {
@@ -410,7 +410,7 @@ public class SkillShopScript : MonoBehaviour
         foreach (Character playablechar in DataScript.instance.PlayableCharacterList)
         {
 
-            if (playablechar.playableStats.unlocked && playablechar.UnitSkill != 0)
+            if (playablechar.playableStats.unlocked && playablechar.UnitSkill != 0 && !playablechar.PermaDied)
             {
                 foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                 {
@@ -538,7 +538,7 @@ public class SkillShopScript : MonoBehaviour
         }
         foreach (Character chara in DataScript.instance.PlayableCharacterList)
         {
-            if (chara.playableStats.unlocked)
+            if (chara.playableStats.unlocked && !chara.PermaDied)
             {
                 foreach (int SkillID in chara.EquipedSkills)
                 {

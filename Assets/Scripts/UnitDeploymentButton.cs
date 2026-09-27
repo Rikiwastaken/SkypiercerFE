@@ -163,11 +163,11 @@ public class UnitDeploymentButton : MonoBehaviour
 
         foreach (Character character in DataScript.instance.PlayableCharacterList)
         {
-            if (character.name.ToLower() == "kira" && character.playableStats.unlocked)
+            if (character.name.ToLower() == "kira" && character.playableStats.unlocked && !character.PermaDied)
             {
                 KiraUnlocked = true;
             }
-            if (character.name.ToLower() == "gale" && character.playableStats.unlocked)
+            if (character.name.ToLower() == "gale" && character.playableStats.unlocked && !character.PermaDied)
             {
                 GaleUnlocked = true;
             }

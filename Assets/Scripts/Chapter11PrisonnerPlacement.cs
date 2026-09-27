@@ -15,7 +15,7 @@ public class Chapter11PrisonnerPlacement : MonoBehaviour
         List<int> IDsToRemove = new List<int>();
         foreach (int ID in PlayableCharactersToSpawn)
         {
-            if (!DataScript.instance.PlayableCharacterList[ID].playableStats.unlocked)
+            if (!DataScript.instance.PlayableCharacterList[ID].playableStats.unlocked || DataScript.instance.PlayableCharacterList[ID].PermaDied)
             {
                 IDsToRemove.Add(ID);
             }

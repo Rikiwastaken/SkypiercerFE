@@ -40,6 +40,8 @@ public class SaveManager : MonoBehaviour
         public List<int> SkillsAlreadySeenInShop;
         public List<bool> CampDialoguesSeen;
         public List<int> PreviouslyDeployed;
+        public bool FixedGrowth;
+        public bool Permadeath;
     }
 
     [Serializable]
@@ -53,6 +55,7 @@ public class SaveManager : MonoBehaviour
         public List<int> equipedskills;
         public List<WeaponMastery> WeaponMasteryList;
         public bool unlocked;
+        public bool Permadied;
         public string battalion;
         public int previousequipedweapon;
         public int previousTelekinesis;
@@ -77,7 +80,6 @@ public class SaveManager : MonoBehaviour
         public float SEVolume;
         public bool Fullscreen;
         public bool BattleAnimations;
-        public bool FixedGrowth;
         public int ResolutionID = 7;
     }
 
@@ -158,6 +160,7 @@ public class SaveManager : MonoBehaviour
                 secondskillUnlocked = character.SecondSkillUnlocked,
                 UnitSkillLevel = character.UnitSkillLevel,
                 SecondSkillLevel = character.SecondSkillLevel,
+                Permadied = character.PermaDied,
             };
             returnlist.Add(characterSaveInfo);
         }
@@ -186,6 +189,7 @@ public class SaveManager : MonoBehaviour
                     character.SecondSkillUnlocked = CharaSave.secondskillUnlocked;
                     character.UnitSkillLevel = CharaSave.UnitSkillLevel;
                     character.SecondSkillLevel = CharaSave.SecondSkillLevel;
+                    character.PermaDied = CharaSave.Permadied;
                 }
             }
         }
@@ -265,7 +269,6 @@ public class SaveManager : MonoBehaviour
             Options.SEVolume = 1.000001f;
             Options.Fullscreen = Screen.fullScreen;
             Options.BattleAnimations = true;
-            Options.FixedGrowth = false;
             Options.ResolutionID = 7;
             Screen.SetResolution((int)Resolutions[Options.ResolutionID].x, (int)Resolutions[Options.ResolutionID].y, Options.Fullscreen);
             Screen.fullScreen = Options.Fullscreen;
@@ -404,6 +407,7 @@ public class SaveManager : MonoBehaviour
             DS.SkillsAlreadySeenInShop = new List<int>();
             CampDialoguesSeen = new List<bool>(30);
             PreviouslyDeployed = new List<int>();
+            //Fixed growth and permadeath are set through buttons
         }
 
     }
@@ -427,6 +431,8 @@ public class SaveManager : MonoBehaviour
         DS.SkillsAlreadySeenInShop = Save.SkillsAlreadySeenInShop;
         CampDialoguesSeen = Save.CampDialoguesSeen;
         PreviouslyDeployed = Save.PreviouslyDeployed;
+        DS.FixedGrowth = Save.FixedGrowth;
+        DS.Permadeath = Save.Permadeath;
     }
 
     public void SaveCurrentSlot(int chapter = 0)
@@ -515,6 +521,8 @@ public class SaveManager : MonoBehaviour
             SkillsAlreadySeenInShop = DS.SkillsAlreadySeenInShop,
             CampDialoguesSeen = CampDialoguesSeen,
             PreviouslyDeployed = PreviouslyDeployed,
+            FixedGrowth = DS.FixedGrowth,
+            Permadeath = DS.Permadeath,
         };
 
         return save;

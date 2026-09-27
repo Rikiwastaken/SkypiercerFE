@@ -56,7 +56,7 @@ public class MapInitializer : MonoBehaviour
         for (int i = 0; i < DataScript.instance.PlayableCharacterList.Count; i++)
         {
             Character currentchar = DataScript.instance.PlayableCharacterList[i];
-            if (!currentchar.playableStats.unlocked)
+            if (!currentchar.playableStats.unlocked || currentchar.PermaDied)
             {
                 currentchar.playableStats.deployunit = false;
             }
@@ -72,7 +72,7 @@ public class MapInitializer : MonoBehaviour
 
         foreach (Character chara in DataScript.instance.PlayableCharacterList)
         {
-            if (chara.playableStats.unlocked && !chara.playableStats.deployunit)
+            if (chara.playableStats.unlocked && !chara.playableStats.deployunit && !chara.PermaDied)
             {
                 if (numberofdeployed < playablepos.Count)
                 {
@@ -135,12 +135,12 @@ public class MapInitializer : MonoBehaviour
         SaveManager SM = SaveManager.instance;
         foreach (Character playable in DataScript.instance.PlayableCharacterList)
         {
-            if (SM.PreviouslyDeployed.Contains(playable.ID) && !playable.playableStats.deployunit && playable.playableStats.unlocked)
+            if (SM.PreviouslyDeployed.Contains(playable.ID) && !playable.playableStats.deployunit && playable.playableStats.unlocked && !playable.PermaDied)
             {
                 playable.playableStats.deployunit = true;
             }
 
-            if (playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)) && !ForcedCharacters.Contains(playable.ID))
+            if (playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)) && !ForcedCharacters.Contains(playable.ID) && !playable.PermaDied)
             {
                 AddUnit(playable);
             }
@@ -150,7 +150,7 @@ public class MapInitializer : MonoBehaviour
         // then we fill the remaining spots with random characters
         foreach (Character playable in DataScript.instance.PlayableCharacterList)
         {
-            if (!playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)))
+            if (!playable.playableStats.deployunit && (intestmap || (playable.playableStats.unlocked && firstinit)) && !playable.PermaDied)
             {
                 playable.playableStats.deployunit = true;
                 AddUnit(playable);

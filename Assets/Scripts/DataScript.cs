@@ -30,6 +30,8 @@ public class DataScript : MonoBehaviour
     public List<Sprite> DialogueSpriteList;
 
     public List<Sprite> EnemySprites;
+    public bool FixedGrowth;
+    public bool Permadeath;
 
 
     [Space]
@@ -39,6 +41,7 @@ public class DataScript : MonoBehaviour
     public List<ChapterFlags> SidestoryFlagList;
     public List<int> SkillsAlreadySeenInShop;
     public List<int> CompletedSideStories;
+
 
 
 
@@ -325,8 +328,8 @@ public class DataScript : MonoBehaviour
 
         GameObject USGO = new GameObject();
         UnitScript US = USGO.AddComponent<UnitScript>();
-        bool previousFixedGrowth = SaveManager.instance.Options.FixedGrowth;
-        SaveManager.instance.Options.FixedGrowth = true;
+        bool previousFixedGrowth = DataScript.instance.FixedGrowth;
+        DataScript.instance.FixedGrowth = true;
         try
         {
             int targetmastery = 1;
@@ -341,7 +344,7 @@ public class DataScript : MonoBehaviour
 
             foreach (Character unit in PlayableCharacterList)
             {
-                if (unit.playableStats.unlocked)
+                if (unit.playableStats.unlocked && !unit.PermaDied)
                 {
                     int baselevel = unit.level;
                     US.UnitCharacteristics = unit;
@@ -366,7 +369,7 @@ public class DataScript : MonoBehaviour
         }
         finally
         {
-            SaveManager.instance.Options.FixedGrowth = previousFixedGrowth;
+            DataScript.instance.FixedGrowth = previousFixedGrowth;
         }
 
 

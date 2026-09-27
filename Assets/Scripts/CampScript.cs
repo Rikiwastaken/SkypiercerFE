@@ -177,7 +177,7 @@ public class CampScript : MonoBehaviour
         List<Character> characterstouse = new List<Character>();
         foreach (Character chara in allcharacters)
         {
-            if (chara.playableStats.unlocked)
+            if (chara.playableStats.unlocked && !chara.PermaDied)
             {
                 characterstouse.Add(chara);
             }

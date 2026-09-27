@@ -241,7 +241,7 @@ public class SkillEditionScript : MonoBehaviour
         unlockedplayables = new List<Character>();
         foreach (Character character in DataScript.instance.PlayableCharacterList)
         {
-            if (character.playableStats.unlocked)
+            if (character.playableStats.unlocked && !character.PermaDied)
             {
                 unlockedplayables.Add(character);
             }
@@ -415,7 +415,7 @@ public class SkillEditionScript : MonoBehaviour
         foreach (Character playablechar in DataScript.instance.PlayableCharacterList)
         {
 
-            if (playablechar.playableStats.unlocked && playablechar.UnitSkill != 0)
+            if (playablechar.playableStats.unlocked && playablechar.UnitSkill != 0 && !playablechar.PermaDied)
             {
                 foreach (InventoryItem item in DataScript.instance.PlayerInventory.inventoryItems)
                 {
@@ -461,7 +461,7 @@ public class SkillEditionScript : MonoBehaviour
 
             foreach (Character playablechar in DataScript.instance.PlayableCharacterList)
             {
-                if (playablechar.playableStats.unlocked && characterswithbonds.Contains(playablechar.ID))
+                if (playablechar.playableStats.unlocked && characterswithbonds.Contains(playablechar.ID) && !playablechar.PermaDied)
                 {
                     ListToUse.Add(playablechar);
                 }
@@ -472,7 +472,7 @@ public class SkillEditionScript : MonoBehaviour
 
             foreach (Character playablechar in DataScript.instance.PlayableCharacterList)
             {
-                if (playablechar.playableStats.unlocked)
+                if (playablechar.playableStats.unlocked && !playablechar.PermaDied)
                 {
                     ListToUse.Add(playablechar);
                 }
@@ -650,7 +650,7 @@ public class SkillEditionScript : MonoBehaviour
         int numberofunits = 0;
         foreach (Character character in DataScript.instance.PlayableCharacterList)
         {
-            if (character.playableStats.unlocked)
+            if (character.playableStats.unlocked && !character.PermaDied)
             {
                 numberofunits++;
             }

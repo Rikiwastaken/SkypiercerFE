@@ -283,7 +283,7 @@ public class UnitDeploymentScript : MonoBehaviour
                 characterstoshow.Add(character);
                 character.playableStats.unlocked = true;
             }
-            else if (character.playableStats.unlocked)
+            else if (character.playableStats.unlocked && !character.PermaDied)
             {
                 characterstoshow.Add(character);
             }
@@ -457,7 +457,7 @@ public class UnitDeploymentScript : MonoBehaviour
         int numberofunits = 0;
         foreach (Character character in DeployableUnitList)
         {
-            if (character.playableStats.deployunit && character.playableStats.unlocked)
+            if (character.playableStats.deployunit && character.playableStats.unlocked && !character.PermaDied)
             {
                 numberofunits++;
             }
