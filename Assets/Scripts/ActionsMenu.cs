@@ -1912,7 +1912,7 @@ public class ActionsMenu : MonoBehaviour
 
                     (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage, false);
 
-                    (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false);
+                    (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false, isbossdamage);
                     finaldamage = unitdamage;
 
 
@@ -1954,7 +1954,7 @@ public class ActionsMenu : MonoBehaviour
 
                 (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage, numberofcritials != 0);
 
-                (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false);
+                (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false, isbossdamage);
                 finaldamage = unitdamage;
 
                 bool diddamage = false;
@@ -2009,7 +2009,7 @@ public class ActionsMenu : MonoBehaviour
                     (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, numberofcritials, totaldamage, Damagelist, Critlist);
 
                     (allforoneactive, unyieldingactivated) = AffectDamage(target, unit, totaldamage, numberofcritials != 0);
-                    (compassionused, invigoratingused) = OnDamageEffect(target, targetdamage, false);
+                    (compassionused, invigoratingused) = OnDamageEffect(target, targetdamage, false, isbossdamage);
                     finaldamage = targetdamage;
                 }
                 if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
@@ -2059,7 +2059,7 @@ public class ActionsMenu : MonoBehaviour
                 SpawnTextPopup(unitdamage + "", true, false, target);
                 Damagelist.Add(unitdamage);
                 Critlist.Add(0);
-                (compassionused, invigoratingused) = OnDamageEffect(unit, unitdamage, true);
+                (compassionused, invigoratingused) = OnDamageEffect(unit, unitdamage, true, isbossdamage);
                 finaldamage = unitdamage;
             }
             else
@@ -2385,7 +2385,7 @@ public class ActionsMenu : MonoBehaviour
         return false;
     }
 
-    private (bool, bool) OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing) // compassion, invigorating, 
+    private (bool, bool) OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing, bool isBoss) // compassion, invigorating, 
     {
         bool compassionused = false;
         bool invigoratingused = false;
@@ -2456,7 +2456,7 @@ public class ActionsMenu : MonoBehaviour
         }
 
         //Durability
-        if (!Attacker.GetComponent<UnitScript>().GetSkill(8)) //inexhaustible
+        if (!Attacker.GetComponent<UnitScript>().GetSkill(8) || !isBoss) //inexhaustible
         {
             equipment weapon = Attacker.GetComponent<UnitScript>().GetFirstWeapon();
             if (weapon.Maxuses > 0)
