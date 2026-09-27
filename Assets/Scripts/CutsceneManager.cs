@@ -480,7 +480,11 @@ public class CutsceneManager : MonoBehaviour
             newemojibubble.SetActive(false);
 
             // deactivate useless objects
-            newcharacter.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+            if (newcharacter.GetComponentInChildren<Canvas>() != null)
+            {
+                newcharacter.GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+            }
+
 
             if (CurrentCharacter.Examode)
             {

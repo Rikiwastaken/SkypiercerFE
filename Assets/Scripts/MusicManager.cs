@@ -440,7 +440,6 @@ public class MusicManager : MonoBehaviour
 
     public void InitializeMusics(string ChapterToLoad)
     {
-        Debug.Log("did this play");
         bool isSideStory = false;
         int Chapter = -1;
         if (ChapterToLoad.Contains("Chapter"))

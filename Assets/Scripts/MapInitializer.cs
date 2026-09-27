@@ -209,6 +209,17 @@ public class MapInitializer : MonoBehaviour
 
     public void AddUnit(Character playable)
     {
+        // FIrst check if unit not already there
+
+        foreach (Transform child in Characters.transform)
+        {
+            if (child.GetComponent<UnitScript>() && child.GetComponent<UnitScript>().UnitCharacteristics == playable)
+            {
+                return;
+            }
+        }
+
+
         if (GetFirstFreePlayablePos() != -1)
         {
 
