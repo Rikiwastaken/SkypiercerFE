@@ -3248,7 +3248,7 @@ public class ActionsMenu : MonoBehaviour
         {
             if (targetTile.elevation != unitTile.elevation)
             {
-                tilebonus -= 40 * (unitTile.elevation - targetTile.elevation);
+                tilebonus += 40 * (unitTile.elevation - targetTile.elevation);
             }
         }
 
