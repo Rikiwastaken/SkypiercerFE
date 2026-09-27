@@ -361,6 +361,7 @@ public class SkillEditionScript : MonoBehaviour
                 for (int j = 0; j < skill.SkillValues.Count; j++)
                 {
                     texttouse = texttouse.Replace("@" + j, skill.SkillValues[j].ToString());
+                    texttouse = texttouse.Replace("#" + j, skill.SkillValues[j].ToString());
                 }
                 DescriptionText += "<align=left>Effect: " + texttouse;
                 SkillDescriptionText.text = DescriptionText;
