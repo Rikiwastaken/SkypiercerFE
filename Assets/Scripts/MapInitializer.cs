@@ -232,7 +232,6 @@ public class MapInitializer : MonoBehaviour
 
         if (GetFirstFreePlayablePos() != -1)
         {
-            Debug.Log("deploying " + playable.name);
             GameObject newcharacter = Instantiate(BaseCharacter);
             newcharacter.GetComponent<UnitScript>().UnitCharacteristics = playable;
             newcharacter.GetComponent<UnitScript>().InstantiateCharacterModel();

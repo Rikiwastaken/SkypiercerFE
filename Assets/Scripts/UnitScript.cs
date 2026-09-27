@@ -3321,7 +3321,7 @@ public class UnitScript : MonoBehaviour
             UnitCharacteristics.SecondSkillLevel = 1;
         }
     }
-    public float GetLevelUpStatsChange(float growth, List<List<int>> randomvalues, int Index = 0)
+    public float GetLevelUpStatsChange(float growth, List<RandomScript.RandomValuesDup> randomvalues, int Index = 0)
     {
         float gain = 0f;
         if (growth > 100)
@@ -3330,14 +3330,14 @@ public class UnitScript : MonoBehaviour
         }
         else if (growth < 0)
         {
-            if (randomvalues[Index][0] <= Mathf.Abs(growth))
+            if (randomvalues[Index].NormalValue <= Mathf.Abs(growth))
             {
                 gain--;
             }
         }
         else
         {
-            if (randomvalues[Index][0] <= growth)
+            if (randomvalues[Index].NormalValue <= growth)
             {
                 gain++;
             }

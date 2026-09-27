@@ -8,15 +8,15 @@ public class RandomScript : MonoBehaviour
 
     [Header("Random Values")]
     [SerializeField]
-    public List<List<int>> HitValues;
+    public List<RandomValuesDup> HitValues;
     [SerializeField]
     public int hitvaluesindex;
     [SerializeField]
-    public List<List<int>> CritValues;
+    public List<RandomValuesDup> CritValues;
     [SerializeField]
     public int CritValuesindex;
     [SerializeField]
-    public List<List<int>> personalityValues;
+    public List<RandomValuesDup> personalityValues;
     [SerializeField]
     public int personalityvaluesindex;
     [SerializeField]
@@ -29,15 +29,23 @@ public class RandomScript : MonoBehaviour
     [Serializable]
     public class RandomLevelValues
     {
-        public List<List<int>> HPRandomValue;
-        public List<List<int>> StrengthRandomValue;
-        public List<List<int>> PsycheRandomValue;
-        public List<List<int>> DefenseRandomValue;
-        public List<List<int>> ResistanceRandomValue;
-        public List<List<int>> SpeedRandomValue;
-        public List<List<int>> DexterityRandomValue;
-        public List<List<int>> LuckRandomValue;
+        public List<RandomValuesDup> HPRandomValue;
+        public List<RandomValuesDup> StrengthRandomValue;
+        public List<RandomValuesDup> PsycheRandomValue;
+        public List<RandomValuesDup> DefenseRandomValue;
+        public List<RandomValuesDup> ResistanceRandomValue;
+        public List<RandomValuesDup> SpeedRandomValue;
+        public List<RandomValuesDup> DexterityRandomValue;
+        public List<RandomValuesDup> LuckRandomValue;
     }
+
+    [Serializable]
+    public class RandomValuesDup
+    {
+        public int NormalValue;
+        public int TwoRNValue;
+    }
+
     [SerializeField]
     public List<RandomLevelValues> LevelValues;
     [SerializeField]
@@ -46,8 +54,6 @@ public class RandomScript : MonoBehaviour
     private Character UnitCharacter;
 
     [Header("Random Values Settings")]
-
-    public bool use2RN;
 
     public int numberofRandomValues;
 
@@ -67,9 +73,9 @@ public class RandomScript : MonoBehaviour
         initialized = true;
         UnitCharacter = GetComponent<UnitScript>().UnitCharacteristics;
 
-        HitValues = new List<List<int>>();
-        CritValues = new List<List<int>>();
-        personalityValues = new List<List<int>>();
+        HitValues = new List<RandomValuesDup>();
+        CritValues = new List<RandomValuesDup>();
+        personalityValues = new List<RandomValuesDup>();
         levelValues = new List<RandomLevelValues> { };
         for (int i = 0; i < numberofRandomValues; i++)
         {
@@ -81,14 +87,14 @@ public class RandomScript : MonoBehaviour
                 if (i < numberofLevelValues)
                 {
                     RandomLevelValues newlevelvalues = new RandomLevelValues();
-                    newlevelvalues.HPRandomValue = new List<List<int>>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
-                    newlevelvalues.StrengthRandomValue = new List<List<int>>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
-                    newlevelvalues.PsycheRandomValue = new List<List<int>>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
-                    newlevelvalues.DefenseRandomValue = new List<List<int>>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
-                    newlevelvalues.ResistanceRandomValue = new List<List<int>>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
-                    newlevelvalues.SpeedRandomValue = new List<List<int>>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
-                    newlevelvalues.DexterityRandomValue = new List<List<int>>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
-                    newlevelvalues.LuckRandomValue = new List<List<int>>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
+                    newlevelvalues.HPRandomValue = new List<RandomValuesDup>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
+                    newlevelvalues.StrengthRandomValue = new List<RandomValuesDup>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
+                    newlevelvalues.PsycheRandomValue = new List<RandomValuesDup>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
+                    newlevelvalues.DefenseRandomValue = new List<RandomValuesDup>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
+                    newlevelvalues.ResistanceRandomValue = new List<RandomValuesDup>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
+                    newlevelvalues.SpeedRandomValue = new List<RandomValuesDup>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
+                    newlevelvalues.DexterityRandomValue = new List<RandomValuesDup>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
+                    newlevelvalues.LuckRandomValue = new List<RandomValuesDup>() { CalculateAValue(0), CalculateAValue(0), CalculateAValue(0) };
                     levelValues.Add(newlevelvalues);
                 }
             }
@@ -121,11 +127,11 @@ public class RandomScript : MonoBehaviour
         int value = 0;
         if (target > 50)
         {
-            value = HitValues[hitvaluesindex][0];
+            value = HitValues[hitvaluesindex].TwoRNValue;
         }
         else
         {
-            value = HitValues[hitvaluesindex][1];
+            value = HitValues[hitvaluesindex].NormalValue;
         }
         hitvaluesindex++;
         return value;
@@ -157,11 +163,11 @@ public class RandomScript : MonoBehaviour
         int value = 0;
         if (target > 50)
         {
-            value = CritValues[CritValuesindex][0];
+            value = CritValues[CritValuesindex].TwoRNValue;
         }
         else
         {
-            value = CritValues[CritValuesindex][1];
+            value = CritValues[CritValuesindex].NormalValue;
         }
         CritValuesindex++;
         return value;
@@ -193,11 +199,11 @@ public class RandomScript : MonoBehaviour
         int value = 0;
         if (target > 50)
         {
-            value = personalityValues[personalityvaluesindex][0];
+            value = personalityValues[personalityvaluesindex].TwoRNValue;
         }
         else
         {
-            value = personalityValues[personalityvaluesindex][1];
+            value = personalityValues[personalityvaluesindex].NormalValue;
         }
         personalityvaluesindex++;
         return value;
@@ -214,30 +220,10 @@ public class RandomScript : MonoBehaviour
         return randomLevelValues;
     }
 
-    private List<int> CalculateAValue(int SystemToUse = -1) // -1 is value determined by the use2RN bool, 0 is just one value, 1 is two values
+    private RandomValuesDup CalculateAValue(int SystemToUse = -1) // -1 is value determined by the use2RN bool, 0 is just one value, 1 is two values
     {
 
-        bool use2RNSystem = use2RN;
-        switch (SystemToUse)
-        {
-
-            case 0:
-                use2RNSystem = false;
-                break;
-            case 1:
-                use2RNSystem = true;
-                break;
-        }
-
-        if (use2RNSystem)
-        {
-            return new List<int> { (UnityEngine.Random.Range(1, 101) + UnityEngine.Random.Range(1, 101)) / 2, UnityEngine.Random.Range(1, 101) };
-        }
-        else
-        {
-            int value = UnityEngine.Random.Range(1, 101);
-            return new List<int> { value, value };
-        }
+        return new RandomValuesDup { TwoRNValue = (UnityEngine.Random.Range(1, 101) + UnityEngine.Random.Range(1, 101)) / 2, NormalValue = UnityEngine.Random.Range(1, 101) };
     }
 
 
