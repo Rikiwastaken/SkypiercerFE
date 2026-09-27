@@ -14,6 +14,7 @@ public class CampScript : MonoBehaviour
 
     public Transform BaseMenu;
     public GameObject BondMenu;
+    public GameObject SkillEquipMenu;
 
     [Serializable]
     public class StartDialogue
@@ -91,7 +92,7 @@ public class CampScript : MonoBehaviour
             BaseMenu.gameObject.SetActive(false);
         }
 
-        if (!textBubbleScript.indialogue && !BaseMenu.gameObject.activeSelf && !BondMenu.activeSelf)
+        if (!textBubbleScript.indialogue && !BaseMenu.gameObject.activeSelf && !BondMenu.activeSelf && !SkillEquipMenu.activeSelf)
         {
             if (!BaseMenu.gameObject.activeSelf)
             {
