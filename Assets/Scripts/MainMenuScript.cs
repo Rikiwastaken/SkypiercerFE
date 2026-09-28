@@ -154,10 +154,27 @@ public class MainMenuScript : MonoBehaviour
         else
         {
             saveManager.ApplySave(-1);
+            ApplyRandomCharacterBoosts();
             saveManager.activeSlot = slot;
             sceneLoader.LoadScene("Prologue");
         }
         DataScript.instance.CalculateMaxSP();
+    }
+
+    public void ApplyRandomCharacterBoosts()
+    {
+        foreach (UnitScript.Character Character in DataScript.instance.PlayableCharacterList)
+        {
+
+            Character.stats.HP += Mathf.Min(0.99f, Character.growth.HPGrowth / 100f * Random.Range(0.5f, 1.5f));
+            Character.stats.Strength += Mathf.Min(0.99f, Character.growth.StrengthGrowth / 100f * Random.Range(0.5f, 1.5f));
+            Character.stats.Psyche += Mathf.Min(0.99f, Character.growth.PsycheGrowth / 100f * Random.Range(0.5f, 1.5f));
+            Character.stats.Defense += Mathf.Min(0.99f, Character.growth.DefenseGrowth / 100f * Random.Range(0.5f, 1.5f));
+            Character.stats.Resistance += Mathf.Min(0.99f, Character.growth.ResistanceGrowth / 100f * Random.Range(0.5f, 1.5f));
+            Character.stats.Speed += Mathf.Min(0.99f, Character.growth.SpeedGrowth / 100f * Random.Range(0.5f, 1.5f));
+            Character.stats.Dexterity += Mathf.Min(0.99f, Character.growth.DexterityGrowth / 100f * Random.Range(0.5f, 1.5f));
+            Character.stats.Luck += Mathf.Min(0.99f, Character.growth.LuckGrowth / 100f * Random.Range(0.5f, 1.5f));
+        }
     }
 
     public void LoadPrologue()
