@@ -2255,19 +2255,19 @@ public class ActionsMenu : MonoBehaviour
             }
         }
 
-        if (Attacker.GetComponent<UnitScript>().GetSkill(85) && charTarget.affiliation != "breakable") //lightning edge
+        if (Attacker.GetComponent<UnitScript>().GetSkill(85) && charTarget.affiliation != "breakable" && damage != 0) //lightning edge
         {
             charTarget.statusEffects.ParalyzedTurns++;
             SpawnTextPopup("paralyzed", false, false, target);
         }
 
-        if (Attacker.GetComponent<UnitScript>().GetSkill(86) && charTarget.affiliation != "breakable") //blazing edge
+        if (Attacker.GetComponent<UnitScript>().GetSkill(86) && charTarget.affiliation != "breakable" && damage != 0) //blazing edge
         {
             charTarget.statusEffects.BurnTurns++;
             SpawnTextPopup("burn", false, false, target);
         }
 
-        if (Attacker.GetComponent<UnitScript>().GetSkill(93) && charTarget.affiliation != "breakable") //contamination
+        if (Attacker.GetComponent<UnitScript>().GetSkill(93) && charTarget.affiliation != "breakable" && damage != 0) //contamination
         {
             StatusEffects AtatckerStatus = Attacker.GetComponent<UnitScript>().UnitCharacteristics.statusEffects;
             StatusEffects TargetStatus = charTarget.statusEffects;
