@@ -141,12 +141,21 @@ public class SkillEditionScript : MonoBehaviour
         }
 
 
+        int maxwindowstoshow = unlockedplayables.Count / 10;
+        if (unlockedplayables.Count % 10 != 0)
+        {
+            maxwindowstoshow++;
+        }
 
-
-        PageNumberText.text = (characterwindowindex + 1) + "/" + Mathf.Max(1, (unlockedplayables.Count / 10));
+        PageNumberText.text = (characterwindowindex + 1) + "/" + maxwindowstoshow;
         if (SkillPageNumberText.gameObject.activeSelf)
         {
-            SkillPageNumberText.text = (skillwindowindex + 1) + "/" + Mathf.Max(1, ((InventorySkillList.Count / 10) + 1));
+            maxwindowstoshow = InventorySkillList.Count / 10;
+            if (InventorySkillList.Count % 10 != 0)
+            {
+                maxwindowstoshow++;
+            }
+            SkillPageNumberText.text = (skillwindowindex + 1) + "/" + maxwindowstoshow;
         }
 
 
