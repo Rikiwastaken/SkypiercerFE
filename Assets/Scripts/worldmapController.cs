@@ -49,6 +49,7 @@ public class worldmapController : MonoBehaviour
         cam = GetComponentInChildren<Camera>();
         CC = GetComponent<CharacterController>();
         playermodel.GetComponent<Animator>().SetBool("WorldMap", true);
+
         _MoveAction = InputSystem.actions.FindAction("Movement");
         _MoveCamAction = InputSystem.actions.FindAction("MoveCam");
         if (DataScript.instance != null && DataScript.instance.GetComponent<SaveManager>().maxchapterreached >= minchapterforship)
@@ -78,6 +79,10 @@ public class worldmapController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playermodel.GetComponent<Animator>() && !playermodel.GetComponent<Animator>().GetBool("WorldMap"))
+        {
+            playermodel.GetComponent<Animator>().SetBool("WorldMap", true);
+        }
         Vector3 finalmovement = Vector3.zero;
 
 

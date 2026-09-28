@@ -174,6 +174,12 @@ public class MusicManager : MonoBehaviour
             }
         }
 
+        else if (currentscenename == "MainMenu" && (!MainMenuMusic.isPlaying && !MainMenuMusicintro.isPlaying))
+        {
+            ResetAll();
+            PlayMusic(8, maxvolume);
+        }
+
         if ((DialogueAudioSource.isPlaying || DialogueAudioSource2.isPlaying) && (textBubbleScript == null || TextBubbleScript.Instance == null || textBubbleScript.indialogue == false))
         {
             ChangeVolume(DialogueAudioSource, 0f);
@@ -417,11 +423,7 @@ public class MusicManager : MonoBehaviour
             // keeps behavior identical to before without depending on watchdog timing.
             PlayMusicWithIntro(7, 0f, true);
         }
-        else if (nextscene.name == "MainMenu")
-        {
-            ResetAll();
-            PlayMusic(8, maxvolume);
-        }
+
     }
 
     public void StopDialogueMusic()
