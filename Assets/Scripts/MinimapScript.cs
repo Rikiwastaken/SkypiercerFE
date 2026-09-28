@@ -42,7 +42,11 @@ public class MinimapScript : MonoBehaviour
     public Sprite CurrentPositionSprite;
     public Sprite BreakableSprite;
 
+    public float minimapCellSize = 8f;
+
     public GameObject CharacterPinPrefab;
+    public float pinSize = 32f;
+    public RectTransform pinContainer;
 
     private void Awake()
     {
@@ -131,13 +135,24 @@ public class MinimapScript : MonoBehaviour
 
             minimapImage.rectTransform.sizeDelta = new Vector2(gridWidth, gridHeight);
 
-            float zoom = 8f;
+            float zoom = minimapCellSize;
             minimapImage.rectTransform.sizeDelta = new Vector2(gridWidth * zoom, gridHeight * zoom);
             minimapImage.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
             minimapImage.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
 
             // Pivot also bottom-left
             minimapImage.GetComponent<RectTransform>().pivot = new Vector2(1, 0);
+
+            RectTransform minimapRect = minimapImage.rectTransform;
+
+            pinContainer.SetParent(minimapRect, false);
+
+            pinContainer.anchorMin = Vector2.zero;
+            pinContainer.anchorMax = Vector2.zero;
+            pinContainer.pivot = Vector2.zero;
+            pinContainer.anchoredPosition = Vector2.zero;
+            pinContainer.sizeDelta = minimapImage.rectTransform.sizeDelta;
+            pinContainer.localScale = Vector3.one;
 
             // Position with offset (e.g., 10px from edges)
             //minimapImage.GetComponent<RectTransform>().anchoredPosition = new Vector2(-5, 5);
@@ -169,7 +184,7 @@ public class MinimapScript : MonoBehaviour
 
             minimapBGImage.rectTransform.sizeDelta = new Vector2(gridWidth, gridHeight);
 
-            float zoom = 8f;
+            float zoom = minimapCellSize;
             minimapBGImage.rectTransform.sizeDelta = new Vector2(gridWidth * zoom, gridHeight * zoom);
             minimapBGImage.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
             minimapBGImage.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
@@ -252,7 +267,7 @@ public class MinimapScript : MonoBehaviour
 
     public Vector2 GridToMinimapPosition(Vector2 gridCoordinates)
     {
-        float cellSize = 8f;
+        float cellSize = minimapCellSize;
 
         return new Vector2((gridCoordinates.x + 0.5f) * cellSize, (gridCoordinates.y + 0.5f) * cellSize);
     }
@@ -317,14 +332,12 @@ public class MinimapScript : MonoBehaviour
         {
             GameObject newPin = Instantiate(CharacterPinPrefab);
             newPin.name = "End Pin";
-            newPin.transform.SetParent(transform.parent);
+            newPin.transform.SetParent(pinContainer, false);
 
 
             RectTransform iconRect = newPin.GetComponent<RectTransform>();
 
-            iconRect.anchorMin = new Vector2(0, 0);
-            iconRect.anchorMax = new Vector2(0, 0);
-            iconRect.pivot = new Vector2(0.5f, 0.5f);
+            SetupPinRect(iconRect);
 
             iconRect.anchoredPosition = GridToMinimapPosition(currentTile.GridCoordinates);
 
@@ -354,14 +367,12 @@ public class MinimapScript : MonoBehaviour
                 {
                     GameObject newPin = Instantiate(CharacterPinPrefab);
                     newPin.name = "Breakable Pin " + CurrentBreakableIndex;
-                    newPin.transform.SetParent(transform.parent);
+                    newPin.transform.SetParent(pinContainer, false);
 
 
                     RectTransform iconRect = newPin.GetComponent<RectTransform>();
 
-                    iconRect.anchorMin = new Vector2(0, 0);
-                    iconRect.anchorMax = new Vector2(0, 0);
-                    iconRect.pivot = new Vector2(0.5f, 0.5f);
+                    SetupPinRect(iconRect);
 
                     iconRect.anchoredPosition = GridToMinimapPosition(character.currentTile.GridCoordinates);
 
@@ -416,7 +427,7 @@ public class MinimapScript : MonoBehaviour
         {
             GameObject newPin = Instantiate(CharacterPinPrefab);
             newPin.name = name;
-            newPin.transform.SetParent(transform.parent);
+            newPin.transform.SetParent(pinContainer, false);
             CurrentPinList.Add(newPin);
         }
 
@@ -427,9 +438,7 @@ public class MinimapScript : MonoBehaviour
 
         RectTransform iconRect = CurrentPinList[currentindex].GetComponent<RectTransform>();
 
-        iconRect.anchorMin = new Vector2(0, 0);
-        iconRect.anchorMax = new Vector2(0, 0);
-        iconRect.pivot = new Vector2(0.5f, 0.5f);
+        SetupPinRect(iconRect);
 
         iconRect.anchoredPosition = GridToMinimapPosition(gridPosition);
 
@@ -516,7 +525,7 @@ public class MinimapScript : MonoBehaviour
         {
             GameObject newPin = Instantiate(CharacterPinPrefab);
             newPin.name = "Contraption Pin " + currentContraptionIndex;
-            newPin.transform.SetParent(transform.parent);
+            newPin.transform.SetParent(pinContainer, false);
             ContraptionPins.Add(newPin);
         }
 
@@ -567,9 +576,7 @@ public class MinimapScript : MonoBehaviour
 
         RectTransform iconRect = ContraptionPins[currentContraptionIndex].GetComponent<RectTransform>();
 
-        iconRect.anchorMin = new Vector2(0, 0);
-        iconRect.anchorMax = new Vector2(0, 0);
-        iconRect.pivot = new Vector2(0.5f, 0.5f);
+        SetupPinRect(iconRect);
 
         iconRect.anchoredPosition = GridToMinimapPosition(tile.GridCoordinates);
     }
@@ -608,12 +615,18 @@ public class MinimapScript : MonoBehaviour
 
             RectTransform iconRect = SelectedTileIcon.GetComponent<RectTransform>();
 
-            iconRect.anchorMin = new Vector2(0, 0);
-            iconRect.anchorMax = new Vector2(0, 0);
-            iconRect.pivot = new Vector2(0.5f, 0.5f);
+            SetupPinRect(iconRect);
 
             iconRect.anchoredPosition = GridToMinimapPosition(targetpos);
         }
     }
+    private void SetupPinRect(RectTransform rect)
+    {
+        rect.anchorMin = new Vector2(0, 0);
+        rect.anchorMax = new Vector2(0, 0);
+        rect.pivot = new Vector2(0.5f, 0.5f);
 
+        //rect.sizeDelta = new Vector2(pinSize, pinSize);
+        //rect.localScale = Vector3.one;
+    }
 }
