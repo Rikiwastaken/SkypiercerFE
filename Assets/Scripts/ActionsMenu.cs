@@ -1695,6 +1695,10 @@ public class ActionsMenu : MonoBehaviour
             {
                 spriteToUse = DataScript.instance.DialogueSpriteList[character.ID];
             }
+            else if (character.affiliation.ToLower() == "breakable")
+            {
+                spriteToUse = EmptySprite;
+            }
             else if (character.enemyStats.PlayableSpriteID > 0)
             {
                 spriteToUse = DataScript.instance.DialogueSpriteList[character.enemyStats.PlayableSpriteID];
