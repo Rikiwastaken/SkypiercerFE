@@ -200,11 +200,15 @@ public class TurnManger : MonoBehaviour
             TileEffects(enemyunitGO);
             TileEffects(otherunitsGO);
 
-            GetComponent<AttackTurnScript>().DeathCleanup();
+
 
         }
+
         GridScript.CalculateDangerousTiles();
+        GetComponent<AttackTurnScript>().DeathCleanup();
+        GridScript.InitializeGOList();
         minimapScript.UpdateMinimap();
+
     }
 
     /// <summary>

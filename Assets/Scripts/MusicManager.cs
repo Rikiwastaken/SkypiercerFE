@@ -120,7 +120,7 @@ public class MusicManager : MonoBehaviour
 
     private ActionsMenu actionsMenu;
 
-    private int currentMusicType = -1;
+    public int currentMusicType = -1;
 
     public float timebeforemusicplays;
     private void Awake()

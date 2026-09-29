@@ -484,6 +484,10 @@ public class MapEventManager : MonoBehaviour
         {
             return;
         }
+        if (turnManger.currentlyplaying == "enemy" || turnManger.currentlyplaying == "other")
+        {
+            return;
+        }
         if (EventsToMonitor != null)
         {
             EventInitialization();
