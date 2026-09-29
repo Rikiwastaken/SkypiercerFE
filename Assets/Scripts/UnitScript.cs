@@ -5089,7 +5089,7 @@ public class UnitScript : MonoBehaviour
 
     public int GetCritLuckModificator()
     {
-        return GetHitLuckModificator(UnitCharacteristics);
+        return GetCritLuckModificator(UnitCharacteristics);
     }
 
     public int GetLuckyTriggerLuckModificator(Character Chartouse)
