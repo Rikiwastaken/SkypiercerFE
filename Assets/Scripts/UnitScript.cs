@@ -2631,7 +2631,7 @@ public class UnitScript : MonoBehaviour
                 remainingMovements += (int)(BaseBonus * multiplier);
             }
 
-            if (remainingMovements <= 0)
+            if (remainingMovements <= 1)
             {
                 UnitCharacteristics.alreadymoved = true;
             }

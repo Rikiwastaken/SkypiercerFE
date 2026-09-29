@@ -156,7 +156,11 @@ public class MusicManager : MonoBehaviour
 
             if (TurnManager == null)
             {
-                TurnManager = FindAnyObjectByType<TurnManger>();
+                if (GridScript.instance != null)
+                {
+                    TurnManager = GridScript.instance.GetComponent<TurnManger>();
+                }
+
             }
 
             if (GameOverScript == null)
@@ -186,7 +190,7 @@ public class MusicManager : MonoBehaviour
             ChangeVolume(DialogueAudioSourceIntro, 0f);
             ChangeVolume(DialogueAudioSource2, 0f);
             ChangeVolume(DialogueAudioSource2Intro, 0f);
-
+            currentMusicType = -1;
             if (DialogueAudioSource.volume <= 0.001f)
             {
                 DialogueAudioSource.Stop();
@@ -199,7 +203,7 @@ public class MusicManager : MonoBehaviour
 
         if (SceneLoader.instance.LoadingImage.gameObject.activeSelf)
         {
-            return;
+            // return;
         }
         if (PlayPrepMusic)
         {
@@ -233,7 +237,7 @@ public class MusicManager : MonoBehaviour
             }
         }
 
-        if (currentscene != "CutsceneScene")
+        if (currentscenename != "CutsceneScene")
         {
             ChangeVolume(CutSceneMusic, 0f);
             ChangeVolume(CutSceneMusicintro, 0f);
@@ -252,7 +256,7 @@ public class MusicManager : MonoBehaviour
             PlayMusic(2, maxvolume);
         }
 
-        if (currentscene == "Camp")
+        if (currentscenename == "Camp")
         {
             // FIX: previously checked "!CampMusic.isPlaying && !CampMusicintro.isPlaying" every frame.
             // AudioSource.isPlaying can read false for a scheduled clip until its dspTime is actually
@@ -270,7 +274,7 @@ public class MusicManager : MonoBehaviour
             ChangeVolume(WorldMapMusicintro, 0f);
 
         }
-        else if (currentscene == "WorldMap")
+        else if (currentscenename == "WorldMap")
         {
             // FIX: same reasoning as the Camp block above - avoid retriggering off isPlaying.
             if (currentMusicType != 6)
@@ -495,6 +499,7 @@ public class MusicManager : MonoBehaviour
     {
         StopAllCoroutines();
         StopAllMusic();
+        currentMusicType = -1;
     }
     void PlayMusic(int type, float startvolume = 0f, bool ignoreStartOfset = false)
     {
@@ -664,6 +669,7 @@ public class MusicManager : MonoBehaviour
         else if (musicID == -1)
         {
             CurrentDialogueMusic = -1;
+            StopDialogueMusic();
         }
     }
 
@@ -840,5 +846,13 @@ public class MusicManager : MonoBehaviour
         ShipMusicintro.Stop();
         MainMenuMusic.Stop();
         MainMenuMusicintro.Stop();
+        BeforeCombat.Stop();
+        BeforeCombatintro.Stop();
+        CutSceneMusic.Stop();
+        CutSceneMusicintro.Stop();
+        DialogueAudioSource.Stop();
+        DialogueAudioSourceIntro.Stop();
+        DialogueAudioSource2.Stop();
+        DialogueAudioSource2Intro.Stop();
     }
 }
