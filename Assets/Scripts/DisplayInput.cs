@@ -177,6 +177,10 @@ public class DisplayInput : MonoBehaviour
 
     private void ActivateButton(GameObject button)
     {
+        if (!ActivateInput)
+        {
+            return;
+        }
         if (!button.GetComponent<Image>().enabled)
         {
             button.GetComponent<Image>().enabled = true;

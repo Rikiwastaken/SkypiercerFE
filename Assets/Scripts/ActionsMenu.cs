@@ -691,7 +691,6 @@ public class ActionsMenu : MonoBehaviour
         GameObject oldtarget = target;
         target = null;
         CommandUsedID = 0;
-        GridScript.CalculateDangerousTiles();
         GridScript.Recolor();
         confirmattack = false;
         ActionManager.instance.currentcharacter = null;
