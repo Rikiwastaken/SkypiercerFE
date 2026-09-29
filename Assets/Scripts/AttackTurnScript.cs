@@ -2116,6 +2116,7 @@ public class AttackTurnScript : MonoBehaviour
         }
 
         minimapScript.UpdateMinimap();
+        GridScript.instance.CalculateDangerousTiles();
     }
 
     private void GenerateDeathDialogue(Character charawhodied)

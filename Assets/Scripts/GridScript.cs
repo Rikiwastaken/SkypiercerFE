@@ -358,6 +358,10 @@ public class GridScript : MonoBehaviour
 
     public void CalculateDangerousTiles()
     {
+        if (TurnManger.instance.currentlyplaying == "enemy" || TurnManger.instance.currentlyplaying == "other")
+        {
+            return;
+        }
         DangerousTiles = new List<GridSquareScript>();
 
         foreach (GameObject unit in allunitGOs)
@@ -378,7 +382,7 @@ public class GridScript : MonoBehaviour
 
             foreach (GridSquareScript tile in movementtiles)
             {
-                List<GridSquareScript> newattacktiles = GetAttack(range, melee, tile, UnitChar);
+                List<GridSquareScript> newattacktiles = GetAttack(range, melee, tile);
 
                 foreach (GridSquareScript attacktile in newattacktiles)
                 {
@@ -389,7 +393,7 @@ public class GridScript : MonoBehaviour
                 }
             }
         }
-
+        Recolor();
     }
 
     private void UpdateTileText()
