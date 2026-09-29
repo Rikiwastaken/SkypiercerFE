@@ -323,7 +323,7 @@ public class MusicManager : MonoBehaviour
 
 
 
-        if (textBubbleScript != null && textBubbleScript.indialogue)
+        if (textBubbleScript != null && textBubbleScript.indialogue && CurrentDialogueMusic != -1)
         {
             if (lowermap)
             {
