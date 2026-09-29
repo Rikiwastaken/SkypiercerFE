@@ -609,7 +609,11 @@ public class MinimapScript : MonoBehaviour
                 SelectedTileIcon.GetComponent<Image>().sprite = CurrentPositionSprite;
 
                 rect.rect.Set(0, 0, 150, 150);
-                rect.localScale = Vector2.one * 0.06f;
+                rect.anchorMin = new Vector2(0, 0);
+                rect.anchorMax = new Vector2(0, 0);
+                rect.pivot = new Vector2(0.5f, 0.5f);
+
+                rect.localScale = Vector2.one * 0.33f;
                 rect.SetParent(transform.parent);
             }
 
