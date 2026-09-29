@@ -3236,7 +3236,7 @@ public class UnitScript : MonoBehaviour
         calculateStats();
         LevelUpSkill();
 
-
+        UnitCharacteristics.currentHP = (int)UnitCharacteristics.stats.HP;
 
         return lvlupresult;
     }
