@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static CalculationToolsScript;
 using static UnitScript;
 
 public class MapInitializer : MonoBehaviour
@@ -345,7 +346,7 @@ public class MapInitializer : MonoBehaviour
         GameObject newcharacter = Instantiate(BaseCharacter);
         if (chartouse != null)
         {
-            newcharacter.GetComponent<UnitScript>().UnitCharacteristics = newcharacter.GetComponent<UnitScript>().CreateCopy(chartouse);
+            newcharacter.GetComponent<UnitScript>().UnitCharacteristics = CreateCopy(chartouse);
         }
         Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
 

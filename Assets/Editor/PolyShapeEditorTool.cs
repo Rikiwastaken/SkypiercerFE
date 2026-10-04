@@ -1,11 +1,11 @@
 
 using System.Collections.Generic;
 using System.Linq;
-
 using UnityEditor;
-
 using UnityEngine;
 using UnityEngine.ProBuilder;
+using static CalculationToolsScript;
+
 
 
 public class CustomPolygonTool : EditorWindow
@@ -100,10 +100,6 @@ public class CustomPolygonTool : EditorWindow
 
     }
 
-    int ManhattanDistance(Vector2 point1, Vector2 point2)
-    {
-        return (int)(Mathf.Abs(point1.x - point2.x) + Mathf.Abs(point1.y - point2.y));
-    }
 
     void InstantiateGrid()
     {
@@ -473,7 +469,7 @@ public class CustomPolygonTool : EditorWindow
         float halfSize = size / 2f;
         List<Vector2> allCorners = new List<Vector2>();
 
-        // Collecte des coins des carrés
+        // Collecte des coins des carrï¿½s
         foreach (GridSquareScript center in centers)
         {
             allCorners.Add(center.GridCoordinates + new Vector2(-halfSize, -halfSize));
@@ -482,7 +478,7 @@ public class CustomPolygonTool : EditorWindow
             allCorners.Add(center.GridCoordinates + new Vector2(halfSize, -halfSize));
         }
 
-        // Récupère l'enveloppe convexe
+        // Rï¿½cupï¿½re l'enveloppe convexe
         return GetConvexHull(allCorners);
 
 
@@ -534,7 +530,7 @@ public class CustomPolygonTool : EditorWindow
             Vector2 start = hull[i];
             Vector2 end = hull[(i + 1) % hull.Count];
 
-            // Ajoute toujours le point de départ
+            // Ajoute toujours le point de dï¿½part
             expanded.Add(start);
 
             // Calcul du delta
@@ -543,13 +539,13 @@ public class CustomPolygonTool : EditorWindow
             // On force un mouvement uniquement horizontal ou vertical
             if (Mathf.Abs(dir.x) > 0 && Mathf.Abs(dir.y) > 0)
             {
-                //throw new System.Exception("Erreur: diagonale détectée dans le hull, interdit.");
+                //throw new System.Exception("Erreur: diagonale dï¿½tectï¿½e dans le hull, interdit.");
             }
 
-            // Nombre de pas entiers de 1 unité
+            // Nombre de pas entiers de 1 unitï¿½
             int steps = Mathf.RoundToInt(Mathf.Max(Mathf.Abs(dir.x), Mathf.Abs(dir.y)));
 
-            // Ajout des points intermédiaires
+            // Ajout des points intermï¿½diaires
             if (steps > 1)
             {
                 Vector2 stepDir = new Vector2(

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using static CalculationToolsScript;
 using static DataScript;
 using static GridSquareScript;
 using static SaveManager;
@@ -390,7 +391,7 @@ public class ForesightScript : MonoBehaviour
         CurrentAction.skilltoremovefrominventory = skilltoremove;
         CurrentAction.beginningofturn = beginningofturn;
         CurrentAction.ModifiedCharacters = new List<Character>();
-        CurrentAction.PreviousBonds = DataScript.instance.CreateBondsCopy();
+        CurrentAction.PreviousBonds = CreateCopy(DataScript.instance.BondsList);
         CurrentAction.currentturn = TurnManger.instance.currentTurn;
         CurrentAction.chapterflags = DataScript.instance.ChapterFlagsList;
         CurrentAction.FactionCurrentlyPlayingAtTime = TurnManger.instance.currentlyplaying;
@@ -412,7 +413,7 @@ public class ForesightScript : MonoBehaviour
 
         foreach (GameObject unit in GridScript.instance.allunitGOs)
         {
-            CurrentAction.ModifiedCharacters.Add(unit.GetComponent<UnitScript>().CreateCopy());
+            CurrentAction.ModifiedCharacters.Add(CreateCopy(unit.GetComponent<UnitScript>().UnitCharacteristics));
         }
         if (User != null)
         {

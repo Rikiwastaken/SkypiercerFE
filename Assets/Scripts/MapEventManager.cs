@@ -5,6 +5,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static CalculationToolsScript;
 using static TextBubbleScript;
 using static UnitScript;
 
@@ -853,11 +854,6 @@ public class MapEventManager : MonoBehaviour
             }
 
         }
-    }
-
-    private int ManhattanDistance(Character unit, Character otherunit)
-    {
-        return (int)(Mathf.Abs(unit.currentTile.GridCoordinates.x - otherunit.currentTile.GridCoordinates.x) + Mathf.Abs(unit.currentTile.GridCoordinates.y - otherunit.currentTile.GridCoordinates.y));
     }
 
     private void SpawnnewEnemies(EventCondition e)

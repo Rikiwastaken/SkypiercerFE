@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static CalculationToolsScript;
 using static UnitScript;
 
 
@@ -108,7 +109,7 @@ public class ItemsScript : MonoBehaviour
 
                         string typeicon = "";
 
-                        typeicon = DataScript.instance.GetWeaponSpriteString(equ.type.ToLower());
+                        typeicon = GetWeaponSpriteString(equ.type.ToLower());
 
                         BladeName.text = equ.Name;
                         BladeType.text = typeicon;
@@ -210,7 +211,7 @@ public class ItemsScript : MonoBehaviour
 
             string typeicon = "";
 
-            typeicon = DataScript.instance.GetWeaponSpriteString(equ.type.ToLower());
+            typeicon = GetWeaponSpriteString(equ.type.ToLower());
 
             BladeName.text = equ.Name;
             BladeType.text = typeicon;
@@ -248,42 +249,10 @@ public class ItemsScript : MonoBehaviour
                     }
                     else
                     {
-
-                        int spriteID = 0;
-                        switch (target.equipments[i].type.ToLower())
-                        {
-                            default:
-                                spriteID = 5;
-                                break;
-                            case ("sword"):
-                                spriteID = 0;
-                                break;
-                            case ("spear"):
-                                spriteID = 1;
-                                break;
-                            case ("greatsword"):
-                                spriteID = 2;
-                                break;
-                            case ("bow"):
-                                spriteID = 3;
-                                break;
-                            case ("scythe"):
-                                spriteID = 4;
-                                break;
-                            case ("shield"):
-                                spriteID = 6;
-                                break;
-                            case ("staff"):
-                                spriteID = 7;
-                                break;
-                            case ("dagger"):
-                                spriteID = 27;
-                                break;
+                        string weapontypestring = GetWeaponSpriteString(target.equipments[i].type);
 
 
-                        }
-
-                        buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = target.equipments[i].Name + " <sprite=" + spriteID + "> " + target.equipments[i].Currentuses + "/" + target.equipments[i].Maxuses;
+                        buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = target.equipments[i].Name + " " + weapontypestring + " " + target.equipments[i].Currentuses + "/" + target.equipments[i].Maxuses;
                     }
                 }
                 else

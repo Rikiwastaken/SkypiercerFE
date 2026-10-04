@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static CalculationToolsScript;
 using static UnitScript;
 public class GridScript : MonoBehaviour
 {
@@ -1562,7 +1563,7 @@ public class GridScript : MonoBehaviour
         List<Node> open = new List<Node>();
         HashSet<Vector2> closed = new HashSet<Vector2>();
 
-        Node startNode = new Node(start, null, 0, Manhattandistance(start, goal));
+        Node startNode = new Node(start, null, 0, ManhattanDistance(start, goal));
         open.Add(startNode);
 
         while (open.Count > 0)
@@ -1606,7 +1607,7 @@ public class GridScript : MonoBehaviour
                         neighborPos,
                         current,
                         tentativeG,
-                        Manhattandistance(neighborPos, goal)
+                        ManhattanDistance(neighborPos, goal)
                     );
                     open.Add(neighborNode);
                 }
@@ -1622,11 +1623,7 @@ public class GridScript : MonoBehaviour
         return new List<Vector2>();
     }
 
-    private float Manhattandistance(Vector2 a, Vector2 b)
-    {
-        // Manhattan distance (good for 4-directional grids)
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
-    }
+
 
     private IEnumerable<Vector2> GetNeighbors(Vector2 pos)
     {

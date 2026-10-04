@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static CalculationToolsScript;
 using static UnitScript;
 
 public class ActionManager : MonoBehaviour
@@ -345,7 +346,7 @@ public class ActionManager : MonoBehaviour
 
                 (int range, bool melee) = US.GetRangeAndMele();
 
-                if (Manhattandistance(tiletouse.GridCoordinates, unit.currentTile.GridCoordinates) > range + unit.movements)
+                if (ManhattanDistance(tiletouse.GridCoordinates, unit.currentTile.GridCoordinates) > range + unit.movements)
                 {
                     continue;
                 }
@@ -384,12 +385,6 @@ public class ActionManager : MonoBehaviour
         }
 
 
-    }
-
-    private float Manhattandistance(Vector2 a, Vector2 b)
-    {
-        // Manhattan distance (good for 4-directional grids)
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
     private void MoveCharacterToSelection()

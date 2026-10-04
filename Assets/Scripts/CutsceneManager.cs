@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.Timeline;
+using static CalculationToolsScript;
 using static TextBubbleScript;
 using static UnitScript;
 
@@ -426,7 +427,7 @@ public class CutsceneManager : MonoBehaviour
             if (CurrentCharacter.characterID != -1 && DataScript != null)
             {
 
-                newcharacter.GetComponent<UnitScript>().UnitCharacteristics = newcharacter.GetComponent<UnitScript>().CreateCopy(DataScript.PlayableCharacterList[CurrentCharacter.characterID]);
+                newcharacter.GetComponent<UnitScript>().UnitCharacteristics = CreateCopy(DataScript.PlayableCharacterList[CurrentCharacter.characterID]);
             }
             else if (CurrentCharacter.EnemyStats != null)
             {

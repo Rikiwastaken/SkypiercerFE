@@ -4,6 +4,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static CalculationToolsScript;
 using static SaveManager;
 using static SkillIconScript;
 using static UnitScript;
@@ -550,26 +551,20 @@ public class DataScript : MonoBehaviour
     {
         DefaultPlayableCharacterList = new List<Character>();
         DefaultInventory = new Inventory() { inventoryItems = new List<InventoryItem>() };
-        GameObject USGO = new GameObject();
-        UnitScript unitScript = USGO.AddComponent<UnitScript>();
         try
         {
             foreach (Character character in PlayableCharacterList)
             {
-                DefaultPlayableCharacterList.Add(unitScript.CreateCopy(character));
+                DefaultPlayableCharacterList.Add(CreateCopy(character));
             }
             foreach (InventoryItem item in PlayerInventory.inventoryItems)
             {
-                DefaultInventory.inventoryItems.Add(CopyInventoryItem(item));
+                DefaultInventory.inventoryItems.Add(CreateCopy(item));
             }
         }
         catch (Exception ex)
         {
             Debug.LogError(ex);
-        }
-        finally
-        {
-            DestroyImmediate(USGO);
         }
     }
 
@@ -579,45 +574,15 @@ public class DataScript : MonoBehaviour
         PlayerInventory = new Inventory() { inventoryItems = new List<InventoryItem>() };
         foreach (Character character in DefaultPlayableCharacterList)
         {
-            PlayableCharacterList.Add(CopyChararacter(character));
+            PlayableCharacterList.Add(CreateCopy(character));
         }
         foreach (InventoryItem item in DefaultInventory.inventoryItems)
         {
-            PlayerInventory.inventoryItems.Add(CopyInventoryItem(item));
+            PlayerInventory.inventoryItems.Add(CreateCopy(item));
         }
     }
 
-    private Character CopyChararacter(Character charactertoCopy)
-    {
-        Character copy = new Character();
-        copy.ID = charactertoCopy.ID;
-        copy.name = charactertoCopy.name;
-        copy.stats = charactertoCopy.stats;
-        copy.movements = charactertoCopy.movements;
-        copy.growth = charactertoCopy.growth;
-        copy.equipmentsIDs = charactertoCopy.equipmentsIDs;
-        copy.UnitSkill = charactertoCopy.UnitSkill;
-        copy.EquipedSkills = charactertoCopy.EquipedSkills;
-        copy.playableStats = charactertoCopy.playableStats;
-        copy.level = charactertoCopy.level;
-        copy.experience = charactertoCopy.experience;
-        List<WeaponMastery> masteriescopy = new List<WeaponMastery>();
-        foreach (WeaponMastery mastery in charactertoCopy.Masteries)
-        {
-            masteriescopy.Add(new WeaponMastery() { Exp = mastery.Exp, Level = mastery.Level, weapontype = mastery.weapontype });
-        }
-        copy.Masteries = masteriescopy;
-        return copy;
-    }
 
-    private InventoryItem CopyInventoryItem(InventoryItem itemtocopy)
-    {
-        InventoryItem copy = new InventoryItem();
-        copy.Quantity = itemtocopy.Quantity;
-        copy.type = itemtocopy.type;
-        copy.ID = itemtocopy.ID;
-        return copy;
-    }
 
     private void SetupEquipment()
     {
@@ -745,22 +710,7 @@ public class DataScript : MonoBehaviour
         }
     }
 
-    public List<Bonds> CreateBondsCopy()
-    {
-        List<Bonds> bondscopy = new List<Bonds>();
-        foreach (Bonds bond in BondsList)
-        {
-            Bonds bondcopy = new Bonds();
-            bondcopy.ID = bond.ID;
-            bondcopy.Characters = bond.Characters;
-            bondcopy.BondDialogueSeen = bond.BondDialogueSeen;
-            bondcopy.BondLevel = bond.BondLevel;
-            bondcopy.BondPoints = bond.BondPoints;
-            bondcopy.MaxLevel = bond.MaxLevel;
-            bondscopy.Add(bondcopy);
-        }
-        return bondscopy;
-    }
+
 
     public void IncreaseBonds(GameObject MainUnit, GameObject OtherUnit)
     {
@@ -953,8 +903,7 @@ public class DataScript : MonoBehaviour
 
         foreach (Character c in PlayableCharacterList)
         {
-            UnitScript uS = new UnitScript();
-            playablecopy.Add(uS.CreateCopy(c));
+            playablecopy.Add(CreateCopy(c));
         }
 
         foreach (UnitScript unitscript in unitscripts)
@@ -1079,7 +1028,7 @@ public class DataScript : MonoBehaviour
             {
 
                 equipment equipmenttocopy = equipmentList[equipmentID];
-                equipment newequipment = GenerateEquipementCopy(equipmenttocopy, Character);
+                equipment newequipment = CreateCopy(equipmenttocopy, Character);
                 newequipmentlist.Add(newequipment);
 
 
@@ -1138,113 +1087,6 @@ public class DataScript : MonoBehaviour
 
     }
 
-    public equipment GenerateEquipementCopy(equipment equipmenttocopy, Character character)
-    {
-        equipment newequipment = new equipment();
-        newequipment.Name = equipmenttocopy.Name;
-        newequipment.BaseDamage = equipmenttocopy.BaseDamage;
-        newequipment.BaseHit = equipmenttocopy.BaseHit;
-        newequipment.BaseCrit = equipmenttocopy.BaseCrit;
-        newequipment.Range = equipmenttocopy.Range;
-        newequipment.type = equipmenttocopy.type;
-        newequipment.Currentuses = equipmenttocopy.Currentuses;
-        newequipment.Maxuses = equipmenttocopy.Maxuses;
-        newequipment.ID = equipmenttocopy.ID;
-        newequipment.Grade = equipmenttocopy.Grade;
-        newequipment.equipmentmodel = equipmenttocopy.equipmentmodel;
-
-        if (character.name == "Zack")
-        {
-            switch (newequipment.type.ToLower())
-            {
-                case "sword":
-                    newequipment.Name = "Swino";
-                    break;
-                case "spear":
-                    newequipment.Name = "Spino";
-                    break;
-                case "greatsword":
-                    newequipment.Name = "Grino";
-                    break;
-                case "bow":
-                    newequipment.Name = "Bino";
-                    break;
-                case "scythe":
-                    newequipment.Name = "Scino";
-                    break;
-                case "shield":
-                    newequipment.Name = "Shino";
-                    break;
-                case "staff":
-                    newequipment.Name = "Stino";
-                    break;
-                case "dagger":
-                    newequipment.Name = "Dino";
-                    break;
-            }
-            switch (newequipment.Grade)
-            {
-                case 2:
-                    newequipment.Name += "+";
-                    break;
-                case 3:
-                    newequipment.Name += "Ex";
-                    break;
-                case 4:
-                    newequipment.Name += "Ult";
-                    break;
-                case 5:
-                    newequipment.Name += "Final";
-                    break;
-            }
-        }
-
-        if (character.name == "Kira")
-        {
-            if (newequipment.type.ToLower() == "sword")
-            {
-                newequipment.Name = "Reshine";
-                switch (newequipment.Grade)
-                {
-                    case 3:
-                        newequipment.Name += "II";
-                        break;
-                    case 4:
-                        newequipment.Name += "III";
-                        break;
-                    case 5:
-                        newequipment.Name += "IV";
-                        break;
-                }
-            }
-        }
-
-        if (character.name == "Gale")
-        {
-            if (newequipment.type.ToLower() == "greatsword")
-            {
-                newequipment.Name = "Abyssal";
-                switch (newequipment.Grade)
-                {
-                    case 3:
-                        newequipment.Name += " 2";
-                        break;
-                    case 4:
-                        newequipment.Name += " 3";
-                        break;
-                    case 5:
-                        newequipment.Name += " 4";
-                        break;
-                }
-            }
-        }
-        return newequipment;
-    }
-
-    int ManhattanDistance(Vector2 point1, Vector2 point2)
-    {
-        return (int)(Mathf.Abs(point1.x - point2.x) + Mathf.Abs(point1.y - point2.y));
-    }
 
 
     public void SaveCharacterTalkedToFlag(int characterTalkID, bool IsSideStory)
@@ -1311,34 +1153,7 @@ public class DataScript : MonoBehaviour
 
     }
 
-    public string GetWeaponSpriteString(string weapontype)
-    {
-        switch (weapontype.ToLower())
-        {
-            case ("sword"):
-                return "<sprite=0>";
-            case ("spear"):
-                return "<sprite=1>";
 
-            case ("greatsword"):
-                return "<sprite=2>";
-
-            case ("bow"):
-                return "<sprite=3>";
-
-            case ("scythe"):
-                return "<sprite=4>";
-
-            case ("shield"):
-                return "<sprite=6>";
-            case ("staff"):
-                return "<sprite=7>";
-            case ("dagger"):
-                return "<sprite=27>";
-            default:
-                return "<sprite=5>";
-        }
-    }
 
     public bool CheckIfExamodeIsUnlocked(Character Charactertouse)
     {

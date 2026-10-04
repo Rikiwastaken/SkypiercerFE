@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CalculationToolsScript;
 
 public class WeaponPrefabScript : MonoBehaviour
 {
@@ -83,7 +84,7 @@ public class WeaponPrefabScript : MonoBehaviour
 
     }
 
-    public void SwitchWeaponGO(string type, string name, int level, LayerMask Layer, float scale = 0.5f, UnitScript.Character User = null, bool switchinstantly = false)
+    public void SwitchWeaponGO(string type, string name, int level, string LayerMaskName, float scale = 0.5f, UnitScript.Character User = null, bool switchinstantly = false)
     {
         if (CurrentlyAppearing.weaponType != null && CurrentlyAppearing.weaponType.ToLower() == type.ToLower() && currentEquipedLevel == level)
         {
@@ -155,7 +156,7 @@ public class WeaponPrefabScript : MonoBehaviour
         {
             if (newweapon != null)
             {
-                CreateAndSetWeaponMaterial(newweapon, level, weaponVis, uniqueweaponID, Layer);
+                CreateAndSetWeaponMaterial(newweapon, level, weaponVis, uniqueweaponID, LayerMaskName);
                 weaponVis.materials = new List<Material>();
 
                 SetMaterialsToList(weaponVis.materials, newweapon);
@@ -209,7 +210,7 @@ public class WeaponPrefabScript : MonoBehaviour
 
         return -1;
     }
-    public void CreateAndSetWeaponMaterial(GameObject GO, int level, weaponVisuals WeaponVis, int uniqueweaponID, LayerMask Layer)
+    public void CreateAndSetWeaponMaterial(GameObject GO, int level, weaponVisuals WeaponVis, int uniqueweaponID, string LayerMaskName)
     {
         Material newMaterial = new Material(TemplateMaterial);
         if (uniqueweaponID == -1)
@@ -236,7 +237,7 @@ public class WeaponPrefabScript : MonoBehaviour
         }
         newMaterial.SetColor("_OutlineColor", WeaponVis.WeaponEffectColor);
 
-        SetMaterialToGO(GO, newMaterial, Layer);
+        ChangeMaterialInGOHierarchy(GO, newMaterial, LayerMaskName);
     }
 
     // this function is used to place the weapon on the unit, it takes the weapon type and the parent transform as parameters, it then finds the corresponding weapon gameobject and sets its parent and local position and rotation based on the offset variables
@@ -368,23 +369,5 @@ public class WeaponPrefabScript : MonoBehaviour
         }
     }
 
-    private void SetMaterialToGO(GameObject GOtouse, Material Mattoadd, LayerMask Layer)
-    {
-        // Sets material
-        if (GOtouse.GetComponent<Renderer>())
-        {
-            GOtouse.GetComponent<Renderer>().material = Mattoadd;
-        }
-
-        // Also sets layer
-        GOtouse.layer = Layer;
-
-        // then for each child we do the same.
-
-        foreach (Transform child in GOtouse.transform)
-        {
-            SetMaterialToGO(child.gameObject, Mattoadd, Layer);
-        }
-    }
 
 }

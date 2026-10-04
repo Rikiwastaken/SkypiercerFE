@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static CalculationToolsScript;
 using static DataScript;
 
 public class UnitScript : MonoBehaviour
@@ -444,19 +444,22 @@ public class UnitScript : MonoBehaviour
             {
                 if (UnitCharacteristics.affiliation.ToLower() == "playable")
                 {
-                    gameObject.layer = LayerMask.NameToLayer("Players");
-                    UpdateLayer(ActiveModel);
+                    LayerMask Layer = LayerMask.NameToLayer("Players");
+                    gameObject.layer = Layer;
+                    UpdateLayer(ActiveModel, Layer);
 
                 }
                 else if (UnitCharacteristics.affiliation.ToLower() == "other")
                 {
-                    gameObject.layer = LayerMask.NameToLayer("Others");
-                    UpdateLayer(ActiveModel);
+                    LayerMask Layer = LayerMask.NameToLayer("Others");
+                    gameObject.layer = Layer;
+                    UpdateLayer(ActiveModel, Layer);
                 }
                 else if (UnitCharacteristics.affiliation.ToLower() == "enemy")
                 {
-                    gameObject.layer = LayerMask.NameToLayer("Enemies");
-                    UpdateLayer(ActiveModel);
+                    LayerMask Layer = LayerMask.NameToLayer("Enemies");
+                    gameObject.layer = Layer;
+                    UpdateLayer(ActiveModel, Layer);
                 }
                 else
                 {
@@ -612,7 +615,7 @@ public class UnitScript : MonoBehaviour
             }
             if (UnitCharacteristics.enemyStats.monsterStats.ispluvial)
             {
-                UpdateMaterial(ActiveModel, PluvialMat);
+                ChangeMaterialInGOHierarchy(ActiveModel, PluvialMat);
             }
             armature = animator.transform;
             initialpos = armature.localPosition;
@@ -623,18 +626,6 @@ public class UnitScript : MonoBehaviour
         }
 
 
-    }
-
-    private void UpdateMaterial(GameObject go, Material material)
-    {
-        if (go.GetComponent<Renderer>())
-        {
-            go.GetComponent<Renderer>().material = material;
-        }
-        foreach (Transform child in go.transform)
-        {
-            UpdateMaterial(child.gameObject, material);
-        }
     }
 
     // Update is called once per frame
@@ -788,7 +779,7 @@ public class UnitScript : MonoBehaviour
                         if (ActiveModel != null)
                         {
                             character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
-                            SetMaterial(ActiveModel, character.ExamodeClass.ExamodeMat);
+                            ChangeMaterialInGOHierarchy(ActiveModel, character.ExamodeClass.ExamodeMat);
                         }
 
                         character.ExamodeClass.remaingExamodeTurns = _Datascript.ExamodeMaxTurns;
@@ -811,7 +802,7 @@ public class UnitScript : MonoBehaviour
                                 if (equipment.type == oldequ.type && equipment.Grade == oldequ.Grade + 1)
                                 {
 
-                                    equipment newequ = _Datascript.GenerateEquipementCopy(equipment, character);
+                                    equipment newequ = CreateCopy(equipment, character);
                                     newequipment.Add(newequ);
                                     break;
                                 }
@@ -842,7 +833,7 @@ public class UnitScript : MonoBehaviour
                         if (ActiveModel != null)
                         {
                             character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
-                            SetMaterial(ActiveModel, examodemat);
+                            ChangeMaterialInGOHierarchy(ActiveModel, examodemat);
                         }
 
                         character.ExamodeClass.remaingExamodeTurns = _Datascript.ExamodeMaxTurns;
@@ -864,7 +855,7 @@ public class UnitScript : MonoBehaviour
                         if (ActiveModel != null)
                         {
                             character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
-                            SetMaterial(ActiveModel, examodemat);
+                            ChangeMaterialInGOHierarchy(ActiveModel, examodemat);
                         }
 
                         character.ExamodeClass.remaingExamodeTurns = _Datascript.ExamodeMaxTurns;
@@ -892,7 +883,7 @@ public class UnitScript : MonoBehaviour
         // revert to old model
         if (character.playableStats.protagonist && character.ExamodeClass != null)
         {
-            SetMaterial(ActiveModel, character.ExamodeClass.Basemat);
+            ChangeMaterialInGOHierarchy(ActiveModel, character.ExamodeClass.Basemat);
         }
 
         if (character.name.ToLower() == "zack")
@@ -914,39 +905,7 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-    private void SetMaterial(GameObject go, Material material)
-    {
-        if (go.GetComponent<Renderer>() != null)
-        {
-            List<Material> materialstoset = new List<Material>();
-            foreach (Material mat in go.GetComponent<Renderer>().materials)
-            {
-                materialstoset.Add(material);
-            }
-            go.GetComponent<Renderer>().SetMaterials(materialstoset);
-        }
-        foreach (Transform child in go.transform)
-        {
-            SetMaterial(child.gameObject, material);
-        }
-    }
 
-    private Material GetMaterial(GameObject go)
-    {
-        if (go.GetComponent<Renderer>() != null)
-        {
-            return go.GetComponent<Renderer>().material;
-        }
-        foreach (Transform child in go.transform)
-        {
-            Material childmat = GetMaterial(child.gameObject);
-            if (childmat != null)
-            {
-                return childmat;
-            }
-        }
-        return null;
-    }
 
 
     public void BeginningofTurnTrigger(List<GameObject> charactertoapply)
@@ -1151,154 +1110,7 @@ public class UnitScript : MonoBehaviour
 
     public Animator GetAnimator()
     { return animator; }
-    public Character CreateCopy(Character CharacterToCopy = null)
-    {
-        if (CharacterToCopy == null)
-        {
-            CharacterToCopy = UnitCharacteristics;
-        }
 
-        Character copy = new Character
-        {
-            name = CharacterToCopy.name,
-            ID = CharacterToCopy.ID,
-            stats = new BaseStats
-            {
-                HP = CharacterToCopy.stats.HP,
-                Strength = CharacterToCopy.stats.Strength,
-                Psyche = CharacterToCopy.stats.Psyche,
-                Defense = CharacterToCopy.stats.Defense,
-                Resistance = CharacterToCopy.stats.Resistance,
-                Speed = CharacterToCopy.stats.Speed,
-                Dexterity = CharacterToCopy.stats.Dexterity,
-                Luck = CharacterToCopy.stats.Luck,
-            },
-            AjustedStats = new BaseStats
-            {
-                HP = CharacterToCopy.AjustedStats.HP,
-                Strength = CharacterToCopy.AjustedStats.Strength,
-                Psyche = CharacterToCopy.AjustedStats.Psyche,
-                Defense = CharacterToCopy.AjustedStats.Defense,
-                Resistance = CharacterToCopy.AjustedStats.Resistance,
-                Speed = CharacterToCopy.AjustedStats.Speed,
-                Dexterity = CharacterToCopy.AjustedStats.Dexterity,
-                Luck = CharacterToCopy.AjustedStats.Luck,
-            },
-            level = CharacterToCopy.level,
-            experience = CharacterToCopy.experience,
-            affiliation = CharacterToCopy.affiliation,
-            growth = new StatGrowth
-            {
-                HPGrowth = CharacterToCopy.growth.HPGrowth,
-                StrengthGrowth = CharacterToCopy.growth.StrengthGrowth,
-                PsycheGrowth = CharacterToCopy.growth.PsycheGrowth,
-                DefenseGrowth = CharacterToCopy.growth.DefenseGrowth,
-                ResistanceGrowth = CharacterToCopy.growth.ResistanceGrowth,
-                SpeedGrowth = CharacterToCopy.growth.SpeedGrowth,
-                DexterityGrowth = CharacterToCopy.growth.DexterityGrowth,
-                LuckGrowth = CharacterToCopy.growth.LuckGrowth,
-            },
-            currentHP = CharacterToCopy.currentHP,
-            movements = CharacterToCopy.movements,
-            alreadyplayed = CharacterToCopy.alreadyplayed,
-            alreadymoved = CharacterToCopy.alreadymoved,
-            telekinesisactivated = CharacterToCopy.telekinesisactivated,
-            equipmentsIDs = new List<int>(CharacterToCopy.equipmentsIDs),
-            equipments = CharacterToCopy.equipments,
-            UnitSkill = CharacterToCopy.UnitSkill,
-            SecondUnitSkill = CharacterToCopy.SecondUnitSkill,
-            EquipedSkills = new List<int>(CharacterToCopy.EquipedSkills),
-            attacksfriends = CharacterToCopy.attacksfriends,
-            PermaDied = CharacterToCopy.PermaDied,
-            playableStats = new PlayableStats
-            {
-                MaxSkillpoints = CharacterToCopy.playableStats.MaxSkillpoints,
-                deployunit = CharacterToCopy.playableStats.deployunit,
-                unlocked = CharacterToCopy.playableStats.unlocked,
-                protagonist = CharacterToCopy.playableStats.protagonist,
-                battalion = CharacterToCopy.playableStats.battalion,
-                ID = CharacterToCopy.playableStats.ID
-            },
-            enemyStats = new EnemyStats
-            {
-                classID = CharacterToCopy.enemyStats.classID,
-                desiredlevel = CharacterToCopy.enemyStats.desiredlevel,
-                itemtodropID = CharacterToCopy.enemyStats.itemtodropID,
-                usetelekinesis = CharacterToCopy.enemyStats.usetelekinesis,
-                personality = CharacterToCopy.enemyStats.personality,
-                startpos = CharacterToCopy.enemyStats.startpos,
-                equipments = new List<int>(CharacterToCopy.enemyStats.equipments),
-                Skills = new List<int>(CharacterToCopy.enemyStats.Skills),
-                Name = CharacterToCopy.enemyStats.Name,
-                bossiD = CharacterToCopy.enemyStats.bossiD,
-                isother = CharacterToCopy.enemyStats.isother,
-                monsterStats = new MonsterStats
-                {
-                    ispluvial = CharacterToCopy.enemyStats.monsterStats.ispluvial,
-                    ismachine = CharacterToCopy.enemyStats.monsterStats.ismachine
-                },
-                RemainingLifebars = CharacterToCopy.enemyStats.RemainingLifebars,
-                modelID = CharacterToCopy.enemyStats.modelID,
-                talkable = CharacterToCopy.enemyStats.talkable,
-                talkID = CharacterToCopy.enemyStats.talkID,
-                talkedto = CharacterToCopy.enemyStats.talkedto,
-                SpriteID = CharacterToCopy.enemyStats.SpriteID,
-                CopyID = CharacterToCopy.enemyStats.CopyID,
-                PlayableSpriteID = CharacterToCopy.enemyStats.PlayableSpriteID,
-            },
-            currentTile = CharacterToCopy.currentTile,
-            modelID = CharacterToCopy.modelID,
-            Masteries = CharacterToCopy.Masteries.Select(m => new WeaponMastery
-            {
-                Modifier = m.Modifier,
-                weapontype = m.weapontype,
-                Exp = m.Exp,
-                Level = m.Level,
-                maxlevel = m.maxlevel
-            }).ToList(),
-            DialoguePitch = CharacterToCopy.DialoguePitch,
-            TauntTurns = CharacterToCopy.TauntTurns,
-            isintercepting = CharacterToCopy.isintercepting,
-            TemporarySkill = CharacterToCopy.TemporarySkill,
-            SecondSkillUnlocked = CharacterToCopy.SecondSkillUnlocked,
-            statusEffects = new StatusEffects
-            {
-                BurnTurns = CharacterToCopy.statusEffects.BurnTurns,
-                StunTurns = CharacterToCopy.statusEffects.StunTurns,
-                ParalyzedTurns = CharacterToCopy.statusEffects.ParalyzedTurns,
-                ConcussionTunrs = CharacterToCopy.statusEffects.ConcussionTunrs,
-                WeaknessTurns = CharacterToCopy.statusEffects.WeaknessTurns,
-                RegenTurns = CharacterToCopy.statusEffects.RegenTurns,
-                AccelerationTurns = CharacterToCopy.statusEffects.AccelerationTurns,
-                PowerTurns = CharacterToCopy.statusEffects.PowerTurns
-            },
-            motivateusedthisturn = CharacterToCopy.motivateusedthisturn,
-            previouslyequipedweaponID = CharacterToCopy.previouslyequipedweaponID,
-            previousTelekinesis = CharacterToCopy.previousTelekinesis,
-            characterDialogues = new CharacterDialogues
-            {
-                CharacterID = CharacterToCopy.characterDialogues.CharacterID,
-                DeathQuote = CharacterToCopy.characterDialogues.DeathQuote,
-                DeathReaction_Zack = CharacterToCopy.characterDialogues.DeathReaction_Zack,
-                DeathReaction_Kira = CharacterToCopy.characterDialogues.DeathReaction_Kira,
-                DeathReaction_Gale = CharacterToCopy.characterDialogues.DeathReaction_Gale,
-                GoodLvlUp = CharacterToCopy.characterDialogues.GoodLvlUp,
-                MidLvlUp = CharacterToCopy.characterDialogues.MidLvlUp,
-                LowLvlUp = CharacterToCopy.characterDialogues.LowLvlUp
-            },
-            ExamodeClass = new ExamodeClass
-            {
-                ExamodeTexture = CharacterToCopy.ExamodeClass.ExamodeTexture,
-                remaingExamodeTurns = CharacterToCopy.ExamodeClass.remaingExamodeTurns,
-                ExamodePoints = CharacterToCopy.ExamodeClass.ExamodePoints,
-                Basemat = CharacterToCopy.ExamodeClass.Basemat,
-                ExamodeMat = CharacterToCopy.ExamodeClass.ExamodeMat
-            },
-            totalenemieskilled = CharacterToCopy.totalenemieskilled,
-        };
-
-        return copy;
-    }
 
 
     //Manage horizontal movements
@@ -1708,7 +1520,7 @@ public class UnitScript : MonoBehaviour
                 equipment targetequipment = DataScript.instance.equipmentList[ID];
                 if (equip.type.ToLower() == targetequipment.type.ToLower() && equip.ID != ID)
                 {
-                    Chartouse.equipments[i] = DataScript.instance.GenerateEquipementCopy(targetequipment, character);
+                    Chartouse.equipments[i] = CreateCopy(targetequipment, character);
                     continue;
                 }
             }
@@ -1745,14 +1557,14 @@ public class UnitScript : MonoBehaviour
                 equipment equip = Chartouse.equipments[i];
                 if (equip == null || equip.type == null || equip.Name == "")
                 {
-                    Chartouse.equipments[i] = DataScript.instance.GenerateEquipementCopy(DataScript.instance.equipmentList[IDtoAdd], character);
+                    Chartouse.equipments[i] = CreateCopy(DataScript.instance.equipmentList[IDtoAdd], character);
                     equipmentAdded = true;
                     break;
                 }
             }
             if (!equipmentAdded)
             {
-                Chartouse.equipments.Add(DataScript.instance.GenerateEquipementCopy(DataScript.instance.equipmentList[IDtoAdd], character));
+                Chartouse.equipments.Add(CreateCopy(DataScript.instance.equipmentList[IDtoAdd], character));
             }
         }
 
@@ -2354,7 +2166,7 @@ public class UnitScript : MonoBehaviour
             {
                 _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
             }
-            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, ActiveModel.layer, scale, Charactertouse, spawninstantly);
+            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, LayerMask.LayerToName(ActiveModel.layer), scale, Charactertouse, spawninstantly);
             currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO();
             if (currentequipmentmodel != null)
             {
@@ -2403,7 +2215,7 @@ public class UnitScript : MonoBehaviour
                     _WeaponPrefabScript.PlaceWeapon(currentweapon.type.ToLower(), parenttouse, positiontouse, ActiveModel.GetComponent<Unit3DModelInfoScript>().weaponscameajust, rotationtouse);
                 }
 
-                UpdateLayer(currentequipmentmodel);
+                UpdateLayer(currentequipmentmodel, LayerMask.LayerToName(gameObject.layer));
             }
         }
 
@@ -2411,28 +2223,7 @@ public class UnitScript : MonoBehaviour
 
     }
 
-    // For each object if hierarchy under the chosen GO, changes the LayerMask to the layer passed as parameter. If parameter is null, the layer of the GO is applied instead.
-    private void UpdateLayer(GameObject obj, string layername = null)
-    {
-        LayerMask layer = gameObject.layer;
-        if (layername != null)
-        {
-            layer = LayerMask.NameToLayer(layername);
-        }
 
-        if (obj == null)
-        {
-            return;
-        }
-        obj.layer = layer;
-        if (obj.transform.childCount > 0)
-        {
-            for (int i = 0; i < obj.transform.childCount; i++)
-            {
-                UpdateLayer(obj.transform.GetChild(i).gameObject, layername);
-            }
-        }
-    }
 
     private void UpdateWeaponIcon(equipment weapon, bool telekinesis)
     {
@@ -2775,23 +2566,6 @@ public class UnitScript : MonoBehaviour
 
     }
 
-    /*
-    private void Hidedeactivated()
-    {
-        bool checkifonactivated = CheckIfOnActivated();
-        if (CanvasTransform.gameObject.activeSelf != checkifonactivated)
-        {
-            if (animator != null)
-            {
-                animator.transform.gameObject.SetActive(CheckIfOnActivated());
-            }
-
-            CanvasTransform.gameObject.SetActive(CheckIfOnActivated());
-        }
-
-
-    }
-    */
     public bool CheckIfOnActivated()
     {
         return UnitCharacteristics.currentTile.activated;
@@ -4811,11 +4585,6 @@ public class UnitScript : MonoBehaviour
 
 
         return multiplier;
-    }
-
-    private int ManhattanDistance(Character unit, Character otherunit)
-    {
-        return (int)(Mathf.Abs(unit.currentTile.GridCoordinates.x - otherunit.currentTile.GridCoordinates.x) + Mathf.Abs(unit.currentTile.GridCoordinates.y - otherunit.currentTile.GridCoordinates.y));
     }
 
     public void IncreaseUnitsKilled(GameObject unit)

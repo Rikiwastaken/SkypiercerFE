@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static CalculationToolsScript;
 using static DataScript;
 using static UnitScript;
 
@@ -148,7 +149,7 @@ public class FightCalculator : EditorWindow
         {
             CharacterLoaded = true;
 
-            CurrentChar = US.CreateCopy(DS.PlayableCharacterList[currentStatCalculation.ClassID]);
+            CurrentChar = CreateCopy(DS.PlayableCharacterList[currentStatCalculation.ClassID]);
             CurrentChar.SecondSkillUnlocked = true;
             currentStatCalculation.currentlevel = DS.PlayableCharacterList[currentStatCalculation.ClassID].level;
             US.UnitCharacteristics = CurrentChar;
@@ -288,7 +289,7 @@ public class FightCalculator : EditorWindow
                 }
 
                 CurrentChar.equipmentsIDs = new List<int>() { weaponID };
-                CurrentChar.equipments = new List<equipment>() { DS.GenerateEquipementCopy(DS.equipmentList[weaponID], CurrentChar) };
+                CurrentChar.equipments = new List<equipment>() { CreateCopy(DS.equipmentList[weaponID], CurrentChar) };
                 if (currentStatCalculation.BattlesToSimulate <= 0)
                 {
                     CalculationsLaunched = false;
@@ -495,7 +496,7 @@ public class FightCalculator : EditorWindow
                 }
             }
             CurrentChar.equipmentsIDs = new List<int>() { weaponID };
-            CurrentChar.equipments = new List<equipment>() { DS.GenerateEquipementCopy(DS.equipmentList[weaponID], CurrentChar) };
+            CurrentChar.equipments = new List<equipment>() { CreateCopy(DS.equipmentList[weaponID], CurrentChar) };
             CurrentChar.telekinesisactivated = currentStatCalculation.UseTelekinesis;
 
 
@@ -568,7 +569,7 @@ public class FightCalculator : EditorWindow
             }
             simulationClass.EquipedWeaponID = weaponID;
             newChar.equipmentsIDs = new List<int>() { weaponID };
-            newChar.equipments = new List<equipment>() { DS.GenerateEquipementCopy(DS.equipmentList[weaponID], newChar) };
+            newChar.equipments = new List<equipment>() { CreateCopy(DS.equipmentList[weaponID], newChar) };
             newChar.EquipedSkills = new List<int>();
 
 

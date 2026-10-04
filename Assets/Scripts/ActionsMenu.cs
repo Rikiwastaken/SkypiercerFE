@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static CalculationToolsScript;
 using static DataScript;
 using static UnitScript;
 public class ActionsMenu : MonoBehaviour
@@ -1390,7 +1391,7 @@ public class ActionsMenu : MonoBehaviour
 
         equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
 
-        unitweapontxt = DataScript.instance.GetWeaponSpriteString(unitweapon.type.ToLower());
+        unitweapontxt = GetWeaponSpriteString(unitweapon.type.ToLower());
 
         string colorstring = " ";
         if (newbladeuse > unitweapon.Currentuses)
@@ -1430,7 +1431,7 @@ public class ActionsMenu : MonoBehaviour
 
         equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
 
-        unitweapontxt = DataScript.instance.GetWeaponSpriteString(unitweapon.type.ToLower());
+        unitweapontxt = GetWeaponSpriteString(unitweapon.type.ToLower());
 
 
 
@@ -1465,7 +1466,7 @@ public class ActionsMenu : MonoBehaviour
 
         equipment unitweapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
 
-        unitweapontxt = DataScript.instance.GetWeaponSpriteString(unitweapon.type.ToLower());
+        unitweapontxt = GetWeaponSpriteString(unitweapon.type.ToLower());
 
 
 
@@ -1495,7 +1496,7 @@ public class ActionsMenu : MonoBehaviour
 
         equipment targetweapon = target.GetComponent<UnitScript>().GetFirstWeapon();
 
-        targetweapontxt = DataScript.instance.GetWeaponSpriteString(targetweapon.type.ToLower());
+        targetweapontxt = GetWeaponSpriteString(targetweapon.type.ToLower());
 
 
 
@@ -1741,7 +1742,7 @@ public class ActionsMenu : MonoBehaviour
 
             equipment weapon = GOToUse.GetComponent<UnitScript>().GetFirstWeapon();
 
-            weapontxt = DataScript.instance.GetWeaponSpriteString(weapon.type.ToLower());
+            weapontxt = GetWeaponSpriteString(weapon.type.ToLower());
 
 
 
@@ -3310,10 +3311,7 @@ public class ActionsMenu : MonoBehaviour
         return finalcritrate;
     }
 
-    private int ManhattanDistance(Character unit, Character otherunit)
-    {
-        return (int)(Mathf.Abs(unit.currentTile.GridCoordinates.x - otherunit.currentTile.GridCoordinates.x) + Mathf.Abs(unit.currentTile.GridCoordinates.y - otherunit.currentTile.GridCoordinates.y));
-    }
+
 
     public void BladeMenuButton()
     {

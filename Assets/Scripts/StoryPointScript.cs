@@ -41,17 +41,5 @@ public class StoryPointScript : MonoBehaviour
 
     }
 
-    public void ChangeMaterial(GameObject GO, Material material)
-    {
-        if (GO.GetComponent<Renderer>())
-        {
-            GO.GetComponent<Renderer>().material = material;
-        }
-        foreach (Transform child in GO.transform)
-        {
-            ChangeMaterial(child.gameObject, material);
-        }
-    }
-
 
 }

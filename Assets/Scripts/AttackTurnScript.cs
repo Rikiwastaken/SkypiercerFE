@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CalculationToolsScript;
 using static DataScript;
 using static TextBubbleScript;
 using static UnitScript;
@@ -889,7 +890,7 @@ public class AttackTurnScript : MonoBehaviour
             attackanimationhappeningcnt = (int)(TimebeforeAnimationAttack / Time.deltaTime);
             Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
 
-            Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
+            Character Attackercopy = CreateCopy(CharAttacker);
 
 
 
@@ -921,7 +922,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
                 Character Chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-                Character Targetcopy = target.GetComponent<UnitScript>().CreateCopy();
+                Character Targetcopy = CreateCopy(Chartarget);
 
 
                 (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
@@ -1024,7 +1025,7 @@ public class AttackTurnScript : MonoBehaviour
     {
         int safeguard = 0;
         Character CharAttacker = Attacker.GetComponent<UnitScript>().UnitCharacteristics;
-        Character Attackercopy = Attacker.GetComponent<UnitScript>().CreateCopy();
+        Character Attackercopy = CreateCopy(CharAttacker);
 
         //setup target
         GameObject target = null;
@@ -1082,7 +1083,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
             Character Chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-            Character Targetcopy = target.GetComponent<UnitScript>().CreateCopy();
+            Character Targetcopy = CreateCopy(Chartarget);
 
 
             (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
@@ -2030,16 +2031,6 @@ public class AttackTurnScript : MonoBehaviour
         }
 
         return targettile;
-    }
-
-    private int ManhattanDistance(Character unit, Character otherunit)
-    {
-        return (int)(Mathf.Abs(unit.currentTile.GridCoordinates.x - otherunit.currentTile.GridCoordinates.x) + Mathf.Abs(unit.currentTile.GridCoordinates.y - otherunit.currentTile.GridCoordinates.y));
-    }
-
-    private int ManhattanDistance(Vector2 unit, Vector2 otherunit)
-    {
-        return (int)(Mathf.Abs(unit.x - otherunit.x) + Mathf.Abs(unit.y - otherunit.y));
     }
 
     public void DeathCleanup()
