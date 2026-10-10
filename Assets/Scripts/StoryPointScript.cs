@@ -1,4 +1,5 @@
 using UnityEngine;
+using static CalculationToolsScript;
 
 public class StoryPointScript : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class StoryPointScript : MonoBehaviour
     {
         if (isSideStory)
         {
-            ChangeMaterial(ChapterChangeVisuals, SideStoryMat);
+            ChangeMaterialInGOHierarchy(ChapterChangeVisuals, SideStoryMat);
             if (DataScript.instance.GetComponent<SaveManager>().maxchapterreached < minchapterforSideStory)
             {
 
@@ -30,7 +31,7 @@ public class StoryPointScript : MonoBehaviour
         }
         else
         {
-            ChangeMaterial(ChapterChangeVisuals, MainStoryMat);
+            ChangeMaterialInGOHierarchy(ChapterChangeVisuals, MainStoryMat);
             if (DataScript.instance.GetComponent<SaveManager>().maxchapterreached < chapterID)
             {
 

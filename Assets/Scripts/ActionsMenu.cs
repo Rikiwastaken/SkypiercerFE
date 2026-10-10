@@ -17,6 +17,7 @@ public class ActionsMenu : MonoBehaviour
     public Button ActionsCancelButton;
     public Button AttackButton;
     public Button AttackCancelButton;
+    public GameObject AttackWindowGO;
 
     public GameObject ItemsScript;
     public GameObject CommandGO;
@@ -136,7 +137,7 @@ public class ActionsMenu : MonoBehaviour
 
 
         // guarantees attack button is selected when it hsould
-        if (AttackButton.gameObject.activeSelf && AttackButton.transform.parent.gameObject.activeSelf)
+        if (AttackButton.gameObject.activeSelf && AttackWindowGO.activeSelf)
         {
             GameObject selectedGO = EventSystem.current.currentSelectedGameObject;
             if (selectedGO == null || (selectedGO != AttackButton.gameObject && selectedGO != AttackCancelButton.gameObject))
@@ -147,11 +148,11 @@ public class ActionsMenu : MonoBehaviour
         }
 
 
-        if (_CancelAction.WasPressedThisFrame() && !ItemsScript.activeSelf && !CommandGO.activeSelf && !AttackButton.transform.parent.gameObject.activeSelf)
+        if (_CancelAction.WasPressedThisFrame() && !ItemsScript.activeSelf && !CommandGO.activeSelf && !AttackWindowGO.activeSelf)
         {
             ActionsCancelButton.onClick.Invoke();
         }
-        else if (_CancelAction.WasPressedThisFrame() && AttackButton.transform.parent.gameObject.activeSelf)
+        else if (_CancelAction.WasPressedThisFrame() && AttackWindowGO.activeSelf)
         {
             AttackCancelButton.onClick.Invoke();
         }
@@ -704,7 +705,7 @@ public class ActionsMenu : MonoBehaviour
         if (targetlist.Count > 0)
         {
             confirmattack = true;
-            unitAttackText.transform.parent.gameObject.SetActive(false);
+            AttackWindowGO.SetActive(false);
             gameObject.SetActive(false);
             GridScript.ResetAllSelections();
         }
@@ -1059,7 +1060,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.gameObject.SetActive(true);
 
 
 
@@ -1212,7 +1213,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.SetActive(true);
 
         int FinalHealingdmg = CalculateHealing(unit, false);
 
@@ -1341,7 +1342,7 @@ public class ActionsMenu : MonoBehaviour
 
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.SetActive(true);
 
         SetupCombatHUD(unit, true, true, charunit.currentHP);
         SetupCombatHUD(target, false, true, chartarget.currentHP);
@@ -1358,7 +1359,7 @@ public class ActionsMenu : MonoBehaviour
 
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.SetActive(true);
 
         SetupCombatHUD(unit, true, true, charunit.currentHP);
 
@@ -1379,7 +1380,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.SetActive(true);
 
 
 
@@ -1418,7 +1419,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.SetActive(true);
         List<int> Skillvalues = DataScript.instance.SkillList[70].SkillValues;
         float multiplier = unit.GetComponent<UnitScript>().GetSkillLevelMultiplier(70);
         float Ratio = (Skillvalues[0] / 100f * multiplier);
@@ -1450,7 +1451,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.SetActive(true);
         List<int> Skillvalues = DataScript.instance.SkillList[71].SkillValues;
         float multiplier = unit.GetComponent<UnitScript>().GetSkillLevelMultiplier(71);
         float Ratio = (Skillvalues[0] / 100f * multiplier);
@@ -1485,7 +1486,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.SetActive(true);
 
         SetupCombatHUD(unit, true, true, charunit.currentHP);
         SetupCombatHUD(target, false, true, chartarget.currentHP);
@@ -1526,7 +1527,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         GridSquareScript Walltarget = target.GetComponent<GridSquareScript>();
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.SetActive(true);
 
 
         SetupCombatHUD(unit, true, true, charunit.currentHP);
@@ -1596,7 +1597,7 @@ public class ActionsMenu : MonoBehaviour
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.SetActive(true);
 
 
 
@@ -1642,7 +1643,7 @@ public class ActionsMenu : MonoBehaviour
 
     private void SetupCombatHUD(GameObject GOToUse, bool isUnit, bool isnormalUnit, int hptoshow, bool isnull = false, string dmgorhealing = "-", string hit = "-", string crit = "-", bool ishealing = false, int targetdurabilityaftereffect = -1)
     {
-        unitAttackText.transform.parent.gameObject.SetActive(true);
+        AttackWindowGO.SetActive(true);
 
 
         if (isnull)

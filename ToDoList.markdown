@@ -14,7 +14,17 @@
 
 ## System 
 
--  Do several different camp environment
+- Utiliser des textures metalliques et roughness pour les persos
+
+- Rework textures to be smaller
+
+- Rework Canvasses (all menu must be on their own canvas)
+
+- Voir pour utiliser un set de texture pour avoir un matériau par objet
+
+- Checker UCUPaint pour les textures
+
+- Do several different camp environment
 
 - Reword Battle Animation Mode.
 

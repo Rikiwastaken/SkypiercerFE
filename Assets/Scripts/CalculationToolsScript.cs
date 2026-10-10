@@ -431,6 +431,7 @@ public class CalculationToolsScript : MonoBehaviour
     /// <summary>
     /// Returns string corresponding to weapon type passed in argument
     /// </summary>
+    /// <param name="weapontype"></param>
 
     public static string GetWeaponSpriteString(string weapontype)
     {

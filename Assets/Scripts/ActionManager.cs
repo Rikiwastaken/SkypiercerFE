@@ -9,6 +9,8 @@ using static UnitScript;
 public class ActionManager : MonoBehaviour
 {
 
+    [SerializeField] private GameObject AttackWindow;
+
     public static ActionManager instance;
 
     private TurnManger TurnManager;
@@ -92,7 +94,7 @@ public class ActionManager : MonoBehaviour
 
         if (actionsMenu.activeSelf)
         {
-            if (_telekinesisaction.WasPressedThisFrame() && !actionsMenu.GetComponent<ActionsMenu>().incombat && GameObject.Find("Attackwindow") == null && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && allowtelekinesisChangeFromTutorial())
+            if (_telekinesisaction.WasPressedThisFrame() && !actionsMenu.GetComponent<ActionsMenu>().incombat && !AttackWindow.activeInHierarchy && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && allowtelekinesisChangeFromTutorial())
             {
                 currentcharacter.GetComponent<UnitScript>().ToggleTelekinesis();
                 if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)

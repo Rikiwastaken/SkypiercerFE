@@ -1567,7 +1567,6 @@ public class UnitScript : MonoBehaviour
                 Chartouse.equipments.Add(CreateCopy(DataScript.instance.equipmentList[IDtoAdd], character));
             }
         }
-
         CheckWeaponsMod(Chartouse);
     }
 

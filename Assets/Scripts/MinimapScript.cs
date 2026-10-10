@@ -613,8 +613,9 @@ public class MinimapScript : MonoBehaviour
                 rect.anchorMax = new Vector2(0, 0);
                 rect.pivot = new Vector2(0.5f, 0.5f);
 
-                rect.localScale = Vector2.one * 0.33f;
+
                 rect.SetParent(transform.parent);
+                rect.localScale = Vector2.one * 0.1f;
             }
 
             RectTransform iconRect = SelectedTileIcon.GetComponent<RectTransform>();

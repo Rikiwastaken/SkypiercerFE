@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class NeutralMenuScript : MonoBehaviour
 {
 
-    public Transform RedoMenuTransfrom;
-    public Transform OptionsMenuTransfrom;
+    public RectTransform RedoMenuTransfrom;
+    public RectTransform OptionsMenuTransfrom;
 
     public TurnManger TurnManager;
 
