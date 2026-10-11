@@ -613,9 +613,15 @@ public class UnitScript : MonoBehaviour
             {
                 animator = ActiveModel.GetComponentInChildren<Animator>();
             }
+            Material material = ActiveModel.GetComponent<Unit3DModelInfoScript>().GenerateMaterial();
+
             if (UnitCharacteristics.enemyStats.monsterStats.ispluvial)
             {
                 ChangeMaterialInGOHierarchy(ActiveModel, PluvialMat);
+            }
+            else
+            {
+                ChangeMaterialInGOHierarchy(ActiveModel, material);
             }
             armature = animator.transform;
             initialpos = armature.localPosition;

@@ -1,2 +1,17 @@
 fileFormatVersion: 2
 guid: 1dc031b0c8b464a43b9fca651efefd06
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - handbone: {instanceID: 0}
+  - Lefthandbone: {instanceID: 0}
+  - BaseTexture: {instanceID: 0}
+  - MetallicTexture: {instanceID: 0}
+  - RougnessTexture: {instanceID: 0}
+  - BaseMaterial: {fileID: 2100000, guid: 7a6f92080c3228e41a9f12b302768513, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
