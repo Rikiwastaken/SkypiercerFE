@@ -12,16 +12,16 @@ public class cameraScriptV2 : MonoBehaviour
     [Header("Cinemachine Varibles")]
 
     // each Cinemachine Camera governs one of the 4 possible position
-    public CinemachineCamera FarTopCamera;
-    public CinemachineCamera MiddleTopCamera;
-    public CinemachineCamera CloseTopCamera;
-    public CinemachineCamera DownCamera;
+    [SerializeField] private CinemachineCamera FarTopCamera;
+    [SerializeField] private CinemachineCamera MiddleTopCamera;
+    [SerializeField] private CinemachineCamera CloseTopCamera;
+    [SerializeField] private CinemachineCamera DownCamera;
     private List<CinemachineCamera> Cameras;
 
-    public GameObject PreBattleMenu;
+    [SerializeField] private GameObject PreBattleMenu;
 
-    public CinemachineBrain MainCamera;
-    public CinemachineBrain HUDCamera;
+    [SerializeField] private CinemachineBrain MainCamera;
+    [SerializeField] private CinemachineBrain HUDCamera;
 
     private CinemachineCamera currentcam;
 
@@ -34,13 +34,13 @@ public class cameraScriptV2 : MonoBehaviour
     private GridScript _GridScript;
 
     [Header("Cam Movement Varibles")]
-    public float RotationPerInput;
+    [SerializeField] private float RotationPerInput;
     private float TargetAngle;
     private float currentTurnVelocity;
-    public float rotationSmoothTime = 0.3f;
-    public Vector3 BaseOffset;
+    [SerializeField] private float rotationSmoothTime = 0.3f;
+    [SerializeField] private Vector3 BaseOffset;
     private float ElevationYadjust = 0f;
-    public float movementSmoothTime;
+    [SerializeField] private float movementSmoothTime;
     private Vector3 currentMoveVelocity;
     private Vector3 MovementTarget;
 

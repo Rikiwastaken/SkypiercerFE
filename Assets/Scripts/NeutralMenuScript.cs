@@ -8,16 +8,16 @@ using UnityEngine.SceneManagement;
 public class NeutralMenuScript : MonoBehaviour
 {
 
-    public RectTransform RedoMenuTransfrom;
-    public RectTransform OptionsMenuTransfrom;
+    [SerializeField] private RectTransform RedoMenuTransfrom;
+    [SerializeField] private RectTransform OptionsMenuTransfrom;
 
-    public TurnManger TurnManager;
+    [SerializeField] private TurnManger TurnManager;
 
-    public TextMeshProUGUI ForeSightButtonText;
+    [SerializeField] private TextMeshProUGUI ForeSightButtonText;
 
-    private SaveManager SaveManager;
+    [SerializeField] private SaveManager SaveManager;
 
-    private int chapter;
+    [SerializeField] private int chapter;
 
     public int chapterforUnlockingForesight;
 

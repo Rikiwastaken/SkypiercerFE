@@ -12,37 +12,37 @@ public class SkillEditionScript : MonoBehaviour
 
     private GridScript gridscript;
 
-    public TextMeshProUGUI BattalionText;
+    [SerializeField] private TextMeshProUGUI BattalionText;
 
-    public TextMeshProUGUI UnitsDeployedText;
+    [SerializeField] private TextMeshProUGUI UnitsDeployedText;
 
     public Character selectedcharacter;
 
     private int characterwindowindex = 0;
     private int skillwindowindex = 0;
-    public GameObject SkillList;
+    [SerializeField] private GameObject SkillList;
 
-    public TextMeshProUGUI PageNumberText;
-    public TextMeshProUGUI SkillPageNumberText;
+    [SerializeField] private TextMeshProUGUI PageNumberText;
+    [SerializeField] private TextMeshProUGUI SkillPageNumberText;
     private List<InventoryItem> InventorySkillList;
 
-    public TextMeshProUGUI UnitSkillText;
-    public TextMeshProUGUI EquipedSkillText;
-    public TextMeshProUGUI SkillDescriptionText;
-    public TextMeshProUGUI SkillPointsText;
-    public GameObject FirstUnitSKillIcon;
-    public GameObject SecondUnitSKillIcon;
-    public List<GameObject> EquipedSkillsIcons;
-    public GameObject CurrentDescribedSkillIcon;
+    [SerializeField] private TextMeshProUGUI UnitSkillText;
+    [SerializeField] private TextMeshProUGUI EquipedSkillText;
+    [SerializeField] private TextMeshProUGUI SkillDescriptionText;
+    [SerializeField] private TextMeshProUGUI SkillPointsText;
+    [SerializeField] private GameObject FirstUnitSKillIcon;
+    [SerializeField] private GameObject SecondUnitSKillIcon;
+    [SerializeField] private List<GameObject> EquipedSkillsIcons;
+    [SerializeField] private GameObject CurrentDescribedSkillIcon;
 
 
-    public List<GameObject> PreBattleMenu;
+    [SerializeField] private List<GameObject> PreBattleMenu;
 
-    public List<GameObject> BondNewImages;
+    [SerializeField] private List<GameObject> BondNewImages;
 
-    public bool inCamp;
-    public bool IsBonds;
-    public GameObject CampMenu;
+    [SerializeField] private bool inCamp;
+    [SerializeField] private bool IsBonds;
+    [SerializeField] private GameObject CampMenu;
 
     private TextBubbleScript TextBubbleScript;
 
@@ -51,7 +51,7 @@ public class SkillEditionScript : MonoBehaviour
     private InputAction _CancelAction;
     private InputAction _NextWeaponAction;
     private InputAction _PreviousWeaponAction;
-    public BondsScript BondsScript;
+    [SerializeField] private BondsScript BondsScript;
 
     public int previousselectedbutton;
     private Color basebuttoncolor;

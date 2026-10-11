@@ -301,38 +301,38 @@ public class UnitScript : MonoBehaviour
 
     [Header("\nEquipment/Type/Copy/Telekinesis Sprites")]
     [Header("Equipment Sprites")]
-    public Sprite BareHandSprite;
-    public Sprite SwordSprite;
-    public Sprite SpearSprite;
-    public Sprite GreatSwordSprite;
-    public Sprite BowSprite;
-    public Sprite ScytheSprite;
-    public Sprite ShieldSprite;
-    public Sprite StaffSprite;
-    public Sprite DaggerSprite;
-    public Image WeaponImage;
+    [SerializeField] private Sprite BareHandSprite;
+    [SerializeField] private Sprite SwordSprite;
+    [SerializeField] private Sprite SpearSprite;
+    [SerializeField] private Sprite GreatSwordSprite;
+    [SerializeField] private Sprite BowSprite;
+    [SerializeField] private Sprite ScytheSprite;
+    [SerializeField] private Sprite ShieldSprite;
+    [SerializeField] private Sprite StaffSprite;
+    [SerializeField] private Sprite DaggerSprite;
+    [SerializeField] private Image WeaponImage;
 
     [Header("\nCopy Sprites")]
-    public Sprite SkillNotCopiedSprite;
-    public Sprite SkillCopiedSprite;
-    public Image CopiedSkillImage;
+    [SerializeField] private Sprite SkillNotCopiedSprite;
+    [SerializeField] private Sprite SkillCopiedSprite;
+    [SerializeField] private Image CopiedSkillImage;
 
     [Header("\nType Sprites")]
-    public Sprite PluvialSprite;
-    public Sprite MachineSprite;
-    public Image UnitTypeImage;
+    [SerializeField] private Sprite PluvialSprite;
+    [SerializeField] private Sprite MachineSprite;
+    [SerializeField] private Image UnitTypeImage;
 
     [Header("\nTelekinesis Sprites")]
-    public Sprite TelekinesisSprite;
-    public Image TelekinesisImage;
+    [SerializeField] private Sprite TelekinesisSprite;
+    [SerializeField] private Image TelekinesisImage;
 
     [Header("\nUI variables")]
-    public TextMeshProUGUI DmgText;
-    public TextMeshProUGUI DmgEffectNameText;
-    public Image AffinityImage;
+    [SerializeField] private TextMeshProUGUI DmgText;
+    [SerializeField] private TextMeshProUGUI DmgEffectNameText;
+    [SerializeField] private Image AffinityImage;
     private List<NumberToShow> damagestoshow = new List<NumberToShow>();
 
-    public float timeforshowingnumbers;
+    [SerializeField] private float timeforshowingnumbers;
 
     private event Action<int> OnHealthChanged;
     private int previousHPForEvent;
@@ -366,10 +366,10 @@ public class UnitScript : MonoBehaviour
     }
 
 
-    public Image Lifebar;
+    [SerializeField] private Image Lifebar;
     public Transform LifebarCanvas;
     public Transform UICanvas;
-    public Image LBBackground;
+    [SerializeField] private Image LBBackground;
     public Image LifebarWhenBossTile;
     public Image LBBackgroundWhenBossTile;
 
@@ -392,13 +392,13 @@ public class UnitScript : MonoBehaviour
     public GameObject currentequipmentmodel;
 
     [Header("\n\nTools")]
-    public bool trylvlup;
-    public bool forcemoveTO;
-    public Vector2 forcemovetonewpos;
+    [SerializeField] private bool trylvlup;
+    [SerializeField] private bool forcemoveTO;
+    [SerializeField] private Vector2 forcemovetonewpos;
     public bool lockExamode;
 
     [Header("\n\nGlobal System Variables")]
-    public bool fixedgrowth;
+    [SerializeField] private bool fixedgrowth;
     public equipment Fists;
     public float growthPerLuckPoint = 0.25f;
     public int geniusgrowthboost = 15;

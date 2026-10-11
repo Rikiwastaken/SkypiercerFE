@@ -21,31 +21,31 @@ public class UnitDeploymentScript : MonoBehaviour
 
     private DataScript DataScript;
 
-    public List<GameObject> PreBattleMenuItems;
+    [SerializeField] private List<GameObject> PreBattleMenuItems;
 
-    public TextMeshProUGUI BattalionText;
+    [SerializeField] private TextMeshProUGUI BattalionText;
 
-    public TextMeshProUGUI UnitsDeployedText;
+    [SerializeField] private TextMeshProUGUI UnitsDeployedText;
 
-    public TextMeshProUGUI UnitDescription;
+    [SerializeField] private TextMeshProUGUI UnitDescription;
 
-    public Transform Mastery;
+    [SerializeField] private Transform Mastery;
 
-    public List<TextMeshProUGUI> MasteryTexts;
-    public List<Image> MasteryImages;
-    public List<Transform> MasteryExpBars;
-    public List<Sprite> WeaponClassImages;
+    [SerializeField] private List<TextMeshProUGUI> MasteryTexts;
+    [SerializeField] private List<Image> MasteryImages;
+    [SerializeField] private List<Transform> MasteryExpBars;
+    [SerializeField] private List<Sprite> WeaponClassImages;
 
     private InputAction _CancelAction;
 
     public List<Character> DeployableUnitList;
 
-    public TextMeshProUGUI SortTMP;
+    [SerializeField] private TextMeshProUGUI SortTMP;
 
     public int windowindex = 0;
 
-    public List<GameObject> topbuttons;
-    public List<GameObject> bottombuttons;
+    [SerializeField] private List<GameObject> topbuttons;
+    [SerializeField] private List<GameObject> bottombuttons;
 
     private InputAction _TelekinesisInputAction;
     private InputAction _MovementAction;

@@ -23,18 +23,18 @@ public class UnitDeploymentButton : MonoBehaviour
 
     private SkillEditionScript SkillEditionScript;
 
-    public GameObject lockimage;
+    [SerializeField] private GameObject lockimage;
 
     private Image ButtonBGImage;
 
     public Image AnnexImage;
 
-    public Color ImageDefaultColor;
+    [SerializeField] private Color ImageDefaultColor;
 
-    public Color ZackColor;
-    public Color KiraColor;
-    public Color GaleColor;
-    public Color UnSelectedColor;
+    [SerializeField] private Color ZackColor;
+    [SerializeField] private Color KiraColor;
+    [SerializeField] private Color GaleColor;
+    [SerializeField] private Color UnSelectedColor;
 
     private InputAction _DetailsPressed;
 

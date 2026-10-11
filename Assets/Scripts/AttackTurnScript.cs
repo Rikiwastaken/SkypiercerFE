@@ -10,16 +10,16 @@ public class AttackTurnScript : MonoBehaviour
 
     [Header("Pointers")]
     private TurnManger TurnManager;
-    public ExpBarScript expbar;
+    [SerializeField] private ExpBarScript expbar;
 
-    public GameObject CurrentEnemy;
-    public GameObject CurrentPlayable;
-    public GameObject CurrentOther;
+    [SerializeField] private GameObject CurrentEnemy;
+    [SerializeField] private GameObject CurrentPlayable;
+    [SerializeField] private GameObject CurrentOther;
 
     private GridScript gridScript;
 
-    public ActionsMenu ActionsMenu;
-    public PhaseTextScript phaseTextScript;
+    [SerializeField] public ActionsMenu ActionsMenu;
+    [SerializeField] public PhaseTextScript phaseTextScript;
 
     private cameraScriptV2 camScriptV2;
 
@@ -27,20 +27,20 @@ public class AttackTurnScript : MonoBehaviour
 
     [Header("combat timing variables")]
 
-    public float delaybeforeMove;
+    [SerializeField] private float delaybeforeMove;
     private int counterbeforemove;
-    public float delaybeforeAttack;
+    [SerializeField] private float delaybeforeAttack;
     private int counterbeforeattack;
 
-    public float delaybeforeFirstAttack;
+    [SerializeField] private float delaybeforeFirstAttack;
     private int counterbeforeFirstAttack;
 
     private bool unitalreadyattacked;
 
-    public float delaybetweenAttack;
+    [SerializeField] private float delaybetweenAttack;
     private int counterbetweenattack;
 
-    public float delayafterAttack;
+    [SerializeField] private float delayafterAttack;
     private int counterafterattack;
 
     private bool attacktrigger;
@@ -61,12 +61,12 @@ public class AttackTurnScript : MonoBehaviour
 
     public int delaybeforenxtunit;
 
-    public float TimebeforeAnimationAttack;
+    [SerializeField] private float TimebeforeAnimationAttack;
 
 
     private MinimapScript minimapScript;
 
-    public ForesightScript foresightScript;
+    [SerializeField] private ForesightScript foresightScript;
 
     private SaveManager saveManager;
 

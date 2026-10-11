@@ -85,13 +85,13 @@ public class ForesightScript : MonoBehaviour
 
     private GameObject CharacterHolder;
 
-    public List<Button> Buttons;
+    [SerializeField] private List<Button> Buttons;
 
-    public List<int> ButtonIDs;
+    [SerializeField] private List<int> ButtonIDs;
 
-    public GameObject neutralmenu;
+    [SerializeField] private GameObject neutralmenu;
 
-    public MinimapScript MinimapScript;
+    [SerializeField] private MinimapScript MinimapScript;
 
     private int framesuppressed;
     private int framesdownpressed;
@@ -104,7 +104,7 @@ public class ForesightScript : MonoBehaviour
 
     public int remaininguses;
 
-    public GameObject RemainingUsesGO;
+    [SerializeField] private GameObject RemainingUsesGO;
     private InputAction _MoveAction;
     private InputAction _MoveCamAction;
     private InputAction _CancelAction;
@@ -124,7 +124,7 @@ public class ForesightScript : MonoBehaviour
         _CancelAction = InputSystem.actions.FindAction("Cancel");
     }
 
-    public Volume PostProcessingVolume;
+    [SerializeField] private Volume PostProcessingVolume;
 
     private void Update()
     {

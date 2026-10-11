@@ -6,20 +6,20 @@ using UnityEngine.UI;
 public class EmoteBubbleScript : MonoBehaviour
 {
 
-    public float timetomaxscale;
+    [SerializeField] private float timetomaxscale;
 
-    public float timebeforedisappear;
+    [SerializeField] private float timebeforedisappear;
 
     private Coroutine IncreaseCoroutine;
     private Coroutine DisappearCoroutine;
 
-    public float elevation;
+    [SerializeField] private float elevation;
 
     private Camera cam;
 
-    public List<Sprite> emojifaces;
+    [SerializeField] private List<Sprite> emojifaces;
 
-    public Image EmojiImage;
+    [SerializeField] private Image EmojiImage;
 
 
 

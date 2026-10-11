@@ -8,8 +8,8 @@ public class MinimapScript : MonoBehaviour
 
     public static MinimapScript instance;
 
-    public Image minimapImage;
-    public Image minimapBGImage;
+    [SerializeField] private Image minimapImage;
+    [SerializeField] private Image minimapBGImage;
 
     private Texture2D minimapTexture;
     private Texture2D minimapBackgroundTexture;
@@ -36,17 +36,16 @@ public class MinimapScript : MonoBehaviour
 
     private GameObject SelectedTileIcon;
 
-    public Sprite flagpoleSprite;
-    public Sprite LockedDoorSprite;
-    public Sprite InterruptorSprite;
-    public Sprite CurrentPositionSprite;
-    public Sprite BreakableSprite;
+    [SerializeField] private Sprite flagpoleSprite;
+    [SerializeField] private Sprite LockedDoorSprite;
+    [SerializeField] private Sprite InterruptorSprite;
+    [SerializeField] private Sprite CurrentPositionSprite;
+    [SerializeField] private Sprite BreakableSprite;
 
-    public float minimapCellSize = 8f;
+    [SerializeField] private float minimapCellSize = 8f;
 
-    public GameObject CharacterPinPrefab;
-    public float pinSize = 32f;
-    public RectTransform pinContainer;
+    [SerializeField] private GameObject CharacterPinPrefab;
+    [SerializeField] private RectTransform pinContainer;
 
     private void Awake()
     {

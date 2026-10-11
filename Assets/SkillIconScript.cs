@@ -6,20 +6,20 @@ using UnityEngine.UI;
 public class SkillIconScript : MonoBehaviour
 {
 
-    public Image OuterCircle;
-    public Image InnerCircle;
-    public Image MainLogo;
+    [SerializeField] private Image OuterCircle;
+    [SerializeField] private Image InnerCircle;
+    [SerializeField] private Image MainLogo;
 
-    public List<Color> OuterColors;
-    public List<Color> InnerColors;
-    public List<Sprite> Logos;
+    [SerializeField] private List<Color> OuterColors;
+    [SerializeField] private List<Color> InnerColors;
+    [SerializeField] private List<Sprite> Logos;
 
     [Serializable]
     public class ImageIconInfo
     {
-        [Header("Couleurs:\n0: Offensif, 1: Défensif, 2: Soin, 3: Mobilité,\n4: Command, 5: Météo, 6: Type d'ennemi, 7: Armes, 8:Progression")]
+        [Header("Couleurs:\n0: Offensif, 1: Dï¿½fensif, 2: Soin, 3: Mobilitï¿½,\n4: Command, 5: Mï¿½tï¿½o, 6: Type d'ennemi, 7: Armes, 8:Progression")]
         public int OuterCircleColorID;
-        [Header("Couleurs:\n0: Physique, 1: Psychique, 2: Soin, 3: Mobilité,\n4: Esquive, 5: Météo, 6: Status, 7: Armes, 8:Progression, 9:Chance")]
+        [Header("Couleurs:\n0: Physique, 1: Psychique, 2: Soin, 3: Mobilitï¿½,\n4: Esquive, 5: Mï¿½tï¿½o, 6: Status, 7: Armes, 8:Progression, 9:Chance")]
         public int InnerCircleColorID;
         [Header("IDs:\n0: Swr, 1: Spr, 2: GS, 3: Bow, 4: Scy, 5:Shld, 6: Stf, 7: Dggr,\n 8: Pluit, 9: Soleil, 10: Nuage, 11: Zone,\n12: Pluvials, 13: Machines, 14: Barehands, 15: Telek, 16: Copy, 17: Heart,\n18: Acc, 19: Brun, 20: Concuss, 21: Para, 22: Power,\n23: Regen, 24: Stun, 25: Weakness")]
         public int MainLogoID;

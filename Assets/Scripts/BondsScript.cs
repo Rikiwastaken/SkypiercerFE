@@ -56,11 +56,11 @@ public class BondsScript : MonoBehaviour
         public string text;
     }
 
-    public List<BondsDialogueClass> AllbondsDialogue;
+    [SerializeField] private List<BondsDialogueClass> AllbondsDialogue;
 
-    public Transform BondsMenu;
-    public GameObject bondsSubMenu;
-    public List<GameObject> BondSubMenuNewImages;
+    [SerializeField] private Transform BondsMenu;
+    [SerializeField] private GameObject bondsSubMenu;
+    [SerializeField] private List<GameObject> BondSubMenuNewImages;
 
     private List<int> SubMenuCharactersID;
 
@@ -68,8 +68,8 @@ public class BondsScript : MonoBehaviour
 
     private TextBubbleScript TextBubbleScript;
 
-    public Button BondButton;
-    public GameObject BondButtonNewImageGO;
+    [SerializeField] private Button BondButton;
+    [SerializeField] private GameObject BondButtonNewImageGO;
 
     private int cancelcounter;
 
@@ -81,7 +81,7 @@ public class BondsScript : MonoBehaviour
         }
     }
 
-    public DataScript debugdatascript;
+    [SerializeField] private DataScript debugdatascript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

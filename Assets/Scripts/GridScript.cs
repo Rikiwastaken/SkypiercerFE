@@ -12,17 +12,17 @@ public class GridScript : MonoBehaviour
 
     public static GridScript instance;
 
-    public GameObject GridSquarePrefab;
+    [SerializeField] private GameObject GridSquarePrefab;
 
     public List<List<GameObject>> Grid;
 
-    public Vector2 GridDimensions;
+    [SerializeField] private Vector2 GridDimensions;
 
     public GridSquareScript selection;
 
     public GridSquareScript previousselection;
 
-    private Vector2 previousmovevalue;
+    [SerializeField] private Vector2 previousmovevalue;
 
     public List<Character> allunits;
     public List<GameObject> allunitGOs;
@@ -45,14 +45,14 @@ public class GridScript : MonoBehaviour
     public GameObject actionsMenu;
 
     public int movementbuffercounter;
-    public float movementbuffer;
+    [SerializeField] private float movementbuffer;
 
     private Vector2 previousmovementvalueforbuffer;
 
-    public TextMeshProUGUI tiletext;
-    public TextMeshProUGUI Elevationtiletext;
-    public GameObject TileImageContainer;
-    private SkillEditionScript SkillEditionScript;
+    [SerializeField] private TextMeshProUGUI tiletext;
+    [SerializeField] private TextMeshProUGUI Elevationtiletext;
+    [SerializeField] private GameObject TileImageContainer;
+    [SerializeField] private SkillEditionScript SkillEditionScript;
 
     private TextBubbleScript textBubble;
 

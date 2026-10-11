@@ -6,18 +6,18 @@ using static UnitScript;
 public class CharacterCircleVisuals : MonoBehaviour
 {
 
-    public Sprite CircleSprite;
-    public Sprite emptysprite;
+    [SerializeField] private Sprite CircleSprite;
+    [SerializeField] private Sprite emptysprite;
 
-    public GridScript GridScript;
+    [SerializeField] private GridScript GridScript;
 
     private List<GameObject> allunitGOsList;
 
-    public List<GameObject> UnitCircles;
+    [SerializeField] private List<GameObject> UnitCircles;
 
-    public Transform UnitCirclesHolder;
+    [SerializeField] private Transform UnitCirclesHolder;
 
-    public float YElevation;
+    [SerializeField] private float YElevation;
 
     private int delaycounter;
 

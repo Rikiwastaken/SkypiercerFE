@@ -7,8 +7,8 @@ using static UnitScript;
 public class GridSquareScript : MonoBehaviour
 {
 
-    public SpriteRenderer filledimage;
-    public SpriteRenderer BossFilledImage;
+    [SerializeField] private SpriteRenderer filledimage;
+    [SerializeField] private SpriteRenderer BossFilledImage;
 
 
     public Vector2 GridCoordinates = new Vector2(0, 0);
@@ -20,15 +20,15 @@ public class GridSquareScript : MonoBehaviour
 
     public bool isobstacle;
 
-    public float elevationchange;
+    [SerializeField] private float elevationchange;
 
-    public float walloffset;
+    [SerializeField] private float walloffset;
 
     public int elevation;
 
-    public GameObject Stairs;
+    [SerializeField] private GameObject Stairs;
 
-    public GameObject Cube;
+    [SerializeField] private GameObject Cube;
     private List<Vector3> initialpos = new List<Vector3>();
 
     /*type is for potential bonus : 
@@ -54,12 +54,12 @@ public class GridSquareScript : MonoBehaviour
 
     public bool justbecamerain;
 
-    public string VisualType;
+    [SerializeField] private string VisualType;
 
-    public GameObject rainparticle;
-    public GameObject sunparticle;
-    public GameObject FireParticles;
-    public GameObject BeaconObject;
+    [SerializeField] private GameObject rainparticle;
+    [SerializeField] private GameObject sunparticle;
+    [SerializeField] private GameObject FireParticles;
+    [SerializeField] private GameObject BeaconObject;
 
     [Serializable]
     public class MechanismClass

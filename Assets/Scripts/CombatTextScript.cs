@@ -8,19 +8,19 @@ public class CombatTextScript : MonoBehaviour
     private Character attacker;
     private Character defender;
 
-    public TextMeshProUGUI attackertext;
-    public TextMeshProUGUI defendertext;
+    [SerializeField] private TextMeshProUGUI attackertext;
+    [SerializeField] private TextMeshProUGUI defendertext;
 
-    public Image AttackerLifebarLost;
-    public Image DefenderLifebarLost;
-    public Image AttackerLifebarRemaining;
-    public Image DefenderLifebarRemaining;
+    [SerializeField] private Image AttackerLifebarLost;
+    [SerializeField] private Image DefenderLifebarLost;
+    [SerializeField] private Image AttackerLifebarRemaining;
+    [SerializeField] private Image DefenderLifebarRemaining;
 
-    public TextMeshProUGUI combattext;
+    [SerializeField] private TextMeshProUGUI combattext;
 
-    public ActionsMenu ActionsMenu;
+    [SerializeField] private ActionsMenu ActionsMenu;
 
-    public float fillspeed;
+    [SerializeField] private float fillspeed;
 
     // Update is called once per frame
     void Update()

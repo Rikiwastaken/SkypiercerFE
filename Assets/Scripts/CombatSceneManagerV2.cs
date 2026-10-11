@@ -14,7 +14,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
     public static CombatSceneManagerV2 instance;
 
-    public GameObject EventSystem;
+    [SerializeField] private GameObject EventSystem;
 
     [Serializable]
     public class CharacterBattleInfo
@@ -91,73 +91,73 @@ public class CombatSceneManagerV2 : MonoBehaviour
     }
 
     [Header("Scene Variables")]
-    public InfoText AttackerName = new InfoText() { name = "AttackerName" };
-    public InfoText AttackerDescription = new InfoText() { name = "AttackerDescription" };
-    public InfoText DefenderName = new InfoText() { name = "DefenderName" };
-    public InfoText DefenderDescription = new InfoText() { name = "DefenderDescription" };
-    public TextMeshProUGUI AttackerHP;
-    public TextMeshProUGUI DefenderHP;
-    public GameObject AttackerGO;
-    public Vector3 AttackerStartpos;
-    public GameObject DefenderGO;
-    public Vector3 DefenderStartpos;
-    public GameObject TextObjectPrefab;
-    public Vector3 ExpBarBasePos;
-    public Vector3 ExptargetBasePos;
-    public GameObject ExpBarHolder;
-    public Image ExpBarImage;
-    public TextMeshProUGUI ExpBarText;
-    public FreezeFrameCapture LevelUpFreezeFrame;
-    public List<CombatEnvirnoment> EnvirnomentList;
+    [SerializeField] private InfoText AttackerName = new InfoText() { name = "AttackerName" };
+    [SerializeField] private InfoText AttackerDescription = new InfoText() { name = "AttackerDescription" };
+    [SerializeField] private InfoText DefenderName = new InfoText() { name = "DefenderName" };
+    [SerializeField] private InfoText DefenderDescription = new InfoText() { name = "DefenderDescription" };
+    [SerializeField] private TextMeshProUGUI AttackerHP;
+    [SerializeField] private TextMeshProUGUI DefenderHP;
+    [SerializeField] private GameObject AttackerGO;
+    [SerializeField] private Vector3 AttackerStartpos;
+    [SerializeField] private GameObject DefenderGO;
+    [SerializeField] private Vector3 DefenderStartpos;
+    [SerializeField] private GameObject TextObjectPrefab;
+    [SerializeField] private Vector3 ExpBarBasePos;
+    [SerializeField] private Vector3 ExptargetBasePos;
+    [SerializeField] private GameObject ExpBarHolder;
+    [SerializeField] private Image ExpBarImage;
+    [SerializeField] private TextMeshProUGUI ExpBarText;
+    [SerializeField] private FreezeFrameCapture LevelUpFreezeFrame;
+    [SerializeField] private List<CombatEnvirnoment> EnvirnomentList;
     private GameObject currentenv;
 
     [Header("Camera Positions")]
-    public Transform Camera;
-    public Transform CameraHolder;
-    public CamPosition InitialCameraPosition;
-    public CamPosition CamPositionToSeeEnemy;
-    public CamPosition CamePositionAttackerRunning;
-    public CamPosition CamPositionEnemyRunning;
-    public CamPosition AttackerVictoryCam;
-    public CamPosition EnemyVictoryCam;
+    [SerializeField] private Transform Camera;
+    [SerializeField] private Transform CameraHolder;
+    [SerializeField] private CamPosition InitialCameraPosition;
+    [SerializeField] private CamPosition CamPositionToSeeEnemy;
+    [SerializeField] private CamPosition CamePositionAttackerRunning;
+    [SerializeField] private CamPosition CamPositionEnemyRunning;
+    [SerializeField] private CamPosition AttackerVictoryCam;
+    [SerializeField] private CamPosition EnemyVictoryCam;
 
     [Header("Camera Positions With Mixing")]
 
-    public CamPositionWithMixing InitialMixingCameraPosition;
-    public CamPositionWithMixing MixingCamePositionAttackerRunning;
-    public CamPositionWithMixing MixingCamPositionEnemyRunning;
-    public CamPositionWithMixing AttackerVictoryMixingCam;
-    public CamPositionWithMixing EnemyVictoryMixingCam;
+    [SerializeField] private CamPositionWithMixing InitialMixingCameraPosition;
+    [SerializeField] private CamPositionWithMixing MixingCamePositionAttackerRunning;
+    [SerializeField] private CamPositionWithMixing MixingCamPositionEnemyRunning;
+    [SerializeField] private CamPositionWithMixing AttackerVictoryMixingCam;
+    [SerializeField] private CamPositionWithMixing EnemyVictoryMixingCam;
     private Coroutine _MixingCoroutine;
 
     [Header("Scene Unwinding Variables")]
     //PreBattle
 
-    public float timelookingatattacker;
-    public float timetolookatdefender;
-    public float timetoshownames;
+    [SerializeField] private float timelookingatattacker;
+    [SerializeField] private float timetolookatdefender;
+    [SerializeField] private float timetoshownames;
     // attack
-    public float DistanceForMelee;
-    public float TimeToWalkToEnnemies;
-    public float TimeBetweenAttacks;
-    public float timeforLifebar;
+    [SerializeField] private float DistanceForMelee;
+    [SerializeField] private float TimeToWalkToEnnemies;
+    [SerializeField] private float TimeBetweenAttacks;
+    [SerializeField] private float timeforLifebar;
 
     //results
-    public float TimeforExpBar;
-    public float TimeAfterExpBar;
+    [SerializeField] private float TimeforExpBar;
+    [SerializeField] private float TimeAfterExpBar;
 
 
 
     [Header("Battle Variables")]
-    public CharacterBattleInfo AttackerInfo;
-    public CharacterBattleInfo DefenderInfo;
-    public List<int> levelupbonus;
-    public int exp;
-    public bool ishealing;
-    public bool isinBeforeBattleStarts;
-    public bool isinAttackerTurn;
-    public bool isinDefenderTurn;
-    public bool isinEndOfCombat;
+    [SerializeField] private CharacterBattleInfo AttackerInfo;
+    [SerializeField] private CharacterBattleInfo DefenderInfo;
+    [SerializeField] private List<int> levelupbonus;
+    [SerializeField] private int exp;
+    [SerializeField] private bool ishealing;
+    [SerializeField] private bool isinBeforeBattleStarts;
+    [SerializeField] private bool isinAttackerTurn;
+    [SerializeField] private bool isinDefenderTurn;
+    [SerializeField] private bool isinEndOfCombat;
 
     private void Awake()
     {

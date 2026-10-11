@@ -23,8 +23,8 @@ public class TurnManger : MonoBehaviour
     public List<Character> otherunits;
     public List<GameObject> otherunitsGO;
 
-    public TextMeshProUGUI turntext;
-    public Image TurnImage;
+    [SerializeField] private TextMeshProUGUI turntext;
+    [SerializeField] private Image TurnImage;
 
     public GameOverScript GameOverScript;
 
@@ -34,7 +34,7 @@ public class TurnManger : MonoBehaviour
 
     public bool waittingforstart;
 
-    public PreBattleMenuScript preBattleMenuScript;
+    [SerializeField] private PreBattleMenuScript preBattleMenuScript;
 
     private WeatherManager weatherManager;
 
@@ -42,8 +42,8 @@ public class TurnManger : MonoBehaviour
 
     private MinimapScript minimapScript;
 
-    public TextBubbleScript textBubbleScript;
-    public GameObject TutorialWindows;
+    [SerializeField] private TextBubbleScript textBubbleScript;
+    [SerializeField] private GameObject TutorialWindows;
 
     private ForesightScript FSS;
 

@@ -19,7 +19,7 @@ public class BondVisualsScript : MonoBehaviour
         public List<int> BondWithOtherUnits;
     }
 
-    public List<BondPerCharacter> bondPerCharacterList;
+    [SerializeField] private List<BondPerCharacter> bondPerCharacterList;
 
     private GameObject previousSelectedUnit;
 

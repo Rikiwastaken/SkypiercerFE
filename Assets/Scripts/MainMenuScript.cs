@@ -10,18 +10,18 @@ public class MainMenuScript : MonoBehaviour
     private SaveManager saveManager;
     private SceneLoader sceneLoader;
 
-    public Transform OptionsMenu;
-    public Button OptionsMenuButton;
-    public Transform BaseMenu;
-    public Transform ContinueMenu;
-    public Transform ManuallyLoadChapterMenu;
-    public Button ContinueMenuButton;
+    [SerializeField] private Transform OptionsMenu;
+    [SerializeField] private Button OptionsMenuButton;
+    [SerializeField] private Transform BaseMenu;
+    [SerializeField] private Transform ContinueMenu;
+    [SerializeField] private Transform ManuallyLoadChapterMenu;
+    [SerializeField] private Button ContinueMenuButton;
 
-    public Transform Waterwheel;
+    [SerializeField] private Transform Waterwheel;
 
 
 
-    public float waterwheelrotationpersecond;
+    [SerializeField] private float waterwheelrotationpersecond;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -9,7 +9,7 @@ public class PreBattleMenuScript : MonoBehaviour
 
     public static PreBattleMenuScript instance;
 
-    public GameObject ReplaceUnitButton;
+    [SerializeField] private GameObject ReplaceUnitButton;
     private GridScript GridScript;
     private TurnManger TurnManager;
     public bool ChangingUnitPlace;

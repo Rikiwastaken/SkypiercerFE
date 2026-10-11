@@ -3,12 +3,12 @@ using UnityEngine;
 public class ActivatedTileIcon : MonoBehaviour
 {
 
-    public GameObject SelectedImage;
-    public GameObject LockedSelectedImage;
-    public int rotationperframe;
+    [SerializeField] private GameObject SelectedImage;
+    [SerializeField] private GameObject LockedSelectedImage;
+    [SerializeField] private int rotationperframe;
 
-    public GridScript GridScript;
-    public ActionsMenu _ActionsMenu;
+    [SerializeField] private GridScript GridScript;
+    [SerializeField] private ActionsMenu _ActionsMenu;
 
     private GridSquareScript SelectedTile;
     private GridSquareScript LockedSelectedTile;

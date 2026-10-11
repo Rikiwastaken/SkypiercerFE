@@ -8,13 +8,13 @@ using UnityEngine.UI;
 public class ManulChapterLoadScript : MonoBehaviour
 {
 
-    public Transform ManualLoadChapterButtons;
-    public List<string> ChapterNames;
-    public List<Sprite> ChapterImages;
-    public Transform ManuallyLoadChapterMenu;
+    [SerializeField] private Transform ManualLoadChapterButtons;
+    [SerializeField] private List<string> ChapterNames;
+    [SerializeField] private List<Sprite> ChapterImages;
+    [SerializeField] private Transform ManuallyLoadChapterMenu;
     private SceneLoader sceneLoader;
     private SaveManager saveManager;
-    public Image ChapterImage;
+    [SerializeField] private Image ChapterImage;
 
     private Sprite SpriteToUse;
 
@@ -22,10 +22,10 @@ public class ManulChapterLoadScript : MonoBehaviour
     private InputAction _MovementAction;
     private InputAction _CamAction;
 
-    public int currentTopButtonID = 0;
+    [SerializeField] private int currentTopButtonID = 0;
 
     private GameObject previousSelected;
-    public TextMeshProUGUI NameTMP;
+    [SerializeField] private TextMeshProUGUI NameTMP;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

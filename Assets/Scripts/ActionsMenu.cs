@@ -14,36 +14,36 @@ public class ActionsMenu : MonoBehaviour
 
     public GameObject target;
 
-    public Button ActionsCancelButton;
-    public Button AttackButton;
-    public Button AttackCancelButton;
-    public GameObject AttackWindowGO;
+    [SerializeField] private Button ActionsCancelButton;
+    [SerializeField] private Button AttackButton;
+    [SerializeField] private Button AttackCancelButton;
+    [SerializeField] private GameObject AttackWindowGO;
 
-    public GameObject ItemsScript;
-    public GameObject CommandGO;
-    public GameObject SpecialCommandGO;
+    [SerializeField] private GameObject ItemsScript;
+    [SerializeField] private GameObject CommandGO;
+    [SerializeField] private GameObject SpecialCommandGO;
 
-    public TextMeshProUGUI unitAttackText;
-    public TextMeshProUGUI targetAttackText;
-    public Image unitSprite;
-    public Image targetSprite;
-    public TextMeshProUGUI UnitWeapon;
-    public TextMeshProUGUI TargetWeapon;
-    public TextMeshProUGUI UnitNameTMP;
-    public TextMeshProUGUI UnitHPTMP;
-    public TextMeshProUGUI TargetHPTMP;
-    public TextMeshProUGUI TargetNameTMP;
-    public GameObject UnitTelekinesis;
-    public GameObject TargetTelekinesis;
-    public TextMeshProUGUI UnitTileTMP;
-    public TextMeshProUGUI TargetTileTMP;
+    [SerializeField] private TextMeshProUGUI unitAttackText;
+    [SerializeField] private TextMeshProUGUI targetAttackText;
+    [SerializeField] private Image unitSprite;
+    [SerializeField] private Image targetSprite;
+    [SerializeField] private TextMeshProUGUI UnitWeapon;
+    [SerializeField] private TextMeshProUGUI TargetWeapon;
+    [SerializeField] private TextMeshProUGUI UnitNameTMP;
+    [SerializeField] private TextMeshProUGUI UnitHPTMP;
+    [SerializeField] private TextMeshProUGUI TargetHPTMP;
+    [SerializeField] private TextMeshProUGUI TargetNameTMP;
+    [SerializeField] private GameObject UnitTelekinesis;
+    [SerializeField] private GameObject TargetTelekinesis;
+    [SerializeField] private TextMeshProUGUI UnitTileTMP;
+    [SerializeField] private TextMeshProUGUI TargetTileTMP;
 
-    public Image UnitOrangeLifeBar;
-    public Image UnitGreenLifebar;
-    public Image TargetOrangeLifeBar;
-    public Image TargetGreenLifebar;
+    [SerializeField] private Image UnitOrangeLifeBar;
+    [SerializeField] private Image UnitGreenLifebar;
+    [SerializeField] private Image TargetOrangeLifeBar;
+    [SerializeField] private Image TargetGreenLifebar;
 
-    public Sprite EmptySprite;
+    [SerializeField] private Sprite EmptySprite;
 
     private GridScript GridScript;
 
@@ -63,13 +63,12 @@ public class ActionsMenu : MonoBehaviour
     private Color BaseTextColor;
     private Color BaseImageColor;
 
-    public GameObject commandmenu;
+    [SerializeField] private GameObject commandmenu;
 
     private AttackTurnScript attackTurnScript;
 
     public float DamageReductionWhenIntercepted;
     public float DamageReductionForIntercepter;
-
     private bool PreviousActivatedState = false;
 
     private bool isUnithealing;
@@ -82,9 +81,9 @@ public class ActionsMenu : MonoBehaviour
     private InputAction _PrevTargetAction;
     private InputAction _MovementAction;
 
-    public float expLevelAjustmentFactor = 4f; // The divisor for the level difference adjustment, can be tweaked for balance
+    [SerializeField] private float expLevelAjustmentFactor = 4f; // The divisor for the level difference adjustment, can be tweaked for balance
 
-    public GameObject TextNumberPopup;
+    [SerializeField] private GameObject TextNumberPopup;
 
     private void OnDisable()
     {

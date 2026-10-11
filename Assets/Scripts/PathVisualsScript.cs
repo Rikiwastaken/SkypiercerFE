@@ -5,10 +5,10 @@ public class PathVisualsScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public Sprite PathPiece;
-    public Sprite PathPieceEnd;
-    public Sprite emptysprite;
-    public Transform PathPiecesHolder;
+    [SerializeField] private Sprite PathPiece;
+    [SerializeField] private Sprite PathPieceEnd;
+    [SerializeField] private Sprite emptysprite;
+    [SerializeField] private Transform PathPiecesHolder;
 
     public List<GameObject> PathGOList;
 

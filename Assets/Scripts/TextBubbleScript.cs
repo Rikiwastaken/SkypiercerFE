@@ -32,9 +32,9 @@ public class TextBubbleScript : MonoBehaviour
 
     public bool indialogue;
 
-    public Image characterportrait;
-    public TextMeshProUGUI charactername;
-    public TextMeshProUGUI sentence;
+    [SerializeField] private Image characterportrait;
+    [SerializeField] private TextMeshProUGUI charactername;
+    [SerializeField] private TextMeshProUGUI sentence;
 
     private string texttodisplay;
 
@@ -49,7 +49,7 @@ public class TextBubbleScript : MonoBehaviour
 
     private cameraScriptV2 cameraScript;
 
-    public Image Imagetoshow;
+    [SerializeField] private Image Imagetoshow;
     private float currentcharacterpitch;
     private MusicManager musicManager;
 

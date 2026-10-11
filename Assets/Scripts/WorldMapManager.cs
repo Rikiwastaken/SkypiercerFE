@@ -16,20 +16,20 @@ public class WorldMapManager : MonoBehaviour
     public List<string> chapternames;
     public List<string> SideStoryNames;
 
-    public GameObject ChapterUI;
-    public TextMeshProUGUI chaptertext;
-    public TextMeshProUGUI chapterNametext;
-    public TextMeshProUGUI chapterlvl;
+    [SerializeField] private GameObject ChapterUI;
+    [SerializeField] private TextMeshProUGUI chaptertext;
+    [SerializeField] private TextMeshProUGUI chapterNametext;
+    [SerializeField] private TextMeshProUGUI chapterlvl;
 
     private Vector3 initialPosition;
 
-    public float displacementpersecond;
+    [SerializeField] private float displacementpersecond;
 
-    public float maxx;
+    [SerializeField] private float maxx;
 
-    public GameObject Character;
+    [SerializeField] private GameObject Character;
 
-    public Transform StoryPointTrsfrm;
+    [SerializeField] private Transform StoryPointTrsfrm;
 
 
 
@@ -45,22 +45,22 @@ public class WorldMapManager : MonoBehaviour
     private InputAction _ShowDetailsAction;
     private InputAction _CamAction;
 
-    public Transform StoryPoints;
+    [SerializeField] private Transform StoryPoints;
 
-    public Transform SideStoryPoints;
+    [SerializeField] private Transform SideStoryPoints;
 
-    public float mindistforstorypoints;
+    [SerializeField] private float mindistforstorypoints;
 
     [Header("Fast Travel")]
     public GameObject FastTravelMenu;
-    public Transform FastTravelMenuButtons;
-    public List<int> FastTravelMenuIDList;
+    [SerializeField] private Transform FastTravelMenuButtons;
+    [SerializeField] private List<int> FastTravelMenuIDList;
     private bool MainMissionsSelected = true;
-    public GameObject MainMissionBG;
-    public GameObject SideMissionBG;
-    public Transform SideStoryTransform;
+    [SerializeField] private GameObject MainMissionBG;
+    [SerializeField] private GameObject SideMissionBG;
+    [SerializeField] private Transform SideStoryTransform;
     private List<int> accessibleSideStories;
-    public List<GameObject> ButtonNewImages;
+    [SerializeField] private List<GameObject> ButtonNewImages;
 
     private void Awake()
     {

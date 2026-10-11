@@ -4,18 +4,18 @@ using UnityEngine;
 public class AnimationCombatTextScript : MonoBehaviour
 {
 
-    public TextMeshProUGUI ForegoundTMP;
-    public TextMeshProUGUI BackGroundTMP;
+    [SerializeField] private TextMeshProUGUI ForegoundTMP;
+    [SerializeField] private TextMeshProUGUI BackGroundTMP;
 
-    public float timebeforevanish;
+    [SerializeField] private float timebeforevanish;
     private int timebeforevanishcounter;
 
-    public float timetotargetscale;
+    [SerializeField] private float timetotargetscale;
     private int timetotargetscalecounter;
 
-    public float movespeed;
+    [SerializeField] private float movespeed;
 
-    public float targetscale;
+    [SerializeField] private float targetscale;
 
     private Vector3 InitialPosition;
 

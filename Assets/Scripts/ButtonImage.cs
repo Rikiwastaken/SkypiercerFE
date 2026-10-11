@@ -6,30 +6,30 @@ using UnityEngine.UI;
 public class ButtonImage : MonoBehaviour
 {
 
-    public Sprite AButton;
-    public Sprite BButton;
-    public Sprite XButton;
-    public Sprite YButton;
-    public Sprite LBButton;
-    public Sprite RBButton;
-    public Sprite LTButton;
-    public Sprite RTButton;
-    public Sprite DPadUp;
-    public Sprite DPadDown;
-    public Sprite DPadLeft;
-    public Sprite DPadRight;
-    public Sprite Stick;
-    public Sprite KeyBoardKey;
-    public TextMeshProUGUI keyboardtext;
+    [SerializeField] private Sprite AButton;
+    [SerializeField] private Sprite BButton;
+    [SerializeField] private Sprite XButton;
+    [SerializeField] private Sprite YButton;
+    [SerializeField] private Sprite LBButton;
+    [SerializeField] private Sprite RBButton;
+    [SerializeField] private Sprite LTButton;
+    [SerializeField] private Sprite RTButton;
+    [SerializeField] private Sprite DPadUp;
+    [SerializeField] private Sprite DPadDown;
+    [SerializeField] private Sprite DPadLeft;
+    [SerializeField] private Sprite DPadRight;
+    [SerializeField] private Sprite Stick;
+    [SerializeField] private Sprite KeyBoardKey;
+    [SerializeField] private TextMeshProUGUI keyboardtext;
 
-    public string WhattoShow;
+    [SerializeField] private string WhattoShow;
 
     private Image image;
 
     private bool previousstate;
     private void Update()
     {
-        if((Gamepad.current!=null) !=previousstate)
+        if ((Gamepad.current != null) != previousstate)
         {
             OnEnable();
         }
@@ -40,7 +40,7 @@ public class ButtonImage : MonoBehaviour
     void OnEnable()
     {
         image = GetComponent<Image>();
-        if(Gamepad.current!=null)
+        if (Gamepad.current != null)
         {
             keyboardtext.fontSize = 40;
             keyboardtext.text = "";
@@ -100,7 +100,7 @@ public class ButtonImage : MonoBehaviour
             {
                 case ("A"):
                     keyboardtext.text = "K";
-                    
+
                     break;
                 case ("B"):
                     keyboardtext.text = "L";
@@ -121,7 +121,7 @@ public class ButtonImage : MonoBehaviour
                     keyboardtext.text = "&";
                     break;
                 case ("RT"):
-                    keyboardtext.text = "à";
+                    keyboardtext.text = "ï¿½";
                     break;
                 case ("DPadUp"):
                     keyboardtext.text = "";
@@ -144,6 +144,6 @@ public class ButtonImage : MonoBehaviour
                     break;
             }
         }
-        
+
     }
 }

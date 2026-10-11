@@ -8,12 +8,12 @@ public class CombatSceneLoader : MonoBehaviour
 {
     [Header("Scene Names")]
     public string MainSceneName;
-    public string CombatSceneName;
-    public string CutScenesceneName;
+    [SerializeField] private string CombatSceneName;
+    [SerializeField] private string CutScenesceneName;
 
     [Header("Fade Settings")]
-    public CanvasGroup fadeCanvasGroup; // full screen black overlay
-    public float fadeDuration = 1f;
+    [SerializeField] private CanvasGroup fadeCanvasGroup; // full screen black overlay
+    [SerializeField] private float fadeDuration = 1f;
 
     private Scene combatScene;
     private Scene CutsceneScene;

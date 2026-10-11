@@ -18,9 +18,9 @@ public class MapInitializer : MonoBehaviour
     public bool IsSideStory;
     public int ChapterID;
 
-    public GameObject BaseCharacter;
+    [SerializeField] private GameObject BaseCharacter;
 
-    public GameObject Characters;
+    [SerializeField] private GameObject Characters;
 
     public List<EnemyStats> EnemyList;
 
@@ -36,7 +36,7 @@ public class MapInitializer : MonoBehaviour
     public Vector2 EnemyStartLookDirection;
     public Vector2 OtherStartLookDirection;
 
-    public UnitDeploymentScript _unitdeploymentscript;
+    [SerializeField] private UnitDeploymentScript _unitdeploymentscript;
 
     private void Awake()
     {

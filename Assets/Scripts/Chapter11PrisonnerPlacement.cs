@@ -6,8 +6,8 @@ using static UnitScript;
 public class Chapter11PrisonnerPlacement : MonoBehaviour
 {
 
-    public List<Vector2> prisonnersPlayablePosition;
-    public List<int> PlayableCharactersToSpawn;
+    [SerializeField] private List<Vector2> prisonnersPlayablePosition;
+    [SerializeField] private List<int> PlayableCharactersToSpawn;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

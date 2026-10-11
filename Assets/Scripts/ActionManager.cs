@@ -34,9 +34,9 @@ public class ActionManager : MonoBehaviour
     public List<GridSquareScript> currentpath;
     private GridSquareScript previoustile;
 
-    public GameObject NeutralMenu;
+    [SerializeField] private GameObject NeutralMenu;
 
-    public ForesightScript Foresight;
+    [SerializeField] private ForesightScript Foresight;
 
     public int NeutralMenuCD;
 
@@ -51,8 +51,8 @@ public class ActionManager : MonoBehaviour
     private BezierCurveManager BezierCurveManager;
 
     [Header("Examode Activation Variables")]
-    public float timetoactivateExamode;
-    public Image ExamodeBar;
+    [SerializeField] private float timetoactivateExamode;
+    [SerializeField] private Image ExamodeBar;
     private float timeforExamodeactivation;
     private bool previousexamodebuttonstate;
 

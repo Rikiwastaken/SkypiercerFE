@@ -5,27 +5,27 @@ using UnityEngine.UI;
 public class DisplayInput : MonoBehaviour
 {
 
-    public GameObject LT;
-    public GameObject RT;
-    public GameObject LB;
-    public GameObject RB;
-    public GameObject NorthButton;
-    public GameObject SouthButton;
-    public GameObject EastButton;
-    public GameObject WestButton;
-    public GameObject StartButton;
-    public GameObject SelectButton;
-    public GameObject DPadUp;
-    public GameObject DPadDown;
-    public GameObject DPadLeft;
-    public GameObject DPadRight;
-    public GameObject LeftStick;
-    public GameObject RightStick;
+    [SerializeField] private GameObject LT;
+    [SerializeField] private GameObject RT;
+    [SerializeField] private GameObject LB;
+    [SerializeField] private GameObject RB;
+    [SerializeField] private GameObject NorthButton;
+    [SerializeField] private GameObject SouthButton;
+    [SerializeField] private GameObject EastButton;
+    [SerializeField] private GameObject WestButton;
+    [SerializeField] private GameObject StartButton;
+    [SerializeField] private GameObject SelectButton;
+    [SerializeField] private GameObject DPadUp;
+    [SerializeField] private GameObject DPadDown;
+    [SerializeField] private GameObject DPadLeft;
+    [SerializeField] private GameObject DPadRight;
+    [SerializeField] private GameObject LeftStick;
+    [SerializeField] private GameObject RightStick;
 
     private Vector2 LeftStickBasepos;
     private Vector2 RightStickBasepos;
 
-    public float stickmovement;
+    [SerializeField] private float stickmovement;
 
     private InputManager InputManager;
     public bool ActivateInput;

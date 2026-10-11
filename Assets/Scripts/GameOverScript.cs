@@ -16,10 +16,10 @@ public class GameOverScript : MonoBehaviour
     private SceneLoader sceneLoader;
     private SaveManager saveManager;
 
-    public Transform GameOverMenu;
-    public Transform VictoryMenu;
-    public Transform SaveMenu;
-    public Transform ConfirmMenu;
+    [SerializeField] private Transform GameOverMenu;
+    [SerializeField] private Transform VictoryMenu;
+    [SerializeField] private Transform SaveMenu;
+    [SerializeField] private Transform ConfirmMenu;
 
     private int chosenSlot;
 

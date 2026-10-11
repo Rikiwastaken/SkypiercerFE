@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class ButtonSoundScript : MonoBehaviour
 {
 
-    public AudioMixerGroup SESound;
-    public float volume;
-    public AudioClip SFX;
-    public Button[] buttons;
+    [SerializeField] private AudioMixerGroup SESound;
+    [SerializeField] private float volume;
+    [SerializeField] private AudioClip SFX;
+    [SerializeField] private Button[] buttons;
 
-    public bool automaticallyplay = false;
+    [SerializeField] private bool automaticallyplay = false;
 
     void Start()
     {

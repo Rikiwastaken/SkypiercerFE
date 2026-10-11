@@ -44,7 +44,7 @@ public class StatCalculator : EditorWindow
     }
 
 
-    public CurrentStatCalculation currentStatCalculation;
+    [SerializeField] private CurrentStatCalculation currentStatCalculation;
 
     private SerializedProperty Prop;
 

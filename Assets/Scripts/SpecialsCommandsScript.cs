@@ -10,9 +10,9 @@ public class SpecialCommandsScript : MonoBehaviour
 
     public GameObject target;
 
-    public List<GameObject> buttons;
+    [SerializeField] private List<GameObject> buttons;
     public List<GameObject> SpecialInteractos;
-    public Button ItemMenuCancelButton;
+    [SerializeField] private Button ItemMenuCancelButton;
     private ActionsMenu ActionsMenu;
 
     private InputAction _CancelAction;

@@ -5,8 +5,8 @@ using static MapEventManager;
 public class SpecialPhaseScript : MonoBehaviour
 {
 
-    public CharacterCircleVisuals _CharacterCircleVisuals;
-    public ForesightScript _ForesightScript;
+    [SerializeField] private CharacterCircleVisuals _CharacterCircleVisuals;
+    [SerializeField] private ForesightScript _ForesightScript;
 
     public void TriggerSpecialPhase()
     {

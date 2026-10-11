@@ -11,11 +11,11 @@ public class CommandScript : MonoBehaviour
 
     public GameObject target;
 
-    public List<GameObject> buttons;
+    [SerializeField] private List<GameObject> buttons;
     public List<Skill> CommandList;
-    public Button ItemMenuCancelButton;
-    public GameObject ItemActionsMenu;
-    public TextMeshProUGUI statstext;
+    [SerializeField] private Button ItemMenuCancelButton;
+    [SerializeField] private GameObject ItemActionsMenu;
+    [SerializeField] private TextMeshProUGUI statstext;
     private ActionsMenu ActionsMenu;
 
     private void Update()

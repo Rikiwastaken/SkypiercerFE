@@ -14,46 +14,46 @@ public class cameraScriptR : MonoBehaviour
 
     private GridScript GridScript;
 
-    public float camspeed;
+    [SerializeField] private float camspeed;
 
     private Vector3 pointtolookat;
 
-    public bool incombat;
+    [SerializeField] private bool incombat;
 
     private Vector3 initialrotation;
 
-    public float previouselevation;
+    [SerializeField] private float previouselevation;
 
-    public GameObject fighter1;
-    public GameObject fighter2;
-    public CombatTextScript CombatTextScript;
+    [SerializeField] private GameObject fighter1;
+    [SerializeField] private GameObject fighter2;
+    [SerializeField] private CombatTextScript CombatTextScript;
     private bool resettingy;
 
-    public GameObject PreBattleMenu;
+    [SerializeField] private GameObject PreBattleMenu;
 
     private float elevationtoadd;
-    public float verticalautomovespeed;
+    [SerializeField] private float verticalautomovespeed;
 
-    public TextBubbleScript TextBubbleScript;
-    public TutorialWindowScript TutorialWindowScript;
+    [SerializeField] private TextBubbleScript TextBubbleScript;
+    [SerializeField] private TutorialWindowScript TutorialWindowScript;
 
     private float targetangle;
 
     private float currentVelocity = 0f;
-    public float rotationSmoothTime = 0.3f;
-    public float rotationSpeed = 45f;
+    [SerializeField] private float rotationSmoothTime = 0.3f;
+    [SerializeField] private float rotationSpeed = 45f;
 
-    public float maxY = 20f;
-    public float minY = 5f;
+    [SerializeField] private float maxY = 20f;
+    [SerializeField] private float minY = 5f;
 
-    public List<VolumeProfile> PostProcessingVolumeProfileList;
+    [SerializeField] private List<VolumeProfile> PostProcessingVolumeProfileList;
 
-    public VolumeProfile DefaultVolumeProfile;
+    [SerializeField] private VolumeProfile DefaultVolumeProfile;
     private bool PostProcessingInitialized;
 
     private TurnManger turnmanager;
 
-    public float previousY;
+    [SerializeField] private float previousY;
 
     private Vector2 prevdest;
     private void Awake()

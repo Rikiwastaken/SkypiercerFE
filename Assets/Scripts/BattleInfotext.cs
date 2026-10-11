@@ -18,27 +18,27 @@ public class BattleInfotext : MonoBehaviour
 
     private TurnManger turnManger;
     private AttackTurnScript attackTurnScript;
-    public TextMeshProUGUI Skilltext;
+    [SerializeField] private TextMeshProUGUI Skilltext;
 
-    public List<TextMeshProUGUI> MasteryTexts;
-    public List<Image> MasteryImages;
-    public List<Transform> MasteryExpBars;
-    public List<Sprite> WeaponClassImages;
+    [SerializeField] private List<TextMeshProUGUI> MasteryTexts;
+    [SerializeField] private List<Image> MasteryImages;
+    [SerializeField] private List<Transform> MasteryExpBars;
+    [SerializeField] private List<Sprite> WeaponClassImages;
 
-    public GameObject ItemAction;
+    [SerializeField] private GameObject ItemAction;
 
-    public GameObject PreBattleMenu;
-    public GameObject AttackMenu;
+    [SerializeField] private GameObject PreBattleMenu;
+    [SerializeField] private GameObject AttackMenu;
 
-    public ActionsMenu ActionsMenu;
+    [SerializeField] public ActionsMenu ActionsMenu;
 
     public bool indescription;
 
-    public TextBubbleScript textBubbleScript;
+    [SerializeField] private TextBubbleScript textBubbleScript;
 
-    public GameObject NeutralMenu;
+    [SerializeField] private GameObject NeutralMenu;
 
-    public GameObject ForeSightMenu;
+    [SerializeField] private GameObject ForeSightMenu;
 
     private EventSystem eventSystem;
 
@@ -49,54 +49,54 @@ public class BattleInfotext : MonoBehaviour
 
     [Header("CharacterInfo")]
 
-    public TextMeshProUGUI NameTMP;
-    public TextMeshProUGUI HPTMP;
-    public Image HPLifebar;
-    public TextMeshProUGUI ExpAndLevelTMP;
-    public TextMeshProUGUI StrAndPsyTMP;
-    public TextMeshProUGUI DefAndResTMP;
-    public TextMeshProUGUI SpdAndDexTMP;
-    public TextMeshProUGUI LuckAndMovTMP;
-    public TextMeshProUGUI HitCritAndDodgeTMP;
-    public TextMeshProUGUI StrArrowTMP;
-    public TextMeshProUGUI PsyArrowTMP;
-    public TextMeshProUGUI DefArrowTMP;
-    public TextMeshProUGUI ResArrowTMP;
-    public TextMeshProUGUI SpdArrowTMP;
-    public TextMeshProUGUI DexArrowTMP;
-    public TextMeshProUGUI LuckArrowTMP;
-    public TextMeshProUGUI HPArrowTMP;
-    public TextMeshProUGUI DmgTMP;
-    public Image EquipedWeaponIco;
-    public TextMeshProUGUI EquipedWeaponGradeTxt;
-    public TextMeshProUGUI equipedweaponText;
-    public Image CharacterSprite;
-    public Image ExpBarFilling;
-    public Image ExamodeBar;
-    public GameObject ExamodeGO;
-    public Color ExamodeActivatedColor;
-    public Color ExamodeDeactivatedColor;
-    public Sprite EmptySprite;
+    [SerializeField] private TextMeshProUGUI NameTMP;
+    [SerializeField] private TextMeshProUGUI HPTMP;
+    [SerializeField] private Image HPLifebar;
+    [SerializeField] private TextMeshProUGUI ExpAndLevelTMP;
+    [SerializeField] private TextMeshProUGUI StrAndPsyTMP;
+    [SerializeField] private TextMeshProUGUI DefAndResTMP;
+    [SerializeField] private TextMeshProUGUI SpdAndDexTMP;
+    [SerializeField] private TextMeshProUGUI LuckAndMovTMP;
+    [SerializeField] private TextMeshProUGUI HitCritAndDodgeTMP;
+    [SerializeField] private TextMeshProUGUI StrArrowTMP;
+    [SerializeField] private TextMeshProUGUI PsyArrowTMP;
+    [SerializeField] private TextMeshProUGUI DefArrowTMP;
+    [SerializeField] private TextMeshProUGUI ResArrowTMP;
+    [SerializeField] private TextMeshProUGUI SpdArrowTMP;
+    [SerializeField] private TextMeshProUGUI DexArrowTMP;
+    [SerializeField] private TextMeshProUGUI LuckArrowTMP;
+    [SerializeField] private TextMeshProUGUI HPArrowTMP;
+    [SerializeField] private TextMeshProUGUI DmgTMP;
+    [SerializeField] private Image EquipedWeaponIco;
+    [SerializeField] private TextMeshProUGUI EquipedWeaponGradeTxt;
+    [SerializeField] private TextMeshProUGUI equipedweaponText;
+    [SerializeField] private Image CharacterSprite;
+    [SerializeField] private Image ExpBarFilling;
+    [SerializeField] private Image ExamodeBar;
+    [SerializeField] private GameObject ExamodeGO;
+    [SerializeField] private Color ExamodeActivatedColor;
+    [SerializeField] private Color ExamodeDeactivatedColor;
+    [SerializeField] private Sprite EmptySprite;
 
     [Header("StatusAilment")]
 
-    public List<TextMeshProUGUI> AilmentIconList;
-    public List<TextMeshProUGUI> AilmentDurationLst;
+    [SerializeField] private List<TextMeshProUGUI> AilmentIconList;
+    [SerializeField] private List<TextMeshProUGUI> AilmentDurationLst;
 
     [Header("Skill-related")]
 
-    public Color TemporarySkillColor;
-    public List<Button> SkillButtonList;
+    [SerializeField] private Color TemporarySkillColor;
+    [SerializeField] private List<Button> SkillButtonList;
     private List<int> SkillButtonIDList = new List<int>();
-    public TextMeshProUGUI SkillDescription;
+    [SerializeField] private TextMeshProUGUI SkillDescription;
     private Color BaseSkillColor;
-    public List<SkillIconScript> SkillIconScriptList;
-    public List<GameObject> SkillBars;
-    public List<TextMeshProUGUI> SkillNames;
-    public GameObject SkillGO;
+    [SerializeField] private List<SkillIconScript> SkillIconScriptList;
+    [SerializeField] private List<GameObject> SkillBars;
+    [SerializeField] private List<TextMeshProUGUI> SkillNames;
+    [SerializeField] private GameObject SkillGO;
 
     private float timefordisappearsrpite;
-    public float Timefordisappearsrpite = 1f;
+    [SerializeField] private float Timefordisappearsrpite = 1f;
 
     private InputAction _ShowDetailsAction;
     private InputAction _CancelAction;

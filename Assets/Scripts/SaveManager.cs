@@ -83,13 +83,13 @@ public class SaveManager : MonoBehaviour
         public int ResolutionID = 7;
     }
 
-    public int numberofslots;
+    [SerializeField] private int numberofslots;
 
     public List<SaveClass> SaveClasses;
 
-    public float secondselapsed;
+    [SerializeField] private float secondselapsed;
 
-    public SaveClass DefaultSave;
+    [SerializeField] private SaveClass DefaultSave;
 
     public OptionsClass Options;
 

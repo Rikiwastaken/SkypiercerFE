@@ -4,13 +4,13 @@ public class LightFlickerScript : MonoBehaviour
 {
     [Header("Base Settings")]
     private float baseIntensity;
-    public float intensityVariation = 0.5f;
+    [SerializeField] private float intensityVariation = 0.5f;
 
     private float baseRange;
-    public float rangeVariation = 1f;
+    [SerializeField] private float rangeVariation = 1f;
 
     [Header("Flicker Settings")]
-    public float flickerSpeed = 5f;
+    [SerializeField] private float flickerSpeed = 5f;
 
     private Light fireLight;
     private float randomOffset;

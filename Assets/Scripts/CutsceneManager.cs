@@ -107,24 +107,24 @@ public class CutsceneManager : MonoBehaviour
         public int EmojiToShow = -1;
     }
 
-    public PlayableDirector director;
+    [SerializeField] private PlayableDirector director;
 
     [Header("Global Parameters")]
     public int CurrentCutscene;
-    public List<Light> lights;
-    public GameObject CharacterPrefab;
-    public RuntimeAnimatorController AnimatorController;
-    public List<Transform> Cameras;
-    public UnityEngine.UI.Image FadeToBlackImage;
-    public float BaseFadeImageX;
-    public float FadeTime;
+    [SerializeField] private List<Light> lights;
+    [SerializeField] private GameObject CharacterPrefab;
+    [SerializeField] private RuntimeAnimatorController AnimatorController;
+    [SerializeField] private List<Transform> Cameras;
+    [SerializeField] private UnityEngine.UI.Image FadeToBlackImage;
+    [SerializeField] private float BaseFadeImageX;
+    [SerializeField] private float FadeTime;
     private Coroutine FadeToBlacKCoroutine;
-    public GameObject EmojiBubble;
+    [SerializeField] private GameObject EmojiBubble;
     private MusicManager _MusicManager;
 
 
     [Header("Scene Parameters")]
-    public List<CutScene> Cutscenes;
+    [SerializeField] private List<CutScene> Cutscenes;
 
     private List<GameObject> SpawnedCharacters;
 
@@ -135,14 +135,14 @@ public class CutsceneManager : MonoBehaviour
     public bool cutscenefinished;
 
     private GameObject CurrentEnvironment;
-    public List<float> Movementhappenning = new List<float>();
+    [SerializeField] private List<float> Movementhappenning = new List<float>();
 
     [Header("Debug Tools")]
-    public int CurrentCutsceneToDebug;
+    [SerializeField] private int CurrentCutsceneToDebug;
 
     private bool paused;
 
-    public bool testing;
+    [SerializeField] private bool testing;
 
     [Serializable]
     public class DialogueImporterWrapperClass

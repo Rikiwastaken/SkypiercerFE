@@ -17,7 +17,7 @@ public class MapEventManager : MonoBehaviour
     public static MapEventManager instance;
     public TutorialWindowScript TutorialwindowScript;
 
-    public ForesightScript ForesightScript;
+    [SerializeField] private ForesightScript ForesightScript;
 
     [System.Serializable]
     private class Wrapper<T>
@@ -158,20 +158,20 @@ public class MapEventManager : MonoBehaviour
     private GridScript GridScript;
     private TurnManger turnManger;
 
-    public GameOverScript GameOverScript;
+    [SerializeField] private GameOverScript GameOverScript;
     private TextBubbleScript TextBubbleScript;
 
     private bool eventinitialized;
 
     [Header("Debugging Tools")]
 
-    public int ManualEventTrigger = -1;
+    [SerializeField] private int ManualEventTrigger = -1;
 
-    public int EventToSaveToJson;
+    [SerializeField] private int EventToSaveToJson;
 
-    public TextMeshProUGUI ConditionsText;
-    public int conditionseventID = -1;
-    public int VictoryEvent = -1;
+    [SerializeField] private TextMeshProUGUI ConditionsText;
+    [SerializeField] private int conditionseventID = -1;
+    [SerializeField] private int VictoryEvent = -1;
 
     private void Awake()
     {

@@ -13,25 +13,25 @@ public class ItemsScript : MonoBehaviour
 
     public Character target;
 
-    public List<GameObject> buttons;
+    [SerializeField] private List<GameObject> buttons;
 
-    public Button ItemMenuCancelButton;
-    public Button ItemActionsMenuCancelButton;
-    public GameObject ItemActionsMenu;
+    [SerializeField] private Button ItemMenuCancelButton;
+    [SerializeField] private Button ItemActionsMenuCancelButton;
+    [SerializeField] private GameObject ItemActionsMenu;
 
     [Header("Blade Stats")]
 
-    public GameObject statstext;
+    [SerializeField] private GameObject statstext;
 
-    public TextMeshProUGUI BladeName;
-    public TextMeshProUGUI BladeType;
-    public TextMeshProUGUI BladeDamage;
-    public TextMeshProUGUI BladeHitRate;
-    public TextMeshProUGUI BladeCritRate;
-    public TextMeshProUGUI BladeUses;
-    public TextMeshProUGUI BladeRange;
-    public TextMeshProUGUI BladeMod;
-    public TextMeshProUGUI BladeGrade;
+    [SerializeField] private TextMeshProUGUI BladeName;
+    [SerializeField] private TextMeshProUGUI BladeType;
+    [SerializeField] private TextMeshProUGUI BladeDamage;
+    [SerializeField] private TextMeshProUGUI BladeHitRate;
+    [SerializeField] private TextMeshProUGUI BladeCritRate;
+    [SerializeField] private TextMeshProUGUI BladeUses;
+    [SerializeField] private TextMeshProUGUI BladeRange;
+    [SerializeField] private TextMeshProUGUI BladeMod;
+    [SerializeField] private TextMeshProUGUI BladeGrade;
 
     private Vector3 initialpos;
 

@@ -8,20 +8,20 @@ public class FreezeFrameGeneral : MonoBehaviour
     public static FreezeFrameGeneral instance;
 
     [Header("BaseVariables")]
-    public Camera cam;
-    public RenderTexture RenderTextureObj;
-    public Texture2D captured;
+    [SerializeField] private Camera cam;
+    [SerializeField] private RenderTexture RenderTextureObj;
+    [SerializeField] private Texture2D captured;
     public Image image;
-    public Image imageBG;
-    public RectTransform Canvas;
+    [SerializeField] private Image imageBG;
+    [SerializeField] private RectTransform Canvas;
 
     [Header("MoveVariables")]
-    public float timetorotate;
-    public float rotation;
-    public float targetscale;
+    [SerializeField] private float timetorotate;
+    [SerializeField] private float rotation;
+    [SerializeField] private float targetscale;
 
     [Header("Safeguard")]
-    public float timeforsafeguard;
+    [SerializeField] private float timeforsafeguard;
     private float timeforsafeguardcounter;
 
     private void Awake()

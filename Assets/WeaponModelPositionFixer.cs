@@ -5,10 +5,10 @@ using static UnitScript;
 
 public class WeaponModelPositionFixer : MonoBehaviour
 {
-    public int ZackModelID = 3;
-    public List<int> IDsToExclude;
-    public Vector3 WeaponPosition;
-    public Vector3 WeaponRotation;
+    [SerializeField] private int ZackModelID = 3;
+    [SerializeField] private List<int> IDsToExclude;
+    [SerializeField] private Vector3 WeaponPosition;
+    [SerializeField] private Vector3 WeaponRotation;
 
 #if UNITY_EDITOR
 

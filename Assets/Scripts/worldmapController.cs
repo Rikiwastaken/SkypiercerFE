@@ -9,39 +9,39 @@ public class worldmapController : MonoBehaviour
 
     private Camera cam;
 
-    public Transform CamHolder;
+    [SerializeField] private Transform CamHolder;
 
-    public float cammovepersec;
+    [SerializeField] private float cammovepersec;
 
     private CharacterController CC;
 
-    public float speed;
+    [SerializeField] private float speed;
 
-    public Transform playermodel;
+    [SerializeField] private Transform playermodel;
 
     private Vector3 forwardtarget = new Vector3(0, 0, 1);
 
     private Vector3 targetcamrotation;
 
     public int isshippingCounter;
-    public float waterwheelrotationpersecond;
-    public Transform Waterwheel;
-    public int minchapterforship;
+    [SerializeField] private float waterwheelrotationpersecond;
+    [SerializeField] private Transform Waterwheel;
+    [SerializeField] private int minchapterforship;
 
-    public GameObject ShipModel;
-    public GameObject HumanModel;
+    [SerializeField] private GameObject ShipModel;
+    [SerializeField] private GameObject HumanModel;
 
-    public float gravValue;
+    [SerializeField] private float gravValue;
 
     private InputAction _MoveAction;
     private InputAction _MoveCamAction;
-    public GameObject WaterBlocker;
+    [SerializeField] private GameObject WaterBlocker;
     private void Awake()
     {
         instance = this;
     }
 
-    public List<string> collidingtags = new List<string>();
+    [SerializeField] private List<string> collidingtags = new List<string>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

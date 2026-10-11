@@ -6,30 +6,30 @@ using UnityEngine.UI;
 public class OptionsMenuScript : MonoBehaviour
 {
 
-    public Button MusicMain;
-    public Button MusicLess;
-    public Button MusicMore;
+    [SerializeField] private Button MusicMain;
+    [SerializeField] private Button MusicLess;
+    [SerializeField] private Button MusicMore;
 
-    public Button SEMain;
-    public Button SELess;
-    public Button SEMore;
+    [SerializeField] private Button SEMain;
+    [SerializeField] private Button SELess;
+    [SerializeField] private Button SEMore;
 
-    public Button ResMain;
-    public Button ResLess;
-    public Button ResMore;
+    [SerializeField] private Button ResMain;
+    [SerializeField] private Button ResLess;
+    [SerializeField] private Button ResMore;
 
-    public TextMeshProUGUI fullscreentext;
+    [SerializeField] private TextMeshProUGUI fullscreentext;
 
-    public TextMeshProUGUI BattleAnimations;
+    [SerializeField] private TextMeshProUGUI BattleAnimations;
 
     private SaveManager SaveManager;
 
-    public TextMeshProUGUI musictext;
-    public TextMeshProUGUI SEtext;
+    [SerializeField] private TextMeshProUGUI musictext;
+    [SerializeField] private TextMeshProUGUI SEtext;
 
-    public TextMeshProUGUI ResText;
+    [SerializeField] private TextMeshProUGUI ResText;
 
-    public ButtonSoundScript ButtonSoundScript;
+    [SerializeField] private ButtonSoundScript ButtonSoundScript;
 
     private void Start()
     {

@@ -13,16 +13,16 @@ public class TipsMenuScript : MonoBehaviour
 
     public static TipsMenuScript instance;
 
-    public List<Button> Buttons;
+    [SerializeField] private List<Button> Buttons;
 
-    public List<int> ButtonIDs;
+    [SerializeField] private List<int> ButtonIDs;
 
     private int framesuppressed;
     private int framesdownpressed;
 
-    public GameObject neutralmenu;
+    [SerializeField] private GameObject neutralmenu;
 
-    public TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
 
     [Serializable]
     public class Tip
@@ -38,9 +38,9 @@ public class TipsMenuScript : MonoBehaviour
         public List<Tip> tipList;
     }
 
-    public List<Tip> Tips;
+    [SerializeField] private List<Tip> Tips;
 
-    public List<Tip> TipsToUse;
+    [SerializeField] private List<Tip> TipsToUse;
 
     private GameObject previousselection;
 

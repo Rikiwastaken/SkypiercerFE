@@ -4,7 +4,7 @@ using static CalculationToolsScript;
 public class StoryPointScript : MonoBehaviour
 {
 
-    public GameObject ChapterChangeVisuals;
+    [SerializeField] private GameObject ChapterChangeVisuals;
 
 
     public int chapterID;
@@ -13,8 +13,8 @@ public class StoryPointScript : MonoBehaviour
 
     public int minchapterforSideStory;
 
-    public Material MainStoryMat;
-    public Material SideStoryMat;
+    [SerializeField] private Material MainStoryMat;
+    [SerializeField] private Material SideStoryMat;
 
     private void Start()
     {

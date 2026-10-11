@@ -8,38 +8,38 @@ using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
 {
-    public AudioSource PlayableAudioSource;
-    public AudioSource PlayableAudioSourceIntro;
-    public AudioSource EnemyAudioSource;
-    public AudioSource EnemyAudioSourceIntro;
-    public AudioSource OtherAudioSource;
-    public AudioSource OtherAudioSourceIntro;
-    public AudioSource BeforeCombat;
-    public AudioSource BeforeCombatintro;
+    [SerializeField] private AudioSource PlayableAudioSource;
+    [SerializeField] private AudioSource PlayableAudioSourceIntro;
+    [SerializeField] private AudioSource EnemyAudioSource;
+    [SerializeField] private AudioSource EnemyAudioSourceIntro;
+    [SerializeField] private AudioSource OtherAudioSource;
+    [SerializeField] private AudioSource OtherAudioSourceIntro;
+    [SerializeField] private AudioSource BeforeCombat;
+    [SerializeField] private AudioSource BeforeCombatintro;
 
-    public AudioSource CampMusic;
-    public AudioSource CampMusicintro;
-    public AudioSource WorldMapMusic;
-    public AudioSource WorldMapMusicintro;
-    public AudioSource ShipMusic;
-    public AudioSource ShipMusicintro;
+    [SerializeField] private AudioSource CampMusic;
+    [SerializeField] private AudioSource CampMusicintro;
+    [SerializeField] private AudioSource WorldMapMusic;
+    [SerializeField] private AudioSource WorldMapMusicintro;
+    [SerializeField] private AudioSource ShipMusic;
+    [SerializeField] private AudioSource ShipMusicintro;
 
-    public AudioSource MainMenuMusic;
-    public AudioSource MainMenuMusicintro;
+    [SerializeField] private AudioSource MainMenuMusic;
+    [SerializeField] private AudioSource MainMenuMusicintro;
 
 
-    public AudioSource DialogueAudioSource;
-    public AudioSource DialogueAudioSourceIntro;
-    public AudioSource DialogueAudioSource2;
-    public AudioSource DialogueAudioSource2Intro;
+    [SerializeField] private AudioSource DialogueAudioSource;
+    [SerializeField] private AudioSource DialogueAudioSourceIntro;
+    [SerializeField] private AudioSource DialogueAudioSource2;
+    [SerializeField] private AudioSource DialogueAudioSource2Intro;
 
     private AudioSource currentDialogueAudioSource;
     private AudioSource currentDialogueAudioSourceIntro;
 
-    public AudioSource CutSceneMusic;
-    public AudioSource CutSceneMusicintro;
+    [SerializeField] private AudioSource CutSceneMusic;
+    [SerializeField] private AudioSource CutSceneMusicintro;
 
-    public AudioSource LevelUpAS;
+    [SerializeField] private AudioSource LevelUpAS;
 
     public int CurrentDialogueMusic;
 
@@ -55,11 +55,11 @@ public class MusicManager : MonoBehaviour
     }
     public List<Audios> DialogueMusicsWithIntro;
 
-    public float maxvolume;
+    [SerializeField] private float maxvolume;
 
-    public float SFXVolume;
+    [SerializeField] private float SFXVolume;
 
-    public AudioMixer mixer;
+    [SerializeField] private AudioMixer mixer;
 
     private TurnManger TurnManager;
 
@@ -69,14 +69,14 @@ public class MusicManager : MonoBehaviour
 
     public static MusicManager instance;
 
-    public GameObject GeneratedSoundHolder;
+    [SerializeField] private GameObject GeneratedSoundHolder;
 
-    public List<AudioClip> VoiceSFXList;
+    [SerializeField] private List<AudioClip> VoiceSFXList;
 
-    public List<Audios> PlayableMusics;
-    public List<Audios> EnemyMusics;
-    public List<Audios> OtherMusics;
-    public List<Audios> PrepMusics;
+    [SerializeField] private List<Audios> PlayableMusics;
+    [SerializeField] private List<Audios> EnemyMusics;
+    [SerializeField] private List<Audios> OtherMusics;
+    [SerializeField] private List<Audios> PrepMusics;
 
     [Serializable]
     public class MapBattleMusic
@@ -102,9 +102,9 @@ public class MusicManager : MonoBehaviour
         public bool useforSideStory;
     }
 
-    public List<MapBattleMusic> MusicList;
+    [SerializeField] private List<MapBattleMusic> MusicList;
 
-    public List<MapMusic> MusicPerMap;
+    [SerializeField] private List<MapMusic> MusicPerMap;
 
     private bool PlayPrepMusic;
 

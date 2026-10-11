@@ -4,13 +4,13 @@ using UnityEngine;
 public class PhaseTextScript : MonoBehaviour
 {
 
-    public float restingXpos;
-    public float speed;
+    [SerializeField] private float restingXpos;
+    [SerializeField] private float speed;
 
     public bool moveText;
 
     private int timeinthemiddlecounter;
-    public float timeinthemiddle;
+    [SerializeField] private float timeinthemiddle;
 
     private TextMeshProUGUI TMP;
     private TextMeshProUGUI BackTMP;

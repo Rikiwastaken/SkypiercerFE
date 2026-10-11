@@ -70,16 +70,16 @@ public class BezierCurveManager : MonoBehaviour
     }
     [Header("Curve Variables")]
     private List<GameObject> SpawnedLines = new List<GameObject>();
-    public int sections;
-    public float elongationRatio;
-    public Material material;
-    public float middlepointElevation;
-    public Color RendererColor;
-    public float width;
+    [SerializeField] private int sections;
+    [SerializeField] private float elongationRatio;
+    [SerializeField] private Material material;
+    [SerializeField] private float middlepointElevation;
+    [SerializeField] private Color RendererColor;
+    [SerializeField] private float width;
 
 
     [Header("Line Fadein variables")]
-    public float timeforalltoappear;
+    [SerializeField] private float timeforalltoappear;
 
     public void DrawLineBetween2Characters(Character selectedChar, Character OtherChar, int lineID)
     {

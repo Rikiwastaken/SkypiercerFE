@@ -9,10 +9,10 @@ public class SceneLoader : MonoBehaviour
     public static SceneLoader instance;
 
     private string SceneToLoad;
-    public GameObject loadingCanvas;
+    [SerializeField] private GameObject loadingCanvas;
     private int framestoloading;
     private bool fondu;
-    public TextMeshProUGUI loadingtext;
+    [SerializeField] private TextMeshProUGUI loadingtext;
 
     public Image LoadingImage;
 

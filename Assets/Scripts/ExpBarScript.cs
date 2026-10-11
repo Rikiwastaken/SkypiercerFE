@@ -6,10 +6,10 @@ using static UnitScript;
 
 public class ExpBarScript : MonoBehaviour
 {
-    public Image Expbar;
-    public FreezeFrameCapture FreezeFrame;
+    [SerializeField] private Image Expbar;
+    [SerializeField] private FreezeFrameCapture FreezeFrame;
 
-    public int Speedpersecond;
+    [SerializeField] private int Speedpersecond;
 
     private int targetnumber;
 
@@ -19,8 +19,8 @@ public class ExpBarScript : MonoBehaviour
 
     private AttackTurnScript AttackTurnScript;
 
-    public int filledupbardelaycounter;
-    public float filledupbardelay;
+    [SerializeField] private int filledupbardelaycounter;
+    [SerializeField] private float filledupbardelay;
 
     private List<int> levelupbonuses;
 

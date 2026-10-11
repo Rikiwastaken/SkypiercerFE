@@ -13,8 +13,8 @@ public class CampScript : MonoBehaviour
     SaveManager saveManager;
 
     public Transform BaseMenu;
-    public GameObject BondMenu;
-    public GameObject SkillEquipMenu;
+    [SerializeField] private GameObject BondMenu;
+    [SerializeField] private GameObject SkillEquipMenu;
 
     [Serializable]
     public class StartDialogue
@@ -23,30 +23,30 @@ public class CampScript : MonoBehaviour
         public List<TextBubbleInfo> Dialogue;
     }
 
-    public List<StartDialogue> StartDialogueList;
+    [SerializeField] private List<StartDialogue> StartDialogueList;
 
     private bool previousindialogue;
 
-    public Transform SaveButtonList;
+    [SerializeField] private Transform SaveButtonList;
 
-    public Transform SittingGO;
-    public Transform Sitting2GO;
-    public Transform Sitting3GO;
-    public Transform LeaningGO;
+    [SerializeField] private Transform SittingGO;
+    [SerializeField] private Transform Sitting2GO;
+    [SerializeField] private Transform Sitting3GO;
+    [SerializeField] private Transform LeaningGO;
 
     private Animator SittingCharacter;
     private Animator Sitting2Character;
     private Animator Sitting3Character;
     private Animator LeaningCharacter;
 
-    public GameObject CharacterPrefab;
-    public RuntimeAnimatorController CampCharacterController;
+    [SerializeField] private GameObject CharacterPrefab;
+    [SerializeField] private RuntimeAnimatorController CampCharacterController;
 
-    public TextBubbleScript textBubbleScript;
+    [SerializeField] private TextBubbleScript textBubbleScript;
 
     private bool waitAFrameBeforeCutscene;
 
-    public Transform MainCanvas;
+    [SerializeField] private Transform MainCanvas;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

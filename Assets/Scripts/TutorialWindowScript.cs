@@ -11,11 +11,11 @@ public class TutorialWindowScript : MonoBehaviour
 
     private float timecounter;
 
-    public Button validatebutton;
+    [SerializeField] private Button validatebutton;
 
-    public GameObject TextGO;
+    [SerializeField] private GameObject TextGO;
 
-    public float delay;
+    [SerializeField] private float delay;
 
     private bool abletocontinue;
 

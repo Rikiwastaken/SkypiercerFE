@@ -16,17 +16,17 @@ public class WeatherManager : MonoBehaviour
 
     public bool alwaysrainy;
 
-    public List<List<GridSquareScript>> sunnytilesgroups;
-    public List<List<GridSquareScript>> rainytilesgroups;
-    public List<List<GridSquareScript>> cloudytilesgroups;
+    [SerializeField] private List<List<GridSquareScript>> sunnytilesgroups;
+    [SerializeField] private List<List<GridSquareScript>> rainytilesgroups;
+    [SerializeField] private List<List<GridSquareScript>> cloudytilesgroups;
 
-    public Color SunnyTileColor;
-    public Color CloudyTileColor;
-    public Color rainyTileColor;
+    [SerializeField] private Color SunnyTileColor;
+    [SerializeField] private Color CloudyTileColor;
+    [SerializeField] private Color rainyTileColor;
 
-    public Sprite SunnySprite;
-    public Sprite CloudySprite;
-    public Sprite RainySprite;
+    [SerializeField] private Sprite SunnySprite;
+    [SerializeField] private Sprite CloudySprite;
+    [SerializeField] private Sprite RainySprite;
 
     private List<GameObject> SpritesUsed = new List<GameObject>();
 
@@ -36,7 +36,7 @@ public class WeatherManager : MonoBehaviour
 
     private int weatherTogglecooldown;
 
-    public Transform WeatherGOHolder;
+    [SerializeField] private Transform WeatherGOHolder;
 
     private InputAction _ShowWeatherAction;
 

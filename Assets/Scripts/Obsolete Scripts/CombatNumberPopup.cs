@@ -6,17 +6,17 @@ public class CombatNumberPopup : MonoBehaviour
 {
 
     private Camera Camera;
-    public TextMeshProUGUI TMPUGUI;
+    [SerializeField] private TextMeshProUGUI TMPUGUI;
 
-    public Vector3 offset;
+    [SerializeField] private Vector3 offset;
 
-    public float durationofText;
+    [SerializeField] private float durationofText;
 
     private Vector3 BasePos;
 
     private float whentodispawn;
 
-    public float randomoffset;
+    [SerializeField] private float randomoffset;
 
     // Update is called once per frame
     void Update()

@@ -7,21 +7,14 @@ public class RandomScript : MonoBehaviour
 {
 
     [Header("Random Values")]
-    [SerializeField]
-    public List<RandomValuesDup> HitValues;
-    [SerializeField]
+    [SerializeField] private List<RandomValuesDup> HitValues;
     public int hitvaluesindex;
-    [SerializeField]
-    public List<RandomValuesDup> CritValues;
-    [SerializeField]
+    [SerializeField] private List<RandomValuesDup> CritValues;
     public int CritValuesindex;
-    [SerializeField]
-    public List<RandomValuesDup> personalityValues;
-    [SerializeField]
+    [SerializeField] private List<RandomValuesDup> personalityValues;
     public int personalityvaluesindex;
-    [SerializeField]
-    public List<RandomLevelValues> levelValues;
-    [SerializeField]
+    [SerializeField] private List<RandomLevelValues> levelValues;
+
     public int levelvaluesindex;
 
 

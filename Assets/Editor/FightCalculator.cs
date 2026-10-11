@@ -60,7 +60,7 @@ public class FightCalculator : EditorWindow
     }
 
 
-    public CurrentStatCalculation currentStatCalculation;
+    [SerializeField] private CurrentStatCalculation currentStatCalculation;
 
     private Character CurrentChar;
 

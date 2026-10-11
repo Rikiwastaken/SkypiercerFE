@@ -11,83 +11,83 @@ public class FreezeFrameCapture : MonoBehaviour
     public static FreezeFrameCapture instance;
 
     [Header("BaseVariables")]
-    public Camera cam;
-    public RenderTexture RenderTextureObj;
-    public Texture2D captured;
-    public Image left;
-    public Image right;
-    public float splitDistance = 500f;
-    public float splitDuration = 0.4f;
-    public GameObject BackgroundImage;
-    public GameObject CharacterSprite;
+    [SerializeField] private Camera cam;
+    [SerializeField] private RenderTexture RenderTextureObj;
+    [SerializeField] private Texture2D captured;
+    [SerializeField] private Image left;
+    [SerializeField] private Image right;
+    [SerializeField] private float splitDistance = 500f;
+    [SerializeField] private float splitDuration = 0.4f;
+    [SerializeField] private GameObject BackgroundImage;
+    [SerializeField] private GameObject CharacterSprite;
     private Vector2 CharacterSpriteBasePos;
     private Vector2 BackgroundImageBasePos;
-    public RectTransform TextHolder;
-    public InputActionReference activate;
-    public float timebeforesplit;
-    public RectTransform Canvas;
+    [SerializeField] private RectTransform TextHolder;
+    [SerializeField] private InputActionReference activate;
+    [SerializeField] private float timebeforesplit;
+    [SerializeField] private RectTransform Canvas;
 
     public bool playsplit;
     public bool ShowingLevelUp;
 
     [Header("NameTextVariables")]
-    public TextMeshProUGUI CharacterName;
-    public TextMeshProUGUI CharacterNameBG;
-    public float lefttextsizeratio;
-    public float righttextsizeratio;
-    public Vector2 BaseNamePosition;
-    public Vector2 TargetNamePosition;
-    public Vector2 NameBGOffset;
+    [SerializeField] private TextMeshProUGUI CharacterName;
+    [SerializeField] private TextMeshProUGUI CharacterNameBG;
+    [SerializeField] private float lefttextsizeratio;
+    [SerializeField] private float righttextsizeratio;
+    [SerializeField] private Vector2 BaseNamePosition;
+    [SerializeField] private Vector2 TargetNamePosition;
+    [SerializeField] private Vector2 NameBGOffset;
 
     [Header("LevelUpTextVariables")]
-    public TextMeshProUGUI LvlUpText;
-    public TextMeshProUGUI LvlUpTextBG;
-    public float lefttextsizeratioLvlUp;
-    public float righttextsizeratioLvlUp;
-    public Vector2 BaseLvlUpPosition;
-    public Vector2 TargetLvlUpPosition;
-    public Vector2 LvlUpBGOffset;
+    [SerializeField] private TextMeshProUGUI LvlUpText;
+    [SerializeField] private TextMeshProUGUI LvlUpTextBG;
+    [SerializeField] private float lefttextsizeratioLvlUp;
+    [SerializeField] private float righttextsizeratioLvlUp;
+    [SerializeField] private Vector2 BaseLvlUpPosition;
+    [SerializeField] private Vector2 TargetLvlUpPosition;
+    [SerializeField] private Vector2 LvlUpBGOffset;
 
     [Header("QuoteVariables")]
-    public TextMeshProUGUI QuoteText;
-    public TextMeshProUGUI QuoteTextBG;
-    public float lefttextsizeratioQuote;
-    public float righttextsizeratioQuote;
-    public Vector2 BaseQuotePosition;
-    public Vector2 TargetQuotePosition;
-    public Vector2 QuoteBGOffset;
+    [SerializeField] private TextMeshProUGUI QuoteText;
+    [SerializeField] private TextMeshProUGUI QuoteTextBG;
+    [SerializeField] private float lefttextsizeratioQuote;
+    [SerializeField] private float righttextsizeratioQuote;
+    [SerializeField] private Vector2 BaseQuotePosition;
+    [SerializeField] private Vector2 TargetQuotePosition;
+    [SerializeField] private Vector2 QuoteBGOffset;
 
     [Header("StatTextVariables")]
-    public List<TextMeshProUGUI> StatTexts;
-    public List<TextMeshProUGUI> StatTextBG;
-    public RectTransform StatTextHolder;
-    public Vector2 BaseStatPosition;
-    public Vector2 TargetStatPosition;
-    public Vector2 OffsetPerIndex;
-    public Vector2 BGOffSet;
-    public float timebetweenStats;
+    [SerializeField] private List<TextMeshProUGUI> StatTexts;
+    [SerializeField] private List<TextMeshProUGUI> StatTextBG;
+    [SerializeField] private RectTransform StatTextHolder;
+    [SerializeField] private Vector2 BaseStatPosition;
+    [SerializeField] private Vector2 TargetStatPosition;
+    [SerializeField] private Vector2 OffsetPerIndex;
+    [SerializeField] private Vector2 BGOffSet;
+    [SerializeField] private float timebetweenStats;
 
     [Header("StatTextVariables")]
-    public TextMeshProUGUI SkillCoinText;
-    public Vector2 BaseSkillCoinPosition;
-    public Vector2 TargetSkillCoinPosition;
+    [SerializeField] private TextMeshProUGUI SkillCoinText;
+    [SerializeField] private Vector2 BaseSkillCoinPosition;
+    [SerializeField] private Vector2 TargetSkillCoinPosition;
 
 
     [Header("ContinueVariables")]
-    public bool continueAvailable;
-    public TextMeshProUGUI Continuetxt;
-    public TextMeshProUGUI ContinueBGtxt;
-    public Vector2 BaseContinuePosition;
-    public Vector2 TargetContinuePosition;
-    public Vector2 ContinueOffSet;
-    public float leftContinueratio;
-    public float rightContinueratio;
+    [SerializeField] private bool continueAvailable;
+    [SerializeField] private TextMeshProUGUI Continuetxt;
+    [SerializeField] private TextMeshProUGUI ContinueBGtxt;
+    [SerializeField] private Vector2 BaseContinuePosition;
+    [SerializeField] private Vector2 TargetContinuePosition;
+    [SerializeField] private Vector2 ContinueOffSet;
+    [SerializeField] private float leftContinueratio;
+    [SerializeField] private float rightContinueratio;
 
 
     private InputAction ActivateAction;
     private InputAction CancelAction;
 
-    public PlayerInput playerInput;
+    [SerializeField] private PlayerInput playerInput;
 
     private Coroutine CloseCoroutine;
 
