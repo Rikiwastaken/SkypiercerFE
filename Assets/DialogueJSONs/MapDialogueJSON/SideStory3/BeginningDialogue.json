@@ -45,7 +45,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Yeah, but there's a girl, too!",
+            "text": "Yeah, but there's a girl, too and she's not alone.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -56,7 +56,29 @@
             "musictoplay": 0
         },
         {
-            "text": "You're right. Let's help her!",
+            "text": "Would you mind leaving me alone?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 22,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "What do you think you're doing here, Archadian scum? We'll make you pay for what you did to our people!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 55,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "Guys, don't you think you should calm down? She seems lost.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -67,40 +89,18 @@
             "musictoplay": 0
         },
         {
-            "text": "Mushrooms! I keep stumbling on them. I hope they're good...",
+            "text": "Buzz off, Gusto. I've been waitting for an opportunity to have some fun. Don't butt in, or else.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "characterindex": 22,
+            "characterindex": 55,
             "ImageToShow": 0,
             "musictoplay": 0
         },
         {
-            "text": "You, watch out! There are pluvials around here.",
-            "CameraDestination": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "characterindex": 0,
-            "ImageToShow": 0,
-            "musictoplay": 0
-        },
-        {
-            "text": "Hello! I've been looking for people. Can you tell me where we are?",
-            "CameraDestination": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "characterindex": 22,
-            "ImageToShow": 0,
-            "musictoplay": 0
-        },
-        {
-            "text": "We will speak later, they are already surrounding us .",
+            "text": "Come on. She doesn't look like a soldier.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -111,24 +111,35 @@
             "musictoplay": 0
         },
         {
-            "text": "If you really need help, I'll lend a hand.",
+            "text": "You all are starting to piss me off. Boys, rough them up a bit, but don't kill them.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "characterindex": 22,
+            "characterindex": 55,
             "ImageToShow": 0,
             "musictoplay": 0
         },
         {
-            "text": "What?",
+            "text": "Damn it. We have no choice but to fight. Stay behind us. We'll take care of them.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
             "characterindex": 0,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "I'll lend a hand.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 22,
             "ImageToShow": 0,
             "musictoplay": 0
         }
