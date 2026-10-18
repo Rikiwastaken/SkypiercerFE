@@ -1,130 +1,81 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Home sweet home ! I'm exhausted.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Yeah, what a day...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Can you believe it ? We just met THE Mir. Sorak and Lyv talk about him all the time.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "He doesn't seem like such a big shot to me.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Well he was way better than you despite not even wielding a Blade. So at least he's a bigger shot than you.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Aren't you such a joker...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Anyway, you boys can keep chatting but I'm going to bed. See you tomorrow.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         }
     ]
 }

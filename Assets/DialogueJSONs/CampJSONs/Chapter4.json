@@ -1,454 +1,279 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Are you all fine?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 12,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 12
         },
         {
-            "Charactername": "",
             "text": "Fine? How the heck do you think we could be fine. Granpa... The Village... They're gone...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "That's not what I... Damn it, if only we'd been faster...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Yeah, if only the so called master had deemed useful to use his blade rather than show off and punch pluvials !",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "I know, alright! I screwed up. I didn't think it would blow so soon...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "You knew? Then why didn't you warn us? We could have taken them with us.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "I... I didn't want to cause a panic. I thought we had time to clear the mountains and then safely...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "It's all your damn fault. You're such a fraud.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Stop Zack... He tried to help us.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Maybe I can't say it's not my fault, but I know whose fault it is.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 2,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 2
         },
         {
-            "Charactername": "",
             "text": "What did you just say?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "The ones who opened the ruins and activated the self destruct function. I came here to stop them. That's why I sent you into the ruins instead of going there myself. I was looking for them.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Why? Why would they blow up the whole village. As if we care for some old ruins. We could have given them anything they wanted. Who would do this?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "They are called Caelum. Their goal is to use the war between Occidens and Archades to take control of both nations when they're at their lowest. ",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "What does that have to do with us?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "That crystal, the Xenolith. It holds more power than you think. But that power is now in our hands and it might be what we need to stop them.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Let me go with you.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "What?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "If they're the ones who did this... If it's really them, I want to make them pay.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "I see... Then we will do this together. How about the rest of you?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Landfall Village was my home... I want to make them pay!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "I will come with you too.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "It's not like we have anywhere else to go.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 3,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Where are we going then?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 4,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Occidens. Darius needs to be informed of what happened, and I need to cash in some favors. We'll be going through the Drenched Plains tomorrow. Get some rest.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         }
     ]
 }

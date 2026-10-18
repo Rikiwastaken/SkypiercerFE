@@ -1,454 +1,279 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "You kids are back! Did it go well? Did you have fun?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Being order around by a brat swinging random weapons haphazardly can hardly be called fun.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 3,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "I'm also glad you're part of team, Sorak.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Hello, Mister Mir. Glad to see you safe.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "You made it through the caves, Sieg! You still convinced going up the mountains was less dangerous? ",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Let's just say I am glad Zack and his friends found me. But look at all this I picked up down there!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "You know each other?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "A Occidens kid trying to reach Landfall village by going under the mountains? Hard to forget! Anyway, did you find the stone?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Here it is, but I have to ask. Couldn't you get it yourself? It looks like you had a pretty good idea of the layout of the ruins.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "It wouldn't have been fun, right? I feel like you guys have been craving a field trip, right Sorak?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Just take it. This things gives me the chills.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Thank you. You all did well. Now there is something else I would like to ask you.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Good thing we cleared out these ruins then if we'll be going there back and forth.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Actually, this time I need your help for real. The Elder needs to go to Occidens.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "Elder Farron",
             "text": "I need to see Darius Albarn. More than half of the village left in the draft a few days ago. This can't go on. There is barely anyone left.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 90594
-            },
-            "characterindex": -1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.699999988079071
+            "characterindex": 16,
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "As Sieg said, the only safe way to leave Landfall Crater is through the mountain path. I need your help to dispatch any pluvials there. I could do it alone, but it would take much longer.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "Elder Farron",
             "text": "Then, Zack, maybe we can take a few days to look around the capital.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 90594
-            },
-            "characterindex": -1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "characterindex": 16,
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "This is where the best Old World workshops are! I heard they can repair anything! Count me in! And count all of them in too!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Do we really have to leave too?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "I've always wanted to see a bigger settlement than Landfall Village.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "It looks like it's settled then.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 4,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "I will come with you guys too. After all, I told Kira would only be gone for a day or two and it has been more than a week. She must be worried sick.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Perfect. Go get some rest. If we leave tomorrow morning, we should  be able to clean the mountain by the evening.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "One last thing, Zack. Take these. They're some things we use in Occidens to study the pluvials. It should allow you turn learn some pretty cool tricks from them.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Obtained 2 \"Copy\" Skills.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
-            "characterindex": -1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "characterindex": 53,
+            "ImageToShow": -1,
+            "musictoplay": -1
         }
     ]
 }

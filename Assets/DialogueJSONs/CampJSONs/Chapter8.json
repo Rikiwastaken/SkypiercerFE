@@ -1,202 +1,125 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Hey guys, wouldn't you say this is... smooth sailing?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
-            },
-            "Portrait": {
-                "instanceID": 0
             },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
-            },
-            "Portrait": {
-                "instanceID": 0
             },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 10,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
-            "text": "Anyway, this is about it. In case you guys forgot anything, I wrote everything you need to know in this book.",
+            "text": "Anyway, this is about it. In case you guys forgot anything, I wrote everything you need to know in this book. Gwenie was a big help.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "It's less complicated than it looks like.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 10,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Well, it looks rustic but the machinery is quite advanced. Once the Blade Engine is rolling, all you need to do is control the speed and the direction.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Easy as pie.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Sir Mir, wait a second. I see another ship.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "They're pirates!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         },
         {
-            "Charactername": "",
             "text": "Damn, everyone, to arms!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": -1,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": -1
         }
     ]
 }

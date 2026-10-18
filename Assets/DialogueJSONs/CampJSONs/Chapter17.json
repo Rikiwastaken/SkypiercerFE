@@ -1,166 +1,103 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Ok, next stop, the Junkyard!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Wait, pupil. We have to get Johnson and Jackson back to the capital.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 12,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "What? You want us to waltz in the belly of the beast?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 9,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "What are you talking about? Don't you have friends and family you miss, there?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 12,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "We need the authorization to get into the Junkyard anyway...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 13,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "I thought we were gonna steal the engine and run away. You're not thinking about just asking them, do you?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Why not? I know some people.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 13,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "I guess if we can doing it the easy way... As long as Bob's with us we don't have anything to fear in Archades right?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 9,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "I have no idea what you pupils are talking about... Anyway, onward!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 12,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": -1,
+            "musictoplay": 0
         }
     ]
 }

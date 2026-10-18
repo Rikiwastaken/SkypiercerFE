@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static TextBubbleScript;
 using static UnitScript;
 
 public class CampScript : MonoBehaviour
@@ -21,7 +19,7 @@ public class CampScript : MonoBehaviour
     public class StartDialogue
     {
         public int Chapter;
-        public List<TextBubbleInfo> Dialogue;
+        public TextAsset Dialogue;
     }
 
     [SerializeField] private List<StartDialogue> StartDialogueList;
@@ -161,7 +159,7 @@ public class CampScript : MonoBehaviour
 
                 if (!saveManager.CampDialoguesSeen[index])
                 {
-                    textBubbleScript.InitializeDialogue(startdialogue.Dialogue);
+                    textBubbleScript.InitializeDialogue(CalculationToolsScript.GetDialogueFromJSON(startdialogue.Dialogue));
                     saveManager.CampDialoguesSeen[index] = true;
                 }
 
@@ -215,26 +213,5 @@ public class CampScript : MonoBehaviour
         return character.modelID;
     }
 
-#if UNITY_EDITOR
 
-    [ContextMenu("Create Camp Dialogue JSONs")]
-    private void CreateDialogueJSONs()
-    {
-
-        // Open the folder selection window.
-        string folderPath = EditorUtility.OpenFolderPanel(
-            "Choose Main Folder in which all dialogues JSONs will be created",
-            Application.dataPath,
-            ""
-        );
-
-        foreach (StartDialogue dialogue in StartDialogueList)
-        {
-            string path = folderPath;
-            string name = "Chapter" + dialogue.Chapter;
-            CalculationToolsScript.ExportDialoguesToJson(name, dialogue.Dialogue, path);
-        }
-
-    }
-#endif
 }
