@@ -14,35 +14,6 @@ public class DataScript : MonoBehaviour
 
     public static DataScript instance;
 
-    [Space]
-    [Header("Character and inventory variables")]
-
-
-    public List<ClassInfo> ClassList;
-
-    public List<Character> PlayableCharacterList;
-    public ClassInfo BreakableCharacterClass;
-
-    public Inventory PlayerInventory;
-
-    public List<Character> DefaultPlayableCharacterList;
-    public Inventory DefaultInventory;
-
-    public List<Sprite> DialogueSpriteList;
-
-    public List<Sprite> EnemySprites;
-    public bool FixedGrowth;
-    public bool Permadeath;
-
-
-    [Space]
-    [Header("Story Advancement Variables")]
-
-    public List<ChapterFlags> ChapterFlagsList;
-    public List<ChapterFlags> SidestoryFlagList;
-    public List<int> SkillsAlreadySeenInShop;
-    public List<int> CompletedSideStories;
-
 
 
 
@@ -143,6 +114,52 @@ public class DataScript : MonoBehaviour
         public string MidLvlUp;
         public string LowLvlUp;
     }
+
+    [Serializable]
+    public class CharacterDialogueInfo
+    {
+
+        public string Charactername;
+        public int ID;
+        public Sprite Portrait;
+        public float voicepitch = 0f;
+    }
+
+
+
+    [Space]
+    [Header("Character and inventory variables")]
+
+
+    public List<ClassInfo> ClassList;
+
+    public List<Character> PlayableCharacterList;
+    public ClassInfo BreakableCharacterClass;
+
+    public Inventory PlayerInventory;
+
+    public List<Character> DefaultPlayableCharacterList;
+    public Inventory DefaultInventory;
+
+    public List<Sprite> DialogueSpriteList;
+
+    public List<Sprite> EnemySprites;
+    [Header("1-50 Playables 51-inf NPCs")]
+    public List<CharacterDialogueInfo> DialogueCharacterList;
+    public bool FixedGrowth;
+    public bool Permadeath;
+
+
+    [Space]
+    [Header("Story Advancement Variables")]
+
+    public List<ChapterFlags> ChapterFlagsList;
+    public List<ChapterFlags> SidestoryFlagList;
+    public List<int> SkillsAlreadySeenInShop;
+    public List<int> CompletedSideStories;
+
+
+
     [Space]
     [Header("Bond Variables")]
 
@@ -237,6 +254,7 @@ public class DataScript : MonoBehaviour
         for (int i = 0; i < PlayableCharacterList.Count; i++)
         {
             PlayableCharacterList[i].playableStats.ID = i;
+            PlayableCharacterList[i].DialogueClassID = i;
         }
     }
 
@@ -1517,6 +1535,95 @@ public class DataScript : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    [ContextMenu("Turn Unitscript Characters into CharacterDialogueInfo")]
+    private void TurnCharactersIntoCharacterDialogueInfo()
+    {
+        List<CharacterDialogueInfo> newDialogueCharacterList = new List<CharacterDialogueInfo>();
+
+        int ID = 0;
+        foreach (UnitScript.Character character in PlayableCharacterList)
+        {
+            CharacterDialogueInfo info = new CharacterDialogueInfo() { Charactername = character.name, ID = ID, Portrait = DialogueSpriteList[ID] };
+            info.voicepitch = character.DialoguePitch;
+            newDialogueCharacterList.Add(info);
+            ID++;
+        }
+
+        for (int i = ID; i < 50; i++)
+        {
+            CharacterDialogueInfo info = new CharacterDialogueInfo() { Charactername = "NA", ID = ID, Portrait = null, voicepitch = 1 };
+            newDialogueCharacterList.Add(info);
+        }
+        for (int i = 50; i < DialogueCharacterList.Count; i++)
+        {
+            CharacterDialogueInfo info = DialogueCharacterList[i];
+            newDialogueCharacterList.Add(info);
+        }
+        DialogueCharacterList = newDialogueCharacterList;
+    }
+
+    [ContextMenu("Create Map Dialogue JSONs")]
+    private void CreateDialogueJSONs()
+    {
+
+
+        // Open the folder selection window.
+        string folderPath = EditorUtility.OpenFolderPanel(
+            "Choose Main Folder in which all dialogues folder will be created",
+            Application.dataPath,
+            ""
+        );
+
+        string[] sceneGUIDs = UnityEditor.AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes/Maps" });
+
+        skillsPerMap = new List<SkillPerMap>();
+
+        Scene currentscene = SceneManager.GetActiveScene();
+
+        foreach (string guid in sceneGUIDs)
+        {
+            string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+
+            Scene scene = UnityEditor.SceneManagement.EditorSceneManager.OpenScene(path, UnityEditor.SceneManagement.OpenSceneMode.Single);
+            string FullSceneName = scene.name;
+
+            MapEventManager EventManager = FindAnyObjectByType<MapEventManager>(FindObjectsInactive.Include);
+
+
+
+
+            if (EventManager != null)
+            {
+                Debug.Log($"Event Manager Found in {path}");
+            }
+            else
+            {
+                continue;
+            }
+
+            foreach (MapEventManager.EventCondition Event in EventManager.EventsToMonitor)
+            {
+                if (Event.triggerEffectType == 4) // for showing dialogues
+                {
+
+                    List<TextBubbleScript.TextBubbleInfo> dialogue = Event.dialoguetoShow;
+
+                    string FinalFolderPath = Path.Join(folderPath, FullSceneName);
+
+                    if (!Directory.Exists(FinalFolderPath))
+                    {
+                        Directory.CreateDirectory(FinalFolderPath);
+                    }
+
+
+                    ExportDialoguesToJson(Event.eventname, dialogue, FinalFolderPath);
+                }
+
+
+            }
+        }
     }
 
 

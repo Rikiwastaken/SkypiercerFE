@@ -1,0 +1,166 @@
+{
+    "Dialogue": [
+        {
+            "Charactername": "",
+            "text": "Here you are! I hope you bear good news, Captain Farron.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 19,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Yeah, we took care of your pluvial problem.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Wonderful. Thanks to you we will be able to defend our nation from Occidens.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 19,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Tell me about it...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Commander, our main task is far from over. We would like to request some supplies and a bed for the night.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 13,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "We are a bit tight, but it's a more than adequate payment. Had we filed an official request it would have taken days, maybe weeks. We are in your debt.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 19,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Well, just give us supplies and you can consider it paid.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "I shall spread the word of Captain Zack Farron's pluvial slaying squad! Soon, you'll be know in all of Archades.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 19,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Yeah, there's no need for that. We'll just take the food, thanks.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        }
+    ]
+}

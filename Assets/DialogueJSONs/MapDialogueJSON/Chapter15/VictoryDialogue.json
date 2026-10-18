@@ -1,0 +1,58 @@
+{
+    "Dialogue": [
+        {
+            "Charactername": "",
+            "text": "Well done, my pupil. Next time you might be able to fight without my aid...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 12,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Right...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "We do not have time for this... Let's find the others.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 13,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        }
+    ]
+}

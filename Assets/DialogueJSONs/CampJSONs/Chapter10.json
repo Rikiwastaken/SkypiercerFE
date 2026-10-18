@@ -1,0 +1,526 @@
+{
+    "Dialogue": [
+        {
+            "Charactername": "Olphus",
+            "text": "That was close. I was almost out of booze in there. What took you so long ?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 90598
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.6000000238418579
+        },
+        {
+            "Charactername": "",
+            "text": "Those pirates attacked us at sea. I had to fix the engine, so it slowed down a bit.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "Olphus",
+            "text": "Right...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 90598
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.6000000238418579
+        },
+        {
+            "Charactername": "",
+            "text": "Anyway, you know what you need to do.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "Olphus",
+            "text": "Yeah, but it's gonna be more complicated that we envisioned. They wrecked my workshop, but more importantly they stole the engine.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 90598
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.6000000238418579
+        },
+        {
+            "Charactername": "",
+            "text": "Damn it. We'll have to get it back.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "What is it?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "Olphus",
+            "text": "The most efficient Blade Engine ever built, based on the designed made by the Hero himself!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 90598
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.6000000238418579
+        },
+        {
+            "Charactername": "",
+            "text": "Sick! Can't you make it again?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "It's not that simple. We have been working on it for years...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Do you have any idea where the pirates went?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "As a matter of fact, I do.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Where are we going? ",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "You're going to Archades.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "You're kidding.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Aren't we gonna be like, executed on the spot?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "You'll have to be discrete and lay low. I trust you guys.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Hold on, Mir. Aren't you coming?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "We don't have time. I'll stay here with Olphus and help him repair the workshop and get prepared. You guys take the Tidepiercer and head to an abandoned mine, South of the Eastern Continent. That's where the pirates should be going.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "It's impossible. The Archadians will kill us.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "If it all goes well, they won't even find you. If they they do, these should keep you safe.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "They're hunter medals...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "But they're a bit weird.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "These are Archadian hunter medals. They bear my crest. You should be able to avoid getting arrested as long as you don't steer trouble.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Does that mean we're officially Hunters ?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "I mean, you guys have been killing Pluvials left and right, so it's pretty much justified.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "That's pretty rad... Although I would have preferred some from our village.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 2,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Don't worry. When this is all over we'll have them made.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 3,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "I'll get in touch with my friend there. He'll join you and act as your guide. I wish you all luck. I know you can do this.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        }
+    ]
+}

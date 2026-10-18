@@ -1,0 +1,58 @@
+{
+    "Dialogue": [
+        {
+            "Charactername": "Olphus",
+            "text": "Not this one! That's where I trapped them...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 57096
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.6000000238418579
+        },
+        {
+            "Charactername": "Zack",
+            "text": "Just tell us which one open which, old man!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "Olphus",
+            "text": "Don't worry you're doing a great job!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 57096
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.6000000238418579
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+{
+    "Dialogue": [
+        {
+            "Charactername": "",
+            "text": "Damn you... Let's retreat to the lifeboats. Blow up their engines! See you down South, if you make it there!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 11,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "No, come back here!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "We won't be catching up to them any time soon. Zack, I'll need help with the repairs.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Sure, let's do it.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        }
+    ]
+}

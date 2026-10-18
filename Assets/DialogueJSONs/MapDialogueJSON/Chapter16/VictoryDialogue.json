@@ -1,0 +1,40 @@
+{
+    "Dialogue": [
+        {
+            "Charactername": "Duskhand soldier",
+            "text": "How can this be... Magnus, you were one of us. Where is your loyalty?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 57302
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.75
+        },
+        {
+            "Charactername": "",
+            "text": "We do not have time for this... Let's find the others.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 13,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        }
+    ]
+}

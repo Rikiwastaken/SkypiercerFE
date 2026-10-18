@@ -1,0 +1,328 @@
+{
+    "Dialogue": [
+        {
+            "Charactername": "",
+            "text": "Here we are, Seafront Village!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Hold on...",
+            "CameraDestination": {
+                "x": 13.0,
+                "y": 0.0,
+                "z": 7.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "They don't look like villagers...",
+            "CameraDestination": {
+                "x": 7.0,
+                "y": 0.0,
+                "z": 7.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "They're not. That's Raghnall.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 7.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Who ?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "Raghnall",
+            "text": "Mir... The boss didn't tell me who I was waiting for. I would never have thought you were the one.",
+            "CameraDestination": {
+                "x": 13.0,
+                "y": 0.0,
+                "z": 7.0
+            },
+            "Portrait": {
+                "instanceID": 57292
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.800000011920929
+        },
+        {
+            "Charactername": "",
+            "text": "Who the heck are you ?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "Raghnall",
+            "text": "Raghnall, general of the army of Caelum.",
+            "CameraDestination": {
+                "x": 13.0,
+                "y": 0.0,
+                "z": 7.0
+            },
+            "Portrait": {
+                "instanceID": 57292
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.800000011920929
+        },
+        {
+            "Charactername": "",
+            "text": "Where are all the villagers? What did you do ?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "Raghnall",
+            "text": "Nothing, for now. But who knows what might happen to their ships if you don't play nice.",
+            "CameraDestination": {
+                "x": 13.0,
+                "y": 0.0,
+                "z": 7.0
+            },
+            "Portrait": {
+                "instanceID": 57292
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.800000011920929
+        },
+        {
+            "Charactername": "",
+            "text": "Caelum... I swear I'll kill you all.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "Raghnall",
+            "text": "Tch, you just try. We received orders to stop you all and sink the ships.",
+            "CameraDestination": {
+                "x": 13.0,
+                "y": 0.0,
+                "z": 7.0
+            },
+            "Portrait": {
+                "instanceID": 57292
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.800000011920929
+        },
+        {
+            "Charactername": "",
+            "text": "It's a fishing village, damn it!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Boss, do we really have to ? The villagers don't look like soldiers.",
+            "CameraDestination": {
+                "x": 5.0,
+                "y": 0.0,
+                "z": 2.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 10,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "Raghnall",
+            "text": "Don't contest our orders, rookie. You know why we're doing this.",
+            "CameraDestination": {
+                "x": 13.0,
+                "y": 0.0,
+                "z": 7.0
+            },
+            "Portrait": {
+                "instanceID": 57292
+            },
+            "characterindex": -1,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.800000011920929
+        },
+        {
+            "Charactername": "",
+            "text": "I know, but still...",
+            "CameraDestination": {
+                "x": 5.0,
+                "y": 0.0,
+                "z": 2.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 10,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Everyone, it's time to take our revenge!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Let's stop them! Whatever you do, don't kill them. We need them to talk.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": 0,
+            "voicepitch": 0.0
+        }
+    ]
+}

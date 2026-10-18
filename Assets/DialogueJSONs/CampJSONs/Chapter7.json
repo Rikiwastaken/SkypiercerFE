@@ -1,0 +1,202 @@
+{
+    "Dialogue": [
+        {
+            "Charactername": "",
+            "text": "We should reach Seafront Village tomorrow.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "That's great. Travelling by ship should be a lot more comfortable than walking.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Say, Mir. Why do we need to go to the Southern Continent? There's nothing there. Is this where Caelum are hiding?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Not really, but the only one who can help us get to Caelum is there.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Can't we go there directly?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "Have you heard of the Towers?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "What towers?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "THE Towers. They are gigantic pillars that are said to have appeared at the same time as the Beast.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 9,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "That's right. The reason we can't get to Caelum yet is that their base is at the very top of one of these Towers.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "So, how do we get there ?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 0,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        },
+        {
+            "Charactername": "",
+            "text": "We fly.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Portrait": {
+                "instanceID": 0
+            },
+            "characterindex": 6,
+            "ImageToShow": {
+                "instanceID": 0
+            },
+            "musictoplay": -1,
+            "voicepitch": 0.0
+        }
+    ]
+}

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnitScript;
+using static DataScript;
 
 public class TextBubbleScript : MonoBehaviour
 {
@@ -25,8 +25,8 @@ public class TextBubbleScript : MonoBehaviour
         public float voicepitch = 0f;
     }
 
-    private List<TextBubbleInfo> Dialogue;
 
+    private List<TextBubbleInfo> Dialogue;
     public int currentTextBubble;
 
 
@@ -104,17 +104,6 @@ public class TextBubbleScript : MonoBehaviour
         _CancelAction.Enable();
         _StartAction = InputSystem.actions.FindAction("Start");
         _StartAction.Enable();
-    }
-
-    private void DialogueExample()
-    {
-        TextBubbleInfo ex1 = new TextBubbleInfo();
-        ex1.text = "I'm ready to roll !";
-        ex1.Charactername = "Genny";
-        TextBubbleInfo ex2 = new TextBubbleInfo();
-        ex2.text = "I'M READY TO ROLL";
-        ex2.Charactername = "Genny";
-        InitializeDialogue(new List<TextBubbleInfo> { ex1, ex2 });
     }
 
     // Update is called once per frame
@@ -265,16 +254,16 @@ public class TextBubbleScript : MonoBehaviour
                 Imagetoshow.color = Color.clear;
             }
             currentcharacterpitch = 0;
-            Character character = GetCharacter();
+            CharacterDialogueInfo character = GetCharacter();
 
             if (character != null)
             {
-                charactername.text = character.name;
-                characterportrait.sprite = DataScript.instance.DialogueSpriteList[character.ID];
+                charactername.text = character.Charactername;
+                characterportrait.sprite = character.Portrait;
                 characterportrait.color = new Color(1, 1, 1, 1);
-                if (character.DialoguePitch != 0)
+                if (character.voicepitch != 0)
                 {
-                    currentcharacterpitch = character.DialoguePitch;
+                    currentcharacterpitch = character.voicepitch;
                 }
             }
             else
@@ -297,9 +286,18 @@ public class TextBubbleScript : MonoBehaviour
                 {
                     cameraScript.Destination = new Vector3(info.CameraDestination.x, info.CameraDestination.z);
                 }
-                else if (character != null && character.playableStats.deployunit && character.currentTile != null)
+                else if (character != null && gridScript != null)
                 {
-                    cameraScript.Destination = character.currentTile.GridCoordinates;
+                    foreach (GameObject unit in gridScript.allunitGOs)
+                    {
+                        UnitScript.Character UnitChar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+                        if (UnitChar.DialogueClassID == character.ID)
+                        {
+                            cameraScript.Destination = UnitChar.currentTile.GridCoordinates;
+                            break;
+                        }
+                    }
+
                 }
 
             }
@@ -366,7 +364,7 @@ public class TextBubbleScript : MonoBehaviour
 
     }
 
-    private Character GetCharacter()
+    private CharacterDialogueInfo GetCharacter()
     {
         if (indialogue)
         {
@@ -375,35 +373,12 @@ public class TextBubbleScript : MonoBehaviour
                 var info = Dialogue[currentTextBubble];
                 if (info.characterindex >= 0 && DataScript.instance != null)
                 {
-                    foreach (Character character in DataScript.instance.PlayableCharacterList)
-                    {
-                        if (character.ID == info.characterindex)
-                        {
-                            return character;
-                        }
-                    }
+                    return DataScript.instance.DialogueCharacterList[info.characterindex];
                 }
             }
         }
         return null;
 
-    }
-
-    private Vector2 GetCharacterCoordinates()
-    {
-        Character character = GetCharacter();
-        if (character != null)
-        {
-            foreach (Character otherchar in gridScript.allunits)
-            {
-                if (otherchar.ID == character.ID)
-                {
-                    return otherchar.currentTile.GridCoordinates;
-                }
-            }
-        }
-
-        return Vector2.zero;
     }
 
     private void ActivateBubble()

@@ -1,11 +1,18 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using static DataScript;
+using static TextBubbleScript;
 using static UnitScript;
 
 public class CalculationToolsScript : MonoBehaviour
 {
+
+
+
 
     /// <summary>
     /// Calculated Manhattan distance from 2 Characters using the Tile they're on
@@ -238,7 +245,10 @@ public class CalculationToolsScript : MonoBehaviour
                 Level = m.Level,
                 maxlevel = m.maxlevel
             }).ToList(),
+            DialogueClassID = CharacterToCopy.DialogueClassID,
             DialoguePitch = CharacterToCopy.DialoguePitch,
+            SecondSkillLevel = CharacterToCopy.SecondSkillLevel,
+            UnitSkillLevel = CharacterToCopy.UnitSkillLevel,
             TauntTurns = CharacterToCopy.TauntTurns,
             isintercepting = CharacterToCopy.isintercepting,
             TemporarySkill = CharacterToCopy.TemporarySkill,
@@ -460,5 +470,56 @@ public class CalculationToolsScript : MonoBehaviour
             default:
                 return "<sprite=5>";
         }
+    }
+
+    [Serializable]
+    public class DialogueExport
+    {
+        public List<TextBubbleInfo> Dialogue;
+    }
+
+    public static void ExportDialoguesToJson(string name, List<TextBubbleInfo> dialogue, string folderPath)
+    {
+#if UNITY_EDITOR
+        if (dialogue == null || dialogue.Count == 0)
+        {
+            Debug.LogWarning("No dialogues available to export.");
+            return;
+        }
+
+        // The user cancelled the folder selection.
+        if (string.IsNullOrEmpty(folderPath))
+        {
+            Debug.Log("Dialogue export cancelled.");
+            return;
+        }
+
+
+        DialogueExport exportData = new DialogueExport
+        {
+            Dialogue = dialogue
+        };
+
+        string json = JsonUtility.ToJson(exportData, true);
+
+        string filePath = Path.Combine(
+            folderPath,
+            $"{name}.json"
+        );
+
+        File.WriteAllText(filePath, json);
+
+
+        Debug.Log(
+            $"Successfully exported {name} dialogue files to: {folderPath}"
+        );
+
+        EditorUtility.RevealInFinder(folderPath);
+#else
+    Debug.LogWarning(
+        "Dialogue folder selection is only available in the Unity Editor. " +
+        "Use a file browser plugin for a standalone build."
+    );
+#endif
     }
 }

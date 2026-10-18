@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -214,4 +215,26 @@ public class CampScript : MonoBehaviour
         return character.modelID;
     }
 
+#if UNITY_EDITOR
+
+    [ContextMenu("Create Camp Dialogue JSONs")]
+    private void CreateDialogueJSONs()
+    {
+
+        // Open the folder selection window.
+        string folderPath = EditorUtility.OpenFolderPanel(
+            "Choose Main Folder in which all dialogues JSONs will be created",
+            Application.dataPath,
+            ""
+        );
+
+        foreach (StartDialogue dialogue in StartDialogueList)
+        {
+            string path = folderPath;
+            string name = "Chapter" + dialogue.Chapter;
+            CalculationToolsScript.ExportDialoguesToJson(name, dialogue.Dialogue, path);
+        }
+
+    }
+#endif
 }

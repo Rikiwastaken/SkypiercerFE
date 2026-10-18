@@ -49,6 +49,7 @@ public class UnitScript : MonoBehaviour
         public int modelID;
         public List<WeaponMastery> Masteries;
         public float DialoguePitch;
+        public int DialogueClassID;
 
         public int totalenemieskilled;
 
