@@ -1,148 +1,92 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Hey, are you alright ?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "AAAAAAAAAAh !",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
-            "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "characterindex": 52,
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Who are you ?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
-            "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "characterindex": 52,
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "So some people still live down there ?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
-            "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "characterindex": 52,
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
-            "text": "That's an incredible scientific discovery !",
+            "text": "That's an incredible! It's funny that you are dressed exactly like us, though...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
-            "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "characterindex": 52,
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Wow, chill out! I'm from Landfall Village. Who are you?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Oh, really ? Well that's disappointing.. My name is Sieg, wandering archeologist and science enthusiast.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Well, stay close to us, Sieg. We'll get you out of here.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }

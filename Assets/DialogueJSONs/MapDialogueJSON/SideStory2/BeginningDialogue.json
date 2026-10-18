@@ -1,184 +1,114 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "I can't believe it! I've never been this close to the ring!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "To be honest, it looks sick. What are we doing here, though?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "We have to study it, Zack! Find out what it was used for.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "People already studied it, didn't they? Don't you have a book about it right here with you ?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "As a matter of fact, I do. Sadly, it's incomplete. I feel like the one who wrote the book did not have any knowledge of old world technologies.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "That's a bit lame for a book about Old World Archeology.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 9,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "It's understandable. Occidens researchers only managed to repair a computer recently after years and years of trial and error.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Is that what we're looking for then? A computer?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 9,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "That's right. If we can turn it on, we can learn a lot about the ring.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 5,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "That'll have to wait, guys. It's starting to rain. You know what that means.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }

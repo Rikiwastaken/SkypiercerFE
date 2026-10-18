@@ -1,274 +1,180 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Why did no one tell me we had to cross a desert?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Did you even go to school?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 9,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Yeah! And they never taught us that!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "I'm pretty sure they did.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Yeah, definitely.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "We did teach you that.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 4,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Yeah well, how am I supposed to remember anything when it's so hot?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Zack's illiteracy aside, we need to move. We won't hold out long under this heat.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 3,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "There are lots of oases around the desert. We can use them to freshen up.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 9,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "At least we can take our time.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "I wouldn't be so sure of that. I see pluvials.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Why are they everywhere? Don't they get hot?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "They look pretty dry.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 9,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Let's just ignore them and move on.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
-            "text": "Peons! Let's kill them all!",
+            "text": "That or we could kill them all...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 9,
-            "ImageToShow": {
-                "instanceID": 0
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "Ugh... It's too hot to argue...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
             },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "characterindex": 0,
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }

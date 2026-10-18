@@ -1,220 +1,136 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "So, are you sure about these mushrooms?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "You have to be patient, Zack. They are hard to find, but they're a real delicacy, you'll see!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 8,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Look, over there!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Ah! The mushrooms!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 8,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Yeah, but there's a girl, too!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "You're right. Let's help her!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 8,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Mushrooms! I keep stumbling on them. I hope they're good...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 22,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "You, watch out! There are pluvials around here.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Hello! I've been looking for people. Can you tell me where we are?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 22,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "We will speak later, they are already surrounding us .",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 8,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "If you really need help, I'll lend a hand.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 22,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "What?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }

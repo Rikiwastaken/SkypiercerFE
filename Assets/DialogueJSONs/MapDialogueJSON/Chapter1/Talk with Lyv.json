@@ -1,58 +1,37 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Teacher, are you alright ?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Lea, Elwyn, oh and even Zack ? I knew you had it in you.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 4,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "No time to be joking. I'll show you how you dismantle a machine !",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }

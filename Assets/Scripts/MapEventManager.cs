@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static CalculationToolsScript;
-using static TextBubbleScript;
 using static UnitScript;
 
 
@@ -71,7 +68,7 @@ public class MapEventManager : MonoBehaviour
          * 9 : Activate Special Phase Script
          * 10 : Unlock Second Skill
          */
-        public List<TextBubbleInfo> dialoguetoShow;
+        public TextAsset dialoguetoShow;
         public List<int> UnitsToUnlockID = new List<int>();
         public List<int> UnitsToLockID = new List<int>();
         public List<SkillsToAdd> skillsToAdd;
@@ -381,7 +378,7 @@ public class MapEventManager : MonoBehaviour
                 break;
             case 4:
                 Debug.Log("dialogue trigger");
-                TextBubbleScript.InitializeDialogue(Event.dialoguetoShow);
+                TextBubbleScript.InitializeDialogue(CalculationToolsScript.GetDialogueFromJSON(Event.dialoguetoShow));
                 break;
             case 5:
                 Debug.Log("Tutorial Window trigger");
@@ -898,42 +895,6 @@ public class MapEventManager : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-
-
-
-    [ContextMenu("Save Conv To JSON")]
-    public void SaveConv()
-    {
-        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Skill JSON File", "", "json");
-        if (string.IsNullOrEmpty(path))
-            return;
-
-        List<DialgueToLoad> dialgouestoSave = new List<DialgueToLoad>();
-
-        foreach (TextBubbleInfo dialoguepart in EventsToMonitor[EventToSaveToJson].dialoguetoShow)
-        {
-            dialgouestoSave.Add(new DialgueToLoad() { characterindex = dialoguepart.characterindex, text = dialoguepart.text });
-        }
-
-        Dialoguewrapper wrapper = new Dialoguewrapper() { dialguesToLoad = dialgouestoSave };
-
-        string json = JsonUtility.ToJson(wrapper, true);
-
-        try
-        {
-            AssetDatabase.StartAssetEditing();
-            File.WriteAllText(path, json);
-            Debug.Log($"Discussion Saved : {path}");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"Error when saving options : {e.Message}");
-        }
-        finally
-        {
-            AssetDatabase.StopAssetEditing();
-        }
-    }
 
     [ContextMenu("Recalculate Event ID")]
     public void RecalculateID()

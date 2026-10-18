@@ -1,202 +1,125 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Let me out! Let me out, damn it!",
             "CameraDestination": {
                 "x": 1.0,
                 "y": 0.0,
                 "z": 3.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "Guard",
             "text": "Shut up!",
             "CameraDestination": {
                 "x": 1.0,
                 "y": 0.0,
                 "z": 3.0
             },
-            "Portrait": {
-                "instanceID": 57296
-            },
-            "characterindex": -1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.800000011920929
+            "characterindex": 57,
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Yeah, shut up! It's already painful enough being wounded and imprisoned without hearing your annoying voice.",
             "CameraDestination": {
                 "x": 6.0,
                 "y": 0.0,
                 "z": 4.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 11,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "What? You're here too?",
             "CameraDestination": {
                 "x": 1.0,
                 "y": 0.0,
                 "z": 3.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 9,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Serves you right! That's what you gain from committing crimes!",
             "CameraDestination": {
                 "x": 1.0,
                 "y": 0.0,
                 "z": 3.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "You know that from their point of view you're the same as me, right?",
             "CameraDestination": {
                 "x": 6.0,
                 "y": 0.0,
                 "z": 4.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 11,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "So you were right. They really got caught.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 14,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "What did she expect, coming through the army's training grounds...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 13,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Let's break them out.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 14,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "From what I gathered, there is a lever somewhere which should open all the cells. Escaping after that should be a piece of cake will all of them.",
             "CameraDestination": {
                 "x": 5.0,
                 "y": 0.0,
                 "z": 12.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 13,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "There are quite a lot of guards. We'll need to be careful.",
             "CameraDestination": {
                 "x": 12.0,
                 "y": 0.0,
                 "z": 6.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 14,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }

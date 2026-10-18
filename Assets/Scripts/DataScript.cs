@@ -123,6 +123,7 @@ public class DataScript : MonoBehaviour
         public int ID;
         public Sprite Portrait;
         public float voicepitch = 0f;
+        public string note;
     }
 
 
@@ -1562,69 +1563,10 @@ public class DataScript : MonoBehaviour
             newDialogueCharacterList.Add(info);
         }
         DialogueCharacterList = newDialogueCharacterList;
+        UnityEditor.EditorUtility.SetDirty(this);
     }
 
-    [ContextMenu("Create Map Dialogue JSONs")]
-    private void CreateDialogueJSONs()
-    {
 
-
-        // Open the folder selection window.
-        string folderPath = EditorUtility.OpenFolderPanel(
-            "Choose Main Folder in which all dialogues folder will be created",
-            Application.dataPath,
-            ""
-        );
-
-        string[] sceneGUIDs = UnityEditor.AssetDatabase.FindAssets("t:Scene", new[] { "Assets/Scenes/Maps" });
-
-        skillsPerMap = new List<SkillPerMap>();
-
-        Scene currentscene = SceneManager.GetActiveScene();
-
-        foreach (string guid in sceneGUIDs)
-        {
-            string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-
-            Scene scene = UnityEditor.SceneManagement.EditorSceneManager.OpenScene(path, UnityEditor.SceneManagement.OpenSceneMode.Single);
-            string FullSceneName = scene.name;
-
-            MapEventManager EventManager = FindAnyObjectByType<MapEventManager>(FindObjectsInactive.Include);
-
-
-
-
-            if (EventManager != null)
-            {
-                Debug.Log($"Event Manager Found in {path}");
-            }
-            else
-            {
-                continue;
-            }
-
-            foreach (MapEventManager.EventCondition Event in EventManager.EventsToMonitor)
-            {
-                if (Event.triggerEffectType == 4) // for showing dialogues
-                {
-
-                    List<TextBubbleScript.TextBubbleInfo> dialogue = Event.dialoguetoShow;
-
-                    string FinalFolderPath = Path.Join(folderPath, FullSceneName);
-
-                    if (!Directory.Exists(FinalFolderPath))
-                    {
-                        Directory.CreateDirectory(FinalFolderPath);
-                    }
-
-
-                    ExportDialoguesToJson(Event.eventname, dialogue, FinalFolderPath);
-                }
-
-
-            }
-        }
-    }
 
 
 #endif

@@ -1,76 +1,48 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Hand over your valuables, and don't forget the crystal !",
             "CameraDestination": {
                 "x": 17.0,
                 "y": 0.0,
                 "z": 12.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 11,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "What? How do you know about it? Who are you?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "No need for questions. Men, find it! It'll make an awesome gift for Gale!",
             "CameraDestination": {
                 "x": 17.0,
                 "y": 0.0,
                 "z": 12.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 11,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Don't waste time on questions. She's their captain. Let's take her out!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }

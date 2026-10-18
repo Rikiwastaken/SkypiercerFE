@@ -1,58 +1,37 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Alright!",
             "CameraDestination": {
                 "x": 12.0,
                 "y": 0.0,
                 "z": 2.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Careful, I see another one on the other side of that wall.",
             "CameraDestination": {
                 "x": 12.0,
                 "y": 0.0,
                 "z": 4.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Leave it to me. With my telekinesis, I should be able to reach him.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }

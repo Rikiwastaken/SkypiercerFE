@@ -472,6 +472,23 @@ public class CalculationToolsScript : MonoBehaviour
         }
     }
 
+
+    public static List<TextBubbleInfo> GetDialogueFromJSON(TextAsset JSONAsset)
+    {
+        List<TextBubbleInfo> dialogue = new List<TextBubbleInfo>();
+        DialogueExport wrapper = JsonUtility.FromJson<DialogueExport>(JSONAsset.text);
+
+        if (wrapper != null && wrapper.Dialogue != null)
+        {
+            dialogue = wrapper.Dialogue;
+        }
+        else
+        {
+            Debug.LogError("error when loading JSON Asset");
+        }
+        return dialogue;
+    }
+
     [Serializable]
     public class DialogueExport
     {

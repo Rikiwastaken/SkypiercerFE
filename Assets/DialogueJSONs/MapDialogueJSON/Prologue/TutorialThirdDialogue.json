@@ -1,40 +1,26 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Done and dusted.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Let me take the lead. Who knows what comes next.",
             "CameraDestination": {
                 "x": 13.0,
                 "y": 0.0,
                 "z": 2.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }

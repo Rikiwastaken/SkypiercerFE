@@ -1,112 +1,70 @@
 {
     "Dialogue": [
         {
-            "Charactername": "",
             "text": "Hold on, what's that ?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "Explosion",
-            "text": "Boom",
+            "text": "                      ",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
-            "characterindex": -1,
-            "ImageToShow": {
-                "instanceID": 72960
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "characterindex": 53,
+            "ImageToShow": 1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "GRANPA !",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 72960
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "What the hell is this ?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 2,
-            "ImageToShow": {
-                "instanceID": 72960
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "The town...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 72960
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 1,
+            "musictoplay": 0
         },
         {
-            "Charactername": "",
             "text": "Get ahold of yourselves ! The blast will catch up to us soon, we have to get to the top of the mountain !",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }

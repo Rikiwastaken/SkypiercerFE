@@ -15,14 +15,11 @@ public class TextBubbleScript : MonoBehaviour
     [Serializable]
     public class TextBubbleInfo
     {
-        public string Charactername;
         public string text;
         public Vector3 CameraDestination;
-        public Sprite Portrait;
         public int characterindex = -1;
-        public Sprite ImageToShow;
+        public int ImageToShow = -1;
         public int musictoplay = -1;
-        public float voicepitch = 0f;
     }
 
 
@@ -35,6 +32,8 @@ public class TextBubbleScript : MonoBehaviour
     [SerializeField] private Image characterportrait;
     [SerializeField] private TextMeshProUGUI charactername;
     [SerializeField] private TextMeshProUGUI sentence;
+
+    [SerializeField] private List<Sprite> DialogueImages;
 
     private string texttodisplay;
 
@@ -244,10 +243,10 @@ public class TextBubbleScript : MonoBehaviour
             var info = Dialogue[currentTextBubble];
 
 
-            if (info.ImageToShow != null)
+            if (info.ImageToShow > 0)
             {
                 Imagetoshow.color = Color.white;
-                Imagetoshow.sprite = info.ImageToShow;
+                Imagetoshow.sprite = DialogueImages[info.ImageToShow];
             }
             else if (Imagetoshow.color != Color.clear)
             {
@@ -268,13 +267,10 @@ public class TextBubbleScript : MonoBehaviour
             }
             else
             {
-                if (info.Portrait != null)
-                {
-                    characterportrait.color = new Color(1, 1, 1, 1);
-                    characterportrait.sprite = info.Portrait;
-                }
-                currentcharacterpitch = info.voicepitch;
-                charactername.text = info.Charactername;
+                characterportrait.color = new Color(1, 1, 1, 0);
+                characterportrait.sprite = null;
+                currentcharacterpitch = 1f;
+                charactername.text = "NoName";
             }
 
 

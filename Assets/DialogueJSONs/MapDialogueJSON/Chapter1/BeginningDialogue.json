@@ -1,148 +1,92 @@
 {
     "Dialogue": [
         {
-            "Charactername": "Villager",
             "text": "Help !",
             "CameraDestination": {
                 "x": 15.0,
                 "y": 0.0,
                 "z": 6.0
             },
-            "Portrait": {
-                "instanceID": 57296
-            },
-            "characterindex": -1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.8500000238418579
+            "characterindex": 51,
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "Sorak",
             "text": "Stay behind us !",
             "CameraDestination": {
                 "x": 10.0,
                 "y": 0.0,
                 "z": 5.0
             },
-            "Portrait": {
-                "instanceID": 57266
-            },
             "characterindex": 3,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "Lyv",
-            "text": "We got this.",
+            "text": "We'll protect you.",
             "CameraDestination": {
                 "x": 19.0,
                 "y": 0.0,
                 "z": 7.0
             },
-            "Portrait": {
-                "instanceID": 0
-            },
             "characterindex": 4,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "Zack",
             "text": "What's going on ? Is the village under attack ?",
             "CameraDestination": {
                 "x": 14.0,
                 "y": 0.0,
                 "z": 22.0
             },
-            "Portrait": {
-                "instanceID": 57260
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "Lea",
             "text": "It looks like the old stuff you're always tinkering with, except it's usually not moving as much.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 57262
-            },
             "characterindex": 1,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "Mir",
             "text": "You are almost right. It's machines from the underground complex.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 57272
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "Zack",
             "text": "The old ruins ? But they are sealed... Never mind that. Why are they attacking us ?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 57260
-            },
             "characterindex": 0,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         },
         {
-            "Charactername": "Mir",
-            "text": "They are an auto-defense mechanism. It looks like someone unsealed the ruins. I'll give you a hand. Don't let a single villager die, Zack !",
+            "text": "They are an auto-defense mechanism. It looks like someone unsealed the ruins. Let's go, i'll give you a hand.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
-            "Portrait": {
-                "instanceID": 57272
-            },
             "characterindex": 6,
-            "ImageToShow": {
-                "instanceID": 0
-            },
-            "musictoplay": 0,
-            "voicepitch": 0.0
+            "ImageToShow": 0,
+            "musictoplay": 0
         }
     ]
 }
