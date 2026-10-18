@@ -615,14 +615,17 @@ public class UnitScript : MonoBehaviour
             }
             Material material = ActiveModel.GetComponent<Unit3DModelInfoScript>().GenerateMaterial();
 
+            ChangeMaterialInGOHierarchy(ActiveModel, material);
+
             if (UnitCharacteristics.enemyStats.monsterStats.ispluvial)
             {
-                ChangeMaterialInGOHierarchy(ActiveModel, PluvialMat);
+                material.SetInt("_IsPluvial", 1);
             }
             else
             {
-                ChangeMaterialInGOHierarchy(ActiveModel, material);
+                material.SetInt("_IsPluvial", 0);
             }
+
             armature = animator.transform;
             initialpos = armature.localPosition;
             initialforward = armature.forward;
