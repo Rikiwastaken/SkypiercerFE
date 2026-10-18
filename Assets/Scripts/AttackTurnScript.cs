@@ -430,6 +430,8 @@ public class AttackTurnScript : MonoBehaviour
         return false;
     }
 
+    //returns true if unit does an action
+
     private bool determineifActionifTaken(GameObject unit)
     {
         cachedDecisionUnit = null;
@@ -437,10 +439,39 @@ public class AttackTurnScript : MonoBehaviour
         cachedDecisionTarget = null;
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
 
+
         if (charunit.enemyStats.personality.ToLower() == "hunter" || charunit.enemyStats.bossiD > 0)
         {
             return true;
         }
+
+        List<Character> enemies = null;
+        if (charunit.affiliation == "enemy")
+        {
+            enemies = TurnManager.playableunit;
+            foreach (Character other in TurnManager.otherunits)
+            {
+                if (!other.attacksfriends)
+                {
+                    enemies.Add(other);
+                }
+            }
+        }
+        else if (charunit.affiliation == "other")
+        {
+            if (charunit.attacksfriends)
+            {
+                enemies = TurnManager.playableunit;
+            }
+            else
+            {
+                enemies = TurnManager.enemyunit;
+            }
+
+
+        }
+
+
 
 
         // start by calculating min dist to every other unit
@@ -449,18 +480,15 @@ public class AttackTurnScript : MonoBehaviour
 
         int mindistance = 99;
 
-        foreach (Character otherunit in gridScript.allunits)
+        foreach (Character otherunit in enemies)
         {
-            if (otherunit.affiliation.ToLower() != charunit.affiliation.ToLower())
+            int distance = ManhattanDistance(otherunit, charunit);
+            if (distance < mindistance)
             {
-                int distance = ManhattanDistance(otherunit, charunit);
-                if (distance < mindistance)
+                mindistance = distance;
+                if (mindistance < distanceformovement)
                 {
-                    mindistance = distance;
-                    if (mindistance < distanceformovement)
-                    {
-                        break;
-                    }
+                    break;
                 }
             }
         }
@@ -496,6 +524,7 @@ public class AttackTurnScript : MonoBehaviour
         }
         else
         {
+            Debug.Log("ça rentre en jeu ?");
             unit.GetComponent<UnitScript>().MoveTo(Destination.GridCoordinates);
             (Destination, target) = CalculateDestinationForOffensiveUnitsV2(unit, true);
             unit.GetComponent<UnitScript>().MoveTo(originalpos);
@@ -1500,6 +1529,7 @@ public class AttackTurnScript : MonoBehaviour
         (int attackerrange, bool attackermelee) = currentCharacter.GetComponent<UnitScript>().GetRangeAndMele();
 
 
+
         List<GridSquareScript> newattacktiles = null;
 
         if (character.enemyStats.personality.ToLower() == "guard") // Guard units only consider attacking from their current position
@@ -1616,22 +1646,26 @@ public class AttackTurnScript : MonoBehaviour
 
             GridSquareScript targepositiontiles = truetarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
 
-            (int range, bool melee) = currentCharacter.GetComponent<UnitScript>().GetRangeAndMele();
 
             List<GridSquareScript> potentialmovementtile = new List<GridSquareScript>();
 
-            foreach (GridSquareScript movementtile in movementtouse)
+            for (int i = -attackerrange; i < attackerrange; i++)
             {
-                foreach (GridSquareScript attacktilesFromPosition in gridScript.GetAttack(range, melee, movementtile, character))
+                for (int j = -attackerrange; j < attackerrange; j++)
                 {
-                    if (targepositiontiles == attacktilesFromPosition)
+                    if (Mathf.Abs(i) + Mathf.Abs(j) <= attackerrange && (i != 0 || j != 0))
                     {
-                        potentialmovementtile.Add(movementtile);
-                        continue;
+                        GridSquareScript tile = gridScript.GetTile(targepositiontiles.GridCoordinates + new Vector2Int(i, j));
+                        if (movementtouse.Contains(tile))
+                        {
+                            potentialmovementtile.Add(tile);
+                        }
+
                     }
                 }
             }
 
+            // These tiles are the tiles in which the character can attack the target withouth being attacked
 
             List<GridSquareScript> potentialmovementtilesecondFilter = new List<GridSquareScript>();
 
@@ -1640,14 +1674,14 @@ public class AttackTurnScript : MonoBehaviour
 
             foreach (GridSquareScript tile in potentialmovementtile)
             {
-                currentCharacter.GetComponent<UnitScript>().MoveTo(tile.GridCoordinates);
+                //currentCharacter.GetComponent<UnitScript>().MoveTo(tile.GridCoordinates);
 
-                if (ActionsMenu.CheckifInRange(truetarget, currentCharacter) && !ActionsMenu.CheckifInRange(currentCharacter, truetarget))
+                if (ActionsMenu.CheckifInRange(truetarget, currentCharacter, truetarget.GetComponent<UnitScript>().UnitCharacteristics.currentTile, tile) && !ActionsMenu.CheckifInRange(currentCharacter, truetarget, tile))
                 {
                     potentialmovementtilesecondFilter.Add(tile);
                 }
             }
-            currentCharacter.GetComponent<UnitScript>().MoveTo(baseposition);
+            //currentCharacter.GetComponent<UnitScript>().MoveTo(baseposition);
             GridSquareScript finaltile = null;
 
             if (potentialmovementtilesecondFilter.Count == 1)

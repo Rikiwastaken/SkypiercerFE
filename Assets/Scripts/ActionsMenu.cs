@@ -1814,23 +1814,29 @@ public class ActionsMenu : MonoBehaviour
     /// <param name="unit"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    public bool CheckifInRange(GameObject unit, GameObject target, GridSquareScript position = null)
+    public bool CheckifInRange(GameObject unit, GameObject target, GridSquareScript positionForUnit = null, GridSquareScript positionForTarget = null)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
-        GridSquareScript tiletouse = position;
-        if (tiletouse == null)
+        GridSquareScript tiletouseForUnit = positionForUnit;
+        if (tiletouseForUnit == null)
         {
-            tiletouse = charunit.currentTile;
+            tiletouseForUnit = charunit.currentTile;
         }
+        GridSquareScript tiletouseForTarget = positionForTarget;
+        if (tiletouseForTarget == null)
+        {
+            tiletouseForTarget = chartarget.currentTile;
+        }
+
 #if UNITY_EDITOR
         if (DataScript.instance == null) // for fight simulator use, inaccessible during gameplay
         {
             return true;
         }
 #endif
-        int Distance = (int)(Mathf.Abs(chartarget.currentTile.GridCoordinates.x - tiletouse.GridCoordinates.x) + Mathf.Abs(chartarget.currentTile.GridCoordinates.y - tiletouse.GridCoordinates.y));
+        int Distance = (int)(Mathf.Abs(tiletouseForTarget.GridCoordinates.x - tiletouseForUnit.GridCoordinates.x) + Mathf.Abs(tiletouseForTarget.GridCoordinates.y - tiletouseForUnit.GridCoordinates.y));
         (int range, bool melee) = target.GetComponent<UnitScript>().GetRangeAndMele();
         if (Distance <= 1)
         {

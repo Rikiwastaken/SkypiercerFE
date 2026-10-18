@@ -382,7 +382,6 @@ public class UnitScript : MonoBehaviour
     public List<GameObject> BreakableModelList;
     private WeaponPrefabScript _WeaponPrefabScript;
     private List<equipment> oldequipment;
-    private Color InitialCharacterColor;
     private Animator animator;
 
     private Transform armature;
@@ -2298,17 +2297,16 @@ public class UnitScript : MonoBehaviour
             }
             if (newPlayed)
             {
-                if (ActiveModel.GetComponentInChildren<Renderer>().material.GetColor("_BaseColor") != Color.grey)
+                if (ActiveModel.GetComponentInChildren<Renderer>().material.GetInt("_BlackAndWhite") != 1)
                 {
-                    InitialCharacterColor = ActiveModel.GetComponentInChildren<Renderer>().material.GetColor("_BaseColor");
-                    ActiveModel.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", Color.grey);
+                    ActiveModel.GetComponentInChildren<Renderer>().material.SetInt("_BlackAndWhite", 1);
                 }
             }
             else
             {
-                if (ActiveModel.GetComponentInChildren<Renderer>().material.GetColor("_BaseColor") != InitialCharacterColor)
+                if (ActiveModel.GetComponentInChildren<Renderer>().material.GetInt("_BlackAndWhite") != 0)
                 {
-                    ActiveModel.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", InitialCharacterColor); ;
+                    ActiveModel.GetComponentInChildren<Renderer>().material.SetInt("_BlackAndWhite", 0);
                 }
             }
         }
