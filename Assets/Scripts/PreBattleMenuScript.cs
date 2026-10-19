@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using static SaveManager;
 
 public class PreBattleMenuScript : MonoBehaviour
@@ -22,8 +23,9 @@ public class PreBattleMenuScript : MonoBehaviour
 
     private SaveClass SaveBeforeBattle;
 
-    [SerializeField] private GameObject BattallioNChangeMenu;
-
+    [SerializeField] private GameObject BattallionChangeMenu;
+    [SerializeField] private Button BattallionChangeButton;
+    private bool BattallionAvailable;
     private void Awake()
     {
         if (instance == null)
@@ -38,6 +40,7 @@ public class PreBattleMenuScript : MonoBehaviour
         InitializeVariables();
         _CancelAction = InputSystem.actions.FindAction("Cancel");
         _ActivateAction = InputSystem.actions.FindAction("Validate");
+        CheckIfBattallionMenuIsAvailable();
     }
 
     // Update is called once per frame
@@ -50,7 +53,7 @@ public class PreBattleMenuScript : MonoBehaviour
         }
 
 
-        if (BattallioNChangeMenu.activeSelf)
+        if (BattallionChangeMenu.activeSelf)
         {
             return;
         }
@@ -131,6 +134,29 @@ public class PreBattleMenuScript : MonoBehaviour
     public void ActivatePlacement()
     {
         ChangingUnitPlace = true;
+    }
+
+    private void CheckIfBattallionMenuIsAvailable()
+    {
+        BattallionAvailable = false;
+        if (DataScript.instance.PlayableCharacterList[9].playableStats.unlocked)
+        {
+            BattallionAvailable = true;
+        }
+
+        if (!BattallionAvailable)
+        {
+            BattallionChangeButton.GetComponent<Image>().color = Color.gray;
+        }
+    }
+
+    public void OpenBattallionMenu()
+    {
+        if (BattallionAvailable)
+        {
+            BattallionChangeMenu.SetActive(true);
+            BattallionChangeMenu.GetComponent<BattallionChoiceScript>().Initialization();
+        }
     }
 
     public void BeginBattle()

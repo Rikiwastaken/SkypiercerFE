@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnitScript;
 
@@ -211,8 +212,8 @@ public class BattallionChoiceScript : MonoBehaviour
                     }
                     UnitsInBattallionTMP.text = "Units in battallion : " + numberofUnitsInBattallion;
                     BattallionLeaderImage.sprite = _DataScript.DialogueCharacterList[13].Portrait;
-                    UnitEffectTMP.text = "Effect for Unit:\nIncrease nearby allies' Strength by " + (int)(currentChar.AjustedStats.Strength / 5) + " and Defense by " + (int)(currentChar.AjustedStats.Defense / 5);
-                    CommanderEffectTMP.text = "Effect for Commander:\n+" + strbonus + " Strength and +" + defbonus + " Defense";
+                    UnitEffectTMP.text = "Effect for Unit:\nIncrease nearby allies' Strength by " + Mathf.Max(1, (int)(currentChar.AjustedStats.Strength / 5)) + " and Defense by " + Mathf.Max(1, (int)(currentChar.AjustedStats.Defense / 5));
+                    CommanderEffectTMP.text = "Effect for Commander:\n+" + strbonus + " Strength\n+" + defbonus + " Defense";
                     BattallionNameTMP.text = "Eton Archadians";
                     break;
             }
@@ -223,9 +224,63 @@ public class BattallionChoiceScript : MonoBehaviour
 
     }
 
-    public void ChooseCharacterButton(int ButtonID)
+    private void ChangeBattallion(Character _Character)
     {
 
+        bool KiraUnlocked = false;
+        bool GaleUnlocked = false;
+
+        foreach (Character character in DataScript.instance.PlayableCharacterList)
+        {
+            if (character.name.ToLower() == "kira" && character.playableStats.unlocked && !character.PermaDied)
+            {
+                KiraUnlocked = true;
+            }
+            if (character.name.ToLower() == "gale" && character.playableStats.unlocked && !character.PermaDied)
+            {
+                GaleUnlocked = true;
+            }
+        }
+        //exception for test map
+        if (SceneManager.GetActiveScene().name == "TestMap")
+        {
+            KiraUnlocked = true;
+            GaleUnlocked = true;
+        }
+
+        if (_Character.playableStats.battalion.ToLower() == "zack")
+        {
+            if (KiraUnlocked)
+            {
+                _Character.playableStats.battalion = "Kira";
+            }
+            else if (GaleUnlocked)
+            {
+                _Character.playableStats.battalion = "Gale";
+            }
+        }
+        else if (_Character.playableStats.battalion.ToLower() == "kira")
+        {
+            if (GaleUnlocked)
+            {
+                _Character.playableStats.battalion = "Gale";
+            }
+            else
+            {
+                _Character.playableStats.battalion = "Zack";
+            }
+        }
+        else
+        {
+            _Character.playableStats.battalion = "Zack";
+        }
+    }
+
+    public void ChooseCharacterButton(int ButtonID)
+    {
+        Character _CharacterToUse = CharacterList[ButtonID + ListPositionOffset];
+        ChangeBattallion(_CharacterToUse);
+        InitializeHUD();
     }
 
 }
