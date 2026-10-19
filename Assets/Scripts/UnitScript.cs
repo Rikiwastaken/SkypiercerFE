@@ -3327,13 +3327,13 @@ public class UnitScript : MonoBehaviour
             {
                 if (character.playableStats.battalion.ToLower() == "gale" && character.affiliation == UnitCharacteristics.affiliation)
                 {
-                    statbonuses.FixedDamageReduction += (int)character.AjustedStats.Defense / 5;
-                    statbonuses.FixedDamageBonus += (int)character.AjustedStats.Strength / 5;
+                    statbonuses.FixedDamageReduction += Mathf.Max(1, (int)character.AjustedStats.Defense / 5);
+                    statbonuses.FixedDamageBonus += Mathf.Max(1, (int)character.AjustedStats.Strength / 5);
                     //Loyal
                     if (characterGO.GetComponent<UnitScript>().GetSkill(35))
                     {
-                        statbonuses.FixedDamageReduction += (int)character.AjustedStats.Defense / 5;
-                        statbonuses.FixedDamageBonus += (int)character.AjustedStats.Strength / 5;
+                        statbonuses.FixedDamageReduction += Mathf.Max(1, (int)character.AjustedStats.Defense / 5);
+                        statbonuses.FixedDamageBonus += Mathf.Max(1, (int)character.AjustedStats.Strength / 5);
                     }
                 }
             }
@@ -3361,8 +3361,8 @@ public class UnitScript : MonoBehaviour
                 {
                     if (character.playableStats.battalion.ToLower() == "gale" && character != UnitCharacteristics)
                     {
-                        statbonuses.Defense += (int)character.AjustedStats.Defense / 20;
-                        statbonuses.Strength += (int)character.AjustedStats.Strength / 20;
+                        statbonuses.Defense += Mathf.Max(1, (int)character.AjustedStats.Defense / 20);
+                        statbonuses.Strength += Mathf.Max(1, (int)character.AjustedStats.Strength / 20);
                     }
                 }
             }
@@ -3373,7 +3373,7 @@ public class UnitScript : MonoBehaviour
                 {
                     if (character.playableStats.battalion.ToLower() == "kira" && character != UnitCharacteristics)
                     {
-                        statbonuses.Psyche += (int)character.AjustedStats.Psyche / 20;
+                        statbonuses.Psyche += Mathf.Max(1, (int)character.AjustedStats.Psyche / 20);
 
                     }
                 }

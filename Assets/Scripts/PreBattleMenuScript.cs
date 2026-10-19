@@ -22,6 +22,8 @@ public class PreBattleMenuScript : MonoBehaviour
 
     private SaveClass SaveBeforeBattle;
 
+    [SerializeField] private GameObject BattallioNChangeMenu;
+
     private void Awake()
     {
         if (instance == null)
@@ -47,14 +49,24 @@ public class PreBattleMenuScript : MonoBehaviour
             return;
         }
 
+
+        if (BattallioNChangeMenu.activeSelf)
+        {
+            return;
+        }
+
         if (_CancelAction.WasPressedThisFrame() && ChangingUnitPlace)
         {
             ChangingUnitPlace = false;
-            transform.GetChild(2).gameObject.SetActive(true);
-            transform.GetChild(3).gameObject.SetActive(true);
-            transform.GetChild(4).gameObject.SetActive(true);
-            transform.GetChild(5).gameObject.SetActive(true);
-            transform.GetChild(6).gameObject.SetActive(true);
+            for (int i = 2; i < transform.childCount; i++)
+            {
+                transform.GetChild(2).gameObject.SetActive(true);
+                transform.GetChild(3).gameObject.SetActive(true);
+                transform.GetChild(4).gameObject.SetActive(true);
+                transform.GetChild(5).gameObject.SetActive(true);
+                transform.GetChild(6).gameObject.SetActive(true);
+            }
+
         }
 
         if (ReplaceUnitButton.activeSelf)
