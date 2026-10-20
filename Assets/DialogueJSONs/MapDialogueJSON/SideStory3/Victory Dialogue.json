@@ -1,7 +1,18 @@
 {
     "Dialogue": [
         {
-            "text": "Don't you ever show your faces in Occidens.",
+            "text": "What the hell is wrong with these guys? Why would they do that?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 0,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "Saddly this is war. Not all soldiers fight for their families or their countries, especially when they are drafted.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -12,7 +23,29 @@
             "musictoplay": 0
         },
         {
-            "text": "That was scary. Thank you very much. I would like to repay you, but I don't have anything to offer.",
+            "text": "Why...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 0,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "Some soldiers would rather try to invade Archades than maintain the standstill as it is. At any rate, are you alright? Sorry about that. I'm ashamed that my countrymen would do such a thing.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 8,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "That was scary, but 'I'm ok, thank you. I would like to repay you, but I don't have anything to offer.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -23,7 +56,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Don't worry about it. These guys have been causing problems for a while now. Anyway, we were about to have dinner. Would you like to join us?",
+            "text": "Don't worry about it. I'll make sure these guys get judged accordingly. We'll return to our camp and have dinner. Would you like to join us?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,

@@ -100,7 +100,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Come on. She doesn't look like a soldier.",
+            "text": "Come on. She is a civilan. Let her go.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -111,7 +111,7 @@
             "musictoplay": 0
         },
         {
-            "text": "You all are starting to piss me off. Boys, rough them up a bit, but don't kill them.",
+            "text": "You all are starting to piss me off. Boys, let's rough them up a bit.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -122,13 +122,24 @@
             "musictoplay": 0
         },
         {
-            "text": "Damn it. We have no choice but to fight. Stay behind us. We'll take care of them.",
+            "text": "We're not gonna fight you guys. We're all Occidens.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
                 "z": 0.0
             },
             "characterindex": 0,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "Forget it, Zack. To them War in nothing but a pretext to do whatever they want. Get ready.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 8,
             "ImageToShow": 0,
             "musictoplay": 0
         },
