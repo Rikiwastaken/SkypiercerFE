@@ -329,6 +329,7 @@ public class ActionManager : MonoBehaviour
         }
         else
         {
+            ExamodeBar.fillAmount = 0;
             timeforExamodeactivation = 0;
         }
     }

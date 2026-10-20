@@ -492,9 +492,8 @@ public class CutsceneManager : MonoBehaviour
                 Character Character = newcharacter.GetComponent<UnitScript>().UnitCharacteristics;
                 if (Character.name.ToLower() == "zack" && Character.ExamodeClass != null && DataScript.instance != null)
                 {
-
-                    Character.ExamodeClass.ExamodeMat = new Material(DataScript.instance.ExamodeMaterial);
-                    Character.ExamodeClass.ExamodeMat.SetTexture("_BaseTexture", Character.ExamodeClass.ExamodeTexture);
+                    Character.ExamodeClass.ExamodeMat = new Material(newcharacter.GetComponent<UnitScript>().ActiveModel.GetComponent<Unit3DModelInfoScript>().GeneratedMaterial);
+                    Character.ExamodeClass.ExamodeMat.SetTexture("_BaseMap", Character.ExamodeClass.ExamodeTexture);
                 }
                 newcharacter.GetComponent<UnitScript>().ActivateExamode(true);
 

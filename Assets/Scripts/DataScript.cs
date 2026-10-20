@@ -185,7 +185,6 @@ public class DataScript : MonoBehaviour
     public int SkillCoins;
     [Space]
     [Header("Examode Variables")]
-    public Material ExamodeMaterial;
     public int ExamodeUnlockChapter_Zack;
     public int ExamodeUnlockChapter_Kira;
     public int ExamodeUnlockChapter_Gale;

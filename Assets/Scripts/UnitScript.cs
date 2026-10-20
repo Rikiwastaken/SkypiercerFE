@@ -377,7 +377,6 @@ public class UnitScript : MonoBehaviour
 
     [Header("\n\n3D Model Variables")]
     public GameObject ActiveModel;
-    public Material PluvialMat;
     public List<ModelInfo> ModelList;
     public List<GameObject> BreakableModelList;
     private WeaponPrefabScript _WeaponPrefabScript;
@@ -427,8 +426,8 @@ public class UnitScript : MonoBehaviour
         if (UnitCharacteristics.name.ToLower() == "zack" && UnitCharacteristics.ExamodeClass != null)
         {
 
-            UnitCharacteristics.ExamodeClass.ExamodeMat = new Material(DataScript.instance.ExamodeMaterial);
-            UnitCharacteristics.ExamodeClass.ExamodeMat.SetTexture("_BaseTexture", UnitCharacteristics.ExamodeClass.ExamodeTexture);
+            UnitCharacteristics.ExamodeClass.ExamodeMat = new Material(ActiveModel.GetComponent<Unit3DModelInfoScript>().GeneratedMaterial);
+            UnitCharacteristics.ExamodeClass.ExamodeMat.SetTexture("_BaseMap", UnitCharacteristics.ExamodeClass.ExamodeTexture);
         }
 
         _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
@@ -836,9 +835,6 @@ public class UnitScript : MonoBehaviour
                         character.ExamodeClass.ExamodePoints = 0;
 
 
-
-                        examodemat = new Material(_Datascript.ExamodeMaterial);
-                        examodemat.SetTexture("_BaseTexture", character.ExamodeClass.ExamodeTexture);
                         if (ActiveModel != null)
                         {
                             character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
@@ -859,8 +855,7 @@ public class UnitScript : MonoBehaviour
 
 
 
-                        examodemat = new Material(_Datascript.ExamodeMaterial);
-                        examodemat.SetTexture("_BaseTexture", character.ExamodeClass.ExamodeTexture);
+
                         if (ActiveModel != null)
                         {
                             character.ExamodeClass.Basemat = GetMaterial(ActiveModel);
@@ -912,6 +907,7 @@ public class UnitScript : MonoBehaviour
         {
             GetNewWeaponFromMastery(mastery, character);
         }
+        UpdateWeaponModel();
     }
 
 

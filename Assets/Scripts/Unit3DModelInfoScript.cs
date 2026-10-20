@@ -24,6 +24,8 @@ public class Unit3DModelInfoScript : MonoBehaviour
     [SerializeField] private Texture2D DefaultEmission;
     [SerializeField] private Material BaseMaterial;
 
+    public Material GeneratedMaterial;
+
     public Material GenerateMaterial()
     {
         Material newmat = new Material(BaseMaterial);
@@ -59,6 +61,7 @@ public class Unit3DModelInfoScript : MonoBehaviour
         {
             newmat.SetTexture("_EmissionMap", DefaultEmission);
         }
+        GeneratedMaterial = newmat;
         return newmat;
     }
 
