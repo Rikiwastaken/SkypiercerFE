@@ -366,8 +366,7 @@ public class UnitScript : MonoBehaviour
         }
     }
 
-
-    [SerializeField] private Image Lifebar;
+    [SerializeField] private LifebarManager _lifebarManager;
     public Transform LifebarCanvas;
     public Transform UICanvas;
     [SerializeField] private Image LBBackground;
@@ -1231,39 +1230,21 @@ public class UnitScript : MonoBehaviour
     {
         if (disableLifebar)
         {
-            if (Lifebar.gameObject.activeSelf)
+            if (_lifebarManager.gameObject.activeSelf)
             {
-                Lifebar.gameObject.SetActive(false);
+                _lifebarManager.gameObject.SetActive(false);
                 LBBackground.gameObject.SetActive(false);
             }
         }
-        else if (!Lifebar.gameObject.activeSelf)
+        else if (!_lifebarManager.gameObject.activeSelf)
         {
-            Lifebar.gameObject.SetActive(true);
+            _lifebarManager.gameObject.SetActive(true);
             LBBackground.gameObject.SetActive(true);
         }
-        Lifebar.type = Image.Type.Filled;
-        Lifebar.fillAmount = (float)UnitCharacteristics.currentHP / (float)UnitCharacteristics.AjustedStats.HP;
+        _lifebarManager.SetTargetRatio(UnitCharacteristics.currentHP, (int)UnitCharacteristics.AjustedStats.HP);
         if (UnitCharacteristics.enemyStats != null)
         {
-            switch (UnitCharacteristics.enemyStats.RemainingLifebars)
-            {
-                case 0:
-                    Lifebar.color = Color.green;
-                    break;
-                case 1:
-                    Lifebar.color = Color.blue;
-                    break;
-                case 2:
-                    Lifebar.color = Color.magenta;
-                    break;
-                case 3:
-                    Lifebar.color = Color.yellow;
-                    break;
-                case 4:
-                    Lifebar.color = Color.gray;
-                    break;
-            }
+            _lifebarManager.ChangeLifeBarColorAccordingToRemaining(UnitCharacteristics.enemyStats.RemainingLifebars);
         }
 
     }
