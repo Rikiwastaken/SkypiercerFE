@@ -89,7 +89,7 @@ public class CombatSceneLoader : MonoBehaviour
     }
 
     // Activate combat scene
-    public void ActivateCombatScene(Character attacker, Character defender, List<int> attackerattacks, List<int> attackercriticals, List<int> defenderattacks, List<int> defendercriticals, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses, bool doesdefenderattacks, bool oneforallactiveattacker, bool unyieldingactiveattacker, bool compassionusedattacker, bool invigoratingusedattacker, bool oneforallactivedefender, bool unyieldingactivedefender, bool compassionuseddefender, bool invigoratinguseddefender)
+    public void ActivateCombatScene(Character attacker, Character defender, List<int> attackerattacks, List<int> defenderattacks, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses, bool doesdefenderattacks, List<int> AttackerSkillTriggers, List<int> DefenderSkillTriggers, List<int> AttackerSkillTriggersDuringCounterAttack, List<int> DefenderSkillTriggersDuringCounterAttack)
     {
         if (!combatLoaded)
         {
@@ -109,7 +109,7 @@ public class CombatSceneLoader : MonoBehaviour
                 var combatManager = FindAnyObjectByType<CombatSceneManagerV2>();
                 if (combatManager != null)
                 {
-                    combatManager.SetupScene(attacker, defender, attackerattacks, attackercriticals, defenderattacks, defendercriticals, attackerhitrate, attackercritrate, attackerdamage, defenderhitrate, defendercritrate, defenderdamage, expgained, levelupbonuses, doesdefenderattacks, oneforallactiveattacker, unyieldingactiveattacker, compassionusedattacker, invigoratingusedattacker, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender);
+                    combatManager.SetupScene(attacker, defender, attackerattacks, defenderattacks, attackerhitrate, attackercritrate, attackerdamage, defenderhitrate, defendercritrate, defenderdamage, expgained, levelupbonuses, doesdefenderattacks, AttackerSkillTriggers, DefenderSkillTriggers, AttackerSkillTriggersDuringCounterAttack, DefenderSkillTriggersDuringCounterAttack);
                 }
             }));
     }

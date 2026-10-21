@@ -1854,17 +1854,14 @@ public class ActionsMenu : MonoBehaviour
 
     }
 
-    public (int, int, int, int, List<int>, List<int>, List<int>, bool, bool, bool, bool) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked, bool ishealing, bool isbossdamage = false, bool AttackIntercepted = false, bool IsIntercepter = false)
+    public (List<int>, int, int, List<int>, List<int>, List<int>, List<int>) ApplyDamage(GameObject unit, GameObject target, bool unitalreadyattacked, bool ishealing, bool isbossdamage = false, bool AttackIntercepted = false, bool IsIntercepter = false)
     {
         Character charunit = unit.GetComponent<UnitScript>().UnitCharacteristics;
         Character chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
         List<int> levelup = null;
         List<int> Damagelist = new List<int>();
-        List<int> Critlist = new List<int>();
-        bool unyieldingactivated = false;
-        bool allforoneactive = false;
-        bool compassionused = false;
-        bool invigoratingused = false;
+        List<int> UnitSkillTriggers = new List<int>();
+        List<int> TargetSkillTriggers = new List<int>();
 
 
         int exp = 1;
@@ -1882,8 +1879,7 @@ public class ActionsMenu : MonoBehaviour
 
             int unitcrit = CalculateCrit(unit, target, true);
 
-            int numberofhits = 0;
-            int numberofcritials = 0;
+            List<int> numberofhits = new List<int>();
 
             int finaldamage = 0;
 
@@ -1894,7 +1890,7 @@ public class ActionsMenu : MonoBehaviour
 
                 if (unit.GetComponent<RandomScript>().GetHitValue(unithitrate) < unithitrate)
                 {
-                    numberofhits++;
+                    numberofhits.Add(1);
 
                     if (AttackIntercepted)
                     {
@@ -1902,27 +1898,24 @@ public class ActionsMenu : MonoBehaviour
                         {
                             totaldamage += (int)(DamageReductionForIntercepter * unitdamage);
                             Damagelist.Add((int)(DamageReductionForIntercepter * unitdamage));
-                            Critlist.Add(0);
                         }
                         else
                         {
                             totaldamage += (int)(DamageReductionWhenIntercepted * unitdamage);
                             Damagelist.Add((int)(DamageReductionWhenIntercepted * unitdamage));
-                            Critlist.Add(0);
                         }
                     }
                     else
                     {
                         totaldamage += unitdamage;
                         Damagelist.Add(unitdamage);
-                        Critlist.Add(0);
                     }
 
 
 
-                    (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage, false);
+                    AffectDamage(unit, target, totaldamage, false, UnitSkillTriggers, TargetSkillTriggers);
 
-                    (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false, isbossdamage);
+                    OnDamageEffect(unit, totaldamage, false, isbossdamage, UnitSkillTriggers);
                     finaldamage = unitdamage;
 
 
@@ -1932,8 +1925,12 @@ public class ActionsMenu : MonoBehaviour
                         unit.GetComponent<UnitScript>().IncreaseUnitsKilled();
                     }
                 }
+                else
+                {
+                    numberofhits.Add(-1);
+                }
 
-                return (numberofhits, numberofcritials, finaldamage, 0, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
+                return (numberofhits, finaldamage, 0, levelup, Damagelist, UnitSkillTriggers, TargetSkillTriggers);
             }
 
 
@@ -1951,20 +1948,29 @@ public class ActionsMenu : MonoBehaviour
                     if (tripleattack)
                     {
 
-                        (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(unit, target, numberofhits, unithitrate, unitcrit, unitdamage, numberofcritials, totaldamage, Damagelist, Critlist);
+                        (numberofhits, totaldamage) = CalculateIfAttackHit(unit, target, numberofhits, unithitrate, unitcrit, unitdamage, totaldamage, Damagelist);
 
 
                     }
 
-                    (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(unit, target, numberofhits, unithitrate, unitcrit, unitdamage, numberofcritials, totaldamage, Damagelist, Critlist);
+                    (numberofhits, totaldamage) = CalculateIfAttackHit(unit, target, numberofhits, unithitrate, unitcrit, unitdamage, totaldamage, Damagelist);
 
                 }
 
-                (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(unit, target, numberofhits, unithitrate, unitcrit, unitdamage, numberofcritials, totaldamage, Damagelist, Critlist);
+                (numberofhits, totaldamage) = CalculateIfAttackHit(unit, target, numberofhits, unithitrate, unitcrit, unitdamage, totaldamage, Damagelist);
 
-                (allforoneactive, unyieldingactivated) = AffectDamage(unit, target, totaldamage, numberofcritials != 0);
+                bool iscritical = false;
+                foreach (int hit in numberofhits)
+                {
+                    if (hit == 2)
+                    {
+                        iscritical = true;
+                    }
+                }
 
-                (compassionused, invigoratingused) = OnDamageEffect(unit, totaldamage, false, isbossdamage);
+                AffectDamage(unit, target, totaldamage, iscritical, UnitSkillTriggers, TargetSkillTriggers);
+
+                OnDamageEffect(unit, totaldamage, false, isbossdamage, UnitSkillTriggers);
                 finaldamage = unitdamage;
 
                 bool diddamage = false;
@@ -2007,19 +2013,28 @@ public class ActionsMenu : MonoBehaviour
                         if (tripleattack)
                         {
 
-                            (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, numberofcritials, totaldamage, Damagelist, Critlist);
+                            (numberofhits, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, totaldamage, Damagelist);
 
 
                         }
 
-                        (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, numberofcritials, totaldamage, Damagelist, Critlist);
+                        (numberofhits, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, totaldamage, Damagelist);
 
                     }
 
-                    (numberofhits, numberofcritials, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, numberofcritials, totaldamage, Damagelist, Critlist);
+                    (numberofhits, totaldamage) = CalculateIfAttackHit(target, unit, numberofhits, targethitrate, targetcrit, targetdamage, totaldamage, Damagelist);
 
-                    (allforoneactive, unyieldingactivated) = AffectDamage(target, unit, totaldamage, numberofcritials != 0);
-                    (compassionused, invigoratingused) = OnDamageEffect(target, targetdamage, false, isbossdamage);
+                    bool iscritical = false;
+                    foreach (int hit in numberofhits)
+                    {
+                        if (hit == 2)
+                        {
+                            iscritical = true;
+                        }
+                    }
+
+                    AffectDamage(target, unit, totaldamage, iscritical, TargetSkillTriggers, UnitSkillTriggers);
+                    OnDamageEffect(target, targetdamage, false, isbossdamage, TargetSkillTriggers);
                     finaldamage = targetdamage;
                 }
                 if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
@@ -2047,15 +2062,14 @@ public class ActionsMenu : MonoBehaviour
                 target.GetComponent<UnitScript>().IncreaseUnitsKilled();
             }
 
-            return (numberofhits, numberofcritials, finaldamage, exp, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
+            return (numberofhits, finaldamage, exp, levelup, Damagelist, UnitSkillTriggers, TargetSkillTriggers);
         }
         //healing
         else
         {
             bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77); //Spite, Caelum General
             int unitdamage = (int)Mathf.Min(CalculateHealing(unit, true), chartarget.AjustedStats.HP - chartarget.currentHP);
-            int numberofhits = 1;
-            int numberofcritials = 0;
+            List<int> numberofhits = new List<int>() { 1 };
 
             int finaldamage = 0;
 
@@ -2068,15 +2082,13 @@ public class ActionsMenu : MonoBehaviour
                 chartarget.currentHP += unitdamage;
                 SpawnTextPopup(unitdamage + "", true, false, target);
                 Damagelist.Add(unitdamage);
-                Critlist.Add(0);
-                (compassionused, invigoratingused) = OnDamageEffect(unit, unitdamage, true, isbossdamage);
+                OnDamageEffect(unit, unitdamage, true, isbossdamage, UnitSkillTriggers);
                 finaldamage = unitdamage;
             }
             else
             {
                 //When healing the other does nothing
-                numberofcritials = 0;
-                numberofhits = 0;
+                numberofhits = new List<int>() { 1 };
                 finaldamage = 0;
             }
             if (charunit.currentHP > 0 && (chartarget.affiliation == "playable" || (chartarget.affiliation == "other" && !chartarget.attacksfriends)) && charunit.affiliation == "playable")
@@ -2087,20 +2099,19 @@ public class ActionsMenu : MonoBehaviour
             {
                 exp = 0;
             }
-            return (numberofhits, numberofcritials, finaldamage, exp, levelup, Damagelist, Critlist, allforoneactive, unyieldingactivated, compassionused, invigoratingused);
+            return (numberofhits, finaldamage, exp, levelup, Damagelist, UnitSkillTriggers, TargetSkillTriggers);
         }
 
     }
 
-    private (int, int, int) CalculateIfAttackHit(GameObject unit, GameObject target, int numberofhits, int unithitrate, int unitcrit, int unitdamage, int numberofcritials, int totaldamage, List<int> Damagelist, List<int> Critlist)
+    private (List<int>, int) CalculateIfAttackHit(GameObject unit, GameObject target, List<int> numberofhits, int unithitrate, int unitcrit, int unitdamage, int totaldamage, List<int> Damagelist)
     {
         if (unit.GetComponent<RandomScript>().GetHitValue(unithitrate) < unithitrate)
         {
 
-            numberofhits++;
+
 
             int damagetoaddtolist = -1;
-            int crittoaddtolist = 0;
 
             equipment weapon = unit.GetComponent<UnitScript>().GetFirstWeapon();
 
@@ -2135,18 +2146,19 @@ public class ActionsMenu : MonoBehaviour
             // calculating critical
             if (unit.GetComponent<RandomScript>().GetCritValue(unitcrit) < unitcrit)
             {
-                numberofcritials++;
+                numberofhits.Add(2);
                 totaldamage += unitdamage * 3;
                 damagetoaddtolist = unitdamage * 3;
-                crittoaddtolist = 1;
             }
             else if (unit.GetComponent<UnitScript>().GetSkill(109)) //Risky Bet
             {
+                numberofhits.Add(1);
                 totaldamage += 0;
                 damagetoaddtolist = 0;
             }
             else
             {
+                numberofhits.Add(1);
                 totaldamage += unitdamage;
                 damagetoaddtolist = unitdamage;
             }
@@ -2159,16 +2171,16 @@ public class ActionsMenu : MonoBehaviour
             }
 
             Damagelist.Add(damagetoaddtolist);
-            Critlist.Add(crittoaddtolist);
         }
-        return (numberofhits, numberofcritials, totaldamage);
+        else
+        {
+            numberofhits.Add(-1);
+        }
+        return (numberofhits, totaldamage);
     }
 
-    private (bool, bool) AffectDamage(GameObject Attacker, GameObject target, int damage, bool iscrit)// oneforall active, unyieldingactive
+    private void AffectDamage(GameObject Attacker, GameObject target, int damage, bool iscrit, List<int> AttackerSkillTriggers, List<int> DefenderSkillTriggers)// oneforall active, unyieldingactive
     {
-
-        bool oneforallactive = false;
-        bool unyieldingactive = false;
 
         Character charTarget = target.GetComponent<UnitScript>().UnitCharacteristics;
 
@@ -2215,7 +2227,7 @@ public class ActionsMenu : MonoBehaviour
             List<int> Skillvalues = DataScript.instance.SkillList[40].SkillValues;
             float multiplier = allforonetransfertargetGO.GetComponent<UnitScript>().GetSkillLevelMultiplier(40);
             float DmgMultiplier = (int)(Skillvalues[0] * multiplier);
-            oneforallactive = true;
+            DefenderSkillTriggers.Add(40);
             int transfertargethp = allforonetransfertarget.currentHP;
             target.GetComponent<UnitScript>().UnitCharacteristics.currentHP -= (int)(damage * (1f - DmgMultiplier));
             allforonetransfertarget.currentHP -= (int)(damage * DmgMultiplier);
@@ -2250,8 +2262,12 @@ public class ActionsMenu : MonoBehaviour
 
         }
 
+        int SurvivalCheckValue = SurvivalSkillsCheck(target, basehp);
+        if (SurvivalCheckValue > 0)
+        {
+            DefenderSkillTriggers.Add(SurvivalCheckValue);
 
-        unyieldingactive = SurvivalSkillsCheck(target, basehp);
+        }
 
 
 
@@ -2260,6 +2276,7 @@ public class ActionsMenu : MonoBehaviour
         {
             if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.BurnTurns > 0 && charTarget.affiliation != "breakable")
             {
+                AttackerSkillTriggers.Add(83);
                 charTarget.statusEffects.BurnTurns++;
                 SpawnTextPopup("burn", false, false, target);
             }
@@ -2267,18 +2284,21 @@ public class ActionsMenu : MonoBehaviour
 
         if (Attacker.GetComponent<UnitScript>().GetSkill(85) && charTarget.affiliation != "breakable" && damage != 0) //lightning edge
         {
+            AttackerSkillTriggers.Add(85);
             charTarget.statusEffects.ParalyzedTurns++;
             SpawnTextPopup("paralyzed", false, false, target);
         }
 
         if (Attacker.GetComponent<UnitScript>().GetSkill(86) && charTarget.affiliation != "breakable" && damage != 0) //blazing edge
         {
+            AttackerSkillTriggers.Add(86);
             charTarget.statusEffects.BurnTurns++;
             SpawnTextPopup("burn", false, false, target);
         }
 
         if (Attacker.GetComponent<UnitScript>().GetSkill(93) && charTarget.affiliation != "breakable" && damage != 0) //contamination
         {
+            AttackerSkillTriggers.Add(93);
             StatusEffects AtatckerStatus = Attacker.GetComponent<UnitScript>().UnitCharacteristics.statusEffects;
             StatusEffects TargetStatus = charTarget.statusEffects;
             TargetStatus.BurnTurns += AtatckerStatus.BurnTurns;
@@ -2322,11 +2342,10 @@ public class ActionsMenu : MonoBehaviour
 
         if (target.GetComponent<UnitScript>().GetSkill(87)) //unphasable
         {
+            DefenderSkillTriggers.Add(87);
             target.GetComponent<UnitScript>().RemoveStatusAilments();
             SpawnTextPopup("cleanse", true, false, target);
         }
-
-        return (oneforallactive, unyieldingactive);
     }
 
     public void SpawnTextPopup(string damage, bool ishealing, bool iscritical, GameObject Character)
@@ -2341,7 +2360,7 @@ public class ActionsMenu : MonoBehaviour
         Vector3 wheretospawn = new Vector3(gridcoords.x, characterelevation + 1f, gridcoords.y);
         Textnumber.GetComponent<CombatNumberPopup>().InitializeTMP(damage, wheretospawn, iscritical, ishealing);
     }
-    private bool SurvivalSkillsCheck(GameObject unitGO, int previousHP)
+    private int SurvivalSkillsCheck(GameObject unitGO, int previousHP)
     {
         Character unitChar = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
         if (unitChar.currentHP <= 0)
@@ -2350,13 +2369,13 @@ public class ActionsMenu : MonoBehaviour
             {
                 unitChar.currentHP = 1;
                 unitGO.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
-                return true;
+                return 44;
             }
             if (unitChar.name.ToLower() == "zack" && unitChar.ExamodeClass.remaingExamodeTurns > 0)  //zack examode
             {
                 unitChar.currentHP = 1;
                 target.GetComponent<UnitScript>().AddNumber(0, true, "Unyielding");
-                return true;
+                return 44;
             }
             if (unitGO.GetComponent<UnitScript>().GetSkill(97))  //guardian spirit
             {
@@ -2369,7 +2388,7 @@ public class ActionsMenu : MonoBehaviour
                 {
                     unitChar.currentHP = 1;
                     unitGO.GetComponent<UnitScript>().AddNumber(0, true, "Guardian Spirit");
-                    return true;
+                    return 97;
                 }
             }
             if (unitChar.playableStats.battalion != null && unitChar.playableStats.battalion.ToLower() == "kira")
@@ -2383,7 +2402,7 @@ public class ActionsMenu : MonoBehaviour
                     {
                         unitChar.currentHP = 1;
                         unitGO.GetComponent<UnitScript>().AddNumber(0, true, "Kira's Intervention");
-                        return true;
+                        return 97;
                     }
                 }
 
@@ -2392,19 +2411,17 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-        return false;
+        return -1;
     }
 
-    private (bool, bool) OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing, bool isBoss) // compassion, invigorating, 
+    private void OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing, bool isBoss, List<int> AttackerSkillTriggers) // compassion, invigorating, 
     {
-        bool compassionused = false;
-        bool invigoratingused = false;
 
         if (healing)
         {
             if (Attacker.GetComponent<UnitScript>().GetSkill(30)) // Compassion
             {
-                compassionused = true;
+                AttackerSkillTriggers.Add(30);
                 Attacker.GetComponent<UnitScript>().AddNumber(Mathf.Min(DamageDealt, (int)Attacker.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP - Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP), true, "Compassion");
                 Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP += DamageDealt;
                 if (Attacker.GetComponent<UnitScript>().UnitCharacteristics.currentHP > Attacker.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.HP)
@@ -2414,6 +2431,7 @@ public class ActionsMenu : MonoBehaviour
             }
             if (Attacker.GetComponent<UnitScript>().GetSkill(34)) // Rebound
             {
+                AttackerSkillTriggers.Add(34);
                 List<int> Skillvalues = DataScript.instance.SkillList[34].SkillValues;
                 float multiplier = Attacker.GetComponent<UnitScript>().GetSkillLevelMultiplier(34);
                 float HealingRatio = (Skillvalues[0] / 100f * multiplier);
@@ -2448,7 +2466,7 @@ public class ActionsMenu : MonoBehaviour
         {
             if (Attacker.GetComponent<UnitScript>().GetSkill(14)) // Invigorating
             {
-                invigoratingused = true;
+                AttackerSkillTriggers.Add(14);
                 List<int> Skillvalues = DataScript.instance.SkillList[14].SkillValues;
                 float multiplier = Attacker.GetComponent<UnitScript>().GetSkillLevelMultiplier(14);
                 float HealingRatio = (Skillvalues[0] / 100f * multiplier);
@@ -2474,6 +2492,7 @@ public class ActionsMenu : MonoBehaviour
                 weapon.Currentuses--;
                 if (Attacker.GetComponent<UnitScript>().GetSkill(68))//Violent Misuse
                 {
+                    AttackerSkillTriggers.Add(68);
                     weapon.Currentuses--;
                 }
             }
@@ -2482,8 +2501,10 @@ public class ActionsMenu : MonoBehaviour
                 Attacker.GetComponent<UnitScript>().UpdateWeaponModel();
             }
         }
-
-        return (compassionused, invigoratingused);
+        else
+        {
+            AttackerSkillTriggers.Add(8);
+        }
     }
 
     private void DealScytheDamage(GameObject attacker, GameObject target)

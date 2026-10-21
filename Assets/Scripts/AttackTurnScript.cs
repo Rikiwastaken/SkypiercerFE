@@ -524,7 +524,6 @@ public class AttackTurnScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("ça rentre en jeu ?");
             unit.GetComponent<UnitScript>().MoveTo(Destination.GridCoordinates);
             (Destination, target) = CalculateDestinationForOffensiveUnitsV2(unit, true);
             unit.GetComponent<UnitScript>().MoveTo(originalpos);
@@ -986,17 +985,17 @@ public class AttackTurnScript : MonoBehaviour
 
 
 
-                (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist, bool oneforallactiveattacker, bool unyieldingactiveattacker, bool compassionusedattacker, bool invigoratingusedattacker) = ActionsMenu.ApplyDamage(Attacker, target, false, ishealing);
+                (List<int> attackerhits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> AttackerSkillTriggers, List<int> DefenderSkillTriggers) = ActionsMenu.ApplyDamage(Attacker, target, false, ishealing);
 
 
 
-                int defenderhits = 0;
+                List<int> defenderhits = new List<int>();
                 int defenderdamage = 0;
-                int defendercrits = 0;
                 int defenderexp = 0;
                 List<int> defenderlevelbonus = new List<int>();
                 List<int> defenderdamagelist = new List<int>();
-                List<int> defendercritlist = new List<int>();
+                List<int> AttackerSkillTriggersDuringCounterAttack = new List<int>();
+                List<int> DefenderSkillTriggersDuringCounterAttack = new List<int>();
                 bool doesdefenderattacks = false;
 
                 bool oneforallactivedefender = false;
@@ -1009,7 +1008,7 @@ public class AttackTurnScript : MonoBehaviour
                     doesdefenderattacks = true;
                     if (Chartarget.currentHP > 0)
                     {
-                        (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender) = ActionsMenu.ApplyDamage(Attacker, target, true, false);
+                        (defenderhits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, AttackerSkillTriggersDuringCounterAttack, DefenderSkillTriggersDuringCounterAttack) = ActionsMenu.ApplyDamage(Attacker, target, true, false);
                     }
                 }
 
@@ -1040,7 +1039,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
                 CharAttacker.alreadyplayed = true;
-                combatsceneloader.ActivateCombatScene(Attackercopy, Targetcopy, attackerdamagelist, attackercritlist, defenderdamagelist, defendercritlist, attackerhit, attackercrit, attackerdmg, defenderhit, defendercrit, defenderdmg, expearned, levelbonus, doesdefenderattacks, oneforallactiveattacker, unyieldingactiveattacker, compassionusedattacker, invigoratingusedattacker, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender);
+                combatsceneloader.ActivateCombatScene(Attackercopy, Targetcopy, attackerdamagelist, defenderdamagelist, attackerhit, attackercrit, attackerdmg, defenderhit, defendercrit, defenderdmg, expearned, levelbonus, doesdefenderattacks, AttackerSkillTriggers, DefenderSkillTriggers, AttackerSkillTriggersDuringCounterAttack, DefenderSkillTriggersDuringCounterAttack);
 
             }
             else
@@ -1157,19 +1156,19 @@ public class AttackTurnScript : MonoBehaviour
 
 
             // apply damage
-            (int attackerhits, int attackercrits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> attackercritlist, bool oneforallactiveattacker, bool unyieldingactiveattacker, bool compassionusedattacker, bool invigoratingusedattacker) = ActionsMenu.ApplyDamage(Attacker, target, false, ishealing);
+            (List<int> attackerhits, int attackerdamage, int attackerexp, List<int> attackerlevelbonus, List<int> attackerdamagelist, List<int> AttackerSkillTrigger, List<int> DefenderSkillTrigger) = ActionsMenu.ApplyDamage(Attacker, target, false, ishealing);
 
-            combatTextScript.UpdateInfo(attackerdamage, attackerhits, attackercrits, CharAttacker, Chartarget, ishealing);
+            combatTextScript.UpdateInfo(attackerdamage, attackerhits, CharAttacker, Chartarget, ishealing);
 
             bool defenderattacks = ((ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38) && Chartarget.statusEffects.StunTurns <= 0) && !ishealing && Chartarget.currentHP > 0);
 
-            int defenderhits = 0;
+            List<int> defenderhits = new List<int>();
             int defenderdamage = 0;
-            int defendercrits = 0;
             int defenderexp = 0;
             List<int> defenderlevelbonus = new List<int>();
             List<int> defenderdamagelist = new List<int>();
-            List<int> defendercritlist = new List<int>();
+            List<int> AttackerSkillTriggerDuringCounterAttack = new List<int>();
+            List<int> DefenderSkilLTriggerDuringCounterAttack = new List<int>();
             bool oneforallactivedefender = false;
             bool unyieldingactivedefender = false;
             bool compassionuseddefender = false;
@@ -1210,8 +1209,8 @@ public class AttackTurnScript : MonoBehaviour
                 }
 
                 // deal damage
-                (defenderhits, defendercrits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, defendercritlist, oneforallactivedefender, unyieldingactivedefender, compassionuseddefender, invigoratinguseddefender) = ActionsMenu.ApplyDamage(Attacker, target, true, false);
-                combatTextScript.UpdateInfo(defenderdamage, defenderhits, defendercrits, Chartarget, CharAttacker, false);
+                (defenderhits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, AttackerSkillTriggerDuringCounterAttack, DefenderSkilLTriggerDuringCounterAttack) = ActionsMenu.ApplyDamage(Attacker, target, true, false);
+                combatTextScript.UpdateInfo(defenderdamage, defenderhits, Chartarget, CharAttacker, false);
 
             }
             yield return new WaitForSeconds(delayafterAttack);

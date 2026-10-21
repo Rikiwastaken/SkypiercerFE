@@ -645,25 +645,24 @@ public class FightCalculator : EditorWindow
                 }
 
             }
-            (int numberofhits, int numberofcritials, int finaldamage, int exp, List<int> levelup, List<int> Damagelist, List<int> Critlist, bool allforoneactive, bool unyieldingactivated, bool compassionused, bool invigoratingused) = AM.ApplyDamage(US.gameObject, USForEnemy.gameObject, EnemyAttacks, false);
+            (List<int> numberofhits, int finaldamage, int exp, List<int> levelup, List<int> Damagelist, List<int> AttackerSkillTriggers, List<int> DefenderSkillTriggers) = AM.ApplyDamage(US.gameObject, USForEnemy.gameObject, EnemyAttacks, false);
             if (!EnemyAttacks)
             {
                 int numberofcrits = 0;
-                foreach (int attack in Critlist)
+                int numberhits = 0;
+                foreach (int attack in numberofhits)
                 {
                     if (attack > 0)
+                    {
+                        numberhits++;
+                    }
+                    if (attack == 2)
                     {
                         numberofcrits++;
                     }
                 }
                 Simulation.NumberOfPlayerCrits += numberofcrits;
-                foreach (int attack in Damagelist)
-                {
-                    if (attack > 0)
-                    {
-                        Simulation.NumberOfPlayerHits++;
-                    }
-                }
+                Simulation.NumberOfPlayerHits += numberhits;
             }
             else
             {

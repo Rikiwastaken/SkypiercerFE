@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -169,7 +170,7 @@ public class CombatTextScript : MonoBehaviour
         combattext.text = "";
     }
 
-    public void UpdateInfo(int damage, int hits, int crits, Character newattacker, Character newdefender, bool healing = false)
+    public void UpdateInfo(int damage, List<int> hits, Character newattacker, Character newdefender, bool healing = false)
     {
         if (healing)
         {
@@ -177,26 +178,41 @@ public class CombatTextScript : MonoBehaviour
         }
         else
         {
-            int finaldamage = damage * hits + 2 * damage * crits;
-            if (hits == 0)
+            int finaldamage = 0;
+            int numberofhits = 0;
+            int numberofcrits = 0;
+            foreach (int hit in hits)
+            {
+                if (hit == 1)
+                {
+                    finaldamage += damage;
+                    numberofhits++;
+                }
+                else if (hit == 2)
+                {
+                    finaldamage += damage * 3;
+                    numberofcrits++;
+                }
+            }
+            if (numberofhits == 0)
             {
                 combattext.text = newattacker.name + " missed " + newdefender.name + ".";
             }
-            else if (hits == 1)
+            else if (numberofhits == 1)
             {
                 combattext.text = newattacker.name + " hit " + newdefender.name + ".";
             }
             else
             {
-                combattext.text = newattacker.name + " hit " + newdefender.name + " " + hits + " times.";
+                combattext.text = newattacker.name + " hit " + newdefender.name + " " + numberofhits + " times.";
             }
-            if (crits == 1)
+            if (numberofcrits == 1)
             {
                 combattext.text += "\n Critical hit !";
             }
-            else if (crits > 1)
+            else if (numberofcrits > 1)
             {
-                combattext.text += "\n Critical hit " + crits + " times !";
+                combattext.text += "\n Critical hit " + numberofcrits + " times !";
             }
             combattext.text += "\n" + newdefender.name + " lost " + finaldamage + " Health.";
         }

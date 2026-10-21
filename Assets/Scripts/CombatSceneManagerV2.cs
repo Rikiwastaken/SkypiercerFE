@@ -185,7 +185,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         }
     }
 
-    public void SetupScene(Character attacker, Character defender, List<int> attackerattacks, List<int> attackercriticals, List<int> defenderattacks, List<int> defendercriticals, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses, bool doesdefenderattacks, bool attackeroneforall, bool attackerunyielding, bool attackercompassionused, bool attackerinvigorating, bool defenderoneforall, bool defenderunyielding, bool defendercompassionused, bool defenderinvigorating) // list<int> for attacks: -1 are dodges, >=0 are damages, for criticals, 1=critical, 0=not
+    public void SetupScene(Character attacker, Character defender, List<int> attackerattacks, List<int> defenderattacks, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses, bool doesdefenderattacks, List<int> AttackerSkillTriggers, List<int> DefenderSkillTriggers, List<int> AttackerSkillTriggersDuringCounterAttack, List<int> DefenderSkillTriggersDuringCounterAttack) // list<int> for attacks: -1 are dodges, >=0 are damages, for criticals, 1=critical, 0=not
     {
 
         EventSystem.SetActive(true);
@@ -196,12 +196,12 @@ public class CombatSceneManagerV2 : MonoBehaviour
         {
             character = attacker,
             attacks = attackerattacks,
-            criticals = attackercriticals,
+            //  criticals = attackercriticals,
             currentHP = attacker.currentHP,
-            unyieldingactivated = attackerunyielding,
-            oneforallactivated = attackeroneforall,
-            compassionactivated = attackercompassionused,
-            invigoratingactivated = attackerinvigorating
+            //unyieldingactivated = attackerunyielding,
+            //oneforallactivated = attackeroneforall,
+            //compassionactivated = attackercompassionused,
+            //invigoratingactivated = attackerinvigorating
         };
 
         AttackerInfo.getweapon();
@@ -210,12 +210,12 @@ public class CombatSceneManagerV2 : MonoBehaviour
         {
             character = defender,
             attacks = defenderattacks,
-            criticals = defendercriticals,
+            //criticals = defendercriticals,
             currentHP = defender.currentHP,
-            unyieldingactivated = defenderunyielding,
-            oneforallactivated = defenderoneforall,
-            compassionactivated = defendercompassionused,
-            invigoratingactivated = defenderinvigorating
+            //unyieldingactivated = defenderunyielding,
+            //oneforallactivated = defenderoneforall,
+            //compassionactivated = defendercompassionused,
+            //invigoratingactivated = defenderinvigorating
         };
 
         DefenderInfo.getweapon();
