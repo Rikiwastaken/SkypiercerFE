@@ -7,7 +7,7 @@
 
 ## Ideas
 
-- peut être faire qu'on puisse mettre "pas de battallion"
+- peut être faire qu'on puisse mettre "pas de battallion" - > finalement non
 - Faire les visuels de l'effet gardien de Kira
 - Mettre un cercle pour montrer les effets de skills qui ont un rayon. (marche pas trop)
 
@@ -34,8 +34,6 @@ scanner uniquement les unités concernées et pas toutes les unités.
 - Reword Battle Animation Mode.
 
 - Rework Animation for Animation Tree
-
-- Make visuals for telekinesis with animations activated.
 
 - Make visuals for Boss Attacks
 

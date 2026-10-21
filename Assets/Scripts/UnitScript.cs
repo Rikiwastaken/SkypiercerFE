@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -294,8 +295,18 @@ public class UnitScript : MonoBehaviour
 
 
     [Header("Flying Weapon")]
-    public GameObject FlyingWeapon;
 
+    [SerializeField] private Vector3 telekinesisOffset = new Vector3(0.5f, 1.5f, 0.3f);
+
+    [SerializeField] private float floatHeight = 0.12f;
+    [SerializeField] private float floatDuration = 0.8f;
+    [SerializeField] private float rotationDuration = 2f;
+
+    private Sequence telekinesisSequence;
+    private Vector3 weaponInitialLocalPosition;
+    private Quaternion weaponInitialLocalRotation;
+    private Tween telekinesisFloatTween;
+    private Tween telekinesisRotationTween;
 
 
 
@@ -2141,7 +2152,7 @@ public class UnitScript : MonoBehaviour
         if (currentequipmentmodel != null)
         {
             currentequipmentmodel = null;
-            FlyingWeapon = null;
+
         }
 
         equipment currentweapon = GetFirstWeapon();
@@ -2166,8 +2177,9 @@ public class UnitScript : MonoBehaviour
                         }
                         else if (UnitCharacteristics.telekinesisactivated)
                         {
-                            FlyingWeapon = currentequipmentmodel;
+
                             currentequipmentmodel.transform.SetParent(animatortouse.transform);
+                            StartTelekinesisMovement(currentweapon.type);
                         }
                         else if (currentweapon.type.ToLower() != "machine")
                         {
@@ -2183,7 +2195,8 @@ public class UnitScript : MonoBehaviour
                 }
                 else
                 {
-
+                    telekinesisFloatTween?.Kill();
+                    telekinesisRotationTween?.Kill();
                     Vector3 rotationtouse = Vector3.zero;
                     Vector3 positiontouse = Vector3.zero;
                     if (currentweapon.type.ToLower() == "bow")
@@ -3239,6 +3252,44 @@ public class UnitScript : MonoBehaviour
         }
     }
 
+
+    private void StartTelekinesisMovement(string weapontype)
+    {
+        if (currentequipmentmodel == null)
+            return;
+
+        Transform weapon = currentequipmentmodel.transform;
+        weapon.forward = transform.forward;
+
+        // Stop any previous animation.
+        telekinesisFloatTween?.Kill();
+        telekinesisRotationTween?.Kill();
+
+        // Place the weapon beside the shoulder.
+        weapon.localPosition = telekinesisOffset;
+
+        // Set and Remember its initial rotation.
+        if (weapontype.ToLower() == "shield" || weapontype.ToLower() == "scythe")
+        {
+            weapon.localRotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
+        }
+        Vector3 initialRotation = weapon.localEulerAngles;
+
+        // Gentle up-and-down floating motion.
+        telekinesisFloatTween = weapon.DOLocalMoveY(telekinesisOffset.y + floatHeight, floatDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+
+        // Continuous rotation around a local axis dependant on weapon type
+
+        Vector3 newrot = new Vector3(0f, 0f, 360f);
+        if (weapontype.ToLower() == "shield" || weapontype.ToLower() == "scythe")
+        {
+            newrot = new Vector3(360f, 0f, 0f);
+        }
+
+
+        telekinesisRotationTween = weapon.DOLocalRotate(initialRotation + newrot, rotationDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+
+    }
     public void RestoreUses(int number)
     {
         for (int i = 0; i < UnitCharacteristics.equipments.Count; i++)
@@ -4525,6 +4576,7 @@ public class UnitScript : MonoBehaviour
 
         return statbonuses;
     }
+
 
     public float GetSkillLevelMultiplier(int SkillID, Character Character = null)
     {
