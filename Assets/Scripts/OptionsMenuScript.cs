@@ -175,7 +175,7 @@ public class OptionsMenuScript : MonoBehaviour
         }
         else
         {
-            BattleAnimations.text = "Battle Animations : Locked";
+            BattleAnimations.text = "Battle Animations : Off";
         }
     }
 
