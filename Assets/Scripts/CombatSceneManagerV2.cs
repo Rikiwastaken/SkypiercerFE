@@ -154,10 +154,6 @@ public class CombatSceneManagerV2 : MonoBehaviour
     [SerializeField] private List<int> levelupbonus;
     [SerializeField] private int exp;
     [SerializeField] private bool ishealing;
-    [SerializeField] private bool isinBeforeBattleStarts;
-    [SerializeField] private bool isinAttackerTurn;
-    [SerializeField] private bool isinDefenderTurn;
-    [SerializeField] private bool isinEndOfCombat;
 
     private void Awake()
     {
@@ -294,7 +290,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
     public IEnumerator BeforeBattleStarts()
     {
-        isinBeforeBattleStarts = true;
+
 
         Debug.Log("BeforeBattleStarts");
 
@@ -313,7 +309,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
         StartCoroutine(ShowText(AttackerDescription, timetoshownames));
         yield return StartCoroutine(ShowText(DefenderDescription, timetoshownames));
 
-        isinBeforeBattleStarts = false;
+
         StartCoroutine(AttackerTurn());
     }
 
@@ -323,7 +319,6 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
         Debug.Log("AttackerTurn");
 
-        isinAttackerTurn = true;
 
         bool isranged = DetermineIfRanged(AttackerInfo);
         if (!isranged)
@@ -423,13 +418,13 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
 
 
-        isinAttackerTurn = false;
+
         StartCoroutine(DefenderTurn());
     }
     public IEnumerator DefenderTurn()
     {
         Debug.Log("DefenderTurn");
-        isinDefenderTurn = true;
+
 
         if (DefenderInfo.attacks.Count > 0)
         {
@@ -526,7 +521,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
 
 
 
-        isinDefenderTurn = false;
+
         StartCoroutine(EndOfCombat());
     }
 
@@ -605,7 +600,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
     public IEnumerator EndOfCombat()
     {
         Debug.Log("EndOfCombat");
-        isinEndOfCombat = true;
+
 
 
         GameObject importantGO = null;
@@ -661,7 +656,7 @@ public class CombatSceneManagerV2 : MonoBehaviour
     {
         Debug.Log("ClosingScene");
         EventSystem.SetActive(false);
-        isinEndOfCombat = false;
+
         CameraHolder.transform.parent = null;
         if (FindAnyObjectByType<CombatSceneLoader>() != null)
         {

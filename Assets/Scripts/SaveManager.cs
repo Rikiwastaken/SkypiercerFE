@@ -110,10 +110,6 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
         LoadOptions();
-        if (Options.BattleAnimations)
-        {
-            Options.BattleAnimations = false;
-        }
         SaveOptions();
         DefaultSave.slot = -1;
         DefaultSave.versionID = versionID;

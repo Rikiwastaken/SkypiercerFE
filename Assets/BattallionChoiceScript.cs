@@ -18,7 +18,6 @@ public class BattallionChoiceScript : MonoBehaviour
     [SerializeField] private Image UnitImage;
     [SerializeField] private Button ButtonToReturnToAfterClosingMenu;
 
-    private Character CurrentSelectedChar;
     [SerializeField] private List<Character> CharacterList = new List<Character>();
     private DataScript _DataScript;
 
@@ -112,7 +111,6 @@ public class BattallionChoiceScript : MonoBehaviour
         {
             _DataScript = DataScript.instance;
         }
-        CurrentSelectedChar = null;
         CharacterList = new List<Character>();
         foreach (Character character in _DataScript.PlayableCharacterList)
         {

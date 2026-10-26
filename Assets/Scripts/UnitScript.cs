@@ -582,6 +582,10 @@ public class UnitScript : MonoBehaviour
     }
     public void InstantiateCharacterModel(string layername = null)
     {
+        if (ActiveModel != null)
+        {
+            DestroyImmediate(ActiveModel.gameObject);
+        }
 
         if (UnitCharacteristics.affiliation == "breakable")
         {
@@ -3494,9 +3498,13 @@ public class UnitScript : MonoBehaviour
 
         return statbonuses;
     }
-    public AllStatsSkillBonus GetStatSkillBonus(GameObject enemy, bool incombat)
+    public AllStatsSkillBonus GetStatSkillBonus(GameObject enemy, bool incombat, List<int> TriggerSkills = null)
     {
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
+        if (TriggerSkills == null)
+        {
+            TriggerSkills = new List<int>();
+        }
 
         List<List<GameObject>> UnitsGORankedByRange = new List<List<GameObject>>() { new List<GameObject>(), new List<GameObject>(), new List<GameObject>(), new List<GameObject>() };
         List<GameObject> allunitsGO = new List<GameObject>();
@@ -3553,6 +3561,7 @@ public class UnitScript : MonoBehaviour
             {
                 statbonuses.Crit += (int)(critvalue * multiplier);
                 statbonuses.Dodge += (int)(dodgevalue * multiplier);
+                TriggerSkills.Add(2);
             }
         }
         //Psychic
@@ -3610,6 +3619,7 @@ public class UnitScript : MonoBehaviour
                 {
                     statbonuses.FixedDamageBonus += (int)(DamageBonus * multiplier);
                     statbonuses.FixedDamageReduction += (int)(DamageReduction * multiplier);
+                    TriggerSkills.Add(6);
                     break;
                 }
             }
@@ -3649,6 +3659,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.Speed += 7;
                 statbonuses.Dexterity += 7;
                 statbonuses.Luck += 7;
+                TriggerSkills.Add(19);
             }
         }
         //In Great Shape
@@ -3661,6 +3672,7 @@ public class UnitScript : MonoBehaviour
                 int Bonus = (int)(Skillvalues[0] * multiplier);
                 statbonuses.Hit += Bonus;
                 statbonuses.Dodge += Bonus;
+                TriggerSkills.Add(21);
             }
         }
         // Competitive
@@ -3674,6 +3686,7 @@ public class UnitScript : MonoBehaviour
                     float multiplier = GetSkillLevelMultiplier(22);
                     int Bonus = (int)(Skillvalues[0] * multiplier);
                     statbonuses.FixedDamageBonus += Bonus;
+                    TriggerSkills.Add(22);
                 }
             }
 
@@ -3692,6 +3705,7 @@ public class UnitScript : MonoBehaviour
                     statbonuses.PhysDamage += DamageBonus;
                     statbonuses.TelekDamage += DamageBonus;
                     statbonuses.DamageReduction += DamageReductionBonus;
+                    TriggerSkills.Add(23);
                 }
             }
 
@@ -3730,6 +3744,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.Speed += (int)(UnitCharacteristics.AjustedStats.Speed * StatMult);
                 statbonuses.Dexterity += (int)(UnitCharacteristics.AjustedStats.Dexterity * StatMult);
                 statbonuses.Luck += (int)(UnitCharacteristics.AjustedStats.Luck * StatMult);
+                TriggerSkills.Add(24);
             }
         }
         // Solitary
@@ -3770,6 +3785,7 @@ public class UnitScript : MonoBehaviour
                 float multiplier = GetSkillLevelMultiplier(26);
                 int DmgBonus = (int)(Skillvalues[0] * multiplier);
                 statbonuses.FixedDamageBonus += DmgBonus;
+                TriggerSkills.Add(26);
             }
         }
 
@@ -3779,6 +3795,7 @@ public class UnitScript : MonoBehaviour
             if (enemy != null)
             {
                 statbonuses.FixedDamageBonus += ((int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP);
+                TriggerSkills.Add(28);
             }
 
         }
@@ -3788,13 +3805,18 @@ public class UnitScript : MonoBehaviour
             List<int> Skillvalues = dataScript.SkillList[29].SkillValues;
             float multiplier = GetSkillLevelMultiplier(29);
             float Bonus = (Skillvalues[0] * multiplier);
-            statbonuses.Strength += (int)(Bonus * unitkilled);
-            statbonuses.Psyche += (int)(Bonus * unitkilled);
-            statbonuses.Resistance += (int)(Bonus * unitkilled);
-            statbonuses.Defense += (int)(Bonus * unitkilled);
-            statbonuses.Speed += (int)(Bonus * unitkilled);
-            statbonuses.Dexterity += (int)(Bonus * unitkilled);
-            statbonuses.Luck += (int)(Bonus * unitkilled);
+            int finalBonus = (int)(Bonus * unitkilled);
+            statbonuses.Strength += finalBonus;
+            statbonuses.Psyche += finalBonus;
+            statbonuses.Resistance += finalBonus;
+            statbonuses.Defense += finalBonus;
+            statbonuses.Speed += finalBonus;
+            statbonuses.Dexterity += finalBonus;
+            statbonuses.Luck += finalBonus;
+            if (finalBonus > 0)
+            {
+                TriggerSkills.Add(29);
+            }
         }
 
         //Survivor
@@ -3812,6 +3834,10 @@ public class UnitScript : MonoBehaviour
             statbonuses.Speed += totalstatbonus;
             statbonuses.Dexterity += totalstatbonus;
             statbonuses.Luck += totalstatbonus;
+            if (totalstatbonus > 0)
+            {
+                TriggerSkills.Add(32);
+            }
         }
         //Bravery
         if (GetSkill(36))
@@ -3836,6 +3862,7 @@ public class UnitScript : MonoBehaviour
                     statbonuses.Speed += TotalBonus;
                     statbonuses.Dexterity += TotalBonus;
                     statbonuses.Luck += TotalBonus;
+                    TriggerSkills.Add(36);
                 }
             }
 
@@ -3850,6 +3877,7 @@ public class UnitScript : MonoBehaviour
             int Bonus = (int)(Skillvalues[0] * multiplier);
             statbonuses.Hit += Bonus;
             statbonuses.Dodge -= Bonus;
+            TriggerSkills.Add(37);
         }
         //Thousand Needles
         if (GetSkill(39))
@@ -3859,6 +3887,7 @@ public class UnitScript : MonoBehaviour
             int Malus = (int)(Skillvalues[1] * multiplier);
             statbonuses.PhysDamage -= Malus;
             statbonuses.TelekDamage -= Malus;
+            TriggerSkills.Add(39);
         }
 
         // Together we ride
@@ -3888,6 +3917,10 @@ public class UnitScript : MonoBehaviour
             statbonuses.Speed += Bonus;
             statbonuses.Dexterity += Bonus;
             statbonuses.Luck += Bonus;
+            if (Bonus > 0)
+            {
+                TriggerSkills.Add(41);
+            }
 
         }
 
@@ -3901,6 +3934,10 @@ public class UnitScript : MonoBehaviour
             int dmgbonus = (int)Mathf.Min(bonus, limit);
             statbonuses.TelekDamage += dmgbonus;
             statbonuses.PhysDamage += dmgbonus;
+            if (dmgbonus > 0)
+            {
+                TriggerSkills.Add(42);
+            }
         }
 
         // Recklessness
@@ -3912,6 +3949,7 @@ public class UnitScript : MonoBehaviour
             statbonuses.TelekDamage += bonus;
             statbonuses.PhysDamage += bonus;
             statbonuses.DamageReduction -= bonus;
+            TriggerSkills.Add(43);
         }
 
         //TransparentCrossBow
@@ -3924,6 +3962,7 @@ public class UnitScript : MonoBehaviour
             statbonuses.Speed += SpeedBonus;
             statbonuses.PhysDamage += DmgBonus;
             statbonuses.TelekDamage += DmgBonus;
+            TriggerSkills.Add(45);
         }
 
         // Enduring
@@ -3935,6 +3974,10 @@ public class UnitScript : MonoBehaviour
             int dmgbonus = (int)((UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP) * Ratio);
             statbonuses.TelekDamage += dmgbonus;
             statbonuses.PhysDamage += dmgbonus;
+            if (dmgbonus > 0)
+            {
+                TriggerSkills.Add(55);
+            }
         }
 
         // Crystal Heart
@@ -3944,6 +3987,7 @@ public class UnitScript : MonoBehaviour
             int dodgebonus = Skillvalues[0];
             float multiplier = GetSkillLevelMultiplier(57);
             statbonuses.Dodge += (int)(dodgebonus * multiplier);
+            TriggerSkills.Add(55);
         }
 
         //Amphibian
@@ -3958,6 +4002,7 @@ public class UnitScript : MonoBehaviour
                     float multiplier = GetSkillLevelMultiplier(61);
                     statbonuses.Dodge += (int)(Skillvalues[0] * multiplier);
                     statbonuses.Hit += (int)(Skillvalues[0] * multiplier);
+                    TriggerSkills.Add(61);
                 }
             }
 
@@ -3984,6 +4029,7 @@ public class UnitScript : MonoBehaviour
                     statbonuses.TelekDamage += bonus;
                     statbonuses.PhysDamage += bonus;
                 }
+                TriggerSkills.Add(62);
             }
 
 
@@ -4002,6 +4048,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.Hit += Hitbonus;
                 statbonuses.TelekDamage += DmgBonus;
                 statbonuses.PhysDamage += DmgBonus;
+                TriggerSkills.Add(63);
             }
         }
 
@@ -4011,6 +4058,7 @@ public class UnitScript : MonoBehaviour
             List<int> Skillvalues = dataScript.SkillList[64].SkillValues;
             float multiplier = GetSkillLevelMultiplier(64);
             statbonuses.Crit += (int)(Skillvalues[0] * multiplier);
+            TriggerSkills.Add(64);
         }
 
         //Showdown (enemy unit)
@@ -4027,6 +4075,7 @@ public class UnitScript : MonoBehaviour
             List<int> Skillvalues = dataScript.SkillList[65].SkillValues;
             float multiplier = GetSkillLevelMultiplier(65);
             statbonuses.Crit -= (int)(Skillvalues[0] * multiplier);
+            TriggerSkills.Add(65);
         }
 
         //Fair Play (enemy unit)
@@ -4044,6 +4093,7 @@ public class UnitScript : MonoBehaviour
             float multiplier = GetSkillLevelMultiplier(68);
             float ratio = (Skillvalues[0] / 100f * multiplier);
             statbonuses.FixedDamageBonus += (int)(weapon.BaseDamage * ratio);
+            TriggerSkills.Add(68);
         }
 
         //Occidens Strategist
@@ -4053,6 +4103,7 @@ public class UnitScript : MonoBehaviour
             int hitbonus = Skillvalues[0];
             float multiplier = GetSkillLevelMultiplier(72);
             statbonuses.Hit += (int)(hitbonus * multiplier);
+            TriggerSkills.Add(72);
         }
 
 
@@ -4065,6 +4116,7 @@ public class UnitScript : MonoBehaviour
             float multiplier = GetSkillLevelMultiplier(73);
             statbonuses.TelekDamage += (int)(damagebonus * multiplier);
             statbonuses.PhysDamage += (int)(damagebonus * multiplier);
+            TriggerSkills.Add(73);
         }
 
         //Eye of Shining Justice
@@ -4077,6 +4129,7 @@ public class UnitScript : MonoBehaviour
             int damagereduction = (int)(Skillvalues[1] * multiplier);
             statbonuses.FixedDamageBonus += damagebonus;
             statbonuses.FixedDamageReduction += damagereduction;
+            TriggerSkills.Add(74);
         }
 
         //Caelum General
@@ -4087,6 +4140,7 @@ public class UnitScript : MonoBehaviour
             float multiplier = GetSkillLevelMultiplier(77);
             int damageReductionbonus = (int)(Skillvalues[0] * multiplier);
             statbonuses.DamageReduction += damageReductionbonus;
+            TriggerSkills.Add(77);
         }
 
         //Overly Cautious
@@ -4100,6 +4154,7 @@ public class UnitScript : MonoBehaviour
 
             statbonuses.Crit -= (int)(CritReduction * multiplier);
             statbonuses.Dodge += (int)(DodgeBonus * multiplier);
+            TriggerSkills.Add(78);
         }
 
         //Brawl Master
@@ -4113,6 +4168,7 @@ public class UnitScript : MonoBehaviour
 
             statbonuses.Hit += (int)(UnitCharacteristics.AjustedStats.Dexterity + statbonuses.Dexterity * HitBonus);
             statbonuses.PhysDamage += (int)(UnitCharacteristics.AjustedStats.Strength + statbonuses.Strength / PhysDamageBonus);
+            TriggerSkills.Add(80);
         }
 
         //Born to burn
@@ -4129,6 +4185,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.Hit += HitDodgeBonus;
                 statbonuses.Dodge += HitDodgeBonus;
                 statbonuses.Crit += CritBonus;
+                TriggerSkills.Add(83);
             }
         }
 
@@ -4141,6 +4198,7 @@ public class UnitScript : MonoBehaviour
             statbonuses.PhysDamage += bonus;
             statbonuses.TelekDamage += bonus;
             statbonuses.Dodge += bonus;
+            TriggerSkills.Add(89);
         }
 
         //LightSpeed
@@ -4154,6 +4212,7 @@ public class UnitScript : MonoBehaviour
                 int CritBonus = (int)(Skillvalues[1] * multiplier);
                 statbonuses.Dodge += DodgeBonus;
                 statbonuses.Crit += CritBonus;
+                TriggerSkills.Add(90);
             }
         }
 
@@ -4167,21 +4226,25 @@ public class UnitScript : MonoBehaviour
             {
                 statbonuses.PhysDamage += Bonus;
                 statbonuses.TelekDamage += Bonus;
+                TriggerSkills.Add(92);
             }
             if (UnitCharacteristics.statusEffects.BurnTurns > 0)
             {
                 statbonuses.PhysDamage += Bonus;
                 statbonuses.TelekDamage += Bonus;
+                TriggerSkills.Add(92);
             }
             if (UnitCharacteristics.statusEffects.WeaknessTurns > 0)
             {
                 statbonuses.PhysDamage += Bonus;
                 statbonuses.TelekDamage += Bonus;
+                TriggerSkills.Add(92);
             }
             if (UnitCharacteristics.statusEffects.StunTurns > 0)
             {
                 statbonuses.PhysDamage += Bonus;
                 statbonuses.TelekDamage += Bonus;
+                TriggerSkills.Add(92);
             }
         }
 
@@ -4196,6 +4259,10 @@ public class UnitScript : MonoBehaviour
 
             statbonuses.PhysDamage += Realbonus;
             statbonuses.TelekDamage += Realbonus;
+            if (Realbonus > 0)
+            {
+                TriggerSkills.Add(95);
+            }
         }
 
         //Sword Mastery
@@ -4216,6 +4283,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.PhysDamage -= 15;
                 statbonuses.TelekDamage -= 15;
             }
+            TriggerSkills.Add(98);
         }
 
         //Greatsword Mastery
@@ -4234,6 +4302,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.PhysDamage -= 15;
                 statbonuses.TelekDamage -= 15;
             }
+            TriggerSkills.Add(99);
         }
 
         //Spear Mastery
@@ -4254,6 +4323,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.PhysDamage -= 15;
                 statbonuses.TelekDamage -= 15;
             }
+            TriggerSkills.Add(100);
         }
 
         //Shield Mastery
@@ -4274,6 +4344,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.PhysDamage -= 15;
                 statbonuses.TelekDamage -= 15;
             }
+            TriggerSkills.Add(101);
         }
 
         //Staff Mastery
@@ -4293,6 +4364,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.PhysDamage -= 15;
                 statbonuses.TelekDamage -= 15;
             }
+            TriggerSkills.Add(102);
         }
 
         //Scythe Mastery
@@ -4311,6 +4383,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.PhysDamage -= 25;
                 statbonuses.TelekDamage -= 25;
             }
+            TriggerSkills.Add(103);
         }
 
         //Bow Mastery
@@ -4330,6 +4403,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.PhysDamage -= 15;
                 statbonuses.TelekDamage -= 15;
             }
+            TriggerSkills.Add(104);
         }
 
         //Dagger Mastery
@@ -4350,6 +4424,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.PhysDamage -= 15;
                 statbonuses.TelekDamage -= 15;
             }
+            TriggerSkills.Add(105);
         }
 
 
@@ -4393,6 +4468,7 @@ public class UnitScript : MonoBehaviour
                 float multiplier = GetSkillLevelMultiplier(115);
                 int DamageReduction = (int)(Skillvalues[0] * multiplier);
                 statbonuses.FixedDamageBonus -= DamageReduction;
+                TriggerSkills.Add(115);
             }
 
             //Terrifying Aura
@@ -4404,6 +4480,7 @@ public class UnitScript : MonoBehaviour
                 statbonuses.Hit -= Malus;
                 statbonuses.Dodge -= Malus;
                 statbonuses.Crit -= Malus;
+                TriggerSkills.Add(116);
             }
 
             //Heroic Aura
@@ -4414,6 +4491,7 @@ public class UnitScript : MonoBehaviour
                 int Bonus = (int)(Skillvalues[0] * multiplier);
                 statbonuses.Hit += Bonus;
                 statbonuses.Dodge += Bonus;
+                TriggerSkills.Add(117);
             }
 
             //Empowering Aura
@@ -4423,6 +4501,7 @@ public class UnitScript : MonoBehaviour
                 float multiplier = GetSkillLevelMultiplier(118);
                 int Bonus = (int)(Skillvalues[0] * multiplier);
                 statbonuses.FixedDamageBonus += Bonus;
+                TriggerSkills.Add(118);
             }
         }
 
@@ -4525,6 +4604,7 @@ public class UnitScript : MonoBehaviour
             float multiplier = GetSkillLevelMultiplier(109);
             float Divider = ((Skillvalues[0] / 100f) / multiplier);
             statbonuses.Crit += (int)((UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) / Divider);
+            TriggerSkills.Add(109);
         }
 
         //Protected by luck
@@ -4534,6 +4614,7 @@ public class UnitScript : MonoBehaviour
             float multiplier = GetSkillLevelMultiplier(110);
             float AvoidMultiplier = (Skillvalues[0] / 100f * multiplier);
             statbonuses.CritAvoid += (int)((UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) * AvoidMultiplier);
+            TriggerSkills.Add(110);
         }
 
         if (incombat)
@@ -4549,6 +4630,7 @@ public class UnitScript : MonoBehaviour
                     float multiplier = GetSkillLevelMultiplier(108);
                     int DamageReductionBonus = (int)(Skillvalues[0] * multiplier);
                     statbonuses.DamageReduction += DamageReductionBonus;
+                    TriggerSkills.Add(108);
                 }
             }
 
@@ -4564,6 +4646,7 @@ public class UnitScript : MonoBehaviour
                 if (GetComponent<RandomScript>().GetPersonalityValue(targetvalue) <= targetvalue)
                 {
                     statbonuses.FixedDamageBonus += (int)(Luck / DamageMultiplier);
+                    TriggerSkills.Add(113);
                 }
             }
         }

@@ -381,6 +381,7 @@ public class AttackTurnScript : MonoBehaviour
                 }
                 else
                 {
+
                     AttackerGO.GetComponent<UnitScript>().MoveTo(DestinationVector);
                     counterbeforeattack = 0;
                     charAttacker.alreadymoved = true;
@@ -953,7 +954,11 @@ public class AttackTurnScript : MonoBehaviour
                 Character Targetcopy = CreateCopy(Chartarget);
 
 
-                (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
+                AllStatsSkillBonus AttackerStatBonus = Attacker.GetComponent<UnitScript>().GetStatSkillBonus(target, false);
+                AllStatsSkillBonus DefenderStatBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(Attacker, false);
+
+
+                (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target, AttackerStatBonus, DefenderStatBonus);
                 bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && !CharAttacker.attacksfriends));
                 if (ishealing)
                 {
@@ -964,24 +969,25 @@ public class AttackTurnScript : MonoBehaviour
                     foresightScript.CreateAction(0, Attacker, target);
                 }
 
-                int attackerhit = ActionsMenu.CalculateHit(Attacker, target, false);
-                int defenderhit = ActionsMenu.CalculateHit(target, Attacker, false);
+                int attackerhit = ActionsMenu.CalculateHit(Attacker, target, AttackerStatBonus, DefenderStatBonus);
+                int defenderhit = ActionsMenu.CalculateHit(target, Attacker, DefenderStatBonus, AttackerStatBonus);
 
                 int attackerdmg = 0;
                 int attackercrit = 0;
 
                 if (ishealing)
                 {
-                    attackerdmg = ActionsMenu.CalculateHealing(Attacker, false);
+                    attackerdmg = ActionsMenu.CalculateHealing(Attacker, AttackerStatBonus);
                 }
                 else
                 {
-                    attackerdmg = ActionsMenu.CalculateDamage(Attacker, false, target);
-                    attackercrit = ActionsMenu.CalculateCrit(Attacker, target, false);
+                    attackerdmg = ActionsMenu.CalculateDamage(Attacker, AttackerStatBonus, target, DefenderStatBonus);
+                    attackercrit = ActionsMenu.CalculateCrit(Attacker, target, AttackerStatBonus, DefenderStatBonus);
                 }
 
-                int defenderdmg = ActionsMenu.CalculateDamage(target, false, Attacker);
-                int defendercrit = ActionsMenu.CalculateCrit(target, Attacker, false);
+                int defenderdmg = ActionsMenu.CalculateDamage(target, DefenderStatBonus, Attacker, AttackerStatBonus);
+                int defendercrit = ActionsMenu.CalculateCrit(target, Attacker, DefenderStatBonus, AttackerStatBonus);
+
 
 
 
@@ -996,16 +1002,10 @@ public class AttackTurnScript : MonoBehaviour
                 List<int> defenderdamagelist = new List<int>();
                 List<int> AttackerSkillTriggersDuringCounterAttack = new List<int>();
                 List<int> DefenderSkillTriggersDuringCounterAttack = new List<int>();
-                bool doesdefenderattacks = false;
-
-                bool oneforallactivedefender = false;
-                bool unyieldingactivedefender = false;
-                bool compassionuseddefender = false;
-                bool invigoratinguseddefender = false;
 
                 if ((ActionsMenu.CheckifInRange(Attacker, target) || target.GetComponent<UnitScript>().GetSkill(38) && Chartarget.statusEffects.StunTurns <= 0) && !ishealing)
                 {
-                    doesdefenderattacks = true;
+
                     if (Chartarget.currentHP > 0)
                     {
                         (defenderhits, defenderdamage, defenderexp, defenderlevelbonus, defenderdamagelist, AttackerSkillTriggersDuringCounterAttack, DefenderSkillTriggersDuringCounterAttack) = ActionsMenu.ApplyDamage(Attacker, target, true, false);
@@ -1039,7 +1039,7 @@ public class AttackTurnScript : MonoBehaviour
 
 
                 CharAttacker.alreadyplayed = true;
-                combatsceneloader.ActivateCombatScene(Attackercopy, Targetcopy, attackerdamagelist, defenderdamagelist, attackerhit, attackercrit, attackerdmg, defenderhit, defendercrit, defenderdmg, expearned, levelbonus, doesdefenderattacks, AttackerSkillTriggers, DefenderSkillTriggers, AttackerSkillTriggersDuringCounterAttack, DefenderSkillTriggersDuringCounterAttack);
+                combatsceneloader.ActivateCombatScene(Attackercopy, Targetcopy, attackerhits, attackerdamagelist, AttackerSkillTriggers, DefenderSkillTriggers, defenderhits, defenderdamagelist, AttackerSkillTriggersDuringCounterAttack, DefenderSkillTriggersDuringCounterAttack, attackerdmg, attackerhit, attackercrit, defenderdmg, defenderhit, defendercrit, expearned, levelbonus);
 
             }
             else
@@ -1113,8 +1113,10 @@ public class AttackTurnScript : MonoBehaviour
             Character Chartarget = target.GetComponent<UnitScript>().UnitCharacteristics;
             Character Targetcopy = CreateCopy(Chartarget);
 
+            AllStatsSkillBonus AttackerStatBonus = Attacker.GetComponent<UnitScript>().GetStatSkillBonus(target, true);
+            AllStatsSkillBonus TargetStatBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(target, true);
 
-            (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target);
+            (GameObject doubleattacker, bool triple) = ActionsMenu.CalculatedoubleAttack(Attacker, target, AttackerStatBonus, TargetStatBonus);
             bool ishealing = Attacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff" && (CharAttacker.affiliation == target.GetComponent<UnitScript>().UnitCharacteristics.affiliation || (CharAttacker.affiliation == "playable" && target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "other" && !target.GetComponent<UnitScript>().UnitCharacteristics.attacksfriends) || (target.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && CharAttacker.affiliation == "other" && !CharAttacker.attacksfriends));
             if (ishealing)
             {
@@ -1169,10 +1171,6 @@ public class AttackTurnScript : MonoBehaviour
             List<int> defenderdamagelist = new List<int>();
             List<int> AttackerSkillTriggerDuringCounterAttack = new List<int>();
             List<int> DefenderSkilLTriggerDuringCounterAttack = new List<int>();
-            bool oneforallactivedefender = false;
-            bool unyieldingactivedefender = false;
-            bool compassionuseddefender = false;
-            bool invigoratinguseddefender = false;
 
 
             if (defenderattacks)
@@ -1648,9 +1646,9 @@ public class AttackTurnScript : MonoBehaviour
 
             List<GridSquareScript> potentialmovementtile = new List<GridSquareScript>();
 
-            for (int i = -attackerrange; i < attackerrange; i++)
+            for (int i = -attackerrange; i <= attackerrange; i++)
             {
-                for (int j = -attackerrange; j < attackerrange; j++)
+                for (int j = -attackerrange; j <= attackerrange; j++)
                 {
                     if (Mathf.Abs(i) + Mathf.Abs(j) <= attackerrange && (i != 0 || j != 0))
                     {
@@ -1978,10 +1976,13 @@ public class AttackTurnScript : MonoBehaviour
                 NoCounterFactor = 0f;
             }
 
-            int rawdamage = ActionsMenu.CalculateDamage(attacker, false, target);
-            int rawdamagetaken = ActionsMenu.CalculateDamage(target, false, attacker);
-            int hitrate = ActionsMenu.CalculateHit(attacker, target, false);
-            int EnemyHitrate = ActionsMenu.CalculateHit(target, attacker, false);
+            AllStatsSkillBonus AttackerStatBonus = attacker.GetComponent<UnitScript>().GetStatSkillBonus(target, false);
+            AllStatsSkillBonus TargetStatBonus = target.GetComponent<UnitScript>().GetStatSkillBonus(attacker, false);
+
+            int rawdamage = ActionsMenu.CalculateDamage(attacker, AttackerStatBonus, target, TargetStatBonus);
+            int rawdamagetaken = ActionsMenu.CalculateDamage(target, TargetStatBonus, attacker, AttackerStatBonus);
+            int hitrate = ActionsMenu.CalculateHit(attacker, target, AttackerStatBonus, TargetStatBonus);
+            int EnemyHitrate = ActionsMenu.CalculateHit(target, attacker, TargetStatBonus, AttackerStatBonus);
 
             bool inrange = ActionsMenu.CheckifInRange(attacker, target, tiletouse);
 

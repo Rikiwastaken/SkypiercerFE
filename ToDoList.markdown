@@ -31,8 +31,6 @@ scanner uniquement les unités concernées et pas toutes les unités.
 
 - Do several different camp environment
 
-- Reword Battle Animation Mode.
-
 - Rework Animation for Animation Tree
 
 - Make visuals for Boss Attacks

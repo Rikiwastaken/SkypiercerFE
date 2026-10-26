@@ -98,6 +98,9 @@ public class FreezeFrameCapture : MonoBehaviour
 
     private bool isClosing = false;
 
+    [SerializeField] private bool IsCombatVersion;
+    public CombatSceneManagerV3 _CombatSceneManagerV3;
+
     private void Awake()
     {
         instance = this;
@@ -513,7 +516,7 @@ public class FreezeFrameCapture : MonoBehaviour
 
         while (t < 1f)
         {
-            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher m�me si Time.timeScale = 0
+            t += Time.unscaledDeltaTime / splitDuration; // unscaled pour marcher meme si Time.timeScale = 0
 
             float eased = EaseOutCubic(t);
 
@@ -550,10 +553,10 @@ public class FreezeFrameCapture : MonoBehaviour
         right.transform.localPosition = new Vector2(1000, 0);
 
 
-        if (CombatSceneManagerV2.instance != null && CombatSceneManagerV2.instance.gameObject.activeInHierarchy)
+        if (IsCombatVersion)
         {
             Time.timeScale = 1;
-            CombatSceneManagerV2.instance.CloseCombatScene();
+            StartCoroutine(_CombatSceneManagerV3.CloseCombatScene(0f));
         }
         isClosing = false;
         CloseCoroutine = null;

@@ -60,7 +60,7 @@ public class CombatSceneLoader : MonoBehaviour
 
         combatScene = SceneManager.GetSceneByName(CombatSceneName);
         //FindAnyObjectByType<CombaSceneManager>().LoadEnvironment(MainSceneName, combatScene);
-        FindAnyObjectByType<CombatSceneManagerV2>().LoadEnvironment(MainSceneName, combatScene);
+        FindAnyObjectByType<CombatSceneManagerV3>().LoadEnvironment(MainSceneName, combatScene);
         // Hide combat scene root objects
         SetSceneVisible(combatScene, false);
 
@@ -89,7 +89,7 @@ public class CombatSceneLoader : MonoBehaviour
     }
 
     // Activate combat scene
-    public void ActivateCombatScene(Character attacker, Character defender, List<int> attackerattacks, List<int> defenderattacks, int attackerhitrate, int attackercritrate, int attackerdamage, int defenderhitrate, int defendercritrate, int defenderdamage, int expgained, List<int> levelupbonuses, bool doesdefenderattacks, List<int> AttackerSkillTriggers, List<int> DefenderSkillTriggers, List<int> AttackerSkillTriggersDuringCounterAttack, List<int> DefenderSkillTriggersDuringCounterAttack)
+    public void ActivateCombatScene(Character attackerCopyBeforeCombat, Character defenderCopyBeforeCombat, List<int> AttackerHits, List<int> AttackerDamage, List<int> AttackerToDefenderAttackerSkillTriggers, List<int> AttackerToDefenderDefenderSkillTriggers, List<int> Defenderhits, List<int> Defenderdamage, List<int> DefenderToAttackerAttackerSkillTriggers, List<int> DefenderToAttackerDefenderSkillTriggers, int AttackerBaseDmg, int AttackerBaseHitRate, int AttackerBaseCrit, int DefenderBaseDmg, int DefenderBaseHitRate, int DefenderBaseCrit, int expearned, List<int> LevelUpBonuses)
     {
         if (!combatLoaded)
         {
@@ -106,10 +106,10 @@ public class CombatSceneLoader : MonoBehaviour
             toScene: combatScene,
             onSceneActivated: () =>
             {
-                var combatManager = FindAnyObjectByType<CombatSceneManagerV2>();
+                var combatManager = FindAnyObjectByType<CombatSceneManagerV3>();
                 if (combatManager != null)
                 {
-                    combatManager.SetupScene(attacker, defender, attackerattacks, defenderattacks, attackerhitrate, attackercritrate, attackerdamage, defenderhitrate, defendercritrate, defenderdamage, expgained, levelupbonuses, doesdefenderattacks, AttackerSkillTriggers, DefenderSkillTriggers, AttackerSkillTriggersDuringCounterAttack, DefenderSkillTriggersDuringCounterAttack);
+                    combatManager.SetupScene(this, attackerCopyBeforeCombat, defenderCopyBeforeCombat, AttackerHits, AttackerDamage, AttackerToDefenderAttackerSkillTriggers, AttackerToDefenderDefenderSkillTriggers, Defenderhits, Defenderdamage, DefenderToAttackerAttackerSkillTriggers, DefenderToAttackerDefenderSkillTriggers, AttackerBaseDmg, AttackerBaseHitRate, AttackerBaseCrit, DefenderBaseDmg, DefenderBaseHitRate, DefenderBaseCrit, expearned, LevelUpBonuses);
                 }
             }));
     }

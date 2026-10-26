@@ -86,7 +86,7 @@ public class WeaponPrefabScript : MonoBehaviour
 
     public void SwitchWeaponGO(string type, string name, int level, string LayerMaskName, float scale = 0.5f, UnitScript.Character User = null, bool switchinstantly = false)
     {
-        if (CurrentlyAppearing.weaponType != null && CurrentlyAppearing.weaponType.ToLower() == type.ToLower() && currentEquipedLevel == level)
+        if (currentWeaponGO != null && CurrentlyAppearing.weaponType != null && CurrentlyAppearing.weaponType.ToLower() == type.ToLower() && currentEquipedLevel == level)
         {
             return;
         }

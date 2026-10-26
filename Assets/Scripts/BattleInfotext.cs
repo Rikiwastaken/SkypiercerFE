@@ -361,15 +361,17 @@ public class BattleInfotext : MonoBehaviour
                     LuckAndMovTMP.text = "Lck: " + luckcolorstring + (selectedunitCharacter.AjustedStats.Luck + statsmods.Luck) + "</color>\n";
                     LuckAndMovTMP.text += "Mvt: " + (selectedunitCharacter.movements - 1);
 
-                    (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(selectedunit, true, null, false);
+                    AllStatsSkillBonus UnitStatBonus = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null, false);
+
+                    (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(selectedunit, true, UnitStatBonus, null, null);
 
                     string dmgcolorstring = getcolorstring(damagebonus);
 
                     DmgTMP.text = "" + dmgcolorstring + BaseDamage;
 
-                    int HitRate = ActionsMenu.CalculateBaseHitUnit(selectedunit, null);
-                    int CritRate = ActionsMenu.CalculateCrit(selectedunit, null, false);
-                    int DodgeRate = ActionsMenu.CalculateBaseDodgeUnit(selectedunit, null);
+                    int HitRate = ActionsMenu.CalculateBaseHitUnit(selectedunit, null, UnitStatBonus);
+                    int CritRate = ActionsMenu.CalculateCrit(selectedunit, null, UnitStatBonus, null);
+                    int DodgeRate = ActionsMenu.CalculateBaseDodgeUnit(selectedunit, null, UnitStatBonus);
 
                     HitCritAndDodgeTMP.text = "Hit: " + HitRate + "\nCrit: " + CritRate + "\nDge: " + DodgeRate;
 

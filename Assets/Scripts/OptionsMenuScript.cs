@@ -42,15 +42,15 @@ public class OptionsMenuScript : MonoBehaviour
         {
             fullscreentext.text = "Fullscreen : Off";
         }
-        //if (SaveManager.Options.BattleAnimations)
-        //{
-        //    BattleAnimations.text = "Battle Animations : On";
-        //}
-        //else
-        //{
-        //    BattleAnimations.text = "Battle Animations : Off";
-        //}
-        BattleAnimations.text = "Battle Animations : Locked";
+        if (SaveManager.Options.BattleAnimations)
+        {
+            BattleAnimations.text = "Battle Animations : On";
+        }
+        else
+        {
+            BattleAnimations.text = "Battle Animations : Off";
+        }
+
 
         musictext.text = "Music : " + (int)(SaveManager.Options.musicvolume * 100);
         SEtext.text = "Sound : " + (int)(SaveManager.Options.SEVolume * 100);
@@ -167,7 +167,7 @@ public class OptionsMenuScript : MonoBehaviour
 
     public void TogglebattleAnimations()
     {
-        SaveManager.Options.BattleAnimations = false;
+        SaveManager.Options.BattleAnimations = !SaveManager.Options.BattleAnimations;
         SaveManager.SaveOptions();
         if (SaveManager.Options.BattleAnimations)
         {

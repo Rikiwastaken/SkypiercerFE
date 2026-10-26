@@ -83,6 +83,10 @@ public class CombatTextScript : MonoBehaviour
         string attackerText = attacker.name + "\n";
         string defenderText = defender.name + "\n";
         bool ishealing = false;
+
+        AllStatsSkillBonus NewAttackerStatBonus = newattacker.GetComponent<UnitScript>().GetStatSkillBonus(newdefender, false);
+        AllStatsSkillBonus NewDefenderStatBonus = newattacker.GetComponent<UnitScript>().GetStatSkillBonus(newattacker, false);
+
         if (newattacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
         {
             string attackeraffiliation = attacker.affiliation.ToLower();
@@ -102,18 +106,18 @@ public class CombatTextScript : MonoBehaviour
         }
         if (ishealing)
         {
-            int healing = ActionsMenu.CalculateHealing(newattacker, false);
+            int healing = ActionsMenu.CalculateHealing(newattacker, NewAttackerStatBonus);
             attackerText += "healing: " + healing + "  hit: 100%  crit: -";
             defenderText += "dmg: -  hit: -  crit: -";
         }
         else
         {
-            (GameObject doubler, bool istriple) = ActionsMenu.CalculatedoubleAttack(newattacker, newdefender);
+            (GameObject doubler, bool istriple) = ActionsMenu.CalculatedoubleAttack(newattacker, newdefender, NewAttackerStatBonus, NewDefenderStatBonus);
 
 
-            int damagedealtattacker = ActionsMenu.CalculateDamage(newattacker, false, newdefender);
-            int hitrateattacker = ActionsMenu.CalculateHit(newattacker, newdefender, false);
-            int critrateattacker = ActionsMenu.CalculateCrit(newattacker, newdefender, false);
+            int damagedealtattacker = ActionsMenu.CalculateDamage(newattacker, NewAttackerStatBonus, newdefender, NewDefenderStatBonus);
+            int hitrateattacker = ActionsMenu.CalculateHit(newattacker, newdefender, NewAttackerStatBonus, NewDefenderStatBonus);
+            int critrateattacker = ActionsMenu.CalculateCrit(newattacker, newdefender, NewAttackerStatBonus, NewDefenderStatBonus);
 
             attackerText += "dmg: " + damagedealtattacker;
             if (doubler == newattacker)
@@ -131,9 +135,9 @@ public class CombatTextScript : MonoBehaviour
             attackerText += "  hit: " + hitrateattacker + "%  crit: " + critrateattacker + "%";
             if (ActionsMenu.instance.CheckifInRange(newattacker, newdefender) || newdefender.GetComponent<UnitScript>().GetSkill(38) || newdefender.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
             {
-                int damagedealtDefender = ActionsMenu.CalculateDamage(newdefender, false, newattacker);
-                int hitrateDefender = ActionsMenu.CalculateHit(newdefender, newattacker, false);
-                int critrateDefender = ActionsMenu.CalculateCrit(newdefender, newattacker, false);
+                int damagedealtDefender = ActionsMenu.CalculateDamage(newdefender, NewDefenderStatBonus, newattacker, NewAttackerStatBonus);
+                int hitrateDefender = ActionsMenu.CalculateHit(newdefender, newattacker, NewDefenderStatBonus, NewAttackerStatBonus);
+                int critrateDefender = ActionsMenu.CalculateCrit(newdefender, newattacker, NewDefenderStatBonus, NewAttackerStatBonus);
 
                 defenderText += "dmg: " + damagedealtDefender;
                 if (doubler == newdefender)

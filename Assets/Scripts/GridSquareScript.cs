@@ -542,7 +542,11 @@ public class GridSquareScript : MonoBehaviour
 
             BossLifeBarBG.gameObject.SetActive(true);
 
-            int damagetaken = actionsmenu.CalculateDamage(MapInitializer.currentboss.gameObject, false, unit);
+            GameObject Boss = MapInitializer.currentboss.gameObject;
+            AllStatsSkillBonus BossStatBonus = Boss.GetComponent<UnitScript>().GetStatSkillBonus(unit, false);
+            AllStatsSkillBonus UnitStatBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(Boss, false);
+
+            int damagetaken = actionsmenu.CalculateDamage(Boss, BossStatBonus, unit, UnitStatBonus);
             if (Intercepter != null)
             {
                 if (Intercepter == unit)
