@@ -871,39 +871,6 @@ public class CombatSceneManagerV3 : MonoBehaviour
 
     }
 
-    [ContextMenu("InstantiateEnvironmentAndCharactersForTesting")]
-    private void GenerateTestScene()
-    {
-        if (AttackerUS == null)
-        {
-            AttackerUS = AttackerGO.GetComponent<UnitScript>();
-            DefenderUS = DefenderGO.GetComponent<UnitScript>();
-        }
-        InitializePositions();
-        DataScript DS = null;
-        string[] scriptGUIDs = UnityEditor.AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Prefabs" });
-        foreach (string guid in scriptGUIDs)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject GO = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-
-            if (GO.GetComponent<DataScript>())
-            {
-                DS = GO.GetComponent<DataScript>();
-            }
-
-        }
-        if (DS != null)
-        {
-            Debug.Log("DataScript found");
-        }
-        string Chaptername = "Chapter" + TestSceneID;
-        StartCoroutine(LoadEnvironmentAsync(Chaptername, SceneManager.GetActiveScene()));
-        AttackerUS.UnitCharacteristics = CalculationToolsScript.CreateCopy(DS.PlayableCharacterList[TestAttackerID]);
-        AttackerUS.InstantiateCharacterModel("Default");
-        DefenderUS.UnitCharacteristics = CalculationToolsScript.CreateCopy(DS.PlayableCharacterList[TestDefenderID]);
-        DefenderUS.InstantiateCharacterModel("Default");
-    }
 
     private void InitializePositions()
     {
@@ -912,23 +879,6 @@ public class CombatSceneManagerV3 : MonoBehaviour
         FighterCamHolder.position = (AttackerStartpos + DefenderStartpos) / 2f + new Vector3(0f, 1f, 0f);
     }
 
-    /*
-     
-     phases:
-    - Cam starts behind attacker
-
-    - if attacker is not ranged, it runs to enemy. For that phase the camera is childed to the attacker (prévoir trois positions possibles en cas de déplacement ( haut, milieu, bas)
-
-    - if character is ranged they attack directly
-
-    - In Attack Phase Place the camera to look between the characters. For the transitions, a cut to this one is fine. The camera needs to move as the characters move if it's the case. Maybe use dotween to move cameras a bit.
-
-    - Pour le déplacement de l'autre unité, reculer juste un peu la cam.
-
-    - Pour les résulat, gros plan sur l'unité allié. sinon skip
-
-     
-     */
 
 
     private void ResetSkillIcons()
@@ -972,6 +922,40 @@ public class CombatSceneManagerV3 : MonoBehaviour
         }
 
     }
+#if UNITY_EDITOR
+    [ContextMenu("InstantiateEnvironmentAndCharactersForTesting")]
+    private void GenerateTestScene()
+    {
+        if (AttackerUS == null)
+        {
+            AttackerUS = AttackerGO.GetComponent<UnitScript>();
+            DefenderUS = DefenderGO.GetComponent<UnitScript>();
+        }
+        InitializePositions();
+        DataScript DS = null;
+        string[] scriptGUIDs = UnityEditor.AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Prefabs" });
+        foreach (string guid in scriptGUIDs)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject GO = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+
+            if (GO.GetComponent<DataScript>())
+            {
+                DS = GO.GetComponent<DataScript>();
+            }
+
+        }
+        if (DS != null)
+        {
+            Debug.Log("DataScript found");
+        }
+        string Chaptername = "Chapter" + TestSceneID;
+        StartCoroutine(LoadEnvironmentAsync(Chaptername, SceneManager.GetActiveScene()));
+        AttackerUS.UnitCharacteristics = CalculationToolsScript.CreateCopy(DS.PlayableCharacterList[TestAttackerID]);
+        AttackerUS.InstantiateCharacterModel("Default");
+        DefenderUS.UnitCharacteristics = CalculationToolsScript.CreateCopy(DS.PlayableCharacterList[TestDefenderID]);
+        DefenderUS.InstantiateCharacterModel("Default");
+    }
 
     [ContextMenu("Fill Cam Data")]
     private void FillCamData()
@@ -1008,5 +992,5 @@ public class CombatSceneManagerV3 : MonoBehaviour
         }
 
     }
-
+#endif
 }
