@@ -269,7 +269,8 @@ public class FreezeFrameCapture : MonoBehaviour
         SkillCoinText.text = "Skill Coins: " + (DataScript.instance.SkillCoins - 1) + " <sprite=17><color=yellow> " + DataScript.instance.SkillCoins;
 
 
-        CharacterSprite.GetComponent<Image>().sprite = DataScript.instance.DialogueSpriteList[characterWhoLeveledUp.ID];
+
+        CharacterSprite.GetComponent<Image>().sprite = DataScript.instance.DialogueCharacterList[characterWhoLeveledUp.ID].Portrait;
 
 
         ApplyDistortion(CharacterName, characterWhoLeveledUp.name, righttextsizeratio, righttextsizeratio);

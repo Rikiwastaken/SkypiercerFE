@@ -62,7 +62,7 @@ Music by <a href="https://maou.audio/category/bgm/"> Maoudamashii </a> and<a hre
 
 Icons by xoraki_rkd
 
-Placeholder images borrowed from Fire Emblem Awakening and Fire Emblem Echoes, Shadows of Valentia (I do not own these images).
+Placeholder character images made with <a href="https://charat.me/en/"> Charat.me </a>.
 
 ## Controls
 

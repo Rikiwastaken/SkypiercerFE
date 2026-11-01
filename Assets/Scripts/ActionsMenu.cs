@@ -1707,7 +1707,7 @@ public class ActionsMenu : MonoBehaviour
             Sprite spriteToUse = null;
             if (character.affiliation.ToLower() == "playable")
             {
-                spriteToUse = DataScript.instance.DialogueSpriteList[character.ID];
+                spriteToUse = DataScript.instance.DialogueCharacterList[character.ID].Portrait;
             }
             else if (character.affiliation.ToLower() == "breakable")
             {
@@ -1715,7 +1715,7 @@ public class ActionsMenu : MonoBehaviour
             }
             else if (character.enemyStats.PlayableSpriteID > 0)
             {
-                spriteToUse = DataScript.instance.DialogueSpriteList[character.enemyStats.PlayableSpriteID];
+                spriteToUse = DataScript.instance.DialogueCharacterList[character.enemyStats.PlayableSpriteID].Portrait;
             }
             else
             {

@@ -296,11 +296,11 @@ public class BattleInfotext : MonoBehaviour
                     Sprite spriteToUse = null;
                     if (selectedunitCharacter.affiliation.ToLower() == "playable")
                     {
-                        spriteToUse = DataScript.instance.DialogueSpriteList[selectedunitCharacter.ID];
+                        spriteToUse = DataScript.instance.DialogueCharacterList[selectedunitCharacter.ID].Portrait;
                     }
                     else if (selectedunitCharacter.enemyStats.PlayableSpriteID > 0)
                     {
-                        spriteToUse = DataScript.instance.DialogueSpriteList[selectedunitCharacter.enemyStats.PlayableSpriteID];
+                        spriteToUse = DataScript.instance.DialogueCharacterList[selectedunitCharacter.enemyStats.PlayableSpriteID].Portrait;
                     }
                     else
                     {

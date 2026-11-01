@@ -142,8 +142,6 @@ public class DataScript : MonoBehaviour
     public List<Character> DefaultPlayableCharacterList;
     public Inventory DefaultInventory;
 
-    public List<Sprite> DialogueSpriteList;
-
     public List<Sprite> EnemySprites;
     [Header("1-50 Playables 51-inf NPCs")]
     public List<CharacterDialogueInfo> DialogueCharacterList;
@@ -1537,33 +1535,7 @@ public class DataScript : MonoBehaviour
         return true;
     }
 
-    [ContextMenu("Turn Unitscript Characters into CharacterDialogueInfo")]
-    private void TurnCharactersIntoCharacterDialogueInfo()
-    {
-        List<CharacterDialogueInfo> newDialogueCharacterList = new List<CharacterDialogueInfo>();
 
-        int ID = 0;
-        foreach (UnitScript.Character character in PlayableCharacterList)
-        {
-            CharacterDialogueInfo info = new CharacterDialogueInfo() { Charactername = character.name, ID = ID, Portrait = DialogueSpriteList[ID] };
-            info.voicepitch = character.DialoguePitch;
-            newDialogueCharacterList.Add(info);
-            ID++;
-        }
-
-        for (int i = ID; i < 50; i++)
-        {
-            CharacterDialogueInfo info = new CharacterDialogueInfo() { Charactername = "NA", ID = ID, Portrait = null, voicepitch = 1 };
-            newDialogueCharacterList.Add(info);
-        }
-        for (int i = 50; i < DialogueCharacterList.Count; i++)
-        {
-            CharacterDialogueInfo info = DialogueCharacterList[i];
-            newDialogueCharacterList.Add(info);
-        }
-        DialogueCharacterList = newDialogueCharacterList;
-        UnityEditor.EditorUtility.SetDirty(this);
-    }
 
 
 
