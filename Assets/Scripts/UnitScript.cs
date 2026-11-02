@@ -4432,6 +4432,7 @@ public class UnitScript : MonoBehaviour
         }
 
 
+
         //Aura Skills
         foreach (GameObject unit in UnitsGORankedByRange[1]) // List 2 (with ID 1) is all units at less than 2 range
         {
@@ -4620,6 +4621,23 @@ public class UnitScript : MonoBehaviour
             statbonuses.CritAvoid += (int)((UnitCharacteristics.AjustedStats.Luck + statbonuses.Luck) * AvoidMultiplier);
             TriggerSkills.Add(110);
         }
+
+        //Expert Mecanician
+        if (GetSkill(120))
+        {
+            if (enemy != null && enemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.ismachine)
+            {
+                List<int> Skillvalues = dataScript.SkillList[120].SkillValues;
+                float multiplier = GetSkillLevelMultiplier(120);
+                int Damagebonus = (int)(Skillvalues[0] * multiplier);
+                statbonuses.PhysDamage += Damagebonus;
+                statbonuses.TelekDamage += Damagebonus;
+                TriggerSkills.Add(120);
+            }
+
+        }
+
+
 
         if (incombat)
         {

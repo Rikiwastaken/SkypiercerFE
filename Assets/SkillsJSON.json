@@ -2573,6 +2573,50 @@
             "level2Multiplier": 0.0,
             "level3Multiplier": 0.0,
             "level4Multiplier": 0.0
+        },
+        {
+            "name": "Expert Mecanician",
+            "Descriptions": "Increases damage dealt to machines by @0%.",
+            "IsCommand": false,
+            "Cost": 3,
+            "SkillValues": [
+                50
+            ],
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 120,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 6,
+                "InnerCircleColorID": 0,
+                "MainLogoID": 13
+            },
+            "level2Multiplier": 1.3333330154418946,
+            "level3Multiplier": 1.5,
+            "level4Multiplier": 2.0
+        },
+        {
+            "name": "Dextrous Hands",
+            "Descriptions": "Adds a Luck/@0% chance to not consume durability when attacking.",
+            "IsCommand": false,
+            "Cost": 5,
+            "SkillValues": [
+                2
+            ],
+            "targettype": 0,
+            "range": 0,
+            "buyable": true,
+            "AlwaysPresentInShop": false,
+            "ID": 121,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 7,
+                "InnerCircleColorID": 7,
+                "MainLogoID": 14
+            },
+            "level2Multiplier": 0.75,
+            "level3Multiplier": 0.5,
+            "level4Multiplier": 0.25
         }
     ]
 }

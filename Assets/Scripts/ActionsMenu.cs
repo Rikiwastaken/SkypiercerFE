@@ -1934,7 +1934,7 @@ public class ActionsMenu : MonoBehaviour
 
                     AffectDamage(unit, target, totaldamage, false, UnitSkillTriggers, TargetSkillTriggers);
 
-                    OnDamageEffect(unit, totaldamage, false, isbossdamage, UnitSkillTriggers);
+                    OnDamageEffect(unit, totaldamage, false, isbossdamage, UnitSkillTriggers, UnitStatBonus);
                     finaldamage = unitdamage;
 
 
@@ -1992,7 +1992,7 @@ public class ActionsMenu : MonoBehaviour
 
                 AffectDamage(unit, target, totaldamage, iscritical, UnitSkillTriggers, TargetSkillTriggers);
 
-                OnDamageEffect(unit, totaldamage, false, isbossdamage, UnitSkillTriggers);
+                OnDamageEffect(unit, totaldamage, false, isbossdamage, UnitSkillTriggers, UnitStatBonus);
                 finaldamage = unitdamage;
 
                 bool diddamage = false;
@@ -2049,7 +2049,7 @@ public class ActionsMenu : MonoBehaviour
                     }
 
                     AffectDamage(target, unit, totaldamage, iscritical, TargetSkillTriggers, UnitSkillTriggers);
-                    OnDamageEffect(target, targetdamage, false, isbossdamage, TargetSkillTriggers);
+                    OnDamageEffect(target, targetdamage, false, isbossdamage, TargetSkillTriggers, TargetStatBonus);
                     finaldamage = targetdamage;
                 }
                 if (chartarget.currentHP > 0 && chartarget.affiliation == "playable")
@@ -2097,7 +2097,7 @@ public class ActionsMenu : MonoBehaviour
                 chartarget.currentHP += unitdamage;
                 SpawnTextPopup(unitdamage + "", true, false, target);
                 Damagelist.Add(unitdamage);
-                OnDamageEffect(unit, unitdamage, true, isbossdamage, UnitSkillTriggers);
+                OnDamageEffect(unit, unitdamage, true, isbossdamage, UnitSkillTriggers, UnitStatBonus);
                 finaldamage = unitdamage;
             }
             else
@@ -2429,7 +2429,7 @@ public class ActionsMenu : MonoBehaviour
         return -1;
     }
 
-    private void OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing, bool isBoss, List<int> AttackerSkillTriggers) // compassion, invigorating, 
+    private void OnDamageEffect(GameObject Attacker, int DamageDealt, bool healing, bool isBoss, List<int> AttackerSkillTriggers, AllStatsSkillBonus attackerStatBonus) // compassion, invigorating, 
     {
 
         if (healing)
@@ -2499,7 +2499,31 @@ public class ActionsMenu : MonoBehaviour
         }
 
         //Durability
-        if (!Attacker.GetComponent<UnitScript>().GetSkill(8) || !isBoss) //inexhaustible
+
+        bool DecreaseDurability = true;
+        if (Attacker.GetComponent<UnitScript>().GetSkill(8) || isBoss)//inexhaustible
+        {
+            DecreaseDurability = false;
+        }
+        else if (Attacker.GetComponent<UnitScript>().GetSkill(121))//Dextrous Hands
+        {
+            int Luck = (int)Attacker.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Luck + attackerStatBonus.Luck;
+
+            List<int> Skillvalues = DataScript.instance.SkillList[120].SkillValues;
+            float multiplier = Attacker.GetComponent<UnitScript>().GetSkillLevelMultiplier(121);
+            float divider = (float)(Skillvalues[0] * multiplier);
+            int target = (int)(Luck / divider);
+
+
+            int PersonalityValue = Attacker.GetComponent<RandomScript>().GetPersonalityValue(target);
+            if (PersonalityValue <= target)
+            {
+                DecreaseDurability = false;
+                AttackerSkillTriggers.Add(121);
+            }
+        }
+
+        if (DecreaseDurability)
         {
             equipment weapon = Attacker.GetComponent<UnitScript>().GetFirstWeapon();
             if (weapon.Maxuses > 0)
@@ -3085,6 +3109,11 @@ public class ActionsMenu : MonoBehaviour
             else
             {
                 targetstatbonus.Dexterity -= unitfirstweapon.Grade * 2;
+            }
+
+            if (target != null && unitfirstweapon.Modifier != null && unitfirstweapon.Modifier != "" && unitfirstweapon.Modifier.ToLower() == "piercing")
+            {
+                targetstatbonus.Defense -= (target.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Defense * 25f) / 100f;
             }
         }
 
