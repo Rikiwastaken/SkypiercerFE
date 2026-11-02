@@ -23,6 +23,7 @@ public class Unit3DModelInfoScript : MonoBehaviour
     [SerializeField] private Texture2D DefaultRougnhess;
     [SerializeField] private Texture2D DefaultEmission;
     [SerializeField] private Material BaseMaterial;
+    public float WeaponModelScale = 1.0f;
 
     public Material GeneratedMaterial;
 

@@ -308,10 +308,11 @@ public class UnitScript : MonoBehaviour
     private Tween telekinesisFloatTween;
     private Tween telekinesisRotationTween;
 
-
+    private float WeaponModelScale;
 
 
     [Header("\nEquipment/Type/Copy/Telekinesis Sprites")]
+
     [Header("Equipment Sprites")]
     [SerializeField] private Sprite BareHandSprite;
     [SerializeField] private Sprite SwordSprite;
@@ -423,6 +424,8 @@ public class UnitScript : MonoBehaviour
     public GridSquareScript previouspos;
 
     public bool disableLifebar;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -615,6 +618,7 @@ public class UnitScript : MonoBehaviour
                 Destroy(ActiveModel);
             }
             ActiveModel = Instantiate(ModelList[UnitCharacteristics.modelID].wholeModel);
+            WeaponModelScale = ActiveModel.GetComponent<Unit3DModelInfoScript>().WeaponModelScale;
             ActiveModel.transform.SetParent(transform);
             ActiveModel.transform.SetLocalPositionAndRotation(ActiveModel.GetComponent<Unit3DModelInfoScript>().positionadjust, Quaternion.Euler(ActiveModel.GetComponent<Unit3DModelInfoScript>().rotationadjust));
             ActiveModel.transform.localScale = ActiveModel.GetComponent<Unit3DModelInfoScript>().scaleadjust;
@@ -2166,7 +2170,7 @@ public class UnitScript : MonoBehaviour
             {
                 _WeaponPrefabScript = GetComponentInChildren<WeaponPrefabScript>();
             }
-            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, LayerMask.LayerToName(ActiveModel.layer), scale, Charactertouse, spawninstantly);
+            _WeaponPrefabScript.SwitchWeaponGO(currentweapon.type.ToLower(), currentweapon.Name, currentweapon.Grade, LayerMask.LayerToName(ActiveModel.layer), scale * WeaponModelScale, Charactertouse, spawninstantly);
             currentequipmentmodel = _WeaponPrefabScript.GetWeaponGO();
             if (currentequipmentmodel != null)
             {
