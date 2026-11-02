@@ -178,7 +178,7 @@ public class BattallionChoiceScript : MonoBehaviour
                     BattallionLeaderImage.sprite = _DataScript.DialogueCharacterList[0].Portrait;
                     UnitEffectTMP.text = "Effect for Unit:\n+7% hit rate\n+3% crit rate";
                     CommanderEffectTMP.text = "Effect for Commander:\n+" + (numberofUnitsInBattallion) + "% hit rate\n+" + (numberofUnitsInBattallion) + "% crit rate";
-                    BattallionNameTMP.text = "Crimson Landfallers";
+                    BattallionNameTMP.text = "Crimson Windwalkers";
                     break;
                 case "kira":
                     int psybonus = 0;

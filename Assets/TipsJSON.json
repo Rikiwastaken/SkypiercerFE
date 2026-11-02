@@ -106,9 +106,14 @@
             "chapterWhereUnlocks": 4
         },
         {
-            "name": "Battalions",
-            "description": "Now that Kira's part of the team, you can change any unit's battalion in the deployment menu and assign them to either Kira or Zack's battalion.\n\nEach unit in Zack's battalion increases Zack's Hit and Crit rate by 1% and increases their own by 5%.\n\nEach unit in Kira's battalion increases Kira's Psyche by 20% of the unit's Psyche and the unit recovers 10% of their HP at the beginning of each turn.",
+            "name": "Battalions (1/2)",
+            "description": "Now that Kira's part of the team, you can change any unit's battalion in the deployment menu and assign them to either Kira or Zack's battalion.\n\nEach unit in Zack's battalion increases Zack's Hit and Crit rate by 1% and increases their own by Hit Rate by 7% and Crit Rate by 3%.\n\nEach unit in Kira's battalion increases Kira's Psyche by 20% of the unit's Psyche and the unit recovers 10% of their HP at the beginning of each turn.",
             "chapterWhereUnlocks": 6
+        },
+        {
+            "name": "Battalions (2/2)",
+            "description": "Gale has now joined Zack and Kira. You can now assign units to either Zack, Kira, or Gale's battalion.\n\nEach unit in Gale's battalion gains an aura that increases nearby allies' Strength and Defense by 20% of their own and increases Gale's Strength and Defense by 20% of the unit's Strength and Defense.",
+            "chapterWhereUnlocks": 13
         },
         {
             "name": "Boss encounters",
