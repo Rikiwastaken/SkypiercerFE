@@ -24,6 +24,8 @@ public class TipsMenuScript : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI descriptionText;
 
+    [SerializeField] private TextAsset TipsJSON;
+
     [Serializable]
     public class Tip
     {
@@ -38,9 +40,9 @@ public class TipsMenuScript : MonoBehaviour
         public List<Tip> tipList;
     }
 
-    [SerializeField] private List<Tip> Tips;
+    private List<Tip> Tips;
 
-    [SerializeField] private List<Tip> TipsToUse;
+    private List<Tip> TipsToUse;
 
     private GameObject previousselection;
 
@@ -65,6 +67,7 @@ public class TipsMenuScript : MonoBehaviour
     private void OnEnable()
     {
         BaseColor = Buttons[0].GetComponent<Image>().color;
+        Tips = CalculationToolsScript.GetTipsFromJSON(TipsJSON);
         SelectTipsToUse();
         ButtonInitialization();
 

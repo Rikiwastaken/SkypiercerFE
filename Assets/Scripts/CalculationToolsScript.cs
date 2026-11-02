@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using static DataScript;
 using static TextBubbleScript;
+using static TipsMenuScript;
 using static UnitScript;
 
 public class CalculationToolsScript : MonoBehaviour
@@ -472,6 +473,12 @@ public class CalculationToolsScript : MonoBehaviour
         }
     }
 
+    [Serializable]
+    public class DialogueExport
+    {
+        public List<TextBubbleInfo> Dialogue;
+    }
+
 
     public static List<TextBubbleInfo> GetDialogueFromJSON(TextAsset JSONAsset)
     {
@@ -490,10 +497,28 @@ public class CalculationToolsScript : MonoBehaviour
     }
 
     [Serializable]
-    public class DialogueExport
+    public class TipExport
     {
-        public List<TextBubbleInfo> Dialogue;
+        public List<Tip> tipList;
     }
+    public static List<Tip> GetTipsFromJSON(TextAsset JSONAsset)
+    {
+        List<Tip> tips = new List<Tip>();
+        TipExport wrapper = JsonUtility.FromJson<TipExport>(JSONAsset.text);
+
+        if (wrapper != null && wrapper.tipList != null)
+        {
+            tips = wrapper.tipList;
+        }
+        else
+        {
+            Debug.LogError("error when loading JSON Asset");
+        }
+        return tips;
+    }
+
+
+
 
     public static void ExportDialoguesToJson(string name, List<TextBubbleInfo> dialogue, string folderPath)
     {
