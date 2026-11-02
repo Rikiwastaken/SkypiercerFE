@@ -358,9 +358,9 @@ public class ActionManager : MonoBehaviour
 
                 string tiletype = unit.currentTile.type;
 
-                int movements = US.CalculateNumberOfMovements();
+                float movements = US.CalculateNumberOfMovements();
 
-                GridScript.SpreadMovements(unit.currentTile.GridCoordinates, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
+                GridScript.SpreadMovements(unit.currentTile.GridCoordinates, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, float>());
 
 
 
@@ -422,7 +422,7 @@ public class ActionManager : MonoBehaviour
         currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
         if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
         {
-            int movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
+            float movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
             currentcharacter.GetComponent<UnitScript>().tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
         }
         GridScript.UnlockSelection();
@@ -505,7 +505,7 @@ public class ActionManager : MonoBehaviour
 
                 //Then we get the closest tile
 
-                int movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
+                float movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
 
                 int shortestdistance = 99;
                 GridSquareScript besttile = null;
@@ -573,7 +573,7 @@ public class ActionManager : MonoBehaviour
 
             //Then we get the closest tile
 
-            int movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
+            float movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
 
             int shortestdistance = 99;
             GridSquareScript besttile = null;

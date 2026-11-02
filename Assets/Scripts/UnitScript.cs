@@ -2577,13 +2577,13 @@ public class UnitScript : MonoBehaviour
     }
 
     // Calculate tile, status effect and skill ajustments to movements
-    public int CalculateNumberOfMovements()
+    public float CalculateNumberOfMovements()
     {
         string tiletype = UnitCharacteristics.currentTile.type;
-        int ajustedmovements = UnitCharacteristics.movements;
-        if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
+        float ajustedmovements = UnitCharacteristics.movements;
+        if (tiletype.ToLower() != "desert" && tiletype.ToLower() == "") //checking if movement reducing effect
         {
-            ajustedmovements -= 1;
+            ajustedmovements -= 0.5f;
         }
         if (GetSkill(1))//checking if unit is using canto/Retreat
         {

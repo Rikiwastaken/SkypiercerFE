@@ -32,7 +32,7 @@
         },
         {
             "name": "Blades Modifiers (2/4)",
-            "description": "All blade used by playable characters can have unique modifiers which change their behaviors.\n\n  Quick (swords) : Increases the speed and dexterity bonus by 1 per grade.\n\n  Precise (spears) : Increases dexterity reduction by 1 per grade.\n\n  Lightweight (greatsword) : No longer lowers speed.\n\n  Heavyweight (greatsword) : Increases the enemy's defense and resistance reduction by 1 per grade and the wielder's speed reduction by 1 per grade.",
+            "description": "All blade used by playable characters can have unique modifiers which change their behaviors.\n\n  Quick (swords) : Increases the speed and dexterity bonus by 1 per grade.\n\n  Precise (spears) : Increases dexterity reduction by 1 per grade.\n\n  Piercing (spears) : Ignores 25% of the enemy's defense and resistance.\n\n  Lightweight (greatsword) : No longer lowers speed.\n\n  Heavyweight (greatsword) : Increases the enemy's defense and resistance reduction by 1 per grade and the wielder's speed reduction by 1 per grade.",
             "chapterWhereUnlocks": 3
         },
         {
@@ -41,7 +41,7 @@
             "chapterWhereUnlocks": 3
         },
         {
-            "name": "Blades Modifiers (3/4)",
+            "name": "Blades Modifiers (4/4)",
             "description": "All blade used by playable characters can have unique modifiers which change their behaviors.\n\n  Hidden (daggers) : Increases damage by 50% if enemy has all their HP.\n\n  Tricky (daggers) : Changes dagger damage variation from 50%-150% to 25%-175%.\n\n  Deadly (daggers) : Damage variation increase or decrease critical rate by 10%.\n\n  Windborne (daggers) : Increase Dodge Rate by 5% per weapon rank.",
             "chapterWhereUnlocks": 3
         },
@@ -82,7 +82,7 @@
         },
         {
             "name": "Skills",
-            "description": "Skills are special upgrades than can be equipped to characters. They can give passive bonuses or access to an active Command.\n\nEach character has two innates skills that cannot be removed (some are unlocked through story progression or Side Stories), a  and 4 slots for additional skills.\n\nAdditional skills require Skill Points to equip. These Skill Points are obtained when levelling up.",
+            "description": "Skills are special upgrades than can be equipped to characters. They can give passive bonuses or access to an active Command.\n\nEach character has two innates skills that cannot be removed (some are unlocked through story progression or Side Stories), a  and 4 slots for additional skills.\n\nAdditional skills require Skill Points to equip. These Skill Points are obtained when levelling up. Innates Skills can level up and gain additional effects when the character levels up.",
             "chapterWhereUnlocks": 3
         },
         {
@@ -97,7 +97,7 @@
         },
         {
             "name": "Special Tiles",
-            "description": "Some tiles can have special effects that can be positive or negative :\n\n - Forest : Increases Dodge Rate by 20%.\n - Ruins : Increases Dodge Rate by 10% and Hit Rate by 10%.\n - Fog : Increases Dodge Rate by 20% and reduces Hit Rate by 20%.\n - Fire : Reduces movement points by 1. Increases damage taken by 10% and lowers HP by 10% each turn.\n - Water : Reduces movement points by 1 and Dodge Rate by 20%.\n - Fortification : Increases Dodge Rate by 5%, Hit rate by 15% and restores 10% HP each turn.\n - Medicinal Water : Restores 50% HP each turn.\n - Desert : Lowers HP by 10% each turn.",
+            "description": "Some tiles can have special effects that can be positive or negative :\n\n - Forest : Increases Dodge Rate by 20%.\n - Ruins : Increases Dodge Rate by 10% and Hit Rate by 10%.\n - Fog : Increases Dodge Rate by 20% and reduces Hit Rate by 20%.\n - Fire : Increases damage taken by 10% and lowers HP by 10% each turn.\n - Water : Reduces Dodge Rate by 20%.\n - Fortification : Increases Dodge Rate by 5%, Hit rate by 15% and restores 10% HP each turn.\n - Medicinal Water : Restores 50% HP each turn.\n - Desert : Lowers HP by 10% each turn.\n\nExcept for desert tiles, all tiles effects reduce movements.",
             "chapterWhereUnlocks": 4
         },
         {

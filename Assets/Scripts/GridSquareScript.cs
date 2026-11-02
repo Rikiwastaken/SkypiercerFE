@@ -34,8 +34,8 @@ public class GridSquareScript : MonoBehaviour
     /*type is for potential bonus : 
         Forest : +20% dodge
         Ruins : +10% Dodge, +10% Accuracy
-        Fire : -1 movement, +10% Damage taken and lose 33% of max hp each turn;
-        Water : -1 movement, -20% dodge
+        Fire :  +10% Damage taken and lose 33% of max hp each turn;
+        Water :  -20% dodge
         Fortification : +5% Dodge, +15% accuracy, restore 10% HP Each turn;
         Fog : +20% Dodge, -20% accuracy
         MedicinalWater : +50% HP each turn

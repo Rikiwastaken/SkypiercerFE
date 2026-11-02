@@ -444,11 +444,11 @@ public class GridScript : MonoBehaviour
             }
             if (selection.type.ToLower() == "fire")
             {
-                text = "Fire \n-1 mvt\n+10% Dmg taken\n-10% HP";
+                text = "Fire \n+10% Dmg taken\n-10% HP";
             }
             if (selection.type.ToLower() == "water")
             {
-                text = "Water \n-1 mvt\n-20% Dodge";
+                text = "Water \n-20% Dodge";
             }
             if (selection.type.ToLower() == "medicinalwater")
             {
@@ -653,8 +653,8 @@ public class GridScript : MonoBehaviour
                 Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
                 if (unit.currentTile == selection)
                 {
-                    int movements = unitGO.GetComponent<UnitScript>().CalculateNumberOfMovements();
-                    SpreadMovements(unit.currentTile.GridCoordinates, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
+                    float movements = unitGO.GetComponent<UnitScript>().CalculateNumberOfMovements();
+                    SpreadMovements(unit.currentTile.GridCoordinates, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, float>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                     ShowAttack(range, melee, type.ToLower() == "staff", false, unit);
                 }
@@ -693,8 +693,8 @@ public class GridScript : MonoBehaviour
                 Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
                 if (unit.currentTile.GridCoordinates == Target.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates && !unit.alreadyplayed)
                 {
-                    int movements = unitGO.GetComponent<UnitScript>().CalculateNumberOfMovements();
-                    SpreadMovements(unit.currentTile.GridCoordinates, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, int>());
+                    float movements = unitGO.GetComponent<UnitScript>().CalculateNumberOfMovements();
+                    SpreadMovements(unit.currentTile.GridCoordinates, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, float>());
                     (int range, bool melee, string type) = unitGO.GetComponent<UnitScript>().GetRangeMeleeAndType();
                     ShowAttack(range, melee, type.ToLower() == "staff", false, unit);
 
@@ -748,7 +748,7 @@ public class GridScript : MonoBehaviour
             movements -= 1;
         }
 
-        SpreadMovements(unitchar.currentTile.GridCoordinates, movements, movementtiles, unit, new Dictionary<GridSquareScript, int>());
+        SpreadMovements(unitchar.currentTile.GridCoordinates, movements, movementtiles, unit, new Dictionary<GridSquareScript, float>());
         if (!lockselection)
         {
             foreach (GridSquareScript gridSquareScript in movementtiles)
@@ -1266,7 +1266,7 @@ public class GridScript : MonoBehaviour
 
     }
 
-    public int findshortestpath(GridSquareScript starttile, GridSquareScript targettile, int maxDeplacements)
+    public int findshortestpath(GridSquareScript starttile, GridSquareScript targettile, float maxDeplacements)
     {
         int rows = Grid.Count;
         int cols = Grid[0].Count;
@@ -1325,7 +1325,7 @@ public class GridScript : MonoBehaviour
         return -1;
     }
 
-    public void SpreadMovements(Vector2 Coordinates, int remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit, Dictionary<GridSquareScript, int> visited)
+    public void SpreadMovements(Vector2 Coordinates, float remainingMovements, List<GridSquareScript> tilestolight, GameObject selectedunit, Dictionary<GridSquareScript, float> visited)
     {
         GridSquareScript tile = GetTile((int)Coordinates.x, (int)Coordinates.y);
         if (tile == null)
