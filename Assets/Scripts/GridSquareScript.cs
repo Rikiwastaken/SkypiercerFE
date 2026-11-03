@@ -464,8 +464,8 @@ public class GridSquareScript : MonoBehaviour
             {
                 if (MapInitializer.playablepos.Contains(GridCoordinates) && filledimage.color != new Color(0.45f, 0f, 0.42f, 0.5f))
                 {
-
                     filledimage.color = new Color(0.45f, 0f, 0.42f, 0.5f);
+
                 }
             }
 
@@ -854,6 +854,10 @@ public class GridSquareScript : MonoBehaviour
 
     public void fillwithblue()
     {
+        if (TurnManger.currentlyplaying == "")
+        {
+            return;
+        }
         GameObject GO = GridScript.instance.GetUnit(this);
 
         if (GO != null)
@@ -865,7 +869,10 @@ public class GridSquareScript : MonoBehaviour
 
     public void fillwithRed()
     {
-
+        if (TurnManger.currentlyplaying == "")
+        {
+            return;
+        }
         GameObject GO = GridScript.instance.GetUnit(this);
 
         if (GO != null)
@@ -880,6 +887,10 @@ public class GridSquareScript : MonoBehaviour
 
     public void fillwithGreen()
     {
+        if (TurnManger.currentlyplaying == "")
+        {
+            return;
+        }
         filledimage.color = HealingColor;
     }
 

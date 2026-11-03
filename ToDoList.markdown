@@ -10,6 +10,7 @@
 - peut être faire qu'on puisse mettre "pas de battallion" - > finalement non
 - Faire les visuels de l'effet gardien de Kira
 - Mettre un cercle pour montrer les effets de skills qui ont un rayon. (marche pas trop)
+- Faire la pluie avec des effets différent et des couleurs différentes pour chaque effet
 
 ## System 
 

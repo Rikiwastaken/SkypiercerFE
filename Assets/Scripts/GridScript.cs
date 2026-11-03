@@ -68,6 +68,11 @@ public class GridScript : MonoBehaviour
 
     private bool ShowDangerousTiles;
 
+    private InputAction MovementInput;
+    private InputAction ShowDangerousTilesInput;
+    private InputAction NextWeaponInput;
+    private InputAction PrevWeaponInput;
+
     public class Node
     {
         public Vector2 Position;
@@ -108,6 +113,10 @@ public class GridScript : MonoBehaviour
         InitializeGOList();
         textBubble = GetComponent<ActionManager>().TextBubbleScript;
         cameraScript = cameraScriptV2.instance;
+        ShowDangerousTilesInput = InputSystem.actions.FindAction("ShowDangerousTiles");
+        MovementInput = InputSystem.actions.FindAction("Movement");
+        NextWeaponInput = InputSystem.actions.FindAction("NextWeapon");
+        PrevWeaponInput = InputSystem.actions.FindAction("PreviousWeapon");
 
     }
 
@@ -119,7 +128,7 @@ public class GridScript : MonoBehaviour
             SkillEditionScript = FindAnyObjectByType<SkillEditionScript>(FindObjectsInactive.Include);
         }
 
-        if (InputSystem.actions.FindAction("ShowDangerousTiles").WasPressedThisFrame())
+        if (ShowDangerousTilesInput.WasPressedThisFrame())
         {
             ShowDangerousTiles = !ShowDangerousTiles;
             Recolor();
@@ -134,7 +143,7 @@ public class GridScript : MonoBehaviour
         {
             movementbuffercounter--;
         }
-        Vector2 movement = InputSystem.actions.FindAction("Movement").ReadValue<Vector2>();
+        Vector2 movement = MovementInput.ReadValue<Vector2>();
         if (movement == Vector2.zero)
         {
             movementbuffercounter = 0;
@@ -146,8 +155,6 @@ public class GridScript : MonoBehaviour
             currentselectedstate = checkIfCurrentSelectedIsActive(CurrentSelected.transform);
         }
 
-
-        //if (moveCD <= 0 && !actionsMenu.activeSelf && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !NeutralMenu.activeSelf && !ForesightMenu.activeSelf && !TutorialWindowMenu.activeSelf && !(GameOverScript.instance != null && GameOverScript.instance.gameObject.activeSelf))
         if (moveCD <= 0 && (CurrentSelected == null || !currentselectedstate) && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial" || GetComponent<TurnManger>().currentlyplaying == "") && movementbuffercounter <= 0 && !textBubble.indialogue && !actionsMenu.GetComponent<ActionsMenu>().incombat)
         {
 
@@ -163,7 +170,7 @@ public class GridScript : MonoBehaviour
                 previousmovevalue = Vector2.zero;
             }
 
-            if ((InputSystem.actions.FindAction("NextWeapon").WasPressedThisFrame() || InputSystem.actions.FindAction("PreviousWeapon").WasPressedThisFrame()) && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial") && !lockselection)
+            if ((NextWeaponInput.WasPressedThisFrame() || PrevWeaponInput.WasPressedThisFrame()) && (GetComponent<TurnManger>().currentlyplaying == "playable" || GetComponent<TurnManger>().currentlyplaying == "tutorial") && !lockselection)
             {
                 GameObject GOSelected = GetUnit(selection);
                 if (GOSelected != null)
@@ -742,10 +749,10 @@ public class GridScript : MonoBehaviour
         attacktiles = new List<GridSquareScript>();
         Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
         string tiletype = unitchar.currentTile.type;
-        int movements = remainingmovements;
-        if (tiletype.ToLower() == "fire" || tiletype.ToLower() == "water") //checking if movement reducing effect
+        float movements = remainingmovements;
+        if (tiletype.ToLower() != "desert" && tiletype.ToLower() == "") //checking if movement reducing effect
         {
-            movements -= 1;
+            movements -= 0.5f;
         }
 
         SpreadMovements(unitchar.currentTile.GridCoordinates, movements, movementtiles, unit, new Dictionary<GridSquareScript, float>());

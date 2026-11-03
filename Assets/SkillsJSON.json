@@ -2598,7 +2598,7 @@
         },
         {
             "name": "Dextrous Hands",
-            "Descriptions": "Adds a Luck/@0% chance to not consume durability when attacking.",
+            "Descriptions": "Adds a Dexterity/@0% chance to not consume durability when attacking.",
             "IsCommand": false,
             "Cost": 5,
             "SkillValues": [

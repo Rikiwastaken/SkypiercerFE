@@ -2507,12 +2507,12 @@ public class ActionsMenu : MonoBehaviour
         }
         else if (Attacker.GetComponent<UnitScript>().GetSkill(121))//Dextrous Hands
         {
-            int Luck = (int)Attacker.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Luck + attackerStatBonus.Luck;
+            int Dexterity = (int)Attacker.GetComponent<UnitScript>().UnitCharacteristics.AjustedStats.Dexterity + attackerStatBonus.Dexterity;
 
             List<int> Skillvalues = DataScript.instance.SkillList[120].SkillValues;
             float multiplier = Attacker.GetComponent<UnitScript>().GetSkillLevelMultiplier(121);
             float divider = (float)(Skillvalues[0] * multiplier);
-            int target = (int)(Luck / divider);
+            int target = (int)(Dexterity / divider);
 
 
             int PersonalityValue = Attacker.GetComponent<RandomScript>().GetPersonalityValue(target);

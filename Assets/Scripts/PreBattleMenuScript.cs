@@ -26,6 +26,7 @@ public class PreBattleMenuScript : MonoBehaviour
     [SerializeField] private GameObject BattallionChangeMenu;
     [SerializeField] private Button BattallionChangeButton;
     private bool BattallionAvailable;
+    [SerializeField] private int ChangeDelay;
     private void Awake()
     {
         if (instance == null)
@@ -58,16 +59,22 @@ public class PreBattleMenuScript : MonoBehaviour
             return;
         }
 
+        if (ChangingUnitPlace)
+        {
+            ChangeDelay--;
+        }
+        else
+        {
+            ChangeDelay = 5;
+            selectedunit = null;
+        }
+
         if (_CancelAction.WasPressedThisFrame() && ChangingUnitPlace)
         {
             ChangingUnitPlace = false;
             for (int i = 2; i < transform.childCount; i++)
             {
-                transform.GetChild(2).gameObject.SetActive(true);
-                transform.GetChild(3).gameObject.SetActive(true);
-                transform.GetChild(4).gameObject.SetActive(true);
-                transform.GetChild(5).gameObject.SetActive(true);
-                transform.GetChild(6).gameObject.SetActive(true);
+                transform.GetChild(i).gameObject.SetActive(true);
             }
 
         }
@@ -97,12 +104,12 @@ public class PreBattleMenuScript : MonoBehaviour
             }
         }
 
-        if (ChangingUnitPlace)
+        if (ChangingUnitPlace && ChangeDelay <= 0)
         {
             if (GridScript.GetUnit(GridScript.selection) != null)
             {
                 GameObject gridselection = GridScript.GetUnit(GridScript.selection);
-                if (gridselection.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && _ActivateAction.WasPressedThisFrame())
+                if (gridselection.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && _ActivateAction.WasPressedThisFrame() && (MapInitializer.ForcedCharacters == null || !MapInitializer.ForcedCharacters.Contains(gridselection.GetComponent<UnitScript>().UnitCharacteristics.ID)))
                 {
                     if (selectedunit == null)
                     {
