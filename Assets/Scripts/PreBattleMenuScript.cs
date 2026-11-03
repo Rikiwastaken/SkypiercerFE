@@ -42,6 +42,7 @@ public class PreBattleMenuScript : MonoBehaviour
         _CancelAction = InputSystem.actions.FindAction("Cancel");
         _ActivateAction = InputSystem.actions.FindAction("Validate");
         CheckIfBattallionMenuIsAvailable();
+        UpdateTileColor();
     }
 
     // Update is called once per frame
@@ -119,6 +120,7 @@ public class PreBattleMenuScript : MonoBehaviour
                     {
                         SwitchUnits(selectedunit, gridselection);
                         selectedunit = null;
+                        UpdateTileColor();
                     }
                 }
             }
@@ -131,6 +133,17 @@ public class PreBattleMenuScript : MonoBehaviour
             }
         }
 
+    }
+
+    private void UpdateTileColor()
+    {
+        foreach (List<GameObject> line in GridScript.instance.Grid)
+        {
+            foreach (GameObject go in line)
+            {
+                go.GetComponent<GridSquareScript>().SetPrebattleTileColor();
+            }
+        }
     }
 
     private void SwitchUnits(GameObject unit1, GameObject unit2)

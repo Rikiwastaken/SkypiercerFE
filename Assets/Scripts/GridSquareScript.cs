@@ -153,6 +153,8 @@ public class GridSquareScript : MonoBehaviour
 
     private ActionsMenu actionsmenu;
 
+    private bool updateColorAtBattleStart = false;
+
     void Awake()
     {
 
@@ -178,6 +180,7 @@ public class GridSquareScript : MonoBehaviour
 
     private void Start()
     {
+
         BossFilledImage.color = BossAttackColor;
         actionsmenu = FindAnyObjectByType<ActionsMenu>(FindObjectsInactive.Include);
 
@@ -232,6 +235,11 @@ public class GridSquareScript : MonoBehaviour
 
     private void Update()
     {
+        if (!updateColorAtBattleStart)
+        {
+            updateColorAtBattleStart = true;
+            SetPrebattleTileColor();
+        }
         UpdateDelay();
 
     }
@@ -460,14 +468,7 @@ public class GridSquareScript : MonoBehaviour
 
 
 
-            if (TurnManger.currentlyplaying == "")
-            {
-                if (MapInitializer.playablepos.Contains(GridCoordinates) && filledimage.color != new Color(0.45f, 0f, 0.42f, 0.5f))
-                {
-                    filledimage.color = new Color(0.45f, 0f, 0.42f, 0.5f);
 
-                }
-            }
 
         }
 
@@ -488,6 +489,27 @@ public class GridSquareScript : MonoBehaviour
         //manageElevation();
         //UpdateFilling();
         previouslyincombat = actionsmenu.incombat;
+    }
+
+    public void SetPrebattleTileColor()
+    {
+        if (TurnManger == null || TurnManger.currentlyplaying == "")
+        {
+            if (MapInitializer.playablepos.Contains(GridCoordinates))
+            {
+                GameObject Unit = GridScript.GetUnit(this);
+                Color TargetColor = new Color(0.45f, 0f, 0.42f, 0.5f);
+
+                if (MapInitializer.ForcedCharacters != null && MapInitializer.ForcedCharacters.Contains(Unit.GetComponent<UnitScript>().UnitCharacteristics.ID))
+                {
+                    TargetColor = Color.gray;
+                    TargetColor.a = 0.5f;
+                }
+
+                filledimage.color = TargetColor;
+
+            }
+        }
     }
 
     private void LateUpdate()
