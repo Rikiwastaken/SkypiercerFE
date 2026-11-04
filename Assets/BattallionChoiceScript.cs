@@ -178,7 +178,7 @@ public class BattallionChoiceScript : MonoBehaviour
                     BattallionLeaderImage.sprite = _DataScript.DialogueCharacterList[0].Portrait;
                     UnitEffectTMP.text = "Effect for Unit:\n+7% hit rate\n+3% crit rate";
                     CommanderEffectTMP.text = "Effect for Commander:\n+" + (numberofUnitsInBattallion) + "% hit rate\n+" + (numberofUnitsInBattallion) + "% crit rate";
-                    BattallionNameTMP.text = "Crimson Windwalkers";
+                    BattallionNameTMP.text = "Crimson Gust";
                     break;
                 case "kira":
                     int psybonus = 0;
@@ -194,7 +194,7 @@ public class BattallionChoiceScript : MonoBehaviour
                     BattallionLeaderImage.sprite = _DataScript.DialogueCharacterList[9].Portrait;
                     UnitEffectTMP.text = "Effect for Unit:\n10% HP recovery at beginning of turn";
                     CommanderEffectTMP.text = "Effect for Commander:\n+" + psybonus + " Psyche.";
-                    BattallionNameTMP.text = "Aegean Occidens";
+                    BattallionNameTMP.text = "Aegean Zephyr";
                     break;
                 case "gale":
                     int strbonus = 0;
@@ -212,7 +212,7 @@ public class BattallionChoiceScript : MonoBehaviour
                     BattallionLeaderImage.sprite = _DataScript.DialogueCharacterList[13].Portrait;
                     UnitEffectTMP.text = "Effect for Unit:\nIncrease nearby allies' Strength by " + Mathf.Max(1, (int)(currentChar.AjustedStats.Strength / 5)) + " and Defense by " + Mathf.Max(1, (int)(currentChar.AjustedStats.Defense / 5));
                     CommanderEffectTMP.text = "Effect for Commander:\n+" + strbonus + " Strength\n+" + defbonus + " Defense";
-                    BattallionNameTMP.text = "Eton Archadians";
+                    BattallionNameTMP.text = "Eton Zephyr";
                     break;
             }
 
