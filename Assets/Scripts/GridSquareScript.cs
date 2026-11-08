@@ -246,11 +246,12 @@ public class GridSquareScript : MonoBehaviour
     }
     private void CheckAllTriggers(MechanismClass _)
     {
-        if (Mechanism == null || Mechanism.type != 1)
+        if (Mechanism == null || Mechanism.type != 1) // Mechanism type 1 is a door
         {
             return;
         }
-        // if there is no trigger, the mechanisms are always closed
+
+        // if there is no trigger, the door is always closed
         if (Mechanism.Triggers == null || Mechanism.Triggers.Count == 0)
         {
             Mechanism.ChangeActivation(false);
@@ -258,16 +259,121 @@ public class GridSquareScript : MonoBehaviour
             return;
         }
         // Verify all trigger mechanisms are activated
-        foreach (var square in Mechanism.Triggers)
+        foreach (GridSquareScript square in Mechanism.Triggers)
         {
             if (square.Mechanism != null && square.Mechanism.type == 2 && !square.Mechanism.isactivated)
             {
-                return; // At least one inactive so do nothing
+                // At least one inactive so close door
+
+                //First we check if an unit is on the tile, we'll have to move them before turning the tile into a wall
+
+                GameObject unit = GridScript.GetUnit(square);
+                if (unit != null) // there is an unit on the mechanism
+                {
+                    ReplaceUnitOnUnstableTile(unit, square);
+                }
+
+                Mechanism.ChangeActivation(false);
+                isobstacle = true;
+                return;
             }
         }
         // All triggers activated so open door
         Mechanism.ChangeActivation(true);
         isobstacle = false;
+    }
+
+    private void ReplaceUnitOnUnstableTile(GameObject Unit, GridSquareScript InitialTile)
+    {
+        List<GridSquareScript> tilelist = new List<GridSquareScript>();
+        List<GridSquareScript> AvailableTiles = new List<GridSquareScript>();
+        for (int x = 1; x < 5; x++)
+        {
+            for (int y = 1; y < 5; y++)
+            {
+                tilelist = new List<GridSquareScript>{
+                    GridScript.GetTile(InitialTile.GridCoordinates + new Vector2(x, y)),
+                    GridScript.GetTile(InitialTile.GridCoordinates + new Vector2(-x, y)),
+                    GridScript.GetTile(InitialTile.GridCoordinates + new Vector2(x, -y)),
+                    GridScript.GetTile(InitialTile.GridCoordinates + new Vector2(-x, -y))
+                    };
+                foreach (GridSquareScript tile in tilelist)
+                {
+                    if (tile != null && !tile.isobstacle)
+                    {
+                        AvailableTiles.Add(tile);
+                    }
+                }
+            }
+        }
+
+        // We have all the potential tiles, so now we get a list to all those that are the closest
+        List<GridSquareScript> BestTiles = new List<GridSquareScript>();
+        float distance = 50000;
+
+        foreach (GridSquareScript tile in AvailableTiles)
+        {
+            float newdistance = CalculationToolsScript.ManhattanDistance(tile.GridCoordinates, InitialTile.GridCoordinates);
+            if (newdistance == distance)
+            {
+                BestTiles.Add(tile);
+            }
+            else if (newdistance < distance)
+            {
+                BestTiles = new List<GridSquareScript> { tile };
+            }
+        }
+
+        GridSquareScript TargetTile = null;
+
+        // If we have no possible tile, then throw an error
+        if (BestTiles.Count == 0)
+        {
+            Debug.LogError("could not move unit: " + Unit.name + " out of Tile: " + InitialTile.name);
+            return;
+        }
+
+        // Then if we have more than 1, a first selection process is to favor the ones which are not mechanisms
+        if (BestTiles.Count > 1)
+        {
+            List<GridSquareScript> newBestTiles = new List<GridSquareScript>();
+            foreach (GridSquareScript Tile in BestTiles)
+            {
+                if (Tile.Mechanism == null || Tile.Mechanism.type == 0)
+                {
+                    newBestTiles.Add(Tile);
+                }
+            }
+            if (newBestTiles.Count > 0)
+            {
+                BestTiles = newBestTiles;
+            }
+        }
+        else
+        {
+            TargetTile = BestTiles[0];
+        }
+
+        // Then if we still have more than one, we take one randomly
+
+        if (BestTiles.Count > 1)
+        {
+            int personalityValue = Unit.GetComponent<RandomScript>().GetPersonalityValue(100);
+            int index = (int)((float)BestTiles.Count * (float)personalityValue / 100f);
+
+            if (index >= BestTiles.Count)
+            {
+                index = BestTiles.Count - 1;
+            }
+            TargetTile = BestTiles[index];
+        }
+        else
+        {
+            TargetTile = BestTiles[0];
+        }
+
+
+        Unit.GetComponent<UnitScript>().MoveTo(TargetTile.GridCoordinates, true, true);
     }
     public void ReinitializeMechanismIfPairednotactive()
     {
