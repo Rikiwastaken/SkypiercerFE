@@ -4771,6 +4771,7 @@ public class UnitScript : MonoBehaviour
         if (newtile != null)
         {
             GameObject newunit = GridScript.GetUnit(newtile.GetComponent<GridSquareScript>());
+            GridSquareScript.MechanismClass Mechanism = newtile.GetComponent<GridSquareScript>().Mechanism;
             if (newunit != null)
             {
                 if (newunit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkable && !newunit.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.talkedto)
@@ -4778,11 +4779,11 @@ public class UnitScript : MonoBehaviour
                     interactables.Add(newunit);
                 }
             }
-            if (newtile.GetComponent<GridSquareScript>().Mechanism != null && !newtile.GetComponent<GridSquareScript>().Mechanism.isactivated && newtile.GetComponent<GridSquareScript>().Mechanism.type == 2)
+            if (Mechanism != null && (!Mechanism.isactivated || Mechanism.CanBeDeactivated) && Mechanism.type == 2)
             {
                 interactables.Add(newtile);
             }
-            if (newtile.GetComponent<GridSquareScript>().Mechanism != null && newtile.GetComponent<GridSquareScript>().Mechanism.type == 3 && newtile.GetComponent<GridSquareScript>().Mechanism.PairedTiles.Count >= 1 && GridScript.GetUnit(newtile.GetComponent<GridSquareScript>().Mechanism.PairedTiles[0]) == null)
+            if (Mechanism != null && Mechanism.type == 3 && Mechanism.PairedTiles.Count >= 1 && GridScript.GetUnit(Mechanism.PairedTiles[0]) == null)
             {
                 interactables.Add(newtile);
             }

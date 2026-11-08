@@ -67,6 +67,7 @@ public class GridSquareScript : MonoBehaviour
         [Header("1: door, 2: lever, 3: teleporter")]
         public int type; // 1 : door, 2 : lever, 3 : teleporter;
         public bool isactivated;
+        public bool CanBeDeactivated;
         public List<GridSquareScript> Triggers;
         public List<GridSquareScript> PairedTiles;
 

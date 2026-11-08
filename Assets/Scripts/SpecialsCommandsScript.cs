@@ -113,14 +113,15 @@ public class SpecialCommandsScript : MonoBehaviour
         else if (SpecialInteractos[i].GetComponent<GridSquareScript>() != null)
         {
             ActionManager.instance.Interract(target, SpecialInteractos[i].GetComponent<GridSquareScript>());
-            if (SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.type == 2)
+            GridSquareScript.MechanismClass Mechanism = SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism;
+            if (Mechanism.type == 2 && (!Mechanism.isactivated || Mechanism.CanBeDeactivated))
             {
-                SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.ChangeActivation(true);
+                Mechanism.ChangeActivation(!Mechanism.isactivated);
                 SpecialInteractos[i].GetComponent<GridSquareScript>().ManageLeverOrientation();
             }
-            else if (SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.type == 3)
+            else if (Mechanism.type == 3)
             {
-                target.GetComponent<UnitScript>().MoveTo(SpecialInteractos[i].GetComponent<GridSquareScript>().Mechanism.PairedTiles[0].GridCoordinates, false, true);
+                target.GetComponent<UnitScript>().MoveTo(Mechanism.PairedTiles[0].GridCoordinates, false, true);
             }
 
             MapEventManager.instance.TriggerEventCheck();
