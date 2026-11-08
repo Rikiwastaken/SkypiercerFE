@@ -212,7 +212,7 @@ public class BattallionChoiceScript : MonoBehaviour
                     BattallionLeaderImage.sprite = _DataScript.DialogueCharacterList[13].Portrait;
                     UnitEffectTMP.text = "Effect for Unit:\nIncrease nearby allies' Strength by " + Mathf.Max(1, (int)(currentChar.AjustedStats.Strength / 5)) + " and Defense by " + Mathf.Max(1, (int)(currentChar.AjustedStats.Defense / 5));
                     CommanderEffectTMP.text = "Effect for Commander:\n+" + strbonus + " Strength\n+" + defbonus + " Defense";
-                    BattallionNameTMP.text = "Eton Zephyr";
+                    BattallionNameTMP.text = "Eton Storm";
                     break;
             }
 
