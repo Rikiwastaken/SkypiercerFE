@@ -11,6 +11,7 @@
 - Faire les visuels de l'effet gardien de Kira
 - Mettre un cercle pour montrer les effets de skills qui ont un rayon. (marche pas trop)
 - Faire la pluie avec des effets différent et des couleurs différentes pour chaque effet
+- Pour le verre: faire un sahder avec un  "effet de fresnel" et jouer avec l'indice de réfractions
 
 ## System 
 
