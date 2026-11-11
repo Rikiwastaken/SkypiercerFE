@@ -42,10 +42,11 @@ Material:
     - _AlphaClipThreshold: 0.5
     - _AngleOffset: -21.2
     - _CellDensity: 3.8
-    - _Metallic: 0.58
+    - _DisplacementMultiplier: 0
+    - _Metallic: 0.28
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.23
+    - _Smoothness: 0.05
     m_Colors:
     - _BaseColor: {r: 0.28930807, g: 0.28930807, b: 0.28930807, a: 0}
     - _MossColor: {r: 0.22012573, g: 0.071064845, b: 0.043609787, a: 0}
