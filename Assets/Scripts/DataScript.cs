@@ -1073,7 +1073,7 @@ public class DataScript : MonoBehaviour
                 }
 
 
-                if (Character.enemyStats != null && Character.enemyStats.EquipmentModifiers != null && Character.enemyStats.EquipmentModifiers.Count < i)
+                if (Character.enemyStats != null && Character.enemyStats.EquipmentModifiers != null && Character.enemyStats.EquipmentModifiers.Count > i)
                 {
                     newequipment.Modifier = ModifierNames[Character.enemyStats.EquipmentModifiers[i]];
                 }
