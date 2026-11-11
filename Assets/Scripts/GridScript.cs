@@ -813,7 +813,8 @@ public class GridScript : MonoBehaviour
             {
                 continue;
             }
-            if (unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile != null && unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile == tile)
+            GridSquareScript unitTile = unit.GetComponent<UnitScript>().UnitCharacteristics.currentTile;
+            if (unitTile != null && unitTile == tile)
             {
                 return unit;
 

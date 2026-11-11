@@ -303,9 +303,15 @@ public class GridSquareScript : MonoBehaviour
                     };
                 foreach (GridSquareScript tile in tilelist)
                 {
+
                     if (tile != null && !tile.isobstacle)
                     {
-                        AvailableTiles.Add(tile);
+                        GameObject unit = GridScript.GetUnit(tile);
+                        if (unit == null)
+                        {
+                            AvailableTiles.Add(tile);
+                        }
+
                     }
                 }
             }
