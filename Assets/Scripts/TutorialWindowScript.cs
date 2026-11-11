@@ -32,6 +32,10 @@ public class TutorialWindowScript : MonoBehaviour
 
     public void InitializeWindow(Vector2 Dimensions, string text)
     {
+        if (gameObject == null)
+        {
+            return;
+        }
         gameObject.SetActive(true);
         var theBarRectTransform = GetComponent<Transform>() as RectTransform;
         theBarRectTransform.sizeDelta = new Vector2(Dimensions.x, Dimensions.y);

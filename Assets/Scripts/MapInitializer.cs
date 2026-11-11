@@ -128,17 +128,15 @@ public class MapInitializer : MonoBehaviour
 
         }
         // first, the forced characters
-        foreach (Character playable in DataScript.instance.PlayableCharacterList)
+        foreach (int forcedCharacterID in ForcedCharacters)
         {
-            if (ForcedCharacters.Contains(playable.ID))
-            {
-                playable.playableStats.deployunit = true;
-                playable.playableStats.unlocked = true;
-                currentlydeployed++;
-                AddUnit(playable);
-            }
-
+            Character playable = DataScript.instance.PlayableCharacterList[forcedCharacterID];
+            playable.playableStats.deployunit = true;
+            playable.playableStats.unlocked = true;
+            currentlydeployed++;
+            AddUnit(playable);
         }
+
         // then the characters that were deployed last map
         SaveManager SM = SaveManager.instance;
         foreach (Character playable in DataScript.instance.PlayableCharacterList)

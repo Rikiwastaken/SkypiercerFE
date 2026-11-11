@@ -3057,8 +3057,12 @@ public class UnitScript : MonoBehaviour
 
                 string text = UnitCharacteristics.name + "'s skills evolved to level " + 3;
 
-                MapEventManager.instance.TutorialwindowScript.InitializeWindow(new Vector2(300, 150), text);
+                if (MapEventManager.instance != null && MapEventManager.instance.TutorialwindowScript != null)
+                {
+                    MapEventManager.instance.TutorialwindowScript.InitializeWindow(new Vector2(300, 150), text);
+                }
             }
+
             else if (UnitCharacteristics.level < 30)
             {
                 UnitCharacteristics.UnitSkillLevel = 3;

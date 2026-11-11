@@ -854,6 +854,12 @@ public class DataScript : MonoBehaviour
                     {
                         character.playableStats.unlocked = true;
                     }
+                    break;
+                case 12: // Bob
+                    if (chapter >= 15)
+                    {
+                        character.playableStats.unlocked = true;
+                    }
 
                     break;
                 case 13: // Gale
@@ -876,6 +882,12 @@ public class DataScript : MonoBehaviour
                     break;
                 case 22: // Lucy
                     if (CompletedSideStories != null && CompletedSideStories.Contains(2))
+                    {
+                        character.playableStats.unlocked = true;
+                    }
+                    break;
+                case 25: // Cross
+                    if (chapter >= 18)
                     {
                         character.playableStats.unlocked = true;
                     }

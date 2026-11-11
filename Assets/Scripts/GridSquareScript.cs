@@ -250,6 +250,10 @@ public class GridSquareScript : MonoBehaviour
         {
             return;
         }
+        if (GridScript == null)
+        {
+            GridScript = GridScript.instance;
+        }
 
         // if there is no trigger, the door is always closed
         if (Mechanism.Triggers == null || Mechanism.Triggers.Count == 0)
@@ -600,6 +604,10 @@ public class GridSquareScript : MonoBehaviour
 
     public void SetPrebattleTileColor()
     {
+        if (MapInitializer == null)
+        {
+            MapInitializer = MapInitializer.instance;
+        }
         if (TurnManger == null || TurnManger.currentlyplaying == "")
         {
             if (MapInitializer.playablepos.Contains(GridCoordinates))
