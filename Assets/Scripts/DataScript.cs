@@ -141,6 +141,7 @@ public class DataScript : MonoBehaviour
 
     public List<Character> DefaultPlayableCharacterList;
     public Inventory DefaultInventory;
+    public List<string> ModifierNames;
 
     public List<Sprite> EnemySprites;
     [Header("1-50 Playables 51-inf NPCs")]
@@ -1050,8 +1051,9 @@ public class DataScript : MonoBehaviour
         //UpdateEquipmentID(Character);
         List<int> equipmentListIDs = Character.equipmentsIDs;
         List<equipment> newequipmentlist = new List<equipment>();
-        foreach (int equipmentID in equipmentListIDs)
+        for (int i = 0; i < equipmentListIDs.Count; i++)
         {
+            int equipmentID = equipmentListIDs[i];
             if (equipmentID >= 0 && equipmentID < equipmentList.Count)
             {
 
@@ -1070,10 +1072,18 @@ public class DataScript : MonoBehaviour
                     }
                 }
 
+
+                if (Character.enemyStats != null && Character.enemyStats.EquipmentModifiers != null && Character.enemyStats.EquipmentModifiers.Count < i)
+                {
+                    newequipment.Modifier = ModifierNames[Character.enemyStats.EquipmentModifiers[i]];
+                }
+
                 if (newequipment.Modifier == null || newequipment.Modifier == "")
                 {
                     newequipment.Modifier = "Basic";
                 }
+
+
 
                 CalculateModifierStatChanges(newequipment);
 

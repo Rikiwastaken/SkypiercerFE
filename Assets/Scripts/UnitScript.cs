@@ -150,6 +150,7 @@ public class UnitScript : MonoBehaviour
          */
         public Vector2 startpos;
         public List<int> equipments;
+        public List<int> EquipmentModifiers;
         public List<int> Skills;
         public String Name;
         public int bossiD;

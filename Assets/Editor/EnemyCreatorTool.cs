@@ -24,6 +24,10 @@ public class EnemyStatsEditorWindow : EditorWindow
     private List<string> equipmentNames = new List<string>();
     private List<int> equipmentIDs = new List<int>();
 
+    // Modifier dropdown
+    private List<string> modifierNames = new List<string>();
+    private List<int> modifierIDs = new List<int>();
+
 
 
     private static readonly string[] PersonalityOptions = new string[]
@@ -92,6 +96,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         skillNames.Clear();
         skillIDs.Clear();
         equipmentNames.Clear();
+        modifierNames.Clear();
         equipmentIDs.Clear();
 
         if (dataScriptPrefab != null)
@@ -109,22 +114,33 @@ public class EnemyStatsEditorWindow : EditorWindow
             // Skills
             if (dataScriptPrefab.SkillList != null)
             {
-                foreach (var s in dataScriptPrefab.SkillList)
+                foreach (DataScript.Skill skill in dataScriptPrefab.SkillList)
                 {
-                    string label = s.ID + " : " + s.name + (s.IsCommand ? " (command)" : " (passive)");
+                    string label = skill.ID + " : " + skill.name + (skill.IsCommand ? " (command)" : " (passive)");
                     skillNames.Add(label);
-                    skillIDs.Add(s.ID);
+                    skillIDs.Add(skill.ID);
                 }
             }
 
             // Equipments
             if (dataScriptPrefab.equipmentList != null)
             {
-                foreach (var e in dataScriptPrefab.equipmentList)
+                foreach (UnitScript.equipment equ in dataScriptPrefab.equipmentList)
                 {
-                    string label = e.ID + $" : {e.type} {e.Grade}";
+                    string label = equ.ID + $" : {equ.type} {equ.Grade}";
                     equipmentNames.Add(label);
-                    equipmentIDs.Add(e.ID);
+                    equipmentIDs.Add(equ.ID);
+                }
+            }
+
+            // Modifiers
+            if (dataScriptPrefab.ModifierNames != null)
+            {
+                for (int i = 0; i < dataScriptPrefab.ModifierNames.Count; i++)
+                {
+                    string label = i + $" : {dataScriptPrefab.ModifierNames[i]}";
+                    modifierNames.Add(label);
+                    modifierIDs.Add(i);
                 }
             }
         }
@@ -236,6 +252,7 @@ public class EnemyStatsEditorWindow : EditorWindow
         eProp.FindPropertyRelative("modelID").intValue = 0;
 
         eProp.FindPropertyRelative("equipments").ClearArray();
+        eProp.FindPropertyRelative("EquipmentModifiers").ClearArray();
         eProp.FindPropertyRelative("Skills").ClearArray();
 
         SerializedProperty monsterStats = eProp.FindPropertyRelative("monsterStats");
@@ -309,6 +326,11 @@ public class EnemyStatsEditorWindow : EditorWindow
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Equipments");
         DrawIDListDropdown(eProp.FindPropertyRelative("equipments"), equipmentNames, equipmentIDs);
+
+        // --- Equipments Modifiers ---
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("Modifiers");
+        DrawIDListDropdown(eProp.FindPropertyRelative("EquipmentModifiers"), modifierNames, modifierIDs);
 
         // --- Skills ---
         EditorGUILayout.Space();
@@ -503,6 +525,21 @@ public class EnemyStatsEditorWindow : EditorWindow
             }
         }
 
+    }
+
+    [MenuItem("Map Edition/Show Expanded Positions")]
+    public static void ShowExpandedCharacter()
+    {
+        ShowCharacter();
+        Transform gridGO = GameObject.Find("Grid").transform;
+        for (int i = 0; i < gridGO.childCount; i++)
+        {
+            GridSquareScript tile = gridGO.GetChild(i).GetComponent<GridSquareScript>();
+            if (tile.Mechanism != null && tile.Mechanism.type == 1)
+            {
+                gridGO.GetChild(i).GetChild(1).GetComponent<SpriteRenderer>().color = Color.magenta;
+            }
+        }
     }
 
     [MenuItem("Map Edition/Show Elevation")]

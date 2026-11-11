@@ -130,12 +130,16 @@ public class WeaponPrefabScript : MonoBehaviour
 
 
                     newweapon.transform.localScale *= scale;
-                    GameObject newparticlesystem = Instantiate(ParticleSystem);
-                    newparticlesystem.transform.parent = newweapon.transform;
-                    newparticlesystem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0)));
-                    newparticlesystem.transform.localScale = Vector3.one;
+                    if (ParticleSystem.activeSelf)
+                    {
+                        GameObject newparticlesystem = Instantiate(ParticleSystem);
+                        newparticlesystem.transform.parent = newweapon.transform;
+                        newparticlesystem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0)));
+                        newparticlesystem.transform.localScale = Vector3.one;
 
-                    newparticlesystem.SetActive(true);
+                        newparticlesystem.SetActive(true);
+                    }
+
                     break;
                 }
             }
