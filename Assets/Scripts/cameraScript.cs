@@ -68,7 +68,11 @@ public class cameraScriptR : MonoBehaviour
         initialrotation = transform.GetChild(0).rotation.eulerAngles;
         previouselevation = transform.position.y;
         GridScript = GridScript.instance;
-        Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
+        if (Destination == null || Destination == new Vector2(0, 0))
+        {
+            Destination = GridScript.GetComponent<MapInitializer>().playablepos[0];
+        }
+
         //transform.position = new Vector3(Destination.x, transform.position.y, Destination.y);
         turnmanager = TurnManger.instance;
         previousY = transform.position.y;

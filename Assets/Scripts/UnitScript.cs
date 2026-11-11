@@ -1039,6 +1039,22 @@ public class UnitScript : MonoBehaviour
             }
         }
 
+        // Advanced Machine
+        if (GetSkill(122))
+        {
+            List<int> Skillvalues = DataScript.instance.SkillList[122].SkillValues;
+
+            float multiplier = GetSkillLevelMultiplier(122);
+            int damageReductionbonus = (int)(Skillvalues[1] * multiplier);
+            float restoredHP = Mathf.Min((int)(UnitCharacteristics.AjustedStats.HP * (Skillvalues[0] / 100f * multiplier)), (int)UnitCharacteristics.AjustedStats.HP - UnitCharacteristics.currentHP);
+            AddNumber((int)restoredHP, true, "Advanced Machine");
+            UnitCharacteristics.currentHP += (int)restoredHP;
+            if (UnitCharacteristics.currentHP > UnitCharacteristics.AjustedStats.HP)
+            {
+                UnitCharacteristics.currentHP = (int)UnitCharacteristics.AjustedStats.HP;
+            }
+        }
+
         // Photosynthesis
         if (GetSkill(94) && GetWeatherType() == "sun")
         {
@@ -4640,6 +4656,18 @@ public class UnitScript : MonoBehaviour
                 TriggerSkills.Add(120);
             }
 
+        }
+
+
+        //Advanced Machinery
+        if (GetSkill(122))
+        {
+            List<int> Skillvalues = dataScript.SkillList[122].SkillValues;
+
+            float multiplier = GetSkillLevelMultiplier(122);
+            int damageReductionbonus = (int)(Skillvalues[0] * multiplier);
+            statbonuses.DamageReduction += damageReductionbonus;
+            TriggerSkills.Add(122);
         }
 
 

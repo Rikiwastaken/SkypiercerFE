@@ -1077,7 +1077,8 @@ public class ActionsMenu : MonoBehaviour
 
 
 
-        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
+
+        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77) || target.GetComponent<UnitScript>().GetSkill(122)) //Spite, Caelum General, Advanced Machinery
         {
             if (doubleattacker == target)
             {
@@ -1140,7 +1141,7 @@ public class ActionsMenu : MonoBehaviour
 
         SetupCombatHUD(unit, true, true, (int)Mathf.Max(charunit.currentHP - FinalTargetdmg, 0f), false, damageunittxt, unithit + "%", unitcrit + "%");
 
-        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
+        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77) || target.GetComponent<UnitScript>().GetSkill(122)) //Spite, Caelum General, Advanced Machinery
         {
             string TargetDmgText = "";
             if (doubleattacker == target)
@@ -1192,7 +1193,7 @@ public class ActionsMenu : MonoBehaviour
             TargetOrangeLifeBar.fillAmount = (float)(chartarget.currentHP) / (float)chartarget.AjustedStats.HP;
         }
 
-        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
+        if (CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77) || target.GetComponent<UnitScript>().GetSkill(122)) //Spite, Caelum General, Advanced Machinery
         {
             if (doubleattacker == target)
             {
@@ -1888,7 +1889,7 @@ public class ActionsMenu : MonoBehaviour
         {
             (GameObject doubleattacker, bool tripleattack) = CalculatedoubleAttack(unit, target, UnitStatBonus, TargetStatBonus);
 
-            bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77);//spite, Caelum General
+            bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77) || target.GetComponent<UnitScript>().GetSkill(122);//spite, Caelum General, Advanced Machinery
 
             int unithitrate = CalculateHit(unit, target, UnitStatBonus, TargetStatBonus);
 
@@ -2082,7 +2083,7 @@ public class ActionsMenu : MonoBehaviour
         //healing
         else
         {
-            bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77); //Spite, Caelum General
+            bool inrange = CheckifInRange(unit, target) || target.GetComponent<UnitScript>().GetSkill(38) || target.GetComponent<UnitScript>().GetSkill(77) || target.GetComponent<UnitScript>().GetSkill(122); //Spite, Caelum General, Advanced Machinery
             int unitdamage = (int)Mathf.Min(CalculateHealing(unit, UnitStatBonus), chartarget.AjustedStats.HP - chartarget.currentHP);
             List<int> numberofhits = new List<int>() { 1 };
 

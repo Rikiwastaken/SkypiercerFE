@@ -133,7 +133,7 @@ public class CombatTextScript : MonoBehaviour
 
             }
             attackerText += "  hit: " + hitrateattacker + "%  crit: " + critrateattacker + "%";
-            if (ActionsMenu.instance.CheckifInRange(newattacker, newdefender) || newdefender.GetComponent<UnitScript>().GetSkill(38) || newdefender.GetComponent<UnitScript>().GetSkill(77)) //Spite, Caelum General
+            if (ActionsMenu.instance.CheckifInRange(newattacker, newdefender) || newdefender.GetComponent<UnitScript>().GetSkill(38) || newdefender.GetComponent<UnitScript>().GetSkill(77) || newdefender.GetComponent<UnitScript>().GetSkill(122)) //Spite, Caelum General, Advanced Machinery
             {
                 int damagedealtDefender = ActionsMenu.CalculateDamage(newdefender, NewDefenderStatBonus, newattacker, NewAttackerStatBonus);
                 int hitrateDefender = ActionsMenu.CalculateHit(newdefender, newattacker, NewDefenderStatBonus, NewAttackerStatBonus);

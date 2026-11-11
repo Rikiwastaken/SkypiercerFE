@@ -2617,6 +2617,29 @@
             "level2Multiplier": 0.75,
             "level3Multiplier": 0.5,
             "level4Multiplier": 0.25
+        },
+        {
+            "name": "Advanced Machinery",
+            "Descriptions": "Reduce damage taken by @0%, always counterattacks and restores @1% of max HP at beginning of turn.",
+            "IsCommand": false,
+            "Cost": 0,
+            "SkillValues": [
+                40,
+                25
+            ],
+            "targettype": 0,
+            "range": 0,
+            "buyable": false,
+            "AlwaysPresentInShop": false,
+            "ID": 122,
+            "SkillIconInfo": {
+                "OuterCircleColorID": 6,
+                "InnerCircleColorID": 2,
+                "MainLogoID": 13
+            },
+            "level2Multiplier": 1.0,
+            "level3Multiplier": 1.0,
+            "level4Multiplier": 1.0
         }
     ]
 }
