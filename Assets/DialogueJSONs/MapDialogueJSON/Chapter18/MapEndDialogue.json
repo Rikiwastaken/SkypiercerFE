@@ -1,0 +1,26 @@
+{
+    "Dialogue": [
+        {
+            "text": "It's down!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 0,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "Am I... Still alive?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        }
+    ]
+}
