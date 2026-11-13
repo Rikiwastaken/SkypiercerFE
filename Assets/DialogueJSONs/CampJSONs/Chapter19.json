@@ -1,0 +1,312 @@
+{
+    "Dialogue": [
+        {
+            "text": "Phew, thanks for the help! I thought I would die in here!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "What happened here? What were those things?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 12,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Chill out, Bob. Those were only machines.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 0,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Machines?! Demons are what they are! Who would make something like this?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 12,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "I made them!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Why would you create something you cannot even control properly?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 13,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "That... Wasn't part of the plan.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Are you trying to raise some kind of army? Is Archades resorting to machines to fight for them?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 9,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "No you got it all wrong. Last week, the empire delivered a whole batch of goodies.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Let me guess... You found a Blade Engine amongst the \"goodies\"?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 0,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "How do you know?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "It's ours. We're here for that Engine.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 9,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Bummer. Anyway, this is exavtly what I needed to complete my FriendMaker Mk2.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Mk2? What happened to the first one?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 0,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Trust me, you don't want to know.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "True, we do not want to. So what's the FriendMaker?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 13,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Well... You know... It can get pretty lonely out here, so I thought I could repair an old sentry assembler...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "How did you find one? The only one in working order was the one in Landfall Village.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 5,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Easy. We're above an Old World Bunker.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "What? Zack, Kira, we have to take a look a this place!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 5,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Really? Well that simplifies things!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "How so?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 9,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Well, the FriendMaker Mk2 is still making these machines, it would be nice if you guys could turn it off.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Why would we do that? It's your problem.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 0,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Zack, the engine...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 9,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Right! Forgot about that! Welp, let's bash some machines. Bob, you in?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 0,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "Absolutely not, pupil! I'd rather eat my blade than step foot in this hellhole!",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 12,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        },
+        {
+            "text": "He's in.",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 0,
+            "ImageToShow": -1,
+            "musictoplay": 0
+        }
+    ]
+}
