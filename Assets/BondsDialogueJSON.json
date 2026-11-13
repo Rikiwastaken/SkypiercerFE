@@ -5439,6 +5439,296 @@
                 }
             ],
             "dialogueLvl4": []
+        },
+        {
+            "BondID": 49,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 1 between Lucy and Zack, with Lucy talking"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "bond 1 between Zack and Lucy, with Zack talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 2 between Lucy and Zack, with Lucy talking"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "bond 2 between Zack and Lucy, with Zack talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 3 between Lucy and Zack, with Lucy talking"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "bond 3 between Zack and Lucy, with Zack talking"
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 50,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 1 between Lucy and Gale, with Lucy talking"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "bond 1 between Gale and Lucy, with Gale talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 2 between Lucy and Gale, with Lucy talking"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "bond 2 between Gale and Lucy, with Gale talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 3 between Lucy and Gale, with Lucy talking"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "bond 3 between Gale and Lucy, with Gale talking"
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 4 between Lucy and Gale, with Lucy talking"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "bond 4 between Gale and Lucy, with Gale talking"
+                }
+            ]
+        },
+        {
+            "BondID": 51,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 1 between Lucy and Cross, with Lucy talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 1 between Cross and Lucy, with Cross talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 2 between Lucy and Cross, with Lucy talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 2 between Cross and Lucy, with Cross talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 3 between Lucy and Cross, with Lucy talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 3 between Cross and Lucy, with Cross talking"
+                }
+            ],
+            "dialogueLvl4": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 4 between Lucy and Cross, with Lucy talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 4 between Cross and Lucy, with Cross talking"
+                }
+            ]
+        },
+        {
+            "BondID": 52,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 1 between Bob and Cross, with Bob talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 1 between Cross and Bob, with Cross talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 2 between Bob and Cross, with Bob talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 2 between Cross and Bob, with Cross talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 12,
+                    "text": "bond 3 between Bob and Cross, with Bob talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 3 between Cross and Bob, with Cross talking"
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 53,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 1 between Lucy and Cross, with Lucy talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 1 between Cross and Lucy, with Cross talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 2 between Lucy and Cross, with Lucy talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 2 between Cross and Lucy, with Cross talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 22,
+                    "text": "bond 3 between Lucy and Cross, with Lucy talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 3 between Cross and Lucy, with Cross talking"
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 54,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 5,
+                    "text": "bond 1 between Sieg and Cross, with Sieg talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 1 between Cross and Sieg, with Cross talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 5,
+                    "text": "bond 2 between Sieg and Cross, with Sieg talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 2 between Cross and Sieg, with Cross talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 5,
+                    "text": "bond 3 between Sieg and Cross, with Sieg talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 3 between Cross and Sieg, with Cross talking"
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 55,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 13,
+                    "text": "bond 1 between Gale and Cross, with Gale talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 1 between Cross and Gale, with Cross talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 13,
+                    "text": "bond 2 between Gale and Cross, with Gale talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 2 between Cross and Gale, with Cross talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 13,
+                    "text": "bond 3 between Gale and Cross, with Gale talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 3 between Cross and Gale, with Cross talking"
+                }
+            ],
+            "dialogueLvl4": []
+        },
+        {
+            "BondID": 56,
+            "dialogueLvl1": [
+                {
+                    "CharacterID": 0,
+                    "text": "bond 1 between Zack and Cross, with Zack talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 1 between Cross and Zack, with Cross talking"
+                }
+            ],
+            "dialogueLvl2": [
+                {
+                    "CharacterID": 0,
+                    "text": "bond 2 between Zack and Cross, with Zack talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 2 between Cross and Zack, with Cross talking"
+                }
+            ],
+            "dialogueLvl3": [
+                {
+                    "CharacterID": 0,
+                    "text": "bond 3 between Zack and Cross, with Zack talking"
+                },
+                {
+                    "CharacterID": 25,
+                    "text": "bond 3 between Cross and Zack, with Cross talking"
+                }
+            ],
+            "dialogueLvl4": []
         }
     ]
 }

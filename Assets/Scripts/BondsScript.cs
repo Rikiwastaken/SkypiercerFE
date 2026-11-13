@@ -542,7 +542,7 @@ public class BondsScript : MonoBehaviour
         {
             AssetDatabase.StartAssetEditing();
             File.WriteAllText(path, json);
-            Debug.Log($"Skill Saved : {path}");
+            Debug.Log($"Bond Dialogues Saved : {path}");
         }
         catch (System.Exception e)
         {

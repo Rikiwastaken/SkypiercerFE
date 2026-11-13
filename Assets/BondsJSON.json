@@ -635,6 +635,78 @@
             "BondLevel": 0,
             "BondDialogueSeen": 0,
             "MaxLevel": 3
+        },
+        {
+            "ID": 51,
+            "Name": "Cross-Aurora",
+            "Characters": [
+                22,
+                25
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 4
+        },
+        {
+            "ID": 52,
+            "Name": "Cross-Bob",
+            "Characters": [
+                12,
+                25
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 53,
+            "Name": "Cross-Lucy",
+            "Characters": [
+                22,
+                25
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 54,
+            "Name": "Cross-Sieg",
+            "Characters": [
+                5,
+                25
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 55,
+            "Name": "Cross-Gale",
+            "Characters": [
+                13,
+                25
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
+        },
+        {
+            "ID": 56,
+            "Name": "Cross-Zack",
+            "Characters": [
+                0,
+                25
+            ],
+            "BondPoints": 0,
+            "BondLevel": 0,
+            "BondDialogueSeen": 0,
+            "MaxLevel": 3
         }
     ]
 }
