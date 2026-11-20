@@ -47,6 +47,8 @@ public class CampScript : MonoBehaviour
 
     [SerializeField] private Transform MainCanvas;
 
+    private FMODEventManager _FMODEventManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -57,6 +59,14 @@ public class CampScript : MonoBehaviour
         {
             SceneManager.LoadScene("FirstScene");
         }
+
+        if (_FMODEventManager == null)
+        {
+            _FMODEventManager = FMODEventManager.instance;
+        }
+
+        _FMODEventManager.PlayCampMusic();
+
         EventSystem.current.SetSelectedGameObject(BaseMenu.GetChild(0).gameObject);
 
 
@@ -132,13 +142,14 @@ public class CampScript : MonoBehaviour
     public void LoadNextChapter()
     {
 
-
+        _FMODEventManager.StopCampMusic();
         SceneLoader.instance.LoadScene("WorldMap");
 
     }
 
     public void ReturnToMainMenu()
     {
+        _FMODEventManager.StopCampMusic();
         SceneLoader.instance.LoadScene("MainMenu");
     }
     private void PlayStartDialogue()

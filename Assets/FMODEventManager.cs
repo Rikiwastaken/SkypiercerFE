@@ -24,9 +24,11 @@ public class FMODEventManager : MonoBehaviour
     [SerializeField] private string PrepBankRef;
     [SerializeField] private string VoiceSFXBankRef;
     [SerializeField] private string CutSceneMusicBankRef;
+    [SerializeField] private string CampMusiceventPath;
 
     private EventInstance currentEvent;
     private EventInstance CurrentMusicEvent;
+    private EventInstance CampEvent;
     private EventDescription prepMusicEvent;
     private EventDescription AllyMusic;
     private EventDescription EnemyMusic;
@@ -90,6 +92,29 @@ public class FMODEventManager : MonoBehaviour
         }
 
 
+        if (CampEvent.isValid())
+        {
+
+            CampEvent.getVolume(out float volume);
+            if (CurrentMusicEvent.isValid())
+            {
+
+                if (volume > 0f)
+                {
+                    CampEvent.setVolume(volume - Time.deltaTime);
+                }
+            }
+            else
+            {
+                if (volume < 1f)
+                {
+                    CampEvent.setVolume(volume + Time.deltaTime);
+                }
+            }
+
+
+        }
+
         if (currentEvent.isValid())
         {
 
@@ -122,6 +147,25 @@ public class FMODEventManager : MonoBehaviour
             currentEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             currentEvent.release();
             currentEvent.clearHandle();
+        }
+    }
+
+    public void PlayCampMusic()
+    {
+
+        RuntimeManager.StudioSystem.getEvent(
+       CampMusiceventPath,
+       out EventDescription campEventDescription);
+        campEventDescription.createInstance(out CampEvent);
+        CampEvent.start();
+    }
+
+    public void StopCampMusic()
+    {
+        if (CampEvent.isValid())
+        {
+            CampEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            CampEvent.release();
         }
     }
 
