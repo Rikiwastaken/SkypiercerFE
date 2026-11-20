@@ -11,6 +11,12 @@ public class FMODEventManager : MonoBehaviour
 
     private TurnManger _TurnManger;
 
+    private SaveManager _SaveManager;
+
+    private Bus MasterBus;
+    private Bus MusicBus;
+    private Bus SFXBus;
+
     private Bank AllyBank;
     private Bank EnemyBank;
     private Bank OtherBank;
@@ -34,6 +40,7 @@ public class FMODEventManager : MonoBehaviour
     private EventDescription EnemyMusic;
     private EventDescription OtherMusic;
     public bool isInCutscene;
+
 
 
     [Serializable]
@@ -60,6 +67,10 @@ public class FMODEventManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _SaveManager = SaveManager.instance;
+        MasterBus = RuntimeManager.GetBus("bus:/");
+        MusicBus = RuntimeManager.GetBus("bus:/Music");
+        SFXBus = RuntimeManager.GetBus("bus:/SFX");
         RuntimeManager.StudioSystem.getBank(AllyBankRef, out AllyBank);
         RuntimeManager.StudioSystem.getBank(EnemyBankRef, out EnemyBank);
         RuntimeManager.StudioSystem.getBank(OtherBankRef, out OtherBank);
@@ -139,6 +150,27 @@ public class FMODEventManager : MonoBehaviour
         }
 
     }
+
+    public void ChangeVolume()
+    {
+
+
+        MusicBus.setVolume(convertToLog(_SaveManager.Options.musicvolume));
+        SFXBus.setVolume(convertToLog(_SaveManager.Options.SEVolume));
+    }
+
+    private float convertToLog(float initialvalue)
+    {
+        if (initialvalue < 0.001f)
+        {
+            return 0f;
+        }
+        else
+        {
+            return Mathf.Pow(10f, (initialvalue * 40f - 40f) / 20f);
+        }
+    }
+
 
     private void StopCurrentMusic()
     {

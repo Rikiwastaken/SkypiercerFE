@@ -118,7 +118,7 @@ public class SaveManager : MonoBehaviour
         DefaultSave.PlayerInventory = DataScript.instance.PlayerInventory;
         DefaultSave.BondList = DataScript.instance.BondsList;
         DefaultSave.secondselapsed = 0;
-        MusicManager.instance.ChangeVolume();
+        FMODEventManager.instance.ChangeVolume();
     }
 
     private void FixedUpdate()
@@ -296,9 +296,9 @@ public class SaveManager : MonoBehaviour
             Debug.LogError($"Error when saving options : {e.Message}");
         }
 
-        if (MusicManager.instance != null)
+        if (FMODEventManager.instance != null)
         {
-            MusicManager.instance.ChangeVolume();
+            FMODEventManager.instance.ChangeVolume();
 
         }
         Screen.SetResolution((int)Resolutions[Options.ResolutionID].x, (int)Resolutions[Options.ResolutionID].y, Options.Fullscreen);
