@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{e2f12bb8-2285-4ea8-b00d-181991db16b5}">
+		<property name="assetPath">
+			<value>Battle-deadly_loop.ogg</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>79.055714285714288</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3413e3e8-4f00-4363-bd82-ab5fdfff3d53}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{fbe010de-34df-433b-8e0d-267fcf1eab5f}">
+		<property name="assetPath">
+			<value>Sky-Airship_loop.ogg</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>92.68961451247165</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3413e3e8-4f00-4363-bd82-ab5fdfff3d53}</destination>
+		</relationship>
+	</object>
+</objects>

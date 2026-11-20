@@ -104,7 +104,7 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] private List<MapBattleMusic> MusicList;
 
-    [SerializeField] private List<MapMusic> MusicPerMap;
+    [SerializeField] public List<MapMusic> MusicPerMap;
 
     private bool PlayPrepMusic;
 
@@ -181,7 +181,7 @@ public class MusicManager : MonoBehaviour
         else if (currentscenename == "MainMenu" && (!MainMenuMusic.isPlaying && !MainMenuMusicintro.isPlaying))
         {
             ResetAll();
-            PlayMusic(8, maxvolume);
+            //PlayMusic(8, maxvolume);
         }
 
         if ((DialogueAudioSource.isPlaying || DialogueAudioSource2.isPlaying) && (textBubbleScript == null || TextBubbleScript.Instance == null || textBubbleScript.indialogue == false))

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{5fbd7de7-1c58-4b3b-baf3-73e643e8ff93}">
+		<property name="name">
+			<value>SkyShipVol</value>
+		</property>
+		<relationship name="folder">
+			<destination>{2ed71060-38b8-4f7b-92e4-da40cd89a02b}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{a7230fc8-4633-41d5-97ce-61e0222c5a65}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{a7230fc8-4633-41d5-97ce-61e0222c5a65}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

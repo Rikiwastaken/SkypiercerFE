@@ -51,6 +51,7 @@ public class TextBubbleScript : MonoBehaviour
     [SerializeField] private Image Imagetoshow;
     private float currentcharacterpitch;
     private MusicManager musicManager;
+    private FMODEventManager _FMODEventManager;
 
     private Coroutine fixTMPRoutine;
 
@@ -127,6 +128,10 @@ public class TextBubbleScript : MonoBehaviour
         {
             musicManager = MusicManager.instance;
         }
+        if (_FMODEventManager == null)
+        {
+            _FMODEventManager = FMODEventManager.instance;
+        }
 
 
         indialogue = true;
@@ -149,9 +154,9 @@ public class TextBubbleScript : MonoBehaviour
                 charTimer = 0f;
                 charIndex = Mathf.Min(charIndex + 1, totalChars);
                 sentence.maxVisibleCharacters = charIndex;
-                if (musicManager != null)
+                if (_FMODEventManager != null)
                 {
-                    musicManager.PlayVoiceSE(currentcharacterpitch);
+                    _FMODEventManager.CreateVoiceFE(currentcharacterpitch);
                 }
 
             }

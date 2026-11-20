@@ -195,11 +195,11 @@
                 },
                 {
                     "CharacterID": 0,
-                    "text": "You don't need any special occasions to give something to the one you love, right ?"
+                    "text": "You don't need any special occasions to give you something, right ?"
                 },
                 {
                     "CharacterID": 1,
-                    "text": "The one... You love?"
+                    "text": "What? But you usually don't... What? I mean... What?"
                 },
                 {
                     "CharacterID": 0,
@@ -1001,51 +1001,35 @@
             "dialogueLvl4": [
                 {
                     "CharacterID": 1,
-                    "text": "Elwyn! Ready for our training session?"
+                    "text": "Elwyn! You're here early! Ready for our training session?"
                 },
                 {
                     "CharacterID": 2,
-                    "text": "Sure, but first I have something to say."
+                    "text": "Hi, you're early too! Let's get started."
                 },
                 {
                     "CharacterID": 1,
-                    "text": "What is it?"
+                    "text": "Yeah, well, you know how much I like spending time with you."
                 },
                 {
                     "CharacterID": 2,
-                    "text": "Well, you know, we have been together ever since childhood."
+                    "text": "What? Let's just get started, already."
                 },
                 {
                     "CharacterID": 1,
-                    "text": "Yeah? "
+                    "text": "You're as red as a tomato!"
                 },
                 {
                     "CharacterID": 2,
-                    "text": "And you know that you and Zack are my best friends. No, you're more than that. You're both family to me."
-                },
-                {
-                    "CharacterID": 1,
-                    "text": "Keep going."
+                    "text": "Yeah, well... I enjoy spending time with you too, you know..."
                 },
                 {
                     "CharacterID": 2,
-                    "text": "But you, Lea, you're even more than that to me. You're the most important person in the whole world. And... That's why I want to give you this."
-                },
-                {
-                    "CharacterID": 1,
-                    "text": "A ring? You took your sweet time, you dummy."
+                    "text": "I... Let's just get started ok?"
                 },
                 {
                     "CharacterID": 2,
-                    "text": "Lea, would you be my wife."
-                },
-                {
-                    "CharacterID": 1,
-                    "text": "Of course, yes! I'll be your forever."
-                },
-                {
-                    "CharacterID": 2,
-                    "text": "Forever and ever."
+                    "text": "You're just as red!"
                 }
             ]
         },
@@ -2591,11 +2575,11 @@
                 },
                 {
                     "CharacterID": 7,
-                    "text": "Well, you know how it is... I just like spending time with you, Kira."
+                    "text": "yeah, this is not a bad way to spend an evening. The night breeze is nice and all."
                 },
                 {
                     "CharacterID": 9,
-                    "text": "Really? Spending time with me? How so?"
+                    "text": "The night breeze? Really? How corny are you?"
                 },
                 {
                     "CharacterID": 7,
@@ -2603,7 +2587,7 @@
                 },
                 {
                     "CharacterID": 9,
-                    "text": "I'm just teasing you, Ruben. I know what you mean. I like spending time with you too. I would love to spend more time with you, actually."
+                    "text": "I'm just teasing you, Ruben. I also think this is not \"a bad way to spend an evening\", actually."
                 },
                 {
                     "CharacterID": 7,
@@ -3113,7 +3097,7 @@
                 },
                 {
                     "CharacterID": 5,
-                    "text": "Yeah, I am. I like you Kira!"
+                    "text": "Well, yes. That is basically it."
                 },
                 {
                     "CharacterID": 9,
@@ -3121,7 +3105,7 @@
                 },
                 {
                     "CharacterID": 5,
-                    "text": "I practiced a little bit, I wanted to make sure I said it right."
+                    "text": "I practiced a little bit."
                 },
                 {
                     "CharacterID": 9,
@@ -3352,7 +3336,7 @@
                 },
                 {
                     "CharacterID": 0,
-                    "text": "\"we\"? You want to help me build it?"
+                    "text": "\"We\"? You want to help me build it?"
                 },
                 {
                     "CharacterID": 9,
@@ -3392,11 +3376,7 @@
                 },
                 {
                     "CharacterID": 0,
-                    "text": "Oh... Ok, that sounds nice. Real nice."
-                },
-                {
-                    "CharacterID": 9,
-                    "text": "Let's do it together."
+                    "text": "Sure, that sounds nice. Real nice."
                 }
             ]
         },
@@ -3911,11 +3891,11 @@
                 },
                 {
                     "CharacterID": 9,
-                    "text": "Part of your family..."
+                    "text": "Part of your family?"
                 },
                 {
                     "CharacterID": 10,
-                    "text": "Why are you so red, Kira?"
+                    "text": "Well, yeah!"
                 },
                 {
                     "CharacterID": 9,
@@ -3951,7 +3931,7 @@
                 },
                 {
                     "CharacterID": 9,
-                    "text": "As long as it's with you."
+                    "text": "I'm not sure I want to go on an adventure with Kay..."
                 }
             ]
         },
@@ -4687,7 +4667,7 @@
                 },
                 {
                     "CharacterID": 13,
-                    "text": "I followed him. I wanted to learn from him, and I did. I learned how to fight, how to protect, and how to be a man of honor."
+                    "text": "I followed him. I wanted to understand why he let me live when I was the one who deserved it the most. In the end he took me in. He showed me the way."
                 },
                 {
                     "CharacterID": 13,
@@ -4695,7 +4675,7 @@
                 },
                 {
                     "CharacterID": 13,
-                    "text": "With every hunter being drafted and killed in the war, the pluvials were a threat, so Aurora and me decided to hunt a many of them as we could."
+                    "text": "With nearly every hunter being drafted and killed in the war, the pluvials were a threat, so Aurora and me decided to hunt a many of them as we could."
                 },
                 {
                     "CharacterID": 9,
@@ -4713,31 +4693,171 @@
             "dialogueLvl1": [
                 {
                     "CharacterID": 13,
-                    "text": "bond 1 between Gale and Zack, with Gale talking"
+                    "text": "Greetings, Zack. What are you up to?"
                 },
                 {
                     "CharacterID": 0,
-                    "text": "bond 1 between Zack and Gale, with Zack talking"
+                    "text": "Hey, Gale. I'm just chilling out. Why don't you lay on the grass with me."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I'd like to, but I should rather go train."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Oh come on, if you get any more buff you won't be able to fit in door frames. Just lay down!"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I guess taking a short break never hurts."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "..."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "So, Zack. What are we doing."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Look up."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "How so? The sky?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "The stars, man. They're really as bright as they are today."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I... Rarely pay attention to them."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "You should, man. You're always so tense."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "And what good will staring at the sky do?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Listen, just shut up and look at them!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "They're beautiful, aren't they?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Gale?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "He fell asleep!"
                 }
             ],
             "dialogueLvl2": [
                 {
                     "CharacterID": 13,
-                    "text": "bond 2 between Gale and Zack, with Gale talking"
+                    "text": "Zack, how would you like to go stargazing with me?"
                 },
                 {
                     "CharacterID": 0,
-                    "text": "bond 2 between Zack and Gale, with Zack talking"
+                    "text": "You? Asking me to take a break? Are you sick?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I have to say I feel a little disapointed. I thought you would my companion. Sorry to have disturbed you."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "To hell with training, let's go!"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Aaaah... This feels nice. Grass under the fingers, a clear sky and a good weather. It really is a perfect night!"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I also find it strangely peaceful."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "I heard that in the Old World, nearly every night was starless."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Was it that much cloudier?"
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "In a way. It was the result of their machines and factories and stuff that hid the stars."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "How could they keep using them? The damage must have been apparent."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah, from what I've read, they poluted to the point where it was nearly unbreathable."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "The more I learn about the Old World, the more I feel like the Cataclysm was bound to happen one way or another, even without the Beast."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Who knows? Maybe you're right."
                 }
             ],
             "dialogueLvl3": [
                 {
                     "CharacterID": 13,
-                    "text": "bond 3 between Gale and Zack, with Gale talking"
+                    "text": "What another nice evening..."
                 },
                 {
                     "CharacterID": 0,
-                    "text": "bond 3 between Zack and Gale, with Zack talking"
+                    "text": "True... I guess many of your friend would laugh, seeing you like this, relaxing in the grass."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "A bit out of character, isn't it? But I have one friend who would rather join me."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Who is that?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "That would be Mir."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah, I guess I can see him doing that."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "You two are very much alike in many ways. Being able to take time to relax in even the most tense situations in really a gift."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "That's a nice way to put it. Most of the others would call that laziness."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "That is not true. Only when you are rested can you make the most of your mind and body. This is fine."
+                },
+                {
+                    "CharacterID": 0,
+                    "text": "Yeah, I'll just take your word for it and take a nap."
                 }
             ],
             "dialogueLvl4": []

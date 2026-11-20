@@ -1,4 +1,5 @@
 
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,7 +24,7 @@ public class worldmapController : MonoBehaviour
 
     private Vector3 targetcamrotation;
 
-    public int isshippingCounter;
+    public int isshippingCounter = -1;
     [SerializeField] private float waterwheelrotationpersecond;
     [SerializeField] private Transform Waterwheel;
     [SerializeField] private int minchapterforship;
@@ -36,6 +37,14 @@ public class worldmapController : MonoBehaviour
     private InputAction _MoveAction;
     private InputAction _MoveCamAction;
     [SerializeField] private GameObject WaterBlocker;
+
+
+
+    [SerializeField] private StudioEventEmitter _MusicEventEmiter;
+
+    private float fonduvalue = 1f;
+
+
     private void Awake()
     {
         instance = this;
@@ -168,6 +177,9 @@ public class worldmapController : MonoBehaviour
             isshippingCounter = -(int)(0.5f / Time.deltaTime);
         }
 
+        ManageMusic();
+
+
         if (isshippingCounter > 0)
         {
             if (!ShipModel.activeSelf)
@@ -190,6 +202,30 @@ public class worldmapController : MonoBehaviour
             }
         }
     }
+
+    private void ManageMusic()
+    {
+        if (isshippingCounter <= 0)
+        {
+
+            if (fonduvalue < 1f)
+            {
+                fonduvalue += Time.deltaTime;
+                _MusicEventEmiter.SetParameter("MusicBlend", fonduvalue);
+            }
+        }
+        else
+        {
+            if (fonduvalue > 0f)
+            {
+                fonduvalue -= Time.deltaTime;
+                _MusicEventEmiter.SetParameter("MusicBlend", fonduvalue);
+            }
+
+        }
+    }
+
+
 
     public void MoveTo(Vector3 destination)
     {

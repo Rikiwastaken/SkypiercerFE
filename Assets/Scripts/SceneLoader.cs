@@ -88,7 +88,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadScene(string sceneName, int cutscene = -1)
     {
-
+        FMODEventManager.instance.InitializeMapMusic(sceneName);
         int chapternumber = SaveManager.instance.maxchapterreached;
         DataScript.instance.CharacterUnlockingSafeguard(chapternumber);
         SceneToLoad = sceneName;
