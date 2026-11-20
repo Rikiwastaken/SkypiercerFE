@@ -16,18 +16,22 @@ public class FMODEventManager : MonoBehaviour
     private Bank OtherBank;
     private Bank PrepBank;
     private Bank VoiceSFXBank;
+    private Bank CutSceneMusicBank;
 
     [SerializeField] private string AllyBankRef;
     [SerializeField] private string EnemyBankRef;
     [SerializeField] private string OtherBankRef;
     [SerializeField] private string PrepBankRef;
     [SerializeField] private string VoiceSFXBankRef;
+    [SerializeField] private string CutSceneMusicBankRef;
 
     private EventInstance currentEvent;
+    private EventInstance CurrentMusicEvent;
     private EventDescription prepMusicEvent;
     private EventDescription AllyMusic;
     private EventDescription EnemyMusic;
     private EventDescription OtherMusic;
+    public bool isInCutscene;
 
 
     [Serializable]
@@ -59,6 +63,7 @@ public class FMODEventManager : MonoBehaviour
         RuntimeManager.StudioSystem.getBank(OtherBankRef, out OtherBank);
         RuntimeManager.StudioSystem.getBank(PrepBankRef, out PrepBank);
         RuntimeManager.StudioSystem.getBank(VoiceSFXBankRef, out VoiceSFXBank);
+        RuntimeManager.StudioSystem.getBank(CutSceneMusicBankRef, out CutSceneMusicBank);
     }
 
     // Update is called once per frame
@@ -83,6 +88,31 @@ public class FMODEventManager : MonoBehaviour
             previouslyplaying = "none";
             StopCurrentMusic();
         }
+
+
+        if (currentEvent.isValid())
+        {
+
+            currentEvent.getVolume(out float volume);
+            if (CurrentMusicEvent.isValid())
+            {
+
+                if (volume > 0f)
+                {
+                    currentEvent.setVolume(volume - Time.deltaTime);
+                }
+            }
+            else
+            {
+                if (volume < 1f)
+                {
+                    currentEvent.setVolume(volume + Time.deltaTime);
+                }
+            }
+
+
+        }
+
     }
 
     private void StopCurrentMusic()
@@ -93,6 +123,42 @@ public class FMODEventManager : MonoBehaviour
             currentEvent.release();
             currentEvent.clearHandle();
         }
+    }
+
+    public void PlayCutsceneMusic(int musicID, bool IsInCutscene)
+    {
+        if (IsInCutscene)
+        {
+            isInCutscene = IsInCutscene;
+        }
+        if (musicID > 0)
+        {
+            EventDescription MusicEvent = GetEventFromBank(musicID, CutSceneMusicBank);
+            if (CurrentMusicEvent.isValid())
+            {
+                CurrentMusicEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                CurrentMusicEvent.release();
+            }
+            MusicEvent.createInstance(out CurrentMusicEvent);
+            CurrentMusicEvent.start();
+        }
+    }
+
+    public void StopCutsceneMusic(bool StopCutSceneMusic)
+    {
+        if (StopCutSceneMusic)
+        {
+            isInCutscene = false;
+        }
+        if (!isInCutscene)
+        {
+            if (CurrentMusicEvent.isValid())
+            {
+                CurrentMusicEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                CurrentMusicEvent.release();
+            }
+        }
+
     }
 
     public void ChangeBattleTheme(string currentlyplaying)
@@ -207,17 +273,35 @@ public class FMODEventManager : MonoBehaviour
         return events[ID];
     }
 
+
     private EventDescription GetEventFromBank(int ID, Bank bank)
     {
         bank.getEventList(out EventDescription[] events);
 
         if (ID < 0 || ID >= events.Length)
         {
+
+
             Debug.LogError("Event ID out of range");
             return default;
         }
 
-        return events[ID];
+        string IDString = "0" + ID;
+        if (ID > 9)
+        {
+            IDString = "" + ID;
+        }
+
+        foreach (EventDescription Event in events)
+        {
+            Event.getPath(out string path);
+            if (path.Contains(IDString))
+            {
+                return Event;
+            }
+        }
+
+        return default;
     }
 
 

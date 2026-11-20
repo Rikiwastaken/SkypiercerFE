@@ -476,8 +476,15 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Master
+  Banks:
+  - AllyMusic
+  - DialogueMusic
+  - EnemyMusic
+  - OtherMusic
+  - PrepMusic
+  - VoiceSFX
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

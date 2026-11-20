@@ -31,7 +31,7 @@
             },
             "characterindex": 50,
             "ImageToShow": 0,
-            "musictoplay": 8
+            "musictoplay": 3
         },
         {
             "text": "Who are you ? What did you do to granpa ?",
@@ -119,7 +119,7 @@
             },
             "characterindex": 0,
             "ImageToShow": 0,
-            "musictoplay": 17
+            "musictoplay": 7
         },
         {
             "text": "What's wrong?",

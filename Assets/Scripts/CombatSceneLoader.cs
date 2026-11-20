@@ -99,7 +99,7 @@ public class CombatSceneLoader : MonoBehaviour
 
         mainScene = SceneManager.GetSceneByName(MainSceneName);
 
-        MusicManager.instance.inCombatBool = true;
+
 
         StartCoroutine(SwitchSceneRoutine(
             fromScene: mainScene,
@@ -148,7 +148,6 @@ public class CombatSceneLoader : MonoBehaviour
             return;
         }
 
-        MusicManager.instance.inCombatBool = false;
 
         StartCoroutine(SwitchSceneRoutine(
             fromScene: combatScene,

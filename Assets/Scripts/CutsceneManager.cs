@@ -120,7 +120,7 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private float FadeTime;
     private Coroutine FadeToBlacKCoroutine;
     [SerializeField] private GameObject EmojiBubble;
-    private MusicManager _MusicManager;
+    private FMODEventManager _FMODEventManager;
 
 
     [Header("Scene Parameters")]
@@ -295,11 +295,11 @@ public class CutsceneManager : MonoBehaviour
         }
         int musicID = Cutscenes[CurrentCutscene].MusicIDs[Cutscenes[CurrentCutscene].musicToPlay];
 
-        if (_MusicManager == null)
+        if (_FMODEventManager == null)
         {
-            _MusicManager = MusicManager.instance;
+            _FMODEventManager = FMODEventManager.instance;
         }
-        _MusicManager.SetCutSceneMusic(musicID);
+        _FMODEventManager.PlayCutsceneMusic(musicID, true);
 
         Cutscenes[CurrentCutscene].musicToPlay++;
 
@@ -330,7 +330,11 @@ public class CutsceneManager : MonoBehaviour
         paused = false;
         CurrentCutscene = cutscenetoload;
         director.playableAsset = Cutscenes[CurrentCutscene].Timeline;
-
+        if (_FMODEventManager == null)
+        {
+            _FMODEventManager = FMODEventManager.instance;
+        }
+        _FMODEventManager.isInCutscene = true;
         Setup();
     }
 
@@ -355,6 +359,8 @@ public class CutsceneManager : MonoBehaviour
         CreateEnvironment();
         SetupLights();
         SetupCameras();
+
+
     }
 
     private void SetupLights()
@@ -526,6 +532,7 @@ public class CutsceneManager : MonoBehaviour
             }
             if (chapterToLoad != "")
             {
+                _FMODEventManager.StopCutsceneMusic(true);
                 _sceneLoader.LoadScene(chapterToLoad);
             }
 
@@ -536,6 +543,11 @@ public class CutsceneManager : MonoBehaviour
             bool firstframeplayed = false;
             if (Cutscenetostart != -1)
             {
+                if (_FMODEventManager == null)
+                {
+                    _FMODEventManager = FMODEventManager.instance;
+                }
+                _FMODEventManager.StopCutsceneMusic(true);
                 InitializeCutscene(Cutscenetostart);
                 cutscenefinished = false;
                 director.time = 0f;

@@ -50,7 +50,6 @@ public class TextBubbleScript : MonoBehaviour
 
     [SerializeField] private Image Imagetoshow;
     private float currentcharacterpitch;
-    private MusicManager musicManager;
     private FMODEventManager _FMODEventManager;
 
     private Coroutine fixTMPRoutine;
@@ -124,10 +123,7 @@ public class TextBubbleScript : MonoBehaviour
             EndDialogue();
             return;
         }
-        if (musicManager == null)
-        {
-            musicManager = MusicManager.instance;
-        }
+
         if (_FMODEventManager == null)
         {
             _FMODEventManager = FMODEventManager.instance;
@@ -320,14 +316,14 @@ public class TextBubbleScript : MonoBehaviour
             }
 
 
-            if (musicManager == null)
+            if (_FMODEventManager == null)
             {
-                musicManager = MusicManager.instance;
+                _FMODEventManager = FMODEventManager.instance;
             }
-            if (musicManager != null)
-            {
-                musicManager.SetDialogueMusic(info.musictoplay);
-            }
+
+
+            _FMODEventManager.PlayCutsceneMusic(info.musictoplay, false);
+
 
 
         }
@@ -339,6 +335,7 @@ public class TextBubbleScript : MonoBehaviour
 
     private void EndDialogue()
     {
+        _FMODEventManager.StopCutsceneMusic(false);
         DeactivateBubble();
         gameObject.SetActive(false);
         if (MapEventManager.instance != null)
@@ -401,9 +398,6 @@ public class TextBubbleScript : MonoBehaviour
 
         Dialogue = null;
         currentTextBubble = -1;
-        if (MusicManager.instance != null)
-        {
-            MusicManager.instance.StopDialogueMusic();
-        }
+
     }
 }
