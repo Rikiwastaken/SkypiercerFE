@@ -618,11 +618,13 @@ public class UnitScript : MonoBehaviour
             {
                 Destroy(ActiveModel);
             }
+
             ActiveModel = Instantiate(ModelList[UnitCharacteristics.modelID].wholeModel);
-            WeaponModelScale = ActiveModel.GetComponent<Unit3DModelInfoScript>().WeaponModelScale;
+            Unit3DModelInfoScript _Unit3DModelInfoScript = ActiveModel.GetComponent<Unit3DModelInfoScript>();
+            WeaponModelScale = _Unit3DModelInfoScript.WeaponModelScale;
             ActiveModel.transform.SetParent(transform);
-            ActiveModel.transform.SetLocalPositionAndRotation(ActiveModel.GetComponent<Unit3DModelInfoScript>().positionadjust, Quaternion.Euler(ActiveModel.GetComponent<Unit3DModelInfoScript>().rotationadjust));
-            ActiveModel.transform.localScale = ActiveModel.GetComponent<Unit3DModelInfoScript>().scaleadjust;
+            ActiveModel.transform.SetLocalPositionAndRotation(_Unit3DModelInfoScript.positionadjust, Quaternion.Euler(_Unit3DModelInfoScript.rotationadjust));
+            ActiveModel.transform.localScale = _Unit3DModelInfoScript.scaleadjust;
             if (ActiveModel.GetComponent<Animator>())
             {
                 animator = ActiveModel.GetComponent<Animator>();
@@ -631,18 +633,22 @@ public class UnitScript : MonoBehaviour
             {
                 animator = ActiveModel.GetComponentInChildren<Animator>();
             }
-            Material material = ActiveModel.GetComponent<Unit3DModelInfoScript>().GenerateMaterial();
-
-            ChangeMaterialInGOHierarchy(ActiveModel, material);
-
-            if (UnitCharacteristics.enemyStats.monsterStats.ispluvial)
+            if (!_Unit3DModelInfoScript.IgnoreMaterial)
             {
-                material.SetInt("_IsPluvial", 1);
+                Material material = _Unit3DModelInfoScript.GenerateMaterial();
+
+                ChangeMaterialInGOHierarchy(ActiveModel, material);
+
+                if (UnitCharacteristics.enemyStats.monsterStats.ispluvial)
+                {
+                    material.SetInt("_IsPluvial", 1);
+                }
+                else
+                {
+                    material.SetInt("_IsPluvial", 0);
+                }
             }
-            else
-            {
-                material.SetInt("_IsPluvial", 0);
-            }
+
 
             armature = animator.transform;
             initialpos = armature.localPosition;

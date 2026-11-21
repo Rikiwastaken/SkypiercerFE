@@ -25,6 +25,8 @@ public class Unit3DModelInfoScript : MonoBehaviour
     [SerializeField] private Material BaseMaterial;
     public float WeaponModelScale = 1.0f;
 
+    public bool IgnoreMaterial;
+
     public Material GeneratedMaterial;
 
     public Material GenerateMaterial()
