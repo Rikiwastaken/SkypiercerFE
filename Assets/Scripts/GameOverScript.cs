@@ -141,6 +141,7 @@ public class GameOverScript : MonoBehaviour
 
     public void Continue()
     {
+        InfoLogger.instance.EndBattleLog(0, TurnManger.instance.currentTurn);
         if (saveManager == null)
             saveManager = SaveManager.instance;
 
@@ -172,12 +173,14 @@ public class GameOverScript : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        InfoLogger.instance.EndBattleLog(1, TurnManger.instance.currentTurn);
         Time.timeScale = 1f;
         sceneLoader.LoadScene("MainMenu");
     }
 
     public void Restart()
     {
+        InfoLogger.instance.EndBattleLog(1, TurnManger.instance.currentTurn);
         Time.timeScale = 1f;
         sceneLoader.LoadScene(SceneManager.GetActiveScene().name);
     }

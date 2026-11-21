@@ -115,6 +115,7 @@ public class NeutralMenuScript : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        InfoLogger.instance.EndBattleLog(2, TurnManger.instance.currentTurn);
         SceneLoader.instance.LoadScene("MainMenu");
     }
 

@@ -366,6 +366,7 @@ public class ForesightScript : MonoBehaviour
         }
         if (ButtonID != -1 && ButtonIDs[ButtonID] != -1)
         {
+            InfoLogger.instance.AppendForeSight();
             remaininguses--;
             RevertTo(ButtonIDs[ButtonID]);
             gameObject.SetActive(false);

@@ -1949,7 +1949,7 @@ public class ActionsMenu : MonoBehaviour
                 {
                     numberofhits.Add(-1);
                 }
-
+                LogAttack(charunit, chartarget, numberofhits, false);
                 return (numberofhits, finaldamage, 0, levelup, Damagelist, UnitSkillTriggers, TargetSkillTriggers);
             }
 
@@ -2010,7 +2010,7 @@ public class ActionsMenu : MonoBehaviour
                 {
                     (exp, levelup) = AwardExp(unit, target, false, !diddamage);
                 }
-
+                LogAttack(charunit, chartarget, numberofhits, false);
             }
             else
             {
@@ -2067,6 +2067,7 @@ public class ActionsMenu : MonoBehaviour
 
                     (exp, levelup) = AwardExp(target, unit, false, !diddamage);
                 }
+                LogAttack(chartarget, charunit, numberofhits, false);
             }
 
             if (chartarget.currentHP <= 0)
@@ -2115,9 +2116,73 @@ public class ActionsMenu : MonoBehaviour
             {
                 exp = 0;
             }
+            LogAttack(charunit, chartarget, numberofhits, true);
             return (numberofhits, finaldamage, exp, levelup, Damagelist, UnitSkillTriggers, TargetSkillTriggers);
         }
 
+    }
+
+    private void LogAttack(Character AttackerChar, Character DefenderChar, List<int> numberofhits, bool ishealing)
+    {
+        if (ishealing)
+        {
+            if (AttackerChar.affiliation.ToLower() == "playable")
+            {
+                InfoLogger.instance.AddAttack(AttackerChar.ID, true, false, 1, 0, 0, false, false);
+            }
+            if (DefenderChar.affiliation.ToLower() == "playable")
+            {
+                InfoLogger.instance.AddDefense(DefenderChar.ID, true, 0, 0);
+            }
+        }
+        else
+        {
+            if (AttackerChar.affiliation.ToLower() == "playable")
+            {
+                int truenumberofhits = 0;
+                int numberofmisses = 0;
+                int numberofcrits = 0;
+                foreach (int hit in numberofhits)
+                {
+                    if (hit > 0)
+                    {
+                        truenumberofhits++;
+                    }
+                    else
+                    {
+                        numberofmisses++;
+                    }
+                    if (hit == 2)
+                    {
+                        numberofcrits++;
+                    }
+                }
+
+
+
+                InfoLogger.instance.AddAttack(AttackerChar.ID, false, DefenderChar.currentHP <= 0, truenumberofhits, numberofmisses, numberofcrits, numberofhits.Count == 2, numberofhits.Count == 3);
+            }
+            if (DefenderChar.affiliation.ToLower() == "playable")
+            {
+
+                int numberofhitstaken = 0;
+                int numberofdodges = 0;
+                foreach (int hit in numberofhits)
+                {
+                    if (hit > 0)
+                    {
+                        numberofhitstaken++;
+                    }
+                    else
+                    {
+                        numberofdodges++;
+                    }
+
+                }
+
+                InfoLogger.instance.AddDefense(DefenderChar.ID, false, numberofhitstaken, numberofdodges);
+            }
+        }
     }
 
     private (List<int>, int) CalculateIfAttackHit(GameObject unit, GameObject target, List<int> numberofhits, int unithitrate, int unitcrit, int unitdamage, int totaldamage, List<int> Damagelist, AllStatsSkillBonus AttackerStatBonus, AllStatsSkillBonus TargetStatBonus)

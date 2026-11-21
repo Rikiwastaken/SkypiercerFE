@@ -197,10 +197,12 @@ public class PreBattleMenuScript : MonoBehaviour
         }
         SaveManager.instance.PreviouslyDeployed = newpreviouslydeployed;
         SaveBeforeBattle = SaveManager.instance.GenerateSaveClassFromGameState(false, false);
+        InfoLogger.instance.initializeBattleLog(TurnManager, MapInitializer.instance, GridScript);
     }
 
     public void ReturnToCamp(bool ApplySave)
     {
+        InfoLogger.instance.EndBattleLog(2, TurnManger.instance.currentTurn);
         if (ApplySave)
         {
             SaveManager.instance.ApplySaveFromSaveClass(SaveBeforeBattle);
