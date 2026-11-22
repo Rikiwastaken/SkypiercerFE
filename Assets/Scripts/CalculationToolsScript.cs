@@ -307,6 +307,26 @@ public class CalculationToolsScript : MonoBehaviour
     }
 
     /// <summary>
+    /// Creates a true copy of the BaseStats passed in argument
+    /// </summary>
+    /// <param name="itemtocopy"></param>
+    public static BaseStats CreateCopy(BaseStats itemtocopy)
+    {
+        BaseStats copy = new BaseStats();
+        copy.HP = itemtocopy.HP;
+        copy.Strength = itemtocopy.Strength;
+        copy.Defense = itemtocopy.Defense;
+        copy.Psyche = itemtocopy.Psyche;
+        copy.Resistance = itemtocopy.Resistance;
+        copy.Speed = itemtocopy.Speed;
+        copy.Dexterity = itemtocopy.Dexterity;
+        copy.Luck = itemtocopy.Luck;
+
+        return copy;
+    }
+
+
+    /// <summary>
     /// Creates a true copy of Bond List passed in argument
     /// </summary>
     /// <param name="BondsList"></param>

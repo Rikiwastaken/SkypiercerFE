@@ -111,6 +111,8 @@ public class InfoLogger : MonoBehaviour
         public int LevelAtEnd;
         public List<UnitScript.WeaponMastery> BladeLevelsAtStart;
         public List<UnitScript.WeaponMastery> BladeLevelsAtEnd;
+        public UnitScript.BaseStats StatsAtStart;
+        public UnitScript.BaseStats StatsAtEnd;
         public bool CharacterLived;
     }
 
@@ -154,6 +156,7 @@ public class InfoLogger : MonoBehaviour
                 {
                     _CharacterBattleLog.BladeLevelsAtStart.Add(new UnitScript.WeaponMastery() { Level = mastery.Level, weapontype = mastery.weapontype });
                 }
+                _CharacterBattleLog.StatsAtStart = CalculationToolsScript.CreateCopy(Unit.stats);
                 newLog.CharacterBattleLogList.Add(_CharacterBattleLog);
             }
         }
@@ -190,6 +193,7 @@ public class InfoLogger : MonoBehaviour
                     {
                         _CharacterBattleLog.BladeLevelsAtEnd.Add(new UnitScript.WeaponMastery() { Level = mastery.Level, weapontype = mastery.weapontype });
                     }
+                    _CharacterBattleLog.StatsAtEnd = CalculationToolsScript.CreateCopy(Character.stats);
                 }
             }
         }
@@ -318,7 +322,10 @@ public class InfoLogger : MonoBehaviour
             }
 
             long Battletime = battle.TimeForBattleEnd - battle.TimeForBattleStart;
-            FileContent += "Battle time: " + DateTimeOffset.FromUnixTimeSeconds(Battletime).LocalDateTime.ToString("HH-mm-ss") + "\n";
+            int hours = (int)(Battletime / 60) / 60;
+            int minutes = (int)(Battletime % 60) / 60;
+            int seconds = (int)(Battletime % 60) % 60;
+            FileContent += "Battle time: " + hours + "-" + minutes + "-" + seconds + "\n";
             FileContent += "\nBattle lasted " + battle.NumberOfTurns + " turns";
             FileContent += "\nForesight used " + battle.numberOfForsightUsed + " times\n";
 
@@ -346,6 +353,24 @@ public class InfoLogger : MonoBehaviour
                     }
 
                 }
+                if (CharacterLog.EquipedSkills != null && CharacterLog.EquipedSkills.Count > 0)
+                {
+                    FileContent += "Equiped Skills: ";
+                    foreach (string skillname in GetSkillNamesFromID(CharacterLog.EquipedSkills))
+                    {
+                        FileContent += skillname + ", ";
+                    }
+                    FileContent += "\n";
+                }
+                FileContent += "STATS:\n";
+                FileContent += "   HP: " + CharacterLog.StatsAtStart.HP + " > " + CharacterLog.StatsAtEnd.HP + "\n";
+                FileContent += "   Strength: " + CharacterLog.StatsAtStart.Strength + " > " + CharacterLog.StatsAtEnd.Strength + "\n";
+                FileContent += "   Defense: " + CharacterLog.StatsAtStart.Defense + " > " + CharacterLog.StatsAtEnd.Defense + "\n";
+                FileContent += "   Psyche: " + CharacterLog.StatsAtStart.Psyche + " > " + CharacterLog.StatsAtEnd.Psyche + "\n";
+                FileContent += "   Resistance: " + CharacterLog.StatsAtStart.Resistance + " > " + CharacterLog.StatsAtEnd.Resistance + "\n";
+                FileContent += "   Speed: " + CharacterLog.StatsAtStart.Speed + " > " + CharacterLog.StatsAtEnd.Speed + "\n";
+                FileContent += "   Dexterity: " + CharacterLog.StatsAtStart.Dexterity + " > " + CharacterLog.StatsAtEnd.Dexterity + "\n";
+                FileContent += "   Luck: " + CharacterLog.StatsAtStart.Luck + " > " + CharacterLog.StatsAtEnd.Luck + "\n";
                 FileContent += "Attacked " + CharacterLog.numberOfAttacks + " times\n";
                 FileContent += "Healed " + CharacterLog.numberOfTimeHealed + " times\n";
                 FileContent += "Was attacker " + CharacterLog.NumberOfTimesAttacked + " times\n";
@@ -414,6 +439,20 @@ public class InfoLogger : MonoBehaviour
 
         return Index;
     }
+
+    private List<string> GetSkillNamesFromID(List<int> skillIDs)
+    {
+        List<string> skillnames = new List<string>();
+        foreach (DataScript.Skill skill in DataScript.instance.SkillList)
+        {
+            if (skill.ID != 0 && skillIDs.Contains(skill.ID))
+            {
+                skillnames.Add(skill.name);
+            }
+        }
+        return skillnames;
+    }
+
 
 }
 
