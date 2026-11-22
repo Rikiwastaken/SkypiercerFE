@@ -46,6 +46,8 @@ public class MinimapScript : MonoBehaviour
 
     [SerializeField] private GameObject CharacterPinPrefab;
     [SerializeField] private RectTransform pinContainer;
+    [SerializeField] private float TargetScale;
+    [SerializeField] private int MapSizeForTargetScale;
 
     private void Awake()
     {
@@ -109,8 +111,10 @@ public class MinimapScript : MonoBehaviour
 
     public void CreateMinimap()
     {
+        int GridMaxValue = 0;
         if (minimapTexture == null)
         {
+            GridMaxValue = Mathf.Max(gridScript.Grid[0].Count, gridScript.Grid[0].Count);
             int gridHeight = gridScript.Grid[0].Count;
             int gridWidth = gridScript.Grid.Count;
             minimapTexture = new Texture2D(gridWidth, gridHeight, TextureFormat.RGBA32, false);
@@ -196,6 +200,15 @@ public class MinimapScript : MonoBehaviour
         }
         FirstInitializationMinimapBG();
         UpdateMinimap();
+
+
+        ScaleMinimap(GridMaxValue);
+    }
+
+    private void ScaleMinimap(int gridsize)
+    {
+        float Scale = TargetScale * (float)MapSizeForTargetScale / (float)gridsize;
+        transform.parent.localScale = Vector3.one * Scale;
     }
 
     public void FirstInitializationMinimapBG()
