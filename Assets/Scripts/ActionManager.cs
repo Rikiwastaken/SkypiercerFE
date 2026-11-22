@@ -96,14 +96,15 @@ public class ActionManager : MonoBehaviour
         {
             if (_telekinesisaction.WasPressedThisFrame() && !actionsMenu.GetComponent<ActionsMenu>().incombat && !AttackWindow.activeInHierarchy && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && allowtelekinesisChangeFromTutorial())
             {
-                currentcharacter.GetComponent<UnitScript>().ToggleTelekinesis();
-                if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
+                UnitScript unit = currentcharacter.GetComponent<UnitScript>();
+                unit.ToggleTelekinesis();
+                if (unit.UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
                 {
-                    currentcharacter.GetComponent<UnitScript>().ToggleTelekinesis(false);
+                    unit.ToggleTelekinesis(false);
                 }
-                currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
-                (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, false, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+                unit.UpdateWeaponModel();
+                (int weaponrange, bool melee, string type) = unit.GetRangeMeleeAndType();
+                GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, false, unit.UnitCharacteristics);
             }
             return;
         }
@@ -157,26 +158,28 @@ public class ActionManager : MonoBehaviour
                 currentcharacter = GridScript.GetSelectedUnitGameObject();
                 if (currentcharacter != null)
                 {
-                    if (!inamenu && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && _ActivateAction.WasPressedThisFrame() && !preventfromlockingafteraction && frameswherenotlock == 0 && !TextBubbleScript.indialogue)
+                    UnitScript CurrentcharacterUS = currentcharacter.GetComponent<UnitScript>();
+                    if (!inamenu && !CurrentcharacterUS.UnitCharacteristics.alreadyplayed && CurrentcharacterUS.UnitCharacteristics.affiliation == "playable" && _ActivateAction.WasPressedThisFrame() && !preventfromlockingafteraction && frameswherenotlock == 0 && !TextBubbleScript.indialogue)
                     {
                         GridScript.lockselection = true;
                         GridScript.LockcurrentSelection();
                         GridScript.Recolor();
 
                     }
-                    else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation != "playable" && _ActivateAction.WasPressedThisFrame() && (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && NeutralMenuCD == 0 && !TextBubbleScript.indialogue)
+                    else if (CurrentcharacterUS.UnitCharacteristics.affiliation != "playable" && _ActivateAction.WasPressedThisFrame() && (TurnManager.currentlyplaying == "playable" || TurnManager.currentlyplaying == "tutorial") && NeutralMenuCD == 0 && !TextBubbleScript.indialogue)
                     {
                         NeutralMenu.SetActive(true);
                         EventSystem.current.SetSelectedGameObject(NeutralMenu.transform.GetChild(0).gameObject);
                     }
-                    if (_telekinesisaction.WasPressedThisFrame() && !actionsMenu.GetComponent<ActionsMenu>().incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && allowtelekinesisChangeFromTutorial())
+
+                    if (_telekinesisaction.WasPressedThisFrame() && !actionsMenu.GetComponent<ActionsMenu>().incombat && !CurrentcharacterUS.UnitCharacteristics.alreadyplayed && CurrentcharacterUS.UnitCharacteristics.affiliation == "playable" && allowtelekinesisChangeFromTutorial())
                     {
-                        currentcharacter.GetComponent<UnitScript>().ToggleTelekinesis();
-                        if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
+                        CurrentcharacterUS.ToggleTelekinesis();
+                        if (CurrentcharacterUS.UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
                         {
-                            currentcharacter.GetComponent<UnitScript>().ToggleTelekinesis(false);
+                            CurrentcharacterUS.ToggleTelekinesis(false);
                         }
-                        currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
+                        CurrentcharacterUS.UpdateWeaponModel();
                         GridScript.ShowMovement();
                     }
                     ManageExamodeActivation(currentcharacter);
@@ -196,33 +199,34 @@ public class ActionManager : MonoBehaviour
 
                 if (currentcharacter != null)
                 {
+                    UnitScript CurrentcharacterUS = currentcharacter.GetComponent<UnitScript>();
                     if (_NextWeaponAction.WasPressedThisFrame())
                     {
-                        currentcharacter.GetComponent<UnitScript>().GetNextWeapon();
+                        CurrentcharacterUS.GetNextWeapon();
                         WeaponChange(currentcharacter);
                         GridScript.ShowMovement();
                     }
                     if (_PrevWeaponAction.WasPressedThisFrame())
                     {
-                        currentcharacter.GetComponent<UnitScript>().GetPreviousWeapon();
+                        CurrentcharacterUS.GetPreviousWeapon();
                         WeaponChange(currentcharacter);
                         GridScript.ShowMovement();
                     }
-                    if (_telekinesisaction.WasPressedThisFrame() && !actionsMenu.GetComponent<ActionsMenu>().incombat && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed && currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation == "playable" && allowtelekinesisChangeFromTutorial())
+                    if (_telekinesisaction.WasPressedThisFrame() && !actionsMenu.GetComponent<ActionsMenu>().incombat && !CurrentcharacterUS.UnitCharacteristics.alreadyplayed && CurrentcharacterUS.UnitCharacteristics.affiliation == "playable" && allowtelekinesisChangeFromTutorial())
                     {
 
-                        currentcharacter.GetComponent<UnitScript>().ToggleTelekinesis();
-                        if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
+                        CurrentcharacterUS.ToggleTelekinesis();
+                        if (CurrentcharacterUS.UnitCharacteristics.statusEffects.ConcussionTunrs > 0)
                         {
-                            currentcharacter.GetComponent<UnitScript>().ToggleTelekinesis(false);
+                            CurrentcharacterUS.ToggleTelekinesis(false);
                         }
                         WeaponChange(currentcharacter);
-                        currentcharacter.GetComponent<UnitScript>().UpdateWeaponModel();
+                        CurrentcharacterUS.UpdateWeaponModel();
                         GridScript.ShowMovement();
                     }
-                    if (_CancelAction.WasPressedThisFrame() && !currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved)
+                    if (_CancelAction.WasPressedThisFrame() && !CurrentcharacterUS.UnitCharacteristics.alreadymoved)
                     {
-                        if (!currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
+                        if (!CurrentcharacterUS.UnitCharacteristics.alreadyplayed)
                         {
                             currentcharacter = null;
                             GridScript.ResetAllSelections();
@@ -276,7 +280,8 @@ public class ActionManager : MonoBehaviour
 
     private void ManageExamodeActivation(GameObject unit)
     {
-        Character chartouse = unit.GetComponent<UnitScript>().UnitCharacteristics;
+        UnitScript _UnitScript = unit.GetComponent<UnitScript>();
+        Character chartouse = _UnitScript.UnitCharacteristics;
         if (!chartouse.playableStats.protagonist)
         {
             timeforExamodeactivation = 0;
@@ -287,7 +292,7 @@ public class ActionManager : MonoBehaviour
             timeforExamodeactivation = 0;
             return;
         }
-        if (unit.GetComponent<UnitScript>().lockExamode)
+        if (_UnitScript.lockExamode)
         {
             return;
         }
@@ -303,12 +308,12 @@ public class ActionManager : MonoBehaviour
             {
                 if (chartouse.ExamodeClass.remaingExamodeTurns == 0)
                 {
-                    unit.GetComponent<UnitScript>().ActivateExamode();
+                    _UnitScript.ActivateExamode();
                     timeforExamodeactivation = 0;
                 }
                 else
                 {
-                    unit.GetComponent<UnitScript>().DisableExamode();
+                    _UnitScript.DisableExamode();
                     timeforExamodeactivation = 0;
                 }
             }
@@ -417,25 +422,26 @@ public class ActionManager : MonoBehaviour
             }
         }
         currentpath = null;
-        previouscoordinates = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates;
-        currentcharacter.GetComponent<UnitScript>().MoveTo(GridScript.selection.GridCoordinates);
-        currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
-        if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
+        UnitScript CurrentcharacterUS = currentcharacter.GetComponent<UnitScript>();
+        previouscoordinates = CurrentcharacterUS.UnitCharacteristics.currentTile.GridCoordinates;
+        CurrentcharacterUS.MoveTo(GridScript.selection.GridCoordinates);
+        CurrentcharacterUS.UnitCharacteristics.alreadymoved = true;
+        if (CurrentcharacterUS.GetSkill(31) || CurrentcharacterUS.GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
         {
-            float movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
-            currentcharacter.GetComponent<UnitScript>().tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
+            float movements = CurrentcharacterUS.CalculateNumberOfMovements();
+            CurrentcharacterUS.tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
         }
         GridScript.UnlockSelection();
-        if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed)
+        if (CurrentcharacterUS.UnitCharacteristics.alreadyplayed)
         {
             GridScript.ResetAllSelections();
-            currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
+            CurrentcharacterUS.UnitCharacteristics.alreadymoved = true;
             GridScript.Recolor();
         }
         else
         {
-            (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
-            GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, false, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+            (int weaponrange, bool melee, string type) = CurrentcharacterUS.GetRangeMeleeAndType();
+            GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, false, CurrentcharacterUS.UnitCharacteristics);
             GridScript.LockcurrentSelection();
             if (!GridScript.actionsMenu.activeSelf)
             {
@@ -464,9 +470,10 @@ public class ActionManager : MonoBehaviour
         {
             return;
         }
-        Character defenderunitChar = defenderunit.GetComponent<UnitScript>().UnitCharacteristics;
-
-        Character currentChar = currentcharacter.GetComponent<UnitScript>().UnitCharacteristics;
+        UnitScript defenderunitUS = defenderunit.GetComponent<UnitScript>();
+        UnitScript currentcharacterUS = currentcharacter.GetComponent<UnitScript>();
+        Character defenderunitChar = defenderunitUS.UnitCharacteristics;
+        Character currentChar = currentcharacterUS.UnitCharacteristics;
 
         List<GridSquareScript> potentialmovementtiles = new List<GridSquareScript>();
 
@@ -479,12 +486,12 @@ public class ActionManager : MonoBehaviour
             }
             // if we are healing it's kinda the same, but first check if the unit has a staff
             bool hasstaff = false;
-            foreach (equipment equ in currentcharacter.GetComponent<UnitScript>().GetAllWeapons())
+            foreach (equipment equ in currentcharacterUS.GetAllWeapons())
             {
                 if (equ.type.ToLower() == "staff" && equ.Currentuses > 0)
                 {
                     hasstaff = true;
-                    currentcharacter.GetComponent<UnitScript>().EquipWeapon(equ);
+                    currentcharacterUS.EquipWeapon(equ);
                     break;
                 }
             }
@@ -493,7 +500,7 @@ public class ActionManager : MonoBehaviour
 
 
                 // first, we find movement tiles in which attack tiles englobe the unit because we can attack them
-                (int newweaponrange, bool newmelee, string newtype) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                (int newweaponrange, bool newmelee, string newtype) = currentcharacterUS.GetRangeMeleeAndType();
                 foreach (GridSquareScript movementtile in GridScript.lockedmovementtiles)
                 {
                     GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, true, currentChar);
@@ -505,7 +512,7 @@ public class ActionManager : MonoBehaviour
 
                 //Then we get the closest tile
 
-                float movements = currentcharacter.GetComponent<UnitScript>().CalculateNumberOfMovements();
+                float movements = currentcharacterUS.CalculateNumberOfMovements();
 
                 int shortestdistance = 99;
                 GridSquareScript besttile = null;
@@ -524,14 +531,14 @@ public class ActionManager : MonoBehaviour
                 if (besttile != null)
                 {
                     previouscoordinates = currentChar.currentTile.GridCoordinates;
-                    currentcharacter.GetComponent<UnitScript>().MoveTo(besttile.GridCoordinates);
+                    currentcharacterUS.MoveTo(besttile.GridCoordinates);
                     currentChar.alreadymoved = true;
-                    if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
+                    if (currentcharacterUS.GetSkill(31) || currentcharacterUS.GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
                     {
-                        currentcharacter.GetComponent<UnitScript>().tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
+                        currentcharacterUS.tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
                     }
                     GridScript.UnlockSelection();
-                    (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                    (int weaponrange, bool melee, string type) = currentcharacterUS.GetRangeMeleeAndType();
                     GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, true, currentChar);
                     GridScript.LockcurrentSelection();
                     if (!GridScript.actionsMenu.activeSelf)
@@ -563,7 +570,7 @@ public class ActionManager : MonoBehaviour
             // first, we find movement tiles in which attack tiles englobe the unit because we can attack them
             foreach (GridSquareScript movementtile in GridScript.lockedmovementtiles)
             {
-                (int newweaponrange, bool newmelee, string newtype) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                (int newweaponrange, bool newmelee, string newtype) = currentcharacterUS.GetRangeMeleeAndType();
                 GridScript.ShowAttackAfterMovement(newweaponrange, newmelee, new List<GridSquareScript>() { movementtile }, false, currentChar);
                 if (GridScript.attacktiles.Contains(defenderunitChar.currentTile))
                 {
@@ -592,14 +599,14 @@ public class ActionManager : MonoBehaviour
             if (besttile != null)
             {
                 previouscoordinates = currentChar.currentTile.GridCoordinates;
-                currentcharacter.GetComponent<UnitScript>().MoveTo(besttile.GridCoordinates);
+                currentcharacterUS.MoveTo(besttile.GridCoordinates);
                 currentChar.alreadymoved = true;
-                if (currentcharacter.GetComponent<UnitScript>().GetSkill(31) || currentcharacter.GetComponent<UnitScript>().GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
+                if (currentcharacterUS.GetSkill(31) || currentcharacterUS.GetFirstWeapon().Name.ToLower().Contains("abyssal")) //verso or abyssal
                 {
-                    currentcharacter.GetComponent<UnitScript>().tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
+                    currentcharacterUS.tilesmoved = GridScript.findshortestpath(GridScript.GetTile(previouscoordinates), GridScript.selection, movements);
                 }
                 GridScript.UnlockSelection();
-                (int weaponrange, bool melee, string type) = currentcharacter.GetComponent<UnitScript>().GetRangeMeleeAndType();
+                (int weaponrange, bool melee, string type) = currentcharacterUS.GetRangeMeleeAndType();
                 GridScript.ShowAttackAfterMovement(weaponrange, melee, new List<GridSquareScript>() { GridScript.selection }, type.ToLower() == "staff", currentChar);
                 GridScript.LockcurrentSelection();
                 if (!GridScript.actionsMenu.activeSelf)
@@ -637,6 +644,7 @@ public class ActionManager : MonoBehaviour
         }
         else if (currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile != GridScript.selection && GridScript.selection != previoustile && GridScript.lockedmovementtiles.Contains(GridScript.selection))
         {
+            UnitScript currentcharacterUS = currentcharacter.GetComponent<UnitScript>();
             previoustile = GridScript.selection;
             bool legalposition = true;
             GridSquareScript tile = GridScript.selection;
@@ -648,7 +656,7 @@ public class ActionManager : MonoBehaviour
             if (unit != null)
             {
                 Character unitchar = unit.GetComponent<UnitScript>().UnitCharacteristics;
-                if (unitchar != currentcharacter.GetComponent<UnitScript>().UnitCharacteristics && unitchar.affiliation != currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.affiliation)
+                if (unitchar != currentcharacterUS.UnitCharacteristics && unitchar.affiliation != currentcharacterUS.UnitCharacteristics.affiliation)
                 {
                     legalposition = false;
                 }
@@ -656,7 +664,7 @@ public class ActionManager : MonoBehaviour
             if (legalposition)
             {
                 List<Vector2> path = new List<Vector2>();
-                path = GridScript.FindPath(currentcharacter.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates, GridScript.selection.GridCoordinates, currentcharacter.GetComponent<UnitScript>().UnitCharacteristics);
+                path = GridScript.FindPath(currentcharacterUS.UnitCharacteristics.currentTile.GridCoordinates, GridScript.selection.GridCoordinates, currentcharacterUS.UnitCharacteristics);
                 currentpath = new List<GridSquareScript>();
                 foreach (Vector2 coord in path)
                 {
@@ -700,50 +708,50 @@ public class ActionManager : MonoBehaviour
         Wait();
     }
 
-    public void Wait(GameObject Unit = null) // permet d'attendre
+    public void Wait(UnitScript Unit = null) // permet d'attendre
     {
-        GameObject Unittouse = currentcharacter;
+        UnitScript UnitUS = currentcharacter.GetComponent<UnitScript>();
         if (Unit != null)
         {
-            Unittouse = Unit;
+            UnitUS = Unit;
         }
 
-        Foresight.CreateAction(2, Unittouse);
+        Foresight.CreateAction(2, UnitUS);
 
-        Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;
-        Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadymoved = true;
-        Unittouse.GetComponent<UnitScript>().numberoftimeswaitted++;
-        Unittouse.GetComponent<UnitScript>().waittedbonusturns = 2;
+        UnitUS.UnitCharacteristics.alreadyplayed = true;
+        UnitUS.UnitCharacteristics.alreadymoved = true;
+        UnitUS.numberoftimeswaitted++;
+        UnitUS.waittedbonusturns = 2;
 
         //Readiness
-        if (Unittouse.GetComponent<UnitScript>().GetSkill(42))
+        if (UnitUS.GetSkill(42))
         {
-            Unittouse.GetComponent<UnitScript>().AddNumber(0, true, "Readiness");
+            UnitUS.AddNumber(0, true, "Readiness");
         }
         //patient
-        if (Unittouse.GetComponent<UnitScript>().GetSkill(20))
+        if (UnitUS.GetSkill(20))
         {
             List<int> Skillvalues = DataScript.instance.SkillList[20].SkillValues;
-            float multiplier = Unittouse.GetComponent<UnitScript>().GetSkillLevelMultiplier(20);
+            float multiplier = UnitUS.GetSkillLevelMultiplier(20);
             float HealingRatio = (Skillvalues[0] / 100f * multiplier);
-            Character currentcharacterchar = Unittouse.GetComponent<UnitScript>().UnitCharacteristics;
-            Unittouse.GetComponent<UnitScript>().AddNumber(Mathf.Min((int)(currentcharacterchar.AjustedStats.HP * HealingRatio), (int)currentcharacterchar.AjustedStats.HP - currentcharacterchar.currentHP), true, "Patient");
+            Character currentcharacterchar = UnitUS.UnitCharacteristics;
+            UnitUS.AddNumber(Mathf.Min((int)(currentcharacterchar.AjustedStats.HP * HealingRatio), (int)currentcharacterchar.AjustedStats.HP - currentcharacterchar.currentHP), true, "Patient");
             currentcharacterchar.currentHP += (int)(currentcharacterchar.AjustedStats.HP * HealingRatio);
             if (currentcharacterchar.currentHP > currentcharacterchar.AjustedStats.HP)
             {
                 currentcharacterchar.currentHP = (int)currentcharacterchar.AjustedStats.HP;
             }
 
-            Unittouse.GetComponent<UnitScript>().RestoreUses(1);
-            if (Unittouse.GetComponent<UnitScript>().GetSkill(7)) // full of beans
+            UnitUS.RestoreUses(1);
+            if (UnitUS.GetSkill(7)) // full of beans
             {
-                Unittouse.GetComponent<UnitScript>().AddNumber(0, true, "Full of Beans");
-                Unittouse.GetComponent<UnitScript>().RestoreUses(1);
+                UnitUS.AddNumber(0, true, "Full of Beans");
+                UnitUS.RestoreUses(1);
             }
 
         }
 
-        Unittouse.GetComponent<UnitScript>().RestoreUses(1);
+        UnitUS.RestoreUses(1);
         GridScript.ResetAllSelections();
         GridScript.ResetColor();
         GridScript.lockselection = false;
@@ -768,13 +776,13 @@ public class ActionManager : MonoBehaviour
 
         if (tilechanged != null)
         {
-            Foresight.CreateAction(6, Unittouse);
+            Foresight.CreateAction(6, Unittouse.GetComponent<UnitScript>());
 
 
         }
         if (SpecialCommandUnit != null)
         {
-            Foresight.CreateAction(5, Unittouse, SpecialCommandUnit);
+            Foresight.CreateAction(5, Unittouse.GetComponent<UnitScript>(), SpecialCommandUnit.GetComponent<UnitScript>());
         }
 
         Unittouse.GetComponent<UnitScript>().UnitCharacteristics.alreadyplayed = true;

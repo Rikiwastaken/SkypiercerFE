@@ -262,6 +262,7 @@ public class BattleInfotext : MonoBehaviour
 
             if (selectedunit != null && selectedunitCharacter != null)
             {
+                UnitScript SelectedUnitUS = selectedunit.GetComponent<UnitScript>();
                 if (previousselectedGO != selectedunit)
                 {
                     previousselectedGO = selectedunit;
@@ -269,7 +270,7 @@ public class BattleInfotext : MonoBehaviour
                     ManagedSkillVisuals(selectedunitCharacter);
                 }
 
-                characterweapon = selectedunit.GetComponent<UnitScript>().GetFirstWeapon();
+                characterweapon = SelectedUnitUS.GetFirstWeapon();
 
                 ManageSkillDescription();
                 ManageExamodeVisuals(selectedunitCharacter);
@@ -323,7 +324,7 @@ public class BattleInfotext : MonoBehaviour
                         }
                     }
 
-                    AllStatsSkillBonus statsmods = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null, false);
+                    AllStatsSkillBonus statsmods = SelectedUnitUS.GetStatSkillBonus(null, false);
 
 
 
@@ -361,21 +362,21 @@ public class BattleInfotext : MonoBehaviour
                     LuckAndMovTMP.text = "Lck: " + luckcolorstring + (selectedunitCharacter.AjustedStats.Luck + statsmods.Luck) + "</color>\n";
                     LuckAndMovTMP.text += "Mvt: " + (selectedunitCharacter.movements - 1);
 
-                    AllStatsSkillBonus UnitStatBonus = selectedunit.GetComponent<UnitScript>().GetStatSkillBonus(null, false);
+                    AllStatsSkillBonus UnitStatBonus = SelectedUnitUS.GetStatSkillBonus(null, false);
 
-                    (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(selectedunit, true, UnitStatBonus, null, null);
+                    (int BaseDamage, int damagebonus) = ActionsMenu.CalculateDamage(SelectedUnitUS, true, UnitStatBonus, null, null);
 
                     string dmgcolorstring = getcolorstring(damagebonus);
 
                     DmgTMP.text = "" + dmgcolorstring + BaseDamage;
 
-                    int HitRate = ActionsMenu.CalculateBaseHitUnit(selectedunit, null, UnitStatBonus);
-                    int CritRate = ActionsMenu.CalculateCrit(selectedunit, null, UnitStatBonus, null);
-                    int DodgeRate = ActionsMenu.CalculateBaseDodgeUnit(selectedunit, null, UnitStatBonus);
+                    int HitRate = ActionsMenu.CalculateBaseHitUnit(SelectedUnitUS, null, UnitStatBonus);
+                    int CritRate = ActionsMenu.CalculateCrit(SelectedUnitUS, null, UnitStatBonus, null);
+                    int DodgeRate = ActionsMenu.CalculateBaseDodgeUnit(SelectedUnitUS, null, UnitStatBonus);
 
                     HitCritAndDodgeTMP.text = "Hit: " + HitRate + "\nCrit: " + CritRate + "\nDge: " + DodgeRate;
 
-                    equipment EquipedWeapon = selectedunit.GetComponent<UnitScript>().GetFirstWeapon();
+                    equipment EquipedWeapon = SelectedUnitUS.GetFirstWeapon();
                     EquipedWeaponIco.sprite = GetWeaponIcons(EquipedWeapon.type);
                     string grade = "";
                     switch (EquipedWeapon.Grade)

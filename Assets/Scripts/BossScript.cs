@@ -66,7 +66,7 @@ public class BossScript : MonoBehaviour
 
             if (unit != gameObject)
             {
-                ActionsMenu.ApplyDamage(gameObject, unit, true, false, true, intercepted, intercepter == unit);
+                ActionsMenu.ApplyDamage(GetComponent<UnitScript>(), unit.GetComponent<UnitScript>(), true, false, true, intercepted, intercepter == unit);
 
             }
 

@@ -199,16 +199,17 @@ public class MapLoader : EditorWindow
                 {
                     MapInitializer.playablepos = newplayablepos;
                 }
-
-                newtile.GetComponent<GridSquareScript>().activated = true;
+                GridSquareScript gridsquare = newtile.GetComponent<GridSquareScript>();
+                gridsquare.activated = true;
                 newtile.transform.parent = GridObject;
                 newtile.transform.localRotation = Quaternion.Euler(-90, 0, 0);
 
+
                 string tilename = "";
 
-                if (newtile.GetComponent<GridSquareScript>().isobstacle)
+                if (gridsquare.isobstacle)
                 {
-                    if (newtile.GetComponent<GridSquareScript>().IsPit)
+                    if (gridsquare.IsPit)
                     {
                         tilename = "Pit";
                     }
@@ -220,30 +221,30 @@ public class MapLoader : EditorWindow
 
                 }
 
-                else if (newtile.GetComponent<GridSquareScript>().isfinishtile)
+                else if (gridsquare.isfinishtile)
                 {
                     tilename = "Finish";
                 }
-                else if (newtile.GetComponent<GridSquareScript>().isstairs)
+                else if (gridsquare.isstairs)
                 {
                     tilename = "stairs";
                 }
-                else if (newtile.GetComponent<GridSquareScript>().type != "")
+                else if (gridsquare.type != "")
                 {
-                    tilename = newtile.GetComponent<GridSquareScript>().type;
+                    tilename = gridsquare.type;
                 }
                 else
                 {
                     tilename = "tile";
                 }
 
-                if (newtile.GetComponent<GridSquareScript>().Mechanism != null)
+                if (gridsquare.Mechanism != null)
                 {
-                    if (newtile.GetComponent<GridSquareScript>().Mechanism.type == 1)
+                    if (gridsquare.Mechanism.type == 1)
                     {
                         tilename = "door";
                     }
-                    if (newtile.GetComponent<GridSquareScript>().Mechanism.type == 2)
+                    if (gridsquare.Mechanism.type == 2)
                     {
                         tilename = "lever";
                     }
@@ -253,7 +254,7 @@ public class MapLoader : EditorWindow
                 newtile.name = tilename;
 
                 number++;
-                lasttile = newtile.GetComponent<GridSquareScript>();
+                lasttile = gridsquare;
             }
         }
         GameObject.FindAnyObjectByType<GridScript>().lastSquare = lasttile;
@@ -278,6 +279,7 @@ public class MapLoader : EditorWindow
 
     private void ManageObstable(GameObject Tile, int x, int y)
     {
+        GridSquareScript GridTile = Tile.GetComponent<GridSquareScript>();
         Color pixelColor = ObstacleMap.GetPixel(x, y);
         if (x == 0)
         {
@@ -287,15 +289,15 @@ public class MapLoader : EditorWindow
 
         if (SameColor(pixelColor, colors.wall, 0.1f) || SameColor(pixelColor, colors.pit, 0.1f))
         {
-            Tile.GetComponent<GridSquareScript>().isobstacle = true;
+            GridTile.isobstacle = true;
         }
         else
         {
-            Tile.GetComponent<GridSquareScript>().isobstacle = false;
+            GridTile.isobstacle = false;
         }
         if (SameColor(pixelColor, colors.pit, 0.1f))
         {
-            Tile.GetComponent<GridSquareScript>().IsPit = true;
+            GridTile.IsPit = true;
         }
     }
 

@@ -729,11 +729,11 @@ public class DataScript : MonoBehaviour
 
 
 
-    public void IncreaseBonds(GameObject MainUnit, GameObject OtherUnit)
+    public void IncreaseBonds(UnitScript MainUnit, UnitScript OtherUnit)
     {
 
-        int UnitID = MainUnit.GetComponent<UnitScript>().UnitCharacteristics.ID;
-        int OtherUnitID = OtherUnit.GetComponent<UnitScript>().UnitCharacteristics.ID;
+        int UnitID = MainUnit.UnitCharacteristics.ID;
+        int OtherUnitID = OtherUnit.UnitCharacteristics.ID;
 
         TurnManger turnManger = TurnManger.instance;
         if (turnManger == null)
@@ -750,12 +750,12 @@ public class DataScript : MonoBehaviour
 
 
 
-                if (OtherUnit.GetComponent<UnitScript>().GetSkill(66) && MainUnit.GetComponent<UnitScript>().GetSkill(66)) //Friendly
+                if (OtherUnit.GetSkill(66) && MainUnit.GetSkill(66)) //Friendly
                 {
                     bond.BondPoints += bondincreaseperaction * 3;
 
                 }
-                else if (OtherUnit.GetComponent<UnitScript>().GetSkill(66) || MainUnit.GetComponent<UnitScript>().GetSkill(66))
+                else if (OtherUnit.GetSkill(66) || MainUnit.GetSkill(66))
                 {
                     bond.BondPoints += bondincreaseperaction * 2;
 
@@ -765,8 +765,8 @@ public class DataScript : MonoBehaviour
                     bond.BondPoints += bondincreaseperaction;
 
                 }
-                MainUnit.GetComponent<UnitScript>().AddNumber(0, true, "", true);
-                OtherUnit.GetComponent<UnitScript>().AddNumber(0, true, "", true);
+                MainUnit.AddNumber(0, true, "", true);
+                OtherUnit.AddNumber(0, true, "", true);
 
                 return;
             }
@@ -902,11 +902,11 @@ public class DataScript : MonoBehaviour
 
     }
 
-    public void SpreadBonds(GameObject Unit)
+    public void SpreadBonds(UnitScript Unit)
     {
         TurnManger turnManger = TurnManger.instance;
 
-        Character charunit = Unit.GetComponent<UnitScript>().UnitCharacteristics;
+        Character charunit = Unit.UnitCharacteristics;
 
         if (charunit.affiliation.ToLower() != "playable" || turnManger == null)
         {
@@ -918,7 +918,7 @@ public class DataScript : MonoBehaviour
             Character charother = otherunit.GetComponent<UnitScript>().UnitCharacteristics;
             if (charother != charunit && charother.currentHP > 0 && ManhattanDistance(charunit.currentTile.GridCoordinates, charother.currentTile.GridCoordinates) <= 2)
             {
-                IncreaseBonds(Unit, otherunit);
+                IncreaseBonds(Unit, otherunit.GetComponent<UnitScript>());
             }
         }
 

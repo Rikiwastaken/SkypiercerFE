@@ -645,7 +645,7 @@ public class FightCalculator : EditorWindow
                 }
 
             }
-            (List<int> numberofhits, int finaldamage, int exp, List<int> levelup, List<int> Damagelist, List<int> AttackerSkillTriggers, List<int> DefenderSkillTriggers) = AM.ApplyDamage(US.gameObject, USForEnemy.gameObject, EnemyAttacks, false);
+            (List<int> numberofhits, int finaldamage, int exp, List<int> levelup, List<int> Damagelist, List<int> AttackerSkillTriggers, List<int> DefenderSkillTriggers) = AM.ApplyDamage(US, USForEnemy, EnemyAttacks, false);
             if (!EnemyAttacks)
             {
                 int numberofcrits = 0;

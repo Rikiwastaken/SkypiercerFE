@@ -667,6 +667,9 @@ public class GridSquareScript : MonoBehaviour
         {
             return;
         }
+
+        UnitScript unitUS = unit.GetComponent<UnitScript>();
+
         Image BossLifebar = unit.GetComponent<UnitScript>().LifebarWhenBossTile;
         Image BossLifeBarBG = unit.GetComponent<UnitScript>().LBBackgroundWhenBossTile;
 
@@ -686,10 +689,11 @@ public class GridSquareScript : MonoBehaviour
             BossLifeBarBG.gameObject.SetActive(true);
 
             GameObject Boss = MapInitializer.currentboss.gameObject;
-            AllStatsSkillBonus BossStatBonus = Boss.GetComponent<UnitScript>().GetStatSkillBonus(unit, false);
-            AllStatsSkillBonus UnitStatBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(Boss, false);
+            UnitScript BossUS = Boss.GetComponent<UnitScript>();
+            AllStatsSkillBonus BossStatBonus = Boss.GetComponent<UnitScript>().GetStatSkillBonus(unitUS, false);
+            AllStatsSkillBonus UnitStatBonus = unit.GetComponent<UnitScript>().GetStatSkillBonus(BossUS, false);
 
-            int damagetaken = actionsmenu.CalculateDamage(Boss, BossStatBonus, unit, UnitStatBonus);
+            int damagetaken = actionsmenu.CalculateDamage(BossUS, BossStatBonus, unitUS, UnitStatBonus);
             if (Intercepter != null)
             {
                 if (Intercepter == unit)

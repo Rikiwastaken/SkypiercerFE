@@ -385,7 +385,7 @@ public class ForesightScript : MonoBehaviour
 
     }
 
-    public void CreateAction(int type, GameObject User, GameObject target, int skilltoremove = -1, int beginningofturn = -1)
+    public void CreateAction(int type, UnitScript User, UnitScript target, int skilltoremove = -1, int beginningofturn = -1)
     {
         Action CurrentAction = new Action();
         actions.Add(CurrentAction);
@@ -418,10 +418,10 @@ public class ForesightScript : MonoBehaviour
         }
         if (User != null)
         {
-            CurrentAction.Unit = User.GetComponent<UnitScript>();
-            CurrentAction.previousPosition = User.GetComponent<UnitScript>().previouspos;
+            CurrentAction.Unit = User;
+            CurrentAction.previousPosition = User.previouspos;
             CurrentAction.AttackData = new ForesightScript.AttackData();
-            CurrentAction.AttackData.attackersurvivorstats = User.GetComponent<UnitScript>().SurvivorStacks;
+            CurrentAction.AttackData.attackersurvivorstats = User.SurvivorStacks;
             CurrentAction.AttackData.previousattackerhitindex = User.GetComponent<RandomScript>().hitvaluesindex;
             CurrentAction.AttackData.previousattackercritindex = User.GetComponent<RandomScript>().CritValuesindex;
             CurrentAction.AttackData.previousattackerlvlupindex = User.GetComponent<RandomScript>().levelvaluesindex;
@@ -429,8 +429,8 @@ public class ForesightScript : MonoBehaviour
         }
         if (target != null)
         {
-            CurrentAction.AttackData.defender = target.GetComponent<UnitScript>();
-            CurrentAction.AttackData.defendersurvivorstats = target.GetComponent<UnitScript>().SurvivorStacks;
+            CurrentAction.AttackData.defender = target;
+            CurrentAction.AttackData.defendersurvivorstats = target.SurvivorStacks;
             CurrentAction.AttackData.previousdefenderhitindex = target.GetComponent<RandomScript>().hitvaluesindex;
             CurrentAction.AttackData.previousdefendercritindex = target.GetComponent<RandomScript>().CritValuesindex;
             CurrentAction.AttackData.previousdefenderlvlupindex = target.GetComponent<RandomScript>().levelvaluesindex;
@@ -460,7 +460,7 @@ public class ForesightScript : MonoBehaviour
 
 
 
-    public void CreateAction(int type, GameObject User, int skilltoremove = -1)
+    public void CreateAction(int type, UnitScript User, int skilltoremove = -1)
     {
 
         CreateAction(type, User, null, skilltoremove);

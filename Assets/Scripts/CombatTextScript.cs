@@ -70,11 +70,11 @@ public class CombatTextScript : MonoBehaviour
 
     }
 
-    public void SetupCombat(GameObject newattacker, GameObject newdefender)
+    public void SetupCombat(UnitScript newattacker, UnitScript newdefender)
     {
         gameObject.SetActive(true);
-        attacker = newattacker.GetComponent<UnitScript>().UnitCharacteristics;
-        defender = newdefender.GetComponent<UnitScript>().UnitCharacteristics;
+        attacker = newattacker.UnitCharacteristics;
+        defender = newdefender.UnitCharacteristics;
         AttackerLifebarRemaining.fillAmount = (float)(attacker.currentHP / attacker.AjustedStats.HP);
         DefenderLifebarRemaining.fillAmount = (float)(defender.currentHP / defender.AjustedStats.HP);
         AttackerLifebarLost.fillAmount = (float)(attacker.currentHP / attacker.AjustedStats.HP);
@@ -84,10 +84,10 @@ public class CombatTextScript : MonoBehaviour
         string defenderText = defender.name + "\n";
         bool ishealing = false;
 
-        AllStatsSkillBonus NewAttackerStatBonus = newattacker.GetComponent<UnitScript>().GetStatSkillBonus(newdefender, false);
-        AllStatsSkillBonus NewDefenderStatBonus = newattacker.GetComponent<UnitScript>().GetStatSkillBonus(newattacker, false);
+        AllStatsSkillBonus NewAttackerStatBonus = newattacker.GetStatSkillBonus(newdefender, false);
+        AllStatsSkillBonus NewDefenderStatBonus = newattacker.GetStatSkillBonus(newattacker, false);
 
-        if (newattacker.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower() == "staff")
+        if (newattacker.GetFirstWeapon().type.ToLower() == "staff")
         {
             string attackeraffiliation = attacker.affiliation.ToLower();
             string defenderaffiliation = defender.affiliation.ToLower();
@@ -112,7 +112,7 @@ public class CombatTextScript : MonoBehaviour
         }
         else
         {
-            (GameObject doubler, bool istriple) = ActionsMenu.CalculatedoubleAttack(newattacker, newdefender, NewAttackerStatBonus, NewDefenderStatBonus);
+            (UnitScript doubler, bool istriple) = ActionsMenu.CalculatedoubleAttack(newattacker, newdefender, NewAttackerStatBonus, NewDefenderStatBonus);
 
 
             int damagedealtattacker = ActionsMenu.CalculateDamage(newattacker, NewAttackerStatBonus, newdefender, NewDefenderStatBonus);

@@ -17,8 +17,6 @@
 
 - pour les structures de données check les serialazable objects -> pas sur finalement
 
-
-- pistes pour améliorer les IAs: pour chaque unité ennemi, calculer si elle peut être atteinte, et sur quelle case c'est le cas plutot que l'opposé. (calculer les cases d'où on peut attaquer en fonction de la range, puis calculer si on peut atteindre la meilleur des cases. Peut être commencer par hierarchiser les cibles. Comme ça, si on peut attaquer direct la cible la plus importante, on oublie le reste.)
 limiter le nombre de getcomponent
 calculer les dégats infligé et le hit rate une fois seulement.
 scanner uniquement les unités concernées et pas toutes les unités.
@@ -41,10 +39,6 @@ scanner uniquement les unités concernées et pas toutes les unités.
 
 ## Visuals
 
-- Redo the world map
-
-- Make camera move a little bit more in battle (avoid fixed angles)
-
 - Make animations use root motions (in combat scene manager move animaotr transform instead of parent GO)
 
 ### 3D Models
@@ -56,11 +50,10 @@ scanner uniquement les unités concernées et pas toutes les unités.
 
 #### Characters
 
-- All
 
 #### Icons
 
-- Status Alterations
+
 
 ## Text
 
@@ -73,5 +66,3 @@ scanner uniquement les unités concernées et pas toutes les unités.
 - Find voice SFX (Maybe TTS ?)
 
 ## Music
-
-- Look into fmod

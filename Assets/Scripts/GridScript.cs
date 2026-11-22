@@ -374,7 +374,8 @@ public class GridScript : MonoBehaviour
 
         foreach (GameObject unit in allunitGOs)
         {
-            Character UnitChar = unit.GetComponent<UnitScript>().UnitCharacteristics;
+            UnitScript US = unit.GetComponent<UnitScript>();
+            Character UnitChar = US.UnitCharacteristics;
             if (UnitChar.currentTile == null || !UnitChar.currentTile.activated)
             {
                 continue;
@@ -384,9 +385,9 @@ public class GridScript : MonoBehaviour
                 continue;
             }
 
-            ShowMovementOfUnit(unit, false);
+            ShowMovementOfUnit(US, false);
 
-            (int range, bool melee) = unit.GetComponent<UnitScript>().GetRangeAndMele();
+            (int range, bool melee) = US.GetRangeAndMele();
 
             foreach (GridSquareScript tile in movementtiles)
             {
@@ -674,7 +675,7 @@ public class GridScript : MonoBehaviour
 
 
 
-    public void ShowMovementOfUnit(GameObject Target, bool color = true)
+    public void ShowMovementOfUnit(UnitScript Target, bool color = true)
     {
         for (int x = 0; x < Grid.Count; x++)
         {
@@ -698,7 +699,7 @@ public class GridScript : MonoBehaviour
             if (unitGO != null)
             {
                 Character unit = unitGO.GetComponent<UnitScript>().UnitCharacteristics;
-                if (unit.currentTile.GridCoordinates == Target.GetComponent<UnitScript>().UnitCharacteristics.currentTile.GridCoordinates && !unit.alreadyplayed)
+                if (unit.currentTile.GridCoordinates == Target.UnitCharacteristics.currentTile.GridCoordinates && !unit.alreadyplayed)
                 {
                     float movements = unitGO.GetComponent<UnitScript>().CalculateNumberOfMovements();
                     SpreadMovements(unit.currentTile.GridCoordinates, movements, movementtiles, unitGO, new Dictionary<GridSquareScript, float>());

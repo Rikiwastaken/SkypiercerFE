@@ -24,8 +24,8 @@ public class cameraScriptR : MonoBehaviour
 
     [SerializeField] private float previouselevation;
 
-    [SerializeField] private GameObject fighter1;
-    [SerializeField] private GameObject fighter2;
+    [SerializeField] private UnitScript fighter1;
+    [SerializeField] private UnitScript fighter2;
     [SerializeField] private CombatTextScript CombatTextScript;
     private bool resettingy;
 
@@ -204,7 +204,7 @@ public class cameraScriptR : MonoBehaviour
         }
     }
 
-    public Vector2 GoToFightCamera(GameObject unit, GameObject target)
+    public Vector2 GoToFightCamera(UnitScript unit, UnitScript target)
     {
 
         fighter1 = unit;

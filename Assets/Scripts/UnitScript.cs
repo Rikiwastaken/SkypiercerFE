@@ -3529,7 +3529,7 @@ public class UnitScript : MonoBehaviour
 
         return statbonuses;
     }
-    public AllStatsSkillBonus GetStatSkillBonus(GameObject enemy, bool incombat, List<int> TriggerSkills = null)
+    public AllStatsSkillBonus GetStatSkillBonus(UnitScript enemy, bool incombat, List<int> TriggerSkills = null)
     {
         AllStatsSkillBonus statbonuses = new AllStatsSkillBonus();
         if (TriggerSkills == null)
@@ -3711,7 +3711,7 @@ public class UnitScript : MonoBehaviour
         {
             if (enemy != null)
             {
-                if (weapon.type.ToLower() == enemy.GetComponent<UnitScript>().GetFirstWeapon().type.ToLower())
+                if (weapon.type.ToLower() == enemy.GetFirstWeapon().type.ToLower())
                 {
                     List<int> Skillvalues = dataScript.SkillList[22].SkillValues;
                     float multiplier = GetSkillLevelMultiplier(22);
@@ -3727,7 +3727,7 @@ public class UnitScript : MonoBehaviour
         {
             if (enemy != null)
             {
-                if (enemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats != null && enemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.bossiD > 0)
+                if (enemy.UnitCharacteristics.enemyStats != null && enemy.UnitCharacteristics.enemyStats.bossiD > 0)
                 {
                     List<int> Skillvalues = dataScript.SkillList[23].SkillValues;
                     float multiplier = GetSkillLevelMultiplier(23);
@@ -3881,7 +3881,7 @@ public class UnitScript : MonoBehaviour
 
 
 
-                int difference = enemy.GetComponent<UnitScript>().UnitCharacteristics.level - UnitCharacteristics.level;
+                int difference = enemy.UnitCharacteristics.level - UnitCharacteristics.level;
 
                 if (difference > 0)
                 {
@@ -4093,10 +4093,10 @@ public class UnitScript : MonoBehaviour
         }
 
         //Showdown (enemy unit)
-        if (enemy != null && enemy.GetComponent<UnitScript>().GetSkill(64))
+        if (enemy != null && enemy.GetSkill(64))
         {
             List<int> Skillvalues = dataScript.SkillList[64].SkillValues;
-            float multiplier = enemy.GetComponent<UnitScript>().GetSkillLevelMultiplier(64);
+            float multiplier = enemy.GetSkillLevelMultiplier(64);
             statbonuses.Crit += (int)(Skillvalues[0] * multiplier);
         }
 
@@ -4110,10 +4110,10 @@ public class UnitScript : MonoBehaviour
         }
 
         //Fair Play (enemy unit)
-        if (enemy != null && enemy.GetComponent<UnitScript>().GetSkill(65))
+        if (enemy != null && enemy.GetSkill(65))
         {
             List<int> Skillvalues = dataScript.SkillList[65].SkillValues;
-            float multiplier = enemy.GetComponent<UnitScript>().GetSkillLevelMultiplier(65);
+            float multiplier = enemy.GetSkillLevelMultiplier(65);
             statbonuses.Crit -= (int)(Skillvalues[0] * multiplier);
         }
 
@@ -4652,7 +4652,7 @@ public class UnitScript : MonoBehaviour
         //Expert Mecanician
         if (GetSkill(120))
         {
-            if (enemy != null && enemy.GetComponent<UnitScript>().UnitCharacteristics.enemyStats.monsterStats.ismachine)
+            if (enemy != null && enemy.UnitCharacteristics.enemyStats.monsterStats.ismachine)
             {
                 List<int> Skillvalues = dataScript.SkillList[120].SkillValues;
                 float multiplier = GetSkillLevelMultiplier(120);
