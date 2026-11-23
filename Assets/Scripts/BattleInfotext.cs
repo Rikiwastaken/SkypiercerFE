@@ -23,7 +23,7 @@ public class BattleInfotext : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> MasteryTexts;
     [SerializeField] private List<Image> MasteryImages;
     [SerializeField] private List<Transform> MasteryExpBars;
-    [SerializeField] private List<Sprite> WeaponClassImages;
+
 
     [SerializeField] private GameObject ItemAction;
 
@@ -414,7 +414,7 @@ public class BattleInfotext : MonoBehaviour
                     HitCritAndDodgeTMP.text = "Hit: " + HitRate + "\nCrit: " + CritRate + "\nDge: " + DodgeRate;
 
                     equipment EquipedWeapon = SelectedUnitUS.GetFirstWeapon();
-                    EquipedWeaponIco.sprite = GetWeaponIcons(EquipedWeapon.type);
+                    EquipedWeaponIco.sprite = DataScript.instance.GetWeaponIcons(EquipedWeapon.type);
                     string grade = "";
                     switch (EquipedWeapon.Grade)
                     {
@@ -737,7 +737,7 @@ public class BattleInfotext : MonoBehaviour
                     break;
             }
 
-            MasteryImages[barID].sprite = GetWeaponIcons(masteries[i].weapontype);
+            MasteryImages[barID].sprite = DataScript.instance.GetWeaponIcons(masteries[i].weapontype);
             MasteryTexts[barID].text = masterylevel;
 
 
@@ -756,37 +756,7 @@ public class BattleInfotext : MonoBehaviour
 
     }
 
-    private Sprite GetWeaponIcons(int weaponclass)
-    {
 
-        return WeaponClassImages[weaponclass];
-    }
-
-    private Sprite GetWeaponIcons(string weapontype)
-    {
-
-        switch (weapontype.ToLower())
-        {
-            default:
-                return WeaponClassImages[0];
-            case "sword":
-                return WeaponClassImages[1];
-            case "spear":
-                return WeaponClassImages[2];
-            case "greatsword":
-                return WeaponClassImages[3];
-            case "bow":
-                return WeaponClassImages[4];
-            case "scythe":
-                return WeaponClassImages[5];
-            case "shield":
-                return WeaponClassImages[6];
-            case "staff":
-                return WeaponClassImages[7];
-            case "dagger":
-                return WeaponClassImages[8];
-        }
-    }
 
     private void ManagedSkillVisuals(Character unit)
     {
@@ -818,7 +788,7 @@ public class BattleInfotext : MonoBehaviour
 
             DataScript.Skill unitskill = GetSkill(unit.UnitSkill);
             SkillButtonList[0].GetComponent<Image>().color = BaseSkillColor;
-            SkillNames[0].text = GetSkillName(unitskill.ID, unit);
+            SkillNames[0].text = DataScript.instance.GetSkillName(unitskill.ID, unit);
             SkillIconScriptList[0].InitializeIcon(unitskill.SkillIconInfo);
             SkillButtonIDList.Add(unitskill.ID);
             usedindex++;
@@ -847,7 +817,7 @@ public class BattleInfotext : MonoBehaviour
 
             DataScript.Skill SecondSkill = GetSkill(unit.SecondUnitSkill);
             SkillButtonList[usedindex].GetComponent<Image>().color = BaseSkillColor;
-            SkillNames[usedindex].text = GetSkillName(SecondSkill.ID, unit);
+            SkillNames[usedindex].text = DataScript.instance.GetSkillName(SecondSkill.ID, unit);
             SkillIconScriptList[usedindex].InitializeIcon(SecondSkill.SkillIconInfo);
             SkillButtonIDList.Add(SecondSkill.ID);
             usedindex++;
@@ -877,7 +847,7 @@ public class BattleInfotext : MonoBehaviour
 
             DataScript.Skill equipedskill = GetSkill(unit.EquipedSkills[i]);
 
-            SkillNames[i + usedindex].text = GetSkillName(equipedskill.ID, unit);
+            SkillNames[i + usedindex].text = DataScript.instance.GetSkillName(equipedskill.ID, unit);
             SkillIconScriptList[i + usedindex].InitializeIcon(equipedskill.SkillIconInfo);
             SkillButtonIDList.Add(equipedskill.ID);
         }
@@ -904,7 +874,7 @@ public class BattleInfotext : MonoBehaviour
 
                 DataScript.Skill tempskill = GetSkill(unit.TemporarySkill);
 
-                SkillNames[i + usedindex].text = GetSkillName(tempskill.ID, unit);
+                SkillNames[i + usedindex].text = DataScript.instance.GetSkillName(tempskill.ID, unit);
                 SkillIconScriptList[i + usedindex].InitializeIcon(tempskill.SkillIconInfo);
                 SkillButtonIDList.Add(tempskill.ID);
             }
@@ -983,51 +953,7 @@ public class BattleInfotext : MonoBehaviour
         }
     }
 
-    private string GetSkillName(int SkillID, Character character)
-    {
-        string Skillname = DataScript.instance.SkillList[SkillID].name;
 
-        if (character.affiliation == "playable")
-        {
-            if (character.UnitSkill == SkillID)
-            {
-                switch (character.UnitSkillLevel)
-                {
-                    case 2:
-                        Skillname += " II";
-                        break;
-                    case 3:
-                        Skillname += " III";
-                        break;
-                    case 4:
-                        Skillname += " IV";
-                        break;
-                    case 5:
-                        Skillname += " V";
-                        break;
-                }
-            }
-            else if (character.SecondUnitSkill == SkillID)
-            {
-                switch (character.SecondSkillLevel)
-                {
-                    case 2:
-                        Skillname += " II";
-                        break;
-                    case 3:
-                        Skillname += " III";
-                        break;
-                    case 4:
-                        Skillname += " IV";
-                        break;
-                    case 5:
-                        Skillname += " V";
-                        break;
-                }
-            }
-        }
-        return Skillname;
-    }
     private DataScript.Skill GetSkill(int skillID)
     {
         DataScript.Skill unitskill = null;

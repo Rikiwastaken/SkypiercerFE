@@ -176,6 +176,7 @@ public class DataScript : MonoBehaviour
     public int MasteryforLevel1;
     public int MasteryforLevel2;
     public int MasteryforLevel3;
+    [SerializeField] private List<Sprite> WeaponClassImages;
     [Space]
     [Header("Skill Variables")]
 
@@ -1191,7 +1192,86 @@ public class DataScript : MonoBehaviour
 
     }
 
+    public Sprite GetWeaponIcons(int weaponclass)
+    {
 
+        return WeaponClassImages[weaponclass];
+    }
+
+    public Sprite GetWeaponIcons(string weapontype)
+    {
+        if (weapontype == null)
+        {
+            return null;
+        }
+        switch (weapontype.ToLower())
+        {
+            default:
+                return WeaponClassImages[0];
+            case "sword":
+                return WeaponClassImages[1];
+            case "spear":
+                return WeaponClassImages[2];
+            case "greatsword":
+                return WeaponClassImages[3];
+            case "bow":
+                return WeaponClassImages[4];
+            case "scythe":
+                return WeaponClassImages[5];
+            case "shield":
+                return WeaponClassImages[6];
+            case "staff":
+                return WeaponClassImages[7];
+            case "dagger":
+                return WeaponClassImages[8];
+        }
+    }
+
+    public string GetSkillName(int SkillID, Character character)
+    {
+        string Skillname = SkillList[SkillID].name;
+
+        if (character.affiliation == "playable")
+        {
+            if (character.UnitSkill == SkillID)
+            {
+                switch (character.UnitSkillLevel)
+                {
+                    case 2:
+                        Skillname += " II";
+                        break;
+                    case 3:
+                        Skillname += " III";
+                        break;
+                    case 4:
+                        Skillname += " IV";
+                        break;
+                    case 5:
+                        Skillname += " V";
+                        break;
+                }
+            }
+            else if (character.SecondUnitSkill == SkillID)
+            {
+                switch (character.SecondSkillLevel)
+                {
+                    case 2:
+                        Skillname += " II";
+                        break;
+                    case 3:
+                        Skillname += " III";
+                        break;
+                    case 4:
+                        Skillname += " IV";
+                        break;
+                    case 5:
+                        Skillname += " V";
+                        break;
+                }
+            }
+        }
+        return Skillname;
+    }
 
     public bool CheckIfExamodeIsUnlocked(Character Charactertouse)
     {
