@@ -108,6 +108,15 @@ public class BattleInfotext : MonoBehaviour
     private equipment previousCharacterWeapon;
     private GameObject previousselectedGO;
 
+
+    [Header("Gear-related")]
+
+    [SerializeField] private List<Image> Gears;
+    [SerializeField] private Sprite ZackGear;
+    [SerializeField] private Sprite KiraGear;
+    [SerializeField] private Sprite GaleGear;
+    [SerializeField] private float GearRotationPerSecond;
+
     private void Awake()
     {
         if (instance == null)
@@ -129,6 +138,9 @@ public class BattleInfotext : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        GearMovement();
+
         if (textBubbleScript.indialogue || AttackMenu.activeSelf || NeutralMenu.activeSelf || ForeSightMenu.activeSelf || (PreBattleMenu.activeSelf && !PreBattleMenu.GetComponent<PreBattleMenuScript>().ChangingUnitPlace) || (TipsMenuScript.instance != null && TipsMenuScript.instance.gameObject.activeSelf) || (TutorialWindowScript.instance != null && TutorialWindowScript.instance.gameObject.activeSelf) || (attackTurnScript != null && attackTurnScript.AttackCoroutine != null))
         {
             framesbeforeactivation = 5;
@@ -330,6 +342,31 @@ public class BattleInfotext : MonoBehaviour
 
                     bool isplayable = selectedunitCharacter.affiliation.ToLower() == "playable";
 
+                    Sprite GearspriteToUse = EmptySprite;
+                    if (isplayable)
+                    {
+
+                        switch (selectedunitCharacter.playableStats.battalion.ToLower())
+                        {
+                            case "zack":
+                                GearspriteToUse = ZackGear;
+                                break;
+                            case "kira":
+                                GearspriteToUse = KiraGear;
+                                break;
+                            case "gale":
+                                GearspriteToUse = GaleGear;
+                                break;
+
+                        }
+                    }
+                    if (Gears[0].sprite != GearspriteToUse)
+                    {
+                        foreach (Image gear in Gears)
+                        {
+                            gear.sprite = GearspriteToUse;
+                        }
+                    }
 
                     ManageGrowthArrow(isplayable);
 
@@ -1006,6 +1043,37 @@ public class BattleInfotext : MonoBehaviour
         return unitskill;
     }
 
+    private void GearMovement()
+    {
+
+        if (turnManger == null)
+        {
+            turnManger = TurnManger.instance;
+        }
+        float movementMultiplierbyturn = (1f + (float)Mathf.Min(turnManger.currentTurn, 10) / 10f);
+
+        float movementMultiplierbyHP = 1f;
+
+        if (selectedunit != null)
+        {
+            Character SelectedChar = selectedunit.GetComponent<UnitScript>().UnitCharacteristics;
+
+            float HPRatio = (float)SelectedChar.currentHP / (float)SelectedChar.AjustedStats.HP;
+
+            movementMultiplierbyHP = 1f + (1f - HPRatio) * 1.5f;
+        }
+
+        float speed = GearRotationPerSecond * movementMultiplierbyHP * movementMultiplierbyturn;
+
+
+        foreach (Image gear in Gears)
+        {
+            Quaternion newrotation = Quaternion.Euler(gear.transform.localRotation.eulerAngles + new Vector3(0f, 0f, speed * Time.deltaTime));
+            gear.transform.localRotation = newrotation;
+            speed *= -1f;
+        }
+
+    }
     private void ManageStatusAilmentVisuals(GameObject Unit)
     {
         Character UnitChar = Unit.GetComponent<UnitScript>().UnitCharacteristics;
