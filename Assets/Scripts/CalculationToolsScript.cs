@@ -374,28 +374,28 @@ public class CalculationToolsScript : MonoBehaviour
                 switch (newequipment.type.ToLower())
                 {
                     case "sword":
-                        newequipment.Name = "Swino";
+                        newequipment.Name = "Sword Form";
                         break;
                     case "spear":
-                        newequipment.Name = "Spino";
+                        newequipment.Name = "Spear Form";
                         break;
                     case "greatsword":
-                        newequipment.Name = "Grino";
+                        newequipment.Name = "Greatsword Form";
                         break;
                     case "bow":
-                        newequipment.Name = "Bino";
+                        newequipment.Name = "Bow Form";
                         break;
                     case "scythe":
-                        newequipment.Name = "Scino";
+                        newequipment.Name = "Scythe Form";
                         break;
                     case "shield":
-                        newequipment.Name = "Shino";
+                        newequipment.Name = "Shield Form";
                         break;
                     case "staff":
-                        newequipment.Name = "Stino";
+                        newequipment.Name = "Staff Form";
                         break;
                     case "dagger":
-                        newequipment.Name = "Dino";
+                        newequipment.Name = "Dagger Form";
                         break;
                 }
                 switch (newequipment.Grade)
@@ -578,10 +578,10 @@ public class CalculationToolsScript : MonoBehaviour
 
         EditorUtility.RevealInFinder(folderPath);
 #else
-    Debug.LogWarning(
-        "Dialogue folder selection is only available in the Unity Editor. " +
-        "Use a file browser plugin for a standalone build."
-    );
+        Debug.LogWarning(
+            "Dialogue folder selection is only available in the Unity Editor. " +
+            "Use a file browser plugin for a standalone build."
+        );
 #endif
     }
 }

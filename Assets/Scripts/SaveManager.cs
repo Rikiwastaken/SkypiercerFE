@@ -196,11 +196,10 @@ public class SaveManager : MonoBehaviour
     {
         List<SaveClass> loadedSaves = new List<SaveClass>();
         string path = Application.persistentDataPath;
-        Debug.Log("Chargement des sauvegardes depuis : " + path);
 
         if (!Directory.Exists(path))
         {
-            Debug.LogWarning("Dossier introuvable : " + path);
+            Debug.LogWarning("Dossier de sauvegarde introuvable : " + path);
             return null;
         }
 
@@ -219,7 +218,6 @@ public class SaveManager : MonoBehaviour
                 if (save != null)
                 {
                     loadedSaves.Add(save);
-                    Debug.Log($"File Loaded : {Path.GetFileName(file)}");
                 }
                 else
                 {
@@ -231,8 +229,6 @@ public class SaveManager : MonoBehaviour
                 Debug.LogError($"Error reading {file} : {e.Message}");
             }
         }
-
-        Debug.Log($"Loading successful. {loadedSaves.Count} save(s) found.");
         return loadedSaves;
     }
 
@@ -259,7 +255,6 @@ public class SaveManager : MonoBehaviour
         }
         catch
         {
-            Debug.Log("creating new options data");
             Options = new OptionsClass();
             Options.musicvolume = 1.000001f;
             Options.SEVolume = 1.000001f;
@@ -289,7 +284,6 @@ public class SaveManager : MonoBehaviour
         try
         {
             File.WriteAllText(fullPath, json);
-            Debug.Log($"Options Saved : {fullPath}");
         }
         catch (System.Exception e)
         {
@@ -487,7 +481,7 @@ public class SaveManager : MonoBehaviour
         try
         {
             File.WriteAllText(fullPath, json);
-            Debug.Log($"Sauvegarde effectuee : {fullPath}");
+
         }
         catch (System.Exception e)
         {

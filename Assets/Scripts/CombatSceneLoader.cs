@@ -29,7 +29,7 @@ public class CombatSceneLoader : MonoBehaviour
     // Preload Combat Scene
     public void LoadCombatScene()
     {
-        Debug.Log("combat scene loaded : " + combatLoaded);
+
         if (!combatLoaded)
             StartCoroutine(LoadCombatSceneRoutine());
     }
@@ -37,7 +37,7 @@ public class CombatSceneLoader : MonoBehaviour
     // Preload Cutscene Scene
     public void LoadCutsceneScene()
     {
-        Debug.Log("Cutscene scene loaded : " + CutsceneSceneLoaded);
+
         if (!CutsceneSceneLoaded)
             StartCoroutine(LoadCutsceneSceneSceneRoutine());
     }
