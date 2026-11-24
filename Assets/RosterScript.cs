@@ -19,6 +19,7 @@ public class RosterScript : MonoBehaviour
     private InputAction _CancelAction;
     private InputAction _NextWeaponAction;
     private InputAction _PreviousWeaponAction;
+    private InputAction _TelekinesisToggle;
     private Character SelectedChar;
 
     [Header("CharacterDisplay")]
@@ -26,8 +27,15 @@ public class RosterScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI CharacterGrowth;
     [SerializeField] private TextMeshProUGUI CharacterBlades;
     [SerializeField] private TextMeshProUGUI CharacterSkills;
+    [SerializeField] private TextMeshProUGUI EquipedSkills;
+    [SerializeField] private TextMeshProUGUI CharacterName;
     [SerializeField] private TextMeshProUGUI CharacterDescription;
+    [SerializeField] private TextMeshProUGUI CharacterBonds;
     [SerializeField] private Image CharacterSprite;
+
+    [Header("DifferentSections")]
+    [SerializeField] private GameObject StatSection;
+    [SerializeField] private GameObject DescriptionSection;
 
     [Header("Gears")]
     [SerializeField] private Sprite ZackGear;
@@ -49,6 +57,7 @@ public class RosterScript : MonoBehaviour
         _PreviousWeaponAction = InputSystem.actions.FindAction("PreviousWeapon");
         _NextWeaponAction = InputSystem.actions.FindAction("NextWeapon");
         _CancelAction = InputSystem.actions.FindAction("Cancel");
+        _TelekinesisToggle = InputSystem.actions.FindAction("TelekinesisToggle");
         InitializeButtons();
         LoadDescriptions();
     }
@@ -114,8 +123,27 @@ public class RosterScript : MonoBehaviour
             }
         }
 
+
+        if (SelectedChar != null && _TelekinesisToggle.WasPerformedThisFrame())
+        {
+            SwitchSelection();
+        }
     }
 
+    private void SwitchSelection()
+    {
+        if (DescriptionSection.activeSelf)
+        {
+            DescriptionSection.SetActive(false);
+            StatSection.SetActive(true);
+
+        }
+        else
+        {
+            StatSection.SetActive(false);
+            DescriptionSection.SetActive(true);
+        }
+    }
 
     private void UpdateDisplay()
     {
@@ -142,30 +170,51 @@ public class RosterScript : MonoBehaviour
             gear.sprite = GearToUse;
         }
 
+        //CharacterInfo
+        string newInfoString = "<align=center>" + SelectedChar.name + "</align>";
+        newInfoString += "\nLevel: " + SelectedChar.level;
+        newInfoString += "\nExp: " + SelectedChar.experience + "/100";
+        newInfoString += "\nBat: ";
+        switch (SelectedChar.playableStats.battalion.ToLower())
+        {
+            case "zack":
+                newInfoString += "Zack";
+                break;
+            case "kira":
+                newInfoString += "Kira";
+                break;
+            case "gale":
+                newInfoString += "Gale";
+                break;
+        }
+        newInfoString += "\nSP: " + SelectedChar.playableStats.MaxSkillpoints;
+
+        CharacterName.text = newInfoString;
+
         //Stats
         string newstatString = "<align=center>Stats</align>";
-        newstatString += "\nHP: " + (int)SelectedChar.stats.HP + "%";
-        newstatString += "\nStrength: " + (int)SelectedChar.stats.Strength + "%";
-        newstatString += "\nPsyche: " + (int)SelectedChar.stats.Psyche + "%";
-        newstatString += "\nDefense: " + (int)SelectedChar.stats.Defense + "%";
-        newstatString += "\nResistance: " + (int)SelectedChar.stats.Resistance + "%";
-        newstatString += "\nSpeed: " + (int)SelectedChar.stats.Speed + "%";
-        newstatString += "\nDexterity: " + (int)SelectedChar.stats.Dexterity + "%";
-        newstatString += "\nLuck: " + (int)SelectedChar.stats.Luck + "%";
+        newstatString += "\nHP: " + (int)SelectedChar.stats.HP;
+        newstatString += "\nStrength: " + (int)SelectedChar.stats.Strength;
+        newstatString += "\nPsyche: " + (int)SelectedChar.stats.Psyche;
+        newstatString += "\nDefense: " + (int)SelectedChar.stats.Defense;
+        newstatString += "\nResistance: " + (int)SelectedChar.stats.Resistance;
+        newstatString += "\nSpeed: " + (int)SelectedChar.stats.Speed;
+        newstatString += "\nDexterity: " + (int)SelectedChar.stats.Dexterity;
+        newstatString += "\nLuck: " + (int)SelectedChar.stats.Luck;
 
         CharacterStats.text = newstatString;
 
 
         //Growth
         string newgrowthString = "<align=center>Growths</align>";
-        newgrowthString += "\nHP: " + (int)SelectedChar.growth.HPGrowth;
-        newgrowthString += "\nStrength: " + (int)SelectedChar.growth.StrengthGrowth;
-        newgrowthString += "\nPsyche: " + (int)SelectedChar.growth.PsycheGrowth;
-        newgrowthString += "\nDefense: " + (int)SelectedChar.growth.DefenseGrowth;
-        newgrowthString += "\nResistance: " + (int)SelectedChar.growth.ResistanceGrowth;
-        newgrowthString += "\nSpeed: " + (int)SelectedChar.growth.SpeedGrowth;
-        newgrowthString += "\nDexterity: " + (int)SelectedChar.growth.DexterityGrowth;
-        newgrowthString += "\nLuck: " + (int)SelectedChar.growth.LuckGrowth;
+        newgrowthString += "\nHP: " + (int)SelectedChar.growth.HPGrowth + "%";
+        newgrowthString += "\nStrength: " + (int)SelectedChar.growth.StrengthGrowth + "%";
+        newgrowthString += "\nPsyche: " + (int)SelectedChar.growth.PsycheGrowth + "%";
+        newgrowthString += "\nDefense: " + (int)SelectedChar.growth.DefenseGrowth + "%";
+        newgrowthString += "\nResistance: " + (int)SelectedChar.growth.ResistanceGrowth + "%";
+        newgrowthString += "\nSpeed: " + (int)SelectedChar.growth.SpeedGrowth + "%";
+        newgrowthString += "\nDexterity: " + (int)SelectedChar.growth.DexterityGrowth + "%";
+        newgrowthString += "\nLuck: " + (int)SelectedChar.growth.LuckGrowth + "%";
 
         CharacterGrowth.text = newgrowthString;
 
@@ -233,7 +282,7 @@ public class RosterScript : MonoBehaviour
         CharacterBlades.text = newBladeString;
 
 
-        //Skills
+        // Character Skills
         string NewSkillText = "Character Skills:";
         NewSkillText += "\n" + DataScript.instance.GetSkillName(SelectedChar.UnitSkill, SelectedChar);
         if (SelectedChar.SecondSkillUnlocked)
@@ -247,6 +296,15 @@ public class RosterScript : MonoBehaviour
 
         CharacterSkills.text = NewSkillText;
 
+
+        // Equiped Skills
+        string NewEquipedSkillText = "Equiped Skills:";
+        foreach (int skillID in SelectedChar.EquipedSkills)
+        {
+            NewEquipedSkillText += "\n" + DataScript.instance.GetSkillName(skillID, SelectedChar);
+        }
+        EquipedSkills.text = NewSkillText;
+
         //Description
         if (CharacterSummariesList.Count > SelectedChar.ID)
         {
@@ -257,6 +315,26 @@ public class RosterScript : MonoBehaviour
             CharacterDescription.text = "No Description yet for " + SelectedChar.name + " :(";
         }
 
+        // Bonds
+        string BondText = "<align=center>Bonds</align>";
+        foreach (DataScript.Bonds bond in DataScript.instance.BondsList)
+        {
+            int othercharacter = -1;
+            if (bond.Characters[0] == SelectedChar.ID)
+            {
+                othercharacter = bond.Characters[1];
+            }
+            else if (bond.Characters[1] == SelectedChar.ID)
+            {
+                othercharacter = bond.Characters[0];
+            }
+            if (othercharacter != -1)
+            {
+                BondText += "\n" + DataScript.instance.PlayableCharacterList[othercharacter].name + " Lvl " + bond.BondLevel + "/" + bond.MaxLevel;
+            }
+
+        }
+        CharacterBonds.text = BondText;
     }
 
     private void GearRotation()
