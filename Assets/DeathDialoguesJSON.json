@@ -169,6 +169,16 @@
             "GoodLvlUp": "Lucky!",
             "MidLvlUp": "Wow, all that?",
             "LowLvlUp": "Well that's unfortunate...!"
+        },
+        {
+            "CharacterID": 25,
+            "DeathQuote": "This is not a beautiful way to fall... What a disgrace...",
+            "DeathReaction_Zack": "Cross, you're not falling today, retrat!",
+            "DeathReaction_Kira": "We will cover your escape, Cross, go!",
+            "DeathReaction_Gale": "You are not to die yet, Cross! I will defend you!",
+            "GoodLvlUp": "Magnificent!",
+            "MidLvlUp": "This is only the beginning!",
+            "LowLvlUp": "What an ugly outcome..."
         }
     ]
 }

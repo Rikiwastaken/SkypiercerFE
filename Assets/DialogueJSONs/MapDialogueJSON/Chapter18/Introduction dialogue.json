@@ -12,7 +12,7 @@
             "musictoplay": 0
         },
         {
-            "text": "You all, out there!",
+            "text": "You! Beautiful people, out there!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -34,7 +34,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Damn Archadians who don't even know what a toaster is! Just listen to me.",
+            "text": "Heed my voice",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -67,7 +67,7 @@
             "musictoplay": 0
         },
         {
-            "text": "I need your help! There are haywire machines in mu junkyard, and they are attacking me! I need you to help me fight them off!",
+            "text": "I need your help! There are haywire machines in my junkyard, and they are attacking me! I need you to help me fight them off!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -89,7 +89,29 @@
             "musictoplay": 0
         },
         {
-            "text": "Whatever you want! One of them is directing the others. Take this one down and the others will stop.",
+            "text": "I can offer you tea, if you wish so?",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 25,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "Tea? You can't be serious...",
+            "CameraDestination": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "characterindex": 0,
+            "ImageToShow": 0,
+            "musictoplay": 0
+        },
+        {
+            "text": "All you need to do is dispatch the one leading the others! I will try to join up with you.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,

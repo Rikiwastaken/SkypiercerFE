@@ -362,10 +362,7 @@ public class BattleInfotext : MonoBehaviour
                     }
                     if (Gears[0].sprite != GearspriteToUse)
                     {
-                        foreach (Image gear in Gears)
-                        {
-                            gear.sprite = GearspriteToUse;
-                        }
+                        Gears[0].sprite = GearspriteToUse;
                     }
 
                     ManageGrowthArrow(isplayable);

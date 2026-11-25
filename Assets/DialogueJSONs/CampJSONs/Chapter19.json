@@ -1,7 +1,7 @@
 {
     "Dialogue": [
         {
-            "text": "Phew, thanks for the help! I thought I would die in here!",
+            "text": "Phew, thanks for the help! I thought I would die in here! I was almost out of cakes, too!",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -45,7 +45,7 @@
             "musictoplay": 0
         },
         {
-            "text": "I made them!",
+            "text": "Well, to say the truth, I made them.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -67,7 +67,7 @@
             "musictoplay": 0
         },
         {
-            "text": "That... Wasn't part of the plan.",
+            "text": "Believe it or not, but things took a turn for the worse.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -89,7 +89,7 @@
             "musictoplay": 0
         },
         {
-            "text": "No you got it all wrong. Last week, the empire delivered a whole batch of goodies.",
+            "text": "No, beautiful lady, you got it all wrong. Last week, the empire delivered a whole batch of perfectly good parts, you see.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -100,7 +100,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Let me guess... You found a Blade Engine amongst the \"goodies\"?",
+            "text": "Let me guess... You found a Blade Engine amongst the \"parts\"?",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -111,7 +111,7 @@
             "musictoplay": 0
         },
         {
-            "text": "How do you know?",
+            "text": "How do you know? ",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -133,7 +133,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Bummer. Anyway, this is exavtly what I needed to complete my FriendMaker Mk2.",
+            "text": "I see. Well, it is now inside the building. This machine is what I needed to complete my FriendMaker Mk2.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -155,7 +155,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Trust me, you don't want to know.",
+            "text": "Something... Truly unfortunate... You do not wish to know the details.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -177,7 +177,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Well... You know... It can get pretty lonely out here, so I thought I could repair an old sentry assembler...",
+            "text": "Well... You know... It can get pretty lonely here. So I thought company would be nice, so I repaired an old sentry assembler...",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -199,7 +199,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Easy. We're above an Old World Bunker.",
+            "text": "Well, that can be explained easily. We are above an Old World Bunker.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -221,7 +221,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Really? Well that simplifies things!",
+            "text": "If you wish to, I can unlock the doors. I would like you to take back your engine.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
@@ -243,7 +243,7 @@
             "musictoplay": 0
         },
         {
-            "text": "Well, the FriendMaker Mk2 is still making these machines, it would be nice if you guys could turn it off.",
+            "text": "Well, the FriendMaker Mk2 is still making these machines, it would be nice if you could help me turn it off.",
             "CameraDestination": {
                 "x": 0.0,
                 "y": 0.0,
