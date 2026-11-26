@@ -56,7 +56,8 @@ public class BondsScript : MonoBehaviour
         public string text;
     }
 
-    [SerializeField] private List<BondsDialogueClass> AllbondsDialogue;
+    private List<BondsDialogueClass> AllbondsDialogue;
+    [SerializeField] private TextAsset BondDialogueJSON;
 
     [SerializeField] private Transform BondsMenu;
     [SerializeField] private GameObject bondsSubMenu;
@@ -86,6 +87,7 @@ public class BondsScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        LoadBonds();
         foreach (BondsDialogueClass bonddialogue in AllbondsDialogue)
         {
             foreach (Bonds bond in DataScript.instance.BondsList)
@@ -383,16 +385,12 @@ public class BondsScript : MonoBehaviour
             ChangeColorIfBondsCanBeIncreased();
         }
     }
-#if UNITY_EDITOR
 
-    [ContextMenu("Load Bonds Dialogues")]
-    public void LoadBonds()
+    private void LoadBonds()
     {
-        string path = EditorUtility.OpenFilePanel("Select Bond JSON File", "", "json");
-        if (string.IsNullOrEmpty(path))
-            return;
 
-        string json = File.ReadAllText(path);
+
+        string json = BondDialogueJSON.text;
 
         AllBondsDialogueToLoadClass wrapper = JsonUtility.FromJson<AllBondsDialogueToLoadClass>(json);
         if (wrapper == null || wrapper.AllBondDialogueToLoadClass == null)
@@ -458,10 +456,12 @@ public class BondsScript : MonoBehaviour
                 }
             }
         }
-        EditorUtility.SetDirty(this);
-
-        Debug.Log("bonds loaded");
     }
+
+
+
+#if UNITY_EDITOR
+
 
     private List<SimplifiedDialogues> TurnDialogueListIntoSimplifiedList(List<TextBubbleInfo> list)
     {

@@ -4867,31 +4867,115 @@
             "dialogueLvl1": [
                 {
                     "CharacterID": 13,
-                    "text": "bond 1 between Gale and Gwenie, with Gale talking"
+                    "text": "Gwenie, for the last time. You are not allowed to take whatever you want from places where we fight."
                 },
                 {
                     "CharacterID": 10,
-                    "text": "bond 1 between Gwenie and Gale, with Gwenie talking"
+                    "text": "What? Why? Sieg does it all the time!"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Sieg is an archeologist. He takes things for research purposes, not for personal gain."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Maybe I should try to become an archeologist too! Then I could take whatever I want!"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "That is not how that works, although I think you would benefit from learning a bit about history and manners from him."
                 }
             ],
             "dialogueLvl2": [
                 {
+                    "CharacterID": 10,
+                    "text": "Gale! You lied to me!"
+                },
+                {
                     "CharacterID": 13,
-                    "text": "bond 2 between Gale and Gwenie, with Gale talking"
+                    "text": "My apologies, Gwenie, but what are you talking about?"
                 },
                 {
                     "CharacterID": 10,
-                    "text": "bond 2 between Gwenie and Gale, with Gwenie talking"
+                    "text": "This archeology stuff sucks! It's so boring! It's not at all about picking up trinkets and treasure hunting and adventure!"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Well, of course. It is about researching the past. Why would you think it is about treasure hunting?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Well, my mom used to tell me stories about how in the Old World, archeologists would be seen as cool adventurers..."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Was your mother interested in the Old World?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Yeah! She would sail for weeks looking for old ruins and artifacts! But she would never want to sell them, she would just keep them and write books about them and stuff..."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "So, you mother was really doing archeology, then."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "No way..."
                 }
             ],
             "dialogueLvl3": [
                 {
+                    "CharacterID": 10,
+                    "text": "Gale! I need to talk to you!"
+                },
+                {
                     "CharacterID": 13,
-                    "text": "bond 3 between Gale and Gwenie, with Gale talking"
+                    "text": "Of course, Gwenie. What do you need?"
                 },
                 {
                     "CharacterID": 10,
-                    "text": "bond 3 between Gwenie and Gale, with Gwenie talking"
+                    "text": "Ok, so I gave it a try, this archeology stuff."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Have you been stealing again?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Well, yeah, but this time I kept it all and put labels on it and everything!"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I... I see. What about it, then?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Well, now my room is full of useless junk. Why would people do that!"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "To safeguard it for future generations. That is the point of archeology, Gwenie."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "Why the hell would I need to safegard a set of dumbells!"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Hold on, Gwenie, where did you find dumbells?"
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "In the room next to mine, duh!"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Gwenie... That is my room. These dumbells are mine. I use them to train."
+                },
+                {
+                    "CharacterID": 10,
+                    "text": "That proves you can really find treasures anywhere!"
                 }
             ],
             "dialogueLvl4": []
@@ -4901,11 +4985,43 @@
             "dialogueLvl1": [
                 {
                     "CharacterID": 13,
-                    "text": "bond 1 between Gale and Aurora, with Gale talking"
+                    "text": "Aurora, here you are. I was looking for you."
                 },
                 {
                     "CharacterID": 14,
-                    "text": "bond 1 between Aurora and Gale, with Aurora talking"
+                    "text": "Gale. What can I do for you?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Do you know if we got any more instructions, now that we managed to join Zack and his group?"
+                },
+                {
+                    "CharacterID": 14,
+                    "text": "I'm afraid not. For now, I think out priority is helping them."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "I thought so. Well, I have to say it may be for the best."
+                },
+                {
+                    "CharacterID": 14,
+                    "text": "How so?"
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "They are an intersting group. It breaks the monotony of our usual assignments."
+                },
+                {
+                    "CharacterID": 14,
+                    "text": "I am surprised to hear you say that."
+                },
+                {
+                    "CharacterID": 13,
+                    "text": "Well, Zack reminds me of Sir Mir."
+                },
+                {
+                    "CharacterID": 14,
+                    "text": "We shall see about that."
                 }
             ],
             "dialogueLvl2": [
