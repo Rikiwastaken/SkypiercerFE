@@ -2,31 +2,38 @@
     "dialoguesToLoad": [
         {
             "text": "So, you awakened, didn't you... You're better than expected. Time to make my exit.",
-            "characterindex": 17
+            "characterindex": 17,
+            "dialogueID": 0
         },
         {
             "text": "You... You stay here...",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 1
         },
         {
             "text": "Look at you, you're barely standing now.",
-            "characterindex": 17
+            "characterindex": 17,
+            "dialogueID": 2
         },
         {
             "text": "Damn... You...",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 3
         },
         {
             "text": "Heh. He fainted.",
-            "characterindex": 17
+            "characterindex": 17,
+            "dialogueID": 4
         },
         {
             "text": "Raghnall... What are you doing...",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 5
         },
         {
             "text": "I'll leave him in your care, Gale.",
-            "characterindex": 17
+            "characterindex": 17,
+            "dialogueID": 6
         }
     ]
 }

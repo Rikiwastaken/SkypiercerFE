@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -787,5 +788,58 @@ public class CutsceneManager : MonoBehaviour
         Debug.Log("Loaded " + wrapper.dialoguesToLoad.Count + " dialogue parts into the Cutscenes number " + CurrentCutsceneToDebug + "!");
 
     }
+
+    [ContextMenu("Save Dialogue To JSON")]
+    public void SaveDialogues()
+    {
+
+
+        if (CurrentCutsceneToDebug == -1)
+        {
+            return;
+        }
+
+        string path = UnityEditor.EditorUtility.OpenFilePanel("Select Dialogue JSON File", "", "json");
+        if (string.IsNullOrEmpty(path))
+            return;
+
+
+
+
+        List<DialogueImporterClass> newdialogue = new List<DialogueImporterClass>();
+
+        DialogueImporterWrapperClass wrapper = new DialogueImporterWrapperClass() { dialoguesToLoad = newdialogue };
+        int id = 0;
+        foreach (DialogueList _DialogueList in Cutscenes[CurrentCutsceneToDebug].DialogueBubblesList)
+        {
+
+            foreach (TextBubbleInfo _TextBubbleInfo in _DialogueList.Dialogue)
+            {
+                newdialogue.Add(new DialogueImporterClass() { dialogueID = id, text = _TextBubbleInfo.text, characterindex = _TextBubbleInfo.characterindex });
+            }
+            id++;
+        }
+
+
+        string json = JsonUtility.ToJson(wrapper, true);
+
+        try
+        {
+            AssetDatabase.StartAssetEditing();
+            File.WriteAllText(path, json);
+            Debug.Log($"Dialogue Saved : {path}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error when saving options : {e.Message}");
+        }
+        finally
+        {
+            AssetDatabase.StopAssetEditing();
+        }
+        Debug.Log("Saved " + wrapper.dialoguesToLoad.Count + " to json for dialogue for scene " + CurrentCutsceneToDebug);
+
+    }
+
 #endif
 }

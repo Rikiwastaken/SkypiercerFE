@@ -2,47 +2,58 @@
     "dialoguesToLoad": [
         {
             "text": "I'm sorry, guys... I can't fight anymore...",
-            "characterindex": 9
+            "characterindex": 9,
+            "dialogueID": 0
         },
         {
             "text": "Kira! Damn it...",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 1
         },
         {
             "text": "Is this all you've got? I thought you would kill me.",
-            "characterindex": 17
+            "characterindex": 17,
+            "dialogueID": 2
         },
         {
             "text": "How... How can he be so strong.",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 3
         },
         {
             "text": "Leave, Zack. You can't fall here... I'll hold him off.",
-            "characterindex": 13
+            "characterindex": 13,
+            "dialogueID": 4
         },
         {
             "text": "No... No! I won't leave anyone behind!",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 5
         },
         {
-            "text": "Hold me...",
-            "characterindex": -1
+            "text": "There is still a way.",
+            "characterindex": -1,
+            "dialogueID": 6
         },
         {
-            "text": "What?",
-            "characterindex": 0
+            "text": "What was that...",
+            "characterindex": 0,
+            "dialogueID": 7
         },
         {
             "text": "Take me in your hand.",
-            "characterindex": -1
+            "characterindex": -1,
+            "dialogueID": 8
         },
         {
-            "text": "Who is that?",
-            "characterindex": 0
+            "text": "Who is that? Who cares, do something!",
+            "characterindex": 0,
+            "dialogueID": 9
         },
         {
-            "text": "The damned crystal! Now take me, if you want to live!",
-            "characterindex": -1
+            "text": "Very well.",
+            "characterindex": -1,
+            "dialogueID": 10
         }
     ]
 }

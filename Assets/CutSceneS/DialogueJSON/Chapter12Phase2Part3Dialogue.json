@@ -2,19 +2,23 @@
     "dialoguesToLoad": [
         {
             "text": "What? Did he...",
-            "characterindex": 17
+            "characterindex": 17,
+            "dialogueID": 0
         },
         {
             "text": "Time for round two.",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 1
         },
         {
             "text": "Zack... What's going on?",
-            "characterindex": 9
+            "characterindex": 9,
+            "dialogueID": 2
         },
         {
             "text": "Don't worry. I got this. Let's fight fire with fire.",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 3
         }
     ]
 }

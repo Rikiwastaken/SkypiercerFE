@@ -1,112 +1,139 @@
 {
     "dialoguesToLoad": [
         {
-            "text": "Where am I? What's going on?",
-            "characterindex": 0
+            "text": "What is this place?",
+            "characterindex": 0,
+            "dialogueID": 0
         },
         {
             "text": "We are inside your mind.",
-            "characterindex": -1
+            "characterindex": 50,
+            "dialogueID": 1
         },
         {
             "text": "Mir! What are you doing here?",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 2
         },
         {
-            "text": "I am not Mir. I am the Icosahedron.",
-            "characterindex": -1
+            "text": "My name is Therion Tou Telous.",
+            "characterindex": 60,
+            "dialogueID": 3
         },
         {
             "text": "What? Why do you look like him then?",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 4
         },
         {
-            "text": "That's not important right now.",
-            "characterindex": -1
+            "text": "It's a long story...",
+            "characterindex": 60,
+            "dialogueID": 5
         },
         {
-            "text": "OK, you're weird.",
-            "characterindex": 0
+            "text": "It's strange... Your name feels familiar... It's way too long, though. How about just Therion?",
+            "characterindex": 0,
+            "dialogueID": 6
         },
         {
-            "text": "Have some respect! I am the Icosahedron.",
-            "characterindex": -1
+            "text": "What? Don't you dare butcher my name.",
+            "characterindex": 18,
+            "dialogueID": 7
         },
         {
-            "text": "That name is way too long. I'll just call you Ico.",
-            "characterindex": 0
+            "text": "I don't even remember the rest, anyway.",
+            "characterindex": 0,
+            "dialogueID": 8
         },
         {
-            "text": "This kid... Whatever you want...",
-            "characterindex": 18
+            "text": "I knew it would turn out like this... ",
+            "characterindex": 18,
+            "dialogueID": 9
         },
         {
-            "text": "Anyway. What am I doing here? I have some butt to kick.",
-            "characterindex": 0
+            "text": "Anyway. What am I doing here? I don't have time for this. My friends are in danger.",
+            "characterindex": 0,
+            "dialogueID": 10
         },
         {
-            "text": "Really? It looked like your butt was the one getting kicked.",
-            "characterindex": 18
+            "text": "And to help them, you need my strength.",
+            "characterindex": 18,
+            "dialogueID": 11
         },
         {
-            "text": "No, that... Yeah, you're right. Raghnall is so much stronger than us.",
-            "characterindex": 0
+            "text": "Yeah, Raghnall is so strong... It felt like I was landing blows but it did nothing.",
+            "characterindex": 0,
+            "dialogueID": 12
         },
         {
-            "text": "You're wrong, Zack. I can help you beat him.",
-            "characterindex": 18
+            "text": "I can lend you my power, Zack.",
+            "characterindex": 18,
+            "dialogueID": 13
         },
         {
             "text": "Really? Let's go then!",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 14
         },
         {
-            "text": "What?",
-            "characterindex": 18
+            "text": "There is a cost for it, though... You need-",
+            "characterindex": 18,
+            "dialogueID": 15
         },
         {
-            "text": "Just do your thing we have no time to waste.",
-            "characterindex": 0
+            "text": "Just do your thing. We have no time to waste.",
+            "characterindex": 0,
+            "dialogueID": 16
         },
         {
-            "text": "Don't worry about that. We are out of time.",
-            "characterindex": 18
+            "text": "Will you listen? This kid, I swear...",
+            "characterindex": 18,
+            "dialogueID": 17
         },
         {
-            "text": " I know that's what I've been saying.",
-            "characterindex": 0
+            "text": "Sorry. But the others are fighting him! ",
+            "characterindex": 0,
+            "dialogueID": 18
         },
         {
-            "text": "I meant that literally. I'm the source of your visions. I have some power on Time.",
-            "characterindex": 18
+            "text": "Don't worry about that. In the world outside, Time if frozen.",
+            "characterindex": 18,
+            "dialogueID": 19
         },
         {
-            "text": "Hold on... I started getting visions before I found the crystal.",
-            "characterindex": 0
+            "text": "Do you have something to do with my visions? Why did you wait so long to talk to me?",
+            "characterindex": 0,
+            "dialogueID": 20
         },
         {
-            "text": "That is because the crystal you found under Landfall Village and the one in your chest are two parts of a whole.",
-            "characterindex": 18
+            "text": "Your visions are caused by the crystal in your chest. I am in the crystal you found in Landfall Village. They are like two sides of a coin.",
+            "characterindex": 18,
+            "dialogueID": 21
         },
         {
-            "text": "I knew it felt familiar.",
-            "characterindex": 0
+            "text": "That's why it felt familiar.",
+            "characterindex": 0,
+            "dialogueID": 22
         },
         {
             "text": "This crystal contains tremendous power. If you combine the crystal with the one in your chest, you will gain incredible power.",
-            "characterindex": 18
+            "characterindex": 18,
+            "dialogueID": 23
         },
         {
             "text": "Cool let's do it.",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 24
         },
         {
-            "text": "You'll gain power, but be careful. It will only be temporary. If you combine the crystal with the one in your chest, you will gain incredible power.",
-            "characterindex": 18
+            "text": "You have to be careful. This surge of strength will only be temporary.",
+            "characterindex": 18,
+            "dialogueID": 25
         },
         {
             "text": "As long as it's enough to beat his ass, I'm good.",
-            "characterindex": 0
+            "characterindex": 0,
+            "dialogueID": 26
         }
     ]
 }
