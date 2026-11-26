@@ -384,10 +384,6 @@ public class CutsceneManager : MonoBehaviour
         {
             lights[i].gameObject.SetActive(false);
         }
-        foreach (Light light in GetComponents<Light>())
-        {
-            light.lightmapBakeType = LightmapBakeType.Realtime;
-        }
     }
 
     private void SetupCameras()
